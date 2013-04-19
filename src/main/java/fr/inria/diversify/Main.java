@@ -68,7 +68,7 @@ public class Main {
 		}
 
 		ProcessingManager pm = new QueueProcessingManager(factory);
-		StatementProcessor processor = new StatementProcessor();
+		StatementProcessor processor = new StatementProcessor(false);
 //		 TestProcessor processor = new TestProcessor();//*******************************
 
 		pm.addProcessor(processor);

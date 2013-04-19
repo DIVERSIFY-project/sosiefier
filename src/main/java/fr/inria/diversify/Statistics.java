@@ -42,8 +42,8 @@ public class Statistics {
 	
 	public void addStatement(Statement stmt) {
 		count++;
-		if(count%100 == 0)
-		System.out.println(count+"/"+numberOfStatements + "  "+uniqueStatment.size());
+		if(count%1000 == 0)
+		System.out.println(count+"/"+numberOfStatements);
 		addUniqueInputContext(stmt.getInputContext());
 		addUniqueOutputContext(stmt.getOuputContext());
 		addUniqueContext(stmt.getContext());

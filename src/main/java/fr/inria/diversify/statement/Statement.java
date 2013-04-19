@@ -6,12 +6,12 @@ import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtTypedElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
-import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 
 public class Statement {
 	protected InputContext inputContext;
 	protected CtTypeReference<?> ouputContext;
 	protected CtStatement stmt;
+	private String equalString;
 	
 	
 	public Statement(CtStatement stmt) {
@@ -55,13 +55,13 @@ public class Statement {
 	
 	
 	public String equalString() {
-		String tmp = "Input: "+inputContext.equalString();
-			
+		if(equalString != null)
+			return equalString;
+		
+		equalString = "Input: "+inputContext.equalString();	
 		JavaPrettyPrinter pp = new JavaPrettyPrinter(stmt.getFactory().getEnvironment());
 		stmt.accept(pp);
-		
-		tmp = tmp + "\nOutput: "+ouputContext+"\nSource: "+pp.toString();
-		return tmp;
+		return equalString + "\nOutput: "+ouputContext+"\nSource: "+pp.toString();
 	}
 	
 	public void replace(Statement other) throws CloneNotSupportedException{
