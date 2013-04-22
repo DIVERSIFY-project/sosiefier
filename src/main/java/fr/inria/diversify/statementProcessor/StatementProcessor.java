@@ -23,10 +23,10 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 			try {
 				Statement stmt = new Statement(element);
 				statements.add(stmt);
-				System.out.println(element);
+			//	System.out.println(element);
 				//System.out.println(element.getPosition());
 			//	System.out.println(isValid(element)+ "  "+element.getClass().getSimpleName()+"  "+element.getParent().getClass().getSimpleName());
-				System.out.println("-------------------------------\n");
+			//	System.out.println("-------------------------------\n");
 			} catch (Exception e) {
 				System.err.println("erreur");
 			}

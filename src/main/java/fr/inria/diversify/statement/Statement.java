@@ -9,48 +9,47 @@ import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 
 public class Statement {
-	protected InputContext inputContext;
-	protected CtTypeReference<?> ouputContext;
+	protected Context context;
 	protected CtStatement stmt;
 	private String equalString;
 	
 	
 	public Statement(CtStatement stmt) {
 		this.stmt = stmt;
+		context = new Context(initInputContext(), initOutputContext());
 		this.initOutputContext();
 		this.initInputContext();
 	}
 	
 	public CtTypeReference<?> getOuputContext() {	
-		return ouputContext;
+		return context.getOuputContext();
 	}
 	
 	
 	public InputContext getInputContext() {
-		return inputContext;
+		return context.getInputContext();
 	} 
 	
-	protected void initOutputContext(){
+	protected CtTypeReference<?> initOutputContext(){
 		if(stmt instanceof CtTypedElement) {
-			ouputContext = ((CtTypedElement<?>)stmt).getType();
-			if(ouputContext == null)
-				System.out.println();
+			return ((CtTypedElement<?>)stmt).getType();
+			
 		}
 		else
-			ouputContext =Factory.getLauchingFactory().Type().createReference(Void.class) ;
+			return Factory.getLauchingFactory().Type().createReference(Void.class) ;
 	}
 
-	protected void initInputContext(){
+	protected InputContext initInputContext(){
 		VariableVisitor visitor = new VariableVisitor();
 		stmt.accept(visitor);
-		inputContext = visitor.input();
+		return visitor.input();
 	}
 	
 	
 	@Override
 	public String toString() {
-		String tmp = "Input:" + inputContext;
-		tmp = tmp + "\nOutput: "+ouputContext+"\nSource: "+stmt;
+		String tmp = "Input:" + getInputContext();
+		tmp = tmp + "\nOutput: "+getOuputContext()+"\nSource: "+stmt;
 		return tmp;
 	}
 	
@@ -59,10 +58,10 @@ public class Statement {
 		if(equalString != null)
 			return equalString;
 		
-		equalString = "Input: "+inputContext.equalString();	
-		JavaPrettyPrinter pp = new JavaPrettyPrinter(stmt.getFactory().getEnvironment());
+		equalString = "Input: "+getInputContext().equalString();	
+		StatementEqualPrinter pp = new StatementEqualPrinter(stmt.getFactory().getEnvironment());
 		stmt.accept(pp);
-		equalString = equalString + "\nOutput: "+ouputContext+"\nSource: "+pp.toString();
+		equalString = equalString + "\nOutput: "+getOuputContext()+"\nSource: "+pp.toString();
 		return equalString;
 	}
 	
@@ -71,8 +70,8 @@ public class Statement {
 		System.out.println(stmt.getParent());
 	
 		for (CtVariableReference<?> variable : other.getInputContext().getContext()) {
-			System.out.println("replace: "+variable+ " by "+inputContext.candidate(variable));
-			variable.setSimpleName(inputContext.candidate(variable).getSimpleName());
+			System.out.println("replace: "+variable+ " by "+getInputContext().candidate(variable));
+			variable.setSimpleName(getInputContext().candidate(variable).getSimpleName());
 			
 		}
 		stmt.replace(other.stmt);
@@ -83,7 +82,7 @@ public class Statement {
 	
 	//check if this can be replaced by other
 	public boolean isReplace(Statement other){
-		return inputContext.isInclude(other.getInputContext()) && ouputContext.equals(other.ouputContext);
+		return getInputContext().isInclude(other.getInputContext()) && getOuputContext().equals(other.getOuputContext());
 	}
 	
 	
@@ -105,7 +104,7 @@ public class Statement {
 //	}
 	
 	public Context getContext() {
-		return new Context(inputContext,ouputContext);
+		return context;
 	}
 	
 	public Class<?> getStatementType() {
@@ -117,7 +116,7 @@ public class Statement {
 	}
 	
 	public int id() {
-		return equalString().hashCode() + inputContext.hashCode() + ouputContext.hashCode();
+		return equalString().hashCode() + context.hashCode();
 	}
 	
 }

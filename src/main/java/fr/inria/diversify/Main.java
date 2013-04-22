@@ -24,7 +24,7 @@ import fr.inria.diversify.statistic.Statistic;
 public class Main {
 	//public static final String srcfolderstatic = "../camel-2.10.4/camel-core";
 //	public static final String srcfolderstatic = "../../workspace/Test";
-	public static final String srcfolderstatic = "../statement/src_to_modify";
+	public static final String srcfolderstatic = "../standardLib/src";
 //	public static final String srcfolderstatic = "src";
 	
 	public static final String srcgenfolderstatic = "src_modified";
@@ -50,7 +50,7 @@ public class Main {
 
 	private void initSpoon(List<File> folderToParse) {
 		StandardEnvironment env = new StandardEnvironment();
-		env.setComplianceLevel(7); //for jfreechart
+		env.setComplianceLevel(6); //for jfreechart
 		env.setVerbose(true);
 		env.setDebug(true);
 
@@ -73,7 +73,7 @@ public class Main {
 		}
 
 		ProcessingManager pm = new QueueProcessingManager(factory);
-		StatementProcessor processor = new StatementProcessor(true);
+		StatementProcessor processor = new StatementProcessor(false);
 //		 TestProcessor processor = new TestProcessor();//*******************************
 
 		pm.addProcessor(processor);
@@ -86,7 +86,7 @@ public class Main {
 		Statistic stat = new Statistic(statements);
 		
 		try {
-			stat.writeSatistic("/Users/Simon/Documents/code/diversify-statements/","jfreechart_withChildren");
+			stat.writeSatistic("/Users/Simon/Documents/code/diversify-statements/","standardLib_withoutChildren");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
