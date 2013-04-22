@@ -3,6 +3,7 @@ package fr.inria.diversify.statementProcessor;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtReturn;
+import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
@@ -10,21 +11,15 @@ import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.CtScanner;
 
 public class ValidStatementVisitor extends CtScanner {
-	protected boolean visitStart = false;
 	protected boolean valid = true;
-	
+	protected CtElement root; 
 	
 	public boolean isValid(){
 		return valid;
 	}
 	
-	protected void exit(CtElement e) {
-		visitStart = true;
-	}
-	
-	protected void enter(CtElement e) {
-//		if(e.getParent(CtInvocation.class) != null)
-//			valid = false;
+	public ValidStatementVisitor(CtElement e) {
+		root = e;
 	}
 	
 	public <T> void visitCtClass(CtClass<T> ctClass) {
@@ -36,16 +31,12 @@ public class ValidStatementVisitor extends CtScanner {
 	}
 	
 	public <T> void visitCtLiteral(CtLiteral<T> literal) {
-		if(!visitStart)
+		if(literal == root)
 			valid = false;
 	}
 	
 	public <R> void visitCtBlock(CtBlock<R> block) {
-		CtElement parent = block.getParent();
-			if(parent instanceof CtMethod || parent instanceof CtConstructor<?>)
-				valid = false;
+		if(block == root)
+			valid = false;
 	}
-	
-	
-
 }

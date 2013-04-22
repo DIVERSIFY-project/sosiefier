@@ -10,23 +10,26 @@ import spoon.support.builder.SpoonBuildingManager;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import fr.inria.diversify.statement.Statement;
 import fr.inria.diversify.statementProcessor.StatementProcessor;
+import fr.inria.diversify.statistic.Statistic;
 
 /**
  * Created with IntelliJ IDEA. User: Simon Date: 4/17/13 Time: 11:33 AM To
  * change this template use File | Settings | File Templates.
  */
 public class Main {
+	//public static final String srcfolderstatic = "../camel-2.10.4/camel-core";
+//	public static final String srcfolderstatic = "../../workspace/Test";
 	public static final String srcfolderstatic = "../statement/src_to_modify";
+//	public static final String srcfolderstatic = "src";
+	
 	public static final String srcgenfolderstatic = "src_modified";
 	private List<Statement> statements;
-	protected Statistics stat;
+	
 
 	public static void main(String[] args) {
 
@@ -39,19 +42,21 @@ public class Main {
 
 	public Main(List<File> srcfolders, File srcgenfolder) {
 		this.initSpoon(srcfolders);
+		
+		System.out.println(statements.size());
 		computeStatistic();
-		stat.printStat();
+		//stat.printStat();
 	}
 
 	private void initSpoon(List<File> folderToParse) {
 		StandardEnvironment env = new StandardEnvironment();
-
+		env.setComplianceLevel(7); //for jfreechart
 		env.setVerbose(true);
 		env.setDebug(true);
 
 		DefaultCoreFactory f = new DefaultCoreFactory();
 		Factory factory = new Factory(f, env);
-
+		
 		SpoonBuildingManager builder = new SpoonBuildingManager(factory);
 
 		for (File file : folderToParse) {
@@ -68,7 +73,7 @@ public class Main {
 		}
 
 		ProcessingManager pm = new QueueProcessingManager(factory);
-		StatementProcessor processor = new StatementProcessor(false);
+		StatementProcessor processor = new StatementProcessor(true);
 //		 TestProcessor processor = new TestProcessor();//*******************************
 
 		pm.addProcessor(processor);
@@ -78,7 +83,13 @@ public class Main {
 	}
 
 	protected void computeStatistic() {
-		stat = new Statistics(statements);
+		Statistic stat = new Statistic(statements);
+		
+		try {
+			stat.writeSatistic("/Users/Simon/Documents/code/diversify-statements/","jfreechart_withChildren");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void test() {

@@ -3,6 +3,7 @@ package fr.inria.diversify.statement;
 
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtTypedElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
@@ -61,7 +62,8 @@ public class Statement {
 		equalString = "Input: "+inputContext.equalString();	
 		JavaPrettyPrinter pp = new JavaPrettyPrinter(stmt.getFactory().getEnvironment());
 		stmt.accept(pp);
-		return equalString + "\nOutput: "+ouputContext+"\nSource: "+pp.toString();
+		equalString = equalString + "\nOutput: "+ouputContext+"\nSource: "+pp.toString();
+		return equalString;
 	}
 	
 	public void replace(Statement other) throws CloneNotSupportedException{
@@ -86,24 +88,32 @@ public class Statement {
 	
 	
 	
-	@Override
-	public boolean equals(Object obj) {
-		if(obj == null)
-			return false;
-		
-		Statement stmtObj = (Statement)obj;
-		return stmt.toString().equals(stmtObj.stmt.toString()) && 
-				inputContext.equals(stmtObj.inputContext) &&
-				ouputContext.equals(stmtObj.ouputContext);
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		if(obj == null)
+//			return false;
+//		
+//		Statement stmtObj = (Statement)obj;
+//		return stmt.toString().equals(stmtObj.stmt.toString()) && 
+//				inputContext.equals(stmtObj.inputContext) &&
+//				ouputContext.equals(stmtObj.ouputContext);
+//	}
 	
-	@Override
-	public int hashCode() {
-		return stmt.toString().hashCode()*inputContext.hashCode() + ouputContext.hashCode();
-	}
+//	@Override
+//	public int hashCode() {
+//		return stmt.toString().hashCode()*inputContext.hashCode() + ouputContext.hashCode();
+//	}
 	
 	public Context getContext() {
 		return new Context(inputContext,ouputContext);
+	}
+	
+	public Class<?> getStatementType() {
+		return stmt.getClass();
+	}
+	
+	public SourcePosition getSourcePosition() {
+		return stmt.getPosition();
 	}
 	
 	public int id() {

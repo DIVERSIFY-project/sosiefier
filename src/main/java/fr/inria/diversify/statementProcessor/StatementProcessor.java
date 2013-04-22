@@ -6,7 +6,6 @@ import java.util.List;
 import fr.inria.diversify.statement.Statement;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.declaration.CtElement;
 
 public class StatementProcessor extends AbstractProcessor<CtStatement> {
 	protected List<Statement> statements;
@@ -20,14 +19,17 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 	}
 
 	public void process(CtStatement element) {
-		Statement stmt;
 		if(isValid(element)) {
-			stmt = new Statement(element);
-			statements.add(stmt);
-			System.out.println(stmt);
-			System.out.println(element.getPosition());
-//			System.out.println(stmt.equalString());
-			System.out.println("-------------------------------\n");
+			try {
+				Statement stmt = new Statement(element);
+				statements.add(stmt);
+				System.out.println(element);
+				//System.out.println(element.getPosition());
+			//	System.out.println(isValid(element)+ "  "+element.getClass().getSimpleName()+"  "+element.getParent().getClass().getSimpleName());
+				System.out.println("-------------------------------\n");
+			} catch (Exception e) {
+				System.err.println("erreur");
+			}
 			}
 	}
 	
@@ -40,7 +42,7 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 	}
 	
 	protected boolean isValidStatement(CtStatement element) {
-		ValidStatementVisitor valid = new ValidStatementVisitor(); 
+		ValidStatementVisitor valid = new ValidStatementVisitor(element); 
 		element.accept(valid);
 		return valid.isValid();
 	}
@@ -56,3 +58,4 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 	}
 	
 }
+

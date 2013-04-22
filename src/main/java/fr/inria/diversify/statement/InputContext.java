@@ -73,5 +73,9 @@ public class InputContext {
 			hashCode = inputContextToString(inputContext).hashCode();
 		return hashCode;
 	}
+
+	public int size() {
+		return inputContext.size();
+	}
 	
 }
