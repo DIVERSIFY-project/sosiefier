@@ -71,7 +71,7 @@ public class Statistic {
 		return map;
 	}
 	
-	protected ComputeStatistic allStat() {
+	public ComputeStatistic allStat() {
 		if(allStat == null)
 			allStat = new ComputeStatistic(statements);
 		return allStat;

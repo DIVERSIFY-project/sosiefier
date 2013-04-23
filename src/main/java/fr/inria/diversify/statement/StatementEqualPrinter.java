@@ -6,6 +6,7 @@ import spoon.processing.Environment;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtInvocation;
+import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtVariableAccess;
 import spoon.reflect.declaration.CtSimpleType;
@@ -21,6 +22,16 @@ public class StatementEqualPrinter extends DefaultJavaPrettyPrinter {
 		super(env);
 		
 	}
+	
+	
+//	public <T> void visitCtLiteral(CtLiteral<T> literal) {
+//		enterCtExpression(literal);
+//		if (literal.getValue() == null) 
+//			write("null");
+//		else
+//			write(literal.getValue().getClass().toString());
+//		exitCtExpression(literal);
+//	}
 
 public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 		

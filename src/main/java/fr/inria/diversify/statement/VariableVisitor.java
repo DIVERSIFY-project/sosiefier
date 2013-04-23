@@ -3,20 +3,16 @@ package fr.inria.diversify.statement;
 import java.util.HashSet;
 import java.util.Set;
 
-
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtVariableAccess;
-import spoon.reflect.declaration.CtVariable;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.reflect.visitor.CtScanner;
-import spoon.support.reflect.code.CtLocalVariableImpl;
 import spoon.support.reflect.reference.CtLocalVariableReferenceImpl;
-import spoon.support.reflect.reference.CtVariableReferenceImpl;
 
 
 public class VariableVisitor extends CtScanner {

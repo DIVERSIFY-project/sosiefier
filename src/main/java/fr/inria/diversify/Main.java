@@ -26,6 +26,7 @@ public class Main {
 //	public static final String srcfolderstatic = "../../workspace/Test";
 	public static final String srcfolderstatic = "../standardLib/src";
 //	public static final String srcfolderstatic = "src";
+//	public static final String srcfolderstatic = "../statement/src_to_modify";
 	
 	public static final String srcgenfolderstatic = "src_modified";
 	private List<Statement> statements;
@@ -44,6 +45,7 @@ public class Main {
 		this.initSpoon(srcfolders);
 		
 		System.out.println(statements.size());
+		
 		computeStatistic();
 		//stat.printStat();
 	}
@@ -73,7 +75,7 @@ public class Main {
 		}
 
 		ProcessingManager pm = new QueueProcessingManager(factory);
-		StatementProcessor processor = new StatementProcessor(false);
+		StatementProcessor processor = new StatementProcessor(true);
 //		 TestProcessor processor = new TestProcessor();//*******************************
 
 		pm.addProcessor(processor);
@@ -84,9 +86,10 @@ public class Main {
 
 	protected void computeStatistic() {
 		Statistic stat = new Statistic(statements);
-		
+//		 stat.allStat().printStat();
+		 
 		try {
-			stat.writeSatistic("/Users/Simon/Documents/code/diversify-statements/","standardLib_withoutChildren");
+			stat.writeSatistic("/Users/Simon/Documents/code/diversify-statements/","jfreechart2_withChildren");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,22 +1,16 @@
 package fr.inria.diversify.statistic;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import javax.swing.text.StyleContext.SmallAttributeSet;
-
+import spoon.reflect.reference.CtTypeReference;
 import fr.inria.diversify.statement.Context;
 import fr.inria.diversify.statement.InputContext;
 import fr.inria.diversify.statement.Statement;
 
-import spoon.reflect.reference.CtTypeReference;
-import spoon.reflect.reference.CtVariableReference;
-
 public class ComputeStatistic {
-
+//	todo ajout shanon index
 	protected int numberOfStatements = 0;
 	protected Map<InputContext,Integer> uniqueInputContext;
 	protected Map<CtTypeReference<?>,Integer> uniqueOutputContext;
@@ -46,6 +40,8 @@ public class ComputeStatistic {
 	public void addStatement(Statement stmt) {
 		try {
 			numberOfStatements++;
+			if(numberOfStatements%1000 == 0)
+				System.out.println(numberOfStatements);
 			addUniqueInputContext(stmt.getInputContext());
 			addUniqueOutputContext(stmt.getOuputContext());
 			addUniqueContext(stmt.getContext());
@@ -64,22 +60,22 @@ public class ComputeStatistic {
 		System.out.println("number of unique context: "+uniqueContext.size());
 		System.out.println("number of unique statement: "+uniqueStatment.size());
 		
-//		System.out.println("\nOutputContext:");
-//		for (InputContext ic : uniqueInputContext.keySet()) 
-//			System.out.println(ic.equalString()+ ": "+uniqueInputContext.get(ic));
-//		
-//		System.out.println("\nInputContext:");
-//		for (CtTypeReference<?> ic : uniqueOutputContext.keySet()) 
-//			System.out.println(ic+ ": "+uniqueOutputContext.get(ic));
-//		
-//		
-//		System.out.println("\nContext:");
-//		for (Context ic : uniqueContext.keySet()) 
-//			System.out.println(ic.equalString()+": "+uniqueContext.get(ic));
-//		
-//		System.out.println("\nStatement:");
-//		for (Integer ic : uniqueStatment.keySet()) 
-//			System.out.println(idToStatement.get(ic).equalString()+"\n: "+uniqueStatment.get(ic));
+		System.out.println("\nOutputContext:");
+		for (InputContext ic : uniqueInputContext.keySet()) 
+			System.out.println(ic.equalString()+ ": "+uniqueInputContext.get(ic));
+		
+		System.out.println("\nInputContext:");
+		for (CtTypeReference<?> ic : uniqueOutputContext.keySet()) 
+			System.out.println(ic+ ": "+uniqueOutputContext.get(ic));
+		
+		
+		System.out.println("\nContext:");
+		for (Context ic : uniqueContext.keySet()) 
+			System.out.println(ic.equalString()+": "+uniqueContext.get(ic));
+		
+		System.out.println("\nStatement:");
+		for (Integer ic : uniqueStatment.keySet()) 
+			System.out.println(idToStatement.get(ic).equalString()+"\n: "+uniqueStatment.get(ic));
 	}
 	
 	protected void addUniqueStatement(Statement stmt) {
