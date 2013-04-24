@@ -9,24 +9,21 @@ import spoon.reflect.code.CtStatement;
 
 public class StatementProcessor extends AbstractProcessor<CtStatement> {
 	protected List<Statement> statements;
-	private boolean withChildren;
 	private ValidStatementVisitor valid;
 
 
-	public StatementProcessor(boolean withChildren) {
-		this.withChildren = withChildren;
+	public StatementProcessor() {
 		statements = new LinkedList<Statement>();
-	
 	}
 
 	public void process(CtStatement element) {
 		try {
 			if(isValidStatement(element)) {
-					Statement stmt = new Statement(element);
-					statements.add(stmt);
-					System.out.println(stmt);
-					//System.out.println(element.getPosition());
-					System.out.println("-------------------------------\n");
+				Statement stmt = new Statement(element);
+				statements.add(stmt);
+//				System.out.println(stmt);
+				//System.out.println(element.getPosition());
+//				System.out.println("-------------------------------\n");
 			}	
 		} catch (Exception e) {
 			System.err.println("erreur");

@@ -23,13 +23,14 @@ public class Statistic {
 		this.statements = statements;
 	}
 	
-	public void writeSatistic(String directory,String fileName) throws IOException {
-		writeSummary(new File(directory+fileName+"_statements.csv"), statisticByStatement());
-		writeSummary(new File(directory+fileName+"classes.csv"), statisticByClass());
+	public void writeSatistic(String fileName) throws IOException {
+		writeSummary(new File(fileName+"_statements.csv"), statisticByStatement());
+		writeSummary(new File(fileName+"classes.csv"), statisticByClass());
+		writeSummary(new File(fileName+"packages.csv"), statisticByPackage());
 		
-		writeStatement(new File(directory+fileName+"_uniqueStatement.csv"), allStat().getUniqueStatment());
-		writeUniqueContext(new File(directory+fileName+"_uniqueContext.csv"), allStat().getUniqueContext());
-		writeUniqueInputContext(new File(directory+fileName+"_uniqueInputContext.csv"), allStat().getUniqueInputContext());
+		writeStatement(new File(fileName+"_uniqueStatement.csv"), allStat().getUniqueStatment());
+		writeUniqueContext(new File(fileName+"_uniqueContext.csv"), allStat().getUniqueContext());
+		writeUniqueInputContext(new File(fileName+"_uniqueInputContext.csv"), allStat().getUniqueInputContext());
 	}
 	
 	public Map<String,ComputeStatistic> statisticByStatement() {
@@ -50,7 +51,7 @@ public class Statistic {
 		
 		map.put("all", allStat());
 		for (Statement statement : statements) {
-			String stmtType = statement.getSourcePosition().getFile().toString();
+			String stmtType = statement.getSourceClass().getQualifiedName();
 			if(!map.containsKey(stmtType))
 				map.put(stmtType,new ComputeStatistic());
 			map.get(stmtType).addStatement(statement);
@@ -63,7 +64,7 @@ public class Statistic {
 		
 		map.put("all", allStat());
 		for (Statement statement : statements) {
-			String stmtType = statement.getSourcePosition().toString();
+			String stmtType = statement.getSourcePackage().getQualifiedName();
 			if(!map.containsKey(stmtType))
 				map.put(stmtType,new ComputeStatistic());
 			map.get(stmtType).addStatement(statement);
@@ -82,14 +83,20 @@ public class Statistic {
 		BufferedWriter bw = new BufferedWriter(fw);
 		bw.write(getSummaryHeadLine()+"\n");
 		
+		
 		for (String key : data.keySet()) {
 			ComputeStatistic stat = data.get(key);
+			int popSize = stat.getNumberOfStatements();
 			bw.write(key + separtor 
 					+ stat.getNumberOfStatements() + separtor 
 					+ stat.getUniqueInputContext().size() + separtor
 					+ stat.getUniqueOutputContext().size() + separtor
 					+ stat.getUniqueContext().size() + separtor
-					+ stat.getUniqueStatment().size() + "\n");
+					+ stat.getUniqueStatment().size() + separtor
+					+ shannon(stat.getUniqueStatment(), popSize) + separtor
+					+ simpson(stat.getUniqueStatment(), popSize) + separtor
+					+ shannon(stat.getUniqueContext(), popSize) + separtor
+					+ simpson(stat.getUniqueContext(), popSize) +"\n");
 		}
 		bw.close();
 	}
@@ -133,12 +140,34 @@ public class Statistic {
 		bw.close();
 	}
 	
+	protected double shannon(Map<?,Integer> data, int popSize) {
+		double shannon = 0;
+		for (Object key : data.keySet()) {
+			double p = (double) data.get(key) / (double) popSize;
+			shannon = shannon + (p * Math.log(p));
+		}
+		return - shannon;
+	}
+	
+	protected double simpson(Map<?,Integer> data, int popSize) {
+		double simpson = 0;
+		for (Object key : data.keySet()) {
+			double p = (double) data.get(key) / (double)popSize;
+			simpson = simpson + p * p;
+		}
+		return simpson;
+	}
+	
 	protected String getSummaryHeadLine() {
 		return "item" +separtor 
 				+ "statement" + separtor 
 				+ "uniqueInputContext" + separtor
 				+ "uniqueOutputContext" + separtor
 				+ "uniqueContext" + separtor
-				+ "uniqueStatement";
+				+ "uniqueStatement" + separtor
+				+ "shannon_us" + separtor
+				+ "simpson_us"  + separtor
+				+ "shannon_uc" + separtor
+				+ "simpson_uc";
 	}
 }

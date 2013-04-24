@@ -4,6 +4,8 @@ package fr.inria.diversify.statement;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtPackage;
+import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.declaration.CtTypedElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
@@ -57,11 +59,9 @@ public class Statement {
 	public String equalString() {
 		if(equalString != null)
 			return equalString;
-		
-		equalString = "Input: "+getInputContext().equalString();	
 		StatementEqualPrinter pp = new StatementEqualPrinter(stmt.getFactory().getEnvironment());
 		stmt.accept(pp);
-		equalString = equalString + "\nOutput: "+getOuputContext()+"\nSource: "+pp.toString();
+		equalString = pp.toString();
 		return equalString;
 	}
 	
@@ -111,8 +111,11 @@ public class Statement {
 		return stmt.getClass();
 	}
 	
-	public SourcePosition getSourcePosition() {
-		return stmt.getPosition();
+	public CtSimpleType<?> getSourceClass() {
+		return 	stmt.getPosition().getCompilationUnit().getMainType();
+	}
+	public CtPackage getSourcePackage() {
+		return 	getSourceClass().getPackage();
 	}
 	
 	public int id() {

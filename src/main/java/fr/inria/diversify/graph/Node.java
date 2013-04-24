@@ -1,17 +1,23 @@
 package fr.inria.diversify.graph;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Node {
-	protected List<Node> call;
-	protected List<Node> caller;
+	protected Set<Node> call;
+	protected Set<Node> caller;
 	
 	
 	public Node() {
-		call = new ArrayList<Node>();
-		caller = new ArrayList<Node>();
+		call = new HashSet<Node>();
+		caller = new HashSet<Node>();
 	}
 	
+	public void addCaller(Node n) {
+		caller.add(n);
+	}
 	
+	public void addCall(Node n) {
+		call.add(n);
+	}
 }

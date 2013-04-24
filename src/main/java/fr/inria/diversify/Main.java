@@ -24,29 +24,27 @@ import fr.inria.diversify.statistic.Statistic;
 public class Main {
 	//public static final String srcfolderstatic = "../camel-2.10.4/camel-core";
 //	public static final String srcfolderstatic = "../../workspace/Test";
-	public static final String srcfolderstatic = "../standardLib/src";
+//	public static final String srcfolderstatic = "../standardLib/src";
 //	public static final String srcfolderstatic = "src";
 //	public static final String srcfolderstatic = "../statement/src_to_modify";
 	
-	public static final String srcgenfolderstatic = "src_modified";
+//	public static final String srcgenfolderstatic = "src_modified";
 	private List<Statement> statements;
 	
 
 	public static void main(String[] args) {
-
+		String srcfolderstatic = "../statement/src_to_modify";
 		List<File> files = new ArrayList<File>();
 		files.add(new File(srcfolderstatic));
-
-		Main app = new Main(files, new File(srcgenfolderstatic));
+		String output = "/Users/Simon/Documents/code/diversify-statements/jfreechart";
+		Main app = new Main(files, output);
 	}
 
 
-	public Main(List<File> srcfolders, File srcgenfolder) {
+	public Main(List<File> srcfolders, String output) {
 		this.initSpoon(srcfolders);
-		
 		System.out.println(statements.size());
-		
-		computeStatistic();
+		computeStatistic(output);
 		//stat.printStat();
 	}
 
@@ -61,35 +59,29 @@ public class Main {
 		
 		SpoonBuildingManager builder = new SpoonBuildingManager(factory);
 
-		for (File file : folderToParse) {
+		for (File file : folderToParse)
 			try {
 				builder.addInputSource(file);
-			} catch (IOException e) {
-				e.printStackTrace();
+				builder.build();
+			} catch (Exception e) {
+				
+					e.printStackTrace();
 			}
-		}
-		try {
-			builder.build();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		ProcessingManager pm = new QueueProcessingManager(factory);
-		StatementProcessor processor = new StatementProcessor(true);
-//		 TestProcessor processor = new TestProcessor();//*******************************
+		StatementProcessor processor = new StatementProcessor();
 
 		pm.addProcessor(processor);
 		pm.process();
-		
+	
 		statements = processor.getStatements();
 	}
 
-	protected void computeStatistic() {
+	protected void computeStatistic(String output) {
 		Statistic stat = new Statistic(statements);
-//		 stat.allStat().printStat();
 		 
 		try {
-			stat.writeSatistic("/Users/Simon/Documents/code/diversify-statements/","jfreechart2_withChildren");
+			stat.writeSatistic(output);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
