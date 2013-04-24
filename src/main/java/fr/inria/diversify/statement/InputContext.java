@@ -34,13 +34,7 @@ public class InputContext {
 	}
 	
 	public Object candidate(CtTypeReference<?> type){
-        Object canditate = null;
-		for (CtVariableReference<?> var : localVariableReferences) {
-			if(var.getType().equals(type)) {
-				canditate = var;
-				break;
-			}
-		}
+        Object canditate =  candidateForLocalVar(type);
         if(canditate == null)
             for (CtFieldAccess<?> var : fieldReferences) {
                 if(var.getVariable().getType().equals(type)) {
@@ -94,7 +88,6 @@ public class InputContext {
         return list;
     }
 	public String equalString() {
-		// TODO Auto-generated method stub
 		return inputContextToString().toString();
 	}
 	

@@ -94,21 +94,22 @@ public class Main {
             stmt.getInputContext().toString().equals("[b, java.lang.Double test.A#cc]") ;
         }
 		Statement[] stmt = statements.toArray(new Statement[statements.size()]);
-		
-		for (Statement statement : stmt) {
-			if(stmt[i].isReplace(statement) && statement != stmt[i]) {
+        for (Statement statement1 : stmt) {
+		for (Statement statement2 : stmt) {
+			if(statement1.isReplace(statement2) && statement2 != statement1) {
 				System.out.println("\n____________________________________________________");
-				System.out.println(stmt[i]);
+				System.out.println(statement1+"\n"+statement1.getStatementType().getSimpleName());
 				System.out.println("\nreplaced by:");
-				System.out.println(statement);
+				System.out.println(statement2+"\n"+statement2.getStatementType().getSimpleName());
 				try {
-					stmt[i].replace(statement);
+                    statement1.replace(statement2);
 				} catch (CloneNotSupportedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			break;
 			}
+        }
 		}
 	}
 }
