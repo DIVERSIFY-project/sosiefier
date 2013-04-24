@@ -1,13 +1,13 @@
 package fr.inria.diversify.statistic;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import spoon.reflect.reference.CtTypeReference;
 import fr.inria.diversify.statement.Context;
 import fr.inria.diversify.statement.InputContext;
 import fr.inria.diversify.statement.Statement;
+import spoon.reflect.reference.CtTypeReference;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ComputeStatistic {
 //	todo ajout shanon index
@@ -16,7 +16,7 @@ public class ComputeStatistic {
 	protected Map<CtTypeReference<?>,Integer> uniqueOutputContext;
 	protected Map<Context,Integer> uniqueContext;
 	protected Map<Integer,Integer> uniqueStatment;
-	private Map<Integer,Statement> idToStatement;
+	protected Map<Integer,Statement> idToStatement;
 	
 
 	public ComputeStatistic(List<Statement> statements) {

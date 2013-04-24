@@ -1,5 +1,10 @@
 package fr.inria.diversify.statistic;
 
+import fr.inria.diversify.graph.StatementGraph;
+import fr.inria.diversify.statement.Context;
+import fr.inria.diversify.statement.InputContext;
+import fr.inria.diversify.statement.Statement;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,11 +12,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-
-import fr.inria.diversify.statement.Context;
-import fr.inria.diversify.statement.InputContext;
-import fr.inria.diversify.statement.Statement;
 
 public class Statistic {
 
@@ -24,9 +24,11 @@ public class Statistic {
 	}
 	
 	public void writeSatistic(String fileName) throws IOException {
-		writeSummary(new File(fileName+"_statements.csv"), statisticByStatement());
-		writeSummary(new File(fileName+"classes.csv"), statisticByClass());
-		writeSummary(new File(fileName+"packages.csv"), statisticByPackage());
+
+
+        writeSummary(new File(fileName+"_statements.csv"), statisticByStatement());
+		writeSummary(new File(fileName+"_classes.csv"), statisticByClass());
+		writeSummary(new File(fileName+"_packages.csv"), statisticByPackage());
 		
 		writeStatement(new File(fileName+"_uniqueStatement.csv"), allStat().getUniqueStatment());
 		writeUniqueContext(new File(fileName+"_uniqueContext.csv"), allStat().getUniqueContext());
@@ -69,13 +71,18 @@ public class Statistic {
 				map.put(stmtType,new ComputeStatistic());
 			map.get(stmtType).addStatement(statement);
 		}
+
+        StatementGraph g = new StatementGraph();
+        g.buildGraph(map.get("org.jfree.data.jdbc").idToStatement.values());
+        g.displayGraph();
+
 		return map;
 	}
 	
 	public ComputeStatistic allStat() {
 		if(allStat == null)
 			allStat = new ComputeStatistic(statements);
-		return allStat;
+        return allStat;
 	}
 	
 	public void writeSummary(File file, Map<String, ComputeStatistic> data) throws IOException {

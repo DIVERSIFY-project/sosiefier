@@ -1,5 +1,8 @@
 package fr.inria.diversify;
 
+import fr.inria.diversify.statement.Statement;
+import fr.inria.diversify.statementProcessor.StatementProcessor;
+import fr.inria.diversify.statistic.Statistic;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
@@ -12,10 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import fr.inria.diversify.statement.Statement;
-import fr.inria.diversify.statementProcessor.StatementProcessor;
-import fr.inria.diversify.statistic.Statistic;
 
 /**
  * Created with IntelliJ IDEA. User: Simon Date: 4/17/13 Time: 11:33 AM To
@@ -33,7 +32,7 @@ public class Main {
 	
 
 	public static void main(String[] args) {
-		String srcfolderstatic = "../statement/src_to_modify";
+		String srcfolderstatic = "../../workspace/Test";
 		List<File> files = new ArrayList<File>();
 		files.add(new File(srcfolderstatic));
 		String output = "/Users/Simon/Documents/code/diversify-statements/jfreechart";
@@ -44,8 +43,9 @@ public class Main {
 	public Main(List<File> srcfolders, String output) {
 		this.initSpoon(srcfolders);
 		System.out.println(statements.size());
-		computeStatistic(output);
+		//computeStatistic(output);
 		//stat.printStat();
+        test();
 	}
 
 	private void initSpoon(List<File> folderToParse) {
@@ -90,6 +90,9 @@ public class Main {
 	private void test() {
 		Random r = new Random();
 		int i = r.nextInt(statements.size());
+        for (Statement stmt: statements) {
+            stmt.getInputContext().toString().equals("[b, java.lang.Double test.A#cc]") ;
+        }
 		Statement[] stmt = statements.toArray(new Statement[statements.size()]);
 		
 		for (Statement statement : stmt) {

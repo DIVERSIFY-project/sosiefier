@@ -1,81 +1,117 @@
 package fr.inria.diversify.statement;
 
+import spoon.reflect.code.CtFieldAccess;
+import spoon.reflect.reference.CtTypeReference;
+import spoon.reflect.reference.CtVariableReference;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import spoon.reflect.reference.CtVariableReference;
-
 public class InputContext {
-	protected Set<CtVariableReference<?>> inputContext;
+	protected Set<CtVariableReference<?>> localVariableReferences;
+    protected Set<CtFieldAccess<?>> fieldReferences = new HashSet<CtFieldAccess<?>>();
 	protected Integer hashCode = null;
-	
-	public InputContext(Set<CtVariableReference<?>> inputContext) {
-		this.inputContext = inputContext;
+
+	public InputContext(Set<CtVariableReference<?>> inputContext, Set<CtFieldAccess<?>> fieldReferences) {
+		this.localVariableReferences = inputContext;
+        this.fieldReferences = fieldReferences;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if(obj == null || !(obj instanceof InputContext))
 			return false;
-		
-		//InputContext other = (InputContext)obj;
-		//return inputContextToString(inputContext).equals(inputContextToString(other.inputContext));
 		return this.hashCode() == obj.hashCode();
 	}
 	
-	protected Set<String> inputContextToString(Set<CtVariableReference<?>> inputContext) {
+	protected Set<String> inputContextToString() {
 		Set<String> set = new HashSet<String>();
-		for (CtVariableReference<?> var : inputContext) 
+		for (CtVariableReference<?> var : localVariableReferences)
 			set.add(var.getType().toString());
+        for (CtFieldAccess<?> var : fieldReferences)
+            set.add(var.getVariable().getType().toString());
 		return set;
 	}
 	
-	public CtVariableReference<?> candidate(CtVariableReference<?> variable){
-		CtVariableReference<?> canditate = null;
-		for (CtVariableReference<?> var : inputContext) {
-			if(var.getType().equals(variable.getType())) {
+	public Object candidate(CtTypeReference<?> type){
+        Object canditate = null;
+		for (CtVariableReference<?> var : localVariableReferences) {
+			if(var.getType().equals(type)) {
 				canditate = var;
 				break;
 			}
 		}
+        if(canditate == null)
+            for (CtFieldAccess<?> var : fieldReferences) {
+                if(var.getVariable().getType().equals(type)) {
+                    canditate = var;
+                    break;
+                }
+            }
 		return canditate;
 	}
+
+    public CtVariableReference<?> candidateForLocalVar(CtTypeReference<?> type){
+        CtVariableReference<?> canditate = null;
+        for (CtVariableReference<?> var : localVariableReferences) {
+            if(var.getType().equals(type)) {
+                canditate = var;
+                break;
+            }
+        }
+        return canditate;
+        }
 	
 	public boolean isInclude(InputContext other){
 		boolean isReplace = true;
-		for (CtVariableReference<?> variable : other.inputContext) {
-			isReplace = isReplace && hasCandidate(variable);
-		}
+		for (CtVariableReference<?> variable : other.localVariableReferences)
+			isReplace = isReplace && hasCandidate(variable.getType());
+
+        for (CtFieldAccess<?> field : other.fieldReferences)
+            isReplace = isReplace && hasCandidate(field.getVariable().getType());
 		return isReplace;
 	}
-	
-	protected boolean hasCandidate(CtVariableReference<?> variable) {
-		return candidate(variable) != null;
+
+    protected boolean hasCandidateForLocalVar(CtTypeReference<?> type) {
+        return candidateForLocalVar(type) != null;
+    }
+
+	protected boolean hasCandidate(CtTypeReference<?> type) {
+		return candidate(type) != null;
 	}
 
-	public Set<CtVariableReference<?>> getContext() {
-		return inputContext;
+	public Set<CtVariableReference<?>> getLocalVar() {
+		return localVariableReferences;
 	}
 
+    public Set<CtFieldAccess<?>> getField() {
+        return fieldReferences;
+    }
+    public Set<Object> context() {
+        Set<Object> list = new HashSet<Object>();
+        list.addAll(localVariableReferences);
+        list.addAll(fieldReferences);
+        return list;
+    }
 	public String equalString() {
 		// TODO Auto-generated method stub
-		return inputContextToString(inputContext).toString();
+		return inputContextToString().toString();
 	}
 	
 	@Override
 	public String toString() {
-		return inputContext.toString();
+		return context().toString();
 	}
 	
 	@Override
 	public int hashCode() {
 		if(hashCode == null)
-			hashCode = inputContextToString(inputContext).hashCode();
+			hashCode = inputContextToString().hashCode();
 		return hashCode;
 	}
 
 	public int size() {
-		return inputContext.size();
+		return localVariableReferences.size() + fieldReferences.size();
 	}
 	
 }

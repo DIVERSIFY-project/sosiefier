@@ -1,19 +1,14 @@
 package fr.inria.diversify.statement;
 
-import java.util.Stack;
-
 import spoon.processing.Environment;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtFieldAccess;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtLiteral;
-import spoon.reflect.code.CtLocalVariable;
-import spoon.reflect.code.CtVariableAccess;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
+
+import java.util.Stack;
 
 public class StatementEqualPrinter extends DefaultJavaPrettyPrinter {
 	public Printingcontext context = new Printingcontext();
@@ -22,16 +17,6 @@ public class StatementEqualPrinter extends DefaultJavaPrettyPrinter {
 		super(env);
 		
 	}
-	
-	
-//	public <T> void visitCtLiteral(CtLiteral<T> literal) {
-//		enterCtExpression(literal);
-//		if (literal.getValue() == null) 
-//			write("null");
-//		else
-//			write(literal.getValue().getClass().toString());
-//		exitCtExpression(literal);
-//	}
 
 public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 		

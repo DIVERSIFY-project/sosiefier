@@ -1,11 +1,11 @@
 package fr.inria.diversify.statementProcessor;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import fr.inria.diversify.statement.Statement;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class StatementProcessor extends AbstractProcessor<CtStatement> {
 	protected List<Statement> statements;
@@ -21,9 +21,9 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 			if(isValidStatement(element)) {
 				Statement stmt = new Statement(element);
 				statements.add(stmt);
-//				System.out.println(stmt);
-				//System.out.println(element.getPosition());
-//				System.out.println("-------------------------------\n");
+				System.out.println(stmt);
+				System.out.println(stmt.getInputContext().equalString());
+				System.out.println("-------------------------------\n");
 			}	
 		} catch (Exception e) {
 			System.err.println("erreur");

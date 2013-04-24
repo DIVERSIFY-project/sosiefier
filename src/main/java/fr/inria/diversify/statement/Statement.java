@@ -1,9 +1,9 @@
 package fr.inria.diversify.statement;
 
 
+import fr.inria.diversify.statementProcessor.ReplaceVariableVisitor;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.declaration.CtTypedElement;
@@ -68,11 +68,13 @@ public class Statement {
 	public void replace(Statement other) throws CloneNotSupportedException{
 		System.out.println("\navant: "+stmt.getPosition());
 		System.out.println(stmt.getParent());
-	
-		for (CtVariableReference<?> variable : other.getInputContext().getContext()) {
-			System.out.println("replace: "+variable+ " by "+getInputContext().candidate(variable));
-			variable.setSimpleName(getInputContext().candidate(variable).getSimpleName());
-			
+        System.out.println("replace ");
+		for (CtVariableReference<?> variable : other.getInputContext().getLocalVar()) {
+            CtVariableReference candidate = getInputContext().candidateForLocalVar(variable.getType());
+			System.out.println("replace: "+variable+ " by "+ candidate);
+
+            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
+            other.stmt.accept(visitor);
 		}
 		stmt.replace(other.stmt);
 		System.out.println("\napres: ");

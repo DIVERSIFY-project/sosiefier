@@ -6,9 +6,10 @@ import fr.inria.diversify.statement.Statement;
 
 public class StatementNode extends Node {
 	protected Statement stmt;
-	
-	
-	public StatementNode(Statement stmt) {
+    private static int count;
+
+
+    public StatementNode(Statement stmt) {
 		super();
 		this.stmt = stmt;
 	}
@@ -28,7 +29,7 @@ public class StatementNode extends Node {
 	}
 
 	public void buildLinkWith(StatementNode node) {
-		if(stmt.isReplace(node.stmt)) {
+		if(stmt.isReplace(node.stmt) && node != this) {
 			node.addCall(this);
 			this.addCaller(node);
 		}
@@ -37,7 +38,13 @@ public class StatementNode extends Node {
     public void addInGraph(Graph<Node, String> graph) {
         graph.addVertex(this);
         for (Node node : call) {
-            graph.addEdge("", this, node);
+            count++;
+            graph.addEdge(count+"", node, this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return stmt.toString();
     }
 }
