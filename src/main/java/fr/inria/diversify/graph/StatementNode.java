@@ -1,5 +1,6 @@
 package fr.inria.diversify.graph;
 
+import edu.uci.ics.jung.graph.Graph;
 import fr.inria.diversify.statement.Statement;
 
 
@@ -32,4 +33,11 @@ public class StatementNode extends Node {
 			this.addCaller(node);
 		}
 	}
+
+    public void addInGraph(Graph<Node, String> graph) {
+        graph.addVertex(this);
+        for (Node node : call) {
+            graph.addEdge("", this, node);
+        }
+    }
 }
