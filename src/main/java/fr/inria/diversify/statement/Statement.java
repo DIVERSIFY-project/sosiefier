@@ -1,6 +1,7 @@
 package fr.inria.diversify.statement;
 
 
+import fr.inria.diversify.fr.inria.diversify.replace.ReplaceVariableVisitor;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtStatement;
@@ -10,6 +11,8 @@ import spoon.reflect.declaration.CtTypedElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.support.reflect.code.CtLocalVariableImpl;
+
+import java.io.File;
 
 public class Statement {
     protected Context context;
@@ -55,6 +58,9 @@ public class Statement {
         return tmp;
     }
 
+    public String StatementString() {
+        return stmt.toString();
+    }
 
     public String equalString() {
         if (equalString != null)
@@ -66,6 +72,7 @@ public class Statement {
     }
 
     public void replace(Statement other) throws CloneNotSupportedException {
+
         System.out.println("\navant: " + stmt.getPosition());
         System.out.println(stmt.getParent());
         System.out.println("replace local var ");
@@ -98,6 +105,8 @@ public class Statement {
         if(cl == CtLocalVariableImpl.class && clOther != CtLocalVariableImpl.class)
             return false;
         if(clOther ==  CtLocalVariableImpl.class && cl != CtLocalVariableImpl.class)
+            return false;
+        if(StatementString().contains("super("))
             return false;
         return getInputContext().isInclude(other.getInputContext()) && getOuputContext().equals(other.getOuputContext());
     }
@@ -139,4 +148,7 @@ public class Statement {
         return equalString().hashCode() + context.hashCode();
     }
 
+    public File getSourceFile() {
+        return stmt.getPosition().getFile();
+    }
 }

@@ -14,11 +14,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Simon
  * Date: 4/24/13
  * Time: 2:11 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Design {
     public Graph<Node, String> graph;
@@ -65,15 +63,11 @@ public class Design {
         }
     }
 
-
-    @SuppressWarnings("unchecked")
     public void display() {
 
         Layout<StatementNode, String> layout = new FRLayout(graph);
         layout.setSize(new Dimension(800,800));
         VisualizationViewer<StatementNode, String> vv = new VisualizationViewer<StatementNode, String>(layout);
-
-
         vv.setPreferredSize(new Dimension(850,850));
         vv.getRenderContext().setVertexLabelTransformer(new VertexLabelTransformer(vv.getPickedVertexState()));
         vv.getRenderContext().setVertexFillPaintTransformer(new VertexPaintTransformer(vv.getPickedVertexState()));
@@ -83,7 +77,6 @@ public class Design {
         vv.setGraphMouse(graphMouse);
 
         vv.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
-
 
         JFrame frame = new JFrame("Statements");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

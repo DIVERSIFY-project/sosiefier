@@ -1,6 +1,5 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.graph.StatementGraph;
 import fr.inria.diversify.statement.Context;
 import fr.inria.diversify.statement.InputContext;
 import fr.inria.diversify.statement.Statement;
@@ -53,10 +52,16 @@ public class Statistic {
 		
 		map.put("all", allStat());
 		for (Statement statement : statements) {
-			String stmtType = statement.getSourceClass().getQualifiedName();
-			if(!map.containsKey(stmtType))
-				map.put(stmtType,new ComputeStatistic());
-			map.get(stmtType).addStatement(statement);
+            try {
+                String stmtType = statement.getSourceClass().getQualifiedName();
+                if(!map.containsKey(stmtType))
+                    map.put(stmtType,new ComputeStatistic());
+                map.get(stmtType).addStatement(statement);
+            }catch (Exception e) {
+
+            }
+
+
 		}
 		return map;
 	}
@@ -66,15 +71,20 @@ public class Statistic {
 		
 		map.put("all", allStat());
 		for (Statement statement : statements) {
-			String stmtType = statement.getSourcePackage().getQualifiedName();
-			if(!map.containsKey(stmtType))
-				map.put(stmtType,new ComputeStatistic());
-			map.get(stmtType).addStatement(statement);
+            try {
+                String stmtType = statement.getSourcePackage().getQualifiedName();
+                if(!map.containsKey(stmtType))
+                    map.put(stmtType,new ComputeStatistic());
+                map.get(stmtType).addStatement(statement);
+            }   catch (Exception e) {
+
+            }
+
 		}
 
-        StatementGraph g = new StatementGraph();
-        g.buildGraph(map.get("org.jfree.data.jdbc").idToStatement.values());
-        g.displayGraph();
+//        StatementGraph g = new StatementGraph();
+//        g.buildGraph(map.get("org.jfree.data.jdbc").idToStatement.values());
+//        g.displayGraph();
 
 		return map;
 	}

@@ -1,4 +1,4 @@
-package fr.inria.diversify.statement;
+package fr.inria.diversify.fr.inria.diversify.replace;
 
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtInvocation;
@@ -8,11 +8,9 @@ import spoon.reflect.visitor.CtScanner;
 import spoon.support.reflect.code.CtVariableAccessImpl;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Simon
  * Date: 4/24/13
  * Time: 3:09 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ReplaceVariableVisitor extends CtScanner {
     protected Object oldVar;
@@ -26,11 +24,7 @@ public class ReplaceVariableVisitor extends CtScanner {
 
 
     public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
-        System.out.println("visitCtVariableAccess: "+ newVar);
-//        if(newVar instanceof CtFieldReference)
-//            System.out.println(newVar) ;
-
-        if (variableAccess.getVariable().equals(oldVar))
+        System.out.println("visitCtVariableAccess: "+ variableAccess);
             if (variableAccess.getVariable().equals(oldVar))
                 if(newVar instanceof CtVariableReference)
                     variableAccess.setVariable((CtVariableReference)newVar);
@@ -39,30 +33,15 @@ public class ReplaceVariableVisitor extends CtScanner {
         super.visitCtVariableAccess(variableAccess);
     }
 
-//    public <T> void visitCtLocalVariableReference(
-//            CtLocalVariableReference<T> reference) {
-//        //localVariableReferences.add(reference);
-//
-//        super.visitCtLocalVariableReference(reference);
-//    }
-
     public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-        System.out.println("visitCtFieldAccess: "+ newVar);
-        if (fieldAccess.getVariable().getDeclaration() != null)          // utile ??
-            if (fieldAccess.getVariable().equals(oldVar))
-                if(newVar instanceof CtVariableReference)
-                fieldAccess.setVariable((CtVariableReference)newVar);
-            else
+        System.out.println("visitCtFieldAccess: " + fieldAccess);
+        if (fieldAccess.equals(oldVar))
+            if (newVar instanceof CtVariableReference) {
+                fieldAccess.setVariable((CtVariableReference) newVar);
+            } else
                 fieldAccess.replace((CtFieldAccess)newVar);
         super.visitCtVariableAccess(fieldAccess);
     }
-
-//    public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
-//
-//        if (reference.getDeclaration() != null)
-//
-//            super.visitCtFieldReference(reference);
-//    }
 
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 
@@ -85,4 +64,18 @@ public class ReplaceVariableVisitor extends CtScanner {
            return ((CtVariableReference)oldVar).getSimpleName().equals("this");
         return false;
     }
+
+    //    public <T> void visitCtLocalVariableReference(
+//            CtLocalVariableReference<T> reference) {
+//        //localVariableReferences.add(reference);
+//
+//        super.visitCtLocalVariableReference(reference);
+//    }
+
+//    public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
+//        System.out.println("visitCtFieldReference: "+ reference);
+//
+//            super.visitCtFieldReference(reference);
+//    }
+
 }
