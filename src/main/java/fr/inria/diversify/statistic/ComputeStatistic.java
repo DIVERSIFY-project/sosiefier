@@ -5,6 +5,7 @@ import fr.inria.diversify.statement.InputContext;
 import fr.inria.diversify.statement.Statement;
 import spoon.reflect.reference.CtTypeReference;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -148,6 +149,10 @@ public class ComputeStatistic {
 	public Map<Integer, Integer> getUniqueStatment() {
 		return uniqueStatment;
 	}
+
+    public Collection<Statement> getUniqueStatementList() {
+        return idToStatement.values();
+    }
 
 }	
 

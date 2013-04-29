@@ -9,16 +9,15 @@ import spoon.reflect.visitor.filter.AbstractFilter;
  * Time: 11:05 AM
  */
 public class ReplaceVarFilter extends AbstractFilter {
-    CtElement parent;
-    public ReplaceVarFilter(Class<?> type, CtElement parent) {
-        super(type);
-        this.parent = parent;
+    CtElement elem;
+    public ReplaceVarFilter(CtElement elem) {
+        super(CtElement.class);
+        this.elem = elem;
     }
 
     @Override
     public boolean matches(CtElement element) {
-        if(element == null)
-            return false;
-       return element.getParent() == parent || matches(element.getParent());
+
+       return element == elem;
     }
 }

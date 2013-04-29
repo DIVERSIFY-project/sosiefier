@@ -24,7 +24,7 @@ public class ReplaceVariableVisitor extends CtScanner {
 
 
     public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
-        System.out.println("visitCtVariableAccess: "+ variableAccess);
+//        System.out.println("visitCtVariableAccess: "+oldVar+ " ||||| "+newVar);
             if (variableAccess.getVariable().equals(oldVar))
                 if(newVar instanceof CtVariableReference)
                     variableAccess.setVariable((CtVariableReference)newVar);
@@ -33,13 +33,16 @@ public class ReplaceVariableVisitor extends CtScanner {
         super.visitCtVariableAccess(variableAccess);
     }
 
+
     public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-        System.out.println("visitCtFieldAccess: " + fieldAccess);
+//        System.out.println("visitCtFieldAccess: " + oldVar + " ||||| " + newVar);
         if (fieldAccess.equals(oldVar))
             if (newVar instanceof CtVariableReference) {
-                fieldAccess.setVariable((CtVariableReference) newVar);
-            } else
-                fieldAccess.replace((CtFieldAccess)newVar);
+//                    fieldAccess.setVariable((CtVariableReference) newVar);
+                fieldAccess.replace(((CtVariableReference) newVar).getDeclaration());
+            } else {
+                fieldAccess.replace((CtFieldAccess) newVar);
+            }
         super.visitCtVariableAccess(fieldAccess);
     }
 
@@ -64,18 +67,4 @@ public class ReplaceVariableVisitor extends CtScanner {
            return ((CtVariableReference)oldVar).getSimpleName().equals("this");
         return false;
     }
-
-    //    public <T> void visitCtLocalVariableReference(
-//            CtLocalVariableReference<T> reference) {
-//        //localVariableReferences.add(reference);
-//
-//        super.visitCtLocalVariableReference(reference);
-//    }
-
-//    public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
-//        System.out.println("visitCtFieldReference: "+ reference);
-//
-//            super.visitCtFieldReference(reference);
-//    }
-
 }

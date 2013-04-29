@@ -14,7 +14,7 @@ public class A3 {
         return new A1();
     }
 
-    public A3 baz2() {
+    public A2 baz2() {
         return null;
     }
 }

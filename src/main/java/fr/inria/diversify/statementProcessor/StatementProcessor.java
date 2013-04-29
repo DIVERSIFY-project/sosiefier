@@ -24,7 +24,7 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 				System.out.println(stmt);
 				System.out.println(stmt.getInputContext().equalString());
 				System.out.println("-------------------------------\n");
-			}	
+			}
 		} catch (Exception e) {
 			System.err.println("erreur");
 		}			

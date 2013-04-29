@@ -2,11 +2,17 @@ package fr.inria.diversify.fr.inria.diversify.replace;
 
 import fr.inria.diversify.statement.Statement;
 import fr.inria.diversify.statementProcessor.StatementProcessor;
-import spoon.processing.ProcessingManager;
+import fr.inria.diversify.statementProcessor.SubStatementVisitor;
 import spoon.reflect.Factory;
-import spoon.support.QueueProcessingManager;
-import spoon.support.builder.SpoonBuildingManager;
+import spoon.reflect.code.CtStatement;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtSimpleType;
+import spoon.support.JavaOutputProcessor;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -18,90 +24,139 @@ import java.util.Random;
 public class Replace {
 
     protected Factory factory;
-    protected List<Statement> statements;
+    protected List<Statement> allStatements;
+    protected List<Statement> uniqueStatements;
+    protected Statement stmtToReplace;
+    protected Statement stmtReplacedBy;
+    protected CtSimpleType<?> oldClass;
+    protected CtSimpleType<?> newClass;
 
-    public Replace(List<Statement> stmts,Factory factory) {
-        statements = stmts;
+    public Replace(List<Statement> allStatements, Collection<Statement> uniqueStatements, Factory factory) {
+        this.allStatements = allStatements;
+        this.uniqueStatements = new ArrayList<Statement>();
+        this.uniqueStatements.addAll(uniqueStatements);
         this.factory = factory;
     }
 
-    protected Statement getStatementToReplace(Class stmtType) {
+    public void setStatementToReplace(Statement stmt) {
+        stmtToReplace = stmt;
+    }
+//    public void setStatementReplacedBy(Statement stmt) {
+//        stmtReplacedBy = stmt;
+//    }
+
+    protected Statement getStatementToReplace() {
+        if(stmtToReplace == null)  {
+//             choix d'une strategie de selection
+            stmtToReplace = randomStatementToReplace();
+//            oldClass = copyElem(stmtToReplace.getCtStatement().getParent(CtClass.class));
+        }
+        return stmtToReplace;
+    }
+
+    protected Statement getStatementReplacedBy() {
+        if(stmtReplacedBy == null)  {
+//             choix d'une strategie de selection
+            stmtReplacedBy = findRandomCandidateStatement(stmtToReplace);
+        }
+        return stmtReplacedBy;
+    }
+
+    protected Statement randomStatementToReplace(Class stmtType) {
         Random r = new Random();
-        Statement s = statements.get(r.nextInt(statements.size()));
+        Statement s = allStatements.get(r.nextInt(allStatements.size()));
 
         while (s.getClass() != stmtType)
-            s = statements.get(r.nextInt(statements.size()));
+            s = allStatements.get(r.nextInt(allStatements.size()));
 
         return s;
     }
 
-    protected Statement getStatementToReplace() {
+    protected Statement randomStatementToReplace() {
         Random r = new Random();
-        return statements.get(r.nextInt(statements.size()));
+        return allStatements.get(r.nextInt(allStatements.size()));
     }
 
     protected Statement findStatement(String stmtString) {
         Statement s = null;
-        for (Statement stmt : statements)
+        for (Statement stmt : allStatements)
             if (stmt.StatementString().equals(stmtString))
                 s = stmt;
         return s;
     }
 
-    protected Statement getStatement(Statement stmt) {
-        Statement s = null;
-        for (Statement statement2 : statements)
-            if (stmt.isReplace(statement2) && statement2 != stmt) {
-                s = statement2;
-                break;
-            }
-        if (s == null)
+    protected Statement findRandomCandidateStatement(Statement stmt) {
+        List<Statement> list = new ArrayList<Statement>();
+        for (Statement statement : uniqueStatements)
+            if (stmt.isReplace(statement) && !statement.equalString().equals(stmt.equalString()))
+               list.add(statement);
+
+        if (list.isEmpty())
             return null;
-        return copyStatement(s);
+       System.out.println("number of replace: "+list.size());
+
+       Random r = new Random();
+        CtStatement tmp = (CtStatement)copyElem(list.get(r.nextInt(list.size())).getCtStatement());
+        return new Statement(tmp);
     }
 
-    protected Statement copyStatement(Statement statement) {
-        SpoonBuildingManager builder = new SpoonBuildingManager(factory);
-
-        try {
-            builder.addInputSource(statement.getSourceFile());
-            builder.build();
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-
-        ProcessingManager pm = new QueueProcessingManager(factory);
-        StatementProcessor processor = new StatementProcessor();
-
-        pm.addProcessor(processor);
-        pm.process();
-
-        Statement s = null;
-        for (Statement stmt : processor.getStatements()) {
-            if (statement.equalString().equals(stmt.equalString())) {
-                s = stmt;
-            }
-        }
-        System.out.println(s.getContext() +"  "+ statement.hashCode());
-
-        return s;
+    protected CtElement copyElem(CtElement elem) {
+        CtElement tmp = factory.Core().clone(elem);
+        tmp.setParent(elem.getParent());
+        return tmp;
     }
 
     public void replace() {
-        Statement stmt = getStatementToReplace();
-        Statement stmt2 = getStatement(stmt);
-        System.out.println(stmt + "\n" + stmt.getStatementType().getSimpleName());
-        if (stmt2 != null) {
-
-            System.out.println("\nreplaced by:");
-            System.out.println(stmt2 + "\n" + stmt2.getStatementType().getSimpleName());
-            try {
-                stmt.replace(stmt2);
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
+       while(stmtReplacedBy == null) {
+            stmtToReplace = randomStatementToReplace();
+            getStatementReplacedBy();
         }
+         oldClass = factory.Core().clone(stmtToReplace.getCtStatement().getParent(CtSimpleType.class))  ;
+        newClass = stmtToReplace.getCtStatement().getParent(CtSimpleType.class);
+        Statement tmp = new Statement((CtStatement)copyElem(stmtReplacedBy.getCtStatement()));
+        System.out.println(stmtToReplace + "\n" + stmtToReplace.getStatementType().getSimpleName());
+        if (tmp != null) {
+            System.out.println("\nreplaced by:");
+            System.out.println(tmp + "\n" + tmp.getStatementType().getSimpleName());
+
+            stmtToReplace.replace(tmp);
+        }
+//        newClass = stmtToReplace.getCtStatement().getParent(CtSimpleType.class);
+        try {
+            printJavaFile("output_new", newClass);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void restore() {
+        List<Statement> statementToRemove = new ArrayList<Statement>();
+        for (Statement stmt : allStatements) {
+              if(stmt.getCtStatement().getParent(CtSimpleType.class).equals(newClass))
+                  statementToRemove.add(stmt);
+        }
+        SubStatementVisitor sub = new SubStatementVisitor();
+        allStatements.removeAll(statementToRemove);
+        oldClass.accept(sub);
+         StatementProcessor sp = new StatementProcessor();
+        for (CtStatement stmt : sub.getStatements())
+          sp.process(stmt);
+
+        allStatements.addAll(sp.getStatements());
+        oldClass.setParent(newClass.getParent());
+
+        try {
+            printJavaFile("output_old", oldClass);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
+        JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository));
+        processor.setFactory(factory );
+        processor.createJavaFile(type);
 
     }
 

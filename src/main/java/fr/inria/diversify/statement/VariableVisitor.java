@@ -22,8 +22,7 @@ public class VariableVisitor extends CtScanner {
 
 	public InputContext input() {
         localVariableReferences.removeAll(localVariableCreate);
-//        localVariableReferences.addAll(fieldReferences);
-		
+
 		if(refThis != null)
             localVariableReferences.add(getThis());
 		return new InputContext(localVariableReferences, fieldReferences);
@@ -46,22 +45,21 @@ public class VariableVisitor extends CtScanner {
 	}
 
 	public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-//        System.out.println(fieldAccess + "  "+fieldAccess.getTarget());
 		if(!(fieldAccess.getVariable().getSimpleName() == "super"))
-			if(fieldAccess.getVariable().getDeclaration() != null)
+		    if(!fieldAccess.getVariable().isStatic())
 				fieldReferences.add(fieldAccess);
 		super.visitCtVariableAccess(fieldAccess);
 	}
 
 //	public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
-////		System.out.println("\tvisitCtFieldReference "+ reference.getDeclaration());
-//		if(reference.getDeclaration() != null)
-//				fieldReferences.add(reference);
+//		System.out.println("\tvisitCtFieldReference "+ reference);
+////        if(!reference.isStatic())
+////
+////				fieldReferences.add();
 //		super.visitCtFieldReference(reference);
 //	}
-	
+
 	public <T> void visitCtInvocation(CtInvocation<T> invocation) {
-		
 		if(invocation.getTarget() == null){
 			refThis = invocation.getExecutable().getDeclaringType();
 		}

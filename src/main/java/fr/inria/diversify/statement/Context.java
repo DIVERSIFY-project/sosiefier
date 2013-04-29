@@ -35,7 +35,8 @@ public class Context {
 	}
 
 	public String equalString() {
-		return inputContext.equalString()+ " "+ouputContext.toString();
+		return inputContext.equalString()+ " "
+                + ouputContext.toString();
 	}
 
 	public int size() {

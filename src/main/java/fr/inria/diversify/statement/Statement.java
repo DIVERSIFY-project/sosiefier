@@ -2,6 +2,7 @@ package fr.inria.diversify.statement;
 
 
 import fr.inria.diversify.fr.inria.diversify.replace.ReplaceVariableVisitor;
+import fr.inria.diversify.statementProcessor.SubStatementVisitor;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtStatement;
@@ -10,9 +11,13 @@ import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.declaration.CtTypedElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
+import spoon.support.reflect.code.CtCaseImpl;
 import spoon.support.reflect.code.CtLocalVariableImpl;
+import spoon.support.reflect.code.CtThrowImpl;
 
 import java.io.File;
+import java.util.List;
+import java.util.Random;
 
 public class Statement {
     protected Context context;
@@ -26,6 +31,7 @@ public class Statement {
         this.initOutputContext();
         this.initInputContext();
     }
+
 
     public CtTypeReference<?> getOuputContext() {
         return context.getOuputContext();
@@ -71,62 +77,64 @@ public class Statement {
         return equalString;
     }
 
-    public void replace(Statement other) throws CloneNotSupportedException {
-
+    public Statement replace(Statement other) {
+        Statement newStatement = null;
         System.out.println("\navant: " + stmt.getPosition());
         System.out.println(stmt.getParent());
-        System.out.println("replace local var ");
-        for (CtVariableReference<?> variable : other.getInputContext().getLocalVar()) {
-            Object candidate = getInputContext().candidate(variable.getType());
-            System.out.println("replace: " + variable + " by " + candidate);
-
-            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
-            other.stmt.accept(visitor);
-        }
-
-        System.out.println("replace field access ");
-        for (CtFieldAccess<?> variable : other.getInputContext().getField()) {
-            Object candidate = getInputContext().candidate(variable.getType());
-            System.out.println("replace: " + variable + " by " + candidate);
-
-            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
-            other.stmt.accept(visitor);
-        }
         stmt.replace(other.stmt);
-        System.out.println("\napres: ");
-        System.out.println(stmt.getParent());
+        SubStatementVisitor sub = new SubStatementVisitor()  ;
+        stmt.getParent().accept(sub);
+        for(CtStatement statement: sub.getStatements())
+            if(statement.toString().equals(other.stmt.toString()))
+                newStatement = new Statement(statement);
+        Random r = new Random();
+        for (CtVariableReference<?> variable : newStatement.getInputContext().getLocalVar()) {
+            List<Object> list = getInputContext().allCandidate(variable.getType());
+            Object candidate = list.get(r.nextInt(list.size()));
+            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
+            newStatement.stmt.accept(visitor);
+        }
+        for (CtFieldAccess<?> variable : newStatement.getInputContext().getField()) {
+            List<CtFieldAccess> list = getInputContext().allCandidateForFieldAccess(variable.getType());
+            Object candidate = list.get(r.nextInt(list.size()));
 
+            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
+            newStatement.stmt.accept(visitor);
+        }
+        if(stmt instanceof CtLocalVariableImpl) {
+            ((CtLocalVariableImpl)newStatement.stmt).setSimpleName(((CtLocalVariableImpl) stmt).getSimpleName());
+
+        }
+
+        System.out.println("\napres: "+stmt.getParent());
+        return newStatement;
     }
+
+
 
     //check if this can be replaced by other
     public boolean isReplace(Statement other) {
         Class<?> cl = stmt.getClass();
         Class<?> clOther = other.stmt.getClass();
-        if(cl == CtLocalVariableImpl.class && clOther != CtLocalVariableImpl.class)
-            return false;
-        if(clOther ==  CtLocalVariableImpl.class && cl != CtLocalVariableImpl.class)
+        if((clOther ==  CtLocalVariableImpl.class || cl == CtLocalVariableImpl.class) && cl != clOther)
             return false;
         if(StatementString().contains("super("))
             return false;
+        if((clOther ==  CtCaseImpl.class || cl == CtCaseImpl.class) && cl != clOther)
+            return false;
+        if((clOther ==  CtThrowImpl.class || cl == CtThrowImpl.class) && cl != clOther)
+            return false;
+        SubStatementVisitor sub = new SubStatementVisitor()  ;
+        other.stmt.getParent().accept(sub);
+        if(sub.getStatements().contains(stmt))
+            return false;
+
         return getInputContext().isInclude(other.getInputContext()) && getOuputContext().equals(other.getOuputContext());
     }
 
-
-//	@Override
-//	public boolean equals(Object obj) {
-//		if(obj == null)
-//			return false;
-//		
-//		Statement stmtObj = (Statement)obj;
-//		return stmt.toString().equals(stmtObj.stmt.toString()) && 
-//				inputContext.equals(stmtObj.inputContext) &&
-//				ouputContext.equals(stmtObj.ouputContext);
-//	}
-
-//	@Override
-//	public int hashCode() {
-//		return stmt.toString().hashCode()*inputContext.hashCode() + ouputContext.hashCode();
-//	}
+     public CtStatement getCtStatement()  {
+         return stmt;
+     }
 
     public Context getContext() {
         return context;

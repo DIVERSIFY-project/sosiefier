@@ -1,6 +1,5 @@
 package fr.inria.diversify;
 
-import fr.inria.diversify.fr.inria.diversify.replace.Replace;
 import fr.inria.diversify.statement.Statement;
 import fr.inria.diversify.statementProcessor.StatementProcessor;
 import fr.inria.diversify.statistic.Statistic;
@@ -35,7 +34,7 @@ public class Main {
 		String srcfolderstatic = "src/test";
 		List<File> files = new ArrayList<File>();
 		files.add(new File(srcfolderstatic));
-		String output = "/Users/Simon/Documents/code/diversify-statements/test";
+		String output = "test";
 		Main app = new Main(files, output);
 
 	}
@@ -46,13 +45,26 @@ public class Main {
 		System.out.println(statements.size());
 //		computeStatistic(output);
 		//stat.printStat();
-        Replace rp = new Replace(statements, factory);
-          rp.replace();
+        Statistic stat = new Statistic(statements);
         try {
             printJavaFile("output");
+            printJavaFile("output_new");
+            printJavaFile("output_old");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+//        for (int i = 0; i<100; i++) {
+//            System.out.println(i);
+//            Replace rp = new Replace(statements, stat.allStat().getUniqueStatementList(), factory);
+//           try {
+//               rp.replace();
+//           }   catch (Exception e) {
+//               System.out.println("erreur");
+//           }
+//
+//            rp.restore();
+//        }
     }
 
 	private void initSpoon(List<File> folderToParse) {
