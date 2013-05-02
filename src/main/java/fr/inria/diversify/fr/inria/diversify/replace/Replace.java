@@ -8,8 +8,6 @@ import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtSimpleType;
-import spoon.support.ByteCodeOutputProcessor;
-import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +23,8 @@ import java.util.Random;
  */
 public class Replace {
 
-    protected final CoverageReport coverageReport;
+    protected String tmpDir;
+    protected CoverageReport coverageReport;
     protected Factory factory;
     protected List<Statement> allStatements;
     protected List<Statement> uniqueStatements;
@@ -34,7 +33,8 @@ public class Replace {
     protected CtSimpleType<?> oldClass;
     protected CtSimpleType<?> newClass;
 
-    public Replace(List<Statement> allStatements, Collection<Statement> uniqueStatements, CoverageReport cr) {
+    public Replace(List<Statement> allStatements, Collection<Statement> uniqueStatements, CoverageReport cr, String tmpDir) {
+        this.tmpDir = tmpDir;
         this.allStatements = allStatements;
         this.uniqueStatements = new ArrayList<Statement>();
         this.uniqueStatements.addAll(uniqueStatements);
@@ -101,7 +101,6 @@ public class Replace {
 
         if (list.isEmpty())
             return null;
-       System.out.println("number of replace: "+list.size());
 
        Random r = new Random();
         CtStatement tmp = (CtStatement)copyElem(list.get(r.nextInt(list.size())).getCtStatement());
@@ -119,19 +118,15 @@ public class Replace {
             stmtToReplace = randomStatementToReplace();
             getStatementReplacedBy();
         }
-
         oldClass = factory.Core().clone(stmtToReplace.getCtStatement().getParent(CtSimpleType.class))  ;
         newClass = stmtToReplace.getCtStatement().getParent(CtSimpleType.class);
         Statement tmp = new Statement((CtStatement)copyElem(stmtReplacedBy.getCtStatement()));
 
-        System.out.println(stmtToReplace + "\n" + stmtToReplace.getStatementType().getSimpleName());
-        System.out.println("\nreplaced by:");
-        System.out.println(tmp + "\n" + tmp.getStatementType().getSimpleName());
-
         stmtToReplace.replace(tmp);
 
         try {
-            printJavaFile("output_new", newClass);
+            printJavaFile(tmpDir, newClass);
+            compile(new File(tmpDir), newClass.getFactory());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -153,24 +148,55 @@ public class Replace {
         allStatements.addAll(sp.getStatements());
         oldClass.setParent(newClass.getParent());
 
+        System.out.println("oldClass "+oldClass.getSimpleName() + oldClass.getSignature());
+
         try {
-            printJavaFile("output_old", oldClass);
+            printJavaFile(tmpDir, oldClass);
+            compile(new File(tmpDir), oldClass.getFactory());
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
+        MyJavaOutputProcessor processor = new MyJavaOutputProcessor(new File(repository));
+        processor.setFactory(type.getFactory());
+        processor.createJavaFile(type);
+    }
+
+    public void compile(File directory, Factory f ) {
+//        JDTCompiler compiler = new JDTCompiler();
+//        try {
+//            compiler.compileSrc(f, allJavaFile(directory));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        String tmp = "javac -encoding utf8 ";
+        for(File file : allJavaFile(directory)) {
+            tmp = tmp + file.toString()+ " ";
+        }
+        Runtime r = Runtime.getRuntime();
+//        System.out.println(tmp);
+        try {
+            Process p = r.exec(tmp);
+            p.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository));
-        processor.setFactory(factory);
-        processor.createJavaFile(type);
-    }
-
-    public void printByteCode(String repository, CtSimpleType<?> type) throws IOException {
-        File dir =  new File(repository);
-        ByteCodeOutputProcessor processor = new ByteCodeOutputProcessor( new JavaOutputProcessor(dir), dir);
-        processor.setFactory(factory);
-        processor.process(type);
+    protected List<File> allJavaFile(File dir) {
+        List<File> list = new ArrayList<File>();
+        for (File file : dir.listFiles())
+            if(file.isFile())     {
+                if(file.getName().endsWith(".java"))
+                    list.add(file);
+            }
+            else
+                list.addAll(allJavaFile(file));
+        return list;
     }
 }

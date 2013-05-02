@@ -25,11 +25,11 @@ public class CoverageReport {
     private SessionInfoStore sessionInfoStore;
 
 
-    public CoverageReport(String sourceDir, String jacocoFile) {
+    public CoverageReport(String classesDir, String jacocoFile) {
+        System.out.println(classesDir);
         this.executionDataFile = new File(jacocoFile);
-        System.out.println(jacocoFile);
-        System.out.println(sourceDir);
-        this.classesDirectory = new File(sourceDir);
+
+        this.classesDirectory = new File(classesDir);
     }
 
 
@@ -112,7 +112,7 @@ public class CoverageReport {
         }
         if(classCoverage == null)
             return false;
-        System.out.println(classCoverage.getName());
+//        System.out.println(classCoverage.getName());
         boolean ret = false;
         for (int i = stmt.getStartLine(); i <= stmt.getEndLine(); i++) {
             if(classCoverage.getLine(i).getStatus() == 2 || classCoverage.getLine(i).getStatus() == 1) {
