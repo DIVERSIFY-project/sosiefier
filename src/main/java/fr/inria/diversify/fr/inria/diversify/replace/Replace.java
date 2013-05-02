@@ -1,5 +1,6 @@
 package fr.inria.diversify.fr.inria.diversify.replace;
 
+import fr.inria.diversify.fr.inria.diverfy.runtest.CoverageReport;
 import fr.inria.diversify.statement.Statement;
 import fr.inria.diversify.statementProcessor.StatementProcessor;
 import fr.inria.diversify.statementProcessor.SubStatementVisitor;
@@ -7,6 +8,7 @@ import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.support.ByteCodeOutputProcessor;
 import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
@@ -23,6 +25,7 @@ import java.util.Random;
  */
 public class Replace {
 
+    protected final CoverageReport coverageReport;
     protected Factory factory;
     protected List<Statement> allStatements;
     protected List<Statement> uniqueStatements;
@@ -31,11 +34,12 @@ public class Replace {
     protected CtSimpleType<?> oldClass;
     protected CtSimpleType<?> newClass;
 
-    public Replace(List<Statement> allStatements, Collection<Statement> uniqueStatements, Factory factory) {
+    public Replace(List<Statement> allStatements, Collection<Statement> uniqueStatements, CoverageReport cr) {
         this.allStatements = allStatements;
         this.uniqueStatements = new ArrayList<Statement>();
         this.uniqueStatements.addAll(uniqueStatements);
-        this.factory = factory;
+        this.factory = allStatements.get(0).getCtStatement().getFactory();
+        this.coverageReport = cr;
     }
 
     public void setStatementToReplace(Statement stmt) {
@@ -74,7 +78,11 @@ public class Replace {
 
     protected Statement randomStatementToReplace() {
         Random r = new Random();
-        return allStatements.get(r.nextInt(allStatements.size()));
+        Statement stmt = allStatements.get(r.nextInt(allStatements.size()));
+
+        while(!coverageReport.statementCoverage(stmt))
+            stmt = allStatements.get(r.nextInt(allStatements.size()));
+        return stmt;
     }
 
     protected Statement findStatement(String stmtString) {
@@ -107,21 +115,21 @@ public class Replace {
     }
 
     public void replace() {
-       while(stmtReplacedBy == null) {
+        while(stmtReplacedBy == null) {
             stmtToReplace = randomStatementToReplace();
             getStatementReplacedBy();
         }
-         oldClass = factory.Core().clone(stmtToReplace.getCtStatement().getParent(CtSimpleType.class))  ;
+
+        oldClass = factory.Core().clone(stmtToReplace.getCtStatement().getParent(CtSimpleType.class))  ;
         newClass = stmtToReplace.getCtStatement().getParent(CtSimpleType.class);
         Statement tmp = new Statement((CtStatement)copyElem(stmtReplacedBy.getCtStatement()));
-        System.out.println(stmtToReplace + "\n" + stmtToReplace.getStatementType().getSimpleName());
-        if (tmp != null) {
-            System.out.println("\nreplaced by:");
-            System.out.println(tmp + "\n" + tmp.getStatementType().getSimpleName());
 
-            stmtToReplace.replace(tmp);
-        }
-//        newClass = stmtToReplace.getCtStatement().getParent(CtSimpleType.class);
+        System.out.println(stmtToReplace + "\n" + stmtToReplace.getStatementType().getSimpleName());
+        System.out.println("\nreplaced by:");
+        System.out.println(tmp + "\n" + tmp.getStatementType().getSimpleName());
+
+        stmtToReplace.replace(tmp);
+
         try {
             printJavaFile("output_new", newClass);
         } catch (IOException e) {
@@ -155,9 +163,14 @@ public class Replace {
 
     public void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
         JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository));
-        processor.setFactory(factory );
+        processor.setFactory(factory);
         processor.createJavaFile(type);
-
     }
 
+    public void printByteCode(String repository, CtSimpleType<?> type) throws IOException {
+        File dir =  new File(repository);
+        ByteCodeOutputProcessor processor = new ByteCodeOutputProcessor( new JavaOutputProcessor(dir), dir);
+        processor.setFactory(factory);
+        processor.process(type);
+    }
 }

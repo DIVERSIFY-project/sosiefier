@@ -21,9 +21,9 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 			if(isValidStatement(element)) {
 				Statement stmt = new Statement(element);
 				statements.add(stmt);
-				System.out.println(stmt);
-				System.out.println(stmt.getInputContext().equalString());
-				System.out.println("-------------------------------\n");
+//				System.out.println(stmt);
+//				System.out.println(stmt.getInputContext().equalString());
+//				System.out.println("-------------------------------\n");
 			}
 		} catch (Exception e) {
 			System.err.println("erreur");

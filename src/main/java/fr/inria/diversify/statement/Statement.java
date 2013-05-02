@@ -148,6 +148,14 @@ public class Statement {
         return stmt.getPosition().getCompilationUnit().getMainType();
     }
 
+    public int getStartLine() {
+        return stmt.getPosition().getLine();
+    }
+
+    public int getEndLine() {
+        return stmt.getPosition().getEndLine();
+    }
+
     public CtPackage getSourcePackage() {
         return getSourceClass().getPackage();
     }

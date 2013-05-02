@@ -1,12 +1,12 @@
 package fr.inria.diversify;
 
+import fr.inria.diversify.fr.inria.diverfy.runtest.CoverageReport;
 import fr.inria.diversify.statement.Statement;
 import fr.inria.diversify.statementProcessor.StatementProcessor;
 import fr.inria.diversify.statistic.Statistic;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
-import spoon.support.JavaOutputProcessor;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
 import spoon.support.builder.SpoonBuildingManager;
@@ -30,41 +30,48 @@ public class Main {
     private StandardEnvironment env;
 
 
-    public static void main(String[] args) {
-		String srcfolderstatic = "src/test";
+    public static void main(String[] args) throws Exception {
+		String srcfolderstatic = "../junit/src/main/java";
 		List<File> files = new ArrayList<File>();
 		files.add(new File(srcfolderstatic));
 		String output = "test";
 		Main app = new Main(files, output);
+//        ExecDump.dumpContent("../junit/target/jacoco.exec");
 
-	}
+    }
 
 
-	public Main(List<File> srcfolders, String output) {
-		this.initSpoon(srcfolders);
+	public Main(List<File> srcfolders, String output) throws Exception {
+       this.initSpoon(srcfolders);
 		System.out.println(statements.size());
-//		computeStatistic(output);
-		//stat.printStat();
-        Statistic stat = new Statistic(statements);
-        try {
-            printJavaFile("output");
-            printJavaFile("output_new");
-            printJavaFile("output_old");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        CoverageReport rg = new CoverageReport("/Users/Simon/Documents/code/junit/target/classes", "/Users/Simon/Documents/code/junit/target/jacoco.exec");
+        rg.create();
 
-//        for (int i = 0; i<100; i++) {
-//            System.out.println(i);
-//            Replace rp = new Replace(statements, stat.allStat().getUniqueStatementList(), factory);
-//           try {
-//               rp.replace();
-//           }   catch (Exception e) {
-//               System.out.println("erreur");
-//           }
-//
-//            rp.restore();
+        for(Statement stmt: statements)  {
+            System.out.println(stmt.getSourceClass().getSignature()+"\n"+ stmt+ "\ncouverture: " + rg.statementCoverage(stmt)+"\n");
+        }
+////		computeStatistic(output);
+//		//stat.printStat();
+//        Statistic stat = new Statistic(statements);
+//        try {
+//            printJavaFile("output");
+//            printJavaFile("output_new");
+//            printJavaFile("output_old");
+//        } catch (IOException e) {
+//            e.printStackTrace();
 //        }
+//
+////        for (int i = 0; i<100; i++) {
+////            System.out.println(i);
+////            Replace rp = new Replace(statements, stat.allStat().getUniqueStatementList(), factory);
+////           try {
+////               rp.replace();
+////           }   catch (Exception e) {
+////               System.out.println("erreur");
+////           }
+////
+////            rp.restore();
+////        }
     }
 
 	private void initSpoon(List<File> folderToParse) {
@@ -105,14 +112,37 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
-	
 
 
-    public void printJavaFile(String repository) throws IOException {
-        ProcessingManager pm = new QueueProcessingManager(factory);
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository));
-
-        pm.addProcessor(processor);
-        pm.process();
-    }
+//    protected List<File> allClassFile(String dir) {
+//        List<File> list = new ArrayList<File>();
+//        for (File file : (new File(dir).listFiles()))
+//            if(file.isFile())     {
+//                if(file.getName().endsWith(".class"))
+//                list.add(file);
+//            }
+//            else
+//                list.addAll(allClassFile(file.getAbsolutePath()));
+//        return list;
+//    }
+//
+//    protected List<File> allClassDir(String dir) {
+//        List<File> list = new ArrayList<File>();
+//        for (File file : (new File(dir).listFiles()))
+//            if(file.isDirectory())     {
+//                list.add(file);
+//                list.addAll(allClassDir(file.getAbsolutePath()));
+//            }
+//
+//
+//        return list;
+//    }
+//
+//    public void printJavaFile(String repository) throws IOException {
+//        ProcessingManager pm = new QueueProcessingManager(factory);
+//        JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository));
+//
+//        pm.addProcessor(processor);
+//        pm.process();
+//    }
 }
