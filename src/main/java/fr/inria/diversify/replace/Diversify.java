@@ -1,7 +1,7 @@
-package fr.inria.diversify.fr.inria.diversify.replace;
+package fr.inria.diversify.replace;
 
-import fr.inria.diversify.fr.inria.diverfy.runtest.CoverageReport;
-import fr.inria.diversify.fr.inria.diverfy.runtest.RunTest;
+import fr.inria.diversify.runtest.CoverageReport;
+import fr.inria.diversify.runtest.RunTest;
 import fr.inria.diversify.statement.Statement;
 import fr.inria.diversify.statistic.Statistic;
 import spoon.processing.ProcessingManager;
@@ -36,7 +36,7 @@ public class Diversify {
         this.tmpDir = "output";
 
         classPath = new ArrayList<String>();
-        classPath.add(System.getProperty("user.dir")+"/"+tmpDir + "_diversify/");
+        classPath.add(System.getProperty("user.dir") + "/" + tmpDir + "_diversify/");
         classPath.add(testDirectory);
     }
 

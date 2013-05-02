@@ -1,4 +1,4 @@
-package fr.inria.diversify.fr.inria.diverfy.runtest;
+package fr.inria.diversify.runtest;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;

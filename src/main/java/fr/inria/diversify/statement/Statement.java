@@ -1,7 +1,7 @@
 package fr.inria.diversify.statement;
 
 
-import fr.inria.diversify.fr.inria.diversify.replace.ReplaceVariableVisitor;
+import fr.inria.diversify.replace.ReplaceVariableVisitor;
 import fr.inria.diversify.statementProcessor.SubStatementVisitor;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtFieldAccess;

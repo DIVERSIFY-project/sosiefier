@@ -1,4 +1,4 @@
-package fr.inria.diversify.fr.inria.diversify.replace;
+package fr.inria.diversify.replace;
 
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtPackage;
