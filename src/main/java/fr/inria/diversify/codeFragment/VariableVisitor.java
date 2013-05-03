@@ -1,4 +1,4 @@
-package fr.inria.diversify.statement;
+package fr.inria.diversify.codeFragment;
 
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtInvocation;

@@ -1,9 +1,9 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.statement.Context;
-import fr.inria.diversify.statement.InputContext;
-import fr.inria.diversify.statement.Statement;
-import fr.inria.diversify.statement.StatementList;
+import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.codeFragment.Context;
+import fr.inria.diversify.codeFragment.InputContext;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,47 +14,47 @@ import java.util.Map;
 
 public class Statistic {
 
-	private StatementList statements;
+	private CodeFragmentList statements;
 	protected char separtor = ';';
 	
-	public Statistic(StatementList statements) {
+	public Statistic(CodeFragmentList statements) {
 		this.statements = statements;
 	}
 	
 	public void writeSatistic(String fileName) throws IOException {
 
 
-        writeSummary(new File(fileName+"_statements.csv"), statisticByStatement());
+        writeSummary(new File(fileName+"_codeFragment.csv"), statisticByStatement());
 		writeSummary(new File(fileName+"_classes.csv"), statisticByClass());
 		writeSummary(new File(fileName+"_packages.csv"), statisticByPackage());
 		
-		writeStatement(new File(fileName+"_uniqueStatement.csv"), statements.getUniqueStatment());
+		writeStatement(new File(fileName+"_CodeFragment.csv"), statements.getUniqueCodeFragments());
 		writeUniqueContext(new File(fileName+"_uniqueContext.csv"), statements.getUniqueContext());
 		writeUniqueInputContext(new File(fileName+"_uniqueInputContext.csv"), statements.getUniqueInputContext());
 	}
 	
-	public Map<String,StatementList> statisticByStatement() {
-		Map<String,StatementList> map = new HashMap<String, StatementList>();
+	public Map<String,CodeFragmentList> statisticByStatement() {
+		Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
 		
 		map.put("all",statements);
-		for (Statement statement : statements.getStatements()) {
-			String stmtType = statement.getStatementType().getName();
+		for (CodeFragment statement : statements.getCodeFragments()) {
+			String stmtType = statement.getCodeFragmentType().getName();
 			if(!map.containsKey(stmtType))
-				map.put(stmtType,new StatementList());
+				map.put(stmtType,new CodeFragmentList());
 			map.get(stmtType).add(statement);
 		}
 		return map;
 	}
 	
-	public Map<String,StatementList> statisticByClass() {
-		Map<String,StatementList> map = new HashMap<String, StatementList>();
+	public Map<String,CodeFragmentList> statisticByClass() {
+		Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
 		
 		map.put("all", statements);
-		for (Statement statement : statements.getStatements()) {
+		for (CodeFragment statement : statements.getCodeFragments()) {
             try {
                 String stmtType = statement.getSourceClass().getQualifiedName();
                 if(!map.containsKey(stmtType))
-                    map.put(stmtType,new StatementList());
+                    map.put(stmtType,new CodeFragmentList());
                 map.get(stmtType).add(statement);
             }catch (Exception e) {
 
@@ -65,15 +65,15 @@ public class Statistic {
 		return map;
 	}
 
-	public Map<String,StatementList> statisticByPackage() {
-		Map<String,StatementList> map = new HashMap<String, StatementList>();
+	public Map<String,CodeFragmentList> statisticByPackage() {
+		Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
 		
 		map.put("all", statements);
-		for (Statement statement : statements.getStatements()) {
+		for (CodeFragment statement : statements.getCodeFragments()) {
             try {
                 String stmtType = statement.getSourcePackage().getQualifiedName();
                 if(!map.containsKey(stmtType))
-                    map.put(stmtType,new StatementList());
+                    map.put(stmtType,new CodeFragmentList());
                 map.get(stmtType).add(statement);
             }   catch (Exception e) {
 
@@ -89,23 +89,23 @@ public class Statistic {
 	}
 
 	
-	public void writeSummary(File file, Map<String, StatementList> data) throws IOException {
+	public void writeSummary(File file, Map<String, CodeFragmentList> data) throws IOException {
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
 		bw.write(getSummaryHeadLine()+"\n");
 		
 		
 		for (String key : data.keySet()) {
-            StatementList stat = data.get(key);
+            CodeFragmentList stat = data.get(key);
 			int popSize = stat.size();
 			bw.write(key + separtor 
 					+ stat.size() + separtor
 					+ stat.getUniqueInputContext().size() + separtor
 					+ stat.getUniqueOutputContext().size() + separtor
 					+ stat.getUniqueContext().size() + separtor
-					+ stat.getUniqueStatment().size() + separtor
-					+ shannon(stat.getUniqueStatment(), popSize) + separtor
-					+ simpson(stat.getUniqueStatment(), popSize) + separtor
+					+ stat.getUniqueCodeFragments().size() + separtor
+					+ shannon(stat.getUniqueCodeFragments(), popSize) + separtor
+					+ simpson(stat.getUniqueCodeFragments(), popSize) + separtor
 					+ shannon(stat.getUniqueContext(), popSize) + separtor
 					+ simpson(stat.getUniqueContext(), popSize) +"\n");
 		}
@@ -175,7 +175,7 @@ public class Statistic {
 //        System.out.println("number of unique inputContext: "+uniqueInputContext.size());
 //        System.out.println("number of unique outputContext: "+uniqueOutputContext.size());
 //        System.out.println("number of unique context: "+uniqueContext.size());
-//        System.out.println("number of unique statement: "+uniqueStatment.size());
+//        System.out.println("number of unique codeFragment: "+uniqueStatment.size());
 //
 //        System.out.println("\nOutputContext:");
 //        for (InputContext ic : uniqueInputContext.keySet())
@@ -197,7 +197,7 @@ public class Statistic {
 
 	protected String getSummaryHeadLine() {
 		return "item" +separtor 
-				+ "statement" + separtor 
+				+ "codeFragment" + separtor
 				+ "uniqueInputContext" + separtor
 				+ "uniqueOutputContext" + separtor
 				+ "uniqueContext" + separtor

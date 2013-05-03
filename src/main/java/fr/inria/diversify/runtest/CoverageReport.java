@@ -1,7 +1,7 @@
 package fr.inria.diversify.runtest;
 
 
-import fr.inria.diversify.statement.Statement;
+import fr.inria.diversify.codeFragment.CodeFragment;
 import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IClassCoverage;
@@ -100,7 +100,7 @@ public class CoverageReport {
 //        return "";
 //    }
 
-    public boolean statementCoverage(Statement stmt) {
+    public boolean statementCoverage(CodeFragment stmt) {
         IClassCoverage classCoverage = null;
         for (IClassCoverage cc : coverageBuilder.getClasses()) {
             CtSimpleType<?> cl = stmt.getSourceClass();

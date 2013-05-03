@@ -1,36 +1,13 @@
-package fr.inria.diversify.statementProcessor;
+package fr.inria.diversify.codeFragmentProcessor;
+
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.visitor.CtScanner;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
-import fr.inria.diversify.statement.Statement;
-
-import spoon.reflect.code.CtAssert;
-import spoon.reflect.code.CtAssignment;
-import spoon.reflect.code.CtBinaryOperator;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtCase;
-import spoon.reflect.code.CtDo;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtFor;
-import spoon.reflect.code.CtForEach;
-import spoon.reflect.code.CtIf;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtLiteral;
-import spoon.reflect.code.CtLocalVariable;
-import spoon.reflect.code.CtNewArray;
-import spoon.reflect.code.CtNewClass;
-import spoon.reflect.code.CtReturn;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtSwitch;
-import spoon.reflect.code.CtSynchronized;
-import spoon.reflect.code.CtThrow;
-import spoon.reflect.code.CtUnaryOperator;
-import spoon.reflect.code.CtWhile;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.visitor.CtScanner;
 
 public class ValidStatementVisitor extends CtScanner {
 	protected boolean valid = true;

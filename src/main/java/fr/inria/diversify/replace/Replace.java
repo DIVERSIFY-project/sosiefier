@@ -1,10 +1,11 @@
 package fr.inria.diversify.replace;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.codeFragment.Statement;
+import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
+import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
 import fr.inria.diversify.runtest.CoverageReport;
-import fr.inria.diversify.statement.Statement;
-import fr.inria.diversify.statement.StatementList;
-import fr.inria.diversify.statementProcessor.StatementProcessor;
-import fr.inria.diversify.statementProcessor.SubStatementVisitor;
 import org.json.JSONException;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
@@ -27,27 +28,27 @@ public class Replace {
     protected String tmpDir;
     protected CoverageReport coverageReport;
     protected Factory factory;
-    protected StatementList statements;
-    protected Statement stmtToReplace;
-    protected Statement stmtReplacedBy;
+    protected CodeFragmentList statements;
+    protected CodeFragment stmtToReplace;
+    protected CodeFragment stmtReplacedBy;
     protected CtSimpleType<?> oldClass;
     protected CtSimpleType<?> newClass;
 
 
-    public Replace(StatementList statements, CoverageReport cr, String tmpDir) {
+    public Replace(CodeFragmentList statements, CoverageReport cr, String tmpDir) {
         this.tmpDir = tmpDir;
         this.statements = statements;
 
-        this.factory = statements.getStatements().get(0).getCtStatement().getFactory();
+        this.factory = statements.getCodeFragments().get(0).getCtCodeFragment().getFactory();
         this.coverageReport = cr;
     }
 
-    public void setStatementToReplace(Statement stmt) {
+    public void setStatementToReplace(CodeFragment stmt) {
         stmtToReplace = stmt;
     }
 
 
-    protected Statement getStatementToReplace() {
+    protected CodeFragment getStatementToReplace() {
         if(stmtToReplace == null)  {
 //             choix d'une strategie de selection
             stmtToReplace = randomStatementToReplace();
@@ -55,7 +56,7 @@ public class Replace {
         return stmtToReplace;
     }
 
-    protected Statement getStatementReplacedBy() {
+    protected CodeFragment getStatementReplacedBy() {
         if(stmtReplacedBy == null)  {
 //             choix d'une strategie de selection
             stmtReplacedBy = findRandomCandidateStatement(stmtToReplace);
@@ -63,37 +64,37 @@ public class Replace {
         return stmtReplacedBy;
     }
 
-    protected Statement randomStatementToReplace(Class stmtType) {
+    protected CodeFragment randomStatementToReplace(Class stmtType) {
         Random r = new Random();
         int size = getAllStatements().size();
-        Statement s = getAllStatements().get(r.nextInt(size));
+        CodeFragment s = getAllStatements().get(r.nextInt(size));
 
         while (s.getClass() != stmtType && !coverageReport.statementCoverage(s))
             s = getAllStatements().get(r.nextInt(size));
         return s;
     }
 
-    protected Statement randomStatementToReplace() {
+    protected CodeFragment randomStatementToReplace() {
         Random r = new Random();
         int size = getAllStatements().size();
-        Statement stmt = getAllStatements().get(r.nextInt(size));
+        CodeFragment stmt = getAllStatements().get(r.nextInt(size));
 
         while(!coverageReport.statementCoverage(stmt))
             stmt = getAllStatements().get(r.nextInt(size));
         return stmt;
     }
 
-    protected Statement findStatement(String stmtString) {
-        Statement s = null;
-        for (Statement stmt : getAllStatements())
-            if (stmt.StatementString().equals(stmtString))
+    protected CodeFragment findStatement(String stmtString) {
+        CodeFragment s = null;
+        for (CodeFragment stmt : getAllStatements())
+            if (stmt.codeFragmentString().equals(stmtString))
                 s = stmt;
         return s;
     }
 
-    protected Statement findRandomCandidateStatement(Statement stmt) {
-        List<Statement> list = new ArrayList<Statement>();
-        for (Statement statement : getAllUniqueStatement())
+    protected Statement findRandomCandidateStatement(CodeFragment stmt) {
+        List<CodeFragment> list = new ArrayList<CodeFragment>();
+        for (CodeFragment statement : getAllUniqueStatement())
             if (stmt.isReplace(statement) && !statement.equalString().equals(stmt.equalString()))
                list.add(statement);
 
@@ -101,7 +102,7 @@ public class Replace {
             return null;
 
        Random r = new Random();
-        CtStatement tmp = (CtStatement)copyElem(list.get(r.nextInt(list.size())).getCtStatement());
+        CtStatement tmp = (CtStatement)copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
         return new Statement(tmp);
     }
 
@@ -119,10 +120,11 @@ public class Replace {
         }
         tf.setStatementToReplace(stmtToReplace.toJSONObject());
         tf.setStatementReplacedBy(stmtToReplace.toJSONObject());
-
-        oldClass = factory.Core().clone(stmtToReplace.getCtStatement().getParent(CtSimpleType.class))  ;
-        newClass = stmtToReplace.getCtStatement().getParent(CtSimpleType.class);
-        Statement tmp = new Statement((CtStatement)copyElem(stmtReplacedBy.getCtStatement()));
+        oldClass = factory.Core().clone(stmtToReplace.getSourceClass());
+        newClass = stmtToReplace.getSourceClass();
+//        oldClass = factory.Core().clone(stmtToReplace.getCtCodeFragment().getParent(CtSimpleType.class))  ;
+//        newClass = stmtToReplace.getCtCodeFragment().getParent(CtSimpleType.class);
+        Statement tmp = new Statement((CtStatement)copyElem(stmtReplacedBy.getCtCodeFragment()));
 
         Map<String,String> varMapping = stmtToReplace.randomVariableMapping(tmp);
         tf.setVariableMapping(varMapping);
@@ -138,9 +140,9 @@ public class Replace {
 
 
     public void restore() throws CompileException, IOException {
-        List<Statement> statementToRemove = new ArrayList<Statement>();
-        for (Statement stmt : getAllStatements())
-              if(stmt.getCtStatement().getParent(CtSimpleType.class).equals(newClass))
+        List<CodeFragment> statementToRemove = new ArrayList<CodeFragment>();
+        for (CodeFragment stmt : getAllStatements())
+              if(stmt.getCtCodeFragment().getParent(CtSimpleType.class).equals(newClass))
                   statementToRemove.add(stmt);
 
         SubStatementVisitor sub = new SubStatementVisitor();
@@ -150,7 +152,7 @@ public class Replace {
         for (CtStatement stmt : sub.getStatements())
             sp.process(stmt);
 
-        getAllStatements().addAll(sp.getStatements().getStatements());
+        getAllStatements().addAll(sp.getStatements().getCodeFragments());
         oldClass.setParent(newClass.getParent());
 
         System.out.println("oldClass "+oldClass.getSimpleName() + oldClass.getSignature());
@@ -211,11 +213,11 @@ public class Replace {
         return list;
     }
 
-    protected List<Statement> getAllStatements() {
-        return statements.getStatements();
+    protected List<CodeFragment> getAllStatements() {
+        return statements.getCodeFragments();
     }
 
-    protected Collection<Statement> getAllUniqueStatement() {
-        return statements.getUniqueStatementList();
+    protected Collection<CodeFragment> getAllUniqueStatement() {
+        return statements.getUniqueCodeFragmentList();
     }
 }

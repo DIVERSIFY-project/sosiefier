@@ -1,4 +1,4 @@
-package fr.inria.diversify.statement;
+package fr.inria.diversify.codeFragment;
 
 import spoon.reflect.reference.CtTypeReference;
 
@@ -9,38 +9,38 @@ import java.util.*;
  * Date: 5/3/13
  * Time: 10:08 AM
  */
-public class StatementList {
-    protected List<Statement> statements;
+public class CodeFragmentList {
+    protected List<CodeFragment> codeFragments;
 
     protected Map<InputContext,Integer> uniqueInputContext;
     protected Map<CtTypeReference<?>,Integer> uniqueOutputContext;
     protected Map<Context,Integer> uniqueContext;
-    protected Map<Integer,Integer> uniqueStatement;
-    protected Map<Integer,Statement> idToStatement;
+    protected Map<Integer,Integer> uniqueCodeFragment;
+    protected Map<Integer,CodeFragment> idToCodeFragment;
 
-    public StatementList(List<Statement> statements) {
+    public CodeFragmentList(List<CodeFragment> codeFragments) {
         init();
-        this.statements = statements;
-        for (Statement statement : statements)
+        this.codeFragments = codeFragments;
+        for (CodeFragment statement : codeFragments)
             add(statement);
     }
 
-    public StatementList() {
+    public CodeFragmentList() {
         init();
     }
 
     protected void init() {
-        statements = new LinkedList<Statement>();
+        codeFragments = new LinkedList<CodeFragment>();
         uniqueInputContext = new HashMap<InputContext, Integer>();
         uniqueOutputContext = new HashMap<CtTypeReference<?>, Integer>();
         uniqueContext = new HashMap<Context, Integer>();
-        uniqueStatement = new HashMap<Integer, Integer>();
-        idToStatement = new HashMap<Integer,Statement>();
+        uniqueCodeFragment = new HashMap<Integer, Integer>();
+        idToCodeFragment = new HashMap<Integer,CodeFragment>();
     }
 
-    public void add(Statement stmt) {
+    public void add(CodeFragment stmt) {
         try {
-            statements.add(stmt);
+            codeFragments.add(stmt);
             addUniqueInputContext(stmt.getInputContext());
             addUniqueOutputContext(stmt.getOuputContext());
             addUniqueContext(stmt.getContext());
@@ -51,18 +51,18 @@ public class StatementList {
 
     }
 
-    protected void addUniqueStatement(Statement stmt) {
+    protected void addUniqueStatement(CodeFragment stmt) {
         boolean same = false;
-        for (Integer otherStmtId: uniqueStatement.keySet()) {
+        for (Integer otherStmtId: uniqueCodeFragment.keySet()) {
             if(otherStmtId == stmt.id()) {
                 same = true;
-                uniqueStatement.put(otherStmtId, uniqueStatement.get(otherStmtId)+1);
+                uniqueCodeFragment.put(otherStmtId, uniqueCodeFragment.get(otherStmtId)+1);
                 break;
             }
         }
         if(!same) {
-            uniqueStatement.put(stmt.id(),1);
-            idToStatement.put(stmt.id(), stmt);
+            uniqueCodeFragment.put(stmt.id(),1);
+            idToCodeFragment.put(stmt.id(), stmt);
         }
     }
 
@@ -106,7 +106,7 @@ public class StatementList {
     }
 
     public int size() {
-        return statements.size();
+        return codeFragments.size();
     }
     public Map<Context, Integer> getUniqueContext() {
         return uniqueContext;
@@ -117,15 +117,15 @@ public class StatementList {
     public Map<CtTypeReference<?>, Integer> getUniqueOutputContext() {
         return uniqueOutputContext;
     }
-    public Map<Integer, Integer> getUniqueStatment() {
-        return uniqueStatement;
+    public Map<Integer, Integer> getUniqueCodeFragments() {
+        return uniqueCodeFragment;
     }
 
-    public Collection<Statement> getUniqueStatementList() {
-        return idToStatement.values();
+    public Collection<CodeFragment> getUniqueCodeFragmentList() {
+        return idToCodeFragment.values();
     }
 
-    public List<Statement> getStatements() {
-        return  statements;
+    public List<CodeFragment> getCodeFragments() {
+        return  codeFragments;
     }
 }

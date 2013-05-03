@@ -1,8 +1,8 @@
 package fr.inria.diversify.replace;
 
+import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.runtest.RunTest;
-import fr.inria.diversify.statement.StatementList;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.runner.Result;
@@ -28,16 +28,16 @@ public class Diversify {
 
 
     protected String tmpDir;
-    protected StatementList statements;
+    protected CodeFragmentList statements;
     protected Factory factory;
     protected CoverageReport coverageReport;
     List<String> classPath;
     private List<Transformation> transformations;
 
-    public Diversify(StatementList statements, CoverageReport coverageReport, String testDirectory) {
+    public Diversify(CodeFragmentList statements, CoverageReport coverageReport, String testDirectory) {
         this.coverageReport = coverageReport;
         this.statements = statements;
-        this.factory = statements.getStatements().get(0).getCtStatement().getFactory();
+        this.factory = statements.getCodeFragments().get(0).getCtCodeFragment().getFactory();
         this.tmpDir = "output";
         transformations = new ArrayList<Transformation>();
 

@@ -1,12 +1,8 @@
-package fr.inria.diversify.statementProcessor;
+package fr.inria.diversify.codeFragmentProcessor;
 
 import spoon.processing.AbstractProcessor;
-
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLocalVariable;
-import spoon.reflect.code.CtStatement;
-import spoon.support.reflect.code.CtInvocationImpl;
+import spoon.reflect.declaration.CtElement;
 
 /**
  * Created with IntelliJ IDEA. User: Simon Date: 4/17/13 Time: 11:43 AM To

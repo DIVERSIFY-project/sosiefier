@@ -1,10 +1,11 @@
 package fr.inria.diversify;
 
+import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.codeFragmentProcessor.ExpressionProcessor;
 import fr.inria.diversify.replace.Diversify;
 import fr.inria.diversify.runtest.CoverageReport;
-import fr.inria.diversify.statement.StatementList;
-import fr.inria.diversify.statementProcessor.StatementProcessor;
 import fr.inria.diversify.statistic.Statistic;
+import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
@@ -21,10 +22,10 @@ public class Main {
 //	public static final String srcfolderstatic = "../../workspace/Test";
 //	public static final String srcfolderstatic = "../standardLib/src";
 //	public static final String srcfolderstatic = "src";
-//	public static final String srcfolderstatic = "../statement/src_to_modify";
+//	public static final String srcfolderstatic = "../codeFragment/src_to_modify";
 	
 //	public static final String srcgenfolderstatic = "src_modified";
-	private StatementList statements;
+	private CodeFragmentList statements;
     private Factory factory;
 
 
@@ -50,7 +51,7 @@ public class Main {
 		computeStatistic(statOutputFile);
 
         Diversify d  = new Diversify(statements, rg, testDirectory);
-        d.run(100);
+        d.run(10);
         d.writeTransformation("transformation.json");
     }
 
@@ -71,11 +72,11 @@ public class Main {
 					e.printStackTrace();
 			}
 		ProcessingManager pm = new QueueProcessingManager(factory);
-		StatementProcessor processor = new StatementProcessor();
+        AbstractProcessor processor = new ExpressionProcessor();
 		pm.addProcessor(processor);
 		pm.process();
 	
-		statements = processor.getStatements();
+//		statements = processor.getStatements();
         System.out.println("number of statements: "+statements.size());
 	}
 

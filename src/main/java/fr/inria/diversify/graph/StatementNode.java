@@ -1,7 +1,7 @@
 package fr.inria.diversify.graph;
 
 import edu.uci.ics.jung.graph.Graph;
-import fr.inria.diversify.statement.Statement;
+import fr.inria.diversify.codeFragment.Statement;
 
 
 public class StatementNode extends Node {

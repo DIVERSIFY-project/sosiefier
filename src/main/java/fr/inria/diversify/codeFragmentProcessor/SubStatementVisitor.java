@@ -1,12 +1,12 @@
-package fr.inria.diversify.statementProcessor;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+package fr.inria.diversify.codeFragmentProcessor;
 
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class SubStatementVisitor extends CtScanner {
 	List<CtStatement> statements;

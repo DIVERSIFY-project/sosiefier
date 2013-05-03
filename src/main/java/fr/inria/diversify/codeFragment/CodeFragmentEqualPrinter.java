@@ -1,4 +1,4 @@
-package fr.inria.diversify.statement;
+package fr.inria.diversify.codeFragment;
 
 import spoon.processing.Environment;
 import spoon.reflect.code.*;
@@ -10,10 +10,10 @@ import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 
 import java.util.Stack;
 
-public class StatementEqualPrinter extends DefaultJavaPrettyPrinter {
+public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
 	public Printingcontext context = new Printingcontext();
 
-	public StatementEqualPrinter(Environment env) {
+	public CodeFragmentEqualPrinter(Environment env) {
 		super(env);
 		
 	}

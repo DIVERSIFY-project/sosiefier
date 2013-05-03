@@ -1,17 +1,17 @@
-package fr.inria.diversify.statementProcessor;
+package fr.inria.diversify.codeFragmentProcessor;
 
-import fr.inria.diversify.statement.Statement;
-import fr.inria.diversify.statement.StatementList;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.codeFragment.Statement;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
 
 public class StatementProcessor extends AbstractProcessor<CtStatement> {
-	protected StatementList statements;
+	protected CodeFragmentList statements;
 	private ValidStatementVisitor valid;
 
 
 	public StatementProcessor() {
-		statements = new StatementList();
+		statements = new CodeFragmentList();
 	}
 
 	public void process(CtStatement element) {
@@ -24,11 +24,11 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 //				System.out.println("-------------------------------\n");
 			}
 		} catch (Exception e) {
-			System.err.println("erreur ici");
+		e.printStackTrace();
 		}
 	}
 	
-	public StatementList getStatements() {
+	public CodeFragmentList getStatements() {
 		return statements;
 	}
 	

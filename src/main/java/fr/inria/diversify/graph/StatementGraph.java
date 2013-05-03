@@ -2,7 +2,7 @@ package fr.inria.diversify.graph;
 
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
-import fr.inria.diversify.statement.Statement;
+import fr.inria.diversify.codeFragment.Statement;
 
 import java.util.Collection;
 import java.util.HashSet;
