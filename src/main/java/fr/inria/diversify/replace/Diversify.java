@@ -28,16 +28,16 @@ public class Diversify {
 
 
     protected String tmpDir;
-    protected CodeFragmentList statements;
+    protected CodeFragmentList codeFragments;
     protected Factory factory;
     protected CoverageReport coverageReport;
     List<String> classPath;
     private List<Transformation> transformations;
 
-    public Diversify(CodeFragmentList statements, CoverageReport coverageReport, String testDirectory) {
+    public Diversify(CodeFragmentList codeFragments, CoverageReport coverageReport, String testDirectory) {
         this.coverageReport = coverageReport;
-        this.statements = statements;
-        this.factory = statements.getCodeFragments().get(0).getCtCodeFragment().getFactory();
+        this.codeFragments = codeFragments;
+        this.factory = codeFragments.getCodeFragments().get(0).getCtCodeFragment().getFactory();
         this.tmpDir = "output";
         transformations = new ArrayList<Transformation>();
 
@@ -56,7 +56,7 @@ public class Diversify {
 
         for (int i = 0; i < n; i++) {
             System.out.println(i);
-            Replace rp = new Replace(statements, coverageReport, tmpDir + "_diversify");
+            Replace rp = new Replace(codeFragments, coverageReport, tmpDir + "_diversify");
             try {
                 Transformation tf = rp.replace();
                 tf.setJUnitResult(runTest("tests.AllTests"));

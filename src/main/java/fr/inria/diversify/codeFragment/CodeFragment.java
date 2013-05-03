@@ -87,6 +87,7 @@ public abstract class CodeFragment {
     public void replace(Statement other, Map<String,String> varMapping) {
         Statement newStatement = null;
         System.out.println("\navant: " + codeFragment.getPosition());
+        System.out.println(getCodeFragmentType().getSimpleName()+ "    "+other.getCodeFragmentType().getSimpleName());
         System.out.println(codeFragment.getParent());
         codeFragment.replace(other.codeFragment);
         SubStatementVisitor sub = new SubStatementVisitor();

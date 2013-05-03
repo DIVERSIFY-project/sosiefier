@@ -1,11 +1,10 @@
 package fr.inria.diversify;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.codeFragmentProcessor.ExpressionProcessor;
+import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.replace.Diversify;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.statistic.Statistic;
-import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
@@ -51,7 +50,7 @@ public class Main {
 		computeStatistic(statOutputFile);
 
         Diversify d  = new Diversify(statements, rg, testDirectory);
-        d.run(10);
+        d.run(10000);
         d.writeTransformation("transformation.json");
     }
 
@@ -72,11 +71,11 @@ public class Main {
 					e.printStackTrace();
 			}
 		ProcessingManager pm = new QueueProcessingManager(factory);
-        AbstractProcessor processor = new ExpressionProcessor();
+        StatementProcessor processor = new StatementProcessor();
 		pm.addProcessor(processor);
 		pm.process();
 	
-//		statements = processor.getStatements();
+	    statements = processor.getStatements();
         System.out.println("number of statements: "+statements.size());
 	}
 

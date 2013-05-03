@@ -33,6 +33,8 @@ public class ExpressionProcessor   extends AbstractProcessor<CtExpression<?>> {
     }
 
     protected boolean isValidStatement(CtExpression<?> element) {
-        return true;
+        ValidExpressionVisitor valid = new ValidExpressionVisitor(element);
+        element.accept(valid);
+        return valid.isValid();
     }
 }
