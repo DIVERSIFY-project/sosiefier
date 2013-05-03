@@ -2,14 +2,18 @@ package fr.inria.diversify.replace;
 
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.runtest.RunTest;
-import fr.inria.diversify.statement.Statement;
-import fr.inria.diversify.statistic.Statistic;
+import fr.inria.diversify.statement.StatementList;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.runner.Result;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.JavaOutputProcessor;
 import spoon.support.QueueProcessingManager;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -24,60 +28,61 @@ public class Diversify {
 
 
     protected String tmpDir;
-    private List<Statement> statements;
-    private Factory factory;
+    protected StatementList statements;
+    protected Factory factory;
     protected CoverageReport coverageReport;
     List<String> classPath;
+    private List<Transformation> transformations;
 
-    public Diversify(List<Statement> statements, CoverageReport coverageReport, String testDirectory ) {
+    public Diversify(StatementList statements, CoverageReport coverageReport, String testDirectory) {
         this.coverageReport = coverageReport;
         this.statements = statements;
-        this.factory = statements.get(0).getCtStatement().getFactory();
+        this.factory = statements.getStatements().get(0).getCtStatement().getFactory();
         this.tmpDir = "output";
+        transformations = new ArrayList<Transformation>();
 
         classPath = new ArrayList<String>();
         classPath.add(System.getProperty("user.dir") + "/" + tmpDir + "_diversify/");
         classPath.add(testDirectory);
     }
 
-    public void run() {
-        Statistic stat = new Statistic(statements);
+    public void run(int n) throws IOException, CompileException {
         try {
             printJavaFile(tmpDir);
             printJavaFile(tmpDir + "_diversify");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Replace rp = new Replace(statements, stat.allStat().getUniqueStatementList(), coverageReport, tmpDir + "_diversify");
 
-        rp.compile(new File(tmpDir + "_diversify"), factory);
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < n; i++) {
             System.out.println(i);
-            rp = new Replace(statements, stat.allStat().getUniqueStatementList(), coverageReport, tmpDir + "_diversify");
+            Replace rp = new Replace(statements, coverageReport, tmpDir + "_diversify");
             try {
-                rp.replace();
-
+                Transformation tf = rp.replace();
+                tf.setJUnitResult(runTest("tests.AllTests"));
+                transformations.add(tf);
             } catch (Exception e) {
-                System.out.println("erreur dans replace");
+                e.printStackTrace();
             }
-
-            runTest("tests.AllTests");
             rp.restore();
-
         }
     }
 
-    protected void runTest(String classNane) {
+    public void writeTransformation(String FileName) throws IOException, JSONException {
+        BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
 
-        try {
-            RunTest runTest = new RunTest(classNane, classPath);
-            runTest.run();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        for(int i = 0 ; i < transformations.size(); i++) {
+            JSONObject obj = new JSONObject();
+            obj.put("Transformation_"+i, transformations.get(i).toJSONObject());
+            out.write(obj.toString());
+            out.newLine();
         }
+        out.close();
+    }
 
+    protected Result runTest(String className) throws MalformedURLException, ClassNotFoundException {
+        RunTest runTest = new RunTest(className, classPath);
+        return runTest.run();
     }
 
     protected void printJavaFile(String repository) throws IOException {

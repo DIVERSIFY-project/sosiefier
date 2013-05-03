@@ -99,6 +99,16 @@ public class InputContext {
 		return isReplace;
 	}
 
+    public Object getVariableOrFieldNamed(String name) {
+        Object o = null;
+        for(Object vf : getVarAndField())
+            if(vf.toString().equals(name)) {
+                o = vf;
+                break;
+            }
+        return o;
+    }
+
     protected boolean hasCandidateForLocalVar(CtTypeReference<?> type) {
         return candidateForLocalVar(type) != null;
     }

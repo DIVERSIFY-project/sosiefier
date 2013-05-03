@@ -1,19 +1,17 @@
 package fr.inria.diversify.statementProcessor;
 
 import fr.inria.diversify.statement.Statement;
+import fr.inria.diversify.statement.StatementList;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class StatementProcessor extends AbstractProcessor<CtStatement> {
-	protected List<Statement> statements;
+	protected StatementList statements;
 	private ValidStatementVisitor valid;
 
 
 	public StatementProcessor() {
-		statements = new LinkedList<Statement>();
+		statements = new StatementList();
 	}
 
 	public void process(CtStatement element) {
@@ -21,16 +19,16 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 			if(isValidStatement(element)) {
 				Statement stmt = new Statement(element);
 				statements.add(stmt);
-//				System.out.println(stmt);
+//				System.out.println(stmt.toJSONObject());
 //				System.out.println(stmt.getInputContext().equalString());
 //				System.out.println("-------------------------------\n");
 			}
 		} catch (Exception e) {
-			System.err.println("erreur");
-		}			
+			System.err.println("erreur ici");
+		}
 	}
 	
-	public List<Statement> getStatements() {
+	public StatementList getStatements() {
 		return statements;
 	}
 	

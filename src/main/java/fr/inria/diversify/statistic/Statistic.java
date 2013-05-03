@@ -3,22 +3,21 @@ package fr.inria.diversify.statistic;
 import fr.inria.diversify.statement.Context;
 import fr.inria.diversify.statement.InputContext;
 import fr.inria.diversify.statement.Statement;
+import fr.inria.diversify.statement.StatementList;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Statistic {
 
-	private List<Statement> statements;
-	private ComputeStatistic allStat;
+	private StatementList statements;
 	protected char separtor = ';';
 	
-	public Statistic(List<Statement> statements) {
+	public Statistic(StatementList statements) {
 		this.statements = statements;
 	}
 	
@@ -29,34 +28,34 @@ public class Statistic {
 		writeSummary(new File(fileName+"_classes.csv"), statisticByClass());
 		writeSummary(new File(fileName+"_packages.csv"), statisticByPackage());
 		
-		writeStatement(new File(fileName+"_uniqueStatement.csv"), allStat().getUniqueStatment());
-		writeUniqueContext(new File(fileName+"_uniqueContext.csv"), allStat().getUniqueContext());
-		writeUniqueInputContext(new File(fileName+"_uniqueInputContext.csv"), allStat().getUniqueInputContext());
+		writeStatement(new File(fileName+"_uniqueStatement.csv"), statements.getUniqueStatment());
+		writeUniqueContext(new File(fileName+"_uniqueContext.csv"), statements.getUniqueContext());
+		writeUniqueInputContext(new File(fileName+"_uniqueInputContext.csv"), statements.getUniqueInputContext());
 	}
 	
-	public Map<String,ComputeStatistic> statisticByStatement() {
-		Map<String,ComputeStatistic> map = new HashMap<String, ComputeStatistic>();
+	public Map<String,StatementList> statisticByStatement() {
+		Map<String,StatementList> map = new HashMap<String, StatementList>();
 		
-		map.put("all", allStat());
-		for (Statement statement : statements) {
+		map.put("all",statements);
+		for (Statement statement : statements.getStatements()) {
 			String stmtType = statement.getStatementType().getName();
 			if(!map.containsKey(stmtType))
-				map.put(stmtType,new ComputeStatistic());
-			map.get(stmtType).addStatement(statement);
+				map.put(stmtType,new StatementList());
+			map.get(stmtType).add(statement);
 		}
 		return map;
 	}
 	
-	public Map<String,ComputeStatistic> statisticByClass() {
-		Map<String,ComputeStatistic> map = new HashMap<String, ComputeStatistic>();
+	public Map<String,StatementList> statisticByClass() {
+		Map<String,StatementList> map = new HashMap<String, StatementList>();
 		
-		map.put("all", allStat());
-		for (Statement statement : statements) {
+		map.put("all", statements);
+		for (Statement statement : statements.getStatements()) {
             try {
                 String stmtType = statement.getSourceClass().getQualifiedName();
                 if(!map.containsKey(stmtType))
-                    map.put(stmtType,new ComputeStatistic());
-                map.get(stmtType).addStatement(statement);
+                    map.put(stmtType,new StatementList());
+                map.get(stmtType).add(statement);
             }catch (Exception e) {
 
             }
@@ -66,16 +65,16 @@ public class Statistic {
 		return map;
 	}
 
-	public Map<String,ComputeStatistic> statisticByPackage() {
-		Map<String,ComputeStatistic> map = new HashMap<String, ComputeStatistic>();
+	public Map<String,StatementList> statisticByPackage() {
+		Map<String,StatementList> map = new HashMap<String, StatementList>();
 		
-		map.put("all", allStat());
-		for (Statement statement : statements) {
+		map.put("all", statements);
+		for (Statement statement : statements.getStatements()) {
             try {
                 String stmtType = statement.getSourcePackage().getQualifiedName();
                 if(!map.containsKey(stmtType))
-                    map.put(stmtType,new ComputeStatistic());
-                map.get(stmtType).addStatement(statement);
+                    map.put(stmtType,new StatementList());
+                map.get(stmtType).add(statement);
             }   catch (Exception e) {
 
             }
@@ -88,24 +87,19 @@ public class Statistic {
 
 		return map;
 	}
+
 	
-	public ComputeStatistic allStat() {
-		if(allStat == null)
-			allStat = new ComputeStatistic(statements);
-        return allStat;
-	}
-	
-	public void writeSummary(File file, Map<String, ComputeStatistic> data) throws IOException {
+	public void writeSummary(File file, Map<String, StatementList> data) throws IOException {
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
 		bw.write(getSummaryHeadLine()+"\n");
 		
 		
 		for (String key : data.keySet()) {
-			ComputeStatistic stat = data.get(key);
-			int popSize = stat.getNumberOfStatements();
+            StatementList stat = data.get(key);
+			int popSize = stat.size();
 			bw.write(key + separtor 
-					+ stat.getNumberOfStatements() + separtor 
+					+ stat.size() + separtor
 					+ stat.getUniqueInputContext().size() + separtor
 					+ stat.getUniqueOutputContext().size() + separtor
 					+ stat.getUniqueContext().size() + separtor
@@ -174,7 +168,33 @@ public class Statistic {
 		}
 		return simpson;
 	}
-	
+
+//    public void printStat(){
+//        System.out.println("--------------Statistics--------------");
+//        System.out.println("number of statements: "+numberOfStatements);
+//        System.out.println("number of unique inputContext: "+uniqueInputContext.size());
+//        System.out.println("number of unique outputContext: "+uniqueOutputContext.size());
+//        System.out.println("number of unique context: "+uniqueContext.size());
+//        System.out.println("number of unique statement: "+uniqueStatment.size());
+//
+//        System.out.println("\nOutputContext:");
+//        for (InputContext ic : uniqueInputContext.keySet())
+//            System.out.println(ic.equalString()+ ": "+uniqueInputContext.get(ic));
+//
+//        System.out.println("\nInputContext:");
+//        for (CtTypeReference<?> ic : uniqueOutputContext.keySet())
+//            System.out.println(ic+ ": "+uniqueOutputContext.get(ic));
+//
+//
+//        System.out.println("\nContext:");
+//        for (Context ic : uniqueContext.keySet())
+//            System.out.println(ic.equalString()+": "+uniqueContext.get(ic));
+//
+//        System.out.println("\nStatement:");
+//        for (Integer ic : uniqueStatment.keySet())
+//            System.out.println(idToStatement.get(ic).equalString()+"\n: "+uniqueStatment.get(ic));
+//    }
+
 	protected String getSummaryHeadLine() {
 		return "item" +separtor 
 				+ "statement" + separtor 

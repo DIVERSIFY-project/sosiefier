@@ -2,19 +2,20 @@ package fr.inria.diversify.replace;
 
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.statement.Statement;
+import fr.inria.diversify.statement.StatementList;
 import fr.inria.diversify.statementProcessor.StatementProcessor;
 import fr.inria.diversify.statementProcessor.SubStatementVisitor;
+import org.json.JSONException;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtSimpleType;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.io.InputStreamReader;
+import java.util.*;
 
 /**
  * User: Simon
@@ -26,34 +27,30 @@ public class Replace {
     protected String tmpDir;
     protected CoverageReport coverageReport;
     protected Factory factory;
-    protected List<Statement> allStatements;
-    protected List<Statement> uniqueStatements;
+    protected StatementList statements;
     protected Statement stmtToReplace;
     protected Statement stmtReplacedBy;
     protected CtSimpleType<?> oldClass;
     protected CtSimpleType<?> newClass;
 
-    public Replace(List<Statement> allStatements, Collection<Statement> uniqueStatements, CoverageReport cr, String tmpDir) {
+
+    public Replace(StatementList statements, CoverageReport cr, String tmpDir) {
         this.tmpDir = tmpDir;
-        this.allStatements = allStatements;
-        this.uniqueStatements = new ArrayList<Statement>();
-        this.uniqueStatements.addAll(uniqueStatements);
-        this.factory = allStatements.get(0).getCtStatement().getFactory();
+        this.statements = statements;
+
+        this.factory = statements.getStatements().get(0).getCtStatement().getFactory();
         this.coverageReport = cr;
     }
 
     public void setStatementToReplace(Statement stmt) {
         stmtToReplace = stmt;
     }
-//    public void setStatementReplacedBy(Statement stmt) {
-//        stmtReplacedBy = stmt;
-//    }
+
 
     protected Statement getStatementToReplace() {
         if(stmtToReplace == null)  {
 //             choix d'une strategie de selection
             stmtToReplace = randomStatementToReplace();
-//            oldClass = copyElem(stmtToReplace.getCtStatement().getParent(CtClass.class));
         }
         return stmtToReplace;
     }
@@ -68,26 +65,27 @@ public class Replace {
 
     protected Statement randomStatementToReplace(Class stmtType) {
         Random r = new Random();
-        Statement s = allStatements.get(r.nextInt(allStatements.size()));
+        int size = getAllStatements().size();
+        Statement s = getAllStatements().get(r.nextInt(size));
 
-        while (s.getClass() != stmtType)
-            s = allStatements.get(r.nextInt(allStatements.size()));
-
+        while (s.getClass() != stmtType && !coverageReport.statementCoverage(s))
+            s = getAllStatements().get(r.nextInt(size));
         return s;
     }
 
     protected Statement randomStatementToReplace() {
         Random r = new Random();
-        Statement stmt = allStatements.get(r.nextInt(allStatements.size()));
+        int size = getAllStatements().size();
+        Statement stmt = getAllStatements().get(r.nextInt(size));
 
         while(!coverageReport.statementCoverage(stmt))
-            stmt = allStatements.get(r.nextInt(allStatements.size()));
+            stmt = getAllStatements().get(r.nextInt(size));
         return stmt;
     }
 
     protected Statement findStatement(String stmtString) {
         Statement s = null;
-        for (Statement stmt : allStatements)
+        for (Statement stmt : getAllStatements())
             if (stmt.StatementString().equals(stmtString))
                 s = stmt;
         return s;
@@ -95,7 +93,7 @@ public class Replace {
 
     protected Statement findRandomCandidateStatement(Statement stmt) {
         List<Statement> list = new ArrayList<Statement>();
-        for (Statement statement : uniqueStatements)
+        for (Statement statement : getAllUniqueStatement())
             if (stmt.isReplace(statement) && !statement.equalString().equals(stmt.equalString()))
                list.add(statement);
 
@@ -113,49 +111,52 @@ public class Replace {
         return tmp;
     }
 
-    public void replace() {
+    public Transformation replace() throws CompileException, IOException, JSONException {
+        Transformation tf = new Transformation();
         while(stmtReplacedBy == null) {
             stmtToReplace = randomStatementToReplace();
             getStatementReplacedBy();
         }
+        tf.setStatementToReplace(stmtToReplace.toJSONObject());
+        tf.setStatementReplacedBy(stmtToReplace.toJSONObject());
+
         oldClass = factory.Core().clone(stmtToReplace.getCtStatement().getParent(CtSimpleType.class))  ;
         newClass = stmtToReplace.getCtStatement().getParent(CtSimpleType.class);
         Statement tmp = new Statement((CtStatement)copyElem(stmtReplacedBy.getCtStatement()));
 
-        stmtToReplace.replace(tmp);
+        Map<String,String> varMapping = stmtToReplace.randomVariableMapping(tmp);
+        tf.setVariableMapping(varMapping);
+        System.out.println("random variable mapping: "+varMapping);
+        stmtToReplace.replace(tmp, varMapping);
 
-        try {
-            printJavaFile(tmpDir, newClass);
-            compile(new File(tmpDir), newClass.getFactory());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        printJavaFile(tmpDir, newClass);
+        compile(new File(tmpDir), newClass.getFactory());
+
+        return tf;
     }
 
-    public void restore() {
+
+
+    public void restore() throws CompileException, IOException {
         List<Statement> statementToRemove = new ArrayList<Statement>();
-        for (Statement stmt : allStatements) {
+        for (Statement stmt : getAllStatements())
               if(stmt.getCtStatement().getParent(CtSimpleType.class).equals(newClass))
                   statementToRemove.add(stmt);
-        }
+
         SubStatementVisitor sub = new SubStatementVisitor();
-        allStatements.removeAll(statementToRemove);
+        getAllStatements().removeAll(statementToRemove);
         oldClass.accept(sub);
          StatementProcessor sp = new StatementProcessor();
         for (CtStatement stmt : sub.getStatements())
-          sp.process(stmt);
+            sp.process(stmt);
 
-        allStatements.addAll(sp.getStatements());
+        getAllStatements().addAll(sp.getStatements().getStatements());
         oldClass.setParent(newClass.getParent());
 
         System.out.println("oldClass "+oldClass.getSimpleName() + oldClass.getSignature());
 
-        try {
-            printJavaFile(tmpDir, oldClass);
-            compile(new File(tmpDir), oldClass.getFactory());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        printJavaFile(tmpDir, oldClass);
+        compile(new File(tmpDir), oldClass.getFactory());
     }
 
     public void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
@@ -164,7 +165,8 @@ public class Replace {
         processor.createJavaFile(type);
     }
 
-    public void compile(File directory, Factory f ) {
+    //method a refaire
+    public void compile(File directory, Factory f) throws CompileException {
 //        JDTCompiler compiler = new JDTCompiler();
 //        try {
 //            compiler.compileSrc(f, allJavaFile(directory));
@@ -172,20 +174,29 @@ public class Replace {
 //            e.printStackTrace();
 //        }
         String tmp = "javac -encoding utf8 ";
-        for(File file : allJavaFile(directory)) {
-            tmp = tmp + file.toString()+ " ";
+        for (File file : allJavaFile(directory)) {
+            tmp = tmp + file.toString() + " ";
         }
-        Runtime r = Runtime.getRuntime();
-//        System.out.println(tmp);
         try {
+            Runtime r = Runtime.getRuntime();
             Process p = r.exec(tmp);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
             p.waitFor();
+            String line;
+            StringBuffer output = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                output.append(line+"\n");
+                if (line.contains(" error"))  {
+                    reader.close();
+                    throw new CompileException("error during compilation\n"+output);
+                }
+            }
+            reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new CompileException(e);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new CompileException(e);
         }
-
     }
 
     protected List<File> allJavaFile(File dir) {
@@ -198,5 +209,13 @@ public class Replace {
             else
                 list.addAll(allJavaFile(file));
         return list;
+    }
+
+    protected List<Statement> getAllStatements() {
+        return statements.getStatements();
+    }
+
+    protected Collection<Statement> getAllUniqueStatement() {
+        return statements.getUniqueStatementList();
     }
 }

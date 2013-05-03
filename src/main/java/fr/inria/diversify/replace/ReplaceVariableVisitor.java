@@ -38,7 +38,6 @@ public class ReplaceVariableVisitor extends CtScanner {
 //        System.out.println("visitCtFieldAccess: " + oldVar + " ||||| " + newVar);
         if (fieldAccess.equals(oldVar))
             if (newVar instanceof CtVariableReference) {
-//                    fieldAccess.setVariable((CtVariableReference) newVar);
                 fieldAccess.replace(((CtVariableReference) newVar).getDeclaration());
             } else {
                 fieldAccess.replace((CtFieldAccess) newVar);

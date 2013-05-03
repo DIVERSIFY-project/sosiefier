@@ -2,7 +2,7 @@ package fr.inria.diversify;
 
 import fr.inria.diversify.replace.Diversify;
 import fr.inria.diversify.runtest.CoverageReport;
-import fr.inria.diversify.statement.Statement;
+import fr.inria.diversify.statement.StatementList;
 import fr.inria.diversify.statementProcessor.StatementProcessor;
 import fr.inria.diversify.statistic.Statistic;
 import spoon.processing.ProcessingManager;
@@ -14,7 +14,6 @@ import spoon.support.builder.SpoonBuildingManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 
 public class Main {
@@ -25,7 +24,7 @@ public class Main {
 //	public static final String srcfolderstatic = "../statement/src_to_modify";
 	
 //	public static final String srcgenfolderstatic = "src_modified";
-	private List<Statement> statements;
+	private StatementList statements;
     private Factory factory;
 
 
@@ -51,8 +50,8 @@ public class Main {
 		computeStatistic(statOutputFile);
 
         Diversify d  = new Diversify(statements, rg, testDirectory);
-        d.run();
-
+        d.run(100);
+        d.writeTransformation("transformation.json");
     }
 
     protected void initSpoon(File directory) {

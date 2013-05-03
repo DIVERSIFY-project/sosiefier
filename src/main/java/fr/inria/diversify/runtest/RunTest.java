@@ -2,6 +2,7 @@ package fr.inria.diversify.runtest;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,12 +31,13 @@ public class RunTest {
         this.testClasses = classLoader.loadClass(testClasses);
     }
 
-    public  void run() {
+    public Result run() {
         System.out.println("run test class: "+testClasses.getName());
         Result result = JUnitCore.runClasses(testClasses);
         System.out.println("number of failure: "+result.getFailures().size());
-//        for (Failure failure : result.getFailures()) {
-//            System.out.println(failure.toString());
-//        }
+        for (Failure failure : result.getFailures()) {
+            System.out.println(failure.getDescription().getTestClass().getName()+":"+failure.getDescription().getMethodName());
+        }
+        return  result;
     }
 }

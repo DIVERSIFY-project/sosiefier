@@ -3,6 +3,9 @@ package fr.inria.diversify.statement;
 
 import fr.inria.diversify.replace.ReplaceVariableVisitor;
 import fr.inria.diversify.statementProcessor.SubStatementVisitor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtStatement;
@@ -11,12 +14,12 @@ import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.declaration.CtTypedElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
-import spoon.support.reflect.code.CtCaseImpl;
-import spoon.support.reflect.code.CtLocalVariableImpl;
-import spoon.support.reflect.code.CtThrowImpl;
+import spoon.support.reflect.code.*;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class Statement {
@@ -77,45 +80,39 @@ public class Statement {
         return equalString;
     }
 
-    public Statement replace(Statement other) {
+    public void replace(Statement other, Map<String,String> varMapping) {
         Statement newStatement = null;
         System.out.println("\navant: " + stmt.getPosition());
         System.out.println(stmt.getParent());
         stmt.replace(other.stmt);
-        SubStatementVisitor sub = new SubStatementVisitor()  ;
+        SubStatementVisitor sub = new SubStatementVisitor();
         stmt.getParent().accept(sub);
         for(CtStatement statement: sub.getStatements())
             if(statement.toString().equals(other.stmt.toString()))
                 newStatement = new Statement(statement);
-        Random r = new Random();
-        for (CtVariableReference<?> variable : newStatement.getInputContext().getLocalVar()) {
-            List<Object> list = getInputContext().allCandidate(variable.getType());
-            Object candidate = list.get(r.nextInt(list.size()));
-            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
-            newStatement.stmt.accept(visitor);
-        }
-        for (CtFieldAccess<?> variable : newStatement.getInputContext().getField()) {
-            List<CtFieldAccess> list = getInputContext().allCandidateForFieldAccess(variable.getType());
-            Object candidate = list.get(r.nextInt(list.size()));
 
+     for (String varName: varMapping.keySet()) {
+            Object variable = newStatement.getInputContext().getVariableOrFieldNamed(varName);
+            Object candidate = getInputContext().getVariableOrFieldNamed(varMapping.get(varName));
             ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
             newStatement.stmt.accept(visitor);
         }
-        if(stmt instanceof CtLocalVariableImpl) {
+
+        if(stmt instanceof CtLocalVariableImpl)
             ((CtLocalVariableImpl)newStatement.stmt).setSimpleName(((CtLocalVariableImpl) stmt).getSimpleName());
-
-        }
-
         System.out.println("\napres: "+stmt.getParent());
-        return newStatement;
     }
-
 
 
     //check if this can be replaced by other
     public boolean isReplace(Statement other) {
         Class<?> cl = stmt.getClass();
         Class<?> clOther = other.stmt.getClass();
+
+        if(clOther ==  CtBreakImpl.class || cl == CtBreakImpl.class)
+            return false;
+        if(clOther ==  CtContinueImpl.class || cl == CtContinueImpl.class)
+            return false;
         if((clOther ==  CtLocalVariableImpl.class || cl == CtLocalVariableImpl.class) && cl != clOther)
             return false;
         if(StatementString().contains("super("))
@@ -130,6 +127,34 @@ public class Statement {
             return false;
 
         return getInputContext().isInclude(other.getInputContext()) && getOuputContext().equals(other.getOuputContext());
+    }
+
+    public Map<String,String> randomVariableMapping(Statement other) {
+        Map<String,String> varMap = new HashMap<String, String>();
+        Random r = new Random();
+
+        for (CtVariableReference<?> variable : other.getInputContext().getLocalVar()) {
+            List<Object> list = getInputContext().allCandidate(variable.getType());
+            Object candidate = list.get(r.nextInt(list.size()));
+            varMap.put(variable.toString(), candidate.toString());
+        }
+        for (CtFieldAccess<?> variable : other.getInputContext().getField()) {
+            List<CtFieldAccess> list = getInputContext().allCandidateForFieldAccess(variable.getType());
+            Object candidate = list.get(r.nextInt(list.size()));
+            varMap.put(variable.toString(), candidate.toString());
+        }
+        return varMap;
+    }
+
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject object = new JSONObject();
+        String position = getSourcePackage().getQualifiedName()+"."+getSourceClass().getSimpleName()+ ":" +stmt.getPosition().getLine();
+        object.put("Position", position);
+        object.put("Type", getStatementType().getSimpleName());
+        object.put("InputContext", new JSONArray(getInputContext().inputContextToString()));
+        object.put("OutputContext", getOuputContext().toString());
+        object.put("SourceCode", equalString());
+        return object;
     }
 
      public CtStatement getCtStatement()  {
