@@ -3,6 +3,7 @@ package fr.inria.diversify.replace;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.runtest.RunTest;
+import fr.inria.diversify.statistic.StatisticDiversification;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.runner.Result;
@@ -46,7 +47,7 @@ public class Diversify {
         classPath.add(testDirectory);
     }
 
-    public void run(int n) throws IOException, CompileException {
+    public void run(int n) throws Exception {
         try {
             printJavaFile(tmpDir);
             printJavaFile(tmpDir + "_diversify");
@@ -54,8 +55,9 @@ public class Diversify {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             System.out.println(i);
+
             Replace rp = new Replace(codeFragments, coverageReport, tmpDir + "_diversify");
             try {
                 Transformation tf = rp.replace();
@@ -65,7 +67,17 @@ public class Diversify {
                 e.printStackTrace();
             }
             rp.restore();
+//            if(i%100 == 0) {
+//                try {
+//                    writeTransformation("transformation_"+System.currentTimeMillis()+".json");
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//               transformations = new ArrayList<Transformation>();
+//            }
         }
+        StatisticDiversification stat = new StatisticDiversification(transformations, 191);
+        stat.writeStat();
     }
 
     public void writeTransformation(String FileName) throws IOException, JSONException {

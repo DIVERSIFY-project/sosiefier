@@ -65,7 +65,6 @@ public class MyJavaOutputProcessor extends JavaOutputProcessor {
 //            return;
 
 //        System.out.println("print class in "+directory+":\n"+element);
-
         for (CtSimpleType<?> t : cu.getDeclaredTypes()) {
             String name = cu.getFile().getName();
             name = name.substring(0, name.lastIndexOf("."));

@@ -27,7 +27,7 @@ public class Statement extends CodeFragment {
             return false;
         if(codeFragmentString().contains("super("))
             return false;
-        if((clOther ==  CtCaseImpl.class || cl == CtCaseImpl.class) && cl != clOther)
+        if((clOther ==  CtCaseImpl.class || cl == CtCaseImpl.class))
             return false;
         if((clOther ==  CtThrowImpl.class || cl == CtThrowImpl.class) && cl != clOther)
             return false;

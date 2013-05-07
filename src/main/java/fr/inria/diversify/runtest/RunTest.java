@@ -26,18 +26,22 @@ public class RunTest {
         for (int i = 0; i < classPath.size(); i++) {
             urls[i] = new URL("file://"+classPath.get(i));
         }
-        classLoader = new URLClassLoader(urls,Thread.currentThread().getContextClassLoader());
 
+        classLoader = new URLClassLoader(urls,this.getClass().getClassLoader());
         this.testClasses = classLoader.loadClass(testClasses);
     }
 
     public Result run() {
         System.out.println("run test class: "+testClasses.getName());
         Result result = JUnitCore.runClasses(testClasses);
+
         System.out.println("number of failure: "+result.getFailures().size());
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.getDescription().getTestClass().getName()+":"+failure.getDescription().getMethodName());
         }
+
         return  result;
     }
+
+
 }

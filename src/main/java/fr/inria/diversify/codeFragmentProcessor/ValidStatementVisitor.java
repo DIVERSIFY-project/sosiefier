@@ -13,7 +13,7 @@ public class ValidStatementVisitor extends CtScanner {
 	protected boolean valid = true;
 	protected CtElement root; 
 	protected static Set<CtStatement> expresions  = new HashSet<CtStatement>();
-	
+	protected boolean withSuper;
 	
 	
 	public boolean inExperession(CtElement elem) {
@@ -28,8 +28,9 @@ public class ValidStatementVisitor extends CtScanner {
 		return valid;
 	}
 	
-	public ValidStatementVisitor(CtElement e) {
+	public ValidStatementVisitor(CtElement e, boolean withSuper) {
 		root = e;
+        this.withSuper = withSuper;
 	}
 	
 	protected Collection<CtStatement> getAllSubStatement(CtElement element) {
@@ -63,6 +64,10 @@ public class ValidStatementVisitor extends CtScanner {
 	}
 	
 	public <T> void visitCtInvocation(CtInvocation<T> invocation) {
+        if(!withSuper && invocation.toString().contains("super(")) {
+            valid = false;
+        }
+
 		for (CtExpression<?> i : invocation.getArguments()) 
 			addAllSubStatement(i);
 		super.visitCtInvocation(invocation);

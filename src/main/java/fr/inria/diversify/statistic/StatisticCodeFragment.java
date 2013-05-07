@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Statistic {
+public class StatisticCodeFragment {
 
 	private CodeFragmentList statements;
-	protected char separtor = ';';
+	protected char separator = ';';
 	
-	public Statistic(CodeFragmentList statements) {
+	public StatisticCodeFragment(CodeFragmentList statements) {
 		this.statements = statements;
 	}
 	
@@ -34,17 +34,17 @@ public class Statistic {
 	}
 	
 	public Map<String,CodeFragmentList> statisticByStatement() {
-		Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
-		
-		map.put("all",statements);
-		for (CodeFragment statement : statements.getCodeFragments()) {
-			String stmtType = statement.getCodeFragmentType().getName();
-			if(!map.containsKey(stmtType))
-				map.put(stmtType,new CodeFragmentList());
-			map.get(stmtType).add(statement);
-		}
-		return map;
-	}
+        Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
+
+        map.put("all",statements);
+        for (CodeFragment statement : statements.getCodeFragments()) {
+            String stmtType = statement.getCodeFragmentType().getName();
+            if(!map.containsKey(stmtType))
+                map.put(stmtType,new CodeFragmentList());
+            map.get(stmtType).add(statement);
+        }
+        return map;
+    }
 	
 	public Map<String,CodeFragmentList> statisticByClass() {
 		Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
@@ -98,15 +98,15 @@ public class Statistic {
 		for (String key : data.keySet()) {
             CodeFragmentList stat = data.get(key);
 			int popSize = stat.size();
-			bw.write(key + separtor 
-					+ stat.size() + separtor
-					+ stat.getUniqueInputContext().size() + separtor
-					+ stat.getUniqueOutputContext().size() + separtor
-					+ stat.getUniqueContext().size() + separtor
-					+ stat.getUniqueCodeFragments().size() + separtor
-					+ shannon(stat.getUniqueCodeFragments(), popSize) + separtor
-					+ simpson(stat.getUniqueCodeFragments(), popSize) + separtor
-					+ shannon(stat.getUniqueContext(), popSize) + separtor
+			bw.write(key + separator
+					+ stat.size() + separator
+					+ stat.getUniqueInputContext().size() + separator
+					+ stat.getUniqueOutputContext().size() + separator
+					+ stat.getUniqueContext().size() + separator
+					+ stat.getUniqueCodeFragments().size() + separator
+					+ shannon(stat.getUniqueCodeFragments(), popSize) + separator
+					+ simpson(stat.getUniqueCodeFragments(), popSize) + separator
+					+ shannon(stat.getUniqueContext(), popSize) + separator
 					+ simpson(stat.getUniqueContext(), popSize) +"\n");
 		}
 		bw.close();
@@ -115,11 +115,11 @@ public class Statistic {
 	public void writeUniqueContext(File file, Map<Context,Integer> uniqueContext) throws IOException {
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write("item"+separtor+"number"+separtor+"size\n");
+		bw.write("item"+ separator +"number"+ separator +"size\n");
 		
 		for (Context key : uniqueContext.keySet()) {
-			bw.write(key.equalString() + separtor 
-					+ uniqueContext.get(key) + separtor
+			bw.write(key.equalString() + separator
+					+ uniqueContext.get(key) + separator
 					+ key.size() + "\n");
 		}
 		bw.close();
@@ -128,11 +128,11 @@ public class Statistic {
 	public void writeUniqueInputContext(File file, Map<InputContext,Integer> uniqueInputContext) throws IOException {
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write("item"+separtor+"number"+separtor+"size\n");
+		bw.write("item"+ separator +"number"+ separator +"size\n");
 		
 		for (InputContext key : uniqueInputContext.keySet()) {
-			bw.write(key.equalString() + separtor 
-					+ uniqueInputContext.get(key) + separtor
+			bw.write(key.equalString() + separator
+					+ uniqueInputContext.get(key) + separator
 					+ key.size() + "\n");
 		}
 		bw.close();
@@ -141,10 +141,10 @@ public class Statistic {
 	public void writeStatement(File file, Map<Integer,Integer> uniqueStatement) throws IOException {
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write("item"+separtor+"number\n");
+		bw.write("item"+ separator +"number\n");
 		
 		for (Integer key : uniqueStatement.keySet()) {
-			bw.write(key.toString() + separtor 
+			bw.write(key.toString() + separator
 					+  uniqueStatement.get(key).toString()  + "\n");
 					//+ key.size() + "\n");
 		}
@@ -196,15 +196,15 @@ public class Statistic {
 //    }
 
 	protected String getSummaryHeadLine() {
-		return "item" +separtor 
-				+ "codeFragment" + separtor
-				+ "uniqueInputContext" + separtor
-				+ "uniqueOutputContext" + separtor
-				+ "uniqueContext" + separtor
-				+ "uniqueStatement" + separtor
-				+ "shannon_us" + separtor
-				+ "simpson_us"  + separtor
-				+ "shannon_uc" + separtor
+		return "item" + separator
+				+ "codeFragment" + separator
+				+ "uniqueInputContext" + separator
+				+ "uniqueOutputContext" + separator
+				+ "uniqueContext" + separator
+				+ "uniqueStatement" + separator
+				+ "shannon_us" + separator
+				+ "simpson_us"  + separator
+				+ "shannon_uc" + separator
 				+ "simpson_uc";
 	}
 }

@@ -4,7 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.replace.Diversify;
 import fr.inria.diversify.runtest.CoverageReport;
-import fr.inria.diversify.statistic.Statistic;
+import fr.inria.diversify.statistic.StatisticCodeFragment;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
@@ -37,6 +37,7 @@ public class Main {
 
 	public Main() throws Exception {
         String sourceDirectory = "/Users/Simon/Documents/code/code-sequencing/software/code-sequencing/datasets/dataset1/src/main";
+//        String sourceDirectory = "src/test";
         String classesDirectory = "/Users/Simon/Documents/code/code-sequencing/software/code-sequencing/datasets/dataset1/target/classes";
         String testDirectory =  "/Users/Simon/Documents/code/code-sequencing/software/code-sequencing/datasets/dataset1/target/test-classes/";
         String jacocoFile = "/Users/Simon/Documents/code/code-sequencing/software/code-sequencing/datasets/dataset1/jacoco.exec";
@@ -50,8 +51,7 @@ public class Main {
 		computeStatistic(statOutputFile);
 
         Diversify d  = new Diversify(statements, rg, testDirectory);
-        d.run(10000);
-        d.writeTransformation("transformation.json");
+        d.run(1000);
     }
 
     protected void initSpoon(File directory) {
@@ -80,7 +80,7 @@ public class Main {
 	}
 
 	protected void computeStatistic(String output) {
-		Statistic stat = new Statistic(statements);
+		StatisticCodeFragment stat = new StatisticCodeFragment(statements);
 		 
 		try {
 			stat.writeSatistic(output);

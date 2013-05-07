@@ -37,7 +37,7 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 //	}
 //	
 	protected boolean isValidStatement(CtStatement element) {
-		 valid = new ValidStatementVisitor(element); 
+		 valid = new ValidStatementVisitor(element, false);
 		element.accept(valid);
 		return !valid.inExperession(element) && valid.isValid();
 	}

@@ -6,7 +6,6 @@ import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
 import fr.inria.diversify.runtest.CoverageReport;
-import org.json.JSONException;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
@@ -31,8 +30,8 @@ public class Replace {
     protected CodeFragmentList codeFragments;
     protected CodeFragment cfToReplace;
     protected CodeFragment cfReplacedBy;
-    protected CtSimpleType<?> oldClass;
-    protected CtSimpleType<?> newClass;
+    protected CtSimpleType<?> originalClass;
+    private CtSimpleType<?> newClass;
 
 
     public Replace(CodeFragmentList codeFragments, CoverageReport cr, String tmpDir) {
@@ -112,59 +111,67 @@ public class Replace {
         return tmp;
     }
 
-    public Transformation replace() throws CompileException, IOException, JSONException {
+
+    public Transformation replace() throws Exception {
         Transformation tf = new Transformation();
         while(cfReplacedBy == null) {
             cfToReplace = randomCodeFragmentToReplace();
             getCodeFragmentReplacedBy();
         }
-        tf.setStatementToReplace(cfToReplace.toJSONObject());
-        tf.setStatementReplacedBy(cfToReplace.toJSONObject());
-        oldClass = factory.Core().clone(cfToReplace.getSourceClass());
-        newClass = cfToReplace.getSourceClass();
+        originalClass =  cfToReplace.getSourceClass().getPosition().getCompilationUnit().getMainType();
+        newClass = (CtSimpleType<?>) copyElem(originalClass);
 
-        Statement tmp = new Statement((CtStatement)copyElem(cfReplacedBy.getCtCodeFragment()));
+        CodeFragment tmp = null;
+        for(CodeFragment cf : codeFragmentFor(newClass))   {
+            if(cf.equalString().equals(cfToReplace.equalString()))   {
+                tmp = cf;
+                break;
+            }
+        }
 
-        Map<String,String> varMapping = cfToReplace.randomVariableMapping(tmp);
+        tf.setStatementToReplace(cfToReplace);
+        tf.setStatementReplacedBy(cfReplacedBy);
+
+
+        System.out.println("cfToReplace\n " + tmp.getCtCodeFragment());
+        System.out.println("cfReplacedBy\n " + cfReplacedBy.getCtCodeFragment());
+        Map<String,String> varMapping = tmp.randomVariableMapping(cfReplacedBy); //tmp
         tf.setVariableMapping(varMapping);
         System.out.println("random variable mapping: "+varMapping);
-        cfToReplace.replace(tmp, varMapping);
+        tmp.replace(cfReplacedBy, varMapping);  //tmp
 
         printJavaFile(tmpDir, newClass);
-        compile(new File(tmpDir), newClass.getFactory());
-
+        compile(new File(tmpDir), factory);
         return tf;
     }
 
 
 
-    public void restore() throws CompileException, IOException {
-        List<CodeFragment> statementToRemove = new ArrayList<CodeFragment>();
-        for (CodeFragment stmt : getAllCodeFragments())
-              if(stmt.getCtCodeFragment().getParent(CtSimpleType.class).equals(newClass))
-                  statementToRemove.add(stmt);
+    public void restore() throws Exception {
+         printJavaFile(tmpDir, originalClass);
+        compile(new File(tmpDir), factory);
+    }
 
+    public List<CodeFragment> codeFragmentFor(CtSimpleType<?> cl) {
         SubStatementVisitor sub = new SubStatementVisitor();
-        getAllCodeFragments().removeAll(statementToRemove);
-        oldClass.accept(sub);
-         StatementProcessor sp = new StatementProcessor();
+
+        cl.accept(sub);
+        StatementProcessor sp = new StatementProcessor();
         for (CtStatement stmt : sub.getStatements())
             sp.process(stmt);
 
-        getAllCodeFragments().addAll(sp.getStatements().getCodeFragments());
-        oldClass.setParent(newClass.getParent());
-
-        System.out.println("oldClass "+oldClass.getSimpleName() + oldClass.getSignature());
-
-        printJavaFile(tmpDir, oldClass);
-        compile(new File(tmpDir), oldClass.getFactory());
+        return  sp.getStatements().getCodeFragments();
     }
+
+
+
 
     public void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
         MyJavaOutputProcessor processor = new MyJavaOutputProcessor(new File(repository));
         processor.setFactory(type.getFactory());
         processor.createJavaFile(type);
     }
+
 
     //method a refaire
     public void compile(File directory, Factory f) throws CompileException {
@@ -186,7 +193,7 @@ public class Replace {
             String line;
             StringBuffer output = new StringBuffer();
             while ((line = reader.readLine()) != null) {
-                output.append(line+"\n");
+                output.append(line + "\n");
                 if (line.contains(" error"))  {
                     reader.close();
                     throw new CompileException("error during compilation\n"+output);
