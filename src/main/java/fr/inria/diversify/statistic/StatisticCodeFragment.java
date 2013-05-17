@@ -23,8 +23,7 @@ public class StatisticCodeFragment {
 	
 	public void writeSatistic(String fileName) throws IOException {
 
-
-        writeSummary(new File(fileName+"_codeFragment.csv"), statisticByStatement());
+        writeSummary(new File(fileName+"_stmt.csv"), statisticByStatement());
 		writeSummary(new File(fileName+"_classes.csv"), statisticByClass());
 		writeSummary(new File(fileName+"_packages.csv"), statisticByPackage());
 		

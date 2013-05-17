@@ -10,6 +10,7 @@ import spoon.reflect.visitor.filter.AbstractFilter;
  */
 public class ReplaceVarFilter extends AbstractFilter {
     CtElement elem;
+
     public ReplaceVarFilter(CtElement elem) {
         super(CtElement.class);
         this.elem = elem;
@@ -18,6 +19,6 @@ public class ReplaceVarFilter extends AbstractFilter {
     @Override
     public boolean matches(CtElement element) {
 
-       return element == elem;
+        return element == elem;
     }
 }

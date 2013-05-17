@@ -42,7 +42,7 @@ public class CodeFragmentList {
         try {
             codeFragments.add(stmt);
             addUniqueInputContext(stmt.getInputContext());
-            addUniqueOutputContext(stmt.getOuputContext());
+            addUniqueOutputContext(stmt.getOutputContext());
             addUniqueContext(stmt.getContext());
             addUniqueStatement(stmt);
         } catch (Exception e) {
@@ -96,9 +96,9 @@ public class CodeFragmentList {
 
     protected void addUniqueOutputContext(CtTypeReference<?> output){
         boolean same = false;
-        for (CtTypeReference<?> otherOuput: uniqueOutputContext.keySet()) {
-            if(output.equals(otherOuput)) {
-                uniqueOutputContext.put(otherOuput, uniqueOutputContext.get(otherOuput)+1);
+        for (CtTypeReference<?> otherOutput: uniqueOutputContext.keySet()) {
+            if(output.equals(otherOutput)) {
+                uniqueOutputContext.put(otherOutput, uniqueOutputContext.get(otherOutput)+1);
                 same = true;
                 break;
             }

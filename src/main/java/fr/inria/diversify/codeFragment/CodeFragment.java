@@ -8,7 +8,9 @@ import org.json.JSONObject;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtFieldAccess;
+import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.declaration.CtTypedElement;
@@ -40,7 +42,7 @@ public abstract class CodeFragment {
     }
 
 
-    public CtTypeReference<?> getOuputContext() {
+    public CtTypeReference<?> getOutputContext() {
         return context.getOuputContext();
     }
 
@@ -67,7 +69,7 @@ public abstract class CodeFragment {
     @Override
     public String toString() {
         String tmp = "Input:" + getInputContext();
-        tmp = tmp + "\nOutput: " + getOuputContext() + "\nSource: " + codeFragment;
+        tmp = tmp + "\nOutput: " + getOutputContext() + "\nSource: " + codeFragment;
         return tmp;
     }
 
@@ -149,9 +151,26 @@ public abstract class CodeFragment {
         object.put("Position", position);
         object.put("Type", getCodeFragmentType().getSimpleName());
         object.put("InputContext", new JSONArray(getInputContext().inputContextToString()));
-        object.put("OutputContext", getOuputContext().toString());
+        object.put("OutputContext", getOutputContext().toString());
         object.put("SourceCode", equalString());
         return object;
+    }
+
+    public CtTypeReference<?> getMethodReturnType() {
+        CtMethod mth = codeFragment.getParent(CtMethod.class);
+        if(mth != null)
+            return mth.getType();
+
+        return  null;
+    }
+    protected CtTypeReference<?> hasReturn() {
+        SubStatementVisitor sub = new SubStatementVisitor();
+        codeFragment.accept(sub);
+        for(CtStatement stm : sub.getStatements())
+            if(stm instanceof CtReturn)
+                return getMethodReturnType();
+
+        return  null;
     }
 
     public CtCodeElement getCtCodeFragment()  {

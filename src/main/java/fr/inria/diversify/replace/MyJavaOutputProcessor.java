@@ -36,8 +36,7 @@ public class MyJavaOutputProcessor extends JavaOutputProcessor {
     /**
      * Creates a new processor for generating Java source files.
      *
-     * @param outputDirectory
-     *            the root output directory
+     * @param outputDirectory the root output directory
      */
     public MyJavaOutputProcessor(File outputDirectory) {
         super(outputDirectory);
@@ -47,7 +46,6 @@ public class MyJavaOutputProcessor extends JavaOutputProcessor {
     public List<File> getCreatedFiles() {
         return printedFiles;
     }
-
 
 
     Map<String, Map<Integer, Integer>> lineNumberMappings = new HashMap<String, Map<Integer, Integer>>();
@@ -70,7 +68,7 @@ public class MyJavaOutputProcessor extends JavaOutputProcessor {
             name = name.substring(0, name.lastIndexOf("."));
             if (t.getSimpleName().equals(name)) {
                 cu.getDeclaredTypes().remove(t);
-                cu.getDeclaredTypes().add((CtSimpleType)element);
+                cu.getDeclaredTypes().add((CtSimpleType) element);
                 break;
             }
         }
@@ -96,8 +94,8 @@ public class MyJavaOutputProcessor extends JavaOutputProcessor {
 //            }
 //        }
 //        if (printer == null) {
-            printer = new DefaultJavaPrettyPrinter(getEnvironment());
-            printer.calculate(cu,toBePrinted);
+        printer = new DefaultJavaPrettyPrinter(getEnvironment());
+        printer.calculate(cu, toBePrinted);
 //        }
 
         CtPackage pack = element.getPackage();

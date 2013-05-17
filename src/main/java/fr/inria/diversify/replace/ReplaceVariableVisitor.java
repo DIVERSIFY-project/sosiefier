@@ -25,11 +25,11 @@ public class ReplaceVariableVisitor extends CtScanner {
 
     public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
 //        System.out.println("visitCtVariableAccess: "+oldVar+ " ||||| "+newVar);
-            if (variableAccess.getVariable().equals(oldVar))
-                if(newVar instanceof CtVariableReference)
-                    variableAccess.setVariable((CtVariableReference)newVar);
-                else
-                    variableAccess.replace((CtFieldAccess)newVar);
+        if (variableAccess.getVariable().equals(oldVar))
+            if (newVar instanceof CtVariableReference)
+                variableAccess.setVariable((CtVariableReference) newVar);
+            else
+                variableAccess.replace((CtFieldAccess) newVar);
         super.visitCtVariableAccess(variableAccess);
     }
 
@@ -49,12 +49,11 @@ public class ReplaceVariableVisitor extends CtScanner {
 
         if (invocation.getTarget() == null && oldVarIsThis()) {
             CtVariableAccess access = new CtVariableAccessImpl();
-            if(newVar instanceof CtVariableReference)   {
-                access.setVariable((CtVariableReference)newVar);
-                access.setType(((CtVariableReference)newVar).getType());
-            }
-            else
-                access = (CtFieldAccess)newVar;
+            if (newVar instanceof CtVariableReference) {
+                access.setVariable((CtVariableReference) newVar);
+                access.setType(((CtVariableReference) newVar).getType());
+            } else
+                access = (CtFieldAccess) newVar;
 
             invocation.setTarget(access);
         }
@@ -62,8 +61,8 @@ public class ReplaceVariableVisitor extends CtScanner {
     }
 
     protected boolean oldVarIsThis() {
-        if(newVar instanceof CtVariableReference)
-           return ((CtVariableReference)oldVar).getSimpleName().equals("this");
+        if (newVar instanceof CtVariableReference)
+            return ((CtVariableReference) oldVar).getSimpleName().equals("this");
         return false;
     }
 }

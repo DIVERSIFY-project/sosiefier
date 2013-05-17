@@ -26,9 +26,7 @@ public class CoverageReport {
 
 
     public CoverageReport(String classesDir, String jacocoFile) {
-        System.out.println(classesDir);
         this.executionDataFile = new File(jacocoFile);
-
         this.classesDirectory = new File(classesDir);
     }
 
@@ -100,26 +98,25 @@ public class CoverageReport {
 //        return "";
 //    }
 
-    public boolean statementCoverage(CodeFragment stmt) {
+    public double codeFragmentCoverage(CodeFragment stmt) {
         IClassCoverage classCoverage = null;
         for (IClassCoverage cc : coverageBuilder.getClasses()) {
             CtSimpleType<?> cl = stmt.getSourceClass();
-            String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName().toString();
-            if(name.equals(cc.getName())) {
-                classCoverage = cc;
-                break;
+            if(!(cl.getPackage() == null ||   cl.getPackage().getSignature() == null)) {
+                String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName().toString();
+                if(name.equals(cc.getName())) {
+                    classCoverage = cc;
+                    break;
+                }
             }
         }
         if(classCoverage == null)
-            return false;
-//        System.out.println(classCoverage.getName());
-        boolean ret = false;
-        for (int i = stmt.getStartLine(); i <= stmt.getEndLine(); i++) {
-            if(classCoverage.getLine(i).getStatus() == 2 || classCoverage.getLine(i).getStatus() == 1) {
-                ret = true;
-                break;
-            }
-        }
-        return ret;
+            return 0;
+        double ret = 0;
+        for (int i = stmt.getStartLine(); i <= stmt.getEndLine(); i++)
+            if(classCoverage.getLine(i).getStatus() == 2 || classCoverage.getLine(i).getStatus() == 1)
+                ret++;
+
+        return ret/(double)(stmt.getEndLine()- stmt.getStartLine() + 1);
     }
 }

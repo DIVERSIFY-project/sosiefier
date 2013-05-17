@@ -11,10 +11,8 @@ import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtSimpleType;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
 /**
@@ -43,12 +41,12 @@ public class Replace {
     }
 
     public void setCodeFragmentToReplace(CodeFragment stmt) {
-       cfToReplace = stmt;
+        cfToReplace = stmt;
     }
 
 
     protected CodeFragment getCodeFragmentToReplace() {
-        if(cfToReplace == null)  {
+        if (cfToReplace == null) {
 //             choix d'une strategie de selection
             cfToReplace = randomCodeFragmentToReplace();
         }
@@ -56,7 +54,7 @@ public class Replace {
     }
 
     protected CodeFragment getCodeFragmentReplacedBy() {
-        if(cfReplacedBy == null)  {
+        if (cfReplacedBy == null) {
 //             choix d'une strategie de selection
             cfReplacedBy = findRandomCandidateStatement(cfToReplace);
         }
@@ -68,7 +66,7 @@ public class Replace {
         int size = getAllCodeFragments().size();
         CodeFragment s = getAllCodeFragments().get(r.nextInt(size));
 
-        while (s.getClass() != stmtType && !coverageReport.statementCoverage(s))
+        while (s.getClass() != stmtType && coverageReport.codeFragmentCoverage(s) == 0)
             s = getAllCodeFragments().get(r.nextInt(size));
         return s;
     }
@@ -78,7 +76,7 @@ public class Replace {
         int size = getAllCodeFragments().size();
         CodeFragment stmt = getAllCodeFragments().get(r.nextInt(size));
 
-        while(!coverageReport.statementCoverage(stmt))
+        while (coverageReport.codeFragmentCoverage(stmt) == 0)
             stmt = getAllCodeFragments().get(r.nextInt(size));
         return stmt;
     }
@@ -95,13 +93,13 @@ public class Replace {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : getAllUniqueCodeFragments())
             if (stmt.isReplace(statement) && !statement.equalString().equals(stmt.equalString()))
-               list.add(statement);
+                list.add(statement);
 
         if (list.isEmpty())
             return null;
 
-       Random r = new Random();
-        CtStatement tmp = (CtStatement)copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
+        Random r = new Random();
+        CtStatement tmp = (CtStatement) copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
         return new Statement(tmp);
     }
 
@@ -114,16 +112,16 @@ public class Replace {
 
     public Transformation replace() throws Exception {
         Transformation tf = new Transformation();
-        while(cfReplacedBy == null) {
+        while (cfReplacedBy == null) {
             cfToReplace = randomCodeFragmentToReplace();
             getCodeFragmentReplacedBy();
         }
-        originalClass =  cfToReplace.getSourceClass().getPosition().getCompilationUnit().getMainType();
+        originalClass = cfToReplace.getSourceClass().getPosition().getCompilationUnit().getMainType();
         newClass = (CtSimpleType<?>) copyElem(originalClass);
 
         CodeFragment tmp = null;
-        for(CodeFragment cf : codeFragmentFor(newClass))   {
-            if(cf.equalString().equals(cfToReplace.equalString()))   {
+        for (CodeFragment cf : codeFragmentFor(newClass)) {
+            if (cf.equalString().equals(cfToReplace.equalString())) {
                 tmp = cf;
                 break;
             }
@@ -132,38 +130,39 @@ public class Replace {
         tf.setStatementToReplace(cfToReplace);
         tf.setStatementReplacedBy(cfReplacedBy);
 
-
-        System.out.println("cfToReplace\n " + tmp.getCtCodeFragment());
+        System.out.println("cfToReplace (coverage: " + coverageReport.codeFragmentCoverage(cfToReplace) + ")\n " + tmp.getCtCodeFragment());
         System.out.println("cfReplacedBy\n " + cfReplacedBy.getCtCodeFragment());
-        Map<String,String> varMapping = tmp.randomVariableMapping(cfReplacedBy); //tmp
+        Map<String, String> varMapping = tmp.randomVariableMapping(cfReplacedBy); //tmp
         tf.setVariableMapping(varMapping);
-        System.out.println("random variable mapping: "+varMapping);
+        System.out.println("random variable mapping: " + varMapping);
         tmp.replace(cfReplacedBy, varMapping);  //tmp
 
-        printJavaFile(tmpDir, newClass);
-        compile(new File(tmpDir), factory);
+        printJavaFile(tmpDir + "/src/main/java", newClass);
         return tf;
     }
 
 
-
     public void restore() throws Exception {
-         printJavaFile(tmpDir, originalClass);
-        compile(new File(tmpDir), factory);
+//         printJavaFile(tmpDir, originalClass);
+//        compile(new File(tmpDir), factory);
+        String fileToCopy = originalClass.getPosition().getFile().toString();
+        String destination = tmpDir + "/src/main/java/" + originalClass.getQualifiedName().replace('.', '/') + ".java";
+        Runtime r = Runtime.getRuntime();
+        System.out.println("cp " + fileToCopy + " " + destination);
+        Process p = r.exec("cp " + fileToCopy + " " + destination);
+
+        p.waitFor();
     }
 
     public List<CodeFragment> codeFragmentFor(CtSimpleType<?> cl) {
         SubStatementVisitor sub = new SubStatementVisitor();
-
         cl.accept(sub);
         StatementProcessor sp = new StatementProcessor();
         for (CtStatement stmt : sub.getStatements())
             sp.process(stmt);
 
-        return  sp.getStatements().getCodeFragments();
+        return sp.getStatements().getCodeFragments();
     }
-
-
 
 
     public void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
@@ -172,49 +171,13 @@ public class Replace {
         processor.createJavaFile(type);
     }
 
-
-    //method a refaire
-    public void compile(File directory, Factory f) throws CompileException {
-//        JDTCompiler compiler = new JDTCompiler();
-//        try {
-//            compiler.compileSrc(f, allJavaFile(directory));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        String tmp = "javac -encoding utf8 ";
-        for (File file : allJavaFile(directory)) {
-            tmp = tmp + file.toString() + " ";
-        }
-        try {
-            Runtime r = Runtime.getRuntime();
-            Process p = r.exec(tmp);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            p.waitFor();
-            String line;
-            StringBuffer output = new StringBuffer();
-            while ((line = reader.readLine()) != null) {
-                output.append(line + "\n");
-                if (line.contains(" error"))  {
-                    reader.close();
-                    throw new CompileException("error during compilation\n"+output);
-                }
-            }
-            reader.close();
-        } catch (IOException e) {
-            throw new CompileException(e);
-        } catch (InterruptedException e) {
-            throw new CompileException(e);
-        }
-    }
-
     protected List<File> allJavaFile(File dir) {
         List<File> list = new ArrayList<File>();
         for (File file : dir.listFiles())
-            if(file.isFile())     {
-                if(file.getName().endsWith(".java"))
+            if (file.isFile()) {
+                if (file.getName().endsWith(".java"))
                     list.add(file);
-            }
-            else
+            } else
                 list.addAll(allJavaFile(file));
         return list;
     }
@@ -226,4 +189,37 @@ public class Replace {
     protected Collection<CodeFragment> getAllUniqueCodeFragments() {
         return codeFragments.getUniqueCodeFragmentList();
     }
+//    public void compile(File directory, Factory f) throws CompileException {
+//
+////        JDTCompiler compiler = new JDTCompiler();
+////        try {
+////            compiler.compileSrc(f, allJavaFile(directory));
+////        } catch (Exception e) {
+////            e.printStackTrace();
+////        }
+//        String tmp = "javac -encoding utf8 ";
+//        for (File file : allJavaFile(directory)) {
+//            tmp = tmp + file.toString() + " ";
+//        }
+//        try {
+//            Runtime r = Runtime.getRuntime();
+//            Process p = r.exec(tmp);
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+//            p.waitFor();
+//            String line;
+//            StringBuffer output = new StringBuffer();
+//            while ((line = reader.readLine()) != null) {
+//                output.append(line + "\n");
+//                if (line.contains(" error"))  {
+//                    reader.close();
+//                    throw new CompileException("error during compilation\n"+output);
+//                }
+//            }
+//            reader.close();
+//        } catch (IOException e) {
+//            throw new CompileException(e);
+//        } catch (InterruptedException e) {
+//            throw new CompileException(e);
+//        }
+//    }
 }

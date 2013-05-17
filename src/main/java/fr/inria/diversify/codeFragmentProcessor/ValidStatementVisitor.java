@@ -48,9 +48,9 @@ public class ValidStatementVisitor extends CtScanner {
 		valid = false;
 	}
 	
-	public <R> void visitCtReturn(CtReturn<R> returnStatement) {
-		valid = false;
-	}
+//	public <R> void visitCtReturn(CtReturn<R> returnStatement) {
+//		valid = false;
+//	}
 	
 	public <T> void visitCtLiteral(CtLiteral<T> literal) {
 		if(literal == root)

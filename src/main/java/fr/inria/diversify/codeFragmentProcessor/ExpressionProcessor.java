@@ -10,7 +10,7 @@ import spoon.reflect.code.CtExpression;
  * Date: 5/3/13
  * Time: 4:50 PM
  */
-public class ExpressionProcessor   extends AbstractProcessor<CtExpression<?>> {
+public class ExpressionProcessor extends AbstractProcessor<CtExpression<?>> {
     protected CodeFragmentList expressions;
 
     public  ExpressionProcessor() {

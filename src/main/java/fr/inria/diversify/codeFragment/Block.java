@@ -28,6 +28,6 @@ public class Block extends CodeFragment {
 //        if(sub.getStatements().contains(codeFragment))
 //            return false;
 
-        return getInputContext().isInclude(other.getInputContext()) && getOuputContext().equals(other.getOuputContext());
+        return getInputContext().isInclude(other.getInputContext()) && getOutputContext().equals(other.getOutputContext());
     }
 }

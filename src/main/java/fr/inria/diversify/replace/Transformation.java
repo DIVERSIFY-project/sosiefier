@@ -3,11 +3,8 @@ package fr.inria.diversify.replace;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 import spoon.reflect.declaration.CtSimpleType;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +16,8 @@ import java.util.Map;
 public class Transformation {
     protected CodeFragment stmtToReplace;
     protected CodeFragment stmtReplacedBy;
-    protected Map<String,String> variableMapping;
+    protected Map<String, String> variableMapping;
     protected List<String> failures;
-
 
 
     public JSONObject toJSONObject() throws JSONException {
@@ -47,10 +43,8 @@ public class Transformation {
         variableMapping = varMapping;
     }
 
-    public void setJUnitResult(Result result) {
-         failures = new ArrayList<String>();
-         for(Failure failure: result.getFailures())
-            failures.add(failure.getDescription().getTestClass().getName()+":"+failure.getDescription().getMethodName());
+    public void setJUnitResult(List<String> result) {
+        failures = result;
     }
 
     public CtSimpleType getSourceClass() {
