@@ -26,19 +26,19 @@ import java.util.Map;
 /**
  * A processor that generates compilable Java source files from the meta-model.
  */
-public class MyJavaOutputProcessor extends JavaOutputProcessor {
+public class ReplaceJavaOutputProcessor extends JavaOutputProcessor {
 
 
     List<File> printedFiles = new ArrayList<File>();
 
-    boolean writePackageAnnotationFile = true;
+//    boolean writePackageAnnotationFile = true;
 
     /**
      * Creates a new processor for generating Java source files.
      *
      * @param outputDirectory the root output directory
      */
-    public MyJavaOutputProcessor(File outputDirectory) {
+    public ReplaceJavaOutputProcessor(File outputDirectory) {
         super(outputDirectory);
 
     }
@@ -76,27 +76,15 @@ public class MyJavaOutputProcessor extends JavaOutputProcessor {
 
         List<CtSimpleType<?>> toBePrinted = new ArrayList<CtSimpleType<?>>();
 
-        if (cu == null) {
+//        if (cu == null) {
             toBePrinted.add(element);
-        } else {
-            toBePrinted.addAll(cu.getDeclaredTypes());
-        }
-
-        PrettyPrinter printer = null;
-
-//        if (getEnvironment().isUsingSourceCodeFragments()) {
-//            try {
-//                printer = new FragmentDrivenJavaPrettyPrinter(getEnvironment(),
-//                        element.getPosition().getCompilationUnit());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                printer = null;
-//            }
+//        } else {
+//            toBePrinted.addAll(cu.getDeclaredTypes());
 //        }
-//        if (printer == null) {
-        printer = new DefaultJavaPrettyPrinter(getEnvironment());
+
+       PrettyPrinter printer = new replaceJavaPrinter(getEnvironment());
+
         printer.calculate(cu, toBePrinted);
-//        }
 
         CtPackage pack = element.getPackage();
         PrintStream stream = null;
@@ -127,26 +115,6 @@ public class MyJavaOutputProcessor extends JavaOutputProcessor {
             if (!packageDir.mkdirs())
                 throw new RuntimeException("Error creating output directory");
         }
-
-//        // Create package annotation file
-//        if (writePackageAnnotationFile
-//                && element.getPackage().getAnnotations().size() > 0) {
-//            File packageAnnot = new File(packageDir.getAbsolutePath()
-//                    + File.separatorChar
-//                    + DefaultJavaPrettyPrinter.JAVA_PACKAGE_DECLARATION);
-//            if (!printedFiles.contains(packageAnnot))
-//                printedFiles.add(packageAnnot);
-//            try {
-//                stream = new PrintStream(packageAnnot);
-//                stream.println(printer.getPackageDeclaration());
-//                stream.close();
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (stream != null)
-//                    stream.close();
-//            }
-//        }
 
         // print type
         try {

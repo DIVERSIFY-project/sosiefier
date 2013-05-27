@@ -20,19 +20,19 @@ public class StatisticDiversification {
     protected List<Transformation> transformations;
     protected int numberOfFailureMax;
 
-    public StatisticDiversification(List<Transformation> transformations, int numberOfTest) {
+    public StatisticDiversification(List<Transformation> transformations) {
         this.transformations = transformations;
 
         this.numberOfFailureMax = 0;
         for(Transformation t : transformations)
-        this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.numberOfFailure());
+            this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.numberOfFailure());
     }
 
-    public void writeStat() {
+    public void writeStat(String output) {
 
         try {
-            write(statByClass(), "diversification_class.csv");
-            write(statByType(), "diversification_statement.csv");
+            write(statByClass(), output+"_diversification_class.csv");
+            write(statByType(), output+"_diversification_statement.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }

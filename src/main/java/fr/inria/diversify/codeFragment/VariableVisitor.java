@@ -73,4 +73,6 @@ public class VariableVisitor extends CtScanner {
 		thisVariable.setSimpleName("this");
 		return thisVariable;
 	}
+
+
 }

@@ -37,7 +37,8 @@ public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 			CtLocalVariableReference<T> reference) {
 		write(reference.getType().toString());
 	}
-	
+
+
 
 	public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
 		if (reference.getSimpleName().equals("this")) {

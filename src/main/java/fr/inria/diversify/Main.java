@@ -37,7 +37,7 @@ public class Main {
         CommandLineParser parser = new GnuParser();
         CommandLine cmd = parser.parse( commandLineOption(), args);
 
-        initSpoon(cmd.getOptionValue("src")+"src/main/");
+        initSpoon(cmd.getOptionValue("src")+"/src/main/");
 
         CoverageReport rg = new CoverageReport(cmd.getOptionValue("src")+"/target/classes",cmd.getOptionValue("jacoco"));
         rg.create();
@@ -46,7 +46,10 @@ public class Main {
         Set<String> set = new HashSet<String>();
 
         Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("src"), "output_diversify");
-        d.run(10000);
+        for(int i = 0; i < 5; i++) {
+            d.run(20);
+            d.printResult(cmd.getOptionValue("out")+i);
+        }
     }
 
     protected void initSpoon(String directory) {
@@ -88,7 +91,7 @@ public class Main {
         Options options = new Options();
         options.addOption("src", true, "sources directory");
         options.addOption("nbRun", true, "number of run");
-        options.addOption("testClass", true, "classe test");
+        options.addOption("jacoco", true, "jacoco file for test coverage");
         options.addOption("out", true, "prefix for output files");
         return  options;
     }

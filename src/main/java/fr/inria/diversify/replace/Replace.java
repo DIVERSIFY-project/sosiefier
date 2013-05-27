@@ -24,19 +24,18 @@ public class Replace {
 
     protected String tmpDir;
     protected CoverageReport coverageReport;
-    protected Factory factory;
     protected CodeFragmentList codeFragments;
     protected CodeFragment cfToReplace;
     protected CodeFragment cfReplacedBy;
     protected CtSimpleType<?> originalClass;
-    private CtSimpleType<?> newClass;
+    private CodeFragment tmp;
+    private boolean replace;
 
 
     public Replace(CodeFragmentList codeFragments, CoverageReport cr, String tmpDir) {
         this.tmpDir = tmpDir;
         this.codeFragments = codeFragments;
 
-        this.factory = codeFragments.getCodeFragments().get(0).getCtCodeFragment().getFactory();
         this.coverageReport = cr;
     }
 
@@ -104,6 +103,7 @@ public class Replace {
     }
 
     protected CtElement copyElem(CtElement elem) {
+        Factory factory = elem.getFactory();
         CtElement tmp = factory.Core().clone(elem);
         tmp.setParent(elem.getParent());
         return tmp;
@@ -111,15 +111,15 @@ public class Replace {
 
 
     public Transformation replace() throws Exception {
+        replace = false;
         Transformation tf = new Transformation();
         while (cfReplacedBy == null) {
             cfToReplace = randomCodeFragmentToReplace();
             getCodeFragmentReplacedBy();
         }
-        originalClass = cfToReplace.getSourceClass().getPosition().getCompilationUnit().getMainType();
-        newClass = (CtSimpleType<?>) copyElem(originalClass);
+        originalClass = cfToReplace.getCompilationUnit().getMainType();
+        CtSimpleType<?> newClass = (CtSimpleType<?>) copyElem(originalClass);
 
-        CodeFragment tmp = null;
         for (CodeFragment cf : codeFragmentFor(newClass)) {
             if (cf.equalString().equals(cfToReplace.equalString())) {
                 tmp = cf;
@@ -130,25 +130,30 @@ public class Replace {
         tf.setStatementToReplace(cfToReplace);
         tf.setStatementReplacedBy(cfReplacedBy);
 
-        System.out.println("cfToReplace (coverage: " + coverageReport.codeFragmentCoverage(cfToReplace) + ")\n " + tmp.getCtCodeFragment());
-        System.out.println("cfReplacedBy\n " + cfReplacedBy.getCtCodeFragment());
+        System.out.println("cfToReplace (coverage: " + coverageReport.codeFragmentCoverage(cfToReplace) + ")\n " + tmp);
+        System.out.println("cfReplacedBy\n " + cfReplacedBy);
         Map<String, String> varMapping = tmp.randomVariableMapping(cfReplacedBy); //tmp
         tf.setVariableMapping(varMapping);
         System.out.println("random variable mapping: " + varMapping);
         tmp.replace(cfReplacedBy, varMapping);  //tmp
 
         printJavaFile(tmpDir + "/src/main/java", newClass);
+        printJavaFile(tmpDir + "/tmp", newClass);
+        replace = true;
         return tf;
     }
 
 
     public void restore() throws Exception {
+        if(replace)
+            tmp.getCtCodeFragment().getParent().replace(cfToReplace.getCtCodeFragment().getParent());
+
 //         printJavaFile(tmpDir, originalClass);
 //        compile(new File(tmpDir), factory);
         String fileToCopy = originalClass.getPosition().getFile().toString();
         String destination = tmpDir + "/src/main/java/" + originalClass.getQualifiedName().replace('.', '/') + ".java";
         Runtime r = Runtime.getRuntime();
-        System.out.println("cp " + fileToCopy + " " + destination);
+//        System.out.println("cp " + fileToCopy + " " + destination);
         Process p = r.exec("cp " + fileToCopy + " " + destination);
 
         p.waitFor();
@@ -166,7 +171,7 @@ public class Replace {
 
 
     public void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
-        MyJavaOutputProcessor processor = new MyJavaOutputProcessor(new File(repository));
+        ReplaceJavaOutputProcessor processor = new ReplaceJavaOutputProcessor(new File(repository));
         processor.setFactory(type.getFactory());
         processor.createJavaFile(type);
     }

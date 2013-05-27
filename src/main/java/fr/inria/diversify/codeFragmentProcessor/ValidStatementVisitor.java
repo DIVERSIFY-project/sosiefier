@@ -12,13 +12,13 @@ import java.util.Set;
 public class ValidStatementVisitor extends CtScanner {
 	protected boolean valid = true;
 	protected CtElement root; 
-	protected static Set<CtStatement> expresions  = new HashSet<CtStatement>();
+	protected static Set<CtStatement> expressions  = new HashSet<CtStatement>();
 	protected boolean withSuper;
 	
 	
-	public boolean inExperession(CtElement elem) {
-		if(expresions.contains(elem)) {
-			expresions.remove(elem);
+	public boolean inExpression(CtElement elem) {
+		if(expressions.contains(elem)) {
+			expressions.remove(elem);
 			return true;
 		}
 		return false;
@@ -41,7 +41,7 @@ public class ValidStatementVisitor extends CtScanner {
 	
 	protected void addAllSubStatement(CtElement element) {
 		if(element != null)
-			expresions.addAll(getAllSubStatement(element));
+			expressions.addAll(getAllSubStatement(element));
 	}
 	
 	public <T> void visitCtClass(CtClass<T> ctClass) {

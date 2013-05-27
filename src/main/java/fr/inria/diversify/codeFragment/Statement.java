@@ -2,10 +2,10 @@ package fr.inria.diversify.codeFragment;
 
 
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
+import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.*;
-
 
 public class Statement extends CodeFragment {
 
@@ -26,21 +26,27 @@ public class Statement extends CodeFragment {
             return false;
         if ((clOther == CtLocalVariableImpl.class || cl == CtLocalVariableImpl.class) && cl != clOther)
             return false;
-        if (codeFragmentString().contains("super(") || codeFragmentString().contains("super."))
-            return false;
-        if (other.codeFragmentString().contains("super(") || other.codeFragmentString().contains("super."))
-            return false;
         if ((clOther == CtCaseImpl.class || cl == CtCaseImpl.class))
             return false;
         if ((clOther == CtThrowImpl.class || cl == CtThrowImpl.class) && cl != clOther)
             return false;
+        if(containsSuper(codeFragment) || containsSuper(other.codeFragment))
+            return false;
+
+//        if(clOther == CtInvocationImpl.class) {
+//            Set<ModifierKind> mkOther = ((CtInvocationImpl)(other.codeFragment)).getExecutable().getModifiers();
+//            if(mkOther.contains(ModifierKind.PRIVATE) && getSourceClass().equals(other.getSourceClass()))
+//                return false;
+//            if(mkOther.contains(ModifierKind.PROTECTED) && getSourceClass().getPackage().equals(other.getSourceClass().getPackage()))
+//                return false;
+//        }
+
         SubStatementVisitor sub = new SubStatementVisitor();
         other.codeFragment.getParent().accept(sub);
         if (sub.getStatements().contains(codeFragment))
             return false;
 
-
-        if (!(getInputContext().isInclude(other.getInputContext()) && getOutputContext().equals(other.getOutputContext())))
+        if (!context.isReplace(other.context))
             return false;
         //check for return
 
@@ -52,9 +58,10 @@ public class Statement extends CodeFragment {
         if (t1 == null)
             return false;
         return t1.equals(t2);
-
     }
 
-
-
+    protected boolean containsSuper(CtCodeElement cf) {
+        String string = cf.toString();
+        return string.contains("super(") || string.contains("super.");
+    }
 }

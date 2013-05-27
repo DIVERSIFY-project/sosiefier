@@ -4,12 +4,12 @@ import spoon.reflect.reference.CtTypeReference;
 
 public class Context {
 	protected InputContext inputContext;
-	protected CtTypeReference<?> ouputContext;
+	protected CtTypeReference<?> outputContext;
 	
 	
 	public Context(InputContext inputContext, CtTypeReference<?> ouputContext) {
 		this.inputContext = inputContext;
-		this.ouputContext = ouputContext;
+		this.outputContext = ouputContext;
 	}
 
 	public InputContext getInputContext() {
@@ -17,7 +17,7 @@ public class Context {
 	}
 	
 	public CtTypeReference<?> getOuputContext() {
-		return ouputContext;
+		return outputContext;
 	}
 	
 	@Override
@@ -26,17 +26,26 @@ public class Context {
 			return false;
 			
 		Context other = (Context)obj;
-		return inputContext.equals(other.inputContext) && ouputContext.equals(other.ouputContext);
+
+		return inputContext.equals(other.inputContext)
+                && outputContext.equals(other.outputContext)
+                && outputContext.getActualTypeArguments().equals(other.outputContext.getActualTypeArguments());
 	}
 	
 	@Override
 	public int hashCode() {
-		return inputContext.hashCode() * ouputContext.hashCode();
+		return inputContext.hashCode() * outputContext.hashCode();
 	}
+
+    public boolean isReplace(Context other) {
+        return inputContext.isInclude(other.inputContext)
+                && outputContext.equals(other.outputContext)
+                &&  outputContext.getActualTypeArguments().equals(other.outputContext.getActualTypeArguments());
+    }
 
 	public String equalString() {
 		return inputContext.equalString()+ " "
-                + ouputContext.toString();
+                + outputContext.toString();
 	}
 
 	public int size() {

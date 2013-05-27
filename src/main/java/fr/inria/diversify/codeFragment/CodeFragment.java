@@ -10,6 +10,7 @@ import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
+import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
@@ -207,6 +208,9 @@ public abstract class CodeFragment {
 
     public File getSourceFile() {
         return codeFragment.getPosition().getFile();
+    }
+    public CompilationUnit getCompilationUnit() {
+        return codeFragment.getPosition().getCompilationUnit();
     }
 }
 

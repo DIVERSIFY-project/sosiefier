@@ -1,6 +1,7 @@
 package fr.inria.diversify.codeFragment;
 
 import spoon.reflect.code.CtFieldAccess;
+import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 
@@ -70,7 +71,8 @@ public class InputContext {
     public CtFieldAccess<?> candidateForFieldAccess(CtTypeReference<?> type){
         CtFieldAccess<?> candidate = null;
         for (CtFieldAccess<?> var : fieldReferences) {
-            if(var.getVariable().getType().equals(type)) {
+            CtTypeReference<?> varType = var.getType();
+            if(varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
                 candidate = var;
                 break;
             }
@@ -81,7 +83,8 @@ public class InputContext {
     public CtVariableReference<?> candidateForLocalVar(CtTypeReference<?> type){
         CtVariableReference<?> candidate = null;
         for (CtVariableReference<?> var : localVariableReferences) {
-            if(var.getType().equals(type)) {
+            CtTypeReference<?> varType = var.getType();
+            if(varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
                 candidate = var;
                 break;
             }
@@ -152,5 +155,17 @@ public class InputContext {
 	public int size() {
 		return localVariableReferences.size() + fieldReferences.size();
 	}
+
+    public List<CtSimpleType<?>> getTypes() {
+        List<CtSimpleType<?>> types = new ArrayList<CtSimpleType<?>>();
+
+        for (CtFieldAccess field: fieldReferences)
+            types.add(field.getVariable().getDeclaringType().getDeclaration());
+
+        for (CtVariableReference var: localVariableReferences)
+            types.add(var.getType().getDeclaration());
+
+        return types;
+    }
 	
 }

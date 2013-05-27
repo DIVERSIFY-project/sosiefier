@@ -102,7 +102,7 @@ public class CoverageReport {
         IClassCoverage classCoverage = null;
         for (IClassCoverage cc : coverageBuilder.getClasses()) {
             CtSimpleType<?> cl = stmt.getSourceClass();
-            if(!(cl.getPackage() == null ||   cl.getPackage().getSignature() == null)) {
+            if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
                 String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName().toString();
                 if(name.equals(cc.getName())) {
                     classCoverage = cc;
