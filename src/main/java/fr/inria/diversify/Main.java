@@ -18,8 +18,6 @@ import spoon.support.builder.SpoonBuildingManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class Main {
@@ -43,11 +41,11 @@ public class Main {
         rg.create();
 
 		computeStatistic(cmd.getOptionValue("out"));
-        Set<String> set = new HashSet<String>();
 
+        int nbRun = Integer.parseInt(cmd.getOptionValue("nbRun"));
         Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("src"), "output_diversify");
-        for(int i = 0; i < 5; i++) {
-            d.run(20);
+        for(int i = 0; i < 10; i++) {
+            d.run(nbRun/10);
             d.printResult(cmd.getOptionValue("out")+i);
         }
     }

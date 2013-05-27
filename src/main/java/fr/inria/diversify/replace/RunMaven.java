@@ -44,7 +44,7 @@ public class RunMaven extends  Thread {
         boolean error = false;
         boolean start = false;
         for (String s : r.split("\n")) {
-            System.out.println(s);
+//            System.out.println(s);
             if (s.startsWith("[ERROR]"))
                 error = true;
             if (s.startsWith("Tests in error:"))

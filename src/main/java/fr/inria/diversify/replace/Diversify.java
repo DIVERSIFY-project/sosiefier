@@ -38,7 +38,7 @@ public class Diversify {
     public void run(int n) throws Exception {
         int error = 0;
         prepare(sourceDir, tmpDir);
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             System.out.println(i);
             initThreadGroup();
 
@@ -46,13 +46,11 @@ public class Diversify {
             try {
                 Transformation tf = rp.replace();
                 List<String> errors = runTest(tmpDir);
-
-                    System.out.println("errors size "+errors.size());
                 tf.setJUnitResult(errors);
                 transformations.add(tf);
             }
             catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 System.out.println("compile error "+(error++));
             }
             rp.restore();
