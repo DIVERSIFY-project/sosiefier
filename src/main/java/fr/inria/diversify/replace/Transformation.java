@@ -56,6 +56,8 @@ public class Transformation {
     }
 
     public int numberOfFailure() {
+        if(failures == null)
+            return -1;
         return failures.size();
     }
 }

@@ -31,11 +31,12 @@ public class Diversify {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
         this.tmpDir = tmpDir;
-        transformations = new ArrayList<Transformation>();
+
         this.sourceDir = sourceDir;
     }
 
     public void run(int n) throws Exception {
+        transformations = new ArrayList<Transformation>();
         int error = 0;
         prepare(sourceDir, tmpDir);
         for (int i = 0; i < n; i++) {
@@ -60,11 +61,11 @@ public class Diversify {
     }
 
     public void printResult(String output) {
-//        try {
-//                    writeTransformation("transformation/transformation_"+System.currentTimeMillis()+".json");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+        try {
+            writeTransformation(output + "_transformation.json");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         StatisticDiversification stat = new StatisticDiversification(transformations);
         stat.writeStat(output);
     }
@@ -74,7 +75,7 @@ public class Diversify {
 
         for (int i = 0; i < transformations.size(); i++) {
             JSONObject obj = new JSONObject();
-            obj.put("Transformation_" + i, transformations.get(i).toJSONObject());
+            obj.put("Transformation_" + System.currentTimeMillis(), transformations.get(i).toJSONObject());
             out.write(obj.toString());
             out.newLine();
         }

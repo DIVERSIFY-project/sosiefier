@@ -7,16 +7,16 @@ public class Context {
 	protected CtTypeReference<?> outputContext;
 	
 	
-	public Context(InputContext inputContext, CtTypeReference<?> ouputContext) {
+	public Context(InputContext inputContext, CtTypeReference<?> outputContext) {
 		this.inputContext = inputContext;
-		this.outputContext = ouputContext;
+		this.outputContext = outputContext;
 	}
 
 	public InputContext getInputContext() {
 		return inputContext;
 	}
 	
-	public CtTypeReference<?> getOuputContext() {
+	public CtTypeReference<?> getOutputContext() {
 		return outputContext;
 	}
 	

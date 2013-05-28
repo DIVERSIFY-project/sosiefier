@@ -13,23 +13,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StatisticCodeFragment {
-
 	private CodeFragmentList statements;
-	protected char separator = ';';
+	protected static char separator = ';';
+    protected static String typeFileSuffix = "_stmt.csv";
+    protected static String classFileSuffix = "_classes.csv";
+    protected static String packageFileSuffix = "_packages.csv";
+    protected static String codeFragmentFileSuffix = "_CodeFragment.csv";
+    protected static String contextFileSuffix = "_uniqueContext.csv";
+    protected static String uniqueContextFileSuffix = "_uniqueInputContext.csv";
 	
 	public StatisticCodeFragment(CodeFragmentList statements) {
 		this.statements = statements;
 	}
 	
-	public void writeSatistic(String fileName) throws IOException {
+	public void writeStatistic(String fileName) throws IOException {
 
-        writeSummary(new File(fileName+"_stmt.csv"), statisticByStatement());
-		writeSummary(new File(fileName+"_classes.csv"), statisticByClass());
-		writeSummary(new File(fileName+"_packages.csv"), statisticByPackage());
+        writeSummary(new File(fileName+typeFileSuffix), statisticByStatement());
+		writeSummary(new File(fileName+classFileSuffix), statisticByClass());
+		writeSummary(new File(fileName+packageFileSuffix), statisticByPackage());
 		
-		writeStatement(new File(fileName+"_CodeFragment.csv"), statements.getUniqueCodeFragments());
-		writeUniqueContext(new File(fileName+"_uniqueContext.csv"), statements.getUniqueContext());
-		writeUniqueInputContext(new File(fileName+"_uniqueInputContext.csv"), statements.getUniqueInputContext());
+		writeStatement(new File(fileName+codeFragmentFileSuffix), statements.getUniqueCodeFragments());
+		writeUniqueContext(new File(fileName+contextFileSuffix), statements.getUniqueContext());
+		writeUniqueInputContext(new File(fileName+uniqueContextFileSuffix), statements.getUniqueInputContext());
 	}
 	
 	public Map<String,CodeFragmentList> statisticByStatement() {

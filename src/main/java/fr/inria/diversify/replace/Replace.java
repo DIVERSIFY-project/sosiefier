@@ -130,7 +130,7 @@ public class Replace {
         tf.setStatementToReplace(cfToReplace);
         tf.setStatementReplacedBy(cfReplacedBy);
 
-        System.out.println("cfToReplace (coverage: " + coverageReport.codeFragmentCoverage(cfToReplace) + ")\n " + tmp);
+        System.out.println("cfToReplace (coverage: " + coverageReport.codeFragmentCoverage(cfToReplace) + ") type: "+cfToReplace.getCodeFragmentType() +"\n " + tmp);
         System.out.println("cfReplacedBy\n " + cfReplacedBy);
         Map<String, String> varMapping = tmp.randomVariableMapping(cfReplacedBy); //tmp
         tf.setVariableMapping(varMapping);

@@ -44,7 +44,7 @@ public abstract class CodeFragment {
 
 
     public CtTypeReference<?> getOutputContext() {
-        return context.getOuputContext();
+        return context.getOutputContext();
     }
 
 

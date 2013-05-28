@@ -16,6 +16,7 @@ public class RunMaven extends  Thread {
     protected String directory;
     protected List<String> result;
     protected boolean compileError;
+    protected boolean allTestRun;
     protected String lifeCycle;
 
 
@@ -41,58 +42,32 @@ public class RunMaven extends  Thread {
 
     protected void parseResult(String r) {
         result = new ArrayList<String>();
-        boolean error = false;
         boolean start = false;
         for (String s : r.split("\n")) {
-//            System.out.println(s);
-            if (s.startsWith("[ERROR]"))
-                error = true;
-            if (s.startsWith("Tests in error:"))
+            System.out.println(s);
+            if (s.startsWith("[ERROR] COMPILATION ERROR"))
+                compileError = true;
+            if (s.startsWith("Tests in error:")) {
                 start = true;
+                allTestRun = true;
+            }
             if (start && s.equals(""))
                 start = false;
             if (!s.startsWith("Tests in error:") && start)
                 result.add(s);
         }
-        if (result.isEmpty() && error)
-            compileError = true;
+        allTestRun = allTestRun || (result.isEmpty() && !compileError);
     }
 
     public List<String> getResult() {
         return result;
     }
 
-    public boolean getCompileError() {
-        return compileError || result == null;
+    public boolean allTestRun() {
+        return allTestRun;
     }
 
-//    public void run() {
-//        System.out.println("run test in: " + directory);
-//
-//        Runtime r = Runtime.getRuntime();
-//        Process p = null;
-//        try {
-//            p = r.exec("mvn -f " + directory + "/pom.xml test");
-//        } catch (IOException e) {}
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-//
-//
-//        String line;
-//        StringBuffer output = new StringBuffer();
-//        try {
-//            p.waitFor();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            while ((line = reader.readLine()) != null)
-//                output.append(line + "\n");
-//            reader.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-////        System.out.println(output+"\n\npid "+CLibrary.INSTANCE.getpid());
-//        p.destroy();
-//        parseResult(output.toString());
-//    }
+    public boolean getCompileError() {
+        return compileError;
+    }
 }

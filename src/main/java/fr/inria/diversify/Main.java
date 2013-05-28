@@ -79,7 +79,7 @@ public class Main {
 		StatisticCodeFragment stat = new StatisticCodeFragment(statements);
 		 
 		try {
-			stat.writeSatistic(output);
+			stat.writeStatistic(output);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
