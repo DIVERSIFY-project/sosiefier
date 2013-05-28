@@ -3,8 +3,8 @@ package fr.inria.diversify.replace;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.statistic.StatisticDiversification;
+import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -72,13 +72,14 @@ public class Diversify {
 
     public void writeTransformation(String FileName) throws IOException, JSONException {
         BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
-
+        JSONArray obj = new JSONArray();
         for (int i = 0; i < transformations.size(); i++) {
-            JSONObject obj = new JSONObject();
-            obj.put("Transformation_" + System.currentTimeMillis(), transformations.get(i).toJSONObject());
-            out.write(obj.toString());
-            out.newLine();
+
+            obj.put(transformations.get(i).toJSONObject());
+
         }
+        out.write(obj.toString());
+        out.newLine();
         out.close();
     }
 

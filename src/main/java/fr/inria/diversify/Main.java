@@ -22,9 +22,6 @@ import java.io.IOException;
 
 public class Main {
 	private CodeFragmentList statements;
-    private Factory factory;
-
-
 
     public static void main(String[] args) throws Exception {
 		Main app = new Main(args);
@@ -35,6 +32,10 @@ public class Main {
         CommandLine cmd = parser.parse( commandLineOption(), args);
 
         initSpoon(cmd.getOptionValue("src")+"/src/main/");
+
+//        TransformationParser tp = new TransformationParser(statements);
+//        tp.parseDir("result");
+
 
         CoverageReport rg = new CoverageReport(cmd.getOptionValue("src")+"/target/classes",cmd.getOptionValue("jacoco"));
         rg.create();
@@ -56,7 +57,7 @@ public class Main {
 		env.setDebug(true);
 
 		DefaultCoreFactory f = new DefaultCoreFactory();
-		factory = new Factory(f, env);
+		Factory factory = new Factory(f, env);
 		SpoonBuildingManager builder = new SpoonBuildingManager(factory);
         for(String dir : directory.split(System.getProperty("path.separator")))
 			try {

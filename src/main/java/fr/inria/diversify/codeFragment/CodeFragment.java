@@ -148,13 +148,16 @@ public abstract class CodeFragment {
 
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        String position = getSourcePackage().getQualifiedName()+"."+getSourceClass().getSimpleName()+ ":" +codeFragment.getPosition().getLine();
-        object.put("Position", position);
+        object.put("Position", positionString());
         object.put("Type", getCodeFragmentType().getSimpleName());
         object.put("InputContext", new JSONArray(getInputContext().inputContextToString()));
         object.put("OutputContext", getOutputContext().toString());
         object.put("SourceCode", equalString());
         return object;
+    }
+
+    public String positionString() {
+        return getSourcePackage().getQualifiedName()+"."+getSourceClass().getSimpleName()+ ":" +codeFragment.getPosition().getLine();
     }
 
     public CtTypeReference<?> getMethodReturnType() {
