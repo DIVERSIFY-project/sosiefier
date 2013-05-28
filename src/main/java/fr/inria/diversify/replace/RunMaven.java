@@ -44,7 +44,7 @@ public class RunMaven extends  Thread {
         result = new ArrayList<String>();
         boolean start = false;
         for (String s : r.split("\n")) {
-//            System.out.println(s);
+            System.out.println(s);
             if (s.startsWith("[ERROR] COMPILATION ERROR"))
                 compileError = true;
             if (s.startsWith("Tests in error:")) {
