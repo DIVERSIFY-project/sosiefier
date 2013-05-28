@@ -30,7 +30,6 @@ public class Main {
 		Main app = new Main(args);
     }
 
-
 	public Main(String[] args) throws Exception {
         CommandLineParser parser = new GnuParser();
         CommandLine cmd = parser.parse( commandLineOption(), args);

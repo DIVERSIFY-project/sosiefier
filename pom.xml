@@ -15,16 +15,11 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>fr.inria.gforge.spoon</groupId>-->
-            <!--<artifactId>spoon-core</artifactId>-->
-            <!--<version>1.4.2</version>-->
+        <!--<groupId>fr.inria.gforge.spoon</groupId>-->
+        <!--<artifactId>spoon-core</artifactId>-->
+        <!--<version>1.4.2</version>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-embedder</artifactId>
@@ -53,6 +48,7 @@
             <artifactId>org.jacoco.report</artifactId>
             <version>0.6.2.201302030002</version>
         </dependency>
+
         <dependency>
             <groupId>net.sf.jung</groupId>
             <artifactId>jung-api</artifactId>
@@ -74,11 +70,11 @@
             <version>2.0.1</version>
         </dependency>
 
-    <dependency>
-        <groupId>net.sf.jung</groupId>
-        <artifactId>jung-jai</artifactId>
-        <version>2.0.1</version>
-    </dependency>
+        <dependency>
+            <groupId>net.sf.jung</groupId>
+            <artifactId>jung-jai</artifactId>
+            <version>2.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>
