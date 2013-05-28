@@ -36,7 +36,6 @@ public class Main {
 //        TransformationParser tp = new TransformationParser(statements);
 //        tp.parseDir("result");
 
-
         CoverageReport rg = new CoverageReport(cmd.getOptionValue("src")+"/target/classes",cmd.getOptionValue("jacoco"));
         rg.create();
 

@@ -38,15 +38,16 @@ public class Diversify {
     public void run(int n) throws Exception {
         transformations = new ArrayList<Transformation>();
         int error = 0;
-        prepare(sourceDir, tmpDir);
+        String dir = prepare(sourceDir, tmpDir);
+        System.out.println("dir "+ dir);
         for (int i = 0; i < n; i++) {
             System.out.println(i);
             initThreadGroup();
 
-            Replace rp = new Replace(codeFragments, coverageReport, tmpDir);
+            Replace rp = new Replace(codeFragments, coverageReport, dir);
             try {
                 Transformation tf = rp.replace();
-                List<String> errors = runTest(tmpDir);
+                List<String> errors = runTest(dir);
                 tf.setJUnitResult(errors);
                 transformations.add(tf);
             }
@@ -83,10 +84,12 @@ public class Diversify {
         out.close();
     }
 
-    protected void prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
+    protected String prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
         Runtime r = Runtime.getRuntime();
         Process p = r.exec("cp -r " + dirSource + " " + dirTarget);
         p.waitFor();
+
+        return dirTarget + "/" +dirSource.split("/")[dirSource.split("/").length - 1];
     }
 
     protected List<String> runTest(String directory) throws InterruptedException, CompileException {
@@ -114,4 +117,6 @@ public class Diversify {
             }
         }
     }
+
+
 }
