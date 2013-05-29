@@ -6,9 +6,7 @@ import fr.inria.diversify.statistic.StatisticDiversification;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -75,9 +73,9 @@ public class Diversify {
         BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
         JSONArray obj = new JSONArray();
         for (int i = 0; i < transformations.size(); i++) {
-
-            obj.put(transformations.get(i).toJSONObject());
-
+            try {
+                obj.put(transformations.get(i).toJSONObject());
+            } catch (JSONException e) {}
         }
         out.write(obj.toString());
         out.newLine();
@@ -85,11 +83,13 @@ public class Diversify {
     }
 
     protected String prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
-        Runtime r = Runtime.getRuntime();
-        Process p = r.exec("cp -r " + dirSource + " " + dirTarget);
-        p.waitFor();
+           String dir = dirTarget + "/tmp_" + System.currentTimeMillis();
+//        Runtime r = Runtime.getRuntime();
+//        Process p = r.exec("cp -r " + dirSource + " " + dirTarget);
+//        p.waitFor();
+        copyDirectory(new File(dirSource), new File(dir));
 
-        return dirTarget + "/" +dirSource.split("/")[dirSource.split("/").length - 1];
+        return dir;
     }
 
     protected List<String> runTest(String directory) throws InterruptedException, CompileException {
@@ -118,5 +118,30 @@ public class Diversify {
         }
     }
 
+    protected void copyDirectory(File sourceLocation , File targetLocation) throws IOException {
+        if (sourceLocation.isDirectory()) {
+            if (!targetLocation.exists()) {
+                targetLocation.mkdir();
+            }
 
+            String[] children = sourceLocation.list();
+            for (int i=0; i<children.length; i++) {
+                copyDirectory(new File(sourceLocation, children[i]),
+                        new File(targetLocation, children[i]));
+            }
+        } else {
+
+            InputStream in = new FileInputStream(sourceLocation);
+            OutputStream out = new FileOutputStream(targetLocation);
+
+            // Copy the bits from instream to outstream
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+        }
+    }
 }
