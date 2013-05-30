@@ -1,9 +1,8 @@
 package fr.inria.diversify.replace;
 
-import org.apache.maven.cli.MavenCli;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,18 +25,37 @@ public class RunMaven extends  Thread {
     }
 
 
-    public void run() {
-        MavenCli cli = new MavenCli();
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(os);
+//    public void run() {
+//        MavenCli cli = new MavenCli();
+//        ByteArrayOutputStream os = new ByteArrayOutputStream();
+//        PrintStream ps = new PrintStream(os);
+//
+//        try {
+//            cli.doMain(new String[]{lifeCycle}, directory, ps, ps);
+//            parseResult(os.toString());
+//        } catch (OutOfMemoryError e) {
+//            e.printStackTrace();
+//        }
+//        ps.close();
+//    }
 
+
+    public void run() {
+        Runtime r = Runtime.getRuntime();
         try {
-            cli.doMain(new String[]{lifeCycle}, directory, ps, ps);
-            parseResult(os.toString());
-        } catch (OutOfMemoryError e) {
-            e.printStackTrace();
-        }
-        ps.close();
+            Process p = r.exec("mvn -f " + directory + "/pom.xml " + lifeCycle);
+            p.waitFor();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            StringBuffer output = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                output.append(line + "\n");
+                System.out.println(line);
+            }
+            reader.close();
+            parseResult(line);
+    } catch (Exception e) {}
+
     }
 
     protected void parseResult(String r) {

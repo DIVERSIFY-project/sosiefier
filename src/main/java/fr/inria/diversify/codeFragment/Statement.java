@@ -33,13 +33,6 @@ public class Statement extends CodeFragment {
         if(containsSuper(codeFragment) || containsSuper(other.codeFragment))
             return false;
 
-//        if(clOther == CtInvocationImpl.class) {
-//            Set<ModifierKind> mkOther = ((CtInvocationImpl)(other.codeFragment)).getExecutable().getModifiers();
-//            if(mkOther.contains(ModifierKind.PRIVATE) && getSourceClass().equals(other.getSourceClass()))
-//                return false;
-//            if(mkOther.contains(ModifierKind.PROTECTED) && getSourceClass().getPackage().equals(other.getSourceClass().getPackage()))
-//                return false;
-//        }
 
         SubStatementVisitor sub = new SubStatementVisitor();
         other.codeFragment.getParent().accept(sub);
@@ -48,9 +41,14 @@ public class Statement extends CodeFragment {
 
         if (!context.isReplace(other.context))
             return false;
+
+
+//        ReplaceVisitor rv = new ReplaceVisitor(this);
+//        other.getCtCodeFragment().accept(rv);
+//        if(!rv.isReplace())
+//            return false;
+//
         //check for return
-
-
         CtTypeReference t1 = this.hasReturn();
         CtTypeReference t2 = other.hasReturn();
         if (t1 == null && t2 == null)
