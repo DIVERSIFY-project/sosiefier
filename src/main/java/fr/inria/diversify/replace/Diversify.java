@@ -2,14 +2,10 @@ package fr.inria.diversify.replace;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.runtest.CoverageReport;
-import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -59,7 +55,6 @@ public class Diversify {
             killUselessThread();
 
         }
-        FileUtils.deleteDirectory(new File(dir));
     }
 
     public void printResult(String output) {
@@ -89,7 +84,7 @@ public class Diversify {
 
     protected String prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
         String dir = dirTarget + "/tmp_" + System.currentTimeMillis();
-        FileUtils.copyDirectory(new File(dirSource), new File(dir));
+        copyDirectory(new File(dirSource), new File(dir));
         return dir;
     }
 
@@ -101,7 +96,7 @@ public class Diversify {
             count++;
             Thread.sleep(1000);
         }
-        System.out.println("compile error: " + rt.getCompileError());
+        System.out.println("compile error: "+rt.getCompileError());
         System.out.println("all test run: "+rt.allTestRun());
         if(rt.getCompileError())
             throw new CompileException("error ");
@@ -121,30 +116,30 @@ public class Diversify {
         }
     }
 
-//    protected void copyDirectory(File sourceLocation , File targetLocation) throws IOException {
-//        if (sourceLocation.isDirectory()) {
-//            if (!targetLocation.exists()) {
-//                targetLocation.mkdir();
-//            }
-//
-//            String[] children = sourceLocation.list();
-//            for (int i=0; i<children.length; i++) {
-//                copyDirectory(new File(sourceLocation, children[i]),
-//                        new File(targetLocation, children[i]));
-//            }
-//        } else {
-//
-//            InputStream in = new FileInputStream(sourceLocation);
-//            OutputStream out = new FileOutputStream(targetLocation);
-//
-//            // Copy the bits from instream to outstream
-//            byte[] buf = new byte[1024];
-//            int len;
-//            while ((len = in.read(buf)) > 0) {
-//                out.write(buf, 0, len);
-//            }
-//            in.close();
-//            out.close();
-//        }
-//    }
+    protected void copyDirectory(File sourceLocation , File targetLocation) throws IOException {
+        if (sourceLocation.isDirectory()) {
+            if (!targetLocation.exists()) {
+                targetLocation.mkdir();
+            }
+
+            String[] children = sourceLocation.list();
+            for (int i=0; i<children.length; i++) {
+                copyDirectory(new File(sourceLocation, children[i]),
+                        new File(targetLocation, children[i]));
+            }
+        } else {
+
+            InputStream in = new FileInputStream(sourceLocation);
+            OutputStream out = new FileOutputStream(targetLocation);
+
+            // Copy the bits from instream to outstream
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+        }
+    }
 }
