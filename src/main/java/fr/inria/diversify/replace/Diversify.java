@@ -59,7 +59,7 @@ public class Diversify {
 
     public void printResult(String output) {
         try {
-            writeTransformation(output + "_transformation.json");
+            writeTransformation(output + System.currentTimeMillis() + "_transformation.json");
         } catch (Exception e) {
             e.printStackTrace();
         }
