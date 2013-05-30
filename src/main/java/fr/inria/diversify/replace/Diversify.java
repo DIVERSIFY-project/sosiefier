@@ -75,7 +75,7 @@ public class Diversify {
         for (int i = 0; i < transformations.size(); i++) {
             try {
                 obj.put(transformations.get(i).toJSONObject());
-            } catch (JSONException e) {}
+            } catch (Exception e) {}
         }
         out.write(obj.toString());
         out.newLine();
