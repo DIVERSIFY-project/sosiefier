@@ -39,17 +39,17 @@ public class Main {
         CoverageReport rg = new CoverageReport(cmd.getOptionValue("src")+"/target/classes",cmd.getOptionValue("jacoco"));
         rg.create();
 
-		computeStatistic(cmd.getOptionValue("out"));
+//		computeStatistic(cmd.getOptionValue("out"));
 //        System.out.println("number of statement: " + statements.size());
 //        System.out.println("number of undiversify Statement: " + (new Util(statements)).numberOfNotDiversification());
 //        System.out.println("number of diversification: " + (new Util(statements)).numberOfDiversification());
 
         int nbRun = Integer.parseInt(cmd.getOptionValue("nbRun"));
         Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("src"), "output_diversify");
-        for(int i = 0; i < 10; i++) {
-            d.run(nbRun/10);
-            d.printResult(cmd.getOptionValue("out"));
-        }
+
+        d.run(nbRun);
+        d.printResult(cmd.getOptionValue("out"));
+
     }
 
     protected void initSpoon(String directory) {

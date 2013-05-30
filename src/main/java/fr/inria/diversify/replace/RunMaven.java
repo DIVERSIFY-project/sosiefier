@@ -53,7 +53,7 @@ public class RunMaven extends  Thread {
                 System.out.println(line);
             }
             reader.close();
-            parseResult(line);
+            parseResult(output.toString());
     } catch (Exception e) {}
 
     }
