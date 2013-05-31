@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.declaration.CtSimpleType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +26,12 @@ public class Transformation {
         object.put("StatementToReplace", stmtToReplace.toJSONObject());
         object.put("StatementReplacedBy", stmtReplacedBy.toJSONObject());
         object.put("VariableMapping", variableMapping);
+        object.put("allTestRun", (failures != null));
 
-        object.put("Failures", failures);
+        if(failures == null)
+            object.put("Failures", new ArrayList());
+        else
+            object.put("Failures", failures);
 
         return object;
     }

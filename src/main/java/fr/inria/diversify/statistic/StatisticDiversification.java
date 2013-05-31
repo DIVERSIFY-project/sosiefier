@@ -52,6 +52,7 @@ public class StatisticDiversification {
         Map<String, Map<Integer,Integer>> map = new HashMap<String, Map<Integer,Integer>>();
 
         for(Transformation trans : transformations) {
+            try {
             String key = trans.getSourceClass().getQualifiedName();
             if(!map.containsKey(key)) {
                 Map<Integer,Integer> list = new HashMap<Integer,Integer>();
@@ -61,6 +62,7 @@ public class StatisticDiversification {
             }
             int n =  map.get(key).get(trans.numberOfFailure());
             map.get(key).put(trans.numberOfFailure(),n + 1);
+            } catch (Exception e) {}
         }
         return  map;
     }
@@ -69,6 +71,7 @@ public class StatisticDiversification {
         Map<String, Map<Integer,Integer>> map = new HashMap<String, Map<Integer,Integer>>();
 
         for(Transformation trans : transformations) {
+            try {
             String key = trans.geCodeFragmentType().getSimpleName();
             if(!map.containsKey(key)) {
                 Map<Integer,Integer> list = new HashMap<Integer,Integer>();
@@ -78,6 +81,7 @@ public class StatisticDiversification {
             }
             int n =  map.get(key).get(trans.numberOfFailure());
             map.get(key).put(trans.numberOfFailure(),n + 1);
+            } catch (Exception e) {}
         }
         return  map;
     }

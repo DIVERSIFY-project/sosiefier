@@ -1,14 +1,18 @@
 package fr.inria.diversify;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.codeFragment.TransformationParser;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.replace.Diversify;
+import fr.inria.diversify.replace.Transformation;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
+import fr.inria.diversify.statistic.StatisticDiversification;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Options;
+import org.json.JSONException;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
@@ -18,6 +22,7 @@ import spoon.support.builder.SpoonBuildingManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 
 public class Main {
@@ -33,9 +38,6 @@ public class Main {
 
         initSpoon(cmd.getOptionValue("src")+"/src/main/");
 
-//        TransformationParser tp = new TransformationParser(statements);
-//        tp.parseDir("result");
-
         CoverageReport rg = new CoverageReport(cmd.getOptionValue("src")+"/target/classes",cmd.getOptionValue("jacoco"));
         rg.create();
 
@@ -49,7 +51,7 @@ public class Main {
 
         d.run(nbRun);
         d.printResult(cmd.getOptionValue("out"));
-
+//        computeDiversifyStat("result");
     }
 
     protected void initSpoon(String directory) {
@@ -75,6 +77,15 @@ public class Main {
 	
 	    statements = processor.getStatements();
 	}
+
+    protected void computeDiversifyStat(String dir) throws IOException, JSONException {
+        TransformationParser tf = new TransformationParser(statements);
+        List<Transformation> list = tf.parseDir(dir);
+        System.out.println("nb transformation: "+list.size());
+        StatisticDiversification sd = new StatisticDiversification(list);
+        sd.writeStat("diversify_stat.csv");
+
+    }
 
 	protected void computeStatistic(String output) {
 		StatisticCodeFragment stat = new StatisticCodeFragment(statements);

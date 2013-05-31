@@ -92,15 +92,15 @@ public class Diversify {
         RunMaven rt = new RunMaven(directory, "test");
         rt.start();
         int count = 0;
-        while (rt.getResult() == null && count < 30) {
+        while (rt.getResult() == null && count < 40) {
             count++;
             Thread.sleep(1000);
         }
-        System.out.println("compile error: "+rt.getCompileError());
-        System.out.println("all test run: "+rt.allTestRun());
         if(rt.getCompileError())
             throw new CompileException("error ");
 
+        if(!rt.allTestRun())
+            return null;
         return rt.getResult();
     }
 

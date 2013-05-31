@@ -53,7 +53,9 @@ public class TransformationParser {
         trans.setStatementToReplace(findCodeFragment((JSONObject) jsonObject.get("StatementToReplace")));
         trans.setStatementReplacedBy(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
         trans.setVariableMapping(parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
-        trans.setJUnitResult(parseFailures(jsonObject.getJSONArray("Failures")));
+        if(jsonObject.getBoolean("allTestRun"))
+            trans.setJUnitResult(parseFailures(jsonObject.getJSONArray("Failures")));
+
         return trans;
     }
 
