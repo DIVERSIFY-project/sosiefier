@@ -5,8 +5,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.declaration.CtSimpleType;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +16,7 @@ public class Transformation {
     protected CodeFragment stmtToReplace;
     protected CodeFragment stmtReplacedBy;
     protected Map<String, String> variableMapping;
-    protected List<String> failures;
+    protected Integer failures;
 
 
     public JSONObject toJSONObject() throws JSONException {
@@ -27,11 +25,7 @@ public class Transformation {
         object.put("StatementReplacedBy", stmtReplacedBy.toJSONObject());
         object.put("VariableMapping", variableMapping);
         object.put("allTestRun", (failures != null));
-
-        if(failures == null)
-            object.put("Failures", new ArrayList());
-        else
-            object.put("Failures", failures);
+        object.put("Failures", failures);
 
         return object;
     }
@@ -48,7 +42,7 @@ public class Transformation {
         variableMapping = varMapping;
     }
 
-    public void setJUnitResult(List<String> result) {
+    public void setJUnitResult(Integer result) {
         failures = result;
     }
 
@@ -61,8 +55,6 @@ public class Transformation {
     }
 
     public int numberOfFailure() {
-        if(failures == null)
-            return -1;
-        return failures.size();
+        return failures;
     }
 }

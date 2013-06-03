@@ -28,6 +28,7 @@ public class StatisticDiversification {
         this.numberOfFailureMax = 0;
         for(Transformation t : transformations)
             this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.numberOfFailure());
+        System.out.println("max failure: "+numberOfFailureMax);
     }
 
     public StatisticDiversification() {

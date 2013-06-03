@@ -5,8 +5,8 @@ import org.apache.maven.cli.MavenCli;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * User: Simon
@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class RunMaven extends  Thread {
     protected String directory;
-    protected List<String> result;
     protected boolean compileError = false;
     protected boolean allTestRun = false;
     protected String lifeCycle;
+    protected Integer failure = null;
 
 
     public RunMaven(String directory, String lifeCycle) {
@@ -60,30 +60,52 @@ public class RunMaven extends  Thread {
 //
 //    }
 
+//    protected void parseResult(String r) {
+//        result = new ArrayList<String>();
+//        boolean start = false;
+//        allTestRun = false;
+//        compileError= false;
+//        for (String s : r.split("\n")) {
+//            System.out.println(s);
+//            if (s.startsWith("[ERROR] COMPILATION ERROR"))
+//                compileError = true;
+//            if (s.startsWith("Tests in error:")) {
+//                start = true;
+//                allTestRun = true;
+//            }
+//            if (start && s.equals(""))
+//                start = false;
+//            if (!s.startsWith("Tests in error:") && start)
+//                result.add(s);
+//        }
+//        allTestRun = allTestRun || (result.isEmpty() && !compileError);
+//    }
+
     protected void parseResult(String r) {
-        result = new ArrayList<String>();
-        boolean start = false;
+        Pattern pattern = Pattern.compile("Tests run: (\\d+), Failures: (\\d+), Errors: (\\d+), Skipped: (\\d+)");
+        Matcher matcher = null;
+        boolean result = false;
+//        boolean start = false;
         allTestRun = false;
         compileError= false;
         for (String s : r.split("\n")) {
             System.out.println(s);
             if (s.startsWith("[ERROR] COMPILATION ERROR"))
                 compileError = true;
-            if (s.startsWith("Tests in error:")) {
-                start = true;
-                allTestRun = true;
+            if (s.startsWith("Results :")) {
+                result = true;
             }
-            if (start && s.equals(""))
-                start = false;
-            if (!s.startsWith("Tests in error:") && start)
-                result.add(s);
+            Matcher m = pattern.matcher(s);
+            if (result && m.matches())
+                matcher = m;
         }
-        System.out.println("allTestRun "+ allTestRun+" "+result.isEmpty() + " "+ compileError);
-        allTestRun = allTestRun || (result.isEmpty() && !compileError);
+        failure = Integer.parseInt(matcher.group(2)) + Integer.parseInt(matcher.group(3));
+        allTestRun = matcher != null && !matcher.group(1).equals("0") ;
     }
 
-    public List<String> getResult() {
-        return result;
+
+    public Integer getFailures() {
+        return failure;
     }
 
     public boolean allTestRun() {

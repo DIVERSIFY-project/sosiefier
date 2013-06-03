@@ -42,6 +42,8 @@ public class TransformationParser {
             sb.append(line);
             line = br.readLine();
         }
+       if (sb.length() == 0)
+           return list;
         JSONArray array = new JSONArray(sb.toString());
         for(int i = 0; i < array.length(); i++)
             list.add(buildTransformation(array.getJSONObject(i)));
@@ -54,7 +56,7 @@ public class TransformationParser {
         trans.setStatementReplacedBy(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
         trans.setVariableMapping(parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
         if(jsonObject.getBoolean("allTestRun"))
-            trans.setJUnitResult(parseFailures(jsonObject.getJSONArray("Failures")));
+            trans.setJUnitResult(jsonObject.getInt("Failures"));
 
         return trans;
     }

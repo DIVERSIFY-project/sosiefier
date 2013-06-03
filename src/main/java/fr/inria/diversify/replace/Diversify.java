@@ -44,8 +44,8 @@ public class Diversify {
             Replace rp = new Replace(codeFragments, coverageReport, dir);
             try {
                 Transformation tf = rp.replace();
-                List<String> errors = runTest(dir);
-                tf.setJUnitResult(errors);
+                int failures = runTest(dir);
+                tf.setJUnitResult(failures);
                 transformations.add(tf);
             }
             catch (Exception e) {
@@ -88,20 +88,21 @@ public class Diversify {
         return dir;
     }
 
-    protected List<String> runTest(String directory) throws InterruptedException, CompileException {
+    protected Integer runTest(String directory) throws InterruptedException, CompileException {
         RunMaven rt = new RunMaven(directory, "test");
         rt.start();
         int count = 0;
-        while (rt.getResult() == null && count < 40) {
+        while (rt.getFailures() == null && count < 40) {
             count++;
             Thread.sleep(1000);
         }
+        System.out.println(rt.getCompileError()+" "+rt.allTestRun()+" "+rt.getFailures());
         if(rt.getCompileError())
             throw new CompileException("error ");
 
         if(!rt.allTestRun())
-            return null;
-        return rt.getResult();
+            return -1;
+        return rt.getFailures();
     }
 
     protected void initThreadGroup() {

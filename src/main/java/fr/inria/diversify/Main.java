@@ -51,7 +51,7 @@ public class Main {
 
         d.run(nbRun);
         d.printResult(cmd.getOptionValue("out"));
-//        computeDiversifyStat("result");
+//        computeDiversifyStat("result2/result");
     }
 
     protected void initSpoon(String directory) {
