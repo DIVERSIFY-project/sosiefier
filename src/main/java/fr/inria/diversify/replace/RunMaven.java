@@ -85,9 +85,7 @@ public class RunMaven extends  Thread {
         Pattern pattern = Pattern.compile("Tests run: (\\d+), Failures: (\\d+), Errors: (\\d+), Skipped: (\\d+)");
         Matcher matcher = null;
         boolean result = false;
-//        boolean start = false;
-        allTestRun = false;
-        compileError= false;
+
         for (String s : r.split("\n")) {
             System.out.println(s);
             if (s.startsWith("[ERROR] COMPILATION ERROR"))
@@ -99,8 +97,13 @@ public class RunMaven extends  Thread {
             if (result && m.matches())
                 matcher = m;
         }
-        failure = Integer.parseInt(matcher.group(2)) + Integer.parseInt(matcher.group(3));
-        allTestRun = matcher != null && !matcher.group(1).equals("0") ;
+        if(matcher != null) {
+            failure = Integer.parseInt(matcher.group(2)) + Integer.parseInt(matcher.group(3));
+            allTestRun = !matcher.group(1).equals("0") ;
+        }
+        else {
+            failure = -2;
+        }
     }
 
 
