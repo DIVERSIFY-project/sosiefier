@@ -45,8 +45,12 @@ public class TransformationParser {
        if (sb.length() == 0)
            return list;
         JSONArray array = new JSONArray(sb.toString());
-        for(int i = 0; i < array.length(); i++)
-            list.add(buildTransformation(array.getJSONObject(i)));
+        for(int i = 0; i < array.length(); i++)  {
+            if(buildTransformation(array.getJSONObject(i)).numberOfFailure() > 800)
+                System.out.println("erreur "+array.getJSONObject(i));
+            else
+                list.add(buildTransformation(array.getJSONObject(i)));
+        }
         return list;
     }
 

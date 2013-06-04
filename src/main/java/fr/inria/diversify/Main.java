@@ -83,7 +83,7 @@ public class Main {
         List<Transformation> list = tf.parseDir(dir);
         System.out.println("nb transformation: "+list.size());
         StatisticDiversification sd = new StatisticDiversification(list);
-        sd.writeStat("diversify_stat.csv");
+        sd.writeStat("junit");
 
     }
 

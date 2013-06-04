@@ -6,7 +6,9 @@ import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.reference.CtVariableReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Simon
@@ -59,5 +61,19 @@ public class Util {
             nb = nb *  before.getInputContext().allCandidateForFieldAccess(variable.getType()).size();
         }
         return nb;
+    }
+
+    protected Map<?, Integer> numberOfDiversificationFor(Map<?, List<CodeFragment>> map) {
+        Map<Object, Integer> result =  new HashMap<Object, Integer>();
+        for (Object key : map.keySet()) {
+            Integer nb = 0;
+            for (CodeFragment cf1 : map.get(key)) {
+                for (CodeFragment cf2 : findCandidate(cf1)) {
+                    nb = nb + getNumberOfVarMapping(cf1,cf2);
+                }
+            }
+            result.put(key,nb);
+        }
+        return result;
     }
 }

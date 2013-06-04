@@ -19,6 +19,7 @@ public class StatisticDiversification {
     protected static char separator = ';';
     protected static String classFileSuffix = "_diversification_class.csv";
     protected static String statementFileSuffix = "_diversification_statement.csv";
+    protected static String detailFileSuffix = "_diversification_detail.csv";
 
     protected List<Transformation> transformations;
     protected int numberOfFailureMax;
@@ -42,6 +43,7 @@ public class StatisticDiversification {
 
     public void writeStat(String output) {
         try {
+            writeDetail(output+detailFileSuffix);
             write(statByClass(), output+classFileSuffix);
             write(statByType(), output+statementFileSuffix);
         } catch (IOException e) {
@@ -103,4 +105,47 @@ public class StatisticDiversification {
         }
         bw.close();
     }
+
+    protected void writeDetail(String fileName) throws IOException {
+        FileWriter fw = new FileWriter(fileName);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write("toReplaceType"+separator+"replacedByType"+separator+
+                "toReplaceSize"+separator+"replacedBySize"+separator+
+                "toReplaceClass"+separator+"replacedByClass"+separator+
+                "toReplacePackage"+separator+"replacedByPackage"+separator+
+                "toReplaceInputContextSize"+separator+"replacedByInputContextSize"+separator+
+                "failure");
+        bw.write("\n");
+        for(Transformation trans : transformations) {
+            bw.write(trans.getToReplace().getCodeFragmentType().getSimpleName());
+            bw.write(separator);
+            bw.write(trans.getReplaceBy().getCodeFragmentType().getSimpleName());
+            bw.write(separator);
+
+            bw.write(trans.getToReplace().getCtCodeFragment().toString().length()+"");
+            bw.write(separator);
+            bw.write(trans.getReplaceBy().getCtCodeFragment().toString().length()+"");
+            bw.write(separator);
+
+            bw.write(trans.getToReplace().getSourceClass().getQualifiedName());
+            bw.write(separator);
+            bw.write(trans.getReplaceBy().getSourceClass().getQualifiedName());
+            bw.write(separator);
+
+            bw.write(trans.getToReplace().getSourcePackage().getQualifiedName());
+            bw.write(separator);
+            bw.write(trans.getReplaceBy().getSourcePackage().getQualifiedName());
+            bw.write(separator);
+
+            bw.write(trans.getToReplace().getInputContext().size()+"");
+            bw.write(separator);
+            bw.write(trans.getReplaceBy().getInputContext().size()+"");
+            bw.write(separator);
+
+            bw.write(trans.numberOfFailure()+"");
+            bw.write("\n");
+        }
+        bw.close();
+    }
+
 }

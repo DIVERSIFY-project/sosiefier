@@ -13,16 +13,16 @@ import java.util.Map;
  * Time: 11:05 AM
  */
 public class Transformation {
-    protected CodeFragment stmtToReplace;
-    protected CodeFragment stmtReplacedBy;
+    protected CodeFragment toReplace;
+    protected CodeFragment replacedBy;
     protected Map<String, String> variableMapping;
     protected Integer failures;
 
 
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("StatementToReplace", stmtToReplace.toJSONObject());
-        object.put("StatementReplacedBy", stmtReplacedBy.toJSONObject());
+        object.put("StatementToReplace", toReplace.toJSONObject());
+        object.put("StatementReplacedBy", replacedBy.toJSONObject());
         object.put("VariableMapping", variableMapping);
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
@@ -31,11 +31,11 @@ public class Transformation {
     }
 
     public void setStatementToReplace(CodeFragment jsonObject) {
-        stmtToReplace = jsonObject;
+        toReplace = jsonObject;
     }
 
     public void setStatementReplacedBy(CodeFragment jsonObject) {
-        stmtReplacedBy = jsonObject;
+        replacedBy = jsonObject;
     }
 
     public void setVariableMapping(Map<String, String> varMapping) {
@@ -47,14 +47,21 @@ public class Transformation {
     }
 
     public CtSimpleType getSourceClass() {
-        return stmtToReplace.getSourceClass();
+        return toReplace.getSourceClass();
     }
 
     public Class geCodeFragmentType() {
-        return stmtToReplace.getCodeFragmentType();
+        return toReplace.getCodeFragmentType();
     }
 
     public int numberOfFailure() {
         return failures;
+    }
+
+    public CodeFragment getToReplace() {
+        return toReplace;
+    }
+    public CodeFragment getReplaceBy() {
+        return replacedBy;
     }
 }
