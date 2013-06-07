@@ -6,6 +6,8 @@ import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.replace.Diversify;
 import fr.inria.diversify.replace.Transformation;
 import fr.inria.diversify.runtest.CoverageReport;
+import fr.inria.diversify.runtest.ICoverageReport;
+import fr.inria.diversify.runtest.NullCoverageReport;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import org.apache.commons.cli.CommandLine;
@@ -36,10 +38,9 @@ public class Main {
         CommandLineParser parser = new GnuParser();
         CommandLine cmd = parser.parse( commandLineOption(), args);
 
-        initSpoon(cmd.getOptionValue("src")+"/src/main/");
+        initSpoon(cmd.getOptionValue("src"));
+        ICoverageReport rg = getCoverageReport(cmd.getOptionValue("jacoco"),cmd.getOptionValue("classes"));
 
-        CoverageReport rg = new CoverageReport(cmd.getOptionValue("src")+"/target/classes",cmd.getOptionValue("jacoco"));
-        rg.create();
 
 //		computeStatistic(cmd.getOptionValue("out"));
 //        System.out.println("number of statement: " + statements.size());
@@ -47,11 +48,11 @@ public class Main {
 //        System.out.println("number of diversification: " + (new Util(statements)).numberOfDiversification());
 
         int nbRun = Integer.parseInt(cmd.getOptionValue("nbRun"));
-        Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("src"), "output_diversify");
+        Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("project"), "output_diversify");
 
         d.run(nbRun);
         d.printResult(cmd.getOptionValue("out"));
-//        computeDiversifyStat("result2/result");
+//        computeDiversifyStat("result2/result/", cmd.getOptionValue("out"));
     }
 
     protected void initSpoon(String directory) {
@@ -78,12 +79,12 @@ public class Main {
 	    statements = processor.getStatements();
 	}
 
-    protected void computeDiversifyStat(String dir) throws IOException, JSONException {
+    protected void computeDiversifyStat(String dir, String fileName) throws IOException, JSONException {
         TransformationParser tf = new TransformationParser(statements);
         List<Transformation> list = tf.parseDir(dir);
         System.out.println("nb transformation: "+list.size());
-        StatisticDiversification sd = new StatisticDiversification(list);
-        sd.writeStat("junit");
+        StatisticDiversification sd = new StatisticDiversification(list, statements);
+        sd.writeStat(fileName);
 
     }
 
@@ -97,9 +98,23 @@ public class Main {
 		}
 	}
 
+    protected ICoverageReport getCoverageReport(String jacocoFile, String classes) throws IOException {
+        ICoverageReport icr;
+
+        if(jacocoFile != null)
+            icr = new CoverageReport(classes,jacocoFile);
+        else
+            icr = new NullCoverageReport();
+
+        icr.create();
+        return  icr;
+    }
+
     protected Options commandLineOption() {
         Options options = new Options();
+        options.addOption("project", true, "sources directory");
         options.addOption("src", true, "sources directory");
+        options.addOption("classes", true, "classes directory");
         options.addOption("nbRun", true, "number of run");
         options.addOption("jacoco", true, "jacoco file for test coverage");
         options.addOption("out", true, "prefix for output files");

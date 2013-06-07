@@ -43,7 +43,7 @@ public class Util {
         return nb;
     }
 
-    protected List<CodeFragment> findCandidate(CodeFragment cf) {
+    public List<CodeFragment> findCandidate(CodeFragment cf) {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
             if (cf.isReplace(statement) && !statement.equalString().equals(cf.equalString()))
@@ -54,6 +54,7 @@ public class Util {
 
     protected int getNumberOfVarMapping(CodeFragment before, CodeFragment after) {
         int nb = 1;
+
         for (CtVariableReference<?> variable : after.getInputContext().getLocalVar()) {
             nb = nb * before.getInputContext().allCandidate(variable.getType()).size();
         }

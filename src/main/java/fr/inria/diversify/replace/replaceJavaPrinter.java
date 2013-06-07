@@ -40,7 +40,7 @@ import java.util.*;
 /**
  * A visitor for generating Java code from the program compile-time metamodel.
  */
-public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
+public class ReplaceJavaPrinter implements CtVisitor, PrettyPrinter {
 
     /**
      * Java file extension (.java).
@@ -274,14 +274,14 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Creates a new code generator visitor.
      */
-    public replaceJavaPrinter(Environment env) {
+    public ReplaceJavaPrinter(Environment env) {
         this.env = env;
     }
 
     /**
      * Decrements the current number of tabs.
      */
-    public replaceJavaPrinter decTab() {
+    public ReplaceJavaPrinter decTab() {
         context.nbTabs--;
         return this;
     }
@@ -315,7 +315,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
         if (!e.getTypeCasts().isEmpty()) {
             for (CtTypeReference<?> r : e.getTypeCasts()) {
                 write("(");
-                replaceJavaPrinter.this.scan(r);
+                ReplaceJavaPrinter.this.scan(r);
                 write(")");
                 write("(");
                 context.parenthesedExpression.push(e);
@@ -393,7 +393,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Increments the current number of tabs.
      */
-    public replaceJavaPrinter incTab() {
+    public ReplaceJavaPrinter incTab() {
         context.nbTabs++;
         return this;
     }
@@ -401,7 +401,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Sets the current number of tabs.
      */
-    public replaceJavaPrinter setTabCount(int tabCount) {
+    public ReplaceJavaPrinter setTabCount(int tabCount) {
         context.nbTabs = tabCount;
         return this;
     }
@@ -483,7 +483,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Removes the last non-white charater.
      */
-    protected replaceJavaPrinter removeLastChar() {
+    protected ReplaceJavaPrinter removeLastChar() {
         while (isWhite(sbf.charAt(sbf.length() - 1))) {
             sbf.deleteCharAt(sbf.length() - 1);
         }
@@ -497,7 +497,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * The generic scan method for an element.
      */
-    public replaceJavaPrinter scan(CtElement e) {
+    public ReplaceJavaPrinter scan(CtElement e) {
         if (e != null) {
             e.accept(this);
         }
@@ -507,7 +507,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * The generic scan method for a reference.
      */
-    public replaceJavaPrinter scan(CtReference ref) {
+    public ReplaceJavaPrinter scan(CtReference ref) {
         if (ref != null) {
             ref.accept(this);
         }
@@ -693,7 +693,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
         scan(catchBlock.getBody());
     }
 
-    public replaceJavaPrinter writeExtendsClause(CtClass<?> c) {
+    public ReplaceJavaPrinter writeExtendsClause(CtClass<?> c) {
         if (c.getSuperclass() != null) {
             write(" extends ");
             scan(c.getSuperclass());
@@ -701,7 +701,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
         return this;
     }
 
-    public replaceJavaPrinter writeImplementsClause(CtType<?> t) {
+    public ReplaceJavaPrinter writeImplementsClause(CtType<?> t) {
         if (t.getSuperInterfaces().size() > 0) {
             write(" implements ");
             for (CtTypeReference<?> ref : t.getSuperInterfaces()) {
@@ -1231,7 +1231,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
         exitCtExpression(literal);
     }
 
-    public <T> replaceJavaPrinter writeLocalVariable(
+    public <T> ReplaceJavaPrinter writeLocalVariable(
             CtLocalVariable<T> localVariable) {
         if (!context.noTypeDecl) {
             writeModifiers(localVariable);
@@ -1256,12 +1256,12 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
         write(reference.getSimpleName());
     }
 
-    public replaceJavaPrinter writeTypeReference(CtTypeReference<?> t) {
+    public ReplaceJavaPrinter writeTypeReference(CtTypeReference<?> t) {
         scan(t);
         return this;
     }
 
-    public replaceJavaPrinter writeExecutableParameters(CtExecutable<?> e) {
+    public ReplaceJavaPrinter writeExecutableParameters(CtExecutable<?> e) {
         if (e.getParameters().size() > 0) {
             for (CtParameter<?> p : e.getParameters()) {
                 visitCtParameter(p);
@@ -1272,7 +1272,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
         return this;
     }
 
-    public replaceJavaPrinter writeThrowsClause(CtExecutable<?> e) {
+    public ReplaceJavaPrinter writeThrowsClause(CtExecutable<?> e) {
         if (e.getThrownTypes().size() > 0) {
             write(" throws ");
             for (CtTypeReference<?> ref : e.getThrownTypes()) {
@@ -1322,7 +1322,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
         sbf = new StringBuffer();
     }
 
-    public replaceJavaPrinter writeModifiers(CtModifiable m) {
+    public ReplaceJavaPrinter writeModifiers(CtModifiable m) {
         for (ModifierKind mod : m.getModifiers()) {
             write(mod.toString().toLowerCase() + " ");
         }
@@ -1654,7 +1654,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Generates a string.
      */
-    public replaceJavaPrinter write(String s) {
+    public ReplaceJavaPrinter write(String s) {
         if (s != null) {
             sbf.append(s);
         }
@@ -1664,7 +1664,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Writes the annotations for the given element.
      */
-    public replaceJavaPrinter writeAnnotations(CtElement e) {
+    public ReplaceJavaPrinter writeAnnotations(CtElement e) {
         for (CtAnnotation<?> a : e.getAnnotations()) {
             a.accept(this);
         }
@@ -1674,7 +1674,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Writes an annotation element.
      */
-    public replaceJavaPrinter writeAnnotationElement(Object value) {
+    public ReplaceJavaPrinter writeAnnotationElement(Object value) {
         if (value instanceof CtTypeReference) {
             context.ignoreGenerics = true;
             scan((CtTypeReference<?>) value).write(".class");
@@ -1714,7 +1714,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Writes a generics parameter.
      */
-    public replaceJavaPrinter writeGenericsParameter(
+    public ReplaceJavaPrinter writeGenericsParameter(
             Collection<CtTypeReference<?>> params) {
         if (params == null) {
             return this;
@@ -1736,7 +1736,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Write the compilation unit header.
      */
-    public replaceJavaPrinter writeHeader(List<CtSimpleType<?>> types) {
+    public ReplaceJavaPrinter writeHeader(List<CtSimpleType<?>> types) {
         if (!types.isEmpty()) {
             CtPackage pack = types.get(0).getPackage();
             scan(pack).writeln().writeln();
@@ -1781,14 +1781,14 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Generates a new line starting with the current number of tabs.
      */
-    public replaceJavaPrinter writeln() {
+    public ReplaceJavaPrinter writeln() {
         // context.currentLength = 0;
         sbf.append(System.getProperty("line.separator"));
         line++;
         return writeTabs();
     }
 
-    public replaceJavaPrinter writeTabs() {
+    public ReplaceJavaPrinter writeTabs() {
         // context.currentLength = 0;
         for (int i = 0; i < context.nbTabs; i++) {
             // context.currentLength += TAB.length();
@@ -1806,7 +1806,7 @@ public class replaceJavaPrinter implements CtVisitor, PrettyPrinter {
     /**
      * Writes a binary operator.
      */
-    public replaceJavaPrinter writeOperator(BinaryOperatorKind o) {
+    public ReplaceJavaPrinter writeOperator(BinaryOperatorKind o) {
         switch (o) {
             case OR:
                 write("||");

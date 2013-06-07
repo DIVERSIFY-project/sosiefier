@@ -1,5 +1,7 @@
 package fr.inria.diversify.statistic;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.replace.Transformation;
 
 import java.io.BufferedWriter;
@@ -17,16 +19,19 @@ import java.util.Map;
  */
 public class StatisticDiversification {
     protected static char separator = ';';
-    protected static String classFileSuffix = "_diversification_class.csv";
-    protected static String statementFileSuffix = "_diversification_statement.csv";
+//    protected static String classFileSuffix = "_diversification_class.csv";
+//    protected static String statementFileSuffix = "_diversification_statement.csv";
     protected static String detailFileSuffix = "_diversification_detail.csv";
+    protected static String allTransformationFileSuffix = "_diversification_allTransformation.csv";
 
     protected List<Transformation> transformations;
     protected int numberOfFailureMax;
+    protected  CodeFragmentList codeFragmentList;
 
-    public StatisticDiversification(List<Transformation> transformations) {
+    public StatisticDiversification(List<Transformation> transformations, CodeFragmentList codeFragmentList) {
         this.transformations = transformations;
         this.numberOfFailureMax = 0;
+        this.codeFragmentList = codeFragmentList;
         for(Transformation t : transformations)
             this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.numberOfFailure());
         System.out.println("max failure: "+numberOfFailureMax);
@@ -44,8 +49,9 @@ public class StatisticDiversification {
     public void writeStat(String output) {
         try {
             writeDetail(output+detailFileSuffix);
-            write(statByClass(), output+classFileSuffix);
-            write(statByType(), output+statementFileSuffix);
+            writeAllPossibleTransformation(output+allTransformationFileSuffix);
+//            write(statByClass(), output+classFileSuffix);
+//            write(statByType(), output+statementFileSuffix);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -106,6 +112,44 @@ public class StatisticDiversification {
         bw.close();
     }
 
+    protected void writeAllPossibleTransformation(String fileName) throws IOException {
+        FileWriter fw = new FileWriter(fileName);
+        BufferedWriter bw = new BufferedWriter(fw);
+        Util util = new Util(codeFragmentList);
+
+        bw.write("stmtClass"+separator+"stmtPackage"+separator+"stmtInputContextSize"+separator+"stmtType"+separator+"nbCandidate"+separator+"nbDiversification\n");
+        for (CodeFragment cf1 : codeFragmentList.getCodeFragments()) {
+            int nb = 0;
+            StringBuffer sb = new StringBuffer();
+            try {
+
+            List<CodeFragment> candidate = util.findCandidate(cf1);
+            for (CodeFragment cf2 : candidate) {
+                nb = nb + util.getNumberOfVarMapping(cf1, cf2);
+            }
+           sb.append(cf1.getSourceClass().getQualifiedName());
+                sb.append(separator);
+
+                sb.append(cf1.getSourcePackage().getQualifiedName());
+                sb.append(separator);
+
+                sb.append(cf1.getInputContext().size()+"");
+                sb.append(separator);
+
+                sb.append(cf1.getCodeFragmentType().getSimpleName());
+                sb.append(separator);
+
+                sb.append(candidate.size());
+                sb.append(separator);
+
+                sb.append(nb);
+                sb.append("\n");
+            bw.write(sb.toString());
+            } catch (Exception e) {}
+        }
+
+    }
+
     protected void writeDetail(String fileName) throws IOException {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -114,6 +158,7 @@ public class StatisticDiversification {
                 "toReplaceClass"+separator+"replacedByClass"+separator+
                 "toReplacePackage"+separator+"replacedByPackage"+separator+
                 "toReplaceInputContextSize"+separator+"replacedByInputContextSize"+separator+
+                "toReplaceInputContextOnlyPrimitive"+separator+"replacedByInputContextOnlyPrimitive"+separator+
                 "failure");
         bw.write("\n");
         for(Transformation trans : transformations) {
@@ -140,6 +185,11 @@ public class StatisticDiversification {
             bw.write(trans.getToReplace().getInputContext().size()+"");
             bw.write(separator);
             bw.write(trans.getReplaceBy().getInputContext().size()+"");
+            bw.write(separator);
+
+            bw.write(trans.getToReplace().getInputContext().hasOnlyPrimitive()+"");
+            bw.write(separator);
+            bw.write(trans.getReplaceBy().getInputContext().hasOnlyPrimitive()+"");
             bw.write(separator);
 
             bw.write(trans.numberOfFailure()+"");

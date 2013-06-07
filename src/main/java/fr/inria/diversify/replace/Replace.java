@@ -5,7 +5,7 @@ import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
-import fr.inria.diversify.runtest.CoverageReport;
+import fr.inria.diversify.runtest.ICoverageReport;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
@@ -23,7 +23,7 @@ import java.util.*;
 public class Replace {
 
     protected String tmpDir;
-    protected CoverageReport coverageReport;
+    protected ICoverageReport coverageReport;
     protected CodeFragmentList codeFragments;
     protected CodeFragment cfToReplace;
     protected CodeFragment cfReplacedBy;
@@ -32,7 +32,7 @@ public class Replace {
     private boolean replace;
 
 
-    public Replace(CodeFragmentList codeFragments, CoverageReport cr, String tmpDir) {
+    public Replace(CodeFragmentList codeFragments, ICoverageReport cr, String tmpDir) {
         this.tmpDir = tmpDir;
         this.codeFragments = codeFragments;
 

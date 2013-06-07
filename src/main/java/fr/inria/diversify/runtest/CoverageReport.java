@@ -15,7 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 
-public class CoverageReport {
+public class CoverageReport implements ICoverageReport {
 
     CoverageBuilder coverageBuilder;
     private final File executionDataFile;
@@ -34,7 +34,6 @@ public class CoverageReport {
     public void create() throws IOException {
         loadExecutionData();
         coverageBuilder = analyzeStructure();
-//       printResult(coverageBuilder);
     }
 
 
@@ -62,41 +61,6 @@ public class CoverageReport {
         return coverageBuilder;
     }
 
-//    public void printResult(CoverageBuilder coverageBuilder)  {
-//        // Let's dump some metrics and line coverage information:
-//        System.out.println( coverageBuilder.getClasses().size());
-//        for (IClassCoverage cc : coverageBuilder.getClasses()) {
-//            System.out.printf("Coverage of class %s%n", cc.getName());
-//
-//            printCounter("instructions", cc.getInstructionCounter());
-//            printCounter("branches", cc.getBranchCounter());
-//            printCounter("lines", cc.getLineCounter());
-//            printCounter("methods", cc.getMethodCounter());
-//            printCounter("complexity", cc.getComplexityCounter());
-//
-//            for (int i = cc.getFirstLine(); i <= cc.getLastLine(); i++) {
-//                System.out.printf("Line %s: %s%n", Integer.valueOf(i),
-//                        getColor(cc.getLine(i).getStatus()));
-//            }
-//        }
-//    }
-//    private void printCounter(final String unit, final ICounter counter) {
-//        final Integer missed = Integer.valueOf(counter.getMissedCount());
-//        final Integer total = Integer.valueOf(counter.getTotalCount());
-//        System.out.printf("%s of %s %s missed%n", missed, total, unit);
-//    }
-//
-//    private String getColor(final int status) {
-//        switch (status) {
-//            case ICounter.NOT_COVERED:
-//                return "red";
-//            case ICounter.PARTLY_COVERED:
-//                return "yellow";
-//            case ICounter.FULLY_COVERED:
-//                return "green";
-//        }
-//        return "";
-//    }
 
     public double codeFragmentCoverage(CodeFragment stmt) {
         IClassCoverage classCoverage = null;

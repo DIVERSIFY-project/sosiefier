@@ -42,7 +42,7 @@ public class StatisticCodeFragment {
 
         map.put("all",statements);
         for (CodeFragment statement : statements.getCodeFragments()) {
-            String stmtType = statement.getCodeFragmentType().getName();
+            String stmtType = statement.getCodeFragmentType().getSimpleName();
             if(!map.containsKey(stmtType))
                 map.put(stmtType,new CodeFragmentList());
             map.get(stmtType).add(statement);

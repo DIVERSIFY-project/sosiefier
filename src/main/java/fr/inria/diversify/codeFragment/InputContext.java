@@ -1,7 +1,6 @@
 package fr.inria.diversify.codeFragment;
 
 import spoon.reflect.code.CtFieldAccess;
-import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 
@@ -53,8 +52,10 @@ public class InputContext {
     public List<CtFieldAccess> allCandidateForFieldAccess(CtTypeReference<?> type){
         List<CtFieldAccess> candidate = new ArrayList<CtFieldAccess>();
         for (CtFieldAccess<?> var : fieldReferences)
-            if(var.getVariable().getType().equals(type))
+            if(var.getVariable().getType().equals(type) && var.getType().getActualTypeArguments().equals(type.getActualTypeArguments())) {
+//                System.out.println(type+"  "+var + " "+var.getType() + " "+var.getVariable().getType());
                 candidate.add(var);
+            }
 
         return candidate;
     }
@@ -63,8 +64,10 @@ public class InputContext {
         List<CtVariableReference> candidate = new ArrayList<CtVariableReference>();
 
         for (CtVariableReference<?> var : localVariableReferences)
-            if(var.getType().equals(type))
+            if(var.getType().equals(type)  && var.getType().getActualTypeArguments().equals(type.getActualTypeArguments())) {
+//                System.out.println(type+"  "+var + " "+var.getType());
                 candidate.add(var);
+            }
 
         return candidate;
     }
@@ -73,6 +76,7 @@ public class InputContext {
         for (CtFieldAccess<?> var : fieldReferences) {
             CtTypeReference<?> varType = var.getType();
             if(varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+
                 candidate = var;
                 break;
             }
@@ -130,10 +134,11 @@ public class InputContext {
     public Set<CtFieldAccess<?>> getField() {
         return fieldReferences;
     }
-    public Set<Object> getVarAndField() {
-        Set<Object> list = new HashSet<Object>();
-        list.addAll(localVariableReferences);
+    public List<Object> getVarAndField() {
+        List<Object> list = new ArrayList<Object>();
         list.addAll(fieldReferences);
+        list.addAll(localVariableReferences);
+
         return list;
     }
 	public String equalString() {
@@ -156,16 +161,24 @@ public class InputContext {
 		return localVariableReferences.size() + fieldReferences.size();
 	}
 
-    public List<CtSimpleType<?>> getTypes() {
-        List<CtSimpleType<?>> types = new ArrayList<CtSimpleType<?>>();
+    public List<CtTypeReference<?>> getTypes() {
+        List<CtTypeReference<?>> types = new ArrayList<CtTypeReference<?>>();
 
         for (CtFieldAccess field: fieldReferences)
-            types.add(field.getVariable().getDeclaringType().getDeclaration());
+            types.add(field.getType());
 
-        for (CtVariableReference var: localVariableReferences)
-            types.add(var.getType().getDeclaration());
+        for (CtVariableReference var: localVariableReferences) {
+               types.add(var.getType());
+        }
 
         return types;
     }
-	
+
+    public boolean hasOnlyPrimitive() {
+        boolean test = true;
+        for(CtTypeReference type : getTypes()) {
+            test = test && type.isPrimitive();
+        }
+        return test;
+    }
 }

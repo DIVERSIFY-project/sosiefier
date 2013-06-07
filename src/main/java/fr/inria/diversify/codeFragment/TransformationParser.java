@@ -26,6 +26,7 @@ public class TransformationParser {
     public List<Transformation> parseDir(String dir) throws IOException, JSONException {
         List<Transformation> list = new ArrayList<Transformation>();
         File file = new File(dir);
+
         for (File f : file.listFiles())
             if(f.getName().endsWith(".json"))
                 list.addAll(parseFile(f));

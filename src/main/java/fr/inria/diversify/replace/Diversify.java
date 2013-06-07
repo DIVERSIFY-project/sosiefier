@@ -1,7 +1,7 @@
 package fr.inria.diversify.replace;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.runtest.CoverageReport;
+import fr.inria.diversify.runtest.ICoverageReport;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -20,11 +20,11 @@ public class Diversify {
     protected String sourceDir;
     protected String tmpDir;
     protected CodeFragmentList codeFragments;
-    protected CoverageReport coverageReport;
+    protected ICoverageReport coverageReport;
     protected List<Transformation> transformations;
     protected Set<Thread> threadSet;
 
-    public Diversify(CodeFragmentList codeFragments, CoverageReport coverageReport, String sourceDir, String tmpDir) {
+    public Diversify(CodeFragmentList codeFragments, ICoverageReport coverageReport, String sourceDir, String tmpDir) {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
         this.tmpDir = tmpDir;
