@@ -95,7 +95,7 @@ public class Diversify {
         RunMaven rt = new RunMaven(directory, "test", clojureTest);
         rt.start();
         int count = 0;
-        while (rt.getFailures() == null && count < 400) {
+        while (rt.getFailures() == null && count < 200) {
             count++;
             Thread.sleep(1000);
         }
