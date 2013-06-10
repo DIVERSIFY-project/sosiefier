@@ -82,8 +82,8 @@ public class ReplaceJavaOutputProcessor extends JavaOutputProcessor {
 //            toBePrinted.addAll(cu.getDeclaredTypes());
 //        }
 
-//       PrettyPrinter printer = new ReplaceJavaPrinter(getEnvironment());
-        PrettyPrinter printer = new DefaultJavaPrettyPrinter(getEnvironment());
+       PrettyPrinter printer = new ReplaceJavaPrinter(getEnvironment());
+//        PrettyPrinter printer = new DefaultJavaPrettyPrinter(getEnvironment());
 
         printer.calculate(cu, toBePrinted);
 

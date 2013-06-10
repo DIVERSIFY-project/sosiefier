@@ -38,18 +38,24 @@ public class Main {
         CommandLineParser parser = new GnuParser();
         CommandLine cmd = parser.parse( commandLineOption(), args);
 
-        initSpoon(cmd.getOptionValue("src"));
-        ICoverageReport rg = getCoverageReport(cmd.getOptionValue("jacoco"),cmd.getOptionValue("classes"));
+        String project =  cmd.getOptionValue("project");
+        String classes =  cmd.getOptionValue("classes");
+        String src =  cmd.getOptionValue("src");
+        int nbRun = Integer.parseInt(cmd.getOptionValue("nbRun"));
+
+        initSpoon(project+"/"+src);
+        ICoverageReport rg = getCoverageReport(cmd.getOptionValue("jacoco"),project+"/"+classes);
 
 
 //		computeStatistic(cmd.getOptionValue("out"));
-//        System.out.println("number of statement: " + statements.size());
+        System.out.println("number of statement: " + statements.size());
 //        System.out.println("number of undiversify Statement: " + (new Util(statements)).numberOfNotDiversification());
 //        System.out.println("number of diversification: " + (new Util(statements)).numberOfDiversification());
 
-        int nbRun = Integer.parseInt(cmd.getOptionValue("nbRun"));
-        Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("project"), "output_diversify");
 
+        Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("project"), src ,"output_diversify");
+        if(cmd.getOptionValue("clojure").equals("true"))
+            d.setClojureTest(true);
         d.run(nbRun);
         d.printResult(cmd.getOptionValue("out"));
 //        computeDiversifyStat("result2/result/", cmd.getOptionValue("out"));
@@ -106,17 +112,19 @@ public class Main {
         else
             icr = new NullCoverageReport();
 
+        System.out.println("jacoco "+ icr.getClass());
         icr.create();
         return  icr;
     }
 
     protected Options commandLineOption() {
         Options options = new Options();
-        options.addOption("project", true, "sources directory");
+        options.addOption("project", true, "the project directory");
         options.addOption("src", true, "sources directory");
         options.addOption("classes", true, "classes directory");
         options.addOption("nbRun", true, "number of run");
         options.addOption("jacoco", true, "jacoco file for test coverage");
+        options.addOption("clojure", true, "");
         options.addOption("out", true, "prefix for output files");
         return  options;
     }

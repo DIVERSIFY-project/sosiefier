@@ -17,31 +17,34 @@ import java.util.Set;
  */
 public class Diversify {
 
-    protected String sourceDir;
+    protected String projectDir;
     protected String tmpDir;
     protected CodeFragmentList codeFragments;
     protected ICoverageReport coverageReport;
     protected List<Transformation> transformations;
     protected Set<Thread> threadSet;
+    protected String srcDir;
+    protected boolean clojureTest;
 
-    public Diversify(CodeFragmentList codeFragments, ICoverageReport coverageReport, String sourceDir, String tmpDir) {
+    public Diversify(CodeFragmentList codeFragments, ICoverageReport coverageReport, String projectDir, String srcDir ,String tmpDir) {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
         this.tmpDir = tmpDir;
+        this.srcDir = srcDir;
+        this.projectDir = projectDir;
+        clojureTest = false;
 
-        this.sourceDir = sourceDir;
     }
 
     public void run(int n) throws Exception {
         transformations = new ArrayList<Transformation>();
         int error = 0;
-        String dir = prepare(sourceDir, tmpDir);
+        String dir = prepare(projectDir, tmpDir);
         System.out.println("dir "+ dir);
         for (int i = 0; i < n; i++) {
             System.out.println(i);
             initThreadGroup();
-
-            Replace rp = new Replace(codeFragments, coverageReport, dir);
+            Replace rp = new Replace(codeFragments, coverageReport,dir+"/"+srcDir);
             try {
                 Transformation tf = rp.replace();
                 int failures = runTest(dir);
@@ -89,10 +92,10 @@ public class Diversify {
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, "test");
+        RunMaven rt = new RunMaven(directory, "test", clojureTest);
         rt.start();
         int count = 0;
-        while (rt.getFailures() == null && count < 40) {
+        while (rt.getFailures() == null && count < 400) {
             count++;
             Thread.sleep(1000);
         }
@@ -142,5 +145,9 @@ public class Diversify {
             in.close();
             out.close();
         }
+    }
+
+    public void setClojureTest(Boolean clojureTest) {
+        this.clojureTest = clojureTest;
     }
 }

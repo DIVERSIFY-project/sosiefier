@@ -19,11 +19,18 @@ public class RunMaven extends  Thread {
     protected boolean allTestRun = false;
     protected String lifeCycle;
     protected Integer failure = null;
+    protected Boolean clojureTest = false;
 
 
     public RunMaven(String directory, String lifeCycle) {
         this.directory = directory;
         this.lifeCycle = lifeCycle;
+    }
+
+    public RunMaven(String directory, String lifeCycle, boolean clojureTest) {
+        this.directory = directory;
+        this.lifeCycle = lifeCycle;
+        this.clojureTest = clojureTest;
     }
 
 
@@ -33,8 +40,11 @@ public class RunMaven extends  Thread {
         PrintStream ps = new PrintStream(os);
 
         try {
-            cli.doMain(new String[]{lifeCycle}, directory, ps, ps);
-            parseResult(os.toString());
+            cli.doMain(new String[]{"clean", lifeCycle}, directory, ps, ps);
+            if(clojureTest)
+                parseClojureResult(os.toString());
+            else
+                parseResult(os.toString());
         } catch (OutOfMemoryError e) {
             e.printStackTrace();
         }
@@ -59,27 +69,8 @@ public class RunMaven extends  Thread {
 //    } catch (Exception e) {}
 //
 //    }
-
-//    protected void parseResult(String r) {
-//        result = new ArrayList<String>();
-//        boolean start = false;
-//        allTestRun = false;
-//        compileError= false;
-//        for (String s : r.split("\n")) {
-//            System.out.println(s);
-//            if (s.startsWith("[ERROR] COMPILATION ERROR"))
-//                compileError = true;
-//            if (s.startsWith("Tests in error:")) {
-//                start = true;
-//                allTestRun = true;
-//            }
-//            if (start && s.equals(""))
-//                start = false;
-//            if (!s.startsWith("Tests in error:") && start)
-//                result.add(s);
-//        }
-//        allTestRun = allTestRun || (result.isEmpty() && !compileError);
-//    }
+//    "compile-tests:"
+//            "*** Some tests failed ***"
 
     protected void parseResult(String r) {
         Pattern pattern = Pattern.compile("Tests run: (\\d+), Failures: (\\d+), Errors: (\\d+), Skipped: (\\d+)");
@@ -104,6 +95,29 @@ public class RunMaven extends  Thread {
         else {
             failure = -2;
         }
+    }
+
+    protected void parseClojureResult(String r) {
+        Integer tmpFailure = null;
+        for (String s : r.split("\n")) {
+            System.out.println(s);
+            if (s.startsWith("[ERROR] COMPILATION ERROR"))  {
+                tmpFailure = -2;
+                compileError = true;
+            }
+            if (s.startsWith("compile-clojure:")) {
+                tmpFailure = -1;
+            }
+            if (s.contains("test:")) {
+                tmpFailure = 1;
+                allTestRun = true;
+            }
+            if (s.contains("[INFO] BUILD SUCCESS")) {
+                allTestRun = true;
+                tmpFailure = 0;
+            }
+        }
+        failure = tmpFailure;
     }
 
 

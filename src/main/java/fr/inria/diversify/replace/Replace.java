@@ -22,7 +22,7 @@ import java.util.*;
  */
 public class Replace {
 
-    protected String tmpDir;
+    protected final String srcDir;
     protected ICoverageReport coverageReport;
     protected CodeFragmentList codeFragments;
     protected CodeFragment cfToReplace;
@@ -32,10 +32,9 @@ public class Replace {
     private boolean replace;
 
 
-    public Replace(CodeFragmentList codeFragments, ICoverageReport cr, String tmpDir) {
-        this.tmpDir = tmpDir;
+    public Replace(CodeFragmentList codeFragments, ICoverageReport cr, String srcDir) {
         this.codeFragments = codeFragments;
-
+        this.srcDir = srcDir;
         this.coverageReport = cr;
     }
 
@@ -137,8 +136,8 @@ public class Replace {
         System.out.println("random variable mapping: " + varMapping);
         tmp.replace(cfReplacedBy, varMapping);  //tmp
 
-        printJavaFile(tmpDir + "/src/main/java", newClass);
-        printJavaFile(tmpDir + "/tmp", newClass);
+        printJavaFile(srcDir, newClass);
+
         replace = true;
         return tf;
     }
@@ -148,14 +147,12 @@ public class Replace {
         if(replace)
             tmp.getCtCodeFragment().getParent().replace(cfToReplace.getCtCodeFragment().getParent());
 
-//         printJavaFile(tmpDir, originalClass);
-//        compile(new File(tmpDir), factory);
         String fileToCopy = originalClass.getPosition().getFile().toString();
-        String destination = tmpDir + "/src/main/java/" + originalClass.getQualifiedName().replace('.', '/') + ".java";
+        String destination = srcDir+ "/"+originalClass.getQualifiedName().replace('.', '/') + ".java";
         Runtime r = Runtime.getRuntime();
-//        System.out.println("cp " + fileToCopy + " " + destination);
         Process p = r.exec("cp " + fileToCopy + " " + destination);
 
+        System.out.println("restore file: "+fileToCopy + " -> "+destination);
         p.waitFor();
     }
 
@@ -174,6 +171,7 @@ public class Replace {
         ReplaceJavaOutputProcessor processor = new ReplaceJavaOutputProcessor(new File(repository));
         processor.setFactory(type.getFactory());
         processor.createJavaFile(type);
+        System.out.println("copy file: "+repository+" " +type.getQualifiedName());
     }
 
     protected List<File> allJavaFile(File dir) {

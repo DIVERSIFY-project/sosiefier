@@ -5,6 +5,7 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IClassCoverage;
+import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.data.ExecutionDataReader;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfoStore;
@@ -78,7 +79,8 @@ public class CoverageReport implements ICoverageReport {
             return 0;
         double ret = 0;
         for (int i = stmt.getStartLine(); i <= stmt.getEndLine(); i++)
-            if(classCoverage.getLine(i).getStatus() == 2 || classCoverage.getLine(i).getStatus() == 1)
+//            if(classCoverage.getLine(i).getStatus() == 2 || classCoverage.getLine(i).getStatus() == 1)
+             if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
                 ret++;
 
         return ret/(double)(stmt.getEndLine()- stmt.getStartLine() + 1);
