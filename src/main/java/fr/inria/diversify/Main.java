@@ -24,6 +24,7 @@ import spoon.support.builder.SpoonBuildingManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,11 +55,11 @@ public class Main {
 
 
         Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("project"), src ,"output_diversify");
-        if(cmd.getOptionValue("clojure").equals("true"))
+        if(cmd.getOptionValue("clojure") != null && cmd.getOptionValue("clojure").equals("true"))
             d.setClojureTest(true);
         d.run(nbRun);
         d.printResult(cmd.getOptionValue("out"));
-//        computeDiversifyStat("result2/result/", cmd.getOptionValue("out"));
+        computeDiversifyStat("result2/result/", cmd.getOptionValue("out"), rg);
     }
 
     protected void initSpoon(String directory) {
@@ -85,11 +86,18 @@ public class Main {
 	    statements = processor.getStatements();
 	}
 
-    protected void computeDiversifyStat(String dir, String fileName) throws IOException, JSONException {
+    protected void computeDiversifyStat(String dir, String fileName, ICoverageReport cr) throws IOException, JSONException {
         TransformationParser tf = new TransformationParser(statements);
         List<Transformation> list = tf.parseDir(dir);
         System.out.println("nb transformation: "+list.size());
-        StatisticDiversification sd = new StatisticDiversification(list, statements);
+        List<Transformation> listF = new ArrayList<Transformation>();
+        for(Transformation trans : list) {
+            if(cr.codeFragmentCoverage(trans.getToReplace()) != 0)
+                listF.add(trans);
+
+        }
+        System.out.println("nb transformation2: "+listF.size());
+        StatisticDiversification sd = new StatisticDiversification(listF, statements);
         sd.writeStat(fileName);
 
     }
@@ -112,7 +120,7 @@ public class Main {
         else
             icr = new NullCoverageReport();
 
-        System.out.println("jacoco "+ icr.getClass());
+        System.out.println("jacoco " + icr.getClass());
         icr.create();
         return  icr;
     }
