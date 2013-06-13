@@ -65,5 +65,18 @@ public class Transformation {
         return replacedBy;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(o.getClass() != this.getClass())
+            return false;
+        Transformation t = (Transformation)o;
 
+        return toReplace.getCtCodeFragment().getPosition().equals(t.toReplace.getCtCodeFragment().getPosition())
+                && replacedBy.id() == t.replacedBy.id() && variableMapping.equals(t.variableMapping);
+    }
+
+    @Override
+    public int hashCode() {
+        return toReplace.id() * toReplace.getCtCodeFragment().getPosition().hashCode() +replacedBy.id() + variableMapping.hashCode();
+    }
 }

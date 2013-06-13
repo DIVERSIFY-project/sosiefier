@@ -64,7 +64,7 @@ public class Replace {
         int size = getAllCodeFragments().size();
         CodeFragment s = getAllCodeFragments().get(r.nextInt(size));
 
-        while (s.getClass() != stmtType && coverageReport.codeFragmentCoverage(s) == 0)
+        while (s.getCodeFragmentType() != stmtType || coverageReport.codeFragmentCoverage(s) == 0)
             s = getAllCodeFragments().get(r.nextInt(size));
         return s;
     }
@@ -135,7 +135,7 @@ public class Replace {
         tf.setVariableMapping(varMapping);
         System.out.println("random variable mapping: " + varMapping);
         tmp.replace(cfReplacedBy, varMapping);  //tmp
-
+//test replace != toreplace
         printJavaFile(srcDir, newClass);
 
         replace = true;
@@ -152,7 +152,7 @@ public class Replace {
         Runtime r = Runtime.getRuntime();
         Process p = r.exec("cp " + fileToCopy + " " + destination);
 
-        System.out.println("restore file: "+fileToCopy + " -> "+destination);
+        System.out.println("restore file: " + fileToCopy + " -> " + destination);
         p.waitFor();
     }
 
@@ -192,37 +192,5 @@ public class Replace {
     protected Collection<CodeFragment> getAllUniqueCodeFragments() {
         return codeFragments.getUniqueCodeFragmentList();
     }
-//    public void compile(File directory, Factory f) throws CompileException {
-//
-////        JDTCompiler compiler = new JDTCompiler();
-////        try {
-////            compiler.compileSrc(f, allJavaFile(directory));
-////        } catch (Exception e) {
-////            e.printStackTrace();
-////        }
-//        String tmp = "javac -encoding utf8 ";
-//        for (File file : allJavaFile(directory)) {
-//            tmp = tmp + file.toString() + " ";
-//        }
-//        try {
-//            Runtime r = Runtime.getRuntime();
-//            Process p = r.exec(tmp);
-//
-//            p.waitFor();
-//            String line;
-//            StringBuffer output = new StringBuffer();
-//            while ((line = reader.readLine()) != null) {
-//                output.append(line + "\n");
-//                if (line.contains(" error"))  {
-//                    reader.close();
-//                    throw new CompileException("error during compilation\n"+output);
-//                }
-//            }
-//            reader.close();
-//        } catch (IOException e) {
-//            throw new CompileException(e);
-//        } catch (InterruptedException e) {
-//            throw new CompileException(e);
-//        }
-//    }
+
 }

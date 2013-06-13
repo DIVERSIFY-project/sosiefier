@@ -1,10 +1,10 @@
 package fr.inria.diversify;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.codeFragment.TransformationParser;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.replace.Diversify;
 import fr.inria.diversify.replace.Transformation;
+import fr.inria.diversify.replace.TransformationParser;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.runtest.ICoverageReport;
 import fr.inria.diversify.runtest.NullCoverageReport;
@@ -40,8 +40,13 @@ public class Main {
         CommandLine cmd = parser.parse( commandLineOption(), args);
 
         String project =  cmd.getOptionValue("project");
-        String classes =  cmd.getOptionValue("classes");
-        String src =  cmd.getOptionValue("src");
+        String classes = "target/classes";
+        if(cmd.getOptionValue("classes") != null)
+                classes = cmd.getOptionValue("classes");
+
+        String src =  "src/main/java";
+        if(cmd.getOptionValue("src") != null)
+            src = cmd.getOptionValue("src");
         int nbRun = Integer.parseInt(cmd.getOptionValue("nbRun"));
 
         initSpoon(project+"/"+src);
@@ -53,13 +58,24 @@ public class Main {
 //        System.out.println("number of undiversify Statement: " + (new Util(statements)).numberOfNotDiversification());
 //        System.out.println("number of diversification: " + (new Util(statements)).numberOfDiversification());
 
+        runDiversification(cmd, rg);
+//        computeDiversifyStat("result2/result/", cmd.getOptionValue("out"), rg);
+    }
 
-        Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("project"), src ,"output_diversify");
+    protected void runDiversification(CommandLine cmd, ICoverageReport rg) throws Exception {
+        Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("project"));
+
+        if(cmd.getOptionValue("src") != null)
+            d.setSourceDirectory(cmd.getOptionValue("src"));
+
         if(cmd.getOptionValue("clojure") != null && cmd.getOptionValue("clojure").equals("true"))
             d.setClojureTest(true);
-        d.run(nbRun);
+
+        if(cmd.getOptionValue("timeOut") != null)
+            d.setTimeOut(Integer.parseInt(cmd.getOptionValue("timeOut")));
+
+        d.run(Integer.parseInt(cmd.getOptionValue("nbRun")));
         d.printResult(cmd.getOptionValue("out"));
-        computeDiversifyStat("result2/result/", cmd.getOptionValue("out"), rg);
     }
 
     protected void initSpoon(String directory) {
@@ -134,6 +150,7 @@ public class Main {
         options.addOption("jacoco", true, "jacoco file for test coverage");
         options.addOption("clojure", true, "");
         options.addOption("out", true, "prefix for output files");
+        options.addOption("timeOut", true, "time out for test");
         return  options;
     }
 }

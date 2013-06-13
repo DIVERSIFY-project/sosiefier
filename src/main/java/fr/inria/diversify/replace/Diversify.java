@@ -25,14 +25,17 @@ public class Diversify {
     protected Set<Thread> threadSet;
     protected String srcDir;
     protected boolean clojureTest;
+    protected int timeOut;
 
-    public Diversify(CodeFragmentList codeFragments, ICoverageReport coverageReport, String projectDir, String srcDir ,String tmpDir) {
+    public Diversify(CodeFragmentList codeFragments, ICoverageReport coverageReport, String projectDir) {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
-        this.tmpDir = tmpDir;
-        this.srcDir = srcDir;
+        this.tmpDir = "output_diversify";
+
+        this.srcDir = "src/main/java";
         this.projectDir = projectDir;
         clojureTest = false;
+        timeOut = 200;
 
     }
 
@@ -40,10 +43,10 @@ public class Diversify {
         transformations = new ArrayList<Transformation>();
         int error = 0;
         String dir = prepare(projectDir, tmpDir);
-        System.out.println("dir "+ dir);
         for (int i = 0; i < n; i++) {
             System.out.println(i);
             initThreadGroup();
+            System.out.println(dir+"/"+srcDir);
             Replace rp = new Replace(codeFragments, coverageReport,dir+"/"+srcDir);
             try {
                 Transformation tf = rp.replace();
@@ -95,7 +98,7 @@ public class Diversify {
         RunMaven rt = new RunMaven(directory, "test", clojureTest);
         rt.start();
         int count = 0;
-        while (rt.getFailures() == null && count < 200) {
+        while (rt.getFailures() == null && count < timeOut) {
             count++;
             Thread.sleep(1000);
         }
@@ -147,7 +150,19 @@ public class Diversify {
         }
     }
 
+    public void setTmpDirectory(String tmpDir) {
+        this.tmpDir = tmpDir;
+    }
+
     public void setClojureTest(Boolean clojureTest) {
         this.clojureTest = clojureTest;
+    }
+
+    public void setTimeOut(int timeOut) {
+        this.timeOut = timeOut;
+    }
+
+    public void setSourceDirectory(String sourceDirectory) {
+        this.srcDir = sourceDirectory;
     }
 }

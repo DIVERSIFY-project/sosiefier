@@ -90,15 +90,12 @@ public abstract class CodeFragment {
 
 
     public CodeFragment replace(CodeFragment other, Map<String,String> varMapping) {
-//        Statement newStatement = null;
         System.out.println("\navant: " + codeFragment.getPosition());
-//        System.out.println(getCodeFragmentType().getSimpleName()+ "    "+other.getCodeFragmentType().getSimpleName());
         System.out.println(codeFragment.getParent());
         codeFragment.replace(other.codeFragment);
 
         CodeFragment newStatement = getNewStatement(other.getCtCodeFragment());
-//        System.out.println("newStatement\n");
-//            System.out.println(newStatement);
+
         for (String varName: varMapping.keySet()) {
             Object variable = newStatement.getInputContext().getVariableOrFieldNamed(varName);
             Object candidate = getInputContext().getVariableOrFieldNamed(varMapping.get(varName));
@@ -117,7 +114,6 @@ public abstract class CodeFragment {
         Statement newStatement = null;
         SubStatementVisitor sub = new SubStatementVisitor();
         codeFragment.getParent().accept(sub);
-        String codeFragmentString = other.toString();
 
         for(CtStatement statement: sub.getStatements())
             if(statement.getPosition().equals(other.getPosition()))

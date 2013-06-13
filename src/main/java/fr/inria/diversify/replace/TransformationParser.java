@@ -1,6 +1,7 @@
-package fr.inria.diversify.codeFragment;
+package fr.inria.diversify.replace;
 
-import fr.inria.diversify.replace.Transformation;
+import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
