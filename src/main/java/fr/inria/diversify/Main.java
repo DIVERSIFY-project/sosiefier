@@ -57,8 +57,8 @@ public class Main {
 //        System.out.println("number of undiversify Statement: " + (new Util(statements)).numberOfNotDiversification());
 //        System.out.println("number of diversification: " + (new Util(statements)).numberOfDiversification());
 
-//        runDiversification(cmd, rg);
-        computeDiversifyStat("/Users/Simon/Documents/diversify_exp/diversification/result/metrics/tranformation2", cmd.getOptionValue("out"), rg);
+        runDiversification(cmd, rg);
+//        computeDiversifyStat("/Users/Simon/Documents/diversify_exp/diversification/result/metrics/tranformation2", cmd.getOptionValue("out"), rg);
     }
 
     protected void runDiversification(CommandLine cmd, ICoverageReport rg) throws Exception {
