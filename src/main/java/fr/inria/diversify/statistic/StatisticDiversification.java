@@ -161,39 +161,45 @@ public class StatisticDiversification {
                 "toReplaceInputContextOnlyPrimitive"+separator+"replacedByInputContextOnlyPrimitive"+separator+
                 "failure");
         bw.write("\n");
+
         for(Transformation trans : transformations) {
-            bw.write(trans.getToReplace().getCodeFragmentType().getSimpleName());
-            bw.write(separator);
-            bw.write(trans.getReplaceBy().getCodeFragmentType().getSimpleName());
-            bw.write(separator);
+            StringBuffer sb = new StringBuffer();
+            try {
+            sb.append(trans.getToReplace().getCodeFragmentType().getSimpleName());
+            sb.append(separator);
+            sb.append(trans.getReplaceBy().getCodeFragmentType().getSimpleName());
+            sb.append(separator);
 
-            bw.write(trans.getToReplace().getCtCodeFragment().toString().length()+"");
-            bw.write(separator);
-            bw.write(trans.getReplaceBy().getCtCodeFragment().toString().length()+"");
-            bw.write(separator);
+            sb.append(trans.getToReplace().getCtCodeFragment().toString().length()+"");
+            sb.append(separator);
+            sb.append(trans.getReplaceBy().getCtCodeFragment().toString().length()+"");
+            sb.append(separator);
 
-            bw.write(trans.getToReplace().getSourceClass().getQualifiedName());
-            bw.write(separator);
-            bw.write(trans.getReplaceBy().getSourceClass().getQualifiedName());
-            bw.write(separator);
+            sb.append(trans.getToReplace().getSourceClass().getQualifiedName());
+            sb.append(separator);
+            sb.append(trans.getReplaceBy().getSourceClass().getQualifiedName());
+            sb.append(separator);
 
-            bw.write(trans.getToReplace().getSourcePackage().getQualifiedName());
-            bw.write(separator);
-            bw.write(trans.getReplaceBy().getSourcePackage().getQualifiedName());
-            bw.write(separator);
+            sb.append(trans.getToReplace().getSourcePackage().getQualifiedName());
+            sb.append(separator);
+            sb.append(trans.getReplaceBy().getSourcePackage().getQualifiedName());
+            sb.append(separator);
 
-            bw.write(trans.getToReplace().getInputContext().size()+"");
-            bw.write(separator);
-            bw.write(trans.getReplaceBy().getInputContext().size()+"");
-            bw.write(separator);
+            sb.append(trans.getToReplace().getInputContext().size()+"");
+            sb.append(separator);
+            sb.append(trans.getReplaceBy().getInputContext().size()+"");
+            sb.append(separator);
 
-            bw.write(trans.getToReplace().getInputContext().hasOnlyPrimitive()+"");
-            bw.write(separator);
-            bw.write(trans.getReplaceBy().getInputContext().hasOnlyPrimitive()+"");
-            bw.write(separator);
+            sb.append(trans.getToReplace().getInputContext().hasOnlyPrimitive()+"");
+            sb.append(separator);
+            sb.append(trans.getReplaceBy().getInputContext().hasOnlyPrimitive()+"");
+            sb.append(separator);
 
-            bw.write(trans.numberOfFailure()+"");
-            bw.write("\n");
+            sb.append(trans.numberOfFailure()+"");
+            sb.append("\n");
+                bw.write(sb.toString());
+            }catch (Exception e) {}
+
         }
         bw.close();
     }

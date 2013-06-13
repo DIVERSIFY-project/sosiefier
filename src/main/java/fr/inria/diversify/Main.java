@@ -47,7 +47,6 @@ public class Main {
         String src =  "src/main/java";
         if(cmd.getOptionValue("src") != null)
             src = cmd.getOptionValue("src");
-        int nbRun = Integer.parseInt(cmd.getOptionValue("nbRun"));
 
         initSpoon(project+"/"+src);
         ICoverageReport rg = getCoverageReport(cmd.getOptionValue("jacoco"),project+"/"+classes);
@@ -58,8 +57,8 @@ public class Main {
 //        System.out.println("number of undiversify Statement: " + (new Util(statements)).numberOfNotDiversification());
 //        System.out.println("number of diversification: " + (new Util(statements)).numberOfDiversification());
 
-        runDiversification(cmd, rg);
-//        computeDiversifyStat("result2/result/", cmd.getOptionValue("out"), rg);
+//        runDiversification(cmd, rg);
+        computeDiversifyStat("/Users/Simon/Documents/diversify_exp/diversification/result/metrics/tranformation2", cmd.getOptionValue("out"), rg);
     }
 
     protected void runDiversification(CommandLine cmd, ICoverageReport rg) throws Exception {
