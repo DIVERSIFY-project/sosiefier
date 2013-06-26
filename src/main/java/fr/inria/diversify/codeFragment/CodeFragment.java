@@ -153,6 +153,10 @@ public abstract class CodeFragment {
     }
 
     public String positionString() {
+//        System.out.println(codeFragment.getPosition());
+//        System.out.println(codeFragment);
+//        System.out.println(getSourceClass().getQualifiedName());
+//        System.out.println(getSourcePackage());
         return getSourcePackage().getQualifiedName()+"."+getSourceClass().getSimpleName()+ ":" +codeFragment.getPosition().getLine();
     }
 

@@ -28,13 +28,16 @@ public class TransformationParser {
         List<Transformation> list = new ArrayList<Transformation>();
         File file = new File(dir);
 
-        for (File f : file.listFiles())
+        for (File f : file.listFiles())  {
+            System.out.println(f);
             if(f.getName().endsWith(".json"))
+
                 list.addAll(parseFile(f));
+            }
 
         return list;
     }
-
+    static int  count ;
     public List<Transformation> parseFile(File file) throws IOException, JSONException {
         List<Transformation> list = new ArrayList<Transformation>();
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -48,15 +51,20 @@ public class TransformationParser {
            return list;
         JSONArray array = new JSONArray(sb.toString());
         for(int i = 0; i < array.length(); i++)  {
+            count++;
+            try {
             if(buildTransformation(array.getJSONObject(i)).numberOfFailure() > 800)
-                System.out.println("erreur "+array.getJSONObject(i));
+                System.out.println("erreur ");
             else
                 list.add(buildTransformation(array.getJSONObject(i)));
+            }  catch (Exception e) {System.out.println("error in buildTransformation: "+array.getJSONObject(i));}
+
         }
+        System.out.println("count "+count);
         return list;
     }
 
-    protected Transformation buildTransformation(JSONObject jsonObject) throws JSONException {
+    protected Transformation buildTransformation(JSONObject jsonObject) throws Exception {
         Transformation trans = new Transformation();
         trans.setStatementToReplace(findCodeFragment((JSONObject) jsonObject.get("StatementToReplace")));
         trans.setStatementReplacedBy(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
@@ -67,21 +75,21 @@ public class TransformationParser {
         return trans;
     }
 
-    protected CodeFragment findCodeFragment(JSONObject jsonObject) throws JSONException {
+    protected CodeFragment findCodeFragment(JSONObject jsonObject) throws Exception {
         CodeFragment cf = null;
-        for(CodeFragment codeFragment : codeFragments.getCodeFragments())  {
-            try {
-                if(codeFragment.getCodeFragmentType().getSimpleName().equals(jsonObject.get("Type"))
-                        && codeFragment.positionString().equals(jsonObject.get("Position"))
-                        && codeFragment.equalString().equals(jsonObject.get("SourceCode"))) {
-
-                    cf = codeFragment;
-                    break;
-                }
+//        System.out.println(jsonObject);
+        for (CodeFragment codeFragment : codeFragments.getCodeFragments()) {
+             try {
+            if (codeFragment.getCodeFragmentType().getSimpleName().equals(jsonObject.get("Type"))
+                    && codeFragment.positionString().equals(jsonObject.get("Position"))
+                    && codeFragment.equalString().equals(jsonObject.get("SourceCode"))) {
+                cf = codeFragment;
+                break;
             }
-            catch (Exception e) {}
-
+             } catch (Exception e) {}
         }
+        if (cf  == null)
+            throw new Exception();
         return cf;
     }
 
