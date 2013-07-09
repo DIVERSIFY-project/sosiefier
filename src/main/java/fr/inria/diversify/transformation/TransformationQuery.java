@@ -61,6 +61,30 @@ public class TransformationQuery {
         return tf;
     }
 
+    public Add randomAdd() throws Exception {
+        Add tf = new Add();
+        CodeFragment cfToReplace = null;
+        CodeFragment cfReplacedBy =null;
+
+        while (cfReplacedBy == null) {
+            cfToReplace = randomCodeFragmentToReplace();
+            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+        }
+        tf.setStatementToReplace(cfToReplace);
+        tf.setStatementToAdd(cfReplacedBy);
+
+
+        return tf;
+    }
+
+    public Delete randomDelete() throws Exception {
+        Delete tf = new Delete();
+        CodeFragment cfToReplace = randomCodeFragmentToReplace();
+        tf.setCodeFragmentToDelete(cfToReplace);
+
+        return tf;
+    }
+
     protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace) {
         Statement cfReplacedBy = null;
         if (cfReplacedBy == null) {

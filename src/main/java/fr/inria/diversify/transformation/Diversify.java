@@ -50,7 +50,7 @@ public class Diversify {
             TransformationQuery transQuery = new TransformationQuery(coverageReport, codeFragments);
             Transformation tf = null;
             try {
-                tf = transQuery.randomReplace();
+                tf = transQuery.randomDelete();
                 tf.apply(dir + "/" + srcDir);
                 int failures = runTest(dir);
                 tf.setJUnitResult(failures);

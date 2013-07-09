@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.processing.Environment;
@@ -39,7 +40,7 @@ public class Delete extends Transformation {
         env.useSourceCodeFragments(true);
         processor.setFactory(type.getFactory());
 
-        int r = sp.getSourceEnd() -sp.getSourceStart();
+        int r = sp.getSourceEnd() - sp.getSourceStart();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "//delete", r));
         processor.createJavaFile(type);
 
@@ -56,5 +57,9 @@ public class Delete extends Transformation {
         object.put("Failures", failures);
 
         return object;
+    }
+
+    public void setCodeFragmentToDelete(CodeFragment codeFragmentToDelete) {
+        this.toReplace = codeFragmentToDelete;
     }
 }
