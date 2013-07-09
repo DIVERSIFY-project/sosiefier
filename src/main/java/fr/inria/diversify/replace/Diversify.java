@@ -2,6 +2,7 @@ package fr.inria.diversify.replace;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.runtest.ICoverageReport;
+import org.codehaus.plexus.util.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -30,7 +31,7 @@ public class Diversify {
     public Diversify(CodeFragmentList codeFragments, ICoverageReport coverageReport, String projectDir) {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
-        this.tmpDir = "output_diversify";
+        this.tmpDir ="output_diversify";
 
         this.srcDir = "src/main/java";
         this.projectDir = projectDir;
@@ -50,9 +51,9 @@ public class Diversify {
             Replace rp = new Replace(codeFragments, coverageReport,dir+"/"+srcDir);
             try {
                 Transformation tf = rp.replace();
-                int failures = runTest(dir);
-                tf.setJUnitResult(failures);
-                transformations.add(tf);
+               int failures = runTest(dir);
+//                tf.setJUnitResult(failures);
+//                transformations.add(tf);
             }
             catch (Exception e) {
                 System.out.println("compile error "+(error++));
@@ -90,12 +91,13 @@ public class Diversify {
 
     protected String prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
         String dir = dirTarget + "/tmp_" + System.currentTimeMillis();
+//        FileUtils.copyDirectory(new File(dirSource), new File(dir));
         copyDirectory(new File(dirSource), new File(dir));
         return dir;
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, "test", clojureTest);
+        RunMaven rt = new RunMaven(directory, "compile", clojureTest);
         rt.start();
         int count = 0;
         while (rt.getFailures() == null && count < timeOut) {

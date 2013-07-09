@@ -8,8 +8,11 @@ import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
 import fr.inria.diversify.runtest.ICoverageReport;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
+import spoon.reflect.cu.SourceCodeFragment;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +31,6 @@ public class Replace {
     protected CodeFragment cfToReplace;
     protected CodeFragment cfReplacedBy;
     protected CtSimpleType<?> originalClass;
-    private CodeFragment tmp;
-    private boolean replace;
 
 
     public Replace(CodeFragmentList codeFragments, ICoverageReport cr, String srcDir) {
@@ -110,42 +111,36 @@ public class Replace {
 
 
     public Transformation replace() throws Exception {
-        replace = false;
         Transformation tf = new Transformation();
         while (cfReplacedBy == null) {
             cfToReplace = randomCodeFragmentToReplace();
             getCodeFragmentReplacedBy();
         }
         originalClass = cfToReplace.getCompilationUnit().getMainType();
-        CtSimpleType<?> newClass = (CtSimpleType<?>) copyElem(originalClass);
 
-        for (CodeFragment cf : codeFragmentFor(newClass)) {
-            if (cf.equalString().equals(cfToReplace.equalString())) {
-                tmp = cf;
-                break;
-            }
-        }
 
         tf.setStatementToReplace(cfToReplace);
         tf.setStatementReplacedBy(cfReplacedBy);
 
-        System.out.println("cfToReplace (coverage: " + coverageReport.codeFragmentCoverage(cfToReplace) + ") type: "+cfToReplace.getCodeFragmentType() +"\n " + tmp);
+        System.out.println("cfToReplace:\n " + cfToReplace);
+        System.out.println(cfToReplace.getCtCodeFragment().getPosition());
         System.out.println("cfReplacedBy\n " + cfReplacedBy);
-        Map<String, String> varMapping = tmp.randomVariableMapping(cfReplacedBy); //tmp
+        Map<String, String> varMapping = cfToReplace.randomVariableMapping(cfReplacedBy); //tmp
         tf.setVariableMapping(varMapping);
         System.out.println("random variable mapping: " + varMapping);
-        tmp.replace(cfReplacedBy, varMapping);  //tmp
-//test replace != toreplace
-        printJavaFile(srcDir, newClass);
+        cfReplacedBy.replaceVar(cfToReplace, varMapping);  //tmp
 
-        replace = true;
+        if(cfReplacedBy.codeFragmentString().equals(cfToReplace.codeFragmentString()))
+            throw new Exception("same statment");
+
+        printJavaFile2(srcDir, originalClass);
+
+//        printJavaFile2("/Users/Simon/Documents/code/diversify-statements/tmp", originalClass);
         return tf;
     }
 
 
     public void restore() throws Exception {
-        if(replace)
-            tmp.getCtCodeFragment().getParent().replace(cfToReplace.getCtCodeFragment().getParent());
 
         String fileToCopy = originalClass.getPosition().getFile().toString();
         String destination = srcDir+ "/"+originalClass.getQualifiedName().replace('.', '/') + ".java";
@@ -171,6 +166,21 @@ public class Replace {
         ReplaceJavaOutputProcessor processor = new ReplaceJavaOutputProcessor(new File(repository));
         processor.setFactory(type.getFactory());
         processor.createJavaFile(type);
+        System.out.println("copy file: "+repository+" " +type.getQualifiedName());
+    }
+
+    public void printJavaFile2(String repository, CtSimpleType<?> type) throws IOException {
+        JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository));
+        type.getFactory().getEnvironment().useSourceCodeFragments(true);
+        SourcePosition sp = cfToReplace.getCtCodeFragment().getPosition();
+
+        processor.setFactory(type.getFactory());
+        int r =sp.getSourceEnd() -sp.getSourceStart();
+
+        type.getPosition().getCompilationUnit().addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "//delete", r));
+        type.getPosition().getCompilationUnit().addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), cfReplacedBy.codeFragmentString(), 0));
+        processor.createJavaFile(type);
+        type.getPosition().getCompilationUnit().getSourceCodeFraments().clear();
         System.out.println("copy file: "+repository+" " +type.getQualifiedName());
     }
 

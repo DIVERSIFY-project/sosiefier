@@ -51,14 +51,13 @@ public class Main {
         initSpoon(project+"/"+src);
         ICoverageReport rg = getCoverageReport(cmd.getOptionValue("jacoco"),project+"/"+classes);
 
-
 		computeStatistic(cmd.getOptionValue("out"));
         System.out.println("number of statement: " + statements.size());
 //        System.out.println("number of undiversify Statement: " + (new Util(statements)).numberOfNotDiversification());
 //        System.out.println("number of diversification: " + (new Util(statements)).numberOfDiversification());
 
-//        runDiversification(cmd, rg);
-        computeDiversifyStat("/Users/Simon/Documents/diversify_exp/diversification/result/clojure/tranformation", cmd.getOptionValue("out"), rg);
+        runDiversification(cmd, rg);
+//        computeDiversifyStat("/Users/Simon/Documents/diversify_exp/diversification/result/clojure/tranformation", cmd.getOptionValue("out"), rg);
     }
 
     protected void runDiversification(CommandLine cmd, ICoverageReport rg) throws Exception {
@@ -79,17 +78,25 @@ public class Main {
 
     protected void initSpoon(String directory) {
         StandardEnvironment env = new StandardEnvironment();
-		env.setComplianceLevel(6); //for jfreechart
+		env.setComplianceLevel(5);
 		env.setVerbose(true);
 		env.setDebug(true);
 
 		DefaultCoreFactory f = new DefaultCoreFactory();
 		Factory factory = new Factory(f, env);
 		SpoonBuildingManager builder = new SpoonBuildingManager(factory);
+
         for(String dir : directory.split(System.getProperty("path.separator")))
-			try {
-				builder.addInputSource(new File(dir));
-				builder.build();
+            try {
+                builder.addInputSource(new File(dir));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        try {
+               System.out.println("sourcepath "+factory.getEnvironment().getSourcePath());
+            System.out.println(Thread.currentThread().getContextClassLoader().getClass());
+
+            builder.build();
 			} catch (Exception e) {
 					e.printStackTrace();
 			}

@@ -75,7 +75,11 @@ public abstract class CodeFragment {
     }
 
     public String codeFragmentString() {
-        return codeFragment.toString();
+        String string = codeFragment.toString();
+        if(string.trim().endsWith("}"))
+            return string;
+        else
+            return string+";";
     }
 
     public String equalString() {
@@ -87,7 +91,22 @@ public abstract class CodeFragment {
         return equalString;
     }
 
+    public void replaceVar(CodeFragment other, Map<String,String> varMapping) {
+        System.out.println("\n\navant: " + codeFragment.getPosition());
+        System.out.println(codeFragment);
+        for (String varName: varMapping.keySet()) {
+            Object variable = getInputContext().getVariableOrFieldNamed(varName);
+            Object candidate = other.getInputContext().getVariableOrFieldNamed(varMapping.get(varName));
+            ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
+            codeFragment.accept(visitor);
 
+        }
+
+        if(codeFragment instanceof CtLocalVariableImpl)
+            ((CtLocalVariableImpl)other.codeFragment).setSimpleName(((CtLocalVariableImpl) codeFragment).getSimpleName());
+
+        System.out.println("\napres: "+codeFragment);
+    }
 
     public CodeFragment replace(CodeFragment other, Map<String,String> varMapping) {
         System.out.println("\navant: " + codeFragment.getPosition());

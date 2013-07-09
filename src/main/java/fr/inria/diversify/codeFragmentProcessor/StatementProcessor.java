@@ -31,26 +31,11 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 	public CodeFragmentList getStatements() {
 		return statements;
 	}
-	
-//	protected boolean isValid(CtStatement element) {
-//		return isValidStatement(element) && (withChildren || !isChildren(element));
-//	}
-//	
+
 	protected boolean isValidStatement(CtStatement element) {
 		 valid = new ValidStatementVisitor(element, false);
 		element.accept(valid);
 		return !valid.inExpression(element) && valid.isValid();
 	}
-	
-//	protected boolean isChildren(CtStatement element) {
-//		CtStatement parent = (CtStatement)element.getParent(CtStatement.class); 
-//		if(parent == null)
-//			return false;
-//		if(isValidStatement(parent))
-//			return true;
-//		
-//		return isChildren(parent);
-//	}
-	
 }
 
