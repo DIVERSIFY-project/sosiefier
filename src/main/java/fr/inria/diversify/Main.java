@@ -2,9 +2,9 @@ package fr.inria.diversify;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
-import fr.inria.diversify.replace.Diversify;
-import fr.inria.diversify.replace.Transformation;
-import fr.inria.diversify.replace.TransformationParser;
+import fr.inria.diversify.transformation.Diversify;
+import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.runtest.ICoverageReport;
 import fr.inria.diversify.runtest.NullCoverageReport;
@@ -51,7 +51,7 @@ public class Main {
         initSpoon(project+"/"+src);
         ICoverageReport rg = getCoverageReport(cmd.getOptionValue("jacoco"),project+"/"+classes);
 
-		computeStatistic(cmd.getOptionValue("out"));
+//		computeStatistic(cmd.getOptionValue("out"));
         System.out.println("number of statement: " + statements.size());
 //        System.out.println("number of undiversify Statement: " + (new Util(statements)).numberOfNotDiversification());
 //        System.out.println("number of diversification: " + (new Util(statements)).numberOfDiversification());

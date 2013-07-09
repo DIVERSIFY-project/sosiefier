@@ -2,7 +2,8 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.replace.Transformation;
+import fr.inria.diversify.transformation.Replace;
+import fr.inria.diversify.transformation.Transformation;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -162,7 +163,8 @@ public class StatisticDiversification {
                 "failure");
         bw.write("\n");
 
-        for(Transformation trans : transformations) {
+        for(Transformation transs : transformations) {
+            Replace trans = (Replace)transs;
             StringBuffer sb = new StringBuffer();
             try {
             sb.append(trans.getToReplace().getCodeFragmentType().getSimpleName());

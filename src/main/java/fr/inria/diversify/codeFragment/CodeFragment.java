@@ -1,7 +1,7 @@
 package fr.inria.diversify.codeFragment;
 
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
-import fr.inria.diversify.replace.ReplaceVariableVisitor;
+import fr.inria.diversify.transformation.ReplaceVariableVisitor;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,7 +92,7 @@ public abstract class CodeFragment {
     }
 
     public void replaceVar(CodeFragment other, Map<String,String> varMapping) {
-        System.out.println("\n\navant: " + codeFragment.getPosition());
+        System.out.println("\n\navant:\n");
         System.out.println(codeFragment);
         for (String varName: varMapping.keySet()) {
             Object variable = getInputContext().getVariableOrFieldNamed(varName);

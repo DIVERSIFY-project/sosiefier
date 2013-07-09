@@ -1,4 +1,4 @@
-package fr.inria.diversify.replace;
+package fr.inria.diversify.transformation;
 
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtInvocation;

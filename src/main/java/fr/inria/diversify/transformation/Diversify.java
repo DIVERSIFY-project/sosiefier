@@ -1,8 +1,7 @@
-package fr.inria.diversify.replace;
+package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.runtest.ICoverageReport;
-import org.codehaus.plexus.util.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -31,7 +30,7 @@ public class Diversify {
     public Diversify(CodeFragmentList codeFragments, ICoverageReport coverageReport, String projectDir) {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
-        this.tmpDir ="output_diversify";
+        this.tmpDir = "output_diversify";
 
         this.srcDir = "src/main/java";
         this.projectDir = projectDir;
@@ -47,18 +46,20 @@ public class Diversify {
         for (int i = 0; i < n; i++) {
             System.out.println(i);
             initThreadGroup();
-            System.out.println(dir+"/"+srcDir);
-            Replace rp = new Replace(codeFragments, coverageReport,dir+"/"+srcDir);
+            System.out.println("output dir: " + dir + "/" + srcDir);
+            TransformationQuery transQuery = new TransformationQuery(coverageReport, codeFragments);
+            Transformation tf = null;
             try {
-                Transformation tf = rp.replace();
-               int failures = runTest(dir);
-//                tf.setJUnitResult(failures);
-//                transformations.add(tf);
+                tf = transQuery.randomReplace();
+                tf.apply(dir + "/" + srcDir);
+                int failures = runTest(dir);
+                tf.setJUnitResult(failures);
+                transformations.add(tf);
+
+            } catch (Exception e) {
+                System.out.println("compile error " + (error++));
             }
-            catch (Exception e) {
-                System.out.println("compile error "+(error++));
-            }
-            rp.restore();
+            tf.restore(dir + "/" + srcDir);
             killUselessThread();
 
         }
@@ -75,14 +76,15 @@ public class Diversify {
     }
 
     public void writeTransformation(String FileName) throws IOException, JSONException {
-        if(transformations.isEmpty())
+        if (transformations.isEmpty())
             return;
         BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
         JSONArray obj = new JSONArray();
         for (int i = 0; i < transformations.size(); i++) {
             try {
                 obj.put(transformations.get(i).toJSONObject());
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
         out.write(obj.toString());
         out.newLine();
@@ -97,18 +99,18 @@ public class Diversify {
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, "compile", clojureTest);
+        RunMaven rt = new RunMaven(directory, "test", clojureTest);
         rt.start();
         int count = 0;
         while (rt.getFailures() == null && count < timeOut) {
             count++;
             Thread.sleep(1000);
         }
-        System.out.println(rt.getCompileError()+" "+rt.allTestRun()+" "+rt.getFailures());
-        if(rt.getCompileError())
+        System.out.println(rt.getCompileError() + " " + rt.allTestRun() + " " + rt.getFailures());
+        if (rt.getCompileError())
             throw new CompileException("error ");
 
-        if(!rt.allTestRun())
+        if (!rt.allTestRun())
             return -1;
         return rt.getFailures();
     }
@@ -118,21 +120,21 @@ public class Diversify {
     }
 
     protected void killUselessThread() {
-        for(Thread thread: Thread.getAllStackTraces().keySet())  {
-            if(!threadSet.contains(thread)) {
+        for (Thread thread : Thread.getAllStackTraces().keySet()) {
+            if (!threadSet.contains(thread)) {
                 thread.stop();
             }
         }
     }
 
-    protected void copyDirectory(File sourceLocation , File targetLocation) throws IOException {
+    protected void copyDirectory(File sourceLocation, File targetLocation) throws IOException {
         if (sourceLocation.isDirectory()) {
             if (!targetLocation.exists()) {
                 targetLocation.mkdir();
             }
 
             String[] children = sourceLocation.list();
-            for (int i=0; i<children.length; i++) {
+            for (int i = 0; i < children.length; i++) {
                 copyDirectory(new File(sourceLocation, children[i]),
                         new File(targetLocation, children[i]));
             }

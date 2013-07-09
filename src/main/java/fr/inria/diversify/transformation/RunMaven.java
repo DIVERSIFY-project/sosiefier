@@ -1,4 +1,4 @@
-package fr.inria.diversify.replace;
+package fr.inria.diversify.transformation;
 
 
 import org.apache.maven.cli.MavenCli;

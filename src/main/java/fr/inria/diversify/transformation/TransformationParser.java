@@ -1,4 +1,4 @@
-package fr.inria.diversify.replace;
+package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
@@ -64,8 +64,8 @@ public class TransformationParser {
         return list;
     }
 
-    protected Transformation buildTransformation(JSONObject jsonObject) throws Exception {
-        Transformation trans = new Transformation();
+    protected Replace buildTransformation(JSONObject jsonObject) throws Exception {
+        Replace trans = new Replace();
         trans.setStatementToReplace(findCodeFragment((JSONObject) jsonObject.get("StatementToReplace")));
         trans.setStatementReplacedBy(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
         trans.setVariableMapping(parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));

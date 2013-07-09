@@ -2,8 +2,8 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
-import fr.inria.diversify.replace.Transformation;
-import fr.inria.diversify.replace.TransformationParser;
+import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.runtest.ICoverageReport;
 import fr.inria.diversify.runtest.NullCoverageReport;
