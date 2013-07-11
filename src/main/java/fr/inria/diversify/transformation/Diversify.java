@@ -31,38 +31,45 @@ public class Diversify {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
         this.tmpDir = "output_diversify";
-
         this.srcDir = "src/main/java";
         this.projectDir = projectDir;
         clojureTest = false;
         timeOut = 200;
 
+        transformations = new ArrayList<Transformation>();
     }
 
     public void run(int n) throws Exception {
-        transformations = new ArrayList<Transformation>();
-        int error = 0;
         String dir = prepare(projectDir, tmpDir);
+        TransformationQuery transQuery = new TransformationQuery(coverageReport, codeFragments);
+
         for (int i = 0; i < n; i++) {
             System.out.println(i);
-            initThreadGroup();
-            System.out.println("output dir: " + dir + "/" + srcDir);
-            TransformationQuery transQuery = new TransformationQuery(coverageReport, codeFragments);
-            Transformation tf = null;
-            try {
-                tf = transQuery.randomDelete();
-                tf.apply(dir + "/" + srcDir);
-                int failures = runTest(dir);
-                tf.setJUnitResult(failures);
-                transformations.add(tf);
-
-            } catch (Exception e) {
-                System.out.println("compile error " + (error++));
-            }
-            tf.restore(dir + "/" + srcDir);
-            killUselessThread();
-
+            run(transQuery.randomReplace(), dir);
         }
+    }
+
+    public void run(List<Transformation> trans) throws Exception {
+        String dir = prepare(projectDir, tmpDir);
+        for (Transformation tran : trans)
+            run(tran, dir);
+    }
+
+    protected void run(Transformation trans, String dir) throws Exception {
+        initThreadGroup();
+        System.out.println("output dir: " + dir + "/" + srcDir);
+        try {
+            trans.apply(dir + "/" + srcDir);
+            int failures = runTest(dir);
+            trans.setJUnitResult(failures);
+            transformations.add(trans);
+
+        } catch (Exception e) {
+            System.out.println("compile error ");
+        }
+        trans.restore(dir + "/" + srcDir);
+        killUselessThread();
+
     }
 
     public void printResult(String output) {
@@ -80,9 +87,9 @@ public class Diversify {
             return;
         BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
         JSONArray obj = new JSONArray();
-        for (int i = 0; i < transformations.size(); i++) {
+        for (Transformation transformation : transformations) {
             try {
-                obj.put(transformations.get(i).toJSONObject());
+                obj.put(transformation.toJSONObject());
             } catch (Exception e) {
             }
         }
@@ -134,9 +141,9 @@ public class Diversify {
             }
 
             String[] children = sourceLocation.list();
-            for (int i = 0; i < children.length; i++) {
-                copyDirectory(new File(sourceLocation, children[i]),
-                        new File(targetLocation, children[i]));
+            for (String aChildren : children) {
+                copyDirectory(new File(sourceLocation, aChildren),
+                        new File(targetLocation, aChildren));
             }
         } else {
 

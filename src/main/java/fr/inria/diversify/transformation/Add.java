@@ -26,7 +26,7 @@ public class Add extends Transformation {
 
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("CodeFragment", toReplace.toJSONObject());
+        object.put("CodeFragmentPosition", toReplace.toJSONObject());
         object.put("CodeFragmentToAdd", cfToAdd.toJSONObject());
         object.put("VariableMapping", variableMapping);
         object.put("allTestRun", (failures != null));
@@ -39,7 +39,7 @@ public class Add extends Transformation {
     public void apply(String srcDir) throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass();
 
-        System.out.println("cf:\n " + toReplace);
+        System.out.println("cfPosition:\n " + toReplace);
         System.out.println(toReplace.getCtCodeFragment().getPosition());
         System.out.println("cfToAdd\n " + cfToAdd);
         Map<String, String> varMapping = toReplace.randomVariableMapping(cfToAdd); //tmp

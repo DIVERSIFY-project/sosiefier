@@ -5,6 +5,7 @@ import fr.inria.diversify.codeFragment.CodeFragmentList;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.reference.CtVariableReference;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,11 +34,11 @@ public class Util {
         return nb;
     }
 
-    public long numberOfDiversification() {
-        long nb = 0;
+    public BigInteger numberOfDiversification() {
+        BigInteger nb = new BigInteger("0");
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
             for (CodeFragment cf2 : findCandidate(cf1)) {
-            nb = nb + getNumberOfVarMapping(cf1,cf2);
+                nb = nb.add(getNumberOfVarMapping(cf1,cf2));
             }
         }
         return nb;
@@ -52,29 +53,32 @@ public class Util {
         return list;
     }
 
-    protected int getNumberOfVarMapping(CodeFragment before, CodeFragment after) {
-        int nb = 1;
+    protected BigInteger getNumberOfVarMapping(CodeFragment before, CodeFragment after) {
+        BigInteger nb = new BigInteger("1");
 
         for (CtVariableReference<?> variable : after.getInputContext().getLocalVar()) {
-            nb = nb * before.getInputContext().allCandidate(variable.getType()).size();
+//            nb = nb * before.getInputContext().allCandidate(variable.getType()).size();
+            BigInteger tmp = new BigInteger(before.getInputContext().allCandidate(variable.getType()).size()+"");
+            nb = nb.multiply(tmp);
         }
         for (CtFieldAccess<?> variable : after.getInputContext().getField()) {
-            nb = nb *  before.getInputContext().allCandidateForFieldAccess(variable.getType()).size();
+            BigInteger tmp = new BigInteger(before.getInputContext().allCandidateForFieldAccess(variable.getType()).size()+"");
+            nb = nb.multiply(tmp);
         }
         return nb;
     }
 
-    protected Map<?, Integer> numberOfDiversificationFor(Map<?, List<CodeFragment>> map) {
-        Map<Object, Integer> result =  new HashMap<Object, Integer>();
-        for (Object key : map.keySet()) {
-            Integer nb = 0;
-            for (CodeFragment cf1 : map.get(key)) {
-                for (CodeFragment cf2 : findCandidate(cf1)) {
-                    nb = nb + getNumberOfVarMapping(cf1,cf2);
-                }
-            }
-            result.put(key,nb);
-        }
-        return result;
-    }
+//    protected Map<?, Long> numberOfDiversificationFor(Map<?, List<CodeFragment>> map) {
+//        Map<Object, Long> result =  new HashMap<Object, Long>();
+//        for (Object key : map.keySet()) {
+//            Long nb = Long.valueOf(0);
+//            for (CodeFragment cf1 : map.get(key)) {
+//                for (CodeFragment cf2 : findCandidate(cf1)) {
+//                    nb = nb + getNumberOfVarMapping(cf1,cf2);
+//                }
+//            }
+//            result.put(key,nb);
+//        }
+//        return result;
+//    }
 }

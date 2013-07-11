@@ -85,6 +85,34 @@ public class TransformationQuery {
         return tf;
     }
 
+    public Replace randomReplace(String codeFragmentString) throws Exception {
+        Replace tf = new Replace();
+        CodeFragment cfToReplace = null;
+        CodeFragment cfReplacedBy =null;
+
+
+            cfToReplace = findCodeFragmentToReplace(codeFragmentString.trim());
+            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+
+        tf.setStatementToReplace(cfToReplace);
+        tf.setStatementReplacedBy(cfReplacedBy);
+
+
+        return tf;
+    }
+
+    private CodeFragment findCodeFragmentToReplace(String codeFragmentString) {
+        CodeFragment codeFragment = null;
+        for(CodeFragment cf : getAllUniqueCodeFragments())  {
+//            System.out.println(cf.getCtCodeFragment().toString().trim()+" || "+codeFragmentString);
+            if(cf.getCtCodeFragment().toString().equals(codeFragmentString.trim())) {
+                codeFragment = cf;
+                break;
+            }
+        }
+        return codeFragment;
+    }
+
     protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace) {
         Statement cfReplacedBy = null;
         if (cfReplacedBy == null) {
@@ -123,10 +151,16 @@ public class TransformationQuery {
     }
 
     protected Statement findRandomCandidateStatement(CodeFragment stmt) {
+        System.out.println(stmt.getContext().equalString());
+        System.out.println(stmt.codeFragmentString());
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : getAllUniqueCodeFragments())
-            if (stmt.isReplace(statement) && !statement.equalString().equals(stmt.equalString()))
+            if (stmt.isReplace(statement) && !statement.equalString().equals(stmt.equalString())) {
+                System.out.println(statement.getContext().equalString());
+                System.out.println(statement.codeFragmentString());
+
                 list.add(statement);
+            }
 
         if (list.isEmpty())
             return null;

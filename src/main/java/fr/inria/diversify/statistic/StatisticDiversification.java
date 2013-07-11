@@ -8,6 +8,7 @@ import fr.inria.diversify.transformation.Transformation;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -120,13 +121,16 @@ public class StatisticDiversification {
 
         bw.write("stmtClass"+separator+"stmtPackage"+separator+"stmtInputContextSize"+separator+"stmtType"+separator+"nbCandidate"+separator+"nbDiversification\n");
         for (CodeFragment cf1 : codeFragmentList.getCodeFragments()) {
-            int nb = 0;
+//            long nb = 0;
+            BigInteger nb = new BigInteger("0");
             StringBuffer sb = new StringBuffer();
             try {
 
             List<CodeFragment> candidate = util.findCandidate(cf1);
             for (CodeFragment cf2 : candidate) {
-                nb = nb + util.getNumberOfVarMapping(cf1, cf2);
+//                nb = nb + util.getNumberOfVarMapping(cf1, cf2);
+                BigInteger tmp = new BigInteger(util.getNumberOfVarMapping(cf1, cf2)+"");
+                nb = nb.add(tmp);
             }
            sb.append(cf1.getSourceClass().getQualifiedName());
                 sb.append(separator);

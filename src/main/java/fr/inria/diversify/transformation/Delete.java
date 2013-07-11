@@ -27,7 +27,9 @@ public class Delete extends Transformation {
         System.out.println("cfToDelete:\n " + toReplace);
         System.out.println(toReplace.getCtCodeFragment().getPosition());
 
-        printJavaFile(srcDir, originalClass);
+//        printJavaFile(srcDir, originalClass);
+        printJavaFile("/Users/Simon/Documents/code/diversify-statements/tmp", originalClass);
+
     }
 
 

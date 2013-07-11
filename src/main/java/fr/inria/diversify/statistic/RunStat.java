@@ -61,11 +61,14 @@ public class RunStat {
         System.out.println("number of statement: " + statements.size());
 
         computeDiversifyStat( cmd.getOptionValue("transformation"), cmd.getOptionValue("out"), rg);
+
+//        computeOtherStat();
     }
+
 
     protected void initSpoon(String directory) {
         StandardEnvironment env = new StandardEnvironment();
-        env.setComplianceLevel(6); //for jfreechart
+        env.setComplianceLevel(6);
         env.setVerbose(true);
         env.setDebug(true);
 
@@ -117,6 +120,13 @@ public class RunStat {
         System.out.println("nb transformation2: "+listF.size());
         StatisticDiversification sd = new StatisticDiversification(listF, statements);
         sd.writeStat(fileName);
+
+    }
+
+    protected void computeOtherStat() {
+        Util stat = new Util(statements);
+        System.out.println("number of possible code fragment diversification: "+stat.numberOfDiversification());
+        System.out.println("number of not possible code fragment diversification: "+stat.numberOfNotDiversification());
 
     }
 

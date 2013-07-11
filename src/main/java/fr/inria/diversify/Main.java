@@ -10,6 +10,7 @@ import fr.inria.diversify.runtest.ICoverageReport;
 import fr.inria.diversify.runtest.NullCoverageReport;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
+import fr.inria.diversify.transformation.TransformationQuery;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
@@ -53,8 +54,6 @@ public class Main {
 
 //		computeStatistic(cmd.getOptionValue("out"));
         System.out.println("number of statement: " + statements.size());
-//        System.out.println("number of undiversify Statement: " + (new Util(statements)).numberOfNotDiversification());
-//        System.out.println("number of diversification: " + (new Util(statements)).numberOfDiversification());
 
         runDiversification(cmd, rg);
 //        computeDiversifyStat("/Users/Simon/Documents/diversify_exp/diversification/result/clojure/tranformation", cmd.getOptionValue("out"), rg);
@@ -72,7 +71,14 @@ public class Main {
         if(cmd.getOptionValue("timeOut") != null)
             d.setTimeOut(Integer.parseInt(cmd.getOptionValue("timeOut")));
 
-        d.run(Integer.parseInt(cmd.getOptionValue("nbRun")));
+        if(cmd.getOptionValue("nbRun") != null)
+            d.run(Integer.parseInt(cmd.getOptionValue("nbRun")));
+        else {
+            TransformationParser tf = new TransformationParser(statements);
+            List<Transformation> list = tf.parseDir(cmd.getOptionValue("transformation"));
+            d.run(list);
+        }
+
         d.printResult(cmd.getOptionValue("out"));
     }
 
@@ -157,6 +163,7 @@ public class Main {
         options.addOption("clojure", true, "");
         options.addOption("out", true, "prefix for output files");
         options.addOption("timeOut", true, "time out for test");
+        options.addOption("transformation", true, "");
         return  options;
     }
 }
