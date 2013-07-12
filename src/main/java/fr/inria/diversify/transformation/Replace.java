@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.cu.CompilationUnit;
@@ -20,19 +21,28 @@ import java.util.Map;
 public class Replace extends Transformation {
 
     protected Map<CodeFragment,CodeFragment> replaces;
+    private Map<CodeFragment, Map<String, String>> variableMapping;
 
     public Replace() {
         replaces = new HashMap<CodeFragment, CodeFragment>();
+        variableMapping = new HashMap<CodeFragment, Map<String, String>>();
     }
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-//        object.put("CodeFragmentPosition", toReplace.toJSONObject());
-//        object.put("CodeFragmentToAdd", cfToAdd.toJSONObject());
-//        object.put("VariableMapping", variableMapping);
-//        object.put("allTestRun", (failures != null));
-//        object.put("Failures", failures);
+        object.put("type", "replace");
+        JSONArray array = new JSONArray();
+        object.put("transformation",array);
+        for(CodeFragment position: replaces.keySet()) {
+            JSONObject t = new JSONObject();
+            t.put("CodeFragmentPosition", position.toJSONObject());
+            t.put("CodeFragmentReplace", replaces.get(position).toJSONObject());
+            t.put("VariableMapping", variableMapping.get(position));
+            array.put(t);
+        }
+        object.put("allTestRun", (failures != null));
+        object.put("Failures", failures);
 
         return object;
     }
@@ -45,10 +55,11 @@ public class Replace extends Transformation {
         System.out.println(position.getCodeFragmentType());
         System.out.println( replaces.get(position));
 
-        Map<String, String> varMapping = position.randomVariableMapping(replaces.get(position)); //tmp
-        System.out.println("random variable mapping: " + varMapping);
-        replaces.get(position).replaceVar(position, varMapping);  //tmp
+        Map<String, String> varMapping = position.randomVariableMapping(replaces.get(position));
 
+        System.out.println("random variable mapping: " + varMapping);
+        replaces.get(position).replaceVar(position, varMapping);
+        variableMapping.put(position,varMapping);
         if(replaces.get(position).equals(position.codeFragmentString()))
             throw new Exception("same statment");
 
@@ -70,4 +81,7 @@ public class Replace extends Transformation {
     }
 
 
+    public void addVarMapping(CodeFragment position, Map<String, String> mapping) {
+        variableMapping.put(position, mapping);
+    }
 }

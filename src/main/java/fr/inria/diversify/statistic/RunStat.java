@@ -60,7 +60,7 @@ public class RunStat {
         computeStatistic(cmd.getOptionValue("out"));
         System.out.println("number of statement: " + statements.size());
 
-        computeDiversifyStat( cmd.getOptionValue("transformation"), cmd.getOptionValue("out"), rg);
+        computeDiversifyStat( cmd.getOptionValue("transformation"), cmd.getOptionValue("out"));
 
 //        computeOtherStat();
     }
@@ -103,19 +103,13 @@ public class RunStat {
         return  icr;
     }
 
-    protected void computeDiversifyStat(String dir, String fileName, ICoverageReport cr) throws IOException, JSONException {
+    protected void computeDiversifyStat(String dir, String fileName) throws IOException, JSONException {
         TransformationParser tf = new TransformationParser(statements);
         List<Transformation> list = tf.parseDir(dir);
         System.out.println("nb transformation: "+list.size());
         List<Transformation> listF = new ArrayList<Transformation>();
         for(Transformation trans : list) {
-            try {
-                if(cr.codeFragmentCoverage(trans.getToReplace()) != 0)
                     listF.add(trans);
-            }  catch (Exception e) {System.out.println("error in compute Diversify Stat");}
-
-
-
         }
         System.out.println("nb transformation2: "+listF.size());
         StatisticDiversification sd = new StatisticDiversification(listF, statements);

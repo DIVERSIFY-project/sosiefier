@@ -115,18 +115,18 @@ public class Main {
 	}
 
     protected void computeDiversifyStat(String dir, String fileName, ICoverageReport cr) throws IOException, JSONException {
-        TransformationParser tf = new TransformationParser(statements);
-        List<Transformation> list = tf.parseDir(dir);
-        System.out.println("nb transformation: "+list.size());
-        List<Transformation> listF = new ArrayList<Transformation>();
-        for(Transformation trans : list) {
-            if(cr.codeFragmentCoverage(trans.getToReplace()) != 0)
-                listF.add(trans);
-
-        }
-        System.out.println("nb transformation2: "+listF.size());
-        StatisticDiversification sd = new StatisticDiversification(listF, statements);
-        sd.writeStat(fileName);
+//        TransformationParser tf = new TransformationParser(statements);
+//        List<Transformation> list = tf.parseDir(dir);
+//        System.out.println("nb transformation: "+list.size());
+//        List<Transformation> listF = new ArrayList<Transformation>();
+//        for(Transformation trans : list) {
+//            if(cr.codeFragmentCoverage(trans.getToReplace()) != 0)
+//                listF.add(trans);
+//
+//        }
+//        System.out.println("nb transformation2: "+listF.size());
+//        StatisticDiversification sd = new StatisticDiversification(listF, statements);
+//        sd.writeStat(fileName);
 
     }
 

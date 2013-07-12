@@ -45,8 +45,8 @@ public class Diversify {
 
         for (int i = 0; i < n; i++) {
             System.out.println(i);
-            transQuery.setType("delete");
-            transQuery.setNbTransformation(5);
+            transQuery.setType("replace");
+            transQuery.setNbTransformation(1);
             run(transQuery.getTransformation(), dir);
         }
     }
@@ -64,7 +64,7 @@ public class Diversify {
             trans.apply(dir + "/" + srcDir);
             int failures = runTest(dir);
             trans.setJUnitResult(failures);
-//            transformations.add(trans);
+            transformations.add(trans);
 
         } catch (Exception e) {
             System.out.println("compile error ");

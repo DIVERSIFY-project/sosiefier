@@ -62,38 +62,38 @@ public class StatisticDiversification {
     protected Map<String, Map<Integer,Integer>> statByClass(){
         Map<String, Map<Integer,Integer>> map = new HashMap<String, Map<Integer,Integer>>();
 
-        for(Transformation trans : transformations) {
-            try {
-            String key = trans.getSourceClass().getQualifiedName();
-            if(!map.containsKey(key)) {
-                Map<Integer,Integer> list = new HashMap<Integer,Integer>();
-                for(int i = -1; i <= numberOfFailureMax; i++)
-                    list.put(i, 0);
-                map.put(key, list);
-            }
-            int n =  map.get(key).get(trans.numberOfFailure());
-            map.get(key).put(trans.numberOfFailure(),n + 1);
-            } catch (Exception e) {}
-        }
+//        for(Transformation trans : transformations) {
+//            try {
+//            String key = trans.getSourceClass().getQualifiedName();
+//            if(!map.containsKey(key)) {
+//                Map<Integer,Integer> list = new HashMap<Integer,Integer>();
+//                for(int i = -1; i <= numberOfFailureMax; i++)
+//                    list.put(i, 0);
+//                map.put(key, list);
+//            }
+//            int n =  map.get(key).get(trans.numberOfFailure());
+//            map.get(key).put(trans.numberOfFailure(),n + 1);
+//            } catch (Exception e) {}
+//        }
         return  map;
     }
 
     protected Map<String, Map<Integer,Integer>> statByType(){
         Map<String, Map<Integer,Integer>> map = new HashMap<String, Map<Integer,Integer>>();
 
-        for(Transformation trans : transformations) {
-            try {
-            String key = trans.getCodeFragmentType().getSimpleName();
-            if(!map.containsKey(key)) {
-                Map<Integer,Integer> list = new HashMap<Integer,Integer>();
-                for(int i = -1; i <= numberOfFailureMax; i++)
-                    list.put(i,0);
-                map.put(key, list);
-            }
-            int n =  map.get(key).get(trans.numberOfFailure());
-            map.get(key).put(trans.numberOfFailure(),n + 1);
-            } catch (Exception e) {}
-        }
+//        for(Transformation trans : transformations) {
+//            try {
+//            String key = trans.getCodeFragmentType().getSimpleName();
+//            if(!map.containsKey(key)) {
+//                Map<Integer,Integer> list = new HashMap<Integer,Integer>();
+//                for(int i = -1; i <= numberOfFailureMax; i++)
+//                    list.put(i,0);
+//                map.put(key, list);
+//            }
+//            int n =  map.get(key).get(trans.numberOfFailure());
+//            map.get(key).put(trans.numberOfFailure(),n + 1);
+//            } catch (Exception e) {}
+//        }
         return  map;
     }
 
@@ -156,58 +156,58 @@ public class StatisticDiversification {
     }
 
     protected void writeDetail(String fileName) throws IOException {
-        FileWriter fw = new FileWriter(fileName);
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write("toReplaceType"+separator+"replacedByType"+separator+
-                "toReplaceSize"+separator+"replacedBySize"+separator+
-                "toReplaceClass"+separator+"replacedByClass"+separator+
-                "toReplacePackage"+separator+"replacedByPackage"+separator+
-                "toReplaceInputContextSize"+separator+"replacedByInputContextSize"+separator+
-                "toReplaceInputContextOnlyPrimitive"+separator+"replacedByInputContextOnlyPrimitive"+separator+
-                "failure");
-        bw.write("\n");
-
-        for(Transformation transs : transformations) {
-            Replace trans = (Replace)transs;
-            StringBuffer sb = new StringBuffer();
-            try {
-            sb.append(trans.getToReplace().getCodeFragmentType().getSimpleName());
-            sb.append(separator);
-            sb.append(trans.getReplaceBy().getCodeFragmentType().getSimpleName());
-            sb.append(separator);
-
-            sb.append(trans.getToReplace().getCtCodeFragment().toString().length()+"");
-            sb.append(separator);
-            sb.append(trans.getReplaceBy().getCtCodeFragment().toString().length()+"");
-            sb.append(separator);
-
-            sb.append(trans.getToReplace().getSourceClass().getQualifiedName());
-            sb.append(separator);
-            sb.append(trans.getReplaceBy().getSourceClass().getQualifiedName());
-            sb.append(separator);
-
-            sb.append(trans.getToReplace().getSourcePackage().getQualifiedName());
-            sb.append(separator);
-            sb.append(trans.getReplaceBy().getSourcePackage().getQualifiedName());
-            sb.append(separator);
-
-            sb.append(trans.getToReplace().getInputContext().size()+"");
-            sb.append(separator);
-            sb.append(trans.getReplaceBy().getInputContext().size()+"");
-            sb.append(separator);
-
-            sb.append(trans.getToReplace().getInputContext().hasOnlyPrimitive()+"");
-            sb.append(separator);
-            sb.append(trans.getReplaceBy().getInputContext().hasOnlyPrimitive()+"");
-            sb.append(separator);
-
-            sb.append(trans.numberOfFailure()+"");
-            sb.append("\n");
-                bw.write(sb.toString());
-            }catch (Exception e) {}
-
-        }
-        bw.close();
+//        FileWriter fw = new FileWriter(fileName);
+//        BufferedWriter bw = new BufferedWriter(fw);
+//        bw.write("toReplaceType"+separator+"replacedByType"+separator+
+//                "toReplaceSize"+separator+"replacedBySize"+separator+
+//                "toReplaceClass"+separator+"replacedByClass"+separator+
+//                "toReplacePackage"+separator+"replacedByPackage"+separator+
+//                "toReplaceInputContextSize"+separator+"replacedByInputContextSize"+separator+
+//                "toReplaceInputContextOnlyPrimitive"+separator+"replacedByInputContextOnlyPrimitive"+separator+
+//                "failure");
+//        bw.write("\n");
+//
+//        for(Transformation transs : transformations) {
+//            Replace trans = (Replace)transs;
+//            StringBuffer sb = new StringBuffer();
+//            try {
+//            sb.append(trans.getToReplace().getCodeFragmentType().getSimpleName());
+//            sb.append(separator);
+//            sb.append(trans.getReplaceBy().getCodeFragmentType().getSimpleName());
+//            sb.append(separator);
+//
+//            sb.append(trans.getToReplace().getCtCodeFragment().toString().length()+"");
+//            sb.append(separator);
+//            sb.append(trans.getReplaceBy().getCtCodeFragment().toString().length()+"");
+//            sb.append(separator);
+//
+//            sb.append(trans.getToReplace().getSourceClass().getQualifiedName());
+//            sb.append(separator);
+//            sb.append(trans.getReplaceBy().getSourceClass().getQualifiedName());
+//            sb.append(separator);
+//
+//            sb.append(trans.getToReplace().getSourcePackage().getQualifiedName());
+//            sb.append(separator);
+//            sb.append(trans.getReplaceBy().getSourcePackage().getQualifiedName());
+//            sb.append(separator);
+//
+//            sb.append(trans.getToReplace().getInputContext().size()+"");
+//            sb.append(separator);
+//            sb.append(trans.getReplaceBy().getInputContext().size()+"");
+//            sb.append(separator);
+//
+//            sb.append(trans.getToReplace().getInputContext().hasOnlyPrimitive()+"");
+//            sb.append(separator);
+//            sb.append(trans.getReplaceBy().getInputContext().hasOnlyPrimitive()+"");
+//            sb.append(separator);
+//
+//            sb.append(trans.numberOfFailure()+"");
+//            sb.append("\n");
+//                bw.write(sb.toString());
+//            }catch (Exception e) {}
+//
+//        }
+//        bw.close();
     }
 
 }

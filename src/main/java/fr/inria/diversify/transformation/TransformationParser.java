@@ -53,22 +53,61 @@ public class TransformationParser {
         for(int i = 0; i < array.length(); i++)  {
             count++;
             try {
-            if(buildTransformation(array.getJSONObject(i)).numberOfFailure() > 800)
+            if(parseTransformation(array.getJSONObject(i)).numberOfFailure() > 800)
                 System.out.println("erreur ");
             else
-                list.add(buildTransformation(array.getJSONObject(i)));
-            }  catch (Exception e) {System.out.println("error in buildTransformation: "+array.getJSONObject(i));}
+                list.add(parseTransformation(array.getJSONObject(i)));
+            }  catch (Exception e) {System.out.println("error in buildTransformation: "+array.getJSONObject(i));
+            e.printStackTrace();}
 
         }
         System.out.println("count "+count);
         return list;
     }
 
-    protected Replace buildTransformation(JSONObject jsonObject) throws Exception {
+    protected Transformation parseTransformation(JSONObject jsonObject) throws Exception {
+        String type = jsonObject.getString("type");
+        if(type.equals("replace"))
+            return parseReplace(jsonObject);
+        if(type.equals("add"))
+            return parseAdd(jsonObject);
+        if(type.equals("delete"))
+            return parseDelete(jsonObject);
+
+        return null;
+    }
+
+    protected Transformation parseDelete(JSONObject jsonObject) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    protected Transformation parseAdd(JSONObject jsonObject) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    protected Transformation parseReplace(JSONObject jsonObject) throws Exception {
         Replace trans = new Replace();
-        trans.setStatementToReplace(findCodeFragment((JSONObject) jsonObject.get("StatementToReplace")));
-        trans.setStatementReplacedBy(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
-        trans.setVariableMapping(parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
+        JSONArray array = jsonObject.getJSONArray("transformation");
+        for(int i = 0; i <array.length(); i++) {
+            JSONObject t = array.getJSONObject(i);
+            CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));
+            trans.addCodeFragmentToReplace(position, findCodeFragment(t.getJSONObject("CodeFragmentReplace")));
+            trans.addVarMapping(position, parseVariableMapping(t.getJSONObject("VariableMapping")));
+        }
+        if(jsonObject.getBoolean("allTestRun"))
+            trans.setJUnitResult(jsonObject.getInt("Failures"));
+
+        return trans;
+    }
+
+    protected Replace buildOldTransformation(JSONObject jsonObject) throws Exception {
+        Replace trans = new Replace();
+        CodeFragment position = findCodeFragment((JSONObject) jsonObject.get("StatementToReplace"));
+        trans.addCodeFragmentToReplace(position, findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
+        trans.addVarMapping(position, parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
+//        trans.setStatementToReplace(findCodeFragment((JSONObject) jsonObject.get("StatementToReplace")));
+//        trans.setStatementReplacedBy(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
+//        trans.setVariableMapping(parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
         if(jsonObject.getBoolean("allTestRun"))
             trans.setJUnitResult(jsonObject.getInt("Failures"));
 
@@ -82,7 +121,7 @@ public class TransformationParser {
              try {
             if (codeFragment.getCodeFragmentType().getSimpleName().equals(jsonObject.get("Type"))
                     && codeFragment.positionString().equals(jsonObject.get("Position"))
-                    && codeFragment.equalString().equals(jsonObject.get("SourceCode"))) {
+                    && codeFragment.equalString().trim().equals(jsonObject.get("SourceCode"))) {
                 cf = codeFragment;
                 break;
             }

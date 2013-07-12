@@ -33,7 +33,7 @@ public abstract class Transformation {
             addSourceCode(trans);
 
         for(CodeFragment trans : transforms)  {
-//            printJavaFile(srcDir, getOriginalClass(delete));
+            printJavaFile(srcDir, getOriginalClass(trans));
                     printJavaFile("/Users/Simon/Documents/code/diversify-statements/tmp",  getOriginalClass(trans));
         }
         for(CodeFragment trans : transforms)
@@ -88,5 +88,9 @@ public abstract class Transformation {
 
     public void setJUnitResult(Integer result) {
         failures = result;
+    }
+
+    public int numberOfFailure() {
+        return failures;
     }
 }
