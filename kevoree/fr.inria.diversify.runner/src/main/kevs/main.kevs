@@ -1,0 +1,23 @@
+ {
+addRepo "http://maven.kevoree.org/archiva/repository/daum/snapshots"
+addRepo "http://maven.kevoree.org/release"
+addRepo "http://repo.maven.apache.org/maven2"
+addRepo "http://maven.kevoree.org/daum/release"
+addRepo "https://oss.sonatype.org/content/groups/public/"
+addRepo "http://repository.jetbrains.com/all"
+addRepo "https://oss.sonatype.org/content/repositories/snapshots"
+addRepo "http://maven.kevoree.org/snapshots"
+addRepo "http://repo.typesafe.com/typesafe/releases/"
+addRepo "http://maven.kevoree.org/daum/snapshots"
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.javaseNode/2.0.0-SNAPSHOT'
+merge 'mvn:fr.inria.diversify/fr.inria.diversify.runner/2.0.0-SNAPSHOT'
+merge 'mvn:org.kevoree.corelibrary.javase/org.kevoree.library.javase.jexxus/2.0.0-SNAPSHOT'
+addNode node0:JavaSENode
+ {
+  addComponent RunnerCom172@node0 : RunnerComponent {}
+updateDictionary RunnerCom172@node0 
+}
+
+addGroup group1043090491:BasicGroup
+addToGroup group1043090491 node0
+}
