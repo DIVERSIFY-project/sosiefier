@@ -3,91 +3,50 @@ package fr.inria.diversify.transformation;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
-import spoon.processing.Environment;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtSimpleType;
-import spoon.support.JavaOutputProcessor;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * User: Simon
- * Date: 7/9/13
- * Time: 5:13 PM
+ * Date: 7/11/13
+ * Time: 4:33 PM
  */
 public class Add extends Transformation {
-    protected CodeFragment cfToAdd;
-    protected Map<String, String> variableMapping;
-    protected boolean before = true;
 
+    private Map<CodeFragment, CodeFragment> adds;
+
+    public Add() {
+        adds = new HashMap<CodeFragment, CodeFragment>();
+    }
+
+    @Override
     public JSONObject toJSONObject() throws JSONException {
-        JSONObject object = new JSONObject();
-        object.put("CodeFragmentPosition", toReplace.toJSONObject());
-        object.put("CodeFragmentToAdd", cfToAdd.toJSONObject());
-        object.put("VariableMapping", variableMapping);
-        object.put("allTestRun", (failures != null));
-        object.put("Failures", failures);
-
-        return object;
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    protected void addSourceCode(CodeFragment position) throws Exception {
+        CtSimpleType<?> originalClass = getOriginalClass(position);
 
-    public void apply(String srcDir) throws Exception {
-        CtSimpleType<?> originalClass = getOriginalClass();
+        System.out.println("cfToAdd:\n " + adds.get(position)+ " postion: " +position);
+        System.out.println(adds.get(position).getCtCodeFragment().getPosition());
 
-        System.out.println("cfPosition:\n " + toReplace);
-        System.out.println(toReplace.getCtCodeFragment().getPosition());
-        System.out.println("cfToAdd\n " + cfToAdd);
-        Map<String, String> varMapping = toReplace.randomVariableMapping(cfToAdd); //tmp
-        System.out.println("random variable mapping: " + varMapping);
-        cfToAdd.replaceVar(toReplace, varMapping);  //tmp
+        CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
+        SourcePosition sp = position.getCtCodeFragment().getPosition();
 
-        printJavaFile(srcDir, originalClass);
+        int index = sp.getSourceStart();
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, adds.get(position).codeFragmentString(), 0));
     }
 
-
-    protected void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
-        Environment env = type.getFactory().getEnvironment();
-        CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
-        SourcePosition sp = toReplace.getCtCodeFragment().getPosition();
-
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository));
-        env.useSourceCodeFragments(true);
-        processor.setFactory(type.getFactory());
-
-        int index  = 0;
-        if(before)
-            index = sp.getSourceStart();
-        else
-            index = sp.getSourceEnd();
-
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, cfToAdd.codeFragmentString(), 0));
-        processor.createJavaFile(type);
-
-        compileUnit.getSourceCodeFraments().clear();
-        System.out.println("copy file: "+repository+" " +type.getQualifiedName());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if(o.getClass() != this.getClass())
+    public boolean addCodeFragmentToAdd(CodeFragment position, CodeFragment add) {
+        if(transforms.contains(position))
             return false;
-        Replace t = (Replace)o;
-
-        return toReplace.getCtCodeFragment().getPosition().equals(t.toReplace.getCtCodeFragment().getPosition())
-                && cfToAdd.id() == t.replacedBy.id() && variableMapping.equals(t.variableMapping);
-    }
-
-    @Override
-    public int hashCode() {
-        return toReplace.id() * toReplace.getCtCodeFragment().getPosition().hashCode() + cfToAdd.id() + variableMapping.hashCode();
-    }
-
-    public void setStatementToAdd(CodeFragment statementToAdd) {
-        this.cfToAdd = statementToAdd;
+        transforms.add(position);
+        adds.put(position,add);
+        return true;
     }
 }

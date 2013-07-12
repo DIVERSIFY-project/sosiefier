@@ -103,7 +103,7 @@ public abstract class CodeFragment {
         }
 
         if(codeFragment instanceof CtLocalVariableImpl)
-            ((CtLocalVariableImpl)other.codeFragment).setSimpleName(((CtLocalVariableImpl) codeFragment).getSimpleName());
+            ((CtLocalVariableImpl)codeFragment).setSimpleName(((CtLocalVariableImpl) other.codeFragment).getSimpleName());
 
         System.out.println("\napres: "+codeFragment);
     }

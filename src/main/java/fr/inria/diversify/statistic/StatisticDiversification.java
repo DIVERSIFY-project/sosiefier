@@ -83,7 +83,7 @@ public class StatisticDiversification {
 
         for(Transformation trans : transformations) {
             try {
-            String key = trans.geCodeFragmentType().getSimpleName();
+            String key = trans.getCodeFragmentType().getSimpleName();
             if(!map.containsKey(key)) {
                 Map<Integer,Integer> list = new HashMap<Integer,Integer>();
                 for(int i = -1; i <= numberOfFailureMax; i++)

@@ -5,6 +5,7 @@ import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.runtest.ICoverageReport;
 import spoon.reflect.Factory;
+import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
 
@@ -18,100 +19,111 @@ import java.util.*;
 public class TransformationQuery {
     protected ICoverageReport coverageReport;
     protected CodeFragmentList codeFragments;
-
+    protected int nbTransformation = 1;
+    protected String type = "replace";
+    protected List<CodeFragment> cfToTransform;
 
     public TransformationQuery(ICoverageReport coverageReport, CodeFragmentList codeFragments) {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
-    }
-//    public void setCodeFragmentToReplace(CodeFragment stmt) {
-//        cfToReplace = stmt;
-//    }
-
-//
-//    protected CodeFragment getCodeFragmentToReplace() {
-//        if (cfToReplace == null) {
-////             choix d'une strategie de selection
-//            cfToReplace = randomCodeFragmentToReplace();
-//        }
-//        return cfToReplace;
-//    }
-//
-//    protected CodeFragment getCodeFragmentReplacedBy() {
-//        if (cfReplacedBy == null) {
-////             choix d'une strategie de selection
-//            cfReplacedBy = findRandomCandidateStatement(cfToReplace);
-//        }
-//        return cfReplacedBy;
-//    }
-
-    public Replace randomReplace() throws Exception {
-        Replace tf = new Replace();
-        CodeFragment cfToReplace = null;
-        CodeFragment cfReplacedBy =null;
-
-        while (cfReplacedBy == null) {
-            cfToReplace = randomCodeFragmentToReplace();
-            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
-        }
-        tf.setStatementToReplace(cfToReplace);
-        tf.setStatementReplacedBy(cfReplacedBy);
-
-
-        return tf;
+        cfToTransform = new ArrayList<CodeFragment>();
     }
 
-    public Add randomAdd() throws Exception {
-        Add tf = new Add();
-        CodeFragment cfToReplace = null;
-        CodeFragment cfReplacedBy =null;
-
-        while (cfReplacedBy == null) {
-            cfToReplace = randomCodeFragmentToReplace();
-            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
-        }
-        tf.setStatementToReplace(cfToReplace);
-        tf.setStatementToAdd(cfReplacedBy);
-
-
-        return tf;
+    public void setCodeFragmentToTransform(CodeFragment stmt) {
+        cfToTransform.add(stmt);
     }
 
-    public Delete randomDelete() throws Exception {
-        Delete tf = new Delete();
-        CodeFragment cfToReplace = randomCodeFragmentToReplace();
-        tf.setCodeFragmentToDelete(cfToReplace);
-
-        return tf;
-    }
-
-    public Replace randomReplace(String codeFragmentString) throws Exception {
-        Replace tf = new Replace();
-        CodeFragment cfToReplace = null;
-        CodeFragment cfReplacedBy =null;
-
-
-            cfToReplace = findCodeFragmentToReplace(codeFragmentString.trim());
-            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
-
-        tf.setStatementToReplace(cfToReplace);
-        tf.setStatementReplacedBy(cfReplacedBy);
-
-
-        return tf;
-    }
-
-    private CodeFragment findCodeFragmentToReplace(String codeFragmentString) {
-        CodeFragment codeFragment = null;
+    public void setCodeFragmentToTransform(String codeFragmentString) {
         for(CodeFragment cf : getAllUniqueCodeFragments())  {
-//            System.out.println(cf.getCtCodeFragment().toString().trim()+" || "+codeFragmentString);
             if(cf.getCtCodeFragment().toString().equals(codeFragmentString.trim())) {
-                codeFragment = cf;
+                cfToTransform.add(cf);
                 break;
             }
         }
-        return codeFragment;
     }
+
+    public void setNbTransformation(int n) {
+        nbTransformation = n;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Transformation getTransformation() throws Exception {
+        if(type.equals("replace"))
+            return replace();
+
+        if(type.equals("add"))
+            return add();
+
+        if(type.equals("delete"))
+            return delete();
+
+        cfToTransform.clear();
+        return null;
+    }
+
+
+    protected Replace replace() throws Exception {
+        Replace tf = new Replace();
+        for(int i = 0; i < nbTransformation; i++) {
+            CodeFragment cfToReplace = null;
+            CodeFragment cfReplacedBy =null;
+
+            if(cfToTransform.isEmpty()) {
+                while (cfReplacedBy == null) {
+                    cfToReplace = randomCodeFragmentToReplace();
+                    cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+                }
+            } else {
+                cfToReplace = cfToTransform.get(i);
+                cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+            }
+            tf.addCodeFragmentToReplace(cfToReplace,cfReplacedBy);
+        }
+        return tf;
+    }
+
+    protected Add add() throws Exception {
+        Add tf = new Add();
+        for(int i = 0; i < nbTransformation; i++) {
+            CodeFragment cfToReplace = null;
+            CodeFragment cfReplacedBy =null;
+
+            if(cfToTransform.isEmpty()) {
+                while (cfReplacedBy == null) {
+                    cfToReplace = randomCodeFragmentToReplace();
+                    cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+                }
+            } else {
+                cfToReplace = cfToTransform.get(i);
+                cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+            }
+        tf.addCodeFragmentToAdd(cfToReplace,cfReplacedBy);
+        }
+        return tf;
+    }
+
+    protected Delete delete() throws Exception {
+        Delete tf = new Delete();
+        for(int i = 0; i < nbTransformation; i++) {
+            CodeFragment cfToDelete = null;
+            if(cfToTransform.isEmpty()) {
+                while (cfToDelete == null) {
+                 cfToDelete = randomCodeFragmentToReplace();
+                    if (cfToDelete.getCtCodeFragment() instanceof CtReturn)
+                        cfToDelete = null;
+                }
+            } else {
+
+                cfToDelete = cfToTransform.get(i);
+            }
+            tf.addCodeFragmentToTransform(cfToDelete);
+        }
+        return tf;
+    }
+
 
     protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace) {
         Statement cfReplacedBy = null;
@@ -142,23 +154,11 @@ public class TransformationQuery {
         return stmt;
     }
 
-    protected CodeFragment findCodeFragment(String stmtString) {
-        CodeFragment s = null;
-        for (CodeFragment stmt : getAllCodeFragments())
-            if (stmt.codeFragmentString().equals(stmtString))
-                s = stmt;
-        return s;
-    }
 
     protected Statement findRandomCandidateStatement(CodeFragment stmt) {
-        System.out.println(stmt.getContext().equalString());
-        System.out.println(stmt.codeFragmentString());
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : getAllUniqueCodeFragments())
             if (stmt.isReplace(statement) && !statement.equalString().equals(stmt.equalString())) {
-                System.out.println(statement.getContext().equalString());
-                System.out.println(statement.codeFragmentString());
-
                 list.add(statement);
             }
 

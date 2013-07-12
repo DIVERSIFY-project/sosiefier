@@ -76,7 +76,7 @@ public class Main {
         else {
             TransformationParser tf = new TransformationParser(statements);
             List<Transformation> list = tf.parseDir(cmd.getOptionValue("transformation"));
-            d.run(list);
+//            d.run(list);
         }
 
         d.printResult(cmd.getOptionValue("out"));
