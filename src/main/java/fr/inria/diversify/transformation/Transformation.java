@@ -26,6 +26,7 @@ public abstract class Transformation {
         transforms = new ArrayList<CodeFragment>();
     }
 
+    public abstract void write(StringBuffer sb, char separator);
     public abstract JSONObject toJSONObject() throws JSONException;
 
     public void apply(String srcDir) throws Exception {
@@ -93,4 +94,5 @@ public abstract class Transformation {
     public int numberOfFailure() {
         return failures;
     }
+
 }

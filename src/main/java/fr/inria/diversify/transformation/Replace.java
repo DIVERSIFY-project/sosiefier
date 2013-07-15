@@ -84,4 +84,42 @@ public class Replace extends Transformation {
     public void addVarMapping(CodeFragment position, Map<String, String> mapping) {
         variableMapping.put(position, mapping);
     }
+
+
+    public void write(StringBuffer sb, char separator) {
+        CodeFragment t = transforms.get(0);
+        CodeFragment r = replaces.get(t);
+
+        sb.append(t.getCodeFragmentType().getSimpleName());
+        sb.append(separator);
+        sb.append(r.getCodeFragmentType().getSimpleName());
+        sb.append(separator);
+
+        sb.append(t.getCtCodeFragment().toString().length()+"");
+        sb.append(separator);
+        sb.append(r.getCtCodeFragment().toString().length()+"");
+        sb.append(separator);
+
+        sb.append(t.getSourceClass().getQualifiedName());
+        sb.append(separator);
+        sb.append(r.getSourceClass().getQualifiedName());
+        sb.append(separator);
+
+        sb.append(t.getSourcePackage().getQualifiedName());
+        sb.append(separator);
+        sb.append(r.getSourcePackage().getQualifiedName());
+        sb.append(separator);
+
+        sb.append(t.getInputContext().size()+"");
+        sb.append(separator);
+        sb.append(r.getInputContext().size()+"");
+        sb.append(separator);
+
+        sb.append(t.getInputContext().hasOnlyPrimitive()+"");
+        sb.append(separator);
+        sb.append(r.getInputContext().hasOnlyPrimitive()+"");
+        sb.append(separator);
+
+        sb.append(failures+"");
+    }
 }
