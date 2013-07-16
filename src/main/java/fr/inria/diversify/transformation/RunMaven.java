@@ -66,7 +66,7 @@ public class RunMaven extends  Thread {
         //freebsd
         File mvnHome = new File("/usr/local/share/java/maven3");
         if(!mvnHome.exists())
-            //osx
+            //osx and ubuntu
             mvnHome = new File("/usr/share/maven");
 
         invoker.setMavenHome(mvnHome);

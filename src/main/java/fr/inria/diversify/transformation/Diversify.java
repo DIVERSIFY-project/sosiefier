@@ -68,6 +68,7 @@ public class Diversify {
 
         } catch (Exception e) {
             System.out.println("compile error ");
+
         }
         trans.restore(dir + "/" + srcDir);
         killUselessThread();

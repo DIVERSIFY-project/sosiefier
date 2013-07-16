@@ -80,7 +80,6 @@ public class Replace extends Transformation {
         return true;
     }
 
-
     public void addVarMapping(CodeFragment position, Map<String, String> mapping) {
         variableMapping.put(position, mapping);
     }
@@ -88,6 +87,14 @@ public class Replace extends Transformation {
     public void addReplace(Replace replace) {
         this.replaces.putAll(replace.replaces);
         this.variableMapping.putAll(replace.variableMapping);
+    }
+
+    public Delete toDelete() throws Exception {
+        Delete delete = new Delete();
+        for(CodeFragment codeFragment : transforms) {
+            delete.addSourceCode(codeFragment);
+        }
+        return delete;
     }
 
     public void write(StringBuffer sb, char separator) {

@@ -82,7 +82,8 @@ public class CoverageReport implements ICoverageReport {
 //            if(classCoverage.getLine(i).getStatus() == 2 || classCoverage.getLine(i).getStatus() == 1)
              if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
                 ret++;
-
+//         System.out.println("class: "+stmt.getSourceClass().getPosition().getLine()+ " "+stmt.getSourceClass().getPosition().getEndLine());
+//        System.out.println("jacoco: "+classCoverage.getFirstLine()+ " "+classCoverage.getLastLine());
         return ret/(double)(stmt.getEndLine()- stmt.getStartLine() + 1);
     }
 }

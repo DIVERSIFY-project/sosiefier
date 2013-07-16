@@ -35,7 +35,7 @@ public abstract class Transformation {
 
         for(CodeFragment trans : transforms)  {
             printJavaFile(srcDir, getOriginalClass(trans));
-                    printJavaFile("/Users/Simon/Documents/code/diversify-statements/tmp",  getOriginalClass(trans));
+//                    printJavaFile("/Users/Simon/Documents/code/diversify-statements/tmp",  getOriginalClass(trans));
         }
         for(CodeFragment trans : transforms)
             removeSourceCode(getOriginalClass(trans));
