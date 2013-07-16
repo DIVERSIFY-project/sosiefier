@@ -77,12 +77,33 @@ public class TransformationParser {
         return null;
     }
 
-    protected Transformation parseDelete(JSONObject jsonObject) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+    protected Transformation parseDelete(JSONObject jsonObject) throws Exception {
+        Delete trans = new Delete();
+
+        JSONArray array = jsonObject.getJSONArray("transformation");
+        for(int i = 0; i <array.length(); i++) {
+            CodeFragment d = findCodeFragment(array.getJSONObject(i));
+            trans.addSourceCode(d);
+        }
+
+        if(jsonObject.getBoolean("allTestRun"))
+            trans.setJUnitResult(jsonObject.getInt("Failures"));
+
+        return trans;
     }
 
-    protected Transformation parseAdd(JSONObject jsonObject) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+    protected Transformation parseAdd(JSONObject jsonObject) throws Exception {
+        Add trans = new Add();
+        JSONArray array = jsonObject.getJSONArray("transformation");
+        for(int i = 0; i <array.length(); i++) {
+            JSONObject t = array.getJSONObject(i);
+            CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));
+            trans.addCodeFragmentToAdd(position, findCodeFragment(t.getJSONObject("CodeFragmentAdd")));
+        }
+        if(jsonObject.getBoolean("allTestRun"))
+            trans.setJUnitResult(jsonObject.getInt("Failures"));
+
+        return trans;
     }
 
     protected Transformation parseReplace(JSONObject jsonObject) throws Exception {
@@ -116,19 +137,19 @@ public class TransformationParser {
 
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws Exception {
         CodeFragment cf = null;
-//        System.out.println(jsonObject);
         for (CodeFragment codeFragment : codeFragments.getCodeFragments()) {
              try {
             if (codeFragment.getCodeFragmentType().getSimpleName().equals(jsonObject.get("Type"))
                     && codeFragment.positionString().equals(jsonObject.get("Position"))
-                    && codeFragment.equalString().trim().equals(jsonObject.get("SourceCode"))) {
+                    && codeFragment.equalString().equals(jsonObject.get("SourceCode"))) {
                 cf = codeFragment;
                 break;
             }
              } catch (Exception e) {}
         }
-        if (cf  == null)
+        if (cf  == null) {
             throw new Exception();
+        }
         return cf;
     }
 

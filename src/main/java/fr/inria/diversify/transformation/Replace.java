@@ -85,6 +85,10 @@ public class Replace extends Transformation {
         variableMapping.put(position, mapping);
     }
 
+    public void addReplace(Replace replace) {
+        this.replaces.putAll(replace.replaces);
+        this.variableMapping.putAll(replace.variableMapping);
+    }
 
     public void write(StringBuffer sb, char separator) {
         CodeFragment t = transforms.get(0);

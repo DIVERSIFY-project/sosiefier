@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.cu.CompilationUnit;
@@ -22,7 +23,13 @@ public class Delete extends Transformation {
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        JSONObject object = new JSONObject();
+        object.put("type", "replace");
+        object.put("transformation", transforms);
+        object.put("allTestRun", (failures != null));
+        object.put("Failures", failures);
+
+        return object;
     }
 
     protected void addSourceCode(CodeFragment delete) throws Exception {

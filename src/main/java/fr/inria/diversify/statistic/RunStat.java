@@ -54,8 +54,6 @@ public class RunStat {
             src = cmd.getOptionValue("src");
 
         initSpoon(project+"/"+src);
-        ICoverageReport rg = getCoverageReport(cmd.getOptionValue("jacoco"),project+"/"+classes);
-
 
         computeStatistic(cmd.getOptionValue("out"));
         System.out.println("number of statement: " + statements.size());
@@ -68,7 +66,7 @@ public class RunStat {
 
     protected void initSpoon(String directory) {
         StandardEnvironment env = new StandardEnvironment();
-        env.setComplianceLevel(6);
+        env.setComplianceLevel(5);
         env.setVerbose(true);
         env.setDebug(true);
 
@@ -115,6 +113,8 @@ public class RunStat {
         StatisticDiversification sd = new StatisticDiversification(listF, statements);
         sd.writeStat(fileName);
 
+        writeGoodTransformation(fileName+"_goodTransformation.json",list);
+
     }
 
     protected void computeOtherStat() {
@@ -134,7 +134,18 @@ public class RunStat {
         }
     }
 
-    public void writeTransformation(String FileName, List<Transformation> transformations) throws IOException, JSONException {
+    protected void writeGoodTransformation(String FileName, List<Transformation> transformations) throws IOException, JSONException {
+        List<Transformation> goodTransformation = new ArrayList<Transformation>();
+
+        for(Transformation transformation : transformations) {
+            if(transformation.numberOfFailure() == 0) {
+                goodTransformation.add(transformation);
+            }
+        }
+        writeTransformation(FileName, goodTransformation);
+    }
+
+    protected void writeTransformation(String FileName, List<Transformation> transformations) throws IOException, JSONException {
 
         BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
         JSONArray obj = new JSONArray();

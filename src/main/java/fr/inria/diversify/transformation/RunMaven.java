@@ -1,12 +1,12 @@
 package fr.inria.diversify.transformation;
 
 
-import org.apache.maven.cli.MavenCli;
+import org.apache.maven.shared.invoker.*;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,22 +55,56 @@ public class RunMaven extends  Thread {
 
 //
     public void run() {
-        Runtime r = Runtime.getRuntime();
-        try {
-            Process p = r.exec("mvn -f " + directory + "/pom.xml " + lifeCycle);
-            p.waitFor();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line;
-            StringBuffer output = new StringBuffer();
-            while ((line = reader.readLine()) != null) {
-                output.append(line + "\n");
-                System.out.println(line);
-            }
-            reader.close();
-            parseResult(output.toString());
-    } catch (Exception e) {}
+        InvocationRequest request = new DefaultInvocationRequest();
+        request.setPomFile( new File( directory + "/pom.xml" ) );
+        List<String> l = new ArrayList<String>();
+        l.add("clean");
+        l.add(lifeCycle);
+        request.setGoals(l);
 
+        Invoker invoker = new DefaultInvoker();
+        //freebsd
+        File mvnHome = new File("/usr/local/share/java/maven3");
+        if(!mvnHome.exists())
+            //osx
+            mvnHome = new File("/usr/share/maven");
+
+        invoker.setMavenHome(mvnHome);
+
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        PrintStreamHandler psh = new PrintStreamHandler(new PrintStream(os), true);
+        invoker.setOutputHandler(psh);
+        invoker.setErrorHandler(psh);
+
+        try {
+            invoker.execute(request);
+            if(clojureTest)
+                parseClojureResult(os.toString());
+            else
+                parseResult(os.toString());
+
+        } catch (MavenInvocationException e) {
+            e.printStackTrace();
+        }
     }
+
+//    public void run() {
+//        Runtime r = Runtime.getRuntime();
+//        try {
+//            Process p = r.exec("mvn -f " + directory + "/pom.xml " + lifeCycle);
+//            p.waitFor();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+//            String line;
+//            StringBuffer output = new StringBuffer();
+//            while ((line = reader.readLine()) != null) {
+//                output.append(line + "\n");
+//                System.out.println(line);
+//            }
+//            reader.close();
+//            parseResult(output.toString());
+//    } catch (Exception e) {}
+//
+//    }
 //    "compile-tests:"
 //            "*** Some tests failed ***"
 
