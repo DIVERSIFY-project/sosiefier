@@ -28,10 +28,9 @@ public class TransformationParser {
         List<Transformation> list = new ArrayList<Transformation>();
         File file = new File(dir);
 
-        for (File f : file.listFiles())  {
-            System.out.println(f);
-            if(f.getName().endsWith(".json"))
-
+        for (File f : file.listFiles())
+            if(f.getName().endsWith(".json")) {
+                System.out.println(f);
                 list.addAll(parseFile(f));
             }
 
@@ -67,14 +66,22 @@ public class TransformationParser {
 
     protected Transformation parseTransformation(JSONObject jsonObject) throws Exception {
         String type = jsonObject.getString("type");
-        if(type.equals("replace"))
-            return parseReplace(jsonObject);
-        if(type.equals("add"))
-            return parseAdd(jsonObject);
-        if(type.equals("delete"))
-            return parseDelete(jsonObject);
+        Transformation trans = null;
 
-        return null;
+        if(type.equals("replace"))
+            trans = parseReplace(jsonObject);
+        if(type.equals("add"))
+            trans = parseAdd(jsonObject);
+        if(type.equals("delete"))
+            trans = parseDelete(jsonObject);
+
+        if(jsonObject.has("parent")) {
+            JSONArray array = jsonObject.getJSONArray("parents");
+            for(int i = 0; i <array.length(); i++) {
+                trans.addParent(parseTransformation(array.getJSONObject(i)));
+            }
+        }
+        return trans;
     }
 
     protected Transformation parseDelete(JSONObject jsonObject) throws Exception {

@@ -1,13 +1,14 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.runtest.ICoverageReport;
-import spoon.reflect.Factory;
+import fr.inria.diversify.transformation.Add;
+import fr.inria.diversify.transformation.Delete;
+import fr.inria.diversify.transformation.Replace;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.declaration.CtElement;
 
 import java.util.*;
 
@@ -16,12 +17,11 @@ import java.util.*;
  * Date: 7/9/13
  * Time: 10:02 AM
  */
-public class TransformationQuery {
+public class TransformationQuery extends AbstractTransformationQuery {
     protected ICoverageReport coverageReport;
-    protected CodeFragmentList codeFragments;
-    protected int nbTransformation = 1;
-    protected String type = "replace";
+
     protected List<CodeFragment> cfToTransform;
+
 
     public TransformationQuery(ICoverageReport coverageReport, CodeFragmentList codeFragments) {
         this.coverageReport = coverageReport;
@@ -40,28 +40,6 @@ public class TransformationQuery {
                 break;
             }
         }
-    }
-
-    public void setNbTransformation(int n) {
-        nbTransformation = n;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Transformation getTransformation() throws Exception {
-        if(type.equals("replace"))
-            return replace();
-
-        if(type.equals("add"))
-            return add();
-
-        if(type.equals("delete"))
-            return delete();
-
-        cfToTransform.clear();
-        return null;
     }
 
 
@@ -168,21 +146,6 @@ public class TransformationQuery {
         Random r = new Random();
         CtStatement tmp = (CtStatement) copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
         return new Statement(tmp);
-    }
-
-    protected CtElement copyElem(CtElement elem) {
-        Factory factory = elem.getFactory();
-        CtElement tmp = factory.Core().clone(elem);
-        tmp.setParent(elem.getParent());
-        return tmp;
-    }
-
-    protected List<CodeFragment> getAllCodeFragments() {
-        return codeFragments.getCodeFragments();
-    }
-
-    protected Collection<CodeFragment> getAllUniqueCodeFragments() {
-        return codeFragments.getUniqueCodeFragmentList();
     }
 
 }

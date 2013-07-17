@@ -109,12 +109,9 @@ public class RunStat {
         for(Transformation trans : list) {
                     listF.add(trans);
         }
-        System.out.println("nb transformation2: "+listF.size());
+        writeGoodTransformation(fileName+"_goodTransformation.json",list);
         StatisticDiversification sd = new StatisticDiversification(listF, statements);
         sd.writeStat(fileName);
-
-        writeGoodTransformation(fileName+"_goodTransformation.json",list);
-
     }
 
     protected void computeOtherStat() {
@@ -136,7 +133,6 @@ public class RunStat {
 
     protected void writeGoodTransformation(String FileName, List<Transformation> transformations) throws IOException, JSONException {
         List<Transformation> goodTransformation = new ArrayList<Transformation>();
-
         for(Transformation transformation : transformations) {
             if(transformation.numberOfFailure() == 0) {
                 goodTransformation.add(transformation);

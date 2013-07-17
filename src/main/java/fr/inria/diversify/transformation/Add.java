@@ -45,6 +45,12 @@ public class Add extends Transformation {
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 
+        JSONArray Jparents = new JSONArray();
+        object.put("parents",Jparents);
+        for(Transformation parent : parents) {
+            Jparents.put(parent.toJSONObject());
+        }
+
         return object;
     }
 
@@ -61,11 +67,34 @@ public class Add extends Transformation {
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, adds.get(position).codeFragmentString(), 0));
     }
 
+    @Override
+    public Replace toReplace() throws Exception {
+        throw new Exception();
+    }
+
+    @Override
+    public Add toAdd() throws Exception {
+        return this;
+    }
+
+    @Override
+    public Delete toDelete() throws Exception {
+        Delete d = new Delete();
+        for (CodeFragment cf : transforms)
+            d.addCodeFragmentToTransform(cf);
+        return d;
+    }
+
     public boolean addCodeFragmentToAdd(CodeFragment position, CodeFragment add) {
         if(transforms.contains(position))
             return false;
         transforms.add(position);
         adds.put(position,add);
         return true;
+    }
+
+    public void add(Transformation add) {
+        transforms.addAll(add.transforms);
+        adds.putAll(((Add)add).adds);
     }
 }

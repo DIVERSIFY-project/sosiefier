@@ -29,6 +29,12 @@ public class Delete extends Transformation {
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 
+        JSONArray Jparents = new JSONArray();
+        object.put("parents",Jparents);
+        for(Transformation parent : parents) {
+            Jparents.put(parent.toJSONObject());
+        }
+
         return object;
     }
 
@@ -44,5 +50,28 @@ public class Delete extends Transformation {
         int r = sp.getSourceEnd() - sp.getSourceStart();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
+    }
+
+    @Override
+    public Replace toReplace() throws Exception {
+        throw new Exception();
+    }
+
+    @Override
+    public Add toAdd() throws Exception {
+       Add a = new Add();
+       for (CodeFragment cf : transforms)
+            a.addCodeFragmentToAdd(cf,cf);
+        return a;
+    }
+
+    @Override
+    public Delete toDelete() throws Exception {
+        return this;
+    }
+
+    @Override
+    public void add(Transformation delete) {
+        transforms.addAll(delete.transforms);
     }
 }

@@ -44,9 +44,16 @@ public class Replace extends Transformation {
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 
+        JSONArray Jparents = new JSONArray();
+        object.put("parents",Jparents);
+        for(Transformation parent : parents) {
+            Jparents.put(parent.toJSONObject());
+        }
+
         return object;
     }
 
+    @Override
     protected void addSourceCode(CodeFragment position) throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(position);
 
@@ -68,8 +75,29 @@ public class Replace extends Transformation {
 
         int r = sp.getSourceEnd() - compileUnit.beginOfLineIndex(sp.getSourceStart());
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+replaces.get(position).codeFragmentString()+"\n", 0));
+    }
+
+    @Override
+    public Replace toReplace() throws Exception {
+        return this;
+    }
+
+    @Override
+    public Add toAdd() throws Exception {
+        Add a = new Add();
+        for (CodeFragment cf : transforms)
+            a.addCodeFragmentToAdd(cf,replaces.get(cf));
+        return a;
+    }
+
+    @Override
+    public Delete toDelete() throws Exception {
+        Delete delete = new Delete();
+        for(CodeFragment codeFragment : transforms) {
+            delete.addCodeFragmentToTransform(codeFragment);
+        }
+        return delete;
     }
 
     public boolean addCodeFragmentToReplace(CodeFragment position, CodeFragment replace) {
@@ -84,19 +112,14 @@ public class Replace extends Transformation {
         variableMapping.put(position, mapping);
     }
 
-    public void addReplace(Replace replace) {
-        this.replaces.putAll(replace.replaces);
-        this.variableMapping.putAll(replace.variableMapping);
+    @Override
+    public void add(Transformation replace) {
+        transforms.addAll(replace.transforms);
+        this.replaces.putAll(((Replace)replace).replaces);
+        this.variableMapping.putAll(((Replace)replace).variableMapping);
     }
 
-    public Delete toDelete() throws Exception {
-        Delete delete = new Delete();
-        for(CodeFragment codeFragment : transforms) {
-            delete.addSourceCode(codeFragment);
-        }
-        return delete;
-    }
-
+    @Override
     public void write(StringBuffer sb, char separator) {
         CodeFragment t = transforms.get(0);
         CodeFragment r = replaces.get(t);

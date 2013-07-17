@@ -21,9 +21,11 @@ import java.util.List;
 public abstract class Transformation {
     protected List<CodeFragment> transforms;
     protected Integer failures;
+    protected List<Transformation> parents;
 
     public Transformation() {
         transforms = new ArrayList<CodeFragment>();
+        parents = new ArrayList<Transformation>();
     }
 
     public abstract void write(StringBuffer sb, char separator);
@@ -35,8 +37,9 @@ public abstract class Transformation {
 
         for(CodeFragment trans : transforms)  {
             printJavaFile(srcDir, getOriginalClass(trans));
-//                    printJavaFile("/Users/Simon/Documents/code/diversify-statements/tmp",  getOriginalClass(trans));
+//            printJavaFile("/Users/Simon/Documents/code/diversify-statements/tmp",  getOriginalClass(trans));
         }
+
         for(CodeFragment trans : transforms)
             removeSourceCode(getOriginalClass(trans));
     }
@@ -83,6 +86,10 @@ public abstract class Transformation {
         transforms.add(cf);
     }
 
+    public void addParent(Transformation p) {
+        parents.add(p);
+    }
+
     public List<CodeFragment> getTransformation() {
         return transforms;
     }
@@ -95,4 +102,10 @@ public abstract class Transformation {
         return failures;
     }
 
+    public abstract Replace toReplace() throws Exception;
+    public abstract Add toAdd() throws Exception;
+    public abstract Delete toDelete() throws Exception;
+
+
+    public abstract void add(Transformation replace);
 }

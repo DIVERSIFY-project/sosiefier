@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.runtest.ICoverageReport;
+import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -19,17 +18,17 @@ public class Diversify {
 
     protected String projectDir;
     protected String tmpDir;
-    protected CodeFragmentList codeFragments;
-    protected ICoverageReport coverageReport;
+//    protected CodeFragmentList codeFragments;
+//    protected ICoverageReport coverageReport;
     protected List<Transformation> transformations;
     protected Set<Thread> threadSet;
     protected String srcDir;
     protected boolean clojureTest;
     protected int timeOut;
+    protected AbstractTransformationQuery transQuery;
 
-    public Diversify(CodeFragmentList codeFragments, ICoverageReport coverageReport, String projectDir) {
-        this.coverageReport = coverageReport;
-        this.codeFragments = codeFragments;
+    public Diversify(AbstractTransformationQuery transQuery, String projectDir) {
+        this.transQuery = transQuery;
         this.tmpDir = "output_diversify";
         this.srcDir = "src/main/java";
         this.projectDir = projectDir;
@@ -41,12 +40,12 @@ public class Diversify {
 
     public void run(int n) throws Exception {
         String dir = prepare(projectDir, tmpDir);
-        TransformationQuery transQuery = new TransformationQuery(coverageReport, codeFragments);
+//        TransformationQuery transQuery = new TransformationQuery(coverageReport, codeFragments);
 
         for (int i = 0; i < n; i++) {
             System.out.println(i);
-            transQuery.setType("replace");
-            transQuery.setNbTransformation(1);
+//            transQuery.setType("replace");
+//            transQuery.setNbTransformation(1);
             run(transQuery.getTransformation(), dir);
         }
     }
@@ -57,12 +56,12 @@ public class Diversify {
             run(tran, dir);
     }
 
-    protected void run(Transformation trans, String dir) throws Exception {
+    protected void run(Transformation trans, String tmpDir) throws Exception {
         initThreadGroup();
-        System.out.println("output dir: " + dir + "/" + srcDir);
+        System.out.println("output dir: " + tmpDir + "/" + srcDir);
         try {
-            trans.apply(dir + "/" + srcDir);
-            int failures = runTest(dir);
+            trans.apply(tmpDir + "/" + srcDir);
+            int failures = runTest(tmpDir);
             trans.setJUnitResult(failures);
             transformations.add(trans);
 
@@ -70,7 +69,7 @@ public class Diversify {
             System.out.println("compile error ");
 
         }
-        trans.restore(dir + "/" + srcDir);
+        trans.restore(tmpDir + "/" + srcDir);
         killUselessThread();
 
     }

@@ -2,19 +2,16 @@ package fr.inria.diversify;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
-import fr.inria.diversify.transformation.Diversify;
-import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationParser;
+import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.runtest.ICoverageReport;
 import fr.inria.diversify.runtest.NullCoverageReport;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
-import fr.inria.diversify.statistic.StatisticDiversification;
-import fr.inria.diversify.transformation.TransformationQuery;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.GnuParser;
-import org.apache.commons.cli.Options;
+
+import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQueryT;
+import fr.inria.diversify.util.DiversifyProperties;
 import org.json.JSONException;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
@@ -25,7 +22,7 @@ import spoon.support.builder.SpoonBuildingManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -37,54 +34,61 @@ public class Main {
     }
 
 	public Main(String[] args) throws Exception {
-        CommandLineParser parser = new GnuParser();
-        CommandLine cmd = parser.parse( commandLineOption(), args);
+        DiversifyProperties prop = new DiversifyProperties(args[0]);
 
-        String project =  cmd.getOptionValue("project");
-        String classes = "target/classes";
-        if(cmd.getOptionValue("classes") != null)
-                classes = cmd.getOptionValue("classes");
-
-        String src =  "src/main/java";
-        if(cmd.getOptionValue("src") != null)
-            src = cmd.getOptionValue("src");
-
-        initSpoon(project+"/"+src);
-        ICoverageReport rg = getCoverageReport(cmd.getOptionValue("jacoco"),project+"/"+classes);
+        initSpoon();
 
 //		computeStatistic(cmd.getOptionValue("out"));
         System.out.println("number of statement: " + statements.size());
 
-        runDiversification(cmd, rg);
+        runDiversification();
 //        computeDiversifyStat("/Users/Simon/Documents/diversify_exp/diversification/result/clojure/tranformation", cmd.getOptionValue("out"), rg);
     }
 
-    protected void runDiversification(CommandLine cmd, ICoverageReport rg) throws Exception {
-        Diversify d  = new Diversify(statements, rg, cmd.getOptionValue("project"));
+    protected void runDiversification() throws Exception {
+        Diversify d  = new Diversify(initTransformationQuery(), DiversifyProperties.getProperty("project"));
 
-        if(cmd.getOptionValue("src") != null)
-            d.setSourceDirectory(cmd.getOptionValue("src"));
+        d.setSourceDirectory(DiversifyProperties.getProperty("src"));
 
-        if(cmd.getOptionValue("clojure") != null && cmd.getOptionValue("clojure").equals("true"))
+        if(DiversifyProperties.getProperty("clojure").equals("true"))
             d.setClojureTest(true);
 
-        if(cmd.getOptionValue("timeOut") != null)
-            d.setTimeOut(Integer.parseInt(cmd.getOptionValue("timeOut")));
+        int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
+        d.setTimeOut(t);
 
-        if(cmd.getOptionValue("nbRun") != null)
-            d.run(Integer.parseInt(cmd.getOptionValue("nbRun")));
-        else {
-            TransformationParser tf = new TransformationParser(statements);
-            List<Transformation> list = tf.parseDir(cmd.getOptionValue("transformation"));
-//            d.run(list);
-        }
+        int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
+        d.run(n);
 
-        d.printResult(cmd.getOptionValue("out"));
+        d.printResult(DiversifyProperties.getProperty("out"));
     }
 
-    protected void initSpoon(String directory) {
+    protected AbstractTransformationQuery initTransformationQuery() throws IOException, JSONException {
+        ICoverageReport rg = initCoverageReport();
+
+        AbstractTransformationQuery atq = null;
+
+        String transformation = DiversifyProperties.getProperty("transformation");
+        if(transformation != null) {
+            TransformationParser tf = new TransformationParser(statements);
+            List<Transformation> list = tf.parseDir(transformation);
+            atq = new TransformationQueryT(list, statements);
+        } else {
+            atq = new TransformationQuery(rg, statements);
+        }
+        atq.setType(DiversifyProperties.getProperty("transformationType"));
+        int n  = Integer.parseInt(DiversifyProperties.getProperty("transformationSize"));
+        atq.setNbTransformation(n);
+
+        return atq;
+    }
+
+
+    protected void initSpoon() {
+        String srcDirectory = DiversifyProperties.getProperty("project")+"/"+DiversifyProperties.getProperty("src");
+
         StandardEnvironment env = new StandardEnvironment();
-		env.setComplianceLevel(5);
+        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
+		env.setComplianceLevel(javaVersion);
 		env.setVerbose(true);
 		env.setDebug(true);
 
@@ -92,7 +96,7 @@ public class Main {
 		Factory factory = new Factory(f, env);
 		SpoonBuildingManager builder = new SpoonBuildingManager(factory);
 
-        for(String dir : directory.split(System.getProperty("path.separator")))
+        for(String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 builder.addInputSource(new File(dir));
             } catch (IOException e) {
@@ -140,30 +144,19 @@ public class Main {
 		}
 	}
 
-    protected ICoverageReport getCoverageReport(String jacocoFile, String classes) throws IOException {
+    protected ICoverageReport initCoverageReport() throws IOException {
+        String project =  DiversifyProperties.getProperty("project");
+        String classes = DiversifyProperties.getProperty("classes");
+        String jacocoFile = DiversifyProperties.getProperty("jacoco");
         ICoverageReport icr;
 
         if(jacocoFile != null)
-            icr = new CoverageReport(classes,jacocoFile);
+            icr = new CoverageReport(project+"/"+classes,jacocoFile);
         else
             icr = new NullCoverageReport();
 
-        System.out.println("jacoco " + icr.getClass());
         icr.create();
         return  icr;
     }
 
-    protected Options commandLineOption() {
-        Options options = new Options();
-        options.addOption("project", true, "the project directory");
-        options.addOption("src", true, "sources directory");
-        options.addOption("classes", true, "classes directory");
-        options.addOption("nbRun", true, "number of run");
-        options.addOption("jacoco", true, "jacoco file for test coverage");
-        options.addOption("clojure", true, "");
-        options.addOption("out", true, "prefix for output files");
-        options.addOption("timeOut", true, "time out for test");
-        options.addOption("transformation", true, "");
-        return  options;
-    }
 }
