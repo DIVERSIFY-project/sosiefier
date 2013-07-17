@@ -21,6 +21,7 @@ public class TransformationParser {
     CodeFragmentList codeFragments;
 
     public TransformationParser(CodeFragmentList list) {
+        count = 0;
         codeFragments = list;
     }
 
@@ -40,7 +41,7 @@ public class TransformationParser {
     public List<Transformation> parseFile(File file) throws IOException, JSONException {
         List<Transformation> list = new ArrayList<Transformation>();
         BufferedReader br = new BufferedReader(new FileReader(file));
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String line = br.readLine();
         while (line != null) {
             sb.append(line);
@@ -133,9 +134,6 @@ public class TransformationParser {
         CodeFragment position = findCodeFragment((JSONObject) jsonObject.get("StatementToReplace"));
         trans.addCodeFragmentToReplace(position, findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
         trans.addVarMapping(position, parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
-//        trans.setStatementToReplace(findCodeFragment((JSONObject) jsonObject.get("StatementToReplace")));
-//        trans.setStatementReplacedBy(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
-//        trans.setVariableMapping(parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
         if(jsonObject.getBoolean("allTestRun"))
             trans.setJUnitResult(jsonObject.getInt("Failures"));
 
@@ -147,14 +145,16 @@ public class TransformationParser {
         for (CodeFragment codeFragment : codeFragments.getCodeFragments()) {
              try {
             if (codeFragment.getCodeFragmentType().getSimpleName().equals(jsonObject.get("Type"))
-                    && codeFragment.positionString().equals(jsonObject.get("Position"))
-                    && codeFragment.equalString().equals(jsonObject.get("SourceCode"))) {
+                    && codeFragment.positionString().equals(jsonObject.get("Position"))  ){
+//                    && codeFragment.equalString().equals(jsonObject.get("SourceCode"))) {
                 cf = codeFragment;
                 break;
             }
              } catch (Exception e) {}
         }
         if (cf  == null) {
+            System.out.println(jsonObject.get("Position"));
+            System.out.println(jsonObject.get("SourceCode"));
             throw new Exception();
         }
         return cf;
@@ -170,10 +170,10 @@ public class TransformationParser {
         return map;
     }
 
-    protected List<String> parseFailures(JSONArray array) throws JSONException {
-        List<String> list = new ArrayList<String>();
-        for(int i = 0; i < array.length(); i++)
-            list.add(array.getString(i));
-        return list;
-    }
+//    protected List<String> parseFailures(JSONArray array) throws JSONException {
+//        List<String> list = new ArrayList<String>();
+//        for(int i = 0; i < array.length(); i++)
+//            list.add(array.getString(i));
+//        return list;
+//    }
 }

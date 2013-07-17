@@ -2,6 +2,8 @@ package fr.inria.diversify;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
+import fr.inria.diversify.statistic.StatisticDiversification;
+import fr.inria.diversify.statistic.Util;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.runtest.CoverageReport;
 import fr.inria.diversify.runtest.ICoverageReport;
@@ -12,6 +14,7 @@ import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQueryT;
 import fr.inria.diversify.util.DiversifyProperties;
+import org.json.JSONArray;
 import org.json.JSONException;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
@@ -20,37 +23,41 @@ import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
 import spoon.support.builder.SpoonBuildingManager;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Main {
-	private CodeFragmentList statements;
+    private CodeFragmentList statements;
 
     public static void main(String[] args) throws Exception {
-		Main app = new Main(args);
+        new Main(args);
     }
 
-	public Main(String[] args) throws Exception {
-        DiversifyProperties prop = new DiversifyProperties(args[0]);
+    public Main(String[] args) throws Exception {
+        new DiversifyProperties(args[0]);
 
         initSpoon();
 
-//		computeStatistic(cmd.getOptionValue("out"));
         System.out.println("number of statement: " + statements.size());
 
         runDiversification();
-//        computeDiversifyStat("/Users/Simon/Documents/diversify_exp/diversification/result/clojure/tranformation", cmd.getOptionValue("out"), rg);
+
+        if (DiversifyProperties.getProperty("stat").equals("true"))
+            computeStatistic();
     }
 
     protected void runDiversification() throws Exception {
-        Diversify d  = new Diversify(initTransformationQuery(), DiversifyProperties.getProperty("project"));
+        Diversify d = new Diversify(initTransformationQuery(), DiversifyProperties.getProperty("project"));
 
         d.setSourceDirectory(DiversifyProperties.getProperty("src"));
 
-        if(DiversifyProperties.getProperty("clojure").equals("true"))
+        if (DiversifyProperties.getProperty("clojure").equals("true"))
             d.setClojureTest(true);
 
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
@@ -65,18 +72,17 @@ public class Main {
     protected AbstractTransformationQuery initTransformationQuery() throws IOException, JSONException {
         ICoverageReport rg = initCoverageReport();
 
-        AbstractTransformationQuery atq = null;
-
-        String transformation = DiversifyProperties.getProperty("transformation");
-        if(transformation != null) {
+        AbstractTransformationQuery atq;
+        String transformation = DiversifyProperties.getProperty("transformation.directory");
+        if (transformation != null) {
             TransformationParser tf = new TransformationParser(statements);
             List<Transformation> list = tf.parseDir(transformation);
             atq = new TransformationQueryT(list, statements);
         } else {
             atq = new TransformationQuery(rg, statements);
         }
-        atq.setType(DiversifyProperties.getProperty("transformationType"));
-        int n  = Integer.parseInt(DiversifyProperties.getProperty("transformationSize"));
+        atq.setType(DiversifyProperties.getProperty("transformation.type"));
+        int n = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
         atq.setNbTransformation(n);
 
         return atq;
@@ -84,79 +90,116 @@ public class Main {
 
 
     protected void initSpoon() {
-        String srcDirectory = DiversifyProperties.getProperty("project")+"/"+DiversifyProperties.getProperty("src");
+        String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
 
         StandardEnvironment env = new StandardEnvironment();
         int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
-		env.setComplianceLevel(javaVersion);
-		env.setVerbose(true);
-		env.setDebug(true);
+        env.setComplianceLevel(javaVersion);
+        env.setVerbose(true);
+        env.setDebug(true);
 
-		DefaultCoreFactory f = new DefaultCoreFactory();
-		Factory factory = new Factory(f, env);
-		SpoonBuildingManager builder = new SpoonBuildingManager(factory);
+        DefaultCoreFactory f = new DefaultCoreFactory();
+        Factory factory = new Factory(f, env);
+        SpoonBuildingManager builder = new SpoonBuildingManager(factory);
 
-        for(String dir : srcDirectory.split(System.getProperty("path.separator")))
+        for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 builder.addInputSource(new File(dir));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         try {
-               System.out.println("sourcepath "+factory.getEnvironment().getSourcePath());
+            System.out.println("sourcepath " + factory.getEnvironment().getSourcePath());
             System.out.println(Thread.currentThread().getContextClassLoader().getClass());
 
             builder.build();
-			} catch (Exception e) {
-					e.printStackTrace();
-			}
-		ProcessingManager pm = new QueueProcessingManager(factory);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ProcessingManager pm = new QueueProcessingManager(factory);
         StatementProcessor processor = new StatementProcessor();
-		pm.addProcessor(processor);
-		pm.process();
-	
-	    statements = processor.getStatements();
-	}
+        pm.addProcessor(processor);
+        pm.process();
 
-    protected void computeDiversifyStat(String dir, String fileName, ICoverageReport cr) throws IOException, JSONException {
-//        TransformationParser tf = new TransformationParser(statements);
-//        List<Transformation> list = tf.parseDir(dir);
-//        System.out.println("nb transformation: "+list.size());
-//        List<Transformation> listF = new ArrayList<Transformation>();
-//        for(Transformation trans : list) {
-//            if(cr.codeFragmentCoverage(trans.getToReplace()) != 0)
-//                listF.add(trans);
-//
-//        }
-//        System.out.println("nb transformation2: "+listF.size());
-//        StatisticDiversification sd = new StatisticDiversification(listF, statements);
-//        sd.writeStat(fileName);
-
+        statements = processor.getStatements();
     }
 
-	protected void computeStatistic(String output) {
-		StatisticCodeFragment stat = new StatisticCodeFragment(statements);
-		 
-		try {
-			stat.writeStatistic(output);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
     protected ICoverageReport initCoverageReport() throws IOException {
-        String project =  DiversifyProperties.getProperty("project");
+        String project = DiversifyProperties.getProperty("project");
         String classes = DiversifyProperties.getProperty("classes");
         String jacocoFile = DiversifyProperties.getProperty("jacoco");
         ICoverageReport icr;
 
-        if(jacocoFile != null)
-            icr = new CoverageReport(project+"/"+classes,jacocoFile);
+        if (jacocoFile != null)
+            icr = new CoverageReport(project + "/" + classes, jacocoFile);
         else
             icr = new NullCoverageReport();
 
         icr.create();
-        return  icr;
+        return icr;
+    }
+
+    protected void computeStatistic() throws IOException, JSONException {
+        String out = DiversifyProperties.getProperty("out");
+        computeCodeFragmentStatistic(out);
+
+        String transDir = DiversifyProperties.getProperty("transformation.directory");
+        if (transDir != null) {
+            computeDiversifyStat(transDir, out);
+        }
+//        computeOtherStat();
+    }
+
+    protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException {
+        TransformationParser tf = new TransformationParser(statements);
+        List<Transformation> transformations = tf.parseDir(transDir);
+        System.out.println("nb transformation: " + transformations.size());
+
+        writeGoodTransformation(fileName + "_goodTransformation.json", transformations);
+
+        StatisticDiversification sd = new StatisticDiversification(transformations, statements);
+        sd.writeStat(fileName);
+    }
+
+    protected void computeOtherStat() {
+        Util stat = new Util(statements);
+        System.out.println("number of possible code fragment diversification: " + stat.numberOfDiversification());
+        System.out.println("number of not possible code fragment diversification: " + stat.numberOfNotDiversification());
+
+    }
+
+    protected void computeCodeFragmentStatistic(String output) {
+        StatisticCodeFragment stat = new StatisticCodeFragment(statements);
+        try {
+            stat.writeStatistic(output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void writeGoodTransformation(String FileName, List<Transformation> transformations) throws IOException, JSONException {
+        List<Transformation> goodTransformation = new ArrayList<Transformation>();
+        for (Transformation transformation : transformations) {
+            if (transformation.numberOfFailure() == 0) {
+                goodTransformation.add(transformation);
+            }
+        }
+        writeTransformation(FileName, goodTransformation);
+    }
+
+    protected void writeTransformation(String FileName, List<Transformation> transformations) throws IOException, JSONException {
+
+        BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
+        JSONArray obj = new JSONArray();
+        for (Transformation transformation : transformations) {
+            try {
+                obj.put(transformation.toJSONObject());
+            } catch (Exception e) {
+            }
+        }
+        out.write(obj.toString());
+        out.newLine();
+        out.close();
     }
 
 }

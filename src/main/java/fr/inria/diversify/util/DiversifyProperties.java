@@ -29,8 +29,9 @@ public class DiversifyProperties {
         prop.setProperty("classes", "target/classes");
         prop.setProperty("clojure","false");
         prop.setProperty("javaVersion", "5");
-        prop.setProperty("transformationType","replace");
-        prop.setProperty("transformationSize","1");
+        prop.setProperty("transformation.type","replace");
+        prop.setProperty("transformation.size","1");
+        prop.setProperty("stat", "false");
     }
 
 }
