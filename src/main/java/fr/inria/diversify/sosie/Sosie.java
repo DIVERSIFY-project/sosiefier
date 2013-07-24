@@ -1,118 +1,83 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.sosie;
 
+import fr.inria.diversify.transformation.CompileException;
+import fr.inria.diversify.transformation.RunMaven;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import org.codehaus.plexus.util.FileUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 /**
  * User: Simon
- * Date: 5/2/13
- * Time: 5:39 PM
+ * Date: 7/22/13
+ * Time: 10:20 AM
  */
-public class Diversify {
+public class Sosie {
 
     protected String projectDir;
     protected String tmpDir;
-    protected List<Transformation> transformations;
     protected Set<Thread> threadSet;
     protected String srcDir;
-    protected boolean clojureTest;
-    protected int timeOut;
     protected AbstractTransformationQuery transQuery;
+    protected int timeOut;
 
-    public Diversify(AbstractTransformationQuery transQuery, String projectDir) {
+    public Sosie(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
-        this.tmpDir = "output_diversify";
+        this.tmpDir = "output_sosie";
         this.srcDir = "src/main/java";
         this.projectDir = projectDir;
-        clojureTest = false;
-        timeOut = 200;
-
-        transformations = new ArrayList<Transformation>();
     }
 
     public void run(int n) throws Exception {
-        String dir = prepare(projectDir, tmpDir);
-
         for (int i = 0; i < n; i++) {
             System.out.println(i);
-            run(transQuery.getTransformation(), dir);
+            run(transQuery.getTransformation());
         }
-        FileUtils.forceDelete(new File(dir));
     }
 
-    public void run(List<Transformation> trans) throws Exception {
-        String dir = prepare(projectDir, tmpDir);
-        for (Transformation tran : trans)
-            run(tran, dir);
-        FileUtils.forceDelete(new File(dir));
-    }
-
-    protected void run(Transformation trans, String tmpDir) throws Exception {
+    protected void run(Transformation trans) throws Exception {
         initThreadGroup();
-        System.out.println("output dir: " + tmpDir + "/" + srcDir);
+        String dir = prepare(projectDir, tmpDir);
+        System.out.println("output dir: " + dir + "/" + srcDir);
         try {
-            trans.apply(tmpDir + "/" + srcDir);
-            int failures = runTest(tmpDir);
-            trans.setJUnitResult(failures);
-            transformations.add(trans);
+            trans.apply(dir + "/" + srcDir);
+            if(runTest(dir) != 0)
+                FileUtils.forceDelete(new File(dir));
+            else {
+                writeTransformation(dir, trans);
+            }
 
         } catch (Exception e) {
             System.out.println("compile error ");
-
         }
-        trans.restore(tmpDir + "/" + srcDir);
         killUselessThread();
-
-    }
-
-    public void printResult(String output) {
-        try {
-            writeTransformation(output + System.currentTimeMillis() + "_transformation.json");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        StatisticDiversification stat = new StatisticDiversification(transformations);
-//        stat.writeStat(output);
-    }
-
-    public void writeTransformation(String FileName) throws IOException, JSONException {
-        if (transformations.isEmpty())
-            return;
-        BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
-        JSONArray obj = new JSONArray();
-        for (Transformation transformation : transformations) {
-            try {
-                obj.put(transformation.toJSONObject());
-            } catch (Exception e) {}
-        }
-        out.write(obj.toString());
-        out.newLine();
-        out.close();
     }
 
     protected String prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
         String dir = dirTarget + "/tmp_" + System.currentTimeMillis();
-//        FileUtils.copyDirectory(new File(dirSource), new File(dir));
-        copyDirectory(new File(dirSource), new File(dir));
+        FileUtils.copyDirectory(new File(dirSource), new File(dir));
+//        copyDirectory(new File(dirSource), new File(dir));
         return dir;
     }
 
+    public void writeTransformation(String FileName, Transformation tran) throws IOException, JSONException {
+        BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
+        out.write(tran.toJSONObject().toString());
+        out.close();
+    }
+
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, "test", clojureTest);
+        RunMaven rt = new RunMaven(directory, "test", false);
         rt.start();
         int count = 0;
         while (rt.getFailures() == null && count < timeOut) {
             count++;
             Thread.sleep(1000);
         }
-        System.out.println(rt.getCompileError() + " " + rt.allTestRun() + " " + rt.getFailures());
+//        System.out.println(rt.getCompileError() + " " + rt.allTestRun() + " " + rt.getFailures());
         if (rt.getCompileError())
             throw new CompileException("error ");
 
@@ -162,10 +127,6 @@ public class Diversify {
 
     public void setTmpDirectory(String tmpDir) {
         this.tmpDir = tmpDir;
-    }
-
-    public void setClojureTest(Boolean clojureTest) {
-        this.clojureTest = clojureTest;
     }
 
     public void setTimeOut(int timeOut) {
