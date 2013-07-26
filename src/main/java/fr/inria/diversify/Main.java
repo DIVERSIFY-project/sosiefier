@@ -66,7 +66,7 @@ public class Main {
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
         d.run(n);
 
-        d.printResult(DiversifyProperties.getProperty("out"));
+        d.printResult(DiversifyProperties.getProperty("result"));
     }
 
     protected AbstractTransformationQuery initTransformationQuery() throws IOException, JSONException {
@@ -140,7 +140,7 @@ public class Main {
     }
 
     protected void computeStatistic() throws IOException, JSONException {
-        String out = DiversifyProperties.getProperty("out");
+        String out = DiversifyProperties.getProperty("result");
         computeCodeFragmentStatistic(out);
 
         String transDir = DiversifyProperties.getProperty("transformation.directory");
