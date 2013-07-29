@@ -44,7 +44,7 @@ public class Diversify {
             System.out.println(i);
             run(transQuery.getTransformation(), dir);
         }
-        FileUtils.forceDelete(new File(dir));
+//        FileUtils.forceDelete(new File(dir));
     }
 
     public void run(List<Transformation> trans) throws Exception {
