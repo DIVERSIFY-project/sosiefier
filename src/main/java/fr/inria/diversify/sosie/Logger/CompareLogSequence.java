@@ -10,6 +10,12 @@ public class CompareLogSequence {
     protected PointSequence sosie;
 
 
+
+    public CompareLogSequence(PointSequence original, PointSequence sosie) {
+        this.original = original;
+        this.sosie = sosie;
+    }
+
     public int findDivergence(int startOriginal, int startSosie) {
         int bound = Math.min(original.size() - startOriginal, sosie.size() - startSosie);
 
