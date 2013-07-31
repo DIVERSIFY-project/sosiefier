@@ -25,7 +25,15 @@ public class Delete extends Transformation {
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", "add");
-        object.put("transformation", transforms);
+
+        JSONArray array = new JSONArray();
+        object.put("transformation",array);
+        for(CodeFragment position: transforms) {
+            JSONObject t = new JSONObject();
+            t.put("CodeFragmentPosition", position.toJSONObject());
+            t.put("CodeFragmentAdd", position.toJSONObject());
+            array.put(t);
+        }
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 

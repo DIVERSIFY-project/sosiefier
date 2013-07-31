@@ -170,6 +170,7 @@ public class Main {
         List<Transformation> transformations = tf.parseDir(transDir);
         System.out.println("nb transformation: " + transformations.size());
 
+        writeTransformation(fileName + "_allTransformation.json", transformations);
         writeGoodTransformation(fileName + "_goodTransformation.json", transformations);
 
         StatisticDiversification sd = new StatisticDiversification(transformations, statements);
