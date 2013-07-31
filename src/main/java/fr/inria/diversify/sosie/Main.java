@@ -19,16 +19,15 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        new Main(args);
+        new Main(args[1], args[2]);
     }
 
-    public Main(String[] args) throws Exception {
-        initSpoon();
+    public Main(String srcDirectory, String outputDir) throws Exception {
+        initSpoon(srcDirectory, outputDir);
 
     }
 
-    protected void initSpoon() {
-        String srcDirectory = "/Users/Simon/Documents/code/junit2/src/main/java";
+    protected void initSpoon(String srcDirectory, String outputDir) {
 
         StandardEnvironment env = new StandardEnvironment();
 //        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
@@ -42,13 +41,12 @@ public class Main {
 
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
+                System.out.println(" ||| "+dir);
                 builder.addInputSource(new File(dir));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         try {
-            System.out.println("sourcepath " + factory.getEnvironment().getSourcePath());
-            System.out.println(Thread.currentThread().getContextClassLoader().getClass());
 
             builder.build();
         } catch (Exception e) {
@@ -60,10 +58,8 @@ public class Main {
         pm.process();
 
         pm = new QueueProcessingManager(factory);
-        JavaOutputProcessor p2 = new JavaOutputProcessor(new File("/Users/Simon/Documents/code/sacha-incubator/junit/src/main/java"));
+        JavaOutputProcessor p2 = new JavaOutputProcessor(new File(outputDir));
         pm.addProcessor(p2);
         pm.process();
-
-
     }
 }

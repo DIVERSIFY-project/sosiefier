@@ -24,7 +24,7 @@ public class Delete extends Transformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", "replace");
+        object.put("type", "add");
         object.put("transformation", transforms);
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);

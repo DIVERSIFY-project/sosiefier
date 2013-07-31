@@ -23,7 +23,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
 
   @Override
   public boolean isToBeProcessed(CtStatement candidate) {
-    return 
+    return
        CtIf.class.isAssignableFrom(candidate.getClass())
     || CtLoop.class.isAssignableFrom(candidate.getClass())
     ;
@@ -47,7 +47,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         count++;
     boolean inStaticCode =
       hasStaticParent(statement);
-		String snippet = "sacha.incubator.LogWriter.writeLog("+count+",Thread.currentThread(),\""
+		String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeLog("+count+",Thread.currentThread(),\""
 				+ getClass(statement).getQualifiedName()+"\",\""+getMethod(statement).getSignature() + "\"";
 
 		int nVisibleVariables=0;
@@ -75,7 +75,6 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
           }
 		}
 		snippet += ");";
-		
 		if (
 	    nVisibleVariables>0 // do not add the monitoring if nothing to ignore
   		&&
@@ -88,7 +87,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
 		statement.insertBefore(getFactory().Code().createCodeSnippetStatement(
 				snippet));
 		}
-        System.out.println(snippet);
+
 	}
 
   private Collection<CtVariable<?>> getVariablesInScope(final CtElement el) {    

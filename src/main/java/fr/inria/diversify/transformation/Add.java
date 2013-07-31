@@ -33,7 +33,7 @@ public class Add extends Transformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", "replace");
+        object.put("type", "add");
         JSONArray array = new JSONArray();
         object.put("transformation",array);
         for(CodeFragment position: adds.keySet()) {

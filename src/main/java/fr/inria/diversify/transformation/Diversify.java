@@ -145,7 +145,6 @@ public class Diversify {
                         new File(targetLocation, aChildren));
             }
         } else {
-
             InputStream in = new FileInputStream(sourceLocation);
             OutputStream out = new FileOutputStream(targetLocation);
 

@@ -2,6 +2,7 @@ package fr.inria.diversify;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
+import fr.inria.diversify.sosie.Sosie;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.statistic.Util;
 import fr.inria.diversify.transformation.*;
@@ -46,10 +47,24 @@ public class Main {
 
         System.out.println("number of statement: " + statements.size());
 
-        runDiversification();
+        if(DiversifyProperties.getProperty("sosie").equals("true"))
+            runSosie();
+        else
+            runDiversification();
 
         if (DiversifyProperties.getProperty("stat").equals("true"))
             computeStatistic();
+    }
+
+    protected void runSosie() throws Exception {
+        Sosie d = new Sosie(initTransformationQuery(), DiversifyProperties.getProperty("project"));
+        d.setSourceDirectory(DiversifyProperties.getProperty("src"));
+
+        int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
+        d.setTimeOut(t);
+
+        int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
+        d.run(n);
     }
 
     protected void runDiversification() throws Exception {
@@ -159,6 +174,7 @@ public class Main {
 
         StatisticDiversification sd = new StatisticDiversification(transformations, statements);
         sd.writeStat(fileName);
+//        computeOtherStat();
     }
 
     protected void computeOtherStat() {

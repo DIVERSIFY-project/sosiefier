@@ -27,7 +27,7 @@ public class Sosie {
     public Sosie(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.tmpDir = "output_sosie";
-        this.srcDir = "src/main/java";
+//        this.srcDir = "src/main/java";
         this.projectDir = projectDir;
     }
 
@@ -41,33 +41,38 @@ public class Sosie {
     protected void run(Transformation trans) throws Exception {
         initThreadGroup();
         String dir = prepare(projectDir, tmpDir);
-        System.out.println("output dir: " + dir + "/" + srcDir);
+        System.out.println("output dir sosie: " + dir + "/" + srcDir);
         try {
             trans.apply(dir + "/" + srcDir);
-            if(runTest(dir) != 0)
-                FileUtils.forceDelete(new File(dir));
-            else {
-                writeTransformation(dir, trans);
+            if(runTest(dir) != 0) {
+                FileUtils.cleanDirectory(dir);
+                FileUtils.forceDelete(dir);
             }
+            else {
+                FileUtils.mkdir(dir+ "/tmp" + srcDir);
 
+                Main m = new Main(dir + "/" + srcDir, dir + "/" + srcDir);
+//                writeTransformation(dir, trans);
+            }
         } catch (Exception e) {
             System.out.println("compile error ");
+            FileUtils.forceDelete(dir);
         }
         killUselessThread();
     }
 
     protected String prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
         String dir = dirTarget + "/tmp_" + System.currentTimeMillis();
-        FileUtils.copyDirectory(new File(dirSource), new File(dir));
+        copyDirectory(new File(dirSource), new File(dir));
 //        copyDirectory(new File(dirSource), new File(dir));
         return dir;
     }
 
-    public void writeTransformation(String FileName, Transformation tran) throws IOException, JSONException {
-        BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
-        out.write(tran.toJSONObject().toString());
-        out.close();
-    }
+//    public void writeTransformation(String FileName, Transformation tran) throws IOException, JSONException {
+//        BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
+//        out.write(tran.toJSONObject().toString());
+//        out.close();
+//    }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
         RunMaven rt = new RunMaven(directory, "test", false);
