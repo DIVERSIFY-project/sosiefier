@@ -90,8 +90,9 @@ public class TransformationParser {
 
         JSONArray array = jsonObject.getJSONArray("transformation");
         for(int i = 0; i <array.length(); i++) {
-            CodeFragment d = findCodeFragment(array.getJSONObject(i));
-            trans.addSourceCode(d);
+            JSONObject t = array.getJSONObject(i);
+            CodeFragment d = findCodeFragment(t.getJSONObject("CodeFragmentDelete"));
+            trans.addCodeFragmentToTransform(d);
         }
 
         if(jsonObject.getBoolean("allTestRun"))

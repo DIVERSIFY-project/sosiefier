@@ -115,6 +115,7 @@ public class StatisticDiversification {
     }
 
     protected void writeAllPossibleTransformation(String fileName) throws IOException {
+
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
         Util util = new Util(codeFragmentList);
@@ -158,13 +159,8 @@ public class StatisticDiversification {
     protected void writeDetail(String fileName) throws IOException {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
-        bw.write("toReplaceType"+separator+"replacedByType"+separator+
-                "toReplaceSize"+separator+"replacedBySize"+separator+
-                "toReplaceClass"+separator+"replacedByClass"+separator+
-                "toReplacePackage"+separator+"replacedByPackage"+separator+
-                "toReplaceInputContextSize"+separator+"replacedByInputContextSize"+separator+
-                "toReplaceInputContextOnlyPrimitive"+separator+"replacedByInputContextOnlyPrimitive"+separator+
-                "failure");
+        transformations.get(0).writeHead(bw,separator);
+
         bw.write("\n");
 
         for(Transformation trans : transformations) {

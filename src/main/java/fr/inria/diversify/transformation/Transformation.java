@@ -8,6 +8,7 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.support.JavaOutputProcessor;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public abstract class Transformation {
         parents = new ArrayList<Transformation>();
     }
 
+    public abstract void writeHead(BufferedWriter sb, char separator) throws IOException;
     public abstract void write(StringBuffer sb, char separator);
     public abstract JSONObject toJSONObject() throws JSONException;
 

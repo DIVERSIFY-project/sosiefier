@@ -9,6 +9,8 @@ import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtSimpleType;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,16 +28,11 @@ public class Add extends Transformation {
     }
 
     @Override
-    public void write(StringBuffer sb, char separator) {
-
-    }
-
-    @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", "add");
         JSONArray array = new JSONArray();
-        object.put("transformation",array);
+        object.put("transformation", array);
         for(CodeFragment position: adds.keySet()) {
             JSONObject t = new JSONObject();
             t.put("CodeFragmentPosition", position.toJSONObject());
@@ -96,5 +93,55 @@ public class Add extends Transformation {
     public void add(Transformation add) {
         transforms.addAll(add.transforms);
         adds.putAll(((Add)add).adds);
+    }
+
+    @Override
+ public void writeHead(BufferedWriter sb, char separator) throws IOException {
+    sb.write("positionType" + separator + "addType" + separator +
+            "positionSize" + separator + "addSize" + separator +
+            "positionClass" + separator + "addClass" + separator +
+            "positionPackage" + separator + "addPackage" + separator +
+            "positionInputContextSize" + separator + "addInputContextSize" + separator +
+            "positionInputContextOnlyPrimitive" + separator + "addInputContextOnlyPrimitive" + separator +
+            "failure");
+}
+
+    //works only for 1add
+    @Override
+    public void write(StringBuffer sb, char separator) {
+        CodeFragment p = transforms.get(0);
+        CodeFragment r = adds.get(p);
+
+        sb.append(p.getCodeFragmentType().getSimpleName());
+        sb.append(separator);
+        sb.append(r.getCodeFragmentType().getSimpleName());
+        sb.append(separator);
+
+        sb.append(p.getCtCodeFragment().toString().length()+"");
+        sb.append(separator);
+        sb.append(r.getCtCodeFragment().toString().length()+"");
+        sb.append(separator);
+
+        sb.append(p.getSourceClass().getQualifiedName());
+        sb.append(separator);
+        sb.append(r.getSourceClass().getQualifiedName());
+        sb.append(separator);
+
+        sb.append(p.getSourcePackage().getQualifiedName());
+        sb.append(separator);
+        sb.append(r.getSourcePackage().getQualifiedName());
+        sb.append(separator);
+
+        sb.append(p.getInputContext().size()+"");
+        sb.append(separator);
+        sb.append(r.getInputContext().size()+"");
+        sb.append(separator);
+
+        sb.append(p.getInputContext().hasOnlyPrimitive()+"");
+        sb.append(separator);
+        sb.append(r.getInputContext().hasOnlyPrimitive()+"");
+        sb.append(separator);
+
+        sb.append(failures+"");
     }
 }

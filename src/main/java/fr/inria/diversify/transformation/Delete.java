@@ -9,6 +9,9 @@ import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtSimpleType;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 
 /**
  * User: Simon
@@ -16,22 +19,17 @@ import spoon.reflect.declaration.CtSimpleType;
  * Time: 4:20 PM
  */
 public class Delete extends Transformation {
-    @Override
-    public void write(StringBuffer sb, char separator) {
-
-    }
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", "add");
+        object.put("type", "delete");
 
         JSONArray array = new JSONArray();
         object.put("transformation",array);
         for(CodeFragment position: transforms) {
             JSONObject t = new JSONObject();
-            t.put("CodeFragmentPosition", position.toJSONObject());
-            t.put("CodeFragmentAdd", position.toJSONObject());
+            t.put("CodeFragmentDelete", position.toJSONObject());
             array.put(t);
         }
         object.put("allTestRun", (failures != null));
@@ -81,5 +79,43 @@ public class Delete extends Transformation {
     @Override
     public void add(Transformation delete) {
         transforms.addAll(delete.transforms);
+    }
+
+    @Override
+    public void writeHead(BufferedWriter sb, char separator) throws IOException {
+        sb.append("deleteType" + separator +
+                "deleteSize" + separator +
+                "deleteClass" + separator +
+                "deletePackage" + separator +
+                "deleteInputContextSize" + separator +
+                "deleteInputContextOnlyPrimitive" + separator +
+                "failure");
+    }
+
+    //works only for 1delete
+    @Override
+    public void write(StringBuffer sb, char separator) {
+        CodeFragment p = transforms.get(0);
+
+        sb.append(p.getCodeFragmentType().getSimpleName());
+        sb.append(separator);
+
+        sb.append(p.getCtCodeFragment().toString().length()+"");
+        sb.append(separator);
+
+        sb.append(p.getSourceClass().getQualifiedName());
+        sb.append(separator);
+
+
+        sb.append(p.getSourcePackage().getQualifiedName());
+        sb.append(separator);
+
+        sb.append(p.getInputContext().size()+"");
+        sb.append(separator);
+
+        sb.append(p.getInputContext().hasOnlyPrimitive()+"");
+        sb.append(separator);
+
+        sb.append(failures+"");
     }
 }

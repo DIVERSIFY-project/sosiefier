@@ -9,6 +9,8 @@ import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtSimpleType;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +29,8 @@ public class Replace extends Transformation {
         replaces = new HashMap<CodeFragment, CodeFragment>();
         variableMapping = new HashMap<CodeFragment, Map<String, String>>();
     }
+
+
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
@@ -119,6 +123,19 @@ public class Replace extends Transformation {
         this.variableMapping.putAll(((Replace)replace).variableMapping);
     }
 
+
+    @Override
+    public void writeHead(BufferedWriter sb, char separator) throws IOException {
+        sb.append("toReplaceType" + separator + "replacedByType" + separator +
+                "toReplaceSize" + separator + "replacedBySize" + separator +
+                "toReplaceClass" + separator + "replacedByClass" + separator +
+                "toReplacePackage" + separator + "replacedByPackage" + separator +
+                "toReplaceInputContextSize" + separator + "replacedByInputContextSize" + separator +
+                "toReplaceInputContextOnlyPrimitive" + separator + "replacedByInputContextOnlyPrimitive" + separator +
+                "failure");
+    }
+
+    //works only for 1replace
     @Override
     public void write(StringBuffer sb, char separator) {
         CodeFragment t = transforms.get(0);
