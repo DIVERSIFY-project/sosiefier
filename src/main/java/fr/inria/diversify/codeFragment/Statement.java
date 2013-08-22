@@ -35,10 +35,10 @@ public class Statement extends CodeFragment {
 
 
         SubStatementVisitor sub = new SubStatementVisitor();
-        other.codeFragment.getParent().accept(sub);
-        if (sub.getStatements().contains(codeFragment))
+        other.codeFragment.accept(sub);
+        if (sub.getStatements().contains(codeFragment))  {
             return false;
-
+        }
         if (!context.isReplace(other.context))
             return false;
 

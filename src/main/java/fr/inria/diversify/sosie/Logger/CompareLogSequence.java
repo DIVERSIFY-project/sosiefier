@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.Logger;
+package fr.inria.diversify.sosie.logger;
 
 /**
  * User: Simon

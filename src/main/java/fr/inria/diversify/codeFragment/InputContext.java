@@ -67,7 +67,6 @@ public class InputContext {
 
         for (CtVariableReference<?> var : localVariableReferences)
             if(var.getType().equals(type)  && var.getType().getActualTypeArguments().equals(type.getActualTypeArguments())) {
-//                System.out.println(type+"  "+var + " "+var.getType());
                 candidate.add(var);
             }
 
@@ -105,7 +104,8 @@ public class InputContext {
 
         for (CtFieldAccess<?> field : other.fieldReferences)
             isReplace = isReplace && hasCandidateForFieldAccess(field.getVariable().getType());
-		return isReplace;
+
+        return isReplace;
 	}
 
     public Object getVariableOrFieldNamed(String name) {
@@ -115,6 +115,8 @@ public class InputContext {
                 o = vf;
                 break;
             }
+        if(o == null && name.endsWith(")"))
+            return getVariableOrFieldNamed(name.substring(1,name.length()-1));
         return o;
     }
 

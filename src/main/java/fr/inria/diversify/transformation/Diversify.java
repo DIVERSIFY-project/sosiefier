@@ -1,11 +1,14 @@
 package fr.inria.diversify.transformation;
 
+import cern.colt.Arrays;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import org.codehaus.plexus.util.FileUtils;
+import org.hyperic.sigar.Sigar;
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -49,8 +52,9 @@ public class Diversify {
 
     public void run(List<Transformation> trans) throws Exception {
         String dir = prepare(projectDir, tmpDir);
-        for (Transformation tran : trans)
+        for (Transformation tran : trans) {
             run(tran, dir);
+        }
         FileUtils.forceDelete(new File(dir));
     }
 
@@ -126,6 +130,7 @@ public class Diversify {
     }
 
     protected void killUselessThread() {
+        killChild();
         for (Thread thread : Thread.getAllStackTraces().keySet()) {
             if (!threadSet.contains(thread)) {
                 thread.stop();
@@ -173,5 +178,16 @@ public class Diversify {
 
     public void setSourceDirectory(String sourceDirectory) {
         this.srcDir = sourceDirectory;
+    }
+
+    public void killChild() {
+        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+        Runtime r = Runtime.getRuntime();
+        try {
+            Process p = r.exec("pkill -TERM -P " + pid);
+            p.waitFor();
+
+        } catch (Exception e) {}
+
     }
 }

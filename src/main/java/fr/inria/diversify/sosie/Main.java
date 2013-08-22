@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        new Main(args[1], args[2]);
+        new Main(args[0], args[1]);
     }
 
     public Main(String srcDirectory, String outputDir) throws Exception {
@@ -59,6 +59,7 @@ public class Main {
 
         pm = new QueueProcessingManager(factory);
         JavaOutputProcessor p2 = new JavaOutputProcessor(new File(outputDir));
+        env.useSourceCodeFragments(true);
         pm.addProcessor(p2);
         pm.process();
     }

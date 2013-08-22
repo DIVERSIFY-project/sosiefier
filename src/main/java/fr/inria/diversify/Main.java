@@ -15,6 +15,7 @@ import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQueryT;
 import fr.inria.diversify.util.DiversifyProperties;
+import fr.inria.diversify.util.ProjectDependency;
 import org.json.JSONArray;
 import org.json.JSONException;
 import spoon.processing.ProcessingManager;
@@ -43,6 +44,8 @@ public class Main {
     public Main(String[] args) throws Exception {
         new DiversifyProperties(args[0]);
 
+//        new ProjectDependency("junit:junit:4.12-SNAPSHOT",  DiversifyProperties.getProperty("project")+"/pom.xml");
+
         initSpoon();
 
         System.out.println("number of statement: " + statements.size());
@@ -65,6 +68,7 @@ public class Main {
 
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
         d.run(n);
+
     }
 
     protected void runDiversification() throws Exception {
@@ -78,8 +82,20 @@ public class Main {
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
         d.setTimeOut(t);
 
-        int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
-        d.run(n);
+        //TODO refactor
+        if(DiversifyProperties.getProperty("nbRun").equals("all")) {
+            Util util = new Util(statements);
+            if(DiversifyProperties.getProperty("transformation.type").equals("replace"))
+                d.run(util.getAllReplace());
+            if(DiversifyProperties.getProperty("transformation.type").equals("add"))
+                d.run(util.getAllAdd());
+            if(DiversifyProperties.getProperty("transformation.type").equals("delete"))
+                d.run(util.getAllDelete());
+        }
+        else {
+            int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
+            d.run(n);
+        }
 
         d.printResult(DiversifyProperties.getProperty("result"));
     }
@@ -162,7 +178,7 @@ public class Main {
         if (transDir != null) {
             computeDiversifyStat(transDir, out);
         }
-//        computeOtherStat();
+        computeOtherStat();
     }
 
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException {
@@ -175,14 +191,15 @@ public class Main {
 
         StatisticDiversification sd = new StatisticDiversification(transformations, statements);
         sd.writeStat(fileName);
-//        computeOtherStat();
+        computeOtherStat();
     }
 
     protected void computeOtherStat() {
         Util stat = new Util(statements);
-        System.out.println("number of possible code fragment diversification: " + stat.numberOfDiversification());
-        System.out.println("number of not possible code fragment diversification: " + stat.numberOfNotDiversification());
-
+        System.out.println("number of possible code fragment replace: " + stat.numberOfDiversification());
+        System.out.println("number of not possible code fragment replace/add: " + stat.numberOfNotDiversification());
+        System.out.println("number of possible code fragment add: " + stat.getAllAdd().size());
+        System.out.println("number of possible code fragment delete: " + stat.getAllDelete().size());
     }
 
     protected void computeCodeFragmentStatistic(String output) {

@@ -3,6 +3,9 @@ package fr.inria.diversify.sosie.processor;
 
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
+import spoon.reflect.cu.CompilationUnit;
+import spoon.reflect.cu.SourceCodeFragment;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.CtAbstractVisitor;
 
@@ -84,8 +87,12 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
   		// The code of method populateFromBibtex(BibtexEntry) is exceeding the 65535 bytes limit 
   		nVisibleVariables<50
 		) {
-		statement.insertBefore(getFactory().Code().createCodeSnippetStatement(
-				snippet));
+            CompilationUnit compileUnit = statement.getPosition().getCompilationUnit();
+            SourcePosition sp = statement.getPosition();
+
+            int index = sp.getSourceStart();
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index,snippet, 0));
+//		statement.insertBefore(getFactory().Code().createCodeSnippetStatement(	snippet));
 		}
 
 	}

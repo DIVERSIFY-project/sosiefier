@@ -61,10 +61,10 @@ public class Replace extends Transformation {
     protected void addSourceCode(CodeFragment position) throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(position);
 
-        System.out.println("cfToReplace:\n " +position);
+        System.out.println("\n\nposition:\n " +position);
         System.out.println(position.getCtCodeFragment().getPosition());
         System.out.println(position.getCodeFragmentType());
-        System.out.println( replaces.get(position));
+        System.out.println("\nreplace by: "+replaces.get(position));
 
         Map<String, String> varMapping = position.randomVariableMapping(replaces.get(position));
 
@@ -123,6 +123,16 @@ public class Replace extends Transformation {
         this.variableMapping.putAll(((Replace)replace).variableMapping);
     }
 
+    @Override
+    public String toString() {
+        String ret = new String();
+        for(CodeFragment position: replaces.keySet()) {
+            ret = ret + "position: "+position.toString()+"\n" +
+                    "replace: "+replaces.get(position).toString()+"\n"+
+                    "varMapping: "+variableMapping.get(position).toString()+"\n";
+        }
+        return ret;
+    }
 
     @Override
     public void writeHead(BufferedWriter sb, char separator) throws IOException {

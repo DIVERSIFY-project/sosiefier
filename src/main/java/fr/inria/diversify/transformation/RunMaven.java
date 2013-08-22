@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation;
 
 
 import org.apache.maven.shared.invoker.*;
+import org.hyperic.sigar.Sigar;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -168,4 +169,6 @@ public class RunMaven extends  Thread {
     public boolean getCompileError() {
         return compileError;
     }
+
+
 }

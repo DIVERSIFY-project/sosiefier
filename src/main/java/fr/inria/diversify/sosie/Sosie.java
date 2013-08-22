@@ -45,8 +45,8 @@ public class Sosie {
         try {
             trans.apply(dir + "/" + srcDir);
             if(runTest(dir) != 0) {
-                FileUtils.cleanDirectory(dir);
-                FileUtils.forceDelete(dir);
+//                FileUtils.cleanDirectory(dir);
+//                FileUtils.forceDelete(dir);
             }
             else {
                 FileUtils.mkdir(dir+ "/tmp" + srcDir);
@@ -56,7 +56,7 @@ public class Sosie {
             }
         } catch (Exception e) {
             System.out.println("compile error ");
-            FileUtils.forceDelete(dir);
+//            FileUtils.forceDelete(dir);
         }
         killUselessThread();
     }
