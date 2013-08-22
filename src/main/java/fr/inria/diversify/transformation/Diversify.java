@@ -1,9 +1,7 @@
 package fr.inria.diversify.transformation;
 
-import cern.colt.Arrays;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import org.codehaus.plexus.util.FileUtils;
-import org.hyperic.sigar.Sigar;
 import org.json.JSONArray;
 import org.json.JSONException;
 
