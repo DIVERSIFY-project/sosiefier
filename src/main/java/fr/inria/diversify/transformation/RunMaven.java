@@ -2,11 +2,9 @@ package fr.inria.diversify.transformation;
 
 
 import org.apache.maven.shared.invoker.*;
-import org.hyperic.sigar.Sigar;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
