@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.logger;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,18 +14,33 @@ import java.util.List;
  */
 public class PointSequence {
     protected List<Point> points;
+    protected String threadName;
+    protected String name;
 
     public PointSequence() {
         points = new ArrayList<Point>();
     }
 
-    public void parseFile(String fileName) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+    public void parseFile(File file) throws IOException {
+        parseFileName(file.getName());
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        reader.readLine();
         String line = reader.readLine();
-        while (reader != null) {
-            points.add(new Point(line));
+        String tmp = "";
+        while (line != null) {
+            if(!line.isEmpty()) {
+                if(line.endsWith("$$$")) {
+                    points.add(new Point(tmp + line.substring(0,line.length()-3)));
+                    tmp = "";
+                }
+                    else {
+                        tmp = tmp + line;
+                }
+            }
             line = reader.readLine();
         }
+        points.add(new Point(tmp));
     }
 
     public int findPoint(int id, String className, String methodSignature) {
@@ -43,5 +59,20 @@ public class PointSequence {
 
     public Point get(int i) {
         return points.get(i);
+    }
+
+    @Override
+    public String toString() {
+        return name+":"+size();
+    }
+
+    protected void parseFileName(String fileName) {
+        String[] tmp = fileName.split("__");
+        name = tmp[0];
+        threadName = tmp[1];
+    }
+
+    public String getName() {
+        return name;
     }
 }
