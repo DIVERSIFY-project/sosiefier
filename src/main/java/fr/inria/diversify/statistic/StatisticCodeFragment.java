@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatisticCodeFragment {
+public class  StatisticCodeFragment {
 	private CodeFragmentList statements;
 	protected static char separator = ';';
     protected static String typeFileSuffix = "_stmt.csv";

@@ -3,7 +3,7 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
-import fr.inria.diversify.runtest.ICoverageReport;
+import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Add;
 import fr.inria.diversify.transformation.Delete;
 import fr.inria.diversify.transformation.Replace;

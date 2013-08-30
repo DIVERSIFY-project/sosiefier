@@ -6,16 +6,15 @@ import fr.inria.diversify.sosie.Sosie;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.statistic.Util;
 import fr.inria.diversify.transformation.*;
-import fr.inria.diversify.runtest.CoverageReport;
-import fr.inria.diversify.runtest.ICoverageReport;
-import fr.inria.diversify.runtest.NullCoverageReport;
+import fr.inria.diversify.coverage.CoverageReport;
+import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQueryT;
 import fr.inria.diversify.util.DiversifyProperties;
-import fr.inria.diversify.util.ProjectDependency;
 import org.json.JSONArray;
 import org.json.JSONException;
 import spoon.processing.ProcessingManager;
@@ -65,6 +64,8 @@ public class Main {
 
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
         d.setTimeOut(t);
+
+        d.setTmpDirectory(DiversifyProperties.getProperty("output_diversify"));
 
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
         d.run(n);

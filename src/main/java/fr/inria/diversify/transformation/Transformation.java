@@ -108,6 +108,13 @@ public abstract class Transformation {
     public abstract Add toAdd() throws Exception;
     public abstract Delete toDelete() throws Exception;
 
-
     public abstract void add(Transformation replace);
+
+    public String positionString() {
+        String ret = "";
+        for(CodeFragment cf : transforms) {
+            ret = ret + cf.positionString() + "\n";
+        }
+        return ret;
+    }
 }

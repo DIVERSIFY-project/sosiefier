@@ -107,11 +107,13 @@ public class Util {
 
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
             for (CodeFragment cf2 : findCandidate(cf1)) {
-                Add r = new Add();
-                CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                r.addCodeFragmentToAdd(cf1,new Statement(tmp));
-
-                allReplace.add(r);
+                for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
+                    Add r = new Add();
+                    CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
+                    r.addCodeFragmentToAdd(cf1,new Statement(tmp));
+                    r.addVarMapping(cf1,varMapping);
+                    allReplace.add(r);
+                }
             }
         }
         return allReplace;

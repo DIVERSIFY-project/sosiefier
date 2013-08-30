@@ -77,7 +77,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
 			  snippet += ",\"" + var.getSimpleName() +"\"," + var.getSimpleName();
           }
 		}
-		snippet += ");";
+		snippet += ");\n";
 		if (
 	    nVisibleVariables>0 // do not add the monitoring if nothing to ignore
   		&&

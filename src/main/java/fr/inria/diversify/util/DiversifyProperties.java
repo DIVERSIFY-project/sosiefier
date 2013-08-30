@@ -33,6 +33,7 @@ public class DiversifyProperties {
         prop.setProperty("transformation.size","1");
         prop.setProperty("stat", "false");
         prop.setProperty("sosie", "false");
+        prop.setProperty("outputDir", "output_diversify");
     }
 
 }

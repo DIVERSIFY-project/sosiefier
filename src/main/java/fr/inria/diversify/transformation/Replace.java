@@ -66,7 +66,12 @@ public class Replace extends Transformation {
         System.out.println(position.getCodeFragmentType());
         System.out.println("\nreplace by: "+replaces.get(position));
 
-        Map<String, String> varMapping = position.randomVariableMapping(replaces.get(position));
+        Map<String, String> varMapping;
+        if(variableMapping.isEmpty()) {
+            varMapping = position.randomVariableMapping(replaces.get(position));
+        }
+        else
+            varMapping = variableMapping.get(position);
 
         System.out.println("random variable mapping: " + varMapping);
         replaces.get(position).replaceVar(position, varMapping);
@@ -122,6 +127,7 @@ public class Replace extends Transformation {
         this.replaces.putAll(((Replace)replace).replaces);
         this.variableMapping.putAll(((Replace)replace).variableMapping);
     }
+
 
     @Override
     public String toString() {

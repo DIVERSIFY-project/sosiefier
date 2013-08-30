@@ -1,4 +1,4 @@
-package fr.inria.diversify.runtest;
+package fr.inria.diversify.coverage;
 
 
 import fr.inria.diversify.codeFragment.CodeFragment;

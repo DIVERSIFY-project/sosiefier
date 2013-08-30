@@ -17,14 +17,13 @@ import java.io.IOException;
  * Date: 7/22/13
  * Time: 2:03 PM
  */
-public class Main {
+public class MainInstru {
     public static void main(String[] args) throws Exception {
-        new Main(args[0], args[1]);
+        new MainInstru(args[0], args[1]);
     }
 
-    public Main(String srcDirectory, String outputDir) throws Exception {
+    public MainInstru(String srcDirectory, String outputDir) throws Exception {
         initSpoon(srcDirectory, outputDir);
-
     }
 
     protected void initSpoon(String srcDirectory, String outputDir) {
@@ -41,7 +40,6 @@ public class Main {
 
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
-                System.out.println(" ||| "+dir);
                 builder.addInputSource(new File(dir));
             } catch (IOException e) {
                 e.printStackTrace();

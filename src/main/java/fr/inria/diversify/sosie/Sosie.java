@@ -27,11 +27,13 @@ public class Sosie {
     public Sosie(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.tmpDir = "output_sosie";
-//        this.srcDir = "src/main/java";
         this.projectDir = projectDir;
     }
 
     public void run(int n) throws Exception {
+        File dir = new File(tmpDir);
+        if(!dir.exists())
+            dir.mkdirs();
         for (int i = 0; i < n; i++) {
             System.out.println(i);
             run(transQuery.getTransformation());
@@ -45,18 +47,18 @@ public class Sosie {
         try {
             trans.apply(dir + "/" + srcDir);
             if(runTest(dir) != 0) {
-//                FileUtils.cleanDirectory(dir);
-//                FileUtils.forceDelete(dir);
+                FileUtils.cleanDirectory(dir);
+                FileUtils.forceDelete(dir);
             }
             else {
-                FileUtils.mkdir(dir+ "/tmp" + srcDir);
-
-                Main m = new Main(dir + "/" + srcDir, dir + "/" + srcDir);
-//                writeTransformation(dir, trans);
+                FileWriter fileWriter = new FileWriter(dir +"/diversificationPoint");
+                fileWriter.append(trans.positionString());
+                fileWriter.close();
             }
         } catch (Exception e) {
             System.out.println("compile error ");
-//            FileUtils.forceDelete(dir);
+            FileUtils.cleanDirectory(dir);
+            FileUtils.forceDelete(dir);
         }
         killUselessThread();
     }
@@ -68,11 +70,7 @@ public class Sosie {
         return dir;
     }
 
-//    public void writeTransformation(String FileName, Transformation tran) throws IOException, JSONException {
-//        BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
-//        out.write(tran.toJSONObject().toString());
-//        out.close();
-//    }
+
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
         RunMaven rt = new RunMaven(directory, "test", false);
@@ -82,7 +80,6 @@ public class Sosie {
             count++;
             Thread.sleep(1000);
         }
-//        System.out.println(rt.getCompileError() + " " + rt.allTestRun() + " " + rt.getFailures());
         if (rt.getCompileError())
             throw new CompileException("error ");
 
