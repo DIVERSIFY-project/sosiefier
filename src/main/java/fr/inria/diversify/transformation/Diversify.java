@@ -53,7 +53,8 @@ public class Diversify {
         for (Transformation tran : trans) {
             run(tran, dir);
         }
-        FileUtils.forceDelete(new File(dir));
+        FileUtils.cleanDirectory(dir);
+        FileUtils.forceDelete(dir);
     }
 
     protected void run(Transformation trans, String tmpDir) throws Exception {

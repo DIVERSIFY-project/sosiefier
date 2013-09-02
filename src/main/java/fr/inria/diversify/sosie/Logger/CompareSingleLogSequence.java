@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.logger;
 
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,29 +24,32 @@ public class CompareSingleLogSequence {
     }
 
 
-    public int findDivergence(int syncroRange) {
+    public int[][] findDivergence(int syncroRange) {
+
         int startOriginal = -1;
         int startSosie = -1;
         int bound = Math.min(original.size(), sosie.size());
-
+        int[][] divergence = new int[bound][2];
+        int i = 0;
         while(startOriginal < bound - 1 && startSosie < bound - 1) {
             startOriginal++;
             startSosie++;
             Point oPoint = original.get(startOriginal);
             Point sPoint = sosie.get(startSosie);
             if(!oPoint.sameLogPoint(sPoint)) {
-//                System.out.println((startOriginal)+":"+original.getName()+ "  "+startSosie+":"+sosie.getName());
-//                System.out.println(oPoint.getId()+":"+oPoint.getClassName()+"  "+sPoint.getId()+":"+sPoint.getClassName());
                 int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
                 if(newSyncho == null)
-                    return startOriginal;
+                    return null;
                 else {
                     startOriginal = newSyncho[0];
                     startSosie = newSyncho[1];
                 }
             }
+            divergence[i][0] = startOriginal;
+            divergence[i][1] = startSosie;
+            i++;
         }
-        return -1;
+        return Arrays.copyOf(divergence, i);
     }
 
     public void computeDiffVar(int syncroRange) {

@@ -16,7 +16,7 @@ public class CompareMultiLogSequence {
     protected List<PointSequence> originals;
     protected List<PointSequence> sosies;
     protected Set<String> varToExclude;
-    protected int syncroRange = 100;
+    protected int syncroRange = 10;
 
     public CompareMultiLogSequence(String dirOriginal, String dirSosie) {
         originals = loadPointSequence(dirOriginal);
@@ -54,9 +54,10 @@ public class CompareMultiLogSequence {
             for (PointSequence sosie : sosies) {
                 CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie);
                 cls.addAllDiffVar(varToExclude);
-                    if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) == -1) {//same sequence
-                        System.out.println(original.getName()+ " and "+ original.getName()+ " same call trace");
+                    if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) != null) {//same sequence
+                        System.out.println(original.getName()+original.threadName+ " and "+ sosie.getName()+sosie.threadName+ " same call trace");
                         cls.computeDiffVar(syncroRange);
+                        printDivergencePoint(cls.findDivergence(syncroRange));
                         varToExclude.addAll(cls.getDiffVar());
                         same = true;
                         break;
@@ -74,10 +75,9 @@ public class CompareMultiLogSequence {
             boolean same = false;
             for (PointSequence sosie : sosies) {
                 CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie);
-                if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) == -1) {//same sequence
+                if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) != null) {//same sequence
                     System.out.println(original.getName()+ " and "+ original.getName()+ " same call trace");
                         System.out.println(cls.findDivergenceVar(syncroRange));
-                    System.out.println("-----------------");
                     same = true;
                     break;
                 }
@@ -124,5 +124,19 @@ public class CompareMultiLogSequence {
         if(args[0].equals("-diff"))
             un.findDivergence();
 
+    }
+
+    protected void printDivergencePoint(int[][] divergence) {
+        int c1 = divergence[0][0];
+        int c2 = divergence[0][1];
+        for(int[] p : divergence) {
+            if(c1 != p[0] || c2 != p[1]){
+                System.out.println(p[0]+ " "+p[1]);
+                c1 = p[0];
+                c2 = p[1];
+            }
+            c1++;
+            c2++;
+        }
     }
 }
