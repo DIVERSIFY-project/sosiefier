@@ -68,7 +68,7 @@ public class CoverageReport implements ICoverageReport {
         for (IClassCoverage cc : coverageBuilder.getClasses()) {
             CtSimpleType<?> cl = stmt.getSourceClass();
             if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
-                String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName().toString();
+                String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
                 if(name.equals(cc.getName())) {
                     classCoverage = cc;
                     break;
@@ -79,11 +79,8 @@ public class CoverageReport implements ICoverageReport {
             return 0;
         double ret = 0;
         for (int i = stmt.getStartLine(); i <= stmt.getEndLine(); i++)
-//            if(classCoverage.getLine(i).getStatus() == 2 || classCoverage.getLine(i).getStatus() == 1)
              if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
                 ret++;
-//         System.out.println("class: "+stmt.getSourceClass().getPosition().getLine()+ " "+stmt.getSourceClass().getPosition().getEndLine());
-//        System.out.println("jacoco: "+classCoverage.getFirstLine()+ " "+classCoverage.getLastLine());
         return ret/(double)(stmt.getEndLine()- stmt.getStartLine() + 1);
     }
 }

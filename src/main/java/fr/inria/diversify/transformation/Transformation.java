@@ -77,7 +77,8 @@ public abstract class Transformation {
         Process p = r.exec("cp " + fileToCopy + " " + destination);
 
         System.out.println("restore file: " + fileToCopy + " -> " + destination);
-        p.waitFor();
+//        p.waitFor();
+        Thread.sleep(1000);
     }
 
     public CtSimpleType<?> getOriginalClass(CodeFragment cf) {
