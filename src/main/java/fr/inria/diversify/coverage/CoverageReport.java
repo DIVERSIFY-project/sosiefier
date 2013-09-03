@@ -26,8 +26,8 @@ public class CoverageReport implements ICoverageReport {
     private SessionInfoStore sessionInfoStore;
 
 
-    public CoverageReport(String classesDir, String jacocoFile) {
-        this.executionDataFile = new File(jacocoFile);
+    public CoverageReport(String classesDir, File jacocoFile) {
+        this.executionDataFile = jacocoFile;
         this.classesDirectory = new File(classesDir);
     }
 
@@ -82,5 +82,9 @@ public class CoverageReport implements ICoverageReport {
              if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
                 ret++;
         return ret/(double)(stmt.getEndLine()- stmt.getStartLine() + 1);
+    }
+
+    public String getFileName() {
+        return executionDataFile.getName();
     }
 }

@@ -2,9 +2,11 @@ package fr.inria.diversify;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
+import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.sosie.Sosie;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.statistic.Util;
+import fr.inria.diversify.test.TestSosie;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
@@ -14,6 +16,7 @@ import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQueryT;
+import fr.inria.diversify.transformation.query.TransformationQueryTL;
 import fr.inria.diversify.util.DiversifyProperties;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,10 +55,33 @@ public class Main {
         if(DiversifyProperties.getProperty("sosie").equals("true"))
             runSosie();
         else
-            runDiversification();
+            if(DiversifyProperties.getProperty("sosieOnMultiProject").equals("true"))
+                sosieOnMultiProject();
+            else
+                runDiversification();
 
         if (DiversifyProperties.getProperty("stat").equals("true"))
             computeStatistic();
+    }
+
+    protected void sosieOnMultiProject() throws Exception {
+        TestSosie d = new TestSosie(initTransformationQuery(), DiversifyProperties.getProperty("project"));
+        d.setSourceDirectory(DiversifyProperties.getProperty("src"));
+
+        int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
+        d.setTimeOut(t);
+
+        d.setTmpDirectory(DiversifyProperties.getProperty("outputDir"));
+
+        List<String> list = new ArrayList<String>();
+        for (String mvn : DiversifyProperties.getProperty("mavenProjects").split(System.getProperty("path.separator")))
+            list.add(mvn);
+
+        d.setMavenProject(list);
+
+        int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
+        d.run(n);
+
     }
 
     protected void runSosie() throws Exception {
@@ -65,7 +91,7 @@ public class Main {
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
         d.setTimeOut(t);
 
-        d.setTmpDirectory(DiversifyProperties.getProperty("output_diversify"));
+        d.setTmpDirectory(DiversifyProperties.getProperty("outputDir"));
 
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
         d.run(n);
@@ -81,8 +107,10 @@ public class Main {
             d.setClojureTest(true);
 
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
-        d.setTimeOut(t);
-
+        if(t == -1)
+            d.initTimeOut();
+        else
+            d.setTimeOut(t);
         //TODO refactor
         if(DiversifyProperties.getProperty("nbRun").equals("all")) {
             Util util = new Util(statements);
@@ -109,7 +137,7 @@ public class Main {
         if (transformation != null) {
             TransformationParser tf = new TransformationParser(statements);
             List<Transformation> list = tf.parseDir(transformation);
-            atq = new TransformationQueryT(list, statements);
+            atq = new TransformationQueryTL(list, rg, statements);
         } else {
             atq = new TransformationQuery(rg, statements);
         }
@@ -157,13 +185,21 @@ public class Main {
     }
 
     protected ICoverageReport initCoverageReport() throws IOException {
-        String project = DiversifyProperties.getProperty("project");
-        String classes = DiversifyProperties.getProperty("classes");
-        String jacocoFile = DiversifyProperties.getProperty("jacoco");
         ICoverageReport icr;
+        String jacocoFile = DiversifyProperties.getProperty("jacoco");
+        String classes;
+        if(DiversifyProperties.getProperty("jacoco.classes") != null)
+            classes = DiversifyProperties.getProperty("jacoco.classes");
+        else
+            classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
 
-        if (jacocoFile != null)
-            icr = new CoverageReport(project + "/" + classes, jacocoFile);
+        if (jacocoFile != null) {
+            File file = new File(jacocoFile);
+            if(file.isDirectory())
+                icr = new MultiCoverageReport(classes, file);
+            else
+                icr = new CoverageReport(classes, file);
+        }
         else
             icr = new NullCoverageReport();
 

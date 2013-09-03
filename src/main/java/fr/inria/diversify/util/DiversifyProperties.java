@@ -34,6 +34,8 @@ public class DiversifyProperties {
         prop.setProperty("stat", "false");
         prop.setProperty("sosie", "false");
         prop.setProperty("outputDir", "output_diversify");
+        prop.setProperty("sosieOnMultiProject","false");
+        prop.setProperty("timeOut","-1");
     }
 
 }
