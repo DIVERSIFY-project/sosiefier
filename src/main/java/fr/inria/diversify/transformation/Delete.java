@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,9 +48,9 @@ public class Delete extends Transformation {
     protected void addSourceCode(CodeFragment delete) throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(delete);
 
-        System.out.println("cfToDelete:\n " + delete);
-        System.out.println(delete.getCtCodeFragment().getPosition());
-        System.out.println(delete.getCodeFragmentType());
+        Log.debug("cfToDelete:\n {}", delete);
+        Log.debug("{}",delete.getCtCodeFragment().getPosition());
+        Log.debug("{}",delete.getCodeFragmentType());
 
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = delete.getCtCodeFragment().getPosition();

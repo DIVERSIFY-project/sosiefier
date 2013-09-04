@@ -4,6 +4,7 @@ import fr.inria.diversify.transformation.CompileException;
 import fr.inria.diversify.transformation.RunMaven;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -17,7 +18,6 @@ import java.util.Set;
  * Time: 3:05 PM
  */
 public abstract class Builder {
-
     protected String projectDir;
     protected String tmpDir;
     protected List<Transformation> transformations;
@@ -70,9 +70,9 @@ public abstract class Builder {
             count++;
             Thread.sleep(1000);
         }
-//        System.out.println(rt.getCompileError() + " " + rt.allTestRun() + " " + rt.getFailures());
+        Log.info("compile error: " + rt.getCompileError() + ", run all test: " + rt.allTestRun() + ", number of failure: " + rt.getFailures());
         if (rt.getCompileError())
-            throw new CompileException("error ");
+            throw new CompileException("compile error in maven");
 
         if (!rt.allTestRun())
             return -1;
@@ -88,7 +88,7 @@ public abstract class Builder {
             timeOut = timeOut + factor;
             Thread.sleep(1000);
         }
-        System.out.println("timeOut init: "+timeOut);
+        Log.debug("timeOut init: " + timeOut);
     }
 
     protected void initThreadGroup() {

@@ -55,7 +55,6 @@ public class InputContext {
         List<CtFieldAccess> candidate = new ArrayList<CtFieldAccess>();
         for (CtFieldAccess<?> var : fieldReferences)
             if(var.getVariable().getType().equals(type) && var.getType().getActualTypeArguments().equals(type.getActualTypeArguments())) {
-//                System.out.println(type+"  "+var + " "+var.getType() + " "+var.getVariable().getType());
                 candidate.add(var);
             }
 

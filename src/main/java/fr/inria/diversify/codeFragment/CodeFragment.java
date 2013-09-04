@@ -2,6 +2,7 @@ package fr.inria.diversify.codeFragment;
 
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
 import fr.inria.diversify.transformation.ReplaceVariableVisitor;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,8 +93,9 @@ public abstract class CodeFragment {
     }
 
     public void replaceVar(CodeFragment other, Map<String,String> varMapping) {
-        System.out.println("\n\navant:\n");
-        System.out.println(codeFragment);
+        Log.debug("replace variable");
+        Log.debug("avant:");
+        Log.debug("{}",codeFragment);
         for (String varName: varMapping.keySet()) {
             Object variable = getInputContext().getVariableOrFieldNamed(varName);
             Object candidate = other.getInputContext().getVariableOrFieldNamed(varMapping.get(varName));
@@ -105,12 +107,13 @@ public abstract class CodeFragment {
         if(codeFragment instanceof CtLocalVariableImpl)
             ((CtLocalVariableImpl)codeFragment).setSimpleName(((CtLocalVariableImpl) other.codeFragment).getSimpleName());
 
-        System.out.println("\napres: "+codeFragment);
+        Log.debug("apres: {}",codeFragment);
     }
 
     public CodeFragment replace(CodeFragment other, Map<String,String> varMapping) {
-        System.out.println("\navant: " + codeFragment.getPosition());
-        System.out.println(codeFragment.getParent());
+        Log.debug("replace");
+        Log.debug("avant: {}", codeFragment);
+        Log.debug("{}",codeFragment.getParent());
         codeFragment.replace(other.codeFragment);
 
         CodeFragment newStatement = getNewStatement(other.getCtCodeFragment());
@@ -124,7 +127,7 @@ public abstract class CodeFragment {
 
         if(codeFragment instanceof CtLocalVariableImpl)
             ((CtLocalVariableImpl)newStatement.codeFragment).setSimpleName(((CtLocalVariableImpl) codeFragment).getSimpleName());
-        System.out.println("\napres: "+codeFragment.getParent());
+        Log.debug("apres: {}",codeFragment.getParent());
 
         return newStatement;
     }

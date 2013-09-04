@@ -2,6 +2,7 @@ package fr.inria.diversify.codeFragmentProcessor;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
+import fr.inria.diversify.util.Log;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
 
@@ -24,7 +25,7 @@ public class StatementProcessor extends AbstractProcessor<CtStatement> {
 //				System.out.println("-------------------------------\n");
 			}
 		} catch (Exception e) {
-		e.printStackTrace();
+            Log.debug("error in StatementProcessor.process with the statement: "+element, e);
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 
+import fr.inria.diversify.util.Log;
 import org.apache.maven.shared.invoker.*;
 
 import java.io.*;
@@ -54,7 +55,7 @@ public class RunMaven extends  Thread {
 
 //
     public void run() {
-        System.out.println("run maven");
+        Log.debug("run maven");
         InvocationRequest request = new DefaultInvocationRequest();
         request.setPomFile( new File( directory + "/pom.xml" ) );
         List<String> l = new ArrayList<String>();
@@ -77,7 +78,7 @@ public class RunMaven extends  Thread {
         invoker.setErrorHandler(psh);
 
         try {
-            System.out.println("invoke maven");
+            Log.debug("invoke maven");
             invoker.execute(request);
             if(clojureTest)
                 parseClojureResult(os.toString());
@@ -106,8 +107,6 @@ public class RunMaven extends  Thread {
 //    } catch (Exception e) {}
 //
 //    }
-//    "compile-tests:"
-//            "*** Some tests failed ***"
 
     protected void parseResult(String r) {
         Pattern pattern = Pattern.compile("Tests run: (\\d+), Failures: (\\d+), Errors: (\\d+), Skipped: (\\d+)");
@@ -115,7 +114,7 @@ public class RunMaven extends  Thread {
         boolean result = false;
 
         for (String s : r.split("\n")) {
-            System.out.println(s);
+            Log.debug(s);
             if (s.startsWith("[ERROR] COMPILATION ERROR"))
                 compileError = true;
             if (s.startsWith("Results :")) {
@@ -137,7 +136,7 @@ public class RunMaven extends  Thread {
     protected void parseClojureResult(String r) {
         Integer tmpFailure = null;
         for (String s : r.split("\n")) {
-            System.out.println(s);
+            Log.debug(s);
             if (s.startsWith("[ERROR] COMPILATION ERROR"))  {
                 tmpFailure = -2;
                 compileError = true;

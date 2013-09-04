@@ -3,6 +3,7 @@ package fr.inria.diversify.sosie;
 import fr.inria.diversify.Builder;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
 import java.io.*;
@@ -30,7 +31,7 @@ public class Sosie extends Builder {
         if(!dir.exists())
             dir.mkdirs();
         for (int i = 0; i < n; i++) {
-            System.out.println(i);
+            Log.debug("sosie number: " + i);
             run(transQuery.getTransformation());
         }
     }
@@ -44,7 +45,7 @@ public class Sosie extends Builder {
     protected void run(Transformation trans) throws Exception {
         initThreadGroup();
         String dir = prepare(projectDir, tmpDir);
-        System.out.println("output dir sosie: " + dir + "/" + srcDir);
+        Log.debug("output dir sosie: " + dir + "/" + srcDir);
         try {
             trans.apply(dir + "/" + srcDir);
             if(runTest(dir) != 0) {
@@ -58,7 +59,7 @@ public class Sosie extends Builder {
                 fileWriter.close();
             }
         } catch (Exception e) {
-            System.out.println("compile error ");
+            Log.warn("compile error during diversification", e);
             FileUtils.cleanDirectory(dir);
             FileUtils.forceDelete(dir);
         }

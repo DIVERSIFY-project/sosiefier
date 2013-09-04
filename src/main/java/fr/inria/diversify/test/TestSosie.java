@@ -5,6 +5,7 @@ import fr.inria.diversify.transformation.CompileException;
 import fr.inria.diversify.transformation.RunMaven;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
 import java.io.File;
@@ -54,8 +55,7 @@ public class TestSosie extends Builder {
             count++;
             Thread.sleep(1000);
         }
-        System.out.println(rt.getCompileError() + " " + rt.allTestRun() + " " + rt.getFailures());
-        if (rt.getCompileError())
+        Log.debug("compile error: " + rt.getCompileError() + ", run all test" + rt.allTestRun() + ", number of failure" + rt.getFailures());        if (rt.getCompileError())
             throw new CompileException("error ");
 
         if (!rt.allTestRun())
@@ -65,12 +65,11 @@ public class TestSosie extends Builder {
 
     @Override
     public void run(int n) throws Exception {
-        System.out.println(tmpDir);
         File dir = new File(tmpDir);
         if(!dir.exists())
             dir.mkdirs();
         for (int i = 0; i < n; i++) {
-            System.out.println(i);
+            Log.debug("diversification number: " + i);
             run(transQuery.getTransformation());
         }
     }
@@ -84,7 +83,7 @@ public class TestSosie extends Builder {
     protected void run(Transformation trans) throws Exception {
         initThreadGroup();
         String dir = prepare(projectDir, tmpDir);
-        System.out.println("output dir sosie: " + dir + "/" + srcDir);
+        Log.debug("output dir sosie: " + dir + "/" + srcDir);
         try {
             trans.apply(dir + "/" + srcDir);
             if(runTest(dir) != 0) {
@@ -93,10 +92,9 @@ public class TestSosie extends Builder {
             }
             else {
                 transformations.add(trans);
-                System.out.println("ca marche !!!!!!!!!");
             }
         } catch (Exception e) {
-            System.out.println("compile error ");
+            Log.warn("compile error during diversification", e);
             FileUtils.cleanDirectory(dir);
             FileUtils.forceDelete(dir);
         }

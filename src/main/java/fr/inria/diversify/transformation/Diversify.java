@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.Builder;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ import java.util.List;
  * Time: 5:39 PM
  */
 public class Diversify extends Builder {
+
+
     public Diversify(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.tmpDir = "output_diversify";
@@ -28,7 +31,7 @@ public class Diversify extends Builder {
         String dir = prepare(projectDir, tmpDir);
 
         for (int i = 0; i < n; i++) {
-            System.out.println(i);
+            Log.info("diversification number: " + i);
             run(transQuery.getTransformation(), dir);
         }
         FileUtils.cleanDirectory(dir);
@@ -46,7 +49,7 @@ public class Diversify extends Builder {
 
     protected void run(Transformation trans, String tmpDir) throws Exception {
         initThreadGroup();
-        System.out.println("output dir: " + tmpDir + "/" + srcDir);
+        Log.debug("output dir: " + tmpDir + "/" + srcDir);
         try {
             trans.apply(tmpDir + "/" + srcDir);
             int failures = runTest(tmpDir);
@@ -54,8 +57,7 @@ public class Diversify extends Builder {
             transformations.add(trans);
 
         } catch (Exception e) {
-            System.out.println("compile error");
-
+            Log.warn("compile error during diversification", e);
         }
         trans.restore(tmpDir + "/" + srcDir);
         killUselessThread();

@@ -52,14 +52,6 @@ public class VariableVisitor extends CtScanner {
 		super.visitCtVariableAccess(fieldAccess);
 	}
 
-//	public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
-//		System.out.println("\tvisitCtFieldReference "+ reference);
-////        if(!reference.isStatic())
-////
-////				fieldReferences.add();
-//		super.visitCtFieldReference(reference);
-//	}
-
 	public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 		if(invocation.getTarget() == null){
 			refThis = invocation.getExecutable().getDeclaringType();

@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,10 +62,10 @@ public class Replace extends Transformation {
     protected void addSourceCode(CodeFragment position) throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(position);
 
-        System.out.println("\n\nposition:\n " +position);
-        System.out.println(position.getCtCodeFragment().getPosition());
-        System.out.println(position.getCodeFragmentType());
-        System.out.println("\nreplace by: "+replaces.get(position));
+        Log.debug("position:\n{}",position);
+        Log.debug("{}",position.getCtCodeFragment().getPosition());
+        Log.debug("{}",position.getCodeFragmentType());
+        Log.debug("replace by:\n{}",replaces.get(position));
 
         Map<String, String> varMapping;
         if(variableMapping.isEmpty()) {
@@ -73,7 +74,7 @@ public class Replace extends Transformation {
         else
             varMapping = variableMapping.get(position);
 
-        System.out.println("random variable mapping: " + varMapping);
+        Log.debug("random variable mapping: {}", varMapping);
         replaces.get(position).replaceVar(position, varMapping);
         variableMapping.put(position,varMapping);
         if(replaces.get(position).equals(position.codeFragmentString()))

@@ -21,7 +21,6 @@ public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
 public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 		
 		if(invocation.getTarget() == null){
-//			System.out.println("\tvisitCtInvocation "+ invocation.getExecutable().getDeclaringType());
 			write(invocation.getExecutable().getDeclaringType().toString());
 			write(".");
 		}

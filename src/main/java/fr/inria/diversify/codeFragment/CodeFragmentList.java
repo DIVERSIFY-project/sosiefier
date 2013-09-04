@@ -1,5 +1,6 @@
 package fr.inria.diversify.codeFragment;
 
+import fr.inria.diversify.util.Log;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.reference.CtTypeReference;
@@ -48,7 +49,7 @@ public class CodeFragmentList {
             addUniqueContext(stmt.getContext());
             addUniqueStatement(stmt);
         } catch (Exception e) {
-            System.err.println("erreur la");
+            Log.warn("error in CodeFragmentList.add ",e);
         }
 
     }

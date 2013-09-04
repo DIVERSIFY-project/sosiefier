@@ -31,10 +31,8 @@ public class MultiCoverageReport implements ICoverageReport {
 
     @Override
     public double codeFragmentCoverage(CodeFragment stmt) {
-        System.out.println("MultiCoverage");
         double ret = 1;
         for (CoverageReport cr : coverages) {
-//            System.out.println(cr.getFileName()+": "+cr.codeFragmentCoverage(stmt));
             ret = Math.min(ret, cr.codeFragmentCoverage(stmt));
         }
         return ret;

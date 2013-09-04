@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,7 +63,7 @@ public abstract class Transformation {
         processor.setFactory(type.getFactory());
 
         processor.createJavaFile(type);
-        System.out.println("copy file: "+repository+" " +type.getQualifiedName());
+        Log.debug("copy file: " + repository + " " + type.getQualifiedName());
     }
 
     protected void removeSourceCode(CtSimpleType<?> type) {
@@ -73,12 +74,8 @@ public abstract class Transformation {
     protected void restore(String srcDir,CtSimpleType<?> originalClass) throws Exception {
         String fileToCopy = originalClass.getPosition().getFile().toString();
         String destination = srcDir+ "/"+originalClass.getQualifiedName().replace('.', '/') + ".java";
-//        Runtime r = Runtime.getRuntime();
-//        Process p = r.exec("cp " + fileToCopy + " " + destination);
-        System.out.println("restore file: " + fileToCopy + " -> " + destination);
+        Log.debug("restore file: " + fileToCopy + " -> " + destination);
         FileUtils.copyFile(originalClass.getPosition().getFile(), new File(destination));
-//        p.waitFor();
-//        Thread.sleep(1000);
     }
 
     public CtSimpleType<?> getOriginalClass(CodeFragment cf) {

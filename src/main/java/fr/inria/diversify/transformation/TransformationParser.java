@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +22,6 @@ public class TransformationParser {
     CodeFragmentList codeFragments;
 
     public TransformationParser(CodeFragmentList list) {
-        count = 0;
         codeFragments = list;
     }
 
@@ -31,13 +31,12 @@ public class TransformationParser {
 
         for (File f : file.listFiles())
             if(f.getName().endsWith(".json")) {
-                System.out.println(f);
+                Log.debug("parse tranformation file: "+f.getName());
                 list.addAll(parseFile(f));
             }
 
         return list;
     }
-    static int  count ;
     public List<Transformation> parseFile(File file) throws IOException, JSONException {
         List<Transformation> list = new ArrayList<Transformation>();
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -51,17 +50,12 @@ public class TransformationParser {
            return list;
         JSONArray array = new JSONArray(sb.toString());
         for(int i = 0; i < array.length(); i++)  {
-            count++;
             try {
-            if(parseTransformation(array.getJSONObject(i)).numberOfFailure() > 800)
-                System.out.println("erreur ");
-            else
                 list.add(parseTransformation(array.getJSONObject(i)));
-            }  catch (Exception e) {System.out.println("error in buildTransformation: "+array.getJSONObject(i));
-            e.printStackTrace();}
-
+            }  catch (Exception e) {
+                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
+            }
         }
-        System.out.println("count "+count);
         return list;
     }
 
@@ -147,15 +141,15 @@ public class TransformationParser {
              try {
             if (codeFragment.getCodeFragmentType().getSimpleName().equals(jsonObject.get("Type"))
                     && codeFragment.positionString().equals(jsonObject.get("Position"))  ){
-//                    && codeFragment.equalString().equals(jsonObject.get("SourceCode"))) {
                 cf = codeFragment;
                 break;
             }
              } catch (Exception e) {}
         }
         if (cf  == null) {
-            System.out.println(jsonObject.get("Position"));
-            System.out.println(jsonObject.get("SourceCode"));
+            //TODO exception
+//            System.out.println(jsonObject.get("Position"));
+//            System.out.println(jsonObject.get("SourceCode"));
             throw new Exception();
         }
         return cf;

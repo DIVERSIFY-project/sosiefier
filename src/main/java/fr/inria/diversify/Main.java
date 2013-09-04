@@ -18,6 +18,8 @@ import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQueryT;
 import fr.inria.diversify.transformation.query.TransformationQueryTL;
 import fr.inria.diversify.util.DiversifyProperties;
+
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import spoon.processing.ProcessingManager;
@@ -46,11 +48,10 @@ public class Main {
     public Main(String[] args) throws Exception {
         new DiversifyProperties(args[0]);
 
-//        new ProjectDependency("junit:junit:4.12-SNAPSHOT",  DiversifyProperties.getProperty("project")+"/pom.xml");
-
+        Log.set(Log.LEVEL_DEBUG);
         initSpoon();
 
-        System.out.println("number of statement: " + statements.size());
+        Log.info("number of statement: " + statements.size());
 
         if(DiversifyProperties.getProperty("sosie").equals("true"))
             runSosie();
@@ -169,9 +170,6 @@ public class Main {
                 e.printStackTrace();
             }
         try {
-            System.out.println("sourcepath " + factory.getEnvironment().getSourcePath());
-            System.out.println(Thread.currentThread().getContextClassLoader().getClass());
-
             builder.build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -221,7 +219,6 @@ public class Main {
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException {
         TransformationParser tf = new TransformationParser(statements);
         List<Transformation> transformations = tf.parseDir(transDir);
-        System.out.println("nb transformation: " + transformations.size());
 
         writeTransformation(fileName + "_allTransformation.json", transformations);
         writeGoodTransformation(fileName + "_goodTransformation.json", transformations);

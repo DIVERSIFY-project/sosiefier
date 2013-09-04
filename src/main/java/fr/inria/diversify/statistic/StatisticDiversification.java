@@ -36,7 +36,6 @@ public class StatisticDiversification {
         this.codeFragmentList = codeFragmentList;
         for(Transformation t : transformations)
             this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.numberOfFailure());
-        System.out.println("max failure: "+numberOfFailureMax);
     }
 
     public StatisticDiversification() {

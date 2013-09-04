@@ -24,7 +24,6 @@ public class ReplaceVariableVisitor extends CtScanner {
 
 
     public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
-//        System.out.println("visitCtVariableAccess: "+oldVar+ " ||||| "+newVar);
         if (variableAccess.getVariable().equals(oldVar))
             if (newVar instanceof CtVariableReference)
                 variableAccess.setVariable((CtVariableReference) newVar);
@@ -35,7 +34,6 @@ public class ReplaceVariableVisitor extends CtScanner {
 
 
     public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-//        System.out.println("visitCtFieldAccess: " + oldVar + " ||||| " + newVar);
         if (fieldAccess.equals(oldVar))
             if (newVar instanceof CtVariableReference) {
                 fieldAccess.replace(((CtVariableReference) newVar).getDeclaration());

@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,8 +57,9 @@ public class Add extends Transformation {
     protected void addSourceCode(CodeFragment position) throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(position);
 
-        System.out.println("cfToAdd:\n " + adds.get(position)+ "\n---------------------\npostion:\n" +position);
-        System.out.println(adds.get(position).getCtCodeFragment().getPosition());
+        Log.debug("cfToAdd:\n {}",adds.get(position));
+        Log.debug("---------------------\npostion:\n{}",position);
+        Log.debug("{}",adds.get(position).getCtCodeFragment().getPosition());
 
         Map<String, String> varMapping;
         if(variableMapping.isEmpty())
@@ -65,7 +67,7 @@ public class Add extends Transformation {
         else
             varMapping = variableMapping.get(position);
 
-        System.out.println("random variable mapping: " + varMapping);
+        Log.debug("random variable mapping: {}",varMapping);
         adds.get(position).replaceVar(position, varMapping);
         variableMapping.put(position,varMapping);
 
@@ -74,8 +76,8 @@ public class Add extends Transformation {
 
         int index = sp.getSourceStart();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, adds.get(position).codeFragmentString(), 0));
-        System.out.println("----------\n---------");
-        System.out.println(originalClass);
+        Log.debug("----------\n---------");
+        Log.debug("{}",originalClass.getQualifiedName());
 
     }
 
