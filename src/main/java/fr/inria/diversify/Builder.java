@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.util.List;
 import java.util.Set;
 
@@ -35,9 +36,9 @@ public abstract class Builder {
         try {
             String fileName = output + System.currentTimeMillis() + "_transformation.json";
             writeTransformation(fileName);
-            Log.info("write result in {}",fileName);
+            Log.info("write result in {}", fileName);
         } catch (Exception e) {
-            Log.error("error in Main.printResult",e);
+            Log.error("error in Main.printResult", e);
         }
 //        StatisticDiversification stat = new StatisticDiversification(transformations);
 //        stat.writeStat(output);
@@ -100,11 +101,23 @@ public abstract class Builder {
     }
 
     protected void killUselessThread() {
+        killAllChildrenProcess();
         for (Thread thread : Thread.getAllStackTraces().keySet()) {
             if (!threadSet.contains(thread)) {
                 thread.stop();
             }
         }
+    }
+
+    protected void killAllChildrenProcess() {
+        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+        Log.debug("PID :"+pid);
+        Runtime r = Runtime.getRuntime();
+        try {
+            Process p = r.exec("pkill -P " +pid);
+            p.waitFor();
+
+        } catch (Exception e) {}
     }
 
     protected void copyDirectory(File sourceLocation, File targetLocation) throws IOException {
