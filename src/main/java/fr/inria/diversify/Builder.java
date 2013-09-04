@@ -82,15 +82,17 @@ public abstract class Builder {
     }
 
     public void initTimeOut() throws InterruptedException {
+        initThreadGroup();
         RunMaven rt = new RunMaven(projectDir, "test", clojureTest);
         rt.start();
         timeOut = 0;
-        int factor = 4;
+        int factor = 3;
         while (rt.getFailures() == null) {
             timeOut = timeOut + factor;
             Thread.sleep(1000);
         }
         Log.debug("timeOut init: " + timeOut);
+        killUselessThread();
     }
 
     protected void initThreadGroup() {

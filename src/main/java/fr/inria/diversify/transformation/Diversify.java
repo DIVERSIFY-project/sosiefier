@@ -61,6 +61,5 @@ public class Diversify extends Builder {
         }
         trans.restore(tmpDir + "/" + srcDir);
         killUselessThread();
-
     }
 }
