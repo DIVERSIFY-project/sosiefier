@@ -15,7 +15,6 @@ import fr.inria.diversify.statistic.StatisticCodeFragment;
 
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.transformation.query.TransformationQueryT;
 import fr.inria.diversify.transformation.query.TransformationQueryTL;
 import fr.inria.diversify.util.DiversifyProperties;
 
@@ -48,7 +47,7 @@ public class Main {
     public Main(String[] args) throws Exception {
         new DiversifyProperties(args[0]);
 
-        Log.set(Log.LEVEL_DEBUG);
+        initLogLevel();
         initSpoon();
 
         Log.info("number of statement: " + statements.size());
@@ -268,6 +267,11 @@ public class Main {
         out.write(obj.toString());
         out.newLine();
         out.close();
+    }
+
+    protected void initLogLevel() {
+        int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
+        Log.set(level);
     }
 
 }

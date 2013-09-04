@@ -33,9 +33,11 @@ public abstract class Builder {
 
     public void printResult(String output) {
         try {
-            writeTransformation(output + System.currentTimeMillis() + "_transformation.json");
+            String fileName = output + System.currentTimeMillis() + "_transformation.json";
+            writeTransformation(fileName);
+            Log.info("write result in {}",fileName);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.error("error in Main.printResult",e);
         }
 //        StatisticDiversification stat = new StatisticDiversification(transformations);
 //        stat.writeStat(output);
