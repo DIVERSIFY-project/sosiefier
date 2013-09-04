@@ -54,7 +54,7 @@ public class Diversify extends Builder {
             transformations.add(trans);
 
         } catch (Exception e) {
-            System.out.println("compile error ");
+            System.out.println("compile error");
 
         }
         trans.restore(tmpDir + "/" + srcDir);

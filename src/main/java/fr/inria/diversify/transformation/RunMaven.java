@@ -54,6 +54,7 @@ public class RunMaven extends  Thread {
 
 //
     public void run() {
+        System.out.println("run maven");
         InvocationRequest request = new DefaultInvocationRequest();
         request.setPomFile( new File( directory + "/pom.xml" ) );
         List<String> l = new ArrayList<String>();
@@ -76,6 +77,7 @@ public class RunMaven extends  Thread {
         invoker.setErrorHandler(psh);
 
         try {
+            System.out.println("invoke maven");
             invoker.execute(request);
             if(clojureTest)
                 parseClojureResult(os.toString());
