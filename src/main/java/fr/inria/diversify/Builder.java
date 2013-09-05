@@ -69,10 +69,11 @@ public abstract class Builder {
         RunMaven rt = new RunMaven(directory, "test", clojureTest);
         rt.start();
         int count = 0;
-        while (rt.getFailures() == null && count < timeOut) {
-            count++;
-            Thread.sleep(1000);
-        }
+        rt.join(1000*timeOut);
+//        while (rt.getFailures() == null && count < timeOut) {
+//            count++;
+//            Thread.sleep(1000);
+//        }
         Log.info("compile error: " + rt.getCompileError() + ", run all test: " + rt.allTestRun() + ", number of failure: " + rt.getFailures());
         if (rt.getCompileError())
             throw new CompileException("compile error in maven");
@@ -115,9 +116,11 @@ public abstract class Builder {
         Runtime r = Runtime.getRuntime();
         try {
             Process p = r.exec("pkill -P " +pid);
-            p.waitFor();
+            p.wait(1000);
 
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            Log.error("killallchildren ",e);
+        }
     }
 
     protected void copyDirectory(File sourceLocation, File targetLocation) throws IOException {
