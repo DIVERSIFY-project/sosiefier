@@ -6,6 +6,7 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -34,16 +35,17 @@ public abstract class Builder {
     public abstract void run(List<Transformation> trans) throws Exception;
 
     public void printResult(String output, String git) {
+        mkDirResult(output,git);
         String fileName = output + System.currentTimeMillis() + "_transformation.json";
+        String absoluteFileName = git + "/" + fileName;
         try {
-            writeTransformation(fileName);
+            writeTransformation(absoluteFileName);
             Log.info("write result in {}", fileName);
         } catch (Exception e) {
             Log.error("error in Main.printResult", e);
         }
-        if(git != "null") {
-            String[] tmp = fileName.split("/");
-            GitUtil.addToGit(tmp[tmp.length - 1]);
+        if(git != "") {
+            GitUtil.addToGit(fileName);
         }
 //        StatisticDiversification stat = new StatisticDiversification(transformations);
 //        stat.writeStat(output);
@@ -64,11 +66,22 @@ public abstract class Builder {
         out.close();
     }
 
+    protected void mkDirResult(String output, String git) {
+        String[] tmp = output.split("/");
+        String dirs = git +"/";
+        for (int i = 0; i< tmp.length - 1;i++) {
+            dirs = dirs + tmp[i] + "/";
+        }
+        new File(dirs).mkdirs();
+        Log.debug("mkdir: {}",dirs);
+    }
 
     protected String prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
-        String dir = dirTarget + "/tmp_" + System.currentTimeMillis();
-        copyDirectory(new File(dirSource), new File(dir));
-        return dir;
+        String dirName = dirTarget + "/tmp_" + System.currentTimeMillis();
+        File dir = new File(dirName);
+        dir.mkdirs();
+        copyDirectory(new File(dirSource), dir);
+        return dirName;
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {

@@ -14,6 +14,7 @@ public class GitUtil {
     public static void initGit(String dir) {
         Log.debug("init git: {}", dir);
         directory = dir;
+        new File(dir).mkdirs();
         Runtime r = Runtime.getRuntime();
         try {
             Process p = r.exec("sh git/init.sh " +directory);
@@ -39,7 +40,7 @@ public class GitUtil {
         }
         Log.info("properties file: {}",ret);
         updateExpList(sb.toString());
-        return "";
+        return ret;
     }
 
     private static void updateExpList(String s) throws IOException {
@@ -51,6 +52,7 @@ public class GitUtil {
     }
 
     public static void addToGit(String file) {
+        Log.debug("add file: {} to git: {}",file,directory+"/diversify-exp/");
         Runtime r = Runtime.getRuntime();
         try {
             Process p = r.exec("sh git/add.sh " +directory+"/diversify-exp/ "+file+ " \"add file "+file+"\"");

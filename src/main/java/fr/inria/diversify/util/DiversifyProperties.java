@@ -37,7 +37,7 @@ public class DiversifyProperties {
         prop.setProperty("sosieOnMultiProject","false");
         prop.setProperty("timeOut","-1");
         prop.setProperty("logLevel", "2");
-        prop.setProperty("gitRepository", "null");
+        prop.setProperty("gitRepository", "");
     }
 
 }

@@ -34,7 +34,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +46,12 @@ public class Main {
             GitUtil.initGit(args[1]);
             Runtime r = Runtime.getRuntime();
             try {
-                r.exec("sh run.sh " +GitUtil.getFirstPropertyFile());
+                String propertiesFile = GitUtil.getFirstPropertyFile();
+                BufferedWriter out = new BufferedWriter(new FileWriter("propertiesFile"));
+                out.write(propertiesFile);
+                out.close();
+//                r.exec("echo "+propertiesFile+" > propertiesFile" +propertiesFile);
+//                Log.info("execute: sh run.sh {}",propertiesFile);
             } catch (Exception e) {
                 Log.error("Main ",e);
             }
@@ -114,6 +118,10 @@ public class Main {
     protected void runDiversification() throws Exception {
         Diversify d = new Diversify(initTransformationQuery(), DiversifyProperties.getProperty("project"));
         String git = DiversifyProperties.getProperty("gitRepository");
+        if(!git.equals("")) {
+            GitUtil.initGit(git);
+        }
+
         d.setSourceDirectory(DiversifyProperties.getProperty("src"));
 
         if (DiversifyProperties.getProperty("clojure").equals("true"))
@@ -138,7 +146,7 @@ public class Main {
             int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
             d.run(n);
         }
-        d.printResult(DiversifyProperties.getProperty("result"), git);
+        d.printResult(DiversifyProperties.getProperty("result"), git+"/diversify-exp");
     }
 
     protected AbstractTransformationQuery initTransformationQuery() throws IOException, JSONException {
