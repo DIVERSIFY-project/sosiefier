@@ -46,13 +46,12 @@ public class GitUtil {
     private static void updateExpList(String s) throws IOException {
         BufferedWriter out = new BufferedWriter(new FileWriter(directory+"/diversify-exp/"+expFileName));
         out.write(s);
-        out.newLine();
         out.close();
         addToGit(expFileName);
     }
 
     public static void addToGit(String file) {
-        Log.debug("add file: {} to git: {}",file,directory+"/diversify-exp/");
+        Log.info("add file: {} to git: {}",file,directory+"/diversify-exp/");
         Runtime r = Runtime.getRuntime();
         try {
             Process p = r.exec("sh git/add.sh " +directory+"/diversify-exp/ "+file+ " \"add file "+file+"\"");
