@@ -86,7 +86,7 @@ public class Replace extends Transformation {
         int r = sp.getSourceEnd() - compileUnit.beginOfLineIndex(sp.getSourceStart());
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+
-                "System.out.println(\"Diversification ici\");\n" +
+//                "System.out.println(\"Diversification ici\");\n" +
                 replaces.get(position).codeFragmentString()+"\n", 0));
     }
 

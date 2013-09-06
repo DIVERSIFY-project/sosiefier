@@ -18,6 +18,7 @@ import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQueryTL;
 import fr.inria.diversify.util.DiversifyProperties;
 
+import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +43,21 @@ public class Main {
     private CodeFragmentList statements;
 
     public static void main(String[] args) throws Exception {
-        new Main(args);
+        if(args[0].equals("git")) {
+            GitUtil.initGit(args[1]);
+            Runtime r = Runtime.getRuntime();
+            try {
+                r.exec("sh run.sh " +GitUtil.getFirstPropertyFile());
+            } catch (Exception e) {
+                Log.error("Main ",e);
+            }
+        }
+        else
+            new Main(args[0]);
     }
 
-    public Main(String[] args) throws Exception {
-        new DiversifyProperties(args[0]);
+    public Main(String propertiesFile) throws Exception {
+        new DiversifyProperties(propertiesFile);
 
         initLogLevel();
         initSpoon();
@@ -60,8 +72,9 @@ public class Main {
             else
                 runDiversification();
 
-        if (DiversifyProperties.getProperty("stat").equals("true"))
-            computeStatistic();
+        suicide();
+//        if (DiversifyProperties.getProperty("stat").equals("true"))
+//            computeStatistic();
     }
 
     protected void sosieOnMultiProject() throws Exception {
@@ -100,7 +113,7 @@ public class Main {
 
     protected void runDiversification() throws Exception {
         Diversify d = new Diversify(initTransformationQuery(), DiversifyProperties.getProperty("project"));
-
+        String git = DiversifyProperties.getProperty("gitRepository");
         d.setSourceDirectory(DiversifyProperties.getProperty("src"));
 
         if (DiversifyProperties.getProperty("clojure").equals("true"))
@@ -125,8 +138,7 @@ public class Main {
             int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
             d.run(n);
         }
-
-        d.printResult(DiversifyProperties.getProperty("result"));
+        d.printResult(DiversifyProperties.getProperty("result"), git);
     }
 
     protected AbstractTransformationQuery initTransformationQuery() throws IOException, JSONException {
@@ -240,7 +252,7 @@ public class Main {
         try {
             stat.writeStatistic(output);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.error("computeCodeFragmentStatistic ", e);
         }
     }
 
@@ -267,6 +279,20 @@ public class Main {
         out.write(obj.toString());
         out.newLine();
         out.close();
+
+    }
+
+    protected void suicide() {
+//        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+//        Log.debug("PID :"+pid);
+        Runtime r = Runtime.getRuntime();
+        try {
+            Process p = r.exec("pkill java");
+            Thread.sleep(1000);
+
+        } catch (Exception e) {
+            Log.error("suicide ",e);
+        }
     }
 
     protected void initLogLevel() {

@@ -4,6 +4,7 @@ import fr.inria.diversify.transformation.CompileException;
 import fr.inria.diversify.transformation.RunMaven;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,13 +33,17 @@ public abstract class Builder {
 
     public abstract void run(List<Transformation> trans) throws Exception;
 
-    public void printResult(String output) {
+    public void printResult(String output, String git) {
+        String fileName = output + System.currentTimeMillis() + "_transformation.json";
         try {
-            String fileName = output + System.currentTimeMillis() + "_transformation.json";
             writeTransformation(fileName);
             Log.info("write result in {}", fileName);
         } catch (Exception e) {
             Log.error("error in Main.printResult", e);
+        }
+        if(git != "null") {
+            String[] tmp = fileName.split("/");
+            GitUtil.addToGit(tmp[tmp.length - 1]);
         }
 //        StatisticDiversification stat = new StatisticDiversification(transformations);
 //        stat.writeStat(output);
@@ -59,6 +64,7 @@ public abstract class Builder {
         out.close();
     }
 
+
     protected String prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
         String dir = dirTarget + "/tmp_" + System.currentTimeMillis();
         copyDirectory(new File(dirSource), new File(dir));
@@ -68,7 +74,7 @@ public abstract class Builder {
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
         RunMaven rt = new RunMaven(directory, "test", clojureTest);
         rt.start();
-        int count = 0;
+//        int count = 0;
         rt.join(1000*timeOut);
 //        while (rt.getFailures() == null && count < timeOut) {
 //            count++;
@@ -116,7 +122,7 @@ public abstract class Builder {
         Runtime r = Runtime.getRuntime();
         try {
             Process p = r.exec("pkill -P " +pid);
-            p.wait(1000);
+            Thread.sleep(1000);
 
         } catch (Exception e) {
             Log.error("killallchildren ",e);
