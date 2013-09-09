@@ -34,14 +34,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 public class Main {
     private CodeFragmentList statements;
 
     public static void main(String[] args) throws Exception {
+
         if(args[0].equals("git")) {
             GitUtil.initGit(args[1]);
             Runtime r = Runtime.getRuntime();
@@ -75,7 +78,6 @@ public class Main {
                 sosieOnMultiProject();
             else
                 runDiversification();
-
         suicide();
 //        if (DiversifyProperties.getProperty("stat").equals("true"))
 //            computeStatistic();
@@ -291,13 +293,11 @@ public class Main {
     }
 
     protected void suicide() {
-//        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-//        Log.debug("PID :"+pid);
+        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+        Log.debug("PID :"+pid);
         Runtime r = Runtime.getRuntime();
         try {
-            Process p = r.exec("pkill java");
-            Thread.sleep(1000);
-
+            r.exec("kill "+pid);
         } catch (Exception e) {
             Log.error("suicide ",e);
         }
@@ -307,5 +307,4 @@ public class Main {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);
     }
-
 }

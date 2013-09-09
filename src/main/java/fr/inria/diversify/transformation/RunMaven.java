@@ -22,17 +22,20 @@ public class RunMaven extends  Thread {
     protected String lifeCycle;
     protected Integer failure = null;
     protected Boolean clojureTest = false;
+    private int timeOut;
 
 
-    public RunMaven(String directory, String lifeCycle) {
+    public RunMaven(String directory, String lifeCycle, int timeOut) {
         this.directory = directory;
         this.lifeCycle = lifeCycle;
+        this.timeOut = timeOut;
     }
 
-    public RunMaven(String directory, String lifeCycle, boolean clojureTest) {
+    public RunMaven(String directory, String lifeCycle, int timeOut, boolean clojureTest) {
         this.directory = directory;
         this.lifeCycle = lifeCycle;
         this.clojureTest = clojureTest;
+        this.timeOut = timeOut;
     }
 
 
@@ -63,7 +66,8 @@ public class RunMaven extends  Thread {
         l.add(lifeCycle);
         request.setGoals(l);
 
-        Invoker invoker = new DefaultInvoker();
+
+        MavenInvoker invoker = new MavenInvoker();
         //freebsd
         File mvnHome = new File("/usr/local/share/java/maven3");
         if(!mvnHome.exists())
@@ -71,9 +75,11 @@ public class RunMaven extends  Thread {
             mvnHome = new File("/usr/share/maven");
 
         invoker.setMavenHome(mvnHome);
+        invoker.setTimeOut(timeOut);
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        PrintStreamHandler psh = new PrintStreamHandler(new PrintStream(os), true);
+        PrintStream stream = new PrintStream(os);
+        PrintStreamHandler psh = new PrintStreamHandler(stream, true);
         invoker.setOutputHandler(psh);
         invoker.setErrorHandler(psh);
 
@@ -86,6 +92,13 @@ public class RunMaven extends  Thread {
                 parseResult(os.toString());
 
         } catch (MavenInvocationException e) {
+
+            e.printStackTrace();
+        }
+        try {
+            stream.close();
+            os.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -44,7 +44,7 @@ public abstract class Builder {
         } catch (Exception e) {
             Log.error("error in Main.printResult", e);
         }
-        if(git != "") {
+        if(!git.equals("")) {
             GitUtil.addToGit(fileName);
         }
 //        StatisticDiversification stat = new StatisticDiversification(transformations);
@@ -85,7 +85,7 @@ public abstract class Builder {
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, "test", clojureTest);
+        RunMaven rt = new RunMaven(directory, "test", timeOut,clojureTest);
         rt.start();
 //        int count = 0;
         rt.join(1000*timeOut);
@@ -104,10 +104,10 @@ public abstract class Builder {
 
     public void initTimeOut() throws InterruptedException {
         initThreadGroup();
-        RunMaven rt = new RunMaven(projectDir, "test", clojureTest);
+        RunMaven rt = new RunMaven(projectDir, "test", 0, clojureTest);
         rt.start();
         timeOut = 0;
-        int factor = 3;
+        int factor = 4;
         while (rt.getFailures() == null) {
             timeOut = timeOut + factor;
             Thread.sleep(1000);

@@ -48,7 +48,7 @@ public class TestSosie extends Builder {
     }
 
     protected Integer PrunTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, "package", clojureTest);
+        RunMaven rt = new RunMaven(directory, "package",timeOut, clojureTest);
         rt.start();
         int count = 0;
         while (rt.getFailures() == null && count < timeOut) {
