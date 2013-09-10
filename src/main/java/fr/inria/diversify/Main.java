@@ -321,6 +321,6 @@ public class Main {
                     i++;
             }
             reader.close();
-        return  i;
+        return  i/2;
     }
 }
