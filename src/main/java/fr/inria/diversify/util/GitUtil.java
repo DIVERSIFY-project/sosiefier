@@ -48,6 +48,7 @@ public class GitUtil {
         out.write(s);
         out.close();
         addToGit(expFileName);
+        pushGit();
     }
 
     public static void addToGit(String file) {
@@ -59,6 +60,16 @@ public class GitUtil {
             Log.error("addToGit ",e);
         }
         Log.info("add file: {} to git: {}",file,directory+"/diversify-exp/");
+    }
+
+    public static void pushGit() {
+        Runtime r = Runtime.getRuntime();
+        try {
+            Process p = r.exec("sh git/push.sh " +directory+"/diversify-exp/");
+            p.waitFor();
+        } catch (Exception e) {
+            Log.error("addToGit ",e);
+        }
     }
 
 }

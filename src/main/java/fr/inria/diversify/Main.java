@@ -69,6 +69,7 @@ public class Main {
 
         initLogLevel();
         initSpoon();
+
         Log.info("number of cpu: "+numberOfCpu());
         Log.info("number of statement: " + statements.size());
 
