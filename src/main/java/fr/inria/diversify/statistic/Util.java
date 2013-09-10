@@ -136,7 +136,6 @@ public class Util {
                 mapping.add(variable.getVariable().toString()+"==="+candidate.toString() );
 
         }
-
         return computeVarMapping(vars);
     }
 
@@ -147,9 +146,11 @@ public class Util {
         if(vars.size() == 1) {
             for(String var : vars.get(0)) {
                 String[] mapping = var.split("===");
-                Map<String,String> tmp = new HashMap<String, String>();
-                tmp.put(mapping[0],mapping[1]);
-                map.add(tmp);
+                if(mapping.length == 2) {
+                    Map<String,String> tmp = new HashMap<String, String>();
+                    tmp.put(mapping[0],mapping[1]);
+                    map.add(tmp);
+                }
             }
         }
         else {

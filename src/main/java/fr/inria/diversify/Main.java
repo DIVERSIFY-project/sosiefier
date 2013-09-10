@@ -69,7 +69,7 @@ public class Main {
 
         initLogLevel();
         initSpoon();
-
+//        computeOtherStat();
         Log.info("number of cpu: "+numberOfCpu());
         Log.info("number of statement: " + statements.size());
 
@@ -81,8 +81,8 @@ public class Main {
             else
                 runDiversification();
         suicide();
-//        if (DiversifyProperties.getProperty("stat").equals("true"))
-//            computeStatistic();
+        if (DiversifyProperties.getProperty("stat").equals("true"))
+            computeStatistic();
     }
 
     protected void sosieOnMultiProject() throws Exception {

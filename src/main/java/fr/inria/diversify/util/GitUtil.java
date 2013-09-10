@@ -55,6 +55,7 @@ public class GitUtil {
         Runtime r = Runtime.getRuntime();
         try {
             Process p = r.exec("sh git/add.sh " +directory+"/diversify-exp/ "+file+ " \"add file "+file+"\"");
+            Log.debug("sh git/add.sh " +directory+"/diversify-exp/ "+file+ " \"add file "+file+"\"");
             p.waitFor();
         } catch (Exception e) {
             Log.error("addToGit ",e);
@@ -66,6 +67,7 @@ public class GitUtil {
         Runtime r = Runtime.getRuntime();
         try {
             Process p = r.exec("sh git/push.sh " +directory+"/diversify-exp/");
+            Log.debug("sh git/push.sh " +directory+"/diversify-exp/");
             p.waitFor();
         } catch (Exception e) {
             Log.error("addToGit ",e);
