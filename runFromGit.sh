@@ -1,6 +1,5 @@
 #!/bin/sh
 
-java -jar target/Diversify-statements-1.0-SNAPSHOT-jar-with-dependencies.jar git $2
 cpu=$(cat nbCPU)
 for i in `seq 1 $1`
 do
