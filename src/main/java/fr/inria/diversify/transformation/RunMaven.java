@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation;
 
 
 import fr.inria.diversify.util.Log;
+import fr.inria.diversify.util.maven.MavenInvoker;
 import org.apache.maven.shared.invoker.*;
 
 import java.io.*;
@@ -22,7 +23,7 @@ public class RunMaven extends  Thread {
     protected String lifeCycle;
     protected Integer failure = null;
     protected Boolean clojureTest = false;
-    private int timeOut;
+    protected int timeOut;
 
 
     public RunMaven(String directory, String lifeCycle, int timeOut) {

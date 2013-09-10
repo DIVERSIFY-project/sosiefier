@@ -6,7 +6,6 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -107,7 +106,7 @@ public abstract class Builder {
         RunMaven rt = new RunMaven(projectDir, "test", 0, clojureTest);
         rt.start();
         timeOut = 0;
-        int factor = 4;
+        int factor = 2;
         while (rt.getFailures() == null) {
             timeOut = timeOut + factor;
             Thread.sleep(1000);

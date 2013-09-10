@@ -29,10 +29,7 @@ import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
 import spoon.support.builder.SpoonBuildingManager;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
@@ -53,6 +50,10 @@ public class Main {
                 BufferedWriter out = new BufferedWriter(new FileWriter("propertiesFile"));
                 out.write(propertiesFile);
                 out.close();
+                out = new BufferedWriter(new FileWriter("nbCPU"));
+                out.write(numberOfCpu());
+                out.write(numberOfCpu());
+                out.close();
 //                r.exec("echo "+propertiesFile+" > propertiesFile" +propertiesFile);
 //                Log.info("execute: sh run.sh {}",propertiesFile);
             } catch (Exception e) {
@@ -68,7 +69,7 @@ public class Main {
 
         initLogLevel();
         initSpoon();
-
+        Log.info("number of cpu: "+numberOfCpu());
         Log.info("number of statement: " + statements.size());
 
         if(DiversifyProperties.getProperty("sosie").equals("true"))
@@ -289,7 +290,6 @@ public class Main {
         out.write(obj.toString());
         out.newLine();
         out.close();
-
     }
 
     protected void suicide() {
@@ -306,5 +306,21 @@ public class Main {
     protected void initLogLevel() {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);
+    }
+
+    protected static int numberOfCpu() throws InterruptedException, IOException {
+        Runtime r = Runtime.getRuntime();
+
+            Process p = r.exec("cat /proc/cpuinfo");
+            p.waitFor();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            int i = 0;
+            while ((line = reader.readLine()) != null) {
+                if(line.startsWith("processor"))
+                    i++;
+            }
+            reader.close();
+        return  i;
     }
 }
