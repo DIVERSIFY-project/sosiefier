@@ -51,8 +51,8 @@ public class Main {
                 out.write(propertiesFile);
                 out.close();
                 out = new BufferedWriter(new FileWriter("nbCPU"));
-                out.write(numberOfCpu());
-                out.write(numberOfCpu());
+                out.write(numberOfCpu()+"");
+
                 out.close();
 //                r.exec("echo "+propertiesFile+" > propertiesFile" +propertiesFile);
 //                Log.info("execute: sh run.sh {}",propertiesFile);
