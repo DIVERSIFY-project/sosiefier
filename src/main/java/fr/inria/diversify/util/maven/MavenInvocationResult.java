@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.util.maven;
 
 import org.apache.maven.shared.invoker.InvocationResult;
 import org.codehaus.plexus.util.cli.CommandLineException;
