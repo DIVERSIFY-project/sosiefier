@@ -1,6 +1,6 @@
-package fr.inria.diversify.sosie;
+package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.Builder;
+import fr.inria.diversify.diversification.Builder;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.Log;

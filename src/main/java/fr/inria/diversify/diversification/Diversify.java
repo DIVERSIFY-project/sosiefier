@@ -1,6 +1,7 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.Builder;
+import fr.inria.diversify.diversification.Builder;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
@@ -22,7 +23,6 @@ public class Diversify extends Builder {
         this.srcDir = "src/main/java";
         this.projectDir = projectDir;
         clojureTest = false;
-        timeOut = 200;
 
         transformations = new ArrayList<Transformation>();
     }

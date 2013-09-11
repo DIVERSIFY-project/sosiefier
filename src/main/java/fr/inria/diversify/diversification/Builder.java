@@ -1,4 +1,4 @@
-package fr.inria.diversify;
+package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.CompileException;
 import fr.inria.diversify.transformation.RunMaven;

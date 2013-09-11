@@ -1,6 +1,6 @@
-package fr.inria.diversify.test;
+package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.Builder;
+import fr.inria.diversify.diversification.Builder;
 import fr.inria.diversify.transformation.CompileException;
 import fr.inria.diversify.transformation.RunMaven;
 import fr.inria.diversify.transformation.Transformation;
