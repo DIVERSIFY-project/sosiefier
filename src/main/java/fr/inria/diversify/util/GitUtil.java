@@ -66,8 +66,8 @@ public class GitUtil {
     public static void addToGit(String subDir, String file) {
         Runtime r = Runtime.getRuntime();
         try {
-            Process p = r.exec("sh git/add.sh " +directory+"/diversify-exp/"+subDir+ " " +file+ " \"add file "+file+"\"");
-            Log.debug("sh git/add.sh " +directory+"/diversify-exp/"+subDir+ " " +file+ " \"add file "+file+"\"");
+            Process p = r.exec("sh git/add.sh " +subDir+ " " +file+ " \"add file "+file+"\"");
+            Log.debug("sh git/add.sh " +subDir+ " " +file+ " \"add file "+file+"\"");
             p.waitFor();
         } catch (Exception e) {
             Log.error("addToGit ",e);
