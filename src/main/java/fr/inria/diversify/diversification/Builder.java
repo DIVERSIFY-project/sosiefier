@@ -50,7 +50,7 @@ public abstract class Builder {
             for (int i = 0;i < split.length - 1; i++) {
                 tmp = tmp + "/" + split[i];
             }
-            GitUtil.addToGit(tmp, split[split.length]);
+            GitUtil.addToGit(tmp, split[split.length - 1]);
         }
 //        StatisticDiversification stat = new StatisticDiversification(transformations);
 //        stat.writeStat(output);
