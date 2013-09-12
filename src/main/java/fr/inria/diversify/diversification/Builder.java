@@ -45,9 +45,10 @@ public abstract class Builder {
             Log.error("error in Main.printResult", e);
         }
         if(!git.equals("")) {
-            String tmp = "";
+
             String[] split = absoluteFileName.split("/");
-            for (int i = 0;i < split.length - 1; i++) {
+            String tmp = split[0];
+            for (int i = 1;i < split.length - 1; i++) {
                 tmp = tmp + "/" + split[i];
             }
             Log.debug(tmp+"/   "+split[split.length - 1]);
