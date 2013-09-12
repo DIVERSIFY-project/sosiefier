@@ -51,10 +51,9 @@ public abstract class Builder {
             for (int i = 1;i < split.length - 1; i++) {
                 tmp = tmp + "/" + split[i];
             }
-            if(tmp.startsWith("/"))
-                tmp = tmp.substring(1,tmp.length());
+
             Log.debug(tmp+"/   "+split[split.length - 1]);
-            GitUtil.addToGit(tmp+"/", split[split.length - 1]);
+            GitUtil.addToGit(tmp+"/", "*");
         }
 //        StatisticDiversification stat = new StatisticDiversification(transformations);
 //        stat.writeStat(output);
