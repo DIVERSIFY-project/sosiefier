@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cpu=$(cat nbCPU)
+cpu=$(cat nbProcess)
 for i in `seq 1 $1`
 do
     for j in `seq 1 $cpu`

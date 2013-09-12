@@ -53,7 +53,7 @@ public class TransformationParser {
             try {
                 list.add(parseTransformation(array.getJSONObject(i)));
             }  catch (Exception e) {
-                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
+//                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
             }
         }
         return list;

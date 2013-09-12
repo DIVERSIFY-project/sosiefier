@@ -39,5 +39,4 @@ public class DiversifyProperties {
         prop.setProperty("logLevel", "2");
         prop.setProperty("gitRepository", "");
     }
-
 }
