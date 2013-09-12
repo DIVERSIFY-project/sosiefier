@@ -128,6 +128,10 @@ public class Add extends Transformation {
             "failure");
 }
 
+    public String getType(){
+        return "add";
+    }
+
     //works only for 1add
     @Override
     public void write(StringBuffer sb, char separator) {

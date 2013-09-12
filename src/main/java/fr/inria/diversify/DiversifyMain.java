@@ -6,22 +6,22 @@ import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
+import fr.inria.diversify.diversification.Builder;
+import fr.inria.diversify.diversification.Diversify;
 import fr.inria.diversify.diversification.Sosie;
+import fr.inria.diversify.diversification.TestSosie;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.statistic.Util;
-import fr.inria.diversify.diversification.Builder;
-import fr.inria.diversify.diversification.TestSosie;
-import fr.inria.diversify.diversification.Diversify;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
+import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQueryTL;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
@@ -30,9 +30,7 @@ import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
 import spoon.support.builder.SpoonBuildingManager;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,17 +51,15 @@ public class DiversifyMain {
 //        Log.info("number of cpu: "+numberOfCpu());
         Log.info("number of statement: " + statements.size());
 
-        if(DiversifyProperties.getProperty("sosie").equals("true"))
+        if (DiversifyProperties.getProperty("sosie").equals("true"))
             buildSosie();
-        else
-        if(DiversifyProperties.getProperty("sosieOnMultiProject").equals("true"))
+        else if (DiversifyProperties.getProperty("sosieOnMultiProject").equals("true"))
             sosieOnMultiProject();
         else
             runDiversification();
 
         if (DiversifyProperties.getProperty("stat").equals("true")) {
             computeStatistic();
-            computeOtherStat();
         }
     }
 
@@ -75,12 +71,12 @@ public class DiversifyMain {
     protected void runDiversification() throws Exception {
         Diversify d = new Diversify(initTransformationQuery(), DiversifyProperties.getProperty("project"));
         String git = DiversifyProperties.getProperty("gitRepository");
-        if(!git.equals("")) {
+        if (!git.equals("")) {
             GitUtil.initGit(git);
         }
         initAndRunBuilder(d);
 
-        d.printResult(DiversifyProperties.getProperty("result"), git+"/diversify-exp");
+        d.printResult(DiversifyProperties.getProperty("result"), git + "/diversify-exp");
     }
 
     protected void sosieOnMultiProject() throws Exception {
@@ -93,11 +89,12 @@ public class DiversifyMain {
 
         initAndRunBuilder(d);
     }
+
     protected void initAndRunBuilder(Builder builder) throws Exception {
         builder.setSourceDirectory(DiversifyProperties.getProperty("src"));
 
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
-        if(t == -1)
+        if (t == -1)
             builder.initTimeOut();
         else
             builder.setTimeOut(t);
@@ -108,16 +105,15 @@ public class DiversifyMain {
             builder.setClojureTest(true);
 
         //TODO refactor
-        if(DiversifyProperties.getProperty("nbRun").equals("all")) {
+        if (DiversifyProperties.getProperty("nbRun").equals("all")) {
             Util util = new Util(statements);
-            if(DiversifyProperties.getProperty("transformation.type").equals("replace"))
+            if (DiversifyProperties.getProperty("transformation.type").equals("replace"))
                 builder.run(util.getAllReplace());
-            if(DiversifyProperties.getProperty("transformation.type").equals("add"))
+            if (DiversifyProperties.getProperty("transformation.type").equals("add"))
                 builder.run(util.getAllAdd());
-            if(DiversifyProperties.getProperty("transformation.type").equals("delete"))
+            if (DiversifyProperties.getProperty("transformation.type").equals("delete"))
                 builder.run(util.getAllDelete());
-        }
-        else {
+        } else {
             int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
             builder.run(n);
         }
@@ -178,19 +174,18 @@ public class DiversifyMain {
         ICoverageReport icr;
         String jacocoFile = DiversifyProperties.getProperty("jacoco");
         String classes;
-        if(DiversifyProperties.getProperty("jacoco.classes") != null)
+        if (DiversifyProperties.getProperty("jacoco.classes") != null)
             classes = DiversifyProperties.getProperty("jacoco.classes");
         else
             classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
 
         if (jacocoFile != null) {
             File file = new File(jacocoFile);
-            if(file.isDirectory())
+            if (file.isDirectory())
                 icr = new MultiCoverageReport(classes, file);
             else
                 icr = new CoverageReport(classes, file);
-        }
-        else
+        } else
             icr = new NullCoverageReport();
 
         icr.create();
@@ -211,13 +206,40 @@ public class DiversifyMain {
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException {
         TransformationParser tf = new TransformationParser(statements);
         List<Transformation> transformations = tf.parseDir(transDir);
+        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
-        writeTransformation(fileName + "_allTransformation.json", transformations);
-        writeGoodTransformation(fileName + "_goodTransformation.json", transformations);
+        String name = write.writeAllTransformation(null);
+        statForR(name);
+        name = write.writeAllTransformation("add");
+        statForR(name);
+        name = write.writeAllTransformation("delete");
+        statForR(name);
+        name = write.writeAllTransformation("replace");
+        statForR(name);
 
-        StatisticDiversification sd = new StatisticDiversification(transformations, statements);
-        sd.writeStat(fileName);
+        name = write.writeGoodTransformation(null);
+        statForR(name);
+        name = write.writeGoodTransformation("add");
+        statForR(name);
+        name = write.writeGoodTransformation("delete");
+        statForR(name);
+        name = write.writeGoodTransformation("replace");
+        statForR(name);
+
+//        StatisticDiversification sd = new StatisticDiversification(transformations, statements);
+//        sd.writeStat(fileName);
         computeOtherStat();
+    }
+
+    protected void statForR(String fileName) throws IOException, JSONException {
+        TransformationParser tf = new TransformationParser(statements);
+        Log.debug("parse fileName: {}",fileName);
+        List<Transformation> transformations = tf.parseFile(new File(fileName));
+        StatisticDiversification sd = new StatisticDiversification(transformations, statements);
+        Log.debug("number of transformation: {}",transformations.size());
+        String name = fileName.split(".json")[0];
+        sd.writeStat(name);
+
     }
 
     protected void computeOtherStat() {
@@ -235,31 +257,6 @@ public class DiversifyMain {
         } catch (IOException e) {
             Log.error("computeCodeFragmentStatistic ", e);
         }
-    }
-
-    protected void writeGoodTransformation(String FileName, List<Transformation> transformations) throws IOException, JSONException {
-        List<Transformation> goodTransformation = new ArrayList<Transformation>();
-        for (Transformation transformation : transformations) {
-            if (transformation.numberOfFailure() == 0) {
-                goodTransformation.add(transformation);
-            }
-        }
-        writeTransformation(FileName, goodTransformation);
-    }
-
-    protected void writeTransformation(String FileName, List<Transformation> transformations) throws IOException, JSONException {
-
-        BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
-        JSONArray obj = new JSONArray();
-        for (Transformation transformation : transformations) {
-            try {
-                obj.put(transformation.toJSONObject());
-            } catch (Exception e) {
-            }
-        }
-        out.write(obj.toString());
-        out.newLine();
-        out.close();
     }
 
     protected void initLogLevel() {

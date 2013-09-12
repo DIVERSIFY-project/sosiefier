@@ -143,6 +143,10 @@ public class Replace extends Transformation {
         return ret;
     }
 
+    public String getType(){
+        return "replace";
+    }
+
     @Override
     public void writeHead(BufferedWriter sb, char separator) throws IOException {
         sb.append("toReplaceType" + separator + "replacedByType" + separator +

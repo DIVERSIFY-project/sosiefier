@@ -115,4 +115,6 @@ public abstract class Transformation {
         }
         return ret;
     }
+
+    public abstract String getType();
 }

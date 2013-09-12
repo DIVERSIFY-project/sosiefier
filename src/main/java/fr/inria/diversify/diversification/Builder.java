@@ -3,6 +3,7 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.transformation.CompileException;
 import fr.inria.diversify.transformation.RunMaven;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
@@ -50,19 +51,12 @@ public abstract class Builder {
 //        stat.writeStat(output);
     }
 
-    public void writeTransformation(String FileName) throws IOException, JSONException {
+    public void writeTransformation(String fileName) throws IOException, JSONException {
         if (transformations.isEmpty())
             return;
-        BufferedWriter out = new BufferedWriter(new FileWriter(FileName));
-        JSONArray obj = new JSONArray();
-        for (Transformation transformation : transformations) {
-            try {
-                obj.put(transformation.toJSONObject());
-            } catch (Exception e) {}
-        }
-        out.write(obj.toString());
-        out.newLine();
-        out.close();
+
+        TransformationsWriter write = new TransformationsWriter(transformations,fileName);
+        write.writeAllTransformation(null);
     }
 
     protected void mkDirResult(String output, String git) {

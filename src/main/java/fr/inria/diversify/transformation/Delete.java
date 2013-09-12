@@ -82,6 +82,10 @@ public class Delete extends Transformation {
         transforms.addAll(delete.transforms);
     }
 
+    public String getType(){
+        return "delete";
+    }
+
     @Override
     public void writeHead(BufferedWriter sb, char separator) throws IOException {
         sb.append("deleteType" + separator +

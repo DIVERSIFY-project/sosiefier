@@ -50,7 +50,7 @@ public class StatisticDiversification {
     public void writeStat(String output) {
         try {
             writeDetail(output+detailFileSuffix);
-            writeAllPossibleTransformation(output+allTransformationFileSuffix);
+//            writeAllPossibleTransformation(output+allTransformationFileSuffix);
 //            write(statByClass(), output+classFileSuffix);
 //            write(statByType(), output+statementFileSuffix);
         } catch (IOException e) {

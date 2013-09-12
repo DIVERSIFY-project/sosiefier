@@ -160,12 +160,15 @@ public class Util {
             for(String var : currentVar) {
                 String[] mapping = var.split("===");
                 for (Map<String,String> m : currentMapping) {
-                    HashMap<String, String> tmp = new HashMap<String, String>(m);
-                    if(mapping.length == 0)
-                        tmp.put("","");
-                    else
-                        tmp.put(mapping[0],mapping[1]);
-                    map.add(tmp);
+                    try {
+                        HashMap<String, String> tmp = new HashMap<String, String>(m);
+                        if(mapping.length == 0)
+                            tmp.put("","");
+                        else
+                            tmp.put(mapping[0],mapping[1]);
+                        map.add(tmp);
+                    } catch (Exception e) {}
+
                 }
             }
             return map;
