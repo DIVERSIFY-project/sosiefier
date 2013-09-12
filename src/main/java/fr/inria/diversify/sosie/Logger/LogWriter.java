@@ -77,6 +77,32 @@ public class LogWriter {
             }
         } catch (IOException e) {
             e.printStackTrace();
+
+
+        }
+    }
+
+    public static void writeError(int id,Thread thread, String className, String methodSignature, StackTraceElement[] stackTrace) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = init(thread);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileWriter.append("$$$\n");
+            fileWriter.append(id+"");
+            fileWriter.append(separator);
+            fileWriter.append(className);
+            fileWriter.append(separator);
+            fileWriter.append(methodSignature);
+
+            for(StackTraceElement stackTraceElement :stackTrace) {
+                fileWriter.append(stackTraceElement.toString()+"\n");
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
