@@ -20,6 +20,7 @@ import java.util.*;
  */
 public class TransformationParser {
     CodeFragmentList codeFragments;
+    private int countError = 0;
 
     public TransformationParser(CodeFragmentList list) {
         codeFragments = list;
@@ -28,13 +29,16 @@ public class TransformationParser {
     public List<Transformation> parseDir(String dir) throws IOException, JSONException {
         List<Transformation> list = new ArrayList<Transformation>();
         File file = new File(dir);
+        int count = 0;
 
         for (File f : file.listFiles())
             if(f.getName().endsWith(".json")) {
+                count++;
                 Log.debug("parse tranformation file: "+f.getName());
                 list.addAll(parseFile(f));
             }
-
+        Log.debug("number of transformation file: {}",count);
+        Log.debug("number of parse error : {}",countError);
         return list;
     }
     public List<Transformation> parseFile(File file) throws IOException, JSONException {
@@ -53,6 +57,7 @@ public class TransformationParser {
             try {
                 list.add(parseTransformation(array.getJSONObject(i)));
             }  catch (Exception e) {
+                countError++;
 //                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
             }
         }

@@ -36,6 +36,8 @@ public class Diversify extends Builder {
         }
         FileUtils.cleanDirectory(dir);
         FileUtils.forceDelete(dir);
+        Log.debug("{} compile error on {} compilation", compileError, n);
+        Log.debug("{} sosie on {} trial", sosie, trial);
     }
     @Override
     public void run(List<Transformation> trans) throws Exception {
@@ -53,6 +55,9 @@ public class Diversify extends Builder {
         try {
             trans.apply(tmpDir + "/" + srcDir);
             int failures = runTest(tmpDir);
+            if(failures == 0)
+                sosie++;
+            trial++;
             trans.setJUnitResult(failures);
             transformations.add(trans);
 

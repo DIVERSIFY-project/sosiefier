@@ -29,6 +29,9 @@ public abstract class Builder {
     protected boolean clojureTest;
     protected int timeOut;
     protected AbstractTransformationQuery transQuery;
+    protected int compileError = 0;
+    protected int sosie = 0;
+    protected int trial = 0;
 
     public abstract void run(int n) throws Exception;
 
@@ -88,15 +91,13 @@ public abstract class Builder {
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
         RunMaven rt = new RunMaven(directory, "test", timeOut,clojureTest);
         rt.start();
-//        int count = 0;
         rt.join(1000*timeOut);
-//        while (rt.getFailures() == null && count < timeOut) {
-//            count++;
-//            Thread.sleep(1000);
-//        }
+
         Log.info("compile error: " + rt.getCompileError() + ", run all test: " + rt.allTestRun() + ", number of failure: " + rt.getFailures());
-        if (rt.getCompileError())
+        if (rt.getCompileError()) {
+            compileError++;
             throw new CompileException("compile error in maven");
+        }
 
         if (!rt.allTestRun())
             return -1;
@@ -108,7 +109,7 @@ public abstract class Builder {
         RunMaven rt = new RunMaven(projectDir, "test", 0, clojureTest);
         rt.start();
         timeOut = 0;
-        int factor = 2;
+        int factor = 4;
         while (rt.getFailures() == null) {
             timeOut = timeOut + factor;
             Thread.sleep(1000);

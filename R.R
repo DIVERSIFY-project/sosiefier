@@ -68,3 +68,55 @@ forest <- function(diversification) {
   
   return(fit)
 }
+
+loadAllResult <- function(dir) {
+  
+ # tAll <<- read.csv2(paste(sep="", dir, "_all_diversification_detail.csv"))
+  tReplace <<- read.csv2(paste(sep="", dir, "_replace_all_diversification_detail.csv"))
+  tAdd <<- read.csv2(paste(sep="", dir, "_add_all_diversification_detail.csv"))
+  tDelete <<- read.csv2(paste(sep="", dir, "_delete_all_diversification_detail.csv"))
+}
+
+displayResult <- function() {
+cat('all:\n\ttrial: ')
+cat(nbOfDiversification(tReplace) + nbOfDiversification(tAdd) + nbOfDiversification(tDelete))
+cat('\n\tincorrect-variants: ')
+cat(nbOfFailDiversification(tReplace) + nbOfFailDiversification(tAdd) + nbOfFailDiversification(tDelete))
+cat('\n\tsosies: ')
+cat(nbOfGoodDiversification(tReplace) + nbOfGoodDiversification(tAdd) + nbOfGoodDiversification(tDelete))
+
+cat('\nreplace:\n\ttrial: ')
+cat(nbOfDiversification(tReplace))
+cat('\n\tincorrect-variants: ')
+cat(nbOfFailDiversification(tReplace))
+cat('\n\tsosies: ')
+cat(nbOfGoodDiversification(tReplace))
+
+cat('\nadd:\n\ttrial: ')
+cat(nbOfDiversification(tAdd))
+cat('\n\tincorrect-variants: ')
+cat(nbOfFailDiversification(tAdd))
+cat('\n\tsosies: ')
+cat(nbOfGoodDiversification(tAdd))
+
+cat('\ndelete:\n\ttrial: ')
+cat(nbOfDiversification(tDelete))
+cat('\n\tincorrect-variants: ')
+cat(nbOfFailDiversification(tDelete))
+cat('\n\tsosies: ')
+cat(nbOfGoodDiversification(tDelete))
+} 
+
+displayDetailResult <- function() {
+  cat('replace:\n')
+  tab <- diversiticationStat(tReplace, "toReplaceType")
+  print(xtable(tab),floating=FALSE) 
+  
+  cat('\nadd:\n')
+  tab <- diversiticationStat(tAdd, "positionType")
+  print(xtable(tab),floating=FALSE) 
+  
+  cat('\ndelete:\n')
+  tab <- diversiticationStat(tDelete, "deleteType")
+  print(xtable(tab),floating=FALSE) 
+}
