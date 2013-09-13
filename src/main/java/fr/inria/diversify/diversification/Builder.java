@@ -29,9 +29,7 @@ public abstract class Builder {
     protected boolean clojureTest;
     protected int timeOut;
     protected AbstractTransformationQuery transQuery;
-    protected int compileError = 0;
-    protected int sosie = 0;
-    protected int trial = 0;
+
 
     public abstract void run(int n) throws Exception;
 
@@ -95,7 +93,6 @@ public abstract class Builder {
 
         Log.info("compile error: " + rt.getCompileError() + ", run all test: " + rt.allTestRun() + ", number of failure: " + rt.getFailures());
         if (rt.getCompileError()) {
-            compileError++;
             throw new CompileException("compile error in maven");
         }
 

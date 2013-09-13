@@ -1,6 +1,5 @@
 package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.diversification.Builder;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.Log;
@@ -15,7 +14,9 @@ import java.util.List;
  * Time: 5:39 PM
  */
 public class Diversify extends Builder {
-
+    protected int compileError = 0;
+    protected int sosie = 0;
+    protected int trial = 0;
 
     public Diversify(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
@@ -36,6 +37,7 @@ public class Diversify extends Builder {
         }
         FileUtils.cleanDirectory(dir);
         FileUtils.forceDelete(dir);
+
         Log.debug("{} compile error on {} compilation", compileError, n);
         Log.debug("{} sosie on {} trial", sosie, trial);
     }
@@ -62,6 +64,7 @@ public class Diversify extends Builder {
             transformations.add(trans);
 
         } catch (Exception e) {
+            compileError++;
             Log.warn("compile error during diversification", e);
         }
         trans.restore(tmpDir + "/" + srcDir);

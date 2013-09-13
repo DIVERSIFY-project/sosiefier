@@ -235,6 +235,10 @@ public class DiversifyMain {
         TransformationParser tf = new TransformationParser(statements);
         Log.debug("parse fileName: {}",fileName);
         List<Transformation> transformations = tf.parseFile(new File(fileName));
+
+        if(transformations.isEmpty())
+            return;
+
         StatisticDiversification sd = new StatisticDiversification(transformations, statements);
         Log.debug("number of transformation: {}",transformations.size());
         String name = fileName.split(".json")[0];

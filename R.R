@@ -40,9 +40,9 @@ diversiticationStat <- function(data, index) {
     sub <- subset(data, data[,index] == i);
     good <-  nbOfGoodDiversification(sub);
     fail <- nbOfFailDiversification(sub);  
-    result[paste(i,sep=""),"good"] <- good;
-    result[paste(i,sep=""),"fail"] <- fail;
-    result[paste(i,sep=""),"% good"] <- 100*good/(fail + good);
+    result[paste(i,sep=""),"sosie"] <- good;
+    result[paste(i,sep=""),"trial"] <- fail;
+    result[paste(i,sep=""),"% sosie"] <- 100*good/(fail + good);
     result[paste(i,sep=""),"% total"] <- 100*(fail + good)/nbOfDiversification(data);
   } 
   return(result)  
