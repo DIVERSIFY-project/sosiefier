@@ -83,7 +83,6 @@ public class RunMaven extends  Thread {
         PrintStreamHandler psh = new PrintStreamHandler(stream, true);
         invoker.setOutputHandler(psh);
         invoker.setErrorHandler(psh);
-
         try {
             Log.debug("invoke maven");
             invoker.execute(request);
@@ -93,8 +92,7 @@ public class RunMaven extends  Thread {
                 parseResult(os.toString());
 
         } catch (MavenInvocationException e) {
-
-            e.printStackTrace();
+            Log.debug("Error in run Maven",e);
         }
         try {
             stream.close();

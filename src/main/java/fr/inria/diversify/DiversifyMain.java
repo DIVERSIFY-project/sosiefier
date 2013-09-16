@@ -192,7 +192,7 @@ public class DiversifyMain {
         return icr;
     }
 
-    protected void computeStatistic() throws IOException, JSONException {
+    protected void computeStatistic() throws IOException, JSONException, InterruptedException {
         String out = DiversifyProperties.getProperty("result");
         computeCodeFragmentStatistic(out);
 
@@ -203,7 +203,7 @@ public class DiversifyMain {
         computeOtherStat();
     }
 
-    protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException {
+    protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
         TransformationParser tf = new TransformationParser(statements);
         List<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
@@ -226,9 +226,8 @@ public class DiversifyMain {
         name = write.writeGoodTransformation("replace");
         statForR(name);
 
-//        StatisticDiversification sd = new StatisticDiversification(transformations, statements);
-//        sd.writeStat(fileName);
-        computeOtherStat();
+        StatisticDiversification sd = new StatisticDiversification(transformations, statements);
+        sd.writeStat(fileName);
     }
 
     protected void statForR(String fileName) throws IOException, JSONException {
@@ -246,10 +245,15 @@ public class DiversifyMain {
 
     }
 
-    protected void computeOtherStat() {
+    protected void computeOtherStat() throws InterruptedException {
         Util stat = new Util(statements);
-        System.out.println("number of possible code fragment replace: " + stat.numberOfDiversification());
-        System.out.println("number of not possible code fragment replace/add: " + stat.numberOfNotDiversification());
+//        System.out.println("number of possible code fragment replace: " + stat.numberOfDiversification());
+        try {
+            System.out.println("number of not possible code fragment replace/add: " + stat.numberOfNotDiversification());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("number of possible code fragment replace: "+ stat.getAllReplace().size());
         System.out.println("number of possible code fragment add: " + stat.getAllAdd().size());
         System.out.println("number of possible code fragment delete: " + stat.getAllDelete().size());
     }

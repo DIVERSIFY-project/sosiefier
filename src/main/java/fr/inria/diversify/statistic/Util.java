@@ -7,6 +7,7 @@ import fr.inria.diversify.transformation.Add;
 import fr.inria.diversify.transformation.Delete;
 import fr.inria.diversify.transformation.Replace;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.Log;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtStatement;
@@ -15,6 +16,9 @@ import spoon.reflect.reference.CtVariableReference;
 
 import java.math.BigInteger;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * User: Simon
@@ -24,29 +28,54 @@ import java.util.*;
 public class Util {
     protected CodeFragmentList codeFragments;
 
-
     public Util(CodeFragmentList list) {
         codeFragments = list;
     }
 
-    public long numberOfNotDiversification() {
-        long nb = 0;
+    public long numberOfNotDiversification() throws InterruptedException {
+        final List<Object> list = new LinkedList<Object>();
+        ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
-            if (findCandidate(cf1).isEmpty()) {
-               nb++;
-            }
+            final CodeFragment cfTmp = cf1;
+
+            pool.submit(new Runnable() {
+                @Override
+                public void run() {
+                    if(findCandidate(cfTmp).isEmpty())
+                    synchronized (list) {list.add(true);}
+                }
+            });
         }
-        return nb;
+
+        pool.shutdown();
+        pool.awaitTermination(10, TimeUnit.DAYS);
+        return list.size();
     }
 
-    public BigInteger numberOfDiversification() {
-        BigInteger nb = new BigInteger("0");
+    public BigInteger numberOfDiversification() throws InterruptedException {
+        final List<Object> list = new LinkedList<Object>();
+        ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
-            for (CodeFragment cf2 : findCandidate(cf1)) {
-                nb = nb.add(getNumberOfVarMapping(cf1,cf2));
-            }
+            final  CodeFragment cfTmp = cf1;
+            pool.submit(new Runnable() {
+                @Override
+                public void run() {
+                    BigInteger nb = new BigInteger("0");
+                    for (CodeFragment cf2 : findCandidate(cfTmp)) {
+                        nb = nb.add(getNumberOfVarMapping(cfTmp,cf2));
+                    }
+                    synchronized (list) {list.add(nb);}
+                }
+            });
         }
-        return nb;
+        pool.shutdown();
+        pool.awaitTermination(10, TimeUnit.SECONDS);
+        BigInteger result = new BigInteger("0");
+
+        for(Object number : list)
+            result = result.add((BigInteger)number);
+
+        return result;
     }
 
     public List<CodeFragment> findCandidate(CodeFragment cf) {
@@ -73,20 +102,30 @@ public class Util {
     }
 
 
-    public List<Transformation> getAllReplace() {
-        List<Transformation> allReplace = new ArrayList<Transformation>();
-
+    public List<Transformation> getAllReplace() throws InterruptedException {
+        final List<Transformation> allReplace = new ArrayList<Transformation>();
+        ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
-            for (CodeFragment cf2 : findCandidate(cf1)) {
-                for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
-                    Replace r = new Replace();
-                    CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                    r.addCodeFragmentToReplace(cf1,new Statement(tmp));
-                    r.addVarMapping(cf1,varMapping);
-                    allReplace.add(r);
-                }
+                final  CodeFragment cfTmp = cf1;
+                pool.submit(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (CodeFragment cf2 : findCandidate(cfTmp)) {
+                            for (Map<String, String> varMapping : getAllVarMapping(cfTmp, cf2)) {
+                                Replace r = new Replace();
+                                CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
+                                r.addCodeFragmentToReplace(cfTmp, new Statement(tmp));
+                                r.addVarMapping(cfTmp, varMapping);
+                                synchronized (allReplace) {
+                                    allReplace.add(r);
+                                }
+                            }
+                        }
+                    }
+                });
             }
-        }
+        pool.shutdown();
+        pool.awaitTermination(10, TimeUnit.SECONDS);
 
         return allReplace;
     }
@@ -102,20 +141,31 @@ public class Util {
         return allReplace;
     }
 
-    public List<Transformation> getAllAdd() {
-        List<Transformation> allReplace = new ArrayList<Transformation>();
-
+    public List<Transformation> getAllAdd() throws InterruptedException {
+        final List<Transformation> allReplace = new ArrayList<Transformation>();
+        ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
-            for (CodeFragment cf2 : findCandidate(cf1)) {
-                for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
-                    Add r = new Add();
-                    CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                    r.addCodeFragmentToAdd(cf1,new Statement(tmp));
-                    r.addVarMapping(cf1,varMapping);
-                    allReplace.add(r);
+            final  CodeFragment cfTmp = cf1;
+            pool.submit(new Runnable() {
+                @Override
+                public void run() {
+                    for (CodeFragment cf2 : findCandidate(cfTmp)) {
+                        for (Map<String,String> varMapping : getAllVarMapping(cfTmp,cf2)) {
+                            Add r = new Add();
+                            CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
+                            r.addCodeFragmentToAdd(cfTmp,new Statement(tmp));
+                            r.addVarMapping(cfTmp,varMapping);
+                            synchronized (allReplace) {
+                                allReplace.add(r);
+                            }
+                        }
+                    }
                 }
-            }
+            });
         }
+        pool.shutdown();
+        pool.awaitTermination(10, TimeUnit.SECONDS);
+
         return allReplace;
     }
 
