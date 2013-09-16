@@ -13,12 +13,14 @@ import java.util.List;
  * Time: 11:46 AM
  */
 public class PointSequence {
-    protected List<Point> points;
+    protected List<ConditionalPoint> conditionalPoints;
+    protected List<CatchPoint> cacthPoints;
     protected String threadName;
     protected String name;
 
     public PointSequence() {
-        points = new ArrayList<Point>();
+        conditionalPoints = new ArrayList<ConditionalPoint>();
+        cacthPoints = new ArrayList<CatchPoint>();
     }
 
     public void parseFile(File file) throws IOException {
@@ -31,7 +33,8 @@ public class PointSequence {
         while (line != null) {
             if(!line.isEmpty()) {
                 if(line.endsWith("$$$")) {
-                    points.add(new Point(tmp + line.substring(0,line.length()-3)));
+                    addPoint(tmp + line.substring(0,line.length()-3));
+
                     tmp = "";
                 }
                     else {
@@ -40,12 +43,19 @@ public class PointSequence {
             }
             line = reader.readLine();
         }
-        points.add(new Point(tmp));
+        addPoint(tmp);
+    }
+
+    protected void addPoint(String stringPoint) {
+        if(stringPoint.startsWith("ST"))
+            cacthPoints.add(new CatchPoint(stringPoint));
+        else
+            conditionalPoints.add(new ConditionalPoint(stringPoint));
     }
 
     public int findPoint(int id, String className, String methodSignature) {
         int i = 0;
-        for (Point point : points) {
+        for (Point point : conditionalPoints) {
             if(point.getId() == id && point.getClassName().equals(className) && point.getMethodSignature().equals(methodSignature))
                 return i;
             i++;
@@ -54,11 +64,11 @@ public class PointSequence {
     }
 
     public int size() {
-        return points.size();
+        return conditionalPoints.size();
     }
 
-    public Point get(int i) {
-        return points.get(i);
+    public ConditionalPoint get(int i) {
+        return conditionalPoints.get(i);
     }
 
     @Override

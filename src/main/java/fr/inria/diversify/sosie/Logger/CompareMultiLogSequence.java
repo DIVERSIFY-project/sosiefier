@@ -57,7 +57,7 @@ public class CompareMultiLogSequence {
                     if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) != null) {//same sequence
                         System.out.println(original.getName()+original.threadName+ " and "+ sosie.getName()+sosie.threadName+ " same call trace");
                         cls.computeDiffVar(syncroRange);
-                        printDivergencePoint(cls.findDivergence(syncroRange));
+//                        printDivergencePoint(cls.findDivergence(syncroRange));
                         varToExclude.addAll(cls.getDiffVar());
                         same = true;
                         break;
@@ -85,7 +85,6 @@ public class CompareMultiLogSequence {
             if (!same)
                 return true;
         }
-
         return false;
     }
 

@@ -16,16 +16,15 @@ public class LogWriter {
     static private String separator = ":;:";
 
 
-    protected static FileWriter init(Thread thread) throws IOException {
+    protected synchronized static FileWriter init(Thread thread) throws IOException {
         if(fileWriters == null) {
+            if(dir == null)
+                initDir();
             fileWriters = new HashMap<Thread, FileWriter>();
             ShutdownHookLog shutdownHook = new ShutdownHookLog();
             Runtime.getRuntime().addShutdownHook(shutdownHook);
         }
         if(!fileWriters.containsKey(thread)) {
-            if(dir == null) {
-                initDir();
-            }
             String fileName = initFileName(thread);
             fileWriters.put(thread,new FileWriter(dir.getAbsolutePath()+"/"+fileName));
         }
@@ -90,7 +89,10 @@ public class LogWriter {
             e.printStackTrace();
         }
         try {
+
             fileWriter.append("$$$\n");
+            fileWriter.append("ST");
+            fileWriter.append(separator);
             fileWriter.append(id+"");
             fileWriter.append(separator);
             fileWriter.append(className);
@@ -98,7 +100,8 @@ public class LogWriter {
             fileWriter.append(methodSignature);
 
             for(StackTraceElement stackTraceElement :stackTrace) {
-                fileWriter.append(stackTraceElement.toString()+"\n");
+                fileWriter.append(separator);
+                fileWriter.append(stackTraceElement.toString());
             }
         }
         catch (IOException e) {
