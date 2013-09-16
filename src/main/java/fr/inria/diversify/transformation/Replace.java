@@ -83,7 +83,7 @@ public class Replace extends Transformation {
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = position.getCtCodeFragment().getPosition();
 
-        int r = sp.getSourceEnd() - compileUnit.beginOfLineIndex(sp.getSourceStart());
+//        int r = sp.getSourceEnd() - compileUnit.beginOfLineIndex(sp.getSourceStart());
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+
 //                "System.out.println(\"Diversification ici\");\n" +

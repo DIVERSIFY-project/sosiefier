@@ -54,7 +54,6 @@ public class Delete extends Transformation {
 
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = delete.getCtCodeFragment().getPosition();
-        int r = sp.getSourceEnd() - sp.getSourceStart();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
     }

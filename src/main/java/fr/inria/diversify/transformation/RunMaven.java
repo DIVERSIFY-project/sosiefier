@@ -180,6 +180,4 @@ public class RunMaven extends  Thread {
     public boolean getCompileError() {
         return compileError;
     }
-
-
 }
