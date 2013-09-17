@@ -10,8 +10,8 @@ do
     echo $sosie
     mkdir ../sosieInstru
     cp -r $sosie ../sosieInstru
-    java -Xmx2000m -XX:MaxPermSize=256m -cp .:../../target/Diversify-statements-1.0-SNAPSHOT-jar-with-dependencies.jar fr.inria.diversify.sosie.MainInstru $sosie/src/main/java/ ../sosieInstru/$sosie/src/main/java
-    cp -r ../../utils/logger/ ../sosieInstru/$sosie/src/main/java/
+    java -Xmx2000m -XX:MaxPermSize=256m -cp .:../../target/Diversify-statements-1.0-SNAPSHOT-jar-with-dependencies.jar fr.inria.diversify.sosie.MainInstru $sosie/jbehave-core/src/main/java/ ../sosieInstru/$sosie/jbehave-core/src/main/java
+    cp -r ../../utils/logger/ ../sosieInstru/$sosie/jbehave-core/src/main/java/
 done
 
 #run des sosies
