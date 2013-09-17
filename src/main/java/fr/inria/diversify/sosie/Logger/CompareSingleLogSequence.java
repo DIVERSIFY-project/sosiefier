@@ -25,7 +25,6 @@ public class CompareSingleLogSequence {
 
 
     public int[][] findDivergence(int syncroRange) {
-
         int startOriginal = -1;
         int startSosie = -1;
         int bound = Math.min(original.size(), sosie.size());
@@ -60,8 +59,8 @@ public class CompareSingleLogSequence {
         while(startOriginal < bound - 1 && startSosie < bound - 1) {
             startOriginal++;
             startSosie++;
-            Point oPoint = original.get(startOriginal);
-            Point sPoint = sosie.get(startSosie);
+            ConditionalPoint oPoint = original.get(startOriginal);
+            ConditionalPoint sPoint = sosie.get(startSosie);
             if(oPoint.sameLogPoint(sPoint)) {
                 if(!oPoint.sameValue(sPoint))
                     difVar.addAll(oPoint.getDifVar(sPoint));
@@ -86,8 +85,8 @@ public class CompareSingleLogSequence {
         while(startOriginal < bound - 1 && startSosie < bound - 1) {
             startOriginal++;
             startSosie++;
-            Point oPoint = original.get(startOriginal);
-            Point sPoint = sosie.get(startSosie);
+            ConditionalPoint oPoint = original.get(startOriginal);
+            ConditionalPoint sPoint = sosie.get(startSosie);
             if(oPoint.sameLogPoint(sPoint)) {
                 if(!oPoint.sameValue(sPoint))
                     difVar.addAll(oPoint.getDifVar(sPoint));
