@@ -20,7 +20,6 @@ public class Main {
         }
         else
             new DiversifyMain(args[0]);
-
         suicide();
     }
 

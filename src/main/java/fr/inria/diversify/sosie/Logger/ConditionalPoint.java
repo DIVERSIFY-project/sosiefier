@@ -67,7 +67,10 @@ public class ConditionalPoint extends Point {
             return v1.split(", ").length == v2.split(", ").length;
         }
         if(v1.contains("@") && v2.contains("@"))
-            return v1.split("@")[0].equals(v2.split("@")[0]);
+            if(v1.split("@").length != 0 && v2.split("@").length != 0)
+                return v1.split("@")[0].equals(v2.split("@")[0]);
+
+
         return  v1.equals(v2);
 
     }
