@@ -110,17 +110,19 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         Log.info(tryStmt.toString());
         List<CtCatch> catchList = tryStmt.getCatchers();
         for (CtCatch catchStmt : catchList) {
-            String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeError(" + count + ",Thread.currentThread(),\"" +
-                    getClass(tryStmt).getQualifiedName() + "\",\"" + getMethod(tryStmt).getSignature() + "\"," +
-                    catchStmt.getParameter().getSimpleName() + ".getStackTrace());\n";
+            if(getMethod(tryStmt) != null) {
+                String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeError(" + count + ",Thread.currentThread(),\"" +
+                        getClass(tryStmt).getQualifiedName() + "\",\"" + getMethod(tryStmt).getSignature() + "\"," +
+                        catchStmt.getParameter().getSimpleName() + ".getStackTrace());\n";
 
-            CtBlock<?> catchBlock = catchStmt.getBody();
-            if(!catchBlock.getStatements().isEmpty()) {
-                CtStatement statement = catchBlock.getStatements().get(0);
-                SourcePosition sp = statement.getPosition();
-                CompilationUnit compileUnit = sp.getCompilationUnit();
-                int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-                compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+                CtBlock<?> catchBlock = catchStmt.getBody();
+                if(!catchBlock.getStatements().isEmpty()) {
+                    CtStatement statement = catchBlock.getStatements().get(0);
+                    SourcePosition sp = statement.getPosition();
+                    CompilationUnit compileUnit = sp.getCompilationUnit();
+                    int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
+                    compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+                }
             }
         }
     }
