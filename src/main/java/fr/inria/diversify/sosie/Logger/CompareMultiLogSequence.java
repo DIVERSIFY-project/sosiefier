@@ -31,10 +31,10 @@ public class CompareMultiLogSequence {
     }
 
 
-    public boolean findAndWriteDiffVar() {
+    public boolean findAndWriteDiffVar(String fileName) {
         try {
             this.findDiffVar();
-            FileWriter fw = new FileWriter("varToExclude");
+            FileWriter fw = new FileWriter(fileName);
             BufferedWriter bw = new BufferedWriter(fw);
             for(String var: varToExclude) {
                 bw.write(var+"\n");
@@ -119,13 +119,16 @@ public class CompareMultiLogSequence {
     public static void main(String[] args) throws IOException {
         CompareMultiLogSequence un = new CompareMultiLogSequence(args[1],args[2],args[3]);
         if(args[0].equals("-same"))
-            un.findAndWriteDiffVar();
+            un.findAndWriteDiffVar(args[3]);
         if(args[0].equals("-diff"))
             un.findDivergence();
 
     }
 
     protected void printDivergencePoint(int[][] divergence) {
+        if(divergence.length == 0)
+            return;
+
         int c1 = divergence[0][0];
         int c2 = divergence[0][1];
         for(int[] p : divergence) {
