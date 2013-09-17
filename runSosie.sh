@@ -15,16 +15,21 @@ do
 done
 
 #run des sosies
-#cd ../sosieInstru
-#for sosie in $(ls)
-#do
-#    cd $sosie
-#    echo $(date +%s) > LogDirName
-#    for i in `cat $1`
-#    do
-#        echo $i > LogfileName
-#        mvn -Dtest=$i test
-#    done
+mkdir ../log
+cd ../sosieInstru
+LogDirName=$(date +%s)
+for sosie in $(ls)
+do
+    cd $sosie
+    echo $LogDirName > LogDirName
+    for i in `cat $2`
+    do
+        echo $i > LogfileName
+        mvn -Dtest=$i test
+    done
+cp diversificationPoint ../log/$LogDirName/
+cp -r jbehave-core/$LogDirName/ ../log/$LogDirName/
+done
 #comparaison des traces original/sosie
 #    java -Xmx2000m -XX:MaxPermSize=256m target/Diversify-statements-1.0-SNAPSHOT-jar-with-dependencies.jar fr.inria.diversify.sosie $1 $
 #done
