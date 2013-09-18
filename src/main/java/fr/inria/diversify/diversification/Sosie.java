@@ -55,7 +55,7 @@ public class Sosie extends Builder {
             else {
                 transformations.add(trans);
                 FileWriter fileWriter = new FileWriter(dir +"/diversificationPoint");
-                fileWriter.append(trans.positionString());
+                fileWriter.append(trans.toJSONObject().toString());
                 fileWriter.close();
             }
         } catch (Exception e) {

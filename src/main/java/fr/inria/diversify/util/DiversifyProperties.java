@@ -38,5 +38,6 @@ public class DiversifyProperties {
         prop.setProperty("timeOut","-1");
         prop.setProperty("logLevel", "2");
         prop.setProperty("gitRepository", "");
+        //prop.setProperty("transformation.range", "[]");
     }
 }
