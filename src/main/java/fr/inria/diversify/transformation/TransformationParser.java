@@ -42,7 +42,9 @@ public class TransformationParser {
         return list;
     }
     public List<Transformation> parseFile(File file) throws IOException, JSONException {
-        List<Transformation> list = new ArrayList<Transformation>();
+
+        Set<Transformation> set = new HashSet<Transformation>();
+
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
         String line = br.readLine();
@@ -51,16 +53,19 @@ public class TransformationParser {
             line = br.readLine();
         }
        if (sb.length() == 0)
-           return list;
+           return new ArrayList<Transformation>();
         JSONArray array = new JSONArray(sb.toString());
         for(int i = 0; i < array.length(); i++)  {
             try {
-                list.add(parseTransformation(array.getJSONObject(i)));
+                set.add(parseTransformation(array.getJSONObject(i)));
             }  catch (Exception e) {
                 countError++;
 //                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
             }
         }
+
+        List<Transformation> list = new ArrayList<Transformation>();
+        list.addAll(set);
         return list;
     }
 

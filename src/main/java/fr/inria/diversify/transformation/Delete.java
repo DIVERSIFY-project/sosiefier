@@ -84,6 +84,17 @@ public class Delete extends Transformation {
     public String getType(){
         return "delete";
     }
+    public  int hashCode() {
+        return 1;
+    }
+    public boolean equals(Object other) {
+        if(!(other instanceof Delete))
+            return  false;
+        Delete otherDelete = (Delete)other;
+
+        return failures == otherDelete.failures &&
+                transforms.equals(otherDelete.transforms);
+    }
 
     @Override
     public void writeHead(BufferedWriter sb, char separator) throws IOException {

@@ -91,6 +91,17 @@ public abstract class CodeFragment {
         equalString = pp.toString();
         return equalString;
     }
+    //attention !!!!!!!
+    public boolean equals(Object other) {
+        if(!(other instanceof CodeFragment))
+            return  false;
+
+        return equalString().equals(((CodeFragment) other).equalString())
+                && positionString().equals(((CodeFragment) other).positionString());
+    }
+    public  int hashCode() {
+        return 1;
+    }
 
     public void replaceVar(CodeFragment other, Map<String,String> varMapping) {
         Log.debug("replace variable");

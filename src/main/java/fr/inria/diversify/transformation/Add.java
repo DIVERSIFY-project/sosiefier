@@ -115,7 +115,19 @@ public class Add extends Transformation {
         transforms.addAll(add.transforms);
         adds.putAll(((Add)add).adds);
     }
+    public  int hashCode() {
+        return 1;
+    }
+    public boolean equals(Object other) {
+        if(!(other instanceof Add))
+            return  false;
+        Add otherAdd = (Add)other;
 
+        return failures == otherAdd.failures &&
+                variableMapping.equals(otherAdd.variableMapping) &&
+                transforms.equals(otherAdd.transforms) &&
+                adds.equals(otherAdd.adds);
+    }
 
     @Override
  public void writeHead(BufferedWriter sb, char separator) throws IOException {

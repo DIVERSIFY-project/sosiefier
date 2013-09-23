@@ -131,7 +131,19 @@ public class Replace extends Transformation {
         this.variableMapping.putAll(((Replace)replace).variableMapping);
     }
 
+    public  int hashCode() {
+        return 1;
+    }
+    public boolean equals(Object other) {
+        if(!(other instanceof Replace))
+            return  false;
+        Replace otherReplace = (Replace)other;
 
+        return failures == otherReplace.failures &&
+                variableMapping.equals(otherReplace.variableMapping) &&
+                transforms.equals(otherReplace.transforms) &&
+                replaces.equals(otherReplace.replaces);
+    }
     @Override
     public String toString() {
         String ret = new String();
