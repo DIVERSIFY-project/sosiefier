@@ -36,6 +36,7 @@ public abstract class CodeFragment {
     protected CtCodeElement codeFragment;
     protected String equalString;
 
+    public abstract void init(Object cf);
 
     public void init() {
         context = new Context(initInputContext(), initOutputContext());
@@ -77,10 +78,10 @@ public abstract class CodeFragment {
 
     public String codeFragmentString() {
         String string = codeFragment.toString();
-        if(string.trim().endsWith("}"))
+//        if(string.trim().endsWith("}"))
             return string;
-        else
-            return string+";";
+//        else
+//            return string+";";
     }
 
     public String equalString() {
@@ -223,11 +224,21 @@ public abstract class CodeFragment {
     }
 
     public int getStartLine() {
-        return codeFragment.getPosition().getLine();
+//        try {
+            return codeFragment.getPosition().getLine();
+//        } catch (Exception e) {
+//            Log.warn("no position for {}",codeFragment);
+//            return Integer.MAX_VALUE;
+//        }
     }
 
     public int getEndLine() {
-        return codeFragment.getPosition().getEndLine();
+//        try {
+            return codeFragment.getPosition().getEndLine();
+//        } catch (Exception e) {
+//            Log.warn("no position for {}",codeFragment);
+//            return Integer.MAX_VALUE;
+//        }
     }
 
     public CtPackage getSourcePackage() {

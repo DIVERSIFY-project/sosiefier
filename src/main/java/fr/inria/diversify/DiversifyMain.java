@@ -1,7 +1,7 @@
 package fr.inria.diversify;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
+import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
@@ -41,7 +41,7 @@ import java.util.List;
  * Time: 11:41 AM
  */
 public class DiversifyMain {
-    private CodeFragmentList statements;
+    private CodeFragmentList codeFragments;
 
     public DiversifyMain(String propertiesFile) throws Exception {
         new DiversifyProperties(propertiesFile);
@@ -49,7 +49,7 @@ public class DiversifyMain {
         initLogLevel();
         initSpoon();
 //        Log.info("number of cpu: "+numberOfCpu());
-        Log.info("number of statement: " + statements.size());
+        Log.info("number of statement: " + codeFragments.size());
 
         if (DiversifyProperties.getProperty("sosie").equals("true"))
             buildSosie();
@@ -106,7 +106,7 @@ public class DiversifyMain {
 
         //TODO refactor
         if (DiversifyProperties.getProperty("nbRun").equals("all")) {
-            Util util = new Util(statements);
+            Util util = new Util(codeFragments);
             if (DiversifyProperties.getProperty("transformation.type").equals("replace"))
                 builder.run(util.getAllReplace());
             if (DiversifyProperties.getProperty("transformation.type").equals("add"))
@@ -119,17 +119,18 @@ public class DiversifyMain {
         }
     }
 
-    protected AbstractTransformationQuery initTransformationQuery() throws IOException, JSONException {
+    protected AbstractTransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException {
         ICoverageReport rg = initCoverageReport();
 
         AbstractTransformationQuery atq;
         String transformation = DiversifyProperties.getProperty("transformation.directory");
         if (transformation != null) {
-            TransformationParser tf = new TransformationParser(statements);
+            TransformationParser tf = new TransformationParser(codeFragments);
             List<Transformation> list = tf.parseDir(transformation);
-            atq = new TransformationQueryTL(list, rg, statements);
+            atq = new TransformationQueryTL(list, rg, codeFragments);
         } else {
-            atq = new TransformationQuery(rg, statements);
+            Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
+            atq = new TransformationQuery(rg, codeFragments,cl);
         }
         atq.setType(DiversifyProperties.getProperty("transformation.type"));
         int n = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
@@ -138,7 +139,7 @@ public class DiversifyMain {
         return atq;
     }
 
-    protected void initSpoon() {
+    protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
 
         StandardEnvironment env = new StandardEnvironment();
@@ -155,19 +156,21 @@ public class DiversifyMain {
             try {
                 builder.addInputSource(new File(dir));
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.error("error in initSpoon", e);
             }
         try {
             builder.build();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         ProcessingManager pm = new QueueProcessingManager(factory);
-        StatementProcessor processor = new StatementProcessor();
+        Class classz = Class.forName(DiversifyProperties.getProperty("processor"));
+        AbstractCodeFragmentProcessor processor =  (AbstractCodeFragmentProcessor)classz.newInstance();
         pm.addProcessor(processor);
         pm.process();
 
-        statements = processor.getStatements();
+        codeFragments = processor.getCodeFragments();
     }
 
     protected ICoverageReport initCoverageReport() throws IOException {
@@ -204,7 +207,7 @@ public class DiversifyMain {
     }
 
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
-        TransformationParser tf = new TransformationParser(statements);
+        TransformationParser tf = new TransformationParser(codeFragments);
         List<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
@@ -226,19 +229,19 @@ public class DiversifyMain {
         name = write.writeGoodTransformation("replace");
         statForR(name);
 
-        StatisticDiversification sd = new StatisticDiversification(transformations, statements);
+        StatisticDiversification sd = new StatisticDiversification(transformations, codeFragments);
         sd.writeStat(fileName);
     }
 
     protected void statForR(String fileName) throws IOException, JSONException {
-        TransformationParser tf = new TransformationParser(statements);
+        TransformationParser tf = new TransformationParser(codeFragments);
         Log.debug("parse fileName: {}",fileName);
         List<Transformation> transformations = tf.parseFile(new File(fileName));
 
         if(transformations.isEmpty())
             return;
 
-        StatisticDiversification sd = new StatisticDiversification(transformations, statements);
+        StatisticDiversification sd = new StatisticDiversification(transformations, codeFragments);
         Log.debug("number of transformation: {}",transformations.size());
         String name = fileName.split(".json")[0];
         sd.writeStat(name);
@@ -246,7 +249,7 @@ public class DiversifyMain {
     }
 
     protected void computeOtherStat() throws InterruptedException {
-        Util stat = new Util(statements);
+        Util stat = new Util(codeFragments);
 //        System.out.println("number of possible code fragment replace: " + stat.numberOfDiversification());
         try {
             System.out.println("number of not possible code fragment replace/add: " + stat.numberOfNotDiversification());
@@ -259,7 +262,7 @@ public class DiversifyMain {
     }
 
     protected void computeCodeFragmentStatistic(String output) {
-        StatisticCodeFragment stat = new StatisticCodeFragment(statements);
+        StatisticCodeFragment stat = new StatisticCodeFragment(codeFragments);
         try {
             stat.writeStatistic(output);
         } catch (IOException e) {

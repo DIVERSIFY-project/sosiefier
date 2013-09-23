@@ -17,11 +17,20 @@ public class DiversifyProperties {
         prop = new Properties();
         setDefaultProperties();
         prop.load(new FileInputStream(file));
-
+        setCodeFragmentClass();
     }
 
     public static String getProperty(String key) {
         return prop.getProperty(key);
+    }
+
+    protected void setCodeFragmentClass() {
+        if(prop.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
+            prop.setProperty("CodeFragmentClass", "fr.inria.diversify.codeFragment.Statement");
+        if(prop.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.ExpressionProcessor"))
+            prop.setProperty("CodeFragmentClass", "fr.inria.diversify.codeFragment.Expression");
+        if(prop.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.BlockProcessor"))
+            prop.setProperty("CodeFragmentClass", "fr.inria.diversify.codeFragment.Block");
     }
 
     protected void setDefaultProperties() {
@@ -38,6 +47,7 @@ public class DiversifyProperties {
         prop.setProperty("timeOut","-1");
         prop.setProperty("logLevel", "2");
         prop.setProperty("gitRepository", "");
+        prop.setProperty("processor", "fr.inria.diversify.codeFragmentProcessor.StatementProcessor");
         //prop.setProperty("transformation.range", "[]");
     }
 }

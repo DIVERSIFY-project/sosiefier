@@ -78,7 +78,6 @@ public class Add extends Transformation {
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, adds.get(position).codeFragmentString(), 0));
         Log.debug("----------\n---------");
         Log.debug("{}",originalClass.getQualifiedName());
-
     }
 
     public void addVarMapping(CodeFragment position, Map<String, String> mapping) {

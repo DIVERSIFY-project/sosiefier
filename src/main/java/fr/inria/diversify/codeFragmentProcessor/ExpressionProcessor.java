@@ -2,6 +2,7 @@ package fr.inria.diversify.codeFragmentProcessor;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Expression;
+import fr.inria.diversify.util.Log;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtExpression;
 
@@ -10,25 +11,16 @@ import spoon.reflect.code.CtExpression;
  * Date: 5/3/13
  * Time: 4:50 PM
  */
-public class ExpressionProcessor extends AbstractProcessor<CtExpression<?>> {
-    protected CodeFragmentList expressions;
+public class ExpressionProcessor extends AbstractCodeFragmentProcessor<CtExpression<?>> {
 
-    public  ExpressionProcessor() {
-        expressions = new CodeFragmentList();
-    }
 
     @Override
     public void process(CtExpression<?> element) {
         try {
-            if(isValidStatement(element)) {
-                Expression expr = new Expression(element);
-                expressions.add(expr);
-				System.out.println(expr);
-				System.out.println(expr.getInputContext().equalString());
-				System.out.println("-------------------------------\n");
-            }
+            if(isValidStatement(element) && element.getPosition() != null)
+                addCf(new Expression(element));
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.error("error in ExpressionProcessor with expression: "+element, e);
         }
     }
 

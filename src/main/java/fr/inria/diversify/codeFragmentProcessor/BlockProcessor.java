@@ -11,22 +11,17 @@ import spoon.reflect.code.CtStatement;
  * Date: 5/3/13
  * Time: 4:15 PM
  */
-public class BlockProcessor  extends AbstractProcessor<CtBlock> {
-protected CodeFragmentList blocks;
-
-    public BlockProcessor() {
-        blocks = new CodeFragmentList();
-    }
+public class BlockProcessor  extends AbstractCodeFragmentProcessor<CtBlock> {
 
     @Override
     public void process(CtBlock element) {
         try {
             if(isValidStatement(element)) {
                 Block block = new Block(element);
-                blocks.add(block);
-				System.out.println(block);
-				System.out.println(block.getInputContext().equalString());
-				System.out.println("-------------------------------\n");
+                addCf(block);
+//				System.out.println(block);
+//				System.out.println(block.getInputContext().equalString());
+//				System.out.println("-------------------------------\n");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,9 +30,5 @@ protected CodeFragmentList blocks;
 
     private boolean isValidStatement(CtStatement element) {
         return true;
-    }
-
-    public CodeFragmentList getBlocks() {
-        return blocks;
     }
 }

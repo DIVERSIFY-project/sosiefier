@@ -62,6 +62,8 @@ public class Replace extends Transformation {
     protected void addSourceCode(CodeFragment position) throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(position);
 
+
+
         Log.debug("position:\n{}",position);
         Log.debug("{}",position.getCtCodeFragment().getPosition());
         Log.debug("{}",position.getCodeFragmentType());
@@ -83,11 +85,14 @@ public class Replace extends Transformation {
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = position.getCtCodeFragment().getPosition();
 
-//        int r = sp.getSourceEnd() - compileUnit.beginOfLineIndex(sp.getSourceStart());
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+
-//                "System.out.println(\"Diversification ici\");\n" +
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
                 replaces.get(position).codeFragmentString()+"\n", 0));
+
+
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+
+//                replaces.get(position).codeFragmentString()+"\n", 0));
     }
 
     @Override

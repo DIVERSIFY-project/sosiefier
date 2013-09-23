@@ -11,6 +11,13 @@ public class Statement extends CodeFragment {
 
     public Statement(CtStatement stmt) {
         this.codeFragment = stmt;
+        init(stmt);
+    }
+
+    public Statement() {}
+
+    public void init(Object stmt) {
+        this.codeFragment = (CtStatement)stmt;
         init();
     }
 

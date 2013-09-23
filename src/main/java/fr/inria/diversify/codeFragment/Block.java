@@ -11,7 +11,14 @@ import spoon.reflect.code.CtBlock;
 public class Block extends CodeFragment {
     public Block(CtBlock element) {
         codeFragment = element;
-      init();
+      init(element);
+    }
+
+    public Block() {}
+
+    public void init(Object element) {
+        codeFragment = (CtBlock)element;
+        init();
     }
 
     @Override

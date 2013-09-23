@@ -11,6 +11,13 @@ public class Expression extends CodeFragment{
 
     public Expression(CtExpression<?> expression) {
         codeFragment = expression;
+        init(expression);
+    }
+
+    public Expression() {}
+
+    public void init(Object expression) {
+        codeFragment = (CtExpression)expression;
         init();
     }
 
@@ -19,8 +26,8 @@ public class Expression extends CodeFragment{
         Class<?> cl = codeFragment.getClass();
         Class<?> clOther = other.codeFragment.getClass();
 
-        if(clOther != cl )
-            return false;
+//        if(clOther != cl )
+//            return false;
 //
 //        SubStatementVisitor sub = new SubStatementVisitor()  ;
 //        other.codeFragment.getParent().accept(sub);

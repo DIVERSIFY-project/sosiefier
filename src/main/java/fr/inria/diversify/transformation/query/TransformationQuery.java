@@ -2,13 +2,13 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.codeFragment.Expression;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Add;
 import fr.inria.diversify.transformation.Delete;
 import fr.inria.diversify.transformation.Replace;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.code.CtStatement;
 
 import java.util.*;
 
@@ -19,14 +19,16 @@ import java.util.*;
  */
 public class TransformationQuery extends AbstractTransformationQuery {
     protected ICoverageReport coverageReport;
+    protected Class CodeFragmentClass;
 
     protected List<CodeFragment> cfToTransform;
 
 
-    public TransformationQuery(ICoverageReport coverageReport, CodeFragmentList codeFragments) {
+    public TransformationQuery(ICoverageReport coverageReport, CodeFragmentList codeFragments, Class transformationClass) {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
         cfToTransform = new ArrayList<CodeFragment>();
+        this.CodeFragmentClass = transformationClass;
     }
 
     public void setCodeFragmentToTransform(CodeFragment stmt) {
@@ -103,11 +105,11 @@ public class TransformationQuery extends AbstractTransformationQuery {
     }
 
 
-    protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace) {
-        Statement cfReplacedBy = null;
+    protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace) throws InstantiationException, IllegalAccessException {
+        CodeFragment cfReplacedBy = null;
         if (cfReplacedBy == null) {
 //             choix d'une strategie de selection
-            cfReplacedBy = findRandomCandidateStatement(cfToReplace);
+            cfReplacedBy = findRandomCodeFragmentCandidate(cfToReplace);
         }
         return cfReplacedBy;
     }
@@ -133,19 +135,21 @@ public class TransformationQuery extends AbstractTransformationQuery {
     }
 
 
-    protected Statement findRandomCandidateStatement(CodeFragment stmt) {
+    protected CodeFragment findRandomCodeFragmentCandidate(CodeFragment cf) throws IllegalAccessException, InstantiationException {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
-        for (CodeFragment statement : getAllUniqueCodeFragments())
-            if (stmt.isReplace(statement) && !statement.equalString().equals(stmt.equalString())) {
-                list.add(statement);
+        for (CodeFragment codeFragment : getAllUniqueCodeFragments())
+            if (cf.isReplace(codeFragment) && !codeFragment.equalString().equals(cf.equalString())) {
+                list.add(codeFragment);
             }
 
         if (list.isEmpty())
             return null;
 
         Random r = new Random();
-        CtStatement tmp = (CtStatement) copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
-        return new Statement(tmp);
+        Object tmp = copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
+        CodeFragment ret = (CodeFragment)CodeFragmentClass.newInstance();
+        ret.init(tmp);
+        return ret;
     }
 
 }
