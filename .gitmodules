@@ -1,0 +1,6 @@
+[submodule "mavenProjects/commons-math"]
+	path = mavenProjects/commons-math
+	url = https://github.com/apache/commons-math.git
+[submodule "mavenProjects/jfreechart-fse"]
+	path = mavenProjects/jfreechart-fse
+	url = https://github.com/jfree/jfreechart-fse.git

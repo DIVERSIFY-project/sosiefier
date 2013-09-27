@@ -23,17 +23,6 @@ public class Expression extends CodeFragment{
 
     @Override
     public boolean isReplace(CodeFragment other) {
-        Class<?> cl = codeFragment.getClass();
-        Class<?> clOther = other.codeFragment.getClass();
-
-//        if(clOther != cl )
-//            return false;
-//
-//        SubStatementVisitor sub = new SubStatementVisitor()  ;
-//        other.codeFragment.getParent().accept(sub);
-//        if(sub.getStatements().contains(codeFragment))
-//            return false;
-
         return getInputContext().isInclude(other.getInputContext()) && getOutputContext().equals(other.getOutputContext());
     }
 }
