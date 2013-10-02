@@ -40,13 +40,24 @@ diversiticationStat <- function(data, index) {
     sub <- subset(data, data[,index] == i);
     good <-  nbOfGoodDiversification(sub);
     fail <- nbOfFailDiversification(sub);  
+    result[paste(i,sep=""),"trial"] <- good + fail;
+  
+    result[paste(i,sep=""),"incorrect"] <- fail;
     result[paste(i,sep=""),"sosie"] <- good;
-    result[paste(i,sep=""),"trial"] <- fail;
     result[paste(i,sep=""),"% sosie"] <- 100*good/(fail + good);
-    result[paste(i,sep=""),"% total"] <- 100*(fail + good)/nbOfDiversification(data);
-  } 
+ #   result[paste(i,sep=""),"% total"] <- 100*(fail + good)/nbOfDiversification(data);
+  }
+  good <-  nbOfGoodDiversification(data);
+  fail <- nbOfFailDiversification(data); 
+
+  result["all","incorrect"] <- fail;
+  result["all","trial"] <- good + fail;
+  result["all","% sosie"] <- 100*good/(fail + good);
+  # result["all","% total"] <- 100*(fail + good)/nbOfDiversification(data);
   return(result)  
 }
+
+
 
 set <- function(collection) {
   vec <- vector()
@@ -109,14 +120,14 @@ cat(nbOfGoodDiversification(tDelete))
 
 displayDetailResult <- function() {
   cat('replace:\n')
-  tab <- diversiticationStat(tReplace, "toReplaceType")
+  tab <- diversiticationStat(tReplace, "toReplaceSuperType")
   print(xtable(tab),floating=FALSE) 
   
   cat('\nadd:\n')
-  tab <- diversiticationStat(tAdd, "positionType")
+  tab <- diversiticationStat(tAdd, "positionSuperType")
   print(xtable(tab),floating=FALSE) 
   
   cat('\ndelete:\n')
-  tab <- diversiticationStat(tDelete, "deleteType")
+  tab <- diversiticationStat(tDelete, "deleteSuperType")
   print(xtable(tab),floating=FALSE) 
 }
