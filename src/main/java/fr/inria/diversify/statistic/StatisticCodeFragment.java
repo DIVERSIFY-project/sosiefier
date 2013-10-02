@@ -16,6 +16,7 @@ public class  StatisticCodeFragment {
 	private CodeFragmentList statements;
 	protected static char separator = ';';
     protected static String typeFileSuffix = "_stmt.csv";
+    protected static String superTypeFileSuffix = "_superStmt.csv";
     protected static String classFileSuffix = "_classes.csv";
     protected static String packageFileSuffix = "_packages.csv";
     protected static String codeFragmentFileSuffix = "_CodeFragment.csv";
@@ -31,6 +32,7 @@ public class  StatisticCodeFragment {
         writeSummary(new File(fileName+typeFileSuffix), statisticByStatement());
 		writeSummary(new File(fileName+classFileSuffix), statisticByClass());
 		writeSummary(new File(fileName+packageFileSuffix), statisticByPackage());
+        writeSummary(new File(fileName+superTypeFileSuffix), statisticBySuperStatement());
 		
 		writeStatement(new File(fileName+codeFragmentFileSuffix), statements.getUniqueCodeFragments());
 		writeUniqueContext(new File(fileName+contextFileSuffix), statements.getUniqueContext());
@@ -43,6 +45,19 @@ public class  StatisticCodeFragment {
         map.put("all",statements);
         for (CodeFragment statement : statements.getCodeFragments()) {
             String stmtType = statement.getCodeFragmentType().getSimpleName();
+            if(!map.containsKey(stmtType))
+                map.put(stmtType,new CodeFragmentList());
+            map.get(stmtType).add(statement);
+        }
+        return map;
+    }
+
+    public Map<String,CodeFragmentList> statisticBySuperStatement() {
+        Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
+
+        map.put("all",statements);
+        for (CodeFragment statement : statements.getCodeFragments()) {
+            String stmtType = statement.getCodeFragmentSuperType().getSimpleName();
             if(!map.containsKey(stmtType))
                 map.put(stmtType,new CodeFragmentList());
             map.get(stmtType).add(statement);

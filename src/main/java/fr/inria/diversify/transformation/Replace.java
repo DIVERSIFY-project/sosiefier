@@ -172,7 +172,8 @@ public class Replace extends Transformation {
                 "toReplacePackage" + separator + "replacedByPackage" + separator +
                 "toReplaceInputContextSize" + separator + "replacedByInputContextSize" + separator +
                 "toReplaceInputContextOnlyPrimitive" + separator + "replacedByInputContextOnlyPrimitive" + separator +
-                "failure");
+                "failure" + separator +
+                "toReplaceSuperType" +separator + "replacedBySuperType");
     }
 
     //works only for 1replace
@@ -212,5 +213,10 @@ public class Replace extends Transformation {
         sb.append(separator);
 
         sb.append(failures+"");
+
+        sb.append(separator);
+        sb.append(t.getCodeFragmentSuperType().getSimpleName());
+        sb.append(separator);
+        sb.append(r.getCodeFragmentSuperType().getSimpleName());
     }
 }

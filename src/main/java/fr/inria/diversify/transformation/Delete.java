@@ -104,7 +104,8 @@ public class Delete extends Transformation {
                 "deletePackage" + separator +
                 "deleteInputContextSize" + separator +
                 "deleteInputContextOnlyPrimitive" + separator +
-                "failure");
+                "failure" + separator +
+                "deleteSuperType");
     }
 
     //works only for 1delete
@@ -132,5 +133,7 @@ public class Delete extends Transformation {
         sb.append(separator);
 
         sb.append(failures+"");
+        sb.append(separator);
+        sb.append(p.getCodeFragmentSuperType().getSimpleName());
     }
 }

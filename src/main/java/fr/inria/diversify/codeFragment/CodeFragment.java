@@ -7,10 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.Factory;
-import spoon.reflect.code.CtCodeElement;
-import spoon.reflect.code.CtFieldAccess;
-import spoon.reflect.code.CtReturn;
-import spoon.reflect.code.CtStatement;
+import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtPackage;
@@ -254,6 +251,18 @@ public abstract class CodeFragment {
     }
     public CompilationUnit getCompilationUnit() {
         return codeFragment.getPosition().getCompilationUnit();
+    }
+
+    public Class<?> getCodeFragmentSuperType() {
+       if(codeFragment instanceof CtIf
+               || codeFragment instanceof CtCase
+               || codeFragment instanceof CtLoop
+               || codeFragment instanceof CtSynchronized
+               || codeFragment instanceof CtTry)
+           return CtBlock.class;
+//        if(codeFragment instanceof CtExpression)
+//            return CtExpression.class;
+       return CtStatement.class;
     }
 }
 

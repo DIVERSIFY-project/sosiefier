@@ -7,7 +7,6 @@ import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.*;

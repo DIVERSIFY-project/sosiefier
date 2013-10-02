@@ -136,7 +136,8 @@ public class Add extends Transformation {
             "positionPackage" + separator + "addPackage" + separator +
             "positionInputContextSize" + separator + "addInputContextSize" + separator +
             "positionInputContextOnlyPrimitive" + separator + "addInputContextOnlyPrimitive" + separator +
-            "failure");
+            "failure" + separator +
+            "positionSuperType" +separator + "addBySuperType");
 }
 
     public String getType(){
@@ -180,5 +181,10 @@ public class Add extends Transformation {
         sb.append(separator);
 
         sb.append(failures+"");
+
+        sb.append(separator);
+        sb.append(p.getCodeFragmentSuperType().getSimpleName());
+        sb.append(separator);
+        sb.append(r.getCodeFragmentSuperType().getSimpleName());
     }
 }
