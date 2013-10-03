@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,12 +88,20 @@ public class Replace extends Transformation {
 
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
-                replaces.get(position).codeFragmentString()+"\n", 0));
+                codeFragmentString(position)+"\n", 0));
 
 
 //        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
 //        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+
 //                replaces.get(position).codeFragmentString()+"\n", 0));
+    }
+
+    protected String codeFragmentString(CodeFragment cf) {
+        String cFS = replaces.get(cf).codeFragmentString();
+        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
+            return cFS+";";
+        else
+            return cFS;
     }
 
     @Override
@@ -218,5 +227,9 @@ public class Replace extends Transformation {
         sb.append(t.getCodeFragmentSuperType().getSimpleName());
         sb.append(separator);
         sb.append(r.getCodeFragmentSuperType().getSimpleName());
+    }
+
+    public CodeFragment getPosition() {
+        return transforms.get(0);
     }
 }

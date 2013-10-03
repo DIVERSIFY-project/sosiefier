@@ -106,6 +106,8 @@ public class DiversifyMain {
 
         //TODO refactor
         if (DiversifyProperties.getProperty("nbRun").equals("all")) {
+            if(DiversifyProperties.getProperty("transformation.directory") != null)
+                builder.run(1000);
             Util util = new Util(codeFragments);
             if (DiversifyProperties.getProperty("transformation.type").equals("replace"))
                 builder.run(util.getAllReplace());

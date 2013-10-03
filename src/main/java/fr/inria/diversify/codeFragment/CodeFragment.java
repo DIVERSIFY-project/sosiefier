@@ -75,7 +75,7 @@ public abstract class CodeFragment {
 
     public String codeFragmentString() {
         String string = codeFragment.toString();
-//        if(string.trim().endsWith("}"))
+//       if(string.trim().endsWith("}"))
             return string;
 //        else
 //            return string+";";

@@ -63,6 +63,16 @@ public class PointSequence {
         return -1;
     }
 
+    public int findPoint(String className, String methodSignature) {
+        int i = 0;
+        for (Point point : conditionalPoints) {
+            if(point.getClassName().equals(className) && point.getMethodSignature().equals(methodSignature))
+                return i;
+            i++;
+        }
+        return -1;
+    }
+
     public int size() {
         return conditionalPoints.size();
     }

@@ -40,24 +40,6 @@ public class RunMaven extends  Thread {
     }
 
 
-//    public void run() {
-//        MavenCli cli = new MavenCli();
-//        ByteArrayOutputStream os = new ByteArrayOutputStream();
-//        PrintStream ps = new PrintStream(os);
-//
-//        try {
-//            cli.doMain(new String[]{"clean", lifeCycle}, directory, ps, ps);
-//            if(clojureTest)
-//                parseClojureResult(os.toString());
-//            else
-//                parseResult(os.toString());
-//        } catch (OutOfMemoryError e) {
-//            e.printStackTrace();
-//        }
-//        ps.close();
-//    }
-
-//
     public void run() {
         Log.debug("run maven");
         InvocationRequest request = new DefaultInvocationRequest();
@@ -102,23 +84,6 @@ public class RunMaven extends  Thread {
         }
     }
 
-//    public void run() {
-//        Runtime r = Runtime.getRuntime();
-//        try {
-//            Process p = r.exec("mvn -f " + directory + "/pom.xml " + lifeCycle);
-//            p.waitFor();
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-//            String line;
-//            StringBuffer output = new StringBuffer();
-//            while ((line = reader.readLine()) != null) {
-//                output.append(line + "\n");
-//                System.out.println(line);
-//            }
-//            reader.close();
-//            parseResult(output.toString());
-//    } catch (Exception e) {}
-//
-//    }
 
     protected void parseResult(String r) {
         Pattern pattern = Pattern.compile("Tests run: (\\d+), Failures: (\\d+), Errors: (\\d+), Skipped: (\\d+)");

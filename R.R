@@ -58,7 +58,6 @@ diversiticationStat <- function(data, index) {
 }
 
 
-
 set <- function(collection) {
   vec <- vector()
   count <- 1;

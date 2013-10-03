@@ -8,6 +8,7 @@ import spoon.reflect.declaration.CtElement;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 /**
  * User: Simon
@@ -28,6 +29,18 @@ public abstract class AbstractTransformationQuery {
     }
 
     public Transformation getTransformation() throws Exception {
+        String type = this.type;
+        if(type == null) {
+            Random r = new Random();
+            int i = r.nextInt(2);
+            if(i == 0)
+                type = "replace";
+            if(i == 1)
+                type = "delete";
+            if(i == 2)
+                type = "add";
+        }
+
         if(type.equals("replace"))
             return replace();
 

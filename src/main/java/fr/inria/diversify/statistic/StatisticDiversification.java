@@ -153,7 +153,7 @@ public class StatisticDiversification {
             bw.write(sb.toString());
             } catch (Exception e) {}
         }
-
+        bw.close();
     }
 
     protected void writeDetail(String fileName) throws IOException {

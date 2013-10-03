@@ -1,6 +1,8 @@
 package fr.inria.diversify.sosie.logger;
 
 
+import fr.inria.diversify.codeFragment.CodeFragment;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,21 +14,34 @@ import java.util.Set;
  * Time: 4:17 PM
  */
 public class CompareSingleLogSequence {
-    protected  Set<String> difVar;
+    //set of variables whose value changes at each execution
+    protected  Set<String> diffVar;
     protected PointSequence original;
     protected PointSequence sosie;
+    protected CodeFragment startPoint;
 
 
-    public CompareSingleLogSequence(PointSequence original, PointSequence sosie) {
+    public CompareSingleLogSequence(PointSequence original, PointSequence sosie, CodeFragment startPoint) {
         this.original = original;
         this.sosie = sosie;
-        this.difVar = new HashSet<String>();
+        this.diffVar = new HashSet<String>();
+        this.startPoint = startPoint;
     }
 
 
     public int[][] findDivergence(int syncroRange) {
-        int startOriginal = -1;
-        int startSosie = -1;
+        return findDivergence(syncroRange, -1,-1);
+    }
+
+
+    /**
+     * search in original and sosie (two traces) are the same trace at the call level (module the syncro range).
+     * @param syncroRange
+     * @param startOriginal
+     * @param startSosie
+     * @return the local divergence. null if original and sosie are not the same trace
+     */
+    public int[][] findDivergence(int syncroRange, int startOriginal, int startSosie) {
         int bound = Math.min(original.size(), sosie.size());
         int[][] divergence = new int[bound][2];
         int i = 0;
@@ -51,19 +66,25 @@ public class CompareSingleLogSequence {
         return Arrays.copyOf(divergence, i);
     }
 
-    public void computeDiffVar(int syncroRange) {
+    /**
+     * search in original and sosie (two traces) the divergence variable. a exception is thrown if the two traces are not the same at the call level
+     * @param syncroRange
+     * @return the set of divergence variables
+     */
+    public Set<String> findDivergenceVar(int syncroRange) {
         int startOriginal = -1;
         int startSosie = -1;
         int bound = Math.min(original.size(), sosie.size());
 
+        Set<String> var = new HashSet<String>();
         while(startOriginal < bound - 1 && startSosie < bound - 1) {
             startOriginal++;
             startSosie++;
             ConditionalPoint oPoint = original.get(startOriginal);
             ConditionalPoint sPoint = sosie.get(startSosie);
             if(oPoint.sameLogPoint(sPoint)) {
-                if(!oPoint.sameValue(sPoint))
-                    difVar.addAll(oPoint.getDifVar(sPoint));
+                if(!oPoint.sameValue(sPoint) && diffVar.contains(oPoint.getDifVar(sPoint)))
+                    var.addAll(oPoint.getDifVar(sPoint));
             }
             else {
                 int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
@@ -75,34 +96,35 @@ public class CompareSingleLogSequence {
                 }
             }
         }
+        return var;
     }
 
-    public int findDivergenceVar(int syncroRange) {
-        int startOriginal = -1;
-        int startSosie = -1;
-        int bound = Math.min(original.size(), sosie.size());
+//    public void computeDiffVar(int syncroRange) {
+//        int startOriginal = -1;
+//        int startSosie = -1;
+//        int bound = Math.min(original.size(), sosie.size());
+//
+//        while(startOriginal < bound - 1 && startSosie < bound - 1) {
+//            startOriginal++;
+//            startSosie++;
+//            ConditionalPoint oPoint = original.get(startOriginal);
+//            ConditionalPoint sPoint = sosie.get(startSosie);
+//            if(oPoint.sameLogPoint(sPoint)) {
+//                if(!oPoint.sameValue(sPoint))
+//                    difVar.addAll(oPoint.getDifVar(sPoint));
+//            }
+//            else {
+//                int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
+//                if(newSyncho == null)
+//                    new Exception("call trace "+original.getName()+ " and "+sosie.getName()+" no syncro");
+//                else {
+//                    startOriginal = newSyncho[0];
+//                    startSosie = newSyncho[1];
+//                }
+//            }
+//        }
+//    }
 
-        while(startOriginal < bound - 1 && startSosie < bound - 1) {
-            startOriginal++;
-            startSosie++;
-            ConditionalPoint oPoint = original.get(startOriginal);
-            ConditionalPoint sPoint = sosie.get(startSosie);
-            if(oPoint.sameLogPoint(sPoint)) {
-                if(!oPoint.sameValue(sPoint))
-                    difVar.addAll(oPoint.getDifVar(sPoint));
-            }
-            else {
-                int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
-                if(newSyncho == null)
-                    new Exception("call trace "+original.getName()+ " and "+sosie.getName()+" no syncro");
-                else {
-                    startOriginal = newSyncho[0];
-                    startSosie = newSyncho[1];
-                }
-            }
-        }
-        return -1;
-    }
 
     protected int[] findSyncro(int syncroRange, int iOriginal, int iSosie) {
         if(iSosie < iOriginal)
@@ -122,10 +144,8 @@ public class CompareSingleLogSequence {
         return null;
     }
 
-    public Set<String> getDiffVar() {
-        return difVar;
-    }
-    public void addAllDiffVar(Collection<String> set) {
-        difVar.addAll(set);
+
+    public void setDiffVar(Collection<String> set) {
+        diffVar.addAll(set);
     }
 }

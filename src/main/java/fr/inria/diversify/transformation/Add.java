@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,9 +76,17 @@ public class Add extends Transformation {
         SourcePosition sp = position.getCtCodeFragment().getPosition();
 
         int index = sp.getSourceStart();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, adds.get(position).codeFragmentString(), 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, codeFragmentString(position), 0));
         Log.debug("----------\n---------");
         Log.debug("{}",originalClass.getQualifiedName());
+    }
+
+    protected String codeFragmentString(CodeFragment cf) {
+        String cFS = adds.get(cf).codeFragmentString();
+        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
+            return cFS+";";
+        else
+            return cFS;
     }
 
     public void addVarMapping(CodeFragment position, Map<String, String> mapping) {

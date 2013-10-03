@@ -1,6 +1,12 @@
 package fr.inria.diversify.sosie.logger;
 
 
+import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.transformation.Replace;
+import fr.inria.diversify.transformation.TransformationParser;
+import org.json.JSONException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,10 +19,12 @@ import java.util.Set;
  * Time: 11:29 AM
  */
 public class CompareMultiLogSequence {
+
     protected List<PointSequence> originals;
     protected List<PointSequence> sosies;
     protected Set<String> varToExclude;
     protected int syncroRange = 10;
+    protected CodeFragment startPoint;
 
     public CompareMultiLogSequence(String dirOriginal, String dirSosie) {
         originals = loadPointSequence(dirOriginal);
@@ -24,16 +32,18 @@ public class CompareMultiLogSequence {
         varToExclude = new HashSet<String>();
     }
 
-    public CompareMultiLogSequence(String dirOriginal, String dirSosie, String fileExcludeVar) throws IOException {
+    public CompareMultiLogSequence(String dirOriginal, String dirSosie, CodeFragment startPoint, String fileExcludeVar) throws IOException, JSONException {
         originals = loadPointSequence(dirOriginal);
         sosies = loadPointSequence(dirSosie);
         varToExclude = loadVarToExclude(fileExcludeVar);
+        this.startPoint = startPoint;
+
     }
 
 
     public boolean findAndWriteDiffVar(String fileName) {
         try {
-            this.findDiffVar();
+            this.findDiffVarToExclude();
             FileWriter fw = new FileWriter(fileName);
             BufferedWriter bw = new BufferedWriter(fw);
             for(String var: varToExclude) {
@@ -48,36 +58,48 @@ public class CompareMultiLogSequence {
         return true;
     }
 
-    public void findDiffVar() throws IOException {
-        for (PointSequence original : originals) {
-            boolean same = false;
-            for (PointSequence sosie : sosies) {
-                CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie);
-                cls.addAllDiffVar(varToExclude);
-                    if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) != null) {//same sequence
-                        System.out.println(original.getName()+original.threadName+ " and "+ sosie.getName()+sosie.threadName+ " same call trace");
-                        cls.computeDiffVar(syncroRange);
-//                        printDivergencePoint(cls.findDivergence(syncroRange));
-                        varToExclude.addAll(cls.getDiffVar());
-                        same = true;
-                        break;
-                }
-            }
-            if (!same)
-                new Exception("not same call trace");
-        }
+
+    /**
+    * search if the original and sosie (two set of trace) diverge at the call level and variable level
+    *
+    * @throws IOException
+    */
+    public boolean findDiffVar() throws IOException {
+ 	    for (PointSequence original : originals) {
+		    boolean same = false;
+		    for (PointSequence sosie : sosies) {
+			    CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
+	    		cls.setDiffVar(varToExclude);
+		    	if (sosie.getName().equals(original.getName())) {
+		    		Set<String> var = cls.findDivergenceVar(syncroRange);
+		    		if (var.isEmpty()) {// same sequence
+		    			System.out.println(original.getName() + original.threadName + " and " + sosie.getName()
+			    		    + sosie.threadName + " same call trace");
+					// printDivergencePoint(cls.findDivergence(syncroRange));
+			    		same = true;
+				    	break;
+    				}
+	    		}
+	    	}
+		    if (!same) return !same;
+    	}
+	    return true;
     }
 
 
-
+    /**
+     * search if the original and sosie (two set of trace) diverge at the call level
+     * @throws IOException
+     */
     public boolean findDivergence() {
         for (PointSequence original : originals) {
+            String originalName = original.getName();
             boolean same = false;
             for (PointSequence sosie : sosies) {
-                CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie);
-                if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) != null) {//same sequence
+                String sosieName = original.getName();
+                CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
+                if (sosieName.equals(originalName) && cls.findDivergence(syncroRange) != null) {//same sequence
                     System.out.println(original.getName()+ " and "+ original.getName()+ " same call trace");
-                        System.out.println(cls.findDivergenceVar(syncroRange));
                     same = true;
                     break;
                 }
@@ -86,6 +108,28 @@ public class CompareMultiLogSequence {
                 return true;
         }
         return false;
+    }
+
+
+    public void findDiffVarToExclude() {
+        for (PointSequence original : originals) {
+            boolean same = false;
+            for (PointSequence sosie : sosies) {
+                CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
+                cls.setDiffVar(varToExclude);
+                if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) != null) {
+                    varToExclude.addAll(cls.findDivergenceVar(syncroRange));
+//                        System.out.println(original.getName() + original.threadName + " and " + sosie.getName()
+//                                + sosie.threadName + " same call trace");
+                        // printDivergencePoint(cls.findDivergence(syncroRange));
+                        same = true;
+                        break;
+                }
+            }
+            if (!same)
+                new Exception("not same set of trace");
+        }
+
     }
 
     protected Set<String> loadVarToExclude(String fileExcludeVar) throws IOException {
@@ -116,14 +160,7 @@ public class CompareMultiLogSequence {
         return list;
     }
 
-    public static void main(String[] args) throws IOException {
-        CompareMultiLogSequence un = new CompareMultiLogSequence(args[1],args[2],args[3]);
-        if(args[0].equals("-same"))
-            un.findAndWriteDiffVar(args[3]);
-        if(args[0].equals("-diff"))
-            un.findDivergence();
 
-    }
 
     protected void printDivergencePoint(int[][] divergence) {
         if(divergence.length == 0)
