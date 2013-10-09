@@ -62,6 +62,9 @@ public class ConditionalPoint extends Point {
     }
 
     protected boolean valueEqual(String v1, String v2) {
+        if(v1 ==null || v2 == null) {
+           return true;
+        }
         if((v1.startsWith("{") && v2.startsWith("{"))
                 || (v1.startsWith("[") && v2.startsWith("["))) {
             return v1.split(", ").length == v2.split(", ").length;

@@ -43,6 +43,22 @@ public class TransformationParser {
         Log.debug("number of parse error : {}",countError);
         return list;
     }
+
+    public Transformation parseUniqueTransformation(File file) throws Exception {
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        StringBuilder sb = new StringBuilder();
+        String line = br.readLine();
+        while (line != null) {
+            sb.append(line);
+            line = br.readLine();
+        }
+        if (sb.length() == 0)
+            return null;
+        JSONObject jsonObject = new JSONObject(sb.toString());
+        return parseTransformation(jsonObject);
+    }
+
     public List<Transformation> parseFile(File file) throws IOException, JSONException {
 
         Set<Transformation> set = new HashSet<Transformation>();
@@ -54,8 +70,8 @@ public class TransformationParser {
             sb.append(line);
             line = br.readLine();
         }
-       if (sb.length() == 0)
-           return new ArrayList<Transformation>();
+        if (sb.length() == 0)
+            return new ArrayList<Transformation>();
         JSONArray array = new JSONArray(sb.toString());
         for(int i = 0; i < array.length(); i++)  {
             count++;

@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.logger;
 
+import fr.inria.diversify.DiversifyMain;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
@@ -17,6 +18,7 @@ import spoon.support.builder.SpoonBuildingManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * User: Simon
@@ -27,12 +29,16 @@ public class CompareLogMain {
 
     private CodeFragmentList codeFragments;
 
-    public static void main(String[] args) throws IOException, JSONException {
-
-
+    public static void main(String[] args) throws Exception {
+        new DiversifyProperties(args[0]);
+        CompareLogMain clm = new CompareLogMain();
+        clm.init();
     }
 
-    protected void init() throws IOException, JSONException {
+    protected void init() throws Exception {
+        initLogLevel();
+        initSpoon();
+
         String dirOriginal = DiversifyProperties.getProperty("dirOriginal");
         String dirSosie = DiversifyProperties.getProperty("dirSosie");
         String varToExclude = DiversifyProperties.getProperty("varToExclude");
@@ -42,13 +48,19 @@ public class CompareLogMain {
             un.findAndWriteDiffVar(varToExclude);
         } else {
 
-            File startPoint = new File(DiversifyProperties.getProperty("startPoint"));
-            TransformationParser parser = new TransformationParser(codeFragments);
-            CodeFragment cf = ((Replace)parser.parseFile(startPoint).get(0)).getPosition();
+            String startPointString = DiversifyProperties.getProperty("startPoint");
+            for(File f : (new File(dirSosie).listFiles())) {
+                Log.info("log files {}",f);
+                File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
+                TransformationParser parser = new TransformationParser(codeFragments);
+                CodeFragment cf = ((Replace)parser.parseUniqueTransformation(startPoint)).getPosition();
 
-            CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, dirSosie, cf, varToExclude);
-            un.findDiffVar();
+                CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, f.getAbsolutePath(), cf, varToExclude);
 
+                Set<String> result = un.findDiffVar();
+                if(!result.isEmpty())
+                    Log.info("same trace: {}",result);
+            }
         }
 
     }

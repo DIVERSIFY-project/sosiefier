@@ -2,6 +2,7 @@ package fr.inria.diversify.sosie.logger;
 
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.util.Log;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,7 +31,13 @@ public class CompareSingleLogSequence {
 
 
     public int[][] findDivergence(int syncroRange) {
-        return findDivergence(syncroRange, -1,-1);
+        if(startPoint == null)
+            return findDivergence(syncroRange, -1,-1);
+        else {
+//            Log.debug("{} {} {}",original.size(), findDiversificationIndex(original), original.size() == findDiversificationIndex(original));
+//            Log.debug("{} {} {}",sosie.size(), findDiversificationIndex(sosie), sosie.size() == findDiversificationIndex(sosie));
+            return findDivergence(syncroRange, findDiversificationIndex(original),findDiversificationIndex(sosie));
+        }
     }
 
 
@@ -82,9 +89,10 @@ public class CompareSingleLogSequence {
             startSosie++;
             ConditionalPoint oPoint = original.get(startOriginal);
             ConditionalPoint sPoint = sosie.get(startSosie);
-            if(oPoint.sameLogPoint(sPoint)) {
-                if(!oPoint.sameValue(sPoint) && diffVar.contains(oPoint.getDifVar(sPoint)))
-                    var.addAll(oPoint.getDifVar(sPoint));
+            if(oPoint.sameLogPoint(sPoint) && !oPoint.sameValue(sPoint)) {
+                for(String dVar : oPoint.getDifVar(sPoint))
+                    if(!diffVar.contains(dVar))
+                        var.add(dVar);
             }
             else {
                 int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
@@ -124,6 +132,13 @@ public class CompareSingleLogSequence {
 //            }
 //        }
 //    }
+
+    protected int findDiversificationIndex(PointSequence sequence) {
+        int i = 0;
+        while (i < sequence.size() && !sequence.get(i).containsInto(startPoint))
+            i++;
+        return i;
+    }
 
 
     protected int[] findSyncro(int syncroRange, int iOriginal, int iSosie) {
