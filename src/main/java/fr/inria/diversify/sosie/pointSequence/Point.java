@@ -1,10 +1,6 @@
-package fr.inria.diversify.sosie.logger;
+package fr.inria.diversify.sosie.pointSequence;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtMethod;
-
-import java.util.*;
 
 /**
  * User: Simon

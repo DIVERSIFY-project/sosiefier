@@ -1,10 +1,8 @@
-package fr.inria.diversify.sosie.logger;
+package fr.inria.diversify.sosie.compare;
 
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.transformation.Replace;
-import fr.inria.diversify.transformation.TransformationParser;
+import fr.inria.diversify.sosie.pointSequence.PointSequence;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 
@@ -38,7 +36,6 @@ public class CompareMultiLogSequence {
         sosies = loadPointSequence(dirSosie);
         varToExclude = loadVarToExclude(fileExcludeVar);
         this.startPoint = startPoint;
-
     }
 
 
@@ -61,7 +58,6 @@ public class CompareMultiLogSequence {
         return true;
     }
 
-
     /**
     * search if the original and sosie (two set of trace) not diverge at the call level and variable level
     *
@@ -72,10 +68,10 @@ public class CompareMultiLogSequence {
  	    for (PointSequence original : originals) {
 		    boolean same = false;
 		    for (PointSequence sosie : sosies) {
-
+                 Log.debug("compare original: {} with {}",original, sosie );
 			    CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
 	    		cls.setDiffVar(varToExclude);
-		    	if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) != null) {
+                if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) != null) {
 		    		var.addAll(cls.findDivergenceVar(syncroRange));
 		    		if (cls.findDivergenceVar(syncroRange).isEmpty()) {// same sequence
                         var.clear();
@@ -136,11 +132,13 @@ public class CompareMultiLogSequence {
     }
 
     protected Set<String> loadVarToExclude(String fileExcludeVar) throws IOException {
+        Log.debug("load exclude variables");
         varToExclude = new HashSet<String>();
         BufferedReader reader = new BufferedReader(new FileReader(fileExcludeVar));
 
         String line = reader.readLine();
         while (line != null) {
+            Log.debug("exclude var: {}",line);
             varToExclude.add(line);
             line = reader.readLine();
         }
@@ -150,7 +148,7 @@ public class CompareMultiLogSequence {
     protected List<PointSequence> loadPointSequence(String dir) {
         List<PointSequence> list = new ArrayList<PointSequence>();
         File file = new File(dir);
-
+        Log.debug("load trace in directory: {}",dir);
         for (File f : file.listFiles()) {
             try {
                 PointSequence ps = new PointSequence();
@@ -180,5 +178,9 @@ public class CompareMultiLogSequence {
             c1++;
             c2++;
         }
+    }
+
+    public void setSyncroRange(int syncroRange) {
+        this.syncroRange = syncroRange;
     }
 }

@@ -1,6 +1,5 @@
-package fr.inria.diversify.sosie.logger;
+package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.DiversifyMain;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
@@ -8,7 +7,6 @@ import fr.inria.diversify.transformation.Replace;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import org.json.JSONException;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
@@ -28,6 +26,9 @@ import java.util.Set;
 public class CompareLogMain {
 
     private CodeFragmentList codeFragments;
+    private String dirOriginal;
+    private String varToExclude;
+    private String dirSosie;
 
     public static void main(String[] args) throws Exception {
         new DiversifyProperties(args[0]);
@@ -39,30 +40,41 @@ public class CompareLogMain {
         initLogLevel();
         initSpoon();
 
-        String dirOriginal = DiversifyProperties.getProperty("dirOriginal");
-        String dirSosie = DiversifyProperties.getProperty("dirSosie");
-        String varToExclude = DiversifyProperties.getProperty("varToExclude");
+         dirOriginal = DiversifyProperties.getProperty("dirOriginal");
+         dirSosie = DiversifyProperties.getProperty("dirSosie");
+         varToExclude = DiversifyProperties.getProperty("varToExclude");
 
-        if(DiversifyProperties.getProperty("logTrace").equals("same")) {
-            CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal,dirSosie);
-            un.findAndWriteDiffVar(varToExclude);
-        } else {
+        if(DiversifyProperties.getProperty("logTrace").equals("same"))
+            same();
+        else
+            diff();
+    }
 
-            String startPointString = DiversifyProperties.getProperty("startPoint");
-            for(File f : (new File(dirSosie).listFiles())) {
-                Log.info("log files {}",f);
-                File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
-                TransformationParser parser = new TransformationParser(codeFragments);
-                CodeFragment cf = ((Replace)parser.parseUniqueTransformation(startPoint)).getPosition();
+    protected void same() throws IOException {
+        CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal,dirSosie);
+        un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+        un.findAndWriteDiffVar(varToExclude);
+    }
 
-                CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, f.getAbsolutePath(), cf, varToExclude);
+    protected void diff() throws Exception {
+        String startPointString = DiversifyProperties.getProperty("startPoint");
+        for(File f : (new File(dirSosie).listFiles())) {
+            Log.info("log files {}",f);
+            File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
+            TransformationParser parser = new TransformationParser(codeFragments);
+            CodeFragment cf = ((Replace)parser.parseUniqueTransformation(startPoint)).getPosition();
 
-                Set<String> result = un.findDiffVar();
-                if(!result.isEmpty())
-                    Log.info("same trace: {}",result);
-            }
+            CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, f.getAbsolutePath(), cf, varToExclude);
+            un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+            Set<String> result = un.findDiffVar();
+            boolean callDivergence = un.findDivergence();
+            Log.debug("callDivergence {}, result {}",callDivergence,result);
+            if(!callDivergence && result.isEmpty())
+                Log.info("same trace");
+            else
+                Log.info("not same trace {}",result);
+
         }
-
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {

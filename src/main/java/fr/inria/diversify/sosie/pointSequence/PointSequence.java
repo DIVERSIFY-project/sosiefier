@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.logger;
+package fr.inria.diversify.sosie.pointSequence;
 
 import java.io.BufferedReader;
 import java.io.File;

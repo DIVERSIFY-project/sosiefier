@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.processor;
+package fr.inria.diversify.sosie.logger.processor;
 
 
 import fr.inria.diversify.util.Log;

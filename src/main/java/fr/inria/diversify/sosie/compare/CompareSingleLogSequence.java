@@ -1,8 +1,10 @@
-package fr.inria.diversify.sosie.logger;
+package fr.inria.diversify.sosie.compare;
 
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.util.Log;
+import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
+import fr.inria.diversify.sosie.pointSequence.Point;
+import fr.inria.diversify.sosie.pointSequence.PointSequence;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -57,6 +59,9 @@ public class CompareSingleLogSequence {
             startSosie++;
             Point oPoint = original.get(startOriginal);
             Point sPoint = sosie.get(startSosie);
+//            Log.debug("startOriginal: {}, id: {}",startOriginal,sPoint.getId());
+//            Log.debug("startSosie: {}, id: {}",startSosie,oPoint.getId());
+//            Log.debug("same: {}",oPoint.sameLogPoint(sPoint));
             if(!oPoint.sameLogPoint(sPoint)) {
                 int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
                 if(newSyncho == null)
@@ -107,32 +112,6 @@ public class CompareSingleLogSequence {
         return var;
     }
 
-//    public void computeDiffVar(int syncroRange) {
-//        int startOriginal = -1;
-//        int startSosie = -1;
-//        int bound = Math.min(original.size(), sosie.size());
-//
-//        while(startOriginal < bound - 1 && startSosie < bound - 1) {
-//            startOriginal++;
-//            startSosie++;
-//            ConditionalPoint oPoint = original.get(startOriginal);
-//            ConditionalPoint sPoint = sosie.get(startSosie);
-//            if(oPoint.sameLogPoint(sPoint)) {
-//                if(!oPoint.sameValue(sPoint))
-//                    difVar.addAll(oPoint.getDifVar(sPoint));
-//            }
-//            else {
-//                int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
-//                if(newSyncho == null)
-//                    new Exception("call trace "+original.getName()+ " and "+sosie.getName()+" no syncro");
-//                else {
-//                    startOriginal = newSyncho[0];
-//                    startSosie = newSyncho[1];
-//                }
-//            }
-//        }
-//    }
-
     protected int findDiversificationIndex(PointSequence sequence) {
         int i = 0;
         while (i < sequence.size() && !sequence.get(i).containsInto(startPoint))
@@ -147,6 +126,7 @@ public class CompareSingleLogSequence {
             else
         return findSyncroP(syncroRange,iSosie, iOriginal);
     }
+
     protected int[] findSyncroP(int syncroRange, int iOriginal, int iSosie){
         for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < original.size()); i++) {
             for(int j = iSosie; (j < syncroRange + iSosie) && (j < sosie.size()); j++) {

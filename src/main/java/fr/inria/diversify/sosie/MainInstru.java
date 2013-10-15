@@ -1,6 +1,6 @@
 package fr.inria.diversify.sosie;
 
-import fr.inria.diversify.sosie.processor.ConditionalLoggingInstrumenter;
+import fr.inria.diversify.sosie.logger.processor.ConditionalLoggingInstrumenter;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;

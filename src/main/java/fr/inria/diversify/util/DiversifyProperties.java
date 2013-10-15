@@ -48,6 +48,6 @@ public class DiversifyProperties {
         prop.setProperty("logLevel", "2");
         prop.setProperty("gitRepository", "");
         prop.setProperty("processor", "fr.inria.diversify.codeFragmentProcessor.StatementProcessor");
-        //prop.setProperty("transformation.range", "[]");
+        prop.setProperty("syncroRange","0");
     }
 }

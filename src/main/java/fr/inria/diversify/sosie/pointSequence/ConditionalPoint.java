@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.logger;
+package fr.inria.diversify.sosie.pointSequence;
 
 import java.util.HashMap;
 import java.util.HashSet;

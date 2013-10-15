@@ -1,4 +1,6 @@
-package fr.inria.diversify.sosie.logger;
+package fr.inria.diversify.sosie.pointSequence;
+
+import fr.inria.diversify.sosie.pointSequence.Point;
 
 import java.util.ArrayList;
 import java.util.List;
