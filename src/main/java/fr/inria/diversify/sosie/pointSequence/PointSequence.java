@@ -97,4 +97,8 @@ public class PointSequence {
     public String getName() {
         return name;
     }
+
+    public String toDot() {
+        return hashCode() + " [label=\"" + name + "\"];";
+    }
 }

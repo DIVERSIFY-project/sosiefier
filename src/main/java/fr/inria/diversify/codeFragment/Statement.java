@@ -65,6 +65,20 @@ public class Statement extends CodeFragment {
         return t1.equals(t2);
     }
 
+    public String codeFragmentString() {
+        String string = codeFragment.toString();
+        if(string.trim().endsWith("}"))
+            return string;
+        if(!string.endsWith(";"))
+            string = string+";";
+
+        if(!(codeFragment instanceof CtLocalVariableImpl
+               || codeFragment instanceof CtReturnImpl))
+            return "{\n"+string+"\n}";
+        else
+            return string;
+    }
+
     protected boolean containsSuper(CtCodeElement cf) {
         String string = cf.toString();
         return string.contains("super(") || string.contains("super.");

@@ -21,6 +21,10 @@ public class Block extends CodeFragment {
         init();
     }
 
+    public String codeFragmentString() {
+        return codeFragment.toString();
+    }
+
     @Override
     //check if this can be replaced by other
     public boolean isReplace(CodeFragment other) {

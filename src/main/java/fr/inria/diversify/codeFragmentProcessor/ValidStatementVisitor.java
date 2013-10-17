@@ -94,9 +94,7 @@ public class ValidStatementVisitor extends CtScanner {
 		addAllSubStatement(ifElement.getCondition());
 		super.visitCtIf(ifElement);
 	}
-	
 
-	
 	public <T> void visitCtNewArray(CtNewArray<T> newArray) {
 		for (CtExpression<?> i : newArray.getDimensionExpressions()) 
 			addAllSubStatement(i);
@@ -125,7 +123,8 @@ public class ValidStatementVisitor extends CtScanner {
 		addAllSubStatement(whileLoop.getLoopingExpression());
 		super.visitCtWhile(whileLoop);
 	}
-	
+
+
 	public <T> void visitCtLocalVariable(CtLocalVariable<T> localVariable) {
 		addAllSubStatement(localVariable.getDefaultExpression());
 		super.visitCtLocalVariable(localVariable);
@@ -165,5 +164,10 @@ public class ValidStatementVisitor extends CtScanner {
 		addAllSubStatement(doLoop.getLoopingExpression());
 		super.visitCtDo(doLoop);
 	}
+
+    public <R> void visitCtReturn(CtReturn<R> returnStatement) {
+        addAllSubStatement(returnStatement.getReturnedExpression());
+        super.visitCtReturn(returnStatement);
+    }
 
 }

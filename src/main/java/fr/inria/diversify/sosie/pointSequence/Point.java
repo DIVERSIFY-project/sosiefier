@@ -1,6 +1,9 @@
 package fr.inria.diversify.sosie.pointSequence;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.sosie.compare.VariableDiff;
+
+import java.util.Set;
 
 /**
  * User: Simon
@@ -25,11 +28,11 @@ public abstract class Point {
     }
 
     public boolean containsInto(CodeFragment cf) {
-        if(bugPoint)
-            return false;
+//        if(bugPoint)
+//            return false;
         try {
-            String cl = cf.getSourceClass().getQualifiedName().split("$")[0];
-            String cl2 = className.split("$")[0];
+            String cl = cf.getSourceClass().getQualifiedName().split("\\$")[0];
+            String cl2 = className.split("\\$")[0];
             return cl2.equals(cl);
 //                    && methodSignature.equals(cf.getCtCodeFragment().getParent(CtExecutable.class).getSignature()));
         }  catch (Exception e) {
@@ -51,5 +54,7 @@ public abstract class Point {
     public int getId() {
         return id;
     }
+
+    public abstract String toDot(int x, int y, Set<VariableDiff> varDiff);
 }
 

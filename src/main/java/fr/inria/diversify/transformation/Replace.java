@@ -86,21 +86,25 @@ public class Replace extends Transformation {
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = position.getCtCodeFragment().getPosition();
 
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
-                codeFragmentString(position)+"\n", 0));
 
 
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+
-//                replaces.get(position).codeFragmentString()+"\n", 0));
+        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+
+                replaces.get(position).codeFragmentString()+"\n", 0));
+        }
+        else {
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
+                    codeFragmentString(position), 0));
+        }
     }
 
     protected String codeFragmentString(CodeFragment cf) {
         String cFS = replaces.get(cf).codeFragmentString();
-        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
-            return cFS+";";
-        else
+//        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
+//            return cFS+";";
+//        else
             return cFS;
     }
 

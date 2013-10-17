@@ -9,10 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * User: Simon
@@ -26,11 +23,11 @@ public class StatisticDiversification {
     protected static String detailFileSuffix = "_diversification_detail.csv";
     protected static String allTransformationFileSuffix = "_diversification_allTransformation.csv";
 
-    protected List<Transformation> transformations;
+    protected Collection<Transformation> transformations;
     protected int numberOfFailureMax;
     protected  CodeFragmentList codeFragmentList;
 
-    public StatisticDiversification(List<Transformation> transformations, CodeFragmentList codeFragmentList) {
+    public StatisticDiversification(Collection<Transformation> transformations, CodeFragmentList codeFragmentList) {
         this.transformations = transformations;
         this.numberOfFailureMax = 0;
         this.codeFragmentList = codeFragmentList;
@@ -40,7 +37,7 @@ public class StatisticDiversification {
     }
 
     public StatisticDiversification() {
-        this.transformations = new ArrayList<Transformation>();
+        this.transformations = new HashSet<Transformation>();
         this.numberOfFailureMax = 0;
     }
 
@@ -159,7 +156,8 @@ public class StatisticDiversification {
     protected void writeDetail(String fileName) throws IOException {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
-        transformations.get(0).writeHead(bw,separator);
+
+        ((Transformation)transformations.toArray()[0]).writeHead(bw,separator);
 
         bw.write("\n");
 

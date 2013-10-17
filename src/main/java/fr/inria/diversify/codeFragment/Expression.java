@@ -21,6 +21,10 @@ public class Expression extends CodeFragment{
         init();
     }
 
+    public String codeFragmentString() {
+        return codeFragment.toString();
+    }
+
     @Override
     public boolean isReplace(CodeFragment other) {
         return getInputContext().isInclude(other.getInputContext()) && getOutputContext().equals(other.getOutputContext());

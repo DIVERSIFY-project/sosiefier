@@ -59,20 +59,29 @@ public class CompareLogMain {
     protected void diff() throws Exception {
         String startPointString = DiversifyProperties.getProperty("startPoint");
         for(File f : (new File(dirSosie).listFiles())) {
-            Log.info("log files {}",f);
+            try {
+//            Log.info("log files {}",f);
             File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
             TransformationParser parser = new TransformationParser(codeFragments);
+            Log.info("startPoint {}",startPoint.getAbsolutePath());
             CodeFragment cf = ((Replace)parser.parseUniqueTransformation(startPoint)).getPosition();
 
             CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, f.getAbsolutePath(), cf, varToExclude);
             un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
-            Set<String> result = un.findDiffVar();
-            boolean callDivergence = un.findDivergence();
-            Log.debug("callDivergence {}, result {}",callDivergence,result);
-            if(!callDivergence && result.isEmpty())
+            Diff diff = un.findDiffVar();
+
+            Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
+            if(!diff.sameTraceAndVar()) {
+                Log.info(f.getName());
+                Log.info(diff.report());
+                diff.toDot(f.getName()+".dot");
+            }
+                else
                 Log.info("same trace");
-            else
-                Log.info("not same trace {}",result);
+            } catch (Exception e) {
+                Log.error("error",e);
+                e.printStackTrace();
+            }
 
         }
     }

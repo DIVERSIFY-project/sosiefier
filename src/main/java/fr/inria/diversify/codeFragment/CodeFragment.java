@@ -73,13 +73,7 @@ public abstract class CodeFragment {
         return tmp;
     }
 
-    public String codeFragmentString() {
-        String string = codeFragment.toString();
-//       if(string.trim().endsWith("}"))
-            return string;
-//        else
-//            return string+";";
-    }
+    public abstract String codeFragmentString();
 
     public String equalString() {
         if (equalString != null)
@@ -142,7 +136,7 @@ public abstract class CodeFragment {
     }
 
     protected CodeFragment getNewStatement(CtCodeElement other) {
-        Statement newStatement = null;
+        CodeFragment newStatement = null;
         SubStatementVisitor sub = new SubStatementVisitor();
         codeFragment.getParent().accept(sub);
 

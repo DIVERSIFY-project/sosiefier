@@ -1,9 +1,11 @@
 package fr.inria.diversify.sosie.pointSequence;
 
+import fr.inria.diversify.sosie.compare.VariableDiff;
 import fr.inria.diversify.sosie.pointSequence.Point;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: Simon
@@ -32,6 +34,11 @@ public class CatchPoint extends Point {
         } catch (Exception e) {
             bugPoint = true;
         }
+    }
+
+    @Override
+    public String toDot(int x, int y, Set<VariableDiff> varDiff) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public boolean sameValue(Point sPoint) {

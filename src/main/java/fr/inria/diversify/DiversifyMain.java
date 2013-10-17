@@ -10,6 +10,7 @@ import fr.inria.diversify.diversification.Builder;
 import fr.inria.diversify.diversification.Diversify;
 import fr.inria.diversify.diversification.Sosie;
 import fr.inria.diversify.diversification.TestSosie;
+import fr.inria.diversify.statistic.CrossValidation;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.statistic.Util;
@@ -33,7 +34,9 @@ import spoon.support.builder.SpoonBuildingManager;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: Simon
@@ -238,16 +241,22 @@ public class DiversifyMain {
     protected void statForR(String fileName) throws IOException, JSONException {
         TransformationParser tf = new TransformationParser(codeFragments);
         Log.debug("parse fileName: {}",fileName);
-        List<Transformation> transformations = tf.parseFile(new File(fileName));
 
+        List<Transformation> transformations = tf.parseFile(new File(fileName));
         if(transformations.isEmpty())
             return;
 
-        StatisticDiversification sd = new StatisticDiversification(transformations, codeFragments);
+        Set<Transformation> set = new HashSet<Transformation>(tf.parseFile(new File(fileName)));
         Log.debug("number of transformation: {}",transformations.size());
+        Log.debug("number of unique transformation: {}",set.size());
+
+        StatisticDiversification sd = new StatisticDiversification(set, codeFragments);
         String name = fileName.split(".json")[0];
         sd.writeStat(name);
 
+
+        CrossValidation cv = new CrossValidation(transformations,10);
+        cv.write(name+"_crossValidation.csv");
     }
 
     protected void computeOtherStat() throws InterruptedException {

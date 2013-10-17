@@ -1,5 +1,7 @@
 package fr.inria.diversify.sosie.pointSequence;
 
+import fr.inria.diversify.sosie.compare.VariableDiff;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -47,15 +49,34 @@ public class ConditionalPoint extends Point {
         }
     }
 
-    public Set<String> getDifVar(ConditionalPoint point) {
-        Set<String> difVar = new HashSet<String>();
+    @Override
+    public String toDot(int x, int y,Set<VariableDiff> varsDiff) {
+        String dot = hashCode() + "     ";
+        dot += "[\n label =";
+        if(varsDiff.isEmpty())
+            dot += "\"" + toString() + "\"";
+
+        else {
+            dot += "\"" + toString();
+            for(VariableDiff vf : varsDiff)
+                dot += "\\n"+vf.toDot();
+            dot += "\"\n,color=\"red\",";
+        }
+        dot += "\npos=\"" + x + "," + y + "!\"\n];";
+        return dot;
+    }
+
+    public Set<VariableDiff> getDifVar(ConditionalPoint point) {
+        Set<VariableDiff> difVar = new HashSet<VariableDiff>();
         for(String varName : vars.keySet()) {
             String other = point.vars.get(varName);
             if(other == null) {
                 new Exception("pas les meme variables");
             }
             if(!valueEqual(other,vars.get(varName))) {
-                difVar.add(className+":"+methodSignature+":"+varName);
+//                difVar.add(className+":"+methodSignature+":"+varName);
+                difVar.add(new VariableDiff(className,methodSignature,varName,vars.get(varName),other));
+//                difVar.add(className+":"+methodSignature+":"+varName+":("+vars.get(varName)+" / "+other+")");
             }
         }
         return difVar;
@@ -75,6 +96,9 @@ public class ConditionalPoint extends Point {
 
 
         return  v1.equals(v2);
+    }
 
+    public String toString() {
+        return id + ":" + className + ":" + methodSignature + ":" + vars.size();
     }
 }
