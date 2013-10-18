@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.607" tests="362" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib"/>
+    <property name="java.vm.version" value="24.0-b56"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/Simon/Documents/code/diversify-statements/utils/commons-collections/commons-collections"/>
+    <property name="java.runtime.version" value="1.7.0_40-b43"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/v6/k3md0s4j7dq7_37txr_v41tr0000gp/T/"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/usr/share/java/maven-3.0.3/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/Simon/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.8.5"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/Simon"/>
+    <property name="user.timezone" value="Europe/Paris"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="file.encoding" value="US-ASCII"/>
+    <property name="user.name" value="Simon"/>
+    <property name="java.class.path" value="/usr/share/java/maven-3.0.3/boot/plexus-classworlds-2.4.jar"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B clean test"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.7.0_40"/>
+    <property name="java.ext.dirs" value="/Users/Simon/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/lib/JObjC.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home/jre/classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="/usr/share/java/maven-3.0.3"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase name="testBidiPut" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.005"/>
+  <testcase name="testBidiGetKey" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testBidiGetKeyInverse" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testBidiInverse" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testBidiModifyEntrySet" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.01"/>
+  <testcase name="testBidiClear" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testBidiRemove" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testBidiKeySetValuesOrder" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.007"/>
+  <testcase name="testBidiRemoveByKeySet" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testBidiRemoveByEntrySet" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testMapEntrySetIteratorEntrySetValueCrossCheck" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.004"/>
+  <testcase name="testMapEntrySetIteratorEntry" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.001"/>
+  <testcase name="testMapEntrySetIteratorEntrySetValue" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.011"/>
+  <testcase name="testMapEntrySetRemoveNonMapEntry" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testSetEquals" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.005"/>
+  <testcase name="testSetHashCode" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionAdd" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionAddAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testUnsupportedAdd" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.009"/>
+  <testcase name="testCollectionClear" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.001"/>
+  <testcase name="testCollectionContains" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.005"/>
+  <testcase name="testCollectionContainsAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.02"/>
+  <testcase name="testCollectionIsEmpty" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.001"/>
+  <testcase name="testCollectionIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.006"/>
+  <testcase name="testCollectionRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.094"/>
+  <testcase name="testCollectionIteratorRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.009"/>
+  <testcase name="testCollectionRemoveAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.015"/>
+  <testcase name="testCollectionRetainAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.019"/>
+  <testcase name="testCollectionSize" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionToArray" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionToArray2" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.006"/>
+  <testcase name="testCollectionToString" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testUnsupportedRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionIteratorFailFast" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testBidiPut" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.001"/>
+  <testcase name="testBidiGetKey" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testBidiGetKeyInverse" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testBidiInverse" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testBidiModifyEntrySet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testBidiClear" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testBidiRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.002"/>
+  <testcase name="testBidiKeySetValuesOrder" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testBidiRemoveByKeySet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testBidiRemoveByEntrySet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapEntrySetIteratorEntrySetValueCrossCheck" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testMapEntrySetIteratorEntry" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.001"/>
+  <testcase name="testMapEntrySetIteratorEntrySetValue" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.006"/>
+  <testcase name="testMapEntrySetRemoveNonMapEntry" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testSetEquals" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testSetHashCode" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionAdd" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionAddAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testUnsupportedAdd" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.004"/>
+  <testcase name="testCollectionClear" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionContains" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.005"/>
+  <testcase name="testCollectionContainsAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionIsEmpty" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.001"/>
+  <testcase name="testCollectionRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.023"/>
+  <testcase name="testCollectionIteratorRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.005"/>
+  <testcase name="testCollectionRemoveAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.002"/>
+  <testcase name="testCollectionRetainAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.003"/>
+  <testcase name="testCollectionSize" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionToArray" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.001"/>
+  <testcase name="testCollectionToArray2" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.001"/>
+  <testcase name="testCollectionToString" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.001"/>
+  <testcase name="testUnsupportedRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCollectionIteratorFailFast" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0.001"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapEntrySet" time="0"/>
+  <testcase name="testRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.006"/>
+  <testcase name="testEmptyMapIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testFullMapIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.005"/>
+  <testcase name="testMapIteratorSet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.001"/>
+  <testcase name="testMapIteratorSetRemoveSet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.002"/>
+  <testcase name="testMapIteratorRemoveGetKey" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testMapIteratorRemoveGetValue" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testEmptyIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.002"/>
+  <testcase name="testFullIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.016"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.002"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.002"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testBidiMapIteratorSet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testFailFastEntrySet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.001"/>
+  <testcase name="testFailFastKeySet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testFailFastValues" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testRemove" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.003"/>
+  <testcase name="testEmptyMapIterator" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testFullMapIterator" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.044"/>
+  <testcase name="testMapIteratorSet" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.001"/>
+  <testcase name="testMapIteratorSetRemoveSet" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testMapIteratorRemoveGetKey" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.001"/>
+  <testcase name="testMapIteratorRemoveGetValue" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.001"/>
+  <testcase name="testEmptyIterator" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.001"/>
+  <testcase name="testFullIterator" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.013"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.001"/>
+  <testcase name="testSampleMappings" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.001"/>
+  <testcase name="testMakeMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapIsEmpty" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapSize" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.004"/>
+  <testcase name="testMapClear" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapContainsKey" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapContainsValue" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapEquals" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.001"/>
+  <testcase name="testMapGet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.003"/>
+  <testcase name="testMapHashCode" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapToString" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testEmptyMapCompatibility" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.001"/>
+  <testcase name="testFullMapCompatibility" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.002"/>
+  <testcase name="testMapPut" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.011"/>
+  <testcase name="testMapPutNullKey" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapPutNullValue" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapPutAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testMapRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.003"/>
+  <testcase name="testValuesClearChangesMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.001"/>
+  <testcase name="testKeySetClearChangesMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testEntrySetClearChangesMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testEntrySetContains1" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testEntrySetContains2" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testEntrySetContains3" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.002"/>
+  <testcase name="testEntrySetRemove1" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testEntrySetRemove2" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testEntrySetRemove3" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testValuesRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.001"/>
+  <testcase name="testValuesRemoveAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testValuesRetainAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testValuesIteratorRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.011"/>
+  <testcase name="testKeySetRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testKeySetRemoveAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.001"/>
+  <testcase name="testKeySetRetainAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testKeySetIteratorRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.001"/>
+  <testcase name="testEntrySetRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.006"/>
+  <testcase name="testEntrySetRemoveAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.009"/>
+  <testcase name="testEntrySetRetainAll" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testEntrySetIteratorRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testSetEquals" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testSetHashCode" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionAdd" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionAddAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testUnsupportedAdd" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionClear" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionContains" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionContainsAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionIsEmpty" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testCollectionIterator" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testCollectionRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.012"/>
+  <testcase name="testCollectionIteratorRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.004"/>
+  <testcase name="testCollectionRemoveAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionRetainAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.003"/>
+  <testcase name="testCollectionSize" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionToArray" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionToArray2" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.002"/>
+  <testcase name="testCollectionToString" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testUnsupportedRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionIteratorFailFast" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.004"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionAdd" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionAddAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testUnsupportedAdd" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionClear" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionContains" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionContainsAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.005"/>
+  <testcase name="testCollectionIsEmpty" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionIterator" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.006"/>
+  <testcase name="testCollectionIteratorRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.001"/>
+  <testcase name="testCollectionRemoveAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.004"/>
+  <testcase name="testCollectionRetainAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionSize" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionToArray" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.001"/>
+  <testcase name="testCollectionToArray2" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.003"/>
+  <testcase name="testCollectionToString" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testUnsupportedRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionIteratorFailFast" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.001"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0.005"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestInverseBidiMap" time="0"/>
+  <testcase name="testRemove" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testEmptyMapIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testFullMapIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.004"/>
+  <testcase name="testMapIteratorSet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testMapIteratorSetRemoveSet" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testMapIteratorRemoveGetKey" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testMapIteratorRemoveGetValue" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.001"/>
+  <testcase name="testEmptyIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testFullIterator" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.004"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0.001"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.bidimap.AbstractBidiMapTest$TestBidiMapIterator" time="0"/>
+  <testcase name="testBidiMapIteratorSet" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testFailFastEntrySet" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.002"/>
+  <testcase name="testFailFastKeySet" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testFailFastValues" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testRemove" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testEmptyMapIterator" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testFullMapIterator" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.011"/>
+  <testcase name="testMapIteratorSet" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testMapIteratorSetRemoveSet" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.003"/>
+  <testcase name="testMapIteratorRemoveGetKey" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testMapIteratorRemoveGetValue" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testEmptyIterator" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testFullIterator" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.003"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.002"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0.001"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.map.AbstractIterableMapTest$InnerTestMapIterator" time="0"/>
+  <testcase name="testSampleMappings" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testMakeMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testMapIsEmpty" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testMapSize" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testMapClear" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testMapContainsKey" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testMapContainsValue" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testMapEquals" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testMapGet" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testMapHashCode" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testMapToString" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEmptyMapCompatibility" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testFullMapCompatibility" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testMapPut" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.007"/>
+  <testcase name="testMapPutNullKey" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testMapPutNullValue" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testMapPutAll" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.002"/>
+  <testcase name="testMapRemove" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.002"/>
+  <testcase name="testValuesClearChangesMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testKeySetClearChangesMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testEntrySetClearChangesMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEntrySetContains1" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEntrySetContains2" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEntrySetContains3" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEntrySetRemove1" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEntrySetRemove2" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEntrySetRemove3" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testValuesRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testValuesRemoveAll" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testValuesRetainAll" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testValuesIteratorRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testKeySetRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testKeySetRemoveAll" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testKeySetRetainAll" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testKeySetIteratorRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEntrySetRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testEntrySetRemoveAll" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEntrySetRetainAll" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.004"/>
+  <testcase name="testEntrySetIteratorRemoveChangesMap" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testSetEquals" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testSetHashCode" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionAdd" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionAddAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testUnsupportedAdd" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testCollectionClear" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionContains" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.002"/>
+  <testcase name="testCollectionContainsAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionIsEmpty" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testCollectionIterator" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testCollectionRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.013"/>
+  <testcase name="testCollectionIteratorRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testCollectionRemoveAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.002"/>
+  <testcase name="testCollectionRetainAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.003"/>
+  <testcase name="testCollectionSize" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionToArray" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionToArray2" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testCollectionToString" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testUnsupportedRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionIteratorFailFast" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0.001"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapKeySet" time="0"/>
+  <testcase name="testCollectionAdd" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionAddAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testUnsupportedAdd" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionClear" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.002"/>
+  <testcase name="testCollectionContains" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionContainsAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.001"/>
+  <testcase name="testCollectionIsEmpty" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionIterator" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.001"/>
+  <testcase name="testCollectionRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.006"/>
+  <testcase name="testCollectionIteratorRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionRemoveAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionRetainAll" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.002"/>
+  <testcase name="testCollectionSize" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionToArray" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionToArray2" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.002"/>
+  <testcase name="testCollectionToString" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testUnsupportedRemove" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCollectionIteratorFailFast" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.001"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0.001"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.map.AbstractMapTest$TestMapValues" time="0"/>
+  <testcase name="testSerializeDeserializeThenCompare" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testObjectEqualsSelf" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testEqualsNull" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testObjectHashCodeEqualsSelfHashCode" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testObjectHashCodeEqualsContract" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testSimpleSerialization" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0"/>
+  <testcase name="testCanonicalEmptyCollectionExists" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.001"/>
+  <testcase name="testCanonicalFullCollectionExists" classname="org.apache.commons.collections4.bidimap.DualHashBidiMapTest" time="0.003"/>
+</testsuite>

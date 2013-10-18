@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy todir="/Users/Simon/Documents/code/diversify-statements/utils/commons-collections/commons-collections/target/apidocs/META-INF">
+    <fileset dir="/Users/Simon/Documents/code/diversify-statements/utils/commons-collections/commons-collections">
+      <include name="LICENSE.txt"/>
+      <include name="NOTICE.txt"/>
+    </fileset>
+  </copy>
+</target>
+</project>

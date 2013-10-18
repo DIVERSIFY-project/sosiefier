@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1382111199608
+Build-Jdk: 1.7.0_40
+Built-By: Simon
+Bundle-Description: Types that extend and augment the Java Collections F
+ ramework.
+Bundle-DocURL: http://commons.apache.org/proper/commons-collections/
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Commons Collections
+Bundle-SymbolicName: org.apache.commons.collections4
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 4.0.0.alpha1
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.apache.commons.collections4.iterators;version="4.0.0
+ .alpha1",org.apache.commons.collections4.trie.analyzer;version="4.0.0.a
+ lpha1",org.apache.commons.collections4.map;version="4.0.0.alpha1",org.a
+ pache.commons.collections4.bidimap;version="4.0.0.alpha1",org.apache.co
+ mmons.collections4.bag;version="4.0.0.alpha1",org.apache.commons.collec
+ tions4.trie;version="4.0.0.alpha1",org.apache.commons.collections4;vers
+ ion="4.0.0.alpha1",org.apache.commons.collections4.splitmap;version="4.
+ 0.0.alpha1",org.apache.commons.collections4.keyvalue;version="4.0.0.alp
+ ha1",org.apache.commons.collections4.list;version="4.0.0.alpha1",org.ap
+ ache.commons.collections4.collection;version="4.0.0.alpha1",org.apache.
+ commons.collections4.sequence;version="4.0.0.alpha1",org.apache.commons
+ .collections4.functors;version="4.0.0.alpha1",org.apache.commons.collec
+ tions4.queue;version="4.0.0.alpha1",org.apache.commons.collections4.com
+ parators;version="4.0.0.alpha1",org.apache.commons.collections4.set;ver
+ sion="4.0.0.alpha1"
+Import-Package: org.w3c.dom
+Include-Resource: META-INF/LICENSE.txt=LICENSE.txt,META-INF/NOTICE.txt=N
+ OTICE.txt
+Tool: Bnd-1.50.0
