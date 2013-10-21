@@ -426,6 +426,14 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>evosuite</groupId>
+          <artifactId>evosuite</artifactId>
+          <version>1</version>
+          <scope>system</scope>
+          <systemPath>${basedir}/evosuite-20130910.jar</systemPath>
+      </dependency>
+
     <dependency>
       <groupId>org.easymock</groupId>
       <artifactId>easymock</artifactId>

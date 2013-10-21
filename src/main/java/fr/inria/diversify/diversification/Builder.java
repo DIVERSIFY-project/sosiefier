@@ -105,7 +105,7 @@ public abstract class Builder {
         RunMaven rt = new RunMaven(projectDir, "test", 0, clojureTest);
         rt.start();
         timeOut = 0;
-        int factor = 4;
+        int factor = 12;
         while (rt.getFailures() == null) {
             timeOut = timeOut + factor;
             Thread.sleep(1000);

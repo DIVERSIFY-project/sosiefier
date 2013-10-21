@@ -14,6 +14,7 @@ public class LogWriter {
     static private File dir;
     static private Map<Thread, FileWriter> fileWriters;
     static private String separator = ":;:";
+    private static String currentTestSignature;
 
 
     protected synchronized static FileWriter init(Thread thread) throws IOException {
@@ -48,7 +49,7 @@ public class LogWriter {
             BufferedReader reader = new BufferedReader(new FileReader("LogfileName"));
             fileName = reader.readLine() + "__" + thread.getName();
         } catch (IOException e) {
-            fileName = "log" + thread.getName() + "__" + System.currentTimeMillis();
+            fileName = "log" + thread.getName() + "_" + currentTestSignature +"_"+ System.currentTimeMillis();
         }
         return fileName;
     }
@@ -85,11 +86,11 @@ public class LogWriter {
         FileWriter fileWriter = null;
         try {
             fileWriter = init(thread);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-
             fileWriter.append("$$$\n");
             fileWriter.append("ST");
             fileWriter.append(separator);
@@ -106,6 +107,17 @@ public class LogWriter {
         }
         catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void writeTestStart(int id, String testSignature) throws IOException {
+        currentTestSignature = testSignature;
+
+        if(fileWriters != null) {
+            synchronized (fileWriters) {
+                close();
+                fileWriters.clear();
+            }
         }
     }
 
