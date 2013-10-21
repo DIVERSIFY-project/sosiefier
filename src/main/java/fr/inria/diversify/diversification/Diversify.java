@@ -27,6 +27,18 @@ public class Diversify extends Builder {
 
         transformations = new ArrayList<Transformation>();
     }
+
+    public Diversify(String projectDir) {
+        this.tmpDir = "output_diversify";
+        this.srcDir = "src/main/java";
+        this.projectDir = projectDir;
+        clojureTest = false;
+
+        transformations = new ArrayList<Transformation>();
+    }
+
+
+
     @Override
     public void run(int n) throws Exception {
         String dir = prepare(projectDir, tmpDir);

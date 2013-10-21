@@ -67,18 +67,17 @@ public class DiversifyMain {
     }
 
     protected void buildSosie() throws Exception {
-        Sosie d = new Sosie(initTransformationQuery(), DiversifyProperties.getProperty("project"));
+        Sosie d = new Sosie(DiversifyProperties.getProperty("project"));
         initAndRunBuilder(d);
     }
 
     protected void runDiversification() throws Exception {
-        Diversify d = new Diversify(initTransformationQuery(), DiversifyProperties.getProperty("project"));
+        Diversify d = new Diversify( DiversifyProperties.getProperty("project"));
         String git = DiversifyProperties.getProperty("gitRepository");
         if (!git.equals("")) {
             GitUtil.initGit(git);
         }
         initAndRunBuilder(d);
-
         d.printResult(DiversifyProperties.getProperty("result"), git + "/diversify-exp");
     }
 
@@ -103,6 +102,9 @@ public class DiversifyMain {
             builder.setTimeOut(t);
 
         builder.setTmpDirectory(DiversifyProperties.getProperty("outputDir"));
+
+        builder.setTransformationQuery(initTransformationQuery());
+
 
         if (DiversifyProperties.getProperty("clojure").equals("true"))
             builder.setClojureTest(true);

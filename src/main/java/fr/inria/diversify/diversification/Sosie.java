@@ -25,6 +25,15 @@ public class Sosie extends Builder {
 
         clojureTest = false;
     }
+
+    public Sosie(String projectDir) {
+        this.transQuery = transQuery;
+        this.tmpDir = "output_sosie";
+        this.projectDir = projectDir;
+        transformations = new ArrayList<Transformation>();
+
+        clojureTest = false;
+    }
     @Override
     public void run(int n) throws Exception {
         File dir = new File(tmpDir);

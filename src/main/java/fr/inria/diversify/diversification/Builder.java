@@ -181,4 +181,8 @@ public abstract class Builder {
     public void setSourceDirectory(String sourceDirectory) {
         this.srcDir = sourceDirectory;
     }
+
+    public void setTransformationQuery(AbstractTransformationQuery transQuery) {
+        this.transQuery = transQuery;
+    }
 }
