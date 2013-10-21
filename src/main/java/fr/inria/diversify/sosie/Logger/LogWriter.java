@@ -109,6 +109,35 @@ public class LogWriter {
         }
     }
 
+    public static void writeException(int id,Thread thread, String className, String methodSignature, Object exception) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = init(thread);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileWriter.append("$$$\n");
+            fileWriter.append("ST");
+            fileWriter.append(separator);
+            fileWriter.append(id+"");
+            fileWriter.append(separator);
+            fileWriter.append(className);
+            fileWriter.append(separator);
+            fileWriter.append(methodSignature);
+
+            fileWriter.append(separator);
+            if(exception != null)
+                fileWriter.append(exception.toString());
+            else
+                fileWriter.append("NullException");
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void close() {
         for (FileWriter flw : fileWriters.values())
             try {

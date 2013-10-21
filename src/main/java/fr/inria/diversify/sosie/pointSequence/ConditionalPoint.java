@@ -50,7 +50,7 @@ public class ConditionalPoint extends Point {
     }
 
     @Override
-    public String toDot(int x, int y,Set<VariableDiff> varsDiff) {
+    public String toDot(Set<VariableDiff> varsDiff) {
         String dot = hashCode() + "     ";
         dot += "[\n label =";
         if(varsDiff.isEmpty())
@@ -62,7 +62,7 @@ public class ConditionalPoint extends Point {
                 dot += "\\n"+vf.toDot();
             dot += "\"\n,color=\"red\",";
         }
-        dot += "\npos=\"" + x + "," + y + "!\"\n];";
+        dot += "\n];";
         return dot;
     }
 

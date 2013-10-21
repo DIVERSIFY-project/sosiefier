@@ -64,6 +64,8 @@ public class CompareSingleLogSequence {
      */
     protected int[][] findDivergence(int syncroRange, int start1, int start2, PointSequence ps1, PointSequence ps2) {
         int bound = Math.min(ps1.size(), ps2.size());
+        if(bound == 0)
+            return null;
         int[][] divergence = new int[bound][2];
         int i = 0;
         divergence[i][0] = start1;

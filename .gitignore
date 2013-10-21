@@ -1,5 +1,5 @@
-target
 .idea
+.DS_Store
 /output_diversify/
 /output_sosie/
 /result/

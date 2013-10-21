@@ -66,7 +66,6 @@ public class RunMaven extends  Thread {
         invoker.setOutputHandler(psh);
         invoker.setErrorHandler(psh);
         try {
-            Log.debug("invoke maven");
             invoker.execute(request);
             if(clojureTest)
                 parseClojureResult(os.toString());

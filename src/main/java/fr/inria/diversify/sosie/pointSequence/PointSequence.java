@@ -46,10 +46,8 @@ public class PointSequence {
         addPoint(tmp);
     }
 
-
-
     protected void addPoint(String stringPoint) {
-        if(stringPoint.startsWith("ST"))
+        if(stringPoint.startsWith("----------------------------------ST"))
             cacthPoints.add(new CatchPoint(stringPoint));
         else
             conditionalPoints.add(new ConditionalPoint(stringPoint));

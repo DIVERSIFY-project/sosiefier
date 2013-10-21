@@ -174,8 +174,6 @@ public class TransformationParser {
         }
         if (cf  == null) {
             //TODO exception
-//            System.out.println(jsonObject.get("Position"));
-//            System.out.println(jsonObject.get("SourceCode"));
             throw new Exception();
         }
         return cf;

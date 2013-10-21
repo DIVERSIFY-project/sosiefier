@@ -55,6 +55,6 @@ public abstract class Point {
         return id;
     }
 
-    public abstract String toDot(int x, int y, Set<VariableDiff> varDiff);
+    public abstract String toDot(Set<VariableDiff> varDiff);
 }
 

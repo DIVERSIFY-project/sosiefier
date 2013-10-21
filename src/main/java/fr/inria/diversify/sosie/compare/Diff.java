@@ -65,6 +65,15 @@ public class Diff {
         return true;
     }
 
+    public boolean sameVar() {
+
+        for (Set<VariableDiff> vars : diffVar.values())
+            if (!vars.isEmpty())
+                return false;
+
+        return true;
+    }
+
     public boolean hasMatch(PointSequence original) {
         return match.containsKey(original);
     }
@@ -84,7 +93,6 @@ public class Diff {
             }
 
         return report;
-
     }
 
     protected int findDiversificationIndex(PointSequence sequence) {
@@ -98,77 +106,73 @@ public class Diff {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
 
+
         bw.write("digraph G {\n");
         for (PointSequence ps : match.keySet())
-            toDot(bw, ps);
+            bw.write(toDot(ps));
 
         bw.write("}");
         bw.close();
     }
 
 
-    protected void toDot(BufferedWriter writer, PointSequence original) throws IOException {
+    protected String toDot( PointSequence original) throws IOException {
         if(match.get(original) == null)
-            return;
+            return "";
 
+        StringBuilder builder = new StringBuilder();
         PointSequence sosie = match.get(original);
         int[][] div = divergence.get(original);
-        int y = 1;
-        Point precedent = original.get(0);
-        writer.write(original.toDot() +"\n");
-        writer.write(original.hashCode() + " -> " +precedent.hashCode()+"\n");
-        writer.write(precedent.toDot(1, y,getVariableDiffFor(original, 0))+"\n");
-
         int i = 0;
         int start1 = 0;
         int start2 = 0;
+        boolean toString = false;
+
+        Point precedent = original.get(0);
+        builder.append(original.toDot() + "\n");
+        builder.append(original.hashCode() + " -> " + precedent.hashCode() + "\n");
+        builder.append(precedent.toDot(getVariableDiffFor(original, 0)) + "\n");
 
         while(i < div.length) {
             Point next = original.get(start1);
+            Set<VariableDiff> varD = getVariableDiffFor(original, div[i][0]);
+            if(!varD.isEmpty())
+                toString = true;
+
             if(start1 == div[i][0] && start2 == div[i][1]) {
-                writer.write(precedent.hashCode() + " -> " + next.hashCode()+"\n");
+                builder.append(precedent.hashCode() + " -> " + next.hashCode()+"\n");
                 precedent = next;
-                writer.write(precedent.toDot(1,y,getVariableDiffFor(original, div[i][0]))+"\n");
+                builder.append(precedent.toDot(varD)+"\n");
                 start1++;
                 start2++;
                 i++;
             }
             else {
-                writeDotBranch(writer,precedent, original.get(div[i][0]),start1,div[i][0], original);
-                writeDotBranch(writer,precedent, original.get(div[i][0]),start2,div[i][1], sosie);
-//                Point branchNext = precedent;
-//                int j = start1;
-//                for(; j < div[i][0]; j++) {
-//                    writer.write(branchNext.hashCode() + " -> " + original.get(j).hashCode()+"\n");
-//                    branchNext = original.get(j);
-//                    writer.write(branchNext.toDot(1, y, new HashSet<VariableDiff>()));
-//                }
-//                writer.write(branchNext.hashCode() + " -> " + original.get(div[i][0]).hashCode()+"\n");
-//                branchNext = precedent;
-//                j = start2;
-//                for(; j < div[i][1]; j++) {
-//                    writer.write(branchNext.hashCode() + " -> " + sosie.get(j).hashCode()+"\n");
-//                    branchNext = sosie.get(j);
-//                    writer.write(branchNext.toDot(1,y,new HashSet<VariableDiff>()));
-//                }
-//                writer.write(branchNext.hashCode() + " -> " + original.get(div[i][0]).hashCode()+"\n");
-                precedent = original.get(div[i][0]);
-                writer.write(precedent.toDot(0,10,getVariableDiffFor(original, div[i][0])));
+                toString = true;
+                Point endBranch = original.get(div[i][0]);
+                writeDotBranch(builder,precedent, endBranch,start1,div[i][0], original);
+                writeDotBranch(builder,precedent, endBranch,start2,div[i][1], sosie);
+                precedent = endBranch;
+                builder.append(precedent.toDot(varD));
                 i++;
                 start1 = div[i][0];
                 start2 = div[i][1];
             }
         }
+        if(toString)
+            return builder.toString();
+        return "";
     }
 
-    protected void writeDotBranch(BufferedWriter writer, Point branchNext, Point endBranch, int i, int borne,  PointSequence ps) throws IOException {
+    protected void writeDotBranch(StringBuilder builder, Point branchNext, Point endBranch, int i, int borne,  PointSequence ps) throws IOException {
         for(; i < borne; i++) {
-            writer.write(branchNext.hashCode() + " -> " + ps.get(i).hashCode()+"\n");
+            builder.append(branchNext.hashCode() + " -> " + ps.get(i).hashCode() + "\n");
             branchNext = ps.get(i);
-            writer.write(branchNext.toDot(1, 0, new HashSet<VariableDiff>()));
+            builder.append(branchNext.toDot(new HashSet<VariableDiff>()));
         }
-        writer.write(branchNext.hashCode() + " -> " + endBranch.hashCode()+"\n");
+        builder.append(branchNext.hashCode() + " -> " + endBranch.hashCode() + "\n");
     }
+
 
     protected Set<VariableDiff> getVariableDiffFor(PointSequence ps, int index) {
         Set<VariableDiff> set = new HashSet<VariableDiff>();

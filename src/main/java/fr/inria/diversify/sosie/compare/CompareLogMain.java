@@ -58,7 +58,11 @@ public class CompareLogMain {
 
     protected void diff() throws Exception {
         String startPointString = DiversifyProperties.getProperty("startPoint");
+        int count = 0;
+        int i =0;
         for(File f : (new File(dirSosie).listFiles())) {
+            i++;
+            Log.info("i {}",i);
             try {
 //            Log.info("log files {}",f);
             File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
@@ -75,13 +79,18 @@ public class CompareLogMain {
                 Log.info(f.getName());
                 Log.info(diff.report());
                 diff.toDot(f.getName()+".dot");
+                if(!diff.sameVar()) {
+                    count++;
+                Log.info("i: "+count);
+                }
             }
-                else
+            else
                 Log.info("same trace");
             } catch (Exception e) {
                 Log.error("error",e);
                 e.printStackTrace();
             }
+
 
         }
     }

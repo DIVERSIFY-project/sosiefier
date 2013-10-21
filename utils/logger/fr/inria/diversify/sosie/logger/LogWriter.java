@@ -14,35 +14,34 @@ public class LogWriter {
     static private File dir;
     static private Map<Thread, FileWriter> fileWriters;
     static private String separator = ":;:";
-
-
-    protected static FileWriter init(Thread thread) throws IOException {
+    
+    
+    protected synchronized static FileWriter init(Thread thread) throws IOException {
         if(fileWriters == null) {
+            if(dir == null)
+                initDir();
             fileWriters = new HashMap<Thread, FileWriter>();
             ShutdownHookLog shutdownHook = new ShutdownHookLog();
             Runtime.getRuntime().addShutdownHook(shutdownHook);
         }
         if(!fileWriters.containsKey(thread)) {
-            if(dir == null) {
-                initDir();
-            }
             String fileName = initFileName(thread);
             fileWriters.put(thread,new FileWriter(dir.getAbsolutePath()+"/"+fileName));
         }
         return fileWriters.get(thread);
     }
-
+    
     private static void initDir() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("LogDirName"));
             dir = new File("log"+reader.readLine());
-
+            
         } catch (IOException e) {
             dir = new File("log");
         }
         dir.mkdir();
     }
-
+    
     private static String initFileName(Thread thread) {
         String fileName;
         try {
@@ -53,14 +52,14 @@ public class LogWriter {
         }
         return fileName;
     }
-
+    
     public static void writeLog(int id,Thread thread, String className, String methodSignature, Object... var) {
         FileWriter fileWriter = null;
         try {
-                fileWriter = init(thread);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            fileWriter = init(thread);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             fileWriter.append("$$$\n");
             fileWriter.append(id+"");
@@ -68,7 +67,7 @@ public class LogWriter {
             fileWriter.append(className);
             fileWriter.append(separator);
             fileWriter.append(methodSignature);
-
+            
             for (int i = 0; i < var.length/2; i = i + 2) {
                 fileWriter.append(separator);
                 fileWriter.append(var[i].toString());
@@ -77,11 +76,11 @@ public class LogWriter {
             }
         } catch (IOException e) {
             e.printStackTrace();
-
-
+            
+            
         }
     }
-
+    
     public static void writeError(int id,Thread thread, String className, String methodSignature, StackTraceElement[] stackTrace) {
         FileWriter fileWriter = null;
         try {
@@ -90,9 +89,8 @@ public class LogWriter {
             e.printStackTrace();
         }
         try {
-
+            
             fileWriter.append("$$$\n");
-            fileWriter.append("\n----------------------------------\n");
             fileWriter.append("ST");
             fileWriter.append(separator);
             fileWriter.append(id+"");
@@ -100,17 +98,46 @@ public class LogWriter {
             fileWriter.append(className);
             fileWriter.append(separator);
             fileWriter.append(methodSignature);
-
+            
             for(StackTraceElement stackTraceElement :stackTrace) {
+                fileWriter.append(separator);
                 fileWriter.append(stackTraceElement.toString());
-                fileWriter.append(separator+"\n");
             }
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+    
+    public static void writeException(int id,Thread thread, String className, String methodSignature, Object exception) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = init(thread);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileWriter.append("$$$\n");
+            fileWriter.append("ST");
+            fileWriter.append(separator);
+            fileWriter.append(id+"");
+            fileWriter.append(separator);
+            fileWriter.append(className);
+            fileWriter.append(separator);
+            fileWriter.append(methodSignature);
+            
+            fileWriter.append(separator);
+            if(exception != null)
+                fileWriter.append(exception.toString());
+            else
+                fileWriter.append("NullException");
+            
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static void close() {
         for (FileWriter flw : fileWriters.values())
             try {

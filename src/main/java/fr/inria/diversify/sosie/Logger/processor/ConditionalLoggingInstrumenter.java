@@ -29,7 +29,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         return
                 CtIf.class.isAssignableFrom(candidate.getClass())
                         || CtLoop.class.isAssignableFrom(candidate.getClass())
-                        || CtTry.class.isAssignableFrom(candidate.getClass())
+                        || CtThrow.class.isAssignableFrom(candidate.getClass())
                 ;
     }
 
@@ -49,8 +49,8 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
 
     public void process(CtStatement statement) {
         count++;
-        if (CtTry.class.isAssignableFrom(statement.getClass())) {
-            instruCatch((CtTry) statement);
+        if (CtThrow.class.isAssignableFrom(statement.getClass())) {
+            instruThrow((CtThrow) statement);
         } else {
             instruLoopOrIf(statement);
         }
@@ -105,9 +105,23 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         }
     }
 
+    private void instruThrow(CtThrow throwStmt) {
+        String snippet = "{\nfr.inria.diversify.sosie.logger.LogWriter.writeException(" + count + ",Thread.currentThread(),\"" +
+                getClass(throwStmt).getQualifiedName() + "\",\"" + getMethod(throwStmt).getSignature() + "\"," +
+                throwStmt.getThrownExpression() + ");\n";
+        SourcePosition sp = throwStmt.getPosition();
+        CompilationUnit compileUnit = sp.getCompilationUnit();
+        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+
+        snippet = "\n}\n";
+
+        index = compileUnit.nextLineIndex(sp.getSourceEnd());
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+    }
+
+
     private void instruCatch(CtTry tryStmt) {
-        Log.info("instruCath");
-        Log.info(tryStmt.toString());
         List<CtCatch> catchList = tryStmt.getCatchers();
         for (CtCatch catchStmt : catchList) {
             if(getMethod(tryStmt) != null) {

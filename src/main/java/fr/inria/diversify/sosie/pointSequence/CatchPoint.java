@@ -37,8 +37,8 @@ public class CatchPoint extends Point {
     }
 
     @Override
-    public String toDot(int x, int y, Set<VariableDiff> varDiff) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public String toDot(Set<VariableDiff> varDiff) {
+        return null;
     }
 
     public boolean sameValue(Point sPoint) {
