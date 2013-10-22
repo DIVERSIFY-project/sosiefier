@@ -5,9 +5,7 @@ import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Expression;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.transformation.Add;
-import fr.inria.diversify.transformation.Delete;
-import fr.inria.diversify.transformation.Replace;
+import fr.inria.diversify.transformation.*;
 import spoon.reflect.code.CtReturn;
 
 import java.util.*;
@@ -45,7 +43,7 @@ public class TransformationQuery extends AbstractTransformationQuery {
     }
 
 
-    protected Replace replace() throws Exception {
+    public Replace replace() throws Exception {
         Replace tf = new Replace();
         for(int i = 0; i < nbTransformation; i++) {
             CodeFragment cfToReplace = null;
@@ -65,7 +63,27 @@ public class TransformationQuery extends AbstractTransformationQuery {
         return tf;
     }
 
-    protected Add add() throws Exception {
+    public Replace replace(CodeFragment cfToReplace) throws Exception {
+        Replace tf = new Replace();
+
+        CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+        if(cfReplacedBy == null)
+            new Exception("pas de candidat pour "+cfToReplace);
+        tf.addCodeFragmentToReplace(cfToReplace,cfReplacedBy);
+        return tf;
+    }
+
+    public Replace veryStupidReplace(CodeFragment cfToReplace) throws Exception {
+        Random r = new Random();
+        Replace tf = new Replace();
+        tf.setType("VeryStupidReplace");
+        int size = getAllCodeFragments().size();
+        CodeFragment cfReplacedBy = getAllCodeFragments().get(r.nextInt(size));
+        tf.addCodeFragmentToReplace(cfToReplace,cfReplacedBy);
+        return tf;
+    }
+
+    public Add add() throws Exception {
         Add tf = new Add();
         for(int i = 0; i < nbTransformation; i++) {
             CodeFragment cfToReplace = null;
@@ -85,7 +103,27 @@ public class TransformationQuery extends AbstractTransformationQuery {
         return tf;
     }
 
-    protected Delete delete() throws Exception {
+    public Add add(CodeFragment cfToReplace) throws Exception {
+        Add tf = new Add();
+
+        CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+        if(cfReplacedBy == null)
+            new Exception("pas de candidat pour "+cfToReplace);
+        tf.addCodeFragmentToAdd(cfToReplace,cfReplacedBy);
+        return tf;
+    }
+
+    public Add veryStupidAdd(CodeFragment cfToReplace) throws Exception {
+        Random r = new Random();
+        Add tf = new Add();
+        tf.setType("VeryStupidAdd");
+        int size = getAllCodeFragments().size();
+        CodeFragment cfReplacedBy = getAllCodeFragments().get(r.nextInt(size));
+        tf.addCodeFragmentToAdd(cfToReplace, cfReplacedBy);
+        return tf;
+    }
+
+    public Delete delete() throws Exception {
         Delete tf = new Delete();
         for(int i = 0; i < nbTransformation; i++) {
             CodeFragment cfToDelete = null;
@@ -104,6 +142,11 @@ public class TransformationQuery extends AbstractTransformationQuery {
         return tf;
     }
 
+    public Delete delete(CodeFragment cfToDelete) throws Exception {
+        Delete tf = new Delete();
+        tf.addCodeFragmentToTransform(cfToDelete);
+        return tf;
+    }
 
     protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace) throws InstantiationException, IllegalAccessException {
         CodeFragment cfReplacedBy = null;

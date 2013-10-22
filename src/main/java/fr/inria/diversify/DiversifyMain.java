@@ -78,6 +78,7 @@ public class DiversifyMain {
             GitUtil.initGit(git);
         }
         initAndRunBuilder(d);
+        d.setTransformationQuery(initTransformationQuery());
         d.printResult(DiversifyProperties.getProperty("result"), git + "/diversify-exp");
     }
 
@@ -103,8 +104,8 @@ public class DiversifyMain {
 
         builder.setTmpDirectory(DiversifyProperties.getProperty("outputDir"));
 
-        builder.setTransformationQuery(initTransformationQuery());
-
+        AbstractTransformationQuery query = initTransformationQuery();
+        builder.setTransformationQuery(query);
 
         if (DiversifyProperties.getProperty("clojure").equals("true"))
             builder.setClojureTest(true);
@@ -120,7 +121,13 @@ public class DiversifyMain {
                 builder.run(util.getAllAdd());
             if (DiversifyProperties.getProperty("transformation.type").equals("delete"))
                 builder.run(util.getAllDelete());
-        } else {
+        } else if (DiversifyProperties.getProperty("transformation.type").equals("stupid")) {
+            int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
+            Util util = new Util(codeFragments);
+            builder.run(util.getStupidTransformation(n, (TransformationQuery)query));
+        }
+        else
+        {
             int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
             builder.run(n);
         }

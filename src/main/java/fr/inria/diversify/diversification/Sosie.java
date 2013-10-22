@@ -9,6 +9,7 @@ import org.codehaus.plexus.util.FileUtils;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: Simon
@@ -46,7 +47,7 @@ public class Sosie extends Builder {
     }
 
     @Override
-    public void run(List<Transformation> trans) throws Exception {
+    public void run(Set<Transformation> trans) throws Exception {
         for (Transformation tran : trans)
             run(tran);
     }

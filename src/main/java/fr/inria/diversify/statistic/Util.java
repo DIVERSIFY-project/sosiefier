@@ -7,6 +7,8 @@ import fr.inria.diversify.transformation.Add;
 import fr.inria.diversify.transformation.Delete;
 import fr.inria.diversify.transformation.Replace;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtFieldAccess;
@@ -101,9 +103,36 @@ public class Util {
         return nb;
     }
 
+    public Set<Transformation> getStupidTransformation(int nb, TransformationQuery query) {
+        Set<Transformation> transformations = new HashSet<Transformation>();
+        for(int i = 0; i < nb; i++) {
+            try {
+                Replace replace = query.replace();
+                CodeFragment position = replace.getPosition();
 
-    public List<Transformation> getAllReplace() throws InterruptedException {
-        final List<Transformation> allReplace = new ArrayList<Transformation>();
+                transformations.add(replace);
+                Replace stupidReplace = query.replace(position);
+                stupidReplace.setType("stupidReplace");
+                transformations.add(stupidReplace);
+                transformations.add(query.veryStupidReplace(position));
+
+                transformations.add(query.add(position));
+                Add stupidAdd = query.add(position);
+                stupidAdd.setType("stupidAdd");
+                transformations.add(stupidAdd);
+                transformations.add(query.veryStupidAdd(position));
+
+                transformations.add(query.delete(position));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return  transformations;
+    }
+
+    public Set<Transformation> getAllReplace() throws InterruptedException {
+        final Set<Transformation> allReplace = new HashSet<Transformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
                 final  CodeFragment cfTmp = cf1;
@@ -130,8 +159,8 @@ public class Util {
         return allReplace;
     }
 
-    public List<Transformation> getAllDelete() {
-        List<Transformation> allReplace = new ArrayList<Transformation>();
+    public Set<Transformation> getAllDelete() {
+        Set<Transformation> allReplace = new HashSet<Transformation>();
 
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
                     Delete r = new Delete();
@@ -141,8 +170,8 @@ public class Util {
         return allReplace;
     }
 
-    public List<Transformation> getAllAdd() throws InterruptedException {
-        final List<Transformation> allReplace = new ArrayList<Transformation>();
+    public Set<Transformation> getAllAdd() throws InterruptedException {
+        final Set<Transformation> allReplace = new HashSet<Transformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
             final  CodeFragment cfTmp = cf1;

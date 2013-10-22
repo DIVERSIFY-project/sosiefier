@@ -7,6 +7,7 @@ import org.codehaus.plexus.util.FileUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: Simon
@@ -54,7 +55,7 @@ public class Diversify extends Builder {
         Log.debug("{} sosie on {} trial", sosie, trial);
     }
     @Override
-    public void run(List<Transformation> trans) throws Exception {
+    public void run(Set<Transformation> trans) throws Exception {
         String dir = prepare(projectDir, tmpDir);
         for (Transformation tran : trans) {
             run(tran, dir);

@@ -27,7 +27,7 @@ public class TransformationQueryTL extends AbstractTransformationQuery {
     }
 
     @Override
-    protected Transformation delete() throws Exception {
+    public Transformation delete() throws Exception {
         Delete tf = new Delete();
 //        Random r = new Random();
 //        for(int i = 0; i < nbTransformation; i++) {
@@ -39,7 +39,7 @@ public class TransformationQueryTL extends AbstractTransformationQuery {
     }
 
     @Override
-    protected Transformation add() throws Exception {
+    public Transformation add() throws Exception {
         Add tf = new Add();
 //        Random r = new Random();
 //        for(int i = 0; i < nbTransformation; i++) {
@@ -51,7 +51,7 @@ public class TransformationQueryTL extends AbstractTransformationQuery {
     }
 
     @Override
-    protected Transformation replace() throws Exception {
+    public Transformation replace() throws Exception {
 
         Random r = new Random();
         double coverage = 0;

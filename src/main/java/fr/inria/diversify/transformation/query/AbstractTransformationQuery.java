@@ -54,11 +54,11 @@ public abstract class AbstractTransformationQuery {
         return null;
     }
 
-    protected abstract Transformation delete() throws Exception ;
+    public abstract Transformation delete() throws Exception ;
 
-    protected abstract Transformation add() throws Exception ;
+    public abstract Transformation add() throws Exception ;
 
-    protected abstract Transformation replace() throws Exception ;
+    public abstract Transformation replace() throws Exception ;
 
 
     protected CtElement copyElem(CtElement elem) {

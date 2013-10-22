@@ -24,8 +24,10 @@ import java.util.Map;
  */
 public class Replace extends Transformation {
 
+    protected String type = "replace";
+
     protected Map<CodeFragment,CodeFragment> replaces;
-    private Map<CodeFragment, Map<String, String>> variableMapping;
+    protected Map<CodeFragment, Map<String, String>> variableMapping;
 
     public Replace() {
         replaces = new HashMap<CodeFragment, CodeFragment>();
@@ -37,7 +39,7 @@ public class Replace extends Transformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", "replace");
+        object.put("type", type);
         JSONArray array = new JSONArray();
         object.put("transformation",array);
         for(CodeFragment position: replaces.keySet()) {
@@ -63,26 +65,26 @@ public class Replace extends Transformation {
     protected void addSourceCode(CodeFragment position) throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(position);
 
-
-
+        Log.debug("{} transformation",type);
         Log.debug("position:\n{}",position);
         Log.debug("{}",position.getCtCodeFragment().getPosition());
         Log.debug("{}",position.getCodeFragmentType());
         Log.debug("replace by:\n{}",replaces.get(position));
 
-        Map<String, String> varMapping;
-        if(variableMapping.isEmpty()) {
-            varMapping = position.randomVariableMapping(replaces.get(position));
+        if(withVarMapping()) {
+            Map<String, String> varMapping;
+            if(variableMapping.isEmpty()) {
+                varMapping = position.randomVariableMapping(replaces.get(position));
+            }
+            else
+                varMapping = variableMapping.get(position);
+
+            Log.debug("random variable mapping: {}", varMapping);
+            replaces.get(position).replaceVar(position, varMapping);
+            variableMapping.put(position,varMapping);
+            if(replaces.get(position).equals(position.codeFragmentString()))
+                throw new Exception("same statment");
         }
-        else
-            varMapping = variableMapping.get(position);
-
-        Log.debug("random variable mapping: {}", varMapping);
-        replaces.get(position).replaceVar(position, varMapping);
-        variableMapping.put(position,varMapping);
-        if(replaces.get(position).equals(position.codeFragmentString()))
-            throw new Exception("same statment");
-
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = position.getCtCodeFragment().getPosition();
 
@@ -98,6 +100,10 @@ public class Replace extends Transformation {
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
                     codeFragmentString(position), 0));
         }
+    }
+
+    protected boolean withVarMapping() {
+        return type.equals("replace");
     }
 
     protected String codeFragmentString(CodeFragment cf) {
@@ -153,11 +159,11 @@ public class Replace extends Transformation {
         return 1;
     }
     public boolean equals(Object other) {
-        if(!(other instanceof Replace))
+        if(!this.getClass().isAssignableFrom(other.getClass()))
             return  false;
         Replace otherReplace = (Replace)other;
 
-        return failures == otherReplace.failures &&
+        return type.equals(otherReplace.type) && failures == otherReplace.failures &&
                 variableMapping.equals(otherReplace.variableMapping) &&
                 transforms.equals(otherReplace.transforms) &&
                 replaces.equals(otherReplace.replaces);
@@ -167,14 +173,14 @@ public class Replace extends Transformation {
         String ret = new String();
         for(CodeFragment position: replaces.keySet()) {
             ret = ret + "position: "+position.toString()+"\n" +
-                    "replace: "+replaces.get(position).toString()+"\n"+
+                    type +": "+replaces.get(position).toString()+"\n"+
                     "varMapping: "+variableMapping.get(position).toString()+"\n";
         }
         return ret;
     }
 
     public String getType(){
-        return "replace";
+        return type;
     }
 
     @Override
@@ -235,5 +241,9 @@ public class Replace extends Transformation {
 
     public CodeFragment getPosition() {
         return transforms.get(0);
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

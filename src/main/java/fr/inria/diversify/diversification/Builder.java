@@ -32,7 +32,7 @@ public abstract class Builder {
 
     public abstract void run(int n) throws Exception;
 
-    public abstract void run(List<Transformation> trans) throws Exception;
+    public abstract void run(Set<Transformation> trans) throws Exception;
 
     public void printResult(String output, String git) {
         mkDirResult(output,git);
@@ -42,7 +42,7 @@ public abstract class Builder {
             writeTransformation(absoluteFileName);
             Log.info("write result in {}", fileName);
         } catch (Exception e) {
-            Log.error("error in Main.printResult", e);
+            Log.error("error in Builder.printResult", e);
         }
         if(!git.equals("")) {
 

@@ -22,9 +22,9 @@ import java.util.Map;
  * Time: 4:33 PM
  */
 public class Add extends Transformation {
-
-    private Map<CodeFragment, CodeFragment> adds;
-    private HashMap<CodeFragment, Map<String, String>> variableMapping;
+    protected String type = "add";
+    protected Map<CodeFragment, CodeFragment> adds;
+    protected HashMap<CodeFragment, Map<String, String>> variableMapping;
 
     public Add() {
         adds = new HashMap<CodeFragment, CodeFragment>();
@@ -34,7 +34,7 @@ public class Add extends Transformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", "add");
+        object.put("type", type);
         JSONArray array = new JSONArray();
         object.put("transformation", array);
         for(CodeFragment position: adds.keySet()) {
@@ -58,34 +58,40 @@ public class Add extends Transformation {
     protected void addSourceCode(CodeFragment position) throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(position);
 
+        Log.debug("{} transformation",type);
         Log.debug("cfToAdd:\n {}",adds.get(position));
         Log.debug("---------------------\npostion:\n{}",position);
-        Log.debug("{}",adds.get(position).getCtCodeFragment().getPosition());
+        Log.debug("{}",position.getCtCodeFragment().getPosition());
 
-        Map<String, String> varMapping;
-        if(variableMapping.isEmpty())
-            varMapping = position.randomVariableMapping(adds.get(position));
-        else
-            varMapping = variableMapping.get(position);
+        if(withVarMapping()) {
+            Map<String, String> varMapping;
+            if(variableMapping.isEmpty())
+                varMapping = position.randomVariableMapping(adds.get(position));
+            else
+                varMapping = variableMapping.get(position);
 
-        Log.debug("random variable mapping: {}",varMapping);
-        adds.get(position).replaceVar(position, varMapping);
-        variableMapping.put(position,varMapping);
-
+            Log.debug("random variable mapping: {}",varMapping);
+            adds.get(position).replaceVar(position, varMapping);
+            variableMapping.put(position,varMapping);
+        }
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = position.getCtCodeFragment().getPosition();
 
-        int index = sp.getSourceStart();
+        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());//sp.getSourceStart();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, codeFragmentString(position), 0));
         Log.debug("----------\n---------");
         Log.debug("{}",originalClass.getQualifiedName());
     }
 
+    protected boolean withVarMapping() {
+        return type.equals("add");
+    }
+
     protected String codeFragmentString(CodeFragment cf) {
         String cFS = adds.get(cf).codeFragmentString();
-        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
-            return cFS+";";
-        else
+//        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
+//            return cFS+";";
+//        else
             return cFS;
     }
 
@@ -127,11 +133,12 @@ public class Add extends Transformation {
         return 1;
     }
     public boolean equals(Object other) {
-        if(!(other instanceof Add))
+        if(!this.getClass().isAssignableFrom(other.getClass()))
             return  false;
         Add otherAdd = (Add)other;
 
-        return failures == otherAdd.failures &&
+        return type.equals(otherAdd.type) &&
+                failures == otherAdd.failures &&
                 variableMapping.equals(otherAdd.variableMapping) &&
                 transforms.equals(otherAdd.transforms) &&
                 adds.equals(otherAdd.adds);
@@ -150,7 +157,7 @@ public class Add extends Transformation {
 }
 
     public String getType(){
-        return "add";
+        return type;
     }
 
     //works only for 1add
@@ -195,5 +202,9 @@ public class Add extends Transformation {
         sb.append(p.getCodeFragmentSuperType().getSimpleName());
         sb.append(separator);
         sb.append(r.getCodeFragmentSuperType().getSimpleName());
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
