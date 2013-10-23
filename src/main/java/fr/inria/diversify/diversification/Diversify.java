@@ -42,6 +42,7 @@ public class Diversify extends Builder {
 
     @Override
     public void run(int n) throws Exception {
+        // todo bidon
         String dir = prepare(projectDir, tmpDir);
 
         for (int i = 0; i < n; i++) {
