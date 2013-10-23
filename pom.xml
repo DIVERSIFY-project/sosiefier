@@ -30,7 +30,7 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version> <scope>system</scope>
-            <systemPath>${basedir}/utils/commons-collections/commons-collections/target/commons-collections4-4.0-alpha1.jar</systemPath>
+            <systemPath>${basedir}/utils/commons-collections/commons-collections4-4.0-alpha1.jar</systemPath>
 
         </dependency>
 
