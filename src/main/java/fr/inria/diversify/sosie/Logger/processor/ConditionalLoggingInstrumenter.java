@@ -20,17 +20,16 @@ import java.util.TreeSet;
  * Use basic scope inference (the real one is hard due to the complex semantics of "static" and "final"
  * (w.r.t. init, anonymous classes, etc.)
  */
-public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtElement> {
+public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatement> {
     private static int count = 0;
 
 
     @Override
-    public boolean isToBeProcessed(CtElement candidate) {
+    public boolean isToBeProcessed(CtStatement candidate) {
         return
                 CtIf.class.isAssignableFrom(candidate.getClass())
                         || CtLoop.class.isAssignableFrom(candidate.getClass())
                         || CtThrow.class.isAssignableFrom(candidate.getClass())
-                        || CtMethod.class.isAssignableFrom(candidate.getClass())
                 ;
     }
 
@@ -48,19 +47,14 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtElement>
         return false;
     }
 
-    public void process(CtElement statement) {
+    public void process(CtStatement statement) {
         try {
             count++;
             if (CtThrow.class.isAssignableFrom(statement.getClass())) {
                 instruThrow((CtThrow) statement);
+            } else {
+                instruLoopOrIf(statement);
             }
-            else {
-                if (CtMethod.class.isAssignableFrom(statement.getClass()))
-                    instrutTestStart((CtMethod)statement);
-                else
-                    instruLoopOrIf((CtStatement)statement);
-            }
-
         } catch (Exception e) {}
     }
 
@@ -128,25 +122,6 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtElement>
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
     }
 
-
-    private void instrutTestStart(CtMethod element) {
-
-        for(CtAnnotation<?> annotation: element.getAnnotations()) {
-            if(annotation.toString().startsWith("@org.junit.Test")) {
-                Log.info(element.getParent(CtSimpleType.class).getQualifiedName()+" "+element.getSignature());
-                if(!element.getBody().getStatements().isEmpty()) {
-                    CtStatement firstStmt = (CtStatement) element.getBody().getStatements().get(0);
-                    String snippet = "\t\tfr.inria.diversify.sosie.logger.LogWriter.writeTestStart(" + count
-                            + ",\"" + element.getParent(CtSimpleType.class).getQualifiedName() +"."+element.getSimpleName() + "\");\n";
-                    SourcePosition sp = firstStmt.getPosition();
-                    CompilationUnit compileUnit = sp.getCompilationUnit();
-                    int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-                    compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-                }
-                count++;
-            }
-        }
-    }
 
     private void instruCatch(CtTry tryStmt) {
         List<CtCatch> catchList = tryStmt.getCatchers();
