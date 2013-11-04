@@ -48,12 +48,14 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
     }
 
     public void process(CtStatement statement) {
-        count++;
-        if (CtThrow.class.isAssignableFrom(statement.getClass())) {
-            instruThrow((CtThrow) statement);
-        } else {
-            instruLoopOrIf(statement);
-        }
+        try {
+            count++;
+            if (CtThrow.class.isAssignableFrom(statement.getClass())) {
+                instruThrow((CtThrow) statement);
+            } else {
+                instruLoopOrIf(statement);
+            }
+        } catch (Exception e) {}
     }
 
     private void instruLoopOrIf(CtStatement statement) {
