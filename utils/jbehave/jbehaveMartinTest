@@ -52,7 +52,6 @@ org.jbehave.core.embedder.UnmodifiableEmbedderControlsEvoSuiteTest
 org.jbehave.core.embedder.executors.FixedThreadExecutorsEvoSuiteTest
 org.jbehave.core.embedder.PropertyBasedEmbedderControlsEvoSuiteTest
 org.jbehave.core.embedder.SilentEmbedderMonitorEvoSuiteTest
-org.jbehave.core.embedder.ReportingFailuresEmbedderMonitorEvoSuiteTest
 org.jbehave.core.embedder.EmbedderEvoSuiteTest
 org.jbehave.core.embedder.EmbedderMonitorDecoratorEvoSuiteTest
 org.jbehave.core.embedder.NullEmbedderMonitorEvoSuiteTest
