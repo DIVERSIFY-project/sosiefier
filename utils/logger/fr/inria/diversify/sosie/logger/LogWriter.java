@@ -47,7 +47,7 @@ public class LogWriter {
         String fileName;
         try {
             BufferedReader reader = new BufferedReader(new FileReader("LogfileName"));
-            fileName = reader.readLine() + "__" + thread.getName();
+            fileName = reader.readLine() + "_" + currentTestSignature +"_"+ thread.getName();
         } catch (IOException e) {
             fileName = "log" + thread.getName() + "_" + currentTestSignature +"_"+ System.currentTimeMillis();
         }
