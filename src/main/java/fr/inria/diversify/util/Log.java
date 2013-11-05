@@ -6,6 +6,7 @@ package fr.inria.diversify.util;
  * Time: 2:40 PM
  */
 
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Date;

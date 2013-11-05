@@ -1,5 +1,4 @@
 #!/bin/sh
-echo "run from git"
 cpu=$(cat nbProcess)
 for i in `seq 1 $1`
 do
