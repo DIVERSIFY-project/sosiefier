@@ -111,7 +111,7 @@ public abstract class Builder {
             Thread.sleep(1000);
         }
         Log.debug("timeOut init: " + timeOut);
-//        killUselessThread();
+        killUselessThread();
     }
 
     protected void initThreadGroup() {
@@ -138,6 +138,7 @@ public abstract class Builder {
         } catch (Exception e) {
             Log.error("killallchildren ",e);
         }
+        Log.debug("all children process kill");
     }
 
     protected void copyDirectory(File sourceLocation, File targetLocation) throws IOException {
