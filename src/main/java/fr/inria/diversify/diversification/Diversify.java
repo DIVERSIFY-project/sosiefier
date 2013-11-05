@@ -6,7 +6,7 @@ import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Set;
 
 /**
@@ -38,15 +38,13 @@ public class Diversify extends Builder {
         transformations = new ArrayList<Transformation>();
     }
 
-
-
     @Override
     public void run(int n) throws Exception {
         // todo bidon
         String dir = prepare(projectDir, tmpDir);
-
+        Log.info("number of diversification: " + n);
         for (int i = 0; i < n; i++) {
-            Log.info("diversification number: " + i);
+            Log.info("diversification: " + i);
             run(transQuery.getTransformation(), dir);
         }
         FileUtils.cleanDirectory(dir);
@@ -55,11 +53,16 @@ public class Diversify extends Builder {
         Log.debug("{} compile error on {} compilation", compileError, n);
         Log.debug("{} sosie on {} trial", sosie, trial);
     }
+
     @Override
     public void run(Set<Transformation> trans) throws Exception {
         String dir = prepare(projectDir, tmpDir);
+        Log.info("number of diversification: " + trans.size());
+        int i =0;
         for (Transformation tran : trans) {
+            Log.info("diversification: " + i);
             run(tran, dir);
+            i++;
         }
         FileUtils.cleanDirectory(dir);
         FileUtils.forceDelete(dir);

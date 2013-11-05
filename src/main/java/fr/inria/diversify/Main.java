@@ -54,6 +54,7 @@ public class Main {
 
     protected static void suicide() {
         String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+        Log.debug("suicide");
         Log.debug("PID :"+pid);
         Runtime r = Runtime.getRuntime();
         try {

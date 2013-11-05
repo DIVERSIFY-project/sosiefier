@@ -111,7 +111,7 @@ public abstract class Builder {
             Thread.sleep(1000);
         }
         Log.debug("timeOut init: " + timeOut);
-        killUselessThread();
+//        killUselessThread();
     }
 
     protected void initThreadGroup() {
@@ -132,7 +132,7 @@ public abstract class Builder {
         Log.debug("PID :"+pid);
         Runtime r = Runtime.getRuntime();
         try {
-            Process p = r.exec("pkill -P " +pid);
+            r.exec("pkill -P " +pid);
             Thread.sleep(1000);
 
         } catch (Exception e) {

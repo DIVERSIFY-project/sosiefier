@@ -31,7 +31,12 @@
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version> <scope>system</scope>
             <systemPath>${basedir}/utils/commons-collections/commons-collections4-4.0-alpha1.jar</systemPath>
+        </dependency>
 
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.12.1.GA</version>
         </dependency>
 
         <!--<dependency>-->
