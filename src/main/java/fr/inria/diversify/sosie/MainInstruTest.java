@@ -1,6 +1,6 @@
 package fr.inria.diversify.sosie;
 
-import fr.inria.diversify.sosie.logger.processor.TestLoggingInstrumenter;
+    import fr.inria.diversify.sosie.logger.processor.TestLoggingInstrumenter;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
