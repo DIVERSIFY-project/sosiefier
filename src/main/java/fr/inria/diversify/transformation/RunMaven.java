@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * Date: 5/17/13
  * Time: 11:34 AM
  */
-public class RunMaven extends  Thread {
+public class RunMaven extends Thread {
     protected String directory;
     protected boolean compileError = false;
     protected boolean allTestRun = false;
@@ -54,8 +54,11 @@ public class RunMaven extends  Thread {
         //freebsd
         File mvnHome = new File("/usr/local/share/java/maven3");
         if(!mvnHome.exists())
-            //osx and ubuntu
+            //ubuntu
             mvnHome = new File("/usr/share/maven");
+        if(!mvnHome.exists())
+            //osx
+            mvnHome = new File("/usr/local/Cellar/maven/3.1.1/libexec/");
 
         invoker.setMavenHome(mvnHome);
         invoker.setTimeOut(timeOut);
