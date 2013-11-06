@@ -110,7 +110,7 @@ public class LogWriter {
         }
     }
 
-    public static void writeTestStart(int id, String testSignature) throws IOException {
+    public static void writeTestStart(String testSignature) throws IOException {
         currentTestSignature = testSignature;
 
         if(fileWriters != null) {
