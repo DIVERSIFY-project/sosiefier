@@ -132,6 +132,15 @@ public class CodeFragmentList {
         return  codeFragments;
     }
 
+    public List<CtSimpleType> getAllClasses() {
+        List<CtSimpleType> classes = new ArrayList<CtSimpleType>();
+
+        for(CodeFragment cf: codeFragments)
+            if(!classes.contains(cf.getSourceClass()))
+                classes.add(cf.getSourceClass());
+        return getAllClasses();
+    }
+
     public Map<CtSimpleType, List<CodeFragment>> getCodeFragmentsByClass() {
         Map<CtSimpleType, List<CodeFragment>> map = new HashMap<CtSimpleType, List<CodeFragment>>();
         for(CodeFragment cf : codeFragments) {

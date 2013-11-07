@@ -5,9 +5,7 @@ import org.json.JSONArray;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: Simon
@@ -71,6 +69,7 @@ public class TransformationsWriter {
 
         return  writeTransformation(fileName,transformation);
     }
+
 
     protected String writeTransformation(String fileName, Collection<Transformation> trans) throws IOException {
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));

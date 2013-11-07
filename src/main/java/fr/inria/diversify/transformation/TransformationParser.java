@@ -89,11 +89,11 @@ public class TransformationParser {
         String type = jsonObject.getString("type");
         Transformation trans = null;
 
-        if(type.equals("replace"))
+        if(type.endsWith("eplace"))  //replace, stupidReplace, veryStupidReplace
             trans = parseReplace(jsonObject);
-        if(type.equals("add"))
+        if(type.endsWith("dd"))
             trans = parseAdd(jsonObject);
-        if(type.equals("delete"))
+        if(type.endsWith("elete"))
             trans = parseDelete(jsonObject);
 
         if(jsonObject.has("parent")) {
@@ -123,6 +123,7 @@ public class TransformationParser {
 
     protected Transformation parseAdd(JSONObject jsonObject) throws Exception {
         Add trans = new Add();
+        trans.setType(jsonObject.getString("type"));
         JSONArray array = jsonObject.getJSONArray("transformation");
         for(int i = 0; i <array.length(); i++) {
             JSONObject t = array.getJSONObject(i);
@@ -137,12 +138,14 @@ public class TransformationParser {
 
     protected Transformation parseReplace(JSONObject jsonObject) throws Exception {
         Replace trans = new Replace();
+        trans.setType(jsonObject.getString("type"));
         JSONArray array = jsonObject.getJSONArray("transformation");
         for(int i = 0; i <array.length(); i++) {
             JSONObject t = array.getJSONObject(i);
             CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));
             trans.addCodeFragmentToReplace(position, findCodeFragment(t.getJSONObject("CodeFragmentReplace")));
             trans.addVarMapping(position, parseVariableMapping(t.getJSONObject("VariableMapping")));
+
         }
         if(jsonObject.getBoolean("allTestRun"))
             trans.setJUnitResult(jsonObject.getInt("Failures"));

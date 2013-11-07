@@ -3,14 +3,11 @@ package fr.inria.diversify.transformation;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 import spoon.processing.Environment;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.support.JavaOutputProcessor;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +18,7 @@ import java.util.List;
  * Date: 7/11/13
  * Time: 4:15 PM
  */
-public abstract class Transformation {
+public abstract class Transformation implements ITransformation{
     protected List<CodeFragment> transforms;
     protected Integer failures;
     protected List<Transformation> parents;
@@ -30,10 +27,6 @@ public abstract class Transformation {
         transforms = new ArrayList<CodeFragment>();
         parents = new ArrayList<Transformation>();
     }
-
-    public abstract void writeHead(BufferedWriter sb, char separator) throws IOException;
-    public abstract void write(StringBuffer sb, char separator);
-    public abstract JSONObject toJSONObject() throws JSONException;
 
     public void apply(String srcDir) throws Exception {
         for(CodeFragment trans : transforms)
@@ -115,6 +108,4 @@ public abstract class Transformation {
         }
         return ret;
     }
-
-    public abstract String getType();
 }

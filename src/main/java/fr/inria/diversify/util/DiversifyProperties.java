@@ -49,5 +49,7 @@ public class DiversifyProperties {
         prop.setProperty("gitRepository", "");
         prop.setProperty("processor", "fr.inria.diversify.codeFragmentProcessor.StatementProcessor");
         prop.setProperty("syncroRange","0");
+        prop.setProperty("newPomFile","");
+        prop.setProperty("transformation.level","statement");
     }
 }

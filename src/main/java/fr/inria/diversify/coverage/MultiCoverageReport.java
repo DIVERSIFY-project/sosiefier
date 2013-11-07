@@ -1,6 +1,7 @@
 package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import javassist.CtMethod;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +35,15 @@ public class MultiCoverageReport implements ICoverageReport {
         double ret = 1;
         for (CoverageReport cr : coverages) {
             ret = Math.min(ret, cr.codeFragmentCoverage(stmt));
+        }
+        return ret;
+    }
+
+    @Override
+    public int opCodeCoverage(CtMethod method, int indexOpcode) {
+        int ret = 1;
+        for (CoverageReport cr : coverages) {
+            ret = Math.min(ret, cr.opCodeCoverage(method,indexOpcode));
         }
         return ret;
     }

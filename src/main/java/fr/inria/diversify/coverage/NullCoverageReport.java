@@ -1,6 +1,7 @@
 package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import javassist.CtMethod;
 
 import java.io.IOException;
 
@@ -15,6 +16,11 @@ public class NullCoverageReport implements ICoverageReport {
 
     @Override
     public double codeFragmentCoverage(CodeFragment stmt) {
+        return 1;
+    }
+
+    @Override
+    public int opCodeCoverage(CtMethod method, int indexOpcode) {
         return 1;
     }
 }

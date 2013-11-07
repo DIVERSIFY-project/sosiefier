@@ -41,7 +41,7 @@ public class Diversify extends Builder {
     @Override
     public void run(int n) throws Exception {
         // todo bidon
-        String dir = prepare(projectDir, tmpDir);
+        String dir = prepare(projectDir, tmpDir, newPomFile);
         Log.info("number of diversification: " + n);
         for (int i = 0; i < n; i++) {
             Log.info("diversification: " + i);
@@ -56,9 +56,9 @@ public class Diversify extends Builder {
 
     @Override
     public void run(Set<Transformation> trans) throws Exception {
-        String dir = prepare(projectDir, tmpDir);
+        String dir = prepare(projectDir, tmpDir,newPomFile);
         Log.info("number of diversification: " + trans.size());
-        int i =0;
+        int i = 0;
         for (Transformation tran : trans) {
             Log.info("diversification: " + i);
             run(tran, dir);
@@ -66,6 +66,8 @@ public class Diversify extends Builder {
         }
         FileUtils.cleanDirectory(dir);
         FileUtils.forceDelete(dir);
+        Log.debug("{} compile error on {} compilation", compileError, trans.size());
+        Log.debug("{} sosie on {} trial", sosie, trial);
     }
 
     protected void run(Transformation trans, String tmpDir) throws Exception {

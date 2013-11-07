@@ -1,6 +1,7 @@
 package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import javassist.CtMethod;
 
 import java.io.IOException;
 
@@ -14,4 +15,6 @@ public interface ICoverageReport {
     public void create() throws IOException;
 
     public double codeFragmentCoverage(CodeFragment stmt);
+
+    public int opCodeCoverage(CtMethod method, int indexOpcode);
 }

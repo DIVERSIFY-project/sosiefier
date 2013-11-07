@@ -7,6 +7,7 @@ import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 
 import java.io.*;
@@ -28,6 +29,7 @@ public abstract class Builder {
     protected boolean clojureTest;
     protected int timeOut;
     protected AbstractTransformationQuery transQuery;
+    protected String newPomFile;
 
 
     public abstract void run(int n) throws Exception;
@@ -77,11 +79,14 @@ public abstract class Builder {
         Log.debug("mkdir: {}",dirs);
     }
 
-    protected String prepare(String dirSource, String dirTarget) throws IOException, InterruptedException {
+    protected String prepare(String dirSource, String dirTarget, String newPomFile) throws IOException, InterruptedException {
         String dirName = dirTarget + "/tmp_" + System.currentTimeMillis();
         File dir = new File(dirName);
         dir.mkdirs();
         copyDirectory(new File(dirSource), dir);
+        if(newPomFile != "")
+            FileUtils.copyFileToDirectory(new File(newPomFile),dir);
+
         return dirName;
     }
 
@@ -181,6 +186,10 @@ public abstract class Builder {
 
     public void setSourceDirectory(String sourceDirectory) {
         this.srcDir = sourceDirectory;
+    }
+
+    public void setNewPomFile(String pom) {
+        newPomFile = pom;
     }
 
     public void setTransformationQuery(AbstractTransformationQuery transQuery) {

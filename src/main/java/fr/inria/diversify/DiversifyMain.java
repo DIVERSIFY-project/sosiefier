@@ -10,6 +10,8 @@ import fr.inria.diversify.diversification.Builder;
 import fr.inria.diversify.diversification.Diversify;
 import fr.inria.diversify.diversification.Sosie;
 import fr.inria.diversify.diversification.TestSosie;
+import fr.inria.diversify.javassist.ByteCodeTransformation;
+import fr.inria.diversify.javassist.ByteCodeTransformationQuery;
 import fr.inria.diversify.statistic.CrossValidation;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
@@ -110,6 +112,8 @@ public class DiversifyMain {
         if (DiversifyProperties.getProperty("clojure").equals("true"))
             builder.setClojureTest(true);
 
+        builder.setNewPomFile(DiversifyProperties.getProperty("newPomFile"));
+
         //TODO refactor
         if (DiversifyProperties.getProperty("nbRun").equals("all")) {
             if(DiversifyProperties.getProperty("transformation.directory") != null)
@@ -137,6 +141,11 @@ public class DiversifyMain {
         ICoverageReport rg = initCoverageReport();
 
         AbstractTransformationQuery atq;
+
+        if(DiversifyProperties.getProperty("transformation.type").equals("bytecodeReplace"))
+            atq = new ByteCodeTransformationQuery();
+
+
         String transformation = DiversifyProperties.getProperty("transformation.directory");
         if (transformation != null) {
             TransformationParser tf = new TransformationParser(codeFragments);
@@ -227,21 +236,18 @@ public class DiversifyMain {
 
         String name = write.writeAllTransformation(null);
         statForR(name);
-        name = write.writeAllTransformation("add");
-        statForR(name);
-        name = write.writeAllTransformation("delete");
-        statForR(name);
-        name = write.writeAllTransformation("replace");
-        statForR(name);
+        Log.debug("all transformation type: {}", getAllTransformationType(transformations));
+        for(String type : getAllTransformationType(transformations)) {
+            name = write.writeAllTransformation(type);
+            statForR(name);
+        }
 
         name = write.writeGoodTransformation(null);
         statForR(name);
-        name = write.writeGoodTransformation("add");
-        statForR(name);
-        name = write.writeGoodTransformation("delete");
-        statForR(name);
-        name = write.writeGoodTransformation("replace");
-        statForR(name);
+        for(String type : getAllTransformationType(transformations)) {
+            name = write.writeGoodTransformation(type);
+            statForR(name);
+        }
 
         StatisticDiversification sd = new StatisticDiversification(transformations, codeFragments);
         sd.writeStat(fileName);
@@ -293,5 +299,13 @@ public class DiversifyMain {
     protected void initLogLevel() {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);
+    }
+
+
+    protected Set<String> getAllTransformationType(List<Transformation> transformations) {
+        Set<String> types = new HashSet<String>();
+        for (Transformation t : transformations)
+            types.add(t.getType());
+        return types;
     }
 }

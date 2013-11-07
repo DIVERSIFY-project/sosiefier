@@ -109,7 +109,6 @@ public class Delete extends Transformation {
     }
 
     //works only for 1delete
-    @Override
     public void write(StringBuffer sb, char separator) {
         CodeFragment p = transforms.get(0);
 

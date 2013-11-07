@@ -54,7 +54,7 @@ public class Sosie extends Builder {
 
     protected void run(Transformation trans) throws Exception {
         initThreadGroup();
-        String dir = prepare(projectDir, tmpDir);
+        String dir = prepare(projectDir, tmpDir,newPomFile);
         Log.debug("output dir sosie: " + dir + "/" + srcDir);
         try {
             trans.apply(dir + "/" + srcDir);

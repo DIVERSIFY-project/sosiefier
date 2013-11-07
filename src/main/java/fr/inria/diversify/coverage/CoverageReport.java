@@ -2,6 +2,9 @@ package fr.inria.diversify.coverage;
 
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.bytecode.MethodInfo;
 import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IClassCoverage;
@@ -82,6 +85,27 @@ public class CoverageReport implements ICoverageReport {
              if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
                 ret++;
         return ret/(double)(stmt.getEndLine()- stmt.getStartLine() + 1);
+    }
+
+    @Override
+    public int opCodeCoverage(CtMethod method, int indexOpcode) {
+        IClassCoverage classCoverage = null;
+        for (IClassCoverage cc : coverageBuilder.getClasses()) {
+            CtClass cl = method.getDeclaringClass();
+
+            String name =   cl.getName().replace(".","/");
+            if(name.equals(cc.getName())) {
+                classCoverage = cc;
+                break;
+            }
+        }
+        if(classCoverage == null)
+            return 0;
+
+        MethodInfo mInfo = method.getMethodInfo();
+        int line = mInfo.getLineNumber(indexOpcode);
+
+        return classCoverage.getLine(line).getStatus();
     }
 
     public String getFileName() {
