@@ -1,5 +1,6 @@
 package fr.inria.diversify;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 import fr.inria.diversify.coverage.CoverageReport;
@@ -16,18 +17,25 @@ import fr.inria.diversify.statistic.CrossValidation;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.statistic.Util;
+import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQueryTL;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.NotFoundException;
 import org.json.JSONException;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
+import spoon.reflect.declaration.CtSimpleType;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
@@ -35,10 +43,7 @@ import spoon.support.builder.SpoonBuildingManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -74,7 +79,11 @@ public class DiversifyMain {
     }
 
     protected void runDiversification() throws Exception {
-        Diversify d = new Diversify( DiversifyProperties.getProperty("project"));
+        Diversify d = null;
+        if(DiversifyProperties.getProperty("transformation.type").equals("bytecodeDelete"))
+            d = new Diversify( DiversifyProperties.getProperty("project"),DiversifyProperties.getProperty("classes"));
+        else
+            d = new Diversify( DiversifyProperties.getProperty("project"),DiversifyProperties.getProperty("src"));
         String git = DiversifyProperties.getProperty("gitRepository");
         if (!git.equals("")) {
             GitUtil.initGit(git);
@@ -96,7 +105,7 @@ public class DiversifyMain {
     }
 
     protected void initAndRunBuilder(Builder builder) throws Exception {
-        builder.setSourceDirectory(DiversifyProperties.getProperty("src"));
+//        builder.setSourceDirectory(DiversifyProperties.getProperty("src"));
 
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
         if (t == -1)
@@ -106,7 +115,7 @@ public class DiversifyMain {
 
         builder.setTmpDirectory(DiversifyProperties.getProperty("outputDir"));
 
-        AbstractTransformationQuery query = initTransformationQuery();
+        ITransformationQuery query = initTransformationQuery();
         builder.setTransformationQuery(query);
 
         if (DiversifyProperties.getProperty("clojure").equals("true"))
@@ -137,29 +146,50 @@ public class DiversifyMain {
         }
     }
 
-    protected AbstractTransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException {
+    protected ITransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException, NotFoundException {
         ICoverageReport rg = initCoverageReport();
 
-        AbstractTransformationQuery atq;
-
-        if(DiversifyProperties.getProperty("transformation.type").equals("bytecodeReplace"))
-            atq = new ByteCodeTransformationQuery();
-
+        ITransformationQuery atq;
 
         String transformation = DiversifyProperties.getProperty("transformation.directory");
         if (transformation != null) {
             TransformationParser tf = new TransformationParser(codeFragments);
-            List<Transformation> list = tf.parseDir(transformation);
+            List<ITransformation> list = tf.parseDir(transformation);
             atq = new TransformationQueryTL(list, rg, codeFragments);
         } else {
             Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
             atq = new TransformationQuery(rg, codeFragments,cl);
         }
+
+        if(DiversifyProperties.getProperty("transformation.type").equals("bytecodeDelete"))
+            atq = new ByteCodeTransformationQuery(allCtMethod(),rg);
+
         atq.setType(DiversifyProperties.getProperty("transformation.type"));
         int n = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
         atq.setNbTransformation(n);
 
         return atq;
+    }
+
+    private List<CtMethod> allCtMethod() throws NotFoundException {
+        List<CtMethod> methods = new ArrayList<CtMethod>();
+        ClassPool pool = ClassPool.getDefault();
+        pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
+        for (CtSimpleType cl: codeFragments.getAllClasses()) {
+            try {
+                Log.info(cl.getQualifiedName());
+                CtClass cc = pool.get(cl.getQualifiedName());
+                for(CtMethod method : cc.getDeclaredMethods())
+                    if(!method.isEmpty()) {
+                        methods.add(method);
+                    }
+//                Collections.addAll(methods,cc.getMethods());
+            }  catch (Exception e) {
+                Log.error("error in allCtMethod",e);
+            }
+
+        }
+        return methods;
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
@@ -231,7 +261,7 @@ public class DiversifyMain {
 
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
         TransformationParser tf = new TransformationParser(codeFragments);
-        List<Transformation> transformations = tf.parseDir(transDir);
+        List<ITransformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
         String name = write.writeAllTransformation(null);
@@ -261,7 +291,7 @@ public class DiversifyMain {
         if(transformations.isEmpty())
             return;
 
-        Set<Transformation> set = new HashSet<Transformation>(tf.parseFile(new File(fileName)));
+        Set<ITransformation> set = new HashSet<ITransformation>(tf.parseFile(new File(fileName)));
         Log.debug("number of transformation: {}",transformations.size());
         Log.debug("number of unique transformation: {}",set.size());
 
@@ -302,9 +332,9 @@ public class DiversifyMain {
     }
 
 
-    protected Set<String> getAllTransformationType(List<Transformation> transformations) {
+    protected Set<String> getAllTransformationType(List<ITransformation> transformations) {
         Set<String> types = new HashSet<String>();
-        for (Transformation t : transformations)
+        for (ITransformation t : transformations)
             types.add(t.getType());
         return types;
     }

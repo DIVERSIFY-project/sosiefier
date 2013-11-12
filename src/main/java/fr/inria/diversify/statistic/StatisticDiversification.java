@@ -2,6 +2,7 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.Replace;
 import fr.inria.diversify.transformation.Transformation;
 
@@ -23,21 +24,21 @@ public class StatisticDiversification {
     protected static String detailFileSuffix = "_diversification_detail.csv";
     protected static String allTransformationFileSuffix = "_diversification_allTransformation.csv";
 
-    protected Collection<Transformation> transformations;
+    protected Collection<ITransformation> transformations;
     protected int numberOfFailureMax;
     protected  CodeFragmentList codeFragmentList;
 
-    public StatisticDiversification(Collection<Transformation> transformations, CodeFragmentList codeFragmentList) {
+    public StatisticDiversification(Collection<ITransformation> transformations, CodeFragmentList codeFragmentList) {
         this.transformations = transformations;
         this.numberOfFailureMax = 0;
         this.codeFragmentList = codeFragmentList;
 
-        for(Transformation t : transformations)
+        for(ITransformation t : transformations)
             this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.numberOfFailure());
     }
 
     public StatisticDiversification() {
-        this.transformations = new HashSet<Transformation>();
+        this.transformations = new HashSet<ITransformation>();
         this.numberOfFailureMax = 0;
     }
 
@@ -161,7 +162,7 @@ public class StatisticDiversification {
 
         bw.write("\n");
 
-        for(Transformation trans : transformations) {
+        for(ITransformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
                 trans.write(sb, separator);

@@ -1,15 +1,12 @@
 package fr.inria.diversify.javassist;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.util.Log;
 import javassist.CtClass;
 import javassist.CtMethod;
-import javassist.bytecode.BadBytecode;
-import javassist.bytecode.CodeAttribute;
-import javassist.bytecode.CodeIterator;
+import javassist.bytecode.*;
 import org.apache.commons.io.FileUtils;
-import spoon.reflect.declaration.CtSimpleType;
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,28 +24,29 @@ public abstract class ByteCodeTransformation implements ITransformation {
 
     protected File backupClassFile;
     protected CtClass backupClass;
-    protected List<CtSimpleType> allClasses;
 
     public void apply(String targetDir) throws Exception {
-        backupClass = selectClass();
-        String destination = targetDir+ "/"+backupClass.getName() + ".class";
+        backupClass = methodLocation.getDeclaringClass();
+        String destination = targetDir+ "/"+backupClass.getName().replace(".","/") + ".originalClass";
         backupClassFile = new File(destination);
-        FileUtils.copyFile(backupClassFile, new File(destination));
-        Log.info("bytecode transformation: {}",this.getType());
-        Log.debug("method bytecode before: {}",methodLocation.getMethodInfo());
+
+       backupClassFile.createNewFile();
+        FileUtils.copyFile(new File(backupClass.getURL().getFile()),backupClassFile);
+
+        Log.info("bytecode transformation: {} in method: {}",this.getType(),methodLocation.getLongName());
+        Log.debug("method bytecode before: \n{}", methodToString(methodLocation));
         apply();
-        Log.debug("method bytecode after: {}",methodLocation.getMethodInfo());
+        Log.debug("method bytecode after: \n{}",methodToString(methodLocation));
+        Log.debug("write new class in: {}",targetDir);
+        methodLocation.getDeclaringClass().writeFile(targetDir);
+
     }
 
     protected abstract void apply() throws BadBytecode;
 
-    private CtClass selectClass() {
-        //selection d'une classes converte par jacoco
-        return null;
-    }
-
     public void restore(String targetDir) throws Exception {
-        String destination = targetDir+ "/"+backupClass.getName() + ".class";
+        String destination = targetDir+ "/"+backupClass.getName().replace(".","/") + ".class";
+
         Log.debug("restore file: " + backupClassFile + " -> " + destination);
         FileUtils.copyFile(backupClassFile, new File(destination));
     }
@@ -69,5 +67,31 @@ public abstract class ByteCodeTransformation implements ITransformation {
 
     public int numberOfFailure() {
         return failures;
+    }
+
+    public String methodToString(CtMethod method) throws BadBytecode {
+        MethodInfo minfo = method.getMethodInfo();
+        CodeAttribute ca = minfo.getCodeAttribute();
+        CodeIterator i = ca.iterator();
+        String ret = "";
+
+        int oldIndex = i.next();
+        while(i.hasNext()) {
+                int index = i.next();
+                int op = i.byteAt(oldIndex);
+                ret += "index: "+oldIndex+", opCode: "+Mnemonic.OPCODE[op]+ "\n";
+                for(int j = oldIndex+1; j < index; j++)
+                    ret += "index: "+j+", byteCode: "+ i.byteAt(j) +"\n";
+                oldIndex = index;
+            }
+        return ret;
+    }
+
+    protected int byteCodeSize(CodeAttribute ca, List<Integer> opCodeIndexList, int index) {
+        if(index + 1 == opCodeIndexList.size())
+            return ca.getCodeLength() - opCodeIndexList.get(index);
+        else
+            return opCodeIndexList.get(index+1) - opCodeIndexList.get(index);
+
     }
 }

@@ -138,7 +138,7 @@ public class CodeFragmentList {
         for(CodeFragment cf: codeFragments)
             if(!classes.contains(cf.getSourceClass()))
                 classes.add(cf.getSourceClass());
-        return getAllClasses();
+        return classes;
     }
 
     public Map<CtSimpleType, List<CodeFragment>> getCodeFragmentsByClass() {

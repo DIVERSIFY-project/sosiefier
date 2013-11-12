@@ -45,8 +45,7 @@ public class RunMaven extends Thread {
         InvocationRequest request = new DefaultInvocationRequest();
         request.setPomFile( new File( directory + "/pom.xml" ) );
         List<String> l = new ArrayList<String>();
-        l.add("-Dmaven.testCompile.skip=true");
-        l.add("clean");
+//        l.add("clean");
         l.add(lifeCycle);
         request.setGoals(l);
 

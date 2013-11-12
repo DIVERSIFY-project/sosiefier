@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.Factory;
 import spoon.reflect.declaration.CtElement;
@@ -15,7 +16,7 @@ import java.util.Random;
  * Date: 7/17/13
  * Time: 10:17 AM
  */
-public abstract class AbstractTransformationQuery {
+public abstract class AbstractTransformationQuery implements ITransformationQuery{
     protected CodeFragmentList codeFragments;
     protected int nbTransformation = 1;
     protected String type = "replace";
@@ -32,7 +33,7 @@ public abstract class AbstractTransformationQuery {
         String type = this.type;
         if(type == null) {
             Random r = new Random();
-            int i = r.nextInt(2);
+            int i = r.nextInt(3);
             if(i == 0)
                 type = "replace";
             if(i == 1)

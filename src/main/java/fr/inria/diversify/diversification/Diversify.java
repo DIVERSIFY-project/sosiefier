@@ -1,6 +1,6 @@
 package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
@@ -19,23 +19,22 @@ public class Diversify extends Builder {
     protected int sosie = 0;
     protected int trial = 0;
 
-    public Diversify(AbstractTransformationQuery transQuery, String projectDir) {
+    public Diversify(AbstractTransformationQuery transQuery, String projectDir, String workingDir) {
         this.transQuery = transQuery;
         this.tmpDir = "output_diversify";
-        this.srcDir = "src/main/java";
         this.projectDir = projectDir;
         clojureTest = false;
 
-        transformations = new ArrayList<Transformation>();
+        transformations = new ArrayList<ITransformation>();
     }
 
-    public Diversify(String projectDir) {
+    public Diversify(String projectDir, String workingDir) {
         this.tmpDir = "output_diversify";
-        this.srcDir = "src/main/java";
+        this.workingDir = workingDir;
         this.projectDir = projectDir;
         clojureTest = false;
 
-        transformations = new ArrayList<Transformation>();
+        transformations = new ArrayList<ITransformation>();
     }
 
     @Override
@@ -55,11 +54,11 @@ public class Diversify extends Builder {
     }
 
     @Override
-    public void run(Set<Transformation> trans) throws Exception {
+    public void run(Set<ITransformation> trans) throws Exception {
         String dir = prepare(projectDir, tmpDir,newPomFile);
         Log.info("number of diversification: " + trans.size());
         int i = 0;
-        for (Transformation tran : trans) {
+        for (ITransformation tran : trans) {
             Log.info("diversification: " + i);
             run(tran, dir);
             i++;
@@ -70,11 +69,11 @@ public class Diversify extends Builder {
         Log.debug("{} sosie on {} trial", sosie, trial);
     }
 
-    protected void run(Transformation trans, String tmpDir) throws Exception {
+    protected void run(ITransformation trans, String tmpDir) throws Exception {
         initThreadGroup();
-        Log.debug("output dir: " + tmpDir + "/" + srcDir);
+        Log.debug("output dir: " + tmpDir + "/" + workingDir);
         try {
-            trans.apply(tmpDir + "/" + srcDir);
+            trans.apply(tmpDir + "/" + workingDir);
             int failures = runTest(tmpDir);
             if(failures == 0)
                 sosie++;
@@ -86,7 +85,8 @@ public class Diversify extends Builder {
             compileError++;
             Log.warn("compile error during diversification", e);
         }
-        trans.restore(tmpDir + "/" + srcDir);
+        trans.restore(tmpDir + "/" + workingDir);
+        Log.debug("run after restore: " + tmpDir + "/" + workingDir);
         killUselessThread();
     }
 }

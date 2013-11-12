@@ -1,10 +1,7 @@
 package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.transformation.CompileException;
-import fr.inria.diversify.transformation.RunMaven;
-import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationsWriter;
-import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.*;
+import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
@@ -23,18 +20,18 @@ import java.util.Set;
 public abstract class Builder {
     protected String projectDir;
     protected String tmpDir;
-    protected List<Transformation> transformations;
+    protected List<ITransformation> transformations;
     protected Set<Thread> threadSet;
-    protected String srcDir;
+    protected String workingDir;
     protected boolean clojureTest;
     protected int timeOut;
-    protected AbstractTransformationQuery transQuery;
+    protected ITransformationQuery transQuery;
     protected String newPomFile;
 
 
     public abstract void run(int n) throws Exception;
 
-    public abstract void run(Set<Transformation> trans) throws Exception;
+    public abstract void run(Set<ITransformation> trans) throws Exception;
 
     public void printResult(String output, String git) {
         mkDirResult(output,git);
@@ -185,14 +182,14 @@ public abstract class Builder {
     }
 
     public void setSourceDirectory(String sourceDirectory) {
-        this.srcDir = sourceDirectory;
+        this.workingDir = sourceDirectory;
     }
 
     public void setNewPomFile(String pom) {
         newPomFile = pom;
     }
 
-    public void setTransformationQuery(AbstractTransformationQuery transQuery) {
+    public void setTransformationQuery(ITransformationQuery transQuery) {
         this.transQuery = transQuery;
     }
 }

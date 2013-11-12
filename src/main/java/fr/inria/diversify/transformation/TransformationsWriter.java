@@ -15,16 +15,16 @@ import java.util.*;
 public class TransformationsWriter {
 
     protected String fileNamePrefix;
-    protected Collection<Transformation> transformations;
+    protected Collection<ITransformation> transformations;
 
-    public TransformationsWriter(List<Transformation> transformations, String prefix) {
+    public TransformationsWriter(List<ITransformation> transformations, String prefix) {
         this.transformations = transformations;
         fileNamePrefix = prefix;
     }
 
     public String writeGoodTransformation(String type) throws IOException {
-        List<Transformation> goodTransformation = new LinkedList<Transformation>();
-        for (Transformation transformation : transformations) {
+        List<ITransformation> goodTransformation = new LinkedList<ITransformation>();
+        for (ITransformation transformation : transformations) {
             if (transformation.numberOfFailure() == 0 && (type == null || transformation.getType().equals(type))) {
                 goodTransformation.add(transformation);
             }
@@ -39,8 +39,8 @@ public class TransformationsWriter {
     }
 
     public String writeBadTransformation(String type) throws IOException {
-        List<Transformation> badTransformation = new LinkedList<Transformation>();
-        for (Transformation transformation : transformations) {
+        List<ITransformation> badTransformation = new LinkedList<ITransformation>();
+        for (ITransformation transformation : transformations) {
             if (transformation.numberOfFailure() != 0 && (type == null || transformation.getType().equals(type))) {
                 badTransformation.add(transformation);
             }
@@ -55,8 +55,8 @@ public class TransformationsWriter {
     }
 
     public String writeAllTransformation(String type) throws IOException {
-        List<Transformation> transformation = new LinkedList<Transformation>();
-        for (Transformation t : transformations) {
+        List<ITransformation> transformation = new LinkedList<ITransformation>();
+        for (ITransformation t : transformations) {
             if (type == null || t.getType().equals(type)) {
                 transformation.add(t);
             }
@@ -71,10 +71,10 @@ public class TransformationsWriter {
     }
 
 
-    protected String writeTransformation(String fileName, Collection<Transformation> trans) throws IOException {
+    protected String writeTransformation(String fileName, Collection<ITransformation> trans) throws IOException {
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         JSONArray obj = new JSONArray();
-        for (Transformation transformation : trans) {
+        for (ITransformation transformation : trans) {
             try {
                 obj.put(transformation.toJSONObject());
             } catch (Exception e) {

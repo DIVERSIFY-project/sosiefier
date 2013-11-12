@@ -42,11 +42,6 @@ public class IntruTest {
                 }
 
             }
-        try {
-            new BytecodeDelete().randomDelete(cc);
-        } catch (Exception badBytecode) {
-            badBytecode.printStackTrace();
-        }
         cc.writeFile();
     }
 

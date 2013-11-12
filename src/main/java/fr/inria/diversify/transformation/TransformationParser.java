@@ -27,8 +27,8 @@ public class TransformationParser {
         codeFragments = list;
     }
 
-    public List<Transformation> parseDir(String dir) throws IOException, JSONException {
-        List<Transformation> list = new ArrayList<Transformation>();
+    public List<ITransformation> parseDir(String dir) throws IOException, JSONException {
+        List<ITransformation> list = new ArrayList<ITransformation>();
         File file = new File(dir);
 //        int count = 0;
         Log.debug("transformation directory: "+file.getAbsolutePath());

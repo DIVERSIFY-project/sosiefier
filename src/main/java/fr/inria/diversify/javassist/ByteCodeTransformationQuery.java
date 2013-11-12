@@ -2,6 +2,7 @@ package fr.inria.diversify.javassist;
 
 
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.transformation.query.ITransformationQuery;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.bytecode.BadBytecode;
@@ -18,8 +19,7 @@ import java.util.List;
  * Date: 07/11/13
  * Time: 13:07
  */
-public class ByteCodeTransformationQuery {
-//    protected List<CtClass> classes;
+public class ByteCodeTransformationQuery implements ITransformationQuery {
     protected List<CtMethod> methods;
     protected int nbTransformation = 1;
     protected String type = "replace";
@@ -41,24 +41,24 @@ public class ByteCodeTransformationQuery {
 
     public ByteCodeTransformation getTransformation() throws Exception {
         String type = this.type;
-        if(type == null) {
+//        if(type == null) {
             Random r = new Random();
-            int i = r.nextInt(2);
+            int i = r.nextInt(3);
             if(i == 0)
-                type = "replace";
+                type = "bytecodeReplace";
             if(i == 1)
-                type = "delete";
+                type = "bytecodeAdd";
             if(i == 2)
-                type = "add";
-        }
+                type = "bytecodeDelete";
+//        }
 
-        if(type.equals("replace"))
+        if(type.equals("bytecodeReplace"))
             return replace();
 
-        if(type.equals("add"))
+        if(type.equals("bytecodeAdd"))
             return add();
 
-        if(type.equals("delete"))
+        if(type.equals("bytecodeDelete"))
             return delete();
 
         return null;
@@ -69,10 +69,10 @@ public class ByteCodeTransformationQuery {
         CtMethod method = randomConcreteMethod();
         int opCodeIndex = randomOpCode(method);
 
-        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0) {
-            method = randomConcreteMethod();
-            opCodeIndex = randomOpCode(method);
-        }
+//        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0 && false) {
+//            method = randomConcreteMethod();
+//            opCodeIndex = randomOpCode(method);
+//        }
         return new BytecodeDelete(method,opCodeIndex);
     }
 
@@ -80,29 +80,31 @@ public class ByteCodeTransformationQuery {
         CtMethod method = randomConcreteMethod();
         int opCodeIndex = randomOpCode(method);
 
-        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0) {
-            method = randomConcreteMethod();
-            opCodeIndex = randomOpCode(method);
-        }
-        return null;// new BytecodeAdd(method,opCodeIndex);
+//        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0) {
+//            method = randomConcreteMethod();
+//            opCodeIndex = randomOpCode(method);
+//        }
+        return new BytecodeAdd(method,opCodeIndex, randomOpCodeInClass(method.getDeclaringClass()));
     }
 
     public BytecodeReplace replace() throws Exception {
         CtMethod method = randomConcreteMethod();
         int opCodeIndex = randomOpCode(method);
 
-        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0) {
-            method = randomConcreteMethod();
-            opCodeIndex = randomOpCode(method);
-        }
-        return null;// new BytecodeReplace(method,opCodeIndex);
+//        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0) {
+//            method = randomConcreteMethod();
+//            opCodeIndex = randomOpCode(method);
+//        }
+        return new BytecodeReplace(method,opCodeIndex, randomOpCodeInClass(method.getDeclaringClass()));
     }
 
 
     protected CtMethod randomConcreteMethod() {
         Random r = new Random();
-
-        return methods.get(r.nextInt(methods.size()));
+        CtMethod mth = methods.get(r.nextInt(methods.size()));
+        while (mth.getDeclaringClass().isFrozen())
+            mth = methods.get(r.nextInt(methods.size()));
+        return mth;
     }
 
     protected int randomOpCode(CtMethod method) throws BadBytecode {
@@ -110,10 +112,39 @@ public class ByteCodeTransformationQuery {
 
         CodeAttribute ca = minfo.getCodeAttribute();
         List<Integer> opCodeIndexList = opCodeIndexList(ca);
-
         Random r = new Random();
 
-        return opCodeIndexList.get(r.nextInt(opCodeIndexList.size()));
+        return r.nextInt(opCodeIndexList.size());
+    }
+
+    protected byte[] randomOpCodeInClass(CtClass cl) throws BadBytecode {
+        Random r = new Random();
+        CtMethod[] methods = cl.getDeclaredMethods();
+        CtMethod method = methods[r.nextInt(methods.length)];
+        while (method.isEmpty())
+            method = methods[r.nextInt(methods.length)];
+
+        MethodInfo minfo = method.getMethodInfo();
+        CodeAttribute ca = minfo.getCodeAttribute();
+        List<Integer> opCodeIndexList = opCodeIndexList(ca);
+        int opCodeIndex = r.nextInt(opCodeIndexList.size());
+
+        return byteCodeAt(ca,opCodeIndexList,opCodeIndex);
+    }
+
+    protected byte[] byteCodeAt(CodeAttribute ca, List<Integer> opCodeIndexList, int index) {
+        int borne;
+        int byteCodeIndex = opCodeIndexList.get(index);
+        if(index + 1 == opCodeIndexList.size())
+            borne = ca.getCodeLength();
+        else
+            borne = opCodeIndexList.get(index+1);
+        CodeIterator iter = ca.iterator();
+        byte[] bytecode = new  byte[borne - byteCodeIndex];
+        for(int i = 0; i < borne - byteCodeIndex; i++) {
+            bytecode[i] = (byte) iter.byteAt(i);
+        }
+        return bytecode;
     }
 
     protected List<Integer> opCodeIndexList(CodeAttribute ca) throws BadBytecode {

@@ -3,10 +3,7 @@ package fr.inria.diversify.statistic;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
-import fr.inria.diversify.transformation.Add;
-import fr.inria.diversify.transformation.Delete;
-import fr.inria.diversify.transformation.Replace;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
@@ -103,8 +100,8 @@ public class Util {
         return nb;
     }
 
-    public Set<Transformation> getStupidTransformation(int nb, TransformationQuery query) {
-        Set<Transformation> transformations = new HashSet<Transformation>();
+    public Set<ITransformation> getStupidTransformation(int nb, TransformationQuery query) {
+        Set<ITransformation> transformations = new HashSet<ITransformation>();
         for(int i = 0; i < nb; i++) {
             try {
                 Replace replace = query.replace();
@@ -131,8 +128,8 @@ public class Util {
         return  transformations;
     }
 
-    public Set<Transformation> getAllReplace() throws InterruptedException {
-        final Set<Transformation> allReplace = new HashSet<Transformation>();
+    public Set<ITransformation> getAllReplace() throws InterruptedException {
+        final Set<ITransformation> allReplace = new HashSet<ITransformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
                 final  CodeFragment cfTmp = cf1;
@@ -159,8 +156,8 @@ public class Util {
         return allReplace;
     }
 
-    public Set<Transformation> getAllDelete() {
-        Set<Transformation> allReplace = new HashSet<Transformation>();
+    public Set<ITransformation> getAllDelete() {
+        Set<ITransformation> allReplace = new HashSet<ITransformation>();
 
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
                     Delete r = new Delete();
@@ -170,8 +167,8 @@ public class Util {
         return allReplace;
     }
 
-    public Set<Transformation> getAllAdd() throws InterruptedException {
-        final Set<Transformation> allReplace = new HashSet<Transformation>();
+    public Set<ITransformation> getAllAdd() throws InterruptedException {
+        final Set<ITransformation> allReplace = new HashSet<ITransformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
             final  CodeFragment cfTmp = cf1;

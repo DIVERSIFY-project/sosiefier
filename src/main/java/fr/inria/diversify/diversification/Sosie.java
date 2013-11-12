@@ -1,14 +1,12 @@
 package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.diversification.Builder;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,7 +20,7 @@ public class Sosie extends Builder {
         this.transQuery = transQuery;
         this.tmpDir = "output_sosie";
         this.projectDir = projectDir;
-        transformations = new ArrayList<Transformation>();
+        transformations = new ArrayList<ITransformation>();
 
         clojureTest = false;
     }
@@ -31,7 +29,7 @@ public class Sosie extends Builder {
         this.transQuery = transQuery;
         this.tmpDir = "output_sosie";
         this.projectDir = projectDir;
-        transformations = new ArrayList<Transformation>();
+        transformations = new ArrayList<ITransformation>();
 
         clojureTest = false;
     }
@@ -47,17 +45,17 @@ public class Sosie extends Builder {
     }
 
     @Override
-    public void run(Set<Transformation> trans) throws Exception {
-        for (Transformation tran : trans)
+    public void run(Set<ITransformation> trans) throws Exception {
+        for (ITransformation tran : trans)
             run(tran);
     }
 
-    protected void run(Transformation trans) throws Exception {
+    protected void run(ITransformation trans) throws Exception {
         initThreadGroup();
         String dir = prepare(projectDir, tmpDir,newPomFile);
-        Log.debug("output dir sosie: " + dir + "/" + srcDir);
+        Log.debug("output dir sosie: " + dir + "/" + workingDir);
         try {
-            trans.apply(dir + "/" + srcDir);
+            trans.apply(dir + "/" + workingDir);
             if(runTest(dir) != 0) {
                 FileUtils.cleanDirectory(dir);
                 FileUtils.forceDelete(dir);
