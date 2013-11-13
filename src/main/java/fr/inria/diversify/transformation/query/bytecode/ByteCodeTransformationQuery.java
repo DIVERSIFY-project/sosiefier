@@ -2,10 +2,10 @@ package fr.inria.diversify.transformation.query.bytecode;
 
 
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.transformation.bytecode.BytecodeTransformation;
 import fr.inria.diversify.transformation.bytecode.BytecodeAdd;
 import fr.inria.diversify.transformation.bytecode.BytecodeDelete;
 import fr.inria.diversify.transformation.bytecode.BytecodeReplace;
+import fr.inria.diversify.transformation.bytecode.BytecodeTransformation;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import javassist.CtClass;
 import javassist.CtMethod;

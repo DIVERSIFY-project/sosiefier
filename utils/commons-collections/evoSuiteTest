@@ -1,182 +1,182 @@
-Running org.apache.commons.collections4.SplitMapUtilsEvoSuiteTest
-Running org.apache.commons.collections4.queue.PredicatedQueueEvoSuiteTest
-Running org.apache.commons.collections4.queue.UnmodifiableQueueEvoSuiteTest
-Running org.apache.commons.collections4.queue.CircularFifoQueueEvoSuiteTest
-Running org.apache.commons.collections4.queue.TransformedQueueEvoSuiteTest
-Running org.apache.commons.collections4.list.NodeCachingLinkedListEvoSuiteTest
-Running org.apache.commons.collections4.list.LazyListEvoSuiteTest
-Running org.apache.commons.collections4.list.TransformedListEvoSuiteTest
-Running org.apache.commons.collections4.list.CursorableLinkedListEvoSuiteTest
-Running org.apache.commons.collections4.list.GrowthListEvoSuiteTest
-Running org.apache.commons.collections4.list.PredicatedListEvoSuiteTest
-Running org.apache.commons.collections4.list.SetUniqueListEvoSuiteTest
-Running org.apache.commons.collections4.list.FixedSizeListEvoSuiteTest
-Running org.apache.commons.collections4.list.TreeListEvoSuiteTest
-Running org.apache.commons.collections4.list.UnmodifiableListEvoSuiteTest
-Running org.apache.commons.collections4.ClosureUtilsEvoSuiteTest
-Running org.apache.commons.collections4.IteratorUtilsEvoSuiteTest
-Running org.apache.commons.collections4.FunctorExceptionEvoSuiteTest
-Running org.apache.commons.collections4.CollectionUtilsEvoSuiteTest
-Running org.apache.commons.collections4.EnumerationUtilsEvoSuiteTest
-Running org.apache.commons.collections4.splitmap.TransformedSplitMapEvoSuiteTest
-Running org.apache.commons.collections4.iterators.IteratorIterableEvoSuiteTest
-Running org.apache.commons.collections4.iterators.EntrySetMapIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.PeekingIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.CollatingIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.IteratorChainEvoSuiteTest
-Running org.apache.commons.collections4.iterators.EnumerationIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.EmptyMapIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.PermutationIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.UnmodifiableMapIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.ListIteratorWrapperEvoSuiteTest
-Running org.apache.commons.collections4.iterators.SingletonListIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.EmptyOrderedIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.ReverseListIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.TransformIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.NodeListIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.ObjectArrayListIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.ObjectGraphIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.PushbackIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.SingletonIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.EmptyListIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.FilterIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.FilterListIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.UnmodifiableIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.ObjectArrayIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.UniqueFilterIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.LoopingIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.LoopingListIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.UnmodifiableListIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.EmptyOrderedMapIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.UnmodifiableOrderedMapIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.EmptyIteratorEvoSuiteTest
-Running org.apache.commons.collections4.iterators.IteratorEnumerationEvoSuiteTest
-Running org.apache.commons.collections4.ListUtilsEvoSuiteTest
-Running org.apache.commons.collections4.functors.TruePredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.AnyPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.NonePredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.DefaultEquatorEvoSuiteTest
-Running org.apache.commons.collections4.functors.OnePredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.TransformerClosureEvoSuiteTest
-Running org.apache.commons.collections4.functors.NullPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.WhileClosureEvoSuiteTest
-Running org.apache.commons.collections4.functors.EqualPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.ClosureTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.ChainedClosureEvoSuiteTest
-Running org.apache.commons.collections4.functors.NotPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.ExceptionClosureEvoSuiteTest
-Running org.apache.commons.collections4.functors.ComparatorPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.CloneTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.StringValueTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.FalsePredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.NOPClosureEvoSuiteTest
-Running org.apache.commons.collections4.functors.InstantiateTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.AllPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.ConstantFactoryEvoSuiteTest
-Running org.apache.commons.collections4.functors.ChainedTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.ForClosureEvoSuiteTest
-Running org.apache.commons.collections4.functors.NotNullPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.ExceptionPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.InstanceofPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.AndPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.NullIsTruePredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.FactoryTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.MapTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.NOPTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.IfClosureEvoSuiteTest
-Running org.apache.commons.collections4.functors.TransformerPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.ExceptionFactoryEvoSuiteTest
-Running org.apache.commons.collections4.functors.SwitchClosureEvoSuiteTest
-Running org.apache.commons.collections4.functors.NullIsFalsePredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.TransformedPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.InstantiateFactoryEvoSuiteTest
-Running org.apache.commons.collections4.functors.IdentityPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.ExceptionTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.NullIsExceptionPredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.InvokerTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.PredicateTransformerEvoSuiteTest
-Running org.apache.commons.collections4.functors.UniquePredicateEvoSuiteTest
-Running org.apache.commons.collections4.functors.PrototypeFactoryEvoSuiteTest
-Running org.apache.commons.collections4.functors.OrPredicateEvoSuiteTest
-Running org.apache.commons.collections4.QueueUtilsEvoSuiteTest
-Running org.apache.commons.collections4.TransformerUtilsEvoSuiteTest
-Running org.apache.commons.collections4.collection.IndexedCollectionEvoSuiteTest
-Running org.apache.commons.collections4.collection.SynchronizedCollectionEvoSuiteTest
-Running org.apache.commons.collections4.collection.UnmodifiableBoundedCollectionEvoSuiteTest
-Running org.apache.commons.collections4.collection.PredicatedCollectionEvoSuiteTest
-Running org.apache.commons.collections4.collection.TransformedCollectionEvoSuiteTest
-Running org.apache.commons.collections4.collection.UnmodifiableCollectionEvoSuiteTest
-Running org.apache.commons.collections4.collection.CompositeCollectionEvoSuiteTest
-Running org.apache.commons.collections4.sequence.EditScriptEvoSuiteTest
-Running org.apache.commons.collections4.sequence.InsertCommandEvoSuiteTest
-Running org.apache.commons.collections4.sequence.KeepCommandEvoSuiteTest
-Running org.apache.commons.collections4.sequence.ReplacementsFinderEvoSuiteTest
-Running org.apache.commons.collections4.sequence.EditCommandEvoSuiteTest
-Running org.apache.commons.collections4.ComparatorUtilsEvoSuiteTest
-Running org.apache.commons.collections4.bidimap.TreeBidiMapEvoSuiteTest
-Running org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMapEvoSuiteTest
-Running org.apache.commons.collections4.bidimap.UnmodifiableBidiMapEvoSuiteTest
-Running org.apache.commons.collections4.bidimap.DualTreeBidiMapEvoSuiteTest
-Running org.apache.commons.collections4.bidimap.DualLinkedHashBidiMapEvoSuiteTest
-Running org.apache.commons.collections4.bidimap.DualHashBidiMapEvoSuiteTest
-Running org.apache.commons.collections4.trie.UnmodifiableTrieEvoSuiteTest
-Running org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzerEvoSuiteTest
-Running org.apache.commons.collections4.trie.KeyAnalyzerEvoSuiteTest
-Running org.apache.commons.collections4.trie.PatriciaTrieEvoSuiteTest
-Running org.apache.commons.collections4.bag.HashBagEvoSuiteTest
-Running org.apache.commons.collections4.bag.TransformedSortedBagEvoSuiteTest
-Running org.apache.commons.collections4.bag.CompliantBagEvoSuiteTest
-Running org.apache.commons.collections4.bag.PredicatedSortedBagEvoSuiteTest
-Running org.apache.commons.collections4.bag.PredicatedBagEvoSuiteTest
-Running org.apache.commons.collections4.bag.SynchronizedBagEvoSuiteTest
-Running org.apache.commons.collections4.bag.TreeBagEvoSuiteTest
-Running org.apache.commons.collections4.bag.TransformedBagEvoSuiteTest
-Running org.apache.commons.collections4.bag.UnmodifiableBagEvoSuiteTest
-Running org.apache.commons.collections4.bag.SynchronizedSortedBagEvoSuiteTest
-Running org.apache.commons.collections4.keyvalue.UnmodifiableMapEntryEvoSuiteTest
-Running org.apache.commons.collections4.keyvalue.DefaultMapEntryEvoSuiteTest
-Running org.apache.commons.collections4.keyvalue.MultiKeyEvoSuiteTest
-Running org.apache.commons.collections4.keyvalue.DefaultKeyValueEvoSuiteTest
-Running org.apache.commons.collections4.keyvalue.TiedMapEntryEvoSuiteTest
-Running org.apache.commons.collections4.FactoryUtilsEvoSuiteTest
-Running org.apache.commons.collections4.map.CompositeMapEvoSuiteTest
-Running org.apache.commons.collections4.map.UnmodifiableOrderedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.FixedSizeSortedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.Flat3MapEvoSuiteTest
-Running org.apache.commons.collections4.map.SingletonMapEvoSuiteTest
-Running org.apache.commons.collections4.map.FixedSizeMapEvoSuiteTest
-Running org.apache.commons.collections4.map.LRUMapEvoSuiteTest
-Running org.apache.commons.collections4.map.LazyMapEvoSuiteTest
-Running org.apache.commons.collections4.map.TransformedSortedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.DefaultedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.CaseInsensitiveMapEvoSuiteTest
-Running org.apache.commons.collections4.map.ReferenceMapEvoSuiteTest
-Running org.apache.commons.collections4.map.EntrySetToMapIteratorAdapterEvoSuiteTest
-Running org.apache.commons.collections4.map.ReferenceIdentityMapEvoSuiteTest
-Running org.apache.commons.collections4.map.PredicatedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.LinkedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.ListOrderedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.PassiveExpiringMapEvoSuiteTest
-Running org.apache.commons.collections4.map.HashedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.StaticBucketMapEvoSuiteTest
-Running org.apache.commons.collections4.map.LazySortedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.PredicatedSortedMapEvoSuiteTest
-Running org.apache.commons.collections4.map.MultiKeyMapEvoSuiteTest
-Running org.apache.commons.collections4.map.TransformedMapEvoSuiteTest
-Running org.apache.commons.collections4.BagUtilsEvoSuiteTest
-Running org.apache.commons.collections4.comparators.ReverseComparatorEvoSuiteTest
-Running org.apache.commons.collections4.comparators.TransformingComparatorEvoSuiteTest
-Running org.apache.commons.collections4.comparators.BooleanComparatorEvoSuiteTest
-Running org.apache.commons.collections4.comparators.ComparableComparatorEvoSuiteTest
-Running org.apache.commons.collections4.comparators.NullComparatorEvoSuiteTest
-Running org.apache.commons.collections4.comparators.ComparatorChainEvoSuiteTest
-Running org.apache.commons.collections4.comparators.FixedOrderComparatorEvoSuiteTest
-Running org.apache.commons.collections4.set.TransformedSortedSetEvoSuiteTest
-Running org.apache.commons.collections4.set.TransformedSetEvoSuiteTest
-Running org.apache.commons.collections4.set.CompositeSetEvoSuiteTest
-Running org.apache.commons.collections4.set.PredicatedSetEvoSuiteTest
-Running org.apache.commons.collections4.set.UnmodifiableSortedSetEvoSuiteTest
-Running org.apache.commons.collections4.set.ListOrderedSetEvoSuiteTest
-Running org.apache.commons.collections4.set.UnmodifiableSetEvoSuiteTest
-Running org.apache.commons.collections4.set.PredicatedSortedSetEvoSuiteTest
-Running org.apache.commons.collections4.TrieUtilsEvoSuiteTest
+org.apache.commons.collections4.SplitMapUtilsEvoSuiteTest
+org.apache.commons.collections4.queue.PredicatedQueueEvoSuiteTest
+org.apache.commons.collections4.queue.UnmodifiableQueueEvoSuiteTest
+org.apache.commons.collections4.queue.CircularFifoQueueEvoSuiteTest
+org.apache.commons.collections4.queue.TransformedQueueEvoSuiteTest
+org.apache.commons.collections4.list.NodeCachingLinkedListEvoSuiteTest
+org.apache.commons.collections4.list.LazyListEvoSuiteTest
+org.apache.commons.collections4.list.TransformedListEvoSuiteTest
+org.apache.commons.collections4.list.CursorableLinkedListEvoSuiteTest
+org.apache.commons.collections4.list.GrowthListEvoSuiteTest
+org.apache.commons.collections4.list.PredicatedListEvoSuiteTest
+org.apache.commons.collections4.list.SetUniqueListEvoSuiteTest
+org.apache.commons.collections4.list.FixedSizeListEvoSuiteTest
+org.apache.commons.collections4.list.TreeListEvoSuiteTest
+org.apache.commons.collections4.list.UnmodifiableListEvoSuiteTest
+org.apache.commons.collections4.ClosureUtilsEvoSuiteTest
+org.apache.commons.collections4.IteratorUtilsEvoSuiteTest
+org.apache.commons.collections4.FunctorExceptionEvoSuiteTest
+org.apache.commons.collections4.CollectionUtilsEvoSuiteTest
+org.apache.commons.collections4.EnumerationUtilsEvoSuiteTest
+org.apache.commons.collections4.splitmap.TransformedSplitMapEvoSuiteTest
+org.apache.commons.collections4.iterators.IteratorIterableEvoSuiteTest
+org.apache.commons.collections4.iterators.EntrySetMapIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.PeekingIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.CollatingIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.IteratorChainEvoSuiteTest
+org.apache.commons.collections4.iterators.EnumerationIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.EmptyMapIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.PermutationIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.UnmodifiableMapIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.ListIteratorWrapperEvoSuiteTest
+org.apache.commons.collections4.iterators.SingletonListIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.EmptyOrderedIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.ReverseListIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.TransformIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.NodeListIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.ObjectArrayListIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.ObjectGraphIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.PushbackIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.SingletonIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.EmptyListIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.FilterIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.FilterListIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.UnmodifiableIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.ObjectArrayIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.UniqueFilterIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.LoopingIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.LoopingListIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.UnmodifiableListIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.EmptyOrderedMapIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.UnmodifiableOrderedMapIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.EmptyIteratorEvoSuiteTest
+org.apache.commons.collections4.iterators.IteratorEnumerationEvoSuiteTest
+org.apache.commons.collections4.ListUtilsEvoSuiteTest
+org.apache.commons.collections4.functors.TruePredicateEvoSuiteTest
+org.apache.commons.collections4.functors.AnyPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.NonePredicateEvoSuiteTest
+org.apache.commons.collections4.functors.DefaultEquatorEvoSuiteTest
+org.apache.commons.collections4.functors.OnePredicateEvoSuiteTest
+org.apache.commons.collections4.functors.TransformerClosureEvoSuiteTest
+org.apache.commons.collections4.functors.NullPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.WhileClosureEvoSuiteTest
+org.apache.commons.collections4.functors.EqualPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.ClosureTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.ChainedClosureEvoSuiteTest
+org.apache.commons.collections4.functors.NotPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.ExceptionClosureEvoSuiteTest
+org.apache.commons.collections4.functors.ComparatorPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.CloneTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.StringValueTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.FalsePredicateEvoSuiteTest
+org.apache.commons.collections4.functors.NOPClosureEvoSuiteTest
+org.apache.commons.collections4.functors.InstantiateTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.AllPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.ConstantFactoryEvoSuiteTest
+org.apache.commons.collections4.functors.ChainedTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.ForClosureEvoSuiteTest
+org.apache.commons.collections4.functors.NotNullPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.ExceptionPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.InstanceofPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.AndPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.NullIsTruePredicateEvoSuiteTest
+org.apache.commons.collections4.functors.FactoryTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.MapTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.NOPTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.IfClosureEvoSuiteTest
+org.apache.commons.collections4.functors.TransformerPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.ExceptionFactoryEvoSuiteTest
+org.apache.commons.collections4.functors.SwitchClosureEvoSuiteTest
+org.apache.commons.collections4.functors.NullIsFalsePredicateEvoSuiteTest
+org.apache.commons.collections4.functors.TransformedPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.InstantiateFactoryEvoSuiteTest
+org.apache.commons.collections4.functors.IdentityPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.ExceptionTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.NullIsExceptionPredicateEvoSuiteTest
+org.apache.commons.collections4.functors.InvokerTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.PredicateTransformerEvoSuiteTest
+org.apache.commons.collections4.functors.UniquePredicateEvoSuiteTest
+org.apache.commons.collections4.functors.PrototypeFactoryEvoSuiteTest
+org.apache.commons.collections4.functors.OrPredicateEvoSuiteTest
+org.apache.commons.collections4.QueueUtilsEvoSuiteTest
+org.apache.commons.collections4.TransformerUtilsEvoSuiteTest
+org.apache.commons.collections4.collection.IndexedCollectionEvoSuiteTest
+org.apache.commons.collections4.collection.SynchronizedCollectionEvoSuiteTest
+org.apache.commons.collections4.collection.UnmodifiableBoundedCollectionEvoSuiteTest
+org.apache.commons.collections4.collection.PredicatedCollectionEvoSuiteTest
+org.apache.commons.collections4.collection.TransformedCollectionEvoSuiteTest
+org.apache.commons.collections4.collection.UnmodifiableCollectionEvoSuiteTest
+org.apache.commons.collections4.collection.CompositeCollectionEvoSuiteTest
+org.apache.commons.collections4.sequence.EditScriptEvoSuiteTest
+org.apache.commons.collections4.sequence.InsertCommandEvoSuiteTest
+org.apache.commons.collections4.sequence.KeepCommandEvoSuiteTest
+org.apache.commons.collections4.sequence.ReplacementsFinderEvoSuiteTest
+org.apache.commons.collections4.sequence.EditCommandEvoSuiteTest
+org.apache.commons.collections4.ComparatorUtilsEvoSuiteTest
+org.apache.commons.collections4.bidimap.TreeBidiMapEvoSuiteTest
+org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMapEvoSuiteTest
+org.apache.commons.collections4.bidimap.UnmodifiableBidiMapEvoSuiteTest
+org.apache.commons.collections4.bidimap.DualTreeBidiMapEvoSuiteTest
+org.apache.commons.collections4.bidimap.DualLinkedHashBidiMapEvoSuiteTest
+org.apache.commons.collections4.bidimap.DualHashBidiMapEvoSuiteTest
+org.apache.commons.collections4.trie.UnmodifiableTrieEvoSuiteTest
+org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzerEvoSuiteTest
+org.apache.commons.collections4.trie.KeyAnalyzerEvoSuiteTest
+org.apache.commons.collections4.trie.PatriciaTrieEvoSuiteTest
+org.apache.commons.collections4.bag.HashBagEvoSuiteTest
+org.apache.commons.collections4.bag.TransformedSortedBagEvoSuiteTest
+org.apache.commons.collections4.bag.CompliantBagEvoSuiteTest
+org.apache.commons.collections4.bag.PredicatedSortedBagEvoSuiteTest
+org.apache.commons.collections4.bag.PredicatedBagEvoSuiteTest
+org.apache.commons.collections4.bag.SynchronizedBagEvoSuiteTest
+org.apache.commons.collections4.bag.TreeBagEvoSuiteTest
+org.apache.commons.collections4.bag.TransformedBagEvoSuiteTest
+org.apache.commons.collections4.bag.UnmodifiableBagEvoSuiteTest
+org.apache.commons.collections4.bag.SynchronizedSortedBagEvoSuiteTest
+org.apache.commons.collections4.keyvalue.UnmodifiableMapEntryEvoSuiteTest
+org.apache.commons.collections4.keyvalue.DefaultMapEntryEvoSuiteTest
+org.apache.commons.collections4.keyvalue.MultiKeyEvoSuiteTest
+org.apache.commons.collections4.keyvalue.DefaultKeyValueEvoSuiteTest
+org.apache.commons.collections4.keyvalue.TiedMapEntryEvoSuiteTest
+org.apache.commons.collections4.FactoryUtilsEvoSuiteTest
+org.apache.commons.collections4.map.CompositeMapEvoSuiteTest
+org.apache.commons.collections4.map.UnmodifiableOrderedMapEvoSuiteTest
+org.apache.commons.collections4.map.FixedSizeSortedMapEvoSuiteTest
+org.apache.commons.collections4.map.Flat3MapEvoSuiteTest
+org.apache.commons.collections4.map.SingletonMapEvoSuiteTest
+org.apache.commons.collections4.map.FixedSizeMapEvoSuiteTest
+org.apache.commons.collections4.map.LRUMapEvoSuiteTest
+org.apache.commons.collections4.map.LazyMapEvoSuiteTest
+org.apache.commons.collections4.map.TransformedSortedMapEvoSuiteTest
+org.apache.commons.collections4.map.DefaultedMapEvoSuiteTest
+org.apache.commons.collections4.map.CaseInsensitiveMapEvoSuiteTest
+org.apache.commons.collections4.map.ReferenceMapEvoSuiteTest
+org.apache.commons.collections4.map.EntrySetToMapIteratorAdapterEvoSuiteTest
+org.apache.commons.collections4.map.ReferenceIdentityMapEvoSuiteTest
+org.apache.commons.collections4.map.PredicatedMapEvoSuiteTest
+org.apache.commons.collections4.map.LinkedMapEvoSuiteTest
+org.apache.commons.collections4.map.ListOrderedMapEvoSuiteTest
+org.apache.commons.collections4.map.PassiveExpiringMapEvoSuiteTest
+org.apache.commons.collections4.map.HashedMapEvoSuiteTest
+org.apache.commons.collections4.map.StaticBucketMapEvoSuiteTest
+org.apache.commons.collections4.map.LazySortedMapEvoSuiteTest
+org.apache.commons.collections4.map.PredicatedSortedMapEvoSuiteTest
+org.apache.commons.collections4.map.MultiKeyMapEvoSuiteTest
+org.apache.commons.collections4.map.TransformedMapEvoSuiteTest
+org.apache.commons.collections4.BagUtilsEvoSuiteTest
+org.apache.commons.collections4.comparators.ReverseComparatorEvoSuiteTest
+org.apache.commons.collections4.comparators.TransformingComparatorEvoSuiteTest
+org.apache.commons.collections4.comparators.BooleanComparatorEvoSuiteTest
+org.apache.commons.collections4.comparators.ComparableComparatorEvoSuiteTest
+org.apache.commons.collections4.comparators.NullComparatorEvoSuiteTest
+org.apache.commons.collections4.comparators.ComparatorChainEvoSuiteTest
+org.apache.commons.collections4.comparators.FixedOrderComparatorEvoSuiteTest
+org.apache.commons.collections4.set.TransformedSortedSetEvoSuiteTest
+org.apache.commons.collections4.set.TransformedSetEvoSuiteTest
+org.apache.commons.collections4.set.CompositeSetEvoSuiteTest
+org.apache.commons.collections4.set.PredicatedSetEvoSuiteTest
+org.apache.commons.collections4.set.UnmodifiableSortedSetEvoSuiteTest
+org.apache.commons.collections4.set.ListOrderedSetEvoSuiteTest
+org.apache.commons.collections4.set.UnmodifiableSetEvoSuiteTest
+org.apache.commons.collections4.set.PredicatedSortedSetEvoSuiteTest
+org.apache.commons.collections4.TrieUtilsEvoSuiteTest
