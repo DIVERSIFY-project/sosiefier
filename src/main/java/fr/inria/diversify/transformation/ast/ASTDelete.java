@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.util.Log;
@@ -19,7 +19,7 @@ import java.io.IOException;
  * Date: 7/11/13
  * Time: 4:20 PM
  */
-public class Delete extends Transformation {
+public class ASTDelete extends ASTTransformation {
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
@@ -38,7 +38,7 @@ public class Delete extends Transformation {
 
         JSONArray Jparents = new JSONArray();
         object.put("parents",Jparents);
-        for(Transformation parent : parents) {
+        for(ASTTransformation parent : parents) {
             Jparents.put(parent.toJSONObject());
         }
 
@@ -59,25 +59,25 @@ public class Delete extends Transformation {
     }
 
     @Override
-    public Replace toReplace() throws Exception {
+    public ASTReplace toReplace() throws Exception {
         throw new Exception();
     }
 
     @Override
-    public Add toAdd() throws Exception {
-       Add a = new Add();
+    public ASTAdd toAdd() throws Exception {
+       ASTAdd a = new ASTAdd();
        for (CodeFragment cf : transforms)
             a.addCodeFragmentToAdd(cf,cf);
         return a;
     }
 
     @Override
-    public Delete toDelete() throws Exception {
+    public ASTDelete toDelete() throws Exception {
         return this;
     }
 
     @Override
-    public void add(Transformation delete) {
+    public void add(ASTTransformation delete) {
         transforms.addAll(delete.transforms);
     }
 
@@ -88,9 +88,9 @@ public class Delete extends Transformation {
         return 1;
     }
     public boolean equals(Object other) {
-        if(!(other instanceof Delete))
+        if(!(other instanceof ASTDelete))
             return  false;
-        Delete otherDelete = (Delete)other;
+        ASTDelete otherDelete = (ASTDelete)other;
 
         return failures == otherDelete.failures &&
                 transforms.equals(otherDelete.transforms);

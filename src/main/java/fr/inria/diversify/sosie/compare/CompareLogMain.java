@@ -3,7 +3,7 @@ package fr.inria.diversify.sosie.compare;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
-import fr.inria.diversify.transformation.Replace;
+import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
@@ -16,7 +16,6 @@ import spoon.support.builder.SpoonBuildingManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * User: Simon
@@ -68,7 +67,7 @@ public class CompareLogMain {
             File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
             TransformationParser parser = new TransformationParser(codeFragments);
             Log.info("startPoint {}",startPoint.getAbsolutePath());
-            CodeFragment cf = ((Replace)parser.parseUniqueTransformation(startPoint)).getPosition();
+            CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
 
             CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, f.getAbsolutePath(), cf, varToExclude);
             un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));

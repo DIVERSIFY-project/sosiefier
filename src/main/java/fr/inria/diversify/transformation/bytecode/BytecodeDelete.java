@@ -1,4 +1,4 @@
-package fr.inria.diversify.javassist;
+package fr.inria.diversify.transformation.bytecode;
 
 import fr.inria.diversify.util.Log;
 import javassist.CtMethod;
@@ -15,7 +15,7 @@ import java.util.List;
  * Date: 11/6/13
  * Time: 3:20 PM
  */
-public class BytecodeDelete extends ByteCodeTransformation {
+public class BytecodeDelete extends BytecodeTransformation {
 
     public BytecodeDelete(CtMethod method, int index)  {
         methodLocation = method;
@@ -41,7 +41,7 @@ public class BytecodeDelete extends ByteCodeTransformation {
 
     @Override
     public String getType() {
-        return "bytecodeDelete";
+        return "delete";
     }
 
     @Override

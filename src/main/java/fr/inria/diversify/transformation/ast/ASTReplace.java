@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.util.DiversifyProperties;
@@ -22,14 +22,14 @@ import java.util.Map;
  * Date: 7/11/13
  * Time: 4:42 PM
  */
-public class Replace extends Transformation {
+public class ASTReplace extends ASTTransformation {
 
     protected String type = "replace";
 
     protected Map<CodeFragment,CodeFragment> replaces;
     protected Map<CodeFragment, Map<String, String>> variableMapping;
 
-    public Replace() {
+    public ASTReplace() {
         replaces = new HashMap<CodeFragment, CodeFragment>();
         variableMapping = new HashMap<CodeFragment, Map<String, String>>();
     }
@@ -54,7 +54,7 @@ public class Replace extends Transformation {
 
         JSONArray Jparents = new JSONArray();
         object.put("parents",Jparents);
-        for(Transformation parent : parents) {
+        for(ASTTransformation parent : parents) {
             Jparents.put(parent.toJSONObject());
         }
 
@@ -115,21 +115,21 @@ public class Replace extends Transformation {
     }
 
     @Override
-    public Replace toReplace() throws Exception {
+    public ASTReplace toReplace() throws Exception {
         return this;
     }
 
     @Override
-    public Add toAdd() throws Exception {
-        Add a = new Add();
+    public ASTAdd toAdd() throws Exception {
+        ASTAdd a = new ASTAdd();
         for (CodeFragment cf : transforms)
             a.addCodeFragmentToAdd(cf,replaces.get(cf));
         return a;
     }
 
     @Override
-    public Delete toDelete() throws Exception {
-        Delete delete = new Delete();
+    public ASTDelete toDelete() throws Exception {
+        ASTDelete delete = new ASTDelete();
         for(CodeFragment codeFragment : transforms) {
             delete.addCodeFragmentToTransform(codeFragment);
         }
@@ -149,10 +149,10 @@ public class Replace extends Transformation {
     }
 
     @Override
-    public void add(Transformation replace) {
+    public void add(ASTTransformation replace) {
         transforms.addAll(replace.transforms);
-        this.replaces.putAll(((Replace)replace).replaces);
-        this.variableMapping.putAll(((Replace)replace).variableMapping);
+        this.replaces.putAll(((ASTReplace)replace).replaces);
+        this.variableMapping.putAll(((ASTReplace)replace).variableMapping);
     }
 
     public  int hashCode() {
@@ -161,7 +161,7 @@ public class Replace extends Transformation {
     public boolean equals(Object other) {
         if(!this.getClass().isAssignableFrom(other.getClass()))
             return  false;
-        Replace otherReplace = (Replace)other;
+        ASTReplace otherReplace = (ASTReplace)other;
 
         return type.equals(otherReplace.type) && failures == otherReplace.failures &&
                 variableMapping.equals(otherReplace.variableMapping) &&

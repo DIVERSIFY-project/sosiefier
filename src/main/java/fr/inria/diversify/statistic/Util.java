@@ -4,9 +4,10 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.transformation.*;
-import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
-import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.util.Log;
+import fr.inria.diversify.transformation.ast.ASTAdd;
+import fr.inria.diversify.transformation.ast.ASTDelete;
+import fr.inria.diversify.transformation.ast.ASTReplace;
+import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtStatement;
@@ -100,23 +101,23 @@ public class Util {
         return nb;
     }
 
-    public Set<ITransformation> getStupidTransformation(int nb, TransformationQuery query) {
+    public Set<ITransformation> getStupidTransformation(int nb, ASTTransformationQuery query) {
         Set<ITransformation> transformations = new HashSet<ITransformation>();
         for(int i = 0; i < nb; i++) {
             try {
-                Replace replace = query.replace();
+                ASTReplace replace = query.replace();
                 CodeFragment position = replace.getPosition();
 
                 transformations.add(replace);
-                Replace stupidReplace = query.replace(position);
+                ASTReplace stupidReplace = query.replace(position);
                 stupidReplace.setType("stupidReplace");
                 transformations.add(stupidReplace);
                 transformations.add(query.veryStupidReplace(position));
 
                 transformations.add(query.add(position));
-                Add stupidAdd = query.add(position);
-                stupidAdd.setType("stupidAdd");
-                transformations.add(stupidAdd);
+                ASTAdd stupidASTAdd = query.add(position);
+                stupidASTAdd.setType("stupidAdd");
+                transformations.add(stupidASTAdd);
                 transformations.add(query.veryStupidAdd(position));
 
                 transformations.add(query.delete(position));
@@ -138,7 +139,7 @@ public class Util {
                     public void run() {
                         for (CodeFragment cf2 : findCandidate(cfTmp)) {
                             for (Map<String, String> varMapping : getAllVarMapping(cfTmp, cf2)) {
-                                Replace r = new Replace();
+                                ASTReplace r = new ASTReplace();
                                 CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
                                 r.addCodeFragmentToReplace(cfTmp, new Statement(tmp));
                                 r.addVarMapping(cfTmp, varMapping);
@@ -160,7 +161,7 @@ public class Util {
         Set<ITransformation> allReplace = new HashSet<ITransformation>();
 
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
-                    Delete r = new Delete();
+                    ASTDelete r = new ASTDelete();
                     r.addCodeFragmentToTransform(cf1);
                     allReplace.add(r);
         }
@@ -177,7 +178,7 @@ public class Util {
                 public void run() {
                     for (CodeFragment cf2 : findCandidate(cfTmp)) {
                         for (Map<String,String> varMapping : getAllVarMapping(cfTmp,cf2)) {
-                            Add r = new Add();
+                            ASTAdd r = new ASTAdd();
                             CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
                             r.addCodeFragmentToAdd(cfTmp,new Statement(tmp));
                             r.addVarMapping(cfTmp,varMapping);

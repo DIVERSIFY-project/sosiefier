@@ -3,8 +3,7 @@ package fr.inria.diversify.statistic;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.transformation.ITransformation;
-import fr.inria.diversify.transformation.Replace;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -42,7 +41,7 @@ public class StatisticDiversification {
         this.numberOfFailureMax = 0;
     }
 
-    public void addTransformation(Transformation t) {
+    public void addTransformation(ASTTransformation t) {
         transformations.add(t);
     }
 
@@ -158,7 +157,7 @@ public class StatisticDiversification {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        ((Transformation)transformations.toArray()[0]).writeHead(bw,separator);
+        ((ASTTransformation)transformations.toArray()[0]).writeHead(bw,separator);
 
         bw.write("\n");
 

@@ -1,4 +1,4 @@
-package fr.inria.diversify.javassist;
+package fr.inria.diversify.transformation.bytecode;
 
 import fr.inria.diversify.util.Log;
 import javassist.CtMethod;
@@ -16,21 +16,20 @@ import java.util.List;
 /**
  * User: Simon
  * Date: 11/6/13
- * Time: 5:28 PM
+ * Time: 5:29 PM
  */
-public class BytecodeAdd extends ByteCodeTransformation {
-    protected byte[] byteCodeToAdd;
+public class BytecodeReplace extends BytecodeTransformation {
+    protected byte[] byteCodeToReplace;
 
-
-    public BytecodeAdd(CtMethod method, int index, byte[] bytecode) {
+    public BytecodeReplace(CtMethod method, int index, byte[] bytecode) {
         methodLocation = method;
         opcodeIndex = index;
-        byteCodeToAdd = bytecode;
+        byteCodeToReplace = bytecode;
     }
 
     @Override
     public String getType() {
-        return "bytecodeAdd";
+        return "replace";
     }
 
     @Override
@@ -55,13 +54,18 @@ public class BytecodeAdd extends ByteCodeTransformation {
 
         List<Integer> opCodeIndexList = opCodeIndexList(ca);
 
-        Log.info("add opcode in method {} at index {} (size: {})", methodLocation.getName(), opCodeIndexList.get(opcodeIndex), byteCodeToAdd.length);
-        addOpcode(ca, opCodeIndexList.get(opcodeIndex),byteCodeToAdd);
+        Log.info("replace opcode in method {} at index {} (size: {})", methodLocation.getName(), opCodeIndexList.get(opcodeIndex), byteCodeToReplace.length);
+        deleteOpcode(ca, opCodeIndexList.get(opcodeIndex), byteCodeSize(ca, opCodeIndexList, opcodeIndex));
+        addOpcode(ca, opCodeIndexList.get(opcodeIndex),byteCodeToReplace);
     }
 
+    protected void deleteOpcode(CodeAttribute ca, int index, int size) {
+        CodeIterator i = ca.iterator();
+        byte[] NOPByte = new byte[size];
+        i.write(NOPByte,index);
+    }
     protected void addOpcode(CodeAttribute ca, int index, byte[] bytecode) throws BadBytecode {
         CodeIterator i = ca.iterator();
-
         i.insert(index, bytecode);
     }
 }

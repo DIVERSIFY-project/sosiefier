@@ -1,7 +1,6 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,12 +20,12 @@ import java.util.Map;
  * Date: 7/11/13
  * Time: 4:33 PM
  */
-public class Add extends Transformation {
+public class ASTAdd extends ASTTransformation {
     protected String type = "add";
     protected Map<CodeFragment, CodeFragment> adds;
     protected HashMap<CodeFragment, Map<String, String>> variableMapping;
 
-    public Add() {
+    public ASTAdd() {
         adds = new HashMap<CodeFragment, CodeFragment>();
         variableMapping = new HashMap<CodeFragment, Map<String, String>>();
     }
@@ -48,7 +47,7 @@ public class Add extends Transformation {
 
         JSONArray Jparents = new JSONArray();
         object.put("parents",Jparents);
-        for(Transformation parent : parents) {
+        for(ASTTransformation parent : parents) {
             Jparents.put(parent.toJSONObject());
         }
 
@@ -100,18 +99,18 @@ public class Add extends Transformation {
     }
 
     @Override
-    public Replace toReplace() throws Exception {
+    public ASTReplace toReplace() throws Exception {
         throw new Exception();
     }
 
     @Override
-    public Add toAdd() throws Exception {
+    public ASTAdd toAdd() throws Exception {
         return this;
     }
 
     @Override
-    public Delete toDelete() throws Exception {
-        Delete d = new Delete();
+    public ASTDelete toDelete() throws Exception {
+        ASTDelete d = new ASTDelete();
         for (CodeFragment cf : transforms)
             d.addCodeFragmentToTransform(cf);
         return d;
@@ -125,9 +124,9 @@ public class Add extends Transformation {
         return true;
     }
 
-    public void add(Transformation add) {
+    public void add(ASTTransformation add) {
         transforms.addAll(add.transforms);
-        adds.putAll(((Add)add).adds);
+        adds.putAll(((ASTAdd)add).adds);
     }
     public  int hashCode() {
         return 1;
@@ -135,13 +134,13 @@ public class Add extends Transformation {
     public boolean equals(Object other) {
         if(!this.getClass().isAssignableFrom(other.getClass()))
             return  false;
-        Add otherAdd = (Add)other;
+        ASTAdd otherASTAdd = (ASTAdd)other;
 
-        return type.equals(otherAdd.type) &&
-                failures == otherAdd.failures &&
-                variableMapping.equals(otherAdd.variableMapping) &&
-                transforms.equals(otherAdd.transforms) &&
-                adds.equals(otherAdd.adds);
+        return type.equals(otherASTAdd.type) &&
+                failures == otherASTAdd.failures &&
+                variableMapping.equals(otherASTAdd.variableMapping) &&
+                transforms.equals(otherASTAdd.transforms) &&
+                adds.equals(otherASTAdd.adds);
     }
 
     @Override

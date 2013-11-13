@@ -3,10 +3,10 @@ package fr.inria.diversify.statistic;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
-import fr.inria.diversify.transformation.Add;
-import fr.inria.diversify.transformation.Delete;
-import fr.inria.diversify.transformation.Replace;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTReplace;
+import fr.inria.diversify.transformation.ast.ASTAdd;
+import fr.inria.diversify.transformation.ast.ASTDelete;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtStatement;
@@ -47,13 +47,13 @@ public class DiversificationMax extends Thread {
         return list;
     }
 
-    public List<Transformation> getAllReplace() {
-        List<Transformation> allReplace = new ArrayList<Transformation>();
+    public List<ASTTransformation> getAllReplace() {
+        List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
 
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
             for (CodeFragment cf2 : findCandidate(cf1)) {
                 for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
-                    Replace r = new Replace();
+                    ASTReplace r = new ASTReplace();
                     CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
                     r.addCodeFragmentToReplace(cf1,new Statement(tmp));
                     r.addVarMapping(cf1,varMapping);
@@ -65,24 +65,24 @@ public class DiversificationMax extends Thread {
         return allReplace;
     }
 
-    public List<Transformation> getAllDelete() {
-        List<Transformation> allReplace = new ArrayList<Transformation>();
+    public List<ASTTransformation> getAllDelete() {
+        List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
 
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
-            Delete r = new Delete();
+            ASTDelete r = new ASTDelete();
             r.addCodeFragmentToTransform(cf1);
             allReplace.add(r);
         }
         return allReplace;
     }
 
-    public List<Transformation> getAllAdd() {
-        List<Transformation> allReplace = new ArrayList<Transformation>();
+    public List<ASTTransformation> getAllAdd() {
+        List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
 
         for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
             for (CodeFragment cf2 : findCandidate(cf1)) {
                 for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
-                    Add r = new Add();
+                    ASTAdd r = new ASTAdd();
                     CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
                     r.addCodeFragmentToAdd(cf1,new Statement(tmp));
                     r.addVarMapping(cf1,varMapping);

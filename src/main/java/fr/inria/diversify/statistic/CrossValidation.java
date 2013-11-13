@@ -1,12 +1,10 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -15,21 +13,21 @@ import java.util.*;
  * Time: 4:30 PM
  */
 public class CrossValidation {
-    protected Set<Transformation>[] subSet;
+    protected Set<ASTTransformation>[] subSet;
     protected int nbOfSubSet;
     protected char separator = ';';
 
-    public CrossValidation(Collection<Transformation> transformations, int nbOfSubSet) {
+    public CrossValidation(Collection<ASTTransformation> transformations, int nbOfSubSet) {
         this.nbOfSubSet = nbOfSubSet;
         int subSetSize = (int) (((double)transformations.size())/(double)nbOfSubSet);
         subSet = new HashSet[nbOfSubSet];
-        LinkedList<Transformation> tmp = new LinkedList<Transformation>(transformations);
+        LinkedList<ASTTransformation> tmp = new LinkedList<ASTTransformation>(transformations);
         Random r = new Random();
 
         for (int i = 0; i < nbOfSubSet; i++) {
-            subSet[i] = new HashSet<Transformation>();
+            subSet[i] = new HashSet<ASTTransformation>();
             for(int j = 0; j < subSetSize; j++) {
-                Transformation t = tmp.remove(r.nextInt(tmp.size()));
+                ASTTransformation t = tmp.remove(r.nextInt(tmp.size()));
                 subSet[i].add(t);
             }
         }
@@ -57,17 +55,17 @@ public class CrossValidation {
         bw.close();
     }
 
-    protected int nbOfSosie(Set<Transformation> set) {
+    protected int nbOfSosie(Set<ASTTransformation> set) {
         int count = 0;
 
-        for (Transformation transformation : set)
+        for (ASTTransformation transformation : set)
             if(transformation.numberOfFailure() == 0)
                 count++;
 
         return count;
     }
 
-    protected int nbOfIncorrectVariant(Set<Transformation> set) {
+    protected int nbOfIncorrectVariant(Set<ASTTransformation> set) {
         return set.size() - nbOfSosie(set);
     }
 }

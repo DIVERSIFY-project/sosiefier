@@ -1,7 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.ITransformation;
-import fr.inria.diversify.transformation.query.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 

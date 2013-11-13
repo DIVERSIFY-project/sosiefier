@@ -1,9 +1,9 @@
-package fr.inria.diversify.transformation.query;
+package fr.inria.diversify.transformation.query.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.transformation.ITransformation;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.transformation.query.ITransformationQuery;
 import spoon.reflect.Factory;
 import spoon.reflect.declaration.CtElement;
 
@@ -16,7 +16,7 @@ import java.util.Random;
  * Date: 7/17/13
  * Time: 10:17 AM
  */
-public abstract class AbstractTransformationQuery implements ITransformationQuery{
+public abstract class AbstractTransformationQuery implements ITransformationQuery {
     protected CodeFragmentList codeFragments;
     protected int nbTransformation = 1;
     protected String type = "replace";
@@ -29,7 +29,7 @@ public abstract class AbstractTransformationQuery implements ITransformationQuer
         this.type = type;
     }
 
-    public Transformation getTransformation() throws Exception {
+    public ASTTransformation getTransformation() throws Exception {
         String type = this.type;
         if(type == null) {
             Random r = new Random();
@@ -51,15 +51,14 @@ public abstract class AbstractTransformationQuery implements ITransformationQuer
         if(type.equals("delete"))
             return delete();
 
-//        cfToTransform.clear();
         return null;
     }
 
-    public abstract Transformation delete() throws Exception ;
+    public abstract ASTTransformation delete() throws Exception ;
 
-    public abstract Transformation add() throws Exception ;
+    public abstract ASTTransformation add() throws Exception ;
 
-    public abstract Transformation replace() throws Exception ;
+    public abstract ASTTransformation replace() throws Exception ;
 
 
     protected CtElement copyElem(CtElement elem) {

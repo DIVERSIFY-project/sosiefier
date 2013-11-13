@@ -1,6 +1,7 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.processing.Environment;
@@ -18,14 +19,14 @@ import java.util.List;
  * Date: 7/11/13
  * Time: 4:15 PM
  */
-public abstract class Transformation implements ITransformation{
+public abstract class ASTTransformation implements ITransformation {
     protected List<CodeFragment> transforms;
     protected Integer failures;
-    protected List<Transformation> parents;
+    protected List<ASTTransformation> parents;
 
-    public Transformation() {
+    public ASTTransformation() {
         transforms = new ArrayList<CodeFragment>();
-        parents = new ArrayList<Transformation>();
+        parents = new ArrayList<ASTTransformation>();
     }
 
     public void apply(String srcDir) throws Exception {
@@ -79,7 +80,7 @@ public abstract class Transformation implements ITransformation{
         transforms.add(cf);
     }
 
-    public void addParent(Transformation p) {
+    public void addParent(ASTTransformation p) {
         parents.add(p);
     }
 
@@ -95,11 +96,11 @@ public abstract class Transformation implements ITransformation{
         return failures;
     }
 
-    public abstract Replace toReplace() throws Exception;
-    public abstract Add toAdd() throws Exception;
-    public abstract Delete toDelete() throws Exception;
+    public abstract ASTReplace toReplace() throws Exception;
+    public abstract ASTAdd toAdd() throws Exception;
+    public abstract ASTDelete toDelete() throws Exception;
 
-    public abstract void add(Transformation replace);
+    public abstract void add(ASTTransformation replace);
 
     public String positionString() {
         String ret = "";
