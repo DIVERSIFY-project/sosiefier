@@ -1,7 +1,8 @@
 package fr.inria.diversify.statistic;
 
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.codeFragment.CodeFragmentListUtils;
 import fr.inria.diversify.codeFragment.Context;
 import fr.inria.diversify.codeFragment.InputContext;
 
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class  StatisticCodeFragment {
-	private CodeFragmentList statements;
+	private CodeFragmentListUtils codeFragments;
 	protected static char separator = ';';
     protected static String typeFileSuffix = "_stmt.csv";
     protected static String superTypeFileSuffix = "_superStmt.csv";
@@ -23,8 +24,10 @@ public class  StatisticCodeFragment {
     protected static String contextFileSuffix = "_uniqueContext.csv";
     protected static String uniqueContextFileSuffix = "_uniqueInputContext.csv";
 	
-	public StatisticCodeFragment(CodeFragmentList statements) {
-		this.statements = statements;
+	public StatisticCodeFragment(CodeFragmentList codeFragments) {
+        this.codeFragments = new CodeFragmentListUtils();
+        for(CodeFragment cf : codeFragments)
+        this.codeFragments.add(cf);
 	}
 	
 	public void writeStatistic(String fileName) throws IOException {
@@ -34,46 +37,46 @@ public class  StatisticCodeFragment {
 		writeSummary(new File(fileName+packageFileSuffix), statisticByPackage());
         writeSummary(new File(fileName+superTypeFileSuffix), statisticBySuperStatement());
 		
-		writeStatement(new File(fileName+codeFragmentFileSuffix), statements.getUniqueCodeFragments());
-		writeUniqueContext(new File(fileName+contextFileSuffix), statements.getUniqueContext());
-		writeUniqueInputContext(new File(fileName+uniqueContextFileSuffix), statements.getUniqueInputContext());
+		writeStatement(new File(fileName+codeFragmentFileSuffix), codeFragments.getUniqueCodeFragments());
+		writeUniqueContext(new File(fileName+contextFileSuffix), codeFragments.getUniqueContext());
+		writeUniqueInputContext(new File(fileName+uniqueContextFileSuffix), codeFragments.getUniqueInputContext());
 	}
 	
-	public Map<String,CodeFragmentList> statisticByStatement() {
-        Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
+	public Map<String,CodeFragmentListUtils> statisticByStatement() {
+        Map<String,CodeFragmentListUtils> map = new HashMap<String, CodeFragmentListUtils>();
 
-        map.put("all",statements);
-        for (CodeFragment statement : statements.getCodeFragments()) {
+        map.put("all",codeFragments);
+        for (CodeFragment statement : codeFragments.getCodeFragments()) {
             String stmtType = statement.getCodeFragmentType().getSimpleName();
             if(!map.containsKey(stmtType))
-                map.put(stmtType,new CodeFragmentList());
+                map.put(stmtType,new CodeFragmentListUtils());
             map.get(stmtType).add(statement);
         }
         return map;
     }
 
-    public Map<String,CodeFragmentList> statisticBySuperStatement() {
-        Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
+    public Map<String,CodeFragmentListUtils> statisticBySuperStatement() {
+        Map<String,CodeFragmentListUtils> map = new HashMap<String, CodeFragmentListUtils>();
 
-        map.put("all",statements);
-        for (CodeFragment statement : statements.getCodeFragments()) {
+        map.put("all",codeFragments);
+        for (CodeFragment statement : codeFragments.getCodeFragments()) {
             String stmtType = statement.getCodeFragmentSuperType().getSimpleName();
             if(!map.containsKey(stmtType))
-                map.put(stmtType,new CodeFragmentList());
+                map.put(stmtType,new CodeFragmentListUtils());
             map.get(stmtType).add(statement);
         }
         return map;
     }
 	
-	public Map<String,CodeFragmentList> statisticByClass() {
-		Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
+	public Map<String,CodeFragmentListUtils> statisticByClass() {
+		Map<String,CodeFragmentListUtils> map = new HashMap<String, CodeFragmentListUtils>();
 		
-		map.put("all", statements);
-		for (CodeFragment statement : statements.getCodeFragments()) {
+		map.put("all", codeFragments);
+		for (CodeFragment statement : codeFragments.getCodeFragments()) {
             try {
                 String stmtType = statement.getSourceClass().getQualifiedName();
                 if(!map.containsKey(stmtType))
-                    map.put(stmtType,new CodeFragmentList());
+                    map.put(stmtType,new CodeFragmentListUtils());
                 map.get(stmtType).add(statement);
             }catch (Exception e) {
 
@@ -84,15 +87,15 @@ public class  StatisticCodeFragment {
 		return map;
 	}
 
-	public Map<String,CodeFragmentList> statisticByPackage() {
-		Map<String,CodeFragmentList> map = new HashMap<String, CodeFragmentList>();
+	public Map<String,CodeFragmentListUtils> statisticByPackage() {
+		Map<String,CodeFragmentListUtils> map = new HashMap<String, CodeFragmentListUtils>();
 		
-		map.put("all", statements);
-		for (CodeFragment statement : statements.getCodeFragments()) {
+		map.put("all", codeFragments);
+		for (CodeFragment statement : codeFragments.getCodeFragments()) {
             try {
                 String stmtType = statement.getSourcePackage().getQualifiedName();
                 if(!map.containsKey(stmtType))
-                    map.put(stmtType,new CodeFragmentList());
+                    map.put(stmtType,new CodeFragmentListUtils());
                 map.get(stmtType).add(statement);
             }   catch (Exception e) {
 
@@ -100,22 +103,18 @@ public class  StatisticCodeFragment {
 
 		}
 
-//        StatementGraph g = new StatementGraph();
-//        g.buildGraph(map.get("org.jfree.data.jdbc").idToStatement.values());
-//        g.displayGraph();
-
 		return map;
 	}
 
 	
-	public void writeSummary(File file, Map<String, CodeFragmentList> data) throws IOException {
+	public void writeSummary(File file, Map<String, CodeFragmentListUtils> data) throws IOException {
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
 		bw.write(getSummaryHeadLine()+"\n");
 		
 		
 		for (String key : data.keySet()) {
-            CodeFragmentList stat = data.get(key);
+            CodeFragmentListUtils stat = data.get(key);
 			int popSize = stat.size();
 			bw.write(key + separator
 					+ stat.size() + separator

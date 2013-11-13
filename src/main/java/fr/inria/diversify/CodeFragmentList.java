@@ -10,16 +10,20 @@ import java.util.*;
  * Date: 13/11/13
  * Time: 10:57
  */
-public class CodeFragmentList2 extends LinkedList<CodeFragment> {
+public class CodeFragmentList extends LinkedList<CodeFragment> {
     protected Map<Integer,Integer> uniqueCodeFragment;
     protected Map<Integer,CodeFragment> idToCodeFragment;
-    private Collection<CodeFragment> collection;
 
-    public CodeFragmentList2(List<CodeFragment> codeFragments) {
+    public CodeFragmentList(List<CodeFragment> codeFragments) {
         uniqueCodeFragment = new HashMap<Integer, Integer>();
         idToCodeFragment = new HashMap<Integer,CodeFragment>();
         this.addAll(codeFragments);
 
+    }
+
+    public CodeFragmentList() {
+        uniqueCodeFragment = new HashMap<Integer, Integer>();
+        idToCodeFragment = new HashMap<Integer,CodeFragment>();
     }
 
     public List<CtSimpleType> getAllClasses() {
@@ -31,8 +35,8 @@ public class CodeFragmentList2 extends LinkedList<CodeFragment> {
         return classes;
     }
 
-    public Map<Integer, Integer> getUniqueCodeFragments() {
-        return uniqueCodeFragment;
+    public Collection<CodeFragment> getUniqueCodeFragmentList() {
+        return idToCodeFragment.values();
     }
 
     public boolean add(CodeFragment cf) {

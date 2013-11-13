@@ -1,6 +1,5 @@
 package fr.inria.diversify;
 
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;

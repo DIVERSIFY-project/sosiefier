@@ -12,7 +12,7 @@ import java.util.*;
  * Date: 5/3/13
  * Time: 10:08 AM
  */
-public class CodeFragmentList {
+public class CodeFragmentListUtils {
     protected List<CodeFragment> codeFragments;
 
     protected Map<InputContext,Integer> uniqueInputContext;
@@ -21,14 +21,8 @@ public class CodeFragmentList {
     protected Map<Integer,Integer> uniqueCodeFragment;
     protected Map<Integer,CodeFragment> idToCodeFragment;
 
-    public CodeFragmentList(List<CodeFragment> codeFragments) {
-        init();
-        this.codeFragments = codeFragments;
-        for (CodeFragment statement : codeFragments)
-            add(statement);
-    }
 
-    public CodeFragmentList() {
+    public CodeFragmentListUtils() {
         init();
     }
 

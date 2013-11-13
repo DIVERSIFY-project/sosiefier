@@ -1,7 +1,7 @@
 package fr.inria.diversify.statistic;
 
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -50,7 +50,7 @@ public class DiversificationMax extends Thread {
     public List<ASTTransformation> getAllReplace() {
         List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
 
-        for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
+        for (CodeFragment cf1 : codeFragments) {
             for (CodeFragment cf2 : findCandidate(cf1)) {
                 for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
                     ASTReplace r = new ASTReplace();
@@ -68,7 +68,7 @@ public class DiversificationMax extends Thread {
     public List<ASTTransformation> getAllDelete() {
         List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
 
-        for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
+        for (CodeFragment cf1 : codeFragments) {
             ASTDelete r = new ASTDelete();
             r.addCodeFragmentToTransform(cf1);
             allReplace.add(r);
@@ -79,7 +79,7 @@ public class DiversificationMax extends Thread {
     public List<ASTTransformation> getAllAdd() {
         List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
 
-        for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
+        for (CodeFragment cf1 : codeFragments) {
             for (CodeFragment cf2 : findCandidate(cf1)) {
                 for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
                     ASTAdd r = new ASTAdd();

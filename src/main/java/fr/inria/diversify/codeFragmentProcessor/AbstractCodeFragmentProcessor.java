@@ -1,7 +1,7 @@
 package fr.inria.diversify.codeFragmentProcessor;
 
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtElement;
 

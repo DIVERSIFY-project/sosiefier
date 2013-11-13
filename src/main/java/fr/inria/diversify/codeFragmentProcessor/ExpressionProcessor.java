@@ -1,9 +1,7 @@
 package fr.inria.diversify.codeFragmentProcessor;
 
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Expression;
 import fr.inria.diversify.util.Log;
-import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtExpression;
 
 /**

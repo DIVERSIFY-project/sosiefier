@@ -1,7 +1,7 @@
 package fr.inria.diversify.statistic;
 
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
@@ -25,7 +25,7 @@ public class StatisticDiversification {
 
     protected Collection<ITransformation> transformations;
     protected int numberOfFailureMax;
-    protected  CodeFragmentList codeFragmentList;
+    protected CodeFragmentList codeFragmentList;
 
     public StatisticDiversification(Collection<ITransformation> transformations, CodeFragmentList codeFragmentList) {
         this.transformations = transformations;
@@ -118,7 +118,7 @@ public class StatisticDiversification {
         Util util = new Util(codeFragmentList);
 
         bw.write("stmtClass"+separator+"stmtPackage"+separator+"stmtInputContextSize"+separator+"stmtType"+separator+"nbCandidate"+separator+"nbDiversification\n");
-        for (CodeFragment cf1 : codeFragmentList.getCodeFragments()) {
+        for (CodeFragment cf1 : codeFragmentList) {
 //            long nb = 0;
             BigInteger nb = new BigInteger("0");
             StringBuffer sb = new StringBuffer();

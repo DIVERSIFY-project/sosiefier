@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.query.ast;
 
-import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -19,7 +19,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
 
     public ASTTransformationQueryFromList(List<ITransformation> transformation, ICoverageReport cr, CodeFragmentList codeFragments) {
         this.transformation = transformation;
-        this.codeFragments = codeFragments;
+//        this.codeFragments = codeFragments;
         this.coverageReport = cr;
     }
 

@@ -1,14 +1,13 @@
 package fr.inria.diversify.transformation.query.ast;
 
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import spoon.reflect.Factory;
 import spoon.reflect.declaration.CtElement;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -66,10 +65,6 @@ public abstract class AbstractTransformationQuery implements ITransformationQuer
         CtElement tmp = factory.Core().clone(elem);
         tmp.setParent(elem.getParent());
         return tmp;
-    }
-
-    protected List<CodeFragment> getAllCodeFragments() {
-        return codeFragments.getCodeFragments();
     }
 
     protected Collection<CodeFragment> getAllUniqueCodeFragments() {

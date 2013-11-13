@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation.query.ast;
 
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -77,8 +77,8 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         Random r = new Random();
         ASTReplace tf = new ASTReplace();
         tf.setType("VeryStupidReplace");
-        int size = getAllCodeFragments().size();
-        CodeFragment cfReplacedBy = getAllCodeFragments().get(r.nextInt(size));
+        int size = codeFragments.size();
+        CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
         tf.addCodeFragmentToReplace(cfToReplace,cfReplacedBy);
         return tf;
     }
@@ -117,8 +117,8 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         Random r = new Random();
         ASTAdd tf = new ASTAdd();
         tf.setType("VeryStupidAdd");
-        int size = getAllCodeFragments().size();
-        CodeFragment cfReplacedBy = getAllCodeFragments().get(r.nextInt(size));
+        int size = codeFragments.size();
+        CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
         tf.addCodeFragmentToAdd(cfToReplace, cfReplacedBy);
         return tf;
     }
@@ -158,11 +158,11 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
 
     protected CodeFragment randomCodeFragmentToReplace() {
         Random r = new Random();
-        int size = getAllCodeFragments().size();
-        CodeFragment stmt = getAllCodeFragments().get(r.nextInt(size));
+        int size = codeFragments.size();
+        CodeFragment stmt = codeFragments.get(r.nextInt(size));
 
         while (coverageReport.codeFragmentCoverage(stmt) == 0)
-            stmt = getAllCodeFragments().get(r.nextInt(size));
+            stmt = codeFragments.get(r.nextInt(size));
         return stmt;
     }
 

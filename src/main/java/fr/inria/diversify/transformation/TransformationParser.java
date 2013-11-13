@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -170,7 +170,7 @@ public class TransformationParser {
 
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws Exception {
         CodeFragment cf = null;
-        for (CodeFragment codeFragment : codeFragments.getCodeFragments()) {
+        for (CodeFragment codeFragment : codeFragments) {
              try {
             if (codeFragment.getCodeFragmentType().getSimpleName().equals(jsonObject.get("Type"))
                     && codeFragment.positionString().equals(jsonObject.get("Position"))  ){

@@ -1,7 +1,7 @@
 package fr.inria.diversify.statistic;
 
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -35,7 +35,7 @@ public class Util {
     public long numberOfNotDiversification() throws InterruptedException {
         final List<Object> list = new LinkedList<Object>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
-        for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
+        for (CodeFragment cf1 : codeFragments) {
             final CodeFragment cfTmp = cf1;
 
             pool.submit(new Runnable() {
@@ -55,7 +55,7 @@ public class Util {
     public BigInteger numberOfDiversification() throws InterruptedException {
         final List<Object> list = new LinkedList<Object>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
-        for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
+        for (CodeFragment cf1 : codeFragments) {
             final  CodeFragment cfTmp = cf1;
             pool.submit(new Runnable() {
                 @Override
@@ -132,7 +132,7 @@ public class Util {
     public Set<ITransformation> getAllReplace() throws InterruptedException {
         final Set<ITransformation> allReplace = new HashSet<ITransformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
-        for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
+        for (CodeFragment cf1 : codeFragments) {
                 final  CodeFragment cfTmp = cf1;
                 pool.submit(new Runnable() {
                     @Override
@@ -160,7 +160,7 @@ public class Util {
     public Set<ITransformation> getAllDelete() {
         Set<ITransformation> allReplace = new HashSet<ITransformation>();
 
-        for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
+        for (CodeFragment cf1 : codeFragments) {
                     ASTDelete r = new ASTDelete();
                     r.addCodeFragmentToTransform(cf1);
                     allReplace.add(r);
@@ -171,7 +171,7 @@ public class Util {
     public Set<ITransformation> getAllAdd() throws InterruptedException {
         final Set<ITransformation> allReplace = new HashSet<ITransformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
-        for (CodeFragment cf1 : codeFragments.getCodeFragments()) {
+        for (CodeFragment cf1 : codeFragments) {
             final  CodeFragment cfTmp = cf1;
             pool.submit(new Runnable() {
                 @Override
