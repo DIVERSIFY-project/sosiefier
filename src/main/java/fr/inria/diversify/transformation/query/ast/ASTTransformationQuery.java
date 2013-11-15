@@ -58,7 +58,8 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
                 cfToReplace = cfToTransform.get(i);
                 cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
             }
-            tf.addCodeFragmentToReplace(cfToReplace,cfReplacedBy);
+            tf.setPosition(cfToReplace);
+            tf.setCodeFragmentToReplace(cfReplacedBy);
         }
         return tf;
     }
@@ -69,7 +70,8 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
         if(cfReplacedBy == null)
             new Exception("pas de candidat pour "+cfToReplace);
-        tf.addCodeFragmentToReplace(cfToReplace,cfReplacedBy);
+        tf.setPosition(cfToReplace);
+        tf.setCodeFragmentToReplace(cfReplacedBy);
         return tf;
     }
 
@@ -79,7 +81,8 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         tf.setType("VeryStupidReplace");
         int size = codeFragments.size();
         CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
-        tf.addCodeFragmentToReplace(cfToReplace,cfReplacedBy);
+        tf.setPosition(cfToReplace);
+        tf.setCodeFragmentToReplace(cfReplacedBy);
         return tf;
     }
 
@@ -98,7 +101,8 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
                 cfToReplace = cfToTransform.get(i);
                 cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
             }
-        tf.addCodeFragmentToAdd(cfToReplace,cfReplacedBy);
+        tf.setPosition(cfToReplace);
+        tf.setCodeFragmentToAdd(cfReplacedBy);
         }
         return tf;
     }
@@ -109,7 +113,8 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
         if(cfReplacedBy == null)
             new Exception("pas de candidat pour "+cfToReplace);
-        tf.addCodeFragmentToAdd(cfToReplace,cfReplacedBy);
+        tf.setPosition(cfToReplace);
+        tf.setCodeFragmentToAdd(cfReplacedBy);
         return tf;
     }
 
@@ -119,7 +124,8 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         tf.setType("VeryStupidAdd");
         int size = codeFragments.size();
         CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
-        tf.addCodeFragmentToAdd(cfToReplace, cfReplacedBy);
+        tf.setPosition(cfToReplace);
+        tf.setCodeFragmentToAdd(cfReplacedBy);
         return tf;
     }
 
@@ -137,14 +143,14 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
 
                 cfToDelete = cfToTransform.get(i);
             }
-            tf.addCodeFragmentToTransform(cfToDelete);
+            tf.setPosition(cfToDelete);
         }
         return tf;
     }
 
     public ASTDelete delete(CodeFragment cfToDelete) throws Exception {
         ASTDelete tf = new ASTDelete();
-        tf.addCodeFragmentToTransform(cfToDelete);
+        tf.setPosition(cfToDelete);
         return tf;
     }
 

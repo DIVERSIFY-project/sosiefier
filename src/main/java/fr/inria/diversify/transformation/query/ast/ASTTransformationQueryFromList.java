@@ -19,7 +19,6 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
 
     public ASTTransformationQueryFromList(List<ITransformation> transformation, ICoverageReport cr, CodeFragmentList codeFragments) {
         this.transformation = transformation;
-//        this.codeFragments = codeFragments;
         this.coverageReport = cr;
     }
 
@@ -30,7 +29,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         ASTTransformation t = null;
         while(coverage == 0) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-            coverage = coverageReport.codeFragmentCoverage(t.getTransformation().get(0));
+            coverage = coverageReport.codeFragmentCoverage(t.getPosition());
         }
         return t.toDelete();
     }
@@ -42,7 +41,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         ASTTransformation t = null;
         while(coverage == 0) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-            coverage = coverageReport.codeFragmentCoverage(t.getTransformation().get(0));
+            coverage = coverageReport.codeFragmentCoverage(t.getPosition());
         }
         return t.toAdd();
     }
@@ -55,7 +54,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         ASTTransformation t = null;
         while(coverage == 0) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-            coverage = coverageReport.codeFragmentCoverage(t.getTransformation().get(0));
+            coverage = coverageReport.codeFragmentCoverage(t.getPosition());
         }
         return t.toReplace();
     }

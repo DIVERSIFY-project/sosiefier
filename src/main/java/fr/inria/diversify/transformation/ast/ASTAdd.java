@@ -22,13 +22,9 @@ import java.util.Map;
  */
 public class ASTAdd extends ASTTransformation {
     protected String type = "add";
-    protected Map<CodeFragment, CodeFragment> adds;
-    protected HashMap<CodeFragment, Map<String, String>> variableMapping;
+    protected CodeFragment add;
+    protected Map<String, String> variableMapping;
 
-    public ASTAdd() {
-        adds = new HashMap<CodeFragment, CodeFragment>();
-        variableMapping = new HashMap<CodeFragment, Map<String, String>>();
-    }
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
@@ -36,12 +32,13 @@ public class ASTAdd extends ASTTransformation {
         object.put("type", type);
         JSONArray array = new JSONArray();
         object.put("transformation", array);
-        for(CodeFragment position: adds.keySet()) {
+
             JSONObject t = new JSONObject();
             t.put("CodeFragmentPosition", position.toJSONObject());
-            t.put("CodeFragmentAdd", adds.get(position).toJSONObject());
+            t.put("CodeFragmentAdd", add.toJSONObject());
+            t.put("VariableMapping", variableMapping);
             array.put(t);
-        }
+
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 
@@ -54,24 +51,20 @@ public class ASTAdd extends ASTTransformation {
         return object;
     }
 
-    protected void addSourceCode(CodeFragment position) throws Exception {
+    protected void addSourceCode() throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(position);
 
         Log.debug("{} transformation",type);
-        Log.debug("cfToAdd:\n {}",adds.get(position));
+        Log.debug("cfToAdd:\n {}", add);
         Log.debug("---------------------\npostion:\n{}",position);
         Log.debug("{}",position.getCtCodeFragment().getPosition());
 
         if(withVarMapping()) {
-            Map<String, String> varMapping;
-            if(variableMapping.isEmpty())
-                varMapping = position.randomVariableMapping(adds.get(position));
-            else
-                varMapping = variableMapping.get(position);
+            if(variableMapping == null)
+                variableMapping = position.randomVariableMapping(add);
 
-            Log.debug("random variable mapping: {}",varMapping);
-            adds.get(position).replaceVar(position, varMapping);
-            variableMapping.put(position,varMapping);
+            Log.debug("random variable mapping: {}",variableMapping);
+            add.replaceVar(position, variableMapping);
         }
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = position.getCtCodeFragment().getPosition();
@@ -87,15 +80,15 @@ public class ASTAdd extends ASTTransformation {
     }
 
     protected String codeFragmentString(CodeFragment cf) {
-        String cFS = adds.get(cf).codeFragmentString();
+        String cFS = add.codeFragmentString();
 //        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
 //            return cFS+";";
 //        else
             return cFS;
     }
 
-    public void addVarMapping(CodeFragment position, Map<String, String> mapping) {
-        variableMapping.put(position, mapping);
+    public void setVarMapping(Map<String, String> mapping) {
+        variableMapping = mapping;
     }
 
     @Override
@@ -110,24 +103,18 @@ public class ASTAdd extends ASTTransformation {
 
     @Override
     public ASTDelete toDelete() throws Exception {
-        ASTDelete d = new ASTDelete();
-        for (CodeFragment cf : transforms)
-            d.addCodeFragmentToTransform(cf);
-        return d;
+//        ASTDelete d = new ASTDelete();
+//        for (CodeFragment cf : position)
+//            d.addCodeFragmentToTransform(cf);
+//        return d;
+        throw new Exception();
     }
 
-    public boolean addCodeFragmentToAdd(CodeFragment position, CodeFragment add) {
-        if(transforms.contains(position))
-            return false;
-        transforms.add(position);
-        adds.put(position,add);
+    public boolean setCodeFragmentToAdd(CodeFragment add) {
+        this.add = add;
         return true;
     }
 
-    public void add(ASTTransformation add) {
-        transforms.addAll(add.transforms);
-        adds.putAll(((ASTAdd)add).adds);
-    }
     public  int hashCode() {
         return 1;
     }
@@ -139,8 +126,8 @@ public class ASTAdd extends ASTTransformation {
         return type.equals(otherASTAdd.type) &&
                 failures == otherASTAdd.failures &&
                 variableMapping.equals(otherASTAdd.variableMapping) &&
-                transforms.equals(otherASTAdd.transforms) &&
-                adds.equals(otherASTAdd.adds);
+                position.equals(otherASTAdd.position) &&
+                add.equals(otherASTAdd.add);
     }
 
     @Override
@@ -161,8 +148,8 @@ public class ASTAdd extends ASTTransformation {
 
     //works only for 1add
     public void write(StringBuffer sb, char separator) {
-        CodeFragment p = transforms.get(0);
-        CodeFragment r = adds.get(p);
+        CodeFragment p = position;
+        CodeFragment r = add;
 
         sb.append(p.getCodeFragmentType().getSimpleName());
         sb.append(separator);
@@ -204,5 +191,15 @@ public class ASTAdd extends ASTTransformation {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        String ret = new String();
+
+        ret = ret + "position: "+position.toString()+"\n" +
+                "varMapping: "+variableMapping+"\n";
+
+        return ret;
     }
 }

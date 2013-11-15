@@ -26,14 +26,8 @@ public class ASTReplace extends ASTTransformation {
 
     protected String type = "replace";
 
-    protected Map<CodeFragment,CodeFragment> replaces;
-    protected Map<CodeFragment, Map<String, String>> variableMapping;
-
-    public ASTReplace() {
-        replaces = new HashMap<CodeFragment, CodeFragment>();
-        variableMapping = new HashMap<CodeFragment, Map<String, String>>();
-    }
-
+    protected CodeFragment replace;
+    protected Map<String, String> variableMapping;
 
 
     @Override
@@ -42,13 +36,13 @@ public class ASTReplace extends ASTTransformation {
         object.put("type", type);
         JSONArray array = new JSONArray();
         object.put("transformation",array);
-        for(CodeFragment position: replaces.keySet()) {
+
             JSONObject t = new JSONObject();
             t.put("CodeFragmentPosition", position.toJSONObject());
-            t.put("CodeFragmentReplace", replaces.get(position).toJSONObject());
-            t.put("VariableMapping", variableMapping.get(position));
+            t.put("CodeFragmentReplace", replace.toJSONObject());
+            t.put("VariableMapping", variableMapping);
             array.put(t);
-        }
+
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 
@@ -62,27 +56,24 @@ public class ASTReplace extends ASTTransformation {
     }
 
     @Override
-    protected void addSourceCode(CodeFragment position) throws Exception {
+    protected void addSourceCode() throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(position);
 
         Log.debug("{} transformation",type);
         Log.debug("position:\n{}",position);
         Log.debug("{}",position.getCtCodeFragment().getPosition());
         Log.debug("{}",position.getCodeFragmentType());
-        Log.debug("replace by:\n{}",replaces.get(position));
+        Log.debug("replace by:\n{}", replace);
 
         if(withVarMapping()) {
-            Map<String, String> varMapping;
-            if(variableMapping.isEmpty()) {
-                varMapping = position.randomVariableMapping(replaces.get(position));
+            if(variableMapping == null) {
+                variableMapping = position.randomVariableMapping(replace);
             }
-            else
-                varMapping = variableMapping.get(position);
 
-            Log.debug("random variable mapping: {}", varMapping);
-            replaces.get(position).replaceVar(position, varMapping);
-            variableMapping.put(position,varMapping);
-            if(replaces.get(position).equals(position.codeFragmentString()))
+
+            Log.debug("random variable mapping: {}", variableMapping);
+            replace.replaceVar(position, variableMapping);
+            if(replace.equals(position.codeFragmentString()))
                 throw new Exception("same statment");
         }
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
@@ -93,7 +84,7 @@ public class ASTReplace extends ASTTransformation {
         if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+
-                replaces.get(position).codeFragmentString()+"\n", 0));
+                replace.codeFragmentString()+"\n", 0));
         }
         else {
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
@@ -107,7 +98,7 @@ public class ASTReplace extends ASTTransformation {
     }
 
     protected String codeFragmentString(CodeFragment cf) {
-        String cFS = replaces.get(cf).codeFragmentString();
+        String cFS = replace.codeFragmentString();
 //        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
 //            return cFS+";";
 //        else
@@ -121,38 +112,30 @@ public class ASTReplace extends ASTTransformation {
 
     @Override
     public ASTAdd toAdd() throws Exception {
-        ASTAdd a = new ASTAdd();
-        for (CodeFragment cf : transforms)
-            a.addCodeFragmentToAdd(cf,replaces.get(cf));
-        return a;
+//        ASTAdd a = new ASTAdd();
+//        for (CodeFragment cf : position)
+//            a.addCodeFragmentToAdd(cf,replaces.get(cf));
+//        return a;
+        throw new Exception();
     }
 
     @Override
     public ASTDelete toDelete() throws Exception {
-        ASTDelete delete = new ASTDelete();
-        for(CodeFragment codeFragment : transforms) {
-            delete.addCodeFragmentToTransform(codeFragment);
-        }
-        return delete;
+//        ASTDelete delete = new ASTDelete();
+//        for(CodeFragment codeFragment : position) {
+//            delete.addCodeFragmentToTransform(codeFragment);
+//        }
+//        return delete;
+        throw new Exception();
     }
 
-    public boolean addCodeFragmentToReplace(CodeFragment position, CodeFragment replace) {
-        if(transforms.contains(position))
-            return false;
-        transforms.add(position);
-        replaces.put(position,replace);
+    public boolean setCodeFragmentToReplace(CodeFragment replace) {
+        this.replace = replace;
         return true;
     }
 
-    public void addVarMapping(CodeFragment position, Map<String, String> mapping) {
-        variableMapping.put(position, mapping);
-    }
-
-    @Override
-    public void add(ASTTransformation replace) {
-        transforms.addAll(replace.transforms);
-        this.replaces.putAll(((ASTReplace)replace).replaces);
-        this.variableMapping.putAll(((ASTReplace)replace).variableMapping);
+    public void setVarMapping(Map<String, String> mapping) {
+        variableMapping = mapping;
     }
 
     public  int hashCode() {
@@ -165,17 +148,17 @@ public class ASTReplace extends ASTTransformation {
 
         return type.equals(otherReplace.type) && failures == otherReplace.failures &&
                 variableMapping.equals(otherReplace.variableMapping) &&
-                transforms.equals(otherReplace.transforms) &&
-                replaces.equals(otherReplace.replaces);
+                position.equals(otherReplace.position) &&
+                replace.equals(otherReplace.replace);
     }
     @Override
     public String toString() {
         String ret = new String();
-        for(CodeFragment position: replaces.keySet()) {
+
             ret = ret + "position: "+position.toString()+"\n" +
-                    type +": "+replaces.get(position).toString()+"\n"+
-                    "varMapping: "+variableMapping.get(position).toString()+"\n";
-        }
+                    type +": "+ replace.toString()+"\n"+
+                    "varMapping: "+variableMapping+"\n";
+
         return ret;
     }
 
@@ -197,8 +180,8 @@ public class ASTReplace extends ASTTransformation {
 
     //works only for 1replace
     public void write(StringBuffer sb, char separator) {
-        CodeFragment t = transforms.get(0);
-        CodeFragment r = replaces.get(t);
+        CodeFragment t = position;
+        CodeFragment r = replace;
 
         sb.append(t.getCodeFragmentType().getSimpleName());
         sb.append(separator);
@@ -236,10 +219,6 @@ public class ASTReplace extends ASTTransformation {
         sb.append(t.getCodeFragmentSuperType().getSimpleName());
         sb.append(separator);
         sb.append(r.getCodeFragmentSuperType().getSimpleName());
-    }
-
-    public CodeFragment getPosition() {
-        return transforms.get(0);
     }
 
     public void setType(String type) {

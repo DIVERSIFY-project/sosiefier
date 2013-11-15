@@ -28,11 +28,10 @@ public class ASTDelete extends ASTTransformation {
 
         JSONArray array = new JSONArray();
         object.put("transformation",array);
-        for(CodeFragment position: transforms) {
+
             JSONObject t = new JSONObject();
             t.put("CodeFragmentDelete", position.toJSONObject());
             array.put(t);
-        }
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 
@@ -45,15 +44,15 @@ public class ASTDelete extends ASTTransformation {
         return object;
     }
 
-    protected void addSourceCode(CodeFragment delete) throws Exception {
-        CtSimpleType<?> originalClass = getOriginalClass(delete);
+    protected void addSourceCode() throws Exception {
+        CtSimpleType<?> originalClass = getOriginalClass(position);
 
-        Log.debug("cfToDelete:\n {}", delete);
-        Log.debug("{}",delete.getCtCodeFragment().getPosition());
-        Log.debug("{}",delete.getCodeFragmentType());
+        Log.debug("cfToDelete:\n {}", position);
+        Log.debug("{}", position.getCtCodeFragment().getPosition());
+        Log.debug("{}",position.getCodeFragmentType());
 
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
-        SourcePosition sp = delete.getCtCodeFragment().getPosition();
+        SourcePosition sp = position.getCtCodeFragment().getPosition();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
     }
@@ -65,20 +64,16 @@ public class ASTDelete extends ASTTransformation {
 
     @Override
     public ASTAdd toAdd() throws Exception {
-       ASTAdd a = new ASTAdd();
-       for (CodeFragment cf : transforms)
-            a.addCodeFragmentToAdd(cf,cf);
-        return a;
+//       ASTAdd a = new ASTAdd();
+//       for (CodeFragment cf : position)
+//            a.addCodeFragmentToAdd(cf,cf);
+//        return a;
+        throw new Exception();
     }
 
     @Override
     public ASTDelete toDelete() throws Exception {
         return this;
-    }
-
-    @Override
-    public void add(ASTTransformation delete) {
-        transforms.addAll(delete.transforms);
     }
 
     public String getType(){
@@ -93,7 +88,7 @@ public class ASTDelete extends ASTTransformation {
         ASTDelete otherDelete = (ASTDelete)other;
 
         return failures == otherDelete.failures &&
-                transforms.equals(otherDelete.transforms);
+                position.equals(otherDelete.position);
     }
 
     @Override
@@ -108,9 +103,18 @@ public class ASTDelete extends ASTTransformation {
                 "deleteSuperType");
     }
 
-    //works only for 1delete
+    @Override
+    public String toString() {
+        String ret = new String();
+
+        ret = ret + "position: "+position.toString()+"\n";
+
+
+        return ret;
+    }
+
     public void write(StringBuffer sb, char separator) {
-        CodeFragment p = transforms.get(0);
+        CodeFragment p = position;
 
         sb.append(p.getCodeFragmentType().getSimpleName());
         sb.append(separator);

@@ -141,8 +141,9 @@ public class Util {
                             for (Map<String, String> varMapping : getAllVarMapping(cfTmp, cf2)) {
                                 ASTReplace r = new ASTReplace();
                                 CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                                r.addCodeFragmentToReplace(cfTmp, new Statement(tmp));
-                                r.addVarMapping(cfTmp, varMapping);
+                                r.setPosition(cfTmp);
+                                r.setCodeFragmentToReplace(new Statement(tmp));
+                                r.setVarMapping(varMapping);
                                 synchronized (allReplace) {
                                     allReplace.add(r);
                                 }
@@ -162,7 +163,7 @@ public class Util {
 
         for (CodeFragment cf1 : codeFragments) {
                     ASTDelete r = new ASTDelete();
-                    r.addCodeFragmentToTransform(cf1);
+                    r.setPosition(cf1);
                     allReplace.add(r);
         }
         return allReplace;
@@ -180,8 +181,9 @@ public class Util {
                         for (Map<String,String> varMapping : getAllVarMapping(cfTmp,cf2)) {
                             ASTAdd r = new ASTAdd();
                             CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                            r.addCodeFragmentToAdd(cfTmp,new Statement(tmp));
-                            r.addVarMapping(cfTmp,varMapping);
+                            r.setPosition(cfTmp);
+                            r.setCodeFragmentToAdd(new Statement(tmp));
+                            r.setVarMapping(varMapping);
                             synchronized (allReplace) {
                                 allReplace.add(r);
                             }

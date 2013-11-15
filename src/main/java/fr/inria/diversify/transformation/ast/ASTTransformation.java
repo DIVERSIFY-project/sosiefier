@@ -20,36 +20,31 @@ import java.util.List;
  * Time: 4:15 PM
  */
 public abstract class ASTTransformation implements ITransformation {
-    protected List<CodeFragment> transforms;
+    protected CodeFragment position;
     protected Integer failures;
     protected List<ASTTransformation> parents;
 
     public ASTTransformation() {
-        transforms = new ArrayList<CodeFragment>();
+//        transform = new ArrayList<CodeFragment>();
         parents = new ArrayList<ASTTransformation>();
     }
 
     public void apply(String srcDir) throws Exception {
-        for(CodeFragment trans : transforms)
-            addSourceCode(trans);
+        addSourceCode();
 
-        for(CodeFragment trans : transforms) {
-            printJavaFile(srcDir, getOriginalClass(trans));
-        }
-
-        for(CodeFragment trans : transforms)
-            removeSourceCode(getOriginalClass(trans));
+        printJavaFile(srcDir);
+        removeSourceCode();
     }
 
-    protected abstract void addSourceCode(CodeFragment cf) throws Exception;
+    protected abstract void addSourceCode() throws Exception;
 
     public void restore(String srcDir) throws Exception {
-        for (CodeFragment cf : transforms) {
-            restore(srcDir, getOriginalClass(cf));
-        }
+        restore(srcDir, getOriginalClass(position));
+
     }
 
-    protected void printJavaFile(String repository, CtSimpleType<?> type) throws IOException {
+    protected void printJavaFile(String repository) throws IOException {
+        CtSimpleType<?> type = getOriginalClass(position);
         Environment env = type.getFactory().getEnvironment();
 
         JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository));
@@ -60,7 +55,8 @@ public abstract class ASTTransformation implements ITransformation {
         Log.debug("copy file: " + repository + " " + type.getQualifiedName());
     }
 
-    protected void removeSourceCode(CtSimpleType<?> type) {
+    protected void removeSourceCode() {
+        CtSimpleType<?> type = getOriginalClass(position);
         CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
         compileUnit.getSourceCodeFraments().clear();
     }
@@ -76,16 +72,20 @@ public abstract class ASTTransformation implements ITransformation {
         return cf.getCompilationUnit().getMainType();
     }
 
-    public void addCodeFragmentToTransform(CodeFragment cf) {
-        transforms.add(cf);
-    }
+//    public void addCodeFragmentToTransform(CodeFragment cf) {
+//        transform.add(cf);
+//    }
+
+//    public void setCodeFragmentToTransform(CodeFragment cf) {
+//        position = cf;
+//    }
 
     public void addParent(ASTTransformation p) {
         parents.add(p);
     }
 
-    public List<CodeFragment> getTransformation() {
-        return transforms;
+    public CodeFragment getPosition() {
+        return position;
     }
 
     public void setJUnitResult(Integer result) {
@@ -100,13 +100,13 @@ public abstract class ASTTransformation implements ITransformation {
     public abstract ASTAdd toAdd() throws Exception;
     public abstract ASTDelete toDelete() throws Exception;
 
-    public abstract void add(ASTTransformation replace);
-
-    public String positionString() {
-        String ret = "";
-        for(CodeFragment cf : transforms) {
-            ret = ret + cf.positionString() + "\n";
-        }
-        return ret;
+    public void setPosition(CodeFragment position) {
+        this.position = position;
     }
+
+//    public abstract void add(ASTTransformation replace);
+
+//    public String positionString() {
+//        return transform.positionString() + "\n";
+//    }
 }

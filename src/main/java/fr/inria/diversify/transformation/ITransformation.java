@@ -21,7 +21,4 @@ public interface ITransformation {
     public void write(StringBuffer sb, char separator);
     public void writeHead(BufferedWriter sb, char separator) throws IOException;
     public JSONObject toJSONObject() throws JSONException;
-
-
-
 }

@@ -47,51 +47,51 @@ public class DiversificationMax extends Thread {
         return list;
     }
 
-    public List<ASTTransformation> getAllReplace() {
-        List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
-
-        for (CodeFragment cf1 : codeFragments) {
-            for (CodeFragment cf2 : findCandidate(cf1)) {
-                for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
-                    ASTReplace r = new ASTReplace();
-                    CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                    r.addCodeFragmentToReplace(cf1,new Statement(tmp));
-                    r.addVarMapping(cf1,varMapping);
-                    allReplace.add(r);
-                }
-            }
-        }
-
-        return allReplace;
-    }
-
-    public List<ASTTransformation> getAllDelete() {
-        List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
-
-        for (CodeFragment cf1 : codeFragments) {
-            ASTDelete r = new ASTDelete();
-            r.addCodeFragmentToTransform(cf1);
-            allReplace.add(r);
-        }
-        return allReplace;
-    }
-
-    public List<ASTTransformation> getAllAdd() {
-        List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
-
-        for (CodeFragment cf1 : codeFragments) {
-            for (CodeFragment cf2 : findCandidate(cf1)) {
-                for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
-                    ASTAdd r = new ASTAdd();
-                    CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                    r.addCodeFragmentToAdd(cf1,new Statement(tmp));
-                    r.addVarMapping(cf1,varMapping);
-                    allReplace.add(r);
-                }
-            }
-        }
-        return allReplace;
-    }
+//    public List<ASTTransformation> getAllReplace() {
+//        List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
+//
+//        for (CodeFragment cf1 : codeFragments) {
+//            for (CodeFragment cf2 : findCandidate(cf1)) {
+//                for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
+//                    ASTReplace r = new ASTReplace();
+//                    CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
+//                    r.addCodeFragmentToReplace(cf1,new Statement(tmp));
+//                    r.addVarMapping(cf1,varMapping);
+//                    allReplace.add(r);
+//                }
+//            }
+//        }
+//
+//        return allReplace;
+//    }
+//
+//    public List<ASTTransformation> getAllDelete() {
+//        List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
+//
+//        for (CodeFragment cf1 : codeFragments) {
+//            ASTDelete r = new ASTDelete();
+//            r.addCodeFragmentToTransform(cf1);
+//            allReplace.add(r);
+//        }
+//        return allReplace;
+//    }
+//
+//    public List<ASTTransformation> getAllAdd() {
+//        List<ASTTransformation> allReplace = new ArrayList<ASTTransformation>();
+//
+//        for (CodeFragment cf1 : codeFragments) {
+//            for (CodeFragment cf2 : findCandidate(cf1)) {
+//                for (Map<String,String> varMapping : getAllVarMapping(cf1,cf2)) {
+//                    ASTAdd r = new ASTAdd();
+//                    CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
+//                    r.addCodeFragmentToAdd(cf1,new Statement(tmp));
+//                    r.addVarMapping(cf1,varMapping);
+//                    allReplace.add(r);
+//                }
+//            }
+//        }
+//        return allReplace;
+//    }
 
     protected List<Map<String, String>> getAllVarMapping(CodeFragment before, CodeFragment after) {
         List<List<String>> vars = new ArrayList<List<String>>();
