@@ -48,7 +48,7 @@ public class TransformationParser {
         return list;
     }
 
-    public ASTTransformation parseUniqueTransformation(File file) throws Exception {
+    public ITransformation parseUniqueTransformation(File file) throws Exception {
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
@@ -63,8 +63,8 @@ public class TransformationParser {
         return parseTransformation(jsonObject);
     }
 
-    public List<ASTTransformation> parseFile(File file) throws IOException, JSONException {
-        List<ASTTransformation> list = new ArrayList<ASTTransformation>();
+    public List<ITransformation> parseFile(File file) throws IOException, JSONException {
+        List<ITransformation> list = new ArrayList<ITransformation>();
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
@@ -74,7 +74,7 @@ public class TransformationParser {
             line = br.readLine();
         }
         if (sb.length() == 0)
-            return new ArrayList<ASTTransformation>();
+            return new ArrayList<ITransformation>();
         JSONArray array = new JSONArray(sb.toString());
         for(int i = 0; i < array.length(); i++)  {
             count++;
@@ -89,27 +89,49 @@ public class TransformationParser {
         return list;
     }
 
-    protected ASTTransformation parseTransformation(JSONObject jsonObject) throws Exception {
+    protected ITransformation parseTransformation(JSONObject jsonObject) throws Exception {
         String type = jsonObject.getString("type");
-        ASTTransformation trans = null;
+        ITransformation trans = null;
 
-        if(type.endsWith("eplace"))  //replace, stupidReplace, veryStupidReplace
-            trans = parseReplace(jsonObject);
-        if(type.endsWith("dd"))
-            trans = parseAdd(jsonObject);
-        if(type.endsWith("elete"))
-            trans = parseDelete(jsonObject);
-
-        if(jsonObject.has("parent")) {
-            JSONArray array = jsonObject.getJSONArray("parents");
-            for(int i = 0; i <array.length(); i++) {
-                trans.addParent(parseTransformation(array.getJSONObject(i)));
-            }
+        if(jsonObject.has("parent") && jsonObject.getString("parent").equals("bytecode")) {
+            if(type.endsWith("replace"))
+                trans = parseBytecodeReplace(jsonObject);
+            if(type.endsWith("add"))
+                trans = parseBytecodeAdd(jsonObject);
+            if(type.endsWith("delete"))
+                trans = parseBytecodeDelete(jsonObject);
         }
+        else {
+            if(type.endsWith("eplace"))  //replace, stupidReplace, veryStupidReplace
+                trans = parseASTReplace(jsonObject);
+            if(type.endsWith("dd"))
+                trans = parseASTAdd(jsonObject);
+            if(type.endsWith("elete"))
+                trans = parseASTDelete(jsonObject);
+        }
+//        if(jsonObject.has("parent")) {
+//            JSONArray array = jsonObject.getJSONArray("parents");
+//            for(int i = 0; i <array.length(); i++) {
+//                trans.addParent(parseTransformation(array.getJSONObject(i)));
+//            }
+//        }
         return trans;
     }
 
-    protected ASTTransformation parseDelete(JSONObject jsonObject) throws Exception {
+    private ITransformation parseBytecodeDelete(JSONObject jsonObject) {
+        return null;
+    }
+
+    private ITransformation parseBytecodeAdd(JSONObject jsonObject) {
+        return null;
+    }
+
+    private ITransformation parseBytecodeReplace(JSONObject jsonObject) {
+        return null;
+    }
+
+
+    protected ASTTransformation parseASTDelete(JSONObject jsonObject) throws Exception {
         ASTDelete trans = new ASTDelete();
 
         JSONArray array = jsonObject.getJSONArray("transformation");
@@ -125,7 +147,7 @@ public class TransformationParser {
         return trans;
     }
 
-    protected ASTTransformation parseAdd(JSONObject jsonObject) throws Exception {
+    protected ASTTransformation parseASTAdd(JSONObject jsonObject) throws Exception {
         ASTAdd trans = new ASTAdd();
         trans.setType(jsonObject.getString("type"));
         JSONArray array = jsonObject.getJSONArray("transformation");
@@ -145,7 +167,7 @@ public class TransformationParser {
         return trans;
     }
 
-    protected ASTTransformation parseReplace(JSONObject jsonObject) throws Exception {
+    protected ASTTransformation parseASTReplace(JSONObject jsonObject) throws Exception {
         ASTReplace trans = new ASTReplace();
         trans.setType(jsonObject.getString("type"));
         JSONArray array = jsonObject.getJSONArray("transformation");

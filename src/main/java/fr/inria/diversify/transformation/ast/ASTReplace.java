@@ -13,7 +13,6 @@ import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -34,6 +33,7 @@ public class ASTReplace extends ASTTransformation {
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", type);
+        object.put("level", "ast");
         JSONArray array = new JSONArray();
         object.put("transformation",array);
 
@@ -178,7 +178,6 @@ public class ASTReplace extends ASTTransformation {
                 "toReplaceSuperType" +separator + "replacedBySuperType");
     }
 
-    //works only for 1replace
     public void write(StringBuffer sb, char separator) {
         CodeFragment t = position;
         CodeFragment r = replace;

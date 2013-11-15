@@ -25,6 +25,7 @@ public class ASTDelete extends ASTTransformation {
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", "delete");
+        object.put("level", "ast");
 
         JSONArray array = new JSONArray();
         object.put("transformation",array);

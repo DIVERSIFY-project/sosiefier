@@ -25,7 +25,6 @@ public abstract class ASTTransformation implements ITransformation {
     protected List<ASTTransformation> parents;
 
     public ASTTransformation() {
-//        transform = new ArrayList<CodeFragment>();
         parents = new ArrayList<ASTTransformation>();
     }
 

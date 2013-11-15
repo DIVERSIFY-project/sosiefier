@@ -1,5 +1,6 @@
 package fr.inria.diversify.statistic;
 
+import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.io.BufferedWriter;
@@ -13,21 +14,21 @@ import java.util.*;
  * Time: 4:30 PM
  */
 public class CrossValidation {
-    protected Set<ASTTransformation>[] subSet;
+    protected Set<ITransformation>[] subSet;
     protected int nbOfSubSet;
     protected char separator = ';';
 
-    public CrossValidation(Collection<ASTTransformation> transformations, int nbOfSubSet) {
+    public CrossValidation(Collection<ITransformation> transformations, int nbOfSubSet) {
         this.nbOfSubSet = nbOfSubSet;
         int subSetSize = (int) (((double)transformations.size())/(double)nbOfSubSet);
         subSet = new HashSet[nbOfSubSet];
-        LinkedList<ASTTransformation> tmp = new LinkedList<ASTTransformation>(transformations);
+        LinkedList<ITransformation> tmp = new LinkedList<ITransformation>(transformations);
         Random r = new Random();
 
         for (int i = 0; i < nbOfSubSet; i++) {
-            subSet[i] = new HashSet<ASTTransformation>();
+            subSet[i] = new HashSet<ITransformation>();
             for(int j = 0; j < subSetSize; j++) {
-                ASTTransformation t = tmp.remove(r.nextInt(tmp.size()));
+                ITransformation t = tmp.remove(r.nextInt(tmp.size()));
                 subSet[i].add(t);
             }
         }
@@ -55,17 +56,17 @@ public class CrossValidation {
         bw.close();
     }
 
-    protected int nbOfSosie(Set<ASTTransformation> set) {
+    protected int nbOfSosie(Set<ITransformation> set) {
         int count = 0;
 
-        for (ASTTransformation transformation : set)
+        for (ITransformation transformation : set)
             if(transformation.numberOfFailure() == 0)
                 count++;
 
         return count;
     }
 
-    protected int nbOfIncorrectVariant(Set<ASTTransformation> set) {
+    protected int nbOfIncorrectVariant(Set<ITransformation> set) {
         return set.size() - nbOfSosie(set);
     }
 }

@@ -3,6 +3,7 @@ package fr.inria.diversify.transformation.bytecode;
 import fr.inria.diversify.util.Log;
 import javassist.CtMethod;
 import javassist.bytecode.*;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,6 +57,20 @@ public class BytecodeDelete extends BytecodeTransformation {
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        JSONObject object = new JSONObject();
+        object.put("type", "delete");
+        object.put("level", "bytecode");
+        JSONArray array = new JSONArray();
+        object.put("transformation",array);
+
+        JSONObject t = new JSONObject();
+        t.put("methodLocation", methodLocation.getLongName());
+        t.put("opcodeIndex",opcodeIndex);
+        array.put(t);
+
+        object.put("allTestRun", (failures != null));
+        object.put("Failures", failures);
+
+        return object;
     }
 }

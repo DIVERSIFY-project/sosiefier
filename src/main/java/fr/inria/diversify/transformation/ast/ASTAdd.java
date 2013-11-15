@@ -12,7 +12,6 @@ import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,6 +29,7 @@ public class ASTAdd extends ASTTransformation {
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", type);
+        object.put("level", "ast");
         JSONArray array = new JSONArray();
         object.put("transformation", array);
 
@@ -146,7 +146,6 @@ public class ASTAdd extends ASTTransformation {
         return type;
     }
 
-    //works only for 1add
     public void write(StringBuffer sb, char separator) {
         CodeFragment p = position;
         CodeFragment r = add;

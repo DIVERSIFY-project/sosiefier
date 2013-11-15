@@ -282,7 +282,7 @@ public class DiversifyMain {
         TransformationParser tf = new TransformationParser(codeFragments);
         Log.debug("parse fileName: {}",fileName);
 
-        List<ASTTransformation> transformations = tf.parseFile(new File(fileName));
+        List<ITransformation> transformations = tf.parseFile(new File(fileName));
         if(transformations.isEmpty())
             return;
 
