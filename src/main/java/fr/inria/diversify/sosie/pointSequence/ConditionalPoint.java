@@ -34,6 +34,10 @@ public class ConditionalPoint extends Point {
         return ret;
     }
 
+    public boolean sameLogPoint(Point point) {
+        return super.sameLogPoint(point) && vars.keySet().equals(((ConditionalPoint)point).vars.keySet());
+    }
+
     protected void buildFrom(String string) {
         vars = new HashMap<String, String>();
         String[] array = string.split(":;:");
@@ -50,7 +54,7 @@ public class ConditionalPoint extends Point {
     }
 
     @Override
-    public String toDot(Set<VariableDiff> varsDiff) {
+    public String toDot(Set varsDiff) {
         String dot = hashCode() + "     ";
         dot += "[\n label =";
         if(varsDiff.isEmpty())
@@ -58,8 +62,8 @@ public class ConditionalPoint extends Point {
 
         else {
             dot += "\"" + toString();
-            for(VariableDiff vf : varsDiff)
-                dot += "\\n"+vf.toDot();
+            for(Object vf : varsDiff)
+                dot += "\\n"+((VariableDiff)vf).toDot();
             dot += "\"\n,color=\"red\",";
         }
         dot += "\n];";

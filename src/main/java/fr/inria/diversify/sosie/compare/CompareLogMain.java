@@ -46,7 +46,7 @@ public class CompareLogMain {
         if(DiversifyProperties.getProperty("logTrace").equals("same"))
             same();
         else
-            diff();
+            diffCatch();
     }
 
     protected void same() throws IOException {
@@ -56,12 +56,13 @@ public class CompareLogMain {
     }
 
     protected void diff() throws Exception {
+
         String startPointString = DiversifyProperties.getProperty("startPoint");
         int count = 0;
         int i =0;
         for(File f : (new File(dirSosie).listFiles())) {
             i++;
-            Log.info("i {}",i);
+            Log.info("sosie nb: {}",i);
             try {
 //            Log.info("log files {}",f);
             File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
@@ -77,8 +78,9 @@ public class CompareLogMain {
             if(!diff.sameTraceAndVar()) {
                 Log.info(f.getName());
                 Log.info(diff.report());
-                diff.toDot(f.getName()+".dot");
+
                 if(!diff.sameVar()) {
+                    diff.toDot(f.getName()+".dot");
                     count++;
                 Log.info("i: "+count);
                 }
@@ -91,6 +93,43 @@ public class CompareLogMain {
             }
 
 
+        }
+    }
+
+    protected void diffCatch() throws Exception {
+        String startPointString = DiversifyProperties.getProperty("startPoint");
+        int count = 0;
+        int i =0;
+        for(File f : (new File(dirSosie).listFiles())) {
+            i++;
+            Log.info("sosie nb: {}",i);
+            try {
+                File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
+                TransformationParser parser = new TransformationParser(codeFragments);
+                Log.info("startPoint {}",startPoint.getAbsolutePath());
+                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
+
+                CompareMultiCatchSequence un = new CompareMultiCatchSequence(dirOriginal, f.getAbsolutePath(), cf);
+                un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+                Diff diff = un.findDiffCatch();
+
+                Log.info("catchDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndCatch());
+                if(!diff.sameTraceAndCatch()) {
+                    Log.info(f.getName());
+                    Log.info(diff.report());
+
+                    if(!diff.sameCatch()) {
+                        diff.toDotCatch(f.getName() + ".dot");
+                        count++;
+                        Log.info("i: "+count);
+                    }
+                }
+                else
+                    Log.info("same trace");
+            } catch (Exception e) {
+                Log.error("error",e);
+                e.printStackTrace();
+            }
         }
     }
 

@@ -24,7 +24,7 @@ public abstract class Point {
         if(bugPoint || point.bugPoint)
             return bugPoint && point.bugPoint;
 
-        return (className.equals(point.className) && methodSignature.equals(point.methodSignature) && id == point.id);
+        return (className.equals(point.className) && methodSignature.equals(point.methodSignature)); //&& id == point.id);
     }
 
     public boolean containsInto(CodeFragment cf) {
@@ -55,6 +55,6 @@ public abstract class Point {
         return id;
     }
 
-    public abstract String toDot(Set<VariableDiff> varDiff);
+    public abstract String toDot(Set varDiff);
 }
 

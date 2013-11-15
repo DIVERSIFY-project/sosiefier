@@ -26,16 +26,18 @@ public class CompareMultiLogSequence {
     protected CodeFragment startPoint;
 
     public CompareMultiLogSequence(String dirOriginal, String dirSosie) {
-        originals = loadPointSequence(dirOriginal);
-        sosies = loadPointSequence(dirSosie);
+        originals = loadPointSequence(dirOriginal,false);
+        sosies = loadPointSequence(dirSosie,true);
         varToExclude = new HashSet<VariableDiff>();
+
     }
 
     public CompareMultiLogSequence(String dirOriginal, String dirSosie, CodeFragment startPoint, String fileExcludeVar) throws IOException, JSONException {
-        originals = loadPointSequence(dirOriginal);
-        sosies = loadPointSequence(dirSosie);
+        originals = loadPointSequence(dirOriginal,false);
+        sosies = loadPointSequence(dirSosie,true);
         varToExclude = loadVarToExclude(fileExcludeVar);
         this.startPoint = startPoint;
+
     }
 
 
@@ -66,20 +68,14 @@ public class CompareMultiLogSequence {
     public Diff findDiffVar() throws IOException {
         Diff diff = new Diff(startPoint);
  	    for (PointSequence original : originals) {
-		    boolean same = false;
 		    for (PointSequence sosie : sosies) {
                  Log.debug("compare original: {} with {}",original, sosie );
 			    CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
 	    		cls.setDiffVar(varToExclude);
-                if (sosie.getName().equals(original.getName()) && cls.findDivergence(syncroRange) != null) {
+                if (sosie.getName().equals(original.getName())) {
                     diff.addMatch(original,sosie);
                     diff.addVarFor(original,cls.findDivergenceVar(syncroRange));
                     diff.addDivergence(original, cls.findDivergence(syncroRange));
-
-//		    		if (cls.findDivergenceVar(syncroRange).isEmpty()) {// same sequence
-//                        same = true;
-//				    	break;
-//    				}
 	    		}
 	    	}
 		    if(!diff.hasMatch(original))
@@ -101,7 +97,6 @@ public class CompareMultiLogSequence {
                 String sosieName = original.getName();
                 CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
                 if (sosieName.equals(originalName) && cls.findDivergence(syncroRange) != null) {//same sequence
-//                   Log.debug(original.getName()+ " and "+ original.getName()+ " same call trace");
                     same = true;
                     break;
                 }
@@ -131,7 +126,6 @@ public class CompareMultiLogSequence {
             if (!same)
                 new Exception("not same set of trace");
         }
-
     }
 
     protected Set<VariableDiff> loadVarToExclude(String fileExcludeVar) throws IOException {
@@ -148,39 +142,24 @@ public class CompareMultiLogSequence {
         return varToExclude;
     }
 
-    protected List<PointSequence> loadPointSequence(String dir) {
+    protected List<PointSequence> loadPointSequence(String dir, boolean recursive) {
         List<PointSequence> list = new ArrayList<PointSequence>();
         File file = new File(dir);
         Log.debug("load trace in directory: {}",dir);
         for (File f : file.listFiles()) {
-            try {
-                PointSequence ps = new PointSequence();
-                ps.parseFile(f);
-                list.add(ps);
-            } catch (Exception e) {
+            if(recursive && f.isDirectory())
+                list.addAll(loadPointSequence(f.getAbsolutePath(),recursive));
+            else {
+                try {
+                    PointSequence ps = new PointSequence();
+                    ps.parseFile(f);
+                    list.add(ps);
+                } catch (Exception e) {
 //                Log.warn("error during parse file {}",e,f);
+                }
             }
         }
         return list;
-    }
-
-
-
-    protected void printDivergencePoint(int[][] divergence) {
-        if(divergence.length == 0)
-            return;
-
-        int c1 = divergence[0][0];
-        int c2 = divergence[0][1];
-        for(int[] p : divergence) {
-            if(c1 != p[0] || c2 != p[1]){
-                Log.info(p[0] + " " + p[1]);
-                c1 = p[0];
-                c2 = p[1];
-            }
-            c1++;
-            c2++;
-        }
     }
 
     public void setSyncroRange(int syncroRange) {

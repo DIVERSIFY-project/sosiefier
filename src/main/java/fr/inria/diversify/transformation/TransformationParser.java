@@ -34,15 +34,15 @@ public class TransformationParser {
     public List<ITransformation> parseDir(String dir) throws IOException, JSONException {
         List<ITransformation> list = new ArrayList<ITransformation>();
         File file = new File(dir);
-//        int count = 0;
-        Log.debug("transformation directory: "+file.getAbsolutePath());
+        int countFile = 0;
+        Log.debug("transformation directory: {})"+file.getAbsolutePath());
         for (File f : file.listFiles())
             if(f.getName().endsWith(".json")) {
-//                count++;
+                countFile++;
                 Log.debug("parse tranformation file: "+f.getName());
                 list.addAll(parseFile(f));
             }
-//        Log.debug("number of transformation file: {}",count);
+        Log.debug("number of transformation file: {}",countFile);
         Log.debug("number of transformation : {}",count);
         Log.debug("number of parse error : {}",countError);
         return list;

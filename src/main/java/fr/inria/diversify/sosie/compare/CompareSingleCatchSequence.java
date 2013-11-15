@@ -2,13 +2,12 @@ package fr.inria.diversify.sosie.compare;
 
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
+import fr.inria.diversify.sosie.pointSequence.CatchPoint;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
 import fr.inria.diversify.util.Log;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,21 +16,18 @@ import java.util.Set;
  * Date: 7/23/13
  * Time: 4:17 PM
  */
-public class CompareSingleLogSequence {
-    //set of variables whose value changes at each execution
-    protected  Set<VariableDiff> diffVar;
+public class
+        CompareSingleCatchSequence {
     protected PointSequence original;
     protected PointSequence sosie;
     protected CodeFragment startPoint;
 
 
-    public CompareSingleLogSequence(PointSequence original, PointSequence sosie, CodeFragment startPoint) {
+    public CompareSingleCatchSequence(PointSequence original, PointSequence sosie, CodeFragment startPoint) {
         this.original = original;
         this.sosie = sosie;
-        this.diffVar = new HashSet<VariableDiff>();
         this.startPoint = startPoint;
     }
-
 
     public int[][] findDivergence(int syncroRange) {
         if(startPoint == null || true)
@@ -41,9 +37,8 @@ public class CompareSingleLogSequence {
         }
     }
 
-
     /**
-     * search if original and sosie (two traces) are the same trace at the call level (module the syncro range).
+     * search if original and sosie (two traces) are the same trace at the catch level (module the syncro range).
      * @param syncroRange
      * @param startOriginal
      * @param startSosie
@@ -56,12 +51,12 @@ public class CompareSingleLogSequence {
     }
 
     /**
-     * search if two traces are the same trace at the call level (module the syncro range).
+     * search if two traces are the same trace at the call catch (module the syncro range).
 
      * @return the local conditionalDivergence. null if original and sosie are not the same trace
      */
     protected int[][] findDivergence(int syncroRange, int start1, int start2, PointSequence ps1, PointSequence ps2) {
-        int bound = Math.min(ps1.conditionalSize(), ps2.conditionalSize());
+        int bound = Math.min(ps1.cathSize(), ps2.cathSize());
         if(bound == 0)
             return null;
         int[][] divergence = new int[bound][2];
@@ -73,8 +68,8 @@ public class CompareSingleLogSequence {
             i++;
             start1++;
             start2++;
-            Point oPoint = ps1.getConditionalPoint(start1);
-            Point sPoint = ps2.getConditionalPoint(start2);
+            Point oPoint = ps1.getCatchPoint(start1);
+            Point sPoint = ps2.getCatchPoint(start2);
             if(!oPoint.sameLogPoint(sPoint)) {
                 int newSyncho[] = findSyncro(syncroRange, start1,start2);
                 if(newSyncho == null)
@@ -86,8 +81,9 @@ public class CompareSingleLogSequence {
             }
             divergence[i][0] = start1;
             divergence[i][1] = start2;
-//            i++;
         }
+        if(i == 0)
+            i++;
         return Arrays.copyOf(divergence, i);
     }
 
@@ -97,24 +93,25 @@ public class CompareSingleLogSequence {
      * @param syncroRange
      * @return the set of conditionalDivergence variables
      */
-    public Set<VariableDiff> findDivergenceVar(int syncroRange) {
+    public Set<CatchDiff> findDivergenceCatch(int syncroRange) {
         int startOriginal = -1;
         int startSosie = -1;
-        int bound = Math.min(original.conditionalSize(), sosie.conditionalSize());
+        int bound = Math.min(original.cathSize(), sosie.cathSize());
 
-        Set<VariableDiff> var = new HashSet<VariableDiff>();
+        Set<CatchDiff> var = new HashSet<CatchDiff>();
         while(startOriginal < bound - 1 && startSosie < bound - 1) {
             startOriginal++;
             startSosie++;
-            ConditionalPoint oPoint = original.getConditionalPoint(startOriginal);
-            ConditionalPoint sPoint = sosie.getConditionalPoint(startSosie);
-            if(oPoint.sameLogPoint(sPoint) && !oPoint.sameValue(sPoint)) {
-                for(VariableDiff dVar : oPoint.getDifVar(sPoint))
-                    if(!containsExcludeVar(dVar)) {
-                        dVar.setPositionInOrignal(startOriginal);
-                        dVar.setPositionInSosie(startSosie);
-                        var.add(dVar);
-                    }
+            CatchPoint oPoint = original.getCatchPoint(startOriginal);
+            CatchPoint sPoint = sosie.getCatchPoint(startSosie);
+            if(oPoint.sameLogPoint(sPoint) && !oPoint.sameCatchTrace(sPoint)) {
+                CatchDiff cd = new CatchDiff();
+                cd.setOriginal(original);
+                cd.setSosie(sosie);
+                cd.setPositionInOriginal(startOriginal);
+                cd.setPositionInSosie(startSosie);
+                var.add(cd);
+
             }
             else {
                 int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
@@ -131,15 +128,15 @@ public class CompareSingleLogSequence {
 
     protected int findDiversificationIndex(PointSequence sequence) {
 
-        for (int i = 0; i < sequence.conditionalSize(); i++)
-            if(sequence.getConditionalPoint(i).containsInto(startPoint)) {
+        for (int i = 0; i < sequence.cathSize(); i++)
+            if(sequence.getCatchPoint(i).containsInto(startPoint)) {
                 if(i == 0)
 
-                 Log.info("{} {}",sequence.getConditionalPoint(i).getClassName(),startPoint.getSourceClass().getQualifiedName() );
+                 Log.info("{} {}",sequence.getCatchPoint(i).getClassName(),startPoint.getSourceClass().getQualifiedName());
                 return i;
             }
 
-        return sequence.conditionalSize();
+        return sequence.cathSize();
     }
 
 
@@ -151,26 +148,14 @@ public class CompareSingleLogSequence {
     }
 
     protected int[] findSyncroP(int syncroRange, int iOriginal, int iSosie){
-        for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < original.conditionalSize()); i++) {
-            for(int j = iSosie; (j < syncroRange + iSosie) && (j < sosie.conditionalSize()); j++) {
-                Point oPoint = original.getConditionalPoint(i);
-                Point sPoint = sosie.getConditionalPoint(j);
+        for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < original.cathSize()); i++) {
+            for(int j = iSosie; (j < syncroRange + iSosie) && (j < sosie.cathSize()); j++) {
+                Point oPoint = original.getCatchPoint(i);
+                Point sPoint = sosie.getCatchPoint(j);
                 if(oPoint.sameLogPoint(sPoint))
                     return new int[]{i,j};
             }
         }
         return null;
-    }
-
-    protected boolean containsExcludeVar(VariableDiff var) {
-        for (VariableDiff excludeVar : diffVar)
-            if (excludeVar.stringForExcludeFile().equals(var.stringForExcludeFile()))
-                return true;
-        return false;
-    }
-
-
-    public void setDiffVar(Collection<VariableDiff> set) {
-        diffVar.addAll(set);
     }
 }

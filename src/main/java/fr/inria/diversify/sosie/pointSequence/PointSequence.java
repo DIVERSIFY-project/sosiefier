@@ -14,13 +14,13 @@ import java.util.List;
  */
 public class PointSequence {
     protected List<ConditionalPoint> conditionalPoints;
-    protected List<CatchPoint> cacthPoints;
+    protected List<CatchPoint> catchPoints;
     protected String threadName;
     protected String name;
 
     public PointSequence() {
         conditionalPoints = new ArrayList<ConditionalPoint>();
-        cacthPoints = new ArrayList<CatchPoint>();
+        catchPoints = new ArrayList<CatchPoint>();
     }
 
     public void parseFile(File file) throws IOException {
@@ -47,8 +47,8 @@ public class PointSequence {
     }
 
     protected void addPoint(String stringPoint) {
-        if(stringPoint.startsWith("----------------------------------ST"))
-            cacthPoints.add(new CatchPoint(stringPoint));
+        if(stringPoint.startsWith("ST"))
+            catchPoints.add(new CatchPoint(stringPoint));
         else
             conditionalPoints.add(new ConditionalPoint(stringPoint));
     }
@@ -73,23 +73,31 @@ public class PointSequence {
         return -1;
     }
 
-    public int size() {
+    public int conditionalSize() {
         return conditionalPoints.size();
     }
 
-    public ConditionalPoint get(int i) {
+    public int cathSize() {
+        return catchPoints.size();
+    }
+
+    public ConditionalPoint getConditionalPoint(int i) {
         return conditionalPoints.get(i);
+    }
+
+    public CatchPoint getCatchPoint(int i) {
+        return catchPoints.get(i);
     }
 
     @Override
     public String toString() {
-        return name+":"+size();
+        return name+":"+conditionalSize();
     }
 
     protected void parseFileName(String fileName) {
-        String[] tmp = fileName.split("__");
-        name = tmp[0];
-        threadName = tmp[1];
+        String[] tmp = fileName.split("_");
+        name = tmp[0] + "_" +tmp[1];
+        threadName = tmp[2];
     }
 
     public String getName() {
