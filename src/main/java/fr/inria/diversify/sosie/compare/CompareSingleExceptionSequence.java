@@ -2,7 +2,7 @@ package fr.inria.diversify.sosie.compare;
 
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.sosie.pointSequence.CatchPoint;
+import fr.inria.diversify.sosie.pointSequence.ExceptionPoint;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
 import fr.inria.diversify.util.Log;
@@ -17,13 +17,13 @@ import java.util.Set;
  * Time: 4:17 PM
  */
 public class
-        CompareSingleCatchSequence {
+        CompareSingleExceptionSequence {
     protected PointSequence original;
     protected PointSequence sosie;
     protected CodeFragment startPoint;
 
 
-    public CompareSingleCatchSequence(PointSequence original, PointSequence sosie, CodeFragment startPoint) {
+    public CompareSingleExceptionSequence(PointSequence original, PointSequence sosie, CodeFragment startPoint) {
         this.original = original;
         this.sosie = sosie;
         this.startPoint = startPoint;
@@ -93,19 +93,19 @@ public class
      * @param syncroRange
      * @return the set of conditionalDivergence variables
      */
-    public Set<CatchDiff> findDivergenceCatch(int syncroRange) {
+    public Set<ExceptionDiff> findDivergenceException(int syncroRange) {
         int startOriginal = -1;
         int startSosie = -1;
         int bound = Math.min(original.cathSize(), sosie.cathSize());
 
-        Set<CatchDiff> var = new HashSet<CatchDiff>();
+        Set<ExceptionDiff> var = new HashSet<ExceptionDiff>();
         while(startOriginal < bound - 1 && startSosie < bound - 1) {
             startOriginal++;
             startSosie++;
-            CatchPoint oPoint = original.getCatchPoint(startOriginal);
-            CatchPoint sPoint = sosie.getCatchPoint(startSosie);
+            ExceptionPoint oPoint = original.getCatchPoint(startOriginal);
+            ExceptionPoint sPoint = sosie.getCatchPoint(startSosie);
             if(oPoint.sameLogPoint(sPoint) && !oPoint.sameCatchTrace(sPoint)) {
-                CatchDiff cd = new CatchDiff();
+                ExceptionDiff cd = new ExceptionDiff();
                 cd.setOriginal(original);
                 cd.setSosie(sosie);
                 cd.setPositionInOriginal(startOriginal);

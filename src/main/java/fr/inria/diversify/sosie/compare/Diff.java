@@ -3,9 +3,7 @@ package fr.inria.diversify.sosie.compare;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
-import org.apache.commons.io.FileUtils;
 
-import javax.rmi.CORBA.Util;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,13 +22,13 @@ public class Diff {
     protected Map<PointSequence,PointSequence> match;
     protected Map<PointSequence,int[][]> conditionalDivergence;
     protected Map<PointSequence,int[][]> catchDivergence;
-    protected Map<PointSequence, Set<CatchDiff>> diffCatch;
+    protected Map<PointSequence, Set<ExceptionDiff>> diffCatch;
 
     protected CodeFragment startPoint;
 
     public Diff(CodeFragment startPoint) {
         this.diffVar = new HashMap<PointSequence, Set<VariableDiff>>();
-        this.diffCatch = new HashMap<PointSequence, Set<CatchDiff>>();
+        this.diffCatch = new HashMap<PointSequence, Set<ExceptionDiff>>();
         conditionalDivergence = new HashMap<PointSequence, int[][]>();
         catchDivergence = new HashMap<PointSequence, int[][]>();
         match = new HashMap<PointSequence, PointSequence>();
@@ -44,9 +42,9 @@ public class Diff {
         diffVar.get(original).addAll(var);
     }
 
-    public void addCatchFor(PointSequence original, Set<CatchDiff> divergenceCatch) {
+    public void addCatchFor(PointSequence original, Set<ExceptionDiff> divergenceCatch) {
         if(!diffCatch.containsKey(original))
-            diffCatch.put(original,new HashSet<CatchDiff>());
+            diffCatch.put(original,new HashSet<ExceptionDiff>());
 
         diffCatch.get(original).addAll(divergenceCatch);
     }
@@ -98,7 +96,7 @@ public class Diff {
     }
 
     public boolean sameCatch() {
-        for (Set<CatchDiff> vars : diffCatch.values())
+        for (Set<ExceptionDiff> vars : diffCatch.values())
             if (!vars.isEmpty())
                 return false;
 
@@ -247,7 +245,7 @@ public class Diff {
 
         while(i < div.length) {
             Point next = original.getCatchPoint(start1);
-            Set<CatchDiff> varD = getCatchDiffFor(original, div[i][0]);
+            Set<ExceptionDiff> varD = getCatchDiffFor(original, div[i][0]);
             if(!varD.isEmpty())
                 toString = true;
 
@@ -285,9 +283,9 @@ public class Diff {
         builder.append(branchNext.hashCode() + " -> " + endBranch.hashCode() + "\n");
     }
 
-    protected Set<CatchDiff> getCatchDiffFor(PointSequence ps, int index) {
-        Set<CatchDiff> set = new HashSet<CatchDiff>();
-        for (CatchDiff varD : diffCatch.get(ps)) {
+    protected Set<ExceptionDiff> getCatchDiffFor(PointSequence ps, int index) {
+        Set<ExceptionDiff> set = new HashSet<ExceptionDiff>();
+        for (ExceptionDiff varD : diffCatch.get(ps)) {
             if(varD.positionInOriginal == index)
                 set.add(varD);
         }

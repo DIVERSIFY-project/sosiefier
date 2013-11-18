@@ -1,8 +1,6 @@
 package fr.inria.diversify.sosie.pointSequence;
 
-import fr.inria.diversify.sosie.compare.CatchDiff;
-import fr.inria.diversify.sosie.compare.VariableDiff;
-import fr.inria.diversify.sosie.pointSequence.Point;
+import fr.inria.diversify.sosie.compare.ExceptionDiff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +11,11 @@ import java.util.Set;
  * Date: 9/16/13
  * Time: 2:21 PM
  */
-public class CatchPoint extends Point {
+public class ExceptionPoint extends Point {
 
     private List<String> stackTrace;
 
-    public CatchPoint(String string) {
+    public ExceptionPoint(String string) {
         super(string);
     }
 
@@ -47,7 +45,7 @@ public class CatchPoint extends Point {
         else {
             dot += "\"" + toString();
             for(Object vf : catchDiff)
-                dot += "\\n"+((CatchDiff)vf).toDot();
+                dot += "\\n"+((ExceptionDiff)vf).toDot();
             dot += "\"\n,color=\"red\",";
         }
         dot += "\n];";
@@ -59,7 +57,7 @@ public class CatchPoint extends Point {
 //    }
 
     public boolean sameCatchTrace(Point sPoint) {
-        CatchPoint cPoint = (CatchPoint)sPoint;
+        ExceptionPoint cPoint = (ExceptionPoint)sPoint;
         return sameStackTrace(cPoint.stackTrace);
     }
 
@@ -75,5 +73,9 @@ public class CatchPoint extends Point {
                 return false;
         }
         return true;
+    }
+
+    public List<String> getStackTrace() {
+        return stackTrace;
     }
 }

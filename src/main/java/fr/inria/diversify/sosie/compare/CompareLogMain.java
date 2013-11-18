@@ -3,11 +3,13 @@ package fr.inria.diversify.sosie.compare;
 import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
+import fr.inria.diversify.sosie.pointSequence.PointSequence;
+import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
@@ -17,6 +19,8 @@ import spoon.support.builder.SpoonBuildingManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Simon
@@ -50,7 +54,7 @@ public class CompareLogMain {
             if(DiversifyProperties.getProperty("conditionalPoint").equals("true"))
                 diff();
             else
-                diffExeception();
+                diffException();
     }
 
     protected void same() throws IOException {
@@ -60,7 +64,7 @@ public class CompareLogMain {
     }
 
     protected void diff() throws Exception {
-
+        List<ITransformation> trans = new ArrayList<ITransformation>();
         String startPointString = DiversifyProperties.getProperty("startPoint");
         int count = 0;
         int i =0;
@@ -84,7 +88,7 @@ public class CompareLogMain {
                 Log.info(diff.report());
 
                 if(!diff.sameVar()) {
-                    FileUtils.copyFile(startPoint, new File(DiversifyProperties.getProperty("result")+"/sosie/sosie_"+count));
+                    trans.add(parser.parseUniqueTransformation(startPoint));
                     diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
                     count++;
                 Log.info("i: "+count);
@@ -97,11 +101,13 @@ public class CompareLogMain {
                 e.printStackTrace();
             }
 
-
+            TransformationsWriter write = new TransformationsWriter(trans,DiversifyProperties.getProperty("result") + "/sosie/sosie");
+            write.writeAllTransformation(null);
         }
     }
 
-    protected void diffExeception() throws Exception {
+    protected void diffException() throws Exception {
+        List<ITransformation> trans = new ArrayList<ITransformation>();
         String startPointString = DiversifyProperties.getProperty("startPoint");
         int count = 0;
         int i =0;
@@ -114,9 +120,9 @@ public class CompareLogMain {
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
                 CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
 
-                CompareMultiCatchSequence un = new CompareMultiCatchSequence(dirOriginal, f.getAbsolutePath(), cf);
+                CompareMultiExceptionSequence un = new CompareMultiExceptionSequence(dirOriginal, f.getAbsolutePath(), cf);
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
-                Diff diff = un.findDiffCatch();
+                Diff diff = un.findDiffException();
 
                 Log.info("catchDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndCatch());
                 if(!diff.sameTraceAndCatch()) {
@@ -124,7 +130,7 @@ public class CompareLogMain {
                     Log.info(diff.report());
 
                     if(!diff.sameCatch()) {
-                        FileUtils.copyFile(startPoint, new File(DiversifyProperties.getProperty("result")+"/sosie/sosie_E"+count));
+                        trans.add(parser.parseUniqueTransformation(startPoint));
                         diff.toDotCatch(DiversifyProperties.getProperty("result")+"exception_"+f.getName() + ".dot");
                         count++;
                         Log.info("i: "+count);
@@ -137,6 +143,11 @@ public class CompareLogMain {
                 e.printStackTrace();
             }
         }
+
+        Log.info("max exception: "+ PointSequence.getMaxSizeException());
+
+        TransformationsWriter write = new TransformationsWriter(trans,DiversifyProperties.getProperty("result") + "/sosie/sosieE");
+        write.writeAllTransformation(null);
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {

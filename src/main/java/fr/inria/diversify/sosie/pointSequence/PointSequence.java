@@ -14,13 +14,15 @@ import java.util.List;
  */
 public class PointSequence {
     protected List<ConditionalPoint> conditionalPoints;
-    protected List<CatchPoint> catchPoints;
+    protected List<ExceptionPoint> exceptionPoints;
     protected String threadName;
     protected String name;
 
+    protected static int maxSizeException = 0;
+
     public PointSequence() {
         conditionalPoints = new ArrayList<ConditionalPoint>();
-        catchPoints = new ArrayList<CatchPoint>();
+        exceptionPoints = new ArrayList<ExceptionPoint>();
     }
 
     public void parseFile(File file) throws IOException {
@@ -44,11 +46,12 @@ public class PointSequence {
             line = reader.readLine();
         }
         addPoint(tmp);
+       maxSizeException = Math.max(maxSizeException,exceptionPoints.size());
     }
 
     protected void addPoint(String stringPoint) {
         if(stringPoint.startsWith("ST"))
-            catchPoints.add(new CatchPoint(stringPoint));
+            exceptionPoints.add(new ExceptionPoint(stringPoint));
         else
             conditionalPoints.add(new ConditionalPoint(stringPoint));
     }
@@ -78,15 +81,15 @@ public class PointSequence {
     }
 
     public int cathSize() {
-        return catchPoints.size();
+        return exceptionPoints.size();
     }
 
     public ConditionalPoint getConditionalPoint(int i) {
         return conditionalPoints.get(i);
     }
 
-    public CatchPoint getCatchPoint(int i) {
-        return catchPoints.get(i);
+    public ExceptionPoint getCatchPoint(int i) {
+        return exceptionPoints.get(i);
     }
 
     @Override
@@ -106,5 +109,10 @@ public class PointSequence {
 
     public String toDot() {
         return hashCode() + " [label=\"" + name + "\"];";
+    }
+
+    public static int getMaxSizeException() {
+        return maxSizeException;
+
     }
 }

@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.compare;
 
+import fr.inria.diversify.sosie.pointSequence.ExceptionPoint;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
 
 /**
@@ -7,7 +8,7 @@ import fr.inria.diversify.sosie.pointSequence.PointSequence;
  * Date: 14/11/13
  * Time: 17:15
  */
-public class CatchDiff {
+public class ExceptionDiff {
     protected PointSequence original;
     protected PointSequence sosie;
     protected int positionInOriginal;
@@ -29,7 +30,16 @@ public class CatchDiff {
         this.positionInSosie = positionInSosie;
     }
 
+
+    public String toString() {
+        ExceptionPoint cpO =  original.getCatchPoint(positionInOriginal);
+        ExceptionPoint cpS = sosie.getCatchPoint(positionInSosie);
+        return cpO.getClassName() +":"+cpO.getMethodSignature()+":"+cpO.getStackTrace() +" / "+cpS.getStackTrace();
+    }
+
     public String toDot() {
-        return "";
+        ExceptionPoint cpO =  original.getCatchPoint(positionInOriginal);
+        ExceptionPoint cpS = sosie.getCatchPoint(positionInSosie);
+        return cpO.getClassName() +":"+cpO.getMethodSignature()+":"+cpO.getStackTrace() +" / "+cpS.getStackTrace();
     }
 }

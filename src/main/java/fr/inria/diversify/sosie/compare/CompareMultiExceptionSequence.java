@@ -8,16 +8,14 @@ import org.json.JSONException;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * User: Simon
  * Date: 8/23/13
  * Time: 11:29 AM
  */
-public class CompareMultiCatchSequence {
+public class CompareMultiExceptionSequence {
 
     protected List<PointSequence> originals;
     protected List<PointSequence> sosies;
@@ -30,7 +28,7 @@ public class CompareMultiCatchSequence {
 //
 //    }
 
-    public CompareMultiCatchSequence(String dirOriginal, String dirSosie, CodeFragment startPoint) throws IOException, JSONException {
+    public CompareMultiExceptionSequence(String dirOriginal, String dirSosie, CodeFragment startPoint) throws IOException, JSONException {
         originals = loadPointSequence(dirOriginal,false);
         sosies = loadPointSequence(dirSosie,true);
         this.startPoint = startPoint;
@@ -62,15 +60,15 @@ public class CompareMultiCatchSequence {
     *
     * @throws java.io.IOException
     */
-    public Diff findDiffCatch() throws IOException {
+    public Diff findDiffException() throws IOException {
         Diff diff = new Diff(startPoint);
  	    for (PointSequence original : originals) {
 		    for (PointSequence sosie : sosies) {
                  Log.debug("compare original: {} with {}",original, sosie );
-			    CompareSingleCatchSequence cls = new CompareSingleCatchSequence(original, sosie, startPoint);
+			    CompareSingleExceptionSequence cls = new CompareSingleExceptionSequence(original, sosie, startPoint);
                 if (sosie.getName().equals(original.getName())) {
                     diff.addMatch(original,sosie);
-                    diff.addCatchFor(original, cls.findDivergenceCatch(syncroRange));
+                    diff.addCatchFor(original, cls.findDivergenceException(syncroRange));
                     diff.addCatchDivergence(original, cls.findDivergence(syncroRange));
 	    		}
 	    	}
@@ -79,30 +77,6 @@ public class CompareMultiCatchSequence {
     	}
 	    return diff;
     }
-
-
-//    /**
-//     * search if the original and sosie (two set of trace) diverge at the call level
-//     * @throws java.io.IOException
-//     */
-//    public boolean findDivergence() {
-//        for (PointSequence original : originals) {
-//            String originalName = original.getName();
-//            boolean same = false;
-//            for (PointSequence sosie : sosies) {
-//                String sosieName = original.getName();
-//                CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
-//                if (sosieName.equals(originalName) && cls.findDivergence(syncroRange) != null) {//same sequence
-//                    same = true;
-//                    break;
-//                }
-//            }
-//            if (!same)
-//                return true;
-//        }
-//        return false;
-//    }
-
 
     protected List<PointSequence> loadPointSequence(String dir, boolean recursive) {
         List<PointSequence> list = new ArrayList<PointSequence>();
