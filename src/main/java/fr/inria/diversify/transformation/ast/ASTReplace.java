@@ -147,7 +147,7 @@ public class ASTReplace extends ASTTransformation {
         ASTReplace otherReplace = (ASTReplace)other;
 
         return type.equals(otherReplace.type) && failures == otherReplace.failures &&
-                variableMapping.equals(otherReplace.variableMapping) &&
+                (variableMapping == null || variableMapping.equals(otherReplace.variableMapping)) &&
                 position.equals(otherReplace.position) &&
                 replace.equals(otherReplace.replace);
     }

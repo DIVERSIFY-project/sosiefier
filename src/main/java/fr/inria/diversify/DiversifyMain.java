@@ -17,7 +17,6 @@ import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.statistic.Util;
 import fr.inria.diversify.transformation.ITransformation;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
@@ -55,6 +54,7 @@ public class DiversifyMain {
         initLogLevel();
         initSpoon();
         Log.info("number of statement: " + codeFragments.size());
+
 
         if (DiversifyProperties.getProperty("sosie").equals("true"))
             buildSosie();
@@ -172,7 +172,6 @@ public class DiversifyMain {
         pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
         for (CtSimpleType cl: codeFragments.getAllClasses()) {
             try {
-                Log.info(cl.getQualifiedName());
                 CtClass cc = pool.get(cl.getQualifiedName());
                 for(CtMethod method : cc.getDeclaredMethods())
                     if(!method.isEmpty()) {

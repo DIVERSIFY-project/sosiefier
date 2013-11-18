@@ -20,21 +20,15 @@ public class RunMaven extends Thread {
     protected String directory;
     protected boolean compileError = false;
     protected boolean allTestRun = false;
-    protected String lifeCycle;
+    String[] phases;
     protected Integer failure = null;
     protected Boolean clojureTest = false;
     protected int timeOut;
 
 
-    public RunMaven(String directory, String lifeCycle, int timeOut) {
+    public RunMaven(String directory, String[] phases, int timeOut, boolean clojureTest) {
         this.directory = directory;
-        this.lifeCycle = lifeCycle;
-        this.timeOut = timeOut;
-    }
-
-    public RunMaven(String directory, String lifeCycle, int timeOut, boolean clojureTest) {
-        this.directory = directory;
-        this.lifeCycle = lifeCycle;
+        this.phases = phases;
         this.clojureTest = clojureTest;
         this.timeOut = timeOut;
     }
@@ -45,10 +39,11 @@ public class RunMaven extends Thread {
         InvocationRequest request = new DefaultInvocationRequest();
         request.setPomFile( new File( directory + "/pom.xml" ) );
         List<String> l = new ArrayList<String>();
-//        l.add("clean");
-        l.add(lifeCycle);
-        request.setGoals(l);
 
+        for(String phase: phases)
+            l.add(phase);
+
+        request.setGoals(l);
 
         MavenInvoker invoker = new MavenInvoker();
         //freebsd

@@ -88,7 +88,7 @@ public abstract class Builder {
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, "test", timeOut,clojureTest);
+        RunMaven rt = new RunMaven(directory, new String[]{"test"}, timeOut,clojureTest);
         rt.start();
         rt.join(1000*timeOut);
 
@@ -104,7 +104,7 @@ public abstract class Builder {
 
     public void initTimeOut() throws InterruptedException {
         initThreadGroup();
-        RunMaven rt = new RunMaven(projectDir, "test", 0, clojureTest);
+        RunMaven rt = new RunMaven(projectDir, new String[]{"clean", "test"}, 0, clojureTest);
         rt.start();
         timeOut = 0;
         int factor = 12;

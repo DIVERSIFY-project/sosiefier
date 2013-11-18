@@ -125,7 +125,7 @@ public class ASTAdd extends ASTTransformation {
 
         return type.equals(otherASTAdd.type) &&
                 failures == otherASTAdd.failures &&
-                variableMapping.equals(otherASTAdd.variableMapping) &&
+                (variableMapping == null || variableMapping.equals(otherASTAdd.variableMapping)) &&
                 position.equals(otherASTAdd.position) &&
                 add.equals(otherASTAdd.add);
     }
