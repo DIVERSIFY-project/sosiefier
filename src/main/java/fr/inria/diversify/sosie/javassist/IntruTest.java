@@ -1,4 +1,4 @@
-package fr.inria.diversify.javassist;
+package fr.inria.diversify.sosie.javassist;
 
 import fr.inria.diversify.util.Log;
 import javassist.*;

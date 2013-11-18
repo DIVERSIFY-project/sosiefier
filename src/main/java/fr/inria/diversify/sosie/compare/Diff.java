@@ -3,7 +3,9 @@ package fr.inria.diversify.sosie.compare;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
+import org.apache.commons.io.FileUtils;
 
+import javax.rmi.CORBA.Util;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -208,6 +210,7 @@ public class Diff {
     }
 
     public void toDotCatch(String fileName) throws IOException {
+
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
 

@@ -7,6 +7,7 @@ import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
+import org.apache.commons.io.FileUtils;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
@@ -46,7 +47,10 @@ public class CompareLogMain {
         if(DiversifyProperties.getProperty("logTrace").equals("same"))
             same();
         else
-            diffCatch();
+            if(DiversifyProperties.getProperty("conditionalPoint").equals("true"))
+                diff();
+            else
+                diffExeception();
     }
 
     protected void same() throws IOException {
@@ -80,7 +84,8 @@ public class CompareLogMain {
                 Log.info(diff.report());
 
                 if(!diff.sameVar()) {
-                    diff.toDot(f.getName()+".dot");
+                    FileUtils.copyFile(startPoint, new File(DiversifyProperties.getProperty("result")+"/sosie/sosie_"+count));
+                    diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
                     count++;
                 Log.info("i: "+count);
                 }
@@ -96,7 +101,7 @@ public class CompareLogMain {
         }
     }
 
-    protected void diffCatch() throws Exception {
+    protected void diffExeception() throws Exception {
         String startPointString = DiversifyProperties.getProperty("startPoint");
         int count = 0;
         int i =0;
@@ -119,7 +124,8 @@ public class CompareLogMain {
                     Log.info(diff.report());
 
                     if(!diff.sameCatch()) {
-                        diff.toDotCatch(f.getName() + ".dot");
+                        FileUtils.copyFile(startPoint, new File(DiversifyProperties.getProperty("result")+"/sosie/sosie_E"+count));
+                        diff.toDotCatch(DiversifyProperties.getProperty("result")+"exception_"+f.getName() + ".dot");
                         count++;
                         Log.info("i: "+count);
                     }
