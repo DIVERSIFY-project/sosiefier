@@ -24,10 +24,11 @@ public class BytecodeAdd extends BytecodeTransformation {
     protected byte[] byteCodeToAdd;
 
 
-    public BytecodeAdd(CtMethod method, int index, byte[] bytecode) {
+    public BytecodeAdd(CtMethod method, int index, byte[] bytecode, List<CtMethod> methods) {
         methodLocation = method;
         opcodeIndex = index;
         byteCodeToAdd = bytecode;
+        this.methods = methods;
     }
 
     @Override

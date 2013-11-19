@@ -77,7 +77,7 @@ public class ByteCodeTransformationQuery implements ITransformationQuery {
 //            method = randomConcreteMethod();
 //            opCodeIndex = randomOpCode(method);
 //        }
-        return new BytecodeDelete(method,opCodeIndex);
+        return new BytecodeDelete(method,opCodeIndex,methods);
     }
 
     public BytecodeAdd add() throws Exception {
@@ -88,7 +88,7 @@ public class ByteCodeTransformationQuery implements ITransformationQuery {
 //            method = randomConcreteMethod();
 //            opCodeIndex = randomOpCode(method);
 //        }
-        return new BytecodeAdd(method,opCodeIndex, randomOpCodeInClass(method.getDeclaringClass()));
+        return new BytecodeAdd(method,opCodeIndex, randomOpCodeInClass(method.getDeclaringClass()),methods);
     }
 
     public BytecodeReplace replace() throws Exception {
@@ -99,7 +99,7 @@ public class ByteCodeTransformationQuery implements ITransformationQuery {
 //            method = randomConcreteMethod();
 //            opCodeIndex = randomOpCode(method);
 //        }
-        return new BytecodeReplace(method,opCodeIndex, randomOpCodeInClass(method.getDeclaringClass()));
+        return new BytecodeReplace(method,opCodeIndex, randomOpCodeInClass(method.getDeclaringClass()),methods);
     }
 
 

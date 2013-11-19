@@ -2,10 +2,12 @@ package fr.inria.diversify.transformation.bytecode;
 
 import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.util.Log;
+import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.bytecode.*;
 import org.apache.commons.io.FileUtils;
+import spoon.reflect.declaration.CtSimpleType;
 
 
 import java.io.File;
@@ -21,6 +23,7 @@ public abstract class BytecodeTransformation implements ITransformation {
     protected CtMethod methodLocation;
     protected int opcodeIndex;
     protected Integer failures;
+    protected List<CtMethod> methods;
 
     protected File backupClassFile;
     protected CtClass backupClass;
@@ -39,16 +42,26 @@ public abstract class BytecodeTransformation implements ITransformation {
         Log.debug("method bytecode after: \n{}",methodToString(methodLocation));
         Log.debug("write new class in: {}",targetDir);
         methodLocation.getDeclaringClass().writeFile(targetDir);
-
     }
 
     protected abstract void apply() throws BadBytecode;
 
     public void restore(String targetDir) throws Exception {
         String destination = targetDir+ "/"+backupClass.getName().replace(".","/") + ".class";
-
         Log.debug("restore file: " + backupClassFile + " -> " + destination);
+
+        for(CtMethod method : methodLocation.getDeclaringClass().getDeclaredMethods())
+            if(!method.isEmpty())
+                methods.remove(method);
+        methodLocation.getDeclaringClass().detach();
+
         FileUtils.copyFile(backupClassFile, new File(destination));
+        ClassPool pool = ClassPool.getDefault();
+        pool.insertClassPath(destination);
+        pool.get(backupClass.getName());
+        for(CtMethod method : pool.get(backupClass.getName()).getDeclaredMethods())
+            if(!method.isEmpty())
+                methods.add(method);
     }
 
     protected List<Integer> opCodeIndexList(CodeAttribute ca) throws BadBytecode {
