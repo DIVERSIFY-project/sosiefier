@@ -28,7 +28,6 @@ public class InputContext {
 	
 	protected Set<String> inputContextToString() {
 		//todo set ou list ?????
-        //axis 2012 icse 2013 gorla
         Set<String> set = new HashSet<String>();
 		for (CtVariableReference<?> var : localVariableReferences)
 			set.add(var.getType().toString());

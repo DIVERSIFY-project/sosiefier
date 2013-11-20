@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Simon
@@ -25,7 +26,7 @@ public class PointSequence {
         exceptionPoints = new ArrayList<ExceptionPoint>();
     }
 
-    public void parseFile(File file) throws IOException {
+    public void parseFile(File file,Map<String,String> idMap) throws IOException {
         parseFileName(file.getName());
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -35,7 +36,7 @@ public class PointSequence {
         while (line != null) {
             if(!line.isEmpty()) {
                 if(line.endsWith("$$$")) {
-                    addPoint(tmp + line.substring(0,line.length()-3));
+                    addPoint(tmp + line.substring(0,line.length()-3), idMap);
 
                     tmp = "";
                 }
@@ -45,15 +46,15 @@ public class PointSequence {
             }
             line = reader.readLine();
         }
-        addPoint(tmp);
+        addPoint(tmp, idMap);
        maxSizeException = Math.max(maxSizeException,exceptionPoints.size());
     }
 
-    protected void addPoint(String stringPoint) {
+    protected void addPoint(String stringPoint, Map<String,String> idMap) {
         if(stringPoint.startsWith("ST"))
-            exceptionPoints.add(new ExceptionPoint(stringPoint));
+            exceptionPoints.add(new ExceptionPoint(stringPoint, idMap));
         else
-            conditionalPoints.add(new ConditionalPoint(stringPoint));
+            conditionalPoints.add(new ConditionalPoint(stringPoint, idMap));
     }
 
     public int findPoint(int id, String className, String methodSignature) {

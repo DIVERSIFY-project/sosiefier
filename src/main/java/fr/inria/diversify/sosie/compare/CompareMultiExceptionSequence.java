@@ -8,7 +8,9 @@ import org.json.JSONException;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Simon
@@ -81,6 +83,7 @@ public class CompareMultiExceptionSequence {
     protected List<PointSequence> loadPointSequence(String dir, boolean recursive) {
         List<PointSequence> list = new ArrayList<PointSequence>();
         File file = new File(dir);
+
         Log.debug("load trace in directory: {}",dir);
         for (File f : file.listFiles()) {
             if(recursive && f.isDirectory())
@@ -88,7 +91,7 @@ public class CompareMultiExceptionSequence {
             else {
                 try {
                     PointSequence ps = new PointSequence();
-                    ps.parseFile(f);
+                    ps.parseFile(f,null);
                     list.add(ps);
                 } catch (Exception e) {
 //                Log.warn("error during parse file {}",e,f);

@@ -120,8 +120,13 @@ public class DiversifyMain {
 
         //TODO refactor
         if (DiversifyProperties.getProperty("nbRun").equals("all")) {
-            if(DiversifyProperties.getProperty("transformation.directory") != null)
-                builder.run(1000);
+            if(DiversifyProperties.getProperty("transformation.directory") != null) {
+                TransformationParser tf = new TransformationParser(codeFragments);
+                List<ITransformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
+                Set<ITransformation> set = new HashSet<ITransformation>(transformations);
+                Log.debug("apply {} transformation", set.size());
+                builder.run(set);
+            }
             Util util = new Util(codeFragments);
             if (DiversifyProperties.getProperty("transformation.type").equals("replace"))
                 builder.run(util.getAllReplace());
@@ -132,7 +137,16 @@ public class DiversifyMain {
         } else if (DiversifyProperties.getProperty("transformation.type").equals("stupid")) {
             int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
             Util util = new Util(codeFragments);
-            builder.run(util.getStupidTransformation(n, (ASTTransformationQuery)query));
+            int count = 0;
+            for(int i = 0; i < 100; i++) {
+                builder.run(util.getStupidTransformation(n, (ASTTransformationQuery)query));
+                int size = builder.getTransformations().size();
+                builder.getTransformations().clear();
+                count = size+ count;
+                Log.debug("{}*7 = {}",n,size);
+            }
+            Log.debug("mean: {}*7 = {}",n,((double)count/100.0));
+//            builder.run(util.getStupidTransformation(n, (ASTTransformationQuery)query));
         }
         else
         {

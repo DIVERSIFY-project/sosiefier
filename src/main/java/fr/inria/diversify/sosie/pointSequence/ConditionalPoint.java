@@ -15,8 +15,8 @@ import java.util.Set;
 public class ConditionalPoint extends Point {
     Map<String, String> vars;
 
-    public ConditionalPoint(String string) {
-        super(string);
+    public ConditionalPoint(String string, Map<String,String> idMap) {
+        super(string, idMap);
     }
     public boolean sameValue(Point point) {
         if(!(point instanceof ConditionalPoint))
@@ -38,14 +38,37 @@ public class ConditionalPoint extends Point {
         return super.sameLogPoint(point) && vars.keySet().equals(((ConditionalPoint)point).vars.keySet());
     }
 
+    protected void buildFrom(String string, Map<String,String> idMap) {
+        if(idMap == null)
+            buildFrom(string);
+        else
+            buildFromId(string,idMap);
+    }
+
+    protected void buildFromId(String string, Map<String,String> idMap) {
+        vars = new HashMap<String, String>();
+        String[] array = string.split(":;:");
+        try {
+//            id = Integer.parseInt(array[0]);
+            className = idMap.get(array[0]);
+            methodSignature = idMap.get(array[1]);
+            for (int i = 2; i< array.length; i = i+2) {
+                vars.put(idMap.get(array[i]), array[i+1]);
+            }
+        } catch (Exception e) {
+            bugPoint = true;
+        }
+    }
+
+    //ancienne version des logs
     protected void buildFrom(String string) {
         vars = new HashMap<String, String>();
         String[] array = string.split(":;:");
         try {
             id = Integer.parseInt(array[0]);
-            className = array[1];
-            methodSignature = array[2];
-            for (int i = 3; i< array.length; i = i+2) {
+            className = array[0];
+            methodSignature = array[1];
+            for (int i = 2; i< array.length; i = i+2) {
                 vars.put(array[i], array[i+1]);
             }
         } catch (Exception e) {

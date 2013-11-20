@@ -5,6 +5,7 @@ import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtVariableAccess;
 import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
@@ -45,12 +46,19 @@ public class VariableVisitor extends CtScanner {
 		super.visitCtLocalVariableReference(reference);
 	}
 
-	public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-		if(!(fieldAccess.getVariable().getSimpleName() == "super"))
-		    if(!(fieldAccess.getVariable().isStatic() && fieldAccess.getVariable().getModifiers().contains(ModifierKind.PUBLIC)))
-				fieldReferences.add(fieldAccess);
-		super.visitCtVariableAccess(fieldAccess);
-	}
+//	public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
+//		if(!(fieldAccess.getVariable().getSimpleName() == "super"))
+//		    if(!(fieldAccess.getVariable().isStatic() && fieldAccess.getVariable().getModifiers().contains(ModifierKind.PUBLIC)))
+//				fieldReferences.add(fieldAccess);
+//		super.visitCtVariableAccess(fieldAccess);
+//	}
+
+    public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
+        if(!(reference.getSimpleName() == "super"))
+            if(!(reference.isStatic() && reference.getModifiers().contains(ModifierKind.PUBLIC)))
+                localVariableReferences.add(reference);
+        super.visitCtFieldReference(reference);
+    }
 
 	public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 		if(invocation.getTarget() == null){

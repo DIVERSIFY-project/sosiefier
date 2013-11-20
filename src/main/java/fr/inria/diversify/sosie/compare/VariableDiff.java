@@ -32,6 +32,9 @@ public class VariableDiff {
         this.name = tmp[2];
     }
 
+    public String getVarName() {
+        return name;
+    }
     public String toString() {
         return className+":"+methodSignature+":"+name+":("+originalValue+" / "+sosieValue+") index:"+positionInOriginal+"/"+positionInSosie;
     }

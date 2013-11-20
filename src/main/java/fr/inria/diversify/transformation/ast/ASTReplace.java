@@ -63,7 +63,7 @@ public class ASTReplace extends ASTTransformation {
         Log.debug("position:\n{}",position);
         Log.debug("{}",position.getCtCodeFragment().getPosition());
         Log.debug("{}",position.getCodeFragmentType());
-        Log.debug("replace by:\n{}", replace);
+        Log.debug("replace by: ({})\n{}",replace.getCodeFragmentType(), replace);
 
         if(withVarMapping()) {
             if(variableMapping == null) {

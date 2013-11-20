@@ -31,6 +31,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
                         || CtLoop.class.isAssignableFrom(candidate.getClass())
                         || CtThrow.class.isAssignableFrom(candidate.getClass())
                 ;
+
     }
 
     public boolean hasStaticParent(CtElement el) {

@@ -15,12 +15,19 @@ public class LogWriter {
     static private Map<Thread, FileWriter> fileWriters;
     static private String separator = ":;:";
     private static String currentTestSignature;
+    private static Map<String,String> idMap;
 
 
     protected synchronized static FileWriter init(Thread thread) throws IOException {
         if(fileWriters == null) {
             if(dir == null)
                 initDir();
+            try {
+                idMap = loadIdMap(dir+"/id");
+            }   catch (Exception e) {
+                idMap = new HashMap<String, String>();
+            }
+
             fileWriters = new HashMap<Thread, FileWriter>();
             ShutdownHookLog shutdownHook = new ShutdownHookLog();
             Runtime.getRuntime().addShutdownHook(shutdownHook);
@@ -63,17 +70,17 @@ public class LogWriter {
             }
         try {
             fileWriter.append("$$$\n");
-            fileWriter.append(id+"");
+//            fileWriter.append(id+"");
+//            fileWriter.append(separator);
+            fileWriter.append(idFor(className));
             fileWriter.append(separator);
-            fileWriter.append(className);
-            fileWriter.append(separator);
-            fileWriter.append(methodSignature);
+            fileWriter.append(idFor(methodSignature));
 
             for (int i = 0; i < var.length/2; i = i + 2) {
                 fileWriter.append(separator);
-                fileWriter.append(var[i].toString());
+                fileWriter.append(idFor(var[i].toString()));
                 fileWriter.append(separator);
-                fileWriter.append(var[i+1]+"");
+                fileWriter.append(var[i+1].toString());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -157,5 +164,41 @@ public class LogWriter {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        try {
+            writeIdFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected static String idFor(String string) {
+        if(!idMap.containsKey(string))
+            idMap.put(string,idMap.size()+"");
+
+        return idMap.get(string);
+    }
+
+    protected static void writeIdFile() throws IOException {
+        FileWriter fw = new FileWriter(dir.getAbsolutePath()+"/id");
+
+        for(String s : idMap.keySet())
+            fw.write(idMap.get(s)+ " " +s+"\n");
+
+        fw.close();
+    }
+
+    protected static Map<String,String> loadIdMap(String file) throws IOException {
+        Map<String,String> map = new HashMap<String, String>();
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        reader.readLine();
+        String line = reader.readLine();
+
+        while (line != null) {
+
+            String[] tmp = line.split(" ");
+            map.put(tmp[1],tmp[0]);
+            line = reader.readLine();
+        }
+        return map;
     }
 }

@@ -7,10 +7,7 @@ import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -142,9 +139,15 @@ public class CompareMultiLogSequence {
         return varToExclude;
     }
 
-    protected List<PointSequence> loadPointSequence(String dir, boolean recursive) {
+    protected List<PointSequence> loadPointSequence(String dir, boolean recursive){
         List<PointSequence> list = new ArrayList<PointSequence>();
         File file = new File(dir);
+        Map<String, String> idMap = null;
+        try {
+            idMap = loadIdMap(dir + "/id");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Log.debug("load trace in directory: {}",dir);
         for (File f : file.listFiles()) {
             if(recursive && f.isDirectory())
@@ -152,14 +155,27 @@ public class CompareMultiLogSequence {
             else {
                 try {
                     PointSequence ps = new PointSequence();
-                    ps.parseFile(f);
+                    ps.parseFile(f,idMap);
                     list.add(ps);
                 } catch (Exception e) {
-//                Log.warn("error during parse file {}",e,f);
                 }
             }
         }
         return list;
+    }
+
+    protected Map<String,String> loadIdMap(String file) throws IOException {
+        Map<String,String> map = new HashMap<String, String>();
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        reader.readLine();
+        String line = reader.readLine();
+
+        while (line != null) {
+            line = reader.readLine();
+            String[] tmp = line.split(" ");
+            map.put(tmp[0],tmp[1]);
+        }
+        return map;
     }
 
     public void setSyncroRange(int syncroRange) {

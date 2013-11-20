@@ -3,6 +3,7 @@ package fr.inria.diversify.sosie.pointSequence;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.sosie.compare.VariableDiff;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,8 +17,8 @@ public abstract class Point {
     int id;
     boolean bugPoint = false;
 
-    public Point(String string) {
-        buildFrom(string);
+    public Point(String string, Map<String,String> idMap) {
+        buildFrom(string, idMap);
     }
 
     public boolean sameLogPoint(Point point) {
@@ -41,7 +42,7 @@ public abstract class Point {
         return false;
     }
 
-    protected abstract void buildFrom(String string);
+    protected abstract void buildFrom(String string, Map<String,String> idMap);
 
     public String getClassName() {
         return className;

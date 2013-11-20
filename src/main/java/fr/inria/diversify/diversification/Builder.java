@@ -88,7 +88,7 @@ public abstract class Builder {
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, new String[]{"test"}, timeOut,clojureTest);
+        RunMaven rt = new RunMaven(directory, new String[]{"compile"}, timeOut,clojureTest);
         rt.start();
         rt.join(1000*timeOut);
 
@@ -192,4 +192,6 @@ public abstract class Builder {
     public void setTransformationQuery(ITransformationQuery transQuery) {
         this.transQuery = transQuery;
     }
+
+    public List<ITransformation> getTransformations() {return transformations;}
 }

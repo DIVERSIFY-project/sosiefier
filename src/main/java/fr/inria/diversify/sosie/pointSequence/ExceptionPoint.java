@@ -4,6 +4,7 @@ import fr.inria.diversify.sosie.compare.ExceptionDiff;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -15,12 +16,12 @@ public class ExceptionPoint extends Point {
 
     private List<String> stackTrace;
 
-    public ExceptionPoint(String string) {
-        super(string);
+    public ExceptionPoint(String string, Map<String,String> idMap) {
+        super(string, idMap);
     }
 
     @Override
-    protected void buildFrom(String string) {
+    protected void buildFrom(String string, Map<String,String> idMap) {
         stackTrace = new ArrayList<String>();
         String[] array = string.split(":;:");
         try {

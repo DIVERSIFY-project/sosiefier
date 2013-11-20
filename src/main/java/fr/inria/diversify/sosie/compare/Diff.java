@@ -22,13 +22,13 @@ public class Diff {
     protected Map<PointSequence,PointSequence> match;
     protected Map<PointSequence,int[][]> conditionalDivergence;
     protected Map<PointSequence,int[][]> catchDivergence;
-    protected Map<PointSequence, Set<ExceptionDiff>> diffCatch;
+    protected Map<PointSequence, Set<ExceptionDiff>> diffException;
 
     protected CodeFragment startPoint;
 
     public Diff(CodeFragment startPoint) {
         this.diffVar = new HashMap<PointSequence, Set<VariableDiff>>();
-        this.diffCatch = new HashMap<PointSequence, Set<ExceptionDiff>>();
+        this.diffException = new HashMap<PointSequence, Set<ExceptionDiff>>();
         conditionalDivergence = new HashMap<PointSequence, int[][]>();
         catchDivergence = new HashMap<PointSequence, int[][]>();
         match = new HashMap<PointSequence, PointSequence>();
@@ -43,10 +43,10 @@ public class Diff {
     }
 
     public void addCatchFor(PointSequence original, Set<ExceptionDiff> divergenceCatch) {
-        if(!diffCatch.containsKey(original))
-            diffCatch.put(original,new HashSet<ExceptionDiff>());
+        if(!diffException.containsKey(original))
+            diffException.put(original,new HashSet<ExceptionDiff>());
 
-        diffCatch.get(original).addAll(divergenceCatch);
+        diffException.get(original).addAll(divergenceCatch);
     }
 
     public void addMatch(PointSequence original, PointSequence sosie) {
@@ -96,7 +96,7 @@ public class Diff {
     }
 
     public boolean sameCatch() {
-        for (Set<ExceptionDiff> vars : diffCatch.values())
+        for (Set<ExceptionDiff> vars : diffException.values())
             if (!vars.isEmpty())
                 return false;
 
@@ -135,12 +135,12 @@ public class Diff {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
 
-
+        count = 0;
         bw.write("digraph G {\n");
         for (PointSequence ps : match.keySet())
             if (!diffVar.get(ps).isEmpty() ) {
             try {
-            bw.write(toDot(ps));
+                bw.write(toDot(ps));
             }catch (Exception e) {}
             }
 
@@ -148,11 +148,13 @@ public class Diff {
         bw.close();
     }
 
+    public int getCount() {return count;}
 
+    int count;
     protected String toDot(PointSequence original) throws IOException {
         if(match.get(original) == null)
             return "";
-
+        count++;
         StringBuilder builder = new StringBuilder();
         PointSequence sosie = match.get(original);
 
@@ -212,10 +214,10 @@ public class Diff {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
 
-
+        count = 0;
         bw.write("digraph G {\n");
         for (PointSequence ps : match.keySet())
-            if (!diffCatch.get(ps).isEmpty() ) {
+            if (!diffException.get(ps).isEmpty() ) {
                 try {
                     bw.write(toDotCatch(ps));
                 }catch (Exception e) {}
@@ -228,7 +230,7 @@ public class Diff {
     protected String toDotCatch(PointSequence original) throws IOException {
         if(match.get(original) == null)
             return "";
-
+        count++;
         StringBuilder builder = new StringBuilder();
         PointSequence sosie = match.get(original);
 
@@ -285,7 +287,7 @@ public class Diff {
 
     protected Set<ExceptionDiff> getCatchDiffFor(PointSequence ps, int index) {
         Set<ExceptionDiff> set = new HashSet<ExceptionDiff>();
-        for (ExceptionDiff varD : diffCatch.get(ps)) {
+        for (ExceptionDiff varD : diffException.get(ps)) {
             if(varD.positionInOriginal == index)
                 set.add(varD);
         }
@@ -301,4 +303,17 @@ public class Diff {
         return set;
     }
 
+    public Set<VariableDiff> getAllVariableDiff() {
+        Set<VariableDiff> diffs = new HashSet<VariableDiff>();
+        for(Set<VariableDiff> set : diffVar.values())
+            diffs.addAll(set);
+        return diffs;
+    }
+
+    public Set<ExceptionDiff> getAllExceptionDiff() {
+        Set<ExceptionDiff> diffs = new HashSet<ExceptionDiff>();
+        for(Set<ExceptionDiff> set : diffException.values())
+            diffs.addAll(set);
+        return diffs;
+    }
 }
