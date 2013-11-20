@@ -154,13 +154,8 @@ public abstract class CodeFragment {
         Map<String,String> varMap = new HashMap<String, String>();
         Random r = new Random();
 
-        for (CtVariableReference<?> variable : other.getInputContext().getLocalVar()) {
+        for (CtVariableReference<?> variable : other.getInputContext().getVar()) {
             List<Object> list = getInputContext().allCandidate(variable.getType());
-            Object candidate = list.get(r.nextInt(list.size()));
-            varMap.put(variable.toString(), candidate.toString());
-        }
-        for (CtFieldAccess<?> variable : other.getInputContext().getField()) {
-            List<CtFieldAccess> list = getInputContext().allCandidateForFieldAccess(variable.getType());
             Object candidate = list.get(r.nextInt(list.size()));
             varMap.put(variable.toString(), candidate.toString());
         }

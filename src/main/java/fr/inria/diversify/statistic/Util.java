@@ -9,7 +9,6 @@ import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import spoon.reflect.Factory;
-import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtVariableReference;
@@ -90,12 +89,8 @@ public class Util {
     protected BigInteger getNumberOfVarMapping(CodeFragment before, CodeFragment after) {
         BigInteger nb = new BigInteger("1");
 
-        for (CtVariableReference<?> variable : after.getInputContext().getLocalVar()) {
+        for (CtVariableReference<?> variable : after.getInputContext().getVar()) {
             BigInteger tmp = new BigInteger(before.getInputContext().allCandidate(variable.getType()).size()+"");
-            nb = nb.multiply(tmp);
-        }
-        for (CtFieldAccess<?> variable : after.getInputContext().getField()) {
-            BigInteger tmp = new BigInteger(before.getInputContext().allCandidateForFieldAccess(variable.getType()).size()+"");
             nb = nb.multiply(tmp);
         }
         return nb;
@@ -201,20 +196,14 @@ public class Util {
     protected List<Map<String, String>> getAllVarMapping(CodeFragment before, CodeFragment after) {
         List<List<String>> vars = new ArrayList<List<String>>();
 
-        for (CtVariableReference<?> variable : after.getInputContext().getLocalVar()) {
+        for (CtVariableReference<?> variable : after.getInputContext().getVar()) {
             List<String> mapping = new ArrayList<String>();
             vars.add(mapping);
             for (Object candidate : before.getInputContext().allCandidate(variable.getType()))
                     mapping.add(variable.toString()+"==="+candidate.toString() );
 
         }
-        for (CtFieldAccess<?> variable : after.getInputContext().getField()) {
-            List<String> mapping = new ArrayList<String>();
-            vars.add(mapping);
-            for (Object candidate : before.getInputContext().allCandidateForFieldAccess(variable.getType()))
-                mapping.add(variable.getVariable().toString()+"==="+candidate.toString() );
 
-        }
         return computeVarMapping(vars);
     }
 

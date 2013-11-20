@@ -11,12 +11,10 @@ import java.util.Set;
 
 public class InputContext {
 	protected Set<CtVariableReference<?>> localVariableReferences;
-    protected Set<CtFieldAccess<?>> fieldReferences = new HashSet<CtFieldAccess<?>>();
 	protected Integer hashCode = null;
 
-	public InputContext(Set<CtVariableReference<?>> inputContext, Set<CtFieldAccess<?>> fieldReferences) {
+	public InputContext(Set<CtVariableReference<?>> inputContext) {
 		this.localVariableReferences = inputContext;
-        this.fieldReferences = fieldReferences;
 	}
 
 	@Override
@@ -31,31 +29,17 @@ public class InputContext {
         Set<String> set = new HashSet<String>();
 		for (CtVariableReference<?> var : localVariableReferences)
 			set.add(var.getType().toString());
-        for (CtFieldAccess<?> var : fieldReferences)
-            set.add(var.getVariable().getType().toString());
 		return set;
 	}
 	
 	public Object candidate(CtTypeReference<?> type){
-        Object candidate =  candidateForLocalVar(type);
-        if(candidate == null)
-            candidate = candidateForFieldAccess(type);
+        Object candidate =  candidateForLocalVar(type);;
         return candidate;
 	}
 
     public List<Object> allCandidate(CtTypeReference<?> type){
         List<Object> candidate = new ArrayList<Object>();
-       candidate.addAll(allCandidateForFieldAccess(type));
         candidate.addAll(allCandidateForLocalVar(type));
-
-        return candidate;
-    }
-    public List<CtFieldAccess> allCandidateForFieldAccess(CtTypeReference<?> type){
-        List<CtFieldAccess> candidate = new ArrayList<CtFieldAccess>();
-        for (CtFieldAccess<?> var : fieldReferences)
-            if(var.getVariable().getType().equals(type) && var.getType().getActualTypeArguments().equals(type.getActualTypeArguments())) {
-                candidate.add(var);
-            }
 
         return candidate;
     }
@@ -70,18 +54,7 @@ public class InputContext {
 
         return candidate;
     }
-    public CtFieldAccess<?> candidateForFieldAccess(CtTypeReference<?> type){
-        CtFieldAccess<?> candidate = null;
-        for (CtFieldAccess<?> var : fieldReferences) {
-            CtTypeReference<?> varType = var.getType();
-            if(varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
 
-                candidate = var;
-                break;
-            }
-        }
-        return candidate;
-    }
 
     public CtVariableReference<?> candidateForLocalVar(CtTypeReference<?> type){
         CtVariableReference<?> candidate = null;
@@ -99,16 +72,12 @@ public class InputContext {
 		boolean isReplace = true;
 		for (CtVariableReference<?> variable : other.localVariableReferences)
 			isReplace = isReplace && hasCandidate(variable.getType());
-
-        for (CtFieldAccess<?> field : other.fieldReferences)
-            isReplace = isReplace && hasCandidateForFieldAccess(field.getVariable().getType());
-
         return isReplace;
 	}
 
     public Object getVariableOrFieldNamed(String name) {
         Object o = null;
-        for(Object vf : getVarAndField())
+        for(Object vf : getVar())
             if(vf.toString().equals(name)) {
                 o = vf;
                 break;
@@ -118,38 +87,21 @@ public class InputContext {
         return o;
     }
 
-    protected boolean hasCandidateForLocalVar(CtTypeReference<?> type) {
-        return candidateForLocalVar(type) != null;
-    }
-    protected boolean hasCandidateForFieldAccess(CtTypeReference<?> type) {
-        return candidateForFieldAccess(type) != null;
-    }
-
 	protected boolean hasCandidate(CtTypeReference<?> type) {
 		return candidate(type) != null;
 	}
 
-	public Set<CtVariableReference<?>> getLocalVar() {
+	public Set<CtVariableReference<?>> getVar() {
 		return localVariableReferences;
 	}
 
-    public Set<CtFieldAccess<?>> getField() {
-        return fieldReferences;
-    }
-    public List<Object> getVarAndField() {
-        List<Object> list = new ArrayList<Object>();
-        list.addAll(fieldReferences);
-        list.addAll(localVariableReferences);
-
-        return list;
-    }
 	public String equalString() {
 		return inputContextToString().toString();
 	}
 	
 	@Override
 	public String toString() {
-		return getVarAndField().toString();
+		return getVar().toString();
 	}
 	
 	@Override
@@ -160,19 +112,15 @@ public class InputContext {
 	}
 
 	public int size() {
-		return localVariableReferences.size() + fieldReferences.size();
+		return localVariableReferences.size();
 	}
 
     public List<CtTypeReference<?>> getTypes() {
         List<CtTypeReference<?>> types = new ArrayList<CtTypeReference<?>>();
 
-        for (CtFieldAccess field: fieldReferences)
-            types.add(field.getType());
-
         for (CtVariableReference var: localVariableReferences) {
                types.add(var.getType());
         }
-
         return types;
     }
 

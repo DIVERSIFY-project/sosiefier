@@ -18,8 +18,7 @@ import java.util.Set;
 
 public class VariableVisitor extends CtScanner {
 	protected Set<CtVariableReference<?>> localVariableReferences = new HashSet<CtVariableReference<?>>();
-	protected Set<CtFieldAccess<?>> fieldReferences = new HashSet<CtFieldAccess<?>>();
-	protected Set<CtVariableReference<?>> localVariableCreate = new HashSet<CtVariableReference<?>>();
+ 	protected Set<CtVariableReference<?>> localVariableCreate = new HashSet<CtVariableReference<?>>();
 	protected CtTypeReference<?> refThis;
 
 	public InputContext input() {
@@ -27,7 +26,7 @@ public class VariableVisitor extends CtScanner {
 
 		if(refThis != null)
             localVariableReferences.add(getThis());
-		return new InputContext(localVariableReferences, fieldReferences);
+		return new InputContext(localVariableReferences);
 	}
 
 	public <T> void visitCtLocalVariable(CtLocalVariable<T> localVariable) {
