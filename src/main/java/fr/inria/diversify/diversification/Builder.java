@@ -88,7 +88,7 @@ public abstract class Builder {
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, new String[]{"compile"}, timeOut,clojureTest);
+        RunMaven rt = new RunMaven(directory, new String[]{"test"}, timeOut,clojureTest);
         rt.start();
         rt.join(1000*timeOut);
 

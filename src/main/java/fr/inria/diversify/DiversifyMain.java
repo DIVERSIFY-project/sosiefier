@@ -137,16 +137,7 @@ public class DiversifyMain {
         } else if (DiversifyProperties.getProperty("transformation.type").equals("stupid")) {
             int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
             Util util = new Util(codeFragments);
-            int count = 0;
-            for(int i = 0; i < 100; i++) {
-                builder.run(util.getStupidTransformation(n, (ASTTransformationQuery)query));
-                int size = builder.getTransformations().size();
-                builder.getTransformations().clear();
-                count = size+ count;
-                Log.debug("{}*7 = {}",n,size);
-            }
-            Log.debug("mean: {}*7 = {}",n,((double)count/100.0));
-//            builder.run(util.getStupidTransformation(n, (ASTTransformationQuery)query));
+            builder.run(util.getStupidTransformation(n, (ASTTransformationQuery)query));
         }
         else
         {
