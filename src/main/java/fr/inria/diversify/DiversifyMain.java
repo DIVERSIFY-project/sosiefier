@@ -205,6 +205,7 @@ public class DiversifyMain {
 
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
+                Log.debug("add {} to classpath",dir);
                 builder.addInputSource(new File(dir));
             } catch (IOException e) {
                 Log.error("error in initSpoon", e);

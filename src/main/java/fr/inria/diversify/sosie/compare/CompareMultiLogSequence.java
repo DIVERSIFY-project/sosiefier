@@ -146,7 +146,7 @@ public class CompareMultiLogSequence {
         try {
             idMap = loadIdMap(dir + "/id");
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         Log.debug("load trace in directory: {}",dir);
         for (File f : file.listFiles()) {

@@ -2,10 +2,7 @@ package fr.inria.diversify.sosie.pointSequence;
 
 import fr.inria.diversify.sosie.compare.VariableDiff;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -66,9 +63,9 @@ public class ConditionalPoint extends Point {
         String[] array = string.split(":;:");
         try {
             id = Integer.parseInt(array[0]);
-            className = array[0];
-            methodSignature = array[1];
-            for (int i = 2; i< array.length; i = i+2) {
+            className = array[1];
+            methodSignature = array[2];
+            for (int i = 3; i< array.length; i = i+2) {
                 vars.put(array[i], array[i+1]);
             }
         } catch (Exception e) {
@@ -109,20 +106,61 @@ public class ConditionalPoint extends Point {
         return difVar;
     }
 
-    protected boolean valueEqual(String v1, String v2) {
-        if(v1 ==null || v2 == null) {
-           return true;
-        }
-        if((v1.startsWith("{") && v2.startsWith("{"))
-                || (v1.startsWith("[") && v2.startsWith("["))) {
-            return v1.split(", ").length == v2.split(", ").length;
-        }
-        if(v1.contains("@") && v2.contains("@"))
-            if(v1.split("@").length != 0 && v2.split("@").length != 0)
-                return v1.split("@")[0].equals(v2.split("@")[0]);
+//    protected boolean valueEqual(String v1, String v2) {
+//        if(v1 ==null || v2 == null) {
+//           return true;
+//        }
+//        if((v1.startsWith("{") && v2.startsWith("{"))
+//                || (v1.startsWith("[") && v2.startsWith("["))) {
+//            return v1.split(", ").length == v2.split(", ").length;
+//        }
+//        if(v1.contains("@") && v2.contains("@"))
+//            if(v1.split("@").length != 0 && v2.split("@").length != 0)
+//                return v1.split("@")[0].equals(v2.split("@")[0]);
+//
+//
+//        return  v1.equals(v2);
+//    }
+protected boolean valueEqual(String v1, String v2) {
+    if(v1 ==null || v2 == null) {
+        return true;
+    }
+    Object o1 = null;
+    Object o2 = null;
+    if((v1.startsWith("{") && v1.endsWith("}")) ||
+            v1.startsWith("[") && v1.endsWith("]")) {
+        o1 = equalListString(v1);
+    }
+    else
+        o1 = equalString(v1);
 
+    if((v2.startsWith("{") && v2.endsWith("}")) ||
+            v2.startsWith("[") && v2.endsWith("]")) {
+        o2 = equalListString(v2);
+    }
+    else
+        o2 = equalString(v2);
 
-        return  v1.equals(v2);
+    return  o1.equals(o2);
+}
+
+    protected String equalString(String var) {
+        if(var.contains("@") && var.split("@").length != 0)
+            return var.split("@")[0];
+        return  var;
+    }
+
+    protected Collection<String> equalListString(String var) {
+        Collection<String> collection;
+        if(var.startsWith("{"))
+            collection = new HashSet<String>();
+        else
+            collection = new ArrayList<String>();
+
+        for(String s : var.substring(1,var.length()-1).split(","))
+            collection.add(equalString(s));
+
+        return  collection;
     }
 
     public String toString() {

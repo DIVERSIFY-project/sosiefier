@@ -77,54 +77,55 @@ public class CompareLogMain {
         int count = 0;
         int i =0;
         for(File f : (new File(dirSosie).listFiles())) {
+            Log.debug("loading log from dir {}",f.getAbsolutePath());
             i++;
             Log.info("sosie nb: {}",i);
             try {
 //            Log.info("log files {}",f);
-            File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
-            TransformationParser parser = new TransformationParser(codeFragments);
-            Log.info("startPoint {}",startPoint.getAbsolutePath());
-            CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
+                File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
+                TransformationParser parser = new TransformationParser(codeFragments);
+                Log.info("startPoint {}",startPoint.getAbsolutePath());
+                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
 
-            CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, f.getAbsolutePath(), cf, varToExclude);
-            un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
-            Diff diff = un.findDiffVar();
+                CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, f.getAbsolutePath(), cf, varToExclude);
+                un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+                Diff diff = un.findDiffVar();
 
-            Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
-            if(!diff.sameTraceAndVar()) {
-                Log.info(f.getName());
-                Log.info(diff.report());
+                Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
+                if(!diff.sameTraceAndVar()) {
+                    Log.info(f.getName());
+                    Log.info(diff.report());
 
-                if(!diff.sameVar()) {
+                    if(!diff.sameVar()) {
 
-                    trans.add(parser.parseUniqueTransformation(startPoint));
-                    diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
-                    count++;
+                        trans.add(parser.parseUniqueTransformation(startPoint));
+                        diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
+                        count++;
 
-                    Set<String> set = new HashSet<String>();
-                    for(VariableDiff d : diff.getAllVariableDiff()) {
-                        set.add(d.getVarName());
+                        Set<String> set = new HashSet<String>();
+                        for(VariableDiff d : diff.getAllVariableDiff()) {
+                            set.add(d.getVarName());
+                        }
+                        var = var + set.size();
+                        varMax = Math.max(varMax,set.size());
+                        varMin = Math.min(varMin,set.size());
+                        Log.info("nb diff:{}",set.size());
+                        test = test +diff.getCount();
+                        testMax = Math.max(testMax,diff.getCount());
+                        testMin = Math.min(testMin,diff.getCount());
+                        Log.info("i: "+count);
                     }
-                    var = var + set.size();
-                    varMax = Math.max(varMax,set.size());
-                    varMin = Math.min(varMin,set.size());
-                    Log.info("nb diff:{}",set.size());
-                    test = test +diff.getCount();
-                    testMax = Math.max(testMax,diff.getCount());
-                    testMin = Math.min(testMin,diff.getCount());
-                Log.info("i: "+count);
                 }
-            }
-            else
-                Log.info("same trace");
+                else
+                    Log.info("same trace");
             } catch (Exception e) {
                 Log.error("error",e);
                 e.printStackTrace();
             }
             Log.info("nb diff:{},  min: {}, max: {}, {} ",count, testMin,testMax, (double)test/(double)count);
             Log.info("var min: {}, var max: {}, {} ", varMin,varMax, (double)var/(double)count);
-            TransformationsWriter write = new TransformationsWriter(trans,DiversifyProperties.getProperty("result") + "/sosie/sosie");
-            write.writeAllTransformation(null);
+//            TransformationsWriter write = new TransformationsWriter(trans,DiversifyProperties.getProperty("result") + "/sosie/sosie");
+//            write.writeAllTransformation(null);
         }
     }
 
