@@ -104,18 +104,18 @@ public class Util {
                 CodeFragment position = replace.getPosition();
 
                 transformations.add(replace);
-//                ASTReplace stupidReplace = query.replace(position);
-//                stupidReplace.setType("stupidReplace");
-//                transformations.add(stupidReplace);
-//                transformations.add(query.veryStupidReplace(position));
-//
-//                transformations.add(query.add(position));
-//                ASTAdd stupidASTAdd = query.add(position);
-//                stupidASTAdd.setType("stupidAdd");
-//                transformations.add(stupidASTAdd);
-//                transformations.add(query.veryStupidAdd(position));
-//
-//                transformations.add(query.delete(position));
+                ASTReplace stupidReplace = query.replace(position);
+                stupidReplace.setType("stupidReplace");
+                transformations.add(stupidReplace);
+                transformations.add(query.veryStupidReplace(position));
+
+                transformations.add(query.add(position));
+                ASTAdd stupidASTAdd = query.add(position);
+                stupidASTAdd.setType("stupidAdd");
+                transformations.add(stupidASTAdd);
+                transformations.add(query.veryStupidAdd(position));
+
+                transformations.add(query.delete(position));
 
             } catch (Exception e) {
                 e.printStackTrace();
