@@ -6,6 +6,7 @@ import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import spoon.reflect.code.CtReturn;
 
 import java.util.*;
@@ -19,55 +20,43 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
     protected ICoverageReport coverageReport;
     protected Class CodeFragmentClass;
 
-    protected List<CodeFragment> cfToTransform;
+//    protected List<CodeFragment> cfToTransform;
 
 
     public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList codeFragments, Class transformationClass) {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
-        cfToTransform = new ArrayList<CodeFragment>();
+//        cfToTransform = new ArrayList<CodeFragment>();
         this.CodeFragmentClass = transformationClass;
     }
 
-//    public void setCodeFragmentToTransform(CodeFragment stmt) {
-//        cfToTransform.add(stmt);
-//    }
-//
-//    public void setCodeFragmentToTransform(String codeFragmentString) {
-//        for(CodeFragment cf : getAllUniqueCodeFragments())  {
-//            if(cf.getCtCodeFragment().toString().equals(codeFragmentString.trim())) {
-//                cfToTransform.add(cf);
-//                break;
-//            }
-//        }
-//    }
-
-
     public ASTReplace replace() throws Exception {
         ASTReplace tf = new ASTReplace();
-        for(int i = 0; i < nbTransformation; i++) {
+//        for(int i = 0; i < nbTransformation; i++) {
             CodeFragment cfToReplace = null;
             CodeFragment cfReplacedBy =null;
 
-            if(cfToTransform.isEmpty()) {
+//            if(cfToTransform.isEmpty()) {
                 while (cfReplacedBy == null) {
                     cfToReplace = randomCodeFragmentToReplace();
-                    cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+                    cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace,false);
                 }
-            } else {
-                cfToReplace = cfToTransform.get(i);
-                cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
-            }
+//            } else {
+//                cfToReplace = cfToTransform.get(i);
+//                cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+//            }
             tf.setPosition(cfToReplace);
             tf.setCodeFragmentToReplace(cfReplacedBy);
-        }
+//        }
         return tf;
     }
 
-    public ASTReplace replace(CodeFragment cfToReplace) throws Exception {
+
+
+    public ASTReplace replace(CodeFragment cfToReplace, boolean varNameMatch) throws Exception {
         ASTReplace tf = new ASTReplace();
 
-        CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+        CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
         if(cfReplacedBy == null)
             new Exception("pas de candidat pour "+cfToReplace);
         tf.setPosition(cfToReplace);
@@ -75,10 +64,10 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         return tf;
     }
 
-    public ASTReplace veryStupidReplace(CodeFragment cfToReplace) throws Exception {
+    public ASTReplace notContextReplace(CodeFragment cfToReplace) throws Exception {
         Random r = new Random();
         ASTReplace tf = new ASTReplace();
-        tf.setType("VeryStupidReplace");
+        tf.setType("notContextReplace");
         int size = codeFragments.size();
         CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
         tf.setPosition(cfToReplace);
@@ -88,29 +77,29 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
 
     public ASTAdd add() throws Exception {
         ASTAdd tf = new ASTAdd();
-        for(int i = 0; i < nbTransformation; i++) {
+//        for(int i = 0; i < nbTransformation; i++) {
             CodeFragment cfToReplace = null;
             CodeFragment cfReplacedBy =null;
 
-            if(cfToTransform.isEmpty()) {
+//            if(cfToTransform.isEmpty()) {
                 while (cfReplacedBy == null) {
                     cfToReplace = randomCodeFragmentToReplace();
-                    cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+                    cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
                 }
-            } else {
-                cfToReplace = cfToTransform.get(i);
-                cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
-            }
+//            } else {
+//                cfToReplace = cfToTransform.get(i);
+//                cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace,typeMatch);
+//            }
         tf.setPosition(cfToReplace);
         tf.setCodeFragmentToAdd(cfReplacedBy);
-        }
+//        }
         return tf;
     }
 
-    public ASTAdd add(CodeFragment cfToReplace) throws Exception {
+    public ASTAdd add(CodeFragment cfToReplace, boolean varNameMatch) throws Exception {
         ASTAdd tf = new ASTAdd();
 
-        CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
+        CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
         if(cfReplacedBy == null)
             new Exception("pas de candidat pour "+cfToReplace);
         tf.setPosition(cfToReplace);
@@ -118,10 +107,10 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         return tf;
     }
 
-    public ASTAdd veryStupidAdd(CodeFragment cfToReplace) throws Exception {
+    public ASTAdd notContextAdd(CodeFragment cfToReplace) throws Exception {
         Random r = new Random();
         ASTAdd tf = new ASTAdd();
-        tf.setType("VeryStupidAdd");
+        tf.setType("notContextAdd");
         int size = codeFragments.size();
         CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
         tf.setPosition(cfToReplace);
@@ -131,22 +120,32 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
 
     public ASTDelete delete() throws Exception {
         ASTDelete tf = new ASTDelete();
-        for(int i = 0; i < nbTransformation; i++) {
+//        for(int i = 0; i < nbTransformation; i++) {
             CodeFragment cfToDelete = null;
-            if(cfToTransform.isEmpty()) {
+//            if(cfToTransform.isEmpty()) {
                 while (cfToDelete == null) {
                  cfToDelete = randomCodeFragmentToReplace();
                     if (cfToDelete.getCtCodeFragment() instanceof CtReturn)
                         cfToDelete = null;
                 }
-            } else {
-
-                cfToDelete = cfToTransform.get(i);
-            }
+//            } else {
+//
+//                cfToDelete = cfToTransform.get(i);
+//            }
             tf.setPosition(cfToDelete);
-        }
+//        }
         return tf;
     }
+
+//    @Override
+//    public ASTTransformation add() throws Exception {
+//        return add(true);
+//    }
+//
+//    @Override
+//    public ASTTransformation replace() throws Exception {
+//        return replace(true);
+//    }
 
     public ASTDelete delete(CodeFragment cfToDelete) throws Exception {
         ASTDelete tf = new ASTDelete();
@@ -154,10 +153,10 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         return tf;
     }
 
-    protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace) throws InstantiationException, IllegalAccessException {
+    protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace, boolean varNameMatch) throws InstantiationException, IllegalAccessException {
         CodeFragment cfReplacedBy = null;
         if (cfReplacedBy == null) {
-            cfReplacedBy = findRandomCodeFragmentCandidate(cfToReplace);
+            cfReplacedBy = findRandomCodeFragmentCandidate(cfToReplace, varNameMatch);
         }
         return cfReplacedBy;
     }
@@ -172,10 +171,10 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         return stmt;
     }
 
-    protected CodeFragment findRandomCodeFragmentCandidate(CodeFragment cf) throws IllegalAccessException, InstantiationException {
+    protected CodeFragment findRandomCodeFragmentCandidate(CodeFragment cf, boolean varNameMatch) throws IllegalAccessException, InstantiationException {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment codeFragment : getAllUniqueCodeFragments())
-            if (cf.isReplace(codeFragment) && !codeFragment.equalString().equals(cf.equalString())) {
+            if (cf.isReplace(codeFragment, varNameMatch) && !codeFragment.equalString().equals(cf.equalString())) {
                 list.add(codeFragment);
             }
 

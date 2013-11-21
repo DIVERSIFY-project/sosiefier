@@ -23,7 +23,7 @@ public class Statement extends CodeFragment {
 
 
     //check if this can be replaced by other
-    public boolean isReplace(CodeFragment other) {
+    public boolean isReplace(CodeFragment other, boolean varNameMatch) {
         Class<?> cl = codeFragment.getClass();
         Class<?> clOther = other.codeFragment.getClass();
 
@@ -46,7 +46,7 @@ public class Statement extends CodeFragment {
         if (sub.getStatements().contains(codeFragment))  {
             return false;
         }
-        if (!context.isReplace(other.context))
+        if (!context.isReplace(other.context, varNameMatch))
             return false;
 
 

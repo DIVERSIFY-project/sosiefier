@@ -80,7 +80,7 @@ public class Util {
     public List<CodeFragment> findCandidate(CodeFragment cf) {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
-            if (cf.isReplace(statement) && !statement.equalString().equals(cf.equalString()))
+            if (cf.isReplace(statement, true) && !statement.equalString().equals(cf.equalString()))
                 list.add(statement);
 
         return list;
@@ -104,16 +104,28 @@ public class Util {
                 CodeFragment position = replace.getPosition();
 
                 transformations.add(replace);
-                ASTReplace stupidReplace = query.replace(position);
-                stupidReplace.setType("stupidReplace");
-                transformations.add(stupidReplace);
-                transformations.add(query.veryStupidReplace(position));
 
-                transformations.add(query.add(position));
-                ASTAdd stupidASTAdd = query.add(position);
-                stupidASTAdd.setType("stupidAdd");
+                ASTReplace stupidReplace = query.replace(position, false);
+                stupidReplace.setType("notMappingVariableReplace");
+                transformations.add(stupidReplace);
+
+                stupidReplace = query.replace(position, true);
+                stupidReplace.setType("notContextMappingVariableNameReplace");
+                transformations.add(stupidReplace);
+
+                transformations.add(query.notContextReplace(position));
+
+                transformations.add(query.add(position,false));
+
+                ASTAdd stupidASTAdd = query.add(position,false);
+                stupidASTAdd.setType("\"notMappingVariableAdd");
                 transformations.add(stupidASTAdd);
-                transformations.add(query.veryStupidAdd(position));
+
+                stupidASTAdd = query.add(position,true);
+                stupidASTAdd.setType("notContextMappingVariableNameAdd");
+                transformations.add(stupidASTAdd);
+
+                transformations.add(query.notContextAdd(position));
 
                 transformations.add(query.delete(position));
 

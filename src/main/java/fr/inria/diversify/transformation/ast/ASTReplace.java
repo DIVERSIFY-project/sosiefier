@@ -94,6 +94,7 @@ public class ASTReplace extends ASTTransformation {
     }
 
     protected boolean withVarMapping() {
+        //todo a remplacer par un attribut
         return type.equals("replace");
     }
 

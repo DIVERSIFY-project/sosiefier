@@ -27,18 +27,14 @@ public class Block extends CodeFragment {
 
     @Override
     //check if this can be replaced by other
-    public boolean isReplace(CodeFragment other) {
+    public boolean isReplace(CodeFragment other,boolean varNameMatch) {
         Class<?> cl = codeFragment.getClass();
         Class<?> clOther = other.codeFragment.getClass();
 
         if(clOther != cl )
             return false;
-//
-//        SubStatementVisitor sub = new SubStatementVisitor()  ;
-//        other.codeFragment.getParent().accept(sub);
-//        if(sub.getStatements().contains(codeFragment))
-//            return false;
 
-        return getInputContext().isInclude(other.getInputContext()) && getOutputContext().equals(other.getOutputContext());
+        return context.isReplace(other.context, varNameMatch);
+//        return getInputContext().isInclude(other.getInputContext()) && getOutputContext().equals(other.getOutputContext());
     }
 }

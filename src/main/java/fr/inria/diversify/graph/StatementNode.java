@@ -29,7 +29,7 @@ public class StatementNode extends Node {
 	}
 
 	public void buildLinkWith(StatementNode node) {
-		if(stmt.isReplace(node.stmt) && node != this) {
+		if(stmt.isReplace(node.stmt, false) && node != this) {
 			node.addCall(this);
 			this.addCaller(node);
 		}

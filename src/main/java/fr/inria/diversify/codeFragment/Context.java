@@ -37,10 +37,13 @@ public class Context {
 		return inputContext.hashCode() * outputContext.hashCode();
 	}
 
-    public boolean isReplace(Context other) {
-        return inputContext.isInclude(other.inputContext)
+    public boolean isReplace(Context other, boolean varNameMatch) {
+        if(varNameMatch)
+            return other.inputContext.getAllVarName().containsAll(inputContext.getAllVarName());
+        else
+            return inputContext.isInclude(other.inputContext)
                 && outputContext.equals(other.outputContext)
-                &&  outputContext.getActualTypeArguments().equals(other.outputContext.getActualTypeArguments());
+                && outputContext.getActualTypeArguments().equals(other.outputContext.getActualTypeArguments());
     }
 
 	public String equalString() {

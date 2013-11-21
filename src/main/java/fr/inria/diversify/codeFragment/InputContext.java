@@ -87,6 +87,14 @@ public class InputContext {
         return o;
     }
 
+    public Set<String> getAllVarName() {
+        Set<String> set = new HashSet<String>();
+        for (CtVariableReference<?> var : localVariableReferences)
+            set.add(var.getSimpleName());
+
+        return set;
+    }
+
 	protected boolean hasCandidate(CtTypeReference<?> type) {
 		return candidate(type) != null;
 	}

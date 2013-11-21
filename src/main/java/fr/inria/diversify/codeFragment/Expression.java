@@ -7,7 +7,7 @@ import spoon.reflect.code.CtExpression;
  * Date: 5/3/13
  * Time: 4:53 PM
  */
-public class Expression extends CodeFragment{
+public class Expression extends CodeFragment {
 
     public Expression(CtExpression<?> expression) {
         codeFragment = expression;
@@ -26,7 +26,8 @@ public class Expression extends CodeFragment{
     }
 
     @Override
-    public boolean isReplace(CodeFragment other) {
-        return getInputContext().isInclude(other.getInputContext()) && getOutputContext().equals(other.getOutputContext());
+    public boolean isReplace(CodeFragment other, boolean varNameMatch) {
+        return context.isReplace(other.context, varNameMatch);
+//        return getInputContext().isInclude(other.getInputContext()) && getOutputContext().equals(other.getOutputContext());
     }
 }
