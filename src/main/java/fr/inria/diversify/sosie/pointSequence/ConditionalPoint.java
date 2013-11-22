@@ -157,7 +157,7 @@ protected boolean valueEqual(String v1, String v2) {
         else
             collection = new ArrayList<String>();
 
-        for(String s : var.substring(1,var.length()-1).split(","))
+        for(String s : var.substring(1,var.length()-1).split(", "))
             collection.add(equalString(s));
 
         return  collection;

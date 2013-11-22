@@ -4,7 +4,9 @@ package fr.inria.diversify.codeFragment;
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtStatement;
+import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.reference.CtTypeReference;
+import spoon.reflect.reference.CtVariableReference;
 import spoon.support.reflect.code.*;
 
 public class Statement extends CodeFragment {
@@ -39,6 +41,15 @@ public class Statement extends CodeFragment {
             return false;
         if(containsSuper(codeFragment) || containsSuper(other.codeFragment))
             return false;
+
+
+//        if(cl == CtAssignmentImpl.class) {
+//            VariableVisitor visitor = new VariableVisitor();
+//            ((CtAssignmentImpl)codeFragment).getAssigned().accept(visitor);
+//            CtVariableReference var = (CtVariableReference)(visitor.input().getVar().toArray()[0]);
+//            if(var.getDeclaration().getModifiers().contains(ModifierKind.FINAL))
+//                return false;
+//        }
 
 
         SubStatementVisitor sub = new SubStatementVisitor();
