@@ -48,7 +48,7 @@ public class Main {
         }
         reader.close();
         BufferedWriter out = new BufferedWriter(new FileWriter("nbProcess"));
-        out.write(i/2+"");
+        out.write(Math.max(1,i/4)+"");
         out.close();
     }
 

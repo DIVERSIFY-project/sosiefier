@@ -56,16 +56,18 @@ public class DiversifyMain {
         Log.info("number of statement: " + codeFragments.size());
 
 
+        if (DiversifyProperties.getProperty("stat").equals("true")) {
+            computeStatistic();
+
+        } else {
         if (DiversifyProperties.getProperty("sosie").equals("true"))
             buildSosie();
         else if (DiversifyProperties.getProperty("sosieOnMultiProject").equals("true"))
             sosieOnMultiProject();
         else
             runDiversification();
-
-        if (DiversifyProperties.getProperty("stat").equals("true")) {
-            computeStatistic();
         }
+
     }
 
     protected void buildSosie() throws Exception {
@@ -262,21 +264,27 @@ public class DiversifyMain {
         TransformationParser tf = new TransformationParser(codeFragments);
         List<ITransformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
+        int i = 0;
+        for (ITransformation t : transformations)
+            if(t.numberOfFailure() == -1)
+                i++;
+
+        Log.debug("i: "+i);
 
         String name = write.writeAllTransformation(null);
-        statForR(name);
+//        statForR(name);
         for(String type : getAllTransformationType(transformations)) {
             Log.debug("all transformation for: "+type);
             name = write.writeAllTransformation(type);
-            statForR(name);
+//            statForR(name);
         }
 
         name = write.writeGoodTransformation(null);
-        statForR(name);
+//        statForR(name);
         for(String type : getAllTransformationType(transformations)) {
             Log.debug("good transformation for: "+type);
             name = write.writeGoodTransformation(type);
-            statForR(name);
+//            statForR(name);
         }
 
         StatisticDiversification sd = new StatisticDiversification(transformations, codeFragments);
@@ -336,4 +344,6 @@ public class DiversifyMain {
             types.add(t.getType());
         return types;
     }
+
+
 }

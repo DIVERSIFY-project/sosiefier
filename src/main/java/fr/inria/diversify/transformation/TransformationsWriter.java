@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 
 import java.io.BufferedWriter;
@@ -61,6 +62,7 @@ public class TransformationsWriter {
                 transformation.add(t);
             }
         }
+
         String fileName;
         if(type == null)
             fileName = fileNamePrefix+"_all.json";
@@ -72,6 +74,7 @@ public class TransformationsWriter {
 
 
     protected String writeTransformation(String fileName, Collection<ITransformation> trans) throws IOException {
+        Log.debug("write {} transformation in file {}",trans.size(), fileName);
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         JSONArray obj = new JSONArray();
         for (ITransformation transformation : trans) {
