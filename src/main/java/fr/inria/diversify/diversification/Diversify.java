@@ -2,6 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
@@ -88,5 +89,12 @@ public class Diversify extends Builder {
         trans.restore(tmpDir + "/" + workingDir);
         Log.debug("run after restore: " + tmpDir + "/" + workingDir);
         killUselessThread();
+    }
+
+    protected String[] getMavenPhase() {
+        if(transQuery != null && transQuery instanceof ByteCodeTransformationQuery)
+            return new String[]{"test"};
+        else
+            return new String[]{"clean", "test"};
     }
 }

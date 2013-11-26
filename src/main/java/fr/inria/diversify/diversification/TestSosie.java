@@ -104,4 +104,8 @@ public class TestSosie extends Builder {
     public void setMavenProject(List<String> mavenProjects) {
         this.mavenProjects = mavenProjects;
     }
+
+    protected String[] getMavenPhase() {
+        return new String[]{"clean", "test"};
+    }
 }

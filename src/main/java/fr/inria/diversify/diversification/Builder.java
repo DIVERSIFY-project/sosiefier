@@ -9,8 +9,11 @@ import org.json.JSONException;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * User: Simon
@@ -88,7 +91,7 @@ public abstract class Builder {
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, new String[]{"test"}, timeOut,clojureTest);
+        RunMaven rt = new RunMaven(directory, getMavenPhase(), timeOut,clojureTest);
         rt.start();
         rt.join(1000*timeOut);
 
@@ -101,6 +104,8 @@ public abstract class Builder {
             return -1;
         return rt.getFailures();
     }
+
+    protected abstract String[] getMavenPhase();
 
     public void initTimeOut() throws InterruptedException {
         initThreadGroup();
@@ -134,13 +139,66 @@ public abstract class Builder {
         Log.debug("PID :"+pid);
         Runtime r = Runtime.getRuntime();
         try {
+//            findAllChildrenProcessOSX();
             r.exec("pkill -P " +pid);
-            Thread.sleep(1000);
+            killAllChildrenProcess2();
 
+            Thread.sleep(1000);
         } catch (Exception e) {
             Log.error("killallchildren ",e);
         }
         Log.debug("all children process kill");
+    }
+
+    protected void killAllChildrenProcess2() throws IOException, InterruptedException {
+        Runtime r = Runtime.getRuntime();
+        for(String pid : findAllChildrenProcessUNIX()) {
+            r.exec("kill -9 "+pid);
+        }
+    }
+
+    protected List<String> findAllChildrenProcessUNIX() {
+        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+        Log.debug("PID :"+pid);
+        Runtime r = Runtime.getRuntime();
+        List<String> list = new ArrayList<String>();
+        try {
+            Process p = r.exec("pstree -p "+ pid +" | grep -o '([0-9]\\+)' | grep -o '[0-9]\\+'") ;
+            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+
+            while ((line = input.readLine()) != null) {
+                if(!line.equals(pid))
+                    list.add(pid);
+            }
+            input.close();
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    protected List<String> findAllChildrenProcessOSX() {
+        Pattern pattern = Pattern.compile("\\s*(\\d+).+");
+        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+        Runtime r = Runtime.getRuntime();
+        List<String> list = new ArrayList<String>();
+        try {
+            Log.debug("sh script/pstree.sh "+ pid);
+            Process p = r.exec("sh script/pstree.sh "+ pid) ;
+            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+
+            while ((line = input.readLine()) != null) {
+                Log.debug(line);
+                Matcher matcher = pattern.matcher(line);
+                if(!line.equals(matcher.group(1)))
+                    list.add(matcher.group(1));
+            }
+            input.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     protected void copyDirectory(File sourceLocation, File targetLocation) throws IOException {

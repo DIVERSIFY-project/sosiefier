@@ -2,6 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
@@ -72,5 +73,9 @@ public class Sosie extends Builder {
             FileUtils.forceDelete(dir);
         }
         killUselessThread();
+    }
+
+    protected String[] getMavenPhase() {
+        return new String[]{"clean", "test"};
     }
 }
