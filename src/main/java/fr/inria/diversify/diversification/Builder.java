@@ -6,6 +6,7 @@ import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
+import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
@@ -93,7 +94,7 @@ public abstract class Builder {
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
         RunMaven rt = new RunMaven(directory, getMavenPhase(), timeOut,clojureTest);
         rt.start();
-        rt.join(1000*timeOut);
+        rt.join(1000 * timeOut);
 
         Log.info("compile error: " + rt.getCompileError() + ", run all test: " + rt.allTestRun() + ", number of failure: " + rt.getFailures());
         if (rt.getCompileError()) {
@@ -141,7 +142,7 @@ public abstract class Builder {
         try {
 //            findAllChildrenProcessOSX();
             r.exec("pkill -P " +pid);
-            killAllChildrenProcess2();
+//            killAllChildrenProcess2();
 
             Thread.sleep(1000);
         } catch (Exception e) {
