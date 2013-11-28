@@ -161,7 +161,35 @@
                     <compilerArgument>-Xlint:unchecked</compilerArgument>
                      <meminitial>128m</meminitial>
                      <maxmem>2024m</maxmem>
+
+                    <excludes>
+                        <exclude>src/main/java/**</exclude>
+                    </excludes>
                 </configuration>
+
+                <executions>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>compiler</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <!--

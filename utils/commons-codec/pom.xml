@@ -247,6 +247,10 @@ limitations under the License.
                 <compilerArgument>-Xlint:unchecked</compilerArgument>
                 <meminitial>128m</meminitial>
                 <maxmem>2024m</maxmem>
+
+                <excludes>
+                    <exclude>src/main/java/**</exclude>
+                </excludes>
             </configuration>
             
             <executions>
