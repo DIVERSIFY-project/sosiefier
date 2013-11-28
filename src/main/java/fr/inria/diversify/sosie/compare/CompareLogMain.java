@@ -66,22 +66,12 @@ public class CompareLogMain {
     }
 
     protected void diff() throws Exception {
-        List<ITransformation> trans = new ArrayList<ITransformation>();
         String startPointString = DiversifyProperties.getProperty("startPoint");
-        int testMax = 0;
-        int testMin = 100;
-        int test = 0;
-        int varMax = 0;
-        int varMin = 100;
-        int var = 0;
-        int count = 0;
+        List<Diff> diffs = new ArrayList<Diff>();
         int i =0;
         for(File f : (new File(dirSosie).listFiles())) {
             Log.debug("loading log from dir {}",f.getAbsolutePath());
-            i++;
-            Log.info("sosie nb: {}",i);
             try {
-//            Log.info("log files {}",f);
                 File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
                 TransformationParser parser = new TransformationParser(codeFragments);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
@@ -90,30 +80,15 @@ public class CompareLogMain {
                 CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, f.getAbsolutePath(), cf, varToExclude);
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
                 Diff diff = un.findDiffVar();
-
+                i++;
+                Log.info("sosie nb: {}",i);
                 Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
                 if(!diff.sameTraceAndVar()) {
                     Log.info(f.getName());
                     Log.info(diff.report());
-
                     if(!diff.sameVar()) {
-
-                        trans.add(parser.parseUniqueTransformation(startPoint));
+                        diffs.add(diff);
                         diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
-                        count++;
-
-                        Set<String> set = new HashSet<String>();
-                        for(VariableDiff d : diff.getAllVariableDiff()) {
-                            set.add(d.getVarName());
-                        }
-                        var = var + set.size();
-                        varMax = Math.max(varMax,set.size());
-                        varMin = Math.min(varMin,set.size());
-                        Log.info("nb diff:{}",set.size());
-                        test = test +diff.getCount();
-                        testMax = Math.max(testMax,diff.getCount());
-                        testMin = Math.min(testMin,diff.getCount());
-                        Log.info("i: "+count);
                     }
                 }
                 else
@@ -122,24 +97,16 @@ public class CompareLogMain {
                 Log.error("error",e);
                 e.printStackTrace();
             }
-            Log.info("nb diff:{},  min: {}, max: {}, {} ",count, testMin,testMax, (double)test/(double)count);
-            Log.info("var min: {}, var max: {}, {} ", varMin,varMax, (double)var/(double)count);
-//            TransformationsWriter write = new TransformationsWriter(trans,DiversifyProperties.getProperty("result") + "/sosie/sosie");
-//            write.writeAllTransformation(null);
+//            Log.info("nb diff:{},  min: {}, max: {}, {} ",count, testMin,testMax, (double)test/(double)count);
+//            Log.info("var min: {}, var max: {}, {} ", varMin,varMax, (double)var/(double)count);
         }
     }
 
     protected void diffException() throws Exception {
-        List<ITransformation> trans = new ArrayList<ITransformation>();
         String startPointString = DiversifyProperties.getProperty("startPoint");
-        int testMax = 0;
-        int testMin = 100;
-        int test = 0;
-        int count = 0;
+        List<Diff> diffs = new ArrayList<Diff>();
         int i =0;
         for(File f : (new File(dirSosie).listFiles())) {
-            i++;
-            Log.info("sosie nb: {}",i);
             try {
                 File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
                 TransformationParser parser = new TransformationParser(codeFragments);
@@ -149,20 +116,16 @@ public class CompareLogMain {
                 CompareMultiExceptionSequence un = new CompareMultiExceptionSequence(dirOriginal, f.getAbsolutePath(), cf);
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
                 Diff diff = un.findDiffException();
-
+                i++;
+                Log.info("sosie nb: {}",i);
                 Log.info("catchDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndCatch());
                 if(!diff.sameTraceAndCatch()) {
                     Log.info(f.getName());
                     Log.info(diff.report());
 
                     if(!diff.sameCatch()) {
-                        trans.add(parser.parseUniqueTransformation(startPoint));
+                        diffs.add(diff);
                         diff.toDotCatch(DiversifyProperties.getProperty("result")+"exception_"+f.getName() + ".dot");
-                        count++;
-                        test = test +diff.getCount();
-                        testMax = Math.max(testMax,diff.getCount());
-                        testMin = Math.min(testMin,diff.getCount());
-                        Log.info("i: "+count);
                     }
                 }
                 else
@@ -172,11 +135,8 @@ public class CompareLogMain {
                 e.printStackTrace();
             }
         }
-        Log.info("nb diff:{},  min: {}, max: {}, {} ",count, testMin,testMax, (double)test/(double)count);
-        Log.info("max exception: "+ PointSequence.getMaxSizeException());
-
-        TransformationsWriter write = new TransformationsWriter(trans,DiversifyProperties.getProperty("result") + "/sosie/sosieE");
-        write.writeAllTransformation(null);
+//        Log.info("nb diff:{},  min: {}, max: {}, {} ",count, testMin,testMax, (double)test/(double)count);
+//        Log.info("max exception: "+ PointSequence.getMaxSizeException());
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {

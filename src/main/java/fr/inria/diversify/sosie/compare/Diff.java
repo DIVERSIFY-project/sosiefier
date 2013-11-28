@@ -135,7 +135,6 @@ public class Diff {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        count = 0;
         bw.write("digraph G {\n");
         for (PointSequence ps : match.keySet())
             if (!diffVar.get(ps).isEmpty() ) {
@@ -148,13 +147,30 @@ public class Diff {
         bw.close();
     }
 
-    public int getCount() {return count;}
+    public Set<String> getVarTestDiff() {
+        Set<String> d = new HashSet<String>();
 
-    int count;
+        for (PointSequence ps : match.keySet())
+            if (!diffVar.get(ps).isEmpty())
+                if(match.get(ps) != null)
+                    d.add(match.get(ps).getName());
+
+        return d;
+    }
+
+    public Set<String> getCatchTestDiff() {
+        Set<String> d = new HashSet<String>();;
+        for (PointSequence ps : match.keySet())
+            if (!diffVar.get(ps).isEmpty())
+                if(match.get(ps) != null)
+                    d.add(match.get(ps).getName());
+        return d;
+    }
+
     protected String toDot(PointSequence original) throws IOException {
         if(match.get(original) == null)
             return "";
-        count++;
+
         StringBuilder builder = new StringBuilder();
         PointSequence sosie = match.get(original);
 
@@ -214,7 +230,6 @@ public class Diff {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        count = 0;
         bw.write("digraph G {\n");
         for (PointSequence ps : match.keySet())
             if (!diffException.get(ps).isEmpty() ) {
@@ -230,7 +245,7 @@ public class Diff {
     protected String toDotCatch(PointSequence original) throws IOException {
         if(match.get(original) == null)
             return "";
-        count++;
+
         StringBuilder builder = new StringBuilder();
         PointSequence sosie = match.get(original);
 

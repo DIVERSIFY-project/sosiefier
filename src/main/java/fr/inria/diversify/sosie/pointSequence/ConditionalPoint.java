@@ -46,12 +46,12 @@ public class ConditionalPoint extends Point {
         vars = new HashMap<String, String>();
         String[] array = string.split(":;:");
         try {
-//            id = Integer.parseInt(array[0]);
-            className = idMap.get(array[0]);
-            methodSignature = idMap.get(array[1]);
+            className = idMap.get(array[0]).toString();
+            methodSignature = idMap.get(array[1]).toString();
             for (int i = 2; i< array.length; i = i+2) {
-                vars.put(idMap.get(array[i]), array[i+1]);
+                vars.put(idMap.get(array[i]).toString(), array[i+1]);
             }
+
         } catch (Exception e) {
             bugPoint = true;
         }
@@ -106,43 +106,28 @@ public class ConditionalPoint extends Point {
         return difVar;
     }
 
-//    protected boolean valueEqual(String v1, String v2) {
-//        if(v1 ==null || v2 == null) {
-//           return true;
-//        }
-//        if((v1.startsWith("{") && v2.startsWith("{"))
-//                || (v1.startsWith("[") && v2.startsWith("["))) {
-//            return v1.split(", ").length == v2.split(", ").length;
-//        }
-//        if(v1.contains("@") && v2.contains("@"))
-//            if(v1.split("@").length != 0 && v2.split("@").length != 0)
-//                return v1.split("@")[0].equals(v2.split("@")[0]);
-//
-//
-//        return  v1.equals(v2);
-//    }
-protected boolean valueEqual(String v1, String v2) {
-    if(v1 ==null || v2 == null) {
-        return true;
-    }
-    Object o1 = null;
-    Object o2 = null;
-    if((v1.startsWith("{") && v1.endsWith("}")) ||
-            v1.startsWith("[") && v1.endsWith("]")) {
-        o1 = equalListString(v1);
-    }
-    else
-        o1 = equalString(v1);
+    protected boolean valueEqual(String v1, String v2) {
+        if(v1 ==null || v2 == null) {
+            return true;
+        }
+        Object o1;
+        Object o2;
+        if((v1.startsWith("{") && v1.endsWith("}")) ||
+                v1.startsWith("[") && v1.endsWith("]")) {
+            o1 = equalListString(v1);
+        }
+        else
+            o1 = equalString(v1);
 
-    if((v2.startsWith("{") && v2.endsWith("}")) ||
-            v2.startsWith("[") && v2.endsWith("]")) {
-        o2 = equalListString(v2);
-    }
-    else
-        o2 = equalString(v2);
+        if((v2.startsWith("{") && v2.endsWith("}")) ||
+                v2.startsWith("[") && v2.endsWith("]")) {
+            o2 = equalListString(v2);
+        }
+        else
+            o2 = equalString(v2);
 
-    return  o1.equals(o2);
-}
+        return  o1.equals(o2);
+    }
 
     protected String equalString(String var) {
         if(var.contains("@") && var.split("@").length != 0)
@@ -164,6 +149,6 @@ protected boolean valueEqual(String v1, String v2) {
     }
 
     public String toString() {
-        return id + ":" + className + ":" + methodSignature + ":" + vars.size();
+        return className + ":" + methodSignature + ":" + vars.size();
     }
 }

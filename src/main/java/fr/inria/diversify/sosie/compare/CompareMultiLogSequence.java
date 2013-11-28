@@ -2,6 +2,7 @@ package fr.inria.diversify.sosie.compare;
 
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
@@ -26,7 +27,6 @@ public class CompareMultiLogSequence {
         originals = loadPointSequence(dirOriginal,false);
         sosies = loadPointSequence(dirSosie,true);
         varToExclude = new HashSet<VariableDiff>();
-
     }
 
     public CompareMultiLogSequence(String dirOriginal, String dirSosie, CodeFragment startPoint, String fileExcludeVar) throws IOException, JSONException {
@@ -158,6 +158,7 @@ public class CompareMultiLogSequence {
                     ps.parseFile(f,idMap);
                     list.add(ps);
                 } catch (Exception e) {
+                    Log.debug("",e);
                 }
             }
         }
@@ -171,9 +172,9 @@ public class CompareMultiLogSequence {
         String line = reader.readLine();
 
         while (line != null) {
-            line = reader.readLine();
             String[] tmp = line.split(" ");
             map.put(tmp[0],tmp[1]);
+            line = reader.readLine();
         }
         return map;
     }
