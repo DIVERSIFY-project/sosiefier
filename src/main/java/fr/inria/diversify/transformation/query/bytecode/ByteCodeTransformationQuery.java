@@ -73,10 +73,10 @@ public class ByteCodeTransformationQuery implements ITransformationQuery {
         CtMethod method = randomConcreteMethod();
         int opCodeIndex = randomOpCode(method);
 
-//        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0 && false) {
-//            method = randomConcreteMethod();
-//            opCodeIndex = randomOpCode(method);
-//        }
+        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0x00) {
+            method = randomConcreteMethod();
+            opCodeIndex = randomOpCode(method);
+        }
         return new BytecodeDelete(method,opCodeIndex,methods);
     }
 
@@ -84,10 +84,10 @@ public class ByteCodeTransformationQuery implements ITransformationQuery {
         CtMethod method = randomConcreteMethod();
         int opCodeIndex = randomOpCode(method);
 
-//        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0) {
-//            method = randomConcreteMethod();
-//            opCodeIndex = randomOpCode(method);
-//        }
+        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0x00) {
+            method = randomConcreteMethod();
+            opCodeIndex = randomOpCode(method);
+        }
         return new BytecodeAdd(method,opCodeIndex, randomOpCodeInClass(method.getDeclaringClass()),methods);
     }
 
@@ -95,10 +95,10 @@ public class ByteCodeTransformationQuery implements ITransformationQuery {
         CtMethod method = randomConcreteMethod();
         int opCodeIndex = randomOpCode(method);
 
-//        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0) {
-//            method = randomConcreteMethod();
-//            opCodeIndex = randomOpCode(method);
-//        }
+        while(coverageReport.opCodeCoverage(method,opCodeIndex) == 0x00) {
+            method = randomConcreteMethod();
+            opCodeIndex = randomOpCode(method);
+        }
         return new BytecodeReplace(method,opCodeIndex, randomOpCodeInClass(method.getDeclaringClass()),methods);
     }
 
