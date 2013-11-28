@@ -30,7 +30,7 @@ public abstract class AbstractTransformationQuery implements ITransformationQuer
 
     public ASTTransformation getTransformation() throws Exception {
         String type = this.type;
-        if(type == null) {
+        if(type == null || type.equals("multi")) {
             Random r = new Random();
             int i = r.nextInt(3);
             if(i == 0)

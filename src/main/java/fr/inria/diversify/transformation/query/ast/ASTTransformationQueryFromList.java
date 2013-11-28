@@ -3,6 +3,7 @@ package fr.inria.diversify.transformation.query.ast;
 import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.*;
+import fr.inria.diversify.transformation.ast.ASTMultiTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.util.List;
@@ -48,7 +49,6 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
 
     @Override
     public ASTTransformation replace() throws Exception {
-
         Random r = new Random();
         double coverage = 0;
         ASTTransformation t = null;
@@ -57,5 +57,15 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
             coverage = coverageReport.codeFragmentCoverage(t.getPosition());
         }
         return t.toReplace();
+    }
+
+    public ITransformation multiTransformation() throws  Exception {
+        ASTMultiTransformation trans = new ASTMultiTransformation();
+        this.setType(null);
+
+        for(int i = 0; i < nbTransformation; i++) {
+            trans.addTransformation(this.getTransformation());
+        }
+        return trans;
     }
 }

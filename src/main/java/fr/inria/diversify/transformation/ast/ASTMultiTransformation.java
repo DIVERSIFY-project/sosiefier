@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,10 @@ import java.util.List;
 public class ASTMultiTransformation implements ITransformation {
     protected Integer failures;
     protected List<ASTTransformation> transformations;
+
+    public ASTMultiTransformation() {
+        transformations = new ArrayList<ASTTransformation>();
+    }
 
     @Override
     public void apply(String srcDir) throws Exception {
@@ -63,5 +68,9 @@ public class ASTMultiTransformation implements ITransformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public void addTransformation(ASTTransformation transformation) {
+        transformations.add(transformation);
     }
 }
