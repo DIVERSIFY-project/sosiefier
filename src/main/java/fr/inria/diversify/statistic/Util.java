@@ -51,6 +51,14 @@ public class Util {
         return list.size();
     }
 
+    public BigInteger numberOfNotDiversification(CodeFragment cf) {
+        BigInteger nb = new BigInteger("0");
+
+        for (CodeFragment cf2 : findCandidate(cf))
+            nb = nb.add(getNumberOfVarMapping(cf,cf2));
+        return nb;
+    }
+
     public BigInteger numberOfDiversification() throws InterruptedException {
         final List<Object> list = new LinkedList<Object>();
         ExecutorService pool = Executors.newFixedThreadPool(50);

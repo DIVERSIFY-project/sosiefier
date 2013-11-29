@@ -66,5 +66,4 @@ public class CodeFragmentList extends LinkedList<CodeFragment> {
             idToCodeFragment.put(cf.id(), cf);
         }
     }
-
 }

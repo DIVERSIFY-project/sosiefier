@@ -8,7 +8,6 @@ import fr.inria.diversify.transformation.ast.ASTTransformation;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -18,10 +17,8 @@ import java.util.*;
  */
 public class StatisticDiversification {
     protected static char separator = ';';
-//    protected static String classFileSuffix = "_diversification_class.csv";
-//    protected static String statementFileSuffix = "_diversification_statement.csv";
     protected static String detailFileSuffix = "_diversification_detail.csv";
-    protected static String allTransformationFileSuffix = "_diversification_allTransformation.csv";
+    protected static String typeFileSuffix = "_diversification_type.csv";
 
     protected Collection<ITransformation> transformations;
     protected int numberOfFailureMax;
@@ -29,69 +26,81 @@ public class StatisticDiversification {
 
     public StatisticDiversification(Collection<ITransformation> transformations, CodeFragmentList codeFragmentList) {
         this.transformations = transformations;
-        this.numberOfFailureMax = 0;
         this.codeFragmentList = codeFragmentList;
 
+        this.numberOfFailureMax = 0;
         for(ITransformation t : transformations)
             this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.numberOfFailure());
     }
 
-    public StatisticDiversification() {
-        this.transformations = new HashSet<ITransformation>();
-        this.numberOfFailureMax = 0;
-    }
+//    public StatisticDiversification() {
+//        this.transformations = new HashSet<ITransformation>();
+//        this.numberOfFailureMax = 0;
+//    }
 
-    public void addTransformation(ASTTransformation t) {
-        transformations.add(t);
-    }
+//    public void addTransformation(ASTTransformation t) {
+//        transformations.add(t);
+//    }
 
     public void writeStat(String output) {
         try {
             writeDetail(output+detailFileSuffix);
-//            writeAllPossibleTransformation(output+allTransformationFileSuffix);
-//            write(statByClass(), output+classFileSuffix);
-//            write(statByType(), output+statementFileSuffix);
+            writeDetailForTransformationType(output+typeFileSuffix);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected Map<String, Map<Integer,Integer>> statByClass(){
-        Map<String, Map<Integer,Integer>> map = new HashMap<String, Map<Integer,Integer>>();
+    protected void writeDetailForTransformationType(String fileName) throws IOException {
+        FileWriter fw = new FileWriter(fileName);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write("type"+separator+"trial"+separator+"varient"+separator+"sosie"+separator+"space");
+        for(String type : getAllTransformationType(transformations)) {
+            List<ITransformation> trans = transformation(type);
 
-//        for(Transformation trans : transformations) {
-//            try {
-//            String key = trans.getSourceClass().getQualifiedName();
-//            if(!map.containsKey(key)) {
-//                Map<Integer,Integer> list = new HashMap<Integer,Integer>();
-//                for(int i = -1; i <= numberOfFailureMax; i++)
-//                    list.put(i, 0);
-//                map.put(key, list);
-//            }
-//            int n =  map.get(key).get(trans.numberOfFailure());
-//            map.get(key).put(trans.numberOfFailure(),n + 1);
-//            } catch (Exception e) {}
-//        }
-        return  map;
+            bw.write(type+separator);
+            bw.write("nan"+separator);
+            bw.write(trans.size()+separator);
+            bw.write(sosie(trans)+separator);
+            bw.write(space(trans, type)+""+separator);
+        }
     }
 
-    protected Map<String, Map<Integer,Integer>> statByType(){
-        Map<String, Map<Integer,Integer>> map = new HashMap<String, Map<Integer,Integer>>();
+    protected double space(List<ITransformation> trans, String type) {
+        double nb = 0;
+        if(type.equals("delete"))
+            return 1;
+        Util util = new Util(codeFragmentList);
+        for(ITransformation t : trans) {
+            CodeFragment cf = ((ASTTransformation) t).getPosition();
+            if(type.equals("add") || type.equals("replace")) {
+                int i = util.numberOfNotDiversification(cf).intValue();
+                nb = nb + ((double)i)/((double)trans.size());
+            }
+            else {
+                int i = util.findCandidate(cf).size();
+                nb = nb + ((double)i)/((double)trans.size());
+            }
+        }
+        return nb;
+    }
 
-//        for(Transformation trans : transformations) {
-//            try {
-//            String key = trans.getCodeFragmentType().getSimpleName();
-//            if(!map.containsKey(key)) {
-//                Map<Integer,Integer> list = new HashMap<Integer,Integer>();
-//                for(int i = -1; i <= numberOfFailureMax; i++)
-//                    list.put(i,0);
-//                map.put(key, list);
-//            }
-//            int n =  map.get(key).get(trans.numberOfFailure());
-//            map.get(key).put(trans.numberOfFailure(),n + 1);
-//            } catch (Exception e) {}
-//        }
-        return  map;
+    protected List<ITransformation> transformation(String type) {
+        List<ITransformation> trans = new ArrayList<ITransformation>();
+        for(ITransformation t : transformations)
+            if(t.getType().equals(type))
+                trans.add(t);
+        return trans;
+    }
+
+    protected int sosie(List<ITransformation> list) {
+        int count = 0;
+        for (ITransformation t : list) {
+            if(t.numberOfFailure() == 0)
+                count++;
+        }
+        return count;
     }
 
     protected void write(Map<String, Map<Integer,Integer>> result, String fileName) throws IOException {
@@ -111,47 +120,47 @@ public class StatisticDiversification {
         bw.close();
     }
 
-    protected void writeAllPossibleTransformation(String fileName) throws IOException {
-
-        FileWriter fw = new FileWriter(fileName);
-        BufferedWriter bw = new BufferedWriter(fw);
-        Util util = new Util(codeFragmentList);
-
-        bw.write("stmtClass"+separator+"stmtPackage"+separator+"stmtInputContextSize"+separator+"stmtType"+separator+"nbCandidate"+separator+"nbDiversification\n");
-        for (CodeFragment cf1 : codeFragmentList) {
-//            long nb = 0;
-            BigInteger nb = new BigInteger("0");
-            StringBuffer sb = new StringBuffer();
-            try {
-
-            List<CodeFragment> candidate = util.findCandidate(cf1);
-            for (CodeFragment cf2 : candidate) {
-//                nb = nb + util.getNumberOfVarMapping(cf1, cf2);
-                BigInteger tmp = new BigInteger(util.getNumberOfVarMapping(cf1, cf2)+"");
-                nb = nb.add(tmp);
-            }
-           sb.append(cf1.getSourceClass().getQualifiedName());
-                sb.append(separator);
-
-                sb.append(cf1.getSourcePackage().getQualifiedName());
-                sb.append(separator);
-
-                sb.append(cf1.getInputContext().size()+"");
-                sb.append(separator);
-
-                sb.append(cf1.getCodeFragmentType().getSimpleName());
-                sb.append(separator);
-
-                sb.append(candidate.size());
-                sb.append(separator);
-
-                sb.append(nb);
-                sb.append("\n");
-            bw.write(sb.toString());
-            } catch (Exception e) {}
-        }
-        bw.close();
-    }
+//    protected void writeAllPossibleTransformation(String fileName) throws IOException {
+//
+//        FileWriter fw = new FileWriter(fileName);
+//        BufferedWriter bw = new BufferedWriter(fw);
+//        Util util = new Util(codeFragmentList);
+//
+//        bw.write("stmtClass"+separator+"stmtPackage"+separator+"stmtInputContextSize"+separator+"stmtType"+separator+"nbCandidate"+separator+"nbDiversification\n");
+//        for (CodeFragment cf1 : codeFragmentList) {
+////            long nb = 0;
+//            BigInteger nb = new BigInteger("0");
+//            StringBuffer sb = new StringBuffer();
+//            try {
+//
+//            List<CodeFragment> candidate = util.findCandidate(cf1);
+//            for (CodeFragment cf2 : candidate) {
+////                nb = nb + util.getNumberOfVarMapping(cf1, cf2);
+//                BigInteger tmp = new BigInteger(util.getNumberOfVarMapping(cf1, cf2)+"");
+//                nb = nb.add(tmp);
+//            }
+//           sb.append(cf1.getSourceClass().getQualifiedName());
+//                sb.append(separator);
+//
+//                sb.append(cf1.getSourcePackage().getQualifiedName());
+//                sb.append(separator);
+//
+//                sb.append(cf1.getInputContext().size()+"");
+//                sb.append(separator);
+//
+//                sb.append(cf1.getCodeFragmentType().getSimpleName());
+//                sb.append(separator);
+//
+//                sb.append(candidate.size());
+//                sb.append(separator);
+//
+//                sb.append(nb);
+//                sb.append("\n");
+//            bw.write(sb.toString());
+//            } catch (Exception e) {}
+//        }
+//        bw.close();
+//    }
 
     protected void writeDetail(String fileName) throws IOException {
         FileWriter fw = new FileWriter(fileName);
@@ -172,4 +181,10 @@ public class StatisticDiversification {
         bw.close();
     }
 
+    protected Set<String> getAllTransformationType(Collection<ITransformation> transformations) {
+        Set<String> types = new HashSet<String>();
+        for (ITransformation t : transformations)
+            types.add(t.getType());
+        return types;
+    }
 }

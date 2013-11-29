@@ -55,7 +55,6 @@ public class DiversifyMain {
         initSpoon();
         Log.info("number of statement: " + codeFragments.size());
 
-
         if (DiversifyProperties.getProperty("stat").equals("true")) {
             computeStatistic();
 
@@ -102,8 +101,6 @@ public class DiversifyMain {
     }
 
     protected void initAndRunBuilder(Builder builder) throws Exception {
-//        builder.setSourceDirectory(DiversifyProperties.getProperty("src"));
-
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
         if (t == -1)
             builder.initTimeOut();
