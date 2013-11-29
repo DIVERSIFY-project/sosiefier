@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.transformation.ITransformation;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -67,7 +68,13 @@ public class ASTMultiTransformation implements ITransformation {
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        JSONObject object = new JSONObject();
+        object.put("type", getType());
+        JSONArray array = new JSONArray();
+        object.put("transformation",array);
+        for (ASTTransformation t : transformations)
+            array.put(t.toJSONObject());
+        return object;
     }
 
     public void addTransformation(ASTTransformation transformation) {

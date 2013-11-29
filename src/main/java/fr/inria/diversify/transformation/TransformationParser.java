@@ -93,7 +93,7 @@ public class TransformationParser {
         String type = jsonObject.getString("type");
         ITransformation trans = null;
 
-        if(jsonObject.has("parent") && jsonObject.getString("parent").equals("bytecode")) {
+        if(jsonObject.getString("level").equals("bytecode")) {
             if(type.endsWith("replace"))
                 trans = parseBytecodeReplace(jsonObject);
             if(type.endsWith("add"))
@@ -108,6 +108,8 @@ public class TransformationParser {
                 trans = parseASTAdd(jsonObject);
             if(type.endsWith("elete"))
                 trans = parseASTDelete(jsonObject);
+            if(type.equals("multi"))
+                trans = parseASTMulti(jsonObject);
         }
 //        if(jsonObject.has("parent")) {
 //            JSONArray array = jsonObject.getJSONArray("parents");
@@ -116,6 +118,10 @@ public class TransformationParser {
 //            }
 //        }
         return trans;
+    }
+
+    private ITransformation parseASTMulti(JSONObject jsonObject) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
     private ITransformation parseBytecodeDelete(JSONObject jsonObject) {
@@ -134,12 +140,13 @@ public class TransformationParser {
     protected ASTTransformation parseASTDelete(JSONObject jsonObject) throws Exception {
         ASTDelete trans = new ASTDelete();
 
-        JSONArray array = jsonObject.getJSONArray("transformation");
-        for(int i = 0; i <array.length(); i++) { //normalement array.length == 1
-            JSONObject t = array.getJSONObject(i);
+//        JSONArray array = jsonObject.getJSONArray("transformation");
+//        for(int i = 0; i <array.length(); i++) { //normalement array.length == 1
+//            JSONObject t = array.getJSONObject(i);
+        JSONObject t = getTransformation(jsonObject);
             CodeFragment d = findCodeFragment(t.getJSONObject("CodeFragmentDelete"));
             trans.setPosition(d);
-        }
+//        }
 
         if(jsonObject.getBoolean("allTestRun"))
             trans.setJUnitResult(jsonObject.getInt("Failures"));
@@ -150,9 +157,10 @@ public class TransformationParser {
     protected ASTTransformation parseASTAdd(JSONObject jsonObject) throws Exception {
         ASTAdd trans = new ASTAdd();
         trans.setType(jsonObject.getString("type"));
-        JSONArray array = jsonObject.getJSONArray("transformation");
-        for(int i = 0; i <array.length(); i++) {  //normalement array.length == 1
-            JSONObject t = array.getJSONObject(i);
+//        JSONArray array = jsonObject.getJSONArray("transformation");
+//        for(int i = 0; i <array.length(); i++) {  //normalement array.length == 1
+//            JSONObject t = array.getJSONObject(i);
+        JSONObject t = getTransformation(jsonObject);
             CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));
             trans.setPosition(position);
             trans.setCodeFragmentToAdd(findCodeFragment(t.getJSONObject("CodeFragmentAdd")));
@@ -160,7 +168,7 @@ public class TransformationParser {
                 trans.setVarMapping(parseVariableMapping(t.getJSONObject("VariableMapping")));
             } catch (Exception e) {}
 
-        }
+//        }
         if(jsonObject.getBoolean("allTestRun"))
             trans.setJUnitResult(jsonObject.getInt("Failures"));
 
@@ -170,32 +178,39 @@ public class TransformationParser {
     protected ASTTransformation parseASTReplace(JSONObject jsonObject) throws Exception {
         ASTReplace trans = new ASTReplace();
         trans.setType(jsonObject.getString("type"));
-        JSONArray array = jsonObject.getJSONArray("transformation");
-        for(int i = 0; i <array.length(); i++) {    //normalement array.length == 1
-            JSONObject t = array.getJSONObject(i);
+//        JSONArray array = jsonObject.getJSONArray("transformation");
+//        for(int i = 0; i <array.length(); i++) {    //normalement array.length == 1
+//            JSONObject t = array.getJSONObject(i);
+          JSONObject t = getTransformation(jsonObject);
             CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));
             trans.setPosition(position);
             trans.setCodeFragmentToReplace(findCodeFragment(t.getJSONObject("CodeFragmentReplace")));
             trans.setVarMapping(parseVariableMapping(t.getJSONObject("VariableMapping")));
 
-        }
+//        }
         if(jsonObject.getBoolean("allTestRun"))
             trans.setJUnitResult(jsonObject.getInt("Failures"));
 
         return trans;
     }
 
-    protected ASTReplace buildOldTransformation(JSONObject jsonObject) throws Exception {
-        ASTReplace trans = new ASTReplace();
-        CodeFragment position = findCodeFragment((JSONObject) jsonObject.get("StatementToReplace"));
-        trans.setPosition(position);
-        trans.setCodeFragmentToReplace(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
-        trans.setVarMapping(parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
-        if(jsonObject.getBoolean("allTestRun"))
-            trans.setJUnitResult(jsonObject.getInt("Failures"));
-
-        return trans;
+    protected JSONObject getTransformation(JSONObject jsonObject) throws JSONException {
+        if(jsonObject.has("transformation")) //old json format
+            return jsonObject.getJSONArray("transformation").getJSONObject(0);
+        return jsonObject; //new format
     }
+
+//    protected ASTReplace buildOldTransformation(JSONObject jsonObject) throws Exception {
+//        ASTReplace trans = new ASTReplace();
+//        CodeFragment position = findCodeFragment((JSONObject) jsonObject.get("StatementToReplace"));
+//        trans.setPosition(position);
+//        trans.setCodeFragmentToReplace(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
+//        trans.setVarMapping(parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
+//        if(jsonObject.getBoolean("allTestRun"))
+//            trans.setJUnitResult(jsonObject.getInt("Failures"));
+//
+//        return trans;
+//    }
 
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws Exception {
         CodeFragment cf = null;

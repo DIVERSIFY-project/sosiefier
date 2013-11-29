@@ -27,12 +27,12 @@ public class ASTDelete extends ASTTransformation {
         object.put("type", "delete");
         object.put("level", "ast");
 
-        JSONArray array = new JSONArray();
-        object.put("transformation",array);
+//        JSONArray array = new JSONArray();
+//        object.put("transformation",array);
 
-            JSONObject t = new JSONObject();
-            t.put("CodeFragmentDelete", position.toJSONObject());
-            array.put(t);
+//            JSONObject t = new JSONObject();
+        object.put("CodeFragmentDelete", position.toJSONObject());
+//            array.put(t);
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 
