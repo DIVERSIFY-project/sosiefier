@@ -2,7 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.CompileException;
 import fr.inria.diversify.transformation.ITransformation;
-import fr.inria.diversify.transformation.RunMaven;
+import fr.inria.diversify.transformation.maven.RunMaven;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
@@ -83,9 +83,9 @@ public class TestSosie extends Builder {
     protected void run(ITransformation trans) throws Exception {
         initThreadGroup();
         String dir = prepare(projectDir, tmpDir,newPomFile);
-        Log.debug("output dir sosie: " + dir + "/" + workingDir);
+        Log.debug("output dir sosie: " + dir + "/" + sourceDir);
         try {
-            trans.apply(dir + "/" + workingDir);
+            trans.apply(dir + "/" + sourceDir);
             if(runTest(dir) != 0) {
                 FileUtils.cleanDirectory(dir);
                 FileUtils.forceDelete(dir);

@@ -1,12 +1,12 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.*;
+import fr.inria.diversify.transformation.maven.RunMaven;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
-import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
@@ -26,7 +26,7 @@ public abstract class Builder {
     protected String tmpDir;
     protected List<ITransformation> transformations;
     protected Set<Thread> threadSet;
-    protected String workingDir;
+    protected String sourceDir;
     protected boolean clojureTest;
     protected int timeOut;
     protected ITransformationQuery transQuery;
@@ -80,14 +80,17 @@ public abstract class Builder {
         Log.debug("mkdir: {}",dirs);
     }
 
-    protected String prepare(String dirSource, String dirTarget, String newPomFile) throws IOException, InterruptedException {
+    protected String prepare(String dirProject, String dirTarget, String newPomFile) throws IOException, InterruptedException {
         String dirName = dirTarget + "/tmp_" + System.currentTimeMillis();
         File dir = new File(dirName);
         dir.mkdirs();
-        copyDirectory(new File(dirSource), dir);
+        copyDirectory(new File(dirProject), dir);
         if(newPomFile != "")
-            FileUtils.copyFileToDirectory(new File(newPomFile),dir);
+            FileUtils.copyFile(new File(newPomFile),new File(dir.getAbsoluteFile()+"/pom.xml"));
 
+        File failFastDir = new File(dir+"/"+ sourceDir +"/fr/inria/diversify/transformation/maven");
+        FileUtils.forceMkdir(failFastDir);
+        FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/maven/FailFastListener.java"),failFastDir);
         return dirName;
     }
 
@@ -101,7 +104,7 @@ public abstract class Builder {
             throw new CompileException("compile error in maven");
         }
 
-        if (!rt.allTestRun())
+        if (rt.getFailures() == null)
             return -1;
         return rt.getFailures();
     }
@@ -241,7 +244,7 @@ public abstract class Builder {
     }
 
     public void setSourceDirectory(String sourceDirectory) {
-        this.workingDir = sourceDirectory;
+        this.sourceDir = sourceDirectory;
     }
 
     public void setNewPomFile(String pom) {

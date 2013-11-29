@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.transformation.maven;
 
 
 import fr.inria.diversify.util.Log;

@@ -31,7 +31,7 @@ public class Diversify extends Builder {
 
     public Diversify(String projectDir, String workingDir) {
         this.tmpDir = "output_diversify";
-        this.workingDir = workingDir;
+        this.sourceDir = workingDir;
         this.projectDir = projectDir;
         clojureTest = false;
 
@@ -72,9 +72,9 @@ public class Diversify extends Builder {
 
     protected void run(ITransformation trans, String tmpDir) throws Exception {
         initThreadGroup();
-        Log.debug("output dir: " + tmpDir + "/" + workingDir);
+        Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
-            trans.apply(tmpDir + "/" + workingDir);
+            trans.apply(tmpDir + "/" + sourceDir);
             int failures = runTest(tmpDir);
             if(failures == 0)
                 sosie++;
@@ -86,8 +86,8 @@ public class Diversify extends Builder {
             compileError++;
             Log.warn("compile error during diversification", e);
         }
-        trans.restore(tmpDir + "/" + workingDir);
-        Log.debug("run after restore: " + tmpDir + "/" + workingDir);
+        trans.restore(tmpDir + "/" + sourceDir);
+        Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
         killUselessThread();
     }
 
