@@ -51,5 +51,6 @@ public class DiversifyProperties {
         prop.setProperty("syncroRange","0");
         prop.setProperty("newPomFile","");
         prop.setProperty("transformation.level","statement");
+        prop.setProperty("builder","maven");
     }
 }

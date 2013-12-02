@@ -1,6 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.maven.RunBuild;
 import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
@@ -15,17 +16,17 @@ import java.util.Set;
  * Date: 5/2/13
  * Time: 5:39 PM
  */
-public class Diversify extends Builder {
+public class Diversify extends AbstractDiversify {
     protected int compileError = 0;
     protected int sosie = 0;
     protected int trial = 0;
 
-    public Diversify(AbstractTransformationQuery transQuery, String projectDir, String workingDir) {
+    public Diversify(AbstractTransformationQuery transQuery, String projectDir, Class buildClass) {
         this.transQuery = transQuery;
         this.tmpDir = "output_diversify";
         this.projectDir = projectDir;
         clojureTest = false;
-
+        this.buildClass = buildClass;
         transformations = new ArrayList<ITransformation>();
     }
 

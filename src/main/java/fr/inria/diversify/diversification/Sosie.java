@@ -14,7 +14,7 @@ import java.util.Set;
  * Date: 7/22/13
  * Time: 10:20 AM
  */
-public class Sosie extends Builder {
+public class Sosie extends AbstractDiversify {
 
     public Sosie(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;

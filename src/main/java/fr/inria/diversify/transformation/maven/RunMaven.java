@@ -16,15 +16,9 @@ import java.util.regex.Pattern;
  * Date: 5/17/13
  * Time: 11:34 AM
  */
-public class RunMaven extends Thread {
-    protected String directory;
-    protected boolean compileError = false;
-    protected boolean allTestRun = false;
-    String[] phases;
-    protected Integer failure = null;
-    protected Boolean clojureTest = false;
-    protected int timeOut;
+public class RunMaven extends RunBuild {
 
+    public RunMaven() {}
 
     public RunMaven(String directory, String[] phases, int timeOut, boolean clojureTest) {
         this.directory = directory;
@@ -32,7 +26,6 @@ public class RunMaven extends Thread {
         this.clojureTest = clojureTest;
         this.timeOut = timeOut;
     }
-
 
     public void run() {
         Log.debug("run maven");
@@ -128,18 +121,5 @@ public class RunMaven extends Thread {
             }
         }
         failure = tmpFailure;
-    }
-
-
-    public Integer getFailures() {
-        return failure;
-    }
-
-    public boolean allTestRun() {
-        return allTestRun;
-    }
-
-    public boolean getCompileError() {
-        return compileError;
     }
 }

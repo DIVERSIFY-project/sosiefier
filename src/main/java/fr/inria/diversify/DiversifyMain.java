@@ -5,10 +5,13 @@ import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
-import fr.inria.diversify.diversification.Builder;
+import fr.inria.diversify.diversification.AbstractDiversify;
 import fr.inria.diversify.diversification.Diversify;
 import fr.inria.diversify.diversification.Sosie;
 import fr.inria.diversify.diversification.TestSosie;
+import fr.inria.diversify.transformation.maven.RunAnt;
+import fr.inria.diversify.transformation.maven.RunBuild;
+import fr.inria.diversify.transformation.maven.RunMaven;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromList;
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
@@ -84,6 +87,11 @@ public class DiversifyMain {
         if (!git.equals("")) {
             GitUtil.initGit(git);
         }
+        if(DiversifyProperties.getProperty("builder").equals("maven"))
+            d.setBuilderClass(RunMaven.class);
+        else
+            d.setBuilderClass(RunAnt.class);
+
         initAndRunBuilder(d);
         d.setTransformationQuery(initTransformationQuery());
         d.printResult(DiversifyProperties.getProperty("result"), git + "/diversify-exp");
@@ -100,22 +108,22 @@ public class DiversifyMain {
         initAndRunBuilder(d);
     }
 
-    protected void initAndRunBuilder(Builder builder) throws Exception {
+    protected void initAndRunBuilder(AbstractDiversify abstractDiversify) throws Exception {
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
         if (t == -1)
-            builder.initTimeOut();
+            abstractDiversify.initTimeOut();
         else
-            builder.setTimeOut(t);
+            abstractDiversify.setTimeOut(t);
 
-        builder.setTmpDirectory(DiversifyProperties.getProperty("outputDir"));
+        abstractDiversify.setTmpDirectory(DiversifyProperties.getProperty("outputDir"));
 
         ITransformationQuery query = initTransformationQuery();
-        builder.setTransformationQuery(query);
+        abstractDiversify.setTransformationQuery(query);
 
         if (DiversifyProperties.getProperty("clojure").equals("true"))
-            builder.setClojureTest(true);
+            abstractDiversify.setClojureTest(true);
 
-        builder.setNewPomFile(DiversifyProperties.getProperty("newPomFile"));
+        abstractDiversify.setNewPomFile(DiversifyProperties.getProperty("newPomFile"));
 
         //TODO refactor
         if (DiversifyProperties.getProperty("nbRun").equals("all")) {
@@ -124,24 +132,24 @@ public class DiversifyMain {
                 List<ITransformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
                 Set<ITransformation> set = new HashSet<ITransformation>(transformations);
                 Log.debug("apply {} transformation", set.size());
-                builder.run(set);
+                abstractDiversify.run(set);
             }
             Util util = new Util(codeFragments);
             if (DiversifyProperties.getProperty("transformation.type").equals("replace"))
-                builder.run(util.getAllReplace());
+                abstractDiversify.run(util.getAllReplace());
             if (DiversifyProperties.getProperty("transformation.type").equals("add"))
-                builder.run(util.getAllAdd());
+                abstractDiversify.run(util.getAllAdd());
             if (DiversifyProperties.getProperty("transformation.type").equals("delete"))
-                builder.run(util.getAllDelete());
+                abstractDiversify.run(util.getAllDelete());
         } else if (DiversifyProperties.getProperty("transformation.type").equals("stupid")) {
             int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
             Util util = new Util(codeFragments);
-            builder.run(util.getStupidTransformation(n, (ASTTransformationQuery)query));
+            abstractDiversify.run(util.getStupidTransformation(n, (ASTTransformationQuery)query));
         }
         else
         {
             int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
-            builder.run(n);
+            abstractDiversify.run(n);
         }
     }
 

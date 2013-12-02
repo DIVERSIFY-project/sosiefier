@@ -1,6 +1,8 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.*;
+import fr.inria.diversify.transformation.maven.RunAnt;
+import fr.inria.diversify.transformation.maven.RunBuild;
 import fr.inria.diversify.transformation.maven.RunMaven;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.util.GitUtil;
@@ -28,9 +30,11 @@ public abstract class AbstractDiversify {
     protected Set<Thread> threadSet;
     protected String sourceDir;
     protected boolean clojureTest;
-    protected int timeOut;
+    protected int timeOut = 0;
     protected ITransformationQuery transQuery;
     protected String newPomFile;
+    protected Class buildClass;
+
 
 
     public abstract void run(int n) throws Exception;
@@ -85,39 +89,42 @@ public abstract class AbstractDiversify {
         File dir = new File(dirName);
         dir.mkdirs();
         copyDirectory(new File(dirProject), dir);
+
         if(newPomFile != "")
             FileUtils.copyFile(new File(newPomFile),new File(dir.getAbsoluteFile()+"/pom.xml"));
 
-        File failFastDir = new File(dir+"/"+ sourceDir +"/fr/inria/diversify/transformation/maven");
-        FileUtils.forceMkdir(failFastDir);
-        FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/maven/FailFastListener.java"),failFastDir);
+        if(buildClass == RunMaven.class) {
+            File failFastDir = new File(dir+"/"+ sourceDir +"/fr/inria/diversify/transformation/maven");
+            FileUtils.forceMkdir(failFastDir);
+            FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/maven/FailFastListener.java"),failFastDir);
+        }
         return dirName;
     }
 
-    protected Integer runTest(String directory) throws InterruptedException, CompileException {
-        RunMaven rt = new RunMaven(directory, getMavenPhase(), timeOut,clojureTest);
-        rt.start();
-        rt.join(1000 * timeOut);
+    protected Integer runTest(String directory) throws InterruptedException, CompileException, InstantiationException, IllegalAccessException {
+        RunBuild build = initRunBuilder(directory);
+        build.start();
+        build.join(1000 * timeOut);
 
-        Log.info("compile error: " + rt.getCompileError() + ", run all test: " + rt.allTestRun() + ", number of failure: " + rt.getFailures());
-        if (rt.getCompileError()) {
+        Log.info("compile error: " + build.getCompileError() + ", run all test: " + build.allTestRun() + ", number of failure: " + build.getFailures());
+        if (build.getCompileError()) {
             throw new CompileException("compile error in maven");
         }
 
-        if (rt.getFailures() == null)
+        if (build.getFailures() == null)
             return -1;
-        return rt.getFailures();
+        return build.getFailures();
     }
 
     protected abstract String[] getMavenPhase();
 
-    public void initTimeOut() throws InterruptedException {
+    public void initTimeOut() throws InterruptedException, InstantiationException, IllegalAccessException {
         initThreadGroup();
-        RunMaven rt = new RunMaven(projectDir, new String[]{"clean", "test"}, 0, clojureTest);
-        rt.start();
+        RunBuild build = initRunBuilder(projectDir);
+        build.start();
         timeOut = 0;
         int factor = 12;
-        while (rt.getFailures() == null) {
+        while (build.getFailures() == null) {
             timeOut = timeOut + factor;
             Thread.sleep(1000);
         }
@@ -231,6 +238,15 @@ public abstract class AbstractDiversify {
         }
     }
 
+    protected RunBuild initRunBuilder(String directory) throws IllegalAccessException, InstantiationException {
+        RunBuild rb = (RunBuild)buildClass.newInstance();
+        rb.setDirectory(directory);
+        rb.setTimeOut(timeOut);
+        rb.setClojureTest(clojureTest);
+        rb.setPhase(getMavenPhase());
+        return rb;
+    }
+
     public void setTmpDirectory(String tmpDir) {
         this.tmpDir = tmpDir;
     }
@@ -256,4 +272,8 @@ public abstract class AbstractDiversify {
     }
 
     public List<ITransformation> getTransformations() {return transformations;}
+
+    public void setBuilderClass(Class buildClass) {
+        this.buildClass = buildClass;
+    }
 }

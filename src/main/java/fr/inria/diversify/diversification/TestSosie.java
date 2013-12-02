@@ -18,7 +18,7 @@ import java.util.Set;
  * Date: 9/2/13
  * Time: 2:39 PM
  */
-public class TestSosie extends Builder {
+public class TestSosie extends AbstractDiversify {
     protected List<String> mavenProjects;
 
     public TestSosie(ITransformationQuery transQuery, String projectDir) {
