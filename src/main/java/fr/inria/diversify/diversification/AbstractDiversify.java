@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * Date: 9/2/13
  * Time: 3:05 PM
  */
-public abstract class Builder {
+public abstract class AbstractDiversify {
     protected String projectDir;
     protected String tmpDir;
     protected List<ITransformation> transformations;
