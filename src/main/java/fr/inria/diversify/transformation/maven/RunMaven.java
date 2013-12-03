@@ -73,7 +73,6 @@ public class RunMaven extends RunBuild {
         }
     }
 
-
     protected void parseResult(String r) {
         Pattern pattern = Pattern.compile("Tests run: (\\d+), Failures: (\\d+), Errors: (\\d+), Skipped: (\\d+)");
         Matcher matcher = null;

@@ -14,10 +14,10 @@ import java.util.Set;
  */
 public abstract class RunBuild {
     protected String directory;
-    protected boolean compileError = false;
-    protected boolean allTestRun = false;
+    protected boolean compileError;
+    protected boolean allTestRun;
     String[] phases;
-    protected Integer failure = null;
+    protected Integer failure;
     protected int timeOut = -1;
     protected boolean clojureTest;
     protected Set<Thread> threadSet;
@@ -27,8 +27,15 @@ public abstract class RunBuild {
         this.directory = directory;
     }
 
+    protected void reset() {
+        compileError = false;
+        allTestRun = false;
+       failure = null;
+    }
+
     public void runBuilder() throws InterruptedException {
         initThreadGroup();
+        reset();
         Thread thread = new Thread() {
             public void run() {
                 runPrivate();
@@ -42,6 +49,7 @@ public abstract class RunBuild {
 
     public void initTimeOut() throws InterruptedException {
         initThreadGroup();
+        reset();
         Thread thread = new Thread() {
             public void run() {
                 runPrivate();
