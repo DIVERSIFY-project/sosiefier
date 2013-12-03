@@ -1,8 +1,10 @@
-package fr.inria.diversify.transformation.maven;
+package fr.inria.diversify.transformation.builder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,16 +12,16 @@ import fr.inria.diversify.util.Log;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
+import org.apache.tools.ant.Target;
 
 /**
  * User: Simon
  * Date: 02/12/13
  * Time: 11:54
  */
-public class RunAnt extends RunBuild{
-    protected String directory;
+public class AntBuilder extends AbstractBuilder {
 
-    public RunAnt(String directory, String src) {
+    public AntBuilder(String directory, String src) {
         super(directory,src);
     }
 
@@ -37,7 +39,7 @@ public class RunAnt extends RunBuild{
         ProjectHelper helper = ProjectHelper.getProjectHelper();
         p.addReference("ant.projectHelper", helper);
         helper.parse(p, buildFile);
-        p.executeTarget(phases[0]);
+        p.executeTargets(new Vector(Arrays.asList(phases)));
 
         parseResult(os.toString());
     }

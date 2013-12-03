@@ -1,7 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.*;
-import fr.inria.diversify.transformation.maven.RunBuild;
+import fr.inria.diversify.transformation.builder.AbstractBuilder;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
@@ -23,7 +23,7 @@ public abstract class AbstractDiversify {
     protected List<ITransformation> transformations;
     protected String sourceDir;
     protected ITransformationQuery transQuery;
-    protected RunBuild builder;
+    protected AbstractBuilder builder;
 
 
     public abstract void run(int n) throws Exception;
@@ -99,7 +99,7 @@ public abstract class AbstractDiversify {
 
     public List<ITransformation> getTransformations() {return transformations;}
 
-    public void setBuilder(RunBuild builder) {
+    public void setBuilder(AbstractBuilder builder) {
         this.builder = builder;
     }
 }

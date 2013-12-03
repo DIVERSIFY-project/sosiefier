@@ -1,9 +1,7 @@
-package fr.inria.diversify.transformation.maven;
+package fr.inria.diversify.transformation.builder;
 
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 
-import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.Set;
 
@@ -12,7 +10,7 @@ import java.util.Set;
  * Date: 02/12/13
  * Time: 14:12
  */
-public abstract class RunBuild {
+public abstract class AbstractBuilder {
     protected String directory;
     protected boolean compileError;
     protected boolean allTestRun;
@@ -23,7 +21,7 @@ public abstract class RunBuild {
     protected Set<Thread> threadSet;
 
 
-    public RunBuild(String directory, String srcDir) {
+    public AbstractBuilder(String directory, String srcDir) {
         this.directory = directory;
     }
 

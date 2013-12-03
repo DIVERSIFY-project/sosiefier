@@ -11,7 +11,9 @@ import fr.inria.diversify.statistic.CrossValidation;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationsWriter;
-import fr.inria.diversify.transformation.maven.RunBuild;
+import fr.inria.diversify.transformation.builder.AbstractBuilder;
+import fr.inria.diversify.transformation.builder.AntBuilder;
+import fr.inria.diversify.transformation.builder.MavenBuilder;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -38,8 +40,6 @@ import fr.inria.diversify.diversification.Sosie;
 import fr.inria.diversify.statistic.Util;
 import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.TransformationParser;
-import fr.inria.diversify.transformation.maven.RunAnt;
-import fr.inria.diversify.transformation.maven.RunMaven;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromList;
@@ -123,15 +123,15 @@ public class DiversifyMain {
         return ad;
     }
 
-    protected RunBuild initBuilder(String directory) throws Exception {
-        RunBuild rb;
+    protected AbstractBuilder initBuilder(String directory) throws Exception {
+        AbstractBuilder rb;
         String src = DiversifyProperties.getProperty("src");
         if(DiversifyProperties.getProperty("builder").equals("maven")) {
-            rb = new RunMaven(directory, src);
+            rb = new MavenBuilder(directory, src);
             rb.setPhase(new String[]{"clean", "test"});
         }
         else {
-            rb = new RunAnt(directory, src);
+            rb = new AntBuilder(directory, src);
             rb.setPhase(new String[]{"deepclean", "junit-all"});
         }
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));

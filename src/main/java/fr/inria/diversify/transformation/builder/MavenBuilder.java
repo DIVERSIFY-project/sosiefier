@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation.maven;
+package fr.inria.diversify.transformation.builder;
 
 
 import fr.inria.diversify.util.Log;
@@ -17,11 +17,11 @@ import java.util.regex.Pattern;
  * Date: 5/17/13
  * Time: 11:34 AM
  */
-public class RunMaven extends RunBuild {
+public class MavenBuilder extends AbstractBuilder {
 
-    public RunMaven(String directory, String srcDir) throws IOException {
+    public MavenBuilder(String directory, String srcDir) throws IOException {
         super(directory, srcDir);
-        File failFastDir = new File(directory+"/"+ srcDir +"/fr/inria/diversify/transformation/maven");
+        File failFastDir = new File(directory+"/"+ srcDir + "/fr/inria/diversify/transformation/builder");
         FileUtils.forceMkdir(failFastDir);
         FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/maven/FailFastListener.java"),failFastDir);
     }

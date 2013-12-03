@@ -238,7 +238,7 @@ limitations under the License.
                 <properties>
                     <property>
                         <name>listener</name>
-                        <value>fr.inria.diversify.transformation.maven.FailFastListener</value>
+                        <value>fr.inria.diversify.transformation.builder.FailFastListener</value>
                     </property>
                 </properties>
             </configuration>
