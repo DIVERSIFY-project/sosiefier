@@ -1,9 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.*;
-import fr.inria.diversify.transformation.maven.RunAnt;
 import fr.inria.diversify.transformation.maven.RunBuild;
-import fr.inria.diversify.transformation.maven.RunMaven;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
@@ -11,12 +9,8 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 
 import java.io.*;
-import java.lang.management.ManagementFactory;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * User: Simon
@@ -27,14 +21,9 @@ public abstract class AbstractDiversify {
     protected String projectDir;
     protected String tmpDir;
     protected List<ITransformation> transformations;
-    protected Set<Thread> threadSet;
     protected String sourceDir;
-    protected boolean clojureTest;
-    protected int timeOut = 0;
     protected ITransformationQuery transQuery;
-    protected String newPomFile;
-    protected Class buildClass;
-
+    protected RunBuild builder;
 
 
     public abstract void run(int n) throws Exception;
@@ -62,8 +51,6 @@ public abstract class AbstractDiversify {
             Log.debug(tmp+"/   "+split[split.length - 1]);
             GitUtil.addToGit(tmp+"/", "*");
         }
-//        StatisticDiversification stat = new StatisticDiversification(transformations);
-//        stat.writeStat(output);
     }
 
     public void writeTransformation(String fileName) throws IOException, JSONException {
@@ -84,188 +71,27 @@ public abstract class AbstractDiversify {
         Log.debug("mkdir: {}",dirs);
     }
 
-    protected String prepare(String dirProject, String dirTarget, String newPomFile) throws IOException, InterruptedException {
-        String dirName = dirTarget + "/tmp_" + System.currentTimeMillis();
-        File dir = new File(dirName);
+    public String init(String dirProject, String dirTarget) throws IOException, InterruptedException {
+        tmpDir = dirTarget + "/tmp_" + System.currentTimeMillis();
+        File dir = new File(tmpDir);
         dir.mkdirs();
-        copyDirectory(new File(dirProject), dir);
+        FileUtils.copyDirectory(new File(dirProject), dir);
 
-        if(newPomFile != "")
-            FileUtils.copyFile(new File(newPomFile),new File(dir.getAbsoluteFile()+"/pom.xml"));
-
-        if(buildClass == RunMaven.class) {
-            File failFastDir = new File(dir+"/"+ sourceDir +"/fr/inria/diversify/transformation/maven");
-            FileUtils.forceMkdir(failFastDir);
-            FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/maven/FailFastListener.java"),failFastDir);
-        }
-        return dirName;
+        return tmpDir;
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException, InstantiationException, IllegalAccessException {
-        RunBuild build = initRunBuilder(directory);
-        build.start();
-        build.join(1000 * timeOut);
-
-        Log.info("compile error: " + build.getCompileError() + ", run all test: " + build.allTestRun() + ", number of failure: " + build.getFailures());
-        if (build.getCompileError()) {
+        builder.runBuilder();
+        Log.info("compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", number of failure: " + builder.getFailures());
+        if (builder.getCompileError()) {
             throw new CompileException("compile error in maven");
         }
 
-        if (build.getFailures() == null)
+        if (builder.getFailures() == null)
             return -1;
-        return build.getFailures();
+        return builder.getFailures();
     }
 
-    protected abstract String[] getMavenPhase();
-
-    public void initTimeOut() throws InterruptedException, InstantiationException, IllegalAccessException {
-        initThreadGroup();
-        RunBuild build = initRunBuilder(projectDir);
-        build.start();
-        timeOut = 0;
-        int factor = 12;
-        while (build.getFailures() == null) {
-            timeOut = timeOut + factor;
-            Thread.sleep(1000);
-        }
-        Log.debug("timeOut init: " + timeOut);
-        killUselessThread();
-    }
-
-    protected void initThreadGroup() {
-        threadSet = Thread.getAllStackTraces().keySet();
-    }
-
-    protected void killUselessThread() {
-        killAllChildrenProcess();
-        for (Thread thread : Thread.getAllStackTraces().keySet()) {
-            if (!threadSet.contains(thread)) {
-                thread.stop();
-            }
-        }
-    }
-
-    protected void killAllChildrenProcess() {
-        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        Log.debug("PID :"+pid);
-        Runtime r = Runtime.getRuntime();
-        try {
-//            findAllChildrenProcessOSX();
-            r.exec("pkill -P " +pid);
-//            killAllChildrenProcess2();
-
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            Log.error("killallchildren ",e);
-        }
-        Log.debug("all children process kill");
-    }
-
-    protected void killAllChildrenProcess2() throws IOException, InterruptedException {
-        Runtime r = Runtime.getRuntime();
-        for(String pid : findAllChildrenProcessUNIX()) {
-            r.exec("kill -9 "+pid);
-        }
-    }
-
-    protected List<String> findAllChildrenProcessUNIX() {
-        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        Log.debug("PID :"+pid);
-        Runtime r = Runtime.getRuntime();
-        List<String> list = new ArrayList<String>();
-        try {
-            Process p = r.exec("pstree -p "+ pid +" | grep -o '([0-9]\\+)' | grep -o '[0-9]\\+'") ;
-            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line;
-
-            while ((line = input.readLine()) != null) {
-                if(!line.equals(pid))
-                    list.add(pid);
-            }
-            input.close();
-        } catch (Exception e) {
-        }
-        return list;
-    }
-
-    protected List<String> findAllChildrenProcessOSX() {
-        Pattern pattern = Pattern.compile("\\s*(\\d+).+");
-        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        Runtime r = Runtime.getRuntime();
-        List<String> list = new ArrayList<String>();
-        try {
-            Log.debug("sh script/pstree.sh "+ pid);
-            Process p = r.exec("sh script/pstree.sh "+ pid) ;
-            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line;
-
-            while ((line = input.readLine()) != null) {
-                Log.debug(line);
-                Matcher matcher = pattern.matcher(line);
-                if(!line.equals(matcher.group(1)))
-                    list.add(matcher.group(1));
-            }
-            input.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    protected void copyDirectory(File sourceLocation, File targetLocation) throws IOException {
-        if (sourceLocation.isDirectory()) {
-            if (!targetLocation.exists()) {
-                targetLocation.mkdir();
-            }
-
-            String[] children = sourceLocation.list();
-            for (String aChildren : children) {
-                copyDirectory(new File(sourceLocation, aChildren),
-                        new File(targetLocation, aChildren));
-            }
-        } else {
-            InputStream in = new FileInputStream(sourceLocation);
-            OutputStream out = new FileOutputStream(targetLocation);
-
-            // Copy the bits from instream to outstream
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) > 0) {
-                out.write(buf, 0, len);
-            }
-            in.close();
-            out.close();
-        }
-    }
-
-    protected RunBuild initRunBuilder(String directory) throws IllegalAccessException, InstantiationException {
-        RunBuild rb = (RunBuild)buildClass.newInstance();
-        rb.setDirectory(directory);
-        rb.setTimeOut(timeOut);
-        rb.setClojureTest(clojureTest);
-        rb.setPhase(getMavenPhase());
-        return rb;
-    }
-
-    public void setTmpDirectory(String tmpDir) {
-        this.tmpDir = tmpDir;
-    }
-
-    public void setClojureTest(boolean clojureTest) {
-        this.clojureTest = clojureTest;
-    }
-
-    public void setTimeOut(int timeOut) {
-        this.timeOut = timeOut;
-    }
-
-    public void setSourceDirectory(String sourceDirectory) {
-        this.sourceDir = sourceDirectory;
-    }
-
-    public void setNewPomFile(String pom) {
-        newPomFile = pom;
-    }
 
     public void setTransformationQuery(ITransformationQuery transQuery) {
         this.transQuery = transQuery;
@@ -273,7 +99,7 @@ public abstract class AbstractDiversify {
 
     public List<ITransformation> getTransformations() {return transformations;}
 
-    public void setBuilderClass(Class buildClass) {
-        this.buildClass = buildClass;
+    public void setBuilder(RunBuild builder) {
+        this.builder = builder;
     }
 }

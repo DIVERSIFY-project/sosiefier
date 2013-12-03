@@ -19,15 +19,11 @@ import org.apache.tools.ant.ProjectHelper;
 public class RunAnt extends RunBuild{
     protected String directory;
 
-    public RunAnt() {}
+    public RunAnt(String directory, String src) {
+        super(directory,src);
+    }
 
-//    public RunAnt(String directory, String[] phases, int timeOut) {
-//        this.directory = directory;
-//        this.phases = phases;
-//        this.timeOut = timeOut;
-//    }
-
-    public void run(){
+    protected void runPrivate(){
         File buildFile = new File(directory+"/build.xml");
         Project p = new Project();
         DefaultLogger consoleLogger = new DefaultLogger();

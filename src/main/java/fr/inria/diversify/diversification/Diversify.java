@@ -1,7 +1,6 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.ITransformation;
-import fr.inria.diversify.transformation.maven.RunBuild;
 import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
@@ -21,20 +20,16 @@ public class Diversify extends AbstractDiversify {
     protected int sosie = 0;
     protected int trial = 0;
 
-    public Diversify(AbstractTransformationQuery transQuery, String projectDir, Class buildClass) {
+    public Diversify(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
-        this.tmpDir = "output_diversify";
         this.projectDir = projectDir;
-        clojureTest = false;
-        this.buildClass = buildClass;
         transformations = new ArrayList<ITransformation>();
     }
 
     public Diversify(String projectDir, String workingDir) {
-        this.tmpDir = "output_diversify";
         this.sourceDir = workingDir;
         this.projectDir = projectDir;
-        clojureTest = false;
+
 
         transformations = new ArrayList<ITransformation>();
     }
@@ -42,14 +37,13 @@ public class Diversify extends AbstractDiversify {
     @Override
     public void run(int n) throws Exception {
         // todo bidon
-        String dir = prepare(projectDir, tmpDir, newPomFile);
         Log.info("number of diversification: " + n);
         for (int i = 0; i < n; i++) {
             Log.info("diversification: " + i);
-            run(transQuery.getTransformation(), dir);
+            run(transQuery.getTransformation(), tmpDir);
         }
-        FileUtils.cleanDirectory(dir);
-        FileUtils.forceDelete(dir);
+        FileUtils.cleanDirectory(tmpDir);
+        FileUtils.forceDelete(tmpDir);
 
         Log.debug("{} compile error on {} compilation", compileError, n);
         Log.debug("{} sosie on {} trial", sosie, trial);
@@ -57,22 +51,20 @@ public class Diversify extends AbstractDiversify {
 
     @Override
     public void run(Set<ITransformation> trans) throws Exception {
-        String dir = prepare(projectDir, tmpDir,newPomFile);
         Log.info("number of diversification: " + trans.size());
         int i = 0;
         for (ITransformation tran : trans) {
             Log.info("diversification: " + i);
-            run(tran, dir);
+            run(tran, tmpDir);
             i++;
         }
-        FileUtils.cleanDirectory(dir);
-        FileUtils.forceDelete(dir);
+        FileUtils.cleanDirectory(tmpDir);
+        FileUtils.forceDelete(tmpDir);
         Log.debug("{} compile error on {} compilation", compileError, trans.size());
         Log.debug("{} sosie on {} trial", sosie, trial);
     }
 
     protected void run(ITransformation trans, String tmpDir) throws Exception {
-        initThreadGroup();
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
             trans.apply(tmpDir + "/" + sourceDir);
@@ -89,7 +81,6 @@ public class Diversify extends AbstractDiversify {
         }
         trans.restore(tmpDir + "/" + sourceDir);
         Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
-        killUselessThread();
     }
 
     protected String[] getMavenPhase() {

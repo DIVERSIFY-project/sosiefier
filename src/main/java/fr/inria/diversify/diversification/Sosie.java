@@ -18,26 +18,18 @@ public class Sosie extends AbstractDiversify {
 
     public Sosie(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
-        this.tmpDir = "output_sosie";
         this.projectDir = projectDir;
         transformations = new ArrayList<ITransformation>();
 
-        clojureTest = false;
     }
 
-    public Sosie(String projectDir) {
-        this.transQuery = transQuery;
-        this.tmpDir = "output_sosie";
+    public Sosie(String projectDir, String src) {
+        this.sourceDir = src;
         this.projectDir = projectDir;
-        transformations = new ArrayList<ITransformation>();
 
-        clojureTest = false;
     }
     @Override
     public void run(int n) throws Exception {
-        File dir = new File(tmpDir);
-        if(!dir.exists())
-            dir.mkdirs();
         for (int i = 0; i < n; i++) {
             Log.debug("sosie number: " + i);
             run(transQuery.getTransformation());
@@ -51,30 +43,25 @@ public class Sosie extends AbstractDiversify {
     }
 
     protected void run(ITransformation trans) throws Exception {
-        initThreadGroup();
-        String dir = prepare(projectDir, tmpDir,newPomFile);
-        Log.debug("output dir sosie: " + dir + "/" + sourceDir);
+        Log.debug("output dir sosie: " + tmpDir + "/" + sourceDir);
         try {
-            trans.apply(dir + "/" + sourceDir);
-            if(runTest(dir) != 0) {
-                FileUtils.cleanDirectory(dir);
-                FileUtils.forceDelete(dir);
+            trans.apply(tmpDir + "/" + sourceDir);
+            if(runTest(tmpDir) != 0) {
+                FileUtils.cleanDirectory(tmpDir);
+                FileUtils.forceDelete(tmpDir);
             }
             else {
                 transformations.add(trans);
-                FileWriter fileWriter = new FileWriter(dir +"/diversificationPoint");
+                FileWriter fileWriter = new FileWriter(tmpDir +"/diversificationPoint");
                 fileWriter.append(trans.toJSONObject().toString());
                 fileWriter.close();
             }
         } catch (Exception e) {
             Log.warn("compile error during diversification", e);
-            FileUtils.cleanDirectory(dir);
-            FileUtils.forceDelete(dir);
+            FileUtils.cleanDirectory(tmpDir);
+            FileUtils.forceDelete(tmpDir);
         }
-        killUselessThread();
-    }
-
-    protected String[] getMavenPhase() {
-        return new String[]{"clean", "test"};
+        //new tmpdir
+        tmpDir = init(projectDir,"output_sosie");
     }
 }

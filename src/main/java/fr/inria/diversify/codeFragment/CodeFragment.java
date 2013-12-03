@@ -39,7 +39,6 @@ public abstract class CodeFragment {
         context = new Context(initInputContext(), initOutputContext());
         this.initOutputContext();
         this.initInputContext();
-        Log.debug(this.toString()+"\n");
     }
 
 

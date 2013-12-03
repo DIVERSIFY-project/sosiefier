@@ -1,35 +1,24 @@
 package fr.inria.diversify;
 
-import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
-import fr.inria.diversify.coverage.CoverageReport;
-import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.coverage.MultiCoverageReport;
-import fr.inria.diversify.coverage.NullCoverageReport;
-import fr.inria.diversify.diversification.AbstractDiversify;
-import fr.inria.diversify.diversification.Diversify;
-import fr.inria.diversify.diversification.Sosie;
-import fr.inria.diversify.diversification.TestSosie;
-import fr.inria.diversify.transformation.maven.RunAnt;
-import fr.inria.diversify.transformation.maven.RunMaven;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromList;
-import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import fr.inria.diversify.statistic.CrossValidation;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
-import fr.inria.diversify.statistic.Util;
-import fr.inria.diversify.transformation.ITransformation;
-import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationsWriter;
-import fr.inria.diversify.transformation.query.ITransformationQuery;
-import fr.inria.diversify.util.DiversifyProperties;
-import fr.inria.diversify.util.GitUtil;
-import fr.inria.diversify.util.Log;
+import fr.inria.diversify.transformation.maven.RunBuild;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
+
 import org.json.JSONException;
+
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
@@ -38,10 +27,25 @@ import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
 import spoon.support.compiler.JDTCompiler;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
+import fr.inria.diversify.coverage.CoverageReport;
+import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.coverage.MultiCoverageReport;
+import fr.inria.diversify.coverage.NullCoverageReport;
+import fr.inria.diversify.diversification.AbstractDiversify;
+import fr.inria.diversify.diversification.Diversify;
+import fr.inria.diversify.diversification.Sosie;
+import fr.inria.diversify.statistic.Util;
+import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.TransformationParser;
+import fr.inria.diversify.transformation.maven.RunAnt;
+import fr.inria.diversify.transformation.maven.RunMaven;
+import fr.inria.diversify.transformation.query.ITransformationQuery;
+import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
+import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromList;
+import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
+import fr.inria.diversify.util.DiversifyProperties;
+import fr.inria.diversify.util.Log;
 
 /**
  * User: Simon
@@ -62,68 +66,19 @@ public class DiversifyMain2 {
             computeStatistic();
 
         } else {
-        if (DiversifyProperties.getProperty("sosie").equals("true"))
-            buildSosie();
-        else if (DiversifyProperties.getProperty("sosieOnMultiProject").equals("true"))
-            sosieOnMultiProject();
-        else
-            runDiversification();
+            if (DiversifyProperties.getProperty("sosieOnMultiProject").equals("true")) {
+//            sosieOnMultiProject();
+            }
+            else
+                initAndRunBuilder();
         }
-
     }
 
-    protected void buildSosie() throws Exception {
-        Sosie d = new Sosie(DiversifyProperties.getProperty("project"));
-        initAndRunBuilder(d);
-    }
-
-    protected void runDiversification() throws Exception {
-        Diversify d = null;
-        if(DiversifyProperties.getProperty("transformation.level").equals("bytecode"))
-            d = new Diversify( DiversifyProperties.getProperty("project"),DiversifyProperties.getProperty("classes"));
-        else
-            d = new Diversify( DiversifyProperties.getProperty("project"),DiversifyProperties.getProperty("src"));
-        String git = DiversifyProperties.getProperty("gitRepository");
-        if (!git.equals("")) {
-            GitUtil.initGit(git);
-        }
-        if(DiversifyProperties.getProperty("builder").equals("maven"))
-            d.setBuilderClass(RunMaven.class);
-        else
-            d.setBuilderClass(RunAnt.class);
-
-        initAndRunBuilder(d);
-        d.setTransformationQuery(initTransformationQuery());
-        d.printResult(DiversifyProperties.getProperty("result"), git + "/diversify-exp");
-    }
-
-    protected void sosieOnMultiProject() throws Exception {
-        TestSosie d = new TestSosie(initTransformationQuery(), DiversifyProperties.getProperty("project"));
-
-        List<String> list = new ArrayList<String>();
-        for (String mvn : DiversifyProperties.getProperty("mavenProjects").split(System.getProperty("path.separator")))
-            list.add(mvn);
-        d.setMavenProject(list);
-
-        initAndRunBuilder(d);
-    }
-
-    protected void initAndRunBuilder(AbstractDiversify abstractDiversify) throws Exception {
-        int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
-        if (t == -1)
-            abstractDiversify.initTimeOut();
-        else
-            abstractDiversify.setTimeOut(t);
-
-        abstractDiversify.setTmpDirectory(DiversifyProperties.getProperty("outputDir"));
+    protected void initAndRunBuilder() throws Exception {
+        AbstractDiversify abstractDiversify = initAbstractDiversify();
 
         ITransformationQuery query = initTransformationQuery();
         abstractDiversify.setTransformationQuery(query);
-
-        if (DiversifyProperties.getProperty("clojure").equals("true"))
-            abstractDiversify.setClojureTest(true);
-
-        abstractDiversify.setNewPomFile(DiversifyProperties.getProperty("newPomFile"));
 
         //TODO refactor
         if (DiversifyProperties.getProperty("nbRun").equals("all")) {
@@ -153,6 +108,49 @@ public class DiversifyMain2 {
         }
     }
 
+    protected AbstractDiversify initAbstractDiversify() throws Exception {
+        AbstractDiversify ad;
+        String projet = DiversifyProperties.getProperty("project");
+        String src = DiversifyProperties.getProperty("src");
+        if(DiversifyProperties.getProperty("sosie").equals("true"))
+            ad = new Sosie(projet,src);
+        else
+            ad = new Diversify(projet,src);
+
+        String tmpDir = ad.init(projet, DiversifyProperties.getProperty("outputDir"));
+
+        ad.setBuilder(initBuilder(tmpDir));
+        //        abstractDiversify.setNewPomFile(DiversifyProperties.getProperty("newPomFile"));
+
+        return ad;
+    }
+
+    protected RunBuild initBuilder(String directory) throws Exception {
+        RunBuild rb;
+        String src = DiversifyProperties.getProperty("src");
+        if(DiversifyProperties.getProperty("builder").equals("maven")) {
+            rb = new RunMaven(directory, src);
+            rb.setPhase(new String[]{"clean", "test"});
+        }
+        else {
+            rb = new RunAnt(directory, src);
+            rb.setPhase(new String[]{"deepclean", "junit-all"});
+        }
+        int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
+        if (t == -1)
+            rb.initTimeOut();
+        else
+            rb.setTimeOut(t);
+
+        String pomFile = DiversifyProperties.getProperty("newPomFile");
+        if(!pomFile.equals(""))
+            rb.initPom(pomFile);
+
+        if (DiversifyProperties.getProperty("clojure").equals("true"))
+            rb.setClojureTest(true);
+        return rb;
+    }
+
     protected ITransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException, NotFoundException {
         ICoverageReport rg = initCoverageReport();
 
@@ -178,23 +176,22 @@ public class DiversifyMain2 {
         return atq;
     }
 
-    private List<CtMethod> allCtMethod() throws NotFoundException {
-        List<CtMethod> methods = new ArrayList<CtMethod>();
-        ClassPool pool = ClassPool.getDefault();
-        pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
-        for (CtSimpleType cl: codeFragments.getAllClasses()) {
-            try {
-                CtClass cc = pool.get(cl.getQualifiedName());
-                for(CtMethod method : cc.getDeclaredMethods())
-                    if(!method.isEmpty()) {
-                        methods.add(method);
-                    }
-            }  catch (Exception e) {
-                Log.error("error in allCtMethod",e);
-            }
+    protected ICoverageReport initCoverageReport() throws IOException {
+        ICoverageReport icr;
+        String jacocoFile = DiversifyProperties.getProperty("jacoco");
+        String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
 
-        }
-        return methods;
+        if (jacocoFile != null) {
+            File file = new File(jacocoFile);
+            if (file.isDirectory())
+                icr = new MultiCoverageReport(classes, file);
+            else
+                icr = new CoverageReport(classes, file);
+        } else
+            icr = new NullCoverageReport();
+
+        icr.create();
+        return icr;
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
@@ -209,7 +206,6 @@ public class DiversifyMain2 {
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
         SpoonCompiler c = new JDTCompiler(factory);
-//        SpoonBuildingManager builder = new SpoonBuildingManager(factory);
 
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
@@ -223,7 +219,6 @@ public class DiversifyMain2 {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         ProcessingManager pm = new QueueProcessingManager(factory);
         Class classz = Class.forName(DiversifyProperties.getProperty("processor"));
         AbstractCodeFragmentProcessor processor =  (AbstractCodeFragmentProcessor)classz.newInstance();
@@ -231,28 +226,6 @@ public class DiversifyMain2 {
         pm.process();
 
         codeFragments = processor.getCodeFragments();
-    }
-
-    protected ICoverageReport initCoverageReport() throws IOException {
-        ICoverageReport icr;
-        String jacocoFile = DiversifyProperties.getProperty("jacoco");
-        String classes;
-        if (DiversifyProperties.getProperty("jacoco.classes") != null)
-            classes = DiversifyProperties.getProperty("jacoco.classes");
-        else
-            classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
-
-        if (jacocoFile != null) {
-            File file = new File(jacocoFile);
-            if (file.isDirectory())
-                icr = new MultiCoverageReport(classes, file);
-            else
-                icr = new CoverageReport(classes, file);
-        } else
-            icr = new NullCoverageReport();
-
-        icr.create();
-        return icr;
     }
 
     protected void computeStatistic() throws IOException, JSONException, InterruptedException {
@@ -297,6 +270,13 @@ public class DiversifyMain2 {
         sd.writeStat(fileName);
     }
 
+    protected Set<String> getAllTransformationType(List<ITransformation> transformations) {
+        Set<String> types = new HashSet<String>();
+        for (ITransformation t : transformations)
+            types.add(t.getType());
+        return types;
+    }
+
     protected void statForR(String fileName) throws IOException, JSONException {
         TransformationParser tf = new TransformationParser(codeFragments);
         Log.debug("parse fileName: {}",fileName);
@@ -338,18 +318,28 @@ public class DiversifyMain2 {
             Log.error("computeCodeFragmentStatistic ", e);
         }
     }
-
     protected void initLogLevel() {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);
     }
 
-    protected Set<String> getAllTransformationType(List<ITransformation> transformations) {
-        Set<String> types = new HashSet<String>();
-        for (ITransformation t : transformations)
-            types.add(t.getType());
-        return types;
-    }
+    private List<CtMethod> allCtMethod() throws NotFoundException {
+        List<CtMethod> methods = new ArrayList<CtMethod>();
+        ClassPool pool = ClassPool.getDefault();
+        pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
+        for (CtSimpleType cl: codeFragments.getAllClasses()) {
+            try {
+                CtClass cc = pool.get(cl.getQualifiedName());
+                for(CtMethod method : cc.getDeclaredMethods())
+                    if(!method.isEmpty()) {
+                        methods.add(method);
+                    }
+            }  catch (Exception e) {
+                Log.error("error in allCtMethod",e);
+            }
 
+        }
+        return methods;
+    }
 
 }

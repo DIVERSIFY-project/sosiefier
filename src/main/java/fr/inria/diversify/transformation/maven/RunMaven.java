@@ -3,6 +3,7 @@ package fr.inria.diversify.transformation.maven;
 
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.maven.MavenInvoker;
+import org.apache.commons.io.FileUtils;
 import org.apache.maven.shared.invoker.*;
 
 import java.io.*;
@@ -18,16 +19,14 @@ import java.util.regex.Pattern;
  */
 public class RunMaven extends RunBuild {
 
-    public RunMaven() {}
-
-    public RunMaven(String directory, String[] phases, int timeOut, boolean clojureTest) {
-        this.directory = directory;
-        this.phases = phases;
-        this.clojureTest = clojureTest;
-        this.timeOut = timeOut;
+    public RunMaven(String directory, String srcDir) throws IOException {
+        super(directory, srcDir);
+        File failFastDir = new File(directory+"/"+ srcDir +"/fr/inria/diversify/transformation/maven");
+        FileUtils.forceMkdir(failFastDir);
+        FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/maven/FailFastListener.java"),failFastDir);
     }
 
-    public void run() {
+    protected void runPrivate() {
         Log.debug("run maven");
         InvocationRequest request = new DefaultInvocationRequest();
         request.setPomFile( new File( directory + "/pom.xml" ) );
