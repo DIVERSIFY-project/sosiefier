@@ -1,8 +1,8 @@
 package fr.inria.diversify.codeFragment;
 
-import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLocalVariable;
+import spoon.reflect.code.CtThisAccess;
 import spoon.reflect.code.CtVariableAccess;
 import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.reference.CtFieldReference;
@@ -12,6 +12,7 @@ import spoon.reflect.reference.CtVariableReference;
 import spoon.reflect.visitor.CtScanner;
 import spoon.support.reflect.reference.CtLocalVariableReferenceImpl;
 
+import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,16 +46,9 @@ public class VariableVisitor extends CtScanner {
 		super.visitCtLocalVariableReference(reference);
 	}
 
-//	public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-//		if(!(fieldAccess.getVariable().getSimpleName() == "super"))
-//		    if(!(fieldAccess.getVariable().isStatic() && fieldAccess.getVariable().getModifiers().contains(ModifierKind.PUBLIC)))
-//				fieldReferences.add(fieldAccess);
-//		super.visitCtVariableAccess(fieldAccess);
-//	}
-
     public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
         if(!(reference.getSimpleName() == "super"))
-            if(!(reference.isStatic() && reference.getModifiers().contains(ModifierKind.PUBLIC)))
+            if(!(reference.isStatic() && reference.getDeclaration().getModifiers().contains(ModifierKind.PUBLIC)))
                 localVariableReferences.add(reference);
         super.visitCtFieldReference(reference);
     }
@@ -65,7 +59,7 @@ public class VariableVisitor extends CtScanner {
 		}
 		super.visitCtInvocation(invocation);
 	}
-	
+
 	protected CtVariableReference<?> getThis(){
 		CtVariableReference thisVariable = new CtLocalVariableReferenceImpl();
 		thisVariable.setType(refThis);

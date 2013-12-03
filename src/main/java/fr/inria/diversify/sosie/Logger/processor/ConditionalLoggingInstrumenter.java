@@ -233,6 +233,11 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
                 }
             }
 
+            @Override
+            public <T> void visitCtThisAccess(CtThisAccess<T> tCtThisAccess) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+
         };
 
         visitor.scan(el);

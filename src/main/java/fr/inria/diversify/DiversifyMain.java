@@ -10,7 +10,6 @@ import fr.inria.diversify.diversification.Diversify;
 import fr.inria.diversify.diversification.Sosie;
 import fr.inria.diversify.diversification.TestSosie;
 import fr.inria.diversify.transformation.maven.RunAnt;
-import fr.inria.diversify.transformation.maven.RunBuild;
 import fr.inria.diversify.transformation.maven.RunMaven;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromList;
@@ -31,13 +30,14 @@ import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 import org.json.JSONException;
+import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
-import spoon.support.builder.SpoonBuildingManager;
+import spoon.support.compiler.JDTCompiler;
 
 import java.io.File;
 import java.io.IOException;
@@ -208,17 +208,18 @@ public class DiversifyMain {
 
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
-        SpoonBuildingManager builder = new SpoonBuildingManager(factory);
+        SpoonCompiler c = new JDTCompiler(factory);
+//        SpoonBuildingManager builder = new SpoonBuildingManager(factory);
 
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 Log.debug("add {} to classpath",dir);
-                builder.addInputSource(new File(dir));
+                c.addInputSource(new File(dir));
             } catch (IOException e) {
                 Log.error("error in initSpoon", e);
             }
         try {
-            builder.build();
+            c.build();
         } catch (Exception e) {
             e.printStackTrace();
         }

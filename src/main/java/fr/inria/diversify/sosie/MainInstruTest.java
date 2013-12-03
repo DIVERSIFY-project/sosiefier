@@ -1,15 +1,16 @@
 package fr.inria.diversify.sosie;
 
     import fr.inria.diversify.sosie.logger.processor.TestLoggingInstrumenter;
-import spoon.processing.ProcessingManager;
+    import spoon.compiler.SpoonCompiler;
+    import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.JavaOutputProcessor;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
-import spoon.support.builder.SpoonBuildingManager;
+    import spoon.support.compiler.JDTCompiler;
 
-import java.io.File;
+    import java.io.File;
 import java.io.IOException;
 
 /**
@@ -36,16 +37,15 @@ public class MainInstruTest {
 
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
-        SpoonBuildingManager builder = new SpoonBuildingManager(factory);
-
+        SpoonCompiler c = new JDTCompiler(factory);
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
-                builder.addInputSource(new File(dir));
+                c.addInputSource(new File(dir));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         try {
-            builder.build();
+            c.build();
         } catch (Exception e) {
             e.printStackTrace();
         }

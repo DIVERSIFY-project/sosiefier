@@ -3,26 +3,23 @@ package fr.inria.diversify.sosie.compare;
 import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
-import fr.inria.diversify.sosie.pointSequence.PointSequence;
-import fr.inria.diversify.transformation.ITransformation;
-import fr.inria.diversify.transformation.TransformationsWriter;
+
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
+import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
-import spoon.support.builder.SpoonBuildingManager;
+import spoon.support.compiler.JDTCompiler;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * User: Simon
@@ -150,16 +147,17 @@ public class CompareLogMain {
 
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
-        SpoonBuildingManager builder = new SpoonBuildingManager(factory);
+        SpoonCompiler c = new JDTCompiler(factory);
+//        SpoonBuildingManager builder = new SpoonBuildingManager(factory);
 
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
-                builder.addInputSource(new File(dir));
+                c.addInputSource(new File(dir));
             } catch (IOException e) {
                 Log.error("error in initSpoon", e);
             }
         try {
-            builder.build();
+            c.build();
         } catch (Exception e) {
             e.printStackTrace();
         }

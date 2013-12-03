@@ -4,7 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
-import spoon.processing.Environment;
+import spoon.compiler.Environment;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.support.JavaOutputProcessor;

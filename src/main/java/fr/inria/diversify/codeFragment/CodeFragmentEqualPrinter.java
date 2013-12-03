@@ -1,6 +1,6 @@
 package fr.inria.diversify.codeFragment;
 
-import spoon.processing.Environment;
+import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.reference.CtFieldReference;
