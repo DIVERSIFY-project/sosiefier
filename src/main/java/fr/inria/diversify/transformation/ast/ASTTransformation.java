@@ -6,6 +6,7 @@ import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.reflect.cu.CompilationUnit;
+import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.support.JavaOutputProcessor;
 
@@ -102,6 +103,26 @@ public abstract class ASTTransformation implements ITransformation {
     public void setPosition(CodeFragment position) {
         this.position = position;
     }
+
+    public long classSize() {
+        return position.getSourceFile().length();
+    }
+    public String classLocationName() {
+        return position.getSourceClass().getQualifiedName();
+    }
+    public String packageLocationName() {
+        return position.getSourcePackage().getQualifiedName();
+    }
+    public String methodLocationName() {
+        return position.getCtCodeFragment().getParent(CtExecutable.class).getSimpleName();
+    }
+    public boolean isCompile() {
+        return true;
+    }
+    public int nbMethodInClassLocation() {
+        return position.getSourceClass().getActualClass().getDeclaredMethods().length;
+    }
+
 
 //    public abstract void add(ASTTransformation replace);
 

@@ -77,6 +77,31 @@ public class ASTMultiTransformation implements ITransformation {
         return object;
     }
 
+    @Override
+    public long classSize() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String classLocationName() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String packageLocationName() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String methodLocationName() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean isCompile() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     public void addTransformation(ASTTransformation transformation) {
         transformations.add(transformation);
     }

@@ -5,8 +5,10 @@ import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
+import javassist.NotFoundException;
 import javassist.bytecode.*;
 import org.apache.commons.io.FileUtils;
+import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 
 
@@ -106,5 +108,32 @@ public abstract class BytecodeTransformation implements ITransformation {
         else
             return opCodeIndexList.get(index+1) - opCodeIndexList.get(index);
 
+    }
+
+    public long classSize() {
+        try {
+            return methodLocation.getDeclaringClass().getURL().getFile().length();
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public String classLocationName() {
+        return methodLocation.getDeclaringClass().getName();
+    }
+    public String packageLocationName() {
+        return methodLocation.getDeclaringClass().getPackageName();
+    }
+    public String methodLocationName() {
+        return methodLocation.getLongName();
+    }
+    public boolean isCompile() {
+        return true;
+    }
+    public String classReplaceOrAddPositionName(){
+        return "TODO";
+    }
+    public int nbMethodInClassLocation() {
+        return methodLocation.getDeclaringClass().getDeclaredMethods().length;
     }
 }

@@ -21,4 +21,12 @@ public interface ITransformation {
     public void write(StringBuffer sb, char separator);
     public void writeHead(BufferedWriter sb, char separator) throws IOException;
     public JSONObject toJSONObject() throws JSONException;
+
+    public long classSize();
+    public int nbMethodInClassLocation();
+    public String classReplaceOrAddPositionName();
+    public String classLocationName();
+    public String packageLocationName();
+    public String methodLocationName();
+    public boolean isCompile();
 }

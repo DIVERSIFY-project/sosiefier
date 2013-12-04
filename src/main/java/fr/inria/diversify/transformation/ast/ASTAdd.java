@@ -201,4 +201,8 @@ public class ASTAdd extends ASTTransformation {
 
         return ret;
     }
+
+    public String classReplaceOrAddPositionName() {
+        return add.getSourceClass().getQualifiedName();
+    }
 }

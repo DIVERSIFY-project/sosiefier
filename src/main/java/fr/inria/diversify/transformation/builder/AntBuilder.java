@@ -1,8 +1,6 @@
 package fr.inria.diversify.transformation.builder;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -12,7 +10,6 @@ import fr.inria.diversify.util.Log;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
-import org.apache.tools.ant.Target;
 
 /**
  * User: Simon
@@ -25,23 +22,36 @@ public class AntBuilder extends AbstractBuilder {
         super(directory,src);
     }
 
-    protected void runPrivate(){
-        File buildFile = new File(directory+"/build.xml");
-        Project p = new Project();
-        DefaultLogger consoleLogger = new DefaultLogger();
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        PrintStream stream = new PrintStream(os);
-        consoleLogger.setErrorPrintStream(stream);
-        consoleLogger.setOutputPrintStream(stream);
-        p.addBuildListener(consoleLogger);
-        p.setUserProperty("ant.file", buildFile.getAbsolutePath());
-        p.init();
-        ProjectHelper helper = ProjectHelper.getProjectHelper();
-        p.addReference("ant.projectHelper", helper);
-        helper.parse(p, buildFile);
-        p.executeTargets(new Vector(Arrays.asList(phases)));
+    protected void runPrivate() {
+//        File buildFile = new File(directory+"/build.xml");
+//        Project p = new Project();
+//        DefaultLogger consoleLogger = new DefaultLogger();
+//        ByteArrayOutputStream os = new ByteArrayOutputStream();
+//        PrintStream stream = new PrintStream(os);
+//        consoleLogger.setErrorPrintStream(stream);
+//        consoleLogger.setOutputPrintStream(stream);
+//        p.addBuildListener(consoleLogger);
+//        p.setUserProperty("ant.file", buildFile.getAbsolutePath());
+//        p.init();
+//        ProjectHelper helper = ProjectHelper.getProjectHelper();
+//        p.addReference("ant.projectHelper", helper);
+//        helper.parse(p, buildFile);
+//        p.executeTargets(new Vector(Arrays.asList(phases)));
+        try {
+            Process process = Runtime.getRuntime().exec("sh script/ant.sh "+directory+ " "+"junit-all");
+            BufferedReader stream  = new BufferedReader( new InputStreamReader( process.getInputStream() ));
 
-        parseResult(os.toString());
+            String line = stream.readLine();
+            String result = "";
+            while (line != null) {
+                result += line;
+                line = stream.readLine();
+            }
+            parseResult(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     protected void parseResult(String r) {

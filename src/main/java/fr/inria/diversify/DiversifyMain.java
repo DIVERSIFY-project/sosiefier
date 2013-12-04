@@ -249,7 +249,7 @@ public class DiversifyMain {
         Log.debug("i: "+i);
 
         String name = write.writeAllTransformation(null);
-//        statForR(name);
+        statForR(name);
         for(String type : getAllTransformationType(transformations)) {
             Log.debug("all transformation for: "+type);
             name = write.writeAllTransformation(type);

@@ -19,6 +19,7 @@ public class StatisticDiversification {
     protected static char separator = ';';
     protected static String detailFileSuffix = "_diversification_detail.csv";
     protected static String typeFileSuffix = "_diversification_type.csv";
+    protected static String sourceCityFileSuffix  = "_source.csv";;
 
     protected Collection<ITransformation> transformations;
     protected int numberOfFailureMax;
@@ -45,6 +46,7 @@ public class StatisticDiversification {
     public void writeStat(String output) {
         try {
             writeDetail(output+detailFileSuffix);
+            writeSourceCity(output+sourceCityFileSuffix);
             writeDetailForTransformationType(output+typeFileSuffix);
 
         } catch (IOException e) {
@@ -175,6 +177,40 @@ public class StatisticDiversification {
             try {
                 trans.write(sb, separator);
             sb.append("\n");
+                bw.write(sb.toString());
+            }catch (Exception e) {}
+        }
+        bw.close();
+    }
+
+    protected void writeSourceCity(String fileName) throws IOException {
+        FileWriter fw = new FileWriter(fileName);
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        bw.write("type"+separator+"package"+separator+"class"+separator
+                +"classReplaceOrAdd"+separator+"method"+separator+
+                "size"+separator+"nbMethod"+separator+"compile"+separator+"sosie\n");
+        for(ITransformation trans : transformations) {
+            StringBuffer sb = new StringBuffer();
+            try {
+                sb.append(trans.getType());
+                sb.append(separator);
+                sb.append(trans.packageLocationName());
+                sb.append(separator);
+                sb.append(trans.classLocationName());
+                sb.append(separator);
+                sb.append(trans.classReplaceOrAddPositionName());
+                sb.append(separator);
+                sb.append(trans.methodLocationName());
+                sb.append(separator);
+                sb.append(trans.classSize());
+                sb.append(separator);
+                sb.append(trans.nbMethodInClassLocation());
+                sb.append(separator);
+                sb.append(trans.isCompile());
+                sb.append(separator);
+                sb.append(trans.numberOfFailure() == 0);
+                sb.append("\n");
                 bw.write(sb.toString());
             }catch (Exception e) {}
         }

@@ -93,7 +93,7 @@ public class TransformationParser {
         String type = jsonObject.getString("type");
         ITransformation trans = null;
 
-        if(jsonObject.getString("level").equals("bytecode")) {
+        if(jsonObject.has("level") && jsonObject.getString("level").equals("bytecode")) {
             if(type.endsWith("replace"))
                 trans = parseBytecodeReplace(jsonObject);
             if(type.endsWith("add"))

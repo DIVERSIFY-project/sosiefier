@@ -140,4 +140,8 @@ public class ASTDelete extends ASTTransformation {
         sb.append(separator);
         sb.append(p.getCodeFragmentSuperType().getSimpleName());
     }
+
+    public String classReplaceOrAddPositionName() {
+        return "";
+    }
 }

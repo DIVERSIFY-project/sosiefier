@@ -224,4 +224,8 @@ public class ASTReplace extends ASTTransformation {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String classReplaceOrAddPositionName() {
+        return replace.getSourceClass().getQualifiedName();
+    }
 }
