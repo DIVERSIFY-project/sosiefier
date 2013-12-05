@@ -83,6 +83,16 @@ public class ASTMultiTransformation implements ITransformation {
     }
 
     @Override
+    public int nbMethodInClassLocation() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String classReplaceOrAddPositionName() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public String classLocationName() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }

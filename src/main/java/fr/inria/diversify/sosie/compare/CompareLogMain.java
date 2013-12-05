@@ -16,7 +16,9 @@ import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
 import spoon.support.compiler.JDTCompiler;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +96,7 @@ public class CompareLogMain {
                 Log.error("error",e);
                 e.printStackTrace();
             }
+            writeVarDiff(diffs,DiversifyProperties.getProperty("result")+"/varDiff");
 //            Log.info("nb diff:{},  min: {}, max: {}, {} ",count, testMin,testMax, (double)test/(double)count);
 //            Log.info("var min: {}, var max: {}, {} ", varMin,varMax, (double)var/(double)count);
         }
@@ -134,6 +137,18 @@ public class CompareLogMain {
         }
 //        Log.info("nb diff:{},  min: {}, max: {}, {} ",count, testMin,testMax, (double)test/(double)count);
 //        Log.info("max exception: "+ PointSequence.getMaxSizeException());
+    }
+
+    protected void writeVarDiff(List<Diff> diffs, String fileName) throws IOException {
+        FileWriter fw = new FileWriter(fileName);
+        BufferedWriter bw = new BufferedWriter(fw);
+        for(Diff diff: diffs) {
+            for(String dvar : diff.getVarTestDiff()) {
+                bw.write(dvar+"\n");
+            }
+        }
+        bw.close();
+        fw.close();
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {

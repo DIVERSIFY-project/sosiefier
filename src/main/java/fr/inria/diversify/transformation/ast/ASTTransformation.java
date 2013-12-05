@@ -8,6 +8,7 @@ import spoon.compiler.Environment;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.CtType;
 import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
@@ -120,7 +121,7 @@ public abstract class ASTTransformation implements ITransformation {
         return true;
     }
     public int nbMethodInClassLocation() {
-        return position.getSourceClass().getActualClass().getDeclaredMethods().length;
+        return position.getCtCodeFragment().getParent(CtType.class).getMethods().size();
     }
 
 

@@ -142,6 +142,6 @@ public class ASTDelete extends ASTTransformation {
     }
 
     public String classReplaceOrAddPositionName() {
-        return "";
+        return "null";
     }
 }

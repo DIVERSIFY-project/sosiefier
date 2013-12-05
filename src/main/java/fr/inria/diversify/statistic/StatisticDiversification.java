@@ -4,6 +4,7 @@ import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.ITransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -186,7 +187,7 @@ public class StatisticDiversification {
     protected void writeSourceCity(String fileName) throws IOException {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
-
+        Log.debug("write data for source city");
         bw.write("type"+separator+"package"+separator+"class"+separator
                 +"classReplaceOrAdd"+separator+"method"+separator+
                 "size"+separator+"nbMethod"+separator+"compile"+separator+"sosie\n");
@@ -212,7 +213,9 @@ public class StatisticDiversification {
                 sb.append(trans.numberOfFailure() == 0);
                 sb.append("\n");
                 bw.write(sb.toString());
-            }catch (Exception e) {}
+            }catch (Exception e) {
+                Log.error("writeSourceCity",e);
+            }
         }
         bw.close();
     }

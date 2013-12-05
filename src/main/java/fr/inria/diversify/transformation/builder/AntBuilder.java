@@ -37,16 +37,49 @@ public class AntBuilder extends AbstractBuilder {
 //        p.addReference("ant.projectHelper", helper);
 //        helper.parse(p, buildFile);
 //        p.executeTargets(new Vector(Arrays.asList(phases)));
-        try {
-            Process process = Runtime.getRuntime().exec("sh script/ant.sh "+directory+ " "+"junit-all");
-            BufferedReader stream  = new BufferedReader( new InputStreamReader( process.getInputStream() ));
+        Log.debug("run ant: sh script/runAnt.sh "+directory+ " "+"junit-all");
+//        try {
+//            Process process = Runtime.getRuntime().exec("sh script/runAnt.sh "+directory+ " "+"junit-all");
+//            BufferedReader stream  = new BufferedReader( new InputStreamReader( process.getInputStream() ));
+//             process.waitFor();
+//            String line = stream.readLine();
+//            String result = "";
+//            while (line != null) {
+//                Log.debug(line);
+//                result += line;
+//                line = stream.readLine();
+//            }
+//            parseResult(result);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-            String line = stream.readLine();
+        String[] command = {"sh", "script/runAnt.sh", directory,"junit-all"};
+        ProcessBuilder probuilder = new ProcessBuilder( command );
+
+        //You can set up your work directory
+        probuilder.directory(new File(System.getProperty("user.dir")));
+
+        Process process = null;
+        try {
+            process = probuilder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //Read out dir output
+        InputStream is = process.getInputStream();
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
+        String line;
+
+        try {
             String result = "";
-            while (line != null) {
+            while ((line = br.readLine()) != null) {
                 result += line;
-                line = stream.readLine();
             }
+
+            process.waitFor();
             parseResult(result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +91,6 @@ public class AntBuilder extends AbstractBuilder {
         Pattern patternCompileError = Pattern.compile("\\s*[javac] (\\d+) error");
         Pattern patternJunitError = Pattern.compile("\\s*[junit] Tests FAILED");
         Pattern patternJunitOK = Pattern.compile("\\s*BUILD SUCCESSFUL");
-
         for (String s : r.split("\n")) {
             Log.debug(s);
             Matcher m = patternCompileError.matcher(s);
