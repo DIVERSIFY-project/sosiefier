@@ -124,6 +124,13 @@ public class Diff {
         return report;
     }
 
+    public Set<VariableDiff> getDiffVar() {
+        Set<VariableDiff> diff = new HashSet<VariableDiff>();
+        for(Set<VariableDiff> d : diffVar.values())
+            diff.addAll(d);
+        return diff;
+    }
+
     protected int findDiversificationIndex(PointSequence sequence) {
         int i = 0;
         while (i < sequence.conditionalSize() && !sequence.getConditionalPoint(i).containsInto(startPoint))

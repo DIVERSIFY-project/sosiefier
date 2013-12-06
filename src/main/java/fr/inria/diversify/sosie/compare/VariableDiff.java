@@ -43,6 +43,10 @@ public class VariableDiff {
         return name+":("+originalValue+" / "+sosieValue+")";
     }
 
+    public String forFile() {
+        return  className+":"+methodSignature+":"+name;
+    }
+
     public String stringForExcludeFile() {
         return className+":"+methodSignature+":"+name;
     }

@@ -21,7 +21,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: Simon
@@ -66,7 +68,7 @@ public class CompareLogMain {
 
     protected void diff() throws Exception {
         String startPointString = DiversifyProperties.getProperty("startPoint");
-        List<Diff> diffs = new ArrayList<Diff>();
+        Set<VariableDiff> diffs = new HashSet<VariableDiff>();
         int i =0;
         for(File f : (new File(dirSosie).listFiles())) {
             Log.debug("loading log from dir {}",f.getAbsolutePath());
@@ -86,7 +88,7 @@ public class CompareLogMain {
                     Log.info(f.getName());
                     Log.info(diff.report());
                     if(!diff.sameVar()) {
-                        diffs.add(diff);
+                        diffs.addAll(diff.getAllVariableDiff());
                         diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
                     }
                 }
@@ -96,10 +98,8 @@ public class CompareLogMain {
                 Log.error("error",e);
                 e.printStackTrace();
             }
-            writeVarDiff(diffs,DiversifyProperties.getProperty("result")+"/varDiff");
-//            Log.info("nb diff:{},  min: {}, max: {}, {} ",count, testMin,testMax, (double)test/(double)count);
-//            Log.info("var min: {}, var max: {}, {} ", varMin,varMax, (double)var/(double)count);
         }
+        writeVarDiff(diffs,DiversifyProperties.getProperty("result")+"/varDiff");
     }
 
     protected void diffException() throws Exception {
@@ -135,18 +135,14 @@ public class CompareLogMain {
                 e.printStackTrace();
             }
         }
-//        Log.info("nb diff:{},  min: {}, max: {}, {} ",count, testMin,testMax, (double)test/(double)count);
-//        Log.info("max exception: "+ PointSequence.getMaxSizeException());
     }
 
-    protected void writeVarDiff(List<Diff> diffs, String fileName) throws IOException {
+    protected void writeVarDiff(Set<VariableDiff> set, String fileName) throws IOException {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
-        for(Diff diff: diffs) {
-            for(String dvar : diff.getVarTestDiff()) {
-                bw.write(dvar+"\n");
-            }
-        }
+
+        for (VariableDiff s : set)
+            bw.write(s.forFile() + "\n");
         bw.close();
         fw.close();
     }
@@ -163,7 +159,6 @@ public class CompareLogMain {
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
         SpoonCompiler c = new JDTCompiler(factory);
-//        SpoonBuildingManager builder = new SpoonBuildingManager(factory);
 
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
