@@ -21,9 +21,6 @@ public class MavenBuilder extends AbstractBuilder {
 
     public MavenBuilder(String directory, String srcDir) throws IOException {
         super(directory, srcDir);
-        File failFastDir = new File(directory+"/"+ srcDir + "/fr/inria/diversify/transformation/builder");
-        FileUtils.forceMkdir(failFastDir);
-        FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/maven/FailFastListener.java"),failFastDir);
     }
 
     protected void runPrivate() {
@@ -119,5 +116,13 @@ public class MavenBuilder extends AbstractBuilder {
             }
         }
         failure = tmpFailure;
+    }
+
+    public void initPom(String newPomFile) throws Exception {
+         super.initPom(newPomFile);
+        File failFastDir = new File(directory+"/"+ srcDir + "/fr/inria/diversify/transformation/builder");
+        FileUtils.forceMkdir(failFastDir);
+        FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/builder/FailFastListener.java"),failFastDir);
+
     }
 }

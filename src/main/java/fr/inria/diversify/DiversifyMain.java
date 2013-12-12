@@ -14,6 +14,7 @@ import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.builder.AbstractBuilder;
 import fr.inria.diversify.transformation.builder.AntBuilder;
 import fr.inria.diversify.transformation.builder.MavenBuilder;
+import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -59,6 +60,9 @@ public class DiversifyMain {
         new DiversifyProperties(propertiesFile);
 
         initLogLevel();
+//        initBuilder2(DiversifyProperties.getProperty("project"));
+        MavenDependencyResolver t = new MavenDependencyResolver();
+        t.DependencyNode(DiversifyProperties.getProperty("project") + "/pom.xml");
         initSpoon();
         Log.info("number of statement: " + codeFragments.size());
 
@@ -131,7 +135,7 @@ public class DiversifyMain {
             rb.setPhase(new String[]{"clean", "test"});
         }
         else {
-            rb = new AntBuilder(directory, src);
+            rb = new AntBuilder(directory);
             rb.setPhase(new String[]{"deepclean", "junit-all"});
         }
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
@@ -148,6 +152,7 @@ public class DiversifyMain {
             rb.setClojureTest(true);
         return rb;
     }
+
 
     protected ITransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException, NotFoundException {
         ICoverageReport rg = initCoverageReport();
@@ -204,7 +209,7 @@ public class DiversifyMain {
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
         SpoonCompiler c = new JDTCompiler(factory);
-
+        Log.debug("sourceClasspath: {}",c.getSourceClasspath());
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 Log.debug("add {} to classpath",dir);

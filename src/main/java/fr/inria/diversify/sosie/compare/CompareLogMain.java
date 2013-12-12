@@ -140,9 +140,12 @@ public class CompareLogMain {
     protected void writeVarDiff(Set<VariableDiff> set, String fileName) throws IOException {
         FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
+        Set<String> set2 = new HashSet<String>();
 
         for (VariableDiff s : set)
-            bw.write(s.forFile() + "\n");
+           set2.add(s.forFile());
+        for (String s : set2)
+           bw.write(s+"\n");
         bw.close();
         fw.close();
     }

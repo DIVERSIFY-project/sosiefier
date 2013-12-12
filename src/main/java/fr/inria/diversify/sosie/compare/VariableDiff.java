@@ -1,7 +1,5 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
-
 /**
  * User: Simon
  * Date: 10/16/13

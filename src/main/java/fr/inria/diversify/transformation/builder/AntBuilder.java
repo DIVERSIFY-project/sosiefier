@@ -14,8 +14,8 @@ import fr.inria.diversify.util.Log;
  */
 public class AntBuilder extends AbstractBuilder {
 
-    public AntBuilder(String directory, String src) {
-        super(directory,src);
+    public AntBuilder(String directory) {
+        super(directory, null);
     }
 
     protected void runPrivate() {

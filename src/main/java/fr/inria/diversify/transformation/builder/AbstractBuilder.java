@@ -1,7 +1,9 @@
 package fr.inria.diversify.transformation.builder;
 
 import fr.inria.diversify.util.Log;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.Set;
 
@@ -11,6 +13,7 @@ import java.util.Set;
  * Time: 14:12
  */
 public abstract class AbstractBuilder {
+    protected String srcDir;
     protected String directory;
     protected boolean compileError;
     protected boolean allTestRun;
@@ -21,8 +24,9 @@ public abstract class AbstractBuilder {
     protected Set<Thread> threadSet;
 
 
-    public AbstractBuilder(String directory, String srcDir) {
+    public AbstractBuilder(String directory,String srcDir) {
         this.directory = directory;
+        this.srcDir = srcDir;
     }
 
     protected void reset() {
@@ -71,7 +75,7 @@ public abstract class AbstractBuilder {
         if(timeOut == -1)
             throw new Exception("timeout not set");
 
-//        FileUtils.copyFile(new File(newPomFile), new File(directory+ "/pom.xml"));
+        FileUtils.copyFile(new File(newPomFile), new File(directory + "/pom.xml"));
     }
 
     protected abstract void runPrivate();
