@@ -16,9 +16,9 @@ import java.util.Random;
  */
 public class ASTTransformationQueryFromList extends AbstractTransformationQuery {
     protected ICoverageReport coverageReport;
-    private List<ITransformation> transformation;
+    private List<Transformation> transformation;
 
-    public ASTTransformationQueryFromList(List<ITransformation> transformation, ICoverageReport cr, CodeFragmentList codeFragments) {
+    public ASTTransformationQueryFromList(List<Transformation> transformation, ICoverageReport cr, CodeFragmentList codeFragments) {
         this.transformation = transformation;
         this.coverageReport = cr;
     }
@@ -59,7 +59,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         return t.toReplace();
     }
 
-    public ITransformation multiTransformation() throws  Exception {
+    public Transformation multiTransformation() throws  Exception {
         ASTMultiTransformation trans = new ASTMultiTransformation();
         this.setType(null);
 

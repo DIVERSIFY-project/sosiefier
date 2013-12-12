@@ -104,8 +104,8 @@ public class Util {
         return nb;
     }
 
-    public Set<ITransformation> getStupidTransformation(int nb, ASTTransformationQuery query) {
-        Set<ITransformation> transformations = new HashSet<ITransformation>();
+    public Set<Transformation> getStupidTransformation(int nb, ASTTransformationQuery query) {
+        Set<Transformation> transformations = new HashSet<Transformation>();
         for(int i = 0; i < nb; i++) {
             try {
                 ASTReplace replace = query.replace();
@@ -144,8 +144,8 @@ public class Util {
         return  transformations;
     }
 
-    public Set<ITransformation> getAllReplace() throws InterruptedException {
-        final Set<ITransformation> allReplace = new HashSet<ITransformation>();
+    public Set<Transformation> getAllReplace() throws InterruptedException {
+        final Set<Transformation> allReplace = new HashSet<Transformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments) {
                 final  CodeFragment cfTmp = cf1;
@@ -173,8 +173,8 @@ public class Util {
         return allReplace;
     }
 
-    public Set<ITransformation> getAllDelete() {
-        Set<ITransformation> allReplace = new HashSet<ITransformation>();
+    public Set<Transformation> getAllDelete() {
+        Set<Transformation> allReplace = new HashSet<Transformation>();
 
         for (CodeFragment cf1 : codeFragments) {
                     ASTDelete r = new ASTDelete();
@@ -184,8 +184,8 @@ public class Util {
         return allReplace;
     }
 
-    public Set<ITransformation> getAllAdd() throws InterruptedException {
-        final Set<ITransformation> allReplace = new HashSet<ITransformation>();
+    public Set<Transformation> getAllAdd() throws InterruptedException {
+        final Set<Transformation> allReplace = new HashSet<Transformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
         for (CodeFragment cf1 : codeFragments) {
             final  CodeFragment cfTmp = cf1;

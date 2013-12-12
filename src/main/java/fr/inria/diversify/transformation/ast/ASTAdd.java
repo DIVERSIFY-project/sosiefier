@@ -30,15 +30,10 @@ public class ASTAdd extends ASTTransformation {
         JSONObject object = new JSONObject();
         object.put("type", type);
         object.put("level", "ast");
-//        JSONArray array = new JSONArray();
-//        object.put("transformation", array);
-
-//            JSONObject t = new JSONObject();
+        object.put("setCompile", compile);
         object.put("CodeFragmentPosition", position.toJSONObject());
         object.put("CodeFragmentAdd", add.toJSONObject());
         object.put("VariableMapping", variableMapping);
-//            array.put(t);
-
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 

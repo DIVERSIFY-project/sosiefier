@@ -31,8 +31,8 @@ public class TransformationParser {
         codeFragments = list;
     }
 
-    public List<ITransformation> parseDir(String dir) throws IOException, JSONException {
-        List<ITransformation> list = new ArrayList<ITransformation>();
+    public List<Transformation> parseDir(String dir) throws IOException, JSONException {
+        List<Transformation> list = new ArrayList<Transformation>();
         File file = new File(dir);
         int countFile = 0;
         Log.debug("transformation directory: {})"+file.getAbsolutePath());
@@ -48,7 +48,7 @@ public class TransformationParser {
         return list;
     }
 
-    public ITransformation parseUniqueTransformation(File file) throws Exception {
+    public Transformation parseUniqueTransformation(File file) throws Exception {
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
@@ -63,8 +63,8 @@ public class TransformationParser {
         return parseTransformation(jsonObject);
     }
 
-    public List<ITransformation> parseFile(File file) throws IOException, JSONException {
-        List<ITransformation> list = new ArrayList<ITransformation>();
+    public List<Transformation> parseFile(File file) throws IOException, JSONException {
+        List<Transformation> list = new ArrayList<Transformation>();
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
@@ -74,7 +74,7 @@ public class TransformationParser {
             line = br.readLine();
         }
         if (sb.length() == 0)
-            return new ArrayList<ITransformation>();
+            return new ArrayList<Transformation>();
         JSONArray array = new JSONArray(sb.toString());
         for(int i = 0; i < array.length(); i++)  {
             count++;
@@ -89,9 +89,9 @@ public class TransformationParser {
         return list;
     }
 
-    protected ITransformation parseTransformation(JSONObject jsonObject) throws Exception {
+    protected Transformation parseTransformation(JSONObject jsonObject) throws Exception {
         String type = jsonObject.getString("type");
-        ITransformation trans = null;
+        Transformation trans = null;
 
         if(jsonObject.has("level") && jsonObject.getString("level").equals("bytecode")) {
             if(type.endsWith("replace"))
@@ -117,22 +117,23 @@ public class TransformationParser {
 //                trans.addParent(parseTransformation(array.getJSONObject(i)));
 //            }
 //        }
+        trans.setCompile(jsonObject.getBoolean("setCompile"));
         return trans;
     }
 
-    private ITransformation parseASTMulti(JSONObject jsonObject) {
+    private Transformation parseASTMulti(JSONObject jsonObject) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    private ITransformation parseBytecodeDelete(JSONObject jsonObject) {
+    private Transformation parseBytecodeDelete(JSONObject jsonObject) {
         return null;
     }
 
-    private ITransformation parseBytecodeAdd(JSONObject jsonObject) {
+    private Transformation parseBytecodeAdd(JSONObject jsonObject) {
         return null;
     }
 
-    private ITransformation parseBytecodeReplace(JSONObject jsonObject) {
+    private Transformation parseBytecodeReplace(JSONObject jsonObject) {
         return null;
     }
 
@@ -140,9 +141,6 @@ public class TransformationParser {
     protected ASTTransformation parseASTDelete(JSONObject jsonObject) throws Exception {
         ASTDelete trans = new ASTDelete();
 
-//        JSONArray array = jsonObject.getJSONArray("transformation");
-//        for(int i = 0; i <array.length(); i++) { //normalement array.length == 1
-//            JSONObject t = array.getJSONObject(i);
         JSONObject t = getTransformation(jsonObject);
             CodeFragment d = findCodeFragment(t.getJSONObject("CodeFragmentDelete"));
             trans.setPosition(d);
@@ -157,9 +155,7 @@ public class TransformationParser {
     protected ASTTransformation parseASTAdd(JSONObject jsonObject) throws Exception {
         ASTAdd trans = new ASTAdd();
         trans.setType(jsonObject.getString("type"));
-//        JSONArray array = jsonObject.getJSONArray("transformation");
-//        for(int i = 0; i <array.length(); i++) {  //normalement array.length == 1
-//            JSONObject t = array.getJSONObject(i);
+
         JSONObject t = getTransformation(jsonObject);
             CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));
             trans.setPosition(position);
@@ -178,9 +174,7 @@ public class TransformationParser {
     protected ASTTransformation parseASTReplace(JSONObject jsonObject) throws Exception {
         ASTReplace trans = new ASTReplace();
         trans.setType(jsonObject.getString("type"));
-//        JSONArray array = jsonObject.getJSONArray("transformation");
-//        for(int i = 0; i <array.length(); i++) {    //normalement array.length == 1
-//            JSONObject t = array.getJSONObject(i);
+
           JSONObject t = getTransformation(jsonObject);
             CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));
             trans.setPosition(position);

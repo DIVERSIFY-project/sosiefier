@@ -28,7 +28,7 @@ import java.util.Properties;
  */
 public class MavenDependencyResolver {
 
-    public void DependencyNode(String pomFile) throws Exception {
+    public void DependencyResolver(String pomFile) throws Exception {
         MavenProject project = loadProject(new File(pomFile));
         resolveAllDependencies(project);
     }
@@ -94,17 +94,13 @@ public class MavenDependencyResolver {
             }
             if(replaceBegin != -1 && chars[i] == '}') {
                 string =  string.substring(0,replaceBegin) + properties.getProperty(id) + string.substring(i+1,string.length());
-//                string.replace( string.substring(replaceBegin,i+1),properties.getProperty(id));
                 replaceBegin = -1;
                 id = "";
             }
             if(chars[i] == '$' && i + 1 < chars.length && chars[i+1] == '{') {
                 replaceBegin = i;
             }
-
-
         }
        return string;
     }
-
 }

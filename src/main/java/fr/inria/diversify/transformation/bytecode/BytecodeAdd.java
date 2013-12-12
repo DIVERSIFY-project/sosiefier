@@ -51,6 +51,7 @@ public class BytecodeAdd extends BytecodeTransformation {
         JSONObject object = new JSONObject();
         object.put("type", "add");
         object.put("level", "bytecode");
+        object.put("setCompile", compile);
         JSONArray array = new JSONArray();
         object.put("transformation",array);
 

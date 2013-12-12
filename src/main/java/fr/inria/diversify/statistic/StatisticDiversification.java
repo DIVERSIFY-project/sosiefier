@@ -2,7 +2,7 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 
@@ -22,21 +22,21 @@ public class StatisticDiversification {
     protected static String typeFileSuffix = "_diversification_type.csv";
     protected static String sourceCityFileSuffix  = "_source.csv";;
 
-    protected Collection<ITransformation> transformations;
+    protected Collection<Transformation> transformations;
     protected int numberOfFailureMax;
     protected CodeFragmentList codeFragmentList;
 
-    public StatisticDiversification(Collection<ITransformation> transformations, CodeFragmentList codeFragmentList) {
+    public StatisticDiversification(Collection<Transformation> transformations, CodeFragmentList codeFragmentList) {
         this.transformations = transformations;
         this.codeFragmentList = codeFragmentList;
 
         this.numberOfFailureMax = 0;
-        for(ITransformation t : transformations)
+        for(Transformation t : transformations)
             this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.numberOfFailure());
     }
 
 //    public StatisticDiversification() {
-//        this.transformations = new HashSet<ITransformation>();
+//        this.transformations = new HashSet<Transformation>();
 //        this.numberOfFailureMax = 0;
 //    }
 
@@ -60,7 +60,7 @@ public class StatisticDiversification {
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write("type"+separator+"trial"+separator+"varient"+separator+"sosie"+separator+"space");
         for(String type : getAllTransformationType(transformations)) {
-            List<ITransformation> trans = transformation(type);
+            List<Transformation> trans = transformation(type);
 
             bw.write(type+separator);
             bw.write("nan"+separator);
@@ -70,12 +70,12 @@ public class StatisticDiversification {
         }
     }
 
-    protected double space(List<ITransformation> trans, String type) {
+    protected double space(List<Transformation> trans, String type) {
         double nb = 0;
         if(type.equals("delete"))
             return 1;
         Util util = new Util(codeFragmentList);
-        for(ITransformation t : trans) {
+        for(Transformation t : trans) {
             CodeFragment cf = ((ASTTransformation) t).getPosition();
             if(type.equals("add") || type.equals("replace")) {
                 int i = util.numberOfNotDiversification(cf).intValue();
@@ -89,17 +89,17 @@ public class StatisticDiversification {
         return nb;
     }
 
-    protected List<ITransformation> transformation(String type) {
-        List<ITransformation> trans = new ArrayList<ITransformation>();
-        for(ITransformation t : transformations)
+    protected List<Transformation> transformation(String type) {
+        List<Transformation> trans = new ArrayList<Transformation>();
+        for(Transformation t : transformations)
             if(t.getType().equals(type))
                 trans.add(t);
         return trans;
     }
 
-    protected int sosie(List<ITransformation> list) {
+    protected int sosie(List<Transformation> list) {
         int count = 0;
-        for (ITransformation t : list) {
+        for (Transformation t : list) {
             if(t.numberOfFailure() == 0)
                 count++;
         }
@@ -173,7 +173,7 @@ public class StatisticDiversification {
 
         bw.write("\n");
 
-        for(ITransformation trans : transformations) {
+        for(Transformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
                 trans.write(sb, separator);
@@ -190,8 +190,8 @@ public class StatisticDiversification {
         Log.debug("write data for source city");
         bw.write("type"+separator+"package"+separator+"class"+separator
                 +"classReplaceOrAdd"+separator+"method"+separator+
-                "size"+separator+"nbMethod"+separator+"compile"+separator+"sosie\n");
-        for(ITransformation trans : transformations) {
+                "size"+separator+"nbMethod"+separator+"setCompile"+separator+"sosie\n");
+        for(Transformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
                 sb.append(trans.getType());
@@ -220,9 +220,9 @@ public class StatisticDiversification {
         bw.close();
     }
 
-    protected Set<String> getAllTransformationType(Collection<ITransformation> transformations) {
+    protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {
         Set<String> types = new HashSet<String>();
-        for (ITransformation t : transformations)
+        for (Transformation t : transformations)
             types.add(t.getType());
         return types;
     }

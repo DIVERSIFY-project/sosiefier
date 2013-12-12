@@ -50,6 +50,7 @@ public class BytecodeReplace extends BytecodeTransformation {
         JSONObject object = new JSONObject();
         object.put("type", "replace");
         object.put("level", "bytecode");
+        object.put("setCompile", compile);
         JSONArray array = new JSONArray();
         object.put("transformation",array);
 

@@ -39,7 +39,7 @@ import fr.inria.diversify.diversification.AbstractDiversify;
 import fr.inria.diversify.diversification.Diversify;
 import fr.inria.diversify.diversification.Sosie;
 import fr.inria.diversify.statistic.Util;
-import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
@@ -62,7 +62,7 @@ public class DiversifyMain {
         initLogLevel();
 //        initBuilder2(DiversifyProperties.getProperty("project"));
         MavenDependencyResolver t = new MavenDependencyResolver();
-        t.DependencyNode(DiversifyProperties.getProperty("project") + "/pom.xml");
+        t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
         initSpoon();
         Log.info("number of statement: " + codeFragments.size());
 
@@ -88,8 +88,8 @@ public class DiversifyMain {
         if (DiversifyProperties.getProperty("nbRun").equals("all")) {
             if(DiversifyProperties.getProperty("transformation.directory") != null) {
                 TransformationParser tf = new TransformationParser(codeFragments);
-                List<ITransformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
-                Set<ITransformation> set = new HashSet<ITransformation>(transformations);
+                List<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
+                Set<Transformation> set = new HashSet<Transformation>(transformations);
                 Log.debug("apply {} transformation", set.size());
                 abstractDiversify.run(set);
             }
@@ -162,7 +162,7 @@ public class DiversifyMain {
         String transformation = DiversifyProperties.getProperty("transformation.directory");
         if (transformation != null) {
             TransformationParser tf = new TransformationParser(codeFragments);
-            List<ITransformation> list = tf.parseDir(transformation);
+            List<Transformation> list = tf.parseDir(transformation);
             atq = new ASTTransformationQueryFromList(list, rg, codeFragments);
         } else {
             Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
@@ -244,10 +244,10 @@ public class DiversifyMain {
 
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
         TransformationParser tf = new TransformationParser(codeFragments);
-        List<ITransformation> transformations = tf.parseDir(transDir);
+        List<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
         int i = 0;
-        for (ITransformation t : transformations)
+        for (Transformation t : transformations)
             if(t.numberOfFailure() == -1)
                 i++;
 
@@ -273,9 +273,9 @@ public class DiversifyMain {
         sd.writeStat(fileName);
     }
 
-    protected Set<String> getAllTransformationType(List<ITransformation> transformations) {
+    protected Set<String> getAllTransformationType(List<Transformation> transformations) {
         Set<String> types = new HashSet<String>();
-        for (ITransformation t : transformations)
+        for (Transformation t : transformations)
             types.add(t.getType());
         return types;
     }
@@ -284,11 +284,11 @@ public class DiversifyMain {
         TransformationParser tf = new TransformationParser(codeFragments);
         Log.debug("parse fileName: {}",fileName);
 
-        List<ITransformation> transformations = tf.parseFile(new File(fileName));
+        List<Transformation> transformations = tf.parseFile(new File(fileName));
         if(transformations.isEmpty())
             return;
 
-        Set<ITransformation> set = new HashSet<ITransformation>(tf.parseFile(new File(fileName)));
+        Set<Transformation> set = new HashSet<Transformation>(tf.parseFile(new File(fileName)));
         Log.debug("number of transformation: {}",transformations.size());
         Log.debug("number of unique transformation: {}",set.size());
 

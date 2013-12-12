@@ -11,7 +11,7 @@ import java.io.IOException;
  * Date: 07/11/13
  * Time: 11:16
  */
-public interface ITransformation {
+public interface Transformation {
 
     public void apply(String srcDir) throws Exception;
     public void restore(String srcDir) throws Exception;
@@ -29,4 +29,6 @@ public interface ITransformation {
     public String packageLocationName();
     public String methodLocationName();
     public boolean isCompile();
+
+    void setCompile(boolean b);
 }

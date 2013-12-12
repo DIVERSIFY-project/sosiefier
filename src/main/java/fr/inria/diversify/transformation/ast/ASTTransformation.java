@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
@@ -21,10 +21,11 @@ import java.util.List;
  * Date: 7/11/13
  * Time: 4:15 PM
  */
-public abstract class ASTTransformation implements ITransformation {
+public abstract class ASTTransformation implements Transformation {
     protected CodeFragment position;
     protected Integer failures;
     protected List<ASTTransformation> parents;
+    protected boolean compile;
 
     public ASTTransformation() {
         parents = new ArrayList<ASTTransformation>();
@@ -123,7 +124,9 @@ public abstract class ASTTransformation implements ITransformation {
     public int nbMethodInClassLocation() {
         return position.getCtCodeFragment().getParent(CtType.class).getMethods().size();
     }
-
+    public void setCompile(boolean b){
+        compile = b;
+    }
 
 //    public abstract void add(ASTTransformation replace);
 

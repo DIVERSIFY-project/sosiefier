@@ -31,7 +31,7 @@
     <property file="${basedir}/default.properties"/>
     <property name="jdk.javadoc" value="http://download.oracle.com/javase/1.5.0/docs/api/"/>
 
-    <!-- ========== Construct compile classpath =============================== -->
+    <!-- ========== Construct setCompile classpath =============================== -->
     <path id="compile.classpath">
         <pathelement location="${build.home}/classes"/>
     </path>

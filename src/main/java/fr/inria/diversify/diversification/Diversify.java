@@ -1,6 +1,6 @@
 package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
@@ -23,7 +23,7 @@ public class Diversify extends AbstractDiversify {
     public Diversify(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
-        transformations = new ArrayList<ITransformation>();
+        transformations = new ArrayList<Transformation>();
     }
 
     public Diversify(String projectDir, String workingDir) {
@@ -31,7 +31,7 @@ public class Diversify extends AbstractDiversify {
         this.projectDir = projectDir;
 
 
-        transformations = new ArrayList<ITransformation>();
+        transformations = new ArrayList<Transformation>();
     }
 
     @Override
@@ -45,39 +45,42 @@ public class Diversify extends AbstractDiversify {
         FileUtils.cleanDirectory(tmpDir);
         FileUtils.forceDelete(tmpDir);
 
-        Log.debug("{} compile error on {} compilation", compileError, n);
+        Log.debug("{} setCompile error on {} compilation", compileError, n);
         Log.debug("{} sosie on {} trial", sosie, trial);
     }
 
     @Override
-    public void run(Set<ITransformation> trans) throws Exception {
+    public void run(Set<Transformation> trans) throws Exception {
         Log.info("number of diversification: " + trans.size());
         int i = 0;
-        for (ITransformation tran : trans) {
+        for (Transformation tran : trans) {
             Log.info("diversification: " + i);
             run(tran, tmpDir);
             i++;
         }
         FileUtils.cleanDirectory(tmpDir);
         FileUtils.forceDelete(tmpDir);
-        Log.debug("{} compile error on {} compilation", compileError, trans.size());
+        Log.debug("{} setCompile error on {} compilation", compileError, trans.size());
         Log.debug("{} sosie on {} trial", sosie, trial);
     }
 
-    protected void run(ITransformation trans, String tmpDir) throws Exception {
+    protected void run(Transformation trans, String tmpDir) throws Exception {
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
             trans.apply(tmpDir + "/" + sourceDir);
+            transformations.add(trans);
             int failures = runTest(tmpDir);
             if(failures == 0)
                 sosie++;
             trial++;
+            trans.setCompile(true);
             trans.setJUnitResult(failures);
             transformations.add(trans);
 
         } catch (Exception e) {
             compileError++;
-            Log.warn("compile error during diversification", e);
+            trans.setCompile(false);
+            Log.warn("setCompile error during diversification", e);
         }
         trans.restore(tmpDir + "/" + sourceDir);
         Log.debug("run after restore: " + tmpDir + "/" + sourceDir);

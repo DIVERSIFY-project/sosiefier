@@ -103,7 +103,7 @@ public class MavenBuilder extends AbstractBuilder {
                 tmpFailure = -2;
                 compileError = true;
             }
-            if (s.startsWith("compile-clojure:")) {
+            if (s.startsWith("setCompile-clojure:")) {
                 tmpFailure = -1;
             }
             if (s.contains("test:")) {

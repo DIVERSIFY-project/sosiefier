@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.Transformation;
 
 import java.util.Random;
 
@@ -14,12 +14,12 @@ public interface ITransformationQuery {
     public void setNbTransformation(int n);
     public void setType(String type);
 
-    public ITransformation getTransformation() throws Exception;
+    public Transformation getTransformation() throws Exception;
 
-    public ITransformation delete() throws Exception ;
+    public Transformation delete() throws Exception ;
 
-    public ITransformation add() throws Exception ;
+    public Transformation add() throws Exception ;
 
-    public ITransformation replace() throws Exception ;
+    public Transformation replace() throws Exception ;
 
 }

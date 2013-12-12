@@ -1,7 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.CompileException;
-import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
@@ -23,7 +23,7 @@ public class TestSosie extends AbstractDiversify {
     public TestSosie(ITransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
-        transformations = new ArrayList<ITransformation>();
+        transformations = new ArrayList<Transformation>();
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {
@@ -51,7 +51,7 @@ public class TestSosie extends AbstractDiversify {
 //            count++;
 //            Thread.sleep(1000);
 //        }
-//        Log.debug("compile error: " + builder.getCompileError() + ", run all test" + builder.allTestRun() + ", number of failure" + builder.getFailures());
+//        Log.debug("setCompile error: " + builder.getCompileError() + ", run all test" + builder.allTestRun() + ", number of failure" + builder.getFailures());
 //        if (builder.getCompileError())
 //            throw new CompileException("error ");
 //
@@ -70,12 +70,12 @@ public class TestSosie extends AbstractDiversify {
     }
 
     @Override
-    public void run(Set<ITransformation> trans) throws Exception {
-        for (ITransformation tran : trans)
+    public void run(Set<Transformation> trans) throws Exception {
+        for (Transformation tran : trans)
             run(tran);
     }
 
-    protected void run(ITransformation trans) throws Exception {
+    protected void run(Transformation trans) throws Exception {
         Log.debug("output dir sosie: " + tmpDir + "/" + sourceDir);
         try {
             trans.apply(tmpDir + "/" + sourceDir);
@@ -87,7 +87,7 @@ public class TestSosie extends AbstractDiversify {
                 transformations.add(trans);
             }
         } catch (Exception e) {
-            Log.warn("compile error during diversification", e);
+            Log.warn("setCompile error during diversification", e);
             FileUtils.cleanDirectory(tmpDir);
             FileUtils.forceDelete(tmpDir);
         }

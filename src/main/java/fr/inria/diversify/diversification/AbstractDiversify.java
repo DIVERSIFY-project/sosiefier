@@ -20,7 +20,7 @@ import java.util.Set;
 public abstract class AbstractDiversify {
     protected String projectDir;
     protected String tmpDir;
-    protected List<ITransformation> transformations;
+    protected List<Transformation> transformations;
     protected String sourceDir;
     protected ITransformationQuery transQuery;
     protected AbstractBuilder builder;
@@ -28,48 +28,48 @@ public abstract class AbstractDiversify {
 
     public abstract void run(int n) throws Exception;
 
-    public abstract void run(Set<ITransformation> trans) throws Exception;
+    public abstract void run(Set<Transformation> trans) throws Exception;
 
-    public void printResult(String output, String git) {
-        mkDirResult(output,git);
-        String fileName = output + System.currentTimeMillis() + "_transformation.json";
-        String absoluteFileName = git + "/" + fileName;
-        try {
-            writeTransformation(absoluteFileName);
-            Log.info("write result in {}", fileName);
-        } catch (Exception e) {
-            Log.error("error in Builder.printResult", e);
-        }
-        if(!git.equals("")) {
+//    public void printResult(String output, String git) {
+//        mkDirResult(output,git);
+//        String fileName = output + System.currentTimeMillis() + "_transformation.json";
+//        String absoluteFileName = git + "/" + fileName;
+//        try {
+//            writeTransformation(absoluteFileName);
+//            Log.info("write result in {}", fileName);
+//        } catch (Exception e) {
+//            Log.error("error in Builder.printResult", e);
+//        }
+//        if(!git.equals("")) {
+//
+//            String[] split = absoluteFileName.split("/");
+//            String tmp = split[0];
+//            for (int i = 1;i < split.length - 1; i++) {
+//                tmp = tmp + "/" + split[i];
+//            }
+//
+//            Log.debug(tmp+"/   "+split[split.length - 1]);
+//            GitUtil.addToGit(tmp+"/", "*");
+//        }
+//    }
 
-            String[] split = absoluteFileName.split("/");
-            String tmp = split[0];
-            for (int i = 1;i < split.length - 1; i++) {
-                tmp = tmp + "/" + split[i];
-            }
-
-            Log.debug(tmp+"/   "+split[split.length - 1]);
-            GitUtil.addToGit(tmp+"/", "*");
-        }
-    }
-
-    public void writeTransformation(String fileName) throws IOException, JSONException {
-        if (transformations.isEmpty())
-            return;
-
-        TransformationsWriter write = new TransformationsWriter(transformations,fileName);
-        write.writeAllTransformation(null);
-    }
-
-    protected void mkDirResult(String output, String git) {
-        String[] tmp = output.split("/");
-        String dirs = git +"/";
-        for (int i = 0; i< tmp.length - 1;i++) {
-            dirs = dirs + tmp[i] + "/";
-        }
-        new File(dirs).mkdirs();
-        Log.debug("mkdir: {}",dirs);
-    }
+//    public void writeTransformation(String fileName) throws IOException, JSONException {
+//        if (transformations.isEmpty())
+//            return;
+//
+//        TransformationsWriter write = new TransformationsWriter(transformations,fileName);
+//        write.writeAllTransformation(null);
+//    }
+//
+//    protected void mkDirResult(String output, String git) {
+//        String[] tmp = output.split("/");
+//        String dirs = git +"/";
+//        for (int i = 0; i< tmp.length - 1;i++) {
+//            dirs = dirs + tmp[i] + "/";
+//        }
+//        new File(dirs).mkdirs();
+//        Log.debug("mkdir: {}",dirs);
+//    }
 
     public String init(String dirProject, String dirTarget) throws IOException, InterruptedException {
         tmpDir = dirTarget + "/tmp_" + System.currentTimeMillis();
@@ -82,9 +82,9 @@ public abstract class AbstractDiversify {
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException, InstantiationException, IllegalAccessException {
         builder.runBuilder();
-        Log.info("compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", number of failure: " + builder.getFailures());
+        Log.info("setCompile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", number of failure: " + builder.getFailures());
         if (builder.getCompileError()) {
-            throw new CompileException("compile error in maven");
+            throw new CompileException("setCompile error in maven");
         }
 
         if (builder.getFailures() == null)
@@ -97,7 +97,7 @@ public abstract class AbstractDiversify {
         this.transQuery = transQuery;
     }
 
-    public List<ITransformation> getTransformations() {return transformations;}
+    public List<Transformation> getTransformations() {return transformations;}
 
     public void setBuilder(AbstractBuilder builder) {
         this.builder = builder;

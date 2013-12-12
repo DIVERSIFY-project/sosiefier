@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.bytecode;
 
-import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -21,11 +21,12 @@ import java.util.List;
  * Date: 11/6/13
  * Time: 5:28 PM
  */
-public abstract class BytecodeTransformation implements ITransformation {
+public abstract class BytecodeTransformation implements Transformation {
     protected CtMethod methodLocation;
     protected int opcodeIndex;
     protected Integer failures;
     protected List<CtMethod> methods;
+    protected boolean compile;
 
     protected File backupClassFile;
     protected CtClass backupClass;
@@ -135,5 +136,8 @@ public abstract class BytecodeTransformation implements ITransformation {
     }
     public int nbMethodInClassLocation() {
         return methodLocation.getDeclaringClass().getDeclaredMethods().length;
+    }
+    public void setCompile(boolean b){
+        compile = b;
     }
 }

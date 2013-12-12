@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.ast;
 
-import fr.inria.diversify.transformation.ITransformation;
+import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,9 +15,10 @@ import java.util.List;
  * Date: 15/11/13
  * Time: 13:38
  */
-public class ASTMultiTransformation implements ITransformation {
+public class ASTMultiTransformation implements Transformation {
     protected Integer failures;
     protected List<ASTTransformation> transformations;
+    protected boolean compile;
 
     public ASTMultiTransformation() {
         transformations = new ArrayList<ASTTransformation>();
@@ -114,5 +115,8 @@ public class ASTMultiTransformation implements ITransformation {
 
     public void addTransformation(ASTTransformation transformation) {
         transformations.add(transformation);
+    }
+    public void setCompile(boolean b){
+        compile = b;
     }
 }
