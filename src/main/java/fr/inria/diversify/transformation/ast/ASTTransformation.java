@@ -118,8 +118,8 @@ public abstract class ASTTransformation implements Transformation {
     public String methodLocationName() {
         return position.getCtCodeFragment().getParent(CtExecutable.class).getSimpleName();
     }
-    public boolean isCompile() {
-        return true;
+    public boolean getCompile() {
+        return compile;
     }
     public int nbMethodInClassLocation() {
         return position.getCtCodeFragment().getParent(CtType.class).getMethods().size();

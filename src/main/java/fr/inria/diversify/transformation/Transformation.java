@@ -28,7 +28,7 @@ public interface Transformation {
     public String classLocationName();
     public String packageLocationName();
     public String methodLocationName();
-    public boolean isCompile();
+    public boolean getCompile();
 
     void setCompile(boolean b);
 }

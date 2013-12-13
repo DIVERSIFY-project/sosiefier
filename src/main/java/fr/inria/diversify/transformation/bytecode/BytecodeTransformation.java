@@ -128,8 +128,8 @@ public abstract class BytecodeTransformation implements Transformation {
     public String methodLocationName() {
         return methodLocation.getLongName();
     }
-    public boolean isCompile() {
-        return true;
+    public boolean getCompile() {
+        return compile;
     }
     public String classReplaceOrAddPositionName(){
         return "TODO";

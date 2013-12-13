@@ -190,7 +190,7 @@ public class StatisticDiversification {
         Log.debug("write data for source city");
         bw.write("type"+separator+"package"+separator+"class"+separator
                 +"classReplaceOrAdd"+separator+"method"+separator+
-                "size"+separator+"nbMethod"+separator+"setCompile"+separator+"sosie\n");
+                "size"+separator+"nbMethod"+separator+"compile"+separator+"sosie\n");
         for(Transformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
@@ -208,7 +208,7 @@ public class StatisticDiversification {
                 sb.append(separator);
                 sb.append(trans.nbMethodInClassLocation());
                 sb.append(separator);
-                sb.append(trans.isCompile());
+                sb.append(trans.getCompile());
                 sb.append(separator);
                 sb.append(trans.numberOfFailure() == 0);
                 sb.append("\n");

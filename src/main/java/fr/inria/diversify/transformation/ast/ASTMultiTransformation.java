@@ -109,8 +109,8 @@ public class ASTMultiTransformation implements Transformation {
     }
 
     @Override
-    public boolean isCompile() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public boolean getCompile() {
+        return compile;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void addTransformation(ASTTransformation transformation) {
