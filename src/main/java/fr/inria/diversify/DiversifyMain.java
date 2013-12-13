@@ -60,7 +60,7 @@ public class DiversifyMain {
         new DiversifyProperties(propertiesFile);
 
         initLogLevel();
-        if(DiversifyProperties.getProperty("Builder").equals("maven")) {
+        if(DiversifyProperties.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
             t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
         }
