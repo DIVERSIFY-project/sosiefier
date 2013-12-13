@@ -1,6 +1,7 @@
 package fr.inria.diversify.util.maven;
 
 
+import fr.inria.diversify.util.Log;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Repository;
@@ -76,6 +77,7 @@ public class MavenDependencyResolver {
                     ":" + resolveName(dependency.getArtifactId(),properties) +
                     ":" + resolveName(dependency.getVersion(),properties) +
                     ":" + resolveName(dependency.getType(),properties);
+            Log.debug("revolve artifact: {}",artifactId);
             File cachedFile = resolver.resolve(artifactId, urls);
             jarURL.add(cachedFile.toURI().toURL());
         }
