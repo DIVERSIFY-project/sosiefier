@@ -30,46 +30,46 @@ public abstract class AbstractDiversify {
 
     public abstract void run(Set<Transformation> trans) throws Exception;
 
-//    public void printResult(String output, String git) {
-//        mkDirResult(output,git);
-//        String fileName = output + System.currentTimeMillis() + "_transformation.json";
-//        String absoluteFileName = git + "/" + fileName;
-//        try {
-//            writeTransformation(absoluteFileName);
-//            Log.info("write result in {}", fileName);
-//        } catch (Exception e) {
-//            Log.error("error in Builder.printResult", e);
-//        }
-//        if(!git.equals("")) {
-//
-//            String[] split = absoluteFileName.split("/");
-//            String tmp = split[0];
-//            for (int i = 1;i < split.length - 1; i++) {
-//                tmp = tmp + "/" + split[i];
-//            }
-//
-//            Log.debug(tmp+"/   "+split[split.length - 1]);
-//            GitUtil.addToGit(tmp+"/", "*");
-//        }
-//    }
+    public void printResult(String output, String git) {
+        mkDirResult(output,git);
+        String fileName = output + System.currentTimeMillis() + "_transformation.json";
+        String absoluteFileName = git + "/" + fileName;
+        try {
+            writeTransformation(absoluteFileName);
+            Log.info("write result in {}", fileName);
+        } catch (Exception e) {
+            Log.error("error in Builder.printResult", e);
+        }
+        if(!git.equals("")) {
 
-//    public void writeTransformation(String fileName) throws IOException, JSONException {
-//        if (transformations.isEmpty())
-//            return;
-//
-//        TransformationsWriter write = new TransformationsWriter(transformations,fileName);
-//        write.writeAllTransformation(null);
-//    }
-//
-//    protected void mkDirResult(String output, String git) {
-//        String[] tmp = output.split("/");
-//        String dirs = git +"/";
-//        for (int i = 0; i< tmp.length - 1;i++) {
-//            dirs = dirs + tmp[i] + "/";
-//        }
-//        new File(dirs).mkdirs();
-//        Log.debug("mkdir: {}",dirs);
-//    }
+            String[] split = absoluteFileName.split("/");
+            String tmp = split[0];
+            for (int i = 1;i < split.length - 1; i++) {
+                tmp = tmp + "/" + split[i];
+            }
+
+            Log.debug(tmp+"/   "+split[split.length - 1]);
+            GitUtil.addToGit(tmp+"/", "*");
+        }
+    }
+
+    public void writeTransformation(String fileName) throws IOException, JSONException {
+        if (transformations.isEmpty())
+            return;
+
+        TransformationsWriter write = new TransformationsWriter(transformations,fileName);
+        write.writeAllTransformation(null);
+    }
+
+    protected void mkDirResult(String output, String git) {
+        String[] tmp = output.split("/");
+        String dirs = git +"/";
+        for (int i = 0; i< tmp.length - 1;i++) {
+            dirs = dirs + tmp[i] + "/";
+        }
+        new File(dirs).mkdirs();
+        Log.debug("mkdir: {}",dirs);
+    }
 
     public String init(String dirProject, String dirTarget) throws IOException, InterruptedException {
         tmpDir = dirTarget + "/tmp_" + System.currentTimeMillis();
