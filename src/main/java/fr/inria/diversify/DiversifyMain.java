@@ -210,7 +210,6 @@ public class DiversifyMain {
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
         SpoonCompiler c = new JDTCompiler(factory);
-        Log.debug("sourceClasspath: {}",c.getSourceClasspath());
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 Log.debug("add {} to classpath",dir);
