@@ -36,7 +36,7 @@ public abstract class AbstractDiversify {
         String absoluteFileName = git + "/" + fileName;
         try {
             writeTransformation(absoluteFileName);
-            Log.info("write result in {}", fileName);
+            Log.info("write result in {}", absoluteFileName);
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
         }

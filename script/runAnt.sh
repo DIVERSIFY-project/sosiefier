@@ -1,4 +1,4 @@
 #!/bin/sh
 
 cd $1
-ant $2
+ant clean $2

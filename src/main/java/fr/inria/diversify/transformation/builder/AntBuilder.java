@@ -13,15 +13,16 @@ import fr.inria.diversify.util.Log;
  * Time: 11:54
  */
 public class AntBuilder extends AbstractBuilder {
-
-    public AntBuilder(String directory) {
+    protected String testTarget;
+    public AntBuilder(String directory, String testTarget) {
         super(directory, null);
+        this.testTarget = testTarget;
     }
 
     protected void runPrivate() {
-        Log.debug("run ant: sh script/runAnt.sh "+directory+ " "+"junit-all");
+        Log.debug("run ant: sh script/runAnt.sh "+directory+ " "+testTarget);
 
-        String[] command = {"sh", "script/runAnt.sh", directory,"junit-all"};
+        String[] command = {"sh", "script/runAnt.sh", directory,testTarget};
         ProcessBuilder probuilder = new ProcessBuilder( command );
 
         //You can set up your work directory
@@ -48,9 +49,9 @@ public class AntBuilder extends AbstractBuilder {
     }
 
     protected void parseResult(String r) {
-        Pattern patternCompileError = Pattern.compile("\\s*[javac] (\\d+) error");
-        Pattern patternJunitError = Pattern.compile("\\s*[junit] Tests FAILED");
-        Pattern patternJunitOK = Pattern.compile("\\s*BUILD SUCCESSFUL");
+        Pattern patternCompileError = Pattern.compile("\\s*\\[javac\\] (\\d+) error.*");
+        Pattern patternJunitError = Pattern.compile("\\s*\\[junit\\] Tests FAILED\\s*");
+        Pattern patternJunitOK = Pattern.compile("\\s*BUILD SUCCESSFUL\\s*");
         for (String s : r.split("\n")) {
             Log.debug(s);
             Matcher m = patternCompileError.matcher(s);

@@ -8,7 +8,7 @@ import java.io.*;
  * Time: 2:32 PM
  */
 public class GitUtil {
-    protected static String directory;
+    protected static String directory = "repo";
     protected static String expFileName = "exp";
     protected static String scriptDir = "script/git";
 
