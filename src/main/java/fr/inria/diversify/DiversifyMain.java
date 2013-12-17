@@ -138,7 +138,7 @@ public class DiversifyMain {
         }
         else {
             rb = new AntBuilder(directory);
-            rb.setPhase(new String[]{"deepclean", "junit-all"});
+            rb.setPhase(new String[]{"clean", "junit-all"});
         }
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
         if (t == -1)
