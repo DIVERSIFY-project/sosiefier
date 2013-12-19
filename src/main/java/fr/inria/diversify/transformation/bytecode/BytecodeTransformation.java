@@ -8,8 +8,6 @@ import javassist.CtMethod;
 import javassist.NotFoundException;
 import javassist.bytecode.*;
 import org.apache.commons.io.FileUtils;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtSimpleType;
 
 
 import java.io.File;
@@ -25,7 +23,7 @@ public abstract class BytecodeTransformation implements Transformation {
     protected CtMethod methodLocation;
     protected int opcodeIndex;
     protected Integer failures;
-    protected List<CtMethod> methods;
+//    protected List<CtMethod> methods;
     protected boolean compile;
 
     protected File backupClassFile;
@@ -53,18 +51,18 @@ public abstract class BytecodeTransformation implements Transformation {
         String destination = targetDir+ "/"+backupClass.getName().replace(".","/") + ".class";
         Log.debug("restore file: " + backupClassFile + " -> " + destination);
 
-        for(CtMethod method : methodLocation.getDeclaringClass().getDeclaredMethods())
-            if(!method.isEmpty())
-                methods.remove(method);
+//        for(CtMethod method : methodLocation.getDeclaringClass().getDeclaredMethods())
+//            if(!method.isEmpty())
+//                methods.remove(method);
         methodLocation.getDeclaringClass().detach();
 
         FileUtils.copyFile(backupClassFile, new File(destination));
         ClassPool pool = ClassPool.getDefault();
         pool.insertClassPath(destination);
         pool.get(backupClass.getName());
-        for(CtMethod method : pool.get(backupClass.getName()).getDeclaredMethods())
-            if(!method.isEmpty())
-                methods.add(method);
+//        for(CtMethod method : pool.get(backupClass.getName()).getDeclaredMethods())
+//            if(!method.isEmpty())
+//                methods.add(method);
     }
 
     protected List<Integer> opCodeIndexList(CodeAttribute ca) throws BadBytecode {
@@ -149,5 +147,13 @@ public abstract class BytecodeTransformation implements Transformation {
     @Override
     public String stmtType() {
         return "bytecode";
+    }
+
+    public void setOpcodeIndex(int opcodeIndex) {
+        this.opcodeIndex = opcodeIndex;
+    }
+
+    public void setMethodLocation(CtMethod methodLocation) {
+        this.methodLocation = methodLocation;
     }
 }

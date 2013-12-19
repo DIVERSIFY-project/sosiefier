@@ -6,10 +6,19 @@ import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.transformation.bytecode.BytecodeAdd;
+import fr.inria.diversify.transformation.bytecode.BytecodeDelete;
+import fr.inria.diversify.transformation.bytecode.BytecodeReplace;
+import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.NotFoundException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,6 +33,7 @@ import java.util.*;
  */
 public class TransformationParser {
     CodeFragmentList codeFragments;
+    List<CtMethod> ctMethods;
     private int countError = 0;
     private int count = 0;
 
@@ -82,7 +92,7 @@ public class TransformationParser {
                 list.add(parseTransformation(array.getJSONObject(i)));
             }  catch (Exception e) {
                 countError++;
-//                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
+               Log.warn("error during the parsing of "+array.getJSONObject(i),e);
             }
         }
 
@@ -111,36 +121,47 @@ public class TransformationParser {
             if(type.equals("multi"))
                 trans = parseASTMulti(jsonObject);
         }
-//        if(jsonObject.has("parent")) {
-//            JSONArray array = jsonObject.getJSONArray("parents");
-//            for(int i = 0; i <array.length(); i++) {
-//                trans.addParent(parseTransformation(array.getJSONObject(i)));
-//            }
-//        }
+
         try {
             trans.setJUnitResult(jsonObject.getInt("Failures"));
             if(trans.numberOfFailure() ==0 ) {
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            Log.debug("e",e);
+        }
 
         trans.setCompile(jsonObject.getBoolean("setCompile"));
         return trans;
     }
 
-    private Transformation parseASTMulti(JSONObject jsonObject) {
+    protected Transformation parseASTMulti(JSONObject jsonObject) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    private Transformation parseBytecodeDelete(JSONObject jsonObject) {
-        return null;
+    protected Transformation parseBytecodeDelete(JSONObject jsonObject) throws Exception {
+        BytecodeDelete trans = new BytecodeDelete();
+        JSONObject t = getTransformation(jsonObject);
+        trans.setOpcodeIndex(t.getInt("opcodeIndex"));
+        trans.setMethodLocation(getMethod(t.getString("methodLocation")));
+        return trans;
     }
 
-    private Transformation parseBytecodeAdd(JSONObject jsonObject) {
-        return null;
+    protected Transformation parseBytecodeAdd(JSONObject jsonObject) throws Exception {
+        BytecodeAdd trans = new BytecodeAdd();
+        JSONObject t = getTransformation(jsonObject);
+        trans.setOpcodeIndex(t.getInt("opcodeIndex"));
+        trans.setMethodLocation(getMethod(t.getString("methodLocation")));
+        trans.setByteCodeToAdd(parseByteCode(t.getString("byteCodeToAdd")));
+        return trans;
     }
 
-    private Transformation parseBytecodeReplace(JSONObject jsonObject) {
-        return null;
+    protected Transformation parseBytecodeReplace(JSONObject jsonObject) throws Exception {
+        BytecodeReplace trans = new BytecodeReplace();
+        JSONObject t = getTransformation(jsonObject);
+        trans.setOpcodeIndex(t.getInt("opcodeIndex"));
+        trans.setMethodLocation(getMethod(t.getString("methodLocation")));
+        trans.setByteCodeToReplace(parseByteCode(t.getString("byteCodeToReplace")));
+        return trans;
     }
 
 
@@ -241,4 +262,43 @@ public class TransformationParser {
 //            list.add(array.getString(i));
 //        return list;
 //    }
+
+    protected byte[] parseByteCode(String bytecodes) {
+        String[] bytecode = bytecodes.substring(1, bytecodes.length() - 1).split(", ");
+        byte[] tab = new byte[bytecode.length];
+        for(int i = 0; i < tab.length; i++)
+            tab[i] =  Byte.parseByte(bytecode[i]);
+
+        return tab;
+    }
+
+    protected CtMethod getMethod(String name) throws Exception {
+        for(CtMethod mth : allCtMethod()) {
+            if(mth.getLongName().equals(name))
+                return mth;
+        }
+        throw new Exception("error in getMethod for "+name);
+    }
+
+    protected List<CtMethod> allCtMethod() throws NotFoundException {
+        if(ctMethods != null)
+            return ctMethods;
+
+        ctMethods = new ArrayList<CtMethod>();
+        ClassPool pool = ClassPool.getDefault();
+        pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
+        for (CtSimpleType cl: codeFragments.getAllClasses()) {
+            try {
+                CtClass cc = pool.get(cl.getQualifiedName());
+                for(CtMethod method : cc.getDeclaredMethods())
+                    if(!method.isEmpty()) {
+                        ctMethods.add(method);
+                    }
+            }  catch (Exception e) {
+                Log.error("error in allCtMethod",e);
+            }
+
+        }
+        return ctMethods;
+    }
 }

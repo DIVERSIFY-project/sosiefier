@@ -23,11 +23,14 @@ import java.util.List;
 public class BytecodeReplace extends BytecodeTransformation {
     protected byte[] byteCodeToReplace;
 
-    public BytecodeReplace(CtMethod method, int index, byte[] bytecode, List<CtMethod> methods) {
+    public BytecodeReplace(CtMethod method, int index, byte[] bytecode) {
         methodLocation = method;
         opcodeIndex = index;
         byteCodeToReplace = bytecode;
-        this.methods = methods;
+//        this.methods = methods;
+    }
+
+    public BytecodeReplace() {
     }
 
     @Override
@@ -51,14 +54,14 @@ public class BytecodeReplace extends BytecodeTransformation {
         object.put("type", "replace");
         object.put("level", "bytecode");
         object.put("setCompile", compile);
-        JSONArray array = new JSONArray();
-        object.put("transformation",array);
-
-        JSONObject t = new JSONObject();
-        t.put("methodLocation", methodLocation.getLongName());
-        t.put("opcodeIndex",opcodeIndex);
-        t.put("byteCodeToReplace", Arrays.toString(byteCodeToReplace));
-        array.put(t);
+//        JSONArray array = new JSONArray();
+//        object.put("transformation",array);
+//
+//        JSONObject t = new JSONObject();
+        object.put("methodLocation", methodLocation.getLongName());
+        object.put("opcodeIndex",opcodeIndex);
+        object.put("byteCodeToReplace", Arrays.toString(byteCodeToReplace));
+//        array.put(t);
 
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
@@ -86,5 +89,9 @@ public class BytecodeReplace extends BytecodeTransformation {
     protected void addOpcode(CodeAttribute ca, int index, byte[] bytecode) throws BadBytecode {
         CodeIterator i = ca.iterator();
         i.insert(index, bytecode);
+    }
+
+    public void setByteCodeToReplace(byte[] byteCodeToReplace) {
+        this.byteCodeToReplace = byteCodeToReplace;
     }
 }

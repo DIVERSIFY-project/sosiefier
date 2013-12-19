@@ -18,10 +18,13 @@ import java.util.List;
  */
 public class BytecodeDelete extends BytecodeTransformation {
 
-    public BytecodeDelete(CtMethod method, int index, List<CtMethod> methods)  {
+    public BytecodeDelete(CtMethod method, int index)  {
         methodLocation = method;
         opcodeIndex = index;
-        this.methods = methods;
+//        this.methods = methods;
+    }
+
+    public BytecodeDelete() {
     }
 
     public void apply() throws BadBytecode {
@@ -62,13 +65,13 @@ public class BytecodeDelete extends BytecodeTransformation {
         object.put("type", "delete");
         object.put("level", "bytecode");
         object.put("setCompile", compile);
-        JSONArray array = new JSONArray();
-        object.put("transformation",array);
-
-        JSONObject t = new JSONObject();
-        t.put("methodLocation", methodLocation.getLongName());
-        t.put("opcodeIndex",opcodeIndex);
-        array.put(t);
+//        JSONArray array = new JSONArray();
+//        object.put("transformation",array);
+//
+//        JSONObject t = new JSONObject();
+        object.put("methodLocation", methodLocation.getLongName());
+        object.put("opcodeIndex",opcodeIndex);
+//        array.put(t);
 
         object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
