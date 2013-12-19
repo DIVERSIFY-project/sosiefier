@@ -247,23 +247,18 @@ public class DiversifyMain {
         TransformationParser tf = new TransformationParser(codeFragments);
         List<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
-        int i = 0;
-        for (Transformation t : transformations)
-            if(t.numberOfFailure() == -1)
-                i++;
 
-        Log.debug("i: "+i);
-
+        Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         String name = write.writeAllTransformation(null);
         statForR(name);
         for(String type : getAllTransformationType(transformations)) {
-            Log.debug("all transformation for: "+type);
             name = write.writeAllTransformation(type);
 //            statForR(name);
         }
 
         name = write.writeGoodTransformation(null);
 //        statForR(name);
+
         for(String type : getAllTransformationType(transformations)) {
             Log.debug("good transformation for: "+type);
             name = write.writeGoodTransformation(type);

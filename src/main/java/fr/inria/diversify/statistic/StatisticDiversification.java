@@ -49,7 +49,7 @@ public class StatisticDiversification {
             writeDetail(output+detailFileSuffix);
             writeSourceCity(output+sourceCityFileSuffix);
             writeDetailForTransformationType(output+typeFileSuffix);
-
+            Log.debug("end");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -190,7 +190,8 @@ public class StatisticDiversification {
         Log.debug("write data for source city");
         bw.write("type"+separator+"package"+separator+"class"+separator
                 +"classReplaceOrAdd"+separator+"method"+separator+
-                "size"+separator+"nbMethod"+separator+"compile"+separator+"sosie\n");
+                "size"+separator+"nbMethod"+separator+"compile"+separator+
+                "sosie"+separator+"stmtType"+separator+"level"+"\n");
         for(Transformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
@@ -211,6 +212,10 @@ public class StatisticDiversification {
                 sb.append(trans.getCompile());
                 sb.append(separator);
                 sb.append(trans.numberOfFailure() == 0);
+                sb.append(separator);
+                sb.append(trans.stmtType());
+                sb.append(separator);
+                sb.append(trans.level());
                 sb.append("\n");
                 bw.write(sb.toString());
             }catch (Exception e) {

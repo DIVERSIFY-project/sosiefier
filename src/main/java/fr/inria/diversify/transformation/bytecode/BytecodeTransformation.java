@@ -140,4 +140,14 @@ public abstract class BytecodeTransformation implements Transformation {
     public void setCompile(boolean b){
         compile = b;
     }
+
+    @Override
+    public String level() {
+        return "bytecode";
+    }
+
+    @Override
+    public String stmtType() {
+        return "bytecode";
+    }
 }

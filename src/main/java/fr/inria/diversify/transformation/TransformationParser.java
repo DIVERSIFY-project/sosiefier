@@ -117,6 +117,12 @@ public class TransformationParser {
 //                trans.addParent(parseTransformation(array.getJSONObject(i)));
 //            }
 //        }
+        try {
+            trans.setJUnitResult(jsonObject.getInt("Failures"));
+            if(trans.numberOfFailure() ==0 ) {
+            }
+        } catch (Exception e) {}
+
         trans.setCompile(jsonObject.getBoolean("setCompile"));
         return trans;
     }
@@ -144,10 +150,9 @@ public class TransformationParser {
         JSONObject t = getTransformation(jsonObject);
             CodeFragment d = findCodeFragment(t.getJSONObject("CodeFragmentDelete"));
             trans.setPosition(d);
-//        }
 
-        if(jsonObject.getBoolean("allTestRun"))
-            trans.setJUnitResult(jsonObject.getInt("Failures"));
+//        if(jsonObject.getBoolean("allTestRun"))
+//            trans.setJUnitResult(jsonObject.getInt("Failures"));
 
         return trans;
     }
@@ -165,8 +170,8 @@ public class TransformationParser {
             } catch (Exception e) {}
 
 //        }
-        if(jsonObject.getBoolean("allTestRun"))
-            trans.setJUnitResult(jsonObject.getInt("Failures"));
+//        if(jsonObject.getBoolean("allTestRun"))
+//            trans.setJUnitResult(jsonObject.getInt("Failures"));
 
         return trans;
     }
@@ -180,10 +185,6 @@ public class TransformationParser {
             trans.setPosition(position);
             trans.setCodeFragmentToReplace(findCodeFragment(t.getJSONObject("CodeFragmentReplace")));
             trans.setVarMapping(parseVariableMapping(t.getJSONObject("VariableMapping")));
-
-//        }
-        if(jsonObject.getBoolean("allTestRun"))
-            trans.setJUnitResult(jsonObject.getInt("Failures"));
 
         return trans;
     }

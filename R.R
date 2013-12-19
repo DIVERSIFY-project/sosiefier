@@ -1,13 +1,13 @@
-nbOfGoodDiversification <- function(data) {
-  return(length(subset(data, failure == 0)$failure))  
+nbOfSosie <- function(data) {
+  return(length(subset(data, sosie == 'true')$sosie))  
 }
 
-nbOfFailDiversification <- function(data) {
-  return(length(subset(data, failure != 0)$failure))   
+nbOfCompile <- function(data) {
+  return(length(subset(data, compile == 'true')$compile))   
 }
 
-nbOfDiversification <- function(data) {
-  return(length(data$failure)) 
+nbOfTrial <- function(data) {
+  return(length(data$sosie)) 
 }
 
 chiTestTab <- function(data, index) {
@@ -38,21 +38,26 @@ diversiticationStat <- function(data, index) {
   result <- data.frame ();
   for(i in set(data[,index])) {
     sub <- subset(data, data[,index] == i);
-    good <-  nbOfGoodDiversification(sub);
-    fail <- nbOfFailDiversification(sub);  
-    result[paste(i,sep=""),"trial"] <- good + fail;
+    trial <- nbOfTrial(sub)
+    sosie <-  nbOfSosie(sub);
+    compile <- nbOfCompile(sub);  
+    result[paste(i,sep=""),"trial"] <- trial;
   
-    result[paste(i,sep=""),"incorrect"] <- fail;
-    result[paste(i,sep=""),"sosie"] <- good;
-    result[paste(i,sep=""),"% sosie"] <- 100*good/(fail + good);
- #   result[paste(i,sep=""),"% total"] <- 100*(fail + good)/nbOfDiversification(data);
+    result[paste(i,sep=""),"compile"] <- compile;
+    result[paste(i,sep=""),"% compile"] <- 100*compile/(trial);
+    result[paste(i,sep=""),"sosie"] <- sosie;
+    result[paste(i,sep=""),"% sosie"] <- 100*sosie/(trial);
   }
-  good <-  nbOfGoodDiversification(data);
-  fail <- nbOfFailDiversification(data); 
+  sosie <-  nbOfSosie(data);
+  trial <- nbOfTrial(data)
+  compile <- nbOfCompile(data); 
+  
 
-  result["all","incorrect"] <- fail;
-  result["all","trial"] <- good + fail;
-  result["all","% sosie"] <- 100*good/(fail + good);
+  result["all","trial"] <- trial;
+  result["all","compile"] <- compile;
+  result["all,"% compile"] <- 100*compile/(trial);
+  result["all","sosie"] <- sosie;
+  result["all","% sosie"]  <- 100*sosie/(trial);
   # result["all","% total"] <- 100*(fail + good)/nbOfDiversification(data);
   return(result)  
 }

@@ -29,6 +29,9 @@ public interface Transformation {
     public String packageLocationName();
     public String methodLocationName();
     public boolean getCompile();
+    public String level();
+    public String stmtType();
+
 
     void setCompile(boolean b);
 }

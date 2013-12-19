@@ -119,4 +119,14 @@ public class ASTMultiTransformation implements Transformation {
     public void setCompile(boolean b){
         compile = b;
     }
+
+    @Override
+    public String level() {
+        return "multi";
+    }
+
+    @Override
+    public String stmtType() {
+        return "multi";
+    }
 }

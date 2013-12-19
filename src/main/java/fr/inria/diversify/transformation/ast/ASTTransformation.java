@@ -5,6 +5,7 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
+import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
@@ -23,7 +24,7 @@ import java.util.List;
  */
 public abstract class ASTTransformation implements Transformation {
     protected CodeFragment position;
-    protected Integer failures;
+    protected Integer failures = -1;
     protected List<ASTTransformation> parents;
     protected boolean compile;
 
@@ -126,6 +127,27 @@ public abstract class ASTTransformation implements Transformation {
     }
     public void setCompile(boolean b){
         compile = b;
+    }
+
+    @Override
+    public String level() {
+        CtCodeElement stmt = position.getCtCodeFragment();
+        if(stmt instanceof CtLocalVariable
+                || stmt instanceof CtNewClass
+                || stmt instanceof CtBreak
+                || stmt instanceof CtUnaryOperator
+                || stmt instanceof CtAssignment
+                || stmt instanceof CtReturn
+                || stmt instanceof CtOperatorAssignment
+                || stmt instanceof CtContinue
+                || stmt instanceof CtInvocation)
+            return "statement";
+        return "block";
+    }
+
+    @Override
+    public String stmtType() {
+        return position.getCtCodeFragment().getClass().getSimpleName();
     }
 
 //    public abstract void add(ASTTransformation replace);
