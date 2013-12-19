@@ -40,7 +40,7 @@ public class Util {
             pool.submit(new Runnable() {
                 @Override
                 public void run() {
-                    if(findCandidate(cfTmp).isEmpty())
+                    if(findCandidate(cfTmp, false).isEmpty())
                     synchronized (list) {list.add(true);}
                 }
             });
@@ -54,7 +54,7 @@ public class Util {
     public BigInteger numberOfNotDiversification(CodeFragment cf) {
         BigInteger nb = new BigInteger("0");
 
-        for (CodeFragment cf2 : findCandidate(cf))
+        for (CodeFragment cf2 : findCandidate(cf, false))
             nb = nb.add(getNumberOfVarMapping(cf,cf2));
         return nb;
     }
@@ -68,7 +68,7 @@ public class Util {
                 @Override
                 public void run() {
                     BigInteger nb = new BigInteger("0");
-                    for (CodeFragment cf2 : findCandidate(cfTmp)) {
+                    for (CodeFragment cf2 : findCandidate(cfTmp, false)) {
                         nb = nb.add(getNumberOfVarMapping(cfTmp,cf2));
                     }
                     synchronized (list) {list.add(nb);}
@@ -85,10 +85,10 @@ public class Util {
         return result;
     }
 
-    public List<CodeFragment> findCandidate(CodeFragment cf) {
+    public List<CodeFragment> findCandidate(CodeFragment cf, boolean varNameMatch) {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
-            if (cf.isReplace(statement, true) && !statement.equalString().equals(cf.equalString()))
+            if (cf.isReplace(statement,varNameMatch) && !statement.equalString().equals(cf.equalString()))
                 list.add(statement);
 
         return list;
@@ -152,7 +152,7 @@ public class Util {
                 pool.submit(new Runnable() {
                     @Override
                     public void run() {
-                        for (CodeFragment cf2 : findCandidate(cfTmp)) {
+                        for (CodeFragment cf2 : findCandidate(cfTmp, false)) {
                             for (Map<String, String> varMapping : getAllVarMapping(cfTmp, cf2)) {
                                 ASTReplace r = new ASTReplace();
                                 CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
@@ -192,7 +192,7 @@ public class Util {
             pool.submit(new Runnable() {
                 @Override
                 public void run() {
-                    for (CodeFragment cf2 : findCandidate(cfTmp)) {
+                    for (CodeFragment cf2 : findCandidate(cfTmp, false)) {
                         for (Map<String,String> varMapping : getAllVarMapping(cfTmp,cf2)) {
                             ASTAdd r = new ASTAdd();
                             CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());

@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.declaration.CtType;
@@ -117,7 +118,10 @@ public abstract class ASTTransformation implements Transformation {
         return position.getSourcePackage().getQualifiedName();
     }
     public String methodLocationName() {
-        return position.getCtCodeFragment().getParent(CtExecutable.class).getSimpleName();
+        CtExecutable elem = position.getCtCodeFragment().getParent(CtExecutable.class);
+        if(elem != null)
+            return elem.getSimpleName();
+        return "field";
     }
     public boolean getCompile() {
         return compile;

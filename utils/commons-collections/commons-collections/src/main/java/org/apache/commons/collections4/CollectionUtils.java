@@ -356,7 +356,7 @@ public class CollectionUtils {
      * with a guaranteed runtime complexity of {@code O(n + m)}. Depending on the type of
      * {@link Collection} provided, this method will be much faster than calling
      * {@link Collection#containsAll(Collection)} instead, though this will come at the
-     * cost of an additional space complexity O(n).
+     * cost of an additional candidate complexity O(n).
      *
      * @param coll1  the first collection, must not be null
      * @param coll2  the second collection, must not be null

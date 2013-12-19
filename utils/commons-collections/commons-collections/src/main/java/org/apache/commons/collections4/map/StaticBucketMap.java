@@ -691,7 +691,7 @@ public final class StaticBucketMap<K, V> extends AbstractIterableMap<K, V> {
      *  </pre>
      *
      *  <b>Implementation note:</b> This method requires a lot of time
-     *  and a ton of stack space.  Essentially a recursive algorithm is used
+     *  and a ton of stack candidate.  Essentially a recursive algorithm is used
      *  to enter each bucket's monitor.  If you have twenty thousand buckets
      *  in your map, then the recursive method will be invoked twenty thousand
      *  times.  You have been warned.

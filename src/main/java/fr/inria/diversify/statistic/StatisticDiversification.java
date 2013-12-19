@@ -48,46 +48,68 @@ public class StatisticDiversification {
         try {
             writeDetail(output+detailFileSuffix);
             writeSourceCity(output+sourceCityFileSuffix);
-            writeDetailForTransformationType(output+typeFileSuffix);
-            Log.debug("end");
+//            writeDetailForTransformationType(output+typeFileSuffix);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected void writeDetailForTransformationType(String fileName) throws IOException {
-        FileWriter fw = new FileWriter(fileName);
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write("type"+separator+"trial"+separator+"varient"+separator+"sosie"+separator+"space");
-        for(String type : getAllTransformationType(transformations)) {
-            List<Transformation> trans = transformation(type);
+//    protected void writeDetailForTransformationType(String fileName) throws IOException {
+//        FileWriter fw = new FileWriter(fileName);
+//        BufferedWriter bw = new BufferedWriter(fw);
+//        bw.write("type"+separator+"trial"+separator+"varient"+separator+"sosie"+separator+"candidate");
+//        for(String type : getAllTransformationType(transformations)) {
+//            List<Transformation> trans = transformation(type);
+//
+//            bw.write(type+separator);
+//            bw.write("nan"+separator);
+//            bw.write(trans.size()+separator);
+//            bw.write(sosie(trans)+separator);
+//            bw.write(candidate(trans, type)+""+separator);
+//        }
+//    }
 
-            bw.write(type+separator);
-            bw.write("nan"+separator);
-            bw.write(trans.size()+separator);
-            bw.write(sosie(trans)+separator);
-            bw.write(space(trans, type)+""+separator);
-        }
-    }
+//    protected double candidate(List<Transformation> trans, String type) {
+//        double nb = 0;
+//        if(type.equals("delete"))
+//            return 1;
+//        Util util = new Util(codeFragmentList);
+//        for(Transformation t : trans) {
+//            CodeFragment cf = ((ASTTransformation) t).getPosition();
+//            if(type.equals("add") || type.equals("replace")) {
+//                int i = util.numberOfNotDiversification(cf).intValue();
+//                nb = nb + ((double)i)/((double)trans.size());
+//            }
+//            else {
+//                int i = util.findCandidate(cf).size();
+//                nb = nb + ((double)i)/((double)trans.size());
+//            }
+//        }
+//        return nb;
+//    }
 
-    protected double space(List<Transformation> trans, String type) {
-        double nb = 0;
+    protected int candidate(Transformation tran) {
+        String type = tran.getType();
         if(type.equals("delete"))
             return 1;
         Util util = new Util(codeFragmentList);
-        for(Transformation t : trans) {
-            CodeFragment cf = ((ASTTransformation) t).getPosition();
-            if(type.equals("add") || type.equals("replace")) {
-                int i = util.numberOfNotDiversification(cf).intValue();
-                nb = nb + ((double)i)/((double)trans.size());
-            }
-            else {
-                int i = util.findCandidate(cf).size();
-                nb = nb + ((double)i)/((double)trans.size());
-            }
-        }
-        return nb;
+        CodeFragment cf = ((ASTTransformation) tran).getPosition();
+
+        if(type.equals("add") || type.equals("replace"))
+            return util.numberOfNotDiversification(cf).intValue();
+
+        if(type.contains("notContextMappingVariableName"))
+            return util.findCandidate(cf, true).size();
+
+        if(type.contains("notMapping"))
+            return util.findCandidate(cf, false).size();
+
+        if(type.contains("notContext"))
+            return codeFragmentList.size();
+
+        return 0;
     }
+
 
     protected List<Transformation> transformation(String type) {
         List<Transformation> trans = new ArrayList<Transformation>();
@@ -97,14 +119,14 @@ public class StatisticDiversification {
         return trans;
     }
 
-    protected int sosie(List<Transformation> list) {
-        int count = 0;
-        for (Transformation t : list) {
-            if(t.numberOfFailure() == 0)
-                count++;
-        }
-        return count;
-    }
+//    protected int sosie(List<Transformation> list) {
+//        int count = 0;
+//        for (Transformation t : list) {
+//            if(t.numberOfFailure() == 0)
+//                count++;
+//        }
+//        return count;
+//    }
 
     protected void write(Map<String, Map<Integer,Integer>> result, String fileName) throws IOException {
         FileWriter fw = new FileWriter(fileName);
@@ -191,7 +213,7 @@ public class StatisticDiversification {
         bw.write("type"+separator+"package"+separator+"class"+separator
                 +"classReplaceOrAdd"+separator+"method"+separator+
                 "size"+separator+"nbMethod"+separator+"compile"+separator+
-                "sosie"+separator+"stmtType"+separator+"level"+"\n");
+                "sosie"+separator+"stmtType"+separator+"level"+separator+"candidate"+"\n");
         for(Transformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
@@ -216,6 +238,8 @@ public class StatisticDiversification {
                 sb.append(trans.stmtType());
                 sb.append(separator);
                 sb.append(trans.level());
+                sb.append(separator);
+                sb.append(candidate(trans));
                 sb.append("\n");
                 bw.write(sb.toString());
             }catch (Exception e) {

@@ -47,6 +47,7 @@ diversiticationStat <- function(data, index) {
     result[paste(i,sep=""),"% compile"] <- 100*compile/(trial);
     result[paste(i,sep=""),"sosie"] <- sosie;
     result[paste(i,sep=""),"% sosie"] <- 100*sosie/(trial);
+    result[paste(i,sep=""),"space"] <- sum(sub$space)/length(sub$space);
   }
   sosie <-  nbOfSosie(data);
   trial <- nbOfTrial(data)
@@ -55,9 +56,10 @@ diversiticationStat <- function(data, index) {
 
   result["all","trial"] <- trial;
   result["all","compile"] <- compile;
-  result["all,"% compile"] <- 100*compile/(trial);
+  result["all","% compile"] <- 100*compile/(trial);
   result["all","sosie"] <- sosie;
   result["all","% sosie"]  <- 100*sosie/(trial);
+  result["all","space"] <- sum(data$space)/length(data$space);
   # result["all","% total"] <- 100*(fail + good)/nbOfDiversification(data);
   return(result)  
 }
