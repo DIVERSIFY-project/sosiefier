@@ -29,7 +29,7 @@ public class ASTDelete extends ASTTransformation {
         object.put("setCompile", compile);
 
         object.put("CodeFragmentDelete", position.toJSONObject());
-        object.put("allTestRun", (failures != null));
+//        object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 
         JSONArray Jparents = new JSONArray();

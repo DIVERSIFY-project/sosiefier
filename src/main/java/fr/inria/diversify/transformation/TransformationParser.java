@@ -124,12 +124,9 @@ public class TransformationParser {
 
         try {
             trans.setJUnitResult(jsonObject.getInt("Failures"));
-            if(trans.numberOfFailure() ==0 ) {
-            }
         } catch (Exception e) {
             Log.debug("e",e);
         }
-
         trans.setCompile(jsonObject.getBoolean("setCompile"));
         return trans;
     }

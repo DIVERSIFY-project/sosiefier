@@ -34,7 +34,7 @@ public class ASTAdd extends ASTTransformation {
         object.put("CodeFragmentPosition", position.toJSONObject());
         object.put("CodeFragmentAdd", add.toJSONObject());
         object.put("VariableMapping", variableMapping);
-        object.put("allTestRun", (failures != null));
+//        object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
 
         JSONArray Jparents = new JSONArray();
