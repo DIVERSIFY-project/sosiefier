@@ -126,7 +126,7 @@ public class Util {
                 transformations.add(query.add(position,false));
 
                 ASTAdd stupidASTAdd = query.add(position,false);
-                stupidASTAdd.setType("\"notMappingVariableAdd");
+                stupidASTAdd.setType("notMappingVariableAdd");
                 transformations.add(stupidASTAdd);
 
                 stupidASTAdd = query.add(position,true);
