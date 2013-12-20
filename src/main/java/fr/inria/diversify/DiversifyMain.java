@@ -62,11 +62,6 @@ public class DiversifyMain {
         initLogLevel();
         if(DiversifyProperties.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
-            try {
-            MavenBuilder m = new MavenBuilder(DiversifyProperties.getProperty("project"), DiversifyProperties.getProperty("src"));
-                m.setPhase(new String[]{"compile"});
-                m.runBuilder();
-            } catch (Exception e) {}
             t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
         }
         initSpoon();

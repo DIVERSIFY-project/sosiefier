@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class BytecodeDelete extends BytecodeTransformation {
 
-    public BytecodeDelete(CtMethod method, int index)  {
+    public BytecodeDelete(CtMethod method, int index, List<CtMethod> methods)  {
         methodLocation = method;
         opcodeIndex = index;
-//        this.methods = methods;
+        this.methods = methods;
     }
 
     public BytecodeDelete() {

@@ -46,7 +46,7 @@ public class StatisticDiversification {
 
     public void writeStat(String output) {
         try {
-            writeDetail(output+detailFileSuffix);
+//            writeDetail(output+detailFileSuffix);
             writeSourceCity(output+sourceCityFileSuffix);
 //            writeDetailForTransformationType(output+typeFileSuffix);
         } catch (IOException e) {

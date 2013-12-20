@@ -23,7 +23,7 @@ public abstract class BytecodeTransformation implements Transformation {
     protected CtMethod methodLocation;
     protected int opcodeIndex;
     protected Integer failures;
-//    protected List<CtMethod> methods;
+    protected List<CtMethod> methods;
     protected boolean compile;
 
     protected File backupClassFile;
@@ -51,18 +51,18 @@ public abstract class BytecodeTransformation implements Transformation {
         String destination = targetDir+ "/"+backupClass.getName().replace(".","/") + ".class";
         Log.debug("restore file: " + backupClassFile + " -> " + destination);
 
-//        for(CtMethod method : methodLocation.getDeclaringClass().getDeclaredMethods())
-//            if(!method.isEmpty())
-//                methods.remove(method);
+        for(CtMethod method : methodLocation.getDeclaringClass().getDeclaredMethods())
+            if(!method.isEmpty())
+                methods.remove(method);
         methodLocation.getDeclaringClass().detach();
 
         FileUtils.copyFile(backupClassFile, new File(destination));
         ClassPool pool = ClassPool.getDefault();
         pool.insertClassPath(destination);
         pool.get(backupClass.getName());
-//        for(CtMethod method : pool.get(backupClass.getName()).getDeclaredMethods())
-//            if(!method.isEmpty())
-//                methods.add(method);
+        for(CtMethod method : pool.get(backupClass.getName()).getDeclaredMethods())
+            if(!method.isEmpty())
+                methods.add(method);
     }
 
     protected List<Integer> opCodeIndexList(CodeAttribute ca) throws BadBytecode {

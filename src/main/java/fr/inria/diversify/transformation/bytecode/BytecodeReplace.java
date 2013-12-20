@@ -23,11 +23,11 @@ import java.util.List;
 public class BytecodeReplace extends BytecodeTransformation {
     protected byte[] byteCodeToReplace;
 
-    public BytecodeReplace(CtMethod method, int index, byte[] bytecode) {
+    public BytecodeReplace(CtMethod method, int index, byte[] bytecode, List<CtMethod> methods) {
         methodLocation = method;
         opcodeIndex = index;
         byteCodeToReplace = bytecode;
-//        this.methods = methods;
+        this.methods = methods;
     }
 
     public BytecodeReplace() {
