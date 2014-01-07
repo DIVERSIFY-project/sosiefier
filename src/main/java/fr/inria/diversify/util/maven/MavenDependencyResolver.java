@@ -42,13 +42,11 @@ public class MavenDependencyResolver {
         if (pomFile != null && pomFile.exists())
         {
             FileReader reader = null;
-
             try
             {
                 reader = new FileReader(pomFile);
                 Model model = mavenReader.read(reader);
                 model.setPomFile(pomFile);
-
                 ret = new MavenProject(model);
             }
             finally

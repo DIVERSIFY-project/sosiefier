@@ -9,11 +9,9 @@ import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.CtAbstractVisitor;
+import spoon.support.reflect.code.CtCaseImpl;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Adds basic logging before each conditionals (if, loops).
@@ -21,17 +19,20 @@ import java.util.TreeSet;
  * (w.r.t. init, anonymous classes, etc.)
  */
 public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatement> {
-    private static int count = 0;
+//     static int count = 0;
+    protected static Map<CtExecutable,Integer> count = new HashMap<CtExecutable, Integer>();
 
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {
+        if(candidate.getParent(CtCase.class) != null)
+            return false;
+
         return
                 CtIf.class.isAssignableFrom(candidate.getClass())
                         || CtLoop.class.isAssignableFrom(candidate.getClass())
                         || CtThrow.class.isAssignableFrom(candidate.getClass())
                 ;
-
     }
 
     public boolean hasStaticParent(CtElement el) {
@@ -50,7 +51,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
 
     public void process(CtStatement statement) {
         try {
-            count++;
+
             if (CtThrow.class.isAssignableFrom(statement.getClass())) {
                 instruThrow((CtThrow) statement);
             } else {
@@ -62,7 +63,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
     private void instruLoopOrIf(CtStatement statement) {
         boolean inStaticCode =
                 hasStaticParent(statement);
-        String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeLog(" + count + ",Thread.currentThread(),\""
+        String snippet = "{\n\tfr.inria.diversify.sosie.logger.LogWriter.writeLog(" + getCount(statement) + ",Thread.currentThread(),\""
                 + getClass(statement).getQualifiedName() + "\",\"" + getMethod(statement).getSignature() + "\"";
 
         int nVisibleVariables = 0;
@@ -104,12 +105,16 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
 
             int index = sp.getSourceStart();
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+
+            index = compileUnit.nextLineIndex(sp.getSourceEnd());
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, "}\n", 0));
 //		statement.insertBefore(getFactory().Code().createCodeSnippetStatement(	snippet));
         }
     }
 
-    private void instruThrow(CtThrow throwStmt) {
-        String snippet = "{\nfr.inria.diversify.sosie.logger.LogWriter.writeException(" + count + ",Thread.currentThread(),\"" +
+    protected void instruThrow(CtThrow throwStmt) {
+
+        String snippet = "{\nfr.inria.diversify.sosie.logger.LogWriter.writeException(Thread.currentThread(),\"" +
                 getClass(throwStmt).getQualifiedName() + "\",\"" + getMethod(throwStmt).getSignature() + "\"," +
                 throwStmt.getThrownExpression() + ");\n";
         SourcePosition sp = throwStmt.getPosition();
@@ -124,11 +129,14 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
     }
 
 
-    private void instruCatch(CtTry tryStmt) {
+
+
+
+    protected void instruCatch(CtTry tryStmt) {
         List<CtCatch> catchList = tryStmt.getCatchers();
         for (CtCatch catchStmt : catchList) {
             if(getMethod(tryStmt) != null) {
-                String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeError(" + count + ",Thread.currentThread(),\"" +
+                String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeError(" + getCount(tryStmt) + ",Thread.currentThread(),\"" +
                         getClass(tryStmt).getQualifiedName() + "\",\"" + getMethod(tryStmt).getSignature() + "\"," +
                         catchStmt.getParameter().getSimpleName() + ".getStackTrace());\n";
 
@@ -245,11 +253,20 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         return variables;
     }
 
-    private CtSimpleType<?> getClass(CtStatement stmt) {
+    protected int getCount(CtStatement stmt) {
+        CtExecutable parent = stmt.getParent(CtExecutable.class);
+        if(count.containsKey(parent))
+            count.put(parent,count.get(parent) + 1);
+        else
+            count.put(parent,0);
+        return count.get(parent);
+    }
+
+    protected CtSimpleType<?> getClass(CtStatement stmt) {
         return stmt.getParent(CtSimpleType.class);
     }
 
-    private CtExecutable<?> getMethod(CtStatement stmt) {
+    protected CtExecutable<?> getMethod(CtStatement stmt) {
         CtExecutable<?> ret = stmt.getParent(CtMethod.class);
         if (ret == null)
             ret = stmt.getParent(CtConstructor.class);

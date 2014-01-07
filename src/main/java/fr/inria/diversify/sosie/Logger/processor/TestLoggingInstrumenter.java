@@ -16,25 +16,40 @@ import spoon.reflect.declaration.CtSimpleType;
  * Time: 9:27 AM
  */
 public class TestLoggingInstrumenter extends AbstractProcessor<CtMethod> {
-    protected static int count;
+
+    @Override
+    public boolean isToBeProcessed(CtMethod candidate) {
+        if(candidate.isImplicit()
+                || candidate.getBody() == null
+                || candidate.getBody().getStatements().size() == 0)
+            return false;
+
+        for(CtAnnotation<?> annotation: candidate.getAnnotations())
+            if(annotation.toString().startsWith("@org.junit.Test"))
+                return true;
+
+        if(candidate.getSimpleName().contains(" test"))
+            return true;
+
+        return false;
+    }
 
     @Override
     public void process(CtMethod element) {
+        Log.info(element.getParent(CtSimpleType.class).getQualifiedName()+" "+element.getSignature());
+        CtStatement firstStmt = element.getBody().getStatement(0);
+        String snippet = "\t\tfr.inria.diversify.sosie.logger.LogWriter.writeTestStart(\""
+                + element.getParent(CtSimpleType.class).getQualifiedName() +"."+element.getSimpleName() + "\");\n";
+        SourcePosition sp = firstStmt.getPosition();
+        CompilationUnit compileUnit = sp.getCompilationUnit();
 
-        for(CtAnnotation<?> annotation: element.getAnnotations()) {
-            if(annotation.toString().startsWith("@org.junit.Test")) {
-                Log.info(element.getParent(CtSimpleType.class).getQualifiedName()+" "+element.getSignature());
-                if(!element.getBody().getStatements().isEmpty()) {
-                    CtStatement firstStmt = (CtStatement) element.getBody().getStatements().get(0);
-                    String snippet = "\t\tfr.inria.diversify.sosie.logger.LogWriter.writeTestStart(" + count
-                        + ",\"" + element.getParent(CtSimpleType.class).getQualifiedName() +"."+element.getSimpleName() + "\");\n";
-                    SourcePosition sp = firstStmt.getPosition();
-                    CompilationUnit compileUnit = sp.getCompilationUnit();
-                    int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-                    compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-                }
-                count++;
-            }
-        }
+        int index;
+        if(firstStmt.getPosition().getLine() == element.getPosition().getLine())
+            index = sp.getSourceStart();
+        else
+            index = compileUnit.beginOfLineIndex(sp.getSourceStart());
+
+
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
     }
 }

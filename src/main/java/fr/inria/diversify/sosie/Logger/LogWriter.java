@@ -14,9 +14,10 @@ public class LogWriter {
     static private File dir;
     static private Map<Thread, FileWriter> fileWriters;
     static private String separator = ":;:";
-    private static String currentTestSignature;
-    private static Map<String,String> idMap;
-
+    static private String simpleSeparator = ";";
+    protected static String currentTestSignature;
+    protected static Map<String,String> idMap;
+    protected static Map<Thread, String> previous;
 
     protected synchronized static FileWriter init(Thread thread) throws IOException {
         if(fileWriters == null) {
@@ -27,7 +28,7 @@ public class LogWriter {
             }   catch (Exception e) {
                 idMap = new HashMap<String, String>();
             }
-
+            previous = new HashMap<Thread, String>();
             fileWriters = new HashMap<Thread, FileWriter>();
             ShutdownHookLog shutdownHook = new ShutdownHookLog();
             Runtime.getRuntime().addShutdownHook(shutdownHook);
@@ -39,7 +40,7 @@ public class LogWriter {
         return fileWriters.get(thread);
     }
 
-    private static void initDir() {
+    protected static void initDir() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("LogDirName"));
             dir = new File("log"+reader.readLine());
@@ -50,42 +51,74 @@ public class LogWriter {
         dir.mkdir();
     }
 
-    private static String initFileName(Thread thread) {
-        String fileName;
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("LogfileName"));
-            fileName = reader.readLine() + "_" + currentTestSignature +"_"+ thread.getName();
-        } catch (IOException e) {
-            fileName = "log" + thread.getName() + "_" + currentTestSignature +"_"+ System.currentTimeMillis();
-        }
-        return fileName;
+    protected static String initFileName(Thread thread) {
+        return "log" + thread.getName() + "_" + currentTestSignature;
     }
 
     public static void writeLog(int id,Thread thread, String className, String methodSignature, Object... var) {
         FileWriter fileWriter = null;
         try {
-                fileWriter = init(thread);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        try {
-            fileWriter.append("$$$\n");
-//            fileWriter.append(id+"");
-//            fileWriter.append(separator);
-            fileWriter.append(idFor(className));
-            fileWriter.append(separator);
-            fileWriter.append(idFor(methodSignature));
-
-            for (int i = 0; i < var.length/2; i = i + 2) {
-                fileWriter.append(separator);
-                fileWriter.append(idFor(var[i].toString()));
-                fileWriter.append(separator);
-                fileWriter.append(var[i+1].toString());
-            }
+            fileWriter = init(thread);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        StringBuilder string = new StringBuilder();
+        synchronized (fileWriter) {
+            try {
+                string.append("$$$\n");
+                string.append(id+"");
+                string.append(simpleSeparator);
+                string.append(idFor(className));
+                string.append(simpleSeparator);
+                string.append(idFor(methodSignature));
+                fileWriter.append(string.toString());
+            } catch (Exception e) {
+                return;
+            }
+            StringBuilder vars = new StringBuilder();
+            for (int i = 0; i < var.length/2; i = i + 2) {
+                string = new StringBuilder();
+                try {
+                    string.append(separator);
+                    string.append(idFor(var[i].toString()));
+                    string.append(simpleSeparator);
+                    string.append(var[i + 1].toString());
+                    vars.append(string);
+                    //  System.out.println(string.toString());
+                } catch (Exception e) {}
+            }
+            try {
+                if (vars.toString().equals(previous.get(thread))) {
+                    fileWriter.append(separator);
+                    fileWriter.append("P");
+                } else {
+                    fileWriter.append(vars.toString());
+                    previous.put(thread,vars.toString());
+                }
 
+            } catch (Exception e) {}
 
+        }
+    }
+
+    public static void methodCall(Thread thread, String className, String methodSignature) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = init(thread);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        synchronized (fileWriter) {
+            try {
+                fileWriter.append("$$$\n");
+                fileWriter.append("C"); //new call
+                fileWriter.append(simpleSeparator);
+                fileWriter.append(idFor(className));
+                fileWriter.append(simpleSeparator);
+                fileWriter.append(idFor(methodSignature));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -99,7 +132,7 @@ public class LogWriter {
         }
         try {
             fileWriter.append("$$$\n");
-            fileWriter.append("ST");
+            fileWriter.append("NT"); //new throws
             fileWriter.append(separator);
             fileWriter.append(id+"");
             fileWriter.append(separator);
@@ -117,7 +150,7 @@ public class LogWriter {
         }
     }
 
-    public static void writeTestStart(String testSignature) throws IOException {
+    public static void writeTestStart(String testSignature) {
         currentTestSignature = testSignature;
 
         if(fileWriters != null) {
@@ -128,7 +161,7 @@ public class LogWriter {
         }
     }
 
-    public static void writeException(int id,Thread thread, String className, String methodSignature, Object exception) {
+    public static void writeException(Thread thread, String className, String methodSignature, Object exception) {
         FileWriter fileWriter = null;
         try {
             fileWriter = init(thread);
@@ -137,12 +170,10 @@ public class LogWriter {
         }
         try {
             fileWriter.append("$$$\n");
-            fileWriter.append("ST");
-            fileWriter.append(separator);
-            fileWriter.append(id+"");
-            fileWriter.append(separator);
+            fileWriter.append("T");
+            fileWriter.append(simpleSeparator);
             fileWriter.append(className);
-            fileWriter.append(separator);
+            fileWriter.append(simpleSeparator);
             fileWriter.append(methodSignature);
 
             fileWriter.append(separator);
@@ -186,6 +217,7 @@ public class LogWriter {
 
         fw.close();
     }
+
 
     protected static Map<String,String> loadIdMap(String file) throws IOException {
         Map<String,String> map = new HashMap<String, String>();
