@@ -23,6 +23,8 @@ public class TransformationsWriter {
         fileNamePrefix = prefix;
     }
 
+    public TransformationsWriter() {}
+
     public String writeGoodTransformation(String type) throws IOException {
         List<Transformation> goodTransformation = new LinkedList<Transformation>();
         for (Transformation transformation : transformations) {
@@ -35,6 +37,8 @@ public class TransformationsWriter {
             fileName = fileNamePrefix+"_good.json";
         else
             fileName = fileNamePrefix+ "_" + type + "_good.json";
+
+
 
         return writeTransformation(fileName,goodTransformation);
     }
@@ -73,7 +77,7 @@ public class TransformationsWriter {
     }
 
 
-    protected String writeTransformation(String fileName, Collection<Transformation> trans) throws IOException {
+    public String writeTransformation(String fileName, Collection<Transformation> trans) throws IOException {
         Log.debug("write {} transformation in file {}",trans.size(), fileName);
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         JSONArray obj = new JSONArray();

@@ -64,6 +64,18 @@ diversiticationStat <- function(data, index) {
   return(result)  
 }
 
+mySample <- function(data, size) {
+  return(data[sample(1:nrow(data),size, replace=FALSE),])
+}
+
+splitAndWrite <- function(data, splitSize, fileName) {
+  for(i in 0:nrow(data)/splitSize) {
+    subSet <- junit[(i*splitSize):((i+1)*splitSize),]
+    fileName2 <- paste(sep="",fileName,i,".csv")
+    write.csv2(subSet, file=fileName2)
+  }
+  
+}
 
 set <- function(collection) {
   vec <- vector()
