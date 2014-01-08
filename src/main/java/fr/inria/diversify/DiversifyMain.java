@@ -30,7 +30,6 @@ import spoon.reflect.declaration.CtSimpleType;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
-import spoon.support.compiler.JDTCompiler;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
@@ -48,6 +47,7 @@ import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromLis
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
+import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 /**
  * User: Simon
@@ -211,7 +211,7 @@ public class DiversifyMain {
 
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
-        SpoonCompiler c = new JDTCompiler(factory);
+        SpoonCompiler c = new JDTBasedSpoonCompiler(factory);
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 Log.debug("add {} to classpath",dir);
