@@ -47,7 +47,7 @@ import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromLis
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
+import spoon.support.compiler.JDTCompiler;
 
 /**
  * User: Simon
@@ -211,7 +211,7 @@ public class DiversifyMain {
 
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
-        SpoonCompiler c = new JDTBasedSpoonCompiler(factory);
+        SpoonCompiler c = new JDTCompiler(factory);
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 Log.debug("add {} to classpath",dir);

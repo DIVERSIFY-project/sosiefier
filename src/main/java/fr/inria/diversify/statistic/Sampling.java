@@ -27,7 +27,7 @@ public class Sampling {
         int borne = transformations.size()/splitSize;
 
         for(int i = 0; i < borne; i++) {
-           writeSubList(i*splitSize, (i+1)*splitSize, fileName+i+".csv");
+           writeSubList(i*splitSize, (i+1)*splitSize, fileName+i+".json");
         }
     }
 

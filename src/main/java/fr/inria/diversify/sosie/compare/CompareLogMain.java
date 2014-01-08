@@ -14,7 +14,7 @@ import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
-import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
+import spoon.support.compiler.JDTCompiler;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -161,7 +161,7 @@ public class CompareLogMain {
 
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new Factory(f, env);
-        SpoonCompiler c = new JDTBasedSpoonCompiler(factory);
+        SpoonCompiler c = new JDTCompiler(factory);
 
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
