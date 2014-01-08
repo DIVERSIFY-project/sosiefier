@@ -8,13 +8,11 @@ import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import org.apache.commons.io.FileUtils;
-import spoon.compiler.Environment;
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
 import spoon.support.DefaultCoreFactory;
-import spoon.support.JavaOutputProcessor;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
 import spoon.support.compiler.JDTCompiler;
@@ -29,45 +27,32 @@ import java.util.List;
  * Date: 7/22/13
  * Time: 2:03 PM
  */
-public class MainMethodCallInstru {
-    public static void main(String[] args) throws Exception {
-        new DiversifyProperties(args[0]);
-        new MainMethodCallInstru();
-    }
+public class InstruProject {
 
-    public MainMethodCallInstru() throws Exception {
-        initLogLevel();
-
-        if(DiversifyProperties.getProperty("builder").equals("maven")) {
-            MavenDependencyResolver t = new MavenDependencyResolver();
-            t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
-        }
-        String project = DiversifyProperties.getProperty("project");
-        String tmpDir = DiversifyProperties.getProperty("out") + "/sosieInstru_" + System.currentTimeMillis();
-
-        File dir = new File(tmpDir);
+    public InstruProject(String project, String outDir, String srcDir, String testDir) throws Exception {
+        File dir = new File(outDir);
         dir.mkdirs();
         FileUtils.copyDirectory(new File(project), dir);
 
-        String src = project+ "/" +DiversifyProperties.getProperty("src");
-        String test = project+ "/" +DiversifyProperties.getProperty("testSrc");
+        String src = project+ "/" +srcDir;
+        String test = project+ "/" +testDir;
 
         Factory factory = initSpoon(src);
         applyProcessor(factory, new MethodLoggingInstrumenter());
         applyProcessor(factory, new ConditionalLoggingInstrumenter());
 
         factory.getEnvironment().useSourceCodeFragments(true);
-        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(tmpDir +"/"+DiversifyProperties.getProperty("src")), allClassesName(new File(src))));
+        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir + "/" + srcDir), allClassesName(new File(src))));
 
         factory = initSpoon(src+System.getProperty("path.separator")+test);
 
         applyProcessor(factory, new TestLoggingInstrumenter());
 
         factory.getEnvironment().useSourceCodeFragments(true);
-        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(tmpDir +"/"+DiversifyProperties.getProperty("testSrc")), allClassesName(new File(test))));
+        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir +"/"+ testDir), (allClassesName(new File(test)))));
 
-        ConditionalLoggingInstrumenter.writeIdFile(tmpDir);
-        copyLogger(tmpDir);
+        ConditionalLoggingInstrumenter.writeIdFile(outDir);
+        copyLogger(outDir);
     }
 
     protected Factory initSpoon(String srcDirectory) {
@@ -99,11 +84,6 @@ public class MainMethodCallInstru {
         ProcessingManager pm = new QueueProcessingManager(factory);
         pm.addProcessor(processor);
         pm.process();
-    }
-
-    protected void initLogLevel() {
-        int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
-        Log.set(level);
     }
 
     protected List<String> allClassesName(File dir) {

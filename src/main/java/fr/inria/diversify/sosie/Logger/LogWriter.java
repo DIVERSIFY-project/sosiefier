@@ -1,6 +1,5 @@
 package fr.inria.diversify.sosie.logger;
 
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,19 +15,15 @@ public class LogWriter {
     static private String separator = ":;:";
     static private String simpleSeparator = ";";
     protected static String currentTestSignature;
-    protected static Map<String,String> idMap;
-    protected static Map<Thread, String> previous;
+    protected static Map<Thread, String> previousVarLog;
+//    protected static Map<Thread, String> previousCall;
 
     protected synchronized static FileWriter init(Thread thread) throws IOException {
         if(fileWriters == null) {
             if(dir == null)
                 initDir();
-            try {
-                idMap = loadIdMap(dir+"/id");
-            }   catch (Exception e) {
-                idMap = new HashMap<String, String>();
-            }
-            previous = new HashMap<Thread, String>();
+
+            previousVarLog = new HashMap<Thread, String>();
             fileWriters = new HashMap<Thread, FileWriter>();
             ShutdownHookLog shutdownHook = new ShutdownHookLog();
             Runtime.getRuntime().addShutdownHook(shutdownHook);
@@ -55,7 +50,7 @@ public class LogWriter {
         return "log" + thread.getName() + "_" + currentTestSignature;
     }
 
-    public static void writeLog(int id,Thread thread, String className, String methodSignature, Object... var) {
+    public static void writeLog(int id,Thread thread, String classId, String methodSignatureId, Object... var) {
         FileWriter fileWriter = null;
         try {
             fileWriter = init(thread);
@@ -68,9 +63,9 @@ public class LogWriter {
                 string.append("$$$\n");
                 string.append(id+"");
                 string.append(simpleSeparator);
-                string.append(idFor(className));
+                string.append(classId);
                 string.append(simpleSeparator);
-                string.append(idFor(methodSignature));
+                string.append(methodSignatureId);
                 fileWriter.append(string.toString());
             } catch (Exception e) {
                 return;
@@ -80,7 +75,7 @@ public class LogWriter {
                 string = new StringBuilder();
                 try {
                     string.append(separator);
-                    string.append(idFor(var[i].toString()));
+                    string.append(var[i].toString());
                     string.append(simpleSeparator);
                     string.append(var[i + 1].toString());
                     vars.append(string);
@@ -88,12 +83,12 @@ public class LogWriter {
                 } catch (Exception e) {}
             }
             try {
-                if (vars.toString().equals(previous.get(thread))) {
+                if (vars.toString().equals(previousVarLog.get(thread))) {
                     fileWriter.append(separator);
                     fileWriter.append("P");
                 } else {
                     fileWriter.append(vars.toString());
-                    previous.put(thread,vars.toString());
+                    previousVarLog.put(thread,vars.toString());
                 }
 
             } catch (Exception e) {}
@@ -101,7 +96,7 @@ public class LogWriter {
         }
     }
 
-    public static void methodCall(Thread thread, String className, String methodSignature) {
+    public static void methodCall(Thread thread, String classId, String methodSignatureId) {
         FileWriter fileWriter = null;
         try {
             fileWriter = init(thread);
@@ -113,9 +108,9 @@ public class LogWriter {
                 fileWriter.append("$$$\n");
                 fileWriter.append("C"); //new call
                 fileWriter.append(simpleSeparator);
-                fileWriter.append(idFor(className));
+                fileWriter.append(classId);
                 fileWriter.append(simpleSeparator);
-                fileWriter.append(idFor(methodSignature));
+                fileWriter.append(methodSignatureId);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -195,27 +190,6 @@ public class LogWriter {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        try {
-            writeIdFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected static String idFor(String string) {
-        if(!idMap.containsKey(string))
-            idMap.put(string,idMap.size()+"");
-
-        return idMap.get(string);
-    }
-
-    protected static void writeIdFile() throws IOException {
-        FileWriter fw = new FileWriter(dir.getAbsolutePath()+"/id");
-
-        for(String s : idMap.keySet())
-            fw.write(idMap.get(s)+ " " +s+"\n");
-
-        fw.close();
     }
 
 

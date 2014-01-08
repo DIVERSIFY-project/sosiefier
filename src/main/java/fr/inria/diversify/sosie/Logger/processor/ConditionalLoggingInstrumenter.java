@@ -11,6 +11,9 @@ import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.CtAbstractVisitor;
 import spoon.support.reflect.code.CtCaseImpl;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -19,9 +22,8 @@ import java.util.*;
  * (w.r.t. init, anonymous classes, etc.)
  */
 public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatement> {
-//     static int count = 0;
     protected static Map<CtExecutable,Integer> count = new HashMap<CtExecutable, Integer>();
-
+    protected static Map<String,String> idMap = new HashMap<String, String>();
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {
@@ -64,7 +66,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         boolean inStaticCode =
                 hasStaticParent(statement);
         String snippet = "{\n\tfr.inria.diversify.sosie.logger.LogWriter.writeLog(" + getCount(statement) + ",Thread.currentThread(),\""
-                + getClass(statement).getQualifiedName() + "\",\"" + getMethod(statement).getSignature() + "\"";
+                + idFor(getClass(statement).getQualifiedName()) + "\",\"" + idFor(getMethod(statement).getSignature()) + "\"";
 
         int nVisibleVariables = 0;
         for (CtVariable<?> var : getVariablesInScope(statement)) {
@@ -87,7 +89,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
                 // this does not work for case statements
                 // var.getModifiers().remove(ModifierKind.FINAL);
 
-                snippet += ",\"" + var.getSimpleName() + "\"," + var.getSimpleName();
+                snippet += ",\"" + idFor(var.getSimpleName()) + "\"," + var.getSimpleName();
             }
         }
         snippet += ");\n";
@@ -253,6 +255,25 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         return variables;
     }
 
+    protected static String idFor(String string) {
+        if(!idMap.containsKey(string))
+            idMap.put(string,idMap.size()+"");
+
+        return idMap.get(string);
+    }
+
+    public static void writeIdFile(String dir) throws IOException {
+        File file = new File(dir+"/log");
+        file.mkdirs();
+        FileWriter fw = new FileWriter(file.getAbsoluteFile()+"/id");
+
+        for(String s : idMap.keySet())
+            fw.write(idMap.get(s)+ " " +s+"\n");
+
+        fw.close();
+    }
+
+
     protected int getCount(CtStatement stmt) {
         CtExecutable parent = stmt.getParent(CtExecutable.class);
         if(count.containsKey(parent))
@@ -272,4 +293,5 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
             ret = stmt.getParent(CtConstructor.class);
         return ret;
     }
+
 }

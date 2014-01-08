@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import fr.inria.diversify.sosie.InstruProject;
 import fr.inria.diversify.statistic.CrossValidation;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;

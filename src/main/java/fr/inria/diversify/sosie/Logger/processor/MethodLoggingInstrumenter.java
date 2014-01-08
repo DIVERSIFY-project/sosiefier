@@ -29,7 +29,7 @@ public class MethodLoggingInstrumenter extends AbstractProcessor<CtMethod> {
         CtStatement stmt = body.getStatement(0);
 
         String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.methodCall(Thread.currentThread(),\"" +
-                getClass(stmt).getQualifiedName() + "\",\"" + candidate.getSignature() + "\");\n";
+                ConditionalLoggingInstrumenter.idFor(getClass(stmt).getQualifiedName()) + "\",\"" + ConditionalLoggingInstrumenter.idFor(candidate.getSignature()) + "\");\n";
         SourcePosition sp = stmt.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
