@@ -23,10 +23,7 @@ import spoon.support.compiler.JDTCompiler;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -54,7 +51,15 @@ public class SamplingMain {
         List<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
         Set<Transformation> set = new HashSet<Transformation>(transformations);
 
-        Sampling s = new Sampling(set, 1000);
+        LinkedList<Transformation> goodTransformation = new LinkedList<Transformation>();
+        for(Transformation t : set) {
+            if(t.getCompile() == true && t.numberOfFailure() == 0)
+                goodTransformation.add(t);
+        }
+
+        Sampling s = new Sampling(goodTransformation, 1000);
+
+
         s.splitAndWrite(200, DiversifyProperties.getProperty("result"));
     }
 
