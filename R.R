@@ -61,7 +61,7 @@ diversiticationStat <- function(data, index, compileTime, testTime) {
     result[paste(i,sep=""),"candidate (stmt)"] <- paste(round(sum(subStmt$candidate)/length(subStmt$candidate),2),sep="");
     result[paste(i,sep=""),"candidate (block)"] <- paste(round(sum(subBlock$candidate)/length(subBlock$candidate),2), sep="");
     result[paste(i,sep=""),"sosie/h (stmt)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileStmt/trialStmt, 100*sosieStmt/trialStmt),2),sep="");
-    result[paste(i,sep=""),"sosie/h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieStmt/trialBlock),2),sep=""); 
+    result[paste(i,sep=""),"sosie/h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieBlock/trialBlock),2),sep=""); 
   }
   subStmt <-  subset(data, data[,"level"] == "statement");
   subBlock <-  subset(data, data[,"level"] == "block");
@@ -86,12 +86,25 @@ diversiticationStat <- function(data, index, compileTime, testTime) {
   result["all","candidate (stmt)"] <- paste(round(sum(subStmt$candidate)/length(subStmt$candidate),2),sep="");
   result["all","candidate (block)"] <- paste(round(sum(subBlock$candidate)/length(subBlock$candidate),2), sep="");
   result["all","sosie/h (stmt)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileStmt/trialStmt, 100*sosieStmt/trialStmt),2),sep="");
-  result["all","sosie/h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieStmt/trialBlock),2),sep=""); 
+  result["all","sosie/h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieBlock/trialBlock),2),sep=""); 
   return(result)  
 }
 
 sosieHour <- function(compileTime, testTime, perCompile, perSosie) {
   return((3600/((100 - perCompile) * compileTime + perCompile * testTime)) * 100 * perSosie) 
+}
+
+arrayFctRA <- function(data) {
+  result <- vector()
+  
+  for(i in set(data[,"inputContextSizeRA"])) {
+    sub <- subset(data, data[,"inputContextSizeRA"] == i);
+    trial <- nbOfTrial(sub)
+    sosie <-  nbOfSosie(sub);
+    compile <- nbOfCompile(sub);
+    result[i] <- (trial)
+  }
+  return(result)
 }
 
 mySample <- function(data, size) {

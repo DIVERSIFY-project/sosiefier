@@ -213,7 +213,8 @@ public class StatisticDiversification {
         bw.write("type"+separator+"package"+separator+"class"+separator
                 +"classReplaceOrAdd"+separator+"method"+separator+
                 "size"+separator+"nbMethod"+separator+"compile"+separator+
-                "sosie"+separator+"stmtType"+separator+"level"+separator+"candidate"+"\n");
+                "sosie"+separator+"stmtType"+separator+"level"+separator+
+                "candidate"+separator+"inputContextSize"+separator+"inputContextSizeRA"+"\n");
         for(Transformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
@@ -240,6 +241,10 @@ public class StatisticDiversification {
                 sb.append(trans.level());
                 sb.append(separator);
                 sb.append(candidate(trans));
+                sb.append(separator);
+                sb.append(trans.inputContextSize());
+                sb.append(separator);
+                sb.append(trans.inputContextSizeRA());
                 sb.append("\n");
                 bw.write(sb.toString());
             }catch (Exception e) {

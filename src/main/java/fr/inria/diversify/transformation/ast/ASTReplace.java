@@ -222,4 +222,11 @@ public class ASTReplace extends ASTTransformation {
     public String classReplaceOrAddPositionName() {
         return replace.getSourceClass().getQualifiedName();
     }
+
+    public int inputContextSize() {
+        return position.getInputContext().size();
+    }
+    public int inputContextSizeRA() {
+        return replace.getInputContext().size();
+    }
 }

@@ -34,4 +34,7 @@ public interface Transformation {
 
 
     void setCompile(boolean b);
+
+    public int inputContextSize();
+    public int inputContextSizeRA();
 }

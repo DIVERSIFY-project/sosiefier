@@ -140,4 +140,10 @@ public class ASTDelete extends ASTTransformation {
     public String classReplaceOrAddPositionName() {
         return "null";
     }
+    public int inputContextSize() {
+        return position.getInputContext().size();
+    }
+    public int inputContextSizeRA() {
+        return 0;
+    }
 }

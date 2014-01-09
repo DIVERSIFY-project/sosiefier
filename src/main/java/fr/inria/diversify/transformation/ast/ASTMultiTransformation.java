@@ -129,4 +129,7 @@ public class ASTMultiTransformation implements Transformation {
     public String stmtType() {
         return "multi";
     }
+
+    public int inputContextSize() {return 0;}
+    public int inputContextSizeRA() {return 0;}
 }

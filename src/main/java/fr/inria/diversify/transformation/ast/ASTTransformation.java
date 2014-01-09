@@ -154,6 +154,9 @@ public abstract class ASTTransformation implements Transformation {
         return position.getCtCodeFragment().getClass().getSimpleName();
     }
 
+    public int inputContextSize() {return 0;}
+    public int inputContextSizeRA() {return 0;}
+
 //    public abstract void add(ASTTransformation replace);
 
 //    public String positionString() {

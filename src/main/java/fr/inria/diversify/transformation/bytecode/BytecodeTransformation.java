@@ -156,4 +156,7 @@ public abstract class BytecodeTransformation implements Transformation {
     public void setMethodLocation(CtMethod methodLocation) {
         this.methodLocation = methodLocation;
     }
+
+    public int inputContextSize() {return 0;}
+    public int inputContextSizeRA() {return 0;}
 }

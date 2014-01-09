@@ -200,4 +200,11 @@ public class ASTAdd extends ASTTransformation {
     public String classReplaceOrAddPositionName() {
         return add.getSourceClass().getQualifiedName();
     }
+
+    public int inputContextSize() {
+        return position.getInputContext().size();
+    }
+    public int inputContextSizeRA() {
+        return add.getInputContext().size();
+    }
 }
