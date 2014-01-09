@@ -36,7 +36,6 @@ public class TestLoggingInstrumenter extends AbstractProcessor<CtMethod> {
 
     @Override
     public void process(CtMethod element) {
-        Log.info(element.getParent(CtSimpleType.class).getQualifiedName()+" "+element.getSignature());
         CtStatement firstStmt = element.getBody().getStatement(0);
         String snippet = "\t\tfr.inria.diversify.sosie.logger.LogWriter.writeTestStart(\""
                 + element.getParent(CtSimpleType.class).getQualifiedName() +"."+element.getSimpleName() + "\");\n";

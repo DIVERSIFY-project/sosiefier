@@ -45,13 +45,9 @@ public class SamplingMain {
         List<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
         Set<Transformation> set = new HashSet<Transformation>(transformations);
 
-        LinkedList<Transformation> goodTransformation = new LinkedList<Transformation>();
-        for(Transformation t : set) {
-            if(t.getCompile() == true && t.numberOfFailure() == 0)
-                goodTransformation.add(t);
-        }
 
-        Sampling s = new Sampling(goodTransformation, 1000);
+
+        Sampling s = new Sampling(set, 1000);
 
 
         s.splitAndWrite(200, DiversifyProperties.getProperty("result"));

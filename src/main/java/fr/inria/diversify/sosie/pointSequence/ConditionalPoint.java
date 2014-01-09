@@ -12,8 +12,9 @@ import java.util.*;
 public class ConditionalPoint extends Point {
     Map<String, String> vars;
 
-    public ConditionalPoint(String string, Map<String,String> idMap) {
-        super(string, idMap);
+    public ConditionalPoint(String string, Map<String,String> idMap, ConditionalPoint last) {
+        super();
+        buildFromId(string, idMap, last);
     }
     public boolean sameValue(Point point) {
         if(!(point instanceof ConditionalPoint))
@@ -39,22 +40,30 @@ public class ConditionalPoint extends Point {
         if(idMap == null)
             buildFrom(string);
         else
-            buildFromId(string,idMap);
+            buildFromId(string,idMap, null);
     }
 
-    protected void buildFromId(String string, Map<String,String> idMap) {
+    protected void buildFromId(String string, Map<String,String> idMap, ConditionalPoint last) {
         vars = new HashMap<String, String>();
         String[] array = string.split(":;:");
-        try {
-            className = idMap.get(array[0]).toString();
-            methodSignature = idMap.get(array[1]).toString();
-            for (int i = 2; i< array.length; i = i+2) {
-                vars.put(idMap.get(array[i]).toString(), array[i+1]);
-            }
+        parseLocation(array[0],idMap);
 
-        } catch (Exception e) {
-            bugPoint = true;
+        if(array[1].equals("P"))
+            vars.putAll(last.vars);
+        else {
+            for (int i = 1; i< array.length; i++) {
+                String[] tmp = array[i].split(";");
+                vars.put(idMap.get(tmp[0]).toString(), tmp[1]);
+            }
         }
+    }
+
+
+    protected void parseLocation(String string, Map<String, String> idMap) {
+        String[] array = string.split(";");
+        id = Integer.parseInt(array[0]);
+        className = idMap.get(array[1]).toString();
+        methodSignature = idMap.get(array[2]).toString();
     }
 
     //ancienne version des logs

@@ -17,6 +17,8 @@ public abstract class Point {
     int id;
     boolean bugPoint = false;
 
+    public Point() {}
+
     public Point(String string, Map<String,String> idMap) {
         buildFrom(string, idMap);
     }

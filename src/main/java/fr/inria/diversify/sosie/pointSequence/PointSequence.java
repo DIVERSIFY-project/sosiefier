@@ -16,6 +16,7 @@ import java.util.Map;
 public class PointSequence {
     protected List<ConditionalPoint> conditionalPoints;
     protected List<ExceptionPoint> exceptionPoints;
+    protected List<CallPoint> callPoint;
     protected String threadName;
     protected String name;
 
@@ -24,6 +25,7 @@ public class PointSequence {
     public PointSequence() {
         conditionalPoints = new ArrayList<ConditionalPoint>();
         exceptionPoints = new ArrayList<ExceptionPoint>();
+        callPoint = new ArrayList<CallPoint>();
     }
 
     public void parseFile(File file,Map<String,String> idMap) throws IOException {
@@ -51,10 +53,14 @@ public class PointSequence {
     }
 
     protected void addPoint(String stringPoint, Map<String,String> idMap) {
-        if(stringPoint.startsWith("ST"))
+        if(stringPoint.startsWith("T"))
             exceptionPoints.add(new ExceptionPoint(stringPoint, idMap));
-        else
-            conditionalPoints.add(new ConditionalPoint(stringPoint, idMap));
+        else if(stringPoint.startsWith("C"))
+            callPoint.add(new CallPoint(stringPoint, idMap));
+        else {
+            ConditionalPoint last = conditionalPoints.get(conditionalPoints.size());
+            conditionalPoints.add(new ConditionalPoint(stringPoint, idMap, last));
+        }
     }
 
     public int findPoint(int id, String className, String methodSignature) {

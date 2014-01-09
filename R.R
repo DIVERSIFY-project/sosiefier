@@ -33,35 +33,65 @@ chiTestTab2 <- function(data, index1, index2) {
   }
   return(result)  
 }
-
-diversiticationStat <- function(data, index) {
+#compileTime et testTime pour 100 execution
+diversiticationStat <- function(data, index, compileTime, testTime) {
   result <- data.frame ();
   for(i in set(data[,index])) {
     sub <- subset(data, data[,index] == i);
-    trial <- nbOfTrial(sub)
-    sosie <-  nbOfSosie(sub);
-    compile <- nbOfCompile(sub);  
-    result[paste(i,sep=""),"trial"] <- trial;
-  
-    result[paste(i,sep=""),"compile"] <- compile;
-    result[paste(i,sep=""),"% compile"] <- 100*compile/(trial);
-    result[paste(i,sep=""),"sosie"] <- sosie;
-    result[paste(i,sep=""),"% sosie"] <- 100*sosie/(trial);
-    result[paste(i,sep=""),"candidate"] <- sum(sub$candidate)/length(sub$candidate);
+    subStmt <-  subset(sub, sub[,"level"] == "statement");
+    subBlock <-  subset(sub, sub[,"level"] == "block");
+    trialStmt <- nbOfTrial(subStmt)
+    sosieStmt <-  nbOfSosie(subStmt);
+    compileStmt <- nbOfCompile(subStmt);
+    trialBlock <- nbOfTrial(subBlock)
+    sosieBlock <-  nbOfSosie(subBlock);
+    compileBlock <- nbOfCompile(subBlock);
+    
+    result[paste(i,sep=""),"trial (stmt)"] <- paste(trialStmt, sep="");
+    result[paste(i,sep=""),"trial (block)"] <- paste(trialBlock, sep="");
+    result[paste(i,sep=""),"compile (stmt)"] <- paste(compileStmt, sep="");
+    result[paste(i,sep=""),"compile (block)"] <- paste(compileBlock, sep="");
+    
+    result[paste(i,sep=""),"% compile (stmt)"] <- paste(round(100*compileStmt/(trialStmt),2), sep="");
+    result[paste(i,sep=""),"% compile (block)"] <- paste(round(100*compileBlock/(trialBlock),2), sep="");
+    result[paste(i,sep=""),"sosie (stmt)"] <- paste(sosieStmt, sep="");
+    result[paste(i,sep=""),"sosie (block)"] <- paste(sosieBlock, sep="");
+    result[paste(i,sep=""),"% sosie (stmt)"] <- paste(round(100*sosieStmt/(trialStmt),2), sep="");
+    result[paste(i,sep=""),"% sosie (block)"] <- paste(round(100*sosieBlock/(trialBlock),2), sep="");
+    result[paste(i,sep=""),"candidate (stmt)"] <- paste(round(sum(subStmt$candidate)/length(subStmt$candidate),2),sep="");
+    result[paste(i,sep=""),"candidate (block)"] <- paste(round(sum(subBlock$candidate)/length(subBlock$candidate),2), sep="");
+    result[paste(i,sep=""),"sosie/h (stmt)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileStmt/trialStmt, 100*sosieStmt/trialStmt),2),sep="");
+    result[paste(i,sep=""),"sosie/h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieStmt/trialBlock),2),sep=""); 
   }
-  sosie <-  nbOfSosie(data);
-  trial <- nbOfTrial(data)
-  compile <- nbOfCompile(data); 
+  subStmt <-  subset(data, data[,"level"] == "statement");
+  subBlock <-  subset(data, data[,"level"] == "block");
+  trialStmt <- nbOfTrial(subStmt)
+  sosieStmt <-  nbOfSosie(subStmt);
+  compileStmt <- nbOfCompile(subStmt);
+  trialBlock <- nbOfTrial(subBlock)
+  sosieBlock <-  nbOfSosie(subBlock);
+  compileBlock <- nbOfCompile(subBlock);
   
-
-  result["all","trial"] <- trial;
-  result["all","compile"] <- compile;
-  result["all","% compile"] <- 100*compile/(trial);
-  result["all","sosie"] <- sosie;
-  result["all","% sosie"]  <- 100*sosie/(trial);
-  result["all","candidate"] <- sum(data$candidate)/length(data$candidate);
-  # result["all","% total"] <- 100*(fail + good)/nbOfDiversification(data);
+  result["all","trial (stmt)"] <- paste(trialStmt, sep="");
+  result["all","trial (block)"] <- paste(trialBlock, sep="");
+  result["all","compile (stmt)"] <- paste(compileStmt, sep="");
+  result["all","compile (block)"] <- paste(compileBlock, sep="");
+  
+  result["all","% compile (stmt)"] <- paste(round(100*compileStmt/(trialStmt),2), sep="");
+  result["all","% compile (block)"] <- paste(round(100*compileBlock/(trialBlock),2), sep="");
+  result["all","sosie (stmt)"] <- paste(sosieStmt, sep="");
+  result["all","sosie (block)"] <- paste(sosieBlock, sep="");
+  result["all","% sosie (stmt)"] <- paste(round(100*sosieStmt/(trialStmt),2), sep="");
+  result["all","% sosie (block)"] <- paste(round(100*sosieBlock/(trialBlock),2), sep="");
+  result["all","candidate (stmt)"] <- paste(round(sum(subStmt$candidate)/length(subStmt$candidate),2),sep="");
+  result["all","candidate (block)"] <- paste(round(sum(subBlock$candidate)/length(subBlock$candidate),2), sep="");
+  result["all","sosie/h (stmt)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileStmt/trialStmt, 100*sosieStmt/trialStmt),2),sep="");
+  result["all","sosie/h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieStmt/trialBlock),2),sep=""); 
   return(result)  
+}
+
+sosieHour <- function(compileTime, testTime, perCompile, perSosie) {
+  return((3600/((100 - perCompile) * compileTime + perCompile * testTime)) * 100 * perSosie) 
 }
 
 mySample <- function(data, size) {
@@ -69,7 +99,8 @@ mySample <- function(data, size) {
 }
 
 splitAndWrite <- function(data, splitSize, fileName) {
-  for(i in 0:nrow(data)/splitSize) {
+  borne <- nrow(data)/splitSize
+  for(i in 0:borne) {
     subSet <- junit[(i*splitSize):((i+1)*splitSize),]
     fileName2 <- paste(sep="",fileName,i,".csv")
     write.csv2(subSet, file=fileName2)
