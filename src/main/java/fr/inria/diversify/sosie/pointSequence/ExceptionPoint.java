@@ -23,15 +23,18 @@ public class ExceptionPoint extends Point {
     @Override
     protected void buildFrom(String string, Map<String,String> idMap) {
         stackTrace = new ArrayList<String>();
-        String[] array = string.split(":;:");
+        String[] array = string.split(";");
         try {
-            id = Integer.parseInt(array[1]);
-            className = array[2];
-            methodSignature = array[3];
-            for (int i = 4; i< array.length; i++) {
+//            id = Integer.parseInt(array[1]);
+            className = array[0];
+
+            methodSignature = array[1];
+            for (int i = 2; i< array.length; i++) {
                 stackTrace.add(array[i]);
             }
+            nbPoint++;
         } catch (Exception e) {
+            error++;
             bugPoint = true;
         }
     }

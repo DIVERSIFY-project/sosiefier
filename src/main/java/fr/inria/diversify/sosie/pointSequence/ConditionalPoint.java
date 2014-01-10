@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.pointSequence;
 
 import fr.inria.diversify.sosie.compare.VariableDiff;
+import fr.inria.diversify.util.Log;
 
 import java.util.*;
 
@@ -44,18 +45,29 @@ public class ConditionalPoint extends Point {
     }
 
     protected void buildFromId(String string, Map<String,String> idMap, ConditionalPoint last) {
-        vars = new HashMap<String, String>();
-        String[] array = string.split(":;:");
-        parseLocation(array[0],idMap);
+        try {
+            vars = new HashMap<String, String>();
+            String[] array = string.split(":;:");
+            parseLocation(array[0],idMap);
 
-        if(array[1].equals("P"))
-            vars.putAll(last.vars);
-        else {
-            for (int i = 1; i< array.length; i++) {
-                String[] tmp = array[i].split(";");
-                vars.put(idMap.get(tmp[0]).toString(), tmp[1]);
+            if(array[1].equals("P"))
+                vars.putAll(last.vars);
+            else {
+                for (int i = 1; i< array.length; i++) {
+                    String[] tmp = array[i].split(";");
+                    if(tmp.length != 1 )
+                        vars.put(idMap.get(tmp[0]).toString(), tmp[1]);
+                    else
+                        vars.put(idMap.get(tmp[0]).toString(), "");
+                }
             }
+            nbPoint++;
+        } catch (Exception e) {
+            error++;
+            bugPoint = true;
+            Log.debug("error");
         }
+
     }
 
 

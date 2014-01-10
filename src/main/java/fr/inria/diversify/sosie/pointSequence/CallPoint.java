@@ -1,5 +1,7 @@
 package fr.inria.diversify.sosie.pointSequence;
 
+import fr.inria.diversify.util.Log;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -15,10 +17,15 @@ public class CallPoint extends Point {
 
     @Override
     protected void buildFrom(String string, Map<String, String> idMap) {
-        String[] array = string.split(";");
-        id = Integer.parseInt(array[0]);
-        className = idMap.get(array[1]).toString();
-        methodSignature = idMap.get(array[2]).toString();
+        try {
+            String[] array = string.split(";");
+            className = idMap.get(array[0]);
+            methodSignature = idMap.get(array[1]);
+            nbPoint++;
+        } catch (Exception e) {
+            error++;
+            Log.debug("error");
+        }
     }
 
     @Override

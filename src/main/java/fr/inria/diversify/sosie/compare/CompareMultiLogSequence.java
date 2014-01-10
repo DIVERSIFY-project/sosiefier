@@ -128,13 +128,17 @@ public class CompareMultiLogSequence {
     protected Set<VariableDiff> loadVarToExclude(String fileExcludeVar) throws IOException {
         Log.debug("load exclude variables");
         varToExclude = new HashSet<VariableDiff>();
-        BufferedReader reader = new BufferedReader(new FileReader(fileExcludeVar));
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileExcludeVar));
+            String line = reader.readLine();
+            while (line != null) {
+                Log.debug("exclude var: {}",line);
+                varToExclude.add(new VariableDiff(line));
+                line = reader.readLine();
+            }
 
-        String line = reader.readLine();
-        while (line != null) {
-            Log.debug("exclude var: {}",line);
-            varToExclude.add(new VariableDiff(line));
-            line = reader.readLine();
+        } catch (Exception e) {
+            Log.warn("exclude variable file: {} do net exist", fileExcludeVar);
         }
         return varToExclude;
     }
@@ -148,12 +152,14 @@ public class CompareMultiLogSequence {
         } catch (IOException e) {
             //e.printStackTrace();
         }
+        int i = 0;
         Log.debug("load trace in directory: {}",dir);
         for (File f : file.listFiles()) {
             if(recursive && f.isDirectory())
                 list.addAll(loadPointSequence(f.getAbsolutePath(),recursive));
             else {
                 try {
+                    i++;
                     PointSequence ps = new PointSequence();
                     ps.parseFile(f,idMap);
                     list.add(ps);
@@ -173,7 +179,7 @@ public class CompareMultiLogSequence {
 
         while (line != null) {
             String[] tmp = line.split(" ");
-            map.put(tmp[0],tmp[1]);
+            map.put(tmp[0],line.substring(tmp[0].length(), line.length()));
             line = reader.readLine();
         }
         return map;

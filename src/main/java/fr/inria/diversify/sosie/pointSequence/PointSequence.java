@@ -58,8 +58,12 @@ public class PointSequence {
         else if(stringPoint.startsWith("C"))
             callPoint.add(new CallPoint(stringPoint, idMap));
         else {
-            ConditionalPoint last = conditionalPoints.get(conditionalPoints.size());
+            if(conditionalPoints.size() > 0) {
+            ConditionalPoint last = conditionalPoints.get(conditionalPoints.size() - 1);
             conditionalPoints.add(new ConditionalPoint(stringPoint, idMap, last));
+            }
+            else
+                conditionalPoints.add(new ConditionalPoint(stringPoint, idMap, null));
         }
     }
 
@@ -106,8 +110,8 @@ public class PointSequence {
 
     protected void parseFileName(String fileName) {
         String[] tmp = fileName.split("_");
-        name = tmp[0] + "_" +tmp[1];
-        threadName = tmp[2];
+        name = tmp[1];
+        threadName = tmp[0];
     }
 
     public String getName() {

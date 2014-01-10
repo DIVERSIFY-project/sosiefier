@@ -4,6 +4,7 @@ import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 
+import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.util.DiversifyProperties;
@@ -64,6 +65,7 @@ public class CompareLogMain {
         CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal,dirSosie);
         un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
         un.findAndWriteDiffVar(varToExclude);
+        Log.debug(Point.nbPoint+ " "+Point.error);
     }
 
     protected void diff() throws Exception {
