@@ -67,6 +67,7 @@ public class LogWriter {
                 string.append(simpleSeparator);
                 string.append(methodSignatureId);
                 fileWriter.append(string.toString());
+                fileWriter.flush();
             } catch (Exception e) {
                 return;
             }
@@ -90,7 +91,7 @@ public class LogWriter {
                     fileWriter.append(vars.toString());
                     previousVarLog.put(thread,vars.toString());
                 }
-
+                fileWriter.flush();
             } catch (Exception e) {}
 
         }
@@ -111,6 +112,7 @@ public class LogWriter {
                 fileWriter.append(classId);
                 fileWriter.append(simpleSeparator);
                 fileWriter.append(methodSignatureId);
+                fileWriter.flush();
             } catch (Exception e) {
                 e.printStackTrace();
             }

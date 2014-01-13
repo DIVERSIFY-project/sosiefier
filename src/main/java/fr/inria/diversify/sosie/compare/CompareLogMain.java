@@ -55,10 +55,14 @@ public class CompareLogMain {
         if(DiversifyProperties.getProperty("logTrace").equals("same"))
             same();
         else
-            if(DiversifyProperties.getProperty("conditionalPoint").equals("true"))
-                diff();
-            else
-                diffException();
+            if(DiversifyProperties.getProperty("type").equals("var"))
+                diffVar();
+            else {
+                if(DiversifyProperties.getProperty("type").equals("call"))
+                    diffCall();
+                else
+                    diffException();
+            }
     }
 
     protected void same() throws IOException {
@@ -68,7 +72,7 @@ public class CompareLogMain {
         Log.debug(Point.nbPoint+ " "+Point.error);
     }
 
-    protected void diff() throws Exception {
+    protected void diffVar() throws Exception {
         String startPointString = DiversifyProperties.getProperty("startPoint");
         Set<VariableDiff> diffs = new HashSet<VariableDiff>();
         int i =0;
@@ -102,6 +106,40 @@ public class CompareLogMain {
             }
         }
         writeVarDiff(diffs,DiversifyProperties.getProperty("result")+"/varDiff");
+    }
+
+    protected void diffCall() throws Exception {
+        String startPointString = DiversifyProperties.getProperty("startPoint");
+        int i =0;
+        for(File f : (new File(dirSosie).listFiles())) {
+            Log.debug("loading log from dir {}",f.getAbsolutePath());
+            try {
+                File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
+                TransformationParser parser = new TransformationParser(codeFragments);
+                Log.info("startPoint {}",startPoint.getAbsolutePath());
+                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
+
+                CompareMultiCallSequence un = new CompareMultiCallSequence(dirOriginal, f.getAbsolutePath(), cf);
+                un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+                Diff diff = un.findDivergenceCall();
+                i++;
+                Log.info("sosie nb: {}",i);
+                Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
+                if(!diff.sameTraceAndVar()) {
+                    Log.info(f.getName());
+                    Log.info(diff.report());
+                    if(!diff.sameVar()) {
+                        diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
+                    }
+                }
+                else
+                    Log.info("same trace");
+            } catch (Exception e) {
+                Log.error("error",e);
+                e.printStackTrace();
+            }
+        }
+//        writeVarDiff(diffs,DiversifyProperties.getProperty("result")+"/varDiff");
     }
 
     protected void diffException() throws Exception {

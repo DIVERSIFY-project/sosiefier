@@ -8,9 +8,7 @@ import org.json.JSONException;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: Simon
@@ -24,11 +22,6 @@ public class CompareMultiExceptionSequence {
     protected int syncroRange = 0;
     protected CodeFragment startPoint;
 
-//    public CompareMultiCatchSequence(String dirOriginal, String dirSosie) {
-//        originals = loadPointSequence(dirOriginal,false);
-//        sosies = loadPointSequence(dirSosie,true);
-//
-//    }
 
     public CompareMultiExceptionSequence(String dirOriginal, String dirSosie, CodeFragment startPoint) throws IOException, JSONException {
         originals = loadPointSequence(dirOriginal,false);
@@ -36,26 +29,6 @@ public class CompareMultiExceptionSequence {
         this.startPoint = startPoint;
 
     }
-
-
-//    public boolean findAndWriteDiffVar(String fileName) throws IOException {
-//        loadVarToExclude(fileName);
-//        try {
-//            this.findDiffVarToExclude();
-//            FileWriter fw = new FileWriter(fileName);
-//            BufferedWriter bw = new BufferedWriter(fw);
-//            for(VariableDiff var: varToExclude) {
-//                Log.debug("var to exclude: {}",var);
-//                bw.write(var.stringForExcludeFile()+"\n");
-//            }
-//            bw.close();
-//            fw.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//        return true;
-//    }
 
     /**
     * search if the original and sosie (two set of trace) not diverge at the catch level
@@ -70,8 +43,8 @@ public class CompareMultiExceptionSequence {
 			    CompareSingleExceptionSequence cls = new CompareSingleExceptionSequence(original, sosie, startPoint);
                 if (sosie.getName().equals(original.getName())) {
                     diff.addMatch(original,sosie);
-                    diff.addCatchFor(original, cls.findDivergenceException(syncroRange));
-                    diff.addCatchDivergence(original, cls.findDivergence(syncroRange));
+                    diff.addExceptionFor(original, cls.findDivergenceException(syncroRange));
+                    diff.addExceptionDivergence(original, cls.findDivergence(syncroRange));
 	    		}
 	    	}
 		    if(!diff.hasMatch(original))

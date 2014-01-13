@@ -68,8 +68,8 @@ public class
             i++;
             start1++;
             start2++;
-            Point oPoint = ps1.getCatchPoint(start1);
-            Point sPoint = ps2.getCatchPoint(start2);
+            Point oPoint = ps1.getExceptionPoint(start1);
+            Point sPoint = ps2.getExceptionPoint(start2);
             if(!oPoint.sameLogPoint(sPoint)) {
                 int newSyncho[] = findSyncro(syncroRange, start1,start2);
                 if(newSyncho == null)
@@ -102,9 +102,9 @@ public class
         while(startOriginal < bound - 1 && startSosie < bound - 1) {
             startOriginal++;
             startSosie++;
-            ExceptionPoint oPoint = original.getCatchPoint(startOriginal);
-            ExceptionPoint sPoint = sosie.getCatchPoint(startSosie);
-            if(oPoint.sameLogPoint(sPoint) && !oPoint.sameCatchTrace(sPoint)) {
+            ExceptionPoint oPoint = original.getExceptionPoint(startOriginal);
+            ExceptionPoint sPoint = sosie.getExceptionPoint(startSosie);
+            if(oPoint.sameLogPoint(sPoint) && !oPoint.sameExceptionTrace(sPoint)) {
                 ExceptionDiff cd = new ExceptionDiff();
                 cd.setOriginal(original);
                 cd.setSosie(sosie);
@@ -129,10 +129,10 @@ public class
     protected int findDiversificationIndex(PointSequence sequence) {
 
         for (int i = 0; i < sequence.cathSize(); i++)
-            if(sequence.getCatchPoint(i).containsInto(startPoint)) {
+            if(sequence.getExceptionPoint(i).containsInto(startPoint)) {
                 if(i == 0)
 
-                 Log.info("{} {}",sequence.getCatchPoint(i).getClassName(),startPoint.getSourceClass().getQualifiedName());
+                 Log.info("{} {}",sequence.getExceptionPoint(i).getClassName(),startPoint.getSourceClass().getQualifiedName());
                 return i;
             }
 
@@ -150,8 +150,8 @@ public class
     protected int[] findSyncroP(int syncroRange, int iOriginal, int iSosie){
         for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < original.cathSize()); i++) {
             for(int j = iSosie; (j < syncroRange + iSosie) && (j < sosie.cathSize()); j++) {
-                Point oPoint = original.getCatchPoint(i);
-                Point sPoint = sosie.getCatchPoint(j);
+                Point oPoint = original.getExceptionPoint(i);
+                Point sPoint = sosie.getExceptionPoint(j);
                 if(oPoint.sameLogPoint(sPoint))
                     return new int[]{i,j};
             }

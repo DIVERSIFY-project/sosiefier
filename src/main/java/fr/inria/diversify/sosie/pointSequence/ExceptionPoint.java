@@ -60,7 +60,7 @@ public class ExceptionPoint extends Point {
 //        return super.sameLogPoint(point) && sameValue(point);
 //    }
 
-    public boolean sameCatchTrace(Point sPoint) {
+    public boolean sameExceptionTrace(Point sPoint) {
         ExceptionPoint cPoint = (ExceptionPoint)sPoint;
         return sameStackTrace(cPoint.stackTrace);
     }

@@ -99,7 +99,7 @@ public class PointSequence {
         return conditionalPoints.get(i);
     }
 
-    public ExceptionPoint getCatchPoint(int i) {
+    public ExceptionPoint getExceptionPoint(int i) {
         return exceptionPoints.get(i);
     }
 
@@ -125,5 +125,13 @@ public class PointSequence {
     public static int getMaxSizeException() {
         return maxSizeException;
 
+    }
+
+    public int callSize() {
+        return callPoint.size();
+    }
+
+    public Point getCallPoint(int i) {
+        return callPoint.get(i);
     }
 }

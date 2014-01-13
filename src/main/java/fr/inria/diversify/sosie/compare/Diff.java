@@ -21,7 +21,8 @@ public class Diff {
     protected Map<PointSequence, Set<VariableDiff>> diffVar;
     protected Map<PointSequence,PointSequence> match;
     protected Map<PointSequence,int[][]> conditionalDivergence;
-    protected Map<PointSequence,int[][]> catchDivergence;
+    protected Map<PointSequence,int[][]> exceptionDivergence;
+    protected Map<PointSequence,int[][]> callDivergence;
     protected Map<PointSequence, Set<ExceptionDiff>> diffException;
 
     protected CodeFragment startPoint;
@@ -30,7 +31,7 @@ public class Diff {
         this.diffVar = new HashMap<PointSequence, Set<VariableDiff>>();
         this.diffException = new HashMap<PointSequence, Set<ExceptionDiff>>();
         conditionalDivergence = new HashMap<PointSequence, int[][]>();
-        catchDivergence = new HashMap<PointSequence, int[][]>();
+        exceptionDivergence = new HashMap<PointSequence, int[][]>();
         match = new HashMap<PointSequence, PointSequence>();
         this.startPoint = startPoint;
     }
@@ -42,7 +43,7 @@ public class Diff {
         diffVar.get(original).addAll(var);
     }
 
-    public void addCatchFor(PointSequence original, Set<ExceptionDiff> divergenceCatch) {
+    public void addExceptionFor(PointSequence original, Set<ExceptionDiff> divergenceCatch) {
         if(!diffException.containsKey(original))
             diffException.put(original,new HashSet<ExceptionDiff>());
 
@@ -57,8 +58,8 @@ public class Diff {
         conditionalDivergence.put(original, d);
     }
 
-    public void addCatchDivergence(PointSequence original, int[][] divergence) {
-        catchDivergence.put(original, divergence);
+    public void addExceptionDivergence(PointSequence original, int[][] divergence) {
+        exceptionDivergence.put(original, divergence);
     }
 
     public boolean sameTrace() {
@@ -256,19 +257,19 @@ public class Diff {
         StringBuilder builder = new StringBuilder();
         PointSequence sosie = match.get(original);
 
-        int[][] div = catchDivergence.get(original);
+        int[][] div = exceptionDivergence.get(original);
         int i = 0;
         int start1 = 0;
         int start2 = 0;
         boolean toString = false;
 
-        Point precedent = original.getCatchPoint(0);
+        Point precedent = original.getExceptionPoint(0);
         builder.append(original.toDot() + "\n");
         builder.append(original.hashCode() + " -> " + precedent.hashCode() + "\n");
         builder.append(precedent.toDot(getCatchDiffFor(original, 0)) + "\n");
 
         while(i < div.length) {
-            Point next = original.getCatchPoint(start1);
+            Point next = original.getExceptionPoint(start1);
             Set<ExceptionDiff> varD = getCatchDiffFor(original, div[i][0]);
             if(!varD.isEmpty())
                 toString = true;
@@ -283,7 +284,7 @@ public class Diff {
             }
             else {
                 toString = true;
-                Point endBranch = original.getCatchPoint(div[i][0]);
+                Point endBranch = original.getExceptionPoint(div[i][0]);
                 writeDotBranchCatch(builder, precedent, endBranch, start1, div[i][0], original);
                 writeDotBranchCatch(builder, precedent, endBranch, start2, div[i][1], sosie);
                 precedent = endBranch;
@@ -300,8 +301,8 @@ public class Diff {
 
     protected void writeDotBranchCatch(StringBuilder builder, Point branchNext, Point endBranch, int i, int borne,  PointSequence ps) throws IOException {
         for(; i < borne; i++) {
-            builder.append(branchNext.hashCode() + " -> " + ps.getCatchPoint(i).hashCode() + "\n");
-            branchNext = ps.getCatchPoint(i);
+            builder.append(branchNext.hashCode() + " -> " + ps.getExceptionPoint(i).hashCode() + "\n");
+            branchNext = ps.getExceptionPoint(i);
             builder.append(branchNext.toDot(new HashSet<VariableDiff>()));
         }
         builder.append(branchNext.hashCode() + " -> " + endBranch.hashCode() + "\n");
@@ -337,5 +338,9 @@ public class Diff {
         for(Set<ExceptionDiff> set : diffException.values())
             diffs.addAll(set);
         return diffs;
+    }
+
+    public void addCallDivergence(PointSequence original, int[][] divergence) {
+        callDivergence.put(original, divergence);
     }
 }

@@ -32,14 +32,14 @@ public class ExceptionDiff {
 
 
     public String toString() {
-        ExceptionPoint cpO =  original.getCatchPoint(positionInOriginal);
-        ExceptionPoint cpS = sosie.getCatchPoint(positionInSosie);
+        ExceptionPoint cpO =  original.getExceptionPoint(positionInOriginal);
+        ExceptionPoint cpS = sosie.getExceptionPoint(positionInSosie);
         return cpO.getClassName() +":"+cpO.getMethodSignature()+":"+cpO.getStackTrace() +" / "+cpS.getStackTrace();
     }
 
     public String toDot() {
-        ExceptionPoint cpO =  original.getCatchPoint(positionInOriginal);
-        ExceptionPoint cpS = sosie.getCatchPoint(positionInSosie);
+        ExceptionPoint cpO =  original.getExceptionPoint(positionInOriginal);
+        ExceptionPoint cpS = sosie.getExceptionPoint(positionInSosie);
         return cpO.getClassName() +":"+cpO.getMethodSignature()+":"+cpO.getStackTrace() +" / "+cpS.getStackTrace();
     }
 }
