@@ -32,6 +32,7 @@ public class Diff {
         this.diffException = new HashMap<PointSequence, Set<ExceptionDiff>>();
         conditionalDivergence = new HashMap<PointSequence, int[][]>();
         exceptionDivergence = new HashMap<PointSequence, int[][]>();
+        callDivergence = new HashMap<PointSequence, int[][]>();
         match = new HashMap<PointSequence, PointSequence>();
         this.startPoint = startPoint;
     }
@@ -342,5 +343,16 @@ public class Diff {
 
     public void addCallDivergence(PointSequence original, int[][] divergence) {
         callDivergence.put(original, divergence);
+    }
+
+    public String callReport() {
+        int diff = 0;
+        for(PointSequence d : callDivergence.keySet()) {
+            if(callDivergence.get(d) == null) {
+                diff++;
+            }
+
+        }
+        return "trace diff: "+diff;
     }
 }

@@ -59,7 +59,7 @@ public class CompareSingleCallSequence {
         divergence[i][0] = start1;
         divergence[i][1] = start2;
 
-        while(start1 < bound - 1 && start2 < bound - 1) {
+        while(start1 < bound && start2 < bound) {
             i++;
             start1++;
             start2++;

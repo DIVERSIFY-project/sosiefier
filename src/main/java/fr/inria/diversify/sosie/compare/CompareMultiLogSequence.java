@@ -66,7 +66,7 @@ public class CompareMultiLogSequence {
         Diff diff = new Diff(startPoint);
  	    for (PointSequence original : originals) {
 		    for (PointSequence sosie : sosies) {
-                 Log.debug("compare original: {} with {}",original, sosie );
+//                 Log.debug("compare original: {} with {}",original, sosie );
 			    CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
 	    		cls.setDiffVar(varToExclude);
                 if (sosie.getName().equals(original.getName())) {

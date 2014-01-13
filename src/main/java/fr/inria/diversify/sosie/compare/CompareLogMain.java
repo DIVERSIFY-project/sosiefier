@@ -95,7 +95,7 @@ public class CompareLogMain {
                     Log.info(diff.report());
                     if(!diff.sameVar()) {
                         diffs.addAll(diff.getAllVariableDiff());
-                        diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
+//                        diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
                     }
                 }
                 else
@@ -110,30 +110,27 @@ public class CompareLogMain {
 
     protected void diffCall() throws Exception {
         String startPointString = DiversifyProperties.getProperty("startPoint");
-        int i =0;
+        int i = 0;
         for(File f : (new File(dirSosie).listFiles())) {
             Log.debug("loading log from dir {}",f.getAbsolutePath());
             try {
                 File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
                 TransformationParser parser = new TransformationParser(codeFragments);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
-                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
+//                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
 
-                CompareMultiCallSequence un = new CompareMultiCallSequence(dirOriginal, f.getAbsolutePath(), cf);
+                CompareMultiCallSequence un = new CompareMultiCallSequence(dirOriginal, f.getAbsolutePath(), null);
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
                 Diff diff = un.findDivergenceCall();
                 i++;
                 Log.info("sosie nb: {}",i);
-                Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
-                if(!diff.sameTraceAndVar()) {
+                Log.info("callDivergence {}, result {}",diff.sameTrace());
+
                     Log.info(f.getName());
-                    Log.info(diff.report());
-                    if(!diff.sameVar()) {
-                        diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
-                    }
-                }
-                else
-                    Log.info("same trace");
+                    Log.info(diff.callReport());
+//                    if(!diff.sameVar()) {
+//                        diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
+//                    }
             } catch (Exception e) {
                 Log.error("error",e);
                 e.printStackTrace();

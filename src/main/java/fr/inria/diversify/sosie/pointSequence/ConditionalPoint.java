@@ -65,7 +65,6 @@ public class ConditionalPoint extends Point {
         } catch (Exception e) {
             error++;
             bugPoint = true;
-            Log.debug("error");
         }
 
     }

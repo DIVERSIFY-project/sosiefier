@@ -28,13 +28,15 @@ public class PointSequence {
         callPoint = new ArrayList<CallPoint>();
     }
 
-    public void parseFile(File file,Map<String,String> idMap) throws IOException {
+    public void parseFile(File file,Map<String,String> idMap) throws Exception {
         parseFileName(file.getName());
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
         reader.readLine();
         String line = reader.readLine();
         String tmp = "";
+        if(line == null)
+            throw new Exception("empty file");
         while (line != null) {
             if(!line.isEmpty()) {
                 if(line.endsWith("$$$")) {
@@ -55,8 +57,17 @@ public class PointSequence {
     protected void addPoint(String stringPoint, Map<String,String> idMap) {
         if(stringPoint.startsWith("T"))
             exceptionPoints.add(new ExceptionPoint(stringPoint, idMap));
-        else if(stringPoint.startsWith("C"))
-            callPoint.add(new CallPoint(stringPoint, idMap));
+        else if(stringPoint.startsWith("C")) {
+            if(callPoint.size() > 0) {
+                CallPoint last = callPoint.get(callPoint.size() - 1);
+                CallPoint point = new CallPoint(stringPoint, idMap);
+                if(last.sameLogPoint(point))
+                    last.incNb();
+                else
+                    callPoint.add(point);
+            } else
+                callPoint.add(new CallPoint(stringPoint, idMap));
+        }
         else {
             if(conditionalPoints.size() > 0) {
             ConditionalPoint last = conditionalPoints.get(conditionalPoints.size() - 1);
