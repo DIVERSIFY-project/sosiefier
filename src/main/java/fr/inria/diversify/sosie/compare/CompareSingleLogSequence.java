@@ -113,6 +113,7 @@ public class CompareSingleLogSequence {
                     if(!containsExcludeVar(dVar)) {
                         dVar.setPositionInOrignal(startOriginal);
                         dVar.setPositionInSosie(startSosie);
+                        dVar.setConditionalPointSosie(sPoint);
                         var.add(dVar);
                     }
             }

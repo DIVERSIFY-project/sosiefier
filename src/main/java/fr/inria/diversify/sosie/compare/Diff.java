@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
 
@@ -110,8 +111,8 @@ public class Diff {
     }
 
     public String report() {
-        String report = "startPoint: "+startPoint.getSourceClass().getSimpleName();
-        report += "\nsame trace: "+ sameTrace() + " same var: "+sameTraceAndVar()+ "\n";
+//        String report = "startPoint: "+startPoint.getSourceClass().getSimpleName();
+        String  report = "\nsame trace: "+ sameTrace() + " same var: "+sameTraceAndVar()+ "\n";
 
         for (PointSequence original : diffVar.keySet())
             if(!diffVar.get(original).isEmpty()) {
@@ -123,15 +124,43 @@ public class Diff {
                     ")\n\tvar: "+ diffVar.get(original) +"\n";
             }
 
+        report += "nbDiffVar: "+ nbDiffVar() + "\nnbDiffUniqueVar: " + nbDiffUniqueVar() + "\nnbDiffVarPoint: "+ nbDiffVarPoint();
+
         return report;
     }
 
-    public Set<VariableDiff> getDiffVar() {
-        Set<VariableDiff> diff = new HashSet<VariableDiff>();
-        for(Set<VariableDiff> d : diffVar.values())
-            diff.addAll(d);
-        return diff;
+    public int nbDiffVar() {
+        int nb = 0;
+        for (PointSequence original : diffVar.keySet())
+            nb = nb + diffVar.get(original).size();
+
+        return nb;
     }
+
+    public int nbDiffUniqueVar() {
+        Set<String> vars = new HashSet<String>();
+        for (PointSequence original : diffVar.keySet())
+            for (VariableDiff var : diffVar.get(original))
+            vars.add(var.getVarName());
+
+        return vars.size();
+    }
+
+    public int nbDiffVarPoint() {
+        Set<ConditionalPoint> vars = new HashSet<ConditionalPoint>();
+        for (PointSequence original : diffVar.keySet())
+            for (VariableDiff var : diffVar.get(original))
+                vars.add(var.getConditionalPointSosie());
+
+        return vars.size();
+    }
+
+//    public Set<VariableDiff> getDiffVar() {
+//        Set<VariableDiff> diff = new HashSet<VariableDiff>();
+//        for(Set<VariableDiff> d : diffVar.values())
+//            diff.addAll(d);
+//        return diff;
+//    }
 
     protected int findDiversificationIndex(PointSequence sequence) {
         int i = 0;

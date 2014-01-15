@@ -118,9 +118,7 @@ public class ConditionalPoint extends Point {
                 new Exception("pas les meme variables");
             }
             if(!valueEqual(other,vars.get(varName))) {
-//                difVar.add(className+":"+methodSignature+":"+varName);
                 difVar.add(new VariableDiff(className,methodSignature,varName,vars.get(varName),other));
-//                difVar.add(className+":"+methodSignature+":"+varName+":("+vars.get(varName)+" / "+other+")");
             }
         }
         return difVar;

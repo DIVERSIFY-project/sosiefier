@@ -1,5 +1,7 @@
 package fr.inria.diversify.sosie.compare;
 
+import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
+
 /**
  * User: Simon
  * Date: 10/16/13
@@ -13,6 +15,7 @@ public class VariableDiff {
     protected int positionInSosie;
     protected String originalValue;
     protected String sosieValue;
+    protected ConditionalPoint conditionalPointSosie;
 
 
     public VariableDiff(String className, String methodSignature, String name, String originalValue, String sosieValue) {
@@ -65,13 +68,12 @@ public class VariableDiff {
         this.positionInSosie = sosieIndex;
     }
 
-//    public boolean equals(Object other) {
-//        if(!(other instanceof VariableDiff))
-//            return  false;
-//
-//        VariableDiff v = (VariableDiff)other;
-//        return name.equals(v.name)
-//            &&  point.getClassName().equals(v.point.getClassName())
-//            && point.getMethodSignature().equals(v.point.getMethodSignature())
-//    }
+
+    public void setConditionalPointSosie(ConditionalPoint conditinalPointSosie) {
+        this.conditionalPointSosie = conditinalPointSosie;
+    }
+
+    public ConditionalPoint getConditionalPointSosie() {
+        return  this.conditionalPointSosie;
+    }
 }

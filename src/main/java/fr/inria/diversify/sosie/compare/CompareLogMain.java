@@ -7,6 +7,7 @@ import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.TransformationParser;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.SpoonCompiler;
@@ -76,34 +77,33 @@ public class CompareLogMain {
         String startPointString = DiversifyProperties.getProperty("startPoint");
         Set<VariableDiff> diffs = new HashSet<VariableDiff>();
         int i =0;
-        for(File f : (new File(dirSosie).listFiles())) {
-            Log.debug("loading log from dir {}",f.getAbsolutePath());
-            try {
-                File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
-                TransformationParser parser = new TransformationParser(codeFragments);
-                Log.info("startPoint {}",startPoint.getAbsolutePath());
-                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
+        File file = new File(dirSosie);
+        Log.debug("loading log from dir {}",file.getAbsolutePath());
+        try {
+            File startPoint = new File(file.getAbsolutePath()+"/"+startPointString);
+            TransformationParser parser = new TransformationParser(codeFragments);
+            Log.info("startPoint {}",startPoint.getAbsolutePath());
+//            CodeFragment cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getPosition();
 
-                CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, f.getAbsolutePath(), cf, varToExclude);
-                un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
-                Diff diff = un.findDiffVar();
-                i++;
-                Log.info("sosie nb: {}",i);
-                Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
-                if(!diff.sameTraceAndVar()) {
-                    Log.info(f.getName());
-                    Log.info(diff.report());
-                    if(!diff.sameVar()) {
-                        diffs.addAll(diff.getAllVariableDiff());
+            CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, file.getAbsolutePath(), null, varToExclude);
+            un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+            Diff diff = un.findDiffVar();
+            i++;
+            Log.info("sosie nb: {}",i);
+            Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
+//            if(!diff.sameTraceAndVar()) {
+                Log.info(file.getName());
+                Log.info(diff.report());
+                if(!diff.sameVar()) {
+                    diffs.addAll(diff.getAllVariableDiff());
 //                        diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
-                    }
                 }
-                else
-                    Log.info("same trace");
-            } catch (Exception e) {
-                Log.error("error",e);
-                e.printStackTrace();
-            }
+//            }
+//            else
+//                Log.info("same trace");
+        } catch (Exception e) {
+            Log.error("error",e);
+            e.printStackTrace();
         }
         writeVarDiff(diffs,DiversifyProperties.getProperty("result")+"/varDiff");
     }
@@ -117,9 +117,9 @@ public class CompareLogMain {
                 File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
                 TransformationParser parser = new TransformationParser(codeFragments);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
-//                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
+                CodeFragment cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getPosition();
 
-                CompareMultiCallSequence un = new CompareMultiCallSequence(dirOriginal, f.getAbsolutePath(), null);
+                CompareMultiCallSequence un = new CompareMultiCallSequence(dirOriginal, f.getAbsolutePath(), cf);
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
                 Diff diff = un.findDivergenceCall();
                 i++;

@@ -47,10 +47,10 @@ public class SamplingMain {
 
 
 
-        Sampling s = new Sampling(set, 1000);
+        Sampling s = new Sampling(set, 500);
 
 
-        s.splitAndWrite(200, DiversifyProperties.getProperty("result"));
+        s.splitAndWrite(500, DiversifyProperties.getProperty("result"));
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
