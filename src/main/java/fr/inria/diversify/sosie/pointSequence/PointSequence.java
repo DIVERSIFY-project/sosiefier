@@ -61,9 +61,9 @@ public class PointSequence {
             if(callPoint.size() > 0) {
                 CallPoint last = callPoint.get(callPoint.size() - 1);
                 CallPoint point = new CallPoint(stringPoint, idMap);
-                if(last.sameLogPoint(point))
-                    last.incNb();
-                else
+//                if(last.sameLogPoint(point))
+//                    last.incNb();
+//                else
                     callPoint.add(point);
             } else
                 callPoint.add(new CallPoint(stringPoint, idMap));
@@ -102,7 +102,7 @@ public class PointSequence {
         return conditionalPoints.size();
     }
 
-    public int cathSize() {
+    public int exceptionSize() {
         return exceptionPoints.size();
     }
 

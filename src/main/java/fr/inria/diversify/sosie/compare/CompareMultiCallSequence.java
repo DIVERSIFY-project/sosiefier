@@ -48,7 +48,7 @@ public class CompareMultiCallSequence {
                 CompareSingleCallSequence cls = new CompareSingleCallSequence(original, sosie, startPoint);
                 if (sosieName.equals(originalName)) {
                     diff.addMatch(original,sosie);
-                    diff.addCallDivergence(original, cls.findDivergence(syncroRange));
+                    diff.addCallDivergence(original, cls.findDivergence(1000));
 
                 }
                 if(!diff.hasMatch(original))

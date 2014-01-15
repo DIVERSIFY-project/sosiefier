@@ -76,7 +76,7 @@ public class CompareSingleLogSequence {
             Point oPoint = ps1.getConditionalPoint(start1);
             Point sPoint = ps2.getConditionalPoint(start2);
             if(!oPoint.sameLogPoint(sPoint)) {
-                int newSyncho[] = findSyncro(syncroRange, start1,start2);
+                int newSyncho[] = findSyncro(syncroRange, ps1,ps2,  start1,start2);
                 if(newSyncho == null)
                     return null;
                 else {
@@ -118,7 +118,7 @@ public class CompareSingleLogSequence {
                     }
             }
             else {
-                int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
+                int newSyncho[] = findSyncro(syncroRange,original,sosie, startOriginal,startSosie);
                 if(newSyncho == null)
                     new Exception("call trace "+original.getName()+ " and "+sosie.getName()+" no syncro");
                 else {
@@ -144,18 +144,20 @@ public class CompareSingleLogSequence {
     }
 
 
-    protected int[] findSyncro(int syncroRange, int iOriginal, int iSosie) {
-        if(iSosie < iOriginal)
-            return findSyncroP(syncroRange, iOriginal, iSosie);
-            else
-        return findSyncroP(syncroRange,iSosie, iOriginal);
+    protected int[] findSyncro(int syncroRange, PointSequence ps1, PointSequence ps2, int iOriginal, int iSosie) {
+        if(iSosie <= iOriginal)
+            return findSyncroP(syncroRange, ps1, ps2, iOriginal, iSosie);
+        else {
+            int[] tmp = findSyncroP(syncroRange, ps2, ps1, iSosie, iOriginal);
+            return new int[]{tmp[1],tmp[0]};
+        }
     }
 
-    protected int[] findSyncroP(int syncroRange, int iOriginal, int iSosie){
-        for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < original.conditionalSize()); i++) {
-            for(int j = iSosie; (j < syncroRange + iSosie) && (j < sosie.conditionalSize()); j++) {
-                Point oPoint = original.getConditionalPoint(i);
-                Point sPoint = sosie.getConditionalPoint(j);
+    protected int[] findSyncroP(int syncroRange, PointSequence ps1, PointSequence ps2, int iOriginal, int iSosie){
+        for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < ps1.conditionalSize()); i++) {
+            for(int j = iSosie; (j < syncroRange + iSosie) && (j < ps2.conditionalSize()); j++) {
+                Point oPoint = ps1.getConditionalPoint(i);
+                Point sPoint = ps2.getConditionalPoint(j);
                 if(oPoint.sameLogPoint(sPoint))
                     return new int[]{i,j};
             }

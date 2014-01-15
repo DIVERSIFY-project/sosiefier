@@ -56,7 +56,7 @@ public class
      * @return the local conditionalDivergence. null if original and sosie are not the same trace
      */
     protected int[][] findDivergence(int syncroRange, int start1, int start2, PointSequence ps1, PointSequence ps2) {
-        int bound = Math.min(ps1.cathSize(), ps2.cathSize());
+        int bound = Math.min(ps1.exceptionSize(), ps2.exceptionSize());
         if(bound == 0)
             return null;
         int[][] divergence = new int[bound][2];
@@ -71,7 +71,7 @@ public class
             Point oPoint = ps1.getExceptionPoint(start1);
             Point sPoint = ps2.getExceptionPoint(start2);
             if(!oPoint.sameLogPoint(sPoint)) {
-                int newSyncho[] = findSyncro(syncroRange, start1,start2);
+                int newSyncho[] = findSyncro(syncroRange, ps1, ps2, start1,start2);
                 if(newSyncho == null)
                     return null;
                 else {
@@ -96,7 +96,7 @@ public class
     public Set<ExceptionDiff> findDivergenceException(int syncroRange) {
         int startOriginal = -1;
         int startSosie = -1;
-        int bound = Math.min(original.cathSize(), sosie.cathSize());
+        int bound = Math.min(original.exceptionSize(), sosie.exceptionSize());
 
         Set<ExceptionDiff> var = new HashSet<ExceptionDiff>();
         while(startOriginal < bound - 1 && startSosie < bound - 1) {
@@ -114,7 +114,7 @@ public class
 
             }
             else {
-                int newSyncho[] = findSyncro(syncroRange, startOriginal,startSosie);
+                int newSyncho[] = findSyncro(syncroRange, original, sosie, startOriginal,startSosie);
                 if(newSyncho == null)
                     new Exception("call trace "+original.getName()+ " and "+sosie.getName()+" no syncro");
                 else {
@@ -128,7 +128,7 @@ public class
 
     protected int findDiversificationIndex(PointSequence sequence) {
 
-        for (int i = 0; i < sequence.cathSize(); i++)
+        for (int i = 0; i < sequence.exceptionSize(); i++)
             if(sequence.getExceptionPoint(i).containsInto(startPoint)) {
                 if(i == 0)
 
@@ -136,22 +136,24 @@ public class
                 return i;
             }
 
-        return sequence.cathSize();
+        return sequence.exceptionSize();
     }
 
 
-    protected int[] findSyncro(int syncroRange, int iOriginal, int iSosie) {
-        if(iSosie < iOriginal)
-            return findSyncroP(syncroRange, iOriginal, iSosie);
-            else
-        return findSyncroP(syncroRange,iSosie, iOriginal);
+    protected int[] findSyncro(int syncroRange, PointSequence ps1, PointSequence ps2, int iOriginal, int iSosie) {
+        if(iSosie <= iOriginal)
+            return findSyncroP(syncroRange, ps1, ps2, iOriginal, iSosie);
+        else {
+            int[] tmp = findSyncroP(syncroRange, ps2, ps1, iSosie, iOriginal);
+            return new int[]{tmp[1],tmp[0]};
+        }
     }
 
-    protected int[] findSyncroP(int syncroRange, int iOriginal, int iSosie){
-        for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < original.cathSize()); i++) {
-            for(int j = iSosie; (j < syncroRange + iSosie) && (j < sosie.cathSize()); j++) {
-                Point oPoint = original.getExceptionPoint(i);
-                Point sPoint = sosie.getExceptionPoint(j);
+    protected int[] findSyncroP(int syncroRange, PointSequence ps1, PointSequence ps2, int iOriginal, int iSosie){
+        for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < ps1.exceptionSize()); i++) {
+            for(int j = iSosie; (j < syncroRange + iSosie) && (j < ps2.exceptionSize()); j++) {
+                Point oPoint = ps1.getExceptionPoint(i);
+                Point sPoint = ps2.getExceptionPoint(j);
                 if(oPoint.sameLogPoint(sPoint))
                     return new int[]{i,j};
             }

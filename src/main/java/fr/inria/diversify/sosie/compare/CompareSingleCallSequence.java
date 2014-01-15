@@ -61,18 +61,20 @@ public class CompareSingleCallSequence {
 
         while(start1 < bound && start2 < bound) {
             i++;
-            start1++;
-            start2++;
+
             Point oPoint = ps1.getCallPoint(start1);
             Point sPoint = ps2.getCallPoint(start2);
             if(!oPoint.sameLogPoint(sPoint)) {
-                int newSyncho[] = findSyncro(syncroRange, start1,start2);
+                int newSyncho[] = findSyncro(syncroRange, ps1, ps2, start1,start2);
                 if(newSyncho == null)
                     return null;
                 else {
                     start1 = newSyncho[0];
                     start2 = newSyncho[1];
                 }
+            } else {
+                start1++;
+                start2++;
             }
             divergence[i][0] = start1;
             divergence[i][1] = start2;
@@ -94,18 +96,20 @@ public class CompareSingleCallSequence {
         return sequence.callSize();
     }
 
-    protected int[] findSyncro(int syncroRange, int iOriginal, int iSosie) {
-        if(iSosie < iOriginal)
-            return findSyncroP(syncroRange, iOriginal, iSosie);
-        else
-            return findSyncroP(syncroRange,iSosie, iOriginal);
+    protected int[] findSyncro(int syncroRange, PointSequence ps1, PointSequence ps2, int iOriginal, int iSosie) {
+        if(iSosie <= iOriginal)
+            return findSyncroP(syncroRange, ps1, ps2, iOriginal, iSosie);
+        else {
+            int[] tmp = findSyncroP(syncroRange, ps2, ps1, iSosie, iOriginal);
+            return new int[]{tmp[1],tmp[0]};
+        }
     }
 
-    protected int[] findSyncroP(int syncroRange, int iOriginal, int iSosie){
-        for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < original.callSize()); i++) {
-            for(int j = iSosie; (j < syncroRange + iSosie) && (j < sosie.callSize()); j++) {
-                Point oPoint = original.getCallPoint(i);
-                Point sPoint = sosie.getCallPoint(j);
+    protected int[] findSyncroP(int syncroRange, PointSequence ps1, PointSequence ps2, int iOriginal, int iSosie){
+        for(int i = iOriginal; (i < syncroRange + iOriginal) && (i < ps1.callSize()); i++) {
+            for(int j = iSosie; (j < syncroRange + iSosie) && (j < ps2.callSize()); j++) {
+                Point oPoint = ps1.getCallPoint(i);
+                Point sPoint = ps2.getCallPoint(j);
                 if(oPoint.sameLogPoint(sPoint))
                     return new int[]{i,j};
             }

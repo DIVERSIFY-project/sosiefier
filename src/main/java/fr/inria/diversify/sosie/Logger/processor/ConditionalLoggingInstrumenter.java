@@ -1,7 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 
-import fr.inria.diversify.util.Log;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
@@ -9,7 +8,6 @@ import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.CtAbstractVisitor;
-import spoon.support.reflect.code.CtCaseImpl;
 
 import java.io.File;
 import java.io.FileWriter;
