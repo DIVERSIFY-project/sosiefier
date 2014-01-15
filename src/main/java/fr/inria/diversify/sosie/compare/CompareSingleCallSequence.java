@@ -40,9 +40,10 @@ public class CompareSingleCallSequence {
      * @return the local conditionalDivergence. null if original and sosie are not the same trace
      */
     protected int[][] findDivergence(int syncroRange, int startOriginal, int startSosie) {
-        if(findDivergence(syncroRange, startSosie, startOriginal, sosie, original) != null)
+        int[][] tmp = findDivergence(syncroRange, startSosie, startOriginal, sosie, original);
+        if(tmp == null)
             return findDivergence(syncroRange, startOriginal, startSosie, original, sosie);
-        return null;
+        return tmp;
     }
 
     /**
@@ -56,11 +57,10 @@ public class CompareSingleCallSequence {
             return null;
         int[][] divergence = new int[bound][2];
         int i = 0;
-        divergence[i][0] = start1;
-        divergence[i][1] = start2;
-
-        while(start1 < bound && start2 < bound) {
-            i++;
+        try {
+        while(start1 < bound - 1 && start2 < bound - 1) {
+            divergence[i][0] = start1;
+            divergence[i][1] = start2;
 
             Point oPoint = ps1.getCallPoint(start1);
             Point sPoint = ps2.getCallPoint(start2);
@@ -76,10 +76,10 @@ public class CompareSingleCallSequence {
                 start1++;
                 start2++;
             }
-            divergence[i][0] = start1;
-            divergence[i][1] = start2;
-//            i++;
+            i++;
         }
+
+        }catch (Exception e) {}
         return Arrays.copyOf(divergence, i);
     }
 
@@ -101,6 +101,8 @@ public class CompareSingleCallSequence {
             return findSyncroP(syncroRange, ps1, ps2, iOriginal, iSosie);
         else {
             int[] tmp = findSyncroP(syncroRange, ps2, ps1, iSosie, iOriginal);
+            if(tmp == null)
+                   return null;
             return new int[]{tmp[1],tmp[0]};
         }
     }

@@ -56,57 +56,57 @@ public class CompareLogMain {
         if(DiversifyProperties.getProperty("logTrace").equals("same"))
             same();
         else
-            if(DiversifyProperties.getProperty("type").equals("var"))
-                diffVar();
-            else {
-                if(DiversifyProperties.getProperty("type").equals("call"))
-                    diffCall();
-                else
-                    diffException();
-            }
+            diff();
+//            if(DiversifyProperties.getProperty("type").equals("var"))
+//                diffVar();
+//            else {
+//                if(DiversifyProperties.getProperty("type").equals("call"))
+//                    diffCall();
+//                else
+//                    diffException();
+//            }
     }
 
     protected void same() throws IOException {
-        CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal,dirSosie);
+        CompareMultiSequence un = new CompareMultiSequence(dirOriginal,dirSosie);
         un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
         un.findAndWriteDiffVar(varToExclude);
         Log.debug(Point.nbPoint+ " "+Point.error);
     }
 
-    protected void diffVar() throws Exception {
-        String startPointString = DiversifyProperties.getProperty("startPoint");
-        Set<VariableDiff> diffs = new HashSet<VariableDiff>();
-        int i =0;
-        File file = new File(dirSosie);
-        Log.debug("loading log from dir {}",file.getAbsolutePath());
-        try {
-            File startPoint = new File(file.getAbsolutePath()+"/"+startPointString);
-            TransformationParser parser = new TransformationParser(codeFragments);
-            Log.info("startPoint {}",startPoint.getAbsolutePath());
-            CodeFragment cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getPosition();
-
-            CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, file.getAbsolutePath(), cf, varToExclude);
-            un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
-            Diff diff = un.findDiffVar();
-            i++;
-            Log.info("sosie nb: {}",i);
-            Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
-//            if(!diff.sameTraceAndVar()) {
-                Log.info(file.getName());
-                Log.info(diff.report());
-                if(!diff.sameVar()) {
-                    diffs.addAll(diff.getAllVariableDiff());
-//                        diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
-                }
-//            }
-//            else
-//                Log.info("same trace");
-        } catch (Exception e) {
-            Log.error("error",e);
-            e.printStackTrace();
-        }
-        writeVarDiff(diffs,DiversifyProperties.getProperty("result")+"/varDiff");
-    }
+//    protected void diffVar() throws Exception {
+//        String startPointString = DiversifyProperties.getProperty("startPoint");
+//        Set<VariableDiff> diffs = new HashSet<VariableDiff>();
+//        int i =0;
+//        File file = new File(dirSosie);
+//        Log.debug("loading log from dir {}",file.getAbsolutePath());
+//        try {
+//            File startPoint = new File(file.getAbsolutePath()+"/"+startPointString);
+//            TransformationParser parser = new TransformationParser(codeFragments);
+//            Log.info("startPoint {}",startPoint.getAbsolutePath());
+//
+//            CompareMultiLogSequence un = new CompareMultiLogSequence(dirOriginal, file.getAbsolutePath(), cf, varToExclude);
+//            un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+//            Diff diff = un.findDiffVar();
+//            i++;
+//            Log.info("sosie nb: {}",i);
+//            Log.info("callDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndVar());
+////            if(!diff.sameTraceAndVar()) {
+//                Log.info(file.getName());
+//                Log.info(diff.report());
+//                if(!diff.sameVar()) {
+//                    diffs.addAll(diff.getAllVariableDiff());
+////                        diff.toDot(DiversifyProperties.getProperty("result")+"cp_"+f.getName()+".dot");
+//                }
+////            }
+////            else
+////                Log.info("same trace");
+//        } catch (Exception e) {
+//            Log.error("error",e);
+//            e.printStackTrace();
+//        }
+//        writeVarDiff(diffs,DiversifyProperties.getProperty("result")+"/varDiff");
+//    }
 
     protected void diffCall() throws Exception {
         String startPointString = DiversifyProperties.getProperty("startPoint");
@@ -137,6 +137,32 @@ public class CompareLogMain {
             }
         }
 //        writeVarDiff(diffs,DiversifyProperties.getProperty("result")+"/varDiff");
+    }
+
+    protected void diff() throws Exception {
+        String startPointString = DiversifyProperties.getProperty("startPoint");
+            Log.debug("loading log from dir {}",dirSosie);
+            try {
+                File startPoint = new File(dirSosie+"/"+startPointString);
+                TransformationParser parser = new TransformationParser(codeFragments);
+                Log.info("startPoint {}",startPoint.getAbsolutePath());
+//                CodeFragment cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getPosition();
+
+                CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, null ,varToExclude);
+                un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+                Diff diff = new Diff(null);
+                un.findDivergenceCall(diff);
+                Log.debug("dfgdfg");
+                un.findDiffVar(diff);
+                Log.debug("dfgdfg");
+
+                Log.info(diff.report());
+                Log.info(diff.callReport());
+                diff.toJson().write(new FileWriter(DiversifyProperties.getProperty("result")+"_compare.json"));
+            } catch (Exception e) {
+                Log.error("error",e);
+                e.printStackTrace();
+            }
     }
 
     protected void diffException() throws Exception {

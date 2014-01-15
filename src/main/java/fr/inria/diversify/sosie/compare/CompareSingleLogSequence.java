@@ -66,13 +66,13 @@ public class CompareSingleLogSequence {
             return null;
         int[][] divergence = new int[bound][2];
         int i = 0;
-        divergence[i][0] = start1;
-        divergence[i][1] = start2;
 
-        while(start1 < bound - 1 && start2 < bound - 1) {
-            i++;
-            start1++;
-            start2++;
+        try {
+
+
+        while(start1 < bound && start2 < bound ) {
+            divergence[i][0] = start1;
+            divergence[i][1] = start2;
             Point oPoint = ps1.getConditionalPoint(start1);
             Point sPoint = ps2.getConditionalPoint(start2);
             if(!oPoint.sameLogPoint(sPoint)) {
@@ -83,11 +83,13 @@ public class CompareSingleLogSequence {
                     start1 = newSyncho[0];
                     start2 = newSyncho[1];
                 }
+            } else {
+                start1++;
+                start2++;
             }
-            divergence[i][0] = start1;
-            divergence[i][1] = start2;
-//            i++;
+            i++;
         }
+        }catch (Exception e) {}
         return Arrays.copyOf(divergence, i);
     }
 
@@ -103,7 +105,7 @@ public class CompareSingleLogSequence {
         int bound = Math.min(original.conditionalSize(), sosie.conditionalSize());
 
         Set<VariableDiff> var = new HashSet<VariableDiff>();
-        while(startOriginal < bound - 1 && startSosie < bound - 1) {
+        while(startOriginal < bound - 1&& startSosie < bound -1 ) {
             startOriginal++;
             startSosie++;
             ConditionalPoint oPoint = original.getConditionalPoint(startOriginal);
@@ -116,6 +118,7 @@ public class CompareSingleLogSequence {
                         dVar.setConditionalPointSosie(sPoint);
                         var.add(dVar);
                     }
+
             }
             else {
                 int newSyncho[] = findSyncro(syncroRange,original,sosie, startOriginal,startSosie);
@@ -126,6 +129,7 @@ public class CompareSingleLogSequence {
                     startSosie = newSyncho[1];
                 }
             }
+
         }
         return var;
     }
@@ -149,6 +153,8 @@ public class CompareSingleLogSequence {
             return findSyncroP(syncroRange, ps1, ps2, iOriginal, iSosie);
         else {
             int[] tmp = findSyncroP(syncroRange, ps2, ps1, iSosie, iOriginal);
+            if(tmp == null)
+                return null;
             return new int[]{tmp[1],tmp[0]};
         }
     }

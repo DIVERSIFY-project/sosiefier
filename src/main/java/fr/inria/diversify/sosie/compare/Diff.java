@@ -4,6 +4,8 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -374,6 +376,33 @@ public class Diff {
         callDivergence.put(original, divergence);
     }
 
+    public int nbCallDivergence() {
+        int nb = 0;
+         for (PointSequence ps : callDivergence.keySet()) {
+            nb += nbCallDivergence(ps);
+         }
+        return nb;
+    }
+
+    public int nbDiffCallSequence() {
+        int nb = 0;
+        for (PointSequence ps : callDivergence.keySet()) {
+            if(nbCallDivergence(ps) != 0)
+                nb++;
+        }
+        return nb;
+    }
+
+    protected int nbCallDivergence(PointSequence ps) {
+        int nb = 0;
+        int[][] d = callDivergence.get(ps);
+        if (d != null)
+            for(int i = 1; i < d.length; i++) {
+                nb += Math.abs((d[i][0]- d[i-1][0]) - (d[i][1] - d[i-1][1]));
+            }
+        return nb;
+    }
+
     public String callReport() {
         int diff = 0;
         for(PointSequence d : callDivergence.keySet()) {
@@ -382,6 +411,16 @@ public class Diff {
             }
 
         }
-        return "trace diff: "+diff;
+        return "trace diff: "+diff + "\nnbCallDivergence: "+nbCallDivergence();
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("callDivergence", nbCallDivergence());
+        object.put("diffCallSequence", nbDiffCallSequence());
+        object.put("diffVar", nbDiffVar());
+        object.put("diffUniqueVar", nbDiffUniqueVar());
+        object.put("diffVarPoint", nbDiffVarPoint());
+        return  object;
     }
 }
