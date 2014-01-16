@@ -44,7 +44,13 @@ public class CompareSingleCallSequence {
         int[][] tmp = findDivergence(syncroRange, startSosie, startOriginal, sosie, original);
         if(tmp == null)
             return findDivergence(syncroRange, startOriginal, startSosie, original, sosie);
-        return tmp;
+        else {
+            int[][] tmp2 = findDivergence(syncroRange, startOriginal, startSosie, original, sosie);
+            if(nbCallDivergence(tmp) < nbCallDivergence(tmp2))
+                return tmp;
+            else
+                return tmp2;
+        }
     }
 
     /**
@@ -118,5 +124,17 @@ public class CompareSingleCallSequence {
             }
         }
         return null;
+    }
+
+    protected int nbCallDivergence(int[][] d) {
+        int nb = 0;
+        if (d != null)
+            for(int i = 1; i < d.length; i++) {
+                int diff = (d[i][0] - d[i-1][0]) - (d[i][1] - d[i-1][1]);
+
+                nb += Math.abs(diff);
+                // nb += Math.abs((d[i][0]- d[i-1][0]) - (d[i][1] - d[i-1][1]));
+            }
+        return nb;
     }
 }
