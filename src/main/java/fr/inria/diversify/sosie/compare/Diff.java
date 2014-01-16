@@ -75,16 +75,16 @@ public class Diff {
         return true;
     }
 
-    public boolean sameTraceAndVar() {
-        if(!sameTrace())
-            return false;
-
-        for (Set<VariableDiff> vars : diffVar.values())
-            if (!vars.isEmpty())
-                return false;
-
-        return true;
-    }
+//    public boolean sameTraceAndVar() {
+//        if(!sameTrace())
+//            return false;
+//
+//        for (Set<VariableDiff> vars : diffVar.values())
+//            if (!vars.isEmpty())
+//                return false;
+//
+//        return true;
+//    }
 
     public boolean sameTraceAndCatch() {
         if(!sameTrace())
@@ -93,13 +93,13 @@ public class Diff {
         return sameCatch();
     }
 
-    public boolean sameVar() {
-        for (Set<VariableDiff> vars : diffVar.values())
-            if (!vars.isEmpty())
-                return false;
-
-        return true;
-    }
+//    public boolean sameVar() {
+//        for (Set<VariableDiff> vars : diffVar.values())
+//            if (!vars.isEmpty())
+//                return false;
+//
+//        return true;
+//    }
 
     public boolean sameCatch() {
         for (Set<ExceptionDiff> vars : diffException.values())
@@ -115,8 +115,8 @@ public class Diff {
 
     public String report() {
 //        String report = "startPoint: "+startPoint.getSourceClass().getSimpleName();
-        String  report = "\nsame trace: "+ sameTrace() + " same var: "+sameTraceAndVar()+ "\n";
-
+//        String  report = "\nsame trace: "+ sameTrace() + " same var: "+sameTraceAndVar()+ "\n";
+        String  report = "";
         for (PointSequence original : diffVar.keySet())
             if(!diffVar.get(original).isEmpty()) {
             PointSequence sosie = match.get(original);
@@ -195,17 +195,6 @@ public class Diff {
 
         bw.write("}");
         bw.close();
-    }
-
-    public Set<String> getVarTestDiff() {
-        Set<String> d = new HashSet<String>();
-
-        for (PointSequence ps : match.keySet())
-            if (!diffVar.get(ps).isEmpty())
-                if(match.get(ps) != null)
-                    d.add(match.get(ps).getName());
-
-        return d;
     }
 
     public Set<String> getCatchTestDiff() {
@@ -368,12 +357,12 @@ public class Diff {
         return set;
     }
 
-    public Set<VariableDiff> getAllVariableDiff() {
-        Set<VariableDiff> diffs = new HashSet<VariableDiff>();
-        for(Set<VariableDiff> set : diffVar.values())
-            diffs.addAll(set);
-        return diffs;
-    }
+//    public Set<VariableDiff> getAllVariableDiff() {
+//        Set<VariableDiff> diffs = new HashSet<VariableDiff>();
+//        for(Set<VariableDiff> set : diffVar.values())
+//            diffs.addAll(set);
+//        return diffs;
+//    }
 
     public Set<ExceptionDiff> getAllExceptionDiff() {
         Set<ExceptionDiff> diffs = new HashSet<ExceptionDiff>();

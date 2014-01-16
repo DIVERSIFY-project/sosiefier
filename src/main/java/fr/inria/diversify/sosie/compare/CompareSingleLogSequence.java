@@ -143,7 +143,6 @@ public class CompareSingleLogSequence {
                  Log.info("{} {}",sequence.getConditionalPoint(i).getClassName(),startPoint.getSourceClass().getQualifiedName() );
                 return i;
             }
-
         return sequence.conditionalSize();
     }
 
