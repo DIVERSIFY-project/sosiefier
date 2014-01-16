@@ -101,7 +101,7 @@ public class InstruProject {
     }
 
     protected void copyLogger(String tmpDir) throws IOException {
-        File dir = new File(tmpDir+"/src/main/java/fr/inria/diversify/sosie/logger");
+        File dir = new File(tmpDir+"/"+DiversifyProperties.getProperty("src")+"/fr/inria/diversify/sosie/logger");
         FileUtils.forceMkdir(dir);
         FileUtils.copyFileToDirectory(new File(System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/LogWriter.java"),dir);
         FileUtils.copyFileToDirectory(new File(System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/ShutdownHookLog.java"),dir);

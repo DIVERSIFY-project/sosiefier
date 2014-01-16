@@ -16,6 +16,8 @@ public abstract class Point {
     public static int error = 0;
     String className;
     String methodSignature;
+    protected String idClass;
+    protected String idMethod;
     int id;
     boolean bugPoint = false;
 
@@ -27,7 +29,7 @@ public abstract class Point {
 
     public boolean sameLogPoint(Point point) {
         if(bugPoint || point.bugPoint)
-            return bugPoint && point.bugPoint;
+            return bugPoint || point.bugPoint;
 
         return (className.equals(point.className) && methodSignature.equals(point.methodSignature)); //&& id == point.id);
     }

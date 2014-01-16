@@ -7,11 +7,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.sosie.InstruProject;
 import fr.inria.diversify.statistic.CrossValidation;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationsWriter;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.builder.AbstractBuilder;
 import fr.inria.diversify.transformation.builder.AntBuilder;
 import fr.inria.diversify.transformation.builder.MavenBuilder;
@@ -249,9 +251,18 @@ public class DiversifyMain {
         List<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
+
+        Set<CodeFragment> cfs = new HashSet<CodeFragment>();
+        for(Transformation t :transformations) {
+            cfs.add(((ASTTransformation)t).getPosition());
+        }
+        Log.debug("nb position: {}", cfs.size());
+
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         String name = write.writeAllTransformation(null);
         statForR(name);
+
+
 
         for(String type : getAllTransformationType(transformations)) {
             name = write.writeAllTransformation(type);

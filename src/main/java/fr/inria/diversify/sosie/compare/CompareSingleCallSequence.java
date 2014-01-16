@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.sosie.pointSequence.CallPoint;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
 import fr.inria.diversify.util.Log;
@@ -62,8 +63,8 @@ public class CompareSingleCallSequence {
             divergence[i][0] = start1;
             divergence[i][1] = start2;
 
-            Point oPoint = ps1.getCallPoint(start1);
-            Point sPoint = ps2.getCallPoint(start2);
+            CallPoint oPoint = ps1.getCallPoint(start1);
+            CallPoint sPoint = ps2.getCallPoint(start2);
             if(!oPoint.sameLogPoint(sPoint)) {
                 int newSyncho[] = findSyncro(syncroRange, ps1, ps2, start1,start2);
                 if(newSyncho == null)

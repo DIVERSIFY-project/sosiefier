@@ -95,64 +95,44 @@ diversiticationStat <- function(data, index, compileTime, testTime) {
 }
 
 #compileTime et testTime pour 100 execution
-diversiticationStat2 <- function(data, compileTime, testTime) {
+diversiticationStat2 <- function(data, compileTime, testTime, nbStmt, tested) {
   result <- data.frame ();
+ 
   for(i in allType()) {
     sub <- subset(data, data[,"type"] == i);
-    subStmt <-  subset(sub, sub[,"level"] == "statement");
-    subBlock <-  subset(sub, sub[,"level"] == "block");
-    trialStmt <- nbOfTrial(subStmt)
-    sosieStmt <-  nbOfSosie(subStmt);
-    compileStmt <- nbOfCompile(subStmt);
-    trialBlock <- nbOfTrial(subBlock)
-    sosieBlock <-  nbOfSosie(subBlock);
-    compileBlock <- nbOfCompile(subBlock);
-    
-    result[paste(i,sep=""),"trial (stmt)"] <- paste(trialStmt, sep="");
-    result[paste(i,sep=""),"trial (block)"] <- paste(trialBlock, sep="");
-    
-    p <- round(100*compileStmt/trialStmt,1)
-    result[paste(i,sep=""),"compile (stmt)"] <- paste(compileStmt," (",p,"%)", sep="");
-    p <- round(100*compileBlock/trialBlock,1)
-    result[paste(i,sep=""),"compile (block)"] <- paste(compileBlock," (",p,"%)", sep="");
-    
-    p <- round(100*sosieStmt/(trialStmt),1)
-    result[paste(i,sep=""),"sosie (stmt)"] <- paste(sosieStmt," (",p,"%)", sep="");
-    p <- round(100*sosieBlock/(trialBlock),1) 
-    result[paste(i,sep=""),"sosie (block)"] <- paste(sosieBlock," (",p,"%)", sep="");
+    trial <- nbOfTrial(sub)
+    sosie <-  nbOfSosie(sub);
+    compile <- nbOfCompile(sub);
    
-    result[paste(i,sep=""),"candidate (stmt)"] <- paste(round(sum(as.numeric(subStmt$candidate))/length(subStmt$candidate),1),sep="");
-    result[paste(i,sep=""),"candidate (block)"] <- paste(round(sum(as.numeric(subBlock$candidate))/length(subBlock$candidate),1), sep="");
-    result[paste(i,sep=""),"sosie/h (stmt)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileStmt/trialStmt, 100*sosieStmt/trialStmt),1),sep="");
-    result[paste(i,sep=""),"sosie/h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieBlock/trialBlock),1),sep=""); 
+ 
+    result[paste(i,sep=""),"#tested statements"] <- paste(tested ," (",round((tested/nbStmt)*100,1),"%)",sep="")
+    result[paste(i,sep=""),"trial"] <- paste(trial, sep="");
+   
+    
+    p <- round(100*compile/trial,1)
+    result[paste(i,sep=""),"compile"] <- paste(compile," (",p,"%)", sep="");
+   
+    
+    p <- round(100*sosie/(trial),1)
+    result[paste(i,sep=""),"sosie"] <- paste(sosie," (",p,"%)", sep="");
+  
+    candidate <- sum(as.numeric(sub$candidate))/length(sub$candidate)
+    result[paste(i,sep=""),"%tested candidate transformations"] <- paste(round(perTranformationTested(trial, nbStmt, candidate) ,2),"%",sep="")
+    result[paste(i,sep=""),"candidate"] <- paste(round(sum(as.numeric(sub$candidate))/length(sub$candidate),1),sep="");
+    sosieH <- sosieHour(compileTime, testTime, 100*compile/trial, 100*sosie/trial)
+    result[paste(i,sep=""),"sosie/h"] <- paste(round(sosieH,1),sep="");
+    result[paste(i,sep=""),"time"] <- paste(round(totalTime(compileTime, testTime, trial,compile),1),sep="");
+    
+    
   }
-  subStmt <-  subset(data, data[,"level"] == "statement");
-  subBlock <-  subset(data, data[,"level"] == "block");
-  trialStmt <- nbOfTrial(subStmt)
-  sosieStmt <-  nbOfSosie(subStmt);
-  compileStmt <- nbOfCompile(subStmt);
-  trialBlock <- nbOfTrial(subBlock)
-  sosieBlock <-  nbOfSosie(subBlock);
-  compileBlock <- nbOfCompile(subBlock);
-  
-  result["all","trial (stmt)"] <- paste(trialStmt, sep="");
-  result["all","trial (block)"] <- paste(trialBlock, sep="");
-  
-  p <- round(100*compileStmt/trialStmt,1)
-  result["all","compile (stmt)"] <- paste(compileStmt," (",p,"%)", sep="");
-  p <- round(100*compileBlock/trialBlock,1)
-  result["all","compile (block)"] <- paste(compileBlock," (",p,"%)", sep="");
-  
-  p <- round(100*sosieStmt/(trialStmt),1)
-  result["all","sosie (stmt)"] <- paste(sosieStmt," (",p,"%)", sep="");
-  p <- round(100*sosieBlock/(trialBlock),1) 
-  result["all","sosie (block)"] <- paste(sosieBlock," (",p,"%)", sep="");
-  
-  result["all","candidate (stmt)"] <- paste(round(sum(as.numeric(subStmt$candidate))/length(subStmt$candidate),1),sep="");
-  result["all","candidate (block)"] <- paste(round(sum(as.numeric(subBlock$candidate))/length(subBlock$candidate),1), sep="");
-  result["all","sosie/h (stmt)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileStmt/trialStmt, 100*sosieStmt/trialStmt),1),sep="");
-  result["all","sosie/h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieBlock/trialBlock),1),sep=""); 
   return(result)  
+}
+
+
+
+
+perTranformationTested <- function(trial,nbStmt, candidate) {
+  return(trial/(nbStmt*candidate)*100)
 }
 
 allType <- function() {
@@ -173,6 +153,10 @@ sosieHour <- function(compileTime, testTime, perCompile, perSosie) {
   return((3600/((100 - perCompile) * compileTime + perCompile * testTime)) * 100 * perSosie) 
 }
 
+totalTime <- function(compileTime, testTime, nbTrial, nbCompile) {
+  return((nbCompile * testTime/100 + (nbTrial - nbCompile) * compileTime/100)/3600)
+  }
+
 arrayFctRA <- function(data) {
   result <- vector()
   
@@ -184,6 +168,58 @@ arrayFctRA <- function(data) {
     result[i] <- 100*sosie/(trial)
   }
   return(result)
+}
+
+#compileTime et testTime pour 100 execution
+otherStat <- function(data) {
+  result <- data.frame ();
+  
+    add <- subset(data, data[,"type"] == "add")
+   add1 <- subset(data, data[,"type"] == "notContextMappingVariableNameAdd")
+    add2 <- subset(data, data[,"type"] == "notMappingVariableAdd")
+    add3 <- subset(data, data[,"type"] == "notContextAdd")
+   replace <- subset(data, data[,"type"] == "replace")
+  replace1 <- subset(data, data[,"type"] == "notContextMappingVariableNameReplace")
+  replace2 <- subset(data, data[,"type"] == "notMappingVariableReplace")
+  replace3 <- subset(data, data[,"type"] == "notContextReplace")
+  delete <- subset(data, data[,"type"] == "delete")
+
+  trial <- nbOfTrial(delete)+ nbOfTrial(add3)+ nbOfTrial(replace3)
+  compile  <- nbOfCompile(delete)+nbOfCompile(add3)+nbOfCompile(replace3) 
+  sosie <-  nbOfSosie(delete)+ nbOfSosie(add3)+ nbOfSosie(replace3)  
+  result["rand", "trial"] <- trial
+  result["rand", "compile"] <- compile
+  result["rand", "compile%"] <- round(100*compile/trial,1)
+  result["rand", "sosie"] <- sosie
+  result["rand", "sosie%"] <- round(100*sosie/trial,1)
+  
+  trial <- nbOfTrial(delete)+ nbOfTrial(add1)+ nbOfTrial(replace1)
+  compile  <- nbOfCompile(delete)+nbOfCompile(add1)+nbOfCompile(replace1) 
+  sosie <-  nbOfSosie(delete)+ nbOfSosie(add1)+ nbOfSosie(replace1)  
+  result["MnR", "trial"] <- trial
+  result["MnR", "compile"] <- compile
+  result["MnR", "compile%"] <- round(100*compile/trial,1)
+  result["MnR", "sosie"] <- sosie
+  result["MnR", "sosie%"] <- round(100*sosie/trial,1)
+  
+  trial <- nbOfTrial(delete)+ nbOfTrial(add2)+ nbOfTrial(replace2)
+  compile  <- nbOfCompile(delete)+nbOfCompile(add2)+nbOfCompile(replace2) 
+  sosie <-  nbOfSosie(delete)+ nbOfSosie(add2)+ nbOfSosie(replace2)  
+  result["RnM", "trial"] <- trial
+  result["RnM", "compile"] <- compile
+  result["RnM", "compile%"] <- round(100*compile/trial,1)
+  result["RnM", "sosie"] <- sosie
+  result["RnM", "sosie%"] <- round(100*sosie/trial,1)
+  
+  trial <- nbOfTrial(delete)+ nbOfTrial(add)+ nbOfTrial(replace)
+  compile  <- nbOfCompile(delete)+nbOfCompile(add)+nbOfCompile(replace) 
+  sosie <-  nbOfSosie(delete)+ nbOfSosie(add)+ nbOfSosie(replace)  
+  result["MR", "trial"] <- trial
+  result["MR", "compile"] <- compile
+  result["MR", "compile%"] <- round(100*compile/trial,1)
+  result["MR", "sosie"] <- sosie
+  result["MR", "sosie%"] <- round(100*sosie/trial,1)
+  return(result)  
 }
 
 mySample <- function(data, size) {

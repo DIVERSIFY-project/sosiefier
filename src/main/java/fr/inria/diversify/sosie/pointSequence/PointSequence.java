@@ -121,12 +121,16 @@ public class PointSequence {
 
     protected void parseFileName(String fileName) {
         String[] tmp = fileName.split("_");
-        name = tmp[1];
         threadName = tmp[0];
+        name = fileName.substring(threadName.length()+1,fileName.length());
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getFullName() {
+        return threadName+name;
     }
 
     public String toDot() {
@@ -142,7 +146,7 @@ public class PointSequence {
         return callPoint.size();
     }
 
-    public Point getCallPoint(int i) {
+    public CallPoint getCallPoint(int i) {
         return callPoint.get(i);
     }
 }

@@ -10,6 +10,7 @@ import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
+import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
@@ -47,6 +48,11 @@ public class CompareLogMain {
 
     protected void init() throws Exception {
         initLogLevel();
+        if(DiversifyProperties.getProperty("builder").equals("maven")) {
+            MavenDependencyResolver t = new MavenDependencyResolver();
+            t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
+        }
+
         initSpoon();
 
          dirOriginal = DiversifyProperties.getProperty("dirOriginal");
@@ -146,19 +152,19 @@ public class CompareLogMain {
                 File startPoint = new File(dirSosie+"/"+startPointString);
                 TransformationParser parser = new TransformationParser(codeFragments);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
-//                CodeFragment cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getPosition();
+                CodeFragment cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getPosition();
 
-                CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, null ,varToExclude);
+                CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, cf ,varToExclude);
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
                 Diff diff = new Diff(null);
                 un.findDivergenceCall(diff);
-                Log.debug("dfgdfg");
-                un.findDiffVar(diff);
-                Log.debug("dfgdfg");
+                 un.findDiffVar(diff);
 
                 Log.info(diff.report());
                 Log.info(diff.callReport());
-                diff.toJson().write(new FileWriter(DiversifyProperties.getProperty("result")+"_compare.json"));
+                FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "_compare.json");
+                diff.toJson().write(writer);
+                writer.close();
             } catch (Exception e) {
                 Log.error("error",e);
                 e.printStackTrace();

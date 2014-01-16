@@ -34,8 +34,12 @@ public class CallPoint extends Point {
             bugPoint = true;
     }
 
-    protected String idClass;
-    protected String idMethod;
+    public boolean sameLogPoint(Point point) {
+        if(bugPoint || point.bugPoint)
+            return bugPoint || point.bugPoint;
+
+        return (idClass.equals(point.idClass) && idMethod.equals(point.idMethod)); //&& id == point.id);
+    }
 
     @Override
     public String toDot(Set varDiff) {

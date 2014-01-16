@@ -398,7 +398,10 @@ public class Diff {
         int[][] d = callDivergence.get(ps);
         if (d != null)
             for(int i = 1; i < d.length; i++) {
-                nb += Math.abs((d[i][0]- d[i-1][0]) - (d[i][1] - d[i-1][1]));
+                int diff = (d[i][0] - d[i-1][0]) - (d[i][1] - d[i-1][1]);
+
+                    nb += Math.abs(diff);
+               // nb += Math.abs((d[i][0]- d[i-1][0]) - (d[i][1] - d[i-1][1]));
             }
         return nb;
     }
@@ -411,7 +414,7 @@ public class Diff {
             }
 
         }
-        return "trace diff: "+diff + "\nnbCallDivergence: "+nbCallDivergence();
+        return "trace diff: "+diff + "\nnbCallDivergence: "+nbCallDivergence()+ "\nnbDiffCallSequence: "+nbDiffCallSequence();
     }
 
     public JSONObject toJson() throws JSONException {
