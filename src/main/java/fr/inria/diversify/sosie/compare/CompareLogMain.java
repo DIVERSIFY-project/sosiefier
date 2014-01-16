@@ -63,14 +63,6 @@ public class CompareLogMain {
             same();
         else
             diff();
-//            if(DiversifyProperties.getProperty("type").equals("var"))
-//                diffVar();
-//            else {
-//                if(DiversifyProperties.getProperty("type").equals("call"))
-//                    diffCall();
-//                else
-//                    diffException();
-//            }
     }
 
     protected void same() throws IOException {
@@ -162,7 +154,7 @@ public class CompareLogMain {
 
                 Log.info(diff.report());
                 Log.info(diff.callReport());
-                FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "_compare.json");
+                FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "compare"+System.currentTimeMillis()+".json");
                 diff.toJson().write(writer);
                 writer.close();
             } catch (Exception e) {
