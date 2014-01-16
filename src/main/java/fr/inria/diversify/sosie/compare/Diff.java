@@ -4,6 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -157,6 +158,15 @@ public class Diff {
         return vars.size();
     }
 
+    public Set<PointSequence> varSequenceDiff() {
+        Set<PointSequence> diff = new HashSet<PointSequence>();
+        for (PointSequence original : diffVar.keySet())
+            if(!diffVar.get(original).isEmpty())
+                diff.add(original);
+
+        return diff;
+    }
+
 //    public Set<VariableDiff> getDiffVar() {
 //        Set<VariableDiff> diff = new HashSet<VariableDiff>();
 //        for(Set<VariableDiff> d : diffVar.values())
@@ -298,11 +308,11 @@ public class Diff {
         Point precedent = original.getExceptionPoint(0);
         builder.append(original.toDot() + "\n");
         builder.append(original.hashCode() + " -> " + precedent.hashCode() + "\n");
-        builder.append(precedent.toDot(getCatchDiffFor(original, 0)) + "\n");
+        builder.append(precedent.toDot(getExceptionDiffFor(original, 0)) + "\n");
 
         while(i < div.length) {
             Point next = original.getExceptionPoint(start1);
-            Set<ExceptionDiff> varD = getCatchDiffFor(original, div[i][0]);
+            Set<ExceptionDiff> varD = getExceptionDiffFor(original, div[i][0]);
             if(!varD.isEmpty())
                 toString = true;
 
@@ -340,7 +350,7 @@ public class Diff {
         builder.append(branchNext.hashCode() + " -> " + endBranch.hashCode() + "\n");
     }
 
-    protected Set<ExceptionDiff> getCatchDiffFor(PointSequence ps, int index) {
+    protected Set<ExceptionDiff> getExceptionDiffFor(PointSequence ps, int index) {
         Set<ExceptionDiff> set = new HashSet<ExceptionDiff>();
         for (ExceptionDiff varD : diffException.get(ps)) {
             if(varD.positionInOriginal == index)
@@ -384,13 +394,13 @@ public class Diff {
         return nb;
     }
 
-    public int nbDiffCallSequence() {
-        int nb = 0;
+    public  Set<PointSequence> callSequenceDiff() {
+        Set<PointSequence> diff = new HashSet<PointSequence>();
         for (PointSequence ps : callDivergence.keySet()) {
             if(nbCallDivergence(ps) != 0)
-                nb++;
+               diff.add(ps);
         }
-        return nb;
+        return diff;
     }
 
     protected int nbCallDivergence(PointSequence ps) {
@@ -414,16 +424,24 @@ public class Diff {
             }
 
         }
-        return "trace diff: "+diff + "\nnbCallDivergence: "+nbCallDivergence()+ "\nnbDiffCallSequence: "+nbDiffCallSequence();
+        return "trace diff: "+diff + "\nnbCallDivergence: "+nbCallDivergence()+ "\nnbDiffCallSequence: "+ callSequenceDiff().size();
     }
 
     public JSONObject toJson() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("callDivergence", nbCallDivergence());
-        object.put("diffCallSequence", nbDiffCallSequence());
+
+        JSONArray array = new JSONArray();
+        for(PointSequence ps : callSequenceDiff())
+            array.put(ps.getFullName());
+        object.put("callSequenceDiff",array);
         object.put("diffVar", nbDiffVar());
         object.put("diffUniqueVar", nbDiffUniqueVar());
         object.put("diffVarPoint", nbDiffVarPoint());
+        array = new JSONArray();
+        for(PointSequence ps : varSequenceDiff())
+            array.put(ps.getFullName());
+        object.put("varSequenceDiff",array);
         return  object;
     }
 }
