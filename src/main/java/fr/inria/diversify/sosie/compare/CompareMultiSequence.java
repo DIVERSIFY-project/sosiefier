@@ -67,6 +67,7 @@ public class CompareMultiSequence {
                 CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
                 cls.setDiffVar(varToExclude);
                 if (sosie.getFullName().equals(original.getFullName())) {
+//                    Log.info("compare var: {} ",original.getFullName());
                     diff.addMatch(original,sosie);
                     diff.addVarFor(original, cls.findDivergenceVar(syncroRange));
                     diff.addDivergence(original, cls.findDivergence(syncroRange));
@@ -95,14 +96,13 @@ public class CompareMultiSequence {
      * @throws java.io.IOException
      */
     public void findDivergenceCall(Diff diff) {
-
         for (PointSequence original : originals) {
             String originalName = original.getFullName();
             for (PointSequence sosie : sosies) {
-
                 String sosieName = sosie.getFullName();
                 CompareSingleCallSequence cls = new CompareSingleCallSequence(original, sosie, startPoint);
                 if (sosieName.equals(originalName)) {
+//                    Log.info("compare call: {} ",sosieName);
                     diff.addMatch(original,sosie);
                     diff.addCallDivergence(original, cls.findDivergence(200));
                 }
@@ -141,14 +141,14 @@ public class CompareMultiSequence {
         } catch (IOException e) {
             //e.printStackTrace();
         }
-        int i = 0;
-        Log.debug("load trace in directory: {}",dir);
+
+        Log.debug("load trace in directory: {}",file.getAbsolutePath());
         for (File f : file.listFiles()) {
             if(recursive && f.isDirectory())
                 list.addAll(loadPointSequence(f.getAbsolutePath(),recursive));
             else {
                 try {
-                    i++;
+//                    Log.debug("load file: {}",f.getAbsolutePath());
                     PointSequence ps = new PointSequence();
                     ps.parseFile(f,idMap);
                     list.add(ps);

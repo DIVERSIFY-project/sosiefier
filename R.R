@@ -170,6 +170,22 @@ arrayFctRA <- function(data) {
   return(result)
 }
 
+rand <- function(data) {
+  return(subset(data, data[,"type"] == "notContextAdd" || data[,"type"] == "notContextReplace" || data[,"type"] == "delete"))
+}
+
+tm <- function(data) {
+  return(subset(data, data[,"type"] == "notMappingVariableAdd" || data[,"type"] == "notMappingVariableReplace" || data[,"type"] == "delete"))
+}
+
+vm <- function(data) {
+  return(subset(data, data[,"type"] == "notContextMappingVariableNameAdd" || data[,"type"] == "notContextMappingVariableNameReplace" || data[,"type"] == "delete")) 
+}
+
+rm <- function(data) {
+  return(subset(data, data[,"type"] == "replace" || data[,"type"] == "add" || data[,"type"] == "delete")) 
+}
+
 #compileTime et testTime pour 100 execution
 otherStat <- function(data) {
   result <- data.frame ();

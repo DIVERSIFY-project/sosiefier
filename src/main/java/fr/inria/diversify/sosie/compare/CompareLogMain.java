@@ -11,6 +11,8 @@ import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
+import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.Factory;
@@ -89,13 +91,25 @@ public class CompareLogMain {
 
                 Log.info(diff.report());
                 Log.info(diff.callReport());
-                FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "compare"+System.currentTimeMillis()+".json");
-                diff.toJson().write(writer);
-                writer.close();
+                writeResult(diff,cf);
             } catch (Exception e) {
                 Log.error("error",e);
                 e.printStackTrace();
             }
+    }
+
+    protected void writeResult(Diff diff, CodeFragment cf) throws IOException, JSONException {
+        FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "compare"+System.currentTimeMillis()+".json");
+       JSONObject o =  diff.toJson();
+        o.put("dirSosie", dirSosie);
+        o.put("dirOriginal", dirOriginal);
+        try {
+            JSONObject cfJSON = cf.toJSONObject();
+            o.put("startingPoint",cfJSON);
+        } catch (Exception e) {}
+
+        o.write(writer);
+        writer.close();
     }
 
     protected void diffException() throws Exception {
@@ -131,19 +145,6 @@ public class CompareLogMain {
                 e.printStackTrace();
             }
         }
-    }
-
-    protected void writeVarDiff(Set<VariableDiff> set, String fileName) throws IOException {
-        FileWriter fw = new FileWriter(fileName);
-        BufferedWriter bw = new BufferedWriter(fw);
-        Set<String> set2 = new HashSet<String>();
-
-        for (VariableDiff s : set)
-           set2.add(s.forFile());
-        for (String s : set2)
-           bw.write(s+"\n");
-        bw.close();
-        fw.close();
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {

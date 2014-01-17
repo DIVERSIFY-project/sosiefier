@@ -251,17 +251,9 @@ public class DiversifyMain {
         List<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
-
-        Set<CodeFragment> cfs = new HashSet<CodeFragment>();
-        for(Transformation t :transformations) {
-            cfs.add(((ASTTransformation)t).getPosition());
-        }
-        Log.debug("nb position: {}", cfs.size());
-
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         String name = write.writeAllTransformation(null);
         statForR(name);
-
 
 
         for(String type : getAllTransformationType(transformations)) {
