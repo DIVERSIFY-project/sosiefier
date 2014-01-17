@@ -50,10 +50,12 @@ public class CompareLogMain {
 
     protected void init() throws Exception {
         initLogLevel();
+        try {
         if(DiversifyProperties.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
             t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
         }
+        } catch (Exception e) {}
 
         initSpoon();
 
