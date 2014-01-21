@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.BufferedWriter;
@@ -206,5 +207,18 @@ public class ASTAdd extends ASTTransformation {
     }
     public int inputContextSizeRA() {
         return add.getInputContext().size();
+    }
+
+    @Override
+    public String methodReplaceOrAdd() {
+        CtExecutable elem = add.getCtCodeFragment().getParent(CtExecutable.class);
+        if(elem != null)
+            return elem.getSimpleName();
+        return "field";
+    }
+
+    @Override
+    public int lineReplaceOrAdd() {
+        return add.getStartLine();
     }
 }

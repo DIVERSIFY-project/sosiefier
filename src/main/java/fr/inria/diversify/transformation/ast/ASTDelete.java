@@ -84,8 +84,8 @@ public class ASTDelete extends ASTTransformation {
             return  false;
         ASTDelete otherDelete = (ASTDelete)other;
 
-        return failures == otherDelete.failures &&
-                position.equals(otherDelete.position);
+//        return failures == otherDelete.failures &&
+           return      position.equals(otherDelete.position);
     }
 
     @Override
@@ -144,6 +144,16 @@ public class ASTDelete extends ASTTransformation {
         return position.getInputContext().size();
     }
     public int inputContextSizeRA() {
+        return 0;
+    }
+
+    @Override
+    public String methodReplaceOrAdd() {
+        return "null";
+    }
+
+    @Override
+    public int lineReplaceOrAdd() {
         return 0;
     }
 }

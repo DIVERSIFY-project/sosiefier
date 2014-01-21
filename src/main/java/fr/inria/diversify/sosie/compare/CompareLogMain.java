@@ -83,7 +83,10 @@ public class CompareLogMain {
                 File startPoint = new File(dirSosie+"/"+startPointString);
                 TransformationParser parser = new TransformationParser(codeFragments);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
-                CodeFragment cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getPosition();
+                CodeFragment cf = null;
+                try {
+                    cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getPosition();
+                } catch (Exception e) {}
 
                 CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, cf ,varToExclude);
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));

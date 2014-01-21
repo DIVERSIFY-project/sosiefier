@@ -37,4 +37,10 @@ public interface Transformation {
 
     public int inputContextSize();
     public int inputContextSizeRA();
+
+    public int line();
+
+    public String methodReplaceOrAdd();
+
+    public int lineReplaceOrAdd();
 }

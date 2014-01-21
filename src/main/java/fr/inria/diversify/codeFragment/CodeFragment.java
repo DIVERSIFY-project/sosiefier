@@ -88,8 +88,10 @@ public abstract class CodeFragment {
         if(!(other instanceof CodeFragment))
             return  false;
 
-        return equalString().equals(((CodeFragment) other).equalString())
-                && positionString().equals(((CodeFragment) other).positionString());
+        CodeFragment otherCf =  (CodeFragment) other;
+
+        return equalString().equals(otherCf.equalString())
+                && positionString().equals(otherCf.positionString());
     }
     public  int hashCode() {
         return 1;

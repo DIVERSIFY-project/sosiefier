@@ -33,102 +33,98 @@ chiTestTab2 <- function(data, index1, index2) {
   }
   return(result)  
 }
-#compileTime et testTime pour 100 execution
-diversiticationStat <- function(data, index, compileTime, testTime) {
-  result <- data.frame ();
-  for(i in set(data[,index])) {
-    sub <- subset(data, data[,index] == i);
-    subStmt <-  subset(sub, sub[,"level"] == "statement");
-    subBlock <-  subset(sub, sub[,"level"] == "block");
-    trialStmt <- nbOfTrial(subStmt)
-    sosieStmt <-  nbOfSosie(subStmt);
-    compileStmt <- nbOfCompile(subStmt);
-    trialBlock <- nbOfTrial(subBlock)
-    sosieBlock <-  nbOfSosie(subBlock);
-    compileBlock <- nbOfCompile(subBlock);
-    
-    result[paste(i,sep=""),"trial (stmt)"] <- paste(trialStmt, sep="");
-    result[paste(i,sep=""),"trial (block)"] <- paste(trialBlock, sep="");
-    
-    result[paste(i,sep=""),"compile (stmt)"] <- paste(compileStmt, sep=" ");
-    result[paste(i,sep=""),"% compile (stmt)"] <- paste(round(100*compileStmt/(trialStmt),2), sep="");
-    result[paste(i,sep=""),"compile (block)"] <- paste(compileBlock, sep="");
-    result[paste(i,sep=""),"% compile (block)"] <- paste(round(100*compileBlock/(trialBlock),2), sep="");
-    
-    result[paste(i,sep=""),"sosie (stmt)"] <- paste(sosieStmt, sep="");
-    result[paste(i,sep=""),"% sosie (stmt)"] <- paste(round(100*sosieStmt/(trialStmt),2), sep="");
-    result[paste(i,sep=""),"sosie (block)"] <- paste(sosieBlock, sep="");
-    result[paste(i,sep=""),"% sosie (block)"] <- paste(round(100*sosieBlock/(trialBlock),2), sep="");
-    
-    result[paste(i,sep=""),"candidate (stmt)"] <- paste(round(sum(as.numeric(subStmt$candidate))/length(subStmt$candidate),2),sep="");
-    result[paste(i,sep=""),"candidate (block)"] <- paste(round(sum(as.numeric(subBlock$candidate))/length(subBlock$candidate),2), sep="");
-    result[paste(i,sep=""),"sosie/h (stmt)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileStmt/trialStmt, 100*sosieStmt/trialStmt),2),sep="");
-    result[paste(i,sep=""),"sosie/h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieBlock/trialBlock),2),sep=""); 
+
+candidate <- function(data) {
+  sum <- 0
+  count <- 1
+  vec <-vector()
+  
+  for (i in 1:length(data$type)) {
+    key <- paste(data[i,"class"],data[i,"method"],data[i,"line"], sep="_")
+
+    if(!(key %in% vec)) {
+      sum <- sum + data[i,"candidate"]
+      vec[count] <- key
+      count <- count + 1
+    }
+
   }
-  subStmt <-  subset(data, data[,"level"] == "statement");
-  subBlock <-  subset(data, data[,"level"] == "block");
-  trialStmt <- nbOfTrial(subStmt)
-  sosieStmt <-  nbOfSosie(subStmt);
-  compileStmt <- nbOfCompile(subStmt);
-  trialBlock <- nbOfTrial(subBlock)
-  sosieBlock <-  nbOfSosie(subBlock);
-  compileBlock <- nbOfCompile(subBlock);
-  
-  result["all","trial (stmt)"] <- paste(trialStmt, sep="");
-  result["all","trial (block)"] <- paste(trialBlock, sep="");
-  
-  result["all","compile (stmt)"] <- paste(compileStmt, sep="");
-  result["all","% compile (stmt)"] <- paste(round(100*compileStmt/(trialStmt),2), sep="");
-  result["all","compile (block)"] <- paste(compileBlock, sep=""); 
-  result["all","% compile (block)"] <- paste(round(100*compileBlock/(trialBlock),2), sep="");
-  
-  result["all","sosie (stmt)"] <- paste(sosieStmt, sep="");
-  result["all","% sosie (stmt)"] <- paste(round(100*sosieStmt/(trialStmt),2), sep="");
-  result["all","sosie (block)"] <- paste(sosieBlock, sep=""); 
-  result["all","% sosie (block)"] <- paste(round(100*sosieBlock/(trialBlock),2), sep="");
-  
-  result["all","candidate (stmt)"] <- paste(round(sum(subStmt$candidate)/length(subStmt$candidate),2),sep="");
-  result["all","candidate (block)"] <- paste(round(sum(subBlock$candidate)/length(subBlock$candidate),2), sep="");
-  result["all","sosie h (stmt)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileStmt/trialStmt, 100*sosieStmt/trialStmt),2),sep="");
-  result["all","sosie h (block)"] <- paste(round(sosieHour(compileTime, testTime, 100*compileBlock/trialBlock, 100*sosieBlock/trialBlock),2),sep=""); 
-  return(result)  
+  return(sum)
+}
+
+
+diversifivationSet <- function(array) {
+  result <- data.frame()
+  count <- 1
+  vec <-vector()
+  for (i in 1:length(array$type)) {
+    key <- paste(array[i,"type"],array[i,"class"],array[i,"method"],array[i,"line"], sep="_")
+    key <- paste(key, array[i,"classReplaceOrAdd"], array[i,"methodReplaceOrAdd"], array[i,"lineReplaceOrAdd"], sep="_")
+    if(!(key %in% vec) ) {
+      result <- rbind(result, array[i,]) 
+      vec[count] <- key
+      count <- count + 1
+    }
+  }
+    
+    return(result)
 }
 
 #compileTime et testTime pour 100 execution
-diversiticationStat2 <- function(data, compileTime, testTime, nbStmt, tested) {
-  result <- data.frame ();
- 
-  for(i in allType()) {
-    sub <- subset(data, data[,"type"] == i);
-    trial <- nbOfTrial(sub)
-    sosie <-  nbOfSosie(sub);
-    compile <- nbOfCompile(sub);
-   
- 
-    result[paste(i,sep=""),"#tested statements"] <- paste(tested ," (",round((tested/nbStmt)*100,1),"%)",sep="")
-    result[paste(i,sep=""),"trial"] <- paste(trial, sep="");
-   
+diversiticationStatLine <- function(data, name, result, compileTime, testTime, nbStmt, tested) {
+    trial <- nbOfTrial(data)
+    sosie <-  nbOfSosie(data);
+    compile <- nbOfCompile(data);
+    
+    result[name,"#transformable statements"] <- paste(nbStmt,sep="")  
+    result[name,"#tested statements"] <- paste(tested ," (",round((tested/nbStmt)*100,1),"%)",sep="")  
+    candidate <- candidate(data)
+    result[name,"candidate"] <- paste(candidate,sep="");
+    
+    testedCandidiate <- round((trial/candidate)*100,2)
+    result[name,"trial"] <- paste(trial," (",testedCandidiate,"%)", sep="");
     
     p <- round(100*compile/trial,1)
-    result[paste(i,sep=""),"compile"] <- paste(compile," (",p,"%)", sep="");
-   
+    result[name,"compile"] <- paste(compile," (",p,"%)", sep="");
     
     p <- round(100*sosie/(trial),1)
-    result[paste(i,sep=""),"sosie"] <- paste(sosie," (",p,"%)", sep="");
-  
-    candidate <- sum(as.numeric(sub$candidate))/length(sub$candidate)
-    result[paste(i,sep=""),"%tested candidate transformations"] <- paste(round(perTranformationTested(trial, nbStmt, candidate) ,2),"%",sep="")
-    result[paste(i,sep=""),"candidate"] <- paste(round(sum(as.numeric(sub$candidate))/length(sub$candidate),1),sep="");
+    result[name,"sosie"] <- paste(sosie," (",p,"%)", sep=""); 
+    
     sosieH <- sosieHour(compileTime, testTime, 100*compile/trial, 100*sosie/trial)
-    result[paste(i,sep=""),"sosie/h"] <- paste(round(sosieH,1),sep="");
-    result[paste(i,sep=""),"time"] <- paste(round(totalTime(compileTime, testTime, trial,compile),1),sep="");
+    result[name,"sosie/h"] <- paste(round(sosieH,1),sep="");
+    result[name,"time"] <- paste(round(totalTime(compileTime, testTime, trial,compile),1),sep="");
     
-    
+    return(result)
+}
+
+#compileTime et testTime pour 100 execution
+diversiticationStat3 <- function(data, compileTime, testTime, nbStmt, tested) {
+  result <- data.frame ();
+  
+  for(i in allType()) {
+    sub <- subset(data, data[,"type"] == i);
+    result <- diversiticationStatLine(sub,i,result, compileTime, testTime, nbStmt, tested)
   }
   return(result)  
 }
 
+#diversiticationStatAll(all, 0,0, 2914+2042+674+1471+9893+11715+47065 ,782+1957+85+473+1802+3829+1275)
+diversiticationStatAll <- function(data, compileTime, testTime, nbStmt, tested) {
+  result <- data.frame();
+  
+  result <- diversiticationStatLine(rand(data), "rand",result, compileTime, testTime, nbStmt, tested)
+  result <- diversiticationStatLine(tm(data), "tm",result, compileTime, testTime, nbStmt, tested)
+  result <- diversiticationStatLine(vm(data), "vm",result, compileTime, testTime, nbStmt, tested)
+  result <- diversiticationStatLine(rm(data), "rm",result, compileTime, testTime, nbStmt, tested)
+    
+  return(result)  
+}
 
+printTable <-function(data, compileTime, testTime, nbStmt, tested) {
+  options(scipen=10)
+  print(xtable(diversiticationStat2(data, compileTime, testTime, nbStmt, tested)),floating=FALSE,scientific=TRUE)
+  options(scipen=0)
+}
 
 
 perTranformationTested <- function(trial,nbStmt, candidate) {
@@ -171,85 +167,96 @@ arrayFctRA <- function(data) {
 }
 
 rand <- function(data) {
-  return(subset(data, data[,"type"] == "notContextAdd" || data[,"type"] == "notContextReplace" || data[,"type"] == "delete"))
+  return(subset(data, data[,"type"] == "notContextAdd" | data[,"type"] == "notContextReplace" | data[,"type"] == "delete"))
 }
-
 tm <- function(data) {
-  return(subset(data, data[,"type"] == "notMappingVariableAdd" || data[,"type"] == "notMappingVariableReplace" || data[,"type"] == "delete"))
+  return(subset(data, data[,"type"] == "notMappingVariableAdd" | data[,"type"] == "notMappingVariableReplace" | data[,"type"] == "delete"))
 }
-
 vm <- function(data) {
-  return(subset(data, data[,"type"] == "notContextMappingVariableNameAdd" || data[,"type"] == "notContextMappingVariableNameReplace" || data[,"type"] == "delete")) 
+  return(subset(data, data[,"type"] == "notContextMappingVariableNameAdd" | data[,"type"] == "notContextMappingVariableNameReplace" | data[,"type"] == "delete")) 
+}
+rm <- function(data) {
+  return(subset(data, data[,"type"] == "replace" | data[,"type"] == "add" | data[,"type"] == "delete")) 
 }
 
-rm <- function(data) {
-  return(subset(data, data[,"type"] == "replace" || data[,"type"] == "add" || data[,"type"] == "delete")) 
-}
+#print(xtable(diversiticationStat3(easymock,398, 737, 1441, 943)),floating=FALSE)
+#print(xtable(diversiticationStat3(junit,485, 1441, 1654, 669)),floating=FALSE)
+#print(xtable(diversiticationStat2(lang,629, 2463,11715, 3829)),floating=FALSE)
+#print(xtable(diversiticationStat3(metrics,471, 767, 908, 302)),floating=FALSE)
+#print(xtable(diversiticationStat2(math,921, 14420, 47065, 990+285)),floating=FALSE)
+#print(xtable(diversiticationStat2(collections,738, 2238, 5027, 1314+488)),floating=FALSE)
+#print(xtable(diversiticationStat3(dagger,517, 1120, 95, 85)),floating=FALSE)
+#
+#jbehave 3405
 
 #compileTime et testTime pour 100 execution
 otherStat <- function(data) {
   result <- data.frame ();
-  
-    add <- subset(data, data[,"type"] == "add")
-   add1 <- subset(data, data[,"type"] == "notContextMappingVariableNameAdd")
-    add2 <- subset(data, data[,"type"] == "notMappingVariableAdd")
-    add3 <- subset(data, data[,"type"] == "notContextAdd")
-   replace <- subset(data, data[,"type"] == "replace")
-  replace1 <- subset(data, data[,"type"] == "notContextMappingVariableNameReplace")
-  replace2 <- subset(data, data[,"type"] == "notMappingVariableReplace")
-  replace3 <- subset(data, data[,"type"] == "notContextReplace")
-  delete <- subset(data, data[,"type"] == "delete")
 
-  trial <- nbOfTrial(delete)+ nbOfTrial(add3)+ nbOfTrial(replace3)
-  compile  <- nbOfCompile(delete)+nbOfCompile(add3)+nbOfCompile(replace3) 
-  sosie <-  nbOfSosie(delete)+ nbOfSosie(add3)+ nbOfSosie(replace3)  
-  result["rand", "trial"] <- trial
-  result["rand", "compile"] <- compile
-  result["rand", "compile%"] <- round(100*compile/trial,1)
-  result["rand", "sosie"] <- sosie
-  result["rand", "sosie%"] <- round(100*sosie/trial,1)
+  randtrial <- nbOfTrial(rand(data))
+  randcompile  <- nbOfCompile(rand(data)) 
+  randsosie <-  nbOfSosie(rand(data))  
+  result["rand", "trial"] <- randtrial
+  result["rand", "compile"] <- randcompile
+  result["rand", "%compile"] <- round(100*randcompile/randtrial,1)
+  result["rand", "%compile gain"] <- "0"
+  result["rand", "sosie"] <- randsosie
+  result["rand", "%sosie"] <- round(100*randsosie/randtrial,1)
+  result["rand", "%sosie gain"] <- "0"
   
-  trial <- nbOfTrial(delete)+ nbOfTrial(add1)+ nbOfTrial(replace1)
-  compile  <- nbOfCompile(delete)+nbOfCompile(add1)+nbOfCompile(replace1) 
-  sosie <-  nbOfSosie(delete)+ nbOfSosie(add1)+ nbOfSosie(replace1)  
+  trial <- nbOfTrial(tm(data))
+  compile  <- nbOfCompile(tm(data)) 
+  sosie <-  nbOfSosie(tm(data))  
   result["MnR", "trial"] <- trial
   result["MnR", "compile"] <- compile
-  result["MnR", "compile%"] <- round(100*compile/trial,1)
+  result["MnR", "%compile"] <- round(100*compile/trial,1)
+  result["MnR", "%compile gain"] <- round((100*compile/trial) - (100*randcompile/randtrial),1)
   result["MnR", "sosie"] <- sosie
-  result["MnR", "sosie%"] <- round(100*sosie/trial,1)
+  result["MnR", "%sosie"] <- round(100*sosie/trial,1)
+  result["MnR", "%sosie gain"] <- round((100*sosie/trial) - (100*randsosie/randtrial),1)
   
-  trial <- nbOfTrial(delete)+ nbOfTrial(add2)+ nbOfTrial(replace2)
-  compile  <- nbOfCompile(delete)+nbOfCompile(add2)+nbOfCompile(replace2) 
-  sosie <-  nbOfSosie(delete)+ nbOfSosie(add2)+ nbOfSosie(replace2)  
+  trial <- nbOfTrial(vm(data))
+  compile  <- nbOfCompile(vm(data)) 
+  sosie <-  nbOfSosie(vm(data))  
   result["RnM", "trial"] <- trial
   result["RnM", "compile"] <- compile
-  result["RnM", "compile%"] <- round(100*compile/trial,1)
+  result["RnM", "%compile"] <- round(100*compile/trial,1)
+  result["RnM", "%compile gain"] <- round((100*compile/trial) - (100*randcompile/randtrial),1)
   result["RnM", "sosie"] <- sosie
-  result["RnM", "sosie%"] <- round(100*sosie/trial,1)
+  result["RnM", "%sosie"] <- round(100*sosie/trial,1)
+  result["RnM", "%sosie gain"] <- round((100*sosie/trial) - (100*randsosie/randtrial),1)
   
-  trial <- nbOfTrial(delete)+ nbOfTrial(add)+ nbOfTrial(replace)
-  compile  <- nbOfCompile(delete)+nbOfCompile(add)+nbOfCompile(replace) 
-  sosie <-  nbOfSosie(delete)+ nbOfSosie(add)+ nbOfSosie(replace)  
+  trial <- nbOfTrial(rm(data))
+  compile  <- nbOfCompile(rm(data)) 
+  sosie <-  nbOfSosie(rm(data))  
   result["MR", "trial"] <- trial
   result["MR", "compile"] <- compile
-  result["MR", "compile%"] <- round(100*compile/trial,1)
+  result["MR", "%compile"] <- round(100*compile/trial,1)
+  result["MR", "%compile gain"] <- round((100*compile/trial) - (100*randcompile/randtrial),1)
   result["MR", "sosie"] <- sosie
-  result["MR", "sosie%"] <- round(100*sosie/trial,1)
+  result["MR", "%sosie"] <- round(100*sosie/trial,1)
+  result["MR", "%sosie gain"] <- round((100*sosie/trial) - (100*randsosie/randtrial),1)
   return(result)  
 }
 
-mySample <- function(data, size) {
-  return(data[sample(1:nrow(data),size, replace=FALSE),])
-}
-
-splitAndWrite <- function(data, splitSize, fileName) {
-  borne <- nrow(data)/splitSize
-  for(i in 0:borne) {
-    subSet <- junit[(i*splitSize):((i+1)*splitSize),]
-    fileName2 <- paste(sep="",fileName,i,".csv")
-    write.csv2(subSet, file=fileName2)
-  }
+traceStat <-function(dataTrace) {
+  result <- data.frame ();
+  size <- length(dataTrace$diffVar)
+  result[1,"#sosie"] <- size
   
+  tmp <- length(subset(dataTrace, dataTrace$callSequenceDiff > 22 | dataTrace$varSequenceDiff != 0)$diffVar)
+  result[1,"diversity"] <- paste(tmp, " (",round(100*tmp/size,2), "%)", sep="") 
+  
+  tmp <- length(subset(dataTrace, dataTrace$callSequenceDiff > 22)$diffVar)
+  result[1,"call diversity"] <- paste(tmp, " (",round(100*tmp/size,2), "%)", sep="")  
+ 
+  tmp <- length(subset(dataTrace, dataTrace$varSequenceDiff != 0)$diffVar) 
+  result[1," var diversity"] <-  paste(tmp, " (",round(100*tmp/size,2), "%)", sep="")  
+
+  set <- subset(dataTrace, dataTrace$varSequenceDiff != 0)
+  result[1,"diffUniqueVar"] <- round(sum(set$diffUniqueVar)/length(set$diffVar),2)
+  
+  return(result)
 }
 
 set <- function(collection) {
@@ -263,6 +270,8 @@ set <- function(collection) {
   }
   return(sort(vec))
 }
+
+
 
 forest <- function(diversification) {
   testNotFail <- diversification$failure == 0;
@@ -279,48 +288,4 @@ loadAllResult <- function(dir) {
   tReplace <<- read.csv2(paste(sep="", dir, "_replace_all_diversification_detail.csv"))
   tAdd <<- read.csv2(paste(sep="", dir, "_add_all_diversification_detail.csv"))
   tDelete <<- read.csv2(paste(sep="", dir, "_delete_all_diversification_detail.csv"))
-}
-
-displayResult <- function() {
-cat('all:\n\ttrial: ')
-cat(nbOfDiversification(tReplace) + nbOfDiversification(tAdd) + nbOfDiversification(tDelete))
-cat('\n\tincorrect-variants: ')
-cat(nbOfFailDiversification(tReplace) + nbOfFailDiversification(tAdd) + nbOfFailDiversification(tDelete))
-cat('\n\tsosies: ')
-cat(nbOfGoodDiversification(tReplace) + nbOfGoodDiversification(tAdd) + nbOfGoodDiversification(tDelete))
-
-cat('\nreplace:\n\ttrial: ')
-cat(nbOfDiversification(tReplace))
-cat('\n\tincorrect-variants: ')
-cat(nbOfFailDiversification(tReplace))
-cat('\n\tsosies: ')
-cat(nbOfGoodDiversification(tReplace))
-
-cat('\nadd:\n\ttrial: ')
-cat(nbOfDiversification(tAdd))
-cat('\n\tincorrect-variants: ')
-cat(nbOfFailDiversification(tAdd))
-cat('\n\tsosies: ')
-cat(nbOfGoodDiversification(tAdd))
-
-cat('\ndelete:\n\ttrial: ')
-cat(nbOfDiversification(tDelete))
-cat('\n\tincorrect-variants: ')
-cat(nbOfFailDiversification(tDelete))
-cat('\n\tsosies: ')
-cat(nbOfGoodDiversification(tDelete))
-} 
-
-displayDetailResult <- function() {
-  cat('replace:\n')
-  tab <- diversiticationStat(tReplace, "toReplaceSuperType")
-  print(xtable(tab),floating=FALSE) 
-  
-  cat('\nadd:\n')
-  tab <- diversiticationStat(tAdd, "positionSuperType")
-  print(xtable(tab),floating=FALSE) 
-  
-  cat('\ndelete:\n')
-  tab <- diversiticationStat(tDelete, "deleteSuperType")
-  print(xtable(tab),floating=FALSE) 
 }

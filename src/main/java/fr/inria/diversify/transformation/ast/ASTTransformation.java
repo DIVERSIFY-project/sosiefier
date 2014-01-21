@@ -156,6 +156,9 @@ public abstract class ASTTransformation implements Transformation {
 
     public int inputContextSize() {return 0;}
     public int inputContextSizeRA() {return 0;}
+    public int line() {
+        return position.getStartLine();
+    }
 
 //    public abstract void add(ASTTransformation replace);
 

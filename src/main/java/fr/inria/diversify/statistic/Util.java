@@ -3,6 +3,7 @@ package fr.inria.diversify.statistic;
 import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
+import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -94,6 +95,16 @@ public class Util {
         return list;
     }
 
+//    public List<CodeFragment> findStupidCandidate(CodeFragment cf) {
+//        List<CodeFragment> list = new ArrayList<CodeFragment>();
+//        for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
+//
+//            if (cf.isReplace(statement,true) && cf.isReplace(statement,false) && !statement.equalString().equals(cf.equalString()))
+//                list.add(statement);
+//
+//        return list;
+//    }
+
     protected BigInteger getNumberOfVarMapping(CodeFragment before, CodeFragment after) {
         BigInteger nb = new BigInteger("1");
 
@@ -142,6 +153,19 @@ public class Util {
             }
         }
         return  transformations;
+    }
+
+    public List<CodeFragment> findStupidCandidate(CodeFragment cf, ICoverageReport rg) {
+        List<CodeFragment> list = new ArrayList<CodeFragment>();
+        for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
+
+            if (cf.isReplace(statement,false)
+//                    && cf.isReplace(statement,true)
+//                    && !statement.equalString().equals(cf.equalString())
+                    && rg.codeFragmentCoverage(statement) !=0)
+                list.add(statement);
+
+        return list;
     }
 
     public Set<Transformation> getAllReplace() throws InterruptedException {

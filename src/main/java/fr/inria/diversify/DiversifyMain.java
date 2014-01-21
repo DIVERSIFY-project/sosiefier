@@ -249,11 +249,15 @@ public class DiversifyMain {
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
         TransformationParser tf = new TransformationParser(codeFragments);
         List<Transformation> transformations = tf.parseDir(transDir);
+//        Set<Transformation> set = new HashSet<Transformation>();
+//        set.addAll(transformations);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
+        Log.info("nb stmt transformable {}",test());
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         String name = write.writeAllTransformation(null);
         statForR(name);
+
 
 
         for(String type : getAllTransformationType(transformations)) {
@@ -289,7 +293,7 @@ public class DiversifyMain {
         if(transformations.isEmpty())
             return;
 
-        Set<Transformation> set = new HashSet<Transformation>(tf.parseFile(new File(fileName)));
+        Set<Transformation> set = new HashSet<Transformation>(transformations);
         Log.debug("number of transformation: {}",transformations.size());
         Log.debug("number of unique transformation: {}",set.size());
 
@@ -344,6 +348,17 @@ public class DiversifyMain {
 
         }
         return methods;
+    }
+
+    protected  int test() throws IOException {
+        ICoverageReport rg = initCoverageReport();
+        Util util = new Util(codeFragments);
+        int count = 0;
+        for(CodeFragment cf  :codeFragments) {
+            if(util.findStupidCandidate(cf, rg).size() != 0)
+                count++;
+        }
+        return count;
     }
 
     protected void sosieOnMultiProject() throws Exception {

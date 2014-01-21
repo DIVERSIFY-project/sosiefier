@@ -132,4 +132,19 @@ public class ASTMultiTransformation implements Transformation {
 
     public int inputContextSize() {return 0;}
     public int inputContextSizeRA() {return 0;}
+
+    @Override
+    public int line() {
+        return 0;
+    }
+
+    @Override
+    public String methodReplaceOrAdd() {
+        return null;
+    }
+
+    @Override
+    public int lineReplaceOrAdd() {
+        return 0;
+    }
 }

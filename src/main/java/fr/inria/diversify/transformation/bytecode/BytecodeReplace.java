@@ -69,6 +69,8 @@ public class BytecodeReplace extends BytecodeTransformation {
         return object;
     }
 
+
+
     @Override
     protected void apply() throws BadBytecode {
         MethodInfo minfo = methodLocation.getMethodInfo();
