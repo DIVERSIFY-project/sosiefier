@@ -7,6 +7,7 @@ import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtReturn;
 
 import java.util.*;
@@ -182,7 +183,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
             return null;
 
         Random r = new Random();
-        Object tmp = copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
+        CtCodeElement tmp = (CtCodeElement)copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
         CodeFragment ret = (CodeFragment)CodeFragmentClass.newInstance();
         ret.init(tmp);
         return ret;

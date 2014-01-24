@@ -1,20 +1,15 @@
 package fr.inria.diversify.codeFragment;
 
-import spoon.reflect.Factory;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLocalVariable;
-import spoon.reflect.code.CtThisAccess;
 import spoon.reflect.code.CtVariableAccess;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.factory.FactoryImpl;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.reflect.visitor.CtScanner;
-import spoon.support.reflect.reference.CtFieldReferenceImpl;
 import spoon.support.reflect.reference.CtLocalVariableReferenceImpl;
-
-import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -65,7 +60,7 @@ public class VariableVisitor extends CtScanner {
 	protected CtVariableReference<?> getThis(){
 		CtVariableReference thisVariable = new CtLocalVariableReferenceImpl();
 		thisVariable.setType(refThis);
-        thisVariable.setFactory(Factory.getLauchingFactory());
+        thisVariable.setFactory(FactoryImpl.getLauchingFactory());
 		thisVariable.setSimpleName("this");
 		return thisVariable;
 	}

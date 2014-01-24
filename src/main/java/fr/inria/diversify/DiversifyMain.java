@@ -27,8 +27,9 @@ import org.json.JSONException;
 
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
-import spoon.reflect.Factory;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.factory.Factory;
+import spoon.reflect.factory.FactoryImpl;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
@@ -49,7 +50,7 @@ import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromLis
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import spoon.support.compiler.JDTCompiler;
+import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 /**
  * User: Simon
@@ -212,8 +213,8 @@ public class DiversifyMain {
         env.setDebug(true);
 
         DefaultCoreFactory f = new DefaultCoreFactory();
-        Factory factory = new Factory(f, env);
-        SpoonCompiler c = new JDTCompiler(factory);
+        Factory factory = new FactoryImpl(f, env);
+        SpoonCompiler c = new JDTBasedSpoonCompiler(factory);
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 Log.debug("add {} to classpath",dir);

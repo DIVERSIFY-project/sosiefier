@@ -16,11 +16,6 @@ public class Block extends CodeFragment {
 
     public Block() {}
 
-    public void init(Object element) {
-        codeFragment = (CtBlock)element;
-        init();
-    }
-
     public String codeFragmentString() {
         return codeFragment.toString();
     }

@@ -9,11 +9,12 @@ import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
-import spoon.reflect.Factory;
+import spoon.reflect.factory.Factory;
+import spoon.reflect.factory.FactoryImpl;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
-import spoon.support.compiler.JDTCompiler;
+import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,8 +63,8 @@ public class SamplingMain {
         env.setVerbose(true);
         env.setDebug(true);
         DefaultCoreFactory f = new DefaultCoreFactory();
-        Factory factory = new Factory(f, env);
-        SpoonCompiler c = new JDTCompiler(factory);
+        Factory factory = new FactoryImpl(f, env);
+        SpoonCompiler c = new JDTBasedSpoonCompiler(factory);
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 Log.debug("add {} to classpath",dir);

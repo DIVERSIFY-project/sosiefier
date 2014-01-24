@@ -12,17 +12,10 @@ import spoon.support.reflect.code.*;
 public class Statement extends CodeFragment {
 
     public Statement(CtStatement stmt) {
-        this.codeFragment = stmt;
         init(stmt);
     }
 
     public Statement() {}
-
-    public void init(Object stmt) {
-        this.codeFragment = (CtStatement)stmt;
-        init();
-    }
-
 
     //check if this can be replaced by other
     public boolean isReplace(CodeFragment other, boolean varNameMatch) {

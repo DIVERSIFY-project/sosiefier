@@ -26,11 +26,11 @@ import java.util.List;
 public abstract class ASTTransformation implements Transformation {
     protected CodeFragment position;
     protected Integer failures = -1;
-    protected List<ASTTransformation> parents;
+//    protected List<ASTTransformation> parents;
     protected boolean compile;
 
     public ASTTransformation() {
-        parents = new ArrayList<ASTTransformation>();
+//        parents = new ArrayList<ASTTransformation>();
     }
 
     public void apply(String srcDir) throws Exception {
@@ -51,7 +51,8 @@ public abstract class ASTTransformation implements Transformation {
         CtSimpleType<?> type = getOriginalClass(position);
         Environment env = type.getFactory().getEnvironment();
 
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository));
+        JavaOutputProcessor processor = new JavaOutputProcessor();
+        processor.setOutputDirectory(new File(repository));
         env.useSourceCodeFragments(true);
         processor.setFactory(type.getFactory());
 
@@ -84,9 +85,9 @@ public abstract class ASTTransformation implements Transformation {
 //        position = cf;
 //    }
 
-    public void addParent(ASTTransformation p) {
-        parents.add(p);
-    }
+//    public void addParent(ASTTransformation p) {
+//        parents.add(p);
+//    }
 
     public CodeFragment getPosition() {
         return position;

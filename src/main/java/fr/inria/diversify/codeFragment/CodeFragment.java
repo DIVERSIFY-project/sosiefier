@@ -6,13 +6,14 @@ import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import spoon.reflect.Factory;
 import spoon.reflect.code.*;
+import spoon.reflect.factory.Factory;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.declaration.CtTypedElement;
+import spoon.reflect.factory.FactoryImpl;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.support.reflect.code.CtLocalVariableImpl;
@@ -33,9 +34,8 @@ public abstract class CodeFragment {
     protected CtCodeElement codeFragment;
     protected String equalString;
 
-    public abstract void init(Object cf);
-
-    public void init() {
+    public void init(CtCodeElement cf) {
+        codeFragment = cf;
         context = new Context(initInputContext(), initOutputContext());
         this.initOutputContext();
         this.initInputContext();
@@ -56,7 +56,7 @@ public abstract class CodeFragment {
             return ((CtTypedElement<?>) codeFragment).getType();
 
         } else
-            return Factory.getLauchingFactory().Type().createReference(void.class);
+            return FactoryImpl.getLauchingFactory().Type().createReference(void.class);
     }
 
     protected InputContext initInputContext() {
@@ -212,21 +212,11 @@ public abstract class CodeFragment {
     }
 
     public int getStartLine() {
-//        try {
-            return codeFragment.getPosition().getLine();
-//        } catch (Exception e) {
-//            Log.warn("no position for {}",codeFragment);
-//            return Integer.MAX_VALUE;
-//        }
+        return codeFragment.getPosition().getLine();
     }
 
     public int getEndLine() {
-//        try {
-            return codeFragment.getPosition().getEndLine();
-//        } catch (Exception e) {
-//            Log.warn("no position for {}",codeFragment);
-//            return Integer.MAX_VALUE;
-//        }
+        return codeFragment.getPosition().getEndLine();
     }
 
     public CtPackage getSourcePackage() {

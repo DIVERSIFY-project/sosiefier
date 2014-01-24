@@ -20,7 +20,8 @@ public class JavaOutputProcessorWithFilter extends JavaOutputProcessor {
      * @param outputDirectory the root output directory
      */
     public JavaOutputProcessorWithFilter(File outputDirectory, Collection<String> classesName) {
-        super(outputDirectory);
+        super();
+        setOutputDirectory(outputDirectory);
         this.classesName = classesName;
     }
 

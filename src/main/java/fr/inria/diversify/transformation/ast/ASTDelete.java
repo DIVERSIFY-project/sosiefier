@@ -34,9 +34,9 @@ public class ASTDelete extends ASTTransformation {
 
         JSONArray Jparents = new JSONArray();
         object.put("parents",Jparents);
-        for(ASTTransformation parent : parents) {
-            Jparents.put(parent.toJSONObject());
-        }
+//        for(ASTTransformation parent : parents) {
+//            Jparents.put(parent.toJSONObject());
+//        }
 
         return object;
     }

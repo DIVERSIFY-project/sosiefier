@@ -2,8 +2,8 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import spoon.reflect.Factory;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtVariableReference;
 
 import java.util.ArrayList;

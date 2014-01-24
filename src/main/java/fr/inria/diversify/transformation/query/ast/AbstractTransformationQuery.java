@@ -4,8 +4,8 @@ import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.query.ITransformationQuery;
-import spoon.reflect.Factory;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.factory.Factory;
 
 import java.util.Collection;
 import java.util.Random;

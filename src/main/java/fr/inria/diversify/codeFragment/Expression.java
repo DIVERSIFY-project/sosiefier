@@ -1,5 +1,6 @@
 package fr.inria.diversify.codeFragment;
 
+import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtExpression;
 
 /**
@@ -10,16 +11,11 @@ import spoon.reflect.code.CtExpression;
 public class Expression extends CodeFragment {
 
     public Expression(CtExpression<?> expression) {
-        codeFragment = expression;
         init(expression);
     }
 
     public Expression() {}
 
-    public void init(Object expression) {
-        codeFragment = (CtExpression)expression;
-        init();
-    }
 
     public String codeFragmentString() {
         return codeFragment.toString();

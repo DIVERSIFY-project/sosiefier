@@ -6,7 +6,6 @@ import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 
 import fr.inria.diversify.sosie.pointSequence.CallPoint;
 import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
-import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -17,20 +16,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
-import spoon.reflect.Factory;
+import spoon.reflect.factory.Factory;
+import spoon.reflect.factory.FactoryImpl;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
-import spoon.support.compiler.JDTCompiler;
+import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * User: Simon
@@ -165,8 +162,8 @@ public class CompareLogMain {
         env.setDebug(true);
 
         DefaultCoreFactory f = new DefaultCoreFactory();
-        Factory factory = new Factory(f, env);
-        SpoonCompiler c = new JDTCompiler(factory);
+        Factory factory = new FactoryImpl(f, env);
+        SpoonCompiler c = new JDTBasedSpoonCompiler(factory);
 
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
