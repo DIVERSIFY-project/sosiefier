@@ -9,6 +9,7 @@ import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
+import fr.inria.diversify.util.Log;
 import spoon.reflect.Factory;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
@@ -52,11 +53,19 @@ public class Util {
         return list.size();
     }
 
+    static BigInteger max = new BigInteger("0");
     public BigInteger numberOfNotDiversification(CodeFragment cf) {
         BigInteger nb = new BigInteger("0");
 
-        for (CodeFragment cf2 : findCandidate(cf, false))
-            nb = nb.add(getNumberOfVarMapping(cf,cf2));
+        for (CodeFragment cf2 : findCandidate(cf, false)) {
+            BigInteger tmp = getNumberOfVarMapping(cf, cf2);
+            nb = nb.add(tmp);
+            if(max.compareTo(tmp) < 0) {
+                max = tmp;
+                Log.debug("{}\nposition: {}\n {}",tmp, cf.getInputContext().equalString() ,cf);
+                Log.debug("replace/add:{}\n{}\n",  cf2.getInputContext().equalString(), cf2);
+            }
+        }
         return nb;
     }
 
@@ -160,7 +169,7 @@ public class Util {
         for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
 
             if (cf.isReplace(statement,false)
-//                    && cf.isReplace(statement,true)
+                    && cf.isReplace(statement,true)
 //                    && !statement.equalString().equals(cf.equalString())
                     && rg.codeFragmentCoverage(statement) !=0)
                 list.add(statement);

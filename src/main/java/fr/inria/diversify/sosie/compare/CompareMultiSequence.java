@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.sosie.pointSequence.PointSequence;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
@@ -157,6 +158,7 @@ public class CompareMultiSequence {
                 }
             }
         }
+        //Log.debug("nb point: {}",Point.nbPoint);
         return list;
     }
 

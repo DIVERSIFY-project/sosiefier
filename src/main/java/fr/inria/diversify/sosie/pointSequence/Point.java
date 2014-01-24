@@ -12,7 +12,7 @@ import java.util.Set;
  * Time: 11:48 AM
  */
 public abstract class Point {
-    public static int  nbPoint = 0;
+    //public static int  nbPoint = 0;
     public static int error = 0;
     String className;
     String methodSignature;

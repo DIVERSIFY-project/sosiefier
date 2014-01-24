@@ -4,6 +4,8 @@ import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 
+import fr.inria.diversify.sosie.pointSequence.CallPoint;
+import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
 import fr.inria.diversify.sosie.pointSequence.Point;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.TransformationParser;
@@ -73,7 +75,7 @@ public class CompareLogMain {
         CompareMultiSequence un = new CompareMultiSequence(dirOriginal,dirSosie);
         un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
         un.findAndWriteDiffVar(varToExclude);
-        Log.debug(Point.nbPoint+ " "+Point.error);
+
     }
 
     protected void diff() throws Exception {
@@ -101,6 +103,7 @@ public class CompareLogMain {
                 Log.error("error",e);
                 e.printStackTrace();
             }
+        Log.debug(CallPoint.nbCallPoint+ " "+ ConditionalPoint.nbVarPoint);
     }
 
     protected void writeResult(Diff diff, CodeFragment cf) throws IOException, JSONException {

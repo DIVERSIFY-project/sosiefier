@@ -249,11 +249,9 @@ public class DiversifyMain {
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
         TransformationParser tf = new TransformationParser(codeFragments);
         List<Transformation> transformations = tf.parseDir(transDir);
-//        Set<Transformation> set = new HashSet<Transformation>();
-//        set.addAll(transformations);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
-        Log.info("nb stmt transformable {}",test());
+//        Log.info("nb stmt transformable {}",test());
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         String name = write.writeAllTransformation(null);
         statForR(name);
@@ -307,7 +305,6 @@ public class DiversifyMain {
 
     protected void computeOtherStat() throws InterruptedException {
         Util stat = new Util(codeFragments);
-//        System.out.println("number of possible code fragment replace: " + stat.numberOfDiversification());
         try {
             System.out.println("number of not possible code fragment replace/add: " + stat.numberOfNotDiversification());
         } catch (InterruptedException e) {
@@ -354,9 +351,12 @@ public class DiversifyMain {
         ICoverageReport rg = initCoverageReport();
         Util util = new Util(codeFragments);
         int count = 0;
+        int count2 = 0;
         for(CodeFragment cf  :codeFragments) {
+            count2++;
             if(util.findStupidCandidate(cf, rg).size() != 0)
                 count++;
+            Log.debug("stmt {} {}", count2,count);
         }
         return count;
     }

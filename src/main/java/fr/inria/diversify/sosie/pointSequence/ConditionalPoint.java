@@ -44,6 +44,7 @@ public class ConditionalPoint extends Point {
             buildFromId(string,idMap, null);
     }
 
+    public static int  nbVarPoint = 0;
     protected void buildFromId(String string, Map<String,String> idMap, ConditionalPoint last) {
         try {
             vars = new HashMap<String, String>();
@@ -61,7 +62,7 @@ public class ConditionalPoint extends Point {
                         vars.put(idMap.get(tmp[0]).toString(), "");
                 }
             }
-            nbPoint++;
+            nbVarPoint++;
         } catch (Exception e) {
             error++;
             bugPoint = true;

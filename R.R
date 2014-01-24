@@ -40,18 +40,33 @@ candidate <- function(data) {
   vec <-vector()
   
   for (i in 1:length(data$type)) {
-    key <- paste(data[i,"class"],data[i,"method"],data[i,"line"], sep="_")
+    key <- paste(data[i,"type"],data[i,"class"],data[i,"method"],data[i,"line"], sep="_")
 
     if(!(key %in% vec)) {
       sum <- sum + data[i,"candidate"]
       vec[count] <- key
       count <- count + 1
     }
-
+  
   }
   return(sum)
 }
 
+nbStmtTested <- function(data) {
+  count <- 1
+  vec <-vector()
+  tested <- 0
+  for (i in 1:length(data$type)) {
+    key <- paste(data[i,"type"],data[i,"class"],data[i,"method"],data[i,"line"], sep="_")
+    
+    if(!(key %in% vec)) {
+      vec[count] <- key
+      count <- count + 1
+      tested <- tested + 1
+    } 
+  }
+  return(tested)
+}
 
 diversifivationSet <- function(array) {
   result <- data.frame()
@@ -61,6 +76,7 @@ diversifivationSet <- function(array) {
     key <- paste(array[i,"type"],array[i,"class"],array[i,"method"],array[i,"line"], sep="_")
     key <- paste(key, array[i,"classReplaceOrAdd"], array[i,"methodReplaceOrAdd"], array[i,"lineReplaceOrAdd"], sep="_")
     if(!(key %in% vec) ) {
+      print(count)
       result <- rbind(result, array[i,]) 
       vec[count] <- key
       count <- count + 1
@@ -76,19 +92,21 @@ diversiticationStatLine <- function(data, name, result, compileTime, testTime, n
     sosie <-  nbOfSosie(data);
     compile <- nbOfCompile(data);
     
-    result[name,"#transformable statements"] <- paste(nbStmt,sep="")  
-    result[name,"#tested statements"] <- paste(tested ," (",round((tested/nbStmt)*100,1),"%)",sep="")  
+  #  result[name,"#transformable statements"] <- paste(nbStmt,sep="")  
+    result[name,"#tested statements"] <- paste(tested ," (",round((tested/nbStmt)*100,0),"%)",sep="")  
     candidate <- candidate(data)
     result[name,"candidate"] <- paste(candidate,sep="");
     
-    testedCandidiate <- round((trial/candidate)*100,2)
+    testedCandidiate <- round((trial/candidate)*100,0)
     result[name,"trial"] <- paste(trial," (",testedCandidiate,"%)", sep="");
     
-    p <- round(100*compile/trial,1)
+    p <- round(100*compile/trial,0)
     result[name,"compile"] <- paste(compile," (",p,"%)", sep="");
     
-    p <- round(100*sosie/(trial),1)
-    result[name,"sosie"] <- paste(sosie," (",p,"%)", sep=""); 
+    pTrial <- round(100*sosie/(trial),0)
+    pSosie <- round(100*sosie/(compile),0)
+    result[name,"sosie"] <- paste(sosie, sep=""); 
+  result[name,"pTrial"] <- paste(pTrial, sep=""); 
     
     sosieH <- sosieHour(compileTime, testTime, 100*compile/trial, 100*sosie/trial)
     result[name,"sosie/h"] <- paste(round(sosieH,1),sep="");
@@ -116,14 +134,30 @@ diversiticationStatAll <- function(data, compileTime, testTime, nbStmt, tested) 
   result <- diversiticationStatLine(tm(data), "tm",result, compileTime, testTime, nbStmt, tested)
   result <- diversiticationStatLine(vm(data), "vm",result, compileTime, testTime, nbStmt, tested)
   result <- diversiticationStatLine(rm(data), "rm",result, compileTime, testTime, nbStmt, tested)
+  result <- diversiticationStatLine(data, "all",result, compileTime, testTime, nbStmt, tested)
     
   return(result)  
 }
 
-printTable <-function(data, compileTime, testTime, nbStmt, tested) {
-  options(scipen=10)
-  print(xtable(diversiticationStat2(data, compileTime, testTime, nbStmt, tested)),floating=FALSE,scientific=TRUE)
-  options(scipen=0)
+densityGain <- function(data) {
+  addS <- subset(data, data[,"type"] == "add");
+  replaceS <- subset(data, data[,"type"] == "replace");
+  steroid <- subset(data, data[,"type"] == "add" | data[,"type"] == "replace");
+  
+  addR <- subset(data, data[,"type"] == "notContextAdd");
+  replaceR <- subset(data, data[,"type"] == "notContextReplace");
+  rand <- subset(data, data[,"type"] == "notContextAdd" | data[,"type"] == "notContextReplace");
+  
+  print(round(densityGainP(addS, addR),2))
+  print(round(densityGainP(replaceS, replaceR),2))
+  print(round(densityGainP(steroid, rand),2))
+}
+
+densityGainP <- function(steroid, rand) {
+
+  pS <- (100* nbOfSosie(steroid)/nbOfTrial(steroid))
+  pR <- (100* nbOfSosie(rand)/nbOfTrial(rand))
+  return(pS/pR)
 }
 
 
@@ -181,13 +215,13 @@ rm <- function(data) {
 
 #print(xtable(diversiticationStat3(easymock,398, 737, 1441, 943)),floating=FALSE)
 #print(xtable(diversiticationStat3(junit,485, 1441, 1654, 669)),floating=FALSE)
-#print(xtable(diversiticationStat2(lang,629, 2463,11715, 3829)),floating=FALSE)
-#print(xtable(diversiticationStat3(metrics,471, 767, 908, 302)),floating=FALSE)
-#print(xtable(diversiticationStat2(math,921, 14420, 47065, 990+285)),floating=FALSE)
-#print(xtable(diversiticationStat2(collections,738, 2238, 5027, 1314+488)),floating=FALSE)
+#print(xtable(diversiticationStat3(collections,738, 2238, 5027, 1668)),floating=FALSE)
+#print(xtable(diversiticationStat3(metrics,471, 767, 908, 319)),floating=FALSE)
+#print(xtable(diversiticationStat3(math,921, 14420, 12966, 1263)),floating=FALSE)
+#print(xtable(diversiticationStat3(lang, 6.3*100, 24.3*100,4432,  686)),floating=FALSE)
 #print(xtable(diversiticationStat3(dagger,517, 1120, 95, 85)),floating=FALSE)
-#
-#jbehave 3405
+#print(xtable(diversiticationStat3(clojure,10510,18500, 12259,1701)),floating=FALSE)
+#print(xtable(diversiticationStat3(jbehave, 500,2290,3405,2798)),floating=FALSE)
 
 #compileTime et testTime pour 100 execution
 otherStat <- function(data) {
@@ -244,17 +278,24 @@ traceStat <-function(dataTrace) {
   size <- length(dataTrace$diffVar)
   result[1,"#sosie"] <- size
   
-  tmp <- length(subset(dataTrace, dataTrace$callSequenceDiff > 22 | dataTrace$varSequenceDiff != 0)$diffVar)
+  tmp <- length(subset(dataTrace, dataTrace$callSequenceDiff > 23 | dataTrace$varSequenceDiff != 0)$diffVar)
   result[1,"diversity"] <- paste(tmp, " (",round(100*tmp/size,2), "%)", sep="") 
   
-  tmp <- length(subset(dataTrace, dataTrace$callSequenceDiff > 22)$diffVar)
+  tmp <- length(subset(dataTrace, dataTrace$callSequenceDiff > 23)$diffVar)
   result[1,"call diversity"] <- paste(tmp, " (",round(100*tmp/size,2), "%)", sep="")  
  
   tmp <- length(subset(dataTrace, dataTrace$varSequenceDiff != 0)$diffVar) 
   result[1," var diversity"] <-  paste(tmp, " (",round(100*tmp/size,2), "%)", sep="")  
+  
 
+  set <- subset(dataTrace, dataTrace$callSequenceDiff > 23)
+  result[1,"call trace diversity"] <- round(sum(set$callSequenceDiff - 23)/length(set$diffVar),2)
+  
   set <- subset(dataTrace, dataTrace$varSequenceDiff != 0)
-  result[1,"diffUniqueVar"] <- round(sum(set$diffUniqueVar)/length(set$diffVar),2)
+  result[1,"var trace traceStat"] <- round(sum(set$varSequenceDiff)/length(set$diffVar),2)
+  
+ # set <- subset(dataTrace, dataTrace$varSequenceDiff != 0)
+#  result[1,"diffUniqueVar"] <- round(sum(set$diffUniqueVar)/length(set$diffVar),2)
   
   return(result)
 }

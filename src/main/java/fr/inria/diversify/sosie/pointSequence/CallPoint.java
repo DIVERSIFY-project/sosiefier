@@ -17,6 +17,9 @@ public class CallPoint extends Point {
         nb = 0;
     }
 
+    public static int  nbCallPoint = 0;
+
+
     @Override
     protected void buildFrom(String string, Map<String, String> idMap) {
         try {
@@ -25,7 +28,7 @@ public class CallPoint extends Point {
             idClass = array[1];
             methodSignature = idMap.get(array[2]);
             idMethod  = array[2];
-            nbPoint++;
+            nbCallPoint++;
         } catch (Exception e) {
             bugPoint = true;
             error++;

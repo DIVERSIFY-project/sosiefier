@@ -104,7 +104,12 @@ public class InputContext {
 	}
 
 	public String equalString() {
-		return inputContextToString().toString();
+        //todo set ou list ?????
+        Set<String> set = new HashSet<String>();
+        for (CtVariableReference<?> var : localVariableReferences)
+            set.add(var.getType().toString()+": "+var);
+        return set.toString();
+	//	return inputContextToString().toString();
 	}
 	
 	@Override

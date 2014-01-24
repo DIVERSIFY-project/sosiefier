@@ -33,7 +33,7 @@ public class ExceptionPoint extends Point {
             for (int i = 1; i< array.length; i++) {
                 stackTrace.add(array[i]);
             }
-            nbPoint++;
+            //nbPoint++;
         } catch (Exception e) {
             error++;
             bugPoint = true;
