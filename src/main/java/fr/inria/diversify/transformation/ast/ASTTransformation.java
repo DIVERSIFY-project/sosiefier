@@ -11,6 +11,8 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.declaration.CtType;
+import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
+import spoon.reflect.visitor.PrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
@@ -49,9 +51,9 @@ public abstract class ASTTransformation implements Transformation {
         CtSimpleType<?> type = getOriginalClass(position);
         Environment env = type.getFactory().getEnvironment();
 
-        JavaOutputProcessor processor = new JavaOutputProcessor();
-        processor.setOutputDirectory(new File(repository));
-        env.useSourceCodeFragments(true);
+        JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository), new FragmentDrivenJavaPrettyPrinter(env));
+//        processor.setOutputDirectory(new File(repository));
+//        env.useSourceCodeFragments(true);
         processor.setFactory(type.getFactory());
 
         processor.createJavaFile(type);

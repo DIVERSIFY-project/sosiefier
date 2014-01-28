@@ -1,16 +1,9 @@
 package fr.inria.diversify.transformation;
 
-import spoon.reflect.code.CtFieldAccess;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtTargetedAccess;
-import spoon.reflect.code.CtVariableAccess;
-import spoon.reflect.declaration.ModifierKind;
-import spoon.reflect.reference.CtFieldReference;
+import spoon.reflect.code.*;
+import spoon.reflect.factory.CodeFactory;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.reflect.visitor.CtScanner;
-import spoon.support.reflect.code.CtFieldAccessImpl;
-import spoon.support.reflect.code.CtTargetedAccessImpl;
-import spoon.support.reflect.code.CtVariableAccessImpl;
 
 /**
  * User: Simon
@@ -30,60 +23,37 @@ public class ReplaceVariableVisitor extends CtScanner {
 
     public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
         if (variableAccess.getVariable().equals(oldVar))
-            if (newVar instanceof CtVariableReference)
                 variableAccess.setVariable(newVar);
-            else
-                variableAccess.replace((CtFieldAccess) newVar);
+
         super.visitCtVariableAccess(variableAccess);
     }
 
 
     public <T> void visitCtTargetedAccess(CtTargetedAccess<T> targetedAccess) {
             if(targetedAccess.getVariable().equals(oldVar)) {
-//                if(newVar instanceof CtFieldReference) {
-                    CtTargetedAccess t = new CtTargetedAccessImpl();
-                    t.setFactory(targetedAccess.getFactory());
-                    t.setVariable(newVar);
-                    targetedAccess.replace(t);
-//                } else {
-//                    targetedAccess.replace();
-//                }
+                CodeFactory codeFactory = targetedAccess.getFactory().Code();
+                CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
+                targetedAccess.replace(variableAccess);
             }
-
             super.visitCtTargetedAccess(targetedAccess);
     }
-//
-//    public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-//        if (fieldAccess.equals(oldVar))
-//            if (newVar instanceof CtVariableReference) {
-//                fieldAccess.replace(newVar.getDeclaration());
-//            } else {
-//                fieldAccess.replace((CtFieldAccess) newVar);
-//            }
-//        super.visitCtVariableAccess(fieldAccess);
-//    }
+
+        public <T> void visitCtThisAccess(CtThisAccess<T> thisAccess) {
+            if(oldVar.getSimpleName().equals("this")) {
+                CodeFactory codeFactory = thisAccess.getFactory().Code();
+                CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
+                thisAccess.replace(variableAccess);
+            }
+
+            super.visitCtThisAccess(thisAccess);
+        }
 
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 
         if (invocation.getTarget() == null && oldVarIsThis()) {
-            CtVariableAccess access;// = new CtTargetedAccessImpl();
-          ;
-            if (newVar instanceof CtFieldReference) {
-                access = new CtFieldAccessImpl();
-//                access.setVariable((CtVariableReference)newVar);
-//                access.setType(((CtVariableReference) newVar).getType());
-
-//                access = (CtFieldAccess) newVar;
-            } else {
-                access = new CtVariableAccessImpl();
-//                access.setVariable((CtVariableReference) newVar);
-//                access.setType(((CtVariableReference) newVar).getType());
-
-            }
-            access.setFactory(invocation.getFactory());
-            access.setVariable(newVar);
-            access.setType(newVar.getType());
-            invocation.setTarget(access);
+            CodeFactory codeFactory = invocation.getFactory().Code();
+            CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
+            invocation.setTarget(variableAccess);
         }
         super.visitCtInvocation(invocation);
     }

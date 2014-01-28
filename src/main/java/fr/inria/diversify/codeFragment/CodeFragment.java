@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
-import spoon.reflect.factory.Factory;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtPackage;
