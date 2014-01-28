@@ -38,14 +38,7 @@ public class ASTReplace extends ASTTransformation {
         object.put("CodeFragmentPosition", position.toJSONObject());
         object.put("CodeFragmentReplace", replace.toJSONObject());
         object.put("VariableMapping", variableMapping);
-//        object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
-
-        JSONArray Jparents = new JSONArray();
-        object.put("parents",Jparents);
-//        for(ASTTransformation parent : parents) {
-//            Jparents.put(parent.toJSONObject());
-//        }
 
         return object;
     }

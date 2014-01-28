@@ -1,10 +1,29 @@
-.idea
-Diversify-statements.iml
-.DS_Store
-.Rapp.history
 /output_diversify/
 /output_sosie/
 /result/
 /repo/
 /sortResult/
 /mavenProjects/
+/test/
+/target/
+
+# Compiled source #
+###################
+*.class
+
+# intelliJ File #
+#####################
+.idea
+Diversify-statements.iml
+.Rapp.history
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+

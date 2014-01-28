@@ -18,11 +18,11 @@ import spoon.support.reflect.code.CtVariableAccessImpl;
  * Time: 3:09 PM
  */
 public class ReplaceVariableVisitor extends CtScanner {
-    protected Object oldVar;
-    protected Object newVar;
+    protected CtVariableReference oldVar;
+    protected CtVariableReference newVar;
 
 
-    public ReplaceVariableVisitor(Object oldVar, Object newVar) {
+    public ReplaceVariableVisitor(CtVariableReference oldVar, CtVariableReference newVar) {
         this.oldVar = oldVar;
         this.newVar = newVar;
     }
@@ -31,7 +31,7 @@ public class ReplaceVariableVisitor extends CtScanner {
     public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
         if (variableAccess.getVariable().equals(oldVar))
             if (newVar instanceof CtVariableReference)
-                variableAccess.setVariable((CtVariableReference) newVar);
+                variableAccess.setVariable(newVar);
             else
                 variableAccess.replace((CtFieldAccess) newVar);
         super.visitCtVariableAccess(variableAccess);
@@ -43,7 +43,7 @@ public class ReplaceVariableVisitor extends CtScanner {
 //                if(newVar instanceof CtFieldReference) {
                     CtTargetedAccess t = new CtTargetedAccessImpl();
                     t.setFactory(targetedAccess.getFactory());
-                    t.setVariable((CtVariableReference)newVar);
+                    t.setVariable(newVar);
                     targetedAccess.replace(t);
 //                } else {
 //                    targetedAccess.replace();
@@ -53,15 +53,15 @@ public class ReplaceVariableVisitor extends CtScanner {
             super.visitCtTargetedAccess(targetedAccess);
     }
 //
-    public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-        if (fieldAccess.equals(oldVar))
-            if (newVar instanceof CtVariableReference) {
-                fieldAccess.replace(((CtVariableReference) newVar).getDeclaration());
-            } else {
-                fieldAccess.replace((CtFieldAccess) newVar);
-            }
-        super.visitCtVariableAccess(fieldAccess);
-    }
+//    public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
+//        if (fieldAccess.equals(oldVar))
+//            if (newVar instanceof CtVariableReference) {
+//                fieldAccess.replace(newVar.getDeclaration());
+//            } else {
+//                fieldAccess.replace((CtFieldAccess) newVar);
+//            }
+//        super.visitCtVariableAccess(fieldAccess);
+//    }
 
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 
@@ -81,8 +81,8 @@ public class ReplaceVariableVisitor extends CtScanner {
 
             }
             access.setFactory(invocation.getFactory());
-            access.setVariable((CtVariableReference) newVar);
-            access.setType(((CtVariableReference) newVar).getType());
+            access.setVariable(newVar);
+            access.setType(newVar.getType());
             invocation.setTarget(access);
         }
         super.visitCtInvocation(invocation);
@@ -90,7 +90,7 @@ public class ReplaceVariableVisitor extends CtScanner {
 
     protected boolean oldVarIsThis() {
         if (newVar instanceof CtVariableReference)
-            return ((CtVariableReference) oldVar).getSimpleName().equals("this");
+            return oldVar.getSimpleName().equals("this");
         return false;
     }
 }

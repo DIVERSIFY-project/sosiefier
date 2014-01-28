@@ -75,9 +75,9 @@ public class InputContext {
         return isReplace;
 	}
 
-    public Object getVariableOrFieldNamed(String name) {
-        Object o = null;
-        for(Object vf : getVar())
+    public CtVariableReference getVariableOrFieldNamed(String name) {
+        CtVariableReference o = null;
+        for(CtVariableReference vf : getVar())
             if(vf.toString().equals(name)) {
                 o = vf;
                 break;

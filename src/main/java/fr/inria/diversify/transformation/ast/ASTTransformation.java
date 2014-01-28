@@ -26,11 +26,9 @@ import java.util.List;
 public abstract class ASTTransformation implements Transformation {
     protected CodeFragment position;
     protected Integer failures = -1;
-//    protected List<ASTTransformation> parents;
     protected boolean compile;
 
     public ASTTransformation() {
-//        parents = new ArrayList<ASTTransformation>();
     }
 
     public void apply(String srcDir) throws Exception {
