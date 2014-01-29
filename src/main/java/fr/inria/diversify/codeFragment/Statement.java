@@ -4,9 +4,7 @@ package fr.inria.diversify.codeFragment;
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.reference.CtTypeReference;
-import spoon.reflect.reference.CtVariableReference;
 import spoon.support.reflect.code.*;
 
 public class Statement extends CodeFragment {
@@ -36,14 +34,6 @@ public class Statement extends CodeFragment {
             return false;
 
 
-//        if(cl == CtAssignmentImpl.class) {
-//            VariableVisitor visitor = new VariableVisitor();
-//            ((CtAssignmentImpl)codeFragment).getAssigned().accept(visitor);
-//            CtVariableReference var = (CtVariableReference)(visitor.input().getVar().toArray()[0]);
-//            if(var.getDeclaration().getModifiers().contains(ModifierKind.FINAL))
-//                return false;
-//        }
-
 
         SubStatementVisitor sub = new SubStatementVisitor();
         other.codeFragment.accept(sub);
@@ -54,11 +44,6 @@ public class Statement extends CodeFragment {
             return false;
 
 
-//        ReplaceVisitor rv = new ReplaceVisitor(this);
-//        other.getCtCodeFragment().accept(rv);
-//        if(!rv.isReplace())
-//            return false;
-//
         //check for return
         CtTypeReference t1 = this.hasReturn();
         CtTypeReference t2 = other.hasReturn();
@@ -87,4 +72,10 @@ public class Statement extends CodeFragment {
         String string = cf.toString();
         return string.contains("super(") || string.contains("super.");
     }
+
+
+//    protected CtStatement getNextStatement() {
+//        if(codeFragment.getParent() instanceof CtBlock)
+//            toStatementList()
+//    }
 }

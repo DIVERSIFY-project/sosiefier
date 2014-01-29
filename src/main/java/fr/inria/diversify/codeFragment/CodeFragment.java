@@ -105,7 +105,6 @@ public abstract class CodeFragment {
             CtVariableReference candidate = other.getInputContext().getVariableOrFieldNamed(varMapping.get(varName));
             ReplaceVariableVisitor visitor = new ReplaceVariableVisitor(variable, candidate);
             codeFragment.accept(visitor);
-
         }
 
         if(codeFragment instanceof CtLocalVariableImpl)
