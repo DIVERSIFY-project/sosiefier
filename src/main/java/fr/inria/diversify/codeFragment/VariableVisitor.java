@@ -45,7 +45,7 @@ public class VariableVisitor extends CtScanner {
 
     public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
         if(!(reference.getSimpleName() == "super"))
-            if(!(reference.isStatic()))
+//            if(!(reference.isStatic()))
                 localVariableReferences.add(reference);
         super.visitCtFieldReference(reference);
     }

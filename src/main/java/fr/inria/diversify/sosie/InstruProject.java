@@ -29,29 +29,31 @@ import java.util.List;
 public class InstruProject {
 
     public InstruProject(String project, String outDir, String srcDir, String testDir) throws Exception {
-        File dir = new File(outDir);
-        dir.mkdirs();
-        FileUtils.copyDirectory(new File(project), dir);
-
-        String src = project+ "/" +srcDir;
-        String test = project+ "/" +testDir;
-
-        Factory factory = initSpoon(src);
-        applyProcessor(factory, new MethodLoggingInstrumenter());
-        applyProcessor(factory, new ConditionalLoggingInstrumenter());
-
-        factory.getEnvironment().useSourceCodeFragments(true);
-        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir + "/" + srcDir), allClassesName(new File(src))));
-
-        factory = initSpoon(src+System.getProperty("path.separator")+test);
-
-        applyProcessor(factory, new TestLoggingInstrumenter());
-
-        factory.getEnvironment().useSourceCodeFragments(true);
-        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir +"/"+ testDir), (allClassesName(new File(test)))));
-
-        ConditionalLoggingInstrumenter.writeIdFile(outDir);
-        copyLogger(outDir);
+//        A refaire
+//
+//        File dir = new File(outDir);
+//        dir.mkdirs();
+//        FileUtils.copyDirectory(new File(project), dir);
+//
+//        String src = project+ "/" +srcDir;
+//        String test = project+ "/" +testDir;
+//
+//        Factory factory = initSpoon(src);
+//        applyProcessor(factory, new MethodLoggingInstrumenter());
+//        applyProcessor(factory, new ConditionalLoggingInstrumenter());
+//
+//        factory.getEnvironment().useSourceCodeFragments(true);
+//        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir + "/" + srcDir), allClassesName(new File(src))));
+//
+//        factory = initSpoon(src+System.getProperty("path.separator")+test);
+//
+//        applyProcessor(factory, new TestLoggingInstrumenter());
+//
+//        factory.getEnvironment().useSourceCodeFragments(true);
+//        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir +"/"+ testDir), (allClassesName(new File(test)))));
+//
+//        ConditionalLoggingInstrumenter.writeIdFile(outDir);
+//        copyLogger(outDir);
     }
 
     protected Factory initSpoon(String srcDirectory) {

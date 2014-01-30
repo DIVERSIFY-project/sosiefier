@@ -8,12 +8,10 @@ import java.util.List;
 import java.util.Set;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.sosie.InstruProject;
 import fr.inria.diversify.statistic.CrossValidation;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationsWriter;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.builder.AbstractBuilder;
 import fr.inria.diversify.transformation.builder.AntBuilder;
 import fr.inria.diversify.transformation.builder.MavenBuilder;
@@ -133,12 +131,14 @@ public class DiversifyMain {
         return ad;
     }
 
+
+
     protected AbstractBuilder initBuilder(String directory) throws Exception {
         AbstractBuilder rb;
         String src = DiversifyProperties.getProperty("src");
         if(DiversifyProperties.getProperty("builder").equals("maven")) {
             rb = new MavenBuilder(directory, src);
-            rb.setPhase(new String[]{"clean", "test"});
+            rb.setPhase(new String[]{"test"});
         }
         else {
             rb = new AntBuilder(directory,DiversifyProperties.getProperty("builder.testTarget"));
@@ -203,6 +203,7 @@ public class DiversifyMain {
         return icr;
     }
 
+
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
 
@@ -214,16 +215,16 @@ public class DiversifyMain {
 
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new FactoryImpl(f, env);
-        SpoonCompiler c = new JDTBasedSpoonCompiler(factory);
+        SpoonCompiler compiler = new JDTBasedSpoonCompiler(factory);
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
                 Log.debug("add {} to classpath",dir);
-                c.addInputSource(new File(dir));
+                compiler.addInputSource(new File(dir));
             } catch (IOException e) {
                 Log.error("error in initSpoon", e);
             }
         try {
-            c.build();
+            compiler.build();
         } catch (Exception e) {
             e.printStackTrace();
         }

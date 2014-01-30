@@ -2,17 +2,17 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.declaration.CtType;
+import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
-import spoon.reflect.visitor.PrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
@@ -47,18 +47,18 @@ public abstract class ASTTransformation implements Transformation {
 
     }
 
-    protected void printJavaFile(String repository) throws IOException {
+    protected void printJavaFile(String directory) throws IOException {
         CtSimpleType<?> type = getOriginalClass(position);
-        Environment env = type.getFactory().getEnvironment();
+        Factory factory = type.getFactory();
+        Environment env = factory.getEnvironment();
 
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(repository), new FragmentDrivenJavaPrettyPrinter(env));
-//        processor.setOutputDirectory(new File(repository));
-//        env.useSourceCodeFragments(true);
-        processor.setFactory(type.getFactory());
+        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new FragmentDrivenJavaPrettyPrinter(env));
+        processor.setFactory(factory);
 
         processor.createJavaFile(type);
-        Log.debug("copy file: " + repository + " " + type.getQualifiedName());
+        Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
+
 
     protected void removeSourceCode() {
         CtSimpleType<?> type = getOriginalClass(position);
@@ -67,27 +67,20 @@ public abstract class ASTTransformation implements Transformation {
     }
 
     protected void restore(String srcDir,CtSimpleType<?> originalClass) throws Exception {
-        String fileToCopy = originalClass.getPosition().getFile().toString();
-        String destination = srcDir+ "/"+originalClass.getQualifiedName().replace('.', '/') + ".java";
-        Log.debug("restore file: " + fileToCopy + " -> " + destination);
-        FileUtils.copyFile(originalClass.getPosition().getFile(), new File(destination));
+        printJavaFile(srcDir);
+//        String fileToCopy = originalClass.getPosition().getFile().toString();
+//        String path = originalClass.getQualifiedName().replace('.', '/');
+//        String destination = srcDir+ "/"+ path+ ".java";
+//        Log.debug("restore file: " + fileToCopy + " -> " + destination);
+//
+//
+//        FileUtils.copyFile(originalClass.getPosition().getFile(), new File(destination));
+//        FileUtils.forceDelete(new File(DiversifyProperties.getProperty("project")+"/"+DiversifyProperties.getProperty("classes")+ "/"+ path+ ".class"));
     }
 
     public CtSimpleType<?> getOriginalClass(CodeFragment cf) {
         return cf.getCompilationUnit().getMainType();
     }
-
-//    public void addCodeFragmentToTransform(CodeFragment cf) {
-//        transform.add(cf);
-//    }
-
-//    public void setCodeFragmentToTransform(CodeFragment cf) {
-//        position = cf;
-//    }
-
-//    public void addParent(ASTTransformation p) {
-//        parents.add(p);
-//    }
 
     public CodeFragment getPosition() {
         return position;
