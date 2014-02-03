@@ -39,7 +39,6 @@ public class AntBuilder extends AbstractBuilder {
 
             String result = "";
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
                 result += line + "\n";
             }
 
@@ -65,7 +64,7 @@ public class AntBuilder extends AbstractBuilder {
             if ( m.matches()) {
                 failure = -2;
                 allTestRun = true;
-//                break;
+               break;
             }
             m = patternJunitOK.matcher(s);
             if ( m.matches()) {
