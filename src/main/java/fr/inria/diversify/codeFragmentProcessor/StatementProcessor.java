@@ -22,8 +22,9 @@ public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatemen
 
 	protected boolean isValidStatement(CtStatement element) {
 		 valid = new ValidStatementVisitor(element, false);
-		element.accept(valid);
+		element.getParent().accept(valid);
 		return !valid.inExpression(element) && valid.isValid();
 	}
+
 }
 

@@ -60,7 +60,6 @@ public class DiversifyMain {
 
     public DiversifyMain(String propertiesFile) throws Exception {
         new DiversifyProperties(propertiesFile);
-
         initLogLevel();
         if(DiversifyProperties.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();

@@ -74,7 +74,6 @@ public abstract class AbstractBuilder {
     public void initPom(String newPomFile) throws Exception {
         if(timeOut == -1)
             throw new Exception("timeout not set");
-
         FileUtils.copyFile(new File(newPomFile), new File(directory + "/pom.xml"));
     }
 

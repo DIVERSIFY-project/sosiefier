@@ -23,7 +23,11 @@ public class ValidStatementVisitor extends CtScanner {
 		}
 		return false;
 	}
-	
+
+    public static Set<CtStatement> getExpressions() {
+        return expressions;
+    }
+
 	public boolean isValid(){
 		return valid;
 	}
@@ -31,6 +35,7 @@ public class ValidStatementVisitor extends CtScanner {
 	public ValidStatementVisitor(CtElement e, boolean withSuper) {
 		root = e;
         this.withSuper = withSuper;
+
 	}
 	
 	protected Collection<CtStatement> getAllSubStatement(CtElement element) {
@@ -45,12 +50,10 @@ public class ValidStatementVisitor extends CtScanner {
 	}
 	
 	public <T> void visitCtClass(CtClass<T> ctClass) {
-		valid = false;
+        if(ctClass == root)
+		    valid = false;
 	}
-	
-//	public <R> void visitCtReturn(CtReturn<R> returnStatement) {
-//		valid = false;
-//	}
+
 	
 	public <T> void visitCtLiteral(CtLiteral<T> literal) {
 		if(literal == root)
@@ -78,7 +81,7 @@ public class ValidStatementVisitor extends CtScanner {
 			addAllSubStatement(i);
 		
 		addAllSubStatement(forLoop.getExpression());
-		for (CtStatement i : forLoop.getForUpdate()) 
+		for (CtStatement i : forLoop.getForUpdate())
 			addAllSubStatement(i);
 		super.visitCtFor(forLoop);
 	}

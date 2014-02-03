@@ -39,8 +39,10 @@ public class AntBuilder extends AbstractBuilder {
 
             String result = "";
             while ((line = br.readLine()) != null) {
+                System.out.println(line);
                 result += line + "\n";
             }
+
             process.waitFor();
             parseResult(result);
         } catch (Exception e) {
@@ -50,7 +52,7 @@ public class AntBuilder extends AbstractBuilder {
 
     protected void parseResult(String r) {
         Pattern patternCompileError = Pattern.compile("\\s*\\[javac\\] (\\d+) error.*");
-        Pattern patternJunitError = Pattern.compile("\\s*\\[junit\\] Tests FAILED\\s*");
+        Pattern patternJunitError = Pattern.compile("\\s*\\[junit\\]\\s* FAILED.*");
         Pattern patternJunitOK = Pattern.compile("\\s*BUILD SUCCESSFUL\\s*");
         for (String s : r.split("\n")) {
             Log.debug(s);
@@ -63,7 +65,7 @@ public class AntBuilder extends AbstractBuilder {
             if ( m.matches()) {
                 failure = -2;
                 allTestRun = true;
-                break;
+//                break;
             }
             m = patternJunitOK.matcher(s);
             if ( m.matches()) {
@@ -72,5 +74,7 @@ public class AntBuilder extends AbstractBuilder {
                 break;
             }
         }
+        if(compileError == false && failure == null)
+            failure = 0;
     }
 }

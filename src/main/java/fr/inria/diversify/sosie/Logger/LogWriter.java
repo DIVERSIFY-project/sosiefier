@@ -16,7 +16,6 @@ public class LogWriter {
     static private String simpleSeparator = ";";
     protected static String currentTestSignature;
     protected static Map<Thread, String> previousVarLog;
-//    protected static Map<Thread, String> previousCall;
 
     protected synchronized static FileWriter init(Thread thread) throws IOException {
         if(fileWriters == null) {
@@ -80,7 +79,6 @@ public class LogWriter {
                     string.append(simpleSeparator);
                     string.append(var[i + 1].toString());
                     vars.append(string);
-                    //  System.out.println(string.toString());
                 } catch (Exception e) {}
             }
             try {
@@ -202,7 +200,6 @@ public class LogWriter {
         String line = reader.readLine();
 
         while (line != null) {
-
             String[] tmp = line.split(" ");
             map.put(tmp[1],tmp[0]);
             line = reader.readLine();
