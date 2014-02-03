@@ -49,38 +49,36 @@ public class LogWriter {
         return "log" + thread.getName() + "_" + currentTestSignature;
     }
 
-    public static void writeLog(int id,Thread thread, String classId, String methodSignatureId, Object... var) {
-        FileWriter fileWriter = null;
+    public static void writeVar(int id,Thread thread, String methodSignatureId, Object... var) {
+        FileWriter fileWriter;
         try {
             fileWriter = init(thread);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        StringBuilder string = new StringBuilder();
-        synchronized (fileWriter) {
-            try {
-                string.append("$$$\n");
-                string.append(id+"");
-                string.append(simpleSeparator);
-                string.append(classId);
-                string.append(simpleSeparator);
-                string.append(methodSignatureId);
+
+            StringBuilder string = new StringBuilder();
+            string.append("$$$\n");
+            string.append(id+"");
+//            string.append(simpleSeparator);
+//            string.append(classId);
+            string.append(simpleSeparator);
+            string.append(methodSignatureId);
+            synchronized (fileWriter) {
                 fileWriter.append(string.toString());
-                fileWriter.flush();
-            } catch (Exception e) {
-                return;
             }
-            StringBuilder vars = new StringBuilder();
-            for (int i = 0; i < var.length/2; i = i + 2) {
-                string = new StringBuilder();
-                try {
-                    string.append(separator);
-                    string.append(var[i].toString());
-                    string.append(simpleSeparator);
-                    string.append(var[i + 1].toString());
-                    vars.append(string);
-                } catch (Exception e) {}
-            }
+        } catch (Exception e) {
+            return;
+        }
+        StringBuilder vars = new StringBuilder();
+        for (int i = 0; i < var.length/2; i = i + 2) {
+            StringBuilder string = new StringBuilder();
+            try {
+                string.append(separator);
+                string.append(var[i].toString());
+                string.append(simpleSeparator);
+                string.append(var[i + 1].toString());
+                vars.append(string);
+            } catch (Exception e) {}
+        }
+        synchronized (fileWriter) {
             try {
                 if (vars.toString().equals(previousVarLog.get(thread))) {
                     fileWriter.append(separator);
@@ -89,58 +87,26 @@ public class LogWriter {
                     fileWriter.append(vars.toString());
                     previousVarLog.put(thread,vars.toString());
                 }
-                fileWriter.flush();
             } catch (Exception e) {}
-
         }
     }
 
-    public static void methodCall(Thread thread, String classId, String methodSignatureId) {
-        FileWriter fileWriter = null;
+    public static void methodCall(Thread thread, String methodSignatureId) {
         try {
-            fileWriter = init(thread);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        synchronized (fileWriter) {
-            try {
-                fileWriter.append("$$$\n");
-                fileWriter.append("C"); //new call
-                fileWriter.append(simpleSeparator);
-                fileWriter.append(classId);
-                fileWriter.append(simpleSeparator);
-                fileWriter.append(methodSignatureId);
-                fileWriter.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
+            FileWriter fileWriter = init(thread);
+
+            StringBuilder string = new StringBuilder();
+            string.append("$$$\n");
+            string.append("C"); //new call
+            string.append(simpleSeparator);
+            string.append(methodSignatureId);
+//            string.append(simpleSeparator);
+//            string.append(methodSignatureId);
+
+            synchronized (fileWriter) {
+                fileWriter.append(string.toString());
             }
-        }
-    }
-
-    public static void writeError(int id,Thread thread, String className, String methodSignature, StackTraceElement[] stackTrace) {
-        FileWriter fileWriter = null;
-        try {
-            fileWriter = init(thread);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fileWriter.append("$$$\n");
-            fileWriter.append("NT"); //new throws
-            fileWriter.append(separator);
-            fileWriter.append(id+"");
-            fileWriter.append(separator);
-            fileWriter.append(className);
-            fileWriter.append(separator);
-            fileWriter.append(methodSignature);
-
-            for(StackTraceElement stackTraceElement :stackTrace) {
-                fileWriter.append(separator);
-                fileWriter.append(stackTraceElement.toString());
-            }
-        }
-        catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -157,26 +123,25 @@ public class LogWriter {
     }
 
     public static void writeException(Thread thread, String className, String methodSignature, Object exception) {
-        FileWriter fileWriter = null;
         try {
-            fileWriter = init(thread);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fileWriter.append("$$$\n");
-            fileWriter.append("T");
-            fileWriter.append(simpleSeparator);
-            fileWriter.append(className);
-            fileWriter.append(simpleSeparator);
-            fileWriter.append(methodSignature);
+            FileWriter fileWriter = init(thread);
 
-            fileWriter.append(separator);
+            StringBuilder string = new StringBuilder();
+            string.append("$$$\n");
+            string.append("T");
+            string.append(simpleSeparator);
+            string.append(className);
+            string.append(simpleSeparator);
+            string.append(methodSignature);
+            string.append(separator);
             if(exception != null)
-                fileWriter.append(exception.toString());
+                string.append(exception.toString());
             else
-                fileWriter.append("NullException");
+                string.append("NullException");
 
+            synchronized (fileWriter) {
+                fileWriter.append(string.toString());
+            }
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -185,10 +150,12 @@ public class LogWriter {
 
     public static void close() {
         for (FileWriter flw : fileWriters.values())
-            try {
-                flw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            synchronized (flw) {
+                try {
+                    flw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
     }
 

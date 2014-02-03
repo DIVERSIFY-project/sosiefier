@@ -66,8 +66,9 @@ public class DiversifyMain {
             t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
         }
         initSpoon();
-        Log.info("number of statement: " + codeFragments.size());
 
+        Log.info("number of statement: " + codeFragments.size());
+        Log.info("candidate:  {}", test());
         if (DiversifyProperties.getProperty("stat").equals("true")) {
             computeStatistic();
 
@@ -352,12 +353,9 @@ public class DiversifyMain {
         ICoverageReport rg = initCoverageReport();
         Util util = new Util(codeFragments);
         int count = 0;
-        int count2 = 0;
         for(CodeFragment cf  :codeFragments) {
-            count2++;
             if(util.findStupidCandidate(cf, rg).size() != 0)
                 count++;
-            Log.debug("stmt {} {}", count2,count);
         }
         return count;
     }
