@@ -74,6 +74,6 @@ public class AntBuilder extends AbstractBuilder {
             }
         }
         if(compileError == false && failure == null)
-            failure = 0;
+            failure = -3;
     }
 }
