@@ -59,8 +59,9 @@ public class AntBuilder extends AbstractBuilder {
                 compileError = true;
                 break;
             }
-            m = patternJunitError.matcher(s);
-            if ( m.matches()) {
+//            m = patternJunitError.matcher(s);
+//            if ( m.matches()) {
+            if(s.contains("[junit]") && s.contains("FAILED")) {
                 failure = -2;
                 allTestRun = true;
                break;
