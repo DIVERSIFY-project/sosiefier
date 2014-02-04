@@ -73,7 +73,7 @@ public class AntBuilder extends AbstractBuilder {
                 break;
             }
         }
-        if(compileError == false && failure == null)
+        if(!compileError && failure == null)
             failure = -3;
     }
 }
