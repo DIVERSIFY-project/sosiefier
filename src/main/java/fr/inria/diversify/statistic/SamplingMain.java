@@ -42,8 +42,8 @@ public class SamplingMain {
         }
 
         initSpoon();
-        TransformationParser tf = new TransformationParser(codeFragments);
-        List<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
+        TransformationParser tf = new TransformationParser(codeFragments, true);
+        Collection<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
         Set<Transformation> set = new HashSet<Transformation>(transformations);
 
 

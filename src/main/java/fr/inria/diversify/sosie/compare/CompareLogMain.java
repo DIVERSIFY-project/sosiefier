@@ -80,7 +80,7 @@ public class CompareLogMain {
             Log.debug("loading log from dir {}",dirSosie);
             try {
                 File startPoint = new File(dirSosie+"/"+startPointString);
-                TransformationParser parser = new TransformationParser(codeFragments);
+                TransformationParser parser = new TransformationParser(codeFragments, true);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
                 CodeFragment cf = null;
                 try {
@@ -124,7 +124,7 @@ public class CompareLogMain {
         for(File f : (new File(dirSosie).listFiles())) {
             try {
                 File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
-                TransformationParser parser = new TransformationParser(codeFragments);
+                TransformationParser parser = new TransformationParser(codeFragments, true);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
                 CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
 
