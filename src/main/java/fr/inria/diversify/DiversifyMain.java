@@ -2,10 +2,7 @@ package fr.inria.diversify;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.statistic.CrossValidation;
@@ -90,11 +87,10 @@ public class DiversifyMain {
         //TODO refactor
         if (DiversifyProperties.getProperty("nbRun").equals("all")) {
             if(DiversifyProperties.getProperty("transformation.directory") != null) {
-                TransformationParser tf = new TransformationParser(codeFragments);
-                List<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
-                Set<Transformation> set = new HashSet<Transformation>(transformations);
-                Log.debug("apply {} transformation", set.size());
-                abstractDiversify.run(set);
+                TransformationParser tf = new TransformationParser(codeFragments, true);
+                Collection<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
+                Log.debug("apply {} transformation", transformations.size());
+                abstractDiversify.run(transformations);
             }
             Util util = new Util(codeFragments);
             if (DiversifyProperties.getProperty("transformation.type").equals("replace"))
@@ -167,8 +163,8 @@ public class DiversifyMain {
 
         String transformation = DiversifyProperties.getProperty("transformation.directory");
         if (transformation != null) {
-            TransformationParser tf = new TransformationParser(codeFragments);
-            List<Transformation> list = tf.parseDir(transformation);
+            TransformationParser tf = new TransformationParser(codeFragments, false);
+            Collection<Transformation> list = tf.parseDir(transformation);
             atq = new ASTTransformationQueryFromList(list, rg, codeFragments);
         } else {
             Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
@@ -249,8 +245,8 @@ public class DiversifyMain {
     }
 
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
-        TransformationParser tf = new TransformationParser(codeFragments);
-        List<Transformation> transformations = tf.parseDir(transDir);
+        TransformationParser tf = new TransformationParser(codeFragments, true);
+        Collection<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
 //        Log.info("nb stmt transformable {}",test());
@@ -278,7 +274,7 @@ public class DiversifyMain {
         sd.writeStat(fileName);
     }
 
-    protected Set<String> getAllTransformationType(List<Transformation> transformations) {
+    protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {
         Set<String> types = new HashSet<String>();
         for (Transformation t : transformations)
             types.add(t.getType());
@@ -286,7 +282,7 @@ public class DiversifyMain {
     }
 
     protected void statForR(String fileName) throws IOException, JSONException {
-        TransformationParser tf = new TransformationParser(codeFragments);
+        TransformationParser tf = new TransformationParser(codeFragments, false);
         Log.debug("parse fileName: {}",fileName);
 
         List<Transformation> transformations = tf.parseFile(new File(fileName));

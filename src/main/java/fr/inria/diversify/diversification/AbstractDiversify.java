@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 
 import java.io.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public abstract class AbstractDiversify {
 
     public abstract void run(int n) throws Exception;
 
-    public abstract void run(Set<Transformation> trans) throws Exception;
+    public abstract void run(Collection<Transformation> trans) throws Exception;
 
     public void printResult(String output, String git) {
         mkDirResult(output,git);

@@ -18,7 +18,7 @@ public class TransformationsWriter {
     protected String fileNamePrefix;
     protected Collection<Transformation> transformations;
 
-    public TransformationsWriter(List<Transformation> transformations, String prefix) {
+    public TransformationsWriter(Collection<Transformation> transformations, String prefix) {
         this.transformations = transformations;
         fileNamePrefix = prefix;
     }

@@ -9,6 +9,7 @@ import org.codehaus.plexus.util.FileUtils;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -40,7 +41,7 @@ public class Sosie extends AbstractDiversify {
     }
 
     @Override
-    public void run(Set<Transformation> trans) throws Exception {
+    public void run(Collection<Transformation> trans) throws Exception {
         for (Transformation tran : trans)
             run(tran);
     }

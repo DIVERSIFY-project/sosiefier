@@ -36,13 +36,18 @@ public class TransformationParser {
     List<CtMethod> ctMethods;
     private int countError = 0;
     private int count = 0;
+    Collection<Transformation> transformations;
 
-    public TransformationParser(CodeFragmentList list) {
+    public TransformationParser(CodeFragmentList list, boolean toSet) {
         codeFragments = list;
+        if(toSet)
+            transformations = new HashSet<Transformation>();
+        else
+            transformations = new ArrayList<Transformation>();
     }
 
-    public List<Transformation> parseDir(String dir) throws IOException, JSONException {
-        List<Transformation> list = new ArrayList<Transformation>();
+    public Collection<Transformation> parseDir(String dir) throws IOException, JSONException {
+
         File file = new File(dir);
         int countFile = 0;
         Log.debug("transformation directory: {})"+file.getAbsolutePath());
@@ -50,12 +55,12 @@ public class TransformationParser {
             if(f.getName().endsWith(".json")) {
                 countFile++;
                 Log.debug("parse tranformation file: "+f.getName());
-                list.addAll(parseFile(f));
+                transformations.addAll(parseFile(f));
             }
         Log.debug("number of transformation file: {}",countFile);
         Log.debug("number of transformation : {}",count);
         Log.debug("number of parse error : {}",countError);
-        return list;
+        return transformations;
     }
 
     public Transformation parseUniqueTransformation(File file) throws Exception {
@@ -92,7 +97,7 @@ public class TransformationParser {
                 list.add(parseTransformation(array.getJSONObject(i)));
             }  catch (Exception e) {
                 countError++;
-               Log.warn("error during the parsing of "+array.getJSONObject(i),e);
+                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
             }
         }
 

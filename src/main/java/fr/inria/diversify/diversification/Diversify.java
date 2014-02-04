@@ -8,6 +8,7 @@ import org.codehaus.plexus.util.FileUtils;
 
 import java.util.ArrayList;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -50,7 +51,7 @@ public class Diversify extends AbstractDiversify {
     }
 
     @Override
-    public void run(Set<Transformation> trans) throws Exception {
+    public void run(Collection<Transformation> trans) throws Exception {
         Log.info("number of diversification: " + trans.size());
         int i = 0;
         for (Transformation tran : trans) {
@@ -75,7 +76,6 @@ public class Diversify extends AbstractDiversify {
             trial++;
             trans.setCompile(true);
             trans.setJUnitResult(failures);
-            transformations.add(trans);
 
         } catch (Exception e) {
             compileError++;

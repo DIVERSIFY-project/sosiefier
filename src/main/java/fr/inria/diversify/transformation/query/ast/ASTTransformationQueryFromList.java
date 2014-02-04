@@ -6,6 +6,8 @@ import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.ast.ASTMultiTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -18,8 +20,8 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
     protected ICoverageReport coverageReport;
     private List<Transformation> transformation;
 
-    public ASTTransformationQueryFromList(List<Transformation> transformation, ICoverageReport cr, CodeFragmentList codeFragments) {
-        this.transformation = transformation;
+    public ASTTransformationQueryFromList(Collection<Transformation> transformation, ICoverageReport cr, CodeFragmentList codeFragments) {
+        this.transformation = new ArrayList<Transformation>(transformation);
         this.coverageReport = cr;
     }
 
