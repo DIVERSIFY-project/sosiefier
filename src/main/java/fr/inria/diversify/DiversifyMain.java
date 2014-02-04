@@ -68,7 +68,7 @@ public class DiversifyMain {
         initSpoon();
 
         Log.info("number of statement: " + codeFragments.size());
-        Log.info("candidate:  {}", test());
+//        Log.info("candidate:  {}", test());
         if (DiversifyProperties.getProperty("stat").equals("true")) {
             computeStatistic();
 

@@ -28,9 +28,8 @@ public class AntBuilder extends AbstractBuilder {
         //You can set up your work directory
         probuilder.directory(new File(System.getProperty("user.dir")));
 
-        Process process = null;
         try {
-            process = probuilder.start();
+            Process process = probuilder.start();
 
             InputStream is = process.getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
