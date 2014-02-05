@@ -129,4 +129,8 @@ public abstract class AbstractBuilder {
     public void setPhase(String[] phases) {
         this.phases = phases;
     }
+
+    public void setDirectory(String directory) {
+        this.directory = directory;
+    }
 }

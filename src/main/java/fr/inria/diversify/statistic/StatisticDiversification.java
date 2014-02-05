@@ -197,7 +197,8 @@ public class StatisticDiversification {
                 sb.append(separator);
                 sb.append(trans.level());
                 sb.append(separator);
-                sb.append(candidate(trans));
+                sb.append(0+"");
+                // sb.append(candidate(trans));
                 sb.append(separator);
                 sb.append(trans.line());
                 sb.append(separator);
