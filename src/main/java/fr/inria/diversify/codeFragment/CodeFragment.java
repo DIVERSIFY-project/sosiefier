@@ -64,7 +64,6 @@ public abstract class CodeFragment {
         return visitor.input();
     }
 
-
     @Override
     public String toString() {
         String tmp = "Input:" + getInputContext();
@@ -82,6 +81,7 @@ public abstract class CodeFragment {
         equalString = pp.toString();
         return equalString;
     }
+
     //attention !!!!!!!
     public boolean equals(Object other) {
         if(!(other instanceof CodeFragment))
@@ -112,7 +112,6 @@ public abstract class CodeFragment {
 
         Log.debug("apres: {}",codeFragment);
     }
-
 
     //check if this can be replaced by other
     public abstract  boolean isReplace(CodeFragment other, boolean varNameMatch);

@@ -12,6 +12,7 @@ import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.data.ExecutionDataReader;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfoStore;
+import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.File;
@@ -85,6 +86,30 @@ public class CoverageReport implements ICoverageReport {
              if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
                 ret++;
         return ret/(double)(stmt.getEndLine()- stmt.getStartLine() + 1);
+    }
+
+
+    public double elementCoverage(CtBinaryOperator operator) {
+        IClassCoverage classCoverage = null;
+        for (IClassCoverage cc : coverageBuilder.getClasses()) {
+            CtSimpleType<?> cl = operator.getParent(CtSimpleType.class);
+            if(!(cl == null || cl.getPackage() == null || cl.getPackage().getSignature() == null)) {
+                String name =  cl.getPackage().getSignature().replace(".","/")+"/"+cl.getSimpleName();
+                if(name.equals(cc.getName())) {
+                    classCoverage = cc;
+                    break;
+                }
+            }
+        }
+        if(classCoverage == null)
+            return 0;
+        double ret = 0;
+        int start = operator.getPosition().getLine();
+        int end = operator.getPosition().getEndLine();
+        for (int i = start; i <= end; i++)
+            if(classCoverage.getLine(i).getStatus() == ICounter.FULLY_COVERED)
+                ret++;
+        return ret/(double)(start - end + 1);
     }
 
     @Override

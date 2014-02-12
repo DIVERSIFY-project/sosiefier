@@ -47,24 +47,24 @@ public class ASTDelete extends ASTTransformation {
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
     }
 
-    @Override
-    public ASTReplace toReplace() throws Exception {
-        throw new Exception();
-    }
-
-    @Override
-    public ASTAdd toAdd() throws Exception {
-//       ASTAdd a = new ASTAdd();
-//       for (CodeFragment cf : position)
-//            a.addCodeFragmentToAdd(cf,cf);
-//        return a;
-        throw new Exception();
-    }
-
-    @Override
-    public ASTDelete toDelete() throws Exception {
-        return this;
-    }
+//    @Override
+//    public ASTReplace toReplace() throws Exception {
+//        throw new Exception();
+//    }
+//
+//    @Override
+//    public ASTAdd toAdd() throws Exception {
+////       ASTAdd a = new ASTAdd();
+////       for (CodeFragment cf : position)
+////            a.addCodeFragmentToAdd(cf,cf);
+////        return a;
+//        throw new Exception();
+//    }
+//
+//    @Override
+//    public ASTDelete toDelete() throws Exception {
+//        return this;
+//    }
 
     public String getType(){
         return "delete";
@@ -81,17 +81,17 @@ public class ASTDelete extends ASTTransformation {
            return      position.equals(otherDelete.position);
     }
 
-    @Override
-    public void writeHead(BufferedWriter sb, char separator) throws IOException {
-        sb.append("deleteType" + separator +
-                "deleteSize" + separator +
-                "deleteClass" + separator +
-                "deletePackage" + separator +
-                "deleteInputContextSize" + separator +
-                "deleteInputContextOnlyPrimitive" + separator +
-                "failure" + separator +
-                "deleteSuperType");
-    }
+//    @Override
+//    public void writeHead(BufferedWriter sb, char separator) throws IOException {
+//        sb.append("deleteType" + separator +
+//                "deleteSize" + separator +
+//                "deleteClass" + separator +
+//                "deletePackage" + separator +
+//                "deleteInputContextSize" + separator +
+//                "deleteInputContextOnlyPrimitive" + separator +
+//                "failure" + separator +
+//                "deleteSuperType");
+//    }
 
     @Override
     public String toString() {
@@ -103,50 +103,44 @@ public class ASTDelete extends ASTTransformation {
         return ret;
     }
 
-    public void write(StringBuffer sb, char separator) {
-        CodeFragment p = position;
+//    public void write(StringBuffer sb, char separator) {
+//        CodeFragment p = position;
+//
+//        sb.append(p.getCodeFragmentType().getSimpleName());
+//        sb.append(separator);
+//
+//        sb.append(p.getCtCodeFragment().toString().length()+"");
+//        sb.append(separator);
+//
+//        sb.append(p.getSourceClass().getQualifiedName());
+//        sb.append(separator);
+//
+//
+//        sb.append(p.getSourcePackage().getQualifiedName());
+//        sb.append(separator);
+//
+//        sb.append(p.getInputContext().size()+"");
+//        sb.append(separator);
+//
+//        sb.append(p.getInputContext().hasOnlyPrimitive()+"");
+//        sb.append(separator);
+//
+//        sb.append(failures+"");
+//        sb.append(separator);
+//        sb.append(p.getCodeFragmentSuperType().getSimpleName());
+//    }
 
-        sb.append(p.getCodeFragmentType().getSimpleName());
-        sb.append(separator);
+//    public String classReplaceOrAddPositionName() {
+//        return "null";
+//    }
 
-        sb.append(p.getCtCodeFragment().toString().length()+"");
-        sb.append(separator);
+//    @Override
+//    public String methodReplaceOrAdd() {
+//        return "null";
+//    }
 
-        sb.append(p.getSourceClass().getQualifiedName());
-        sb.append(separator);
-
-
-        sb.append(p.getSourcePackage().getQualifiedName());
-        sb.append(separator);
-
-        sb.append(p.getInputContext().size()+"");
-        sb.append(separator);
-
-        sb.append(p.getInputContext().hasOnlyPrimitive()+"");
-        sb.append(separator);
-
-        sb.append(failures+"");
-        sb.append(separator);
-        sb.append(p.getCodeFragmentSuperType().getSimpleName());
-    }
-
-    public String classReplaceOrAddPositionName() {
-        return "null";
-    }
-    public int inputContextSize() {
-        return position.getInputContext().size();
-    }
-    public int inputContextSizeRA() {
-        return 0;
-    }
-
-    @Override
-    public String methodReplaceOrAdd() {
-        return "null";
-    }
-
-    @Override
-    public int lineReplaceOrAdd() {
-        return 0;
-    }
+//    @Override
+//    public int lineReplaceOrAdd() {
+//        return 0;
+//    }
 }

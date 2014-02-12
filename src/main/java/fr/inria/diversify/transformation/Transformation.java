@@ -18,13 +18,13 @@ public interface Transformation {
     public void setJUnitResult(Integer result);
     public int numberOfFailure();
     public String getType();
-    public void write(StringBuffer sb, char separator);
-    public void writeHead(BufferedWriter sb, char separator) throws IOException;
+//    public void write(StringBuffer sb, char separator);
+//    public void writeHead(BufferedWriter sb, char separator) throws IOException;
     public JSONObject toJSONObject() throws JSONException;
 
-    public long classSize();
-    public int nbMethodInClassLocation();
-    public String classReplaceOrAddPositionName();
+//    public long classSize();
+//    public int nbMethodInClassLocation();
+//    public String classReplaceOrAddPositionName();
     public String classLocationName();
     public String packageLocationName();
     public String methodLocationName();
@@ -35,12 +35,9 @@ public interface Transformation {
 
     void setCompile(boolean b);
 
-    public int inputContextSize();
-    public int inputContextSizeRA();
-
     public int line();
 
-    public String methodReplaceOrAdd();
+//    public String methodReplaceOrAdd();
 
-    public int lineReplaceOrAdd();
+//    public int lineReplaceOrAdd();
 }

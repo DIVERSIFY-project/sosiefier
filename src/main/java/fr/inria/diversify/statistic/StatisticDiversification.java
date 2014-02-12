@@ -143,24 +143,24 @@ public class StatisticDiversification {
 //        bw.close();
 //    }
 
-    protected void writeDetail(String fileName) throws IOException {
-        FileWriter fw = new FileWriter(fileName);
-        BufferedWriter bw = new BufferedWriter(fw);
-
-        ((ASTTransformation)transformations.toArray()[0]).writeHead(bw,separator);
-
-        bw.write("\n");
-
-        for(Transformation trans : transformations) {
-            StringBuffer sb = new StringBuffer();
-            try {
-                trans.write(sb, separator);
-            sb.append("\n");
-                bw.write(sb.toString());
-            }catch (Exception e) {}
-        }
-        bw.close();
-    }
+//    protected void writeDetail(String fileName) throws IOException {
+//        FileWriter fw = new FileWriter(fileName);
+//        BufferedWriter bw = new BufferedWriter(fw);
+//
+//        ((ASTTransformation)transformations.toArray()[0]).writeHead(bw,separator);
+//
+//        bw.write("\n");
+//
+//        for(Transformation trans : transformations) {
+//            StringBuffer sb = new StringBuffer();
+//            try {
+//                trans.write(sb, separator);
+//            sb.append("\n");
+//                bw.write(sb.toString());
+//            }catch (Exception e) {}
+//        }
+//        bw.close();
+//    }
 
     protected void writeSourceCity(String fileName) throws IOException {
         FileWriter fw = new FileWriter(fileName);
@@ -175,37 +175,37 @@ public class StatisticDiversification {
         for(Transformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
-                sb.append(trans.getType());
-                sb.append(separator);
-                sb.append(trans.packageLocationName());
-                sb.append(separator);
-                sb.append(trans.classLocationName());
-                sb.append(separator);
-                sb.append(trans.classReplaceOrAddPositionName());
-                sb.append(separator);
-                sb.append(trans.methodLocationName());
-                sb.append(separator);
-                sb.append(trans.classSize());
-                sb.append(separator);
-                sb.append(trans.nbMethodInClassLocation());
-                sb.append(separator);
-                sb.append(trans.getCompile());
-                sb.append(separator);
-                sb.append(trans.numberOfFailure() == 0);
-                sb.append(separator);
-                sb.append(trans.stmtType());
-                sb.append(separator);
-                sb.append(trans.level());
-                sb.append(separator);
-                sb.append(0+"");
-                // sb.append(candidate(trans));
-                sb.append(separator);
-                sb.append(trans.line());
-                sb.append(separator);
-                sb.append(trans.methodReplaceOrAdd());
-                sb.append(separator);
-                sb.append(trans.lineReplaceOrAdd());
-                sb.append("\n");
+//                sb.append(trans.getType());
+//                sb.append(separator);
+//                sb.append(trans.packageLocationName());
+//                sb.append(separator);
+//                sb.append(trans.classLocationName());
+//                sb.append(separator);
+//                sb.append(trans.classReplaceOrAddPositionName());
+//                sb.append(separator);
+//                sb.append(trans.methodLocationName());
+//                sb.append(separator);
+//                sb.append(trans.classSize());
+//                sb.append(separator);
+//                sb.append(trans.nbMethodInClassLocation());
+//                sb.append(separator);
+//                sb.append(trans.getCompile());
+//                sb.append(separator);
+//                sb.append(trans.numberOfFailure() == 0);
+//                sb.append(separator);
+//                sb.append(trans.stmtType());
+//                sb.append(separator);
+//                sb.append(trans.level());
+//                sb.append(separator);
+//                sb.append(0+"");
+//                // sb.append(candidate(trans));
+//                sb.append(separator);
+//                sb.append(trans.line());
+//                sb.append(separator);
+//                sb.append(trans.methodReplaceOrAdd());
+//                sb.append(separator);
+//                sb.append(trans.lineReplaceOrAdd());
+//                sb.append("\n");
                 bw.write(sb.toString());
             }catch (Exception e) {
                 Log.error("writeSourceCity",e);

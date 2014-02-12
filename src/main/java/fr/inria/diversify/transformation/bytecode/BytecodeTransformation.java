@@ -109,14 +109,14 @@ public abstract class BytecodeTransformation implements Transformation {
 
     }
 
-    public long classSize() {
-        try {
-            return methodLocation.getDeclaringClass().getURL().getFile().length();
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
+//    public long classSize() {
+//        try {
+//            return methodLocation.getDeclaringClass().getURL().getFile().length();
+//        } catch (NotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        return 0;
+//    }
     public String classLocationName() {
         return methodLocation.getDeclaringClass().getName();
     }
@@ -128,12 +128,6 @@ public abstract class BytecodeTransformation implements Transformation {
     }
     public boolean getCompile() {
         return compile;
-    }
-    public String classReplaceOrAddPositionName(){
-        return "TODO";
-    }
-    public int nbMethodInClassLocation() {
-        return methodLocation.getDeclaringClass().getDeclaredMethods().length;
     }
     public void setCompile(boolean b){
         compile = b;
@@ -157,17 +151,6 @@ public abstract class BytecodeTransformation implements Transformation {
         this.methodLocation = methodLocation;
     }
 
-    public int inputContextSize() {return 0;}
-    public int inputContextSizeRA() {return 0;}
     public int line() {return 0;}
 
-    @Override
-    public String methodReplaceOrAdd() {
-        return "null";
-    }
-
-    @Override
-    public int lineReplaceOrAdd() {
-        return 0;
-    }
 }

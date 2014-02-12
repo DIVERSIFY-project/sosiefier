@@ -57,15 +57,15 @@ public class ASTMultiTransformation implements Transformation {
         return "ASTMulti";
     }
 
-    @Override
-    public void write(StringBuffer sb, char separator) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void writeHead(BufferedWriter sb, char separator) throws IOException {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+//    @Override
+//    public void write(StringBuffer sb, char separator) {
+//        //To change body of implemented methods use File | Settings | File Templates.
+//    }
+//
+//    @Override
+//    public void writeHead(BufferedWriter sb, char separator) throws IOException {
+//        //To change body of implemented methods use File | Settings | File Templates.
+//    }
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
@@ -78,20 +78,20 @@ public class ASTMultiTransformation implements Transformation {
         return object;
     }
 
-    @Override
-    public long classSize() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public int nbMethodInClassLocation() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public String classReplaceOrAddPositionName() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+//    @Override
+//    public long classSize() {
+//        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+//    }
+//
+//    @Override
+//    public int nbMethodInClassLocation() {
+//        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+//    }
+//
+//    @Override
+//    public String classReplaceOrAddPositionName() {
+//        return null;  //To change body of implemented methods use File | Settings | File Templates.
+//    }
 
     @Override
     public String classLocationName() {
@@ -130,21 +130,18 @@ public class ASTMultiTransformation implements Transformation {
         return "multi";
     }
 
-    public int inputContextSize() {return 0;}
-    public int inputContextSizeRA() {return 0;}
-
     @Override
     public int line() {
         return 0;
     }
 
-    @Override
-    public String methodReplaceOrAdd() {
-        return null;
-    }
-
-    @Override
-    public int lineReplaceOrAdd() {
-        return 0;
-    }
+//    @Override
+//    public String methodReplaceOrAdd() {
+//        return null;
+//    }
+//
+//    @Override
+//    public int lineReplaceOrAdd() {
+//        return 0;
+//    }
 }

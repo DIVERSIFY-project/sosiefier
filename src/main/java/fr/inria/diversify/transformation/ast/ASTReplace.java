@@ -94,29 +94,29 @@ public class ASTReplace extends ASTTransformation {
             return cFS;
     }
 
-    @Override
-    public ASTReplace toReplace() throws Exception {
-        return this;
-    }
-
-    @Override
-    public ASTAdd toAdd() throws Exception {
-//        ASTAdd a = new ASTAdd();
-//        for (CodeFragment cf : position)
-//            a.addCodeFragmentToAdd(cf,replaces.get(cf));
-//        return a;
-        throw new Exception();
-    }
-
-    @Override
-    public ASTDelete toDelete() throws Exception {
-//        ASTDelete delete = new ASTDelete();
-//        for(CodeFragment codeFragment : position) {
-//            delete.addCodeFragmentToTransform(codeFragment);
-//        }
-//        return delete;
-        throw new Exception();
-    }
+//    @Override
+//    public ASTReplace toReplace() throws Exception {
+//        return this;
+//    }
+//
+//    @Override
+//    public ASTAdd toAdd() throws Exception {
+////        ASTAdd a = new ASTAdd();
+////        for (CodeFragment cf : position)
+////            a.addCodeFragmentToAdd(cf,replaces.get(cf));
+////        return a;
+//        throw new Exception();
+//    }
+//
+//    @Override
+//    public ASTDelete toDelete() throws Exception {
+////        ASTDelete delete = new ASTDelete();
+////        for(CodeFragment codeFragment : position) {
+////            delete.addCodeFragmentToTransform(codeFragment);
+////        }
+////        return delete;
+//        throw new Exception();
+//    }
 
     public boolean setCodeFragmentToReplace(CodeFragment replace) {
         this.replace = replace;
@@ -155,85 +155,79 @@ public class ASTReplace extends ASTTransformation {
         return type;
     }
 
-    @Override
-    public void writeHead(BufferedWriter sb, char separator) throws IOException {
-        sb.append("toReplaceType" + separator + "replacedByType" + separator +
-                "toReplaceSize" + separator + "replacedBySize" + separator +
-                "toReplaceClass" + separator + "replacedByClass" + separator +
-                "toReplacePackage" + separator + "replacedByPackage" + separator +
-                "toReplaceInputContextSize" + separator + "replacedByInputContextSize" + separator +
-                "toReplaceInputContextOnlyPrimitive" + separator + "replacedByInputContextOnlyPrimitive" + separator +
-                "failure" + separator +
-                "toReplaceSuperType" +separator + "replacedBySuperType");
-    }
-
-    public void write(StringBuffer sb, char separator) {
-        CodeFragment t = position;
-        CodeFragment r = replace;
-
-        sb.append(t.getCodeFragmentType().getSimpleName());
-        sb.append(separator);
-        sb.append(r.getCodeFragmentType().getSimpleName());
-        sb.append(separator);
-
-        sb.append(t.getCtCodeFragment().toString().length()+"");
-        sb.append(separator);
-        sb.append(r.getCtCodeFragment().toString().length()+"");
-        sb.append(separator);
-
-        sb.append(t.getSourceClass().getQualifiedName());
-        sb.append(separator);
-        sb.append(r.getSourceClass().getQualifiedName());
-        sb.append(separator);
-
-        sb.append(t.getSourcePackage().getQualifiedName());
-        sb.append(separator);
-        sb.append(r.getSourcePackage().getQualifiedName());
-        sb.append(separator);
-
-        sb.append(t.getInputContext().size()+"");
-        sb.append(separator);
-        sb.append(r.getInputContext().size()+"");
-        sb.append(separator);
-
-        sb.append(t.getInputContext().hasOnlyPrimitive()+"");
-        sb.append(separator);
-        sb.append(r.getInputContext().hasOnlyPrimitive()+"");
-        sb.append(separator);
-
-        sb.append(failures+"");
-
-        sb.append(separator);
-        sb.append(t.getCodeFragmentSuperType().getSimpleName());
-        sb.append(separator);
-        sb.append(r.getCodeFragmentSuperType().getSimpleName());
-    }
+//    @Override
+//    public void writeHead(BufferedWriter sb, char separator) throws IOException {
+//        sb.append("toReplaceType" + separator + "replacedByType" + separator +
+//                "toReplaceSize" + separator + "replacedBySize" + separator +
+//                "toReplaceClass" + separator + "replacedByClass" + separator +
+//                "toReplacePackage" + separator + "replacedByPackage" + separator +
+//                "toReplaceInputContextSize" + separator + "replacedByInputContextSize" + separator +
+//                "toReplaceInputContextOnlyPrimitive" + separator + "replacedByInputContextOnlyPrimitive" + separator +
+//                "failure" + separator +
+//                "toReplaceSuperType" +separator + "replacedBySuperType");
+//    }
+//
+//    public void write(StringBuffer sb, char separator) {
+//        CodeFragment t = position;
+//        CodeFragment r = replace;
+//
+//        sb.append(t.getCodeFragmentType().getSimpleName());
+//        sb.append(separator);
+//        sb.append(r.getCodeFragmentType().getSimpleName());
+//        sb.append(separator);
+//
+//        sb.append(t.getCtCodeFragment().toString().length()+"");
+//        sb.append(separator);
+//        sb.append(r.getCtCodeFragment().toString().length()+"");
+//        sb.append(separator);
+//
+//        sb.append(t.getSourceClass().getQualifiedName());
+//        sb.append(separator);
+//        sb.append(r.getSourceClass().getQualifiedName());
+//        sb.append(separator);
+//
+//        sb.append(t.getSourcePackage().getQualifiedName());
+//        sb.append(separator);
+//        sb.append(r.getSourcePackage().getQualifiedName());
+//        sb.append(separator);
+//
+//        sb.append(t.getInputContext().size()+"");
+//        sb.append(separator);
+//        sb.append(r.getInputContext().size()+"");
+//        sb.append(separator);
+//
+//        sb.append(t.getInputContext().hasOnlyPrimitive()+"");
+//        sb.append(separator);
+//        sb.append(r.getInputContext().hasOnlyPrimitive()+"");
+//        sb.append(separator);
+//
+//        sb.append(failures+"");
+//
+//        sb.append(separator);
+//        sb.append(t.getCodeFragmentSuperType().getSimpleName());
+//        sb.append(separator);
+//        sb.append(r.getCodeFragmentSuperType().getSimpleName());
+//    }
 
     public void setType(String type) {
         this.type = type;
     }
 
-    public String classReplaceOrAddPositionName() {
-        return replace.getSourceClass().getQualifiedName();
-    }
+//    public String classReplaceOrAddPositionName() {
+//        return replace.getSourceClass().getQualifiedName();
+//    }
 
-    public int inputContextSize() {
-        return position.getInputContext().size();
-    }
-    public int inputContextSizeRA() {
-        return replace.getInputContext().size();
-    }
 
-    @Override
-    public String methodReplaceOrAdd() {
-        CtExecutable elem = replace.getCtCodeFragment().getParent(CtExecutable.class);
-        if(elem != null)
-            return elem.getSimpleName();
-        return "field";
-    }
-
-    @Override
-    public int lineReplaceOrAdd() {
-        return replace.getStartLine();
-    }
+//    @Override
+//    public String methodReplaceOrAdd() {
+//        CtExecutable elem = replace.getCtCodeFragment().getParent(CtExecutable.class);
+//        if(elem != null)
+//            return elem.getSimpleName();
+//        return "field";
+//    }
+//
+//    @Override
+//    public int lineReplaceOrAdd() {
+//        return replace.getStartLine();
+//    }
 }

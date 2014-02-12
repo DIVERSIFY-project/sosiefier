@@ -50,16 +50,6 @@ public class BytecodeDelete extends BytecodeTransformation {
     }
 
     @Override
-    public void write(StringBuffer sb, char separator) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void writeHead(BufferedWriter sb, char separator) throws IOException {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", "delete");
