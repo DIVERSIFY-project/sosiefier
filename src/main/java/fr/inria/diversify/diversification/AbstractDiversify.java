@@ -2,7 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.builder.AbstractBuilder;
-import fr.inria.diversify.transformation.query.ITransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
@@ -11,7 +11,6 @@ import org.json.JSONException;
 import java.io.*;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * User: Simon
@@ -23,7 +22,7 @@ public abstract class AbstractDiversify {
     protected String tmpDir;
     protected List<Transformation> transformations;
     protected String sourceDir;
-    protected ITransformationQuery transQuery;
+    protected TransformationQuery transQuery;
     protected AbstractBuilder builder;
 
 
@@ -95,7 +94,7 @@ public abstract class AbstractDiversify {
     }
 
 
-    public void setTransformationQuery(ITransformationQuery transQuery) {
+    public void setTransformationQuery(TransformationQuery transQuery) {
         this.transQuery = transQuery;
     }
 

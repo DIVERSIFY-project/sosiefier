@@ -2,7 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragmentProcessor.BinaryOperatorProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.transformation.mutator.ConditionalsBoundaryMutator;
+import fr.inria.diversify.transformation.mutation.ConditionalBoundaryMutation;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.factory.Factory;
@@ -16,7 +16,7 @@ import java.util.Random;
  * Date: 12/02/14
  * Time: 14:31
  */
-public class MutationQuery implements ITransformationQuery {
+public class MutationQuery extends TransformationQuery {
     ICoverageReport coverageReport;
     List<CtBinaryOperator<?>> binaryOperators;
 
@@ -36,20 +36,15 @@ public class MutationQuery implements ITransformationQuery {
     }
 
     @Override
-    public void setNbTransformation(int n) {
-
-    }
-
-    @Override
     public void setType(String type) {
 
     }
 
-    public ConditionalsBoundaryMutator getTransformation() throws Exception {
-        ConditionalsBoundaryMutator mutation = new ConditionalsBoundaryMutator();
+    public ConditionalBoundaryMutation getTransformation() throws Exception {
+        ConditionalBoundaryMutation mutation = new ConditionalBoundaryMutation();
 
         Random r  = new Random();
-        CtBinaryOperator operator = null;
+        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }

@@ -12,6 +12,8 @@ import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.builder.AbstractBuilder;
 import fr.inria.diversify.transformation.builder.AntBuilder;
 import fr.inria.diversify.transformation.builder.MavenBuilder;
+import fr.inria.diversify.transformation.query.MutationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -39,7 +41,6 @@ import fr.inria.diversify.diversification.Sosie;
 import fr.inria.diversify.statistic.Util;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
-import fr.inria.diversify.transformation.query.ITransformationQuery;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromList;
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
@@ -54,6 +55,7 @@ import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
  */
 public class DiversifyMain {
     private CodeFragmentList codeFragments;
+    private Factory factory;
 
     public DiversifyMain(String propertiesFile) throws Exception {
         new DiversifyProperties(propertiesFile);
@@ -81,7 +83,7 @@ public class DiversifyMain {
     protected void initAndRunBuilder() throws Exception {
         AbstractDiversify abstractDiversify = initAbstractDiversify();
 
-        ITransformationQuery query = initTransformationQuery();
+        TransformationQuery query = initTransformationQuery();
         abstractDiversify.setTransformationQuery(query);
 
         //TODO refactor
@@ -156,10 +158,13 @@ public class DiversifyMain {
     }
 
 
-    protected ITransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException, NotFoundException {
+    protected TransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException, NotFoundException {
         ICoverageReport rg = initCoverageReport();
 
-        ITransformationQuery atq;
+        TransformationQuery atq;
+
+        if(DiversifyProperties.getProperty("transformation.type").equals("mutation"))
+            return new MutationQuery(rg,factory);
 
         String transformation = DiversifyProperties.getProperty("transformation.directory");
         if (transformation != null) {
@@ -175,8 +180,7 @@ public class DiversifyMain {
             atq = new ByteCodeTransformationQuery(allCtMethod(),rg);
 
         atq.setType(DiversifyProperties.getProperty("transformation.type"));
-        int n = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
-        atq.setNbTransformation(n);
+
 
         return atq;
     }
@@ -210,7 +214,7 @@ public class DiversifyMain {
         env.setDebug(true);
 
         DefaultCoreFactory f = new DefaultCoreFactory();
-        Factory factory = new FactoryImpl(f, env);
+        factory = new FactoryImpl(f, env);
         SpoonCompiler compiler = new JDTBasedSpoonCompiler(factory);
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {

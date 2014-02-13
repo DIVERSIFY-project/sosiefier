@@ -1,32 +1,31 @@
-package fr.inria.diversify.transformation.mutator;
+package fr.inria.diversify.transformation.mutation;
 
 import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.compiler.Environment;
-import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
-import spoon.support.reflect.code.CtBinaryOperatorImpl;
 
 import java.io.File;
 import java.io.IOException;
 
 /**
  * User: Simon
- * Date: 11/02/14
- * Time: 11:47
+ * Date: 13/02/14
+ * Time: 14:40
  */
-public class ConditionalsBoundaryMutator extends AbstractTransformation {
+public abstract class BinaryOperatorMutation extends AbstractTransformation {
     CtBinaryOperator<?> operator;
 
 
@@ -38,11 +37,14 @@ public class ConditionalsBoundaryMutator extends AbstractTransformation {
     }
 
     protected void addSourceCode() {
-        CtBinaryOperatorImpl mutant = getMutantOperator();
+        Log.debug("conditional boundary mutation");
+        Log.debug("operator:\n {}", operator);
+        Log.debug("---------------------\npostion:\n{}",operator.getPosition());
+        CtElement mutant = getMutantOperator();
         SourcePosition sp = operator.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd(), "**/"+mutant.toString(), 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+mutant.toString(), 0));
     }
 
     public void restore(String srcDir) throws Exception {
@@ -50,7 +52,7 @@ public class ConditionalsBoundaryMutator extends AbstractTransformation {
     }
 
     protected void printJavaFile(String directory) throws IOException {
-        CtSimpleType<?> type = operator.getParent(CtSimpleType.class);
+        CtSimpleType<?> type = operator.getPosition().getCompilationUnit().getMainType();
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
@@ -62,33 +64,12 @@ public class ConditionalsBoundaryMutator extends AbstractTransformation {
     }
 
     protected void removeSourceCode() {
-        CtSimpleType<?> type = operator.getParent(CtSimpleType.class);
-        CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
+        CompilationUnit compileUnit = operator.getPosition().getCompilationUnit();
         compileUnit.getSourceCodeFraments().clear();
     }
 
 
-    protected CtBinaryOperatorImpl getMutantOperator() {
-        CtBinaryOperatorImpl mutant = new CtBinaryOperatorImpl();
-        mutant.setLeftHandOperand(operator.getLeftHandOperand());
-        mutant.setRightHandOperand(operator.getRightHandOperand());
-
-        BinaryOperatorKind kind = operator.getKind();
-        if(kind.equals(BinaryOperatorKind.LT))
-            mutant.setKind(BinaryOperatorKind.LE);
-        if(kind.equals(BinaryOperatorKind.LE))
-            mutant.setKind(BinaryOperatorKind.LT);
-        if(kind.equals(BinaryOperatorKind.GT))
-            mutant.setKind(BinaryOperatorKind.GE);
-        if(kind.equals(BinaryOperatorKind.GE))
-            mutant.setKind(BinaryOperatorKind.GT);
-        return mutant;
-    }
-
-    @Override
-    public String getType() {
-        return "ConditionalsBoundaryMutation";
-    }
+    protected abstract CtElement getMutantOperator();
 
 
     @Override
@@ -109,8 +90,6 @@ public class ConditionalsBoundaryMutator extends AbstractTransformation {
             return elem.getSimpleName();
         return "field";
     }
-
-
 
 
     @Override

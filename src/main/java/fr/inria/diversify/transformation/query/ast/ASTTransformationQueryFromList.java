@@ -3,9 +3,11 @@ package fr.inria.diversify.transformation.query.ast;
 import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.*;
-import fr.inria.diversify.transformation.ast.ASTMultiTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import org.json.JSONException;
+import spoon.reflect.factory.Factory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -59,5 +61,11 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
             coverage = coverageReport.codeFragmentCoverage(t.getPosition());
         }
         return t;
+    }
+
+    protected void init(Factory factory, String transformationDirectory) throws IOException, JSONException {
+        super.init(factory);
+        TransformationParser tf = new TransformationParser(codeFragments, false);
+        transformation = new ArrayList<Transformation>(tf.parseDir(transformationDirectory));
     }
 }

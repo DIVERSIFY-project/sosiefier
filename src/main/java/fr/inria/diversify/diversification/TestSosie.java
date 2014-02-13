@@ -2,7 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.CompileException;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.query.ITransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * User: Simon
@@ -21,7 +20,7 @@ import java.util.Set;
 public class TestSosie extends AbstractDiversify {
     protected List<String> mavenProjects;
 
-    public TestSosie(ITransformationQuery transQuery, String projectDir) {
+    public TestSosie(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<Transformation>();

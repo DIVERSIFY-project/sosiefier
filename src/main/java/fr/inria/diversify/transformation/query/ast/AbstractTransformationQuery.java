@@ -2,10 +2,13 @@ package fr.inria.diversify.transformation.query.ast;
 
 import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import fr.inria.diversify.transformation.query.ITransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
+import spoon.processing.ProcessingManager;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
+import spoon.support.QueueProcessingManager;
 
 import java.util.Collection;
 import java.util.Random;
@@ -15,14 +18,9 @@ import java.util.Random;
  * Date: 7/17/13
  * Time: 10:17 AM
  */
-public abstract class AbstractTransformationQuery implements ITransformationQuery {
+public abstract class AbstractTransformationQuery extends TransformationQuery {
     protected CodeFragmentList codeFragments;
-    protected int nbTransformation = 1;
     protected String type = "replace";
-
-    public void setNbTransformation(int n) {
-        nbTransformation = n;
-    }
 
     public void setType(String type) {
         this.type = type;
@@ -65,6 +63,15 @@ public abstract class AbstractTransformationQuery implements ITransformationQuer
         CtElement tmp = factory.Core().clone(elem);
         tmp.setParent(elem.getParent());
         return tmp;
+    }
+
+    protected void init(Factory factory) {
+        ProcessingManager pm = new QueueProcessingManager(factory);
+        StatementProcessor processor = new StatementProcessor();
+        pm.addProcessor(processor);
+        pm.process();
+
+        codeFragments = processor.getCodeFragments();
     }
 
     protected Collection<CodeFragment> getAllUniqueCodeFragments() {

@@ -6,7 +6,7 @@ import fr.inria.diversify.transformation.bytecode.BytecodeAdd;
 import fr.inria.diversify.transformation.bytecode.BytecodeDelete;
 import fr.inria.diversify.transformation.bytecode.BytecodeReplace;
 import fr.inria.diversify.transformation.bytecode.BytecodeTransformation;
-import fr.inria.diversify.transformation.query.ITransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.bytecode.BadBytecode;
@@ -23,9 +23,8 @@ import java.util.List;
  * Date: 07/11/13
  * Time: 13:07
  */
-public class ByteCodeTransformationQuery implements ITransformationQuery {
+public class ByteCodeTransformationQuery extends TransformationQuery {
     protected List<CtMethod> methods;
-    protected int nbTransformation = 1;
     protected String type = "replace";
     protected ICoverageReport coverageReport;
 
@@ -34,10 +33,6 @@ public class ByteCodeTransformationQuery implements ITransformationQuery {
         this.coverageReport = coverageReport;
     }
 
-
-    public void setNbTransformation(int n) {
-        nbTransformation = n;
-    }
 
     public void setType(String type) {
         this.type = type;
