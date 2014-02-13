@@ -128,9 +128,6 @@ public class ConditionalsBoundaryMutator extends AbstractTransformation {
         return operator.getPosition().getLine();
     }
 
-    public void setOperator(CtBinaryOperator operator) {
-        this.operator = operator;
-    }
 
     public CtBinaryOperator<?> getOperator() {
         return operator;

@@ -6,7 +6,6 @@ import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtReturn;
 
@@ -21,34 +20,24 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
     protected ICoverageReport coverageReport;
     protected Class CodeFragmentClass;
 
-//    protected List<CodeFragment> cfToTransform;
-
 
     public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList codeFragments, Class transformationClass) {
         this.coverageReport = coverageReport;
         this.codeFragments = codeFragments;
-//        cfToTransform = new ArrayList<CodeFragment>();
         this.CodeFragmentClass = transformationClass;
     }
 
     public ASTReplace replace() throws Exception {
         ASTReplace tf = new ASTReplace();
-//        for(int i = 0; i < nbTransformation; i++) {
             CodeFragment cfToReplace = null;
             CodeFragment cfReplacedBy =null;
 
-//            if(cfToTransform.isEmpty()) {
                 while (cfReplacedBy == null) {
                     cfToReplace = randomCodeFragmentToReplace();
                     cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace,false);
                 }
-//            } else {
-//                cfToReplace = cfToTransform.get(i);
-//                cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace);
-//            }
             tf.setPosition(cfToReplace);
             tf.setCodeFragmentToReplace(cfReplacedBy);
-//        }
         return tf;
     }
 
@@ -78,22 +67,15 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
 
     public ASTAdd add() throws Exception {
         ASTAdd tf = new ASTAdd();
-//        for(int i = 0; i < nbTransformation; i++) {
             CodeFragment cfToReplace = null;
             CodeFragment cfReplacedBy =null;
 
-//            if(cfToTransform.isEmpty()) {
                 while (cfReplacedBy == null) {
                     cfToReplace = randomCodeFragmentToReplace();
                     cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
                 }
-//            } else {
-//                cfToReplace = cfToTransform.get(i);
-//                cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace,typeMatch);
-//            }
         tf.setPosition(cfToReplace);
         tf.setCodeFragmentToAdd(cfReplacedBy);
-//        }
         return tf;
     }
 
@@ -121,20 +103,13 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
 
     public ASTDelete delete() throws Exception {
         ASTDelete tf = new ASTDelete();
-//        for(int i = 0; i < nbTransformation; i++) {
             CodeFragment cfToDelete = null;
-//            if(cfToTransform.isEmpty()) {
                 while (cfToDelete == null) {
                  cfToDelete = randomCodeFragmentToReplace();
                     if (cfToDelete.getCtCodeFragment() instanceof CtReturn)
                         cfToDelete = null;
                 }
-//            } else {
-//
-//                cfToDelete = cfToTransform.get(i);
-//            }
             tf.setPosition(cfToDelete);
-//        }
         return tf;
     }
 

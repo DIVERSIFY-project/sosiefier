@@ -16,10 +16,10 @@ public interface ITransformationQuery {
 
     public Transformation getTransformation() throws Exception;
 
-    public Transformation delete() throws Exception ;
-
-    public Transformation add() throws Exception ;
-
-    public Transformation replace() throws Exception ;
+//    public Transformation delete() throws Exception ;
+//
+//    public Transformation add() throws Exception ;
+//
+//    public Transformation replace() throws Exception ;
 
 }

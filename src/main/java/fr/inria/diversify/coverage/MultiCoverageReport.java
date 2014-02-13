@@ -2,6 +2,7 @@ package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import javassist.CtMethod;
+import spoon.reflect.code.CtBinaryOperator;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +45,15 @@ public class MultiCoverageReport implements ICoverageReport {
         int ret = 1;
         for (CoverageReport cr : coverages) {
             ret = Math.min(ret, cr.opCodeCoverage(method,indexOpcode));
+        }
+        return ret;
+    }
+
+    @Override
+    public double elementCoverage(CtBinaryOperator operator) {
+        double ret = 1;
+        for (CoverageReport cr : coverages) {
+            ret = Math.min(ret, cr.elementCoverage(operator));
         }
         return ret;
     }

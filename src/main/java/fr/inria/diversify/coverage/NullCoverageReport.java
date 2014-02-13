@@ -2,6 +2,7 @@ package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import javassist.CtMethod;
+import spoon.reflect.code.CtBinaryOperator;
 
 import java.io.IOException;
 
@@ -21,6 +22,11 @@ public class NullCoverageReport implements ICoverageReport {
 
     @Override
     public int opCodeCoverage(CtMethod method, int indexOpcode) {
+        return 1;
+    }
+
+    @Override
+    public double elementCoverage(CtBinaryOperator operator) {
         return 1;
     }
 }

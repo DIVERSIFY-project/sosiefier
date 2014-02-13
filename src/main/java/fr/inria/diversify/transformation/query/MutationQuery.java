@@ -16,7 +16,7 @@ import java.util.Random;
  * Date: 12/02/14
  * Time: 14:31
  */
-public class MutationQuery {
+public class MutationQuery implements ITransformationQuery {
     ICoverageReport coverageReport;
     List<CtBinaryOperator<?>> binaryOperators;
 
@@ -35,7 +35,17 @@ public class MutationQuery {
         binaryOperators = processor.getBinaryOperators();
     }
 
-    public ConditionalsBoundaryMutator mutation() throws Exception {
+    @Override
+    public void setNbTransformation(int n) {
+
+    }
+
+    @Override
+    public void setType(String type) {
+
+    }
+
+    public ConditionalsBoundaryMutator getTransformation() throws Exception {
         ConditionalsBoundaryMutator mutation = new ConditionalsBoundaryMutator();
 
         Random r  = new Random();

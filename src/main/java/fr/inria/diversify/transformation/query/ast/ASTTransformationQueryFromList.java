@@ -30,11 +30,11 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         Random r = new Random();
         double coverage = 0;
         ASTTransformation t = null;
-        while(coverage == 0) {
+        while(coverage == 0 && t.getType().equals("delete")) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
             coverage = coverageReport.codeFragmentCoverage(t.getPosition());
         }
-        return t.toDelete();
+        return t;
     }
 
     @Override
@@ -42,11 +42,11 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         Random r = new Random();
         double coverage = 0;
         ASTTransformation t = null;
-        while(coverage == 0) {
+        while(coverage == 0&& t.getType().equals("add") ) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
             coverage = coverageReport.codeFragmentCoverage(t.getPosition());
         }
-        return t.toAdd();
+        return t;
     }
 
     @Override
@@ -54,20 +54,10 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         Random r = new Random();
         double coverage = 0;
         ASTTransformation t = null;
-        while(coverage == 0) {
+        while(coverage == 0 && t.getType().equals("replace")) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
             coverage = coverageReport.codeFragmentCoverage(t.getPosition());
         }
-        return t.toReplace();
-    }
-
-    public Transformation multiTransformation() throws  Exception {
-        ASTMultiTransformation trans = new ASTMultiTransformation();
-        this.setType(null);
-
-        for(int i = 0; i < nbTransformation; i++) {
-            trans.addTransformation(this.getTransformation());
-        }
-        return trans;
+        return t;
     }
 }
