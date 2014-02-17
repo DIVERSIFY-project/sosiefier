@@ -128,7 +128,7 @@ public class TransformationParser {
         }
 
         try {
-            trans.setJUnitResult(jsonObject.getInt("Failures"));
+            trans.setStatus(jsonObject.getInt("Failures"));
         } catch (Exception e) {
             Log.debug("e",e);
         }

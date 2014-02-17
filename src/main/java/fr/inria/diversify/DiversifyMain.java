@@ -66,7 +66,7 @@ public class DiversifyMain {
         }
         initSpoon();
 
-        Log.info("number of statement: " + codeFragments.size());
+//        Log.info("number of statement: " + codeFragments.size());
 //        Log.info("candidate:  {}", test());
         if (DiversifyProperties.getProperty("stat").equals("true")) {
             computeStatistic();
@@ -86,31 +86,9 @@ public class DiversifyMain {
         TransformationQuery query = initTransformationQuery();
         abstractDiversify.setTransformationQuery(query);
 
-        //TODO refactor
-        if (DiversifyProperties.getProperty("nbRun").equals("all")) {
-            if(DiversifyProperties.getProperty("transformation.directory") != null) {
-                TransformationParser tf = new TransformationParser(codeFragments, true);
-                Collection<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
-                Log.debug("apply {} transformation", transformations.size());
-                abstractDiversify.run(transformations);
-            }
-            Util util = new Util(codeFragments);
-            if (DiversifyProperties.getProperty("transformation.type").equals("replace"))
-                abstractDiversify.run(util.getAllReplace());
-            if (DiversifyProperties.getProperty("transformation.type").equals("add"))
-                abstractDiversify.run(util.getAllAdd());
-            if (DiversifyProperties.getProperty("transformation.type").equals("delete"))
-                abstractDiversify.run(util.getAllDelete());
-        } else if (DiversifyProperties.getProperty("transformation.type").equals("stupid")) {
-            int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
-            Util util = new Util(codeFragments);
-            abstractDiversify.run(util.getStupidTransformation(n, (ASTTransformationQuery)query));
-        }
-        else
-        {
-            int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
-            abstractDiversify.run(n);
-        }
+        int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
+        abstractDiversify.run(n);
+
         abstractDiversify.printResult(DiversifyProperties.getProperty("result"),DiversifyProperties.getProperty("gitRepository")+"/diversify-exp");
     }
 
@@ -161,26 +139,27 @@ public class DiversifyMain {
     protected TransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException, NotFoundException {
         ICoverageReport rg = initCoverageReport();
 
-        TransformationQuery atq;
+        TransformationQuery atq = null;
+        String type = DiversifyProperties.getProperty("transformation.type");
 
-        if(DiversifyProperties.getProperty("transformation.type").equals("mutation"))
-            return new MutationQuery(rg,factory);
+        if(type.equals("mutation"))
+            atq = new MutationQuery(rg,factory);
 
-        String transformation = DiversifyProperties.getProperty("transformation.directory");
-        if (transformation != null) {
-            TransformationParser tf = new TransformationParser(codeFragments, false);
-            Collection<Transformation> list = tf.parseDir(transformation);
-            atq = new ASTTransformationQueryFromList(list, rg, codeFragments);
-        } else {
+        if(type.equals("ADR")) {
             Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-            atq = new ASTTransformationQuery(rg, codeFragments,cl);
+            atq = new ASTTransformationQuery(rg,factory,cl);
         }
 
-        if(DiversifyProperties.getProperty("transformation.level").equals("bytecode"))
+        if(type.equals("ADRStupid")) {
+            Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
+            atq = new ASTTransformationQuery(rg,factory,cl);
+        }
+
+        if(type.equals("list"))
+            atq = new ASTTransformationQueryFromList(rg,factory);
+
+        if(type.equals("byteCode"))
             atq = new ByteCodeTransformationQuery(allCtMethod(),rg);
-
-        atq.setType(DiversifyProperties.getProperty("transformation.type"));
-
 
         return atq;
     }
@@ -228,13 +207,6 @@ public class DiversifyMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ProcessingManager pm = new QueueProcessingManager(factory);
-        Class classz = Class.forName(DiversifyProperties.getProperty("processor"));
-        AbstractCodeFragmentProcessor processor =  (AbstractCodeFragmentProcessor)classz.newInstance();
-        pm.addProcessor(processor);
-        pm.process();
-
-        codeFragments = processor.getCodeFragments();
     }
 
     protected void computeStatistic() throws IOException, JSONException, InterruptedException {

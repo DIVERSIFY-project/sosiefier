@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * User: Simon
@@ -15,29 +16,21 @@ public interface Transformation {
 
     public void apply(String srcDir) throws Exception;
     public void restore(String srcDir) throws Exception;
-    public void setJUnitResult(Integer result);
-    public int numberOfFailure();
+    public void setStatus(Integer status);
+    public int getStatus();
+    public void setFailures(Set<String> f);
+    public Set<String> getFailures();
+
     public String getType();
-//    public void write(StringBuffer sb, char separator);
-//    public void writeHead(BufferedWriter sb, char separator) throws IOException;
     public JSONObject toJSONObject() throws JSONException;
 
-//    public long classSize();
-//    public int nbMethodInClassLocation();
-//    public String classReplaceOrAddPositionName();
     public String classLocationName();
     public String packageLocationName();
     public String methodLocationName();
-    public boolean getCompile();
     public String level();
     public String stmtType();
 
-
-    void setCompile(boolean b);
+    public boolean isCompile();
 
     public int line();
-
-//    public String methodReplaceOrAdd();
-
-//    public int lineReplaceOrAdd();
 }

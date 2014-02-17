@@ -4,7 +4,9 @@ import fr.inria.diversify.codeFragmentProcessor.BinaryOperatorProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.mutation.ConditionalBoundaryMutation;
+import fr.inria.diversify.transformation.mutation.MathMutation;
 import fr.inria.diversify.transformation.mutation.NegateConditionalMutation;
+import fr.inria.diversify.transformation.mutation.RemoveConditionalMutation;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -65,6 +67,14 @@ public class MutationQuery extends TransformationQuery {
 
     @Override
     public Transformation getTransformation() throws Exception {
+        Random r = new Random();
+        int i = r.nextInt(4);
+        switch (i) {
+            case 0: return getNegateConditionalMutation();
+            case 1: return getConditionalBoundaryMutation();
+            case 2: return getMathMutation();
+            case 3: return getRemoveConditionalMutation();
+        }
         return null;
     }
 
@@ -74,32 +84,44 @@ public class MutationQuery extends TransformationQuery {
         Random r  = new Random();
 
         CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
-        while (coverageReport.elementCoverage(operator) == 0 && negateConditional.contains(operator.getKind())) {
+        while (coverageReport.elementCoverage(operator) == 0 || !negateConditional.contains(operator.getKind())) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
         mutation.setOperator(operator);
         return mutation;
     }
 
-    public NegateConditionalMutation getConditionalBoundaryMutation() throws Exception {
-        NegateConditionalMutation mutation = new NegateConditionalMutation();
-
-        Random r  = new Random();
-
-        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
-        while (coverageReport.elementCoverage(operator) == 0 && conditionalBoundary.contains(operator.getKind())) {
-            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
-        }
-        mutation.setOperator(operator);
-        return mutation;
-    }
-
-    public ConditionalBoundaryMutation getMathMutation() throws Exception {
+    public ConditionalBoundaryMutation getConditionalBoundaryMutation() throws Exception {
         ConditionalBoundaryMutation mutation = new ConditionalBoundaryMutation();
 
         Random r  = new Random();
+
         CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
-        while (coverageReport.elementCoverage(operator) == 0 && math.contains(operator.getKind())) {
+        while (coverageReport.elementCoverage(operator) == 0 || !conditionalBoundary.contains(operator.getKind())) {
+            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+        }
+        mutation.setOperator(operator);
+        return mutation;
+    }
+
+    public MathMutation getMathMutation() throws Exception {
+        MathMutation mutation = new MathMutation();
+
+        Random r  = new Random();
+        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+        while (coverageReport.elementCoverage(operator) == 0 || !math.contains(operator.getKind())) {
+            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+        }
+        mutation.setOperator(operator);
+        return mutation;
+    }
+
+    public RemoveConditionalMutation getRemoveConditionalMutation() throws Exception {
+        RemoveConditionalMutation mutation = new RemoveConditionalMutation();
+
+        Random r  = new Random();
+        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
+        while (coverageReport.elementCoverage(operator) == 0) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
         mutation.setOperator(operator);

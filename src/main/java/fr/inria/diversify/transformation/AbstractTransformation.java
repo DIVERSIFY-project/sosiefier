@@ -1,29 +1,33 @@
 package fr.inria.diversify.transformation;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * User: Simon
  * Date: 12/02/14
  * Time: 10:44
  */
 public abstract class AbstractTransformation implements Transformation {
-    protected Integer failures = -1;
-    protected boolean compile;
+    protected Integer status = -3;
+    protected Set<String> failures;
 
-    public void setJUnitResult(Integer result) {
-        failures = result;
+    public void setStatus(Integer result) {
+        status = result;
     }
 
-    public int numberOfFailure() {
+    public int getStatus() {
+        return status;
+    }
+
+    public void setFailures(Set<String> f) {
+        failures = f;
+    }
+    public Set<String> getFailures() {
         return failures;
     }
 
-    public boolean getCompile() {
-        return compile;
-    }
-    //    public int nbMethodInClassLocation() {
-//        return position.getCtCodeFragment().getParent(CtType.class).getMethods().size();
-//    }
-    public void setCompile(boolean b){
-        compile = b;
+    public boolean isCompile() {
+        return status > -1;
     }
 }

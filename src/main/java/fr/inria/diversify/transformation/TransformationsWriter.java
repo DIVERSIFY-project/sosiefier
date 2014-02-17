@@ -28,7 +28,7 @@ public class TransformationsWriter {
     public String writeGoodTransformation(String type) throws IOException {
         List<Transformation> goodTransformation = new LinkedList<Transformation>();
         for (Transformation transformation : transformations) {
-            if (transformation.numberOfFailure() == 0 && (type == null || transformation.getType().equals(type))) {
+            if (transformation.getStatus() == 0 && (type == null || transformation.getType().equals(type))) {
                 goodTransformation.add(transformation);
             }
         }
@@ -46,7 +46,7 @@ public class TransformationsWriter {
     public String writeBadTransformation(String type) throws IOException {
         List<Transformation> badTransformation = new LinkedList<Transformation>();
         for (Transformation transformation : transformations) {
-            if (transformation.numberOfFailure() != 0 && (type == null || transformation.getType().equals(type))) {
+            if (transformation.getStatus() != 0 && (type == null || transformation.getType().equals(type))) {
                 badTransformation.add(transformation);
             }
         }

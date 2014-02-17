@@ -33,11 +33,10 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     public void apply(String srcDir) throws Exception {
         addSourceCode();
         printJavaFile(srcDir);
-        removeSourceCode();
     }
 
     protected void addSourceCode() {
-        Log.debug("conditional boundary mutation");
+        Log.debug(getType());
         Log.debug("operator:\n {}", operator);
         Log.debug("--------------------\npostion:\n{}",operator.getPosition());
         CtElement mutant = getMutantOperator();
@@ -48,6 +47,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     }
 
     public void restore(String srcDir) throws Exception {
+        removeSourceCode();
         printJavaFile(srcDir);
     }
 

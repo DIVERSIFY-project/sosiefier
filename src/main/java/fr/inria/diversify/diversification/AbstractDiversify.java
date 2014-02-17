@@ -83,14 +83,11 @@ public abstract class AbstractDiversify {
     protected Integer runTest(String directory) throws InterruptedException, CompileException, InstantiationException, IllegalAccessException {
         builder.setDirectory(directory);
         builder.runBuilder();
-        Log.info("setCompile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", number of failure: " + builder.getFailures());
+        Log.info("status: " + builder.getStatus()+", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getErrors().size());
         if (builder.getCompileError()) {
-            throw new CompileException("setCompile error in maven");
+            throw new CompileException("compile error in maven");
         }
-
-        if (builder.getFailures() == null)
-            return -1;
-        return builder.getFailures();
+        return builder.getStatus();
     }
 
 

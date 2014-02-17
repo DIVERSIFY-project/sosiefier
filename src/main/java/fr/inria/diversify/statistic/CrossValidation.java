@@ -59,7 +59,7 @@ public class CrossValidation {
         int count = 0;
 
         for (Transformation transformation : set)
-            if(transformation.numberOfFailure() == 0)
+            if(transformation.getStatus() == 0)
                 count++;
 
         return count;

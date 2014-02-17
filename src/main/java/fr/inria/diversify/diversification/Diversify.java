@@ -9,7 +9,6 @@ import org.codehaus.plexus.util.FileUtils;
 import java.util.ArrayList;
 
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * User: Simon
@@ -70,12 +69,12 @@ public class Diversify extends AbstractDiversify {
         try {
             trans.apply(tmpDir + "/" + sourceDir);
             transformations.add(trans);
-            int failures = runTest(tmpDir);
-            if(failures == 0)
+            int status = runTest(tmpDir);
+            if(status == 0)
                 sosie++;
             trial++;
             trans.setCompile(true);
-            trans.setJUnitResult(failures);
+            trans.setStatus(status);
 
         } catch (Exception e) {
             compileError++;

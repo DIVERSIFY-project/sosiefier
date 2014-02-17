@@ -47,17 +47,17 @@ public class TestSosie extends AbstractDiversify {
 
 //        builder.start();
 //        int count = 0;
-//        while (builder.getFailures() == null && count < timeOut) {
+//        while (builder.getStatus() == null && count < timeOut) {
 //            count++;
 //            Thread.sleep(1000);
 //        }
-//        Log.debug("setCompile error: " + builder.getCompileError() + ", run all test" + builder.allTestRun() + ", number of failure" + builder.getFailures());
+//        Log.debug("setCompile error: " + builder.getCompileError() + ", run all test" + builder.allTestRun() + ", number of failure" + builder.getStatus());
 //        if (builder.getCompileError())
 //            throw new CompileException("error ");
 //
 //        if (!builder.allTestRun())
 //            return -1;
-//        return builder.getFailures();
+//        return builder.getStatus();
         return null;
     }
 

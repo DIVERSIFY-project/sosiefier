@@ -44,14 +44,13 @@ public class BytecodeAdd extends BytecodeTransformation {
         JSONObject object = new JSONObject();
         object.put("type", "add");
         object.put("level", "bytecode");
-        object.put("setCompile", compile);
 
         object.put("methodLocation", methodLocation.getLongName());
         object.put("opcodeIndex",opcodeIndex);
         object.put("byteCodeToAdd", Arrays.toString(byteCodeToAdd));
 
-        object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
+        object.put("status", status);
 
         return object;
     }

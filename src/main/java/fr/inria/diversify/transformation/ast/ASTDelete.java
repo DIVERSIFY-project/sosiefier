@@ -26,10 +26,10 @@ public class ASTDelete extends ASTTransformation {
         JSONObject object = new JSONObject();
         object.put("type", "delete");
         object.put("level", "ast");
-        object.put("setCompile", compile);
 
         object.put("CodeFragmentDelete", position.toJSONObject());
         object.put("Failures", failures);
+        object.put("status", status);
 
         return object;
     }

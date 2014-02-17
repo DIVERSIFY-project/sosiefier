@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation.query.ast;
 
-import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -8,6 +7,7 @@ import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtReturn;
+import spoon.reflect.factory.Factory;
 
 import java.util.*;
 
@@ -21,9 +21,10 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
     protected Class CodeFragmentClass;
 
 
-    public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList codeFragments, Class transformationClass) {
+    public ASTTransformationQuery(ICoverageReport coverageReport, Factory factory,Class transformationClass) {
         this.coverageReport = coverageReport;
-        this.codeFragments = codeFragments;
+//        this.codeFragments = codeFragments;
+        init(factory);
         this.CodeFragmentClass = transformationClass;
     }
 

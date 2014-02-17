@@ -5,6 +5,8 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,7 +20,13 @@ public abstract class AbstractBuilder {
     protected boolean compileError;
     protected boolean allTestRun;
     String[] phases;
-    protected Integer failure;
+    protected List<String> errors;
+
+    //-3 nothing
+    //-2 not compile
+    //-1 compile, error in test
+    //0 compile, all test green
+    protected Integer status = -3;
     protected int timeOut = -1;
     protected boolean clojureTest;
     protected Set<Thread> threadSet;
@@ -27,12 +35,14 @@ public abstract class AbstractBuilder {
     public AbstractBuilder(String directory,String srcDir) {
         this.directory = directory;
         this.srcDir = srcDir;
+        errors = new ArrayList<String>();
     }
 
     protected void reset() {
         compileError = false;
         allTestRun = false;
-       failure = null;
+       status = -3;
+        errors.clear();
     }
 
     public void runBuilder() throws InterruptedException {
@@ -61,7 +71,7 @@ public abstract class AbstractBuilder {
 
         int tmpTimeOut = 0;
         int factor = 12;
-        while (failure == null) {
+        while (status == -3) {
             tmpTimeOut = tmpTimeOut + factor;
             Thread.sleep(1000);
         }
@@ -106,8 +116,12 @@ public abstract class AbstractBuilder {
         Log.debug("all children process kill");
     }
 
-    public Integer getFailures() {
-        return failure;
+    public Integer getStatus() {
+        return status;
+    }
+
+    public List<String> getErrors() {
+        return errors;
     }
 
     public boolean allTestRun() {

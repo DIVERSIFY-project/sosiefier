@@ -48,6 +48,7 @@ public class AntBuilder extends AbstractBuilder {
         }
     }
 
+    //TODO not working
     protected void parseResult(String r) {
         Pattern patternCompileError = Pattern.compile("\\s*\\[javac\\] (\\d+) error.*");
         Pattern patternJunitError = Pattern.compile("\\s*\\[junit\\]\\s* FAILED.*");
@@ -62,18 +63,18 @@ public class AntBuilder extends AbstractBuilder {
 //            m = patternJunitError.matcher(s);
 //            if ( m.matches()) {
             if(s.contains("[junit]") && s.contains("FAILED")) {
-                failure = -2;
+                status = -2;
                 allTestRun = true;
                break;
             }
             m = patternJunitOK.matcher(s);
             if ( m.matches()) {
-                failure = 0;
+                status = 0;
                 allTestRun = true;
                 break;
             }
         }
-        if(!compileError && failure == null)
-            failure = -3;
+        if(!compileError && status == -3)
+            status = -3;
     }
 }

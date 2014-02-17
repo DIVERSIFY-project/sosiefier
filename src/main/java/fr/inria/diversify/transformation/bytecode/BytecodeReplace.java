@@ -43,18 +43,13 @@ public class BytecodeReplace extends BytecodeTransformation {
         JSONObject object = new JSONObject();
         object.put("type", "replace");
         object.put("level", "bytecode");
-        object.put("setCompile", compile);
-//        JSONArray array = new JSONArray();
-//        object.put("transformation",array);
-//
-//        JSONObject t = new JSONObject();
+
         object.put("methodLocation", methodLocation.getLongName());
         object.put("opcodeIndex",opcodeIndex);
         object.put("byteCodeToReplace", Arrays.toString(byteCodeToReplace));
-//        array.put(t);
 
-        object.put("allTestRun", (failures != null));
         object.put("Failures", failures);
+        object.put("status", status);
 
         return object;
     }

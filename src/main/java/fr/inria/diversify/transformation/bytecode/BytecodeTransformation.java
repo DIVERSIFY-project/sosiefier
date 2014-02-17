@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation.bytecode;
 
+import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
@@ -19,12 +20,10 @@ import java.util.List;
  * Date: 11/6/13
  * Time: 5:28 PM
  */
-public abstract class BytecodeTransformation implements Transformation {
+public abstract class BytecodeTransformation extends AbstractTransformation {
     protected CtMethod methodLocation;
     protected int opcodeIndex;
-    protected Integer failures;
     protected List<CtMethod> methods;
-    protected boolean compile;
 
     protected File backupClassFile;
     protected CtClass backupClass;
@@ -75,14 +74,6 @@ public abstract class BytecodeTransformation implements Transformation {
         return list;
     }
 
-    public void setJUnitResult(Integer result) {
-        failures = result;
-    }
-
-    public int numberOfFailure() {
-        return failures;
-    }
-
     public String methodToString(CtMethod method) throws BadBytecode {
         MethodInfo minfo = method.getMethodInfo();
         CodeAttribute ca = minfo.getCodeAttribute();
@@ -126,13 +117,6 @@ public abstract class BytecodeTransformation implements Transformation {
     public String methodLocationName() {
         return methodLocation.getLongName();
     }
-    public boolean getCompile() {
-        return compile;
-    }
-    public void setCompile(boolean b){
-        compile = b;
-    }
-
     @Override
     public String level() {
         return "bytecode";

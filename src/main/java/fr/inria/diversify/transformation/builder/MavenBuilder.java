@@ -72,6 +72,7 @@ public class MavenBuilder extends AbstractBuilder {
 
     protected void parseResult(String r) {
         Pattern pattern = Pattern.compile("Tests run: (\\d+), Failures: (\\d+), Errors: (\\d+), Skipped: (\\d+)");
+        Pattern errorPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
         Matcher matcher = null;
         boolean result = false;
 
@@ -83,15 +84,24 @@ public class MavenBuilder extends AbstractBuilder {
                 result = true;
             }
             Matcher m = pattern.matcher(s);
-            if (result && m.matches())
+            if (result && m.matches()) {
                 matcher = m;
+            }
+
+            Matcher errorMatcher = errorPattern.matcher(s);
+            if(errorMatcher.matches()) {
+                errors.add(errorMatcher.group(2)+"."+errorMatcher.group(1));
+            }
         }
         if(matcher != null) {
-            failure = Integer.parseInt(matcher.group(2)) + Integer.parseInt(matcher.group(3));
+            if(errors.isEmpty())
+                status = 0;
+            else
+                status = -1;
             allTestRun = !matcher.group(1).equals("0") ;
         }
         else {
-            failure = -2;
+            status = -2;
         }
     }
 
@@ -107,7 +117,7 @@ public class MavenBuilder extends AbstractBuilder {
                 tmpFailure = -1;
             }
             if (s.contains("test:")) {
-                tmpFailure = 1;
+                tmpFailure = -1;
                 allTestRun = true;
             }
             if (s.contains("[INFO] BUILD SUCCESS")) {
@@ -115,7 +125,7 @@ public class MavenBuilder extends AbstractBuilder {
                 tmpFailure = 0;
             }
         }
-        failure = tmpFailure;
+        status = tmpFailure;
     }
 
     public void initPom(String newPomFile) throws Exception {

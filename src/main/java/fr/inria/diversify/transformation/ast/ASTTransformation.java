@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
@@ -20,10 +21,8 @@ import java.io.IOException;
  * Date: 7/11/13
  * Time: 4:15 PM
  */
-public abstract class ASTTransformation implements Transformation {
+public abstract class ASTTransformation extends AbstractTransformation {
     protected CodeFragment position;
-    protected Integer failures = -1;
-    protected boolean compile;
 
     public ASTTransformation() {}
 
@@ -66,25 +65,11 @@ public abstract class ASTTransformation implements Transformation {
         return position;
     }
 
-    public void setJUnitResult(Integer result) {
-        failures = result;
-    }
-
-    public int numberOfFailure() {
-        return failures;
-    }
-
-//    public abstract ASTReplace toReplace() throws Exception;
-//    public abstract ASTAdd toAdd() throws Exception;
-//    public abstract ASTDelete toDelete() throws Exception;
-
     public void setPosition(CodeFragment position) {
         this.position = position;
     }
 
-//    public long classSize() {
-//        return position.getSourceFile().length();
-//    }
+
     public String classLocationName() {
         return position.getSourceClass().getQualifiedName();
     }
@@ -97,15 +82,7 @@ public abstract class ASTTransformation implements Transformation {
             return elem.getSimpleName();
         return "field";
     }
-    public boolean getCompile() {
-        return compile;
-    }
-//    public int nbMethodInClassLocation() {
-//        return position.getCtCodeFragment().getParent(CtType.class).getMethods().size();
-//    }
-    public void setCompile(boolean b){
-        compile = b;
-    }
+
 
     @Override
     public String level() {
@@ -131,10 +108,4 @@ public abstract class ASTTransformation implements Transformation {
     public int line() {
         return position.getStartLine();
     }
-
-//    public abstract void add(ASTTransformation replace);
-
-//    public String positionString() {
-//        return transform.positionString() + "\n";
-//    }
 }

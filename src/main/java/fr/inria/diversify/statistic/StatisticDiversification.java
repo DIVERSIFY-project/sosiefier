@@ -32,7 +32,7 @@ public class StatisticDiversification {
 
         this.numberOfFailureMax = 0;
         for(Transformation t : transformations)
-            this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.numberOfFailure());
+            this.numberOfFailureMax = Math.max(this.numberOfFailureMax, t.getStatus());
     }
 
 //    public StatisticDiversification() {

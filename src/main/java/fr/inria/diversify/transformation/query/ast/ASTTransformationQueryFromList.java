@@ -8,10 +8,7 @@ import org.json.JSONException;
 import spoon.reflect.factory.Factory;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * User: Simon
@@ -22,9 +19,22 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
     protected ICoverageReport coverageReport;
     private List<Transformation> transformation;
 
-    public ASTTransformationQueryFromList(Collection<Transformation> transformation, ICoverageReport cr, CodeFragmentList codeFragments) {
-        this.transformation = new ArrayList<Transformation>(transformation);
+    public ASTTransformationQueryFromList(ICoverageReport cr, Factory factory) {
         this.coverageReport = cr;
+        init(factory);
+    }
+
+    public Set<Transformation> getTransformations(int nb) throws Exception {
+        HashSet<Transformation> set = new HashSet<Transformation>();
+
+        if(nb <= 0) {
+            set.addAll(transformation);
+        }
+        else {
+            while (set.size() < nb)
+                set.add(getTransformation());
+        }
+        return set;
     }
 
     @Override
