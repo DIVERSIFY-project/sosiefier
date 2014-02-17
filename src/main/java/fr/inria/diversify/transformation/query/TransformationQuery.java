@@ -13,7 +13,8 @@ import java.util.Set;
  */
 public abstract class TransformationQuery {
 
-//    public abstract void setNbTransformation(int n);
+    protected String type;
+
     public abstract void setType(String type);
 
     public abstract Transformation getTransformation() throws Exception;

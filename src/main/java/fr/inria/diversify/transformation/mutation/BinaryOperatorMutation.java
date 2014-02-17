@@ -39,7 +39,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     protected void addSourceCode() {
         Log.debug("conditional boundary mutation");
         Log.debug("operator:\n {}", operator);
-        Log.debug("---------------------\npostion:\n{}",operator.getPosition());
+        Log.debug("--------------------\npostion:\n{}",operator.getPosition());
         CtElement mutant = getMutantOperator();
         SourcePosition sp = operator.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
