@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation.mutation;
 
+import fr.inria.diversify.codeFragment.CodeFragmentEqualPrinter;
 import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
@@ -74,7 +75,21 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-        return null;
+        JSONObject object = new JSONObject();
+        object.put("type", getType());
+        object.put("level", level());
+
+        object.put("position", operator.getParent(CtPackage.class).getQualifiedName()
+                + "." + operator.getParent(CtSimpleType.class).getSimpleName() + ":" + operator.getPosition().getLine());
+
+        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(operator.getFactory().getEnvironment());
+        operator.accept(pp);
+        object.put("BinaryOperator", pp.toString());
+
+        object.put("Failures", failures);
+        object.put("status", status);
+
+        return object;
     }
 
 
