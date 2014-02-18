@@ -41,7 +41,7 @@ public class ReturnValueMutation extends AbstractTransformation {
 
     @Override
     public void apply(String srcDir) throws Exception {
-        Log.debug(getType());
+        Log.debug(type+ " "+ name);
         Log.debug("statement:\n {}", ret);
         Log.debug("--------------------\npostion:\n{}", ret.getPosition()); 
         CtLiteral literal = (CtLiteral)ret.getReturnedExpression();
