@@ -21,16 +21,20 @@ import java.util.Map;
  * Time: 4:33 PM
  */
 public class ASTAdd extends ASTTransformation {
-    protected String type = "add";
     protected CodeFragment add;
     protected Map<String, String> variableMapping;
 
+
+    public ASTAdd() {
+        name = "add";
+        type = "adrStmt";
+    }
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", type);
-        object.put("level", "ast");
+        object.put("name", name);
         object.put("CodeFragmentPosition", position.toJSONObject());
         object.put("CodeFragmentAdd", add.toJSONObject());
         object.put("VariableMapping", variableMapping);
@@ -80,24 +84,7 @@ public class ASTAdd extends ASTTransformation {
         variableMapping = mapping;
     }
 
-//    @Override
-//    public ASTReplace toReplace() throws Exception {
-//        throw new Exception();
-//    }
-//
-//    @Override
-//    public ASTAdd toAdd() throws Exception {
-//        return this;
-//    }
-//
-//    @Override
-//    public ASTDelete toDelete() throws Exception {
-////        ASTDelete d = new ASTDelete();
-////        for (CodeFragment cf : position)
-////            d.addCodeFragmentToTransform(cf);
-////        return d;
-//        throw new Exception();
-//    }
+
 
     public boolean setCodeFragmentToAdd(CodeFragment add) {
         this.add = add;
@@ -119,67 +106,9 @@ public class ASTAdd extends ASTTransformation {
                 add.equals(otherASTAdd.add);
     }
 
-//    @Override
-// public void writeHead(BufferedWriter sb, char separator) throws IOException {
-//    sb.write("positionType" + separator + "addType" + separator +
-//            "positionSize" + separator + "addSize" + separator +
-//            "positionClass" + separator + "addClass" + separator +
-//            "positionPackage" + separator + "addPackage" + separator +
-//            "positionInputContextSize" + separator + "addInputContextSize" + separator +
-//            "positionInputContextOnlyPrimitive" + separator + "addInputContextOnlyPrimitive" + separator +
-//            "failure" + separator +
-//            "positionSuperType" +separator + "addBySuperType");
-//}
-
-    public String getType(){
-        return type;
-    }
-
-//    public void write(StringBuffer sb, char separator) {
-//        CodeFragment p = position;
-//        CodeFragment r = add;
-//
-//        sb.append(p.getCodeFragmentType().getSimpleName());
-//        sb.append(separator);
-//        sb.append(r.getCodeFragmentType().getSimpleName());
-//        sb.append(separator);
-//
-//        sb.append(p.getCtCodeFragment().toString().length()+"");
-//        sb.append(separator);
-//        sb.append(r.getCtCodeFragment().toString().length()+"");
-//        sb.append(separator);
-//
-//        sb.append(p.getSourceClass().getQualifiedName());
-//        sb.append(separator);
-//        sb.append(r.getSourceClass().getQualifiedName());
-//        sb.append(separator);
-//
-//        sb.append(p.getSourcePackage().getQualifiedName());
-//        sb.append(separator);
-//        sb.append(r.getSourcePackage().getQualifiedName());
-//        sb.append(separator);
-//
-//        sb.append(p.getInputContext().size()+"");
-//        sb.append(separator);
-//        sb.append(r.getInputContext().size()+"");
-//        sb.append(separator);
-//
-//        sb.append(p.getInputContext().hasOnlyPrimitive()+"");
-//        sb.append(separator);
-//        sb.append(r.getInputContext().hasOnlyPrimitive()+"");
-//        sb.append(separator);
-//
-//        sb.append(failures+"");
-//
-//        sb.append(separator);
-//        sb.append(p.getCodeFragmentSuperType().getSimpleName());
-//        sb.append(separator);
-//        sb.append(r.getCodeFragmentSuperType().getSimpleName());
-//    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+  //  public void setType(String type) {
+   //     this.type = type;
+  //  }
 
     @Override
     public String toString() {
@@ -190,21 +119,4 @@ public class ASTAdd extends ASTTransformation {
 
         return ret;
     }
-
-//    public String classReplaceOrAddPositionName() {
-//        return add.getSourceClass().getQualifiedName();
-//    }
-
-//    @Override
-//    public String methodReplaceOrAdd() {
-//        CtExecutable elem = add.getCtCodeFragment().getParent(CtExecutable.class);
-//        if(elem != null)
-//            return elem.getSimpleName();
-//        return "field";
-//    }
-//
-//    @Override
-//    public int lineReplaceOrAdd() {
-//        return add.getStartLine();
-//    }
 }

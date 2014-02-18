@@ -10,6 +10,12 @@ import spoon.reflect.factory.Factory;
  * Time: 14:46
  */
 public class MathMutation extends BinaryOperatorMutation {
+
+    public MathMutation() {
+        name = "mathMutation";
+        type = "mutation";
+    }
+
     @Override
     protected CtBinaryOperator getMutantOperator() {
         Factory factory = operator.getFactory();
@@ -45,10 +51,5 @@ public class MathMutation extends BinaryOperatorMutation {
             mutant.setKind(BinaryOperatorKind.SL);
 
         return mutant;
-    }
-
-    @Override
-    public String getType() {
-        return "MathMutation";
     }
 }

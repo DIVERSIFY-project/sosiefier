@@ -2,6 +2,7 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationsWriter;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.*;
@@ -23,7 +24,7 @@ public class Sampling {
         }
     }
 
-    public void splitAndWrite(int splitSize,String fileName) throws IOException {
+    public void splitAndWrite(int splitSize,String fileName) throws IOException, JSONException {
         int borne = transformations.size()/splitSize;
 
         for(int i = 0; i < borne; i++) {
@@ -31,7 +32,7 @@ public class Sampling {
         }
     }
 
-    protected void writeSubList(int begin, int end, String fileName) throws IOException {
+    protected void writeSubList(int begin, int end, String fileName) throws IOException, JSONException {
         ArrayList<Transformation> list = new ArrayList<Transformation>(end - begin);
         for (int i = begin; i < end; i++) {
             list.add(transformations.get(i));

@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -25,7 +26,7 @@ public class TransformationsWriter {
 
     public TransformationsWriter() {}
 
-    public String writeGoodTransformation(String type) throws IOException {
+    public String writeGoodTransformation(String type) throws IOException, JSONException {
         List<Transformation> goodTransformation = new LinkedList<Transformation>();
         for (Transformation transformation : transformations) {
             if (transformation.getStatus() == 0 && (type == null || transformation.getType().equals(type))) {
@@ -43,7 +44,7 @@ public class TransformationsWriter {
         return writeTransformation(fileName,goodTransformation);
     }
 
-    public String writeBadTransformation(String type) throws IOException {
+    public String writeBadTransformation(String type) throws IOException, JSONException {
         List<Transformation> badTransformation = new LinkedList<Transformation>();
         for (Transformation transformation : transformations) {
             if (transformation.getStatus() != 0 && (type == null || transformation.getType().equals(type))) {
@@ -59,7 +60,7 @@ public class TransformationsWriter {
         return  writeTransformation(fileName,badTransformation);
     }
 
-    public String writeAllTransformation(String type) throws IOException {
+    public String writeAllTransformation(String type) throws IOException, JSONException {
         List<Transformation> transformation = new LinkedList<Transformation>();
         for (Transformation t : transformations) {
             if (type == null || t.getType().equals(type)) {
@@ -77,7 +78,7 @@ public class TransformationsWriter {
     }
 
 
-    public String writeTransformation(String fileName, Collection<Transformation> trans) throws IOException {
+    public String writeTransformation(String fileName, Collection<Transformation> trans) throws IOException, JSONException {
         Log.debug("write {} transformation in file {}",trans.size(), fileName);
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         JSONArray obj = new JSONArray();
@@ -87,7 +88,8 @@ public class TransformationsWriter {
             } catch (Exception e) {
             }
         }
-        out.write(obj.toString());
+        obj.write(out);
+//        out.write(obj.toString());
         out.newLine();
         out.close();
         return  fileName;

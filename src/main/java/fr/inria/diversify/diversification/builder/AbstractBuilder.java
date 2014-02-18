@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation.builder;
+package fr.inria.diversify.diversification.builder;
 
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;

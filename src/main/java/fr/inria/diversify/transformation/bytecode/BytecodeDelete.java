@@ -22,9 +22,13 @@ public class BytecodeDelete extends BytecodeTransformation {
         methodLocation = method;
         opcodeIndex = index;
         this.methods = methods;
+        name = "delete";
+        type = "adrBytecode";
     }
 
     public BytecodeDelete() {
+        name = "delete";
+        type = "adrBytecode";
     }
 
     public void apply() throws BadBytecode {
@@ -52,8 +56,8 @@ public class BytecodeDelete extends BytecodeTransformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", "delete");
-        object.put("level", "bytecode");
+        object.put("type", type);
+        object.put("name", name);
 
         object.put("methodLocation", methodLocation.getLongName());
         object.put("opcodeIndex",opcodeIndex);

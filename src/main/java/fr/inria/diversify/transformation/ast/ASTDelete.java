@@ -21,11 +21,16 @@ import java.io.IOException;
  */
 public class ASTDelete extends ASTTransformation {
 
+    public ASTDelete() {
+        name = "delete";
+        type = "adrStmt";
+    }
+
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", "delete");
-        object.put("level", "ast");
+        object.put("type", type);
+        object.put("name", name);
 
         object.put("CodeFragmentDelete", position.toJSONObject());
         object.put("failures", failures);
@@ -47,28 +52,7 @@ public class ASTDelete extends ASTTransformation {
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
     }
 
-//    @Override
-//    public ASTReplace toReplace() throws Exception {
-//        throw new Exception();
-//    }
-//
-//    @Override
-//    public ASTAdd toAdd() throws Exception {
-////       ASTAdd a = new ASTAdd();
-////       for (CodeFragment cf : position)
-////            a.addCodeFragmentToAdd(cf,cf);
-////        return a;
-//        throw new Exception();
-//    }
-//
-//    @Override
-//    public ASTDelete toDelete() throws Exception {
-//        return this;
-//    }
 
-    public String getType(){
-        return "delete";
-    }
     public  int hashCode() {
         return 1;
     }
@@ -102,45 +86,4 @@ public class ASTDelete extends ASTTransformation {
 
         return ret;
     }
-
-//    public void write(StringBuffer sb, char separator) {
-//        CodeFragment p = position;
-//
-//        sb.append(p.getCodeFragmentType().getSimpleName());
-//        sb.append(separator);
-//
-//        sb.append(p.getCtCodeFragment().toString().length()+"");
-//        sb.append(separator);
-//
-//        sb.append(p.getSourceClass().getQualifiedName());
-//        sb.append(separator);
-//
-//
-//        sb.append(p.getSourcePackage().getQualifiedName());
-//        sb.append(separator);
-//
-//        sb.append(p.getInputContext().size()+"");
-//        sb.append(separator);
-//
-//        sb.append(p.getInputContext().hasOnlyPrimitive()+"");
-//        sb.append(separator);
-//
-//        sb.append(failures+"");
-//        sb.append(separator);
-//        sb.append(p.getCodeFragmentSuperType().getSimpleName());
-//    }
-
-//    public String classReplaceOrAddPositionName() {
-//        return "null";
-//    }
-
-//    @Override
-//    public String methodReplaceOrAdd() {
-//        return "null";
-//    }
-
-//    @Override
-//    public int lineReplaceOrAdd() {
-//        return 0;
-//    }
 }

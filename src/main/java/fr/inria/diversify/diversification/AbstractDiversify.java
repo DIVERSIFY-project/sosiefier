@@ -1,7 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.*;
-import fr.inria.diversify.transformation.builder.AbstractBuilder;
+import fr.inria.diversify.diversification.builder.AbstractBuilder;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.Log;

@@ -28,21 +28,22 @@ public class BytecodeReplace extends BytecodeTransformation {
         opcodeIndex = index;
         byteCodeToReplace = bytecode;
         this.methods = methods;
+        name = "replace";
+        type = "adrBytecode";
     }
 
     public BytecodeReplace() {
+        name = "replace";
+        type = "adrBytecode";
     }
 
-    @Override
-    public String getType() {
-        return "replace";
-    }
+
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", "replace");
-        object.put("level", "bytecode");
+        object.put("type", type);
+        object.put("name", name);
 
         object.put("methodLocation", methodLocation.getLongName());
         object.put("opcodeIndex",opcodeIndex);

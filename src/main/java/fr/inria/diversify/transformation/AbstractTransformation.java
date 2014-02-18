@@ -11,6 +11,8 @@ import java.util.Set;
 public abstract class AbstractTransformation implements Transformation {
     protected Integer status = -3;
     protected Set<String> failures;
+    protected String name;
+    protected String type;
 
     public void setStatus(Integer result) {
         status = result;
@@ -29,5 +31,13 @@ public abstract class AbstractTransformation implements Transformation {
 
     public boolean isCompile() {
         return status > -1;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
     }
 }

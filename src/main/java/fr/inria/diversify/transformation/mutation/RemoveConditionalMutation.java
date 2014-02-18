@@ -13,7 +13,13 @@ import spoon.reflect.factory.Factory;
  * Date: 13/02/14
  * Time: 14:45
  */
-public class RemoveConditionalMutation extends BinaryOperatorMutation{
+public class RemoveConditionalMutation extends BinaryOperatorMutation {
+
+    public RemoveConditionalMutation() {
+        type = "mutation";
+        name = "removeConditionalMutation";
+    }
+
     @Override
     protected CtLiteral<Boolean> getMutantOperator() {
         Factory factory = operator.getFactory();
@@ -31,10 +37,5 @@ public class RemoveConditionalMutation extends BinaryOperatorMutation{
         CompilationUnit compileUnit = sp.getCompilationUnit();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/true", 0));
-    }
-
-    @Override
-    public String getType() {
-        return "RemoveConditionalMutation";
     }
 }

@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation.mutation;
 
+import fr.inria.diversify.sosie.logger.processor.ConditionalLoggingInstrumenter;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.factory.Factory;
@@ -12,6 +13,10 @@ import spoon.reflect.factory.Factory;
  */
 public class ConditionalBoundaryMutation extends BinaryOperatorMutation {
 
+    public ConditionalBoundaryMutation() {
+        name = "conditionalBoundaryMutation";
+        type = "mutation";
+    }
 
     protected CtBinaryOperator getMutantOperator() {
         Factory factory = operator.getFactory();
@@ -29,10 +34,5 @@ public class ConditionalBoundaryMutation extends BinaryOperatorMutation {
         if(kind.equals(BinaryOperatorKind.GE))
             mutant.setKind(BinaryOperatorKind.GT);
         return mutant;
-    }
-
-    @Override
-    public String getType() {
-        return "ConditionalBoundaryMutation";
     }
 }

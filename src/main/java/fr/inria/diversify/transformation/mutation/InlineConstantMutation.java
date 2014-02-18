@@ -33,6 +33,11 @@ public class InlineConstantMutation extends AbstractTransformation {
         this.inlineConstant = inlineConstant;
     }
 
+    public InlineConstantMutation() {
+        name = "inlineConstantMutation";
+        type = "mutation";
+    }
+
     @Override
     public void apply(String srcDir) throws Exception {
         Log.debug(getType());
@@ -88,16 +93,13 @@ public class InlineConstantMutation extends AbstractTransformation {
         compileUnit.getSourceCodeFraments().clear();
     }
 
-    @Override
-    public String getType() {
-        return "InlineConstantMutation";
-    }
+
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", getType());
-        object.put("level", level());
+        object.put("name", getName());
 
         object.put("position", inlineConstant.getParent(CtPackage.class).getQualifiedName()
                 + "." + inlineConstant.getParent(CtSimpleType.class).getSimpleName() + ":" + inlineConstant.getPosition().getLine());
@@ -126,7 +128,7 @@ public class InlineConstantMutation extends AbstractTransformation {
     }
 
     @Override
-    public String level() {
+    public String getLevel() {
         return "AST";
     }
 

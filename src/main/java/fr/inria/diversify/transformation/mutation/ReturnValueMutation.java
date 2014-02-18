@@ -29,6 +29,12 @@ import java.io.IOException;
 public class ReturnValueMutation extends AbstractTransformation {
     protected CtReturn ret;
 
+
+    public  ReturnValueMutation() {
+        type = "mutation";
+        name = "returnValueMutation";
+    }
+
     public void setReturn(CtReturn ret) {
         this.ret = ret;
     }
@@ -97,7 +103,7 @@ public class ReturnValueMutation extends AbstractTransformation {
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", getType());
-        object.put("level", level());
+        object.put("name", getName());
 
         object.put("position", ret.getParent(CtPackage.class).getQualifiedName()
                 + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine());
@@ -127,7 +133,7 @@ public class ReturnValueMutation extends AbstractTransformation {
 
 
     @Override
-    public String level() {
+    public String getLevel() {
         return "AST";
     }
 

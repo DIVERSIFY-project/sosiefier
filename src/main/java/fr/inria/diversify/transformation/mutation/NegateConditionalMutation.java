@@ -10,6 +10,12 @@ import spoon.reflect.factory.Factory;
  * Time: 14:44
  */
 public class NegateConditionalMutation extends BinaryOperatorMutation {
+
+    public NegateConditionalMutation() {
+        type = "mutation";
+        name = "negateConditionalMutation";
+    }
+
     @Override
     protected CtBinaryOperator getMutantOperator() {
         Factory factory = operator.getFactory();
@@ -34,10 +40,5 @@ public class NegateConditionalMutation extends BinaryOperatorMutation {
             mutant.setKind(BinaryOperatorKind.LE);
 
         return mutant;
-    }
-
-    @Override
-    public String getType() {
-        return "NegateConditionalMutation";
     }
 }

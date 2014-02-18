@@ -1,12 +1,10 @@
 package fr.inria.diversify.transformation.bytecode;
 
 import fr.inria.diversify.transformation.AbstractTransformation;
-import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
-import javassist.NotFoundException;
 import javassist.bytecode.*;
 import org.apache.commons.io.FileUtils;
 
@@ -100,14 +98,6 @@ public abstract class BytecodeTransformation extends AbstractTransformation {
 
     }
 
-//    public long classSize() {
-//        try {
-//            return methodLocation.getDeclaringClass().getURL().getFile().length();
-//        } catch (NotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        return 0;
-//    }
     public String classLocationName() {
         return methodLocation.getDeclaringClass().getName();
     }
@@ -118,7 +108,7 @@ public abstract class BytecodeTransformation extends AbstractTransformation {
         return methodLocation.getLongName();
     }
     @Override
-    public String level() {
+    public String getLevel() {
         return "bytecode";
     }
 

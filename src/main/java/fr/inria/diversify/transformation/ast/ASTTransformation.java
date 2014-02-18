@@ -85,7 +85,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
 
     @Override
-    public String level() {
+    public String getLevel() {
         CtCodeElement stmt = position.getCtCodeFragment();
         if(stmt instanceof CtLocalVariable
                 || stmt instanceof CtNewClass

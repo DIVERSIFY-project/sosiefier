@@ -22,12 +22,13 @@ public interface Transformation {
     public Set<String> getFailures();
 
     public String getType();
+    public String getName();
+    public String getLevel();
     public JSONObject toJSONObject() throws JSONException;
 
     public String classLocationName();
     public String packageLocationName();
     public String methodLocationName();
-    public String level();
     public String stmtType();
 
     public boolean isCompile();

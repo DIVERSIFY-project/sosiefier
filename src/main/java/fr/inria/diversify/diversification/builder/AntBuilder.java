@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation.builder;
+package fr.inria.diversify.diversification.builder;
 
 import java.io.*;
 import java.util.regex.Matcher;

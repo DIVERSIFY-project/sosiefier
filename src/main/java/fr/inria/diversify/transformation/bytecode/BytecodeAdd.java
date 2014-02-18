@@ -29,21 +29,20 @@ public class BytecodeAdd extends BytecodeTransformation {
         opcodeIndex = index;
         byteCodeToAdd = bytecode;
         this.methods = methods;
+        name = "add";
+        type = "adrBytecode";
     }
 
     public BytecodeAdd() {
-    }
-
-    @Override
-    public String getType() {
-        return "add";
+        name = "add";
+        type = "adrBytecode";
     }
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", "add");
-        object.put("level", "bytecode");
+        object.put("type", type);
+        object.put("name", name);
 
         object.put("methodLocation", methodLocation.getLongName());
         object.put("opcodeIndex",opcodeIndex);

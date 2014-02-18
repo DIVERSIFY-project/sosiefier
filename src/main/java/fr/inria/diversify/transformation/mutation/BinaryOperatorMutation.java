@@ -30,6 +30,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     CtBinaryOperator<?> operator;
 
 
+
     @Override
     public void apply(String srcDir) throws Exception {
         addSourceCode();
@@ -77,7 +78,8 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", getType());
-        object.put("level", level());
+        object.put("name", getName());
+        object.put("level", getLevel());
 
         object.put("position", operator.getParent(CtPackage.class).getQualifiedName()
                 + "." + operator.getParent(CtSimpleType.class).getSimpleName() + ":" + operator.getPosition().getLine());
@@ -108,7 +110,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
 
 
     @Override
-    public String level() {
+    public String getLevel() {
         return "AST";
     }
 
