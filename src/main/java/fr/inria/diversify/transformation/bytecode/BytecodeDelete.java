@@ -3,12 +3,10 @@ package fr.inria.diversify.transformation.bytecode;
 import fr.inria.diversify.util.Log;
 import javassist.CtMethod;
 import javassist.bytecode.*;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
+
 import java.util.List;
 
 /**

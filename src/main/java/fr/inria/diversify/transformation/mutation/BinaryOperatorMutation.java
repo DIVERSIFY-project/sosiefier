@@ -79,7 +79,6 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
         JSONObject object = new JSONObject();
         object.put("type", getType());
         object.put("name", getName());
-        object.put("level", getLevel());
 
         object.put("position", operator.getParent(CtPackage.class).getQualifiedName()
                 + "." + operator.getParent(CtSimpleType.class).getSimpleName() + ":" + operator.getPosition().getLine());

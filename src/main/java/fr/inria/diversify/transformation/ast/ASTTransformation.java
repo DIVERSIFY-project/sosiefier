@@ -2,7 +2,6 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.AbstractTransformation;
-import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;

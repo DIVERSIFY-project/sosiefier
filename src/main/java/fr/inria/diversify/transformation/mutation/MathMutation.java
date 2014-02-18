@@ -12,7 +12,7 @@ import spoon.reflect.factory.Factory;
 public class MathMutation extends BinaryOperatorMutation {
 
     public MathMutation() {
-        name = "mathMutation";
+        name = "math";
         type = "mutation";
     }
 

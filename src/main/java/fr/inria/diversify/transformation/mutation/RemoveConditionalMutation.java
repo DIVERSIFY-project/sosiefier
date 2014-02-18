@@ -17,7 +17,7 @@ public class RemoveConditionalMutation extends BinaryOperatorMutation {
 
     public RemoveConditionalMutation() {
         type = "mutation";
-        name = "removeConditionalMutation";
+        name = "removeConditional";
     }
 
     @Override

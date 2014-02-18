@@ -34,7 +34,7 @@ public class InlineConstantMutation extends AbstractTransformation {
     }
 
     public InlineConstantMutation() {
-        name = "inlineConstantMutation";
+        name = "inlineConstant";
         type = "mutation";
     }
 

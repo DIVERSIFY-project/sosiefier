@@ -47,6 +47,7 @@ public class ASTMultiTransformation extends AbstractTransformation {
         return "ASTMulti";
     }
 
+
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
@@ -74,7 +75,7 @@ public class ASTMultiTransformation extends AbstractTransformation {
     }
 
     @Override
-    public String level() {
+    public String getLevel() {
         return "multi";
     }
 

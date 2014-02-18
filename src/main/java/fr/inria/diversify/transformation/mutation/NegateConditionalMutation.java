@@ -13,7 +13,7 @@ public class NegateConditionalMutation extends BinaryOperatorMutation {
 
     public NegateConditionalMutation() {
         type = "mutation";
-        name = "negateConditionalMutation";
+        name = "negateConditional";
     }
 
     @Override

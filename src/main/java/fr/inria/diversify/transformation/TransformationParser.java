@@ -182,7 +182,7 @@ public class TransformationParser {
 
     protected ASTTransformation parseASTAdd(JSONObject jsonObject) throws Exception {
         ASTAdd trans = new ASTAdd();
-        trans.setType(jsonObject.getString("type"));
+        trans.setName(jsonObject.getString("name"));
 
         JSONObject t = getTransformation(jsonObject);
             CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));

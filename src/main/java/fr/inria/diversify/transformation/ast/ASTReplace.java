@@ -3,17 +3,13 @@ package fr.inria.diversify.transformation.ast;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.util.Map;
 
 /**

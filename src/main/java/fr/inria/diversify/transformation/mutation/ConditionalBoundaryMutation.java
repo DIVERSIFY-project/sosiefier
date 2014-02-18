@@ -14,7 +14,7 @@ import spoon.reflect.factory.Factory;
 public class ConditionalBoundaryMutation extends BinaryOperatorMutation {
 
     public ConditionalBoundaryMutation() {
-        name = "conditionalBoundaryMutation";
+        name = "conditionalBoundary";
         type = "mutation";
     }
 

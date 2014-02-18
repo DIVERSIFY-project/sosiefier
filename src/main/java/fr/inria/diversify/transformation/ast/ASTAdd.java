@@ -106,9 +106,9 @@ public class ASTAdd extends ASTTransformation {
                 add.equals(otherASTAdd.add);
     }
 
-  //  public void setType(String type) {
-   //     this.type = type;
-  //  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public String toString() {

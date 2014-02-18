@@ -32,7 +32,7 @@ public class ReturnValueMutation extends AbstractTransformation {
 
     public  ReturnValueMutation() {
         type = "mutation";
-        name = "returnValueMutation";
+        name = "returnValue";
     }
 
     public void setReturn(CtReturn ret) {

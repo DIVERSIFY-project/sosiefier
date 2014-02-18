@@ -94,7 +94,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
     public ASTAdd notContextAdd(CodeFragment cfToReplace) throws Exception {
         Random r = new Random();
         ASTAdd tf = new ASTAdd();
-        tf.setType("notContextAdd");
+        tf.setName("notContextAdd");
         int size = codeFragments.size();
         CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
         tf.setPosition(cfToReplace);
