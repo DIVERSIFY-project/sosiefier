@@ -76,11 +76,11 @@ public class Diversify extends AbstractDiversify {
                 sosie++;
             trial++;
             trans.setStatus(status);
-
+            trans.setFailures(builder.getErrors());
         } catch (Exception e) {
             compileError++;
             trans.setStatus(-2);
-            Log.warn("setCompile error during diversification", e);
+            Log.warn("compile error during diversification", e);
         }
         trans.restore(tmpDir + "/" + sourceDir);
         Log.debug("run after restore: " + tmpDir + "/" + sourceDir);

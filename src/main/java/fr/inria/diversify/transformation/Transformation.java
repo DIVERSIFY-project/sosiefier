@@ -3,9 +3,7 @@ package fr.inria.diversify.transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.util.Set;
+import java.util.List;
 
 /**
  * User: Simon
@@ -18,8 +16,8 @@ public interface Transformation {
     public void restore(String srcDir) throws Exception;
     public void setStatus(Integer status);
     public int getStatus();
-    public void setFailures(Set<String> f);
-    public Set<String> getFailures();
+    public void setFailures(List<String> f);
+    public List<String> getFailures();
 
     public String getType();
     public String getName();

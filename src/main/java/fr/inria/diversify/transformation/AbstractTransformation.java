@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * User: Simon
@@ -10,7 +9,7 @@ import java.util.Set;
  */
 public abstract class AbstractTransformation implements Transformation {
     protected Integer status = -3;
-    protected Set<String> failures;
+    protected List<String> failures;
     protected String name;
     protected String type;
 
@@ -22,10 +21,10 @@ public abstract class AbstractTransformation implements Transformation {
         return status;
     }
 
-    public void setFailures(Set<String> f) {
+    public void setFailures(List<String> f) {
         failures = f;
     }
-    public Set<String> getFailures() {
+    public List<String> getFailures() {
         return failures;
     }
 
