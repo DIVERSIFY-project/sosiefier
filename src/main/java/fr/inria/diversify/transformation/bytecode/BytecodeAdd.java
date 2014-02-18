@@ -49,7 +49,7 @@ public class BytecodeAdd extends BytecodeTransformation {
         object.put("opcodeIndex",opcodeIndex);
         object.put("byteCodeToAdd", Arrays.toString(byteCodeToAdd));
 
-        object.put("Failures", failures);
+        object.put("failures", failures);
         object.put("status", status);
 
         return object;

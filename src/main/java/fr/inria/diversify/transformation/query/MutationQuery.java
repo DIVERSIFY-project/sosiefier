@@ -1,15 +1,16 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragmentProcessor.BinaryOperatorProcessor;
+import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
+import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.mutation.ConditionalBoundaryMutation;
-import fr.inria.diversify.transformation.mutation.MathMutation;
-import fr.inria.diversify.transformation.mutation.NegateConditionalMutation;
-import fr.inria.diversify.transformation.mutation.RemoveConditionalMutation;
+import fr.inria.diversify.transformation.mutation.*;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.code.CtLocalVariable;
+import spoon.reflect.code.CtReturn;
 import spoon.reflect.factory.Factory;
 import spoon.support.QueueProcessingManager;
 
@@ -23,8 +24,10 @@ import java.util.Random;
  * Time: 14:31
  */
 public class MutationQuery extends TransformationQuery {
-    ICoverageReport coverageReport;
-    List<CtBinaryOperator<?>> binaryOperators;
+    protected ICoverageReport coverageReport;
+    protected List<CtBinaryOperator<?>> binaryOperators;
+    protected List<CtReturn> returns;
+    protected List<CtLocalVariable> inlineConstant;
 
     protected static List<BinaryOperatorKind> negateConditional = Arrays.asList(
             new BinaryOperatorKind[]{BinaryOperatorKind.EQ,
@@ -55,9 +58,17 @@ public class MutationQuery extends TransformationQuery {
         ProcessingManager pm = new QueueProcessingManager(factory);
         BinaryOperatorProcessor processor = new BinaryOperatorProcessor();
         pm.addProcessor(processor);
+
+        ReturnProcessor processor2 = new ReturnProcessor();
+        pm.addProcessor(processor2);
+
+        InlineConstantProcessor processor3 = new InlineConstantProcessor();
+        pm.addProcessor(processor3);
         pm.process();
 
         binaryOperators = processor.getBinaryOperators();
+        returns = processor2.getReturns();
+        inlineConstant = processor3.getInlineConstant();
     }
 
     @Override
@@ -68,12 +79,15 @@ public class MutationQuery extends TransformationQuery {
     @Override
     public Transformation getTransformation() throws Exception {
         Random r = new Random();
-        int i = r.nextInt(4);
+//        int i = r.nextInt(5);
+        int i = 5;
         switch (i) {
             case 0: return getNegateConditionalMutation();
             case 1: return getConditionalBoundaryMutation();
             case 2: return getMathMutation();
             case 3: return getRemoveConditionalMutation();
+            case 4: return getReturnValueMutation();
+            case 5: return getInlineConstantMutation();
         }
         return null;
     }
@@ -125,6 +139,30 @@ public class MutationQuery extends TransformationQuery {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
         mutation.setOperator(operator);
+        return mutation;
+    }
+
+    public ReturnValueMutation getReturnValueMutation() {
+        ReturnValueMutation mutation = new ReturnValueMutation();
+
+        Random r  = new Random();
+        CtReturn ret = returns.get(r.nextInt(returns.size()));
+        while (coverageReport.elementCoverage(ret) == 0) {
+            ret = returns.get(r.nextInt(returns.size()));
+        }
+        mutation.setReturn(ret);
+        return mutation;
+    }
+
+    public InlineConstantMutation getInlineConstantMutation() {
+        InlineConstantMutation mutation = new InlineConstantMutation();
+
+        Random r  = new Random();
+        CtLocalVariable ret = inlineConstant.get(r.nextInt(inlineConstant.size()));
+        while (coverageReport.elementCoverage(ret) == 0) {
+            ret = inlineConstant.get(r.nextInt(inlineConstant.size()));
+        }
+        mutation.setInlineConstant(ret);
         return mutation;
     }
 }

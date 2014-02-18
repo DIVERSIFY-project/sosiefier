@@ -12,7 +12,7 @@ import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.data.ExecutionDataReader;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfoStore;
-import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.File;
@@ -89,7 +89,7 @@ public class CoverageReport implements ICoverageReport {
     }
 
 
-    public double elementCoverage(CtBinaryOperator operator) {
+    public double elementCoverage(CtElement operator) {
         IClassCoverage classCoverage = null;
         for (IClassCoverage cc : coverageBuilder.getClasses()) {
             CtSimpleType<?> cl = operator.getParent(CtSimpleType.class);

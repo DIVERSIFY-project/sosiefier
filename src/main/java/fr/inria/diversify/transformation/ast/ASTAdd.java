@@ -34,7 +34,7 @@ public class ASTAdd extends ASTTransformation {
         object.put("CodeFragmentPosition", position.toJSONObject());
         object.put("CodeFragmentAdd", add.toJSONObject());
         object.put("VariableMapping", variableMapping);
-        object.put("Failures", failures);
+        object.put("failures", failures);
         object.put("status", status);
 
         return object;

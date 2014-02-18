@@ -57,9 +57,8 @@ public class BytecodeDelete extends BytecodeTransformation {
 
         object.put("methodLocation", methodLocation.getLongName());
         object.put("opcodeIndex",opcodeIndex);
-        object.put("Failures", failures);
         object.put("status", status);
-        object.put("Failures", failures);
+        object.put("failures", failures);
 
         return object;
     }

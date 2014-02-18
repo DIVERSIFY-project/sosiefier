@@ -48,7 +48,7 @@ public class BytecodeReplace extends BytecodeTransformation {
         object.put("opcodeIndex",opcodeIndex);
         object.put("byteCodeToReplace", Arrays.toString(byteCodeToReplace));
 
-        object.put("Failures", failures);
+        object.put("failures", failures);
         object.put("status", status);
 
         return object;

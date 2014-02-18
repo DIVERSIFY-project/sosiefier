@@ -132,7 +132,7 @@ public class TransformationParser {
         } catch (Exception e) {
             Log.debug("e",e);
         }
-        trans.setCompile(jsonObject.getBoolean("setCompile"));
+        trans.setStatus(jsonObject.getInt("status"));
         return trans;
     }
 

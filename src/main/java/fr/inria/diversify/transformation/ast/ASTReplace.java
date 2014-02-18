@@ -37,7 +37,7 @@ public class ASTReplace extends ASTTransformation {
         object.put("CodeFragmentPosition", position.toJSONObject());
         object.put("CodeFragmentReplace", replace.toJSONObject());
         object.put("VariableMapping", variableMapping);
-        object.put("Failures", failures);
+        object.put("failures", failures);
         object.put("status", status);
 
         return object;

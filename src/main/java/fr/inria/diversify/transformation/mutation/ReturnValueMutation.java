@@ -6,11 +6,11 @@ import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.compiler.Environment;
-import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.code.CtLiteral;
+import spoon.reflect.code.CtReturn;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
@@ -23,28 +23,47 @@ import java.io.IOException;
 
 /**
  * User: Simon
- * Date: 13/02/14
- * Time: 14:40
+ * Date: 17/02/14
+ * Time: 17:29
  */
-public abstract class BinaryOperatorMutation extends AbstractTransformation {
-    CtBinaryOperator<?> operator;
+public class ReturnValueMutation extends AbstractTransformation {
+    protected CtReturn ret;
 
+    public void setReturn(CtReturn ret) {
+        this.ret = ret;
+    }
 
     @Override
     public void apply(String srcDir) throws Exception {
-        addSourceCode();
-        printJavaFile(srcDir);
-    }
-
-    protected void addSourceCode() {
         Log.debug(getType());
-        Log.debug("operator:\n {}", operator);
-        Log.debug("--------------------\npostion:\n{}",operator.getPosition());
-        CtElement mutant = getMutantOperator();
-        SourcePosition sp = operator.getPosition();
+        Log.debug("statement:\n {}", ret);
+        Log.debug("--------------------\npostion:\n{}", ret.getPosition()); 
+        CtLiteral literal = (CtLiteral)ret.getReturnedExpression();
+        String type = literal.getType().getSimpleName();
+        String newLiteral = null;
+
+        if(type.equals("boolean")) {
+            newLiteral = !((Boolean)literal.getValue()) + "";
+        } else if(type.equals("short")) {
+            newLiteral = ((Short)literal.getValue() + 1) + "";
+        } else if(type.equals("int")) {
+            newLiteral = ((Integer)literal.getValue() + 1) + "";
+        } else if(type.equals("long")) {
+            newLiteral = ((Long)literal.getValue() + 1) + "";
+        } else if(type.equals("byte")) {
+            newLiteral = ((Byte)literal.getValue() + 1) + "";
+        } else if(type.equals("float")) {
+            newLiteral = ((Float)literal.getValue() + 1.0f) + "";
+        } else if(type.equals("double")) {
+            newLiteral = ((Double)literal.getValue() + 1.0d) + "";
+        }
+
+        SourcePosition sp = literal.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+mutant.toString(), 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
+
+        printJavaFile(srcDir);
     }
 
     public void restore(String srcDir) throws Exception {
@@ -53,7 +72,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     }
 
     protected void printJavaFile(String directory) throws IOException {
-        CtSimpleType<?> type = operator.getPosition().getCompilationUnit().getMainType();
+        CtSimpleType<?> type = ret.getPosition().getCompilationUnit().getMainType();
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
@@ -65,13 +84,14 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     }
 
     protected void removeSourceCode() {
-        CompilationUnit compileUnit = operator.getPosition().getCompilationUnit();
+        CompilationUnit compileUnit = ret.getPosition().getCompilationUnit();
         compileUnit.getSourceCodeFraments().clear();
     }
 
-
-    protected abstract CtElement getMutantOperator();
-
+    @Override
+    public String getType() {
+        return "ReturnValueMutation";
+    }
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
@@ -79,12 +99,12 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
         object.put("type", getType());
         object.put("level", level());
 
-        object.put("position", operator.getParent(CtPackage.class).getQualifiedName()
-                + "." + operator.getParent(CtSimpleType.class).getSimpleName() + ":" + operator.getPosition().getLine());
+        object.put("position", ret.getParent(CtPackage.class).getQualifiedName()
+                + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine());
 
-        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(operator.getFactory().getEnvironment());
-        operator.accept(pp);
-        object.put("binaryOperator", pp.toString());
+        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(ret.getFactory().getEnvironment());
+        ret.accept(pp);
+        object.put("return", pp.toString());
 
         object.put("failures", failures);
         object.put("status", status);
@@ -92,15 +112,14 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
         return object;
     }
 
-
     public String classLocationName() {
-        return operator.getParent(CtSimpleType.class).getQualifiedName();
+        return ret.getParent(CtSimpleType.class).getQualifiedName();
     }
     public String packageLocationName() {
-        return operator.getParent(CtPackage.class).getQualifiedName();
+        return ret.getParent(CtPackage.class).getQualifiedName();
     }
     public String methodLocationName() {
-        CtExecutable elem = operator.getParent(CtExecutable.class);
+        CtExecutable elem = ret.getParent(CtExecutable.class);
         if(elem != null)
             return elem.getSimpleName();
         return "field";
@@ -114,20 +133,12 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
 
     @Override
     public String stmtType() {
-        return "BinaryOperator";
+        return "Return";
     }
 
     @Override
     public int line() {
-        return operator.getPosition().getLine();
+        return ret.getPosition().getLine();
     }
 
-
-    public CtBinaryOperator<?> getOperator() {
-        return operator;
-    }
-
-    public void setOperator(CtBinaryOperator<?> operator) {
-        this.operator = operator;
-    }
 }

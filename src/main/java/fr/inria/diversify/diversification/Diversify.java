@@ -60,6 +60,7 @@ public class Diversify extends AbstractDiversify {
         }
         FileUtils.cleanDirectory(tmpDir);
         FileUtils.forceDelete(tmpDir);
+
         Log.debug("{} setCompile error on {} compilation", compileError, trans.size());
         Log.debug("{} sosie on {} trial", sosie, trial);
     }
@@ -70,15 +71,15 @@ public class Diversify extends AbstractDiversify {
             trans.apply(tmpDir + "/" + sourceDir);
             transformations.add(trans);
             int status = runTest(tmpDir);
+
             if(status == 0)
                 sosie++;
             trial++;
-            trans.setCompile(true);
             trans.setStatus(status);
 
         } catch (Exception e) {
             compileError++;
-            trans.setCompile(false);
+            trans.setStatus(-2);
             Log.warn("setCompile error during diversification", e);
         }
         trans.restore(tmpDir + "/" + sourceDir);
