@@ -42,7 +42,7 @@ public abstract class AbstractBuilder {
         compileError = false;
         allTestRun = false;
        status = -3;
-        errors.clear();
+        errors = new ArrayList<String>();
     }
 
     public void runBuilder() throws InterruptedException {
