@@ -1,8 +1,8 @@
 #!/bin/sh
 
-echo $(date +%s) > LogDirName
 for i in `cat $1`
 do
-    echo $i > LogfileName
+
+    echo jacocoFileName=$i > jacoco.properties
     mvn -Dtest=$i test
 done

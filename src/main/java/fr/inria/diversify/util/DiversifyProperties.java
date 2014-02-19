@@ -35,6 +35,7 @@ public class DiversifyProperties {
 
     protected void setDefaultProperties() {
         prop.setProperty("src", "src/main/java");
+        prop.setProperty("testSrc", "src/test/java");
         prop.setProperty("classes", "target/classes");
         prop.setProperty("clojure","false");
         prop.setProperty("javaVersion", "5");

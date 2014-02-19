@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.logger.processor;
+package fr.inria.diversify.coverage;
 
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
@@ -9,12 +9,24 @@ import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtSimpleType;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * User: Simon
  * Date: 10/21/13
  * Time: 9:27 AM
  */
-public class TestLoggingInstrumenter extends AbstractProcessor<CtMethod> {
+public class TestProcessor extends AbstractProcessor<CtMethod> {
+    BufferedWriter bw;
+
+    public TestProcessor(String fileName) throws IOException {
+        File file = new File(fileName);
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        bw = new BufferedWriter(fw);
+    }
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
@@ -35,19 +47,19 @@ public class TestLoggingInstrumenter extends AbstractProcessor<CtMethod> {
 
     @Override
     public void process(CtMethod element) {
-        CtStatement firstStmt = element.getBody().getStatement(0);
-        String snippet = "\t\tfr.inria.diversify.sosie.logger.LogWriter.writeTestStart(\""
-                + element.getParent(CtSimpleType.class).getQualifiedName() +"."+element.getSimpleName() + "\");\n";
-        SourcePosition sp = firstStmt.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
+        CtSimpleType<?> cl = element.getPosition().getCompilationUnit().getMainType();
+        try {
+            bw.write(cl.getQualifiedName()+"#"+element.getSimpleName()+"\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        int index;
-        if(firstStmt.getPosition().getLine() == element.getPosition().getLine())
-            index = sp.getSourceStart();
-        else
-            index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-
-
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+    public void processingDone() {
+        try {
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
