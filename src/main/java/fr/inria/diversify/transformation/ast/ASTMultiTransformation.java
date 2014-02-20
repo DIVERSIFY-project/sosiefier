@@ -43,12 +43,6 @@ public class ASTMultiTransformation extends AbstractTransformation {
     }
 
     @Override
-    public String getType() {
-        return "ASTMulti";
-    }
-
-
-    @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", getType());

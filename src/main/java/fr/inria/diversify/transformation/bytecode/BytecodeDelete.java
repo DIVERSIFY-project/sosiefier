@@ -47,11 +47,6 @@ public class BytecodeDelete extends BytecodeTransformation {
     }
 
     @Override
-    public String getType() {
-        return "delete";
-    }
-
-    @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", type);

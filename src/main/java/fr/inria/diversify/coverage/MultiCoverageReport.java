@@ -16,6 +16,12 @@ import java.util.List;
  */
 public class MultiCoverageReport implements ICoverageReport {
     protected List<CoverageReport> coverages;
+    protected String classesDir;
+
+    public MultiCoverageReport(String classesDir) {
+        coverages = new ArrayList<CoverageReport>();
+        this.classesDir = classesDir;
+    }
 
     public MultiCoverageReport(String classesDir, File jacocoDir) {
         coverages = new ArrayList<CoverageReport>();
@@ -23,6 +29,10 @@ public class MultiCoverageReport implements ICoverageReport {
             if(file.getName().endsWith(".exec"))
                 coverages.add(new CoverageReport(classesDir,file));
         }
+    }
+
+    public void addJacocoFile(File file) {
+        coverages.add(new CoverageReport(classesDir,file));
     }
 
     @Override

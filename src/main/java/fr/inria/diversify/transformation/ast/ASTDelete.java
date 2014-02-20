@@ -28,7 +28,7 @@ public class ASTDelete extends ASTTransformation {
         object.put("type", type);
         object.put("name", name);
 
-        object.put("CodeFragmentDelete", position.toJSONObject());
+        object.put("codeFragmentPosition", position.toJSONObject());
         object.put("failures", failures);
         object.put("status", status);
 

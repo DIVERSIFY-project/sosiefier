@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
+import fr.inria.diversify.DiversifyEnvironment;
 import fr.inria.diversify.codeFragmentProcessor.BinaryOperatorProcessor;
 import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
@@ -49,26 +50,15 @@ public class MutationQuery extends TransformationQuery {
                     BinaryOperatorKind.USR});
 
 
-    public MutationQuery(ICoverageReport coverageReport, Factory factory) {
+    public MutationQuery(ICoverageReport coverageReport) {
         this.coverageReport = coverageReport;
-        init(factory);
+        init();
     }
 
-    protected void init(Factory factory) {
-        ProcessingManager pm = new QueueProcessingManager(factory);
-        BinaryOperatorProcessor processor = new BinaryOperatorProcessor();
-        pm.addProcessor(processor);
-
-        ReturnProcessor processor2 = new ReturnProcessor();
-        pm.addProcessor(processor2);
-
-        InlineConstantProcessor processor3 = new InlineConstantProcessor();
-        pm.addProcessor(processor3);
-        pm.process();
-
-        binaryOperators = processor.getBinaryOperators();
-        returns = processor2.getReturns();
-        inlineConstant = processor3.getInlineConstant();
+    protected void init() {
+        binaryOperators = DiversifyEnvironment.getBinaryOperators();
+        returns = DiversifyEnvironment.getReturns();
+        inlineConstant = DiversifyEnvironment.getInlineConstant();
     }
 
     @Override

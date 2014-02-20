@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation.query.ast;
 
-import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -19,9 +18,9 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
     protected ICoverageReport coverageReport;
     private List<Transformation> transformation;
 
-    public ASTTransformationQueryFromList(ICoverageReport cr, Factory factory) {
+    public ASTTransformationQueryFromList(ICoverageReport cr) {
         this.coverageReport = cr;
-        init(factory);
+        init();
     }
 
     public Set<Transformation> getTransformations(int nb) throws Exception {
@@ -73,8 +72,8 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         return t;
     }
 
-    protected void init(Factory factory, String transformationDirectory) throws IOException, JSONException {
-        super.init(factory);
+    protected void init(String transformationDirectory) throws IOException, JSONException {
+        super.init();
         TransformationParser tf = new TransformationParser(codeFragments, false);
         transformation = new ArrayList<Transformation>(tf.parseDir(transformationDirectory));
     }

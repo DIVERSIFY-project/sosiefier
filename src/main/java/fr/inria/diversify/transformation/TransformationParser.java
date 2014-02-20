@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.CodeFragmentList;
+import fr.inria.diversify.DiversifyEnvironment;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -9,6 +10,8 @@ import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.bytecode.BytecodeAdd;
 import fr.inria.diversify.transformation.bytecode.BytecodeDelete;
 import fr.inria.diversify.transformation.bytecode.BytecodeReplace;
+import fr.inria.diversify.transformation.bytecode.BytecodeTransformation;
+import fr.inria.diversify.transformation.mutation.*;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
@@ -18,6 +21,10 @@ import javassist.NotFoundException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.code.CtLocalVariable;
+import spoon.reflect.code.CtReturn;
+import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.BufferedReader;
@@ -32,14 +39,13 @@ import java.util.*;
  * Time: 11:38 AM
  */
 public class TransformationParser {
-    CodeFragmentList codeFragments;
+    //CodeFragmentList codeFragments;
     List<CtMethod> ctMethods;
     private int countError = 0;
     private int count = 0;
     Collection<Transformation> transformations;
 
-    public TransformationParser(CodeFragmentList list, boolean toSet) {
-        codeFragments = list;
+    public TransformationParser(boolean toSet) {
         if(toSet)
             transformations = new HashSet<Transformation>();
         else
@@ -108,141 +114,189 @@ public class TransformationParser {
         String type = jsonObject.getString("type");
         Transformation trans = null;
 
-        if(jsonObject.has("level") && jsonObject.getString("level").equals("bytecode")) {
-            if(type.endsWith("replace"))
-                trans = parseBytecodeReplace(jsonObject);
-            if(type.endsWith("add"))
-                trans = parseBytecodeAdd(jsonObject);
-            if(type.endsWith("delete"))
-                trans = parseBytecodeDelete(jsonObject);
-        }
-        else {
-            if(type.endsWith("eplace"))  //replace, stupidReplace, veryStupidReplace
-                trans = parseASTReplace(jsonObject);
-            if(type.endsWith("dd"))
-                trans = parseASTAdd(jsonObject);
-            if(type.endsWith("elete"))
-                trans = parseASTDelete(jsonObject);
-            if(type.equals("multi"))
-                trans = parseASTMulti(jsonObject);
-        }
+        if(type.equals("mutation"))
+            trans = parseMutation(jsonObject);
+        if(type.equals("adrStmt"))
+            trans = parseStmt(jsonObject);
+        if(type.equals("adrBytecode"))
+            trans = parseBytecode(jsonObject);
 
-        try {
-            trans.setStatus(jsonObject.getInt("Failures"));
-        } catch (Exception e) {
-            Log.debug("e",e);
-        }
+        trans.setFailures(getFailures(jsonObject));
         trans.setStatus(jsonObject.getInt("status"));
+
         return trans;
     }
 
-    protected Transformation parseASTMulti(JSONObject jsonObject) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
-    }
+    protected Transformation parseMutation(JSONObject jsonObject) throws Exception {
+        String name = jsonObject.getString("name");
+        Transformation trans = null;
 
-    protected Transformation parseBytecodeDelete(JSONObject jsonObject) throws Exception {
-        BytecodeDelete trans = new BytecodeDelete();
-        JSONObject t = getTransformation(jsonObject);
-        trans.setOpcodeIndex(t.getInt("opcodeIndex"));
-        trans.setMethodLocation(getMethod(t.getString("methodLocation")));
+        if(name.equals("inlineConstant"))
+            trans = parseInlineConstantMutation(jsonObject);
+        else if(name.equals("returnValue"))
+            trans = parseReturnValueMutation(jsonObject);
+        else
+            trans = parseBinaryOperatorMutation(jsonObject);
+
         return trans;
     }
 
-    protected Transformation parseBytecodeAdd(JSONObject jsonObject) throws Exception {
+    protected Transformation parseStmt(JSONObject jsonObject) throws Exception {
+        String name = jsonObject.getString("name");
+        ASTTransformation trans = null;
+
+        if(name.equals("replace"))
+            trans = parseASTReplace(jsonObject);
+        if(name.equals("add"))
+            trans = parseASTAdd(jsonObject);
+        if(name.equals("delete"))
+            trans = parseASTDelete(jsonObject);
+
+        trans.setPosition(findCodeFragment(jsonObject.getJSONObject("codeFragmentPosition")));
+        return trans;
+    }
+
+    protected Transformation parseBytecode(JSONObject jsonObject) throws Exception {
+        String name = jsonObject.getString("name");
+        BytecodeTransformation trans = null;
+
+        if(name.equals("replace"))
+            trans = parseBytecodeReplace(jsonObject);
+        if(name.equals("add"))
+            trans = parseBytecodeAdd(jsonObject);
+        if(name.equals("delete"))
+            trans = parseBytecodeDelete(jsonObject);
+
+
+        trans.setOpcodeIndex(jsonObject.getInt("opcodeIndex"));
+        trans.setMethodLocation(getMethod(jsonObject.getString("methodLocation")));
+        return trans;
+    }
+
+    protected Transformation parseBinaryOperatorMutation(JSONObject jsonObject) throws Exception {
+        String name = jsonObject.getString("name");
+        BinaryOperatorMutation trans = null;
+        if(name.equals("conditionalBoundary"))
+            trans = new ConditionalBoundaryMutation();
+        if(name.equals("math"))
+            trans = new MathMutation();
+        if(name.equals("negateConditional"))
+            trans = new NegateConditionalMutation();
+        if(name.equals("removeConditional"))
+            trans = new RemoveConditionalMutation();
+
+        CtBinaryOperator<?> p = null;
+        for (CtBinaryOperator<?> ret : DiversifyEnvironment.getBinaryOperators()) {
+            try {
+                String position = ret.getParent(CtPackage.class).getQualifiedName()
+                        + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
+                if (position.equals(jsonObject.get("Position"))  ){
+                    p = ret;
+                    break;
+                }
+            } catch (Exception e) {}
+        }
+        if (p == null) {
+            throw new Exception();
+        }
+        trans.setOperator(p);
+        return trans;
+    }
+
+    protected Transformation parseReturnValueMutation(JSONObject jsonObject) throws Exception {
+        ReturnValueMutation trans = new ReturnValueMutation();
+
+        CtReturn p = null;
+        for (CtReturn ret : DiversifyEnvironment.getReturns()) {
+            try {
+                String position = ret.getParent(CtPackage.class).getQualifiedName()
+                        + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
+                if (position.equals(jsonObject.get("Position"))  ){
+                    p = ret;
+                    break;
+                }
+            } catch (Exception e) {}
+        }
+        if (p == null) {
+            throw new Exception();
+        }
+        trans.setReturn(p);
+
+        return trans;
+    }
+
+    protected Transformation parseInlineConstantMutation(JSONObject jsonObject) throws Exception {
+        InlineConstantMutation trans = new InlineConstantMutation();
+
+        CtLocalVariable p = null;
+        for (CtLocalVariable ret : DiversifyEnvironment.getInlineConstant()) {
+            try {
+                String position = ret.getParent(CtPackage.class).getQualifiedName()
+                        + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
+                if (position.equals(jsonObject.get("Position"))  ){
+                    p = ret;
+                    break;
+                }
+            } catch (Exception e) {}
+        }
+        if (p == null) {
+            throw new Exception();
+        }
+        trans.setInlineConstant(p);
+
+        return trans;
+    }
+
+
+    protected BytecodeTransformation parseBytecodeDelete(JSONObject jsonObject) throws Exception {
+        return new BytecodeDelete();
+    }
+
+    protected BytecodeTransformation parseBytecodeAdd(JSONObject jsonObject) throws Exception {
         BytecodeAdd trans = new BytecodeAdd();
-        JSONObject t = getTransformation(jsonObject);
-        trans.setOpcodeIndex(t.getInt("opcodeIndex"));
-        trans.setMethodLocation(getMethod(t.getString("methodLocation")));
-        trans.setByteCodeToAdd(parseByteCode(t.getString("byteCodeToAdd")));
+        trans.setByteCodeToAdd(parseByteCode(jsonObject.getString("byteCodeToAdd")));
         return trans;
     }
 
-    protected Transformation parseBytecodeReplace(JSONObject jsonObject) throws Exception {
+    protected BytecodeTransformation parseBytecodeReplace(JSONObject jsonObject) throws Exception {
         BytecodeReplace trans = new BytecodeReplace();
-        JSONObject t = getTransformation(jsonObject);
-        trans.setOpcodeIndex(t.getInt("opcodeIndex"));
-        trans.setMethodLocation(getMethod(t.getString("methodLocation")));
-        trans.setByteCodeToReplace(parseByteCode(t.getString("byteCodeToReplace")));
+        trans.setByteCodeToReplace(parseByteCode(jsonObject.getString("byteCodeToReplace")));
         return trans;
     }
-
 
     protected ASTTransformation parseASTDelete(JSONObject jsonObject) throws Exception {
-        ASTDelete trans = new ASTDelete();
-
-        JSONObject t = getTransformation(jsonObject);
-            CodeFragment d = findCodeFragment(t.getJSONObject("CodeFragmentDelete"));
-            trans.setPosition(d);
-
-//        if(jsonObject.getBoolean("allTestRun"))
-//            trans.setJUnitResult(jsonObject.getInt("Failures"));
-
-        return trans;
+        return new ASTDelete();
     }
 
     protected ASTTransformation parseASTAdd(JSONObject jsonObject) throws Exception {
         ASTAdd trans = new ASTAdd();
-        trans.setName(jsonObject.getString("name"));
 
-        JSONObject t = getTransformation(jsonObject);
-            CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));
-            trans.setPosition(position);
-            trans.setCodeFragmentToAdd(findCodeFragment(t.getJSONObject("CodeFragmentAdd")));
-            try {
-                trans.setVarMapping(parseVariableMapping(t.getJSONObject("VariableMapping")));
-            } catch (Exception e) {}
-
-//        }
-//        if(jsonObject.getBoolean("allTestRun"))
-//            trans.setJUnitResult(jsonObject.getInt("Failures"));
+        trans.setCodeFragmentToAdd(findCodeFragment(jsonObject.getJSONObject("CodeFragmentAdd")));
+        trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
 
         return trans;
     }
 
     protected ASTTransformation parseASTReplace(JSONObject jsonObject) throws Exception {
         ASTReplace trans = new ASTReplace();
-        trans.setType(jsonObject.getString("type"));
 
-          JSONObject t = getTransformation(jsonObject);
-            CodeFragment position = findCodeFragment(t.getJSONObject("CodeFragmentPosition"));
-            trans.setPosition(position);
-            trans.setCodeFragmentToReplace(findCodeFragment(t.getJSONObject("CodeFragmentReplace")));
-            trans.setVarMapping(parseVariableMapping(t.getJSONObject("VariableMapping")));
+        trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("CodeFragmentAdd")));
+        trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
 
         return trans;
     }
 
-    protected JSONObject getTransformation(JSONObject jsonObject) throws JSONException {
-        if(jsonObject.has("transformation")) //old json format
-            return jsonObject.getJSONArray("transformation").getJSONObject(0);
-        return jsonObject; //new format
-    }
-
-//    protected ASTReplace buildOldTransformation(JSONObject jsonObject) throws Exception {
-//        ASTReplace trans = new ASTReplace();
-//        CodeFragment position = findCodeFragment((JSONObject) jsonObject.get("StatementToReplace"));
-//        trans.setPosition(position);
-//        trans.setCodeFragmentToReplace(findCodeFragment((JSONObject) jsonObject.get("StatementReplacedBy")));
-//        trans.setVarMapping(parseVariableMapping((JSONObject) jsonObject.get("VariableMapping")));
-//        if(jsonObject.getBoolean("allTestRun"))
-//            trans.setJUnitResult(jsonObject.getInt("Failures"));
-//
-//        return trans;
-//    }
-
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws Exception {
         CodeFragment cf = null;
-        for (CodeFragment codeFragment : codeFragments) {
-             try {
-            if (codeFragment.getCodeFragmentType().getSimpleName().equals(jsonObject.get("Type"))
-                    && codeFragment.positionString().equals(jsonObject.get("Position"))  ){
-                cf = codeFragment;
-                break;
-            }
-             } catch (Exception e) {}
+        for (CodeFragment codeFragment : DiversifyEnvironment.getCodeFragments()) {
+            try {
+                if (codeFragment.positionString().equals(jsonObject.get("Position"))  ){
+                    cf = codeFragment;
+                    break;
+                }
+            } catch (Exception e) {}
         }
         if (cf  == null) {
-            //TODO exception
             throw new Exception();
         }
         return cf;
@@ -257,13 +311,6 @@ public class TransformationParser {
         }
         return map;
     }
-
-//    protected List<String> parseFailures(JSONArray array) throws JSONException {
-//        List<String> list = new ArrayList<String>();
-//        for(int i = 0; i < array.length(); i++)
-//            list.add(array.getString(i));
-//        return list;
-//    }
 
     protected byte[] parseByteCode(String bytecodes) {
         String[] bytecode = bytecodes.substring(1, bytecodes.length() - 1).split(", ");
@@ -289,7 +336,7 @@ public class TransformationParser {
         ctMethods = new ArrayList<CtMethod>();
         ClassPool pool = ClassPool.getDefault();
         pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
-        for (CtSimpleType cl: codeFragments.getAllClasses()) {
+        for (CtSimpleType cl: DiversifyEnvironment.getCodeFragments().getAllClasses()) {
             try {
                 CtClass cc = pool.get(cl.getQualifiedName());
                 for(CtMethod method : cc.getDeclaredMethods())
@@ -299,8 +346,17 @@ public class TransformationParser {
             }  catch (Exception e) {
                 Log.error("error in allCtMethod",e);
             }
-
         }
         return ctMethods;
+    }
+
+    protected List<String> getFailures(JSONObject jsonObject) throws JSONException {
+        List<String> list = new ArrayList<String>();
+
+        JSONArray array = jsonObject.getJSONArray("failures");
+        for(int i = 0; i < array.length(); i++) {
+            list.add(array.getString(i));
+        }
+        return list;
     }
 }

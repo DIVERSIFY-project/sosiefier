@@ -1,5 +1,8 @@
 package fr.inria.diversify.transformation;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -39,4 +42,12 @@ public abstract class AbstractTransformation implements Transformation {
     public String getName() {
         return name;
     }
+
+    public void init(JSONObject jsonObject) throws JSONException {
+        type = jsonObject.getString("type");
+        name = jsonObject.getString("name");
+
+    }
+
+
 }

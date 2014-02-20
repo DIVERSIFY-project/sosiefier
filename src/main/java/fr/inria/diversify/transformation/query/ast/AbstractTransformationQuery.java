@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.query.ast;
 
 import fr.inria.diversify.CodeFragmentList;
+import fr.inria.diversify.DiversifyEnvironment;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -65,13 +66,8 @@ public abstract class AbstractTransformationQuery extends TransformationQuery {
         return tmp;
     }
 
-    protected void init(Factory factory) {
-        ProcessingManager pm = new QueueProcessingManager(factory);
-        StatementProcessor processor = new StatementProcessor();
-        pm.addProcessor(processor);
-        pm.process();
-
-        codeFragments = processor.getCodeFragments();
+    protected void init() {
+        codeFragments = DiversifyEnvironment.getCodeFragments();
     }
 
     protected Collection<CodeFragment> getAllUniqueCodeFragments() {

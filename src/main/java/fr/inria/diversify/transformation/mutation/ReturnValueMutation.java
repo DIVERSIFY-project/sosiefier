@@ -95,11 +95,6 @@ public class ReturnValueMutation extends AbstractTransformation {
     }
 
     @Override
-    public String getType() {
-        return "ReturnValueMutation";
-    }
-
-    @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", getType());

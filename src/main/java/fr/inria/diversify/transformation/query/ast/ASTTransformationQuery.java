@@ -21,10 +21,9 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
     protected Class CodeFragmentClass;
 
 
-    public ASTTransformationQuery(ICoverageReport coverageReport, Factory factory,Class transformationClass) {
+    public ASTTransformationQuery(ICoverageReport coverageReport,Class transformationClass) {
         this.coverageReport = coverageReport;
-//        this.codeFragments = codeFragments;
-        init(factory);
+        init();
         this.CodeFragmentClass = transformationClass;
     }
 

@@ -34,9 +34,9 @@ public class ASTReplace extends ASTTransformation {
         JSONObject object = new JSONObject();
         object.put("type", type);
         object.put("name", name);
-        object.put("CodeFragmentPosition", position.toJSONObject());
-        object.put("CodeFragmentReplace", replace.toJSONObject());
-        object.put("VariableMapping", variableMapping);
+        object.put("codeFragmentPosition", position.toJSONObject());
+        object.put("codeFragmentReplace", replace.toJSONObject());
+        object.put("variableMapping", variableMapping);
         object.put("failures", failures);
         object.put("status", status);
 
