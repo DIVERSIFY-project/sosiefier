@@ -97,18 +97,20 @@ public class ReturnValueMutation extends AbstractTransformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", getType());
-        object.put("name", getName());
+        object.put("type", type);
+        object.put("name", name);
+        object.put("failures", failures);
+        object.put("status", status);
 
-        object.put("position", ret.getParent(CtPackage.class).getQualifiedName()
+        if(parent != null)
+            object.put("parent",parent.toJSONObject());
+
+        object.put("transplantationPoint", ret.getParent(CtPackage.class).getQualifiedName()
                 + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine());
 
         CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(ret.getFactory().getEnvironment());
         ret.accept(pp);
         object.put("return", pp.toString());
-
-        object.put("failures", failures);
-        object.put("status", status);
 
         return object;
     }

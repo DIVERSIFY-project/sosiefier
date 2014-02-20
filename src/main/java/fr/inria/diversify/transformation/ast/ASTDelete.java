@@ -27,23 +27,26 @@ public class ASTDelete extends ASTTransformation {
         JSONObject object = new JSONObject();
         object.put("type", type);
         object.put("name", name);
-
-        object.put("codeFragmentPosition", position.toJSONObject());
         object.put("failures", failures);
         object.put("status", status);
+
+        if(parent != null)
+            object.put("parent",parent.toJSONObject());
+
+        object.put("transplantationPoint", transplantationPoint.toJSONObject());
 
         return object;
     }
 
     protected void addSourceCode() throws Exception {
-        CtSimpleType<?> originalClass = getOriginalClass(position);
+        CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
 
-        Log.debug("cfToDelete:\n {}", position);
-        Log.debug("{}", position.getCtCodeFragment().getPosition());
-        Log.debug("{}",position.getCodeFragmentType());
+        Log.debug("transplantation Point:\n {}", transplantationPoint);
+        Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
+        Log.debug("{}", transplantationPoint.getCodeFragmentType());
 
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
-        SourcePosition sp = position.getCtCodeFragment().getPosition();
+        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
     }
@@ -58,28 +61,12 @@ public class ASTDelete extends ASTTransformation {
         ASTDelete otherDelete = (ASTDelete)other;
 
 //        return failures == otherDelete.failures &&
-           return      position.equals(otherDelete.position);
+           return      transplantationPoint.equals(otherDelete.transplantationPoint);
     }
 
-//    @Override
-//    public void writeHead(BufferedWriter sb, char separator) throws IOException {
-//        sb.append("deleteType" + separator +
-//                "deleteSize" + separator +
-//                "deleteClass" + separator +
-//                "deletePackage" + separator +
-//                "deleteInputContextSize" + separator +
-//                "deleteInputContextOnlyPrimitive" + separator +
-//                "failure" + separator +
-//                "deleteSuperType");
-//    }
 
     @Override
     public String toString() {
-        String ret = new String();
-
-        ret = ret + "position: "+position.toString()+"\n";
-
-
-        return ret;
+        return "transplantationPoint: "+ transplantationPoint.toString()+"\n";
     }
 }

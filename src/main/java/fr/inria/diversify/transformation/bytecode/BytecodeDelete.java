@@ -51,11 +51,14 @@ public class BytecodeDelete extends BytecodeTransformation {
         JSONObject object = new JSONObject();
         object.put("type", type);
         object.put("name", name);
+        object.put("failures", failures);
+        object.put("status", status);
+
+        if(parent != null)
+            object.put("parent",parent.toJSONObject());
 
         object.put("methodLocation", methodLocation.getLongName());
         object.put("opcodeIndex",opcodeIndex);
-        object.put("status", status);
-        object.put("failures", failures);
 
         return object;
     }

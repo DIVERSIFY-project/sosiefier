@@ -59,7 +59,7 @@ public class StatisticDiversification {
         if(type.equals("delete"))
             return 1;
         Util util = new Util(codeFragmentList);
-        CodeFragment cf = ((ASTTransformation) tran).getPosition();
+        CodeFragment cf = ((ASTTransformation) tran).getTransplantationPoint();
 
         if(type.equals("add") || type.equals("replace"))
             return util.numberOfNotDiversification(cf).intValue();

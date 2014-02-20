@@ -19,7 +19,8 @@ public interface Transformation {
     public int getStatus();
     public void setFailures(List<String> f);
     public List<String> getFailures();
-
+    public void setParent(Transformation t);
+    public Transformation getParent();
     public String getType();
     public String getName();
     public String getLevel();

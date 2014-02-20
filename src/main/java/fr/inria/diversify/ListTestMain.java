@@ -30,8 +30,6 @@ public class ListTestMain {
             t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
         }
         initSpoon();
-
-
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException, IOException {

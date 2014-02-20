@@ -15,6 +15,7 @@ public abstract class AbstractTransformation implements Transformation {
     protected List<String> failures;
     protected String name;
     protected String type;
+    protected Transformation parent;
 
     public void setStatus(Integer result) {
         status = result;
@@ -49,5 +50,11 @@ public abstract class AbstractTransformation implements Transformation {
 
     }
 
+    public void setParent(Transformation parent) {
+        this.parent = parent;
+    }
+    public Transformation getParent() {
+        return parent;
+    }
 
 }

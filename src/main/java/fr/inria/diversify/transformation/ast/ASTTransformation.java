@@ -21,7 +21,7 @@ import java.io.IOException;
  * Time: 4:15 PM
  */
 public abstract class ASTTransformation extends AbstractTransformation {
-    protected CodeFragment position;
+    protected CodeFragment transplantationPoint;
 
     public ASTTransformation() {}
 
@@ -39,7 +39,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
     }
 
     protected void printJavaFile(String directory) throws IOException {
-        CtSimpleType<?> type = getOriginalClass(position);
+        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
@@ -51,7 +51,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
     }
 
     protected void removeSourceCode() {
-        CtSimpleType<?> type = getOriginalClass(position);
+        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
         CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
         compileUnit.getSourceCodeFraments().clear();
     }
@@ -60,23 +60,23 @@ public abstract class ASTTransformation extends AbstractTransformation {
         return cf.getCompilationUnit().getMainType();
     }
 
-    public CodeFragment getPosition() {
-        return position;
+    public CodeFragment getTransplantationPoint() {
+        return transplantationPoint;
     }
 
-    public void setPosition(CodeFragment position) {
-        this.position = position;
+    public void setTransplantationPoint(CodeFragment transplantationPoint) {
+        this.transplantationPoint = transplantationPoint;
     }
 
 
     public String classLocationName() {
-        return position.getSourceClass().getQualifiedName();
+        return transplantationPoint.getSourceClass().getQualifiedName();
     }
     public String packageLocationName() {
-        return position.getSourcePackage().getQualifiedName();
+        return transplantationPoint.getSourcePackage().getQualifiedName();
     }
     public String methodLocationName() {
-        CtExecutable elem = position.getCtCodeFragment().getParent(CtExecutable.class);
+        CtExecutable elem = transplantationPoint.getCtCodeFragment().getParent(CtExecutable.class);
         if(elem != null)
             return elem.getSimpleName();
         return "field";
@@ -85,7 +85,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     @Override
     public String getLevel() {
-        CtCodeElement stmt = position.getCtCodeFragment();
+        CtCodeElement stmt = transplantationPoint.getCtCodeFragment();
         if(stmt instanceof CtLocalVariable
                 || stmt instanceof CtNewClass
                 || stmt instanceof CtBreak
@@ -101,10 +101,10 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     @Override
     public String stmtType() {
-        return position.getCtCodeFragment().getClass().getSimpleName();
+        return transplantationPoint.getCtCodeFragment().getClass().getSimpleName();
     }
 
     public int line() {
-        return position.getStartLine();
+        return transplantationPoint.getStartLine();
     }
 }

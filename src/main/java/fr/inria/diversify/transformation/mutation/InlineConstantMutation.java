@@ -98,18 +98,20 @@ public class InlineConstantMutation extends AbstractTransformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", getType());
-        object.put("name", getName());
+        object.put("type", type);
+        object.put("name", name);
+        object.put("failures", failures);
+        object.put("status", status);
 
-        object.put("position", inlineConstant.getParent(CtPackage.class).getQualifiedName()
+        if(parent != null)
+            object.put("parent",parent.toJSONObject());
+
+        object.put("transplantationPoint", inlineConstant.getParent(CtPackage.class).getQualifiedName()
                 + "." + inlineConstant.getParent(CtSimpleType.class).getSimpleName() + ":" + inlineConstant.getPosition().getLine());
 
         CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(inlineConstant.getFactory().getEnvironment());
         inlineConstant.accept(pp);
         object.put("inlineConstant", pp.toString());
-
-        object.put("failures", failures);
-        object.put("status", status);
 
         return object;
     }

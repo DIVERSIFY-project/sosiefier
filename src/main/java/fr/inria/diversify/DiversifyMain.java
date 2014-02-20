@@ -13,6 +13,7 @@ import fr.inria.diversify.diversification.builder.AbstractBuilder;
 import fr.inria.diversify.diversification.builder.AntBuilder;
 import fr.inria.diversify.diversification.builder.MavenBuilder;
 import fr.inria.diversify.transformation.query.MutationQuery;
+import fr.inria.diversify.transformation.query.MutationToSosieQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import javassist.NotFoundException;
@@ -136,6 +137,12 @@ public class DiversifyMain {
 
         if(type.equals("mutation"))
             atq = new MutationQuery(rg);
+
+        if(type.equals("mutationToSosie")) {
+            String jacocoFile = DiversifyProperties.getProperty("jacoco");
+            String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
+            atq = new MutationToSosieQuery(classes, new File(jacocoFile));
+        }
 
         if(type.equals("ADR")) {
             Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));

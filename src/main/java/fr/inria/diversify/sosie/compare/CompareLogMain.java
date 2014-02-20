@@ -35,8 +35,6 @@ import java.util.List;
  * Time: 3:00 PM
  */
 public class CompareLogMain {
-
-    private CodeFragmentList codeFragments;
     private String dirOriginal;
     private String varToExclude;
     private String dirSosie;
@@ -84,7 +82,7 @@ public class CompareLogMain {
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
                 CodeFragment cf = null;
                 try {
-                    cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getPosition();
+                    cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
                 } catch (Exception e) {}
 
                 CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, cf ,varToExclude);
@@ -126,7 +124,7 @@ public class CompareLogMain {
                 File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
                 TransformationParser parser = new TransformationParser(true);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
-                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getPosition();
+                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
 
                 CompareMultiExceptionSequence un = new CompareMultiExceptionSequence(dirOriginal, f.getAbsolutePath(), cf);
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
@@ -176,14 +174,6 @@ public class CompareLogMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        ProcessingManager pm = new QueueProcessingManager(factory);
-        Class classz = Class.forName(DiversifyProperties.getProperty("processor"));
-        AbstractCodeFragmentProcessor processor =  (AbstractCodeFragmentProcessor)classz.newInstance();
-        pm.addProcessor(processor);
-        pm.process();
-
-        codeFragments = processor.getCodeFragments();
     }
 
     protected void initLogLevel() {

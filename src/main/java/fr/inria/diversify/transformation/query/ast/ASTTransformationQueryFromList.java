@@ -4,7 +4,6 @@ import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
-import spoon.reflect.factory.Factory;
 
 import java.io.IOException;
 import java.util.*;
@@ -43,7 +42,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         ASTTransformation t = null;
         while(coverage == 0 && t.getType().equals("delete")) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-            coverage = coverageReport.codeFragmentCoverage(t.getPosition());
+            coverage = coverageReport.codeFragmentCoverage(t.getTransplantationPoint());
         }
         return t;
     }
@@ -55,7 +54,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         ASTTransformation t = null;
         while(coverage == 0&& t.getType().equals("add") ) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-            coverage = coverageReport.codeFragmentCoverage(t.getPosition());
+            coverage = coverageReport.codeFragmentCoverage(t.getTransplantationPoint());
         }
         return t;
     }
@@ -67,7 +66,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
         ASTTransformation t = null;
         while(coverage == 0 && t.getType().equals("replace")) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-            coverage = coverageReport.codeFragmentCoverage(t.getPosition());
+            coverage = coverageReport.codeFragmentCoverage(t.getTransplantationPoint());
         }
         return t;
     }

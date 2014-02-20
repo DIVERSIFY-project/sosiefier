@@ -123,6 +123,9 @@ public class TransformationParser {
         trans.setFailures(getFailures(jsonObject));
         trans.setStatus(jsonObject.getInt("status"));
 
+        if(jsonObject.getJSONObject("parent") != null)
+            trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));
+
         return trans;
     }
 
@@ -151,7 +154,7 @@ public class TransformationParser {
         if(name.equals("delete"))
             trans = parseASTDelete(jsonObject);
 
-        trans.setPosition(findCodeFragment(jsonObject.getJSONObject("codeFragmentPosition")));
+        trans.setTransplantationPoint(findCodeFragment(jsonObject.getJSONObject("transplantationPoint")));
         return trans;
     }
 
@@ -270,7 +273,7 @@ public class TransformationParser {
     protected ASTTransformation parseASTAdd(JSONObject jsonObject) throws Exception {
         ASTAdd trans = new ASTAdd();
 
-        trans.setCodeFragmentToAdd(findCodeFragment(jsonObject.getJSONObject("CodeFragmentAdd")));
+        trans.setCodeFragmentToAdd(findCodeFragment(jsonObject.getJSONObject("transplant")));
         trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
 
         return trans;
@@ -279,7 +282,7 @@ public class TransformationParser {
     protected ASTTransformation parseASTReplace(JSONObject jsonObject) throws Exception {
         ASTReplace trans = new ASTReplace();
 
-        trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("CodeFragmentAdd")));
+        trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("transplant")));
         trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
 
         return trans;

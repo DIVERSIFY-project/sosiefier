@@ -2,17 +2,13 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.util.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -21,7 +17,7 @@ import java.util.Map;
  * Time: 4:33 PM
  */
 public class ASTAdd extends ASTTransformation {
-    protected CodeFragment add;
+    protected CodeFragment transplant;
     protected Map<String, String> variableMapping;
 
 
@@ -35,35 +31,39 @@ public class ASTAdd extends ASTTransformation {
         JSONObject object = new JSONObject();
         object.put("type", type);
         object.put("name", name);
-        object.put("codeFragmentPosition", position.toJSONObject());
-        object.put("codeFragmentAdd", add.toJSONObject());
-        object.put("variableMapping", variableMapping);
         object.put("failures", failures);
         object.put("status", status);
+
+        if(parent != null)
+            object.put("parent",parent.toJSONObject());
+
+        object.put("transplantationPoint", transplantationPoint.toJSONObject());
+        object.put("transplant", transplant.toJSONObject());
+        object.put("variableMapping", variableMapping);
 
         return object;
     }
 
     protected void addSourceCode() throws Exception {
-        CtSimpleType<?> originalClass = getOriginalClass(position);
+        CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
 
         Log.debug("{} transformation",type);
-        Log.debug("cfToAdd:\n {}", add);
-        Log.debug("---------------------\npostion:\n{}",position);
-        Log.debug("{}",position.getCtCodeFragment().getPosition());
+        Log.debug("transplant:\n {}", transplant);
+        Log.debug("---------------------\ntransplantation point:\n{}", transplantationPoint);
+        Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
 
         if(withVarMapping()) {
             if(variableMapping == null)
-                variableMapping = position.randomVariableMapping(add);
+                variableMapping = transplantationPoint.randomVariableMapping(transplant);
 
             Log.debug("random variable mapping: {}",variableMapping);
-            add.replaceVar(position, variableMapping);
+            transplant.replaceVar(transplantationPoint, variableMapping);
         }
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
-        SourcePosition sp = position.getCtCodeFragment().getPosition();
+        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
 
         int index = compileUnit.beginOfLineIndex(sp.getSourceStart());//sp.getSourceStart();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, codeFragmentString(position), 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, codeFragmentString(transplantationPoint), 0));
         Log.debug("----------\n---------");
         Log.debug("{}",originalClass.getQualifiedName());
     }
@@ -73,7 +73,7 @@ public class ASTAdd extends ASTTransformation {
     }
 
     protected String codeFragmentString(CodeFragment cf) {
-        String cFS = add.codeFragmentString();
+        String cFS = transplant.codeFragmentString();
 //        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
 //            return cFS+";";
 //        else
@@ -87,7 +87,7 @@ public class ASTAdd extends ASTTransformation {
 
 
     public boolean setCodeFragmentToAdd(CodeFragment add) {
-        this.add = add;
+        this.transplant = add;
         return true;
     }
 
@@ -102,8 +102,8 @@ public class ASTAdd extends ASTTransformation {
         return type.equals(otherASTAdd.type) &&
                 failures == otherASTAdd.failures &&
                 (variableMapping == null || variableMapping.equals(otherASTAdd.variableMapping)) &&
-                position.equals(otherASTAdd.position) &&
-                add.equals(otherASTAdd.add);
+                transplantationPoint.equals(otherASTAdd.transplantationPoint) &&
+                transplant.equals(otherASTAdd.transplant);
     }
 
     public void setName(String name) {
@@ -114,7 +114,7 @@ public class ASTAdd extends ASTTransformation {
     public String toString() {
         String ret = new String();
 
-        ret = ret + "position: "+position.toString()+"\n" +
+        ret = ret + "transplantationPoint: "+ transplantationPoint.toString()+"\n" +
                 "varMapping: "+variableMapping+"\n";
 
         return ret;

@@ -7,7 +7,6 @@ import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.factory.Factory;
 
 import java.util.*;
 
@@ -36,7 +35,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
                     cfToReplace = randomCodeFragmentToReplace();
                     cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace,false);
                 }
-            tf.setPosition(cfToReplace);
+            tf.setTransplantationPoint(cfToReplace);
             tf.setCodeFragmentToReplace(cfReplacedBy);
         return tf;
     }
@@ -49,7 +48,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
         if(cfReplacedBy == null)
             new Exception("pas de candidat pour "+cfToReplace);
-        tf.setPosition(cfToReplace);
+        tf.setTransplantationPoint(cfToReplace);
         tf.setCodeFragmentToReplace(cfReplacedBy);
         return tf;
     }
@@ -60,7 +59,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         tf.setType("notContextReplace");
         int size = codeFragments.size();
         CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
-        tf.setPosition(cfToReplace);
+        tf.setTransplantationPoint(cfToReplace);
         tf.setCodeFragmentToReplace(cfReplacedBy);
         return tf;
     }
@@ -74,7 +73,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
                     cfToReplace = randomCodeFragmentToReplace();
                     cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
                 }
-        tf.setPosition(cfToReplace);
+        tf.setTransplantationPoint(cfToReplace);
         tf.setCodeFragmentToAdd(cfReplacedBy);
         return tf;
     }
@@ -85,7 +84,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
         if(cfReplacedBy == null)
             new Exception("pas de candidat pour "+cfToReplace);
-        tf.setPosition(cfToReplace);
+        tf.setTransplantationPoint(cfToReplace);
         tf.setCodeFragmentToAdd(cfReplacedBy);
         return tf;
     }
@@ -96,7 +95,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
         tf.setName("notContextAdd");
         int size = codeFragments.size();
         CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
-        tf.setPosition(cfToReplace);
+        tf.setTransplantationPoint(cfToReplace);
         tf.setCodeFragmentToAdd(cfReplacedBy);
         return tf;
     }
@@ -109,7 +108,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
                     if (cfToDelete.getCtCodeFragment() instanceof CtReturn)
                         cfToDelete = null;
                 }
-            tf.setPosition(cfToDelete);
+            tf.setTransplantationPoint(cfToDelete);
         return tf;
     }
 
@@ -125,7 +124,7 @@ public class ASTTransformationQuery extends AbstractTransformationQuery {
 
     public ASTDelete delete(CodeFragment cfToDelete) throws Exception {
         ASTDelete tf = new ASTDelete();
-        tf.setPosition(cfToDelete);
+        tf.setTransplantationPoint(cfToDelete);
         return tf;
     }
 

@@ -19,8 +19,7 @@ import java.util.Map;
  * Time: 4:42 PM
  */
 public class ASTReplace extends ASTTransformation {
-
-    protected CodeFragment replace;
+    protected CodeFragment transplant;
     protected Map<String, String> variableMapping;
 
 
@@ -34,50 +33,54 @@ public class ASTReplace extends ASTTransformation {
         JSONObject object = new JSONObject();
         object.put("type", type);
         object.put("name", name);
-        object.put("codeFragmentPosition", position.toJSONObject());
-        object.put("codeFragmentReplace", replace.toJSONObject());
-        object.put("variableMapping", variableMapping);
         object.put("failures", failures);
         object.put("status", status);
+
+        if(parent != null)
+            object.put("parent",parent.toJSONObject());
+
+        object.put("transplantationPoint", transplantationPoint.toJSONObject());
+        object.put("transplant", transplant.toJSONObject());
+        object.put("variableMapping", variableMapping);
 
         return object;
     }
 
     @Override
     protected void addSourceCode() throws Exception {
-        CtSimpleType<?> originalClass = getOriginalClass(position);
+        CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
 
         Log.debug("{} transformation",type);
-        Log.debug("position:\n{}",position);
-        Log.debug("{}",position.getCtCodeFragment().getPosition());
-        Log.debug("{}",position.getCodeFragmentType());
-        Log.debug("replace by: ({})\n{}",replace.getCodeFragmentType(), replace);
+        Log.debug("transplantation point:\n{}", transplantationPoint);
+        Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
+        Log.debug("{}", transplantationPoint.getCodeFragmentType());
+        Log.debug("replace by: ({})\n{}", transplant.getCodeFragmentType(), transplant);
 
         if(withVarMapping()) {
             if(variableMapping == null) {
-                variableMapping = position.randomVariableMapping(replace);
+                variableMapping = transplantationPoint.randomVariableMapping(transplant);
             }
 
 
             Log.debug("random variable mapping: {}", variableMapping);
-            replace.replaceVar(position, variableMapping);
-            if(replace.equals(position.codeFragmentString()))
+            transplant.replaceVar(transplantationPoint, variableMapping);
+            if(transplant.equals(transplantationPoint.codeFragmentString()))
                 throw new Exception("same statment");
         }
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
-        SourcePosition sp = position.getCtCodeFragment().getPosition();
+        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
 
 
 
         if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n"+
-                replace.codeFragmentString()+"\n", 0));
+                transplant.codeFragmentString()+"\n", 0));
         }
         else {
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
-                    codeFragmentString(position), 0));
+                    codeFragmentString(transplantationPoint), 0));
         }
     }
 
@@ -87,7 +90,7 @@ public class ASTReplace extends ASTTransformation {
     }
 
     protected String codeFragmentString(CodeFragment cf) {
-        String cFS = replace.codeFragmentString();
+        String cFS = transplant.codeFragmentString();
 //        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
 //            return cFS+";";
 //        else
@@ -95,7 +98,7 @@ public class ASTReplace extends ASTTransformation {
     }
 
     public boolean setCodeFragmentToReplace(CodeFragment replace) {
-        this.replace = replace;
+        this.transplant = replace;
         return true;
     }
 
@@ -113,15 +116,15 @@ public class ASTReplace extends ASTTransformation {
 
         return type.equals(otherReplace.type) && failures == otherReplace.failures &&
                 (variableMapping == null || variableMapping.equals(otherReplace.variableMapping)) &&
-                position.equals(otherReplace.position) &&
-                replace.equals(otherReplace.replace);
+                transplantationPoint.equals(otherReplace.transplantationPoint) &&
+                transplant.equals(otherReplace.transplant);
     }
     @Override
     public String toString() {
         String ret = new String();
 
-            ret = ret + "position: "+position.toString()+"\n" +
-                    type +": "+ replace.toString()+"\n"+
+            ret = ret + "transplantationPoint: "+ transplantationPoint.toString()+"\n" +
+                    type +": "+ transplant.toString()+"\n"+
                     "varMapping: "+variableMapping+"\n";
 
         return ret;

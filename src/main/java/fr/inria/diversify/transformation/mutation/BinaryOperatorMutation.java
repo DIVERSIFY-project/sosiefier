@@ -77,18 +77,20 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("type", getType());
-        object.put("name", getName());
+        object.put("type", type);
+        object.put("name", name);
+        object.put("failures", failures);
+        object.put("status", status);
 
-        object.put("position", operator.getParent(CtPackage.class).getQualifiedName()
+        if(parent != null)
+            object.put("parent",parent.toJSONObject());
+
+        object.put("transplantationPoint", operator.getParent(CtPackage.class).getQualifiedName()
                 + "." + operator.getParent(CtSimpleType.class).getSimpleName() + ":" + operator.getPosition().getLine());
 
         CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(operator.getFactory().getEnvironment());
         operator.accept(pp);
         object.put("binaryOperator", pp.toString());
-
-        object.put("failures", failures);
-        object.put("status", status);
 
         return object;
     }

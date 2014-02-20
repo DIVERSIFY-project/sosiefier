@@ -62,7 +62,7 @@ public class Util {
             nb = nb.add(tmp);
             if(max.compareTo(tmp) < 0) {
                 max = tmp;
-                Log.debug("{}\nposition: {}\n {}",tmp, cf.getInputContext().equalString() ,cf);
+                Log.debug("{}\ntransplantationPoint: {}\n {}",tmp, cf.getInputContext().equalString() ,cf);
                 Log.debug("replace/add:{}\n{}\n",  cf2.getInputContext().equalString(), cf2);
             }
         }
@@ -129,7 +129,7 @@ public class Util {
         for(int i = 0; i < nb; i++) {
             try {
                 ASTReplace replace = query.replace();
-                CodeFragment position = replace.getPosition();
+                CodeFragment position = replace.getTransplantationPoint();
 
                 transformations.add(replace);
 
@@ -189,7 +189,7 @@ public class Util {
                             for (Map<String, String> varMapping : getAllVarMapping(cfTmp, cf2)) {
                                 ASTReplace r = new ASTReplace();
                                 CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                                r.setPosition(cfTmp);
+                                r.setTransplantationPoint(cfTmp);
                                 r.setCodeFragmentToReplace(new Statement(tmp));
                                 r.setVarMapping(varMapping);
                                 synchronized (allReplace) {
@@ -211,7 +211,7 @@ public class Util {
 
         for (CodeFragment cf1 : codeFragments) {
                     ASTDelete r = new ASTDelete();
-                    r.setPosition(cf1);
+                    r.setTransplantationPoint(cf1);
                     allReplace.add(r);
         }
         return allReplace;
@@ -229,7 +229,7 @@ public class Util {
                         for (Map<String,String> varMapping : getAllVarMapping(cfTmp,cf2)) {
                             ASTAdd r = new ASTAdd();
                             CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
-                            r.setPosition(cfTmp);
+                            r.setTransplantationPoint(cfTmp);
                             r.setCodeFragmentToAdd(new Statement(tmp));
                             r.setVarMapping(varMapping);
                             synchronized (allReplace) {
