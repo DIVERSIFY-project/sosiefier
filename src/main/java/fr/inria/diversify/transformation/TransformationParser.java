@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.DiversifyEnvironment;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.ast.ASTAdd;

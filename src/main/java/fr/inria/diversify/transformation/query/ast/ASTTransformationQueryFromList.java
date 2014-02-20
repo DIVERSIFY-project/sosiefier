@@ -74,7 +74,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
 
     protected void init(String transformationDirectory) throws IOException, JSONException {
         super.init();
-        TransformationParser tf = new TransformationParser(codeFragments, false);
+        TransformationParser tf = new TransformationParser(false);
         transformation = new ArrayList<Transformation>(tf.parseDir(transformationDirectory));
     }
 }

@@ -15,15 +15,11 @@ import fr.inria.diversify.diversification.builder.MavenBuilder;
 import fr.inria.diversify.transformation.query.MutationQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtMethod;
 import javassist.NotFoundException;
 
 import org.json.JSONException;
 
 import spoon.compiler.SpoonCompiler;
-import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;
 import spoon.support.DefaultCoreFactory;
@@ -52,7 +48,6 @@ import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
  */
 public class DiversifyMain {
     private CodeFragmentList codeFragments;
-    private Factory factory;
 
     public DiversifyMain(String propertiesFile) throws Exception {
         new DiversifyProperties(propertiesFile);
@@ -140,23 +135,23 @@ public class DiversifyMain {
         String type = DiversifyProperties.getProperty("transformation.type");
 
         if(type.equals("mutation"))
-            atq = new MutationQuery(rg,factory);
+            atq = new MutationQuery(rg);
 
         if(type.equals("ADR")) {
             Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-            atq = new ASTTransformationQuery(rg,factory,cl);
+            atq = new ASTTransformationQuery(rg,cl);
         }
 
         if(type.equals("ADRStupid")) {
             Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-            atq = new ASTTransformationQuery(rg,factory,cl);
+            atq = new ASTTransformationQuery(rg,cl);
         }
 
         if(type.equals("list"))
-            atq = new ASTTransformationQueryFromList(rg,factory);
+            atq = new ASTTransformationQueryFromList(rg);
 
         if(type.equals("byteCode"))
-            atq = new ByteCodeTransformationQuery(allCtMethod(),rg);
+            atq = new ByteCodeTransformationQuery(rg);
 
         return atq;
     }
@@ -190,7 +185,7 @@ public class DiversifyMain {
         env.setDebug(true);
 
         DefaultCoreFactory f = new DefaultCoreFactory();
-        factory = new FactoryImpl(f, env);
+        Factory factory = new FactoryImpl(f, env);
         SpoonCompiler compiler = new JDTBasedSpoonCompiler(factory);
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
@@ -204,6 +199,7 @@ public class DiversifyMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        DiversifyEnvironment.setFactory(factory);
     }
 
     protected void computeStatistic() throws IOException, JSONException, InterruptedException {
@@ -218,7 +214,7 @@ public class DiversifyMain {
     }
 
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
-        TransformationParser tf = new TransformationParser(codeFragments, true);
+        TransformationParser tf = new TransformationParser(true);
         Collection<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
@@ -255,7 +251,7 @@ public class DiversifyMain {
     }
 
     protected void statForR(String fileName) throws IOException, JSONException {
-        TransformationParser tf = new TransformationParser(codeFragments, false);
+        TransformationParser tf = new TransformationParser(false);
         Log.debug("parse fileName: {}",fileName);
 
         List<Transformation> transformations = tf.parseFile(new File(fileName));
@@ -299,24 +295,6 @@ public class DiversifyMain {
         Log.set(level);
     }
 
-    private List<CtMethod> allCtMethod() throws NotFoundException {
-        List<CtMethod> methods = new ArrayList<CtMethod>();
-        ClassPool pool = ClassPool.getDefault();
-        pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
-        for (CtSimpleType cl: codeFragments.getAllClasses()) {
-            try {
-                CtClass cc = pool.get(cl.getQualifiedName());
-                for(CtMethod method : cc.getDeclaredMethods())
-                    if(!method.isEmpty()) {
-                        methods.add(method);
-                    }
-            }  catch (Exception e) {
-                Log.error("error in allCtMethod",e);
-            }
-
-        }
-        return methods;
-    }
 
     protected  int test() throws IOException {
         ICoverageReport rg = initCoverageReport();
