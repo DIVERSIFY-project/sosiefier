@@ -40,7 +40,7 @@ public class InlineConstantMutation extends AbstractTransformation {
 
     @Override
     public void apply(String srcDir) throws Exception {
-        Log.debug(type+ " "+ name);
+        Log.debug("transformation: {}, {}",type,name);
         Log.debug("statement:\n {}", inlineConstant);
         Log.debug("--------------------\npostion:\n{}", inlineConstant.getPosition());
         CtLiteral literal = (CtLiteral)inlineConstant.getDefaultExpression();

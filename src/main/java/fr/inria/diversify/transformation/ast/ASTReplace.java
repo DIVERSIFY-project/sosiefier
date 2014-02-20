@@ -50,7 +50,7 @@ public class ASTReplace extends ASTTransformation {
     protected void addSourceCode() throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
 
-        Log.debug("{} transformation",type);
+        Log.debug("transformation: {}, {}",type,name);
         Log.debug("transplantation point:\n{}", transplantationPoint);
         Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
         Log.debug("{}", transplantationPoint.getCodeFragmentType());

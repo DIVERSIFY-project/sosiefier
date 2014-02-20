@@ -30,12 +30,11 @@ public class BytecodeDelete extends BytecodeTransformation {
     }
 
     public void apply() throws BadBytecode {
-
         MethodInfo minfo = methodLocation.getMethodInfo();
         CodeAttribute ca = minfo.getCodeAttribute();
-
         List<Integer> opCodeIndexList = opCodeIndexList(ca);
 
+        Log.debug("transformation: {}, {}",type,name);
         Log.info("delete opcode in method {} at index {} (size: {})",methodLocation.getName(),opCodeIndexList.get(opcodeIndex), byteCodeSize(ca, opCodeIndexList, opcodeIndex));
         deleteOpcode(ca, opCodeIndexList.get(opcodeIndex), byteCodeSize(ca, opCodeIndexList, opcodeIndex));
     }

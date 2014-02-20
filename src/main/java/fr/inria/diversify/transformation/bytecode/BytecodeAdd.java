@@ -60,9 +60,9 @@ public class BytecodeAdd extends BytecodeTransformation {
     protected void apply() throws BadBytecode {
         MethodInfo minfo = methodLocation.getMethodInfo();
         CodeAttribute ca = minfo.getCodeAttribute();
-
         List<Integer> opCodeIndexList = opCodeIndexList(ca);
 
+        Log.debug("transformation: {}, {}",type,name);
         Log.info("add opcode in method {} at index {} (size: {})", methodLocation.getName(), opCodeIndexList.get(opcodeIndex), byteCodeToAdd.length);
         addOpcode(ca, opCodeIndexList.get(opcodeIndex),byteCodeToAdd);
     }

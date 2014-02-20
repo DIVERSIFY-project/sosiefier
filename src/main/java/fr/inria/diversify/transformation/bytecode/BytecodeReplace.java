@@ -60,9 +60,9 @@ public class BytecodeReplace extends BytecodeTransformation {
     protected void apply() throws BadBytecode {
         MethodInfo minfo = methodLocation.getMethodInfo();
         CodeAttribute ca = minfo.getCodeAttribute();
-
         List<Integer> opCodeIndexList = opCodeIndexList(ca);
 
+        Log.debug("transformation: {}, {}",type,name);
         Log.info("replace opcode in method {} at index {} (size: {})", methodLocation.getName(), opCodeIndexList.get(opcodeIndex), byteCodeToReplace.length);
         deleteOpcode(ca, opCodeIndexList.get(opcodeIndex), byteCodeSize(ca, opCodeIndexList, opcodeIndex));
         addOpcode(ca, opCodeIndexList.get(opcodeIndex),byteCodeToReplace);

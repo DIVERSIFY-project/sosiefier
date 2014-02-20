@@ -38,7 +38,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     }
 
     protected void addSourceCode() {
-        Log.debug(type+ " "+ name);
+        Log.debug("transformation: {}, {}",type,name);
         Log.debug("operator:\n {}", operator);
         Log.debug("--------------------\npostion:\n{}",operator.getPosition());
         CtElement mutant = getMutantOperator();
