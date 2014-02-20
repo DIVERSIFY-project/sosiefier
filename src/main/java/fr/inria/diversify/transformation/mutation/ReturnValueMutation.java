@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.mutation;
 
 import fr.inria.diversify.codeFragment.CodeFragmentEqualPrinter;
+import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
@@ -142,6 +143,16 @@ public class ReturnValueMutation extends AbstractTransformation {
     @Override
     public int line() {
         return ret.getPosition().getLine();
+    }
+
+    public boolean equals(Object other) {
+        if(!this.getClass().isAssignableFrom(other.getClass()))
+            return  false;
+        ReturnValueMutation otherMutation = (ReturnValueMutation)other;
+
+        return status == otherMutation.status &&
+                failures.equals(otherMutation.failures) &&
+                ret.equals(otherMutation.ret);
     }
 
 }

@@ -125,6 +125,16 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
         return operator.getPosition().getLine();
     }
 
+    public boolean equals(Object other) {
+        if(!this.getClass().isAssignableFrom(other.getClass()))
+            return  false;
+        BinaryOperatorMutation otherMutation = (BinaryOperatorMutation)other;
+
+        return status == otherMutation.status &&
+                failures.equals(otherMutation.failures) &&
+               operator.equals(otherMutation.operator);
+    }
+
 
     public CtBinaryOperator<?> getOperator() {
         return operator;

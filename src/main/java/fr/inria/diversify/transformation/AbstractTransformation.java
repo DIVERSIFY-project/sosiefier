@@ -50,6 +50,10 @@ public abstract class AbstractTransformation implements Transformation {
 
     }
 
+    public  int hashCode() {
+        return name.hashCode() * type.hashCode() +status.hashCode() + failures.hashCode();
+    }
+
     public void setParent(Transformation parent) {
         this.parent = parent;
     }

@@ -19,12 +19,12 @@ public class TransformationsWriter {
     protected String fileNamePrefix;
     protected Collection<Transformation> transformations;
 
+    public TransformationsWriter() {}
+
     public TransformationsWriter(Collection<Transformation> transformations, String prefix) {
         this.transformations = transformations;
         fileNamePrefix = prefix;
     }
-
-    public TransformationsWriter() {}
 
     public String writeGoodTransformation(String type) throws IOException, JSONException {
         List<Transformation> goodTransformation = new LinkedList<Transformation>();
@@ -44,22 +44,6 @@ public class TransformationsWriter {
         return writeTransformation(fileName,goodTransformation);
     }
 
-    public String writeBadTransformation(String type) throws IOException, JSONException {
-        List<Transformation> badTransformation = new LinkedList<Transformation>();
-        for (Transformation transformation : transformations) {
-            if (transformation.getStatus() != 0 && (type == null || transformation.getType().equals(type))) {
-                badTransformation.add(transformation);
-            }
-        }
-        String fileName;
-        if(type == null)
-            fileName = fileNamePrefix+"_bad.json";
-        else
-            fileName = fileNamePrefix+ "_" + type + "_bad.json";
-
-        return  writeTransformation(fileName,badTransformation);
-    }
-
     public String writeAllTransformation(String type) throws IOException, JSONException {
         List<Transformation> transformation = new LinkedList<Transformation>();
         for (Transformation t : transformations) {
@@ -76,7 +60,6 @@ public class TransformationsWriter {
 
         return  writeTransformation(fileName,transformation);
     }
-
 
     public String writeTransformation(String fileName, Collection<Transformation> trans) throws IOException, JSONException {
         Log.debug("write {} transformation in file {}",trans.size(), fileName);

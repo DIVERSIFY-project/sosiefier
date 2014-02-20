@@ -11,12 +11,8 @@ import fr.inria.diversify.transformation.bytecode.BytecodeDelete;
 import fr.inria.diversify.transformation.bytecode.BytecodeReplace;
 import fr.inria.diversify.transformation.bytecode.BytecodeTransformation;
 import fr.inria.diversify.transformation.mutation.*;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import javassist.ClassPool;
-import javassist.CtClass;
 import javassist.CtMethod;
-import javassist.NotFoundException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,8 +34,6 @@ import java.util.*;
  * Time: 11:38 AM
  */
 public class TransformationParser {
-    //CodeFragmentList codeFragments;
-    List<CtMethod> ctMethods;
     private int countError = 0;
     private int count = 0;
     Collection<Transformation> transformations;
@@ -113,7 +107,7 @@ public class TransformationParser {
         String type = jsonObject.getString("type");
         Transformation trans = null;
 
-        if(type.equals("mutation"))
+        if(type.endsWith("utation") )
             trans = parseMutation(jsonObject);
         if(type.equals("adrStmt"))
             trans = parseStmt(jsonObject);
@@ -123,7 +117,7 @@ public class TransformationParser {
         trans.setFailures(getFailures(jsonObject));
         trans.setStatus(jsonObject.getInt("status"));
 
-        if(jsonObject.getJSONObject("parent") != null)
+        if(jsonObject.has("parent"))
             trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));
 
         return trans;
@@ -192,7 +186,7 @@ public class TransformationParser {
             try {
                 String position = ret.getParent(CtPackage.class).getQualifiedName()
                         + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
-                if (position.equals(jsonObject.get("Position"))  ){
+                if (position.equals(jsonObject.get("position"))  ){
                     p = ret;
                     break;
                 }
@@ -213,7 +207,7 @@ public class TransformationParser {
             try {
                 String position = ret.getParent(CtPackage.class).getQualifiedName()
                         + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
-                if (position.equals(jsonObject.get("Position"))  ){
+                if (position.equals(jsonObject.get("position"))  ){
                     p = ret;
                     break;
                 }
@@ -235,7 +229,7 @@ public class TransformationParser {
             try {
                 String position = ret.getParent(CtPackage.class).getQualifiedName()
                         + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
-                if (position.equals(jsonObject.get("Position"))  ){
+                if (position.equals(jsonObject.get("position"))  ){
                     p = ret;
                     break;
                 }
@@ -274,7 +268,7 @@ public class TransformationParser {
         ASTAdd trans = new ASTAdd();
 
         trans.setCodeFragmentToAdd(findCodeFragment(jsonObject.getJSONObject("transplant")));
-        trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
+        trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("variableMapping")));
 
         return trans;
     }
@@ -283,7 +277,7 @@ public class TransformationParser {
         ASTReplace trans = new ASTReplace();
 
         trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("transplant")));
-        trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
+        trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("variableMapping")));
 
         return trans;
     }
@@ -292,7 +286,7 @@ public class TransformationParser {
         CodeFragment cf = null;
         for (CodeFragment codeFragment : DiversifyEnvironment.getCodeFragments()) {
             try {
-                if (codeFragment.positionString().equals(jsonObject.get("Position"))  ){
+                if (codeFragment.positionString().equals(jsonObject.get("position"))  ){
                     cf = codeFragment;
                     break;
                 }
@@ -324,33 +318,14 @@ public class TransformationParser {
     }
 
     protected CtMethod getMethod(String name) throws Exception {
-        for(CtMethod mth : allCtMethod()) {
+        for(CtMethod mth : DiversifyEnvironment.getJavassistMethods()) {
             if(mth.getLongName().equals(name))
                 return mth;
         }
         throw new Exception("error in getMethod for "+name);
     }
 
-    protected List<CtMethod> allCtMethod() throws NotFoundException {
-        if(ctMethods != null)
-            return ctMethods;
 
-        ctMethods = new ArrayList<CtMethod>();
-        ClassPool pool = ClassPool.getDefault();
-        pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
-        for (CtSimpleType cl: DiversifyEnvironment.getCodeFragments().getAllClasses()) {
-            try {
-                CtClass cc = pool.get(cl.getQualifiedName());
-                for(CtMethod method : cc.getDeclaredMethods())
-                    if(!method.isEmpty()) {
-                        ctMethods.add(method);
-                    }
-            }  catch (Exception e) {
-                Log.error("error in allCtMethod",e);
-            }
-        }
-        return ctMethods;
-    }
 
     protected List<String> getFailures(JSONObject jsonObject) throws JSONException {
         List<String> list = new ArrayList<String>();

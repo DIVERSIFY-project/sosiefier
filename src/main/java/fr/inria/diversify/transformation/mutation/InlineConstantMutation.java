@@ -139,6 +139,16 @@ public class InlineConstantMutation extends AbstractTransformation {
         return "LocalVariable";
     }
 
+    public boolean equals(Object other) {
+        if(!this.getClass().isAssignableFrom(other.getClass()))
+            return  false;
+        InlineConstantMutation otherMutation = (InlineConstantMutation)other;
+
+        return status == otherMutation.status &&
+                failures.equals(otherMutation.failures) &&
+                inlineConstant.equals(otherMutation.inlineConstant);
+    }
+
     @Override
     public int line() {
         return inlineConstant.getPosition().getLine();

@@ -94,13 +94,15 @@ public class ASTAdd extends ASTTransformation {
     public  int hashCode() {
         return 1;
     }
+
     public boolean equals(Object other) {
         if(!this.getClass().isAssignableFrom(other.getClass()))
             return  false;
         ASTAdd otherASTAdd = (ASTAdd)other;
 
-        return type.equals(otherASTAdd.type) &&
-                failures == otherASTAdd.failures &&
+        return status == otherASTAdd.status &&
+                name.equals(otherASTAdd.name) &&
+                failures.equals(otherASTAdd.failures) &&
                 (variableMapping == null || variableMapping.equals(otherASTAdd.variableMapping)) &&
                 transplantationPoint.equals(otherASTAdd.transplantationPoint) &&
                 transplant.equals(otherASTAdd.transplant);

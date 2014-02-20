@@ -51,8 +51,6 @@ public class BytecodeAdd extends BytecodeTransformation {
         object.put("opcodeIndex",opcodeIndex);
         object.put("byteCodeToAdd", Arrays.toString(byteCodeToAdd));
 
-
-
         return object;
     }
 

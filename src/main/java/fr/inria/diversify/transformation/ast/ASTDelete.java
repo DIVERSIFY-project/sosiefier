@@ -60,8 +60,10 @@ public class ASTDelete extends ASTTransformation {
             return  false;
         ASTDelete otherDelete = (ASTDelete)other;
 
-//        return failures == otherDelete.failures &&
-           return      transplantationPoint.equals(otherDelete.transplantationPoint);
+           return  status == otherDelete.status &&
+                   name.equals(otherDelete.name) &&
+                   failures.equals(otherDelete.failures) &&
+                   transplantationPoint.equals(otherDelete.transplantationPoint);
     }
 
 

@@ -211,13 +211,13 @@ public class DiversifyMain {
 
     protected void computeStatistic() throws IOException, JSONException, InterruptedException {
         String out = DiversifyProperties.getProperty("result");
-        computeCodeFragmentStatistic(out);
+//        computeCodeFragmentStatistic(out);
 
         String transDir = DiversifyProperties.getProperty("transformation.directory");
         if (transDir != null) {
             computeDiversifyStat(transDir, out);
         }
-        computeOtherStat();
+//        computeOtherStat();
     }
 
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
@@ -227,27 +227,17 @@ public class DiversifyMain {
 
 //        Log.info("nb stmt transformable {}",test());
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
-        String name = write.writeAllTransformation(null);
-        statForR(name);
-
-
-
-        for(String type : getAllTransformationType(transformations)) {
-            name = write.writeAllTransformation(type);
-//            statForR(name);
-        }
-
-        name = write.writeGoodTransformation(null);
-//        statForR(name);
-
-        for(String type : getAllTransformationType(transformations)) {
-            Log.debug("good transformation for: "+type);
-            name = write.writeGoodTransformation(type);
-//            statForR(name);
-        }
-
-        StatisticDiversification sd = new StatisticDiversification(transformations, codeFragments);
+        write.writeAllTransformation(null);
+        StatisticDiversification sd = new StatisticDiversification(transformations);
         sd.writeStat(fileName);
+
+        for(String type : getAllTransformationType(transformations))
+           write.writeAllTransformation(type);
+
+        write.writeGoodTransformation(null);
+
+        for(String type : getAllTransformationType(transformations))
+            write.writeGoodTransformation(type);
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {
@@ -257,25 +247,7 @@ public class DiversifyMain {
         return types;
     }
 
-    protected void statForR(String fileName) throws IOException, JSONException {
-        TransformationParser tf = new TransformationParser(false);
-        Log.debug("parse fileName: {}",fileName);
 
-        List<Transformation> transformations = tf.parseFile(new File(fileName));
-        if(transformations.isEmpty())
-            return;
-
-        Set<Transformation> set = new HashSet<Transformation>(transformations);
-        Log.debug("number of transformation: {}",transformations.size());
-        Log.debug("number of unique transformation: {}",set.size());
-
-        StatisticDiversification sd = new StatisticDiversification(set, codeFragments);
-        String name = fileName.split(".json")[0];
-        sd.writeStat(name);
-
-        CrossValidation cv = new CrossValidation(transformations,10);
-        cv.write(name+"_crossValidation.csv");
-    }
 
     protected void computeOtherStat() throws InterruptedException {
         Util stat = new Util(codeFragments);
