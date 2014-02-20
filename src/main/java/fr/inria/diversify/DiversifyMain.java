@@ -141,7 +141,8 @@ public class DiversifyMain {
         if(type.equals("mutationToSosie")) {
             String jacocoFile = DiversifyProperties.getProperty("jacoco");
             String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
-            atq = new MutationToSosieQuery(classes, new File(jacocoFile));
+            String mutationDirectory = DiversifyProperties.getProperty("transformation.directory");
+            atq = new MutationToSosieQuery(classes, mutationDirectory, new File(jacocoFile));
         }
 
         if(type.equals("ADR")) {

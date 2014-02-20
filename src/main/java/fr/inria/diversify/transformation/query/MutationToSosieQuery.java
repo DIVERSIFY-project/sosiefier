@@ -1,16 +1,16 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
-import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
-import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
-import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
-import spoon.reflect.factory.Factory;
+import org.json.JSONException;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,27 +24,15 @@ public class MutationToSosieQuery extends TransformationQuery {
     protected String classesDir;
     protected File jacocoDir;
 
-    public MutationToSosieQuery(String classesDir, File jacocoDir) {
+    public MutationToSosieQuery(String classesDir,String mutationDirectory ,File jacocoDir) throws IOException, JSONException {
         this.classesDir = classesDir;
         this.jacocoDir = jacocoDir;
-        init();
+        init(mutationDirectory);
     }
 
-    protected void init() {
-//        ProcessingManager pm = new QueueProcessingManager(factory);
-//        BinaryOperatorProcessor processor = new BinaryOperatorProcessor();
-//        pm.addProcessor(processor);
-//
-//        ReturnProcessor processor2 = new ReturnProcessor();
-//        pm.addProcessor(processor2);
-//
-//        InlineConstantProcessor processor3 = new InlineConstantProcessor();
-//        pm.addProcessor(processor3);
-//        pm.process();
-//
-//        binaryOperators = processor.getBinaryOperators();
-//        returns = processor2.getReturns();
-//        inlineConstant = processor3.getInlineConstant();
+    protected void init(String mutationDirectory) throws IOException, JSONException {
+        TransformationParser tf = new TransformationParser(true);
+        mutations = new ArrayList<Transformation>(tf.parseDir(mutationDirectory));
     }
 
 
@@ -69,9 +57,11 @@ public class MutationToSosieQuery extends TransformationQuery {
             }
         }
 
-        ASTTransformationQuery query = new ASTTransformationQuery(coverageReport, StatementProcessor.class);
+        ASTTransformationQuery query = new ASTTransformationQuery(coverageReport, Statement.class);
 
-        return query.getTransformation();
+        ASTTransformation trans = query.getTransformation();
+        trans.setParent(mutation);
+        return trans;
     }
 
     protected String formatTest(String failure) {

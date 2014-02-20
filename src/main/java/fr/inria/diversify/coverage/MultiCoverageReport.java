@@ -31,8 +31,10 @@ public class MultiCoverageReport implements ICoverageReport {
         }
     }
 
-    public void addJacocoFile(File file) {
-        coverages.add(new CoverageReport(classesDir,file));
+    public void addJacocoFile(File file) throws IOException {
+        CoverageReport cr = new CoverageReport(classesDir, file);
+        cr.create();
+        coverages.add(cr);
     }
 
     @Override
@@ -43,27 +45,27 @@ public class MultiCoverageReport implements ICoverageReport {
 
     @Override
     public double codeFragmentCoverage(CodeFragment stmt) {
-        double ret = 1;
+        double ret = 0;
         for (CoverageReport cr : coverages) {
-            ret = Math.min(ret, cr.codeFragmentCoverage(stmt));
+            ret = Math.max(ret, cr.codeFragmentCoverage(stmt));
         }
         return ret;
     }
 
     @Override
     public int opCodeCoverage(CtMethod method, int indexOpcode) {
-        int ret = 1;
+        int ret = 0;
         for (CoverageReport cr : coverages) {
-            ret = Math.min(ret, cr.opCodeCoverage(method,indexOpcode));
+            ret = Math.max(ret, cr.opCodeCoverage(method,indexOpcode));
         }
         return ret;
     }
 
     @Override
     public double elementCoverage(CtElement operator) {
-        double ret = 1;
+        double ret = 0;
         for (CoverageReport cr : coverages) {
-            ret = Math.min(ret, cr.elementCoverage(operator));
+            ret = Math.max(ret, cr.elementCoverage(operator));
         }
         return ret;
     }

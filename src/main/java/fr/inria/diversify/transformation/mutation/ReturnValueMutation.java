@@ -106,7 +106,7 @@ public class ReturnValueMutation extends AbstractTransformation {
         if(parent != null)
             object.put("parent",parent.toJSONObject());
 
-        object.put("transplantationPoint", ret.getParent(CtPackage.class).getQualifiedName()
+        object.put("position", ret.getParent(CtPackage.class).getQualifiedName()
                 + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine());
 
         CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(ret.getFactory().getEnvironment());

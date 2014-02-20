@@ -85,7 +85,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
         if(parent != null)
             object.put("parent",parent.toJSONObject());
 
-        object.put("transplantationPoint", operator.getParent(CtPackage.class).getQualifiedName()
+        object.put("position", operator.getParent(CtPackage.class).getQualifiedName()
                 + "." + operator.getParent(CtSimpleType.class).getSimpleName() + ":" + operator.getPosition().getLine());
 
         CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(operator.getFactory().getEnvironment());
