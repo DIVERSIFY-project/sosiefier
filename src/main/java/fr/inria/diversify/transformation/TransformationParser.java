@@ -107,7 +107,7 @@ public class TransformationParser {
         String type = jsonObject.getString("type");
         Transformation trans = null;
 
-        if(type.endsWith("utation") )
+        if(type.equals("mutation") )
             trans = parseMutation(jsonObject);
         if(type.equals("adrStmt"))
             trans = parseStmt(jsonObject);
