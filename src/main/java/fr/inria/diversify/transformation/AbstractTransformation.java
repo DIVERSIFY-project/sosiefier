@@ -44,11 +44,20 @@ public abstract class AbstractTransformation implements Transformation {
         return name;
     }
 
-    public void init(JSONObject jsonObject) throws JSONException {
-        type = jsonObject.getString("type");
-        name = jsonObject.getString("name");
+    @Override
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("type", type);
+        object.put("name", name);
+        object.put("failures", failures);
+        object.put("status", status);
 
+        if(parent != null)
+            object.put("parent",parent.toJSONObject());
+
+        return object;
     }
+
 
     public  int hashCode() {
         return name.hashCode() * type.hashCode() +status.hashCode() + failures.hashCode();
@@ -60,5 +69,4 @@ public abstract class AbstractTransformation implements Transformation {
     public Transformation getParent() {
         return parent;
     }
-
 }

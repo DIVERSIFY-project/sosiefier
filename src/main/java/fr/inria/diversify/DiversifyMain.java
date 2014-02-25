@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.diversification.MutantSosie;
 import fr.inria.diversify.statistic.CrossValidation;
 import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
@@ -89,10 +90,12 @@ public class DiversifyMain {
         AbstractDiversify ad;
         String projet = DiversifyProperties.getProperty("project");
         String src = DiversifyProperties.getProperty("src");
-        if(DiversifyProperties.getProperty("sosie").equals("true"))
+        if(DiversifyProperties.getProperty("sosie").equals("false"))
+            ad = new Diversify(projet,src);
+        else if(DiversifyProperties.getProperty("sosie").equals("classic"))
             ad = new Sosie(projet,src);
         else
-            ad = new Diversify(projet,src);
+            ad = new MutantSosie(projet,src);
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("outputDir"));
         ad.setBuilder(initBuilder(tmpDir));
@@ -155,8 +158,10 @@ public class DiversifyMain {
             atq = new ASTTransformationQuery(rg,cl);
         }
 
-        if(type.equals("list"))
-            atq = new ASTTransformationQueryFromList(rg);
+        if(type.equals("list")) {
+            String transDirectory = DiversifyProperties.getProperty("transformation.directory");
+            atq = new ASTTransformationQueryFromList(rg, transDirectory);
+        }
 
         if(type.equals("byteCode"))
             atq = new ByteCodeTransformationQuery(rg);

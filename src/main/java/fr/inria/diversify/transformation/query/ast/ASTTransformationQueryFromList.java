@@ -17,9 +17,9 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
     protected ICoverageReport coverageReport;
     private List<Transformation> transformation;
 
-    public ASTTransformationQueryFromList(ICoverageReport cr) {
+    public ASTTransformationQueryFromList(ICoverageReport cr, String transformationDirectory) throws IOException, JSONException {
         this.coverageReport = cr;
-        init();
+        init(transformationDirectory);
     }
 
     public Set<Transformation> getTransformations(int nb) throws Exception {
@@ -39,7 +39,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
     public ASTTransformation delete() throws Exception {
         Random r = new Random();
         double coverage = 0;
-        ASTTransformation t = null;
+        ASTTransformation t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));;
         while(coverage == 0 && t.getType().equals("delete")) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
             coverage = coverageReport.codeFragmentCoverage(t.getTransplantationPoint());
@@ -51,7 +51,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
     public ASTTransformation add() throws Exception {
         Random r = new Random();
         double coverage = 0;
-        ASTTransformation t = null;
+        ASTTransformation t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));;
         while(coverage == 0&& t.getType().equals("add") ) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
             coverage = coverageReport.codeFragmentCoverage(t.getTransplantationPoint());
@@ -63,7 +63,7 @@ public class ASTTransformationQueryFromList extends AbstractTransformationQuery 
     public ASTTransformation replace() throws Exception {
         Random r = new Random();
         double coverage = 0;
-        ASTTransformation t = null;
+        ASTTransformation t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
         while(coverage == 0 && t.getType().equals("replace")) {
             t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
             coverage = coverageReport.codeFragmentCoverage(t.getTransplantationPoint());

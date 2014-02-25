@@ -47,14 +47,7 @@ public class BytecodeDelete extends BytecodeTransformation {
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-        JSONObject object = new JSONObject();
-        object.put("type", type);
-        object.put("name", name);
-        object.put("failures", failures);
-        object.put("status", status);
-
-        if(parent != null)
-            object.put("parent",parent.toJSONObject());
+        JSONObject object = super.toJSONObject();
 
         object.put("methodLocation", methodLocation.getLongName());
         object.put("opcodeIndex",opcodeIndex);

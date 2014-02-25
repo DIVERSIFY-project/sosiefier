@@ -12,7 +12,6 @@ import java.util.List;
  */
 public interface Transformation {
 
-
     public void apply(String srcDir) throws Exception;
     public void restore(String srcDir) throws Exception;
     public void setStatus(Integer status);
@@ -32,6 +31,5 @@ public interface Transformation {
     public String stmtType();
 
     public boolean isCompile();
-
     public int line();
 }

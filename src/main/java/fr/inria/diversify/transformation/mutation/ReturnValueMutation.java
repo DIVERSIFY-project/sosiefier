@@ -71,6 +71,7 @@ public class ReturnValueMutation extends AbstractTransformation {
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
 
         printJavaFile(srcDir);
+        removeSourceCode();
     }
 
     public void restore(String srcDir) throws Exception {
@@ -97,14 +98,7 @@ public class ReturnValueMutation extends AbstractTransformation {
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-        JSONObject object = new JSONObject();
-        object.put("type", type);
-        object.put("name", name);
-        object.put("failures", failures);
-        object.put("status", status);
-
-        if(parent != null)
-            object.put("parent",parent.toJSONObject());
+        JSONObject object = super.toJSONObject();
 
         object.put("position", ret.getParent(CtPackage.class).getQualifiedName()
                 + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine());

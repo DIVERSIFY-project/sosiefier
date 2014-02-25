@@ -69,6 +69,7 @@ public class InlineConstantMutation extends AbstractTransformation {
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
 
         printJavaFile(srcDir);
+        removeSourceCode();
     }
 
     public void restore(String srcDir) throws Exception {
@@ -97,14 +98,7 @@ public class InlineConstantMutation extends AbstractTransformation {
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-        JSONObject object = new JSONObject();
-        object.put("type", type);
-        object.put("name", name);
-        object.put("failures", failures);
-        object.put("status", status);
-
-        if(parent != null)
-            object.put("parent",parent.toJSONObject());
+        JSONObject object = super.toJSONObject();
 
         object.put("position", inlineConstant.getParent(CtPackage.class).getQualifiedName()
                 + "." + inlineConstant.getParent(CtSimpleType.class).getSimpleName() + ":" + inlineConstant.getPosition().getLine());

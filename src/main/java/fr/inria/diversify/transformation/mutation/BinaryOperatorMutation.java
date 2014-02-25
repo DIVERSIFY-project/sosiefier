@@ -35,6 +35,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     public void apply(String srcDir) throws Exception {
         addSourceCode();
         printJavaFile(srcDir);
+        removeSourceCode();
     }
 
     protected void addSourceCode() {
@@ -44,8 +45,9 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
         CtElement mutant = getMutantOperator();
         SourcePosition sp = operator.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+mutant.toString(), 0));
+
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+mutant.toString(), 0));
     }
 
     public void restore(String srcDir) throws Exception {
@@ -76,14 +78,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-        JSONObject object = new JSONObject();
-        object.put("type", type);
-        object.put("name", name);
-        object.put("failures", failures);
-        object.put("status", status);
-
-        if(parent != null)
-            object.put("parent",parent.toJSONObject());
+        JSONObject object = super.toJSONObject();
 
         object.put("position", operator.getParent(CtPackage.class).getQualifiedName()
                 + "." + operator.getParent(CtSimpleType.class).getSimpleName() + ":" + operator.getPosition().getLine());
