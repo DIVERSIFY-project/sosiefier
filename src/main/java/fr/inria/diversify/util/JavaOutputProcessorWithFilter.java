@@ -8,6 +8,7 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
+import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.reflect.visitor.PrettyPrinter;
 
 import java.io.File;
@@ -31,20 +32,14 @@ public class JavaOutputProcessorWithFilter extends AbstractProcessor<CtSimpleTyp
 
     boolean writePackageAnnotationFile = true;
 
-    protected Collection<CtSimpleType<?>> classes;
+    protected Collection<String> classes;
 
     /**
      * Creates a new processor for generating Java source files.
      *
      * @param outputDirectory the root output directory
      */
-    public JavaOutputProcessorWithFilter(File outputDirectory, Collection<CtSimpleType<?>> classesName) {
-        super();
-        setOutputDirectory(outputDirectory);
-        this.classes = classesName;
-    }
-
-    public JavaOutputProcessorWithFilter(File outputDirectory, PrettyPrinter printer, Collection<CtSimpleType<?>> classesName) {
+    public JavaOutputProcessorWithFilter(File outputDirectory, PrettyPrinter printer, Collection<String> classesName) {
         setOutputDirectory(outputDirectory);
         this.printer = printer;
         this.classes = classesName;
@@ -52,7 +47,7 @@ public class JavaOutputProcessorWithFilter extends AbstractProcessor<CtSimpleTyp
 
     @Override
     public boolean isToBeProcessed(CtSimpleType<?> candidate) {
-        return classes.contains(candidate);
+        return classes.contains(candidate.getSimpleName());
     }
 
 

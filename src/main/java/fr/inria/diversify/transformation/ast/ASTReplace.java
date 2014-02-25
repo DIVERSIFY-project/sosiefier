@@ -50,10 +50,8 @@ public class ASTReplace extends ASTTransformation {
         Log.debug("replace by: ({})\n{}", transplant.getCodeFragmentType(), transplant);
 
         if(withVarMapping()) {
-            if(variableMapping == null) {
+            if(variableMapping == null)
                 variableMapping = transplantationPoint.randomVariableMapping(transplant);
-            }
-
 
             Log.debug("random variable mapping: {}", variableMapping);
             transplant.replaceVar(transplantationPoint, variableMapping);
@@ -79,7 +77,7 @@ public class ASTReplace extends ASTTransformation {
 
     protected boolean withVarMapping() {
         //todo a remplacer par un attribut
-        return type.equals("replace");
+        return name.equals("replace");
     }
 
     protected String codeFragmentString(CodeFragment cf) {

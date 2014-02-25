@@ -62,7 +62,7 @@ public class ASTAdd extends ASTTransformation {
     }
 
     protected boolean withVarMapping() {
-        return type.equals("add");
+        return name.equals("add");
     }
 
     protected String codeFragmentString(CodeFragment cf) {

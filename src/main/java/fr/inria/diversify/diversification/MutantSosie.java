@@ -68,7 +68,7 @@ public class MutantSosie extends AbstractDiversify {
                 FileWriter fileWriter = new FileWriter(tmpDir +"/diversificationPoint");
                 fileWriter.append(trans.toJSONObject().toString());
                 fileWriter.close();
-//                instruProject(tmpDir);
+                instruProject(tmpDir);
             }
         } catch (Exception e) {
             Log.warn("setCompile error during diversification", e);

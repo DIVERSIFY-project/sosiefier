@@ -1,16 +1,16 @@
 package fr.inria.diversify.sosie;
 
-import fr.inria.diversify.sosie.logger.processor.ConditionalLoggingInstrumenter;
-import fr.inria.diversify.sosie.logger.processor.MethodLoggingInstrumenter;
-import fr.inria.diversify.sosie.logger.processor.TestLoggingInstrumenter;
+import fr.inria.diversify.sosie.logger.processor.*;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import org.apache.commons.io.FileUtils;
+import spoon.compiler.Environment;
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;
+import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
@@ -29,31 +29,37 @@ import java.util.List;
 public class InstruProject {
 
     public InstruProject(String project, String outDir, String srcDir, String testDir) throws Exception {
-//        A refaire
-//
-//        File dir = new File(outDir);
-//        dir.mkdirs();
-//        FileUtils.copyDirectory(new File(project), dir);
-//
-//        String src = project+ "/" +srcDir;
-//        String test = project+ "/" +testDir;
-//
-//        Factory factory = initSpoon(src);
-//        applyProcessor(factory, new MethodLoggingInstrumenter());
+
+        File dir = new File(outDir);
+        dir.mkdirs();
+        FileUtils.copyDirectory(new File(project), dir);
+
+        String src = project+ "/" +srcDir;
+        String test = project+ "/" +testDir;
+
+        Factory factory = initSpoon(src);
+        applyProcessor(factory, new ErrorLoggingInstrumenter());
 //        applyProcessor(factory, new ConditionalLoggingInstrumenter());
-//
-//        factory.getEnvironment().useSourceCodeFragments(true);
-//        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir + "/" + srcDir), allClassesName(new File(src))));
-//
-//        factory = initSpoon(src+System.getProperty("path.separator")+test);
-//
-//        applyProcessor(factory, new TestLoggingInstrumenter());
-//
-//        factory.getEnvironment().useSourceCodeFragments(true);
-//        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir +"/"+ testDir), (allClassesName(new File(test)))));
-//
-//        ConditionalLoggingInstrumenter.writeIdFile(outDir);
-//        copyLogger(outDir);
+
+        Environment env = factory.getEnvironment();
+        env.useSourceCodeFragments(true);
+
+        applyProcessor(factory,
+                new JavaOutputProcessorWithFilter(new File(outDir + "/" + srcDir),
+                    new FragmentDrivenJavaPrettyPrinter(env),
+                    allClassesName(new File(src))));
+
+        factory = initSpoon(src+System.getProperty("path.separator")+test);
+
+        applyProcessor(factory, new AssertInstrumenter());
+        applyProcessor(factory, new TestLoggingInstrumenter());
+
+
+        factory.getEnvironment().useSourceCodeFragments(true);
+        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir +"/"+ testDir), new FragmentDrivenJavaPrettyPrinter(env), (allClassesName(new File(test)))));
+
+        ConditionalLoggingInstrumenter.writeIdFile(outDir);
+        copyLogger(outDir);
     }
 
     protected Factory initSpoon(String srcDirectory) {
