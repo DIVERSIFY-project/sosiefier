@@ -32,7 +32,8 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
 
     public void process(CtInvocation<?> invocation) {
         String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeAssert(Thread.currentThread(),\"" +
-            getClass(invocation).getQualifiedName() + "\",\"" + getMethod(invocation).getSignature() + "\"";
+            getClass(invocation).getQualifiedName() + "\",\"" + getMethod(invocation).getSignature() + "\",\"" +
+                invocation.getTarget().getSignature()+ "\",";
 
         for(CtExpression expression : invocation.getArguments()) {
             snippet += ", " + expression.toString();

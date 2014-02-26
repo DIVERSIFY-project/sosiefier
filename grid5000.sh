@@ -4,6 +4,7 @@ git pull
 mvn clean package
 
 rm -rf repo/diversify-exp
+mkdir repo
 sh script/git/init.sh repo
 
 sleep $((RANDOM%700))
