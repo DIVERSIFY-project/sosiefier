@@ -1,19 +1,15 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.DiversifyEnvironment;
-import fr.inria.diversify.codeFragmentProcessor.BinaryOperatorProcessor;
-import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
-import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
+
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.mutation.*;
-import spoon.processing.ProcessingManager;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.factory.Factory;
-import spoon.support.QueueProcessingManager;
+
 
 import java.util.Arrays;
 import java.util.List;

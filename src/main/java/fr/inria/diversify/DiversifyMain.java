@@ -13,6 +13,7 @@ import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.diversification.builder.AbstractBuilder;
 import fr.inria.diversify.diversification.builder.AntBuilder;
 import fr.inria.diversify.diversification.builder.MavenBuilder;
+import fr.inria.diversify.transformation.query.CvlQuery;
 import fr.inria.diversify.transformation.query.MutationQuery;
 import fr.inria.diversify.transformation.query.MutationToSosieQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
@@ -165,6 +166,9 @@ public class DiversifyMain {
 
         if(type.equals("byteCode"))
             atq = new ByteCodeTransformationQuery(rg);
+
+        if(type.equals("cvl"))
+            atq = new CvlQuery();
 
         return atq;
     }

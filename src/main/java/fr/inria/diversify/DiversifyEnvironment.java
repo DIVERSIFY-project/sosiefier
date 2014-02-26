@@ -10,10 +10,13 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
+import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 import spoon.support.QueueProcessingManager;
@@ -32,6 +35,7 @@ public class DiversifyEnvironment {
     protected static List<CtReturn> returns;
     protected static List<CtLocalVariable> inlineConstant;
     protected static List<CtMethod> javassistMethods;
+    protected static CtElement root;
     protected static Factory factory;
 
     public static CodeFragmentList getCodeFragments()  {
@@ -100,6 +104,26 @@ public class DiversifyEnvironment {
             }
         }
         return javassistMethods;
+    }
+
+    public static CtElement getRoot() {
+        if(root == null) {
+            ProcessingManager pm = new QueueProcessingManager(factory);
+            AbstractProcessor<CtPackage> processor = new AbstractProcessor<CtPackage>() {
+
+                @Override
+                public void process(CtPackage element) {
+                    if(root == null) {
+                        root = element;
+                        while (root.getParent() != null)
+                        root = root.getParent();
+                    }
+                }
+            };
+            pm.addProcessor(processor);
+            pm.process();
+        }
+        return root;
     }
 
     public static void setFactory(Factory factory) {
