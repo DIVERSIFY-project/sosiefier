@@ -122,13 +122,47 @@ public class LogWriter {
         }
     }
 
+    public static void writeAssert(Thread thread, String className, String methodSignature, String assertName, Object... var) {
+        try {
+            FileWriter fileWriter = init(thread);
+
+            StringBuilder string = new StringBuilder();
+            string.append("$$$\n");
+            string.append("A");
+            string.append(simpleSeparator);
+            string.append(className);
+            string.append(simpleSeparator);
+            string.append(methodSignature);
+            string.append(separator);
+            string.append(assertName);
+
+            synchronized (fileWriter) {
+                fileWriter.append(string.toString());
+            }
+            StringBuilder vars = new StringBuilder();
+            for (int i = 0; i < var.length; i++) {
+                string = new StringBuilder();
+                try {
+                    string.append(separator);
+                    string.append(var[i].toString());
+                    vars.append(string);
+                } catch (Exception e) {}
+            }
+            synchronized (fileWriter) {
+                fileWriter.append(vars.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void writeException(Thread thread, String className, String methodSignature, Object exception) {
         try {
             FileWriter fileWriter = init(thread);
 
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
-            string.append("T");
+            string.append("E");
             string.append(simpleSeparator);
             string.append(className);
             string.append(simpleSeparator);
@@ -145,6 +179,33 @@ public class LogWriter {
         }
         catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void writeCatch(Thread thread, String className, String methodSignature, Object exception) {
+        try {
+            FileWriter fileWriter = init(thread);
+
+            StringBuilder string = new StringBuilder();
+            string.append("$$$\n");
+            string.append("Ca");
+            string.append(simpleSeparator);
+            string.append(className);
+            string.append(simpleSeparator);
+            string.append(methodSignature);
+            string.append(separator);
+            if(exception != null)
+                string.append(exception.toString());
+            else
+                string.append("NullException");
+
+            synchronized (fileWriter) {
+                fileWriter.append(string.toString());
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+
         }
     }
 

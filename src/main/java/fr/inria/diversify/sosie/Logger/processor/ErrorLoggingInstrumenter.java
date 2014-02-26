@@ -88,9 +88,9 @@ public class ErrorLoggingInstrumenter extends AbstractProcessor<CtStatement> {
         List<CtCatch> catchList = tryStmt.getCatchers();
         for (CtCatch catchStmt : catchList) {
             if(getMethod(tryStmt) != null) {
-                String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeError(" + getCount(tryStmt) + ",Thread.currentThread(),\"" +
+                String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeCatch(Thread.currentThread(),\"" +
                         className + "\",\"" + methodName + "\"," +
-                        catchStmt.getParameter().getSimpleName() + ".getStackTrace());\n";
+                        catchStmt.getParameter().getSimpleName() + ");\n";
 
                 CtBlock<?> catchBlock = catchStmt.getBody();
                 if(!catchBlock.getStatements().isEmpty()) {
