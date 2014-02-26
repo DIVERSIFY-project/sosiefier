@@ -21,10 +21,10 @@ import java.io.IOException;
  * Time: 15:36
  */
 public abstract class CVLTransformation extends AbstractTransformation {
-    protected CtElement element;
+    protected CtElement object;
 
     protected void printJavaFile(String directory) throws IOException {
-        CtSimpleType<?> type = getOriginalClass(element);
+        CtSimpleType<?> type = getOriginalClass(object);
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
@@ -36,27 +36,27 @@ public abstract class CVLTransformation extends AbstractTransformation {
     }
 
     public CtSimpleType<?> getOriginalClass(CtElement cf) {
-        return element.getPosition().getCompilationUnit().getMainType();
+        return object.getPosition().getCompilationUnit().getMainType();
     }
 
     public String classLocationName() {
-        CtSimpleType c = element.getParent(CtSimpleType.class);
-        if(c == null && element instanceof CtSimpleType)
-            c = (CtSimpleType)element;
+        CtSimpleType c = object.getParent(CtSimpleType.class);
+        if(c == null && object instanceof CtSimpleType)
+            c = (CtSimpleType) object;
         if(c == null)
             return "null";
 
         return c.getQualifiedName();
     }
     public String packageLocationName() {
-        CtPackage p = element.getParent(CtPackage.class);
-        if(p == null && element instanceof CtPackage)
-            p = (CtPackage)element;
+        CtPackage p = object.getParent(CtPackage.class);
+        if(p == null && object instanceof CtPackage)
+            p = (CtPackage) object;
 
         return p.getQualifiedName();
     }
     public String methodLocationName() {
-        CtExecutable elem = element.getParent(CtExecutable.class);
+        CtExecutable elem = object.getParent(CtExecutable.class);
         if(elem != null)
             return elem.getSimpleName();
 
@@ -71,12 +71,12 @@ public abstract class CVLTransformation extends AbstractTransformation {
 
     @Override
     public String stmtType() {
-        return element.getClass().getSimpleName();
+        return object.getClass().getSimpleName();
     }
 
     @Override
     public int line() {
-        return element.getPosition().getLine();
+        return object.getPosition().getLine();
     }
 
     protected void removeSourceCode(CtElement e) {
@@ -86,10 +86,10 @@ public abstract class CVLTransformation extends AbstractTransformation {
     }
 
     public void setObject(CtElement object) {
-        this.element = object;
+        this.object = object;
     }
 
     public CtElement getObject() {
-        return element;
+        return object;
     }
 }

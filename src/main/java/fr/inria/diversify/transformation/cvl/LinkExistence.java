@@ -19,22 +19,22 @@ public class LinkExistence extends CVLTransformation {
 
     @Override
     public void apply(String srcDir) throws Exception {
-        if(element instanceof CtField) {
-            SourcePosition sp = element.getPosition();
+        if(object instanceof CtField) {
+            SourcePosition sp = object.getPosition();
             CompilationUnit compileUnit = sp.getCompilationUnit();
 
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/", 0));
 
             printJavaFile(srcDir);
-            removeSourceCode(element);
+            removeSourceCode(object);
         }
 
     }
 
     @Override
     public void restore(String srcDir) throws Exception {
-        removeSourceCode(element);
+        removeSourceCode(object);
         printJavaFile(srcDir);
     }
 }

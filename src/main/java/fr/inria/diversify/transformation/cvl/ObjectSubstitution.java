@@ -22,12 +22,12 @@ public class ObjectSubstitution extends CVLTransformation {
     @Override
     public void apply(String srcDir) throws Exception {
         Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object ({}):\n {}", element.getClass().getSimpleName(), element);
-        Log.debug("\npositiom:{}", element.getPosition());
+        Log.debug("object ({}):\n {}", object.getClass().getSimpleName(), object);
+        Log.debug("\npositiom:{}", object.getPosition());
         Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object:\n {}", element);
+        Log.debug("object:\n {}", object);
         Log.debug("\ntransplant:{}", transplant);
-        SourcePosition sp = element.getPosition();
+        SourcePosition sp = object.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
@@ -35,12 +35,12 @@ public class ObjectSubstitution extends CVLTransformation {
                     transplant.toString(), 0));
 
         printJavaFile(srcDir);
-        removeSourceCode(element);
+        removeSourceCode(object);
     }
 
     @Override
     public void restore(String srcDir) throws Exception {
-        removeSourceCode(element);
+        removeSourceCode(object);
         printJavaFile(srcDir);
     }
 

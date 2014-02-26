@@ -36,7 +36,7 @@ public class CvlQuery extends TransformationQuery {
     @Override
     public Transformation getTransformation() throws Exception {
         Random r = new Random();
-        int i = r.nextInt(2);
+        int i = r.nextInt(1);
         switch (i) {
             case 0: return getObjectExistence();
             case 1: return getObjectSubstitution();
@@ -44,15 +44,16 @@ public class CvlQuery extends TransformationQuery {
             case 3: return getLinkSubstitution();
         }
         return null;
-
     }
 
     public LinkSubstitution getLinkSubstitution() {
-        return null;
+        LinkSubstitution ls = new LinkSubstitution();
+        return ls;
     }
 
     public LinkExistence getLinkExistence() {
-        return null;
+        LinkExistence le = new LinkExistence();
+        return le;
     }
 
     public ObjectSubstitution getObjectSubstitution() {
