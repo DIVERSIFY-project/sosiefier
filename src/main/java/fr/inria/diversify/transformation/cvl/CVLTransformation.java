@@ -24,7 +24,15 @@ public abstract class CVLTransformation extends AbstractTransformation {
     protected CtElement object;
 
     protected void printJavaFile(String directory) throws IOException {
-        CtSimpleType<?> type = getOriginalClass(object);
+        printJavaFile(directory, null);
+    }
+
+    protected void printJavaFile(String directory, CtSimpleType<?> cl) throws IOException {
+        CtSimpleType<?> type;
+        if(cl == null)
+            type = getOriginalClass(object);
+        else
+            type = cl;
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 

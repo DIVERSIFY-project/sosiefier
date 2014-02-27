@@ -152,7 +152,7 @@ public class ObjectExistence extends CVLTransformation {
         if(object instanceof CtPackage)
             restorePackage(srcDir);
         else if(object instanceof CtSimpleType)
-            restoreClass(srcDir, object);
+            restoreClass(srcDir, (CtSimpleType)object);
         else {
             removeSourceCode(object);
             printJavaFile(srcDir);
@@ -162,11 +162,11 @@ public class ObjectExistence extends CVLTransformation {
     protected void restorePackage(String srcDir) throws IOException {
         for(CtSimpleType<?> cl : ((CtPackage) object).getTypes()) {
             restoreClass(srcDir, cl);
-            printJavaFile(srcDir);
+            printJavaFile(srcDir,cl);
         }
     }
 
-    protected void restoreClass(String srcDir, CtElement cl) throws IOException {
-        printJavaFile(srcDir);
+    protected void restoreClass(String srcDir, CtSimpleType cl) throws IOException {
+        printJavaFile(srcDir,cl);
     }
 }
