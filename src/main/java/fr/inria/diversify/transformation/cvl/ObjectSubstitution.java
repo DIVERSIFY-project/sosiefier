@@ -5,6 +5,8 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtPackage;
+import spoon.reflect.declaration.CtSimpleType;
 
 /**
  * User: Simon
@@ -21,6 +23,8 @@ public class ObjectSubstitution extends CVLTransformation {
 
     @Override
     public void apply(String srcDir) throws Exception {
+        if(object instanceof CtPackage || object instanceof CtSimpleType)
+            throw new Exception();
         Log.debug("transformation: {}, {}", type, name);
         Log.debug("object ({}):\n {}", object.getClass().getSimpleName(), object);
         Log.debug("\npositiom:{}", object.getPosition());

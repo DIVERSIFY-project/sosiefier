@@ -14,8 +14,9 @@ import java.util.Set;
 public abstract class Point {
     //public static int  nbPoint = 0;
     public static int error = 0;
-    String className;
-    String methodSignature;
+    protected static String prefix;
+    protected String className;
+    protected String methodSignature;
     protected String idClass;
     protected String idMethod;
     int id;
@@ -25,6 +26,10 @@ public abstract class Point {
 
     public Point(String string, Map<String,String> idMap) {
         buildFrom(string, idMap);
+    }
+
+    public static String getPrefix() {
+        return prefix;
     }
 
     public boolean sameLogPoint(Point point) {

@@ -6,6 +6,7 @@ import fr.inria.diversify.transformation.cvl.LinkExistence;
 import fr.inria.diversify.transformation.cvl.LinkSubstitution;
 import fr.inria.diversify.transformation.cvl.ObjectExistence;
 import fr.inria.diversify.transformation.cvl.ObjectSubstitution;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -37,6 +38,7 @@ public class CvlQuery extends TransformationQuery {
     public Transformation getTransformation() throws Exception {
         Random r = new Random();
         int i = r.nextInt(1);
+        i = 3;
         switch (i) {
             case 0: return getObjectExistence();
             case 1: return getObjectSubstitution();
@@ -48,6 +50,16 @@ public class CvlQuery extends TransformationQuery {
 
     public LinkSubstitution getLinkSubstitution() {
         LinkSubstitution ls = new LinkSubstitution();
+        List<CtElement> objects = getAllElement(CtClass.class);
+        Random r = new Random();
+
+        CtClass cl = (CtClass) objects.get(r.nextInt(objects.size()));
+        while (cl.getSuperclass() == null || cl.getSuperclass().getSimpleName().equals("Object") ) {
+            cl = (CtClass) objects.get(r.nextInt(objects.size()));
+        }
+        ls.setObject(cl);
+        ls.setTransplant(objects.get(r.nextInt(objects.size())));
+
         return ls;
     }
 

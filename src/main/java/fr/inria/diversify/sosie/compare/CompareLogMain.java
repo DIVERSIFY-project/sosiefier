@@ -70,7 +70,6 @@ public class CompareLogMain {
         CompareMultiSequence un = new CompareMultiSequence(dirOriginal,dirSosie);
         un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
         un.findAndWriteDiffVar(varToExclude);
-
     }
 
     protected void diff() throws Exception {
@@ -115,40 +114,40 @@ public class CompareLogMain {
         writer.close();
     }
 
-    protected void diffException() throws Exception {
-        String startPointString = DiversifyProperties.getProperty("startPoint");
-        List<Diff> diffs = new ArrayList<Diff>();
-        int i =0;
-        for(File f : (new File(dirSosie).listFiles())) {
-            try {
-                File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
-                TransformationParser parser = new TransformationParser(true);
-                Log.info("startPoint {}",startPoint.getAbsolutePath());
-                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
-
-                CompareMultiExceptionSequence un = new CompareMultiExceptionSequence(dirOriginal, f.getAbsolutePath(), cf);
-                un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
-                Diff diff = un.findDiffException();
-                i++;
-                Log.info("sosie nb: {}",i);
-                Log.info("catchDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndCatch());
-                if(!diff.sameTraceAndCatch()) {
-                    Log.info(f.getName());
-                    Log.info(diff.report());
-
-                    if(!diff.sameCatch()) {
-                        diffs.add(diff);
-                        diff.toDotCatch(DiversifyProperties.getProperty("result")+"exception_"+f.getName() + ".dot");
-                    }
-                }
-                else
-                    Log.info("same trace");
-            } catch (Exception e) {
-                Log.error("error",e);
-                e.printStackTrace();
-            }
-        }
-    }
+//    protected void diffException() throws Exception {
+//        String startPointString = DiversifyProperties.getProperty("startPoint");
+//        List<Diff> diffs = new ArrayList<Diff>();
+//        int i =0;
+//        for(File f : (new File(dirSosie).listFiles())) {
+//            try {
+//                File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
+//                TransformationParser parser = new TransformationParser(true);
+//                Log.info("startPoint {}",startPoint.getAbsolutePath());
+//                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
+//
+//                CompareMultiExceptionSequence un = new CompareMultiExceptionSequence(dirOriginal, f.getAbsolutePath(), cf);
+//                un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+//                Diff diff = un.findDiffException();
+//                i++;
+//                Log.info("sosie nb: {}",i);
+//                Log.info("catchDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndCatch());
+//                if(!diff.sameTraceAndCatch()) {
+//                    Log.info(f.getName());
+//                    Log.info(diff.report());
+//
+//                    if(!diff.sameCatch()) {
+//                        diffs.add(diff);
+//                        diff.toDotCatch(DiversifyProperties.getProperty("result")+"exception_"+f.getName() + ".dot");
+//                    }
+//                }
+//                else
+//                    Log.info("same trace");
+//            } catch (Exception e) {
+//                Log.error("error",e);
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");

@@ -47,7 +47,7 @@ public class ObjectExistence extends CVLTransformation {
                 compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
             }
             else {
-                int[] index = indexStart();
+                int[] index = findIndex();
                 compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[0], "/**", 0));
                 compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[1] + 1, "**/", 0));
 
@@ -57,7 +57,7 @@ public class ObjectExistence extends CVLTransformation {
         }
     }
 
-    protected int[] indexStart() throws IOException {
+    protected int[] findIndex() throws IOException {
         SourcePosition sp = object.getPosition();
         FileInputStream fstream = new FileInputStream(sp.getFile());
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
