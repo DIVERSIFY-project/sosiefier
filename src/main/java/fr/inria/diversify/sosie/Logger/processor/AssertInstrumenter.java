@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
+import fr.inria.diversify.util.Log;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
 
@@ -10,8 +11,11 @@ import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.reference.CtExecutableReference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,19 +35,45 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
 
 
     public void process(CtInvocation<?> invocation) {
-        String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeAssert(Thread.currentThread(),\"" +
-            getClass(invocation).getQualifiedName() + "\",\"" + getMethod(invocation).getSignature() + "\",\"" +
-                invocation.getTarget().getSignature()+ "\",";
-
+        CtExecutableReference<?> executable = invocation.getExecutable();
+        String snippet = "";
+        List<String> assertVar = new ArrayList<String>();
         for(CtExpression expression : invocation.getArguments()) {
-            snippet += ", " + expression.toString();
+            String var = "asssertVar_"+getCount(invocation);
+            assertVar.add(var);
+            if(expression.getTypeCasts().size() != 0)
+                snippet += expression.getTypeCasts().get(0)+" "+ var + " = "+ expression + ";\n";
+            else if(expression.getType().toString().equals("?") || expression.getType().toString().equals("<nulltype>"))
+                snippet += "Object "+ var + " = "+ expression + ";\n";
+            else if(expression.toString().endsWith(".class"))
+                snippet += "java.lang.Class<?> "+ var + " = "+ expression + ";\n";
+            else
+                snippet += expression.getType() +" "+ var + " = "+ expression + ";\n";
         }
-        snippet += ");\n";
+        snippet += "fr.inria.diversify.sosie.logger.LogWriter.writeAssert(Thread.currentThread(),\"" +
+            getClass(invocation).getQualifiedName() + "\",\"" + getMethod(invocation).getSignature() + "\",\"" +
+                executable.getSimpleName()+ "\"";
 
+        for(String var : assertVar) {
+            snippet += ", " + var;
+        }
+
+        snippet += ");\n";
+        if(assertVar.size() != 0)  {
+            snippet += /**executable.getDeclaringType().getPackage()+"."+executable.getDeclaringType().getSimpleName()+"."+**/executable.getSimpleName() + "("+assertVar.get(0);
+            for(int i = 1; i < assertVar.size(); i++)
+                snippet += ", " + assertVar.get(i);
+            snippet += ");\n";
+        }
+
+        Log.info(snippet);
         SourcePosition sp = invocation.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
         int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/\n"+snippet, 0));
 
 //        snippet = "\n}\n";
 
@@ -51,7 +81,7 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
 //        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
     }
 
-    protected int getCount(CtStatement stmt) {
+    protected int getCount(CtInvocation stmt) {
         CtExecutable parent = stmt.getParent(CtExecutable.class);
         if(count.containsKey(parent))
             count.put(parent,count.get(parent) + 1);

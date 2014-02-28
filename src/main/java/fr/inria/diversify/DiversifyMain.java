@@ -84,7 +84,10 @@ public class DiversifyMain {
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
         abstractDiversify.run(n);
 
-        abstractDiversify.printResult(DiversifyProperties.getProperty("result"),DiversifyProperties.getProperty("gitRepository")+"/diversify-exp");
+        String repo = DiversifyProperties.getProperty("gitRepository");
+        if(repo.equals(""))
+            repo = "tmp";
+        abstractDiversify.printResult(DiversifyProperties.getProperty("result"),repo+"/diversify-exp");
     }
 
     protected AbstractDiversify initAbstractDiversify() throws Exception {

@@ -3,6 +3,7 @@ package fr.inria.diversify.sosie;
 import fr.inria.diversify.sosie.logger.processor.*;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
+import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.compiler.SpoonCompiler;
@@ -28,6 +29,13 @@ import java.util.List;
  */
 public class InstruProject {
 
+    public static void main(String[] args) throws Exception {
+        MavenDependencyResolver t = new MavenDependencyResolver();
+        t.DependencyResolver(args[0] + "/pom.xml");
+
+        new InstruProject(args[0],args[1],args[2],args[3]);
+    }
+
     public InstruProject(String project, String outDir, String srcDir, String testDir) throws Exception {
 
         File dir = new File(outDir);
@@ -39,7 +47,6 @@ public class InstruProject {
 
         Factory factory = initSpoon(src);
         applyProcessor(factory, new ErrorLoggingInstrumenter());
-//        applyProcessor(factory, new ConditionalLoggingInstrumenter());
 
         Environment env = factory.getEnvironment();
         env.useSourceCodeFragments(true);
@@ -59,14 +66,14 @@ public class InstruProject {
         applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir +"/"+ testDir), new FragmentDrivenJavaPrettyPrinter(env), (allClassesName(new File(test)))));
 
         ConditionalLoggingInstrumenter.writeIdFile(outDir);
-        copyLogger(outDir);
+        copyLogger(outDir, srcDir);
     }
 
     protected Factory initSpoon(String srcDirectory) {
 
         StandardEnvironment env = new StandardEnvironment();
-        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
-        env.setComplianceLevel(javaVersion);
+//        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
+//        env.setComplianceLevel(javaVersion);
         env.setVerbose(true);
         env.setDebug(true);
 
@@ -109,8 +116,8 @@ public class InstruProject {
         return list;
     }
 
-    protected void copyLogger(String tmpDir) throws IOException {
-        File dir = new File(tmpDir+"/"+DiversifyProperties.getProperty("src")+"/fr/inria/diversify/sosie/logger");
+    protected void copyLogger(String tmpDir, String src) throws IOException {
+        File dir = new File(tmpDir+"/"+src+"/fr/inria/diversify/sosie/logger");
         FileUtils.forceMkdir(dir);
         FileUtils.copyFileToDirectory(new File(System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/LogWriter.java"),dir);
         FileUtils.copyFileToDirectory(new File(System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/ShutdownHookLog.java"),dir);
