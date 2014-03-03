@@ -1,7 +1,6 @@
-package fr.inria.diversify.sosie.pointSequence;
+package fr.inria.diversify.sosie.compare.refactor;
 
-import fr.inria.diversify.sosie.compare.VariableDiff;
-import fr.inria.diversify.sosie.compare.refactor.Diff;
+
 
 import java.util.*;
 
@@ -13,10 +12,11 @@ import java.util.*;
 public class ConditionalPoint extends Point {
     Map<String, String> vars;
 
-    public ConditionalPoint(String string, Map<String,String> idMap, ConditionalPoint last) {
+    public ConditionalPoint(String string, Map<String, String> idMap, ConditionalPoint last) {
         super();
         buildFromId(string, idMap, last);
     }
+
     public boolean sameValue(Point point) {
         if(!(point instanceof ConditionalPoint))
             return false;
@@ -94,32 +94,29 @@ public class ConditionalPoint extends Point {
         }
     }
 
-    @Override
-    public String toDot(Set varsDiff) {
-        String dot = hashCode() + "     ";
-        dot += "[\n label =";
-        if(varsDiff.isEmpty())
-            dot += "\"" + toString() + "\"";
+//    @Override
+//    public String toDot(Set varsDiff) {
+//        String dot = hashCode() + "     ";
+//        dot += "[\n label =";
+//        if(varsDiff.isEmpty())
+//            dot += "\"" + toString() + "\"";
+//
+//        else {
+//            dot += "\"" + toString();
+//            for(Object vf : varsDiff)
+//                dot += "\\n"+((VariableDiff)vf).toDot();
+//            dot += "\"\n,color=\"red\",";
+//        }
+//        dot += "\n];";
+//        return dot;
+//    }
 
-        else {
-            dot += "\"" + toString();
-            for(Object vf : varsDiff)
-                dot += "\\n"+((VariableDiff)vf).toDot();
-            dot += "\"\n,color=\"red\",";
-        }
-        dot += "\n];";
-        return dot;
-    }
+    public Set<Diff> getDiff(Point point) {
+        ConditionalPoint p = (ConditionalPoint)point;
 
-    @Override
-    public List<Diff> getDiff(Point p) {
-        return null;
-    }
-
-    public Set<VariableDiff> getDifVar(ConditionalPoint point) {
-        Set<VariableDiff> difVar = new HashSet<VariableDiff>();
+        Set<Diff> difVar = new HashSet<Diff>();
         for(String varName : vars.keySet()) {
-            String other = point.vars.get(varName);
+            String other = p.vars.get(varName);
             if(other == null) {
                 new Exception("pas les meme variables");
             }

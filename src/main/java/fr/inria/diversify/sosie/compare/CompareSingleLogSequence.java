@@ -75,7 +75,7 @@ public class CompareSingleLogSequence {
             divergence[i][1] = start2;
             Point oPoint = ps1.getConditionalPoint(start1);
             Point sPoint = ps2.getConditionalPoint(start2);
-            if(!oPoint.sameLogPoint(sPoint)) {
+            if(!oPoint.samePosition(sPoint)) {
                 int newSyncho[] = findSyncro(syncroRange, ps1,ps2,  start1,start2);
                 if(newSyncho == null)
                     return null;
@@ -110,7 +110,7 @@ public class CompareSingleLogSequence {
             startSosie++;
             ConditionalPoint oPoint = original.getConditionalPoint(startOriginal);
             ConditionalPoint sPoint = sosie.getConditionalPoint(startSosie);
-            if(oPoint.sameLogPoint(sPoint) && !oPoint.sameValue(sPoint)) {
+            if(oPoint.samePosition(sPoint) && !oPoint.sameValue(sPoint)) {
                 for(VariableDiff dVar : oPoint.getDifVar(sPoint))
                     if(!containsExcludeVar(dVar)) {
                         dVar.setPositionInOrignal(startOriginal);
@@ -163,7 +163,7 @@ public class CompareSingleLogSequence {
             for(int j = iSosie; (j < syncroRange + iSosie) && (j < ps2.conditionalSize()); j++) {
                 Point oPoint = ps1.getConditionalPoint(i);
                 Point sPoint = ps2.getConditionalPoint(j);
-                if(oPoint.sameLogPoint(sPoint))
+                if(oPoint.samePosition(sPoint))
                     return new int[]{i,j};
             }
         }

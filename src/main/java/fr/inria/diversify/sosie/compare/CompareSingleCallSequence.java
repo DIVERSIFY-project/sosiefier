@@ -71,7 +71,7 @@ public class CompareSingleCallSequence {
 
             CallPoint oPoint = ps1.getCallPoint(start1);
             CallPoint sPoint = ps2.getCallPoint(start2);
-            if(!oPoint.sameLogPoint(sPoint)) {
+            if(!oPoint.samePosition(sPoint)) {
                 int newSyncho[] = findSyncro(syncroRange, ps1, ps2, start1,start2);
                 if(newSyncho == null)
                     return null;
@@ -119,7 +119,7 @@ public class CompareSingleCallSequence {
             for(int j = iSosie; (j < syncroRange + iSosie) && (j < ps2.callSize()); j++) {
                 Point oPoint = ps1.getCallPoint(i);
                 Point sPoint = ps2.getCallPoint(j);
-                if(oPoint.sameLogPoint(sPoint))
+                if(oPoint.samePosition(sPoint))
                     return new int[]{i,j};
             }
         }

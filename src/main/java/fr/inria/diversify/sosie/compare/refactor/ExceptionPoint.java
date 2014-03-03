@@ -1,12 +1,7 @@
-package fr.inria.diversify.sosie.pointSequence;
+package fr.inria.diversify.sosie.compare.refactor;
 
-import fr.inria.diversify.sosie.compare.ExceptionDiff;
-import fr.inria.diversify.sosie.compare.refactor.Diff;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Simon
@@ -14,13 +9,17 @@ import java.util.Set;
  * Time: 2:21 PM
  */
 public class ExceptionPoint extends Point {
+    protected boolean isCatch = false;
+    protected List<String> stackTrace;
 
-    private List<String> stackTrace;
-
-    public ExceptionPoint(String string, Map<String,String> idMap) {
+    public ExceptionPoint(String string, Map<String, String> idMap) {
         super(string, idMap);
     }
 
+    public ExceptionPoint(String string, Map<String, String> idMap, boolean isCatch) {
+        super(string, idMap);
+        this.isCatch = isCatch;
+    }
 
     @Override
     protected void buildFrom(String string, Map<String,String> idMap) {
@@ -28,14 +27,12 @@ public class ExceptionPoint extends Point {
         String[] array = string.split(":;:");
         String[] position = string.split(";");
         try {
-//            id = Integer.parseInt(array[1]);
             className = position[1];
 
             methodSignature = position[2];
             for (int i = 1; i< array.length; i++) {
                 stackTrace.add(array[i]);
             }
-            //nbPoint++;
         } catch (Exception e) {
             error++;
             bugPoint = true;
@@ -43,29 +40,13 @@ public class ExceptionPoint extends Point {
     }
 
     @Override
-    public String toDot(Set catchDiff) {
-        String dot = hashCode() + "     ";
-        dot += "[\n label =";
-        if(catchDiff.isEmpty())
-            dot += "\"" + toString() + "\"";
-
-        else {
-            dot += "\"" + toString();
-            for(Object vf : catchDiff)
-                dot += "\\n"+((ExceptionDiff)vf).toDot();
-            dot += "\"\n,color=\"red\",";
-        }
-        dot += "\n];";
-        return dot;
+    public Set<Diff> getDiff(Point p) {
+        ExceptionDiff e = new ExceptionDiff(className,methodSignature, isCatch, stackTrace, ((ExceptionPoint)p).stackTrace);
+        Set<Diff> set = new HashSet<Diff>();
+        set.add(e);
+        return set;
     }
 
-    @Override
-    public List<Diff> getDiff(Point p) {
-        return null;
-    }
-
-
-    @Override
     public boolean sameValue(Point sPoint) {
         ExceptionPoint cPoint = (ExceptionPoint)sPoint;
         return sameStackTrace(cPoint.stackTrace);

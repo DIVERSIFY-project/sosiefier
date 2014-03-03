@@ -3,7 +3,6 @@ package fr.inria.diversify.sosie.pointSequence;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +60,7 @@ public class PointSequence {
             if(callPoint.size() > 0) {
                 CallPoint last = callPoint.get(callPoint.size() - 1);
                 CallPoint point = new CallPoint(stringPoint, idMap);
-                if(last.sameLogPoint(point))
+                if(last.samePosition(point))
                     last.incNb();
                 else
                     callPoint.add(point);

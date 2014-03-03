@@ -1,7 +1,9 @@
 package fr.inria.diversify.sosie.pointSequence;
 
+import fr.inria.diversify.sosie.compare.refactor.Diff;
 import fr.inria.diversify.util.Log;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -37,7 +39,7 @@ public class CallPoint extends Point {
             bugPoint = true;
     }
 
-    public boolean sameLogPoint(Point point) {
+    public boolean samePosition(Point point) {
         if(bugPoint || point.bugPoint)
             return bugPoint || point.bugPoint;
 
@@ -45,7 +47,17 @@ public class CallPoint extends Point {
     }
 
     @Override
+    public boolean sameValue(Point p) {
+        return false;
+    }
+
+    @Override
     public String toDot(Set varDiff) {
+        return null;
+    }
+
+    @Override
+    public List<Diff> getDiff(Point p) {
         return null;
     }
 

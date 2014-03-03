@@ -70,7 +70,7 @@ public class
             start2++;
             Point oPoint = ps1.getExceptionPoint(start1);
             Point sPoint = ps2.getExceptionPoint(start2);
-            if(!oPoint.sameLogPoint(sPoint)) {
+            if(!oPoint.samePosition(sPoint)) {
                 int newSyncho[] = findSyncro(syncroRange, ps1, ps2, start1,start2);
                 if(newSyncho == null)
                     return null;
@@ -104,7 +104,7 @@ public class
             startSosie++;
             ExceptionPoint oPoint = original.getExceptionPoint(startOriginal);
             ExceptionPoint sPoint = sosie.getExceptionPoint(startSosie);
-            if(oPoint.sameLogPoint(sPoint) && !oPoint.sameExceptionTrace(sPoint)) {
+            if(oPoint.samePosition(sPoint)) { //&& !oPoint.sameExceptionTrace(sPoint)) {
                 ExceptionDiff cd = new ExceptionDiff();
                 cd.setOriginal(original);
                 cd.setSosie(sosie);
@@ -154,7 +154,7 @@ public class
             for(int j = iSosie; (j < syncroRange + iSosie) && (j < ps2.exceptionSize()); j++) {
                 Point oPoint = ps1.getExceptionPoint(i);
                 Point sPoint = ps2.getExceptionPoint(j);
-                if(oPoint.sameLogPoint(sPoint))
+                if(oPoint.samePosition(sPoint))
                     return new int[]{i,j};
             }
         }
