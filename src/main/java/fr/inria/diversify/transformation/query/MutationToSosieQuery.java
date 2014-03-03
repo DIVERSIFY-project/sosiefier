@@ -44,24 +44,34 @@ public class MutationToSosieQuery extends TransformationQuery {
     @Override
     public ASTTransformation getTransformation() throws Exception {
         Random r = new Random();
-        Transformation mutation = mutations.get(r.nextInt(mutations.size()));
-        while(mutation.getStatus() != -1)
+        Transformation mutation = null;
+        ASTTransformation transformation = null;
+        while (transformation == null) {
             mutation = mutations.get(r.nextInt(mutations.size()));
+            while (mutation.getStatus() != -1)
+                mutation = mutations.get(r.nextInt(mutations.size()));
 
-        MultiCoverageReport coverageReport = new MultiCoverageReport(classesDir);
-        for(String failure : mutation.getFailures())   {
-            String test = formatTest(failure);
-            for(File jacocoFile : jacocoDir.listFiles()) {
-                if(test.equals(jacocoFile.getName()))
-                    coverageReport.addJacocoFile(jacocoFile);
+            MultiCoverageReport coverageReport = new MultiCoverageReport(classesDir);
+            for (String failure : mutation.getFailures()) {
+                String test = formatTest(failure);
+                for (File jacocoFile : jacocoDir.listFiles()) {
+                    if (test.equals(jacocoFile.getName()))
+                        coverageReport.addJacocoFile(jacocoFile);
+                }
             }
+
+            T thread = new T(new ASTTransformationQuery(coverageReport, Statement.class));
+            thread.start();
+            int count = 0;
+            while (thread.trans == null && count < 50) {
+                Thread.sleep(100);
+                count++;
+            }
+            thread.interrupt();
+            transformation = thread.trans;
         }
-
-        ASTTransformationQuery query = new ASTTransformationQuery(coverageReport, Statement.class);
-
-        ASTTransformation trans = query.getTransformation();
-        trans.setParent(mutation);
-        return trans;
+        transformation.setParent(mutation);
+        return transformation;
     }
 
     protected String formatTest(String failure) {
@@ -71,5 +81,21 @@ public class MutationToSosieQuery extends TransformationQuery {
             ret += "." + tmp[i];
         }
         return ret + "#" +tmp[tmp.length - 1] + ".exec";
+    }
+
+    class T extends Thread {
+        public ASTTransformation trans;
+        ASTTransformationQuery query;
+
+        public T(ASTTransformationQuery query) {
+            this.query = query;
+        }
+        public void run() {
+            try {
+                trans = query.getTransformation();
+            } catch (Exception e) {
+
+            }
+        }
     }
 }

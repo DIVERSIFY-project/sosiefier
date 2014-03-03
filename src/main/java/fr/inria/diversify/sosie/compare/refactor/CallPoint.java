@@ -15,10 +15,10 @@ public class CallPoint extends Point {
 
     }
 
-    @Override
-    public String toDot(Set varDiff) {
-        return null;
-    }
+//    @Override
+//    public String toDot(Set varDiff) {
+//        return null;
+//    }
 
     @Override
     public Set<Diff> getDiff(Point p) {
