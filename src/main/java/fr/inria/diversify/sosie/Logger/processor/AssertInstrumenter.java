@@ -38,24 +38,31 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
         CtExecutableReference<?> executable = invocation.getExecutable();
         String snippet = "";
         List<String> assertVar = new ArrayList<String>();
+        List<String> types = new ArrayList<String>();
+
         for(CtExpression expression : invocation.getArguments()) {
             String var = "asssertVar_"+getCount(invocation);
+            String type;
             assertVar.add(var);
             if(expression.getTypeCasts().size() != 0)
-                snippet += expression.getTypeCasts().get(0)+" "+ var + " = "+ expression + ";\n";
+                type = expression.getTypeCasts().get(0).toString();
             else if(expression.getType().toString().equals("?") || expression.getType().toString().equals("<nulltype>"))
-                snippet += "Object "+ var + " = "+ expression + ";\n";
+                type = "Object";
             else if(expression.toString().endsWith(".class"))
-                snippet += "java.lang.Class<?> "+ var + " = "+ expression + ";\n";
+                type = "java.lang.Class<?>";
             else
-                snippet += expression.getType() +" "+ var + " = "+ expression + ";\n";
+                type = expression.getType().toString();
+
+            types.add(type);
+            snippet += type + " " + var + " = "+ expression + ";\n";
         }
+
         snippet += "fr.inria.diversify.sosie.logger.LogWriter.writeAssert(Thread.currentThread(),\"" +
             getClass(invocation).getQualifiedName() + "\",\"" + getMethod(invocation).getSignature() + "\",\"" +
                 executable.getSimpleName()+ "\"";
 
-        for(String var : assertVar) {
-            snippet += ", " + var;
+        for(int i = 0; i < assertVar.size(); i++) {
+            snippet += ", " + types.get(i) +", "+ assertVar.get(i);
         }
 
         snippet += ");\n";
