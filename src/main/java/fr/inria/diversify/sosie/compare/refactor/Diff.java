@@ -1,10 +1,12 @@
 package fr.inria.diversify.sosie.compare.refactor;
 
 
-public class Diff {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public abstract class Diff {
     protected String className;
     protected String methodSignature;
-    protected String name;
     protected int positionInOriginal;
     protected int positionInSosie;
     private Point pointSosie;
@@ -29,10 +31,11 @@ public class Diff {
         return  this.pointSosie;
     }
 
-    public String toString() {
-        return className+":"+methodSignature+":"+name;
-    }
+//    public String toString() {
+//        return className+":"+methodSignature+":"+name;
+//    }
 
+    public abstract JSONObject toJSON() throws JSONException;
 
     public void setDivergence(int[][] divergence) {
         this.divergence = divergence;

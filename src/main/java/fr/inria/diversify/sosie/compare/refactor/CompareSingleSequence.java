@@ -146,9 +146,9 @@ public class CompareSingleSequence {
     }
 
     protected boolean containsExcludeVar(Diff var) {
-//        for (Diff excludeVar : diff)
-//            if (excludeVar.toString().equals(var.toString()))
-//                return true;
+        for (Diff excludeVar : diff)
+            if (excludeVar.toString().equals(var.toString()))
+                return true;
         return false;
     }
 

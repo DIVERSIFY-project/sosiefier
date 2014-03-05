@@ -50,7 +50,6 @@ import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
  * Time: 11:41 AM
  */
 public class DiversifyMain {
-    private CodeFragmentList codeFragments;
 
     public DiversifyMain(String propertiesFile) throws Exception {
         new DiversifyProperties(propertiesFile);
@@ -262,45 +261,45 @@ public class DiversifyMain {
 
 
 
-    protected void computeOtherStat() throws InterruptedException {
-        Util stat = new Util(codeFragments);
-        try {
-            System.out.println("number of not possible code fragment replace/add: " + stat.numberOfNotDiversification());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("number of possible code fragment replace: "+ stat.getAllReplace().size());
-        System.out.println("number of possible code fragment add: " + stat.getAllAdd().size());
-        System.out.println("number of possible code fragment delete: " + stat.getAllDelete().size());
-    }
-
-    protected void computeCodeFragmentStatistic(String output) {
-        StatisticCodeFragment stat = new StatisticCodeFragment(codeFragments);
-        try {
-            stat.writeStatistic(output);
-        } catch (IOException e) {
-            Log.error("computeCodeFragmentStatistic ", e);
-        }
-    }
+//    protected void computeOtherStat() throws InterruptedException {
+//        Util stat = new Util(codeFragments);
+//        try {
+//            System.out.println("number of not possible code fragment replace/add: " + stat.numberOfNotDiversification());
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("number of possible code fragment replace: "+ stat.getAllReplace().size());
+//        System.out.println("number of possible code fragment add: " + stat.getAllAdd().size());
+//        System.out.println("number of possible code fragment delete: " + stat.getAllDelete().size());
+//    }
+//
+//    protected void computeCodeFragmentStatistic(String output) {
+//        StatisticCodeFragment stat = new StatisticCodeFragment(codeFragments);
+//        try {
+//            stat.writeStatistic(output);
+//        } catch (IOException e) {
+//            Log.error("computeCodeFragmentStatistic ", e);
+//        }
+//    }
     protected void initLogLevel() {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);
     }
 
 
-    protected  int test() throws IOException {
-        ICoverageReport rg = initCoverageReport();
-        Util util = new Util(codeFragments);
-        int count = 0;
-        int count2 = 0;
-        for(CodeFragment cf  :codeFragments) {
-            count2++;
-            if(util.findStupidCandidate(cf, rg).size() != 0)
-                count++;
-            Log.debug("stmt {} {}", count2,count);
-        }
-        return count;
-    }
+//    protected  int test() throws IOException {
+//        ICoverageReport rg = initCoverageReport();
+//        Util util = new Util(codeFragments);
+//        int count = 0;
+//        int count2 = 0;
+//        for(CodeFragment cf  :codeFragments) {
+//            count2++;
+//            if(util.findStupidCandidate(cf, rg).size() != 0)
+//                count++;
+//            Log.debug("stmt {} {}", count2,count);
+//        }
+//        return count;
+//    }
 
     protected void sosieOnMultiProject() throws Exception {
 //        TestSosie d = new TestSosie(initTransformationQuery(), DiversifyProperties.getProperty("project"));

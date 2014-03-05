@@ -7,6 +7,7 @@ import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.compiler.SpoonCompiler;
@@ -17,6 +18,7 @@ import spoon.support.StandardEnvironment;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Set;
 
@@ -58,16 +60,16 @@ public class CompareLogMain {
     }
 
     protected void same() throws IOException {
-        CompareMultiSequence un = new CompareMultiSequence(dirOriginal,dirSosie, ExceptionPointSequence.class);
+        CompareMultiSequence un = new CompareMultiSequence(dirOriginal,dirSosie,getType());
         un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
         un.findAndWriteDiff(varToExclude);
     }
 
     protected void diff() throws Exception {
-        String startPointString = DiversifyProperties.getProperty("startPoint");
+        String startPointString = "diversificationPoint";
             Log.debug("loading log from dir {}",dirSosie);
             try {
-                File startPoint = new File(dirSosie+"/"+startPointString);
+                File startPoint = new File(dirSosie+"/../"+startPointString);
                 TransformationParser parser = new TransformationParser(true);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
                 CodeFragment cf = null;
@@ -75,33 +77,38 @@ public class CompareLogMain {
                     cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
                 } catch (Exception e) {}
 
-                CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, cf ,varToExclude, ExceptionPointSequence.class);
+                CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, cf ,varToExclude, getType());
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
 
                  un.findDiff();
                 Set<Diff> diff = un.getDiffs();
-                Log.info(""+diff.size());
+                Log.info("{} {}",getType() ,diff.size());
 
-//                writeResult(diff,cf);
+                writeResult(diff,cf);
             } catch (Exception e) {
                 Log.error("error",e);
                 e.printStackTrace();
             }
     }
-//
-//    protected void writeResult(Diff diff, CodeFragment cf) throws IOException, JSONException {
-//        FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "compare"+System.currentTimeMillis()+".json");
-//       JSONObject o =  diff.toJson();
-//        o.put("dirSosie", dirSosie);
-//        o.put("dirOriginal", dirOriginal);
-//        try {
-//            JSONObject cfJSON = cf.toJSONObject();
-//            o.put("startingPoint",cfJSON);
-//        } catch (Exception e) {}
-//
-//        o.write(writer);
-//        writer.close();
-//    }
+
+    protected void writeResult(Set<Diff> diffs, CodeFragment cf) throws IOException, JSONException {
+        FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "compare"+System.currentTimeMillis()+".json");
+        JSONArray array = new JSONArray();
+
+        for(Diff diff : diffs) {
+            JSONObject o =  diff.toJSON();
+            o.put("dirSosie", dirSosie);
+            o.put("dirOriginal", dirOriginal);
+            try {
+                JSONObject cfJSON = cf.toJSONObject();
+                o.put("startingPoint",cfJSON);
+            } catch (Exception e) {}
+            array.put(o);
+        }
+
+        array.write(writer);
+        writer.close();
+    }
 
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
@@ -128,6 +135,14 @@ public class CompareLogMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected Class getType() {
+        if(DiversifyProperties.getProperty("type").equals("assert"))
+            return AssertPointSequence.class;
+        if(DiversifyProperties.getProperty("type").equals("exception"))
+            return ExceptionPointSequence.class;
+        return null;
     }
 
     protected void initLogLevel() {

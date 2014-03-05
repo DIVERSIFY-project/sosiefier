@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.compare.refactor;
 
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -20,9 +21,11 @@ public class AssertPoint extends Point {
     @Override
     protected void buildFrom(String string, Map<String, String> idMap) {
         vars = new ArrayList<String>();
+        type = new ArrayList<String>();
         String[] array = string.split(":;:");
+
         try {
-            id = Integer.parseInt(array[0]);
+//            id = Integer.parseInt(array[0]);
             className = array[1];
             methodSignature = array[2];
             assertType = array[3];
@@ -33,16 +36,18 @@ public class AssertPoint extends Point {
         } catch (Exception e) {
             bugPoint = true;
         }
+        className = array[1];
     }
 
     public boolean sameValue(Point point) {
-        if(!(point instanceof ConditionalPoint))
+        if(!(point instanceof AssertPoint))
             return false;
 
-        ConditionalPoint cp = (ConditionalPoint)point;
+        AssertPoint cp = (AssertPoint)point;
         boolean ret = true;
         for(int i = 0; i < vars.size(); i++) {
-            if(valueEqual(vars.get(i),cp.vars.get(i))) {
+            if(!type.get(i).equals(cp.type.get(i))
+                    || !valueEqual(vars.get(i),cp.vars.get(i))) {
                 ret = false;
                 break;
             }

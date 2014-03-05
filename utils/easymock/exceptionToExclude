@@ -1,0 +1,3 @@
+org.easymock.internal.MockInvocationHandler:java.lang.Object invoke(java.lang.Object,java.lang.reflect.Method,java.lang.Object[])::false
+org.easymock.internal.Result$ThrowingAnswer:java.lang.Object answer()::false
+org.easymock.internal.ReplayState:java.lang.Object invokeInner(org.easymock.internal.Invocation)::true

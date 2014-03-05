@@ -99,7 +99,14 @@ public class CompareMultiSequence {
             String line = reader.readLine();
             while (line != null) {
                 Log.debug("exclude var: {}",line);
-                varToExclude.add(new VariableDiff(line));
+                Diff d = null;
+                if(cl == AssertPointSequence.class) {
+                    d = new AssertDiff(line);
+                }
+                if(cl == ExceptionPointSequence.class) {
+                    d = new ExceptionDiff(line);
+                }
+                varToExclude.add(d);
                 line = reader.readLine();
             }
 

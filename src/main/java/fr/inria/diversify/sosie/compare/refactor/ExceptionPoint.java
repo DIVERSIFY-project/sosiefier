@@ -25,11 +25,10 @@ public class ExceptionPoint extends Point {
     protected void buildFrom(String string, Map<String,String> idMap) {
         stackTrace = new ArrayList<String>();
         String[] array = string.split(":;:");
-        String[] position = string.split(";");
         try {
-            className = position[1];
+            className = array[1];
 
-            methodSignature = position[2];
+            methodSignature = array[2];
             for (int i = 1; i< array.length; i++) {
                 stackTrace.add(array[i]);
             }

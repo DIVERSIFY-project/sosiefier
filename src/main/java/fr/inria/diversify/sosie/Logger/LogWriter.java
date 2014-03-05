@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.logger;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,7 +75,10 @@ public class LogWriter {
                 string.append(separator);
                 string.append(var[i].toString());
                 string.append(simpleSeparator);
-                string.append(var[i + 1].toString());
+                if(var[i+1] == null)
+                    string.append("null");
+                else
+                    string.append(var[i + 1].toString());
                 vars.append(string);
             } catch (Exception e) {}
         }
@@ -129,9 +133,9 @@ public class LogWriter {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("A");
-            string.append(simpleSeparator);
+            string.append(separator);
             string.append(className);
-            string.append(simpleSeparator);
+            string.append(separator);
             string.append(methodSignature);
             string.append(separator);
             string.append(assertName);
@@ -141,11 +145,10 @@ public class LogWriter {
             }
             StringBuilder vars = new StringBuilder();
             for (int i = 0; i < var.length; i++) {
-                string = new StringBuilder();
                 try {
-                    string.append(separator);
-                    string.append(var[i].toString());
-                    vars.append(string);
+                    vars.append(separator);
+                    vars.append(  printString(var[i]));
+
                 } catch (Exception e) {}
             }
             synchronized (fileWriter) {
@@ -156,6 +159,30 @@ public class LogWriter {
         }
     }
 
+    private static String printString(Object o) {
+        String string;
+        if(o == null)
+            string = "null";
+        else if(o instanceof Object[])  {
+            Object[] array = (Object[]) o;
+            int iMax = array.length - 1;
+            if (iMax == -1)
+                return "[]";
+
+            StringBuilder b = new StringBuilder();
+            b.append('[');
+            for (int i = 0; ; i++) {
+                b.append(printString(array[i]));
+                if (i == iMax)
+                    return b.append(']').toString();
+                b.append(", ");
+            }
+        }
+        else
+            string = o.toString();
+        return string;
+    }
+
     public static void writeException(Thread thread, String className, String methodSignature, Object exception) {
         try {
             FileWriter fileWriter = init(thread);
@@ -163,9 +190,9 @@ public class LogWriter {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("E");
-            string.append(simpleSeparator);
+            string.append(separator);
             string.append(className);
-            string.append(simpleSeparator);
+            string.append(separator);
             string.append(methodSignature);
             string.append(separator);
             if(exception != null)
@@ -189,9 +216,9 @@ public class LogWriter {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("Ca");
-            string.append(simpleSeparator);
+            string.append(separator);
             string.append(className);
-            string.append(simpleSeparator);
+            string.append(separator);
             string.append(methodSignature);
             string.append(separator);
             if(exception != null)
