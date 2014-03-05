@@ -49,9 +49,15 @@ public class ASTDelete extends ASTTransformation {
         return 1;
     }
     public boolean equals(Object other) {
+        if(other == null)
+            return false;
         if(!(other instanceof ASTDelete))
             return  false;
         ASTDelete otherDelete = (ASTDelete)other;
+
+        if(!((parent == null && parent.equals(otherDelete.parent))
+                || (otherDelete.parent == null && otherDelete.parent.equals(parent))))
+            return false;
 
            return  status == otherDelete.status &&
                    name.equals(otherDelete.name) &&

@@ -81,6 +81,7 @@ public abstract class AbstractDiversify {
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException, InstantiationException, IllegalAccessException {
+        Log.debug("run test in directory: {}", directory);
         builder.setDirectory(directory);
         builder.runBuilder();
         Log.info("status: " + builder.getStatus()+", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getErrors().size());

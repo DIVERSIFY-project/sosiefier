@@ -89,9 +89,15 @@ public class ASTAdd extends ASTTransformation {
     }
 
     public boolean equals(Object other) {
+        if(other == null)
+            return false;
         if(!this.getClass().isAssignableFrom(other.getClass()))
             return  false;
         ASTAdd otherASTAdd = (ASTAdd)other;
+
+        if(!((parent == null && parent.equals(otherASTAdd.parent))
+                || (otherASTAdd.parent == null && otherASTAdd.parent.equals(parent))))
+            return false;
 
         return status == otherASTAdd.status &&
                 name.equals(otherASTAdd.name) &&

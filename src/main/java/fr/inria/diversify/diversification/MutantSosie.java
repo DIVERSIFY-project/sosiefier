@@ -20,6 +20,7 @@ import java.util.Collection;
  */
 public class MutantSosie extends AbstractDiversify {
     protected String sosieDir;
+    protected String mutantDir;
 
     public MutantSosie(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
@@ -49,45 +50,54 @@ public class MutantSosie extends AbstractDiversify {
     }
 
     protected void run(Transformation trans) throws Exception {
-        Log.debug("output dir sosie: " + tmpDir + "/" + sourceDir);
+        Log.debug("output dir mutant and sosie: " + tmpDir );
         try {
-            trans.getParent().apply(tmpDir + "/" + sourceDir);
+            Log.debug("apply mutation");
+            trans.getParent().apply(mutantDir + "/" + sourceDir);
 
+            Log.debug("apply + sosie");
             trans.getParent().apply(sosieDir + "/" + sourceDir);
             trans.apply(sosieDir + "/" + sourceDir);
 
-            if(runTest(tmpDir) < -1 || runTest(sosieDir) < -1) {
-                FileUtils.cleanDirectory(tmpDir);
-                FileUtils.forceDelete(tmpDir);
+            if(runTest(mutantDir) < -1 || runTest(sosieDir) < -1) {
+                FileUtils.cleanDirectory(mutantDir);
+                FileUtils.forceDelete(mutantDir);
 
                 FileUtils.cleanDirectory(sosieDir);
                 FileUtils.forceDelete(sosieDir);
             }
             else {
                 transformations.add(trans);
-                FileWriter fileWriter = new FileWriter(tmpDir +"/diversificationPoint");
+                FileWriter fileWriter = new FileWriter(mutantDir +"/diversificationPoint");
                 fileWriter.append(trans.toJSONObject().toString());
                 fileWriter.close();
-                instruProject(tmpDir);
+                long m = System.currentTimeMillis();
+                String outDir = tmpDir + "/instru/" + m;
+                instruProject(mutantDir, outDir + "/mutant/");
+                instruProject(sosieDir, outDir + "/mutantSosie/");
             }
         } catch (Exception e) {
             Log.warn("setCompile error during diversification", e);
-            FileUtils.cleanDirectory(tmpDir);
-            FileUtils.forceDelete(tmpDir);
+            FileUtils.cleanDirectory(mutantDir);
+            FileUtils.forceDelete(mutantDir);
+
+            FileUtils.cleanDirectory(sosieDir);
+            FileUtils.forceDelete(sosieDir);
         }
         //new tmpdir
-        init(projectDir,"output_sosie/sosie");
+        init(projectDir,tmpDir);
     }
 
     public String init(String dirProject, String dirTarget) throws IOException, InterruptedException {
+        tmpDir = dirTarget;
         long m = System.currentTimeMillis();
 
-        tmpDir = dirTarget + "/mutant_" + m;
-        File dir = new File(tmpDir);
+        mutantDir = dirTarget + "/" + m +"/mutant";
+        File dir = new File(mutantDir);
         dir.mkdirs();
         org.apache.commons.io.FileUtils.copyDirectory(new File(dirProject), dir);
 
-        sosieDir = dirTarget + "/mutantSosie_" + m;
+        sosieDir = dirTarget + "/" + m + "/mutantSosie";
         dir = new File(sosieDir);
         dir.mkdirs();
         org.apache.commons.io.FileUtils.copyDirectory(new File(dirProject), dir);
@@ -95,10 +105,9 @@ public class MutantSosie extends AbstractDiversify {
         return tmpDir;
     }
 
-    protected void instruProject(String projectDir) throws Exception {
-        String tmpDir = DiversifyProperties.getProperty("out") + "/instru/sosie_" + System.currentTimeMillis();
+    protected void instruProject(String projectDir, String outDir) throws Exception {
         String src = DiversifyProperties.getProperty("src");
         String test = DiversifyProperties.getProperty("testSrc");
-        new InstruProject(projectDir, tmpDir, src,test);
+        new InstruProject(projectDir, outDir, src,test);
     }
 }

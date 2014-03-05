@@ -35,7 +35,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     public void apply(String srcDir) throws Exception {
         addSourceCode();
         printJavaFile(srcDir);
-
+        removeSourceCode();
     }
 
     protected void addSourceCode() {
