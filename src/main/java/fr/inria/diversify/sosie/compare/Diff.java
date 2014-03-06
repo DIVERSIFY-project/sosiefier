@@ -40,4 +40,12 @@ public abstract class Diff {
     public void setDivergence(int[][] divergence) {
         this.divergence = divergence;
     }
+
+    public boolean equals(Object other) {
+        return this.toString().equals(other.toString());
+    }
+
+    public  int hashCode() {
+        return  this.toString().hashCode();
+    }
 }

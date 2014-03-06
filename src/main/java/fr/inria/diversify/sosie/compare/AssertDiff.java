@@ -25,13 +25,13 @@ public class AssertDiff extends Diff {
 
     public AssertDiff(String line) {
         String[] tmp = line.split(":");
-        this.className = tmp[0];
-        this.methodSignature = tmp[1];
-        this.assertType = tmp[2];
+        this.className = tmp[1];
+        this.methodSignature = tmp[2];
+        this.assertType = tmp[3];
     }
 
     public String toString() {
-        return className+":"+methodSignature+":"+assertType;
+        return "A:"+className+":"+methodSignature+":"+assertType;
     }
 
     @Override

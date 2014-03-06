@@ -50,7 +50,7 @@ cat ../compare.properties
 
 echo "run exception compare"
 cat ../compare.properties
-   java -Xmx2000m -XX:MaxPermSize=256m -cp $7/Diversify-statements-1.0-SNAPSHOT-jar-with-dependencies.jar fr.inria.diversify.sosie.compare.refactor.CompareLogMain ../compare.properties
+   java -Xmx2000m -XX:MaxPermSize=256m -cp $7/Diversify-statements-1.0-SNAPSHOT-jar-with-dependencies.jar fr.inria.diversify.sosie.compare.CompareLogMain ../compare.properties
 
 done
 

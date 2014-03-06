@@ -20,6 +20,7 @@ import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -31,6 +32,7 @@ public class CompareLogMain {
     private String dirOriginal;
     private String varToExclude;
     private String dirSosie;
+    private Set<Diff> allDiff;
 
     public static void main(String[] args) throws Exception {
         new DiversifyProperties(args[0]);
@@ -39,6 +41,7 @@ public class CompareLogMain {
     }
 
     protected void init() throws Exception {
+        allDiff = new HashSet<Diff>();
         initLogLevel();
         try {
         if(DiversifyProperties.getProperty("builder").equals("maven")) {
@@ -67,28 +70,36 @@ public class CompareLogMain {
 
     protected void diff() throws Exception {
         String startPointString = "diversificationPoint";
-            Log.debug("loading log from dir {}",dirSosie);
-            try {
-                File startPoint = new File(dirSosie+"/../"+startPointString);
-                TransformationParser parser = new TransformationParser(true);
-                Log.info("startPoint {}",startPoint.getAbsolutePath());
-                CodeFragment cf = null;
-                try {
-                    cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
-                } catch (Exception e) {}
+        File startPoint = new File(dirSosie+"/../"+startPointString);
+        TransformationParser parser = new TransformationParser(true);
+        Log.info("startPoint {}",startPoint.getAbsolutePath());
+        CodeFragment cf = null;
+        try {
+            cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
+        } catch (Exception e) {}
 
-                CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, cf ,varToExclude, getType());
-                un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+        String type = DiversifyProperties.getProperty("type");
+        if(type.equals("assert") || type.equals("all"))
+            diff(AssertPointSequence.class, cf);
+        if(type.equals("exception") || type.equals("all"))
+            diff(ExceptionPointSequence.class, cf);
 
-                 un.findDiff();
-                Set<Diff> diff = un.getDiffs();
-                Log.info("{} {}",getType() ,diff.size());
+        writeResult(allDiff, cf);
+    }
 
-                writeResult(diff,cf);
-            } catch (Exception e) {
-                Log.error("error",e);
-                e.printStackTrace();
-            }
+    protected void diff(Class type,  CodeFragment cf) throws Exception {
+        Log.debug("loading log from dir {}",dirSosie);
+        try {
+            CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, cf ,varToExclude, type);
+            un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+
+            un.findDiff();
+            allDiff.addAll(un.getDiffs());
+
+        } catch (Exception e) {
+            Log.error("error",e);
+            e.printStackTrace();
+        }
     }
 
     protected void writeResult(Set<Diff> diffs, CodeFragment cf) throws IOException, JSONException {

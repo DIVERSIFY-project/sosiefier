@@ -100,10 +100,10 @@ public class CompareMultiSequence {
             while (line != null) {
                 Log.debug("exclude var: {}",line);
                 Diff d = null;
-                if(cl == AssertPointSequence.class) {
+                if(line.startsWith("A")) {
                     d = new AssertDiff(line);
                 }
-                if(cl == ExceptionPointSequence.class) {
+                if(line.startsWith("E")) {
                     d = new ExceptionDiff(line);
                 }
                 varToExclude.add(d);

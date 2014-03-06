@@ -25,9 +25,9 @@ public class ExceptionDiff extends Diff {
 
     public ExceptionDiff(String line) {
         String[] tmp = line.split(":");
-        this.className = tmp[0];
-        this.methodSignature = tmp[1];
-        if(tmp[2].equals("true"))
+        this.className = tmp[1];
+        this.methodSignature = tmp[2];
+        if(tmp[3].equals("true"))
             isCatch = true;
         else
             isCatch = false;
@@ -47,6 +47,6 @@ public class ExceptionDiff extends Diff {
     }
 
     public String toString() {
-        return className+":"+methodSignature+":"+isCatch;
+        return "E:"+className+":"+methodSignature+":"+isCatch;
     }
 }
