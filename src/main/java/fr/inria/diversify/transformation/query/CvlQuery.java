@@ -8,13 +8,13 @@ import fr.inria.diversify.transformation.cvl.ObjectExistence;
 import fr.inria.diversify.transformation.cvl.ObjectSubstitution;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtField;
+import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * User: Simon
@@ -37,8 +37,7 @@ public class CvlQuery extends TransformationQuery {
     @Override
     public Transformation getTransformation() throws Exception {
         Random r = new Random();
-        int i = r.nextInt(1);
-        i = 3;
+        int i = r.nextInt(4);
         switch (i) {
             case 0: return getObjectExistence();
             case 1: return getObjectSubstitution();
@@ -49,23 +48,83 @@ public class CvlQuery extends TransformationQuery {
     }
 
     public LinkSubstitution getLinkSubstitution() {
-        LinkSubstitution ls = new LinkSubstitution();
-        List<CtElement> objects = getAllElement(CtClass.class);
         Random r = new Random();
 
-        CtClass cl = (CtClass) objects.get(r.nextInt(objects.size()));
-        while (cl.getSuperclass() == null || cl.getSuperclass().getSimpleName().equals("Object") ) {
-            cl = (CtClass) objects.get(r.nextInt(objects.size()));
-        }
-        ls.setObject(cl);
+        if(r.nextInt()%2 == 0)
+            return getLSForField();
+        else
+            return getLSForClass();
+    }
+
+    protected LinkSubstitution getLSForField() {
+        LinkSubstitution ls = new LinkSubstitution();
+        List<CtElement> objects = getAllElement(CtField.class);
+        Random r = new Random();
+
+        ls.setObject(objects.get(r.nextInt(objects.size())));
         ls.setTransplant(objects.get(r.nextInt(objects.size())));
 
         return ls;
     }
 
+    protected LinkSubstitution getLSForClass() {
+        LinkSubstitution ls = new LinkSubstitution();
+        List<CtElement> objects = getAllElement(CtClass.class);
+        Random r = new Random();
+
+        CtClass cl = (CtClass) objects.get(r.nextInt(objects.size()));
+        List<CtTypeReference> set = new ArrayList<CtTypeReference>();
+        while (cl.getSimpleName().equals("") || set.isEmpty()) {
+            set.clear();
+            cl = (CtClass) objects.get(r.nextInt(objects.size()));
+            if(cl.getSuperclass() != null)
+                set.add(cl.getSuperclass());
+            set.addAll(cl.getSuperInterfaces());
+        }
+        ls.setObject(cl);
+        ls.setTransplant(objects.get(r.nextInt(objects.size())));
+        ls.setClassOrInterfaceSubstitution(set.get(r.nextInt(set.size())));
+
+        return ls;
+    }
+
     public LinkExistence getLinkExistence() {
-        LinkExistence le = new LinkExistence();
-        return le;
+        Random r = new Random();
+
+        if(r.nextInt()%2 == 0)
+            return getLEForField();
+        else
+            return getLEForClass();
+    }
+
+    protected LinkExistence getLEForField() {
+        LinkExistence ls = new LinkExistence();
+        List<CtElement> objects = getAllElement(CtField.class);
+        Random r = new Random();
+
+        ls.setObject(objects.get(r.nextInt(objects.size())));
+
+        return ls;
+    }
+
+    protected LinkExistence getLEForClass() {
+        LinkExistence ls = new LinkExistence();
+        List<CtElement> objects = getAllElement(CtClass.class);
+        Random r = new Random();
+
+        CtClass cl = (CtClass) objects.get(r.nextInt(objects.size()));
+        List<CtTypeReference> set = new ArrayList<CtTypeReference>();
+        while (cl.getSimpleName().equals("") || set.isEmpty()) {
+            set.clear();
+            cl = (CtClass) objects.get(r.nextInt(objects.size()));
+            if(cl.getSuperclass() != null)
+                set.add(cl.getSuperclass());
+            set.addAll(cl.getSuperInterfaces());
+        }
+        ls.setObject(cl);
+        ls.setClassOrInterfaceExistance(set.get(r.nextInt(set.size())));
+
+        return ls;
     }
 
     public ObjectSubstitution getObjectSubstitution() {

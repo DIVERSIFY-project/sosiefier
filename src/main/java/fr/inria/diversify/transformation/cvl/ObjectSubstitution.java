@@ -1,6 +1,9 @@
 package fr.inria.diversify.transformation.cvl;
 
+import fr.inria.diversify.codeFragment.CodeFragmentEqualPrinter;
 import fr.inria.diversify.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
@@ -54,6 +57,20 @@ public class ObjectSubstitution extends CVLTransformation {
 
     public CtElement getTransplant() {
         return transplant;
+    }
+
+    @Override
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject json = super.toJSONObject();
+
+        json.put("transplantPosition", transplant.getParent(CtPackage.class).getQualifiedName()
+                + "." + transplant.getParent(CtSimpleType.class).getSimpleName() + ":" + transplant.getPosition().getLine());
+
+        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(transplant.getFactory().getEnvironment());
+        transplant.accept(pp);
+        json.put("transplant", pp.toString());
+
+        return json;
     }
 
 }

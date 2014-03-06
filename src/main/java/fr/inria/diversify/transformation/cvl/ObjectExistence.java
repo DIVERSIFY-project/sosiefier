@@ -38,10 +38,6 @@ public class ObjectExistence extends CVLTransformation {
             SourcePosition sp = object.getPosition();
             CompilationUnit compileUnit = sp.getCompilationUnit();
 
-
-//            if(object instanceof CtExpression)
-//                compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/null", 0));
-//            else
             if(object instanceof CtStatement && !(object instanceof CtExpression))  {
                 compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
                 compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));

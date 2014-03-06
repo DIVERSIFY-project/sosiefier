@@ -1,13 +1,13 @@
 package fr.inria.diversify.transformation.cvl;
 
+import fr.inria.diversify.codeFragment.CodeFragmentEqualPrinter;
 import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.compiler.Environment;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
@@ -99,5 +99,20 @@ public abstract class CVLTransformation extends AbstractTransformation {
 
     public CtElement getObject() {
         return object;
+    }
+
+    @Override
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject json = super.toJSONObject();
+
+        json.put("objectPosition", object.getParent(CtPackage.class).getQualifiedName()
+                + "." + object.getPosition().getCompilationUnit().getMainType().getSimpleName() + ":" + object.getPosition().getLine());
+
+        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(object.getFactory().getEnvironment());
+        object.accept(pp);
+        json.put("object", pp.toString());
+        json.put("nodeType", stmtType());
+
+        return json;
     }
 }
