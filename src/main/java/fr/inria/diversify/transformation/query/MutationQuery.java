@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.DiversifyEnvironment;
+import fr.inria.diversify.util.DiversifyEnvironment;
 
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;

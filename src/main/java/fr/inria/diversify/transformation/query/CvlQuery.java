@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.DiversifyEnvironment;
+import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.cvl.LinkExistence;
 import fr.inria.diversify.transformation.cvl.LinkSubstitution;
@@ -9,7 +9,6 @@ import fr.inria.diversify.transformation.cvl.ObjectSubstitution;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;

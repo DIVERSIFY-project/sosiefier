@@ -1,11 +1,10 @@
-package fr.inria.diversify;
+package fr.inria.diversify.util;
 
+import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.BinaryOperatorProcessor;
 import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
-import fr.inria.diversify.util.DiversifyProperties;
-import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;

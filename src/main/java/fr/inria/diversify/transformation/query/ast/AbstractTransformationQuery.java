@@ -1,15 +1,12 @@
 package fr.inria.diversify.transformation.query.ast;
 
 import fr.inria.diversify.CodeFragmentList;
-import fr.inria.diversify.DiversifyEnvironment;
+import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import spoon.processing.ProcessingManager;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
-import spoon.support.QueueProcessingManager;
 
 import java.util.Collection;
 import java.util.Random;

@@ -25,7 +25,6 @@ public class AssertPoint extends Point {
         String[] array = string.split(":;:");
 
         try {
-//            id = Integer.parseInt(array[0]);
             className = array[1];
             methodSignature = array[2];
             assertType = array[3];

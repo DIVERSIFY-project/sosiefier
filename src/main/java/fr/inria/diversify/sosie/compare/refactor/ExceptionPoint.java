@@ -48,7 +48,8 @@ public class ExceptionPoint extends Point {
 
     public boolean sameValue(Point sPoint) {
         ExceptionPoint cPoint = (ExceptionPoint)sPoint;
-        return sameStackTrace(cPoint.stackTrace);
+
+        return isCatch == cPoint.isCatch && sameStackTrace(cPoint.stackTrace);
     }
 
     protected boolean sameStackTrace(List<String> otherStackTrace) {
@@ -56,9 +57,10 @@ public class ExceptionPoint extends Point {
             return false;
 
         for(int i = 0; i < stackTrace.size(); i++) {
-            String exception1 = stackTrace.get(i).split(":")[0];
-            String exception2 = otherStackTrace.get(i).split(":")[0];
-
+//            String exception1 = stackTrace.get(i).split(":")[0];
+//            String exception2 = otherStackTrace.get(i).split(":")[0];
+            String exception1 = stackTrace.get(i);
+            String exception2 = otherStackTrace.get(i);
             if(!exception1.equals(exception2))
                 return false;
         }

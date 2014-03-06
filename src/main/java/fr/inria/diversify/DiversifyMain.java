@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.MutantSosie;
-import fr.inria.diversify.statistic.CrossValidation;
-import fr.inria.diversify.statistic.StatisticCodeFragment;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.diversification.builder.AbstractBuilder;
@@ -17,6 +14,7 @@ import fr.inria.diversify.transformation.query.CvlQuery;
 import fr.inria.diversify.transformation.query.MutationQuery;
 import fr.inria.diversify.transformation.query.MutationToSosieQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
+import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import javassist.NotFoundException;
 
@@ -34,7 +32,6 @@ import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.AbstractDiversify;
 import fr.inria.diversify.diversification.Diversify;
 import fr.inria.diversify.diversification.Sosie;
-import fr.inria.diversify.statistic.Util;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
