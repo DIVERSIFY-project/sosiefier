@@ -1,8 +1,6 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.sosie.pointSequence.Point;
-import fr.inria.diversify.sosie.pointSequence.PointSequence;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 
@@ -16,36 +14,42 @@ import java.util.*;
  */
 public class CompareMultiSequence {
 
-    protected List<PointSequence> originals;
-    protected List<PointSequence> sosies;
-    protected Set<VariableDiff> varToExclude;
+    protected List<AbstractPointSequence> originals;
+    protected List<AbstractPointSequence> sosies;
+    protected Set<Diff> varToExclude;
     protected int syncroRange = 0;
     protected CodeFragment startPoint;
+    protected Set<Diff> diffs;
+    protected Class cl;
 
-    public CompareMultiSequence(String dirOriginal, String dirSosie) {
+
+    public CompareMultiSequence(String dirOriginal, String dirSosie, Class cl) {
+        varToExclude = new HashSet<Diff>();
+        this.cl = cl;
+        diffs = new HashSet<Diff>();
         originals = loadPointSequence(dirOriginal,false);
         sosies = loadPointSequence(dirSosie,false);
-        varToExclude = new HashSet<VariableDiff>();
     }
 
-    public CompareMultiSequence(String dirOriginal, String dirSosie, CodeFragment startPoint, String fileExcludeVar) throws IOException, JSONException {
+    public CompareMultiSequence(String dirOriginal, String dirSosie, CodeFragment startPoint, String fileExcludeVar, Class cl) throws IOException, JSONException {
+        this.startPoint = startPoint;
+        this.cl = cl;
+        diffs = new HashSet<Diff>();
         originals = loadPointSequence(dirOriginal,false);
         sosies = loadPointSequence(dirSosie,false);
         varToExclude = loadVarToExclude(fileExcludeVar);
-        this.startPoint = startPoint;
-
     }
 
 
-    public boolean findAndWriteDiffVar(String fileName) throws IOException {
+    public boolean findAndWriteDiff(String fileName) throws IOException {
         loadVarToExclude(fileName);
         try {
-            this.findDiffVarToExclude();
+            this.findDiffToExclude();
             FileWriter fw = new FileWriter(fileName);
             BufferedWriter bw = new BufferedWriter(fw);
-            for(VariableDiff var: varToExclude) {
+            for(Diff var: varToExclude) {
                 Log.debug("var to exclude: {}", var);
-                bw.write(var.stringForExcludeFile()+"\n");
+                bw.write(var+"\n");
             }
             bw.close();
             fw.close();
@@ -59,71 +63,50 @@ public class CompareMultiSequence {
     /**
      * search if the original and sosie (two set of trace) not diverge at the call level and variable level
      *
-     * @throws IOException
-     */
-    public void findDiffVar(Diff diff) throws IOException {
-        for (PointSequence original : originals) {
-            for (PointSequence sosie : sosies) {
-
-                CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
-                cls.setDiffVar(varToExclude);
-                if (sosie.getFullName().equals(original.getFullName())) {
-//                    Log.info("compare var: {} ",original.getFullName());
-                    diff.addMatch(original,sosie);
-                    diff.addVarFor(original, cls.findDivergenceVar(syncroRange));
-                    diff.addDivergence(original, cls.findDivergence(syncroRange));
-                }
-            }
-            if(!diff.hasMatch(original))
-                diff.addMatch(original,null);
-        }
-    }
-
-    public void findDiffVarToExclude() {
-        for (PointSequence original : originals) {
-            for (PointSequence sosie : sosies) {
-
-                CompareSingleLogSequence cls = new CompareSingleLogSequence(original, sosie, startPoint);
-                cls.setDiffVar(varToExclude);
-                if (sosie.getName().equals(original.getName())) {
-                    varToExclude.addAll(cls.findDivergenceVar(syncroRange));
-                }
-            }
-        }
-    }
-
-    /**
-     * search if the original and sosie (two set of trace) diverge at the call level
      * @throws java.io.IOException
      */
-    public void findDivergenceCall(Diff diff) {
-        for (PointSequence original : originals) {
-            String originalName = original.getFullName();
-            for (PointSequence sosie : sosies) {
-                String sosieName = sosie.getFullName();
-                CompareSingleCallSequence cls = new CompareSingleCallSequence(original, sosie, startPoint);
-                if (sosieName.equals(originalName)) {
-//                    Log.info("compare call: {} ",sosieName);
-                    diff.addMatch(original,sosie);
-                    diff.addCallDivergence(original, cls.findDivergence(200));
+    public void findDiff() throws IOException {
+        for (AbstractPointSequence original : originals) {
+            for (AbstractPointSequence sosie : sosies) {
+
+                CompareSingleSequence cls = new CompareSingleSequence(original, sosie, startPoint);
+                cls.setDiff(varToExclude);
+                if (sosie.getFullName().equals(original.getFullName())) {
+                    diffs.addAll(cls.findDiff(syncroRange));
                 }
-//                if(!diff.hasMatch(original))
-//                    diff.addMatch(original,null);
             }
         }
     }
 
+    public void findDiffToExclude() {
+        for (AbstractPointSequence original : originals) {
+            for (AbstractPointSequence sosie : sosies) {
 
+                CompareSingleSequence cls = new CompareSingleSequence(original, sosie, startPoint);
+                cls.setDiff(varToExclude);
+                if (sosie.getName().equals(original.getName())) {
+                    varToExclude.addAll(cls.findDiff(syncroRange));
+                }
+            }
+        }
+    }
 
-    protected Set<VariableDiff> loadVarToExclude(String fileExcludeVar) throws IOException {
+    protected Set<Diff> loadVarToExclude(String fileExcludeVar) throws IOException {
         Log.debug("load exclude variables");
-        varToExclude = new HashSet<VariableDiff>();
+        varToExclude = new HashSet<Diff>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileExcludeVar));
             String line = reader.readLine();
             while (line != null) {
                 Log.debug("exclude var: {}",line);
-                varToExclude.add(new VariableDiff(line));
+                Diff d = null;
+                if(cl == AssertPointSequence.class) {
+                    d = new AssertDiff(line);
+                }
+                if(cl == ExceptionPointSequence.class) {
+                    d = new ExceptionDiff(line);
+                }
+                varToExclude.add(d);
                 line = reader.readLine();
             }
 
@@ -133,8 +116,8 @@ public class CompareMultiSequence {
         return varToExclude;
     }
 
-    protected List<PointSequence> loadPointSequence(String dir, boolean recursive){
-        List<PointSequence> list = new ArrayList<PointSequence>();
+    protected List<AbstractPointSequence> loadPointSequence(String dir, boolean recursive){
+        List<AbstractPointSequence> list = new ArrayList<AbstractPointSequence>();
         File file = new File(dir);
         Map<String, String> idMap = null;
         try {
@@ -149,8 +132,7 @@ public class CompareMultiSequence {
                 list.addAll(loadPointSequence(f.getAbsolutePath(),recursive));
             else {
                 try {
-//                    Log.debug("load file: {}",f.getAbsolutePath());
-                    PointSequence ps = new PointSequence();
+                    AbstractPointSequence ps = (AbstractPointSequence)cl.newInstance();
                     ps.parseFile(f,idMap);
                     list.add(ps);
                 } catch (Exception e) {
@@ -158,7 +140,6 @@ public class CompareMultiSequence {
                 }
             }
         }
-        //Log.debug("nb point: {}",Point.nbPoint);
         return list;
     }
 
@@ -178,5 +159,9 @@ public class CompareMultiSequence {
 
     public void setSyncroRange(int syncroRange) {
         this.syncroRange = syncroRange;
+    }
+
+    public Set<Diff> getDiffs() {
+        return diffs;
     }
 }

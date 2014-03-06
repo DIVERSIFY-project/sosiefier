@@ -1,6 +1,5 @@
-package fr.inria.diversify.sosie.compare.refactor;
+package fr.inria.diversify.sosie.compare;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

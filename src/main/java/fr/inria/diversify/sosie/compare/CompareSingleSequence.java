@@ -1,7 +1,6 @@
-package fr.inria.diversify.sosie.compare.refactor;
+package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.util.Log;
 
 import java.util.*;
 

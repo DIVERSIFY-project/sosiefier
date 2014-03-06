@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.compare.refactor;
+package fr.inria.diversify.sosie.compare;
 
 import org.json.JSONException;
 import org.json.JSONObject;

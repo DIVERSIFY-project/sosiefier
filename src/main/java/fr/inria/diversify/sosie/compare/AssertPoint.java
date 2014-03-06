@@ -1,7 +1,6 @@
-package fr.inria.diversify.sosie.compare.refactor;
+package fr.inria.diversify.sosie.compare;
 
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**

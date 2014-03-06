@@ -1,33 +1,26 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 
-import fr.inria.diversify.sosie.pointSequence.CallPoint;
-import fr.inria.diversify.sosie.pointSequence.ConditionalPoint;
-import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.compiler.SpoonCompiler;
-import spoon.processing.ProcessingManager;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;
 import spoon.support.DefaultCoreFactory;
-import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 /**
  * User: Simon
@@ -67,16 +60,16 @@ public class CompareLogMain {
     }
 
     protected void same() throws IOException {
-        CompareMultiSequence un = new CompareMultiSequence(dirOriginal,dirSosie);
+        CompareMultiSequence un = new CompareMultiSequence(dirOriginal,dirSosie,getType());
         un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
-        un.findAndWriteDiffVar(varToExclude);
+        un.findAndWriteDiff(varToExclude);
     }
 
     protected void diff() throws Exception {
-        String startPointString = DiversifyProperties.getProperty("startPoint");
+        String startPointString = "diversificationPoint";
             Log.debug("loading log from dir {}",dirSosie);
             try {
-                File startPoint = new File(dirSosie+"/"+startPointString);
+                File startPoint = new File(dirSosie+"/../"+startPointString);
                 TransformationParser parser = new TransformationParser(true);
                 Log.info("startPoint {}",startPoint.getAbsolutePath());
                 CodeFragment cf = null;
@@ -84,70 +77,39 @@ public class CompareLogMain {
                     cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
                 } catch (Exception e) {}
 
-                CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, cf ,varToExclude);
+                CompareMultiSequence un = new CompareMultiSequence(dirOriginal, dirSosie, cf ,varToExclude, getType());
                 un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
-                Diff diff = new Diff(null);
-                un.findDivergenceCall(diff);
-                 un.findDiffVar(diff);
 
-                Log.info(diff.report());
-                Log.info(diff.callReport());
+                 un.findDiff();
+                Set<Diff> diff = un.getDiffs();
+                Log.info("{} {}",getType() ,diff.size());
+
                 writeResult(diff,cf);
             } catch (Exception e) {
                 Log.error("error",e);
                 e.printStackTrace();
             }
-        Log.debug(CallPoint.nbCallPoint+ " "+ ConditionalPoint.nbVarPoint);
     }
 
-    protected void writeResult(Diff diff, CodeFragment cf) throws IOException, JSONException {
+    protected void writeResult(Set<Diff> diffs, CodeFragment cf) throws IOException, JSONException {
         FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "compare"+System.currentTimeMillis()+".json");
-       JSONObject o =  diff.toJson();
-        o.put("dirSosie", dirSosie);
-        o.put("dirOriginal", dirOriginal);
-        try {
-            JSONObject cfJSON = cf.toJSONObject();
-            o.put("startingPoint",cfJSON);
-        } catch (Exception e) {}
+        JSONArray array = new JSONArray();
 
-        o.write(writer);
+        for(Diff diff : diffs) {
+            JSONObject o =  diff.toJSON();
+            o.put("dirSosie", dirSosie);
+            o.put("dirOriginal", dirOriginal);
+            try {
+                JSONObject cfJSON = cf.toJSONObject();
+                o.put("startingPoint",cfJSON);
+            } catch (Exception e) {}
+            array.put(o);
+        }
+
+        array.write(writer);
         writer.close();
     }
 
-//    protected void diffException() throws Exception {
-//        String startPointString = DiversifyProperties.getProperty("startPoint");
-//        List<Diff> diffs = new ArrayList<Diff>();
-//        int i =0;
-//        for(File f : (new File(dirSosie).listFiles())) {
-//            try {
-//                File startPoint = new File(f.getAbsolutePath()+"/"+startPointString);
-//                TransformationParser parser = new TransformationParser(true);
-//                Log.info("startPoint {}",startPoint.getAbsolutePath());
-//                CodeFragment cf = ((ASTReplace)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
-//
-//                CompareMultiExceptionSequence un = new CompareMultiExceptionSequence(dirOriginal, f.getAbsolutePath(), cf);
-//                un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
-//                Diff diff = un.findDiffException();
-//                i++;
-//                Log.info("sosie nb: {}",i);
-//                Log.info("catchDivergence {}, result {}",diff.sameTrace(),diff.sameTraceAndCatch());
-//                if(!diff.sameTraceAndCatch()) {
-//                    Log.info(f.getName());
-//                    Log.info(diff.report());
-//
-//                    if(!diff.sameCatch()) {
-//                        diffs.add(diff);
-//                        diff.toDotCatch(DiversifyProperties.getProperty("result")+"exception_"+f.getName() + ".dot");
-//                    }
-//                }
-//                else
-//                    Log.info("same trace");
-//            } catch (Exception e) {
-//                Log.error("error",e);
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
@@ -173,6 +135,14 @@ public class CompareLogMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected Class getType() {
+        if(DiversifyProperties.getProperty("type").equals("assert"))
+            return AssertPointSequence.class;
+        if(DiversifyProperties.getProperty("type").equals("exception"))
+            return ExceptionPointSequence.class;
+        return null;
     }
 
     protected void initLogLevel() {

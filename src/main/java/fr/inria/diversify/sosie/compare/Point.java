@@ -1,10 +1,7 @@
-package fr.inria.diversify.sosie.pointSequence;
+package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.sosie.compare.VariableDiff;
-import fr.inria.diversify.sosie.compare.refactor.Diff;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,12 +17,12 @@ public abstract class Point {
     protected String methodSignature;
     protected String idClass;
     protected String idMethod;
-    int id;
-    boolean bugPoint = false;
+    protected int id;
+    protected boolean bugPoint = false;
 
     public Point() {}
 
-    public Point(String string, Map<String,String> idMap) {
+    public Point(String string, Map<String, String> idMap) {
         buildFrom(string, idMap);
     }
 
@@ -70,8 +67,8 @@ public abstract class Point {
         return id;
     }
 
-    public abstract String toDot(Set varDiff);
+//    public abstract String toDot(Set varDiff);
 
-    public abstract List<Diff> getDiff(Point p);
+    public abstract Set<Diff> getDiff(Point p);
 }
 

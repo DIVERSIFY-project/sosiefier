@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.compare.refactor;
+package fr.inria.diversify.sosie.compare;
 
 import java.util.Map;
 
@@ -7,7 +7,7 @@ import java.util.Map;
  * Date: 03/03/14
  * Time: 11:03
  */
-public class CallPointSequence extends AbstractPointSequence {
+public class VarPointSequence extends AbstractPointSequence {
     @Override
     protected void addPoint(String stringPoint, Map idMap) {
 

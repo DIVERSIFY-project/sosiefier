@@ -1,45 +1,52 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.pointSequence.ExceptionPoint;
-import fr.inria.diversify.sosie.pointSequence.PointSequence;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * User: Simon
- * Date: 14/11/13
- * Time: 17:15
+ * Date: 03/03/14
+ * Time: 15:05
  */
-public class ExceptionDiff {
-    protected PointSequence original;
-    protected PointSequence sosie;
-    protected int positionInOriginal;
-    protected int positionInSosie;
+public class ExceptionDiff extends Diff {
+    boolean isCatch;
+    List<String> originalStackTrace;
+    List<String> sosieStackTrace;
 
-    public void setOriginal(PointSequence original) {
-        this.original = original;
+    public ExceptionDiff(String className, String methodSignature, boolean isCatch, List<String> originalStackTrace, List<String> sosieStackTrace) {
+        this.className = className;
+        this.methodSignature = methodSignature;
+        this.isCatch = isCatch;
+        this.originalStackTrace = originalStackTrace;
+        this.sosieStackTrace =sosieStackTrace;
     }
 
-    public void setSosie(PointSequence sosie) {
-        this.sosie = sosie;
+    public ExceptionDiff(String line) {
+        String[] tmp = line.split(":");
+        this.className = tmp[0];
+        this.methodSignature = tmp[1];
+        if(tmp[2].equals("true"))
+            isCatch = true;
+        else
+            isCatch = false;
     }
 
-    public void setPositionInOriginal(int positionInOriginal) {
-        this.positionInOriginal = positionInOriginal;
-    }
+    @Override
+    public JSONObject toJSON() throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("type", "exception");
+        object.put("class", className);
+        object.put("method", methodSignature);
+        object.put("isCatch", isCatch);
+        object.put("originalStackTrace", originalStackTrace);
+        object.put("sosieStackTrace", sosieStackTrace);
 
-    public void setPositionInSosie(int positionInSosie) {
-        this.positionInSosie = positionInSosie;
+        return object;
     }
-
 
     public String toString() {
-        ExceptionPoint cpO =  original.getExceptionPoint(positionInOriginal);
-        ExceptionPoint cpS = sosie.getExceptionPoint(positionInSosie);
-        return cpO.getClassName() +":"+cpO.getMethodSignature()+":"+cpO.getStackTrace() +" / "+cpS.getStackTrace();
-    }
-
-    public String toDot() {
-        ExceptionPoint cpO =  original.getExceptionPoint(positionInOriginal);
-        ExceptionPoint cpS = sosie.getExceptionPoint(positionInSosie);
-        return cpO.getClassName() +":"+cpO.getMethodSignature()+":"+cpO.getStackTrace() +" / "+cpS.getStackTrace();
+        return className+":"+methodSignature+":"+isCatch;
     }
 }
