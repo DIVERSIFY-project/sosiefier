@@ -56,17 +56,18 @@ public class ErrorLoggingInstrumenter extends AbstractProcessor<CtStatement> {
 
     protected void instruThrow(CtThrow throwStmt) {
         String className = getClass(throwStmt).getQualifiedName();
+        SourcePosition sp = throwStmt.getPosition();
+        CompilationUnit compileUnit = sp.getCompilationUnit();
         String methodName;
         if(getMethod(throwStmt) == null)
             methodName = "field";
 
         else
             methodName = getMethod(throwStmt).getSignature();
-        String snippet = "{\nfr.inria.diversify.sosie.logger.LogWriter.writeException(Thread.currentThread(),\"" +
+        String snippet = "{\nfr.inria.diversify.sosie.logger.LogWriter.writeException("+sp.getSourceStart()+",Thread.currentThread(),\"" +
                  className + "\",\"" + methodName + "\"," +
                 throwStmt.getThrownExpression() + ");\n";
-        SourcePosition sp = throwStmt.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
+
         int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
 
@@ -87,40 +88,26 @@ public class ErrorLoggingInstrumenter extends AbstractProcessor<CtStatement> {
 
         List<CtCatch> catchList = tryStmt.getCatchers();
         for (CtCatch catchStmt : catchList) {
-            if(getMethod(tryStmt) != null) {
-                String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeCatch(Thread.currentThread(),\"" +
+            CtBlock<?> catchBlock = catchStmt.getBody();
+            if(getMethod(tryStmt) != null && !catchBlock.getStatements().isEmpty()) {
+                CtStatement statement = catchBlock.getStatements().get(0);
+                SourcePosition sp = statement.getPosition();
+
+                String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeCatch("+sp.getSourceStart()+",Thread.currentThread(),\"" +
                         className + "\",\"" + methodName + "\"," +
                         catchStmt.getParameter().getSimpleName() + ");\n";
 
-                CtBlock<?> catchBlock = catchStmt.getBody();
-                if(!catchBlock.getStatements().isEmpty()) {
-                    CtStatement statement = catchBlock.getStatements().get(0);
-                    SourcePosition sp = statement.getPosition();
+
+//                if(!catchBlock.getStatements().isEmpty()) {
+
                     CompilationUnit compileUnit = sp.getCompilationUnit();
                     int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
                     compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-                }
+//                }
             }
         }
     }
 
-//    protected static String idFor(String string) {
-//        if(!idMap.containsKey(string))
-//            idMap.put(string,idMap.size()+"");
-//
-//        return idMap.get(string);
-//    }
-//
-//    public static void writeIdFile(String dir) throws IOException {
-//        File file = new File(dir+"/log");
-//        file.mkdirs();
-//        FileWriter fw = new FileWriter(file.getAbsoluteFile()+"/id");
-//
-//        for(String s : idMap.keySet())
-//            fw.write(idMap.get(s)+ " " +s+"\n");
-//
-//        fw.close();
-//    }
 
     protected int getCount(CtStatement stmt) {
         CtExecutable parent = stmt.getParent(CtExecutable.class);

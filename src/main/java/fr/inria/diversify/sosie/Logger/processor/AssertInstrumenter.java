@@ -36,6 +36,8 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
 
     public void process(CtInvocation<?> invocation) {
         CtExecutableReference<?> executable = invocation.getExecutable();
+        SourcePosition sp = invocation.getPosition();
+        CompilationUnit compileUnit = sp.getCompilationUnit();
         String snippet = "";
         List<String> assertVar = new ArrayList<String>();
         List<String> types = new ArrayList<String>();
@@ -57,7 +59,7 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
             snippet += type + " " + var + " = "+ expression + ";\n";
         }
 
-        snippet += "fr.inria.diversify.sosie.logger.LogWriter.writeAssert(Thread.currentThread(),\"" +
+        snippet += "fr.inria.diversify.sosie.logger.LogWriter.writeAssert("+sp.getSourceStart()+",Thread.currentThread(),\"" +
             getClass(invocation).getQualifiedName() + "\",\"" + getMethod(invocation).getSignature() + "\",\"" +
                 executable.getSimpleName()+ "\"";
 
@@ -74,18 +76,10 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
         }
 
         Log.info(snippet);
-        SourcePosition sp = invocation.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+
 
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/\n"+snippet, 0));
-
-//        snippet = "\n}\n";
-
-//        index = compileUnit.nextLineIndex(sp.getSourceEnd());
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
     }
 
     protected int getCount(CtInvocation stmt) {
