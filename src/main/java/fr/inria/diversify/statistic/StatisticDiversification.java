@@ -93,7 +93,7 @@ public class StatisticDiversification {
         Log.debug("write data for source city in file {}",fileName);
         bw.write("type"+separator+"name"+separator+"package"+separator+
                 "class"+separator+"method"+separator+"status"+separator+
-                "stmtType"+separator+"level"+separator+"line"+separator+"\n");
+                "stmtType"+separator+"level"+separator+"line\n");
         for(Transformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {

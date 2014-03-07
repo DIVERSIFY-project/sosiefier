@@ -165,4 +165,19 @@ public class ObjectExistence extends CVLTransformation {
     protected void restoreClass(String srcDir, CtSimpleType cl) throws IOException {
         printJavaFile(srcDir,cl);
     }
+
+    public boolean equals(Object other) {
+        if(other == null)
+            return false;
+        if(!this.getClass().isAssignableFrom(other.getClass()))
+            return  false;
+
+        ObjectExistence o = (ObjectExistence)other;
+
+        try {
+        return stmtType().equals(o.stmtType())
+                && object.equals(o.object);
+        } catch (Exception e) {}
+        return false;
+    }
 }

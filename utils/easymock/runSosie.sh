@@ -6,7 +6,7 @@
 
 
 #run des sosies
-#$1: chemin absolul
+#$1: chemin absolue
 cd $1
 
 mkdir log
@@ -36,7 +36,8 @@ do
     echo dirSosie=../log/$sosie/mutantSosie >> ../compare.properties
 
 cat ../compare.properties
-   java -Xmx2000m -XX:MaxPermSize=256m -cp $7/Diversify-statements-1.0-SNAPSHOT-jar-with-dependencies.jar fr.inria.diversify.sosie.compare.refactor.CompareLogMain ../compare.properties
+echo $6
+   java -Xmx2000m -XX:MaxPermSize=256m -cp $6/Diversify-statements-1.0-SNAPSHOT-jar-with-dependencies.jar fr.inria.diversify.sosie.compare.CompareLogMain ../compare.properties
 
 done
 

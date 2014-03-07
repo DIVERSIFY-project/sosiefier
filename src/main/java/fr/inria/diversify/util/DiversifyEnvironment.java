@@ -18,10 +18,14 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
+import spoon.reflect.visitor.QueryVisitor;
+import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Simon
@@ -29,6 +33,7 @@ import java.util.List;
  * Time: 13:26
  */
 public class DiversifyEnvironment {
+    protected static Map<Class, List<CtElement>> typeToObject = new HashMap<Class, List<CtElement>>();
     protected static CodeFragmentList codeFragments;
     protected static List<CtBinaryOperator<?>> binaryOperators;
     protected static List<CtReturn> returns;
@@ -123,6 +128,15 @@ public class DiversifyEnvironment {
             pm.process();
         }
         return root;
+    }
+
+    public static List<CtElement> getAllElement(Class cl) {
+        if(!typeToObject.containsKey(cl)) {
+            QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
+            DiversifyEnvironment.getRoot().accept(query);
+            typeToObject.put(cl, query.getResult());
+        }
+        return typeToObject.get(cl);
     }
 
     public static void setFactory(Factory factory) {

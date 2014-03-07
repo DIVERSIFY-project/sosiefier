@@ -10,8 +10,6 @@ import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtField;
 import spoon.reflect.reference.CtTypeReference;
-import spoon.reflect.visitor.QueryVisitor;
-import spoon.reflect.visitor.filter.TypeFilter;
 
 import java.util.*;
 
@@ -21,12 +19,6 @@ import java.util.*;
  * Time: 11:10
  */
 public class CvlQuery extends TransformationQuery {
-    protected Map<Class, List<CtElement>> typeToObject;
-
-
-     public CvlQuery() {
-         typeToObject = new HashMap<Class, List<CtElement>>();
-     }
 
     @Override
     public void setType(String type) {
@@ -57,7 +49,7 @@ public class CvlQuery extends TransformationQuery {
 
     protected LinkSubstitution getLSForField() {
         LinkSubstitution ls = new LinkSubstitution();
-        List<CtElement> objects = getAllElement(CtField.class);
+        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtField.class);
         Random r = new Random();
 
         ls.setObject(objects.get(r.nextInt(objects.size())));
@@ -68,7 +60,7 @@ public class CvlQuery extends TransformationQuery {
 
     protected LinkSubstitution getLSForClass() {
         LinkSubstitution ls = new LinkSubstitution();
-        List<CtElement> objects = getAllElement(CtClass.class);
+        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtClass.class);
         Random r = new Random();
 
         CtClass cl = (CtClass) objects.get(r.nextInt(objects.size()));
@@ -98,7 +90,7 @@ public class CvlQuery extends TransformationQuery {
 
     protected LinkExistence getLEForField() {
         LinkExistence ls = new LinkExistence();
-        List<CtElement> objects = getAllElement(CtField.class);
+        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtField.class);
         Random r = new Random();
 
         ls.setObject(objects.get(r.nextInt(objects.size())));
@@ -108,7 +100,7 @@ public class CvlQuery extends TransformationQuery {
 
     protected LinkExistence getLEForClass() {
         LinkExistence ls = new LinkExistence();
-        List<CtElement> objects = getAllElement(CtClass.class);
+        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtClass.class);
         Random r = new Random();
 
         CtClass cl = (CtClass) objects.get(r.nextInt(objects.size()));
@@ -130,10 +122,10 @@ public class CvlQuery extends TransformationQuery {
         ObjectSubstitution os = new  ObjectSubstitution();
         Random r = new Random();
 
-        List<CtElement> objects = getAllElement(CtElement.class);
+        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtElement.class);
         os.setObject(objects.get(r.nextInt(objects.size())));
 
-        List<CtElement> transplants = getAllElement(os.getObject().getClass());
+        List<CtElement> transplants = DiversifyEnvironment.getAllElement(os.getObject().getClass());
         os.setTransplant(transplants.get(r.nextInt(transplants.size())));
 
         return os;
@@ -142,17 +134,10 @@ public class CvlQuery extends TransformationQuery {
     public ObjectExistence getObjectExistence() {
         ObjectExistence oe = new  ObjectExistence();
         Random r = new Random();
-        List<CtElement> objects = getAllElement(CtElement.class);
+        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtElement.class);
         oe.setObject(objects.get(r.nextInt(objects.size())));
         return oe;
     }
 
-    protected  List<CtElement> getAllElement(Class cl) {
-        if(!typeToObject.containsKey(cl)) {
-            QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
-            DiversifyEnvironment.getRoot().accept(query);
-            typeToObject.put(cl, query.getResult());
-        }
-        return typeToObject.get(cl);
-    }
+
 }

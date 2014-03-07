@@ -73,4 +73,19 @@ public class ObjectSubstitution extends CVLTransformation {
         return json;
     }
 
+    public boolean equals(Object other) {
+        if(other == null)
+            return false;
+        if(!this.getClass().isAssignableFrom(other.getClass()))
+            return  false;
+
+        ObjectSubstitution o = (ObjectSubstitution)other;
+
+        try {
+        return stmtType().equals(o.stmtType())
+                && object.getSignature().equals(o.object.getSignature())
+                && transplant.getSignature().equals(o.transplant.getSignature());
+        } catch (Exception e) {}
+        return false;
+    }
 }

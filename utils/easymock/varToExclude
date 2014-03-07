@@ -2,8 +2,8 @@ E:org.easymock.internal.DefaultClassInstantiator:java.lang.Object newInstance(ja
 A:org.easymock.tests2.EasyMockSupportClassTest:void testCreateNiceMockStringClassOfTMethodArray():assertThat
 A:org.easymock.tests2.EasyMockSupportClassTest:void testCreateMockStringClassOfTConstructorArgsMethodArray():assertThat
 E:org.easymock.internal.ReplayState:java.lang.Object invokeInner(org.easymock.internal.Invocation):true
-A:org.easymock.tests2.EasyMockSupportClassTest:void testCreateStrictMockClassOfTMethodArray():assertThat
 A:org.easymock.tests2.MockedExceptionTest:void testNotMockedFillInStackTrace():assertSame
+A:org.easymock.tests2.EasyMockSupportClassTest:void testCreateStrictMockClassOfTMethodArray():assertThat
 A:org.easymock.tests2.EasyMockSupportClassTest:void testCreateNiceMockStringClassOfTConstructorArgsMethodArray():assertThat
 E:org.easymock.internal.MocksControl:org.easymock.internal.MocksControl getControl(java.lang.Object):false
 E:org.easymock.internal.MockInvocationHandler:java.lang.Object invoke(java.lang.Object,java.lang.reflect.Method,java.lang.Object[]):false

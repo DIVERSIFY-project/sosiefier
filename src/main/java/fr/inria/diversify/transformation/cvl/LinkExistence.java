@@ -99,4 +99,21 @@ public class LinkExistence extends CVLTransformation {
 
         return json;
     }
+
+    public boolean equals(Object other) {
+        if(other == null)
+            return false;
+        if(!this.getClass().isAssignableFrom(other.getClass()))
+            return  false;
+
+        LinkExistence o = (LinkExistence)other;
+
+        try {
+        return stmtType().equals(o.stmtType())
+                && object.equals(o.object)
+                && ((classOrInterfaceExistence == null && o.classOrInterfaceExistence == null)
+                    || classOrInterfaceExistence.equals(o.classOrInterfaceExistence));
+        } catch (Exception e) {}
+        return false;
+    }
 }

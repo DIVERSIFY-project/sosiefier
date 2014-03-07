@@ -114,4 +114,22 @@ public class LinkSubstitution extends CVLTransformation {
 
         return json;
     }
+
+    public boolean equals(Object other) {
+        if(other == null)
+            return false;
+        if(!this.getClass().isAssignableFrom(other.getClass()))
+            return  false;
+
+        LinkSubstitution o = (LinkSubstitution)other;
+
+        try {
+        return stmtType().equals(o.stmtType())
+                && object.equals(o.object)
+                && transplant.equals(o.transplant)
+                && ((classOrInterfaceSubstitution == null && o.classOrInterfaceSubstitution == null)
+                || classOrInterfaceSubstitution.equals(o.classOrInterfaceSubstitution));
+        } catch (Exception e) {}
+        return false;
+    }
 }

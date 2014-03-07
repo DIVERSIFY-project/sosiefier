@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.transformation.cvl.*;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -19,8 +20,11 @@ import org.json.JSONObject;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.reference.CtTypeReference;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -98,6 +102,7 @@ public class TransformationParser {
             }  catch (Exception e) {
                 countError++;
                 Log.warn("error during the parsing of "+array.getJSONObject(i),e);
+                Log.debug("{} {} ",count, countError);
             }
         }
 
@@ -114,6 +119,8 @@ public class TransformationParser {
             trans = parseStmt(jsonObject);
         if(type.equals("adrBytecode"))
             trans = parseBytecode(jsonObject);
+        if(type.equals("cvl"))
+            trans = parseCvl(jsonObject);
 
         trans.setFailures(getFailures(jsonObject));
         trans.setStatus(jsonObject.getInt("status"));
@@ -122,6 +129,100 @@ public class TransformationParser {
             trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));
 
         return trans;
+    }
+
+    protected Transformation parseCvl(JSONObject jsonObject) throws Exception {
+        String name = jsonObject.getString("name");
+        CVLTransformation trans = null;
+
+        if(name.equals("linkExistence"))
+            trans = parseLinkExistence(jsonObject);
+        if(name.equals("linkSubstitution"))
+            trans = parseLinkSubstitution(jsonObject);
+        if(name.equals("objectExistence"))
+            trans = parseObjectExistence(jsonObject);
+        if(name.equals("objectSubstitution"))
+            trans = parseObjectSubstitution(jsonObject);
+
+
+        trans.setObject(getObject(jsonObject.getString("objectPosition"), jsonObject.getString("nodeType")));
+        return trans;
+    }
+
+    protected CtElement getObject(String positionObject, String objectType) throws Exception {
+        CtElement o = null;
+
+        for (CtElement object : DiversifyEnvironment.getAllElement(CtElement.class)) {
+            try {
+                String position = object.getParent(CtPackage.class).getQualifiedName()
+                        + "." + object.getPosition().getCompilationUnit().getMainType().getSimpleName() + ":" + object.getPosition().getLine();
+                if (position.equals(positionObject) && object.getClass().getSimpleName().equals(objectType)){
+                    o = object;
+                    break;
+                }
+            } catch (Exception e) {}
+        }
+        if (o == null) {
+            throw new Exception();
+        }
+        return  o;
+    }
+
+    protected CVLTransformation parseObjectExistence(JSONObject jsonObject) {
+        ObjectExistence oe = new ObjectExistence();
+        return oe;
+    }
+
+    protected CVLTransformation parseObjectSubstitution(JSONObject jsonObject) throws Exception {
+        ObjectSubstitution os = new ObjectSubstitution();
+        os.setTransplant(getObject(jsonObject.getString("transplantPosition"), jsonObject.getString("nodeType")));
+        return os;
+    }
+
+    protected CVLTransformation parseLinkSubstitution(JSONObject jsonObject) throws Exception {
+        LinkSubstitution ls = new LinkSubstitution();
+
+        String nodeType = jsonObject.getString("nodeType");
+        if(nodeType.equals("CtClassImpl")) {
+            String clName = jsonObject.getString("classOrInterfaceExistence");
+            CtClass cl = (CtClass) getObject(jsonObject.getString("objectPosition"), jsonObject.getString("nodeType"));
+            List<CtTypeReference> set = new ArrayList<CtTypeReference>();
+
+            if(cl.getSuperclass() != null)
+                set.add(cl.getSuperclass());
+            set.addAll(cl.getSuperInterfaces());
+
+            for(CtTypeReference ref :set) {
+                if(clName.equals(ref.getPackage() + "." + ref.getSimpleName()))
+                    ls.setClassOrInterfaceSubstitution(ref);
+                break;
+            }
+        }
+
+        ls.setTransplant(getObject(jsonObject.getString("transplantPosition"), nodeType));
+        return  ls;
+    }
+
+    protected CVLTransformation parseLinkExistence(JSONObject jsonObject) throws Exception {
+        LinkExistence le = new LinkExistence();
+
+        String nodeType = jsonObject.getString("nodeType");
+        if(nodeType.equals("CtClassImpl")) {
+            String clName = jsonObject.getString("classOrInterfaceExistence");
+            CtClass cl = (CtClass) getObject(jsonObject.getString("objectPosition"), jsonObject.getString("nodeType"));
+            List<CtTypeReference> set = new ArrayList<CtTypeReference>();
+
+            if(cl.getSuperclass() != null)
+                set.add(cl.getSuperclass());
+            set.addAll(cl.getSuperInterfaces());
+
+            for(CtTypeReference ref :set) {
+                if(clName.equals(ref.getPackage()+"."+ref.getSimpleName()))
+                    le.setClassOrInterfaceExistance(ref);
+                break;
+            }
+        }
+        return le;
     }
 
     protected Transformation parseMutation(JSONObject jsonObject) throws Exception {
