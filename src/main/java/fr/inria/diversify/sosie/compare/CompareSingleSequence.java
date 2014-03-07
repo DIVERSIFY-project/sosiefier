@@ -83,16 +83,17 @@ public class CompareSingleSequence {
             i++;
             Point oPoint = original.getPoint(startOriginal);
             Point sPoint = sosie.getPoint(startSosie);
-            if(oPoint.samePosition(sPoint) && !oPoint.sameValue(sPoint)) {
-                for(Diff dVar : oPoint.getDiff(sPoint))
-                    if(!containsExcludeVar(dVar)) {
-                        dVar.setPositionInOriginal(startOriginal);
-                        dVar.setPositionInSosie(startSosie);
-                        dVar.setPointSosie(sPoint);
-                        dVar.setDivergence(divergence);
-                        var.add(dVar);
-                    }
-
+            if(oPoint.samePosition(sPoint)) {
+                if(!oPoint.sameValue(sPoint)) {
+                    for(Diff dVar : oPoint.getDiff(sPoint))
+                        if(!containsExcludeVar(dVar)) {
+                            dVar.setPositionInOriginal(startOriginal);
+                            dVar.setPositionInSosie(startSosie);
+                            dVar.setPointSosie(sPoint);
+                            dVar.setDivergence(divergence);
+                            var.add(dVar);
+                        }
+                }
             }
             else {
                 int newSyncho[] = findSyncro(syncroRange,original,sosie, startOriginal,startSosie);
@@ -107,18 +108,6 @@ public class CompareSingleSequence {
         }
         return var;
     }
-
-//    protected int findDiversificationIndex(AbstractPointSequence sequence) {
-//
-//        for (int i = 0; i < sequence.size(); i++)
-//            if(sequence.getPoint(i).containsInto(startPoint)) {
-//                if(i == 0)
-//
-//                 Log.info("{} {}",sequence.getPoint(i).getClassName(),startPoint.getSourceClass().getQualifiedName() );
-//                return i;
-//            }
-//        return sequence.size();
-//    }
 
 
     protected int[] findSyncro(int syncroRange, AbstractPointSequence ps1, AbstractPointSequence ps2, int iOriginal, int iSosie) {

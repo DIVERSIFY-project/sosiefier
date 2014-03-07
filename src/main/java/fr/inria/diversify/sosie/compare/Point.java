@@ -1,7 +1,5 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
-
 import java.util.Map;
 import java.util.Set;
 
@@ -34,24 +32,12 @@ public abstract class Point {
         if(bugPoint || point.bugPoint)
             return bugPoint || point.bugPoint;
 
-        return (className.equals(point.className) && methodSignature.equals(point.methodSignature)); //&& id == point.id);
+        return id == point.id
+                && (className.equals(point.className)
+                && methodSignature.equals(point.methodSignature));
     }
 
     public abstract boolean sameValue(Point p);
-
-    public boolean containsInto(CodeFragment cf) {
-//        if(bugPoint)
-//            return false;
-        try {
-            String cl = cf.getSourceClass().getQualifiedName().split("\\$")[0];
-            String cl2 = className.split("\\$")[0];
-            return cl2.equals(cl);
-//                    && methodSignature.equals(cf.getCtCodeFragment().getParent(CtExecutable.class).getSignature()));
-        }  catch (Exception e) {
-
-        }
-        return false;
-    }
 
     protected abstract void buildFrom(String string, Map<String,String> idMap);
 
@@ -66,8 +52,6 @@ public abstract class Point {
     public int getId() {
         return id;
     }
-
-//    public abstract String toDot(Set varDiff);
 
     public abstract Set<Diff> getDiff(Point p);
 }

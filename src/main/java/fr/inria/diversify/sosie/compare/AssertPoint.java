@@ -24,17 +24,17 @@ public class AssertPoint extends Point {
         String[] array = string.split(":;:");
 
         try {
-            className = array[1];
-            methodSignature = array[2];
-            assertType = array[3];
-            for (int i = 4; i< array.length; i = i+2) {
+            id = Integer.parseInt(array[1]);
+            className = array[2];
+            methodSignature = array[3];
+            assertType = array[4];
+            for (int i = 5; i< array.length; i = i+2) {
                 type.add(array[i]);
                 vars.add(array[i + 1]);
             }
         } catch (Exception e) {
             bugPoint = true;
         }
-        className = array[1];
     }
 
     public boolean sameValue(Point point) {

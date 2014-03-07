@@ -17,9 +17,7 @@ import spoon.support.DefaultCoreFactory;
 import spoon.support.StandardEnvironment;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -71,18 +69,18 @@ public class CompareLogMain {
     protected void diff() throws Exception {
         String startPointString = "diversificationPoint";
         File startPoint = new File(dirSosie+"/../"+startPointString);
-        TransformationParser parser = new TransformationParser(true);
+//        TransformationParser parser = new TransformationParser(true);
         Log.info("startPoint {}",startPoint.getAbsolutePath());
-        CodeFragment cf = null;
+        JSONObject cf = null;
         try {
-            cf = ((ASTTransformation)parser.parseUniqueTransformation(startPoint)).getTransplantationPoint();
+            cf = getObject(startPoint);
         } catch (Exception e) {}
 
         String type = DiversifyProperties.getProperty("type");
         if(type.equals("assert") || type.equals("all"))
-            diff(AssertPointSequence.class, cf);
+            diff(AssertPointSequence.class, null);
         if(type.equals("exception") || type.equals("all"))
-            diff(ExceptionPointSequence.class, cf);
+            diff(ExceptionPointSequence.class, null);
 
         writeResult(allDiff, cf);
     }
@@ -102,7 +100,7 @@ public class CompareLogMain {
         }
     }
 
-    protected void writeResult(Set<Diff> diffs, CodeFragment cf) throws IOException, JSONException {
+    protected void writeResult(Set<Diff> diffs, JSONObject cf) throws IOException, JSONException {
         FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "compare"+System.currentTimeMillis()+".json");
         JSONArray array = new JSONArray();
 
@@ -111,8 +109,7 @@ public class CompareLogMain {
             o.put("dirSosie", dirSosie);
             o.put("dirOriginal", dirOriginal);
             try {
-                JSONObject cfJSON = cf.toJSONObject();
-                o.put("startingPoint",cfJSON);
+                o.put("startingPoint",cf);
             } catch (Exception e) {}
             array.put(o);
         }
@@ -159,5 +156,19 @@ public class CompareLogMain {
     protected void initLogLevel() {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);
+    }
+
+
+    protected JSONObject getObject(File file) throws IOException, JSONException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        StringBuilder sb = new StringBuilder();
+        String line = br.readLine();
+        while (line != null) {
+            sb.append(line);
+            line = br.readLine();
+        }
+        if (sb.length() == 0)
+            return null;
+        return new JSONObject(sb.toString());
     }
 }

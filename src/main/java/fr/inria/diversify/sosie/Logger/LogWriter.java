@@ -126,13 +126,15 @@ public class LogWriter {
         }
     }
 
-    public static void writeAssert(Thread thread, String className, String methodSignature, String assertName, Object... var) {
+    public static void writeAssert(int id, Thread thread, String className, String methodSignature, String assertName, Object... var) {
         try {
             FileWriter fileWriter = init(thread);
 
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("A");
+            string.append(separator);
+            string.append(id+"");
             string.append(separator);
             string.append(className);
             string.append(separator);
@@ -183,13 +185,15 @@ public class LogWriter {
         return string;
     }
 
-    public static void writeException(Thread thread, String className, String methodSignature, Object exception) {
+    public static void writeException(int id, Thread thread, String className, String methodSignature, Object exception) {
         try {
             FileWriter fileWriter = init(thread);
 
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("E");
+            string.append(separator);
+            string.append(id+"");
             string.append(separator);
             string.append(className);
             string.append(separator);
@@ -209,13 +213,15 @@ public class LogWriter {
         }
     }
 
-    public static void writeCatch(Thread thread, String className, String methodSignature, Object exception) {
+    public static void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
         try {
             FileWriter fileWriter = init(thread);
 
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("Ca");
+            string.append(separator);
+            string.append(id+"");
             string.append(separator);
             string.append(className);
             string.append(separator);

@@ -17,7 +17,7 @@ public class CompareMultiSequence {
     protected List<AbstractPointSequence> originals;
     protected List<AbstractPointSequence> sosies;
     protected Set<Diff> varToExclude;
-    protected int syncroRange = 0;
+    protected int syncroRange = 1;
     protected CodeFragment startPoint;
     protected Set<Diff> diffs;
     protected Class cl;

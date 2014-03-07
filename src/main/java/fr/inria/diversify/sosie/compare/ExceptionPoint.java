@@ -26,10 +26,11 @@ public class ExceptionPoint extends Point {
         stackTrace = new ArrayList<String>();
         String[] array = string.split(":;:");
         try {
-            className = array[1];
+            id = Integer.parseInt(array[1]);
+            className = array[2];
+            methodSignature = array[3];
 
-            methodSignature = array[2];
-            for (int i = 1; i< array.length; i++) {
+            for (int i = 4; i< array.length; i++) {
                 stackTrace.add(array[i]);
             }
         } catch (Exception e) {
@@ -44,6 +45,14 @@ public class ExceptionPoint extends Point {
         Set<Diff> set = new HashSet<Diff>();
         set.add(e);
         return set;
+    }
+
+    public boolean samePosition(Point point) {
+        if(bugPoint || point.bugPoint)
+            return bugPoint || point.bugPoint;
+
+        return (className.equals(point.className)
+                && methodSignature.equals(point.methodSignature));
     }
 
     public boolean sameValue(Point sPoint) {
