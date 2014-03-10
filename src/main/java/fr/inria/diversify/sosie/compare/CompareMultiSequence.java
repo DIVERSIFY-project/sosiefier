@@ -65,7 +65,7 @@ public class CompareMultiSequence {
      *
      * @throws java.io.IOException
      */
-    public void findDiff() throws IOException {
+    public void findDiff() throws Exception {
         for (AbstractPointSequence original : originals) {
             for (AbstractPointSequence sosie : sosies) {
 
@@ -78,7 +78,7 @@ public class CompareMultiSequence {
         }
     }
 
-    public void findDiffToExclude() {
+    public void findDiffToExclude() throws Exception {
         for (AbstractPointSequence original : originals) {
             for (AbstractPointSequence sosie : sosies) {
 

@@ -43,6 +43,7 @@ public class AssertDiff extends Diff {
         object.put("assert", assertType);
         object.put("originalAssert", originalAssert);
         object.put("sosieAssert", sosieAssert);
+//        object.put("nbDivergence",nbDivergence);
 
         return object;
     }

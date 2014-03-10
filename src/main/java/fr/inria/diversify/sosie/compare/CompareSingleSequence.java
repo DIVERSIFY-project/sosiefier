@@ -15,9 +15,10 @@ public class CompareSingleSequence {
     protected AbstractPointSequence original;
     protected AbstractPointSequence sosie;
     protected CodeFragment startPoint;
+    protected static int nbDivergence;
 
-    protected Map<AbstractPointSequence,int[][]> divergence;
-    protected Map<AbstractPointSequence, Set<Diff>> diffs;
+//    protected Map<AbstractPointSequence,int[][]> divergence;
+//    protected Map<AbstractPointSequence, Set<Diff>> diffs;
 
     public CompareSingleSequence(AbstractPointSequence original, AbstractPointSequence sosie, CodeFragment startPoint) {
         this.original = original;
@@ -68,7 +69,7 @@ public class CompareSingleSequence {
      * @param syncroRange
      * @return the set of conditionalDivergence variables
      */
-    public Set<Diff> findDiff(int syncroRange) {
+    public Set<Diff> findDiff(int syncroRange) throws Exception {
         int startOriginal = -1;
         int startSosie = -1;
         int bound = Math.min(original.size(), sosie.size());
@@ -97,8 +98,12 @@ public class CompareSingleSequence {
             }
             else {
                 int newSyncho[] = findSyncro(syncroRange,original,sosie, startOriginal,startSosie);
-                if(newSyncho == null)
-                    new Exception("call trace "+original.getName()+ " and "+sosie.getName()+" no syncro");
+                if(newSyncho == null) {
+                    nbDivergence++;
+                    startOriginal = bound;
+                    startSosie = bound;
+//                    throw new Exception("call trace "+original.getName()+ " and "+sosie.getName()+" no syncro");
+                }
                 else {
                     startOriginal = newSyncho[0];
                     startSosie = newSyncho[1];
@@ -142,5 +147,13 @@ public class CompareSingleSequence {
 
     public void setDiff(Collection<Diff> set) {
         diff.addAll(set);
+    }
+
+    public static void reset() {
+        nbDivergence = 0;
+    }
+
+    public static int getDivergence() {
+        return nbDivergence;
     }
 }

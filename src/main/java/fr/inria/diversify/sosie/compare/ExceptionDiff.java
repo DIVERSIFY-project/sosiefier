@@ -42,6 +42,7 @@ public class ExceptionDiff extends Diff {
         object.put("isCatch", isCatch);
         object.put("originalStackTrace", originalStackTrace);
         object.put("sosieStackTrace", sosieStackTrace);
+//        object.put("nbDivergence",nbDivergence);
 
         return object;
     }

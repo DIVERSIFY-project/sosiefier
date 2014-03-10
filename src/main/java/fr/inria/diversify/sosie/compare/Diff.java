@@ -11,6 +11,8 @@ public abstract class Diff {
     protected int positionInSosie;
     private Point pointSosie;
     private int[][] divergence;
+//    protected int nbDivergence;
+
 
     public void setPositionInOriginal(int positionInOriginal) {
         this.positionInOriginal = positionInOriginal;
@@ -48,4 +50,8 @@ public abstract class Diff {
     public  int hashCode() {
         return  this.toString().hashCode();
     }
+
+//    public void setNbDivergence(int d) {
+//        nbDivergence = d;
+//    }
 }

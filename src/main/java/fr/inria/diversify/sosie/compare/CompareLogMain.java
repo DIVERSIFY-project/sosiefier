@@ -31,6 +31,8 @@ public class CompareLogMain {
     private String varToExclude;
     private String dirSosie;
     private Set<Diff> allDiff;
+    private int nbDivergenceAssert;
+    private int nbDivergenceException;
 
     public static void main(String[] args) throws Exception {
         new DiversifyProperties(args[0]);
@@ -77,10 +79,15 @@ public class CompareLogMain {
         } catch (Exception e) {}
 
         String type = DiversifyProperties.getProperty("type");
-        if(type.equals("assert") || type.equals("all"))
+        if(type.equals("assert") || type.equals("all")) {
             diff(AssertPointSequence.class, null);
-        if(type.equals("exception") || type.equals("all"))
+            nbDivergenceAssert = CompareSingleSequence.getDivergence();
+            CompareSingleSequence.reset();
+        }
+        if(type.equals("exception") || type.equals("all")){
             diff(ExceptionPointSequence.class, null);
+            nbDivergenceException = CompareSingleSequence.getDivergence();
+        }
 
         writeResult(allDiff, cf);
     }
@@ -103,6 +110,17 @@ public class CompareLogMain {
     protected void writeResult(Set<Diff> diffs, JSONObject cf) throws IOException, JSONException {
         FileWriter writer = new FileWriter(DiversifyProperties.getProperty("result") + "compare"+System.currentTimeMillis()+".json");
         JSONArray array = new JSONArray();
+
+
+        JSONObject nbDivergence = new JSONObject();
+        nbDivergence.put("nbDivergence", nbDivergenceAssert);
+        nbDivergence.put("type", "assert");
+        array.put(nbDivergence);
+
+        nbDivergence = new JSONObject();
+        nbDivergence.put("nbDivergence", nbDivergenceException);
+        nbDivergence.put("type", "Exception");
+        array.put(nbDivergence);
 
         for(Diff diff : diffs) {
             JSONObject o =  diff.toJSON();
