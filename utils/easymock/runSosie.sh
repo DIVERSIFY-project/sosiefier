@@ -14,16 +14,16 @@ cd instru
 for sosie in $(ls)
 do
     cd $sosie/mutant
-   # mvn test
+    mvn test
     cd ../mutantSosie
-   # mvn test
+    mvn test
     cd ../..
-   # mkdir ../log/$sosie
-   # mkdir ../log/$sosie/mutant
-   # mkdir ../log/$sosie/mutantSosie
-   # cp $sosie/mutant/diversificationPoint ../log/$sosie
-   # cp -r $sosie/mutant/easymock/log/* ../log/$sosie/mutant
-   # cp -r $sosie/mutantSosie/easymock/log/* ../log/$sosie/mutantSosie
+   mkdir ../log/$sosie
+   mkdir ../log/$sosie/mutant
+   mkdir ../log/$sosie/mutantSosie
+   cp $sosie/mutant/diversificationPoint ../log/$sosie
+   cp -r $sosie/mutant/easymock/log/* ../log/$sosie/mutant
+   cp -r $sosie/mutantSosie/easymock/log/* ../log/$sosie/mutantSosie
 
     rm ../compare.properties
     cp $2 ../compare.properties
@@ -32,8 +32,8 @@ do
     echo result=$4 >> ../compare.properties
     echo varToExclude=$5 >> ../compare.properties
      echo type=all >> ../compare.properties
-    echo dirOriginal=../log/$sosie/mutant >> ../compare.properties
-    echo dirSosie=../log/$sosie/mutantSosie >> ../compare.properties
+    echo dirOriginal=$1/log/$sosie/mutant >> ../compare.properties
+    echo dirSosie=$1/log/$sosie/mutantSosie >> ../compare.properties
 
 cat ../compare.properties
 echo $6

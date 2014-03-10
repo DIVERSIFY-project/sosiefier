@@ -18,18 +18,18 @@ import java.util.Collection;
  * Date: 7/22/13
  * Time: 10:20 AM
  */
-public class MutantSosie extends AbstractDiversify {
+public class MutantSosieWriter extends AbstractDiversify {
     protected String sosieDir;
     protected String mutantDir;
 
-    public MutantSosie(AbstractTransformationQuery transQuery, String projectDir) {
+    public MutantSosieWriter(AbstractTransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<Transformation>();
 
     }
 
-    public MutantSosie(String projectDir, String src) {
+    public MutantSosieWriter(String projectDir, String src) {
         this.sourceDir = src;
         this.projectDir = projectDir;
         transformations = new ArrayList<Transformation>();
@@ -67,6 +67,7 @@ public class MutantSosie extends AbstractDiversify {
                 FileUtils.forceDelete(sosieDir);
             }
             else {
+                trans.setFailures(builder.getErrors());
                 transformations.add(trans);
                 FileWriter fileWriter = new FileWriter(mutantDir +"/diversificationPoint");
                 fileWriter.append(trans.toJSONObject().toString());

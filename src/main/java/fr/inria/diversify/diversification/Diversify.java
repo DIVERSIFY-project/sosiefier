@@ -68,6 +68,7 @@ public class Diversify extends AbstractDiversify {
     protected void run(Transformation trans, String tmpDir) throws Exception {
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
+
             trans.apply(tmpDir + "/" + sourceDir);
             transformations.add(trans);
             int status = runTest(tmpDir);

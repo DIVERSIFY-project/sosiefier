@@ -21,6 +21,7 @@ public abstract class AbstractBuilder {
     protected boolean allTestRun;
     String[] phases;
     protected List<String> errors;
+    protected List<String> acceptedErrors;
 
     //-3 nothing
     //-2 not compile
@@ -36,6 +37,7 @@ public abstract class AbstractBuilder {
         this.directory = directory;
         this.srcDir = srcDir;
         errors = new ArrayList<String>();
+        acceptedErrors = new ArrayList<String>();
     }
 
     protected void reset() {
@@ -146,5 +148,9 @@ public abstract class AbstractBuilder {
 
     public void setDirectory(String directory) {
         this.directory = directory;
+    }
+
+    public void setAcceptedErrors(List<String> ae) {
+        acceptedErrors = ae;
     }
 }

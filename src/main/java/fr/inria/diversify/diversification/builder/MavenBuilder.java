@@ -94,7 +94,7 @@ public class MavenBuilder extends AbstractBuilder {
             }
         }
         if(matcher != null) {
-            if(errors.isEmpty())
+            if(acceptedErrors.containsAll(errors))
                 status = 0;
             else
                 status = -1;

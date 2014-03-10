@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import fr.inria.diversify.diversification.MutantSosie;
+import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.diversification.builder.AbstractBuilder;
@@ -29,9 +29,6 @@ import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
-import fr.inria.diversify.diversification.AbstractDiversify;
-import fr.inria.diversify.diversification.Diversify;
-import fr.inria.diversify.diversification.Sosie;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
@@ -90,12 +87,14 @@ public class DiversifyMain {
         AbstractDiversify ad;
         String projet = DiversifyProperties.getProperty("project");
         String src = DiversifyProperties.getProperty("src");
-        if(DiversifyProperties.getProperty("sosie").equals("false"))
+        if(DiversifyProperties.getProperty("transformation.type").equals("mutationToSosie"))
+            ad = new DiversifyWithParent(projet,src);
+        else if(DiversifyProperties.getProperty("sosie").equals("false"))
             ad = new Diversify(projet,src);
         else if(DiversifyProperties.getProperty("sosie").equals("classic"))
             ad = new Sosie(projet,src);
         else
-            ad = new MutantSosie(projet,src);
+            ad = new MutantSosieWriter(projet,src);
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("outputDir"));
         ad.setBuilder(initBuilder(tmpDir));

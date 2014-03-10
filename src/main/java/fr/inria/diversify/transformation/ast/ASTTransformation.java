@@ -47,6 +47,11 @@ public abstract class ASTTransformation extends AbstractTransformation {
     }
 
     public void restore(String srcDir) throws Exception {
+        if(parent != null) {
+            parent.removeSourceCode();
+            parent.printJavaFile(srcDir);
+        }
+        removeSourceCode();
         printJavaFile(srcDir);
     }
 

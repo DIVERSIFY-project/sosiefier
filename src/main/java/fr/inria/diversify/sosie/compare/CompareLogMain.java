@@ -115,11 +115,13 @@ public class CompareLogMain {
         JSONObject nbDivergence = new JSONObject();
         nbDivergence.put("nbDivergence", nbDivergenceAssert);
         nbDivergence.put("type", "assert");
+        nbDivergence.put("directory",DiversifyProperties.getProperty("dirOriginal"));
         array.put(nbDivergence);
 
         nbDivergence = new JSONObject();
         nbDivergence.put("nbDivergence", nbDivergenceException);
         nbDivergence.put("type", "Exception");
+        nbDivergence.put("directory",DiversifyProperties.getProperty("dirOriginal"));
         array.put(nbDivergence);
 
         for(Diff diff : diffs) {

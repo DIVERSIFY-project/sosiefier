@@ -1,6 +1,5 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.util.Log;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
 
@@ -74,9 +73,6 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
                 snippet += ", " + assertVar.get(i);
             snippet += ");\n";
         }
-
-        Log.info(snippet);
-
 
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/\n"+snippet, 0));
