@@ -9,6 +9,7 @@ import javassist.bytecode.MethodInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class BytecodeAdd extends BytecodeTransformation {
 
         return object;
     }
+
 
     @Override
     protected void apply() throws BadBytecode {

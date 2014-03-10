@@ -39,7 +39,7 @@ public class InlineConstantMutation extends AbstractTransformation {
     }
 
     @Override
-    public void apply(String srcDir) throws Exception {
+    public void addSourceCode() throws Exception {
         Log.debug("transformation: {}, {}",type,name);
         Log.debug("statement:\n {}", inlineConstant);
         Log.debug("--------------------\npostion:\n{}", inlineConstant.getPosition());
@@ -67,9 +67,6 @@ public class InlineConstantMutation extends AbstractTransformation {
         CompilationUnit compileUnit = sp.getCompilationUnit();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
-
-        printJavaFile(srcDir);
-        removeSourceCode();
     }
 
     public void restore(String srcDir) throws Exception {
@@ -77,7 +74,7 @@ public class InlineConstantMutation extends AbstractTransformation {
         printJavaFile(srcDir);
     }
 
-    protected void printJavaFile(String directory) throws IOException {
+    public void printJavaFile(String directory) throws IOException {
         CtSimpleType<?> type = inlineConstant.getPosition().getCompilationUnit().getMainType();
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
@@ -89,7 +86,7 @@ public class InlineConstantMutation extends AbstractTransformation {
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
-    protected void removeSourceCode() {
+    public void removeSourceCode() {
         CompilationUnit compileUnit = inlineConstant.getPosition().getCompilationUnit();
         compileUnit.getSourceCodeFraments().clear();
     }

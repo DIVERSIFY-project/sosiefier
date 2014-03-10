@@ -25,7 +25,7 @@ public class LinkSubstitution extends CVLTransformation {
     }
 
     @Override
-    public void apply(String srcDir) throws Exception {
+    public void addSourceCode() throws Exception {
         Log.debug("transformation: {}, {}", type, name);
         Log.debug("object ({}):\n {}", object.getClass().getSimpleName(), object);
         Log.debug("\npositiom:{}", object.getPosition());
@@ -69,9 +69,6 @@ public class LinkSubstitution extends CVLTransformation {
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(compileUnit.getOriginalSourceCode().length()-1), "\n"+
                     classClone.toString(), 0));
         }
-
-        printJavaFile(srcDir);
-        removeSourceCode(object);
     }
 
     private boolean isPackage(int i, String originalSourceCode) {

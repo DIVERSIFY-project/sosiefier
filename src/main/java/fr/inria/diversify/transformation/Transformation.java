@@ -3,6 +3,7 @@ package fr.inria.diversify.transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ import java.util.List;
 public interface Transformation {
 
     public void apply(String srcDir) throws Exception;
+    public void applyWithParent(String srcDir) throws Exception;
     public void restore(String srcDir) throws Exception;
     public void setStatus(Integer status);
     public int getStatus();
@@ -32,4 +34,11 @@ public interface Transformation {
 
     public boolean isCompile();
     public int line();
+
+    void addSourceCode() throws Exception;
+
+    void printJavaFile(String srcDir) throws IOException;
+
+    void removeSourceCode();
+
 }

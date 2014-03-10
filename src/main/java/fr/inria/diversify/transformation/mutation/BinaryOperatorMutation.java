@@ -31,14 +31,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
 
 
 
-    @Override
-    public void apply(String srcDir) throws Exception {
-        addSourceCode();
-        printJavaFile(srcDir);
-        removeSourceCode();
-    }
-
-    protected void addSourceCode() {
+    public void addSourceCode() {
         Log.debug("transformation: {}, {}",type,name);
         Log.debug("operator:\n {}", operator);
         Log.debug("--------------------\npostion:\n{}",operator.getPosition());
@@ -55,7 +48,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
         printJavaFile(srcDir);
     }
 
-    protected void printJavaFile(String directory) throws IOException {
+    public void printJavaFile(String directory) throws IOException {
         CtSimpleType<?> type = operator.getPosition().getCompilationUnit().getMainType();
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
@@ -67,7 +60,7 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
-    protected void removeSourceCode() {
+    public void removeSourceCode() {
         CompilationUnit compileUnit = operator.getPosition().getCompilationUnit();
         compileUnit.getSourceCodeFraments().clear();
     }

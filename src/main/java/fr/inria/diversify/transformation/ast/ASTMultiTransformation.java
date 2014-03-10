@@ -82,4 +82,19 @@ public class ASTMultiTransformation extends AbstractTransformation {
     public int line() {
         return 0;
     }
+
+    @Override
+    public void addSourceCode() throws Exception {
+
+    }
+
+    @Override
+    public void printJavaFile(String srcDir) throws IOException {
+
+    }
+
+    @Override
+    public void removeSourceCode() {
+
+    }
 }

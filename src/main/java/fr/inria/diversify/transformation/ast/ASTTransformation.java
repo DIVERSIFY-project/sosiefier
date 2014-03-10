@@ -25,20 +25,32 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     public ASTTransformation() {}
 
-    public void apply(String srcDir) throws Exception {
-        addSourceCode();
+//    public void apply(String srcDir) throws Exception {
+//        addSourceCode();
+//
+//        printJavaFile(srcDir);
+//        removeSourceCode();
+//    }
 
+//    protected abstract void addSourceCode() throws Exception;
+
+    public void applyWithParent(String srcDir) throws Exception {
+        addSourceCode();
         printJavaFile(srcDir);
+
+        if(parent != null) {
+            parent.addSourceCode();
+            parent.printJavaFile(srcDir);
+            parent.removeSourceCode();
+        }
         removeSourceCode();
     }
-
-    protected abstract void addSourceCode() throws Exception;
 
     public void restore(String srcDir) throws Exception {
         printJavaFile(srcDir);
     }
 
-    protected void printJavaFile(String directory) throws IOException {
+    public void printJavaFile(String directory) throws IOException {
         CtSimpleType<?> type = getOriginalClass(transplantationPoint);
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
@@ -50,7 +62,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
-    protected void removeSourceCode() {
+    public void removeSourceCode() {
         CtSimpleType<?> type = getOriginalClass(transplantationPoint);
         CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
         compileUnit.getSourceCodeFraments().clear();

@@ -56,8 +56,8 @@ public class MutantSosie extends AbstractDiversify {
             trans.getParent().apply(mutantDir + "/" + sourceDir);
 
             Log.debug("apply + sosie");
-            trans.getParent().apply(sosieDir + "/" + sourceDir);
-            trans.apply(sosieDir + "/" + sourceDir);
+            trans.applyWithParent(sosieDir + "/" + sourceDir);
+//            trans.apply(sosieDir + "/" + sourceDir);
 
             if(runTest(mutantDir) < -1 || runTest(sosieDir) < -1) {
                 FileUtils.cleanDirectory(mutantDir);

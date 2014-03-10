@@ -40,7 +40,7 @@ public class ASTReplace extends ASTTransformation {
     }
 
     @Override
-    protected void addSourceCode() throws Exception {
+    public void addSourceCode() throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
 
         Log.debug("transformation: {}, {}",type,name);

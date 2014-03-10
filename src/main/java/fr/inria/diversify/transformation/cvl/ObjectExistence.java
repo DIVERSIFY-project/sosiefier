@@ -155,6 +155,11 @@ public class ObjectExistence extends CVLTransformation {
         }
     }
 
+    @Override
+    public void addSourceCode() throws Exception {
+
+    }
+
     protected void restorePackage(String srcDir) throws IOException {
         for(CtSimpleType<?> cl : ((CtPackage) object).getTypes()) {
             restoreClass(srcDir, cl);

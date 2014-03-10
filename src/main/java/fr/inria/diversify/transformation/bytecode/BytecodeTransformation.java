@@ -10,6 +10,7 @@ import org.apache.commons.io.FileUtils;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,4 +128,19 @@ public abstract class BytecodeTransformation extends AbstractTransformation {
 
     public int line() {return 0;}
 
+
+    @Override
+    public void addSourceCode() throws Exception {
+
+    }
+
+    @Override
+    public void printJavaFile(String srcDir) throws IOException {
+
+    }
+
+    @Override
+    public void removeSourceCode() {
+
+    }
 }

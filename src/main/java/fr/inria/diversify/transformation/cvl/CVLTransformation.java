@@ -23,7 +23,7 @@ import java.io.IOException;
 public abstract class CVLTransformation extends AbstractTransformation {
     protected CtElement object;
 
-    protected void printJavaFile(String directory) throws IOException {
+    public void printJavaFile(String directory) throws IOException {
         printJavaFile(directory, null);
     }
 
@@ -87,10 +87,13 @@ public abstract class CVLTransformation extends AbstractTransformation {
         return object.getPosition().getLine();
     }
 
-    protected void removeSourceCode(CtElement e) {
-
+    public void removeSourceCode(CtElement e) {
         CompilationUnit compileUnit = e.getPosition().getCompilationUnit();
         compileUnit.getSourceCodeFraments().clear();
+    }
+
+    public void removeSourceCode() {
+        removeSourceCode(object);
     }
 
     public void setObject(CtElement object) {

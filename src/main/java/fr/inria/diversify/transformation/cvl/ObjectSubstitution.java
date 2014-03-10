@@ -25,7 +25,7 @@ public class ObjectSubstitution extends CVLTransformation {
     }
 
     @Override
-    public void apply(String srcDir) throws Exception {
+    public void addSourceCode() throws Exception {
         if(object instanceof CtPackage || object instanceof CtSimpleType)
             throw new Exception();
         Log.debug("transformation: {}, {}", type, name);
@@ -40,9 +40,9 @@ public class ObjectSubstitution extends CVLTransformation {
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
                     transplant.toString(), 0));
-
-        printJavaFile(srcDir);
-        removeSourceCode(object);
+//
+//        printJavaFile(srcDir);
+//        removeSourceCode(object);
     }
 
     @Override

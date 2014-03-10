@@ -3,6 +3,7 @@ package fr.inria.diversify.transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -69,4 +70,13 @@ public abstract class AbstractTransformation implements Transformation {
     public Transformation getParent() {
         return parent;
     }
+
+    public void apply(String srcDir) throws Exception {
+        addSourceCode();
+
+        printJavaFile(srcDir);
+        removeSourceCode();
+    }
+
+    public void applyWithParent(String srcDir) throws Exception { throw new Exception("not implemented");};
 }

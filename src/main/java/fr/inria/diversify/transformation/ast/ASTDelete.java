@@ -31,7 +31,7 @@ public class ASTDelete extends ASTTransformation {
         return object;
     }
 
-    protected void addSourceCode() throws Exception {
+    public void addSourceCode() throws Exception {
         CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
         Log.debug("transformation: {}, {}",type,name);
         Log.debug("transplantation Point:\n {}", transplantationPoint);

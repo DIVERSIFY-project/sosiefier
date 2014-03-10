@@ -29,7 +29,7 @@ public class RemoveConditionalMutation extends BinaryOperatorMutation {
     }
 
 
-    protected void addSourceCode() {
+    public void addSourceCode() {
         Log.debug(getType());
         Log.debug("operator:\n {}", operator);
         Log.debug("--------------------\npostion:\n{}",operator.getPosition());

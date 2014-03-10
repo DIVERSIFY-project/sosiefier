@@ -41,7 +41,7 @@ public class ReturnValueMutation extends AbstractTransformation {
     }
 
     @Override
-    public void apply(String srcDir) throws Exception {
+    public void addSourceCode() throws Exception {
         Log.debug("transformation: {}, {}",type,name);
         Log.debug("return:\n {}", ret);
         Log.debug("--------------------\npostion:\n{}", ret.getPosition()); 
@@ -69,9 +69,6 @@ public class ReturnValueMutation extends AbstractTransformation {
         CompilationUnit compileUnit = sp.getCompilationUnit();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
-
-        printJavaFile(srcDir);
-        removeSourceCode();
     }
 
     public void restore(String srcDir) throws Exception {
@@ -79,7 +76,7 @@ public class ReturnValueMutation extends AbstractTransformation {
         printJavaFile(srcDir);
     }
 
-    protected void printJavaFile(String directory) throws IOException {
+    public void printJavaFile(String directory) throws IOException {
         CtSimpleType<?> type = ret.getPosition().getCompilationUnit().getMainType();
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
@@ -91,7 +88,7 @@ public class ReturnValueMutation extends AbstractTransformation {
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
-    protected void removeSourceCode() {
+    public void removeSourceCode() {
         CompilationUnit compileUnit = ret.getPosition().getCompilationUnit();
         compileUnit.getSourceCodeFraments().clear();
     }
