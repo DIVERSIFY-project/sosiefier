@@ -96,10 +96,12 @@ public class AssertPoint extends Point {
     }
 
     @Override
-    public Set<Diff> getDiff(Point p) {
-        AssertDiff e = new AssertDiff(className,methodSignature,assertType,vars,((AssertPoint)p).vars);
-        Set<Diff> set = new HashSet<Diff>();
-        set.add(e);
-        return set;
+    public Diff getDiff(Point p) {
+        if(this.samePosition(p))
+            return new AssertDiff(className,methodSignature,assertType,vars,((AssertPoint)p).vars);
+        else {
+            AssertPoint ap = (AssertPoint)p;
+            return new AssertDiff(className,methodSignature,assertType, ap.className, ap.methodSignature, ap.assertType);
+        }
     }
 }

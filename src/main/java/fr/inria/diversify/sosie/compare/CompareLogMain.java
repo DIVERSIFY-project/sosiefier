@@ -81,12 +81,12 @@ public class CompareLogMain {
         String type = DiversifyProperties.getProperty("type");
         if(type.equals("assert") || type.equals("all")) {
             diff(AssertPointSequence.class, null);
-            nbDivergenceAssert = CompareSingleSequence.getDivergence();
-            CompareSingleSequence.reset();
+//            nbDivergenceAssert = CompareSingleSequence.getDivergence();
+//            CompareSingleSequence.reset();
         }
         if(type.equals("exception") || type.equals("all")){
-            diff(ExceptionPointSequence.class, null);
-            nbDivergenceException = CompareSingleSequence.getDivergence();
+//            diff(ExceptionPointSequence.class, null);
+//            nbDivergenceException = CompareSingleSequence.getDivergence();
         }
 
         writeResult(allDiff, cf);

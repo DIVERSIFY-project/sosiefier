@@ -111,20 +111,21 @@ public class ConditionalPoint extends Point {
 //        return dot;
 //    }
 
-    public Set<Diff> getDiff(Point point) {
+    public Diff getDiff(Point point) {
         ConditionalPoint p = (ConditionalPoint)point;
 
-        Set<Diff> difVar = new HashSet<Diff>();
-        for(String varName : vars.keySet()) {
-            String other = p.vars.get(varName);
-            if(other == null) {
-                new Exception("pas les meme variables");
-            }
-            if(!valueEqual(other,vars.get(varName))) {
-                difVar.add(new VariableDiff(className,methodSignature,varName,vars.get(varName),other));
-            }
-        }
-        return difVar;
+//        Set<Diff> difVar = new HashSet<Diff>();
+//        for(String varName : vars.keySet()) {
+//            String other = p.vars.get(varName);
+//            if(other == null) {
+//                new Exception("pas les meme variables");
+//            }
+//            if(!valueEqual(other,vars.get(varName))) {
+//                difVar.add(new VariableDiff(className,methodSignature,varName,vars.get(varName),other));
+//            }
+//        }
+//        return difVar;
+        return null;
     }
 
     protected boolean valueEqual(String v1, String v2) {

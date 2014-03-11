@@ -13,8 +13,7 @@ public abstract class Point {
     protected static String prefix;
     protected String className;
     protected String methodSignature;
-    protected String idClass;
-    protected String idMethod;
+
     protected int id;
     protected boolean bugPoint = false;
 
@@ -53,6 +52,6 @@ public abstract class Point {
         return id;
     }
 
-    public abstract Set<Diff> getDiff(Point p);
+    public abstract Diff getDiff(Point p);
 }
 

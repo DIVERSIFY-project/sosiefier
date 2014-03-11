@@ -31,8 +31,6 @@ public class FormatFailureExp {
         fw.close();
     }
 
-
-
     protected JSONArray readFile(File file) throws IOException, JSONException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();

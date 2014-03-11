@@ -15,8 +15,8 @@ public class VariableDiff extends Diff {
 
 
     public VariableDiff(String className, String methodSignature, String name, String originalValue, String sosieValue) {
-        this.className = className;
-        this.methodSignature =methodSignature;
+        this.sosieClassName = className;
+        this.sosieMethodSignature =methodSignature;
         this.name = name;
         this.originalValue = originalValue;
         this.sosieValue = sosieValue;
@@ -24,8 +24,8 @@ public class VariableDiff extends Diff {
 
     public VariableDiff(String var) {
         String[] tmp = var.split(":");
-        this.className = tmp[0];
-        this.methodSignature = tmp[1];
+        this.sosieClassName = tmp[0];
+        this.sosieMethodSignature = tmp[1];
         this.name = tmp[2];
     }
 
@@ -39,14 +39,14 @@ public class VariableDiff extends Diff {
     }
 
     public String forFile() {
-        return  className+":"+methodSignature+":"+name;
+        return  sosieClassName +":"+ sosieMethodSignature +":"+name;
     }
 
     @Override
     public JSONObject toJSON() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("class", className);
-        object.put("method", methodSignature);
+        object.put("class", sosieClassName);
+        object.put("method", sosieMethodSignature);
         object.put("name", name);
         object.put("originalValue", originalValue);
         object.put("sosieValue", sosieValue);

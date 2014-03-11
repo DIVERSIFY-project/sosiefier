@@ -15,7 +15,6 @@ public class CompareSingleSequence {
     protected AbstractPointSequence original;
     protected AbstractPointSequence sosie;
     protected CodeFragment startPoint;
-    protected static int nbDivergence;
 
 //    protected Map<AbstractPointSequence,int[][]> divergence;
 //    protected Map<AbstractPointSequence, Set<Diff>> diffs;
@@ -76,7 +75,7 @@ public class CompareSingleSequence {
         int[][] divergence = new int[bound][2];
         int i = 0;
         Set<Diff> var = new HashSet<Diff>();
-        while(startOriginal < bound - 1 && startSosie < bound -1 ) {
+        while(startOriginal < bound - 1 && startSosie < bound - 1) {
             startOriginal++;
             startSosie++;
             divergence[i][0] = startOriginal;
@@ -86,30 +85,31 @@ public class CompareSingleSequence {
             Point sPoint = sosie.getPoint(startSosie);
             if(oPoint.samePosition(sPoint)) {
                 if(!oPoint.sameValue(sPoint)) {
-                    for(Diff dVar : oPoint.getDiff(sPoint))
-                        if(!containsExcludeVar(dVar)) {
-                            dVar.setPositionInOriginal(startOriginal);
-                            dVar.setPositionInSosie(startSosie);
-                            dVar.setPointSosie(sPoint);
-                            dVar.setDivergence(divergence);
-                            var.add(dVar);
-                        }
+                    Diff dVar = oPoint.getDiff(sPoint);
+                    if(!containsExcludeVar(dVar)) {
+                        dVar.setOriginalPosition(startOriginal);
+                        dVar.setSosiePosition(startSosie);
+                        dVar.setDivergence(divergence);
+                        var.add(dVar);
+                    }
                 }
             }
             else {
+                Diff dVar = oPoint.getDiff(sPoint);
+                dVar.setOriginalPosition(startOriginal);
+                dVar.setSosiePosition(startSosie);
                 int newSyncho[] = findSyncro(syncroRange,original,sosie, startOriginal,startSosie);
                 if(newSyncho == null) {
-                    nbDivergence++;
                     startOriginal = bound;
                     startSosie = bound;
-//                    throw new Exception("call trace "+original.getName()+ " and "+sosie.getName()+" no syncro");
                 }
                 else {
                     startOriginal = newSyncho[0];
                     startSosie = newSyncho[1];
                 }
+                if(!containsExcludeVar(dVar))
+                    var.add(dVar);
             }
-
         }
         return var;
     }
@@ -147,13 +147,5 @@ public class CompareSingleSequence {
 
     public void setDiff(Collection<Diff> set) {
         diff.addAll(set);
-    }
-
-    public static void reset() {
-        nbDivergence = 0;
-    }
-
-    public static int getDivergence() {
-        return nbDivergence;
     }
 }

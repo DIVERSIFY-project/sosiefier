@@ -57,6 +57,7 @@ public class TransformationParser {
         for (File f : file.listFiles())
             if(f.getName().endsWith(".json")) {
                 countFile++;
+                Log.debug("Current number of transformation {}",transformations.size());
                 Log.debug("parse tranformation file: "+f.getName());
                 transformations.addAll(parseFile(f));
             }
@@ -101,7 +102,7 @@ public class TransformationParser {
                 list.add(parseTransformation(array.getJSONObject(i)));
             }  catch (Exception e) {
                 countError++;
-                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
+//                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
                 Log.debug("{} {} ",count, countError);
             }
         }

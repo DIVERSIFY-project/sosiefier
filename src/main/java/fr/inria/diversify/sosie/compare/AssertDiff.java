@@ -13,37 +13,56 @@ import java.util.List;
 public class AssertDiff extends Diff {
     List<String> sosieAssert;
     List<String> originalAssert;
-    String assertType;
+    String originalAssertType;
+    String sosieAssertType;
 
+    //same position
     public AssertDiff(String className, String methodSignature, String assertType, List<String> originalAssert, List<String> sosieAssert) {
-        this.className = className;
-        this.methodSignature = methodSignature;
-        this.assertType = assertType;
+        this.originalClassName = className;
+        this.originalMethodSignature = methodSignature;
+        this.originalAssertType = assertType;
         this.originalAssert = originalAssert;
         this.sosieAssert =sosieAssert;
     }
 
+    //different position
+    public AssertDiff(String originalClassName, String originalMethodSignature, String originalAssertType,
+                         String sosieClassName, String sosieMethodSignature, String sosieAssertType) {
+        this.originalClassName = originalClassName;
+        this.originalMethodSignature = originalMethodSignature;
+        this.originalAssertType = originalAssertType;
+        this.sosieClassName = sosieClassName;
+        this.sosieMethodSignature = sosieMethodSignature;
+        this.sosieAssertType = sosieAssertType;
+    }
+
     public AssertDiff(String line) {
         String[] tmp = line.split(":");
-        this.className = tmp[1];
-        this.methodSignature = tmp[2];
-        this.assertType = tmp[3];
+        this.originalClassName = tmp[1];
+        this.originalMethodSignature = tmp[2];
+        this.originalAssertType = tmp[3];
     }
 
     public String toString() {
-        return "A:"+className+":"+methodSignature+":"+assertType;
+        return "A:"+ originalClassName +":"+ originalMethodSignature +":"+originalAssertType;
     }
 
     @Override
     public JSONObject toJSON() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", "assert");
-        object.put("class", className);
-        object.put("method", methodSignature);
-        object.put("assert", assertType);
-        object.put("originalAssert", originalAssert);
-        object.put("sosieAssert", sosieAssert);
-//        object.put("nbDivergence",nbDivergence);
+        object.put("originalClass", originalClassName);
+        object.put("originalMethod", originalMethodSignature);
+        object.put("originalAssertType", originalAssertType);
+
+        if(originalAssert != null) {
+            object.put("originalAssert", originalAssert);
+            object.put("sosieAssert", sosieAssert);
+        } else {
+            object.put("sosieClass", sosieClassName);
+            object.put("sosieMethod", sosieMethodSignature);
+            object.put("sosieAssertType",sosieAssertType);
+        }
 
         return object;
     }

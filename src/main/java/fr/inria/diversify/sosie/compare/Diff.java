@@ -5,37 +5,32 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public abstract class Diff {
-    protected String className;
-    protected String methodSignature;
-    protected int positionInOriginal;
-    protected int positionInSosie;
-    private Point pointSosie;
+    protected String originalClassName;
+    protected String originalMethodSignature;
+    protected String sosieClassName;
+    protected String sosieMethodSignature;
+    protected int originalPosition;
+    protected int sosiePosition;
+//    private Point sosiePoint;
     private int[][] divergence;
 //    protected int nbDivergence;
 
-
-    public void setPositionInOriginal(int positionInOriginal) {
-        this.positionInOriginal = positionInOriginal;
+    public void setOriginalPosition(int originalPosition) {
+        this.originalPosition = originalPosition;
     }
-    public int getPositionInOriginal() {
-        return positionInOriginal;
-    }
-
-
-    public void setPositionInSosie(int positionInSosie) {
-        this.positionInSosie = positionInSosie;
+    public int getOriginalPosition() {
+        return originalPosition;
     }
 
-    public void setPointSosie(Point pointSosie) {
-        this.pointSosie = pointSosie;
-    }
-    public Point getConditionalPointSosie() {
-        return  this.pointSosie;
-    }
 
-//    public String toString() {
-//        return className+":"+methodSignature+":"+name;
+    public void setSosiePosition(int sosiePosition) {
+        this.sosiePosition = sosiePosition;
+    }
+//    public void setSosiePoint(Point pointSosie) {
+//        this.sosiePoint = pointSosie;
 //    }
+
+
 
     public abstract JSONObject toJSON() throws JSONException;
 
@@ -50,8 +45,4 @@ public abstract class Diff {
     public  int hashCode() {
         return  this.toString().hashCode();
     }
-
-//    public void setNbDivergence(int d) {
-//        nbDivergence = d;
-//    }
 }

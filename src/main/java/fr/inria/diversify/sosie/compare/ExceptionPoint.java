@@ -40,11 +40,13 @@ public class ExceptionPoint extends Point {
     }
 
     @Override
-    public Set<Diff> getDiff(Point p) {
-        ExceptionDiff e = new ExceptionDiff(className,methodSignature, isCatch, stackTrace, ((ExceptionPoint)p).stackTrace);
-        Set<Diff> set = new HashSet<Diff>();
-        set.add(e);
-        return set;
+    public Diff getDiff(Point p) {
+        if(this.samePosition(p))
+            return new ExceptionDiff(className,methodSignature, isCatch, stackTrace, ((ExceptionPoint)p).stackTrace);
+        else {
+            ExceptionPoint ep = (ExceptionPoint)p;
+            return new ExceptionDiff(className,methodSignature, isCatch, ep.className, ep.methodSignature, ep.isCatch);
+        }
     }
 
     public boolean samePosition(Point point) {
