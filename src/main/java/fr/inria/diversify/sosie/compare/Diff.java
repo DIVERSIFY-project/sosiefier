@@ -11,9 +11,8 @@ public abstract class Diff {
     protected String sosieMethodSignature;
     protected int originalPosition;
     protected int sosiePosition;
-//    private Point sosiePoint;
+    protected String testName;
     private int[][] divergence;
-//    protected int nbDivergence;
 
     public void setOriginalPosition(int originalPosition) {
         this.originalPosition = originalPosition;
@@ -21,16 +20,13 @@ public abstract class Diff {
     public int getOriginalPosition() {
         return originalPosition;
     }
-
+    public void setTestName(String testName) {
+        this.testName = testName;
+    }
 
     public void setSosiePosition(int sosiePosition) {
         this.sosiePosition = sosiePosition;
     }
-//    public void setSosiePoint(Point pointSosie) {
-//        this.sosiePoint = pointSosie;
-//    }
-
-
 
     public abstract JSONObject toJSON() throws JSONException;
 

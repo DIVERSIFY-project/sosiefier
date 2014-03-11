@@ -67,6 +67,6 @@ public class ExceptionDiff extends Diff {
     }
 
     public String toString() {
-        return "E:"+ sosieClassName +":"+ sosieMethodSignature +":"+originalIsCatch;
+        return "E:" + testName+ ":" + sosieClassName +":"+ sosieMethodSignature +":"+originalIsCatch;
     }
 }

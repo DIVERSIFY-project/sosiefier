@@ -44,7 +44,7 @@ public class AssertDiff extends Diff {
     }
 
     public String toString() {
-        return "A:"+ originalClassName +":"+ originalMethodSignature +":"+originalAssertType;
+        return "A:"+ testName+ ":" + originalClassName +":"+ originalMethodSignature +":"+originalAssertType;
     }
 
     @Override

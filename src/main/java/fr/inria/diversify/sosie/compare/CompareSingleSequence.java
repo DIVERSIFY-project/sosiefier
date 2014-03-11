@@ -90,12 +90,14 @@ public class CompareSingleSequence {
                         dVar.setOriginalPosition(startOriginal);
                         dVar.setSosiePosition(startSosie);
                         dVar.setDivergence(divergence);
+                        dVar.setTestName(original.getFullName());
                         var.add(dVar);
                     }
                 }
             }
             else {
                 Diff dVar = oPoint.getDiff(sPoint);
+                dVar.setTestName(original.getFullName());
                 dVar.setOriginalPosition(startOriginal);
                 dVar.setSosiePosition(startSosie);
                 int newSyncho[] = findSyncro(syncroRange,original,sosie, startOriginal,startSosie);
