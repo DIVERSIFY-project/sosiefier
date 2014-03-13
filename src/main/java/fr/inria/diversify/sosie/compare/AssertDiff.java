@@ -38,9 +38,10 @@ public class AssertDiff extends Diff {
 
     public AssertDiff(String line) {
         String[] tmp = line.split(":");
-        this.originalClassName = tmp[1];
-        this.originalMethodSignature = tmp[2];
-        this.originalAssertType = tmp[3];
+        testName = tmp[1];
+        this.originalClassName = tmp[2];
+        this.originalMethodSignature = tmp[3];
+        this.originalAssertType = tmp[4];
     }
 
     public String toString() {

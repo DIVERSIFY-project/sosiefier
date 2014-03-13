@@ -114,7 +114,7 @@ public abstract class AbstractPointSequence {
     }
 
     public String getFullName() {
-        return threadName+":"+name;
+        return threadName+"_"+name;
     }
 
  public Point getPoint(int i) {

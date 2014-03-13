@@ -61,7 +61,11 @@ public class CompareLogMain {
     }
 
     protected void same() throws IOException {
-        CompareMultiSequence un = new CompareMultiSequence(dirOriginal,dirSosie,getType());
+        CompareMultiSequence un = new CompareMultiSequence(dirOriginal,dirSosie,AssertPointSequence.class);
+        un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
+        un.findAndWriteDiff(varToExclude);
+
+        un = new CompareMultiSequence(dirOriginal,dirSosie,ExceptionPointSequence.class);
         un.setSyncroRange(Integer.parseInt(DiversifyProperties.getProperty("syncroRange")));
         un.findAndWriteDiff(varToExclude);
     }

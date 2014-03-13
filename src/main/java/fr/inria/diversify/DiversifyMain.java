@@ -16,6 +16,7 @@ import fr.inria.diversify.transformation.query.MutationToSosieQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
+import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
 import org.json.JSONException;
@@ -246,6 +247,9 @@ public class DiversifyMain {
 
         for(String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
+
+        Visu v = new Visu();
+        v.writeJSON(transDir+"_visu.json", transformations);
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {

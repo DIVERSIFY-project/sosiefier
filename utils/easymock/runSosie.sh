@@ -1,10 +1,5 @@
 #!/bin/sh
 
-#generation des sosies
-#java -Xmx2000m -XX:MaxPermSize=256m -jar target/Diversify-statements-1.0-SNAPSHOT-jar-with-dependencies.jar $1
-
-
-
 #run des sosies
 #$1: chemin absolue
 cd $1

@@ -1,0 +1,23 @@
+
+
+rect.class {
+    fill: white;
+    stroke: black;
+    stroke-width: 3;
+    fill-opacity:0;
+}
+rect.package {
+    fill: white;
+    stroke: black;
+    stroke-width: 3;
+    fill-opacity:0;
+}
+line.notCompile {
+    stroke: red;
+}
+line.testFail {
+    stroke: blue;
+}
+line.sosie {
+    stroke: green;
+}

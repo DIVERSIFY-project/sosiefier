@@ -53,7 +53,7 @@ public class TransformationParser {
 
         File file = new File(dir);
         int countFile = 0;
-        Log.debug("transformation directory: {})"+file.getAbsolutePath());
+        Log.debug("transformation directory: {}",file.getAbsolutePath());
         for (File f : file.listFiles())
             if(f.getName().endsWith(".json")) {
                 countFile++;

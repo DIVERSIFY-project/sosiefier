@@ -38,8 +38,9 @@ public class ExceptionDiff extends Diff {
 
     public ExceptionDiff(String line) {
         String[] tmp = line.split(":");
-        this.originalClassName = tmp[1];
-        this.originalMethodSignature = tmp[2];
+        testName = tmp[1];
+        this.originalClassName = tmp[2];
+        this.originalMethodSignature = tmp[3];
         if(tmp[3].equals("true"))
             originalIsCatch = true;
         else
