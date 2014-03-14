@@ -1,4 +1,5 @@
-var paper = Snap(3000, 5000);
+var paper = Snap(document.getElementById("svg").contentDocument,2000,5000);
+//var paper = Snap(2000,5000);
 var rectL = 150;
 var marginX = 10;
 var marginY = 10;
@@ -6,42 +7,67 @@ var claseeNameSize = 15;
 var stroke_Width = 3;
 var maxNumberOfClassPerLine = 4;
 var maxNumberOfPackagePerLine = 3;
+var jsonData;
+
+var steroid = true, reaction = true, wittgenstein = true, random = true;
 
 $.getJSON("clojure_visu.json",function( data ) {
+    jsonData = data;
     var visu = new Visu(data);
     visu.draw();
 });
 
 $(document).find('#random-button').click(function () {
     if($(this).hasClass("btn-success")) {
+        random = false;
         $(this).attr("class","btn btn-danger");
     } else {
+        random = true;
         $(this).attr("class","btn btn-success");
     }
+    paper.clear();
+
+    var visu = new Visu(jsonData);
+    visu.draw();
 })
 
 $(document).find('#reaction-button').click(function () {
     if($(this).hasClass("btn-success")) {
+        reaction = false;
         $(this).attr("class","btn btn-danger");
     } else {
+        reaction = true;
         $(this).attr("class","btn btn-success");
     }
+    paper.clear();
+    var visu = new Visu(jsonData);
+    visu.draw();
 })
 
 $(document).find('#steroid-button').click(function () {
     if($(this).hasClass("btn-success")) {
+        steroid = false;
         $(this).attr("class","btn btn-danger");
     } else {
+        steroid = true;
         $(this).attr("class","btn btn-success");
     }
+    paper.clear();
+    var visu = new Visu(jsonData);
+    visu.draw();
 })
 
 $(document).find('#wittgenstein-button').click(function () {
     if($(this).hasClass("btn-success")) {
+        wittgenstein = false;
         $(this).attr("class","btn btn-danger");
     } else {
+        wittgenstein = true;
         $(this).attr("class","btn btn-success");
     }
+    paper.clear();
+    var visu = new Visu(jsonData);
+    visu.draw();
 })
 
 
@@ -223,12 +249,18 @@ function VisuClass(JSONObject) {
         while(i < transformations.length) {
             var trans = transformations[i];
             if(currentPosition == trans.position) {
-                if(trans.status == -2)
+                if((random || (trans.name != "notContextReplace" && trans.name != "notContextAdd"))
+                    && (wittgenstein || (trans.name != "notContextMappingVariableNameReplace" && trans.name != "notContextMappingVariableNameAdd"))
+                    && (reaction || (trans.name != "notMappingVariableReplace" && trans.name != "notMappingVariableAdd"))
+                    && (steroid || (trans.name != "replace" && trans.name != "add" && trans.name != "delete"))) {
+                if(trans.status == -2 )
                     notCompile++;
                 else if(trans.status == -1)
                     failTest++;
                 else
                     greenTest++;
+
+                }
                 i++;
             } else {
                 var currentPosition = trans.position;
@@ -242,21 +274,18 @@ function VisuClass(JSONObject) {
     }
 
     this.drawLine = function(trans, notCompile, failTest, greenTest) {
-        var x1 = (notCompile / (notCompile + failTest + greenTest)) * rectL;
-        var x2 = ((notCompile+failTest) / (notCompile + failTest + greenTest)) * rectL;
+        var sum = notCompile + failTest + greenTest;
+        if(sum == 0)
+            return;
+
+        var x1 = (notCompile / (sum)) * rectL;
+        var x2 = ((notCompile+failTest) / (sum)) * rectL;
         var lineNC = paper.line(0,
             5 + trans.position + claseeNameSize,
             x1,
             5 + trans.position + claseeNameSize);
         lineNC.attr({class: "notCompile"});
-//        var text = paper.text(0,0,"cgcvbvcb");
-//        text.attr({class:"class", visibility:"hidden"});
-//        this.group.add(text);
-//        var set = paper.el("set",{
-//            attributeName:"visibility", from:"hidden", to:"visible", begin:"thingyouhoverover.mouseover", end:"thingyouhoverover.mouseout"
-//        });
-//        text.add(set);
-//        lineNC.hover(function() {alert("notCompile: "+ notCompile)}, function() {})
+
         this.group.add(lineNC);
 
         var lineFT = paper.line(x1,

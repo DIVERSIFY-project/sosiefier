@@ -5,28 +5,22 @@ rect.class {
     stroke: black;
     stroke-width: 3;
     fill-opacity:0.1;
-    rx: 10;
-    ry: 10;
 }
 rect.package {
     fill: black;
     stroke: black;
     stroke-width: 3;
     fill-opacity:0.1;
-    rx: 10;
-    ry: 10;
+=
 }
 line.notCompile {
-    z-index: 100;
     stroke: red;
 }
 line.testFail {
-    z-index: 100;
     stroke: blue;
 }
 line.sosie {
-    z-index: 100;
-    stroke: green;
+   stroke: green;
 }
 text.class {
     font: 10px sans-serif;
