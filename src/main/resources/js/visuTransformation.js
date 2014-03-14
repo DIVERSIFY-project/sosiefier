@@ -10,7 +10,6 @@ var maxNumberOfPackagePerLine = 3;
 $.getJSON("clojure_visu.json",function( data ) {
     var visu = new Visu(data);
     visu.draw();
-
 });
 
 
@@ -25,7 +24,7 @@ function Visu(JSONObject) {
             this.package[i] = new VisuPackage(this.JSONObject[i], paper);
             this.package[i].draw(0,0);
         }
-        this.package = this.package.sort(function(i,j) {
+        this.package.sort(function(i,j) {
             return i.width < j.width;
         });
 
@@ -87,7 +86,7 @@ function VisuPackage(JSONObject) {
         for(var i = 0; i < this.JSONObject.classes.length; i++) {
             this.classes[i] = new VisuClass(this.JSONObject.classes[i], paper);
         }
-        this.classes = this.classes.sort(function(i,j) {
+        this.classes.sort(function(i,j) {
             return i.getSize() < j.getSize();
         });
         var maxSize = 0;
@@ -95,6 +94,7 @@ function VisuPackage(JSONObject) {
         var currentX = marginX;
         var i = 0;
         var line = 0;
+        var nbColumn = 0;
         while( i < this.classes.length) {
             if(line == maxNumberOfClassPerLine) {
                 line = 0;
@@ -118,18 +118,19 @@ function VisuPackage(JSONObject) {
 
             }
             currentX = currentX + rectL + marginX;
+            nbColumn++
             line++;
         }
-        this.addPackage(currentY+maxSize);
+        this.addPackage(currentY+maxSize, nbColumn);
         this.addText();
         this.translate(x,y);
     }
 
-    this.addPackage = function(y) {
-        if(this.classes.length < maxNumberOfClassPerLine)
-            this.height = this.classes.length * (rectL+2*marginX) - 2*marginX;
+    this.addPackage = function(y, nbColumn) {
+        if(nbColumn < maxNumberOfClassPerLine)
+            this.height = nbColumn * (rectL+marginX) + marginX;
         else
-            this.height = maxNumberOfClassPerLine * (rectL+2*marginX) - 2*marginX;
+            this.height = maxNumberOfClassPerLine * (rectL+marginX) + marginX;
 
         this.width = claseeNameSize + y + marginY;
         var rect = paper.rect(0, 0,this.height, this.width,5,5);
@@ -150,7 +151,7 @@ function VisuPackage(JSONObject) {
         var currentSize = 0;
         while(i < this.classes.length && currentSize <= maxSize - (this.classes[i].getSize()) ) {
             cl.push(this.classes[i]);
-            currentSize += this.classes[i].getSize() + marginY;
+            currentSize += this.classes[i].getSize() + claseeNameSize +marginY;
             i++;
         }
         return cl;
@@ -177,21 +178,58 @@ function VisuClass(JSONObject) {
     }
 
     this.addLines = function() {
-        var lines = this.JSONObject.transformation;
-        for(var j = 0; j < lines.length; j++) {
-            var trans = lines[j];
-            var line = paper.line(0,
-                5 + trans.position + claseeNameSize,
-                rectL,
-                5 + trans.position + claseeNameSize);
-            if(trans.status == -2)
-                line.attr({class: "notCompile"});
-            else if(trans.status == -1)
-                line.attr({class: "testFail"});
-            else
-                line.attr({class: "sosie"});
-            this.group.add(line);
+        var transformations = this.JSONObject.transformation.sort(function(i,j) {
+            return i.position < j.position;
+        });
+        var i = 0;
+        var currentPosition = -1;
+        var notCompile = 0, failTest = 0, greenTest = 0;
+        console.log(transformations.length);
+        while(i < transformations.length) {
+            var trans = transformations[i];
+            if(currentPosition == trans.position) {
+                if(trans.status == -2)
+                    notCompile++;
+                else if(trans.status == -1)
+                    failTest++;
+                else
+                    greenTest++;
+                i++;
+            } else {
+                var currentPosition = trans.position;
+                if(i != 0)
+                    this.drawLine(transformations[i-1], notCompile, failTest, greenTest)
+                notCompile = 0;
+                failTest = 0;
+                greenTest = 0;
+            }
         }
+    }
+
+    this.drawLine = function(trans, notCompile, failTest, greenTest) {
+        console.log("notCompile: " + notCompile + ", failTest: "+ failTest + ", greenTest: "+ greenTest)
+        var x1 = (notCompile / (notCompile + failTest + greenTest)) * rectL;
+        var x2 = ((notCompile+failTest) / (notCompile + failTest + greenTest)) * rectL;
+        var lineNC = paper.line(0,
+            5 + trans.position + claseeNameSize,
+            x1,
+            5 + trans.position + claseeNameSize);
+        lineNC.attr({class: "notCompile"});
+        this.group.add(lineNC);
+
+        var lineFT = paper.line(x1,
+            5 + trans.position + claseeNameSize,
+            x2,
+            5 + trans.position + claseeNameSize);
+        lineFT.attr({class: "testFail"});
+        this.group.add(lineFT);
+
+        var lineGT = paper.line(x2,
+            5 + trans.position + claseeNameSize,
+            rectL,
+            5 + trans.position + claseeNameSize);
+        lineGT.attr({class: "sosie"});
+        this.group.add(lineGT);
     }
 
     this.addText = function() {
