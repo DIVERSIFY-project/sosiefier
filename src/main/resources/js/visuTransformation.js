@@ -12,6 +12,38 @@ $.getJSON("clojure_visu.json",function( data ) {
     visu.draw();
 });
 
+$(document).find('#random-button').click(function () {
+    if($(this).hasClass("btn-success")) {
+        $(this).attr("class","btn btn-danger");
+    } else {
+        $(this).attr("class","btn btn-success");
+    }
+})
+
+$(document).find('#reaction-button').click(function () {
+    if($(this).hasClass("btn-success")) {
+        $(this).attr("class","btn btn-danger");
+    } else {
+        $(this).attr("class","btn btn-success");
+    }
+})
+
+$(document).find('#steroid-button').click(function () {
+    if($(this).hasClass("btn-success")) {
+        $(this).attr("class","btn btn-danger");
+    } else {
+        $(this).attr("class","btn btn-success");
+    }
+})
+
+$(document).find('#wittgenstein-button').click(function () {
+    if($(this).hasClass("btn-success")) {
+        $(this).attr("class","btn btn-danger");
+    } else {
+        $(this).attr("class","btn btn-success");
+    }
+})
+
 
 function Visu(JSONObject) {
     this.JSONObject = JSONObject;
