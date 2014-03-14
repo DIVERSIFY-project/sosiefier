@@ -16,9 +16,6 @@ public class CompareSingleSequence {
     protected AbstractPointSequence sosie;
     protected CodeFragment startPoint;
 
-//    protected Map<AbstractPointSequence,int[][]> divergence;
-//    protected Map<AbstractPointSequence, Set<Diff>> diffs;
-
     public CompareSingleSequence(AbstractPointSequence original, AbstractPointSequence sosie, CodeFragment startPoint) {
         this.original = original;
         this.sosie = sosie;
@@ -86,11 +83,11 @@ public class CompareSingleSequence {
             if(oPoint.samePosition(sPoint)) {
                 if(!oPoint.sameValue(sPoint)) {
                     Diff dVar = oPoint.getDiff(sPoint);
+                    dVar.setTestName(original.getFullName());
                     if(!containsExcludeVar(dVar)) {
                         dVar.setOriginalPosition(startOriginal);
                         dVar.setSosiePosition(startSosie);
                         dVar.setDivergence(divergence);
-                        dVar.setTestName(original.getFullName());
                         var.add(dVar);
                     }
                 }
@@ -141,8 +138,9 @@ public class CompareSingleSequence {
     }
 
     protected boolean containsExcludeVar(Diff var) {
+        String s = var.toString();
         for (Diff excludeVar : diff)
-            if (excludeVar.toString().equals(var.toString()))
+            if (excludeVar.toString().equals(s))
                 return true;
         return false;
     }

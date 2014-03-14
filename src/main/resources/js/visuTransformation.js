@@ -121,7 +121,7 @@ function VisuPackage(JSONObject) {
             nbColumn++
             line++;
         }
-        this.addPackage(currentY+maxSize, nbColumn);
+        var r = this.addPackage(currentY+maxSize, nbColumn);
         this.addText();
         this.translate(x,y);
     }
@@ -135,7 +135,10 @@ function VisuPackage(JSONObject) {
         this.width = claseeNameSize + y + marginY;
         var rect = paper.rect(0, 0,this.height, this.width,5,5);
         rect.attr({class: "package"});
-        this.group.add(rect);
+//        this.group.add(rect);
+        rect.prependTo(this.group)
+//        rect.toBack();
+        return rect;
     }
 
     this.addText = function() {
@@ -160,6 +163,8 @@ function VisuPackage(JSONObject) {
     this.translate = function(x,y) {
         this.group.transform("t" + x + "," + y);
     }
+
+
 }
 
 function VisuClass(JSONObject) {
@@ -167,13 +172,12 @@ function VisuClass(JSONObject) {
     this.group = paper.g();
 
     this.draw = function(x,y) {
-        this.addText();
-        this.addLines();
+
         var rect = paper.rect(0, 0,rectL, this.JSONObject.size + claseeNameSize,5,5);
         rect.attr({class: "class"});
-
         this.group.add(rect);
-
+        this.addText();
+        this.addLines();
         this.translate(x,y);
     }
 
@@ -184,7 +188,6 @@ function VisuClass(JSONObject) {
         var i = 0;
         var currentPosition = -1;
         var notCompile = 0, failTest = 0, greenTest = 0;
-        console.log(transformations.length);
         while(i < transformations.length) {
             var trans = transformations[i];
             if(currentPosition == trans.position) {
@@ -207,7 +210,6 @@ function VisuClass(JSONObject) {
     }
 
     this.drawLine = function(trans, notCompile, failTest, greenTest) {
-        console.log("notCompile: " + notCompile + ", failTest: "+ failTest + ", greenTest: "+ greenTest)
         var x1 = (notCompile / (notCompile + failTest + greenTest)) * rectL;
         var x2 = ((notCompile+failTest) / (notCompile + failTest + greenTest)) * rectL;
         var lineNC = paper.line(0,
@@ -215,6 +217,14 @@ function VisuClass(JSONObject) {
             x1,
             5 + trans.position + claseeNameSize);
         lineNC.attr({class: "notCompile"});
+//        var text = paper.text(0,0,"cgcvbvcb");
+//        text.attr({class:"class", visibility:"hidden"});
+//        this.group.add(text);
+//        var set = paper.el("set",{
+//            attributeName:"visibility", from:"hidden", to:"visible", begin:"thingyouhoverover.mouseover", end:"thingyouhoverover.mouseout"
+//        });
+//        text.add(set);
+//        lineNC.hover(function() {alert("notCompile: "+ notCompile)}, function() {})
         this.group.add(lineNC);
 
         var lineFT = paper.line(x1,
@@ -253,4 +263,7 @@ function VisuClass(JSONObject) {
         return  this.JSONObject.size;
     }
 }
+
+
+
 
