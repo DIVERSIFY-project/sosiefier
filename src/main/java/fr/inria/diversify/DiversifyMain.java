@@ -6,6 +6,7 @@ import java.util.*;
 
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.statistic.StatisticDiversification;
+import fr.inria.diversify.transformation.TransformationOldParser;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.diversification.builder.AbstractBuilder;
 import fr.inria.diversify.diversification.builder.AntBuilder;
@@ -14,6 +15,7 @@ import fr.inria.diversify.transformation.query.CvlQuery;
 import fr.inria.diversify.transformation.query.MutationQuery;
 import fr.inria.diversify.transformation.query.MutationToSosieQuery;
 import fr.inria.diversify.transformation.query.TransformationQuery;
+import fr.inria.diversify.transformation.query.ast.TransformationQueryFromList;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
@@ -33,7 +35,6 @@ import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQueryFromList;
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
@@ -160,7 +161,7 @@ public class DiversifyMain {
 
         if(type.equals("list")) {
             String transDirectory = DiversifyProperties.getProperty("transformation.directory");
-            atq = new ASTTransformationQueryFromList(rg, transDirectory);
+            atq = new TransformationQueryFromList(rg, transDirectory);
         }
 
         if(type.equals("byteCode"))
@@ -230,7 +231,8 @@ public class DiversifyMain {
     }
 
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
-        TransformationParser tf = new TransformationParser(true);
+//        TransformationParser tf = new TransformationParser(true);
+        TransformationOldParser tf = new TransformationOldParser(true);
         Collection<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
@@ -249,7 +251,7 @@ public class DiversifyMain {
             write.writeGoodTransformation(type);
 
         Visu v = new Visu();
-        v.writeJSON(transDir+"_visu.json", transformations);
+        v.writeJSON(fileName+"_visu.json", transformations);
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {

@@ -79,4 +79,13 @@ public abstract class AbstractTransformation implements Transformation {
     }
 
     public void applyWithParent(String srcDir) throws Exception { throw new Exception("not implemented");};
+
+    protected boolean equalParent(Transformation otherParent) {
+        if(parent != null)
+            return parent.equals(otherParent);
+        if(otherParent != null)
+            return otherParent.equals(parent);
+
+        return true;
+    }
 }

@@ -124,4 +124,9 @@ public abstract class ASTTransformation extends AbstractTransformation {
     public int line() {
         return transplantationPoint.getStartLine();
     }
+
+    //far stupid transformation
+    public void setName(String type) {
+        name = type;
+    }
 }

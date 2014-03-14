@@ -1,13 +1,13 @@
-var paper = Snap(1200, 3000);
+var paper = Snap(3000, 5000);
 var rectL = 150;
 var marginX = 10;
 var marginY = 10;
 var claseeNameSize = 15;
 var stroke_Width = 3;
-var maxNumberOfClassPerLine = 3;
+var maxNumberOfClassPerLine = 4;
 var maxNumberOfPackagePerLine = 3;
 
-$.getJSON("tmp_visu.json",function( data ) {
+$.getJSON("clojure_visu.json",function( data ) {
     var visu = new Visu(data);
     visu.draw();
 
@@ -132,14 +132,15 @@ function VisuPackage(JSONObject) {
             this.height = maxNumberOfClassPerLine * (rectL+2*marginX) - 2*marginX;
 
         this.width = claseeNameSize + y + marginY;
-        var rect = paper.rect(0, 0,this.height, this.width);
+        var rect = paper.rect(0, 0,this.height, this.width,5,5);
         rect.attr({class: "package"});
         this.group.add(rect);
     }
 
     this.addText = function() {
         var text = this.JSONObject.name;
-        var text = paper.text(10,14,text);
+        var text = paper.text(10,16,text);
+        text.attr({class: "package"});
         this.group.add(text);
     }
 
@@ -167,7 +168,7 @@ function VisuClass(JSONObject) {
     this.draw = function(x,y) {
         this.addText();
         this.addLines();
-        var rect = paper.rect(0, 0,rectL, this.JSONObject.size + claseeNameSize);
+        var rect = paper.rect(0, 0,rectL, this.JSONObject.size + claseeNameSize,5,5);
         rect.attr({class: "class"});
 
         this.group.add(rect);
@@ -202,6 +203,7 @@ function VisuClass(JSONObject) {
         line.attr({strokeWidth:stroke_Width});
         this.group.add(line);
         var text = paper.text(10,14,text);
+        text.attr({class: "class"});
         this.group.add(text);
     }
 

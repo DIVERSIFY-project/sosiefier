@@ -101,14 +101,14 @@ public class ASTReplace extends ASTTransformation {
         return 1;
     }
     public boolean equals(Object other) {
+
         if(other == null)
             return false;
         if(!this.getClass().isAssignableFrom(other.getClass()))
             return  false;
         ASTReplace otherReplace = (ASTReplace)other;
 
-        if(!((parent == null && parent.equals(otherReplace.parent))
-                || (otherReplace.parent == null && otherReplace.parent.equals(parent))))
+        if(!equalParent(otherReplace.parent))
             return false;
 
         return status == otherReplace.status &&

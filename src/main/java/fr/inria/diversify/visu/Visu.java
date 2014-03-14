@@ -80,7 +80,7 @@ public class Visu {
         for(Transformation transformation : sortTransformation(transformations)) {
             JSONObject t = new JSONObject();
             int position = transformation.line();
-            t.put("position",position - emptyLineBefore(position));
+            t.put("position",position - emptyLineBefore(position) - 5);
             t.put("status",transformation.getStatus());
             t.put("name",transformation.getName());
             t.put("type",transformation.getType());

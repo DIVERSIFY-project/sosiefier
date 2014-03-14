@@ -55,8 +55,7 @@ public class ASTDelete extends ASTTransformation {
             return  false;
         ASTDelete otherDelete = (ASTDelete)other;
 
-        if(!((parent == null && parent.equals(otherDelete.parent))
-                || (otherDelete.parent == null && otherDelete.parent.equals(parent))))
+        if(!equalParent(otherDelete.parent))
             return false;
 
            return  status == otherDelete.status &&

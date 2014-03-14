@@ -14,11 +14,11 @@ import java.util.*;
  * Date: 7/17/13
  * Time: 10:16 AM
  */
-public class ASTTransformationQueryFromList extends TransformationQuery {
+public class TransformationQueryFromList extends TransformationQuery {
     protected ICoverageReport coverageReport;
     private List<Transformation> transformation;
 
-    public ASTTransformationQueryFromList(ICoverageReport cr, String transformationDirectory) throws IOException, JSONException {
+    public TransformationQueryFromList(ICoverageReport cr, String transformationDirectory) throws IOException, JSONException {
         this.coverageReport = cr;
         init(transformationDirectory);
     }

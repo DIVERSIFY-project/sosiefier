@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -95,8 +96,7 @@ public class ASTAdd extends ASTTransformation {
             return  false;
         ASTAdd otherASTAdd = (ASTAdd)other;
 
-        if(!((parent == null && parent.equals(otherASTAdd.parent))
-                || (otherASTAdd.parent == null && otherASTAdd.parent.equals(parent))))
+        if(!equalParent(otherASTAdd.parent))
             return false;
 
         return status == otherASTAdd.status &&

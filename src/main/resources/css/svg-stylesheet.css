@@ -1,16 +1,20 @@
 
 
 rect.class {
-    fill: white;
+    fill: blue;
     stroke: black;
     stroke-width: 3;
-    fill-opacity:0;
+    fill-opacity:0.1;
+    rx: 10;
+    ry: 10;
 }
 rect.package {
-    fill: white;
+    fill: black;
     stroke: black;
     stroke-width: 3;
-    fill-opacity:0;
+    fill-opacity:0.1;
+    rx: 10;
+    ry: 10;
 }
 line.notCompile {
     stroke: red;
@@ -20,4 +24,11 @@ line.testFail {
 }
 line.sosie {
     stroke: green;
+}
+text.class {
+    font: 10px sans-serif;
+}
+
+text.package {
+    font: 14px sans-serif;
 }
