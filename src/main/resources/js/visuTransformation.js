@@ -1,4 +1,4 @@
-var paper = Snap(document.getElementById("svg").contentDocument,2000,5000);
+var paper = Snap(document.getElementById("svg"));
 //var paper = Snap(2000,5000);
 var rectL = 150;
 var marginX = 10;
@@ -11,19 +11,19 @@ var jsonData;
 
 var steroid = true, reaction = true, wittgenstein = true, random = true;
 
-$.getJSON("clojure_visu.json",function( data ) {
+$.getJSON("clojure_visu.json", function (data) {
     jsonData = data;
     var visu = new Visu(data);
     visu.draw();
 });
 
 $(document).find('#random-button').click(function () {
-    if($(this).hasClass("btn-success")) {
+    if ($(this).hasClass("btn-success")) {
         random = false;
-        $(this).attr("class","btn btn-danger");
+        $(this).attr("class", "btn btn-danger");
     } else {
         random = true;
-        $(this).attr("class","btn btn-success");
+        $(this).attr("class", "btn btn-success");
     }
     paper.clear();
 
@@ -32,12 +32,12 @@ $(document).find('#random-button').click(function () {
 })
 
 $(document).find('#reaction-button').click(function () {
-    if($(this).hasClass("btn-success")) {
+    if ($(this).hasClass("btn-success")) {
         reaction = false;
-        $(this).attr("class","btn btn-danger");
+        $(this).attr("class", "btn btn-danger");
     } else {
         reaction = true;
-        $(this).attr("class","btn btn-success");
+        $(this).attr("class", "btn btn-success");
     }
     paper.clear();
     var visu = new Visu(jsonData);
@@ -45,12 +45,12 @@ $(document).find('#reaction-button').click(function () {
 })
 
 $(document).find('#steroid-button').click(function () {
-    if($(this).hasClass("btn-success")) {
+    if ($(this).hasClass("btn-success")) {
         steroid = false;
-        $(this).attr("class","btn btn-danger");
+        $(this).attr("class", "btn btn-danger");
     } else {
         steroid = true;
-        $(this).attr("class","btn btn-success");
+        $(this).attr("class", "btn btn-success");
     }
     paper.clear();
     var visu = new Visu(jsonData);
@@ -58,12 +58,12 @@ $(document).find('#steroid-button').click(function () {
 })
 
 $(document).find('#wittgenstein-button').click(function () {
-    if($(this).hasClass("btn-success")) {
+    if ($(this).hasClass("btn-success")) {
         wittgenstein = false;
-        $(this).attr("class","btn btn-danger");
+        $(this).attr("class", "btn btn-danger");
     } else {
         wittgenstein = true;
-        $(this).attr("class","btn btn-success");
+        $(this).attr("class", "btn btn-success");
     }
     paper.clear();
     var visu = new Visu(jsonData);
@@ -76,60 +76,74 @@ function Visu(JSONObject) {
     this.group = paper.g();
     this.package;
 
-    this.draw = function() {
+    this.draw = function () {
         this.package = [];
-        for(var i = 0; i < this.JSONObject.length; i++) {
+        for (var i = 0; i < this.JSONObject.length; i++) {
             this.package[i] = new VisuPackage(this.JSONObject[i], paper);
-            this.package[i].draw(0,0);
+            this.package[i].draw(0, 0);
         }
-        this.package.sort(function(i,j) {
-            return i.width < j.width;
+        this.package = this.package.sort(function (i, j) {
+            return j.width - i.width;
         });
 
         var maxSize = 0;
         var currentY = marginY;
         var currentX = marginX;
+        var h = 0 ,w = 0;
         var i = 0;
         var line = 0;
-        while( i < this.package.length) {
-            if(line == maxNumberOfPackagePerLine) {
+        while (i < this.package.length) {
+            if (line == maxNumberOfPackagePerLine) {
                 line = 0;
-                currentY += maxSize + 2*marginY;
+                currentY += maxSize + (this.package[i]).width + 2 * marginY;
                 currentX = marginX;
             }
-            if(line == 0) {
+            if (line == 0) {
                 this.package[i].translate(currentX, currentY);
                 this.group.add(this.package[i].group);
                 maxSize = (this.package[i]).width;
+                w = Math.max(w,maxSize+ marginX);
                 i++;
             } else {
-                cl = this.packageToDraw(maxSize,i);
+                cl = this.packageToDraw(maxSize, i);
                 var y = currentY;
 
-                for(var j = 0; j < cl.length; j++) {
-                    this.package[i+j].translate(currentX, y);
-                    this.group.add(this.package[i+j].group);
-                    y += (this.package[i+j]).width + 2*marginY;
+                for (var j = 0; j < cl.length; j++) {
+                    this.package[i + j].translate(currentX, y);
+                    this.group.add(this.package[i + j].group);
+                    y += (this.package[i + j]).width + 2 * marginY;
                 }
+                w = Math.max(w,y);
                 i = i + cl.length;
             }
-            currentX = currentX + (this.package[i-1]).height + marginX;
+
+            currentX = currentX + (this.package[i - 1]).height + marginX;
+            h = Math.max(h,currentX + (this.package[i -1]).height + marginX);
             line++;
         }
+        console.log(h);
+        console.log(w);
+        this.resizeDiv(h,w);
     }
 
-        this.packageToDraw = function(maxSize,j) {
-            var cl = [];
-            var i = j;
-            var currentSize = 0;
-            while(i < this.package.length && currentSize <= maxSize - ((this.package[i]).width) ) {
-                cl.push(this.package[i]);
-                currentSize += this.package[i].width + marginY;
-                i++;
-            }
-            return cl;
+    this.packageToDraw = function (maxSize, j) {
+        var cl = [];
+        var i = j;
+        var currentSize = 0;
+        while (i < this.package.length && currentSize <= maxSize - ((this.package[i]).width)) {
+            cl.push(this.package[i]);
+            currentSize += this.package[i].width + marginY;
+            i++;
         }
+        return cl;
     }
+
+    this.resizeDiv = function(width, height) {
+        console.log($("#svg"))
+        $("#svg").width(width);
+        $("#svg").height(height);
+    }
+}
 
 
 function VisuPackage(JSONObject) {
@@ -139,13 +153,13 @@ function VisuPackage(JSONObject) {
     this.height;
     this.width;
 
-    this.draw = function(x,y) {
+    this.draw = function (x, y) {
         this.classes = [];
-        for(var i = 0; i < this.JSONObject.classes.length; i++) {
+        for (var i = 0; i < this.JSONObject.classes.length; i++) {
             this.classes[i] = new VisuClass(this.JSONObject.classes[i], paper);
         }
-        this.classes.sort(function(i,j) {
-            return i.getSize() < j.getSize();
+        this.classes = this.classes.sort(function (i, j) {
+            return j.getSize() - i.getSize();
         });
         var maxSize = 0;
         var currentY = marginY + claseeNameSize;
@@ -153,24 +167,24 @@ function VisuPackage(JSONObject) {
         var i = 0;
         var line = 0;
         var nbColumn = 0;
-        while( i < this.classes.length) {
-            if(line == maxNumberOfClassPerLine) {
+        while (i < this.classes.length) {
+            if (line == maxNumberOfClassPerLine) {
                 line = 0;
-                currentY += maxSize + 2*marginY;
+                currentY += maxSize + 2 * marginY;
                 currentX = marginX;
             }
-            if(line == 0) {
+            if (line == 0) {
                 this.classes[i].draw(currentX, currentY);
                 this.group.add(this.classes[i].group);
                 maxSize = this.classes[i].getSize();
                 i++;
             } else {
-                cl = this.classToDraw(maxSize,i);
+                cl = this.classToDraw(maxSize, i);
                 var tmpY = currentY;
-                for(var j = 0; j < cl.length; j++) {
-                    this.classes[i+j].draw(currentX, tmpY);
-                    this.group.add(this.classes[i+j].group);
-                    tmpY += this.classes[i+j].getSize() + 2*marginY;
+                for (var j = 0; j < cl.length; j++) {
+                    this.classes[i + j].draw(currentX, tmpY);
+                    this.group.add(this.classes[i + j].group);
+                    tmpY += this.classes[i + j].getSize() + 2 * marginY;
                 }
                 i = i + cl.length;
 
@@ -179,19 +193,19 @@ function VisuPackage(JSONObject) {
             nbColumn++
             line++;
         }
-        var r = this.addPackage(currentY+maxSize, nbColumn);
+        var r = this.addPackage(currentY + maxSize, nbColumn);
         this.addText();
-        this.translate(x,y);
+        this.translate(x, y);
     }
 
-    this.addPackage = function(y, nbColumn) {
-        if(nbColumn < maxNumberOfClassPerLine)
-            this.height = nbColumn * (rectL+marginX) + marginX;
+    this.addPackage = function (y, nbColumn) {
+        if (nbColumn < maxNumberOfClassPerLine)
+            this.height = nbColumn * (rectL + marginX) + marginX;
         else
-            this.height = maxNumberOfClassPerLine * (rectL+marginX) + marginX;
+            this.height = maxNumberOfClassPerLine * (rectL + marginX) + marginX;
 
         this.width = claseeNameSize + y + marginY;
-        var rect = paper.rect(0, 0,this.height, this.width,5,5);
+        var rect = paper.rect(0, 0, this.height, this.width, 5, 5);
         rect.attr({class: "package"});
 //        this.group.add(rect);
         rect.prependTo(this.group)
@@ -199,26 +213,26 @@ function VisuPackage(JSONObject) {
         return rect;
     }
 
-    this.addText = function() {
+    this.addText = function () {
         var text = this.JSONObject.name;
-        var text = paper.text(10,16,text);
+        var text = paper.text(10, 16, text);
         text.attr({class: "package"});
         this.group.add(text);
     }
 
-    this.classToDraw = function(maxSize,j) {
+    this.classToDraw = function (maxSize, j) {
         var cl = [];
         var i = j;
         var currentSize = 0;
-        while(i < this.classes.length && currentSize <= maxSize - (this.classes[i].getSize()) ) {
+        while (i < this.classes.length && currentSize <= maxSize - (this.classes[i].getSize())) {
             cl.push(this.classes[i]);
-            currentSize += this.classes[i].getSize() + claseeNameSize +marginY;
+            currentSize += this.classes[i].getSize() + claseeNameSize + marginY;
             i++;
         }
         return cl;
     }
 
-    this.translate = function(x,y) {
+    this.translate = function (x, y) {
         this.group.transform("t" + x + "," + y);
     }
 
@@ -229,43 +243,43 @@ function VisuClass(JSONObject) {
     this.JSONObject = JSONObject;
     this.group = paper.g();
 
-    this.draw = function(x,y) {
+    this.draw = function (x, y) {
 
-        var rect = paper.rect(0, 0,rectL, this.JSONObject.size + claseeNameSize,5,5);
+        var rect = paper.rect(0, 0, rectL, this.JSONObject.size + claseeNameSize, 5, 5);
         rect.attr({class: "class"});
         this.group.add(rect);
         this.addText();
         this.addLines();
-        this.translate(x,y);
+        this.translate(x, y);
     }
 
-    this.addLines = function() {
-        var transformations = this.JSONObject.transformation.sort(function(i,j) {
+    this.addLines = function () {
+        var transformations = this.JSONObject.transformation.sort(function (i, j) {
             return i.position < j.position;
         });
         var i = 0;
         var currentPosition = -1;
         var notCompile = 0, failTest = 0, greenTest = 0;
-        while(i < transformations.length) {
+        while (i < transformations.length) {
             var trans = transformations[i];
-            if(currentPosition == trans.position) {
-                if((random || (trans.name != "notContextReplace" && trans.name != "notContextAdd"))
+            if (currentPosition == trans.position) {
+                if ((random || (trans.name != "notContextReplace" && trans.name != "notContextAdd"))
                     && (wittgenstein || (trans.name != "notContextMappingVariableNameReplace" && trans.name != "notContextMappingVariableNameAdd"))
                     && (reaction || (trans.name != "notMappingVariableReplace" && trans.name != "notMappingVariableAdd"))
                     && (steroid || (trans.name != "replace" && trans.name != "add" && trans.name != "delete"))) {
-                if(trans.status == -2 )
-                    notCompile++;
-                else if(trans.status == -1)
-                    failTest++;
-                else
-                    greenTest++;
+                    if (trans.status == -2)
+                        notCompile++;
+                    else if (trans.status == -1)
+                        failTest++;
+                    else
+                        greenTest++;
 
                 }
                 i++;
             } else {
                 var currentPosition = trans.position;
-                if(i != 0)
-                    this.drawLine(transformations[i-1], notCompile, failTest, greenTest)
+                if (i != 0)
+                    this.drawLine(transformations[i - 1], notCompile, failTest, greenTest)
                 notCompile = 0;
                 failTest = 0;
                 greenTest = 0;
@@ -273,14 +287,14 @@ function VisuClass(JSONObject) {
         }
     }
 
-    this.drawLine = function(trans, notCompile, failTest, greenTest) {
+    this.drawLine = function (trans, notCompile, failTest, greenTest) {
         var sum = notCompile + failTest + greenTest;
-        if(sum == 0)
+        if (sum == 0)
             return;
 
         var x1 = (notCompile / (sum)) * rectL;
-        var x2 = ((notCompile+failTest) / (sum)) * rectL;
-        var lineNC = paper.line(0,
+        var x2 = ((notCompile + failTest) / (sum)) * rectL;
+        var lineNC = paper.line(2,
             5 + trans.position + claseeNameSize,
             x1,
             5 + trans.position + claseeNameSize);
@@ -297,30 +311,30 @@ function VisuClass(JSONObject) {
 
         var lineGT = paper.line(x2,
             5 + trans.position + claseeNameSize,
-            rectL,
+            rectL - 2,
             5 + trans.position + claseeNameSize);
         lineGT.attr({class: "sosie"});
         this.group.add(lineGT);
     }
 
-    this.addText = function() {
+    this.addText = function () {
         var text = this.JSONObject.name;
-        var line = paper.line(0,5 + claseeNameSize,
+        var line = paper.line(0, 5 + claseeNameSize,
             rectL,
             5 + claseeNameSize);
         line.attr({stroke: "black"});
-        line.attr({strokeWidth:stroke_Width});
+        line.attr({strokeWidth: stroke_Width});
         this.group.add(line);
-        var text = paper.text(10,14,text);
+        var text = paper.text(10, 14, text);
         text.attr({class: "class"});
         this.group.add(text);
     }
 
-    this.translate = function(x,y) {
+    this.translate = function (x, y) {
         this.group.transform("t" + x + "," + y);
     }
 
-    this.getSize = function() {
+    this.getSize = function () {
         return  this.JSONObject.size;
     }
 }
