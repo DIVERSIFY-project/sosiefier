@@ -2,6 +2,7 @@ package fr.inria.diversify;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.*;
 
@@ -23,7 +24,7 @@ public class FormatFailureExp {
         File out = new File(cvsFileName);
         FileWriter fw = new FileWriter(out);
         BufferedWriter bw = new BufferedWriter(fw);
-        bw.write("total;assert;exception\n");
+        bw.write("total;assert;exceptionSamePosition;exceptionDiffPosition\n");
         for (File f : file.listFiles())  {
             addToCvsFile(readFile(f), bw);
         }
@@ -42,17 +43,24 @@ public class FormatFailureExp {
         return new JSONArray(sb.toString());
     }
 
+
     protected void addToCvsFile(JSONArray array, BufferedWriter bw) throws JSONException, IOException {
-        int exceptionCount = 0;
+        int exceptionSPCount = 0;
+        int exceptionDPCount = 0;
         int assertCount = 0;
         for (int i = 0; i < array.length(); i++) {
-            if(array.getJSONObject(i).getString("type").equals("assert"))
+            JSONObject diff = array.getJSONObject(i);
+            if(diff.has("startingPoint")) {
+            if(diff.getString("type").equals("assert"))
                 assertCount++;
-            else
-                exceptionCount++;
+            else {
+                if(diff.has("sosieStackTrace"))
+                    exceptionSPCount++;
+                else
+                    exceptionDPCount++;
+            }
+            }
         }
-        bw.write(array.length() + ";" + assertCount + ";" + exceptionCount+"\n");
+        bw.write(array.length() + ";" + assertCount + ";" + exceptionSPCount + ";" +exceptionDPCount+"\n");
     }
-
-
 }

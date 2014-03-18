@@ -11,7 +11,7 @@ var jsonData;
 
 var steroid = true, reaction = true, wittgenstein = true, random = true;
 
-$.getJSON("clojure_visu.json", function (data) {
+$.getJSON("data/clojure_visu.json", function (data) {
     jsonData = data;
     var visu = new Visu(data);
     visu.draw();
@@ -254,66 +254,52 @@ function VisuClass(JSONObject) {
     }
 
     this.addLines = function () {
-        var transformations = this.JSONObject.transformation.sort(function (i, j) {
-            return i.position < j.position;
-        });
-        var i = 0;
-        var currentPosition = -1;
-        var notCompile = 0, failTest = 0, greenTest = 0;
-        while (i < transformations.length) {
-            var trans = transformations[i];
-            if (currentPosition == trans.position) {
-                if ((random || (trans.name != "notContextReplace" && trans.name != "notContextAdd"))
-                    && (wittgenstein || (trans.name != "notContextMappingVariableNameReplace" && trans.name != "notContextMappingVariableNameAdd"))
-                    && (reaction || (trans.name != "notMappingVariableReplace" && trans.name != "notMappingVariableAdd"))
-                    && (steroid || (trans.name != "replace" && trans.name != "add" && trans.name != "delete"))) {
-                    if (trans.status == -2)
-                        notCompile++;
-                    else if (trans.status == -1)
-                        failTest++;
-                    else
-                        greenTest++;
+        var line = this.JSONObject.transformation;
 
-                }
-                i++;
-            } else {
-                var currentPosition = trans.position;
-                if (i != 0)
-                    this.drawLine(transformations[i - 1], notCompile, failTest, greenTest)
-                notCompile = 0;
-                failTest = 0;
-                greenTest = 0;
+        for(var i = 0; i < line.length; i++) {
+            var notCompile = 0, failTest = 0, sosie = 0;
+            var transformations = line[i].trans;
+            for(var j = 0; j < transformations.length; j++) {
+                var trans = transformations[j];
+                notCompile += trans.notCompile;
+                failTest += trans.failTest;
+                sosie += trans.sosie;
             }
+            this.drawLine(notCompile,failTest,sosie,line[i].position);
         }
     }
 
-    this.drawLine = function (trans, notCompile, failTest, greenTest) {
-        var sum = notCompile + failTest + greenTest;
+    this.drawLine = function (notCompile,failTest,sosie,position) {
+        var sum = notCompile + failTest + sosie;
         if (sum == 0)
             return;
 
         var x1 = (notCompile / (sum)) * rectL;
         var x2 = ((notCompile + failTest) / (sum)) * rectL;
         var lineNC = paper.line(2,
-            5 + trans.position + claseeNameSize,
+            5 + position + claseeNameSize,
             x1,
-            5 + trans.position + claseeNameSize);
+            5 + position + claseeNameSize);
         lineNC.attr({class: "notCompile"});
 
         this.group.add(lineNC);
 
         var lineFT = paper.line(x1,
-            5 + trans.position + claseeNameSize,
+            5 + position + claseeNameSize,
             x2,
-            5 + trans.position + claseeNameSize);
+            5 + position + claseeNameSize);
         lineFT.attr({class: "testFail"});
         this.group.add(lineFT);
 
         var lineGT = paper.line(x2,
-            5 + trans.position + claseeNameSize,
+            5 + position + claseeNameSize,
             rectL - 2,
-            5 + trans.position + claseeNameSize);
+            5 + position + claseeNameSize);
         lineGT.attr({class: "sosie"});
+
+//        lineGT.hover(function(i) {$('#myModal').modal('toggle')
+//;                $('#myModal').modal('show')},function(i) {}
+//   );
         this.group.add(lineGT);
     }
 

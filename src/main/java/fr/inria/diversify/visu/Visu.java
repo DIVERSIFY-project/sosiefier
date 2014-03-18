@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
  * Created by Simon on 13/03/14.
  */
 public class Visu {
+    int id = 0;
 
     Map<String, Set<Transformation>> mapByPackage(Collection<Transformation> transformations) {
         Map<String, Set<Transformation>> map = new HashMap<String, Set<Transformation>>();
@@ -73,20 +74,19 @@ public class Visu {
         CtSimpleType cl = getClass(packageName, className);
         object.put("name", cl.getSimpleName());
 
-
         JSONArray array = new JSONArray();
-        Set<String> set = new HashSet<String>();
         initCurrentFile(cl);
+        List<Transformation> trans = new ArrayList<Transformation>();
+        int currentLine = -1;
         for(Transformation transformation : sortTransformation(transformations)) {
-            JSONObject t = new JSONObject();
-            int position = transformation.line();
-            t.put("position",position - emptyLineBefore(position) - 5);
-            t.put("status",transformation.getStatus());
-            t.put("name",transformation.getName());
-            t.put("type",transformation.getType());
-            if(!set.contains(t.toString())) {
-                set.add(t.toString());
-                array.put(t);
+            if(transformation.line() == currentLine)
+                trans.add(transformation);
+            else {
+                if(!trans.isEmpty())
+                    array.put(JSONLine(trans,currentLine));
+                currentLine = transformation.line();
+                trans = new ArrayList<Transformation>();
+                trans.add(transformation);
             }
         }
         int size = getSize(cl);
@@ -95,6 +95,8 @@ public class Visu {
 
         return object;
     }
+
+
 
     protected List<Transformation> sortTransformation(Set<Transformation> transformations) {
         ArrayList l = new ArrayList(transformations);
@@ -151,6 +153,54 @@ public class Visu {
                 currentEmptyLine++;
         }
         return currentEmptyLine;
+    }
+
+    protected JSONObject JSONLine(List<Transformation> transformations, int position) throws IOException, JSONException {
+        Map<String, List<Transformation>> map = new HashMap<String, List<Transformation>>();
+
+        JSONObject line = new JSONObject();
+        line.put("position", position - emptyLineBefore(position) - 5);
+        for(Transformation trans : transformations) {
+            String key = trans.getType()+":"+trans.getName();
+            if(!map.containsKey(key))
+                map.put(key, new ArrayList<Transformation>());
+            map.get(key).add(trans);
+        }
+        JSONArray array = new JSONArray();
+        line.put("trans", array);
+        for(List<Transformation> list : map.values()) {
+            array.put(JSONTrans(list));
+        }
+
+        line.put("id",id);
+        writeTransformationDetail(transformations,id);
+        id++;
+        return line;
+    }
+
+    private void writeTransformationDetail(List<Transformation> transformations, int id) {
+
+    }
+
+    protected JSONObject JSONTrans(List<Transformation> list) throws JSONException {
+        JSONObject line = new JSONObject();
+        line.put("name",list.get(0).getName());
+        line.put("type",list.get(0).getType());
+        int notCompile = 0;
+        int failTest = 0;
+        int sosie = 0;
+        for (Transformation trans : list) {
+            if(trans.getStatus() == -2)
+                notCompile++;
+            else if(trans.getStatus() == -1)
+                failTest++;
+            else
+                sosie++;
+        }
+        line.put("notCompile", notCompile);
+        line.put("failTest",failTest);
+        line.put("sosie",sosie);
+        return line;
     }
 
 }
