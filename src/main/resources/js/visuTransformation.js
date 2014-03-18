@@ -83,26 +83,26 @@ function Visu(JSONObject) {
             this.package[i].draw(0, 0);
         }
         this.package = this.package.sort(function (i, j) {
-            return j.width - i.width;
+            return j.height - i.height;
         });
 
         var maxSize = 0;
         var currentY = marginY;
         var currentX = marginX;
-        var h = 0 ,w = 0;
+        var w = 0 ,h = 0;
         var i = 0;
         var line = 0;
         while (i < this.package.length) {
             if (line == maxNumberOfPackagePerLine) {
                 line = 0;
-                currentY += maxSize + (this.package[i]).width + 2 * marginY;
+                currentY += maxSize + (this.package[i]).height + 2 * marginY;
                 currentX = marginX;
             }
             if (line == 0) {
                 this.package[i].translate(currentX, currentY);
                 this.group.add(this.package[i].group);
-                maxSize = (this.package[i]).width;
-                w = Math.max(w,maxSize+ marginX);
+                maxSize = (this.package[i]).height;
+                h = Math.max(h,maxSize+ marginX);
                 i++;
             } else {
                 cl = this.packageToDraw(maxSize, i);
@@ -111,18 +111,18 @@ function Visu(JSONObject) {
                 for (var j = 0; j < cl.length; j++) {
                     this.package[i + j].translate(currentX, y);
                     this.group.add(this.package[i + j].group);
-                    y += (this.package[i + j]).width + 2 * marginY;
+                    y += (this.package[i + j]).height + 2 * marginY;
                 }
-                w = Math.max(w,y);
+                h = Math.max(h,y);
                 i = i + cl.length;
             }
 
-            currentX = currentX + (this.package[i - 1]).height + marginX;
-            h = Math.max(h,currentX + (this.package[i -1]).height + marginX);
+            currentX = currentX + (this.package[i - 1]).width + marginX;
+            w = Math.max(w,currentX + (this.package[i -1]).width + marginX);
             line++;
         }
-        console.log(h);
         console.log(w);
+        console.log(h);
         this.resizeDiv(h,w);
     }
 
@@ -130,15 +130,15 @@ function Visu(JSONObject) {
         var cl = [];
         var i = j;
         var currentSize = 0;
-        while (i < this.package.length && currentSize <= maxSize - ((this.package[i]).width)) {
+        while (i < this.package.length && currentSize <= maxSize - ((this.package[i]).height)) {
             cl.push(this.package[i]);
-            currentSize += this.package[i].width + marginY;
+            currentSize += this.package[i].height + marginY;
             i++;
         }
         return cl;
     }
 
-    this.resizeDiv = function(width, height) {
+    this.resizeDiv = function(height,width) {
         console.log($("#svg"))
         $("#svg").width(width);
         $("#svg").height(height);

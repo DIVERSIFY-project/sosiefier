@@ -33,6 +33,7 @@ public class DiversifyWithParent extends Diversify {
                 sosie++;
             trial++;
             trans.setStatus(status);
+            Log.debug("current: {}, parent: {} status: {}", builder.getErrors().size(), trans.getParent().getFailures().size(), status);
             trans.setFailures(builder.getErrors());
         } catch (Exception e) {
             compileError++;

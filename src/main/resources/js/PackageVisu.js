@@ -52,12 +52,12 @@ function VisuPackage(JSONObject) {
 
     this.addPackage = function (y, nbColumn) {
         if (nbColumn < maxNumberOfClassPerLine)
-            this.height = nbColumn * (classWidth + marginX) + marginX;
+            this.width = nbColumn * (classWidth + marginX) + marginX;
         else
-            this.height = maxNumberOfClassPerLine * (classWidth + marginX) + marginX;
+            this.width = maxNumberOfClassPerLine * (classWidth + marginX) + marginX;
 
-        this.width = claseeNameSize + y + marginY;
-        var rect = paper.rect(0, 0, this.height, this.width, 5, 5);
+        this.height = claseeNameSize + y + marginY;
+        var rect = paper.rect(0, 0, this.width, this.height, 5, 5);
         rect.attr({class: "package"});
         rect.prependTo(this.group)
         return rect;
