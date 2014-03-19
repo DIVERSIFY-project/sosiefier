@@ -173,13 +173,45 @@ public class Visu {
         }
 
         line.put("id",id);
-        writeTransformationDetail(transformations,id);
+        writeTransformationDetail(transformations,id,position);
         id++;
         return line;
     }
 
-    private void writeTransformationDetail(List<Transformation> transformations, int id) {
+    protected JSONObject writeTransformationDetail(List<Transformation> transformations, int id, int position) throws JSONException {
+        JSONObject detail = new JSONObject();
+        detail.put("class",transformations.get(0).classLocationName());
+        detail.put("package",transformations.get(0).packageLocationName());
+        detail.put("id",id);
+        detail.put("position",position);
 
+        int notCompile = 0;
+        int failTest = 0;
+        int sosie = 0;
+        JSONArray array = new JSONArray();
+        detail.put("transformation", array);
+        for (Transformation trans : transformations) {
+            array.put(transformationDetail(trans));
+            if(trans.getStatus() == -2)
+                notCompile++;
+            else if(trans.getStatus() == -1)
+                failTest++;
+            else
+                sosie++;
+        }
+        detail.put("notCompile", notCompile);
+        detail.put("failTest",failTest);
+        detail.put("sosie",sosie);
+
+        return detail;
+    }
+
+    protected JSONObject transformationDetail(Transformation transformation) throws JSONException {
+        JSONObject detail = new JSONObject();
+        detail.put("name",transformation.getName());
+        detail.put("type",transformation.getType());
+        detail.put("status", transformation.getStatus());
+        return detail;
     }
 
     protected JSONObject JSONTrans(List<Transformation> list) throws JSONException {

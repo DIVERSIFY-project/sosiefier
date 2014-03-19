@@ -6,12 +6,18 @@ rect.class {
     stroke-width: 3;
     fill-opacity:0.1;
 }
+
+rect.zoomClass {
+    fill: white;
+    stroke: black;
+    stroke-width: 3;
+    /*fill-opacity:0.1;*/
+}
 rect.package {
     fill: black;
     stroke: black;
     stroke-width: 3;
     fill-opacity:0.1;
-=
 }
 line.notCompile {
     stroke: red;
@@ -21,6 +27,19 @@ line.testFail {
 }
 line.sosie {
    stroke: green;
+}
+
+rect.notCompile {
+    stroke: red;
+    fill: red;
+}
+rect.testFail {
+    stroke: blue;
+    fill: blue;
+}
+rect.sosie {
+    stroke: green;
+    fill: green;
 }
 text.class {
     font: 10px sans-serif;
