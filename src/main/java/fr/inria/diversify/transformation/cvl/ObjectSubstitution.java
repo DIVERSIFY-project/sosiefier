@@ -68,7 +68,7 @@ public class ObjectSubstitution extends CVLTransformation {
 
         CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(transplant.getFactory().getEnvironment());
         transplant.accept(pp);
-        json.put("transplant", pp.toString());
+//        json.put("transplant", pp.toString());
 
         return json;
     }

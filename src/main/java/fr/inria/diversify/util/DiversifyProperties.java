@@ -43,11 +43,24 @@ public class DiversifyProperties {
         prop.setProperty("transformation.size","1");
         prop.setProperty("stat", "false");
         prop.setProperty("sosie", "false");
-        prop.setProperty("outputDir", "output_diversify");
+
+        //tempory directory
+        prop.setProperty("tmpDir", "tmpDir");
+
+        //directory for ouput (ex sosie)
+        prop.setProperty("outputDirectory", "output");
+
+        //directory for ouput (ex sosie)
+        prop.setProperty("result", "output_diversify");
+
+        //file name with path for result (ex json file, stat file)
+        //if gitRepository != null all result are put in gitRepository/result
+        prop.setProperty("result", "output_diversify");
+
         prop.setProperty("sosieOnMultiProject","false");
         prop.setProperty("timeOut","-1");
         prop.setProperty("logLevel", "2");
-        prop.setProperty("gitRepository", "");
+        prop.setProperty("gitRepository", "null");
         prop.setProperty("processor", "fr.inria.diversify.codeFragmentProcessor.StatementProcessor");
         prop.setProperty("syncroRange","0");
         prop.setProperty("newPomFile","");

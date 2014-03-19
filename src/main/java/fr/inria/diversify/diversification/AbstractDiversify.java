@@ -30,27 +30,28 @@ public abstract class AbstractDiversify {
 
     public abstract void run(Collection<Transformation> trans) throws Exception;
 
-    public void printResult(String output, String git) {
-        mkDirResult(output,git);
+    public String printResult(String output) {
+        mkDirResult(output);
         String fileName = output + System.currentTimeMillis() + "_transformation.json";
-        String absoluteFileName = git + "/" + fileName;
+        String absoluteFileName = output + "/" + fileName;
         try {
             writeTransformation(absoluteFileName);
             Log.info("write result in {}", absoluteFileName);
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
         }
-        if(!git.equals("")) {
+        return absoluteFileName;
+    }
+
+    public void printResult(String output, String git) {
+        String absoluteFileName = printResult(git+"/"+output);
 
             String[] split = absoluteFileName.split("/");
             String tmp = split[0];
             for (int i = 1;i < split.length - 1; i++) {
                 tmp = tmp + "/" + split[i];
             }
-
             Log.debug(tmp+"/   "+split[split.length - 1]);
-            GitUtil.addToGit(tmp+"/", "*");
-        }
     }
 
     public void writeTransformation(String fileName) throws IOException, JSONException {
@@ -61,9 +62,9 @@ public abstract class AbstractDiversify {
         write.writeAllTransformation(null);
     }
 
-    protected void mkDirResult(String output, String git) {
+    protected void mkDirResult(String output) {
         String[] tmp = output.split("/");
-        String dirs = git +"/";
+        String dirs = "";
         for (int i = 0; i< tmp.length - 1;i++) {
             dirs = dirs + tmp[i] + "/";
         }

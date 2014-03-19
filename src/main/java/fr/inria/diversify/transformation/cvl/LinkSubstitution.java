@@ -104,7 +104,7 @@ public class LinkSubstitution extends CVLTransformation {
 
         CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(transplant.getFactory().getEnvironment());
         transplant.accept(pp);
-        json.put("transplant", pp.toString());
+//        json.put("transplant", pp.toString());
 
         if(classOrInterfaceSubstitution != null)
             json.put("classOrInterfaceExistence",classOrInterfaceSubstitution.getPackage()+"."+classOrInterfaceSubstitution.getSimpleName());

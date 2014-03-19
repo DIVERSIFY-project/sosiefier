@@ -53,8 +53,6 @@ public class DiversifyMain {
         }
         initSpoon();
 
-//        Log.info("number of statement: " + codeFragments.size());
-//        Log.info("candidate:  {}", test());
         if (DiversifyProperties.getProperty("stat").equals("true")) {
             computeStatistic();
 
@@ -77,9 +75,10 @@ public class DiversifyMain {
         abstractDiversify.run(n);
 
         String repo = DiversifyProperties.getProperty("gitRepository");
-        if(repo.equals(""))
-            repo = "tmp";
-        abstractDiversify.printResult(DiversifyProperties.getProperty("result"),repo+"/diversify-exp");
+        if(repo.equals("null"))
+            abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
+        else
+            abstractDiversify.printResult(DiversifyProperties.getProperty("result"),repo+"/diversify-exp");
     }
 
     protected AbstractDiversify initAbstractDiversify() throws Exception {
@@ -95,7 +94,7 @@ public class DiversifyMain {
         else
             ad = new MutantSosieWriter(projet,src);
 
-        String tmpDir = ad.init(projet, DiversifyProperties.getProperty("outputDir"));
+        String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));
         ad.setBuilder(initBuilder(tmpDir));
 
         return ad;
