@@ -41,6 +41,7 @@ public class TransformationParser {
     private int countError = 0;
     private int count = 0;
     Collection<Transformation> transformations;
+    private HashMap<Integer, String> failureDictionary;
 
     public TransformationParser(boolean toSet) {
         if(toSet)
@@ -96,6 +97,9 @@ public class TransformationParser {
         if (sb.length() == 0)
             return new ArrayList<Transformation>();
         JSONArray array = new JSONArray(sb.toString());
+
+        parseFailureDictionay(array);
+
         for(int i = 0; i < array.length(); i++)  {
             count++;
             try {
@@ -429,14 +433,31 @@ public class TransformationParser {
     }
 
 
-
     protected List<String> getFailures(JSONObject jsonObject) throws JSONException {
         List<String> list = new ArrayList<String>();
 
         JSONArray array = jsonObject.getJSONArray("failures");
         for(int i = 0; i < array.length(); i++) {
-            list.add(array.getString(i));
+            if(failureDictionary == null)
+                list.add(array.getString(i));
+            else
+                list.add(failureDictionary.get(array.getInt(i)));
         }
         return list;
+    }
+
+    protected void parseFailureDictionay(JSONArray array) throws JSONException {
+        for(int i = 0; i < array.length(); i++) {
+            JSONObject object = array.getJSONObject(i);
+            if(object.has("failureDictionary")) {
+                failureDictionary = new HashMap<Integer, String>();
+                JSONObject dico = object.getJSONObject("failureDictionary");
+                Iterator it = dico.keys();
+                while (it.hasNext()) {
+                    String key = it.next().toString();
+                    failureDictionary.put(dico.getInt(key), key);
+                }
+            }
+        }
     }
 }

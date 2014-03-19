@@ -7,6 +7,7 @@ import java.util.*;
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationOldParser;
+import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.diversification.builder.AbstractBuilder;
 import fr.inria.diversify.diversification.builder.AntBuilder;
@@ -107,7 +108,7 @@ public class DiversifyMain {
         String src = DiversifyProperties.getProperty("src");
         if(DiversifyProperties.getProperty("builder").equals("maven")) {
             rb = new MavenBuilder(directory, src);
-            rb.setPhase(new String[]{"test"});
+            rb.setPhase(new String[]{"clean","test"});
         }
         else {
             rb = new AntBuilder(directory,DiversifyProperties.getProperty("builder.testTarget"));
@@ -231,8 +232,8 @@ public class DiversifyMain {
     }
 
     protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
-//        TransformationParser tf = new TransformationParser(true);
-        TransformationOldParser tf = new TransformationOldParser(true);
+        TransformationParser tf = new TransformationParser(true);
+//        TransformationOldParser tf = new TransformationOldParser(true);
         Collection<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 

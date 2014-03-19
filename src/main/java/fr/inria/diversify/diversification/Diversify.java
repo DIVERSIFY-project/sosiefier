@@ -37,7 +37,6 @@ public class Diversify extends AbstractDiversify {
 
     @Override
     public void run(int n) throws Exception {
-        // todo bidon
         Log.info("number of diversification: " + n);
         for (int i = 0; i < n; i++) {
             Log.info("diversification: " + i);
@@ -69,7 +68,6 @@ public class Diversify extends AbstractDiversify {
     protected void run(Transformation trans, String tmpDir) throws Exception {
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
-
             trans.apply(tmpDir + "/" + sourceDir);
             transformations.add(trans);
             int status = runTest(tmpDir);

@@ -12,7 +12,6 @@ import java.util.Set;
  * Time: 18:09
  */
 public abstract class TransformationQuery {
-
     protected String type;
 
     public abstract void setType(String type);
