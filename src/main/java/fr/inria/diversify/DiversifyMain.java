@@ -78,7 +78,7 @@ public class DiversifyMain {
         if(repo.equals("null"))
             abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
         else
-            abstractDiversify.printResult(DiversifyProperties.getProperty("result"),repo+"/diversify-exp");
+            abstractDiversify.printResult(DiversifyProperties.getProperty("result"),repo+"/sosie-exp");
     }
 
     protected AbstractDiversify initAbstractDiversify() throws Exception {
