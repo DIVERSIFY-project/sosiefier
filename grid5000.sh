@@ -3,7 +3,7 @@ cd /root/diversify-statements
 git pull
 mvn clean package
 
-rm -rf repo/diversify-exp
+rm -rf repo/sosie-exp
 mkdir repo
 sh script/git/init.sh repo
 

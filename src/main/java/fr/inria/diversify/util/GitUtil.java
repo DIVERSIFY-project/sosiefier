@@ -26,7 +26,7 @@ public class GitUtil {
     }
 
     public static String getFirstPropertyFile() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(directory+"/diversify-exp/"+expFileName));
+        BufferedReader br = new BufferedReader(new FileReader(directory+"/sosie-exp/"+expFileName));
         StringBuilder sb = new StringBuilder();
         String line = br.readLine();
         String ret = "";
@@ -45,7 +45,7 @@ public class GitUtil {
     }
 
     private static void updateExpList(String s) throws IOException {
-        BufferedWriter out = new BufferedWriter(new FileWriter(directory+"/diversify-exp/"+expFileName));
+        BufferedWriter out = new BufferedWriter(new FileWriter(directory+"/sosie-exp/"+expFileName));
         out.write(s);
         out.close();
         addToGit(expFileName);
@@ -55,13 +55,13 @@ public class GitUtil {
     public static void addToGit(String file) {
         Runtime r = Runtime.getRuntime();
         try {
-            Process p = r.exec("sh "+ scriptDir + "/add.sh " +directory+"/diversify-exp/ "+file+ " \"add file "+file+"\"");
-            Log.debug("sh "+ scriptDir + "/add.sh " +directory+"/diversify-exp/ "+file+ " \"add file "+file+"\"");
+            Process p = r.exec("sh "+ scriptDir + "/add.sh " +directory+"/sosie-exp/ "+file+ " \"add file "+file+"\"");
+            Log.debug("sh "+ scriptDir + "/add.sh " +directory+"/sosie-exp/ "+file+ " \"add file "+file+"\"");
             p.waitFor();
         } catch (Exception e) {
             Log.error("addToGit ",e);
         }
-        Log.info("add file: {} to git: {}",file,directory+"/diversify-exp/");
+        Log.info("add file: {} to git: {}",file,directory+"/sosie-exp/");
     }
 
     public static void addToGit(String subDir, String file) {
@@ -73,14 +73,14 @@ public class GitUtil {
         } catch (Exception e) {
             Log.error("addToGit ",e);
         }
-        Log.info("add file: {} to git: {}",file,directory+"/diversify-exp/");
+        Log.info("add file: {} to git: {}",file,directory+"/sosie-exp/");
     }
 
     public static void pushGit() {
         Runtime r = Runtime.getRuntime();
         try {
-            Process p = r.exec("sh "+ scriptDir + "/push.sh " +directory+"/diversify-exp/");
-            Log.debug("sh "+ scriptDir + "/push.sh " +directory+"/diversify-exp/");
+            Process p = r.exec("sh "+ scriptDir + "/push.sh " +directory+"/sosie-exp/");
+            Log.debug("sh "+ scriptDir + "/push.sh " +directory+"/sosie-exp/");
             p.waitFor();
         } catch (Exception e) {
             Log.error("addToGit ",e);
