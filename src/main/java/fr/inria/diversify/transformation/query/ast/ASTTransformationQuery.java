@@ -99,8 +99,8 @@ public class ASTTransformationQuery extends TransformationQuery {
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace,true);
         }
         tf.setName("replaceWittgenstein");
-        tf.setTransplantationPoint(cfToReplace);
-        tf.setCodeFragmentToReplace(cfReplacedBy);
+        tf.setTransplantationPoint(cfReplacedBy);
+        tf.setCodeFragmentToReplace(cfToReplace);
         return tf;
     }
 
@@ -151,8 +151,8 @@ public class ASTTransformationQuery extends TransformationQuery {
                     cfToReplace = randomCodeFragmentToReplace(true);
                     cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
                 }
-        tf.setTransplantationPoint(cfToReplace);
-        tf.setCodeFragmentToAdd(cfReplacedBy);
+        tf.setTransplantationPoint(cfReplacedBy);
+        tf.setCodeFragmentToAdd(cfToReplace);
         return tf;
     }
 
