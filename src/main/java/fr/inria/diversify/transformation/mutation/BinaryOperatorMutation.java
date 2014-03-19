@@ -62,7 +62,8 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
 
     public void removeSourceCode() {
         CompilationUnit compileUnit = operator.getPosition().getCompilationUnit();
-        compileUnit.getSourceCodeFraments().clear();
+        if(compileUnit.getSourceCodeFraments() != null)
+            compileUnit.getSourceCodeFraments().clear();
     }
 
 

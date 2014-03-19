@@ -88,7 +88,8 @@ public class InlineConstantMutation extends AbstractTransformation {
 
     public void removeSourceCode() {
         CompilationUnit compileUnit = inlineConstant.getPosition().getCompilationUnit();
-        compileUnit.getSourceCodeFraments().clear();
+        if(compileUnit.getSourceCodeFraments() != null)
+            compileUnit.getSourceCodeFraments().clear();
     }
 
 

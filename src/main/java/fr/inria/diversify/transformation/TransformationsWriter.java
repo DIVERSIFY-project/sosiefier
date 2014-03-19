@@ -55,9 +55,9 @@ public class TransformationsWriter {
 
         String fileName;
         if(type == null)
-            fileName = fileNamePrefix+"_all.json";
+            fileName = fileNamePrefix+".json";
         else
-            fileName = fileNamePrefix+ "_" + type + "_all.json";
+            fileName = fileNamePrefix+ "_" + type + ".json";
 
         return  writeTransformation(fileName,transformation);
     }

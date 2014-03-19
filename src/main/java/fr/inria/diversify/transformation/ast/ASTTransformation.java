@@ -62,7 +62,8 @@ public abstract class ASTTransformation extends AbstractTransformation {
     public void removeSourceCode() {
         CtSimpleType<?> type = getOriginalClass(transplantationPoint);
         CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
-        compileUnit.getSourceCodeFraments().clear();
+        if(compileUnit.getSourceCodeFraments() != null)
+            compileUnit.getSourceCodeFraments().clear();
     }
 
     public CtSimpleType<?> getOriginalClass(CodeFragment cf) {

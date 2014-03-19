@@ -90,7 +90,8 @@ public class ReturnValueMutation extends AbstractTransformation {
 
     public void removeSourceCode() {
         CompilationUnit compileUnit = ret.getPosition().getCompilationUnit();
-        compileUnit.getSourceCodeFraments().clear();
+        if(compileUnit.getSourceCodeFraments() != null)
+            compileUnit.getSourceCodeFraments().clear();
     }
 
     @Override

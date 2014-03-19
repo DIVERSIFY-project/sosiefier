@@ -32,15 +32,15 @@ public abstract class AbstractDiversify {
 
     public String printResult(String output) {
         mkDirResult(output);
-        String fileName = output + System.currentTimeMillis() + "_transformation.json";
+        String fileName = output + System.currentTimeMillis();// + "_transformation.json";
         String absoluteFileName = output + "/" + fileName;
         try {
-            writeTransformation(absoluteFileName);
-            Log.info("write result in {}", absoluteFileName);
+            writeTransformation(fileName);
+            Log.info("write result in {}", fileName);
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
         }
-        return absoluteFileName;
+        return fileName;
     }
 
     public void printResult(String output, String git) {
@@ -52,6 +52,7 @@ public abstract class AbstractDiversify {
                 tmp = tmp + "/" + split[i];
             }
             Log.debug(tmp+"/   "+split[split.length - 1]);
+        GitUtil.addToGit(tmp+"/", "*");
     }
 
     public void writeTransformation(String fileName) throws IOException, JSONException {
