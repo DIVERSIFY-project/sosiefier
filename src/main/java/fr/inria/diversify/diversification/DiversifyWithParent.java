@@ -1,7 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
 
 
@@ -12,7 +12,7 @@ import fr.inria.diversify.util.Log;
  */
 public class DiversifyWithParent extends Diversify {
 
-    public DiversifyWithParent(AbstractTransformationQuery transQuery, String projectDir) {
+    public DiversifyWithParent(TransformationQuery transQuery, String projectDir) {
         super(transQuery, projectDir);
     }
 

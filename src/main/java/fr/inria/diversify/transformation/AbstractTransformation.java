@@ -1,10 +1,14 @@
 package fr.inria.diversify.transformation;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Simon
@@ -14,6 +18,7 @@ import java.util.List;
 public abstract class AbstractTransformation implements Transformation {
     protected Integer status = -3;
     protected List<String> failures;
+    protected static Map<String,Integer> failuresDico = new HashMap<String, Integer>();
     protected String name;
     protected String type;
     protected Transformation parent;
@@ -50,7 +55,7 @@ public abstract class AbstractTransformation implements Transformation {
         JSONObject object = new JSONObject();
         object.put("type", type);
         object.put("name", name);
-        object.put("failures", failures);
+        object.put("failures", failuresToJSON());
         object.put("status", status);
 
         if(parent != null)
@@ -59,6 +64,18 @@ public abstract class AbstractTransformation implements Transformation {
         return object;
     }
 
+    private static int id = 0;
+    protected JSONArray failuresToJSON() {
+        JSONArray array = new JSONArray();
+        for(String failure : failures) {
+            if(!failuresDico.containsKey(failure)) {
+                failuresDico.put(failure,id);
+                id++;
+            }
+            array.put(failuresDico.get(failure));
+        }
+        return array;
+    }
 
     public  int hashCode() {
         return name.hashCode() * type.hashCode() +status.hashCode() + failures.hashCode();

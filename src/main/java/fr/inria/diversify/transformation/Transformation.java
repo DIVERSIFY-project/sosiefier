@@ -32,6 +32,9 @@ public interface Transformation {
     public String methodLocationName();
     public String stmtType();
 
+//    public String getParentBeforeTransformation();
+//    public String getParentAfterTransformation() throws Exception;
+
     public boolean isCompile();
     public int line();
 

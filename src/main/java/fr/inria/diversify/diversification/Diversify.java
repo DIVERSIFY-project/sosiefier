@@ -1,7 +1,8 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
+import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
@@ -20,7 +21,7 @@ public class Diversify extends AbstractDiversify {
     protected int sosie = 0;
     protected int trial = 0;
 
-    public Diversify(AbstractTransformationQuery transQuery, String projectDir) {
+    public Diversify(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<Transformation>();

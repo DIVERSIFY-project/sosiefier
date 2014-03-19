@@ -2,7 +2,8 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.sosie.InstruProject;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
+import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
@@ -10,7 +11,6 @@ import org.codehaus.plexus.util.FileUtils;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * User: Simon
@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public class Sosie extends AbstractDiversify {
 
-    public Sosie(AbstractTransformationQuery transQuery, String projectDir) {
+    public Sosie(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<Transformation>();

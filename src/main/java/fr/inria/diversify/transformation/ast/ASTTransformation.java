@@ -6,6 +6,7 @@ import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
@@ -24,15 +25,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
     protected CodeFragment transplantationPoint;
 
     public ASTTransformation() {}
-
-//    public void apply(String srcDir) throws Exception {
-//        addSourceCode();
-//
-//        printJavaFile(srcDir);
-//        removeSourceCode();
-//    }
-
-//    protected abstract void addSourceCode() throws Exception;
 
     public void applyWithParent(String srcDir) throws Exception {
         addSourceCode();
@@ -125,8 +117,37 @@ public abstract class ASTTransformation extends AbstractTransformation {
         return transplantationPoint.getStartLine();
     }
 
-    //far stupid transformation
+    //for stupid transformation
     public void setName(String type) {
         name = type;
     }
+
+//    public String getParentBeforeTransformation() {
+//        CompilationUnit compileUnit = transplantationPoint.getCtCodeFragment().getPosition().getCompilationUnit();
+//        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
+//        Environment env = compileUnit.getFactory().getEnvironment();
+//
+//        int begin = compileUnit.beginOfLineIndex(sp.getSourceEnd()) - 3;
+//        int end = compileUnit.nextLineIndex(sp.getSourceEnd()) + 3;
+//
+//        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
+//        printer.getResult();
+//
+//        return transplantationPoint.getCtCodeFragment().getParent().toString();
+//    }
+//
+//    @Override
+//    public String getParentAfterTransformation() throws Exception {
+//        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
+//        Factory factory = type.getFactory();
+//        Environment env = factory.getEnvironment();
+//        addSourceCode();
+//
+//        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
+//        printer.getResult();
+//
+//
+//        removeSourceCode();
+//        return printer.toString();
+//    }
 }

@@ -3,6 +3,7 @@ package fr.inria.diversify.transformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -71,11 +72,16 @@ public class TransformationsWriter {
             } catch (Exception e) {
             }
         }
+        JSONObject dico = new JSONObject();
+        dico.put("failureDictionary",AbstractTransformation.failuresDico);
+        obj.put(dico);
+
         obj.write(out);
-//        out.write(obj.toString());
         out.newLine();
         out.close();
         return  fileName;
     }
+
+
 
 }

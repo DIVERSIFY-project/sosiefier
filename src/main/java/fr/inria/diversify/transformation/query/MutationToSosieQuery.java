@@ -60,7 +60,7 @@ public class MutationToSosieQuery extends TransformationQuery {
                 }
             }
 
-            T thread = new T(new ASTTransformationQuery(coverageReport, Statement.class));
+            T thread = new T(new ASTTransformationQuery(coverageReport, Statement.class, false));
             thread.start();
             int count = 0;
             while (thread.trans == null && count < 50) {

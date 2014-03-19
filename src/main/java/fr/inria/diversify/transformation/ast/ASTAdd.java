@@ -57,7 +57,7 @@ public class ASTAdd extends ASTTransformation {
         SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
 
         int index = compileUnit.beginOfLineIndex(sp.getSourceStart());//sp.getSourceStart();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, codeFragmentString(transplantationPoint), 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, transplant.codeFragmentString(), 0));
         Log.debug("----------\n---------");
         Log.debug("{}",originalClass.getQualifiedName());
     }
@@ -66,19 +66,9 @@ public class ASTAdd extends ASTTransformation {
         return name.equals("add");
     }
 
-    protected String codeFragmentString(CodeFragment cf) {
-        String cFS = transplant.codeFragmentString();
-//        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
-//            return cFS+";";
-//        else
-            return cFS;
-    }
-
     public void setVarMapping(Map<String, String> mapping) {
         variableMapping = mapping;
     }
-
-
 
     public boolean setCodeFragmentToAdd(CodeFragment add) {
         this.transplant = add;

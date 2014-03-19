@@ -2,7 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.sosie.InstruProject;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.query.ast.AbstractTransformationQuery;
+import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
@@ -22,7 +22,7 @@ public class MutantSosieWriter extends AbstractDiversify {
     protected String sosieDir;
     protected String mutantDir;
 
-    public MutantSosieWriter(AbstractTransformationQuery transQuery, String projectDir) {
+    public MutantSosieWriter(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<Transformation>();

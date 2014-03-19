@@ -8,7 +8,6 @@ import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
@@ -104,15 +103,6 @@ public class Util {
         return list;
     }
 
-//    public List<CodeFragment> findStupidCandidate(CodeFragment cf) {
-//        List<CodeFragment> list = new ArrayList<CodeFragment>();
-//        for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
-//
-//            if (cf.isReplace(statement,true) && cf.isReplace(statement,false) && !statement.equalString().equals(cf.equalString()))
-//                list.add(statement);
-//
-//        return list;
-//    }
 
     protected BigInteger getNumberOfVarMapping(CodeFragment before, CodeFragment after) {
         BigInteger nb = new BigInteger("1");
@@ -124,45 +114,45 @@ public class Util {
         return nb;
     }
 
-    public Set<Transformation> getStupidTransformation(int nb, ASTTransformationQuery query) {
-        Set<Transformation> transformations = new HashSet<Transformation>();
-        for(int i = 0; i < nb; i++) {
-            try {
-                ASTReplace replace = query.replace();
-                CodeFragment position = replace.getTransplantationPoint();
-
-                transformations.add(replace);
-
-                ASTReplace stupidReplace = query.replace(position, false);
-                stupidReplace.setType("notMappingVariableReplace");
-                transformations.add(stupidReplace);
-
-                stupidReplace = query.replace(position, true);
-                stupidReplace.setType("notContextMappingVariableNameReplace");
-                transformations.add(stupidReplace);
-
-                transformations.add(query.notContextReplace(position));
-
-                transformations.add(query.add(position,false));
-
-                ASTAdd stupidASTAdd = query.add(position,false);
-                stupidASTAdd.setName("notMappingVariableAdd");
-                transformations.add(stupidASTAdd);
-
-                stupidASTAdd = query.add(position,true);
-                stupidASTAdd.setName("notContextMappingVariableNameAdd");
-                transformations.add(stupidASTAdd);
-
-                transformations.add(query.notContextAdd(position));
-
-                transformations.add(query.delete(position));
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return  transformations;
-    }
+//    public Set<Transformation> getStupidTransformation(int nb, ASTTransformationQuery query) {
+//        Set<Transformation> transformations = new HashSet<Transformation>();
+//        for(int i = 0; i < nb; i++) {
+//            try {
+//                ASTReplace replace = query.replace();
+//                CodeFragment position = replace.getTransplantationPoint();
+//
+//                transformations.add(replace);
+//
+//                ASTReplace stupidReplace = query.replace(position, false);
+//                stupidReplace.setType("notMappingVariableReplace");
+//                transformations.add(stupidReplace);
+//
+//                stupidReplace = query.replace(position, true);
+//                stupidReplace.setType("notContextMappingVariableNameReplace");
+//                transformations.add(stupidReplace);
+//
+//                transformations.add(query.notContextReplace(position));
+//
+//                transformations.add(query.add(position,false));
+//
+//                ASTAdd stupidASTAdd = query.add(position,false);
+//                stupidASTAdd.setName("notMappingVariableAdd");
+//                transformations.add(stupidASTAdd);
+//
+//                stupidASTAdd = query.add(position,true);
+//                stupidASTAdd.setName("notContextMappingVariableNameAdd");
+//                transformations.add(stupidASTAdd);
+//
+//                transformations.add(query.notContextAdd(position));
+//
+//                transformations.add(query.delete(position));
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return  transformations;
+//    }
 
     public List<CodeFragment> findStupidCandidate(CodeFragment cf, ICoverageReport rg) {
         List<CodeFragment> list = new ArrayList<CodeFragment>();

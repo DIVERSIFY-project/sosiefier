@@ -71,21 +71,13 @@ public class ASTReplace extends ASTTransformation {
         else {
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
-                    codeFragmentString(transplantationPoint), 0));
+                    transplant.codeFragmentString(), 0));
         }
     }
 
     protected boolean withVarMapping() {
         //todo a remplacer par un attribut
         return name.equals("replace");
-    }
-
-    protected String codeFragmentString(CodeFragment cf) {
-        String cFS = transplant.codeFragmentString();
-//        if(DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor"))
-//            return cFS+";";
-//        else
-            return cFS;
     }
 
     public boolean setCodeFragmentToReplace(CodeFragment replace) {

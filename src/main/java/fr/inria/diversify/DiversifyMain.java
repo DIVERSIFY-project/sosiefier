@@ -11,10 +11,8 @@ import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.diversification.builder.AbstractBuilder;
 import fr.inria.diversify.diversification.builder.AntBuilder;
 import fr.inria.diversify.diversification.builder.MavenBuilder;
-import fr.inria.diversify.transformation.query.CvlQuery;
-import fr.inria.diversify.transformation.query.MutationQuery;
-import fr.inria.diversify.transformation.query.MutationToSosieQuery;
-import fr.inria.diversify.transformation.query.TransformationQuery;
+import fr.inria.diversify.transformation.query.*;
+import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.ast.TransformationQueryFromList;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
@@ -33,8 +31,6 @@ import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationParser;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
@@ -151,12 +147,16 @@ public class DiversifyMain {
 
         if(type.equals("ADR")) {
             Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-            atq = new ASTTransformationQuery(rg,cl);
+            atq = new ASTTransformationQuery(rg,cl, false);
         }
 
         if(type.equals("ADRStupid")) {
             Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-            atq = new ASTTransformationQuery(rg,cl);
+            atq = new ASTTransformationQuery(rg,cl, true);
+        }
+
+        if(type.equals("all")) {
+            atq = new AllQuery(rg);
         }
 
         if(type.equals("list")) {
