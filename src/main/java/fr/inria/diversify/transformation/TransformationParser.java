@@ -40,6 +40,7 @@ import java.util.*;
 public class TransformationParser {
     private int countError = 0;
     private int count = 0;
+    Map<String, Integer> duplication = new HashMap<String, Integer>();
     Collection<Transformation> transformations;
     private HashMap<Integer, String> failureDictionary;
 
@@ -60,7 +61,16 @@ public class TransformationParser {
                 countFile++;
                 Log.debug("Current number of transformation {}",transformations.size());
                 Log.debug("parse tranformation file: "+f.getName());
-                transformations.addAll(parseFile(f));
+                for(Transformation t : parseFile(f)) {
+                    if(transformations.contains(t)) {
+                        String key = t.getType()+":"+t.getName();
+                        if(!duplication.containsKey(key))
+                            duplication.put(key,1);
+                        else
+                            duplication.put(key, 1 + duplication.get(key));
+                    }
+                    transformations.add(t);
+                }
             }
         Log.debug("number of transformation file: {}",countFile);
         Log.debug("number of transformation : {}",count);
@@ -103,14 +113,14 @@ public class TransformationParser {
         for(int i = 0; i < array.length(); i++)  {
             count++;
             try {
-                list.add(parseTransformation(array.getJSONObject(i)));
+                Transformation t = parseTransformation(array.getJSONObject(i));
+                list.add(t);
             }  catch (Exception e) {
                 countError++;
 //                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
                 Log.debug("{} {} ",count, countError);
             }
         }
-
         return list;
     }
 
@@ -248,13 +258,14 @@ public class TransformationParser {
         String name = jsonObject.getString("name");
         ASTTransformation trans = null;
 
-        if(name.equals("replace"))
+        if(name.startsWith("replace"))
             trans = parseASTReplace(jsonObject);
-        if(name.equals("add"))
+        if(name.startsWith("add"))
             trans = parseASTAdd(jsonObject);
         if(name.equals("delete"))
             trans = parseASTDelete(jsonObject);
 
+        trans.setName(jsonObject.getString("name"));
         trans.setTransplantationPoint(findCodeFragment(jsonObject.getJSONObject("transplantationPoint")));
         return trans;
     }

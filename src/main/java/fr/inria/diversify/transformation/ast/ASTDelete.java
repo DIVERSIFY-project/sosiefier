@@ -46,7 +46,7 @@ public class ASTDelete extends ASTTransformation {
 
 
     public  int hashCode() {
-        return 1;
+        return super.hashCode() * transplantationPoint.getCompilationUnit().hashCode() * transplantationPoint.getStartLine();
     }
     public boolean equals(Object other) {
         if(other == null)
@@ -61,7 +61,7 @@ public class ASTDelete extends ASTTransformation {
            return  status == otherDelete.status &&
                    name.equals(otherDelete.name) &&
                    failures.equals(otherDelete.failures) &&
-                   transplantationPoint.equals(otherDelete.transplantationPoint);
+                   transplantationPoint.getCtCodeFragment().getPosition().equals(otherDelete.transplantationPoint.getCtCodeFragment().getPosition());
     }
 
 

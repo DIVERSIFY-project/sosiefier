@@ -44,7 +44,7 @@ public class ASTTransformationQuery extends TransformationQuery {
     public ASTTransformation getTransformation() throws Exception {
         Random r = new Random();
         ASTTransformation t = null;
-        int i = r.nextInt(stupid ? 13 : 5);
+        int i = r.nextInt(stupid ? 15 : 5);
         switch (i) {
             case 0: case 1:
                 return replace();
@@ -52,20 +52,20 @@ public class ASTTransformationQuery extends TransformationQuery {
                 return add();
             case 4:
                 return delete();
-            case 5: case 6:
+            case 5: case 6:  case 7:
                 return replaceRandom();
-            case 7: case 8:
+            case 8: case 9:  case 10:
                 return addRandom();
-            case 9:
+            case 11:
                 return replaceWittgenstein();
-            case 10:
+            case 12:
                 return addWittgenstein();
-            case 11: {
+            case 13: {
                 t = replace();
                 t.setName("replaceReaction");
                 return t;
             }
-            case 12: {
+            case 14: {
                 t = add();
                 t.setName("addReaction");
                 return t;

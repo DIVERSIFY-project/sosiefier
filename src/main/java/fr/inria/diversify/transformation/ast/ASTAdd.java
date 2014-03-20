@@ -76,7 +76,8 @@ public class ASTAdd extends ASTTransformation {
     }
 
     public  int hashCode() {
-        return 1;
+        return super.hashCode() * transplant.getCompilationUnit().hashCode() *
+                transplant.getStartLine() * transplantationPoint.getCompilationUnit().hashCode() * transplantationPoint.getStartLine();
     }
 
     public boolean equals(Object other) {
@@ -93,8 +94,8 @@ public class ASTAdd extends ASTTransformation {
                 name.equals(otherASTAdd.name) &&
                 failures.equals(otherASTAdd.failures) &&
                 (variableMapping == null || variableMapping.equals(otherASTAdd.variableMapping)) &&
-                transplantationPoint.equals(otherASTAdd.transplantationPoint) &&
-                transplant.equals(otherASTAdd.transplant);
+                transplantationPoint.getCtCodeFragment().equals(otherASTAdd.transplantationPoint.getCtCodeFragment()) &&
+                transplant.getCtCodeFragment().getPosition().equals(otherASTAdd.transplant.getCtCodeFragment().getPosition());
     }
 
     public void setName(String name) {

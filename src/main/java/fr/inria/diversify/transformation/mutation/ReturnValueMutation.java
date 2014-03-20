@@ -144,7 +144,12 @@ public class ReturnValueMutation extends AbstractTransformation {
 
         return status == otherMutation.status &&
                 failures.equals(otherMutation.failures) &&
-                ret.equals(otherMutation.ret);
+                ret.equals(otherMutation.ret) &&
+                ret.getPosition().equals(otherMutation.ret.getPosition());
     }
 
+    public  int hashCode() {
+        return super.hashCode() * ret.getPosition().hashCode() *
+                line();
+    }
 }

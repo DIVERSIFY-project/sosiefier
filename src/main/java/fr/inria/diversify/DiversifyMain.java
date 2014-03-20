@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import fr.inria.diversify.diversification.*;
+import fr.inria.diversify.statistic.FailureMatrix;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationOldParser;
 import fr.inria.diversify.transformation.TransformationParser;
@@ -242,6 +243,7 @@ public class DiversifyMain {
         StatisticDiversification sd = new StatisticDiversification(transformations);
         sd.writeStat(fileName);
 
+
         for(String type : getAllTransformationType(transformations))
            write.writeAllTransformation(type);
 
@@ -250,8 +252,10 @@ public class DiversifyMain {
         for(String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
-        Visu v = new Visu();
-        v.writeJSON(fileName+"_visu.json", transformations);
+        FailureMatrix matrix = new FailureMatrix(transformations,"allTest");
+        matrix.printMatrix(fileName+"_matrix.csv");
+//        Visu v = new Visu();
+//        v.writeJSON(fileName+"_visu.json", transformations);
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {

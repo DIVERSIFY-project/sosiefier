@@ -138,11 +138,17 @@ public class InlineConstantMutation extends AbstractTransformation {
 
         return status == otherMutation.status &&
                 failures.equals(otherMutation.failures) &&
-                inlineConstant.equals(otherMutation.inlineConstant);
+                inlineConstant.equals(otherMutation.inlineConstant) &&
+                inlineConstant.getPosition().equals(otherMutation.inlineConstant.getPosition());
     }
 
     @Override
     public int line() {
         return inlineConstant.getPosition().getLine();
+    }
+
+    public  int hashCode() {
+        return super.hashCode() * inlineConstant.getPosition().hashCode() *
+                line();
     }
 }

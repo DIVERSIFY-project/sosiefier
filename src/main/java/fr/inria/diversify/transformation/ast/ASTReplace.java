@@ -90,8 +90,10 @@ public class ASTReplace extends ASTTransformation {
     }
 
     public  int hashCode() {
-        return 1;
+        return super.hashCode() * transplant.getCompilationUnit().hashCode() *
+                transplant.getStartLine() * transplantationPoint.getCompilationUnit().hashCode() * transplantationPoint.getStartLine();
     }
+
     public boolean equals(Object other) {
 
         if(other == null)
@@ -106,8 +108,8 @@ public class ASTReplace extends ASTTransformation {
         return status == otherReplace.status &&
                 failures.equals(otherReplace.failures) &&
                 (variableMapping == null || variableMapping.equals(otherReplace.variableMapping)) &&
-                transplantationPoint.equals(otherReplace.transplantationPoint) &&
-                transplant.equals(otherReplace.transplant);
+                transplantationPoint.getCtCodeFragment().getPosition().equals(otherReplace.transplantationPoint.getCtCodeFragment().getPosition()) &&
+                transplant.getCtCodeFragment().equals(otherReplace.transplant.getCtCodeFragment());
     }
     @Override
     public String toString() {

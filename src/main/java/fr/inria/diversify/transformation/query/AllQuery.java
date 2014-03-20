@@ -27,7 +27,7 @@ public class AllQuery extends TransformationQuery  {
     @Override
     public Transformation getTransformation() throws Exception {
         Random r = new Random();
-        if(r.nextDouble() < 0.2)
+        if(r.nextDouble() < 0.05)
             return mutation.getTransformation();
         else
             return ast.getTransformation();
