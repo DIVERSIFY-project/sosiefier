@@ -9,6 +9,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * User: Simon
@@ -28,12 +30,16 @@ public class TransformationsWriter {
     }
 
     public String writeGoodTransformation(String type) throws IOException, JSONException {
-        List<Transformation> goodTransformation = new LinkedList<Transformation>();
-        for (Transformation transformation : transformations) {
-            if (transformation.getStatus() == 0 && (type == null || transformation.getType().equals(type))) {
-                goodTransformation.add(transformation);
-            }
-        }
+//        List<Transformation> goodTransformation = new LinkedList<Transformation>();
+
+        List<Transformation> goodTransformation = transformations.stream().
+                filter(t -> t.getStatus() == 0 && t.getType().equals(type))
+                .collect(Collectors.toList());
+//        for (Transformation transformation : transformations) {
+//            if (transformation.getStatus() == 0 && (type == null || transformation.getType().equals(type))) {
+//                goodTransformation.add(transformation);
+//            }
+//        }
         String fileName;
         if(type == null)
             fileName = fileNamePrefix+"_good.json";

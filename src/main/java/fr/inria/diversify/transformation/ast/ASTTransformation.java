@@ -123,32 +123,32 @@ public abstract class ASTTransformation extends AbstractTransformation {
         name = type;
     }
 
-//    public String getParentBeforeTransformation() {
-//        CompilationUnit compileUnit = transplantationPoint.getCtCodeFragment().getPosition().getCompilationUnit();
-//        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
-//        Environment env = compileUnit.getFactory().getEnvironment();
-//
-//        int begin = compileUnit.beginOfLineIndex(sp.getSourceEnd()) - 3;
-//        int end = compileUnit.nextLineIndex(sp.getSourceEnd()) + 3;
-//
-//        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
-//        printer.getResult();
-//
-//        return transplantationPoint.getCtCodeFragment().getParent().toString();
-//    }
-//
-//    @Override
-//    public String getParentAfterTransformation() throws Exception {
-//        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
-//        Factory factory = type.getFactory();
-//        Environment env = factory.getEnvironment();
-//        addSourceCode();
-//
-//        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
-//        printer.getResult();
-//
-//
-//        removeSourceCode();
-//        return printer.toString();
-//    }
+    public String getParentBeforeTransformation() {
+        CompilationUnit compileUnit = transplantationPoint.getCtCodeFragment().getPosition().getCompilationUnit();
+        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
+        Environment env = compileUnit.getFactory().getEnvironment();
+
+        int begin = compileUnit.beginOfLineIndex(sp.getSourceEnd()) - 3;
+        int end = compileUnit.nextLineIndex(sp.getSourceEnd()) + 3;
+
+        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
+        printer.getResult();
+
+        return transplantationPoint.getCtCodeFragment().getParent().toString();
+    }
+
+    @Override
+    public String getParentAfterTransformation() throws Exception {
+        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
+        Factory factory = type.getFactory();
+        Environment env = factory.getEnvironment();
+        addSourceCode();
+
+        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
+        printer.getResult();
+
+
+        removeSourceCode();
+        return printer.toString();
+    }
 }

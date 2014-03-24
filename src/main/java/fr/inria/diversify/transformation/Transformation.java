@@ -12,7 +12,6 @@ import java.util.List;
  * Time: 11:16
  */
 public interface Transformation {
-
     public void apply(String srcDir) throws Exception;
     public void applyWithParent(String srcDir) throws Exception;
     public void restore(String srcDir) throws Exception;
@@ -32,8 +31,8 @@ public interface Transformation {
     public String methodLocationName();
     public String stmtType();
 
-//    public String getParentBeforeTransformation();
-//    public String getParentAfterTransformation() throws Exception;
+    public default String getParentBeforeTransformation() {return "";}
+    public default String getParentAfterTransformation() throws Exception {return "";}
 
     public boolean isCompile();
     public int line();

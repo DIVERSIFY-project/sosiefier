@@ -39,9 +39,10 @@ rank <- function(data, test) {
   colnames <- colnames(matrix);
   for(i in 1:length(data[,1])) {
     if(sum(matrix[i,]) == 1 & matrix[i,test] == 1) {
-      return(j);
+      return(i);
     }
   }
   return(-1);
   
 }
+
