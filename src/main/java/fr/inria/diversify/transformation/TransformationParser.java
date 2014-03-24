@@ -31,6 +31,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * User: Simon
@@ -40,7 +42,7 @@ import java.util.*;
 public class TransformationParser {
     private int countError = 0;
     private int count = 0;
-    Map<String, Integer> duplication = new HashMap<String, Integer>();
+//    Map<String, Integer> duplication = new HashMap<String, Integer>();
     Collection<Transformation> transformations;
     private HashMap<Integer, String> failureDictionary;
 
@@ -56,21 +58,23 @@ public class TransformationParser {
         File file = new File(dir);
         int countFile = 0;
         Log.debug("transformation directory: {}",file.getAbsolutePath());
+
+
         for (File f : file.listFiles())
             if(f.getName().endsWith(".json")) {
                 countFile++;
                 Log.debug("Current number of transformation {}",transformations.size());
                 Log.debug("parse tranformation file: "+f.getName());
-                for(Transformation t : parseFile(f)) {
-                    if(transformations.contains(t)) {
-                        String key = t.getType()+":"+t.getName();
-                        if(!duplication.containsKey(key))
-                            duplication.put(key,1);
-                        else
-                            duplication.put(key, 1 + duplication.get(key));
-                    }
-                    transformations.add(t);
-                }
+//                for(Transformation t : parseFile(f)) {
+//                    if(transformations.contains(t)) {
+//                        String key = t.getType()+":"+t.getName();
+//                        if(!duplication.containsKey(key))
+//                            duplication.put(key,1);
+//                        else
+//                            duplication.put(key, 1 + duplication.get(key));
+//                    }
+                    transformations.addAll(parseFile(f));
+//                }
             }
         Log.debug("number of transformation file: {}",countFile);
         Log.debug("number of transformation : {}",count);
@@ -78,6 +82,8 @@ public class TransformationParser {
 
         return transformations;
     }
+
+
 
     public Transformation parseUniqueTransformation(File file) throws Exception {
 
@@ -95,7 +101,6 @@ public class TransformationParser {
     }
 
     public List<Transformation> parseFile(File file) throws IOException, JSONException {
-        List<Transformation> list = new ArrayList<Transformation>();
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
@@ -109,22 +114,26 @@ public class TransformationParser {
         JSONArray array = new JSONArray(sb.toString());
 
         parseFailureDictionay(array);
+        List<Transformation> list = IntStream.range(0, array.length()).parallel()
+                .mapToObj(i -> parseTransformation(getObject(array, i)))
+                .filter(object -> object != null )
+                .collect(Collectors.toList());
 
-        for(int i = 0; i < array.length(); i++)  {
-            count++;
-            try {
-                Transformation t = parseTransformation(array.getJSONObject(i));
-                list.add(t);
-            }  catch (Exception e) {
-                countError++;
-//                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
-                Log.debug("{} {} ",count, countError);
-            }
-        }
         return list;
     }
 
-    protected Transformation parseTransformation(JSONObject jsonObject) throws Exception {
+    protected JSONObject getObject(JSONArray array, int index) {
+        try {
+            return array.getJSONObject(index);
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+
+
+
+    protected Transformation parseTransformation(JSONObject jsonObject)  {
+        try {
         String type = jsonObject.getString("type");
         Transformation trans = null;
 
@@ -144,6 +153,10 @@ public class TransformationParser {
             trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));
 
         return trans;
+        }catch (Exception e) {
+//            Log.warn("error during the parsing of "+jsonObject,e);
+            return null;
+        }
     }
 
     protected Transformation parseCvl(JSONObject jsonObject) throws Exception {
@@ -321,7 +334,7 @@ public class TransformationParser {
         ReturnValueMutation trans = new ReturnValueMutation();
 
         CtReturn p = null;
-        for (CtReturn ret : DiversifyEnvironment.getReturns()) {
+        for (CtReturn<?> ret : DiversifyEnvironment.getReturns()) {
             try {
                 String position = ret.getParent(CtPackage.class).getQualifiedName()
                         + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
@@ -343,7 +356,7 @@ public class TransformationParser {
         InlineConstantMutation trans = new InlineConstantMutation();
 
         CtLocalVariable p = null;
-        for (CtLocalVariable ret : DiversifyEnvironment.getInlineConstant()) {
+        for (CtLocalVariable<?> ret : DiversifyEnvironment.getInlineConstant()) {
             try {
                 String position = ret.getParent(CtPackage.class).getQualifiedName()
                         + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();

@@ -30,16 +30,10 @@ public class TransformationsWriter {
     }
 
     public String writeGoodTransformation(String type) throws IOException, JSONException {
-//        List<Transformation> goodTransformation = new LinkedList<Transformation>();
-
-        List<Transformation> goodTransformation = transformations.stream().
+        Collection<Transformation> goodTransformation = transformations.stream().
                 filter(t -> t.getStatus() == 0 && t.getType().equals(type))
                 .collect(Collectors.toList());
-//        for (Transformation transformation : transformations) {
-//            if (transformation.getStatus() == 0 && (type == null || transformation.getType().equals(type))) {
-//                goodTransformation.add(transformation);
-//            }
-//        }
+
         String fileName;
         if(type == null)
             fileName = fileNamePrefix+"_good.json";
@@ -52,12 +46,9 @@ public class TransformationsWriter {
     }
 
     public String writeAllTransformation(String type) throws IOException, JSONException {
-        List<Transformation> transformation = new LinkedList<Transformation>();
-        for (Transformation t : transformations) {
-            if (type == null || t.getType().equals(type)) {
-                transformation.add(t);
-            }
-        }
+        Collection<Transformation> transformation = transformations.stream().
+                filter(t -> type != null || t.getType().equals(type))
+                .collect(Collectors.toList());
 
         String fileName;
         if(type == null)
@@ -72,6 +63,7 @@ public class TransformationsWriter {
         Log.debug("write {} transformation in file {}",trans.size(), fileName);
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         JSONArray obj = new JSONArray();
+
         for (Transformation transformation : trans) {
             try {
                 obj.put(transformation.toJSONObject());

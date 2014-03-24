@@ -28,6 +28,7 @@ public class FailureMatrix {
     protected List<String> buildMatrix() {
         Map<String,Integer> map = new HashMap<String,Integer>();
 
+
         for(Transformation transformation: transformations) {
             if(transformation.getStatus() == -1) {
                 StringBuilder sb = new StringBuilder();

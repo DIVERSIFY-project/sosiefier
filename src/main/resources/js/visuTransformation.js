@@ -11,7 +11,7 @@ var jsonData;
 
 var steroid = true, reaction = true, wittgenstein = true, random = true;
 
-$.getJSON("data/easymock_visu.json", function (data) {
+$.getJSON("data/clojure_visu.json", function (data) {
     jsonData = data;
     var visu = new Visu(data);
     visu.draw();
