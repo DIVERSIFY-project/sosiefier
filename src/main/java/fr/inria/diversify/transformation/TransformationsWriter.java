@@ -31,7 +31,7 @@ public class TransformationsWriter {
 
     public String writeGoodTransformation(String type) throws IOException, JSONException {
         Collection<Transformation> goodTransformation = transformations.stream().
-                filter(t -> t.getStatus() == 0 && t.getType().equals(type))
+                filter(t -> t.getStatus() == 0 && (type == null || t.getType().equals(type)))
                 .collect(Collectors.toList());
 
         String fileName;
@@ -47,7 +47,7 @@ public class TransformationsWriter {
 
     public String writeAllTransformation(String type) throws IOException, JSONException {
         Collection<Transformation> transformation = transformations.stream().
-                filter(t -> type != null || t.getType().equals(type))
+                filter(t -> type == null || t.getType().equals(type))
                 .collect(Collectors.toList());
 
         String fileName;

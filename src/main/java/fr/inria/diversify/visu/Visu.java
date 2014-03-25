@@ -2,6 +2,7 @@ package fr.inria.diversify.visu;
 
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.DiversifyEnvironment;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +18,13 @@ import java.util.regex.Pattern;
  */
 public class Visu {
     int id = 0;
+    String prefix;
+
+    public Visu(String prefix) {
+        this.prefix = prefix;
+        File file = new File(prefix);
+        file.mkdirs();
+    }
 
     Map<String, Set<Transformation>> mapByPackage(Collection<Transformation> transformations) {
         Map<String, Set<Transformation>> map = new HashMap<String, Set<Transformation>>();
@@ -41,7 +49,8 @@ public class Visu {
         return map;
     }
 
-    public void writeJSON(String fileName, Collection<Transformation> transformations) throws JSONException, IOException {
+    public void writeJSON(Collection<Transformation> transformations) throws Exception {
+
         JSONArray array = new JSONArray();
 
         Map<String, Set<Transformation>> packages = mapByPackage(transformations);
@@ -49,12 +58,12 @@ public class Visu {
             array.put(JSONPackage(p, packages.get(p)));
         }
 
-        BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
+        BufferedWriter out = new BufferedWriter(new FileWriter(prefix+".json"));
         out.write(array.toString());
         out.close();
     }
 
-    JSONObject JSONPackage(String packageName, Set<Transformation> transformations) throws JSONException, IOException {
+    JSONObject JSONPackage(String packageName, Set<Transformation> transformations) throws Exception {
         JSONObject object = new JSONObject();
         object.put("name", packageName);
 
@@ -69,7 +78,7 @@ public class Visu {
     }
 
 
-    JSONObject JSONClass(String packageName, String className, Set<Transformation> transformations) throws JSONException, IOException {
+    JSONObject JSONClass(String packageName, String className, Set<Transformation> transformations) throws Exception {
         JSONObject object = new JSONObject();
         CtSimpleType cl = getClass(packageName, className);
         object.put("name", cl.getSimpleName());
@@ -103,7 +112,7 @@ public class Visu {
         Collections.sort(l, new Comparator<Object>() {
             @Override
             public int compare(Object o1, Object o2) {
-                return ((Integer)((Transformation)o1).line()).compareTo(((Transformation)o2).line());
+                return ((Integer) ((Transformation) o1).line()).compareTo(((Transformation) o2).line());
             }
         });
         return l;
@@ -155,7 +164,7 @@ public class Visu {
         return currentEmptyLine;
     }
 
-    protected JSONObject JSONLine(List<Transformation> transformations, int position) throws IOException, JSONException {
+    protected JSONObject JSONLine(List<Transformation> transformations, int position) throws Exception {
         Map<String, List<Transformation>> map = new HashMap<String, List<Transformation>>();
 
         JSONObject line = new JSONObject();
@@ -178,7 +187,7 @@ public class Visu {
         return line;
     }
 
-    protected JSONObject writeTransformationDetail(List<Transformation> transformations, int id, int position) throws JSONException {
+    protected void writeTransformationDetail(List<Transformation> transformations, int id, int position) throws Exception {
         JSONObject detail = new JSONObject();
         detail.put("class",transformations.get(0).classLocationName());
         detail.put("package",transformations.get(0).packageLocationName());
@@ -203,14 +212,24 @@ public class Visu {
         detail.put("failTest",failTest);
         detail.put("sosie",sosie);
 
-        return detail;
+        BufferedWriter out = new BufferedWriter(new FileWriter(prefix+"_"+id+".json"));
+        out.write(detail.toString());
+        out.close();
     }
 
-    protected JSONObject transformationDetail(Transformation transformation) throws JSONException {
+    protected JSONObject transformationDetail(Transformation transformation) throws Exception {
         JSONObject detail = new JSONObject();
         detail.put("name",transformation.getName());
         detail.put("type",transformation.getType());
         detail.put("status", transformation.getStatus());
+        if(transformation.getStatus() != -2) {
+            try {
+                detail.put("string",transformation.getTransformationString());
+           } catch (Exception e) {
+                Log.debug("");
+            }
+    }
+
         return detail;
     }
 

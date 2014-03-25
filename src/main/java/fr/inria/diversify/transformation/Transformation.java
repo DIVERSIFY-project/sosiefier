@@ -31,10 +31,8 @@ public interface Transformation {
     public String methodLocationName();
     public String stmtType();
 
-    public default String getParentBeforeTransformation() {return "";}
-    public default String getParentAfterTransformation() throws Exception {return "";}
+    public default String getTransformationString() throws Exception {return "";}
 
-    public boolean isCompile();
     public int line();
 
     void addSourceCode() throws Exception;

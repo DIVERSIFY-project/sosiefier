@@ -220,7 +220,7 @@ public class DiversifyMain {
         DiversifyEnvironment.setFactory(factory);
     }
 
-    protected void computeStatistic() throws IOException, JSONException, InterruptedException {
+    protected void computeStatistic() throws Exception {
         String out = DiversifyProperties.getProperty("result");
 //        computeCodeFragmentStatistic(out);
 
@@ -231,7 +231,7 @@ public class DiversifyMain {
 //        computeOtherStat();
     }
 
-    protected void computeDiversifyStat(String transDir, String fileName) throws IOException, JSONException, InterruptedException {
+    protected void computeDiversifyStat(String transDir, String fileName) throws Exception {
         TransformationParser tf = new TransformationParser(true);
 //        TransformationOldParser tf = new TransformationOldParser(true);
         Collection<Transformation> transformations = tf.parseDir(transDir);
@@ -254,8 +254,9 @@ public class DiversifyMain {
 
         FailureMatrix matrix = new FailureMatrix(transformations,"allTest");
         matrix.printMatrix(fileName+"_matrix.csv");
-//        Visu v = new Visu();
-//        v.writeJSON(fileName+"_visu.json", transformations);
+
+        Visu v = new Visu(fileName+"_visu/visu");
+        v.writeJSON(transformations);
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {

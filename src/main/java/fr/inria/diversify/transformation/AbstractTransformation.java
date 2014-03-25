@@ -38,10 +38,6 @@ public abstract class AbstractTransformation implements Transformation {
         return failures;
     }
 
-    public boolean isCompile() {
-        return status > -1;
-    }
-
     public String getType() {
         return type;
     }
@@ -66,7 +62,11 @@ public abstract class AbstractTransformation implements Transformation {
 
     private static int id = 0;
     protected JSONArray failuresToJSON() {
+
         JSONArray array = new JSONArray();
+        if(failures == null) {
+            return array;
+        }
         for(String failure : failures) {
             if(!failuresDico.containsKey(failure)) {
                 failuresDico.put(failure,id);
