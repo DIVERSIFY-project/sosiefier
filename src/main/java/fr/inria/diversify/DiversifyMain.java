@@ -252,7 +252,7 @@ public class DiversifyMain {
         for(String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
-        FailureMatrix matrix = new FailureMatrix(transformations,"allTest");
+        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
         matrix.printMatrix(fileName+"_matrix.csv");
 
         Visu v = new Visu(fileName+"_visu/visu");
