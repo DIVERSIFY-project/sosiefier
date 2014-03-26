@@ -42,7 +42,22 @@ rank <- function(data, test) {
       return(i);
     }
   }
-  return(-1);
-  
+  return(-1);  
+}
+
+barPlotMeanRank <- function(data) {
+  matrix <- matrixFailure(data);
+  colnames <- colnames(matrix);
+  rank <-  array();
+ 
+  for(i in 1:length(colnames)) {
+    rank[i] <- meanRank(matrix, colnames[i]);
+  }
+  barplot(sort(rank), ylim=c(0,max(rank)));
+}
+
+meanRank <- function(matrix, test) {
+  tmp <- matrix[,test];
+  return(sum(tmp)/length(tmp));  
 }
 

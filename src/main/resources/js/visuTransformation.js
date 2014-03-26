@@ -9,7 +9,7 @@ var maxNumberOfClassPerLine = 4;
 var maxNumberOfPackagePerLine = 3;
 var jsonData;
 var dataDir ='data/commons-lang_visu';
-var steroid = true, reaction = true, wittgenstein = true, random = true;
+var steroid = true, reaction = true, wittgenstein = true, random = true, mutation = true;
 
 $.getJSON(dataDir+'/visu.json', function (data) {
     jsonData = data;

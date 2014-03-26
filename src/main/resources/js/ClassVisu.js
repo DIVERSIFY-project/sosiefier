@@ -14,10 +14,11 @@ function VisuClass(JSONObject) {
         this.addLines();
         this.translate(x, y);
 
-        var zoom = new VisuZoomClass(this.JSONObject);
+
         this.group.dblclick(
-            function() {
-                zoom.draw(0,0);
+            function(event) {
+                var zoom = new VisuZoomClass(JSONObject);
+                zoom.draw(event.layerX,event.layerY-20);
             },
             function() {}
         );
@@ -31,9 +32,16 @@ function VisuClass(JSONObject) {
             var transformations = line[i].trans;
             for(var j = 0; j < transformations.length; j++) {
                 var trans = transformations[j];
-                notCompile += trans.notCompile;
-                failTest += trans.failTest;
-                sosie += trans.sosie;
+                var name = trans.name;
+                if((random  &  (name == "addRandom" || name == "replaceRandom"))
+                    || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
+                    || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
+                    || (steroid  & (name == "delete" || name == "add" || name == "replace"))
+                    || (mutation  & trans.type == "mutation")) {
+                    notCompile += trans.notCompile;
+                    failTest += trans.failTest;
+                    sosie += trans.sosie;
+                }
             }
             this.drawLine(notCompile,failTest,sosie,line[i].position);
         }
@@ -87,10 +95,6 @@ function VisuClass(JSONObject) {
     this.translate = function (x, y) {
         this.group.transform("t" + x + "," + y);
     }
-
-//    this.getSize = function () {
-//        return  this.JSONObject.size;
-//    }
 }
 
 function VisuZoomClass(JSONObject) {
@@ -107,7 +111,7 @@ function VisuZoomClass(JSONObject) {
         this.group.add(rect);
         this.addText();
         this.addLines();
-        this.translate(50, 50);
+        this.translate(x, y);
         this.addClose();
     }
 
@@ -119,9 +123,16 @@ function VisuZoomClass(JSONObject) {
             var transformations = line[i].trans;
             for(var j = 0; j < transformations.length; j++) {
                 var trans = transformations[j];
-                notCompile += trans.notCompile;
-                failTest += trans.failTest;
-                sosie += trans.sosie;
+                var name = trans.name;
+                if((random  &  (name == "addRandom" || name == "replaceRandom"))
+                    || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
+                    || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
+                    || (steroid  & (name == "delete" || name == "add" || name == "replace"))
+                    || (mutation  & trans.type == "mutation")) {
+                    notCompile += trans.notCompile;
+                    failTest += trans.failTest;
+                    sosie += trans.sosie;
+                }
             }
             this.drawLine(notCompile,failTest,sosie,position, line[i].id);
 
@@ -202,10 +213,17 @@ function VisuZoomClass(JSONObject) {
                 var transformation = data.transformation;
                 console.log(transformation);
                 for(var i = 0; i < transformation.length; i++) {
-                    $('#myList').append('<li class="list-group-item">type: '+transformation[i].type+', name: '+transformation[i].name+', status: '+transformation[i].status+
-                        '<pre class="prettyprint lang-java">'+transformation[i].string+'</pre></li>');
+                    var trans = transformation[i];
+                    var name = trans.name;
+                    if((random  &  (name == "addRandom" || name == "replaceRandom"))
+                        || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
+                        || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
+                        || (steroid  & (name == "delete" || name == "add" || name == "replace"))
+                        || (mutation  & trans.type == "mutation")) {
+                        $('#myList').append('<li class="list-group-item">type: '+transformation[i].type+', name: '+transformation[i].name+', status: '+transformation[i].status+
+                            '<pre class="prettyprint lang-java">'+transformation[i].string+'</pre></li>');
+                    }
                 }
-
                 $('#myModal').modal('show');
 
                 (function(jQuery){

@@ -154,8 +154,7 @@ public abstract class AbstractTransformation implements Transformation {
             else
                 return bodyEnd;
         }
-        else {
+        else
             return exe.getPosition().getEndLine()+1;
-        }
     }
 }
