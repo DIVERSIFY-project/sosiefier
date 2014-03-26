@@ -123,12 +123,13 @@ function VisuZoomClass(JSONObject) {
                 failTest += trans.failTest;
                 sosie += trans.sosie;
             }
-            this.drawLine(notCompile,failTest,sosie,position);
+            this.drawLine(notCompile,failTest,sosie,position, line[i].id);
+
             position += 10;
         }
     }
 
-    this.drawLine = function (notCompile,failTest,sosie,position) {
+    this.drawLine = function (notCompile,failTest,sosie,position, id) {
         var sum = notCompile + failTest + sosie;
         if (sum == 0)
             return;
@@ -162,11 +163,7 @@ function VisuZoomClass(JSONObject) {
         lineGT.attr({class: "sosie"});
         this.group.add(lineGT);
 
-        var handler = function() {
-                $('#myModalTitle').text("position: "+position);
-                $('#myModalBody').text("notCompile: "+ notCompile + ", failTest: "+failTest+ ", sosie: "+sosie);
-                $('#myModal').modal('show');
-            };
+        var handler = this.getHandlerDetail(id);
 
         lineNC.click(handler);
         lineFT.click(handler);
@@ -196,7 +193,31 @@ function VisuZoomClass(JSONObject) {
         } );
     }
 
-//    this.getSize = function () {
-//        return  this.JSONObject.size;
-//    }
+    this.getHandlerDetail = function(id) {
+        var handler = function() {
+            $.getJSON(dataDir+'/visu_'+id+'.json', function (data) {
+                $('#myModalTitle').empty();
+                $('#myModalTitle').append(data.package+'.'+data.class+':'+data.position+"<br> notCompile: "+ data.notCompile + ", failTest: "+data.failTest+ ", sosie: "+data.sosie);
+                $('#myList li').remove();
+                var transformation = data.transformation;
+                console.log(transformation);
+                for(var i = 0; i < transformation.length; i++) {
+                    $('#myList').append('<li class="list-group-item">type: '+transformation[i].type+', name: '+transformation[i].name+', status: '+transformation[i].status+
+                        '<pre class="prettyprint lang-java">'+transformation[i].string+'</pre></li>');
+                }
+
+                $('#myModal').modal('show');
+
+                (function(jQuery){
+                    jQuery( document ).ready( function() {
+                        prettyPrint();
+                    } );
+
+                }(jQuery))
+            });
+
+        };
+        return handler;
+    }
+
 }

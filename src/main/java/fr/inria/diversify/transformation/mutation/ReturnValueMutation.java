@@ -28,7 +28,7 @@ import java.io.IOException;
  * Time: 17:29
  */
 public class ReturnValueMutation extends AbstractTransformation {
-    protected CtReturn ret;
+    protected CtReturn<?> ret;
 
 
     public  ReturnValueMutation() {
@@ -151,5 +151,10 @@ public class ReturnValueMutation extends AbstractTransformation {
     public  int hashCode() {
         return super.hashCode() * ret.getPosition().hashCode() *
                 line();
+    }
+
+    @Override
+    public String getTransformationString() throws Exception {
+        return getTransformationString(ret);
     }
 }

@@ -3,12 +3,18 @@ package fr.inria.diversify.transformation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import spoon.compiler.Environment;
+import spoon.reflect.code.CtBlock;
+import spoon.reflect.cu.CompilationUnit;
+import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtConstructor;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtExecutable;
+import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -104,5 +110,52 @@ public abstract class AbstractTransformation implements Transformation {
             return otherParent.equals(parent);
 
         return true;
+    }
+
+
+    protected String getTransformationString(CtElement transplantPoint) throws Exception {
+        CtElement parentMethod = getParentMethod(transplantPoint);
+        SourcePosition sp = parentMethod.getPosition();
+        CompilationUnit compileUnit = sp.getCompilationUnit();
+        Environment env = compileUnit.getFactory().getEnvironment();
+        addSourceCode();
+
+        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
+        printer.calculate(compileUnit,null);
+        String[] code = printer.getResult().split("\n");
+        removeSourceCode();
+
+        int begin = sp.getLine() - 1;
+        int end = getLineEnd(parentMethod) + code.length - printer.getResult().split("\n").length;
+
+        return Arrays.stream(code, begin, end)
+                .collect(Collectors.joining("\n"));
+    }
+
+    protected CtElement getParentMethod(CtElement son) {
+        CtElement parent = son.getParent();
+
+        while(parent != null && !(parent instanceof CtExecutable) ) {
+            parent = parent.getParent();
+        }
+        if(parent == null)
+            return son.getParent();
+        else
+            return parent;
+    }
+
+    protected int getLineEnd(CtElement exe) {
+        if(exe instanceof CtExecutable && ((CtExecutable)exe).getBody() != null) {
+            CtBlock body = ((CtExecutable) exe).getBody();
+            int bodyEnd = body.getPosition().getEndLine();
+            int stmtEnd = body.getLastStatement().getPosition().getEndLine();
+            if(bodyEnd < stmtEnd)
+                return stmtEnd+1;
+            else
+                return bodyEnd;
+        }
+        else {
+            return exe.getPosition().getEndLine()+1;
+        }
     }
 }

@@ -48,3 +48,10 @@ text.class {
 text.package {
     font: 14px sans-serif;
 }
+
+.modal.modal-wide .modal-dialog {
+    width: 80%;
+}
+.modal-wide .modal-body {
+    overflow-y: auto;
+}

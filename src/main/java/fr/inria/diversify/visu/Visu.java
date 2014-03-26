@@ -222,13 +222,12 @@ public class Visu {
         detail.put("name",transformation.getName());
         detail.put("type",transformation.getType());
         detail.put("status", transformation.getStatus());
-        if(transformation.getStatus() != -2) {
-            try {
-                detail.put("string",transformation.getTransformationString());
-           } catch (Exception e) {
+
+        try {
+            detail.put("string",transformation.getTransformationString());
+            } catch (Exception e) {
                 Log.debug("");
-            }
-    }
+        }
 
         return detail;
     }

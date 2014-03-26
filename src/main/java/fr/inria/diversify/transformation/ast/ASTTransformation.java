@@ -130,62 +130,10 @@ public abstract class ASTTransformation extends AbstractTransformation {
         name = type;
     }
 
-//    public String getParentBeforeTransformation() {
-//        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
-//        CompilationUnit compileUnit = sp.getCompilationUnit();
-//
-//        Environment env = compileUnit.getFactory().getEnvironment();
-//
-////        int begin = compileUnit.beginOfLineIndex(sp.getSourceEnd()) - 3;
-////        int end = compileUnit.nextLineIndex(sp.getSourceEnd()) + 3;
-//        int begin = sp.getLine();
-//        int end = sp.getEndLine()+1;
-//        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
-//        printer.calculate(compileUnit,null);
-//        return Arrays.stream(printer.getResult().split("\n"), begin, end)
-//                .collect(Collectors.joining("\n"));
-//    }
-
     @Override
     public String getTransformationString() throws Exception {
-        CtElement parentMethod = getParentMethod(transplantationPoint.getCtCodeFragment());
-        SourcePosition sp = parentMethod.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-        Environment env = compileUnit.getFactory().getEnvironment();
-        addSourceCode();
-
-        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
-        printer.calculate(compileUnit,null);
-        String[] code = printer.getResult().split("\n");
-        removeSourceCode();
-
-        int begin = sp.getLine() - 1;
-        int end = getLineEnd(parentMethod) + code.length - printer.getResult().split("\n").length;
-
-
-        return Arrays.stream(code, begin, end)
-                .collect(Collectors.joining("\n"));
+        return getTransformationString(transplantationPoint.getCtCodeFragment());
     }
-
-    protected CtElement getParentMethod(CtElement son) {
-       CtElement parent = son.getParent();
-
-       while(parent != null && !(parent instanceof CtExecutable)) {
-           parent = parent.getParent();
-       }
-        if(parent == null)
-            return son.getParent();
-        else
-            return parent;
-    }
-
-    protected int getLineEnd(CtElement exe) {
-        if(exe instanceof CtExecutable)
-            return ((CtExecutable)exe).getBody().getPosition().getEndLine();
-        else
-            return exe.getPosition().getEndLine()+1;
-    }
-
 }
 
 

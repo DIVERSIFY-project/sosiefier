@@ -8,10 +8,10 @@ var stroke_Width = 3;
 var maxNumberOfClassPerLine = 4;
 var maxNumberOfPackagePerLine = 3;
 var jsonData;
-
+var dataDir ='data/commons-lang_visu';
 var steroid = true, reaction = true, wittgenstein = true, random = true;
 
-$.getJSON("data/clojure_visu.json", function (data) {
+$.getJSON(dataDir+'/visu.json', function (data) {
     jsonData = data;
     var visu = new Visu(data);
     visu.draw();
@@ -139,7 +139,6 @@ function Visu(JSONObject) {
     }
 
     this.resizeDiv = function(height,width) {
-        console.log($("#svg"))
         $("#svg").width(width);
         $("#svg").height(height);
     }

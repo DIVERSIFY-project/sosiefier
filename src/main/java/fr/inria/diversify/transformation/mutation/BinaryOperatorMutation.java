@@ -137,4 +137,9 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     public void setOperator(CtBinaryOperator<?> operator) {
         this.operator = operator;
     }
+
+    @Override
+    public String getTransformationString() throws Exception {
+        return getTransformationString(operator);
+    }
 }

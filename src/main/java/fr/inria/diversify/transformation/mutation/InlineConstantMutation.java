@@ -27,7 +27,7 @@ import java.io.IOException;
  * Time: 17:30
  */
 public class InlineConstantMutation extends AbstractTransformation {
-    private CtLocalVariable inlineConstant;
+    private CtLocalVariable<?> inlineConstant;
 
     public void setInlineConstant(CtLocalVariable inlineConstant) {
         this.inlineConstant = inlineConstant;
@@ -150,5 +150,10 @@ public class InlineConstantMutation extends AbstractTransformation {
     public  int hashCode() {
         return super.hashCode() * inlineConstant.getPosition().hashCode() *
                 line();
+    }
+
+    @Override
+    public String getTransformationString() throws Exception {
+        return getTransformationString(inlineConstant);
     }
 }
