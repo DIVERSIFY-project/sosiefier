@@ -8,8 +8,8 @@ var stroke_Width = 3;
 var maxNumberOfClassPerLine = 4;
 var maxNumberOfPackagePerLine = 3;
 var jsonData;
-var dataDir ='data/commons-lang_visu';
-var steroid = true, reaction = true, wittgenstein = true, random = true, mutation = true;
+var dataDir ='data/dagger_visu';
+var steroid = true, reaction = true, wittgenstein = true, random = true, mutation = true,  cvl = true;
 
 $.getJSON(dataDir+'/visu.json', function (data) {
     jsonData = data;

@@ -240,8 +240,7 @@ public class DiversifyMain {
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
 
-        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
-        matrix.printMatrix(fileName+"_matrix.csv");
+
 
 //        Log.info("nb stmt transformable {}",test());
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
@@ -258,10 +257,11 @@ public class DiversifyMain {
         for(String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
-
-
         Visu v = new Visu(fileName+"_visu/visu");
         v.writeJSON(transformations);
+
+        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
+        matrix.printMatrix(fileName+"_matrix.csv");
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {

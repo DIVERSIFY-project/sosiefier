@@ -128,7 +128,8 @@ function VisuZoomClass(JSONObject) {
                     || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
                     || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
                     || (steroid  & (name == "delete" || name == "add" || name == "replace"))
-                    || (mutation  & trans.type == "mutation")) {
+                    || (mutation  & trans.type == "mutation")
+                    || (cvl  & trans.type == "cvl")) {
                     notCompile += trans.notCompile;
                     failTest += trans.failTest;
                     sosie += trans.sosie;
@@ -219,7 +220,8 @@ function VisuZoomClass(JSONObject) {
                         || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
                         || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
                         || (steroid  & (name == "delete" || name == "add" || name == "replace"))
-                        || (mutation  & trans.type == "mutation")) {
+                        || (mutation  & trans.type == "mutation")
+                        || (cvl  & trans.type == "cvl")) {
                         $('#myList').append('<li class="list-group-item">type: '+transformation[i].type+', name: '+transformation[i].name+', status: '+transformation[i].status+
                             '<pre class="prettyprint lang-java">'+transformation[i].string+'</pre></li>');
                     }
