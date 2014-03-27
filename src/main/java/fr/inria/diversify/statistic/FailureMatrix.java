@@ -34,8 +34,9 @@ public class FailureMatrix {
                 StringBuilder sb = new StringBuilder();
                 List<String> failures = transformation.getFailures();
                 for(String test: allTest) {
-                   if(failures.contains(test))
+                   if(failures.contains(test)){
                        sb.append(";1");
+                   }
                    else
                        sb.append(";0");
                 }

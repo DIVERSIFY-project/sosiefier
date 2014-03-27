@@ -1,4 +1,5 @@
 #!/bin/sh
+sleep 20
 cd /root/diversify-statements
 git pull
 mvn clean package

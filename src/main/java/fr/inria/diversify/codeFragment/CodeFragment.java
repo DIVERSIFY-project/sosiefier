@@ -172,7 +172,7 @@ public abstract class CodeFragment {
     }
 
     public CtSimpleType<?> getSourceClass() {
-        return codeFragment.getParent(CtSimpleType.class);
+        return getCompilationUnit().getMainType();
     }
 
     public int getStartLine() {

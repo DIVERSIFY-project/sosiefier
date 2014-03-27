@@ -101,7 +101,26 @@ public abstract class AbstractTransformation implements Transformation {
         removeSourceCode();
     }
 
-    public void applyWithParent(String srcDir) throws Exception { throw new Exception("not implemented");};
+    public void restore(String srcDir) throws Exception {
+        if(parent != null) {
+            parent.removeSourceCode();
+            parent.printJavaFile(srcDir);
+        }
+        removeSourceCode();
+        printJavaFile(srcDir);
+    }
+
+    public void applyWithParent(String srcDir) throws Exception {
+        addSourceCode();
+        printJavaFile(srcDir);
+
+        if(parent != null) {
+            parent.addSourceCode();
+            parent.printJavaFile(srcDir);
+            parent.removeSourceCode();
+        }
+        removeSourceCode();
+    }
 
     protected boolean equalParent(Transformation otherParent) {
         if(parent != null)

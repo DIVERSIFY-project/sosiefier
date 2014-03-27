@@ -134,6 +134,7 @@ public class TransformationParser {
 
     protected Transformation parseTransformation(JSONObject jsonObject)  {
         try {
+
         String type = jsonObject.getString("type");
         Transformation trans = null;
 
@@ -154,6 +155,7 @@ public class TransformationParser {
 
         return trans;
         }catch (Exception e) {
+            countError++;
 //            Log.warn("error during the parsing of "+jsonObject,e);
             return null;
         }
@@ -279,6 +281,7 @@ public class TransformationParser {
             trans = parseASTDelete(jsonObject);
 
         trans.setName(jsonObject.getString("name"));
+        String p = jsonObject.getJSONObject("transplantationPoint").getString("position");
         trans.setTransplantationPoint(findCodeFragment(jsonObject.getJSONObject("transplantationPoint")));
         return trans;
     }
@@ -415,15 +418,34 @@ public class TransformationParser {
 
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws Exception {
         CodeFragment cf = null;
+        String position = jsonObject.getString("position");
         for (CodeFragment codeFragment : DiversifyEnvironment.getCodeFragments()) {
             try {
-                if (codeFragment.positionString().equals(jsonObject.get("position"))  ){
+
+                if (codeFragment.positionString().equals(position)  ){
                     cf = codeFragment;
                     break;
                 }
             } catch (Exception e) {}
         }
         if (cf  == null) {
+            int count = 0;
+            for (CodeFragment codeFragment : DiversifyEnvironment.getCodeFragments()) {
+                try {
+                    position = position.split(":")[0];
+                    if(codeFragment.positionString().startsWith(position)) {
+                        count++;
+                        String sourceCode = jsonObject.getString("sourceCode");
+                        String cfSourceCode = codeFragment.equalString();
+                        if(sourceCode.equals(cfSourceCode)) {
+                        cf = codeFragment;
+                        break;
+                    }
+                    }
+                } catch (Exception e) {}
+            }
+        }
+        if(cf  == null) {
             throw new Exception();
         }
         return cf;

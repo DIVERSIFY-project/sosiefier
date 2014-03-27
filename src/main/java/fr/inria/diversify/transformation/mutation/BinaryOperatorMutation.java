@@ -43,10 +43,6 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+mutant.toString(), 0));
     }
 
-    public void restore(String srcDir) throws Exception {
-        removeSourceCode();
-        printJavaFile(srcDir);
-    }
 
     public void printJavaFile(String directory) throws IOException {
         CtSimpleType<?> type = operator.getPosition().getCompilationUnit().getMainType();

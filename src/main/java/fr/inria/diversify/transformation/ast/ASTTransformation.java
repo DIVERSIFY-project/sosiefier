@@ -33,27 +33,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     public ASTTransformation() {}
 
-    public void applyWithParent(String srcDir) throws Exception {
-        addSourceCode();
-        printJavaFile(srcDir);
-
-        if(parent != null) {
-            parent.addSourceCode();
-            parent.printJavaFile(srcDir);
-            parent.removeSourceCode();
-        }
-        removeSourceCode();
-    }
-
-    public void restore(String srcDir) throws Exception {
-        if(parent != null) {
-            parent.removeSourceCode();
-            parent.printJavaFile(srcDir);
-        }
-        removeSourceCode();
-        printJavaFile(srcDir);
-    }
-
     public void printJavaFile(String directory) throws IOException {
         CtSimpleType<?> type = getOriginalClass(transplantationPoint);
         Factory factory = type.getFactory();

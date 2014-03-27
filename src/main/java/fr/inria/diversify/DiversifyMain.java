@@ -235,7 +235,13 @@ public class DiversifyMain {
         TransformationParser tf = new TransformationParser(true);
 //        TransformationOldParser tf = new TransformationOldParser(true);
         Collection<Transformation> transformations = tf.parseDir(transDir);
+        long fail = transformations.stream().filter(t -> t.getStatus() == -1).count();
+        long sosie = transformations.stream().filter(t -> t.getStatus() == 0).count();
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
+
+
+        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
+        matrix.printMatrix(fileName+"_matrix.csv");
 
 //        Log.info("nb stmt transformable {}",test());
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
@@ -252,8 +258,7 @@ public class DiversifyMain {
         for(String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
-        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
-        matrix.printMatrix(fileName+"_matrix.csv");
+
 
         Visu v = new Visu(fileName+"_visu/visu");
         v.writeJSON(transformations);

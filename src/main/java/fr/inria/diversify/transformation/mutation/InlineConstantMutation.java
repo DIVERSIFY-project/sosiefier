@@ -69,11 +69,6 @@ public class InlineConstantMutation extends AbstractTransformation {
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
     }
 
-    public void restore(String srcDir) throws Exception {
-        removeSourceCode();
-        printJavaFile(srcDir);
-    }
-
     public void printJavaFile(String directory) throws IOException {
         CtSimpleType<?> type = inlineConstant.getPosition().getCompilationUnit().getMainType();
         Factory factory = type.getFactory();
