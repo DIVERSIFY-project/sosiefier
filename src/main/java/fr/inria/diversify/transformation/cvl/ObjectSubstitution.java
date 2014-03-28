@@ -37,7 +37,7 @@ public class ObjectSubstitution extends CVLTransformation {
         SourcePosition sp = object.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** ", 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** nodeType: "+object.getClass()+"  \n", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
                     transplant.toString(), 0));
 //

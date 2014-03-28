@@ -1,6 +1,7 @@
 package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.Log;
 
 import java.io.*;
 import java.util.*;
@@ -33,9 +34,11 @@ public class FailureMatrix {
             if(transformation.getStatus() == -1) {
                 StringBuilder sb = new StringBuilder();
                 List<String> failures = transformation.getFailures();
+                int count = 0;
                 for(String test: allTest) {
                    if(failures.contains(test)){
                        sb.append(";1");
+                       count++;
                    }
                    else
                        sb.append(";0");
@@ -43,8 +46,12 @@ public class FailureMatrix {
                 String key = sb.toString();
                 if(!map.containsKey(key))
                     map.put(key, 1);
-                else
+                else {
+                    if(transformation.getFailures().size() < count) {
+                        Log.debug("halt");
+                    }
                     map.put(key, map.get(key) + 1);
+                }
             }
         }
         List<String> matrix = new ArrayList<String>(map.size());

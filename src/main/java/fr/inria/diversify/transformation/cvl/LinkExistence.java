@@ -36,7 +36,7 @@ public class LinkExistence extends CVLTransformation {
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
         if (object instanceof CtField) {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** ", 0));
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** nodeType: "+object.getClass()+"  \n", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), " **/\n", 0));
         }
         if(object instanceof CtSimpleType) {

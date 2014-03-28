@@ -113,9 +113,13 @@ public abstract class CVLTransformation extends AbstractTransformation {
 
         CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(object.getFactory().getEnvironment());
         object.accept(pp);
-//        json.put("object", pp.toString());
         json.put("nodeType", stmtType());
 
         return json;
+    }
+
+    @Override
+    public String getTransformationString() throws Exception {
+        return getTransformationString(object);
     }
 }

@@ -34,7 +34,7 @@ public class LinkSubstitution extends CVLTransformation {
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
         if (object instanceof CtField) {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** ", 0));
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** nodeType: "+object.getClass()+"  \n", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), " **/\n"+
                     transplant.toString(), 0));
         }

@@ -37,7 +37,8 @@ function VisuClass(JSONObject) {
                     || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
                     || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
                     || (steroid  & (name == "delete" || name == "add" || name == "replace"))
-                    || (mutation  & trans.type == "mutation")) {
+                    || (mutation  & trans.type == "mutation")
+                    || (cvl  & trans.type == "cvl")) {
                     notCompile += trans.notCompile;
                     failTest += trans.failTest;
                     sosie += trans.sosie;

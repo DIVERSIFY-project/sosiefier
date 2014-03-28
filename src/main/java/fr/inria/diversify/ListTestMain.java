@@ -12,14 +12,25 @@ import spoon.support.QueueProcessingManager;
 import spoon.support.StandardEnvironment;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class ListTestMain {
 
     public static void main(String[] args) throws Exception {
-        new ListTestMain(args[0]);
+//        new ListTestMain(args[0]);
+
+        Set<String> test = fromSurefireReport("../commons-collections/target/surefire-reports");
+
+        BufferedWriter out = new BufferedWriter(new FileWriter("allTest"));
+        out.append("nb");
+        for(String t: test) {
+            out.append(t+"\n");
+        }
+        out.close();
     }
 
     public ListTestMain(String propertiesFile) throws Exception {
@@ -69,5 +80,24 @@ public class ListTestMain {
     }
 
 
+    public static Set<String> fromSurefireReport(String dir) throws IOException {
+        Set<String> test = new HashSet<>();
+        File file = new File(dir);
+        for (File f : file.listFiles())
+            if(f.getName().endsWith(".xml")) {
+                BufferedReader br = new BufferedReader(new FileReader(f));
+                String line = br.readLine();
+                while (line != null) {
+                    if ( line.contains("<testcase name=")) {
+                        String testName = line.split("testcase name=\"")[1].split("\"")[0];
+                        String className = line.split("classname=\"")[1].split("time=\"")[0].split("\"")[0];
+                        test.add(className+"#"+testName);
+                        Log.info(className + "#" + testName);
+                    }
+                    line = br.readLine();
+                }
+            }
+        return test;
+    }
 
 }

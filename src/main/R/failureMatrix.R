@@ -61,3 +61,15 @@ meanRank <- function(matrix, test) {
   return(sum(tmp)/length(tmp));  
 }
 
+barplotFailure <- function(data,name) {
+  array <- array();
+  length <- length(data);
+  uF <- length(uniqueFailure(data));
+  nR <- length(neverRed(data));  
+  array[1] <- uF/length;
+  array[2] <- (length - uF - nR)/length;
+  array[3] <- nR/length;
+  dat
+  return(data.frame(name=c(name), u=c(array[1]),all=c(array[2]), nr=c(array[3])) );
+}
+

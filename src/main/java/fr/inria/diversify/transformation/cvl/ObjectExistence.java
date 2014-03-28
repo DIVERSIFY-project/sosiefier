@@ -24,33 +24,38 @@ public class ObjectExistence extends CVLTransformation {
         name = "objectExistence";
     }
 
-    @Override
     public void apply(String srcDir) throws Exception {
-        Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object ({}):\n {}", object.getClass().getSimpleName(), object);
-        Log.debug("\npositiom:{}", object.getPosition());
+
         if(object instanceof CtPackage)
             applyToPackage(srcDir);
         else if(object instanceof CtSimpleType)
             applyToClass(srcDir, object);
-        else {
+        else
+            addSourceCode();
 
-            SourcePosition sp = object.getPosition();
-            CompilationUnit compileUnit = sp.getCompilationUnit();
+        printJavaFile(srcDir);
+        removeSourceCode();
+    }
 
-            if(object instanceof CtStatement && !(object instanceof CtExpression))  {
-                compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
-                compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
-            }
-            else {
-                int[] index = findIndex();
-                compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[0], "/**", 0));
-                compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[1] + 1, "**/", 0));
+    @Override
+    public void addSourceCode() throws Exception {
+        Log.debug("transformation: {}, {}", type, name);
+        Log.debug("object ({}):\n {}", object.getClass().getSimpleName(), object);
+        Log.debug("\npositiom:{}", object.getPosition());
 
-            }
-            printJavaFile(srcDir);
-            removeSourceCode(object);
+        SourcePosition sp = object.getPosition();
+        CompilationUnit compileUnit = sp.getCompilationUnit();
+
+        if(object instanceof CtStatement && !(object instanceof CtExpression))  {
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** nodeType: "+object.getClass()+"  \n", 0));
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
         }
+        else {
+            int[] index = findIndex();
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[0], "/**", 0));
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index[1] + 1, "**/", 0));
+        }
+
     }
 
     protected int[] findIndex() throws IOException {
@@ -153,11 +158,6 @@ public class ObjectExistence extends CVLTransformation {
             removeSourceCode(object);
             printJavaFile(srcDir);
         }
-    }
-
-    @Override
-    public void addSourceCode() throws Exception {
-
     }
 
     protected void restorePackage(String srcDir) throws IOException {

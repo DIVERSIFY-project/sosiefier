@@ -41,7 +41,7 @@ public class Visu {
         Map<String, Set<Transformation>> map = new HashMap<String, Set<Transformation>>();
 
         for(Transformation trans : transformations) {
-            String className = trans.classLocationName();
+            String className = trans.classLocationName().split("\\$")[0];
             if(!map.containsKey(className))
                 map.put(className, new HashSet<Transformation>());
             map.get(className).add(trans);
@@ -119,6 +119,7 @@ public class Visu {
     }
 
     protected CtSimpleType getClass(String packageName, String className) {
+
         for(CtElement elem : DiversifyEnvironment.getAllElement(CtSimpleType.class)) {
             CtSimpleType cl = (CtSimpleType) elem;
             try {
