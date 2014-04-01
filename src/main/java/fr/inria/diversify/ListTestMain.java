@@ -23,7 +23,7 @@ public class ListTestMain {
     public static void main(String[] args) throws Exception {
 //        new ListTestMain(args[0]);
 
-        Set<String> test = fromSurefireReport("../commons-collections/target/surefire-reports");
+        Set<String> test = fromSurefireReport("../commons-math/target/surefire-reports");
 
         BufferedWriter out = new BufferedWriter(new FileWriter("allTest"));
         out.append("nb");
@@ -88,9 +88,9 @@ public class ListTestMain {
                 BufferedReader br = new BufferedReader(new FileReader(f));
                 String line = br.readLine();
                 while (line != null) {
-                    if ( line.contains("<testcase name=")) {
-                        String testName = line.split("testcase name=\"")[1].split("\"")[0];
-                        String className = line.split("classname=\"")[1].split("time=\"")[0].split("\"")[0];
+                    if ( line.contains("<testcase classname=")) {
+                        String className = line.split("testcase classname=\"")[1].split("\"")[0];
+                        String testName = line.split(" name=\"")[1].split("time=\"")[0].split("\"")[0].split("\\[")[0];
                         test.add(className+"#"+testName);
                         Log.info(className + "#" + testName);
                     }

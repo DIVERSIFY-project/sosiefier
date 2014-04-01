@@ -26,7 +26,7 @@ public class Visu {
         file.mkdirs();
     }
 
-    Map<String, Set<Transformation>> mapByPackage(Collection<Transformation> transformations) {
+    protected Map<String, Set<Transformation>> mapByPackage(Collection<Transformation> transformations) {
         Map<String, Set<Transformation>> map = new HashMap<String, Set<Transformation>>();
 
         for(Transformation trans : transformations) {
@@ -37,7 +37,8 @@ public class Visu {
         }
         return map;
     }
-    Map<String, Set<Transformation>> mapByPClass(Collection<Transformation> transformations) {
+
+    protected Map<String, Set<Transformation>> mapByPClass(Collection<Transformation> transformations) {
         Map<String, Set<Transformation>> map = new HashMap<String, Set<Transformation>>();
 
         for(Transformation trans : transformations) {
@@ -50,7 +51,6 @@ public class Visu {
     }
 
     public void writeJSON(Collection<Transformation> transformations) throws Exception {
-
         JSONArray array = new JSONArray();
 
         Map<String, Set<Transformation>> packages = mapByPackage(transformations);

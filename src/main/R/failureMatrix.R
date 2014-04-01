@@ -39,7 +39,7 @@ rank <- function(data, test) {
   colnames <- colnames(matrix);
   for(i in 1:length(data[,1])) {
     if(sum(matrix[i,]) == 1 & matrix[i,test] == 1) {
-      return(i);
+      return(i);sum ()
     }
   }
   return(-1);  
@@ -69,7 +69,9 @@ barplotFailure <- function(data,name) {
   array[1] <- uF/length;
   array[2] <- (length - uF - nR)/length;
   array[3] <- nR/length;
-  dat
+
   return(data.frame(name=c(name), u=c(array[1]),all=c(array[2]), nr=c(array[3])) );
 }
-
+#frame <- rbind(tmp,tmp2,tmp3)
+#t <- t(as.matrix(frame[,2:4]))
+#barplot(t, col=c("darkblue","darkgreen","red"), names.arg = frame$name)
