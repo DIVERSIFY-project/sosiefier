@@ -175,7 +175,7 @@ public class TransformationParser {
             trans = parseObjectSubstitution(jsonObject);
 
 
-        trans.setObject(getObject(jsonObject.getString("objectPosition"), jsonObject.getString("nodeType")));
+        trans.setTransformationPoint(getObject(jsonObject.getString("objectPosition"), jsonObject.getString("nodeType")));
         return trans;
     }
 
@@ -329,7 +329,7 @@ public class TransformationParser {
         if (p == null) {
             throw new Exception();
         }
-        trans.setOperator(p);
+        trans.setTransformationPoint(p);
         return trans;
     }
 
@@ -350,7 +350,7 @@ public class TransformationParser {
         if (p == null) {
             throw new Exception();
         }
-        trans.setReturn(p);
+        trans.setTransformationPoint(p);
 
         return trans;
     }
@@ -372,7 +372,7 @@ public class TransformationParser {
         if (p == null) {
             throw new Exception();
         }
-        trans.setInlineConstant(p);
+        trans.setTransformationPoint(p);
 
         return trans;
     }

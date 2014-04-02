@@ -17,7 +17,6 @@ import spoon.reflect.declaration.CtSimpleType;
  * Time: 15:08
  */
 public class ObjectSubstitution extends CVLTransformation {
-    protected CtElement transplant;
 
     public ObjectSubstitution() {
         type= "cvl";
@@ -26,52 +25,35 @@ public class ObjectSubstitution extends CVLTransformation {
 
     @Override
     public void addSourceCode() throws Exception {
-        if(object instanceof CtPackage || object instanceof CtSimpleType)
+        if(transformationPoint instanceof CtPackage || transformationPoint instanceof CtSimpleType)
             throw new Exception();
         Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object ({}):\n {}", object.getClass().getSimpleName(), object);
-        Log.debug("\npositiom:{}", object.getPosition());
+        Log.debug("object ({}):\n {}", transformationPoint.getClass().getSimpleName(), transformationPoint);
+        Log.debug("\npositiom:{}", transformationPoint.getPosition());
         Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object:\n {}", object);
+        Log.debug("object:\n {}", transformationPoint);
         Log.debug("\ntransplant:{}", transplant);
-        SourcePosition sp = object.getPosition();
+        SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** nodeType: "+object.getClass()+"  \n", 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(),  "/** nodeType: "+transformationPoint.getClass()+"  \n", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, " **/\n"+
                     transplant.toString(), 0));
+    }
+
+//    @Override
+//    public JSONObject toJSONObject() throws JSONException {
+//        JSONObject json = super.toJSONObject();
 //
-//        printJavaFile(srcDir);
-//        removeSourceCode(object);
-    }
-
-    @Override
-    public void restore(String srcDir) throws Exception {
-        removeSourceCode(object);
-        printJavaFile(srcDir);
-    }
-
-    public void setTransplant(CtElement e) {
-        transplant = e;
-    }
-
-    public CtElement getTransplant() {
-        return transplant;
-    }
-
-    @Override
-    public JSONObject toJSONObject() throws JSONException {
-        JSONObject json = super.toJSONObject();
-
-        json.put("transplantPosition", transplant.getParent(CtPackage.class).getQualifiedName()
-                + "." + transplant.getParent(CtSimpleType.class).getSimpleName() + ":" + transplant.getPosition().getLine());
-
-        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(transplant.getFactory().getEnvironment());
-        transplant.accept(pp);
-//        json.put("transplant", pp.toString());
-
-        return json;
-    }
+//        json.put("transplantPosition", transplant.getParent(CtPackage.class).getQualifiedName()
+//                + "." + transplant.getParent(CtSimpleType.class).getSimpleName() + ":" + transplant.getPosition().getLine());
+//
+//        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(transplant.getFactory().getEnvironment());
+//        transplant.accept(pp);
+////        json.put("transplant", pp.toString());
+//
+//        return json;
+//    }
 
     public boolean equals(Object other) {
         if(other == null)
@@ -83,7 +65,7 @@ public class ObjectSubstitution extends CVLTransformation {
 
         try {
         return stmtType().equals(o.stmtType())
-                && object.getSignature().equals(o.object.getSignature())
+                && transformationPoint.getSignature().equals(o.transformationPoint.getSignature())
                 && transplant.getSignature().equals(o.transplant.getSignature());
         } catch (Exception e) {}
         return false;

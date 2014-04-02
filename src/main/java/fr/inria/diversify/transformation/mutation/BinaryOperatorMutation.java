@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.mutation;
 
 import fr.inria.diversify.codeFragment.CodeFragmentEqualPrinter;
 import fr.inria.diversify.transformation.AbstractTransformation;
+import fr.inria.diversify.transformation.SpoonTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,42 +27,22 @@ import java.io.IOException;
  * Date: 13/02/14
  * Time: 14:40
  */
-public abstract class BinaryOperatorMutation extends AbstractTransformation {
-    CtBinaryOperator<?> operator;
+public abstract class BinaryOperatorMutation extends SpoonTransformation<CtBinaryOperator, CtElement> {
+
 
 
 
     public void addSourceCode() {
         Log.debug("transformation: {}, {}",type,name);
-        Log.debug("operator:\n {}", operator);
-        Log.debug("--------------------\npostion:\n{}",operator.getPosition());
+        Log.debug("operator:\n {}", transformationPoint);
+        Log.debug("--------------------\npostion:\n{}",transformationPoint.getPosition());
         CtElement mutant = getMutantOperator();
-        SourcePosition sp = operator.getPosition();
+        SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+mutant.toString(), 0));
     }
-
-
-    public void printJavaFile(String directory) throws IOException {
-        CtSimpleType<?> type = operator.getPosition().getCompilationUnit().getMainType();
-        Factory factory = type.getFactory();
-        Environment env = factory.getEnvironment();
-
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new FragmentDrivenJavaPrettyPrinter(env));
-        processor.setFactory(factory);
-
-        processor.createJavaFile(type);
-        Log.debug("copy file: " + directory + " " + type.getQualifiedName());
-    }
-
-    public void removeSourceCode() {
-        CompilationUnit compileUnit = operator.getPosition().getCompilationUnit();
-        if(compileUnit.getSourceCodeFraments() != null)
-            compileUnit.getSourceCodeFraments().clear();
-    }
-
 
     protected abstract CtElement getMutantOperator();
 
@@ -70,28 +51,14 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = super.toJSONObject();
 
-        object.put("position", operator.getParent(CtPackage.class).getQualifiedName()
-                + "." + operator.getParent(CtSimpleType.class).getSimpleName() + ":" + operator.getPosition().getLine());
+//        object.put("position", transformationPoint.getParent(CtPackage.class).getQualifiedName()
+//                + "." + transformationPoint.getParent(CtSimpleType.class).getSimpleName() + ":" + transformationPoint.getPosition().getLine());
 
-        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(operator.getFactory().getEnvironment());
-        operator.accept(pp);
+        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(transformationPoint.getFactory().getEnvironment());
+        transformationPoint.accept(pp);
         object.put("binaryOperator", pp.toString());
 
         return object;
-    }
-
-
-    public String classLocationName() {
-        return operator.getParent(CtSimpleType.class).getQualifiedName();
-    }
-    public String packageLocationName() {
-        return operator.getParent(CtPackage.class).getQualifiedName();
-    }
-    public String methodLocationName() {
-        CtExecutable elem = operator.getParent(CtExecutable.class);
-        if(elem != null)
-            return elem.getSimpleName();
-        return "field";
     }
 
 
@@ -105,10 +72,6 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
         return "BinaryOperator";
     }
 
-    @Override
-    public int line() {
-        return operator.getPosition().getLine();
-    }
 
     public boolean equals(Object other) {
         if(!this.getClass().isAssignableFrom(other.getClass()))
@@ -117,25 +80,8 @@ public abstract class BinaryOperatorMutation extends AbstractTransformation {
 
         return status == otherMutation.status &&
                 failures.equals(otherMutation.failures) &&
-               operator.equals(otherMutation.operator) &&
-               operator.getPosition().equals(otherMutation.operator.getPosition());
+                transformationPoint.equals(otherMutation.transformationPoint) &&
+                transformationPoint.getPosition().equals(otherMutation.transformationPoint.getPosition());
     }
 
-    public  int hashCode() {
-        return super.hashCode() * operator.getPosition().hashCode() *
-                operator.getPosition().getLine();
-    }
-
-    public CtBinaryOperator<?> getOperator() {
-        return operator;
-    }
-
-    public void setOperator(CtBinaryOperator<?> operator) {
-        this.operator = operator;
-    }
-
-    @Override
-    public String getTransformationString() throws Exception {
-        return getTransformationString(operator);
-    }
 }

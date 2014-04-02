@@ -52,7 +52,7 @@ public class CvlQuery extends TransformationQuery {
         List<CtElement> objects = DiversifyEnvironment.getAllElement(CtField.class);
         Random r = new Random();
 
-        ls.setObject(objects.get(r.nextInt(objects.size())));
+        ls.setTransformationPoint(objects.get(r.nextInt(objects.size())));
         ls.setTransplant(objects.get(r.nextInt(objects.size())));
 
         return ls;
@@ -72,7 +72,7 @@ public class CvlQuery extends TransformationQuery {
                 set.add(cl.getSuperclass());
             set.addAll(cl.getSuperInterfaces());
         }
-        ls.setObject(cl);
+        ls.setTransformationPoint(cl);
         ls.setTransplant(objects.get(r.nextInt(objects.size())));
         ls.setClassOrInterfaceSubstitution(set.get(r.nextInt(set.size())));
 
@@ -93,7 +93,7 @@ public class CvlQuery extends TransformationQuery {
         List<CtElement> objects = DiversifyEnvironment.getAllElement(CtField.class);
         Random r = new Random();
 
-        ls.setObject(objects.get(r.nextInt(objects.size())));
+        ls.setTransformationPoint(objects.get(r.nextInt(objects.size())));
 
         return ls;
     }
@@ -112,7 +112,7 @@ public class CvlQuery extends TransformationQuery {
                 set.add(cl.getSuperclass());
             set.addAll(cl.getSuperInterfaces());
         }
-        ls.setObject(cl);
+        ls.setTransformationPoint(cl);
         ls.setClassOrInterfaceExistance(set.get(r.nextInt(set.size())));
 
         return ls;
@@ -123,9 +123,9 @@ public class CvlQuery extends TransformationQuery {
         Random r = new Random();
 
         List<CtElement> objects = DiversifyEnvironment.getAllElement(CtElement.class);
-        os.setObject(objects.get(r.nextInt(objects.size())));
+        os.setTransformationPoint(objects.get(r.nextInt(objects.size())));
 
-        List<CtElement> transplants = DiversifyEnvironment.getAllElement(os.getObject().getClass());
+        List<CtElement> transplants = DiversifyEnvironment.getAllElement(os.getTransformationPoint().getClass());
         os.setTransplant(transplants.get(r.nextInt(transplants.size())));
 
         return os;
@@ -135,7 +135,7 @@ public class CvlQuery extends TransformationQuery {
         ObjectExistence oe = new  ObjectExistence();
         Random r = new Random();
         List<CtElement> objects = DiversifyEnvironment.getAllElement(CtElement.class);
-        oe.setObject(objects.get(r.nextInt(objects.size())));
+        oe.setTransformationPoint(objects.get(r.nextInt(objects.size())));
         return oe;
     }
 

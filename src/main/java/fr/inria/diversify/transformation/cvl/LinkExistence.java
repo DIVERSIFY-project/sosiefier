@@ -29,19 +29,19 @@ public class LinkExistence extends CVLTransformation {
     @Override
     public void addSourceCode() throws Exception {
         Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object ({}):\n {}", object.getClass().getSimpleName(), object);
-        Log.debug("\npositiom:{}", object.getPosition());
+        Log.debug("object ({}):\n {}", classLocationName());
+        Log.debug("\npositiom:{}", transformationPoint.getPosition());
 
-        SourcePosition sp = object.getPosition();
+        SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
-        if (object instanceof CtField) {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** nodeType: "+object.getClass()+"  \n", 0));
+        if (transformationPoint instanceof CtField) {
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()),  "/** nodeType: "+transformationPoint.getClass()+"  \n", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), " **/\n", 0));
         }
-        if(object instanceof CtSimpleType) {
-            Factory factory = object.getFactory();
-            CtClass classClone = factory.Core().clone((CtClass) object);
+        if(transformationPoint instanceof CtSimpleType) {
+            Factory factory = transformationPoint.getFactory();
+            CtClass classClone = factory.Core().clone((CtClass) transformationPoint);
             String ollRefName = classOrInterfaceExistence.getSimpleName();
 
             if(classClone.getSuperclass() != null && classClone.getSuperclass().getSimpleName().equals(ollRefName))
@@ -77,12 +77,6 @@ public class LinkExistence extends CVLTransformation {
         return tmp.contains("package ") || tmp.contains("import ");
     }
 
-    @Override
-    public void restore(String srcDir) throws Exception {
-        removeSourceCode(object);
-        printJavaFile(srcDir);
-    }
-
     public void setClassOrInterfaceExistance(CtTypeReference classOrInterfaceExistence) {
         this.classOrInterfaceExistence = classOrInterfaceExistence;
     }
@@ -107,7 +101,7 @@ public class LinkExistence extends CVLTransformation {
 
         try {
         return stmtType().equals(o.stmtType())
-                && object.equals(o.object)
+                && transformationPoint.equals(o.transformationPoint)
                 && ((classOrInterfaceExistence == null && o.classOrInterfaceExistence == null)
                     || classOrInterfaceExistence.equals(o.classOrInterfaceExistence));
         } catch (Exception e) {}

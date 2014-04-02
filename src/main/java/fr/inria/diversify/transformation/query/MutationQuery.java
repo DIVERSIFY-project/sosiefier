@@ -86,7 +86,7 @@ public class MutationQuery extends TransformationQuery {
         while (coverageReport.elementCoverage(operator) == 0 || !negateConditional.contains(operator.getKind())) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
-        mutation.setOperator(operator);
+        mutation.setTransformationPoint(operator);
         return mutation;
     }
 
@@ -99,7 +99,7 @@ public class MutationQuery extends TransformationQuery {
         while (coverageReport.elementCoverage(operator) == 0 || !conditionalBoundary.contains(operator.getKind())) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
-        mutation.setOperator(operator);
+        mutation.setTransformationPoint(operator);
         return mutation;
     }
 
@@ -111,7 +111,7 @@ public class MutationQuery extends TransformationQuery {
         while (coverageReport.elementCoverage(operator) == 0 || !math.contains(operator.getKind())) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
-        mutation.setOperator(operator);
+        mutation.setTransformationPoint(operator);
         return mutation;
     }
 
@@ -123,7 +123,7 @@ public class MutationQuery extends TransformationQuery {
         while (coverageReport.elementCoverage(operator) == 0) {
             operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
-        mutation.setOperator(operator);
+        mutation.setTransformationPoint(operator);
         return mutation;
     }
 
@@ -135,7 +135,7 @@ public class MutationQuery extends TransformationQuery {
         while (coverageReport.elementCoverage(ret) == 0) {
             ret = returns.get(r.nextInt(returns.size()));
         }
-        mutation.setReturn(ret);
+        mutation.setTransformationPoint(ret);
         return mutation;
     }
 
@@ -147,7 +147,7 @@ public class MutationQuery extends TransformationQuery {
         while (coverageReport.elementCoverage(ret) == 0) {
             ret = inlineConstant.get(r.nextInt(inlineConstant.size()));
         }
-        mutation.setInlineConstant(ret);
+        mutation.setTransformationPoint(ret);
         return mutation;
     }
 }

@@ -5,7 +5,6 @@ import spoon.reflect.code.CtLiteral;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
 
 /**
@@ -22,7 +21,7 @@ public class RemoveConditionalMutation extends BinaryOperatorMutation {
 
     @Override
     protected CtLiteral<Boolean> getMutantOperator() {
-        Factory factory = operator.getFactory();
+        Factory factory = transformationPoint.getFactory();
         CtLiteral<Boolean> literal = factory.Core().createLiteral();
         literal.setValue(true);
         return literal;
@@ -31,9 +30,9 @@ public class RemoveConditionalMutation extends BinaryOperatorMutation {
 
     public void addSourceCode() {
         Log.debug(getType());
-        Log.debug("operator:\n {}", operator);
-        Log.debug("--------------------\npostion:\n{}",operator.getPosition());
-        SourcePosition sp = operator.getPosition();
+        Log.debug("operator:\n {}", transformationPoint);
+        Log.debug("--------------------\npostion:\n{}",transformationPoint.getPosition());
+        SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/true", 0));
