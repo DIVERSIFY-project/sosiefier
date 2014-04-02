@@ -30,12 +30,8 @@ import java.io.IOException;
 public abstract class BinaryOperatorMutation extends SpoonTransformation<CtBinaryOperator, CtElement> {
 
 
-
-
     public void addSourceCode() {
-        Log.debug("transformation: {}, {}",type,name);
-        Log.debug("operator:\n {}", transformationPoint);
-        Log.debug("--------------------\npostion:\n{}",transformationPoint.getPosition());
+        logInfo();
         CtElement mutant = getMutantOperator();
         SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
@@ -45,21 +41,6 @@ public abstract class BinaryOperatorMutation extends SpoonTransformation<CtBinar
     }
 
     protected abstract CtElement getMutantOperator();
-
-
-    @Override
-    public JSONObject toJSONObject() throws JSONException {
-        JSONObject object = super.toJSONObject();
-
-//        object.put("position", transformationPoint.getParent(CtPackage.class).getQualifiedName()
-//                + "." + transformationPoint.getParent(CtSimpleType.class).getSimpleName() + ":" + transformationPoint.getPosition().getLine());
-
-        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(transformationPoint.getFactory().getEnvironment());
-        transformationPoint.accept(pp);
-        object.put("binaryOperator", pp.toString());
-
-        return object;
-    }
 
 
     @Override

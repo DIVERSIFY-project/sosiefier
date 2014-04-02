@@ -40,9 +40,7 @@ public class ObjectExistence extends CVLTransformation {
 
     @Override
     public void addSourceCode() throws Exception {
-        Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object ({}):\n {}", transformationPoint.getClass().getSimpleName(), transformationPoint);
-        Log.debug("\npositiom:{}", transformationPoint.getPosition());
+        logInfo();
 
         SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();

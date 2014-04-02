@@ -22,9 +22,7 @@ public class ReturnValueMutation extends SpoonTransformation<CtReturn, CtElement
 
     @Override
     public void addSourceCode() throws Exception {
-        Log.debug("transformation: {}, {}",type,name);
-        Log.debug("return:\n {}", transformationPoint);
-        Log.debug("--------------------\npostion:\n{}", transformationPoint.getPosition());
+        logInfo();
         CtLiteral literal = (CtLiteral)transformationPoint.getReturnedExpression();
         String type = literal.getType().getSimpleName();
         String newLiteral = null;

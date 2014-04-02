@@ -27,12 +27,8 @@ public class ObjectSubstitution extends CVLTransformation {
     public void addSourceCode() throws Exception {
         if(transformationPoint instanceof CtPackage || transformationPoint instanceof CtSimpleType)
             throw new Exception();
-        Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object ({}):\n {}", transformationPoint.getClass().getSimpleName(), transformationPoint);
-        Log.debug("\npositiom:{}", transformationPoint.getPosition());
-        Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object:\n {}", transformationPoint);
-        Log.debug("\ntransplant:{}", transplant);
+
+        logInfo();
         SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
@@ -41,19 +37,6 @@ public class ObjectSubstitution extends CVLTransformation {
                     transplant.toString(), 0));
     }
 
-//    @Override
-//    public JSONObject toJSONObject() throws JSONException {
-//        JSONObject json = super.toJSONObject();
-//
-//        json.put("transplantPosition", transplant.getParent(CtPackage.class).getQualifiedName()
-//                + "." + transplant.getParent(CtSimpleType.class).getSimpleName() + ":" + transplant.getPosition().getLine());
-//
-//        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(transplant.getFactory().getEnvironment());
-//        transplant.accept(pp);
-////        json.put("transplant", pp.toString());
-//
-//        return json;
-//    }
 
     public boolean equals(Object other) {
         if(other == null)

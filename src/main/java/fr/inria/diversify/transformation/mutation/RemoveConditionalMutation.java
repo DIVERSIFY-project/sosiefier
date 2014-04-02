@@ -29,9 +29,7 @@ public class RemoveConditionalMutation extends BinaryOperatorMutation {
 
 
     public void addSourceCode() {
-        Log.debug(getType());
-        Log.debug("operator:\n {}", transformationPoint);
-        Log.debug("--------------------\npostion:\n{}",transformationPoint.getPosition());
+        logInfo();
         SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));

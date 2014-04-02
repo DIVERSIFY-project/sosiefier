@@ -26,9 +26,7 @@ public class LinkSubstitution extends CVLTransformation {
 
     @Override
     public void addSourceCode() throws Exception {
-        Log.debug("transformation: {}, {}", type, name);
-        Log.debug("object ({}):\n {}", transformationPoint.getClass().getSimpleName(), transformationPoint);
-        Log.debug("\npositiom:{}", transformationPoint.getPosition());
+        logInfo();
 
         SourcePosition sp = transformationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
@@ -92,13 +90,6 @@ public class LinkSubstitution extends CVLTransformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject json = super.toJSONObject();
-
-        json.put("transplantPosition", transplant.getParent(CtPackage.class).getQualifiedName()
-                + "." + transplant.getPosition().getCompilationUnit().getMainType().getSimpleName() + ":" + transplant.getPosition().getLine());
-
-        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(transplant.getFactory().getEnvironment());
-        transplant.accept(pp);
-//        json.put("transplant", pp.toString());
 
         if(classOrInterfaceSubstitution != null)
             json.put("classOrInterfaceExistence",classOrInterfaceSubstitution.getPackage()+"."+classOrInterfaceSubstitution.getSimpleName());

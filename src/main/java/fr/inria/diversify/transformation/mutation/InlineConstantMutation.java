@@ -25,9 +25,7 @@ public class InlineConstantMutation extends SpoonTransformation<CtLocalVariable,
 
     @Override
     public void addSourceCode() throws Exception {
-        Log.debug("transformation: {}, {}",type,name);
-        Log.debug("statement:\n {}", transformationPoint);
-        Log.debug("--------------------\npostion:\n{}", transformationPoint.getPosition());
+        logInfo();
         CtLiteral literal = (CtLiteral)transformationPoint.getDefaultExpression();
         String type = literal.getType().getSimpleName();
         String newLiteral = null;
@@ -53,24 +51,6 @@ public class InlineConstantMutation extends SpoonTransformation<CtLocalVariable,
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
     }
-
-
-
-
-    @Override
-    public JSONObject toJSONObject() throws JSONException {
-        JSONObject object = super.toJSONObject();
-
-//        object.put("position", inlineConstant.getParent(CtPackage.class).getQualifiedName()
-//                + "." + inlineConstant.getParent(CtSimpleType.class).getSimpleName() + ":" + inlineConstant.getPosition().getLine());
-
-//        CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(inlineConstant.getFactory().getEnvironment());
-//        inlineConstant.accept(pp);
-//        object.put("inlineConstant", pp.toString());
-
-        return object;
-    }
-
 
 
     @Override

@@ -137,4 +137,14 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
                 transformationPoint.equals(otherTransformation.transformationPoint) &&
                 transformationPoint.getPosition().equals(otherTransformation.transformationPoint.getPosition());
     }
+
+    protected void logInfo() {
+        Log.debug("transformation: {}, {}",type,name);
+        Log.debug("transformationPoint:\n {}", transformationPoint);
+        Log.debug("--------------------\npostion:\n{}", transformationPoint.getPosition());
+        if(transplant != null) {
+            Log.debug("transplant:\n {}", transplant);
+            Log.debug("--------------------\npostion:\n{}", transplant.getPosition());
+        }
+    }
 }
