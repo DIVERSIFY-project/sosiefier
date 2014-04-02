@@ -28,12 +28,12 @@ public class CvlQuery extends TransformationQuery {
     @Override
     public Transformation getTransformation() throws Exception {
         Random r = new Random();
-        int i = r.nextInt(9);
+        int i = r.nextInt(8);
         switch (i) {
             case 0: return getObjectExistence();
             case 1: return getObjectSubstitution();
-            case 3: case 4: return getLinkExistence();
-            case 5: case 6: case 7:case 8: return getLinkSubstitution();
+            case 2: case 3: return getLinkExistence();
+            case 4: case 5: case 6: case 7: return getLinkSubstitution();
         }
         return null;
     }
