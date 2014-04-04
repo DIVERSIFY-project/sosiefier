@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <title>Transformation</title>
+    <link rel="stylesheet" href="css/svg-stylesheet.css" />
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+</head>
+<body>
+<div class="affix affix-top" style="left: 35%">
+    <div class="btn-group">
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                Files
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="files">
+                <!-- dropdown menu links -->
+            </ul>
+        </div>
+        <button type="button" id="random-button" class="btn btn-success">Random</button>
+        <button type="button" id="wittgenstein-button" class="btn btn-success">Wittgenstein</button>
+        <button type="button" id="reaction-button" class="btn btn-success">Reaction</button>
+        <button type="button" id="steroid-button" class="btn btn-success">Steroid</button>
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade modal-wide" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 id="myModalTitle" class="modal-title">Modal title</h4>
+            </div>
+            <div id="myModalBody" class="modal-body">
+                <ul class="list-group" id="myList">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<svg id="svg" style="margin-top: 30px;width: 3000px;height: 5000px"> </svg>
+<script src="lib/jquery-2.1.0.min.js"></script>
+<script src="lib/prettify.js"></script>
+<script src="lib/snap.svg.js"></script>
+<script src="lib/bootstrap.js"></script>
+<script src="js/visuTransformation.js"></script>
+<script src="js/ClassVisu.js"></script>
+<script src="js/PackageVisu.js"></script>
+<script type="text/javascript" src="lib/reconnecting-websocket.min.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var folderDataPath = "/data";
+        var ws_host = "127.0.0.1";
+        var ws_port = "9090";
+        var ws_path = "files";
+        var ws = new WebSocket("ws://" + ws_host + ":" + ws_port + "/" + ws_path);
+
+        ws.onopen = function () {
+            ws.send(JSON.stringify({request: "list", path: folderDataPath}));
+        };
+        ws.onmessage = function (event) {
+            var message = JSON.parse(event.data);
+            if (message.request == "list") {
+                // { request: "list", files: ["toto.json", titi.json]}
+                message.files.forEach(function (file) {
+                    jQuery('#files').append('<li id="' + file + '">' + file + '</li>');
+                    jQuery("#" + file).click(function () {
+                        loadVisu(folderDataPath + "/" +this.id);
+                    })
+                });
+            }
+        };
+    });
+</script>
+
+</body>
+</html>
