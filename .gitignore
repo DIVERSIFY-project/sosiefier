@@ -7,7 +7,7 @@
 /test/
 **/target/
 
-**/resources/data/*/visu*.json
+**/data/*/visu*.json
 
 # Compiled source #
 ###################
