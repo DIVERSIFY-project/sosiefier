@@ -156,6 +156,11 @@ public class DiversifyMain {
             atq = new ASTTransformationQuery(rg,cl, true);
         }
 
+        if(type.equals("shuffle")) {
+
+            atq = new ShuffleStmtQuery(rg);
+        }
+
         if(type.equals("all")) {
             atq = new AllQuery(rg);
         }

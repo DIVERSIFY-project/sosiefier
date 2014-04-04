@@ -15,9 +15,19 @@ import java.util.Set;
 
 
 public class VariableVisitor extends CtScanner {
-	protected Set<CtVariableReference<?>> localVariableReferences = new HashSet<CtVariableReference<?>>();
+    protected boolean withField;
+    protected Set<CtVariableReference<?>> localVariableReferences = new HashSet<CtVariableReference<?>>();
  	protected Set<CtVariableReference<?>> localVariableCreate = new HashSet<CtVariableReference<?>>();
 	protected CtTypeReference<?> refThis;
+
+
+    public VariableVisitor() {
+        this.withField = true;
+    }
+
+    public VariableVisitor(boolean withField) {
+        this.withField = withField;
+    }
 
 	public InputContext input() {
         localVariableReferences.removeAll(localVariableCreate);
@@ -37,23 +47,23 @@ public class VariableVisitor extends CtScanner {
 		super.visitCtVariableAccess(variableAccess);
 	}
 
-	public <T> void visitCtLocalVariableReference(
-			CtLocalVariableReference<T> reference) {
+	public <T> void visitCtLocalVariableReference(CtLocalVariableReference<T> reference) {
 		localVariableReferences.add(reference);
+
 		super.visitCtLocalVariableReference(reference);
 	}
 
     public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
-        if(!(reference.getSimpleName() == "super"))
-//            if(!(reference.isStatic()))
+        if(withField && !(reference.getSimpleName() == "super"))
                 localVariableReferences.add(reference);
+
         super.visitCtFieldReference(reference);
     }
 
 	public <T> void visitCtInvocation(CtInvocation<T> invocation) {
-		if(invocation.getTarget() == null){
+		if(invocation.getTarget() == null)
 			refThis = invocation.getExecutable().getDeclaringType();
-		}
+
 		super.visitCtInvocation(invocation);
 	}
 
@@ -66,4 +76,7 @@ public class VariableVisitor extends CtScanner {
 	}
 
 
+    public Set<CtVariableReference<?>> getLocalVariableReferences() {
+        return localVariableReferences;
+    }
 }

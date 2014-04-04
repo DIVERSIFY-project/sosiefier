@@ -1,7 +1,6 @@
 package fr.inria.diversify.util;
 
 import fr.inria.diversify.CodeFragmentList;
-import fr.inria.diversify.codeFragmentProcessor.BinaryOperatorProcessor;
 import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
@@ -26,6 +25,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -78,18 +79,6 @@ public class DiversifyEnvironment {
         return returns;
     }
 
-    public static List<CtBinaryOperator<?>> getBinaryOperators() {
-        if(binaryOperators == null) {
-            ProcessingManager pm = new QueueProcessingManager(factory);
-            BinaryOperatorProcessor processor = new BinaryOperatorProcessor();
-            pm.addProcessor(processor);
-            pm.process();
-
-            binaryOperators = processor.getBinaryOperators();
-        }
-        return binaryOperators;
-    }
-
     public static List<CtMethod> getJavassistMethods() throws NotFoundException {
         if(javassistMethods == null) {
             javassistMethods = new ArrayList<CtMethod>();
@@ -131,9 +120,14 @@ public class DiversifyEnvironment {
     }
 
     public static List<CtElement> getAllElement(Class cl) {
+      
         if(!typeToObject.containsKey(cl)) {
             QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
             DiversifyEnvironment.getRoot().accept(query);
+            query.getResult().parallelStream()
+                    .map(e -> cl.cast(e))
+                    .collect(Collectors.toList());
+                    
             typeToObject.put(cl, query.getResult());
         }
         return typeToObject.get(cl);

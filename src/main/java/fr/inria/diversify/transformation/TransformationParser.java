@@ -316,12 +316,12 @@ public class TransformationParser {
             trans = new RemoveConditionalMutation();
 
         CtBinaryOperator<?> p = null;
-        for (CtBinaryOperator<?> ret : DiversifyEnvironment.getBinaryOperators()) {
+        for (CtElement ret : DiversifyEnvironment.getAllElement(CtBinaryOperator.class)) {
             try {
                 String position = ret.getParent(CtPackage.class).getQualifiedName()
                         + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
                 if (position.equals(jsonObject.get("position"))  ){
-                    p = ret;
+                    p = (CtBinaryOperator)ret;
                     break;
                 }
             } catch (Exception e) {}
