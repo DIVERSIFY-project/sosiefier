@@ -11,7 +11,7 @@ include mvn:org.kevoree.komponents:ws-java-websocket:latest
 include mvn:fr.irisa.diversify:sosies-viewer:latest
 
 add node0 : JavaNode
-set node0.log = "debug"
+set node0.log = "warn"
 network node0.ip.lo 127.0.0.1
 
 add node0.webserver : NettyHTTPServer
@@ -23,10 +23,18 @@ set node0.favicon.favicon = "favicon.png"
 
 add node0.page : StaticFileHandler
 //set node0.page1.path = "/home/jed/clone/tempgauge"
-set node0.page.urlPattern = "/"
+set node0.page.urlPattern = "/(?!(data))"
 set node0.page.patternToRemove = "/"
 set node0.page.contained = "false"
 set node0.page.useCache = "false"
+
+add node0.data : StaticFileHandler
+//set node0.page1.path = "/home/jed/clone/tempgauge"
+set node0.data.urlPattern = "/data"
+set node0.data.patternToRemove = "/data"
+set node0.data.contained = "false"
+set node0.data.useCache = "false"
+
 
 add request : AsyncBroadcast
 add response : AsyncBroadcast
@@ -36,6 +44,9 @@ bind node0.webserver.response response
 
 bind node0.page.request request
 bind node0.page.content response
+
+bind node0.data.request request
+bind node0.data.content response
 
 bind node0.favicon.request request
 bind node0.favicon.content response
@@ -68,5 +79,6 @@ bind node0.wsPage.send send
 bind node0.wsPage.broadcast broadcast
 
 
-set node0.page.path = "/home/edaubert/workspace/diversify-project/sosies-viewer/src/main/resources"
-set node0.wsPage.rootFolder = "/home/edaubert/workspace/diversify-project/sosies-viewer/src/main/resources"
+set node0.page.path = "/home/edaubert/workspace/diversify-project/sosies-generator/sosies-viewer/src/main/resources"
+set node0.data.path = "/home/edaubert/workspace/diversify-project/sosies-generator/sosies-viewer/data"
+set node0.wsPage.rootFolder = "/home/edaubert/workspace/diversify-project/sosies-generator/sosies-viewer"

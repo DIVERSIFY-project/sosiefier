@@ -16,6 +16,7 @@ import org.json.JSONStringer;
 import org.kevoree.annotation.ComponentType;
 import org.kevoree.annotation.Param;
 import org.kevoree.library.javase.ws.api.AbstractWebSocketHandler;
+import org.kevoree.log.Log;
 
 import java.io.File;
 
@@ -35,7 +36,7 @@ public class FileListWebSocketHandler extends AbstractWebSocketHandler {
         try {
             JSONObject jsonReader = new JSONObject(message);
             if ("list".equalsIgnoreCase(jsonReader.get("request").toString())) {
-                String path = jsonReader.get("path").toString();
+                String path = jsonReader.get("path").toString().replace("/", File.separator);
                 send(id, new JSONStringer().object().key("request").value("list").key("files").value(new JSONArray(listFiles(path))).endObject().toString());
             }
         } catch (JSONException e) {
@@ -44,7 +45,13 @@ public class FileListWebSocketHandler extends AbstractWebSocketHandler {
     }
 
     public String[] listFiles(String path) {
-        return new File(rootFolder + File.separator + path).list();
+        File f = new File(rootFolder + File.separator + path);
+        if (f.exists()) {
+            return new File(rootFolder + File.separator + path).list();
+        } else {
+            Log.error("Unable to find {}", f.getAbsolutePath());
+            return new String[0];
+        }
     }
 
     @Override
