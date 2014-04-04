@@ -33,6 +33,14 @@
             <url>http://spoon.gforge.inria.fr/repositories/snapshots/</url>
             <snapshots />
         </repository>
+        <repository>
+            <id>reacloud-release</id>
+            <url>http://maven.reacloud.com/repository/reacloud/release</url>
+        </repository>
+        <repository>
+            <id>reacloud-snapshot</id>
+            <url>http://maven.reacloud.com/repository/reacloud/snapshots/</url>
+        </repository>
     </repositories>
 
 
