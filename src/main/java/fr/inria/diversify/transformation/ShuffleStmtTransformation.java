@@ -25,16 +25,6 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
     protected CtBlock newOrder;
 
     @Override
-    public String getLevel() {
-        return null;
-    }
-
-    @Override
-    public String stmtType() {
-        return null;
-    }
-
-    @Override
     public void addSourceCode() throws Exception {
         logInfo();
 

@@ -42,18 +42,6 @@ public abstract class BinaryOperatorMutation extends SpoonTransformation<CtBinar
 
     protected abstract CtElement getMutantOperator();
 
-
-    @Override
-    public String getLevel() {
-        return "AST";
-    }
-
-    @Override
-    public String stmtType() {
-        return "BinaryOperator";
-    }
-
-
     public boolean equals(Object other) {
         if(!this.getClass().isAssignableFrom(other.getClass()))
             return  false;

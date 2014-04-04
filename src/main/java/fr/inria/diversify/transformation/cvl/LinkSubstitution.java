@@ -17,7 +17,6 @@ import spoon.reflect.reference.CtTypeReference;
  * Time: 15:09
  */
 public class LinkSubstitution extends CVLTransformation {
-    protected CtElement transplant;
     protected CtTypeReference classOrInterfaceSubstitution;
     public LinkSubstitution() {
         type= "cvl";

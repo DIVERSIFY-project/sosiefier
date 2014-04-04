@@ -52,17 +52,6 @@ public class InlineConstantMutation extends SpoonTransformation<CtLocalVariable,
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
     }
 
-
-    @Override
-    public String getLevel() {
-        return "AST";
-    }
-
-    @Override
-    public String stmtType() {
-        return "LocalVariable";
-    }
-
     public boolean equals(Object other) {
         if(!this.getClass().isAssignableFrom(other.getClass()))
             return  false;

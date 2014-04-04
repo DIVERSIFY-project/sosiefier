@@ -104,6 +104,7 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
     public JSONObject toJSONObject() throws JSONException {
         JSONObject json = super.toJSONObject();
 
+        json.put("nodeType", stmtType());
         json.put("transformationPoint", getCtElementJSonString(transformationPoint));
 
         if(transplant != null)
@@ -136,6 +137,17 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
                 failures.equals(otherTransformation.failures) &&
                 transformationPoint.equals(otherTransformation.transformationPoint) &&
                 transformationPoint.getPosition().equals(otherTransformation.transformationPoint.getPosition());
+    }
+
+    @Override
+    public String stmtType() {
+        return transformationPoint.getClass().getSimpleName();
+    }
+
+
+    @Override
+    public String getLevel() {
+        return "ast";
     }
 
     protected void logInfo() {

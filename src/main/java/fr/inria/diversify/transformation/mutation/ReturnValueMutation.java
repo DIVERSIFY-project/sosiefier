@@ -49,14 +49,4 @@ public class ReturnValueMutation extends SpoonTransformation<CtReturn, CtElement
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
     }
 
-
-    @Override
-    public String getLevel() {
-        return "AST";
-    }
-
-    @Override
-    public String stmtType() {
-        return "Return";
-    }
 }
