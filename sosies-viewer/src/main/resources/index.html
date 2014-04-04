@@ -80,10 +80,12 @@
             if (message.request == "list") {
                 // { request: "list", files: ["toto.json", titi.json]}
                 message.files.forEach(function (file) {
-                    jQuery('#files').append('<li id="' + file + '">' + file + '</li>');
-                    jQuery("#" + file).click(function () {
-                        loadVisu(folderDataPath + "/" +this.id);
-                    })
+                    if(file.indexOf(".") == -1) {
+                        jQuery('#files').append('<li id="' + file + '">' + file + '</li>');
+                        jQuery("#" + file).click(function () {
+                            loadVisu(folderDataPath + "/" + this.id);
+                        })
+                    }
                 });
             }
         };
