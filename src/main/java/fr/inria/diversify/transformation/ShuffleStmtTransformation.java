@@ -12,8 +12,7 @@ import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.visitor.QueryVisitor;
-import spoon.reflect.visitor.filter.TypeFilter;
+
 
 import java.util.*;
 import java.util.stream.Collectors;

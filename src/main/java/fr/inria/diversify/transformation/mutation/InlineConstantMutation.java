@@ -1,9 +1,6 @@
 package fr.inria.diversify.transformation.mutation;
 
 import fr.inria.diversify.transformation.SpoonTransformation;
-import fr.inria.diversify.util.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.cu.CompilationUnit;

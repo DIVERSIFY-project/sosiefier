@@ -7,12 +7,10 @@ import spoon.compiler.Environment;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 

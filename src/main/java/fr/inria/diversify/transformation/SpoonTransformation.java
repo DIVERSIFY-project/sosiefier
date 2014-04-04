@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.codeFragment.CodeFragmentEqualPrinter;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;

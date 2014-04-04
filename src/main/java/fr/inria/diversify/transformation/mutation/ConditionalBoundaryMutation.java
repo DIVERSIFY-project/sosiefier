@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation.mutation;
 
-import fr.inria.diversify.sosie.logger.processor.ConditionalLoggingInstrumenter;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.factory.Factory;

@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation.cvl;
 
-import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.cu.CompilationUnit;

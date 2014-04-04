@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation.mutation;
 
-import fr.inria.diversify.util.Log;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;

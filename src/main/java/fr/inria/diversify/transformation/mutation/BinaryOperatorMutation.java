@@ -1,26 +1,13 @@
 package fr.inria.diversify.transformation.mutation;
 
-import fr.inria.diversify.codeFragment.CodeFragmentEqualPrinter;
-import fr.inria.diversify.transformation.AbstractTransformation;
+
 import fr.inria.diversify.transformation.SpoonTransformation;
-import fr.inria.diversify.util.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
-import spoon.compiler.Environment;
+
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
-import spoon.reflect.factory.Factory;
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
-import spoon.support.JavaOutputProcessor;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * User: Simon

@@ -6,22 +6,14 @@ import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtField;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * User: Simon

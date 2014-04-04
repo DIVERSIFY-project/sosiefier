@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.mutation;
 
 import fr.inria.diversify.transformation.SpoonTransformation;
-import fr.inria.diversify.util.Log;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.cu.CompilationUnit;
@@ -48,5 +47,4 @@ public class ReturnValueMutation extends SpoonTransformation<CtReturn, CtElement
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+newLiteral, 0));
     }
-
 }
