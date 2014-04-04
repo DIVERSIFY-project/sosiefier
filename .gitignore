@@ -5,7 +5,9 @@
 /sortResult/
 /mavenProjects/
 /test/
-/target/
+**/target/
+
+**/resources/data/*/visu*.json
 
 # Compiled source #
 ###################
@@ -13,8 +15,8 @@
 
 # intelliJ File #
 #####################
-.idea
-Diversify-statements.iml
+**.idea
+**.iml
 .Rapp.history
 
 # OS generated files #
