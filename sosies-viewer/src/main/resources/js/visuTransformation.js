@@ -14,6 +14,7 @@ var steroid = true, reaction = true, wittgenstein = true, random = true, mutatio
 loadVisu = function (filePath) {
     $.getJSON(filePath + "/visu.json", function (data) {
         jsonData = data;
+        paper.clear();
         var visu = new Visu(data);
         visu.draw();
         dataDir = filePath;

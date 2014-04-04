@@ -1,17 +1,20 @@
 repo "https://repo1.maven.org/maven2"
 repo "https://oss.sonatype.org/content/groups/public/"
+repo "http://maven.reacloud.com/repository/reacloud/release"
+repo "http://maven.reacloud.com/repository/reacloud/snapshots"
 
-include mvn:org.kevoree.library.java:org.kevoree.library.java.javaNode:latest
-include mvn:org.kevoree.library.java:org.kevoree.library.java.channels:latest
 
-include mvn:org.kevoree.komponents:http-samples:latest
-include mvn:org.kevoree.komponents:http-netty:latest
-include mvn:org.kevoree.komponents:ws-java-websocket:latest
+include mvn:org.kevoree.library.java:org.kevoree.library.java.javaNode:3.5.2
+include mvn:org.kevoree.library.java:org.kevoree.library.java.channels:3.5.2
+
+include mvn:org.kevoree.komponents:http-samples:1.1.0-SNAPSHOT
+include mvn:org.kevoree.komponents:http-netty:1.1.0-SNAPSHOT
+include mvn:org.kevoree.komponents:ws-java-websocket:1.1.0-SNAPSHOT
 
 include mvn:fr.irisa.diversify:sosies-viewer:latest
 
 add node0 : JavaNode
-set node0.log = "warn"
+set node0.log = "trace"
 network node0.ip.lo 127.0.0.1
 
 add node0.webserver : NettyHTTPServer
@@ -79,6 +82,6 @@ bind node0.wsPage.send send
 bind node0.wsPage.broadcast broadcast
 
 
-set node0.page.path = "/home/edaubert/workspace/diversify-project/sosies-generator/sosies-viewer/src/main/resources"
-set node0.data.path = "/home/edaubert/workspace/diversify-project/sosies-generator/sosies-viewer/data"
-set node0.wsPage.rootFolder = "/home/edaubert/workspace/diversify-project/sosies-generator/sosies-viewer"
+set node0.page.path = "/Users/Simon/Documents/code//sosies-generator/sosies-viewer/src/main/resources"
+set node0.data.path = "/Users/Simon/Documents/code/sosies-generator/src/main/resources/data"
+set node0.wsPage.rootFolder = "/Users/Simon/Documents/code/sosies-generator/src/main/resources"
