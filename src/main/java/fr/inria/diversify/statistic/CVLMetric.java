@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
  */
 public class CVLMetric {
 
-
     public long nbObjectExistence() {
         return DiversifyEnvironment.getAllElement(CtElement.class).size();
     }

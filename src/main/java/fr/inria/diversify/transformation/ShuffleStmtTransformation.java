@@ -2,18 +2,17 @@ package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.VariableVisitor;
 import fr.inria.diversify.util.Log;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtLocalVariable;
-import spoon.reflect.code.CtReturn;
-import spoon.reflect.code.CtStatement;
+import org.json.JSONException;
+import org.json.JSONObject;
+import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.factory.Factory;
 
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,16 +20,22 @@ import java.util.stream.Collectors;
  * Created by Simon on 02/04/14.
  */
 public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtElement> {
-    protected CtBlock newOrder;
+    List<CtStatement> newOrderStmt = new ArrayList<>();
+
+
+    public ShuffleStmtTransformation() {
+        name = "shuffleStmt";
+        type = "foo";
+    }
 
     @Override
     public void addSourceCode() throws Exception {
         logInfo();
 
-        if(newOrder == null)
+        if(newOrderStmt == null)
             buildNewOrder();
 
-        Log.debug("new order\n: {}",newOrder);
+        Log.debug("new order\n: {}",newOrderStmt);
 
         SourcePosition sp = transformationPoint.getStatement(0).getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
@@ -40,9 +45,9 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**", 0));
 
 
-        String stmtsString = (String) newOrder.getStatements().stream()
+        String stmtsString = newOrderStmt.stream()
                 .map(stmt -> stmt.toString())
-                .collect(Collectors.joining(";\n"));
+                .collect(Collectors.joining(";\n")).toString();
 
         sp = transformationPoint.getLastStatement().getPosition();
         compileUnit = sp.getCompilationUnit();
@@ -51,8 +56,7 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
     }
 
 
-    protected void buildNewOrder() {
-        List<CtStatement> newOrderStmt = new ArrayList<>();
+    public void buildNewOrder() {
         List<CtStatement> stmts = new ArrayList<CtStatement>(transformationPoint.getStatements());
         Set<String> localVar = getLocalVariableName(transformationPoint.getStatements());
 
@@ -61,11 +65,19 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
                 .findAny().orElse(null);
         stmts.remove(ret);
 
+        CtStatement superStmt = stmts.stream()
+                .filter(stmt -> stmt instanceof CtSuperAccess)
+                .findAny().orElse(null);
+        stmts.remove(superStmt);
+
+        if(superStmt != null)
+            newOrderStmt.add(superStmt);
+
         Random r = new Random();
         while (stmts.size() > 0) {
             int randomIndex = r.nextInt(stmts.size());
             CtStatement stmt = stmts.get(randomIndex);
-            int index = getStmtIndex(stmt, newOrderStmt, localVar);
+            int index = getStmtIndex(stmt, localVar);
             if(index != -1) {
                 newOrderStmt.add(index, stmt);
                 stmts.remove(randomIndex);
@@ -74,13 +86,9 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
 
         if(ret != null)
             newOrderStmt.add(ret);
-
-        Factory factory = transformationPoint.getFactory();
-        newOrder = factory.Core().createBlock();
-        newOrder.setStatements(newOrderStmt);
     }
 
-    protected int getStmtIndex(CtStatement stmt , List<CtStatement> newOrderStmt, Set<String> localVar) {
+    protected int getStmtIndex(CtStatement stmt , Set<String> localVar) {
         VariableVisitor query = new VariableVisitor(false);
         stmt.accept(query);
 
@@ -93,7 +101,6 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
 
         if(localVarUsed.isEmpty())
             return 0;
-
 
         for(int i = 0; i <= newOrderStmt.size(); i++) {
             Set<String> currentLocalVar = getLocalVariableName(stmts);
@@ -113,5 +120,29 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
                 .map(var -> ((CtLocalVariable)var).getSimpleName())
                 .collect(Collectors.toSet());
 
+    }
+
+    public int[] newOrderIndex() {
+        int size = newOrderStmt.size();
+        int[] newOrderIndex = new int[size];
+
+        for(int i = 0; i < size; i++) {
+            int index = 0;
+            for(Object stmt : transformationPoint.getStatements()) {
+                if(newOrderStmt.get(i).toString().equals(stmt.toString())){
+                    newOrderIndex[i] = index;
+                    break;
+                }
+                index++;
+            }
+        }
+        return newOrderIndex;
+    }
+
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject object = super.toJSONObject();
+        object.put("newStmtOrder", Arrays.toString(newOrderIndex()));
+
+        return object;
     }
 }

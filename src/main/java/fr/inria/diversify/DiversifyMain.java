@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import fr.inria.diversify.diversification.*;
+import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.FailureMatrix;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationOldParser;
@@ -240,14 +241,9 @@ public class DiversifyMain {
         TransformationParser tf = new TransformationParser(true);
 //        TransformationOldParser tf = new TransformationOldParser(true);
         Collection<Transformation> transformations = tf.parseDir(transDir);
-        long fail = transformations.stream().filter(t -> t.getStatus() == -1).count();
-        long sosie = transformations.stream().filter(t -> t.getStatus() == 0).count();
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
 
-
-
-//        Log.info("nb stmt transformable {}",test());
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         write.writeAllTransformation(null);
         StatisticDiversification sd = new StatisticDiversification(transformations);
@@ -262,11 +258,13 @@ public class DiversifyMain {
         for(String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
-        Visu v = new Visu(fileName+"_visu/visu");
-        v.writeJSON(transformations);
 
-        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
-        matrix.printMatrix(fileName+"_matrix.csv");
+        cvlMetrics();
+//        Visu v = new Visu(fileName+"_visu/visu");
+//        v.writeJSON(transformations);
+
+//        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
+//        matrix.printMatrix(fileName+"_matrix.csv");
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {
@@ -277,46 +275,19 @@ public class DiversifyMain {
     }
 
 
-
-//    protected void computeOtherStat() throws InterruptedException {
-//        Util stat = new Util(codeFragments);
-//        try {
-//            System.out.println("number of not possible code fragment replace/add: " + stat.numberOfNotDiversification());
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println("number of possible code fragment replace: "+ stat.getAllReplace().size());
-//        System.out.println("number of possible code fragment add: " + stat.getAllAdd().size());
-//        System.out.println("number of possible code fragment delete: " + stat.getAllDelete().size());
-//    }
-//
-//    protected void computeCodeFragmentStatistic(String output) {
-//        StatisticCodeFragment stat = new StatisticCodeFragment(codeFragments);
-//        try {
-//            stat.writeStatistic(output);
-//        } catch (IOException e) {
-//            Log.error("computeCodeFragmentStatistic ", e);
-//        }
-//    }
     protected void initLogLevel() {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);
     }
 
 
-//    protected  int test() throws IOException {
-//        ICoverageReport rg = initCoverageReport();
-//        Util util = new Util(codeFragments);
-//        int count = 0;
-//        int count2 = 0;
-//        for(CodeFragment cf  :codeFragments) {
-//            count2++;
-//            if(util.findStupidCandidate(cf, rg).size() != 0)
-//                count++;
-//            Log.debug("stmt {} {}", count2,count);
-//        }
-//        return count;
-//    }
+    protected void cvlMetrics() throws IOException {
+        CVLMetric cvl = new CVLMetric();
+        Log.info("object existence: {}",cvl.nbObjectExistence());
+        Log.info("object substitution: {}",cvl.nbObjectSubstitution());
+        Log.info("link existence: {}",cvl.nbLinkExistence());
+        Log.info("link substitution: {}",cvl.nbLinkSubstitution());
+    }
 
     protected void sosieOnMultiProject() throws Exception {
 //        TestSosie d = new TestSosie(initTransformationQuery(), DiversifyProperties.getProperty("project"));

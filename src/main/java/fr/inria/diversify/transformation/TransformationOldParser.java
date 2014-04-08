@@ -49,7 +49,7 @@ public class TransformationOldParser {
                 transformations.addAll(parseFile(f));
             }
         Log.debug("number of transformation file: {}",countFile);
-        Log.debug("number of transformation : {}",count);
+        Log.debug("number of transformation : {}",transformations.size());
         Log.debug("number of parse error : {}",countError);
 
         return transformations;
@@ -109,11 +109,36 @@ public class TransformationOldParser {
             trans = parseASTDelete(jsonObject);
 
         trans.setFailures(new ArrayList<String>());
-        trans.setName(type);
+
+        if(type.equals("notContextAdd"))
+            trans.setName("addRandom");
+        if(type.equals("notContextReplace"))
+            trans.setName("replaceRandom");
+
+        if(type.equals("notMappingVariableAdd"))
+            trans.setName("addReaction");
+        if(type.equals("notMappingVariableReplace"))
+            trans.setName("replaceReaction");
+
+        if(type.equals("notContextMappingVariableNameAdd"))
+            trans.setName("addittgenstein");
+        if(type.equals("notContextMappingVariableNameReplace"))
+            trans.setName("replaceWittgenstein");
+
+        if(type.equals("add"))
+            trans.setName("add");
+        if(type.equals("replace"))
+            trans.setName("replace");
+        if(type.equals("delete"))
+            trans.setName("delete");
+
+
         boolean compile = jsonObject.getBoolean("setCompile");
         int failure = jsonObject.getInt("Failures");
         if(!compile)
             trans.setStatus(-2);
+        else if(failure > 0)
+            trans.setStatus(-1);
         else
             trans.setStatus(failure);
 

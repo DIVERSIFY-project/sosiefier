@@ -30,10 +30,10 @@ public class CvlQuery extends TransformationQuery {
         Random r = new Random();
         int i = r.nextInt(8);
         switch (i) {
-            case 0: return getObjectExistence();
-            case 1: return getObjectSubstitution();
-            case 2: case 3: return getLinkExistence();
-            case 4: case 5: case 6: case 7: return getLinkSubstitution();
+            case 0: return getLinkExistence();
+            case 1: return getLinkSubstitution();
+            case 2: case 3: return getObjectExistence();
+            case 4: case 5: case 6: case 7: return getObjectSubstitution();
         }
         return null;
     }

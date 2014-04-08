@@ -175,7 +175,7 @@ public class TransformationParser {
             trans = parseObjectSubstitution(jsonObject);
 
 
-        trans.setTransformationPoint(getObject(jsonObject.getString("objectPosition"), jsonObject.getString("nodeType")));
+        trans.setTransformationPoint(getObject(jsonObject.getString("transformationPoint"), jsonObject.getString("nodeType")));
         return trans;
     }
 
@@ -205,7 +205,7 @@ public class TransformationParser {
 
     protected CVLTransformation parseObjectSubstitution(JSONObject jsonObject) throws Exception {
         ObjectSubstitution os = new ObjectSubstitution();
-        os.setTransplant(getObject(jsonObject.getString("transplantPosition"), jsonObject.getString("nodeType")));
+        os.setTransplant(getObject(jsonObject.getString("transplant"), jsonObject.getString("nodeType")));
         return os;
     }
 
@@ -215,7 +215,7 @@ public class TransformationParser {
         String nodeType = jsonObject.getString("nodeType");
         if(nodeType.equals("CtClassImpl")) {
             String clName = jsonObject.getString("classOrInterfaceExistence");
-            CtClass cl = (CtClass) getObject(jsonObject.getString("objectPosition"), jsonObject.getString("nodeType"));
+            CtClass cl = (CtClass) getObject(jsonObject.getString("transformationPoint"), jsonObject.getString("nodeType"));
             List<CtTypeReference> set = new ArrayList<CtTypeReference>();
 
             if(cl.getSuperclass() != null)
@@ -229,7 +229,7 @@ public class TransformationParser {
             }
         }
 
-        ls.setTransplant(getObject(jsonObject.getString("transplantPosition"), nodeType));
+        ls.setTransplant(getObject(jsonObject.getString("transplant"), nodeType));
         return  ls;
     }
 
@@ -239,7 +239,7 @@ public class TransformationParser {
         String nodeType = jsonObject.getString("nodeType");
         if(nodeType.equals("CtClassImpl")) {
             String clName = jsonObject.getString("classOrInterfaceExistence");
-            CtClass cl = (CtClass) getObject(jsonObject.getString("objectPosition"), jsonObject.getString("nodeType"));
+            CtClass cl = (CtClass) getObject(jsonObject.getString("transformationPoint"), jsonObject.getString("nodeType"));
             List<CtTypeReference> set = new ArrayList<CtTypeReference>();
 
             if(cl.getSuperclass() != null)
