@@ -2,50 +2,47 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.other.EmptyMethodBody;
 import fr.inria.diversify.transformation.other.ReplaceLiteral;
 import fr.inria.diversify.transformation.other.ReplaceNew;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import spoon.reflect.code.*;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtSimpleType;
-import spoon.reflect.declaration.CtType;
+import spoon.reflect.declaration.*;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Simon on 19/03/14.
  */
 public class OtherQuery extends TransformationQuery {
     protected ICoverageReport coverageReport;
-    private List<CtElement> literals;
-    private List<CtElement> newClasses;
+
+
+    public OtherQuery(ICoverageReport coverageReport) {
+        this.coverageReport = coverageReport;
+    }
 
     @Override
     public void setType(String type) {
 
     }
 
-    protected void init() {
-        literals = DiversifyEnvironment.getAllElement(CtLiteral.class);
-        newClasses = DiversifyEnvironment.getAllElement(CtNewClass.class);
-    }
-
     @Override
     public Transformation getTransformation() throws Exception {
-        Random r = new Random();
-        if(r.nextDouble() < 0.5)
-            return NewReplace();
+//        Random r = new Random();
+//        if(r.nextDouble() < 0.5)
+            return getEmptyMethodBody();
 //        else
 //            return LiteralReplace();
-        return null;
+//        return null;
     }
 
-    private ReplaceLiteral LiteralReplace() {
+    private ReplaceLiteral getLiteralReplace() {
         ReplaceLiteral rl = new ReplaceLiteral();
+        List<CtElement> literals = DiversifyEnvironment.getAllElement(CtLiteral.class);
 
         int size = literals.size();
         Random r  = new Random();
@@ -60,8 +57,9 @@ public class OtherQuery extends TransformationQuery {
         return null;
     }
 
-    private ReplaceNew NewReplace() {
+    private ReplaceNew getNewReplace() {
         ReplaceNew rn = new ReplaceNew();
+        List<CtElement> newClasses = DiversifyEnvironment.getAllElement(CtNewClass.class);
 
         int size = newClasses.size();
         Random r  = new Random();
@@ -70,10 +68,32 @@ public class OtherQuery extends TransformationQuery {
         while (coverageReport.elementCoverage(newClass) == 0) {
             newClass = newClasses.get(r.nextInt(size));
         }
-        rn.setTransplantationPoint((CtNewClass)newClass);
-        rn.setTransplant((CtNewClass)literals.get(r.nextInt(size)));
+        rn.setTransformationPoint((CtNewClass) newClass);
+        rn.setTransplant((CtNewClass)newClasses.get(r.nextInt(size)));
 
         return null;
+    }
+
+    protected EmptyMethodBody getEmptyMethodBody() {
+        EmptyMethodBody emb = new EmptyMethodBody();
+
+        List<CtElement> methods = DiversifyEnvironment.getAllElement(CtMethod.class);
+        int size = methods.size();
+        Random r  = new Random();
+
+        CtMethod method = (CtMethod) methods.get(r.nextInt(size));
+
+        while (coverageReport.elementCoverage(method) == 0
+                || method.getBody() == null
+                || method.getBody().getStatements() == null
+                || method.getBody().getStatements().isEmpty()
+                || method.getType().isPrimitive()) {
+            method = (CtMethod) methods.get(r.nextInt(size));
+        }
+
+        emb.setTransformationPoint(method);
+
+        return emb;
     }
 
 //    private List<CtNewClass> newReplaceCandidate(CtNewClass newClass) {

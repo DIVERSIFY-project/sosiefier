@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.transformation.ShuffleStmtTransformation;
+import fr.inria.diversify.transformation.other.ShuffleStmtTransformation;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.declaration.CtElement;

@@ -97,7 +97,7 @@ function Visu(JSONObject) {
         while (i < this.package.length) {
             if (line == maxNumberOfPackagePerLine) {
                 line = 0;
-                currentY += maxSize + (this.package[i]).height + 2 * marginY;
+                currentY += maxSize + 2 * marginY;
                 currentX = marginX;
             }
             if (line == 0) {

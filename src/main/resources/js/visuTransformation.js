@@ -8,7 +8,7 @@ var stroke_Width = 3;
 var maxNumberOfClassPerLine = 4;
 var maxNumberOfPackagePerLine = 3;
 var jsonData;
-var dataDir ='/metrics_visdatau';
+var dataDir ='data/clojure';
 var steroid = true, reaction = true, wittgenstein = true, random = true, mutation = true,  cvl = true;
 
 $.getJSON(dataDir+'/visu.json', function (data) {

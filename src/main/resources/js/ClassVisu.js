@@ -209,6 +209,7 @@ function VisuZoomClass(JSONObject) {
     this.getHandlerDetail = function(id) {
         var handler = function() {
             $.getJSON(dataDir+'/visu_'+id+'.json', function (data) {
+                console.log(data);
                 $('#myModalTitle').empty();
                 $('#myModalTitle').append(data.package+'.'+data.class+':'+data.position+"<br> notCompile: "+ data.notCompile + ", failTest: "+data.failTest+ ", sosie: "+data.sosie);
                 $('#myList li').remove();

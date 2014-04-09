@@ -39,7 +39,7 @@ import java.util.stream.IntStream;
  * Date: 5/28/13
  * Time: 11:38 AM
  */
-public class TransformationParser {
+public class  TransformationParser {
     private int countError = 0;
     private int count = 0;
 //    Map<String, Integer> duplication = new HashMap<String, Integer>();

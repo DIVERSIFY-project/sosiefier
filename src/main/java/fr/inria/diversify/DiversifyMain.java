@@ -6,9 +6,7 @@ import java.util.*;
 
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.statistic.CVLMetric;
-import fr.inria.diversify.statistic.FailureMatrix;
 import fr.inria.diversify.statistic.StatisticDiversification;
-import fr.inria.diversify.transformation.TransformationOldParser;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.diversification.builder.AbstractBuilder;
@@ -158,8 +156,11 @@ public class DiversifyMain {
         }
 
         if(type.equals("shuffle")) {
-
             atq = new ShuffleStmtQuery(rg);
+        }
+
+        if(type.equals("other")) {
+            atq = new OtherQuery(rg);
         }
 
         if(type.equals("all")) {
@@ -260,8 +261,8 @@ public class DiversifyMain {
 
 
         cvlMetrics();
-//        Visu v = new Visu(fileName+"_visu/visu");
-//        v.writeJSON(transformations);
+        Visu v = new Visu(fileName+"_visu/visu");
+        v.writeJSON(transformations);
 
 //        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
 //        matrix.printMatrix(fileName+"_matrix.csv");

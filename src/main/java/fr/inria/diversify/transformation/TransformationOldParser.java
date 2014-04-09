@@ -126,9 +126,9 @@ public class TransformationOldParser {
             trans.setName("replaceWittgenstein");
 
         if(type.equals("add"))
-            trans.setName("add");
+            trans.setName("addSteroid");
         if(type.equals("replace"))
-            trans.setName("replace");
+            trans.setName("replaceSteroid");
         if(type.equals("delete"))
             trans.setName("delete");
 

@@ -47,7 +47,6 @@ function VisuPackage(JSONObject) {
         }
         var r = this.addPackage(currentY + maxSize, nbColumn);
         this.addText();
-        this.translate(x, y);
     }
 
     this.addPackage = function (y, nbColumn) {
