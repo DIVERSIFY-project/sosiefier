@@ -21,10 +21,7 @@ import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -40,7 +37,7 @@ public class DiversifyEnvironment {
     protected static List<CtReturn> returns;
     protected static List<CtLocalVariable> inlineConstant;
     protected static List<CtMethod> javassistMethods;
-    protected static CtElement root;
+    protected static Set<CtElement> roots;
     protected static Factory factory;
 
     public static CodeFragmentList getCodeFragments()  {
@@ -99,33 +96,35 @@ public class DiversifyEnvironment {
         return javassistMethods;
     }
 
-    public static CtElement getRoot() {
-        if(root == null) {
+    public static Set<CtElement> getRoots() {
+        if(roots == null) {
+            roots = new HashSet<>();
             ProcessingManager pm = new QueueProcessingManager(factory);
             AbstractProcessor<CtPackage> processor = new AbstractProcessor<CtPackage>() {
-
                 @Override
                 public void process(CtPackage element) {
-                    if(root == null) {
-                        root = element;
-                        while (root.getParent() != null)
-                        root = root.getParent();
-                    }
+                    CtElement root = element;
+                        while (root.getParent() != null){
+                            root = root.getParent();
+                        }
+                            roots.add(root);
                 }
             };
             pm.addProcessor(processor);
             pm.process();
         }
-        return root;
+        return roots;
     }
 
     public static List<CtElement> getAllElement(Class cl) {
       
         if(!typeToObject.containsKey(cl)) {
             QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
-            DiversifyEnvironment.getRoot().accept(query);
-            query.getResult().parallelStream()
-                    .map(e -> cl.cast(e))
+            DiversifyEnvironment.getRoots().stream()
+                    .flatMap(root -> {
+                        root.accept(query);
+                        return query.getResult().stream();
+                    })
                     .collect(Collectors.toList());
                     
             typeToObject.put(cl, query.getResult());
