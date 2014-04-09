@@ -18,7 +18,7 @@ import org.kevoree.annotation.Param;
 import org.kevoree.library.javase.ws.api.AbstractWebSocketHandler;
 import org.kevoree.log.Log;
 
-import java.io.File;
+import java.io.*;
 
 @ComponentType
 public class FileListWebSocketHandler extends AbstractWebSocketHandler {
@@ -37,9 +37,29 @@ public class FileListWebSocketHandler extends AbstractWebSocketHandler {
             JSONObject jsonReader = new JSONObject(message);
             if ("list".equalsIgnoreCase(jsonReader.get("request").toString())) {
                 String path = jsonReader.get("path").toString().replace("/", File.separator);
-                send(id, new JSONStringer().object().key("request").value("list").key("files").value(new JSONArray(listFiles(path))).endObject().toString());
+                send(id, new JSONStringer().object()
+                        .key("request").value("list")
+                        .key("files").value(new JSONArray(listFiles(path)))
+                        .endObject()
+                        .toString());
             }
-        } catch (JSONException e) {
+            if("jsonArray".equalsIgnoreCase(jsonReader.get("request").toString())) {
+                String file = jsonReader.get("file").toString().replace("/", File.separator);
+                send(id, new JSONStringer().object()
+                        .key("request").value("jsonArray")
+                        .key("object").value(getJsonArray(file))
+                        .endObject()
+                        .toString());
+            }
+            if("jsonObject".equalsIgnoreCase(jsonReader.get("request").toString())) {
+                String file = jsonReader.get("file").toString().replace("/", File.separator);
+                send(id, new JSONStringer().object()
+                        .key("request").value("jsonObject")
+                        .key("object").value(getJsonObject(file))
+                        .endObject()
+                        .toString());
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -52,6 +72,30 @@ public class FileListWebSocketHandler extends AbstractWebSocketHandler {
             Log.error("Unable to find {}", f.getAbsolutePath());
             return new String[0];
         }
+    }
+
+    protected JSONObject getJsonObject(String file) throws IOException, JSONException {
+        BufferedReader br = new BufferedReader(new FileReader(rootFolder + File.separator + file));
+        StringBuilder sb = new StringBuilder();
+        String line = br.readLine();
+
+        while (line != null) {
+            sb.append(line);
+            line = br.readLine();
+        }
+        return new JSONObject(sb.toString());
+    }
+
+    protected JSONArray getJsonArray(String file) throws IOException, JSONException {
+        BufferedReader br = new BufferedReader(new FileReader(rootFolder + File.separator + file));
+        StringBuilder sb = new StringBuilder();
+        String line = br.readLine();
+
+        while (line != null) {
+            sb.append(line);
+            line = br.readLine();
+        }
+        return new JSONArray(sb.toString());
     }
 
     @Override

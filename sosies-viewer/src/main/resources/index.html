@@ -41,13 +41,7 @@
             </div>
             <div id="myModalBody" class="modal-body">
                 <ul class="list-group" id="myList">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
                 </ul>
-
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -65,16 +59,19 @@
 <script src="js/PackageVisu.js"></script>
 <script type="text/javascript" src="lib/reconnecting-websocket.min.js"></script>
 <script type="text/javascript">
+    var ws_host = "127.0.0.1";
+    var ws_port = "9090";
+    var ws_path = "files";
+    var folderDataPath = "/data";
+
     jQuery(document).ready(function () {
-        var folderDataPath = "/data";
-        var ws_host = "127.0.0.1";
-        var ws_port = "9090";
-        var ws_path = "files";
+
         var ws = new WebSocket("ws://" + ws_host + ":" + ws_port + "/" + ws_path);
 
         ws.onopen = function () {
             ws.send(JSON.stringify({request: "list", path: folderDataPath}));
         };
+
         ws.onmessage = function (event) {
             var message = JSON.parse(event.data);
             if (message.request == "list") {
@@ -83,13 +80,28 @@
                     if(file.indexOf(".") == -1) {
                         jQuery('#files').append('<li id="' + file + '">' + file + '</li>');
                         jQuery("#" + file).click(function () {
-                            loadVisu(folderDataPath + "/" + this.id);
+                            startVisu(folderDataPath + "/" + this.id );
                         })
                     }
                 });
             }
         };
     });
+
+    startVisu = function(path) {
+        var ws = new WebSocket("ws://" + ws_host + ":" + ws_port + "/" + ws_path );
+
+        ws.onopen = function () {
+            ws.send(JSON.stringify({request: "jsonArray", file: path + "/visu.json"}));
+        };
+
+        ws.onmessage = function (event) {
+            var message = JSON.parse(event.data);
+            if (message.request == "jsonArray") {
+                buildVisu(message.object ,path);
+            }
+        };
+    };
 </script>
 
 </body>

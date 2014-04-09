@@ -8,17 +8,15 @@ var stroke_Width = 3;
 var maxNumberOfClassPerLine = 4;
 var maxNumberOfPackagePerLine = 3;
 var jsonData;
-var dataDir = 'data/clojure_visu';
+var dataDir;
 var steroid = true, reaction = true, wittgenstein = true, random = true, mutation = true, cvl = true;
 
-loadVisu = function (filePath) {
-    $.getJSON(filePath + "/visu.json", function (data) {
-        jsonData = data;
+buildVisu = function (jsonArray, dataPath) {
+        jsonData = jsonArray;
         paper.clear();
-        var visu = new Visu(data);
+        var visu = new Visu(jsonData);
         visu.draw();
-        dataDir = filePath;
-    });
+        dataDir = dataPath;
 };
 
 $(document).find('#random-button').click(function () {

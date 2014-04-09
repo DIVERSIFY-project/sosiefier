@@ -32,13 +32,7 @@ function VisuClass(JSONObject) {
             var transformations = line[i].trans;
             for(var j = 0; j < transformations.length; j++) {
                 var trans = transformations[j];
-                var name = trans.name;
-                if((random  &  (name == "addRandom" || name == "replaceRandom"))
-                    || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
-                    || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
-                    || (steroid  & (name == "delete" || name == "add" || name == "replace"))
-                    || (mutation  & trans.type == "mutation")
-                    || (cvl  & trans.type == "cvl")) {
+                if(filter(trans)) {
                     notCompile += trans.notCompile;
                     failTest += trans.failTest;
                     sosie += trans.sosie;
@@ -124,13 +118,7 @@ function VisuZoomClass(JSONObject) {
             var transformations = line[i].trans;
             for(var j = 0; j < transformations.length; j++) {
                 var trans = transformations[j];
-                var name = trans.name;
-                if((random  &  (name == "addRandom" || name == "replaceRandom"))
-                    || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
-                    || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
-                    || (steroid  & (name == "delete" || name == "add" || name == "replace"))
-                    || (mutation  & trans.type == "mutation")
-                    || (cvl  & trans.type == "cvl")) {
+                if(filter(trans)) {
                     notCompile += trans.notCompile;
                     failTest += trans.failTest;
                     sosie += trans.sosie;
@@ -208,37 +196,52 @@ function VisuZoomClass(JSONObject) {
 
     this.getHandlerDetail = function(id) {
         var handler = function() {
-            $.getJSON(dataDir+'/visu_'+id+'.json', function (data) {
-                $('#myModalTitle').empty();
-                $('#myModalTitle').append(data.package+'.'+data.class+':'+data.position+"<br> notCompile: "+ data.notCompile + ", failTest: "+data.failTest+ ", sosie: "+data.sosie);
-                $('#myList li').remove();
-                var transformation = data.transformation;
-                console.log(transformation);
-                for(var i = 0; i < transformation.length; i++) {
-                    var trans = transformation[i];
-                    var name = trans.name;
-                    if((random  &  (name == "addRandom" || name == "replaceRandom"))
-                        || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
-                        || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
-                        || (steroid  & (name == "delete" || name == "add" || name == "replace"))
-                        || (mutation  & trans.type == "mutation")
-                        || (cvl  & trans.type == "cvl")) {
-                        $('#myList').append('<li class="list-group-item">type: '+transformation[i].type+', name: '+transformation[i].name+', status: '+transformation[i].status+
-                            '<pre class="prettyprint lang-java">'+transformation[i].string+'</pre></li>');
-                    }
+            var ws = new WebSocket("ws://" + ws_host + ":" + ws_port + "/" + ws_path );
+
+            ws.onopen = function () {
+                ws.send(JSON.stringify({request: "jsonObject", file: dataDir + "/visu_"+id+".json"}));
+            };
+
+            ws.onmessage = function (event) {
+                var message = JSON.parse(event.data);
+                if (message.request == "jsonObject") {
+                    var data = message.object;
+                    console.log(data)
+                    console.log(data.package+'.'+data.class+':'+data.position+"<br> notCompile: "+ data.notCompile + ", failTest: "+data.failTest+ ", sosie: "+data.sosie);
+                        $('#myModalTitle').empty();
+                        $('#myModalTitle').append(data.package+'.'+data.class+':'+data.position+"<br> notCompile: "+ data.notCompile + ", failTest: "+data.failTest+ ", sosie: "+data.sosie);
+                        $('#myList li').remove();
+                        var transformation = data.transformation;
+
+                        for(var i = 0; i < transformation.length; i++) {
+                            var trans = transformation[i];
+                            if(filter(trans)) {
+                                $('#myList').append('<li class="list-group-item">type: '+transformation[i].type+', name: '+transformation[i].name+', status: '+transformation[i].status+
+                                    '<pre class="prettyprint lang-java">'+transformation[i].string+'</pre></li>');
+                            }
+                        }
+                        $('#myModal').modal('show');
+
+                        (function(jQuery){
+                            jQuery( document ).ready( function() {
+                                prettyPrint();
+                            } );
+
+                        }(jQuery))
+
                 }
-                $('#myModal').modal('show');
-
-                (function(jQuery){
-                    jQuery( document ).ready( function() {
-                        prettyPrint();
-                    } );
-
-                }(jQuery))
-            });
-
+            };
         };
         return handler;
     }
+}
 
+filter = function(transformation) {
+    var name = transformation.name;
+    return (random  &  (name == "addRandom" || name == "replaceRandom"))
+        || (reaction  &  (name == "addReaction" || name == "replaceReaction"))
+        || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
+        || (steroid  & (name == "delete" || name == "add" || name == "replace"))
+        || (mutation  & transformation.type == "mutation")
+        || (cvl  & transformation.type == "cvl");
 }

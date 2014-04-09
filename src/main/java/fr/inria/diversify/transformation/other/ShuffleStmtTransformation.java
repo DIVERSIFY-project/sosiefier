@@ -1,6 +1,7 @@
-package fr.inria.diversify.transformation;
+package fr.inria.diversify.transformation.other;
 
 import fr.inria.diversify.codeFragment.VariableVisitor;
+import fr.inria.diversify.transformation.SpoonTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
