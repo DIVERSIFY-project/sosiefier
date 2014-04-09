@@ -15,10 +15,10 @@
     <div class="btn-group">
         <div class="btn-group">
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                Files
+                Projects
                 <span class="caret"></span>
             </a>
-            <ul class="dropdown-menu" id="files">
+            <ul class="dropdown-menu" role="menu" id="files">
                 <!-- dropdown menu links -->
             </ul>
         </div>
@@ -78,7 +78,8 @@
                 // { request: "list", files: ["toto.json", titi.json]}
                 message.files.forEach(function (file) {
                     if(file.indexOf(".") == -1) {
-                        jQuery('#files').append('<li id="' + file + '">' + file + '</li>');
+
+                        jQuery('#files').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="' + file + '">' + file + '</li>');
                         jQuery("#" + file).click(function () {
                             startVisu(folderDataPath + "/" + this.id );
                         })
