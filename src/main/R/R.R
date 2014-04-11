@@ -83,8 +83,10 @@ resultLigne <- function(data, index, max) {
 printLatexTab <- function(fileName, data, le, ls, oe, os) {
   
   print(xtable(resultTab(data, le, ls, oe, os)), type="latex", file=fileName)
- print(xtable(chiTestTab(data, "stmtType")), append=TRUE, type="latex", file=fileName)
- print(xtable(chiTestTab2(data, "stmtType", "name")), append=TRUE, type="latex", file=fileName)
+  tmp <- chiTestTab(data, "stmtType");
+ print(xtable(tmp[with(tmp, order(3)),]), append=TRUE, type="latex", file=fileName)
+ tmp <- chiTestTab2(data, "stmtType", "name");
+ print(xtable(tmp[with(tmp, order(3)),]), append=TRUE, type="latex", file=fileName)
 }
 
 #resultTab(junit_source, 434, 103560, 16945, 26730357)

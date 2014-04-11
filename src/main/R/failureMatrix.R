@@ -75,3 +75,5 @@ barplotFailure <- function(data,name) {
 #frame <- rbind(tmp,tmp2,tmp3)
 #t <- t(as.matrix(frame[,2:4]))
 #barplot(t, col=c("darkblue","darkgreen","red"), names.arg = frame$name)
+
+
