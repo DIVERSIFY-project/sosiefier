@@ -31,8 +31,9 @@ public class ShuffleStmtQuery extends TransformationQuery {
         Random r = new Random();
 
         CtBlock block = (CtBlock)objects.get(r.nextInt(objects.size()));
-        while (coverageReport.elementCoverage(block) == 0 || block.getStatements().size() <= 4) {
-            block = (CtBlock)objects.get(r.nextInt(objects.size()))   ;
+        while (coverageReport.elementCoverage(block) == 0
+                || block.getStatements().size() <= 4) {
+            block = (CtBlock)objects.get(r.nextInt(objects.size()));
         }
         sst.setTransformationPoint(block);
 

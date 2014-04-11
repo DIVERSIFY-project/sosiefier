@@ -1,10 +1,13 @@
 package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.util.Log;
+import spoon.reflect.declaration.CtClass;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Simon on 20/03/14.
@@ -15,7 +18,7 @@ public class FailureMatrix {
 
     public FailureMatrix(Collection<Transformation> transformations, String allTestFile) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(allTestFile));
-        allTest = new ArrayList<String>();
+        allTest = new ArrayList<>();
 
         String line = br.readLine();
         while (line != null) {
@@ -27,8 +30,17 @@ public class FailureMatrix {
     }
 
     protected List<String> buildMatrix() {
-        Map<String,Integer> map = new HashMap<String,Integer>();
+        return buildMatrix(transformations);
+    }
 
+    protected List<String> buildMatrixForClass(String className) {
+        return buildMatrix(transformations.stream()
+                .filter(t -> t.classLocationName().equals(className))
+                .collect(Collectors.toList()));
+    }
+
+    protected List<String> buildMatrix(Collection<Transformation> transformations) {
+        Map<String,Integer> map = new HashMap<>();
 
         for(Transformation transformation: transformations) {
             if(transformation.getStatus() == -1) {
@@ -61,9 +73,23 @@ public class FailureMatrix {
         return matrix;
     }
 
-    public void printMatrix(String fileName) throws IOException {
-        List<String> matrix = buildMatrix();
+    public void printAllMatrix(String prefix) throws IOException {
+        new File(prefix+"_matrix/").mkdirs();
 
+        printMatrix(prefix+"_matrix/all.csv", buildMatrix());
+
+        List<String> classes = DiversifyEnvironment.getAllElement(CtClass.class).stream()
+                .map(cl -> ((CtClass) cl).getQualifiedName())
+                .collect(Collectors.toList());
+
+        for(String className: classes) {
+            printMatrix(prefix+"_matrix/"+className+".csv",buildMatrixForClass(className));
+        }
+    }
+
+
+
+    protected void printMatrix(String fileName, List<String> matrix) throws IOException {
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         out.append("nb");
         for(String test: allTest) {

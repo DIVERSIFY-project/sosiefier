@@ -6,6 +6,7 @@ import java.util.*;
 
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.statistic.CVLMetric;
+import fr.inria.diversify.statistic.FailureMatrix;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationsWriter;
@@ -261,11 +262,11 @@ public class DiversifyMain {
 
 
         cvlMetrics();
-        Visu v = new Visu(fileName+"_visu/visu");
-        v.writeJSON(transformations);
+//        Visu v = new Visu(fileName+"_visu/visu");
+//        v.writeJSON(transformations);
 
-//        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
-//        matrix.printMatrix(fileName+"_matrix.csv");
+        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
+        matrix.printAllMatrix(fileName);
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {

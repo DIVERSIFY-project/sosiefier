@@ -33,14 +33,13 @@ import java.util.stream.Collectors;
 public class DiversifyEnvironment {
     protected static Map<Class, List<CtElement>> typeToObject = new HashMap<Class, List<CtElement>>();
     protected static CodeFragmentList codeFragments;
-    protected static List<CtBinaryOperator<?>> binaryOperators;
     protected static List<CtReturn> returns;
     protected static List<CtLocalVariable> inlineConstant;
     protected static List<CtMethod> javassistMethods;
     protected static Set<CtElement> roots;
     protected static Factory factory;
 
-    public static CodeFragmentList getCodeFragments()  {
+    public synchronized static CodeFragmentList getCodeFragments()  {
         if(codeFragments == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
             StatementProcessor processor = new StatementProcessor();
@@ -52,7 +51,7 @@ public class DiversifyEnvironment {
         return codeFragments;
     }
 
-    public static List<CtLocalVariable> getInlineConstant() {
+    public synchronized static List<CtLocalVariable> getInlineConstant() {
         if(inlineConstant == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
             InlineConstantProcessor processor = new InlineConstantProcessor();
@@ -64,7 +63,7 @@ public class DiversifyEnvironment {
         return inlineConstant;
     }
 
-    public static List<CtReturn> getReturns() {
+    public synchronized static List<CtReturn> getReturns() {
         if(returns == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
             ReturnProcessor processor = new ReturnProcessor();
@@ -76,9 +75,9 @@ public class DiversifyEnvironment {
         return returns;
     }
 
-    public static List<CtMethod> getJavassistMethods() throws NotFoundException {
+    public synchronized static List<CtMethod> getJavassistMethods() throws NotFoundException {
         if(javassistMethods == null) {
-            javassistMethods = new ArrayList<CtMethod>();
+            javassistMethods = new ArrayList<>();
             ClassPool pool = ClassPool.getDefault();
             pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
             for (CtSimpleType cl: getCodeFragments().getAllClasses()) {
@@ -96,7 +95,7 @@ public class DiversifyEnvironment {
         return javassistMethods;
     }
 
-    public static Set<CtElement> getRoots() {
+    public synchronized static Set<CtElement> getRoots() {
         if(roots == null) {
             roots = new HashSet<>();
             ProcessingManager pm = new QueueProcessingManager(factory);
@@ -116,8 +115,8 @@ public class DiversifyEnvironment {
         return roots;
     }
 
-    public static List<CtElement> getAllElement(Class cl) {
-      
+    public synchronized static List<CtElement> getAllElement(Class cl) {
+
         if(!typeToObject.containsKey(cl)) {
             QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
             DiversifyEnvironment.getRoots().stream()

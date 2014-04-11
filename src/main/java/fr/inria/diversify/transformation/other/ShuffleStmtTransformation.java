@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * Created by Simon on 02/04/14.
  */
 public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtElement> {
-    List<CtStatement> newOrderStmt = new ArrayList<>();
+    List<CtStatement> newOrderStmt;
 
 
     public ShuffleStmtTransformation() {
@@ -36,7 +36,7 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
         if(newOrderStmt == null)
             buildNewOrder();
 
-        Log.debug("new order\n: {}",newOrderStmt);
+
 
         SourcePosition sp = transformationPoint.getStatement(0).getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
@@ -50,6 +50,8 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
                 .map(stmt -> stmt.toString())
                 .collect(Collectors.joining(";\n")).toString();
 
+        Log.debug("new order\n: {}",stmtsString);
+
         sp = transformationPoint.getLastStatement().getPosition();
         compileUnit = sp.getCompilationUnit();
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(
@@ -58,6 +60,7 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
 
 
     public void buildNewOrder() {
+        newOrderStmt = new ArrayList<>();
         List<CtStatement> stmts = new ArrayList<CtStatement>(transformationPoint.getStatements());
         Set<String> localVar = getLocalVariableName(transformationPoint.getStatements());
 

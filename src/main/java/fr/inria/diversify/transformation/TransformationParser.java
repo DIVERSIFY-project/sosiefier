@@ -41,8 +41,6 @@ import java.util.stream.IntStream;
  */
 public class  TransformationParser {
     private int countError = 0;
-    private int count = 0;
-//    Map<String, Integer> duplication = new HashMap<String, Integer>();
     Collection<Transformation> transformations;
     private HashMap<Integer, String> failureDictionary;
 
@@ -65,19 +63,9 @@ public class  TransformationParser {
                 countFile++;
                 Log.debug("Current number of transformation {}",transformations.size());
                 Log.debug("parse tranformation file: "+f.getName());
-//                for(Transformation t : parseFile(f)) {
-//                    if(transformations.contains(t)) {
-//                        String key = t.getType()+":"+t.getName();
-//                        if(!duplication.containsKey(key))
-//                            duplication.put(key,1);
-//                        else
-//                            duplication.put(key, 1 + duplication.get(key));
-//                    }
-                    transformations.addAll(parseFile(f));
-//                }
+                transformations.addAll(parseFile(f));
             }
         Log.debug("number of transformation file: {}",countFile);
-        Log.debug("number of transformation : {}",count);
         Log.debug("number of parse error : {}",countError);
 
         return transformations;
