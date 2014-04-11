@@ -57,12 +57,12 @@
         </dependency>
 
 
-        <!-- Kevoree dependency -->
-        <dependency>
-            <groupId>org.kevoree.komponents</groupId>
-            <artifactId>ws-api</artifactId>
-            <version>1.1.0-SNAPSHOT</version>
-        </dependency>
+        <!--&lt;!&ndash; Kevoree dependency &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.kevoree.komponents</groupId>-->
+            <!--<artifactId>ws-api</artifactId>-->
+            <!--<version>1.1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <repositories>
