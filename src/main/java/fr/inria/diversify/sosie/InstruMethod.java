@@ -1,7 +1,6 @@
 package fr.inria.diversify.sosie;
 
 import fr.inria.diversify.sosie.logger.processor.*;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
 import org.apache.commons.io.FileUtils;
@@ -27,23 +26,23 @@ import java.util.List;
  * Date: 7/22/13
  * Time: 2:03 PM
  */
-public class InstruProject {
+public class InstruMethod {
 
     public static void main(String[] args) throws Exception {
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(args[0] + "/pom.xml");
 
-        new InstruProject(args[0],args[1],args[2],args[3]);
+        new InstruMethod(args[0],args[1],args[2]);
     }
 
-    public InstruProject(String project, String outDir, String srcDir, String testDir) throws Exception {
+    public InstruMethod(String project, String outDir, String srcDir) throws Exception {
 
         File dir = new File(outDir);
         dir.mkdirs();
         FileUtils.copyDirectory(new File(project), dir);
 
         String src = project+ "/" +srcDir;
-        String test = project+ "/" +testDir;
+
 
         Factory factory = initSpoon(src);
         applyProcessor(factory, new ErrorLoggingInstrumenter());
@@ -56,14 +55,17 @@ public class InstruProject {
                     new FragmentDrivenJavaPrettyPrinter(env),
                     allClassesName(new File(src))));
 
-        factory = initSpoon(src+System.getProperty("path.separator")+test);
+        factory = initSpoon(src);
 
-        applyProcessor(factory, new AssertInstrumenter());
-        applyProcessor(factory, new TestLoggingInstrumenter());
+        applyProcessor(factory, new MethodLoggingInstrumenter());
+
 
 
         factory.getEnvironment().useSourceCodeFragments(true);
-        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir +"/"+ testDir), new FragmentDrivenJavaPrettyPrinter(env), (allClassesName(new File(test)))));
+        applyProcessor(factory,
+                new JavaOutputProcessorWithFilter(new File(outDir +"/"+ srcDir),
+                        new FragmentDrivenJavaPrettyPrinter(env),
+                        allClassesName(new File(src))));
 
         ConditionalLoggingInstrumenter.writeIdFile(outDir);
         copyLogger(outDir, srcDir);

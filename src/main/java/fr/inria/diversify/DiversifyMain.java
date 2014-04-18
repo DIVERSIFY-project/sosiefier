@@ -261,12 +261,14 @@ public class DiversifyMain {
             write.writeGoodTransformation(type);
 
 
-        cvlMetrics();
+        CVLMetric cvlMetric = new CVLMetric();
+        cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
+
 //        Visu v = new Visu(fileName+"_visu/visu");
 //        v.writeJSON(transformations);
 
-        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
-        matrix.printAllMatrix(fileName);
+//        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
+//        matrix.printAllMatrix(fileName);
     }
 
     protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {
@@ -280,15 +282,6 @@ public class DiversifyMain {
     protected void initLogLevel() {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);
-    }
-
-
-    protected void cvlMetrics() throws IOException {
-        CVLMetric cvl = new CVLMetric();
-        Log.info("object existence: {}",cvl.nbObjectExistence());
-        Log.info("object substitution: {}",cvl.nbObjectSubstitution());
-        Log.info("link existence: {}",cvl.nbLinkExistence());
-        Log.info("link substitution: {}",cvl.nbLinkSubstitution());
     }
 
     protected void sosieOnMultiProject() throws Exception {

@@ -1,9 +1,8 @@
 package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.sosie.InstruProject;
+import fr.inria.diversify.sosie.InstruMethod;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
@@ -71,10 +70,10 @@ public class Sosie extends AbstractDiversify {
     }
 
     protected void instruProject(String projectDir) throws Exception {
-        String tmpDir = DiversifyProperties.getProperty("out") + "/instru/sosie_" + System.currentTimeMillis();
-        String src = DiversifyProperties.getProperty("src");
-        String test =DiversifyProperties.getProperty("testSrc");
-        new InstruProject(projectDir, tmpDir, src,test);
+//        String tmpDir = DiversifyProperties.getProperty("out") + "/instru/sosie_" + System.currentTimeMillis();
+//        String src = DiversifyProperties.getProperty("src");
+//        String test =DiversifyProperties.getProperty("testSrc");
+//        new InstruMethod(projectDir, tmpDir, src,test);
 
     }
 }

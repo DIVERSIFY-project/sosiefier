@@ -1,6 +1,6 @@
 package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.sosie.InstruProject;
+import fr.inria.diversify.sosie.InstruMethod;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
@@ -107,8 +107,8 @@ public class MutantSosieWriter extends AbstractDiversify {
     }
 
     protected void instruProject(String projectDir, String outDir) throws Exception {
-        String src = DiversifyProperties.getProperty("src");
-        String test = DiversifyProperties.getProperty("testSrc");
-        new InstruProject(projectDir, outDir, src,test);
+//        String src = DiversifyProperties.getProperty("src");
+//        String test = DiversifyProperties.getProperty("testSrc");
+//        new InstruMethod(projectDir, outDir, src,test);
     }
 }

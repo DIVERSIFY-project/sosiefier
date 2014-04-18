@@ -6,6 +6,7 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtAnnotation;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtSimpleType;
 
@@ -37,7 +38,7 @@ public class TestLoggingInstrumenter extends AbstractProcessor<CtMethod> {
     public void process(CtMethod element) {
         CtStatement firstStmt = element.getBody().getStatement(0);
         String snippet = "\t\tfr.inria.diversify.sosie.logger.LogWriter.writeTestStart(\""
-                + element.getParent(CtSimpleType.class).getQualifiedName() +"."+element.getSimpleName() + "\");\n";
+                + element.getPosition().getCompilationUnit().getMainType().getQualifiedName() +"."+element.getSimpleName() + "\");\n";
         SourcePosition sp = firstStmt.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
