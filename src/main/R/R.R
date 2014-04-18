@@ -44,17 +44,24 @@ chiTestTab2 <- function(data, index1, index2) {
     for(j in set(data[,index2])) {
       sub <- subset(data, (data[,index1] == i) & (data[,index2] == j));
       if(nbOfTrial(sub) != 0) {
-        result[paste(i,j,sep="/"),"trial"] <- nbOfTrial(sub);
-        result[paste(i,j,sep="/"),"compile"] <- nbOfCompile(sub);
-        result[paste(i,j,sep="/"),"compile%"] <- round(100*nbOfCompile(sub)/nbOfTrial(sub),2);
-        result[paste(i,j,sep="/"),"sosie"] <- nbOfSosie(sub);
-        result[paste(i,j,sep="/"),"sosie%"] <- round(100*nbOfSosie(sub)/nbOfTrial(sub),2);
+        result[paste(i,j,sep=", "),"trial"] <- nbOfTrial(sub);
+        result[paste(i,j,sep=", "),"compile"] <- nbOfCompile(sub);
+        result[paste(i,j,sep=", "),"compile%"] <- round(100*nbOfCompile(sub)/nbOfTrial(sub),2);
+        result[paste(i,j,sep=", "),"sosie"] <- nbOfSosie(sub);
+        result[paste(i,j,sep=", "),"sosie%"] <- round(100*nbOfSosie(sub)/nbOfTrial(sub),2);
       }
     }
   }
   return(result)  
 }
 
+#seuil de confiance 99%
+errorMargin <- function(data, sizePop) {
+  sampleSize <- nbOfTrial(data);
+  p <- nbOfSosie(data)/sampleSize;
+  
+  return(sqrt( (2.58^2*p*(1-p)) / ((sizePop*sampleSize)/(sizePop-sampleSize))))
+}
 
 resultTab <- function(data, le, ls, oe, os) {
   result <- resultLigne(data, "linkExistence", le)
@@ -84,18 +91,18 @@ printLatexTab <- function(fileName, data, le, ls, oe, os) {
   
   print(xtable(resultTab(data, le, ls, oe, os)), type="latex", file=fileName)
   tmp <- chiTestTab(data, "stmtType");
- print(xtable(tmp[with(tmp, order(3)),]), append=TRUE, type="latex", file=fileName)
- tmp <- chiTestTab2(data, "stmtType", "name");
- print(xtable(tmp[with(tmp, order(3)),]), append=TRUE, type="latex", file=fileName)
+ print(xtable(tmp[with(tmp, order(-tmp[,3])),]), append=TRUE, type="latex", file=fileName)
+ tmp <- chiTestTab2(data, "name","stmtType");
+ print(xtable(tmp[with(tmp, order(-tmp[,3])),]), append=TRUE, type="latex", file=fileName)
 }
 
-#resultTab(junit_source, 434, 103560, 16945, 26730357)
-#resultTab(metrics_source, 376, 81940, 9425, 8436703)
-#resultTab(commons.math_source, 3869, 9780783, 268421, 3325660457)
-#commons-lang 842, 479108, 66191, 443262201 
-#easymock 287, 45051, 10284, 9113924
-
-
+#printLatexTab("~/Documents/papier/bosco/junit.tex", junit_cvl, 434, 103560, 16945, 26730357)
+#printLatexTab("~/Documents/papier/bosco/metrics.tex", metrics_cvl, 376, 81940, 9425, 8436703)
+#printLatexTab("~/Documents/papier/bosco/commons-math.tex",  math_cvl, 3869, 9780783, 268421, 3325660457)
+#printLatexTab("~/Documents/papier/bosco/commons-lang.tex", lang_cvl, 842, 479108, 66191, 443262201)
+#printLatexTab("~/Documents/papier/bosco/easymock.tex", easymock_cvl, 287, 45051, 10284, 9113924)
+#printLatexTab("~/Documents/papier/bosco/commons-collections.tex", collections_cvl, 1316, 766156, 52664, 231420664)
+#printLatexTab("~/Documents/papier/bosco/jbehave.tex", jbehave_cvl, 1039, 741218, 30102, 83260372) 
 
 test <- function(data,selector) {
   array <- array();
