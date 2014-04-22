@@ -82,7 +82,7 @@ public class Diversify extends AbstractDiversify {
             trans.setStatus(-2);
             Log.warn("compile error during diversification", e);
         }
-        trans.toJSONObject();
+
         trans.restore(tmpDir + "/" + sourceDir);
         Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
     }

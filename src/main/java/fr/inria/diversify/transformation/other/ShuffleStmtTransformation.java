@@ -146,7 +146,6 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = super.toJSONObject();
         object.put("newStmtOrder", Arrays.toString(newOrderIndex()));
-
         return object;
     }
 }
