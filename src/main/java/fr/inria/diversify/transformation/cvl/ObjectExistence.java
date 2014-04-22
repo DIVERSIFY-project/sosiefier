@@ -29,10 +29,10 @@ public class ObjectExistence extends CVLTransformation {
             applyToPackage(srcDir);
         else if(transformationPoint instanceof CtSimpleType)
             applyToClass(srcDir, transformationPoint);
-        else
+        else {
             addSourceCode();
-
-        printJavaFile(srcDir);
+            printJavaFile(srcDir);
+        }
         removeSourceCode();
     }
 
