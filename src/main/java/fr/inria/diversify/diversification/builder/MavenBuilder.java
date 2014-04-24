@@ -92,9 +92,10 @@ public class MavenBuilder extends AbstractBuilder {
             if(errorMatcher.matches()) {
                 errors.add(errorMatcher.group(2)+"."+errorMatcher.group(1));
             }
+
         }
         if(matcher != null) {
-            if(acceptedErrors.containsAll(errors))
+            if(acceptedErrors.containsAll(errors) && (Integer.parseInt(matcher.group(2)) + Integer.parseInt(matcher.group(3)) == 0))
                 status = 0;
             else
                 status = -1;
