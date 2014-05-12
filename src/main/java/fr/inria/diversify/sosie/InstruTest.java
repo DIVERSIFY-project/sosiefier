@@ -46,6 +46,7 @@ public class InstruTest {
 
         Factory factory = initSpoon(src);
         applyProcessor(factory, new MethodLoggingInstrumenter());
+        applyProcessor(factory, new ConditionalLoggingInstrumenter());
         applyProcessor(factory, new ErrorLoggingInstrumenter());
 
         Environment env = factory.getEnvironment();

@@ -67,6 +67,9 @@ public class LogWriter {
         try {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
+            string.append("V");
+            string.append(thread.getStackTrace().length);
+            string.append(simpleSeparator);
             string.append(id + "");
 //            string.append(simpleSeparator);
 //            string.append(classId);
@@ -113,11 +116,10 @@ public class LogWriter {
         try {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
-            string.append("C"); //new call
+            string.append("M"); //new method call
+            string.append(thread.getStackTrace().length);
             string.append(simpleSeparator);
             string.append(methodSignatureId);
-            string.append(simpleSeparator);
-            string.append(thread.getStackTrace().length);
 
             FileWriter fileWriter = getFileWriter(thread);
             semaphore = fileWriter.toString()+ fileWriter.hashCode();
@@ -148,13 +150,13 @@ public class LogWriter {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("A");
-            string.append(separator);
+            string.append(simpleSeparator);
             string.append(id + "");
-            string.append(separator);
+            string.append(simpleSeparator);
             string.append(className);
-            string.append(separator);
+            string.append(simpleSeparator);
             string.append(methodSignature);
-            string.append(separator);
+            string.append(simpleSeparator);
             string.append(assertName);
 
             StringBuilder vars = new StringBuilder();
@@ -206,13 +208,14 @@ public class LogWriter {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("E");
-            string.append(separator);
+            string.append(thread.getStackTrace().length);
+            string.append(simpleSeparator);
             string.append(id + "");
-            string.append(separator);
+            string.append(simpleSeparator);
             string.append(className);
-            string.append(separator);
+            string.append(simpleSeparator);;
             string.append(methodSignature);
-            string.append(separator);
+            string.append(simpleSeparator);
             if (exception != null)
                 string.append(exception.toString());
             else
@@ -235,14 +238,15 @@ public class LogWriter {
         try {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
-            string.append("Ca");
-            string.append(separator);
+            string.append("C");
+            string.append(thread.getStackTrace().length);
+            string.append(simpleSeparator);
             string.append(id + "");
-            string.append(separator);
+            string.append(simpleSeparator);;
             string.append(className);
-            string.append(separator);
+            string.append(simpleSeparator);
             string.append(methodSignature);
-            string.append(separator);
+            string.append(simpleSeparator);
             if (exception != null)
                 string.append(exception.toString());
             else

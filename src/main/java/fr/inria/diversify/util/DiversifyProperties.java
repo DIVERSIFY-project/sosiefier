@@ -47,10 +47,10 @@ public class DiversifyProperties {
         //tempory directory
         prop.setProperty("tmpDir", "tmpDir");
 
-        //directory for ouput (ex sosie)
+        //directory for output (ex sosie)
         prop.setProperty("outputDirectory", "output");
 
-        //directory for ouput (ex sosie)
+        //directory for output result (ex sosie)
         prop.setProperty("result", "output_diversify");
 
         //file name with path for result (ex json file, stat file)

@@ -51,12 +51,12 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
 
     public void process(CtStatement statement) {
         try {
-
-            if (CtThrow.class.isAssignableFrom(statement.getClass())) {
-                instruThrow((CtThrow) statement);
-            } else {
+//
+//            if (CtThrow.class.isAssignableFrom(statement.getClass())) {
+//                instruThrow((CtThrow) statement);
+//            } else {
                 instruLoopOrIf(statement);
-            }
+//            }
         } catch (Exception e) {}
     }
 
@@ -113,25 +113,25 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         }
     }
 
-    protected void instruThrow(CtThrow throwStmt) {
-
-        String snippet = "{\nfr.inria.diversify.sosie.logger.LogWriter.writeException(Thread.currentThread(),\"" +
-                getClass(throwStmt).getQualifiedName() + "\",\"" + getMethod(throwStmt).getSignature() + "\"," +
-                throwStmt.getThrownExpression() + ");\n";
-        SourcePosition sp = throwStmt.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-
-        snippet = "\n}\n";
-
-        index = compileUnit.nextLineIndex(sp.getSourceEnd());
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-    }
-
-
-
-
+//    protected void instruThrow(CtThrow throwStmt) {
+//
+//        String snippet = "{\nfr.inria.diversify.sosie.logger.LogWriter.writeException(Thread.currentThread(),\"" +
+//                getClass(throwStmt).getQualifiedName() + "\",\"" + getMethod(throwStmt).getSignature() + "\"," +
+//                throwStmt.getThrownExpression() + ");\n";
+//        SourcePosition sp = throwStmt.getPosition();
+//        CompilationUnit compileUnit = sp.getCompilationUnit();
+//        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+//
+//        snippet = "\n}\n";
+//
+//        index = compileUnit.nextLineIndex(sp.getSourceEnd());
+//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+//    }
+//
+//
+//
+//
 
 //    protected void instruCatch(CtTry tryStmt) {
 //        List<CtCatch> catchList = tryStmt.getCatchers();

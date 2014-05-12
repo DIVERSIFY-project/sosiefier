@@ -148,4 +148,11 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
         object.put("newStmtOrder", Arrays.toString(newOrderIndex()));
         return object;
     }
+
+    public void buildNewOrder(int[] array) {
+        newOrderStmt = new ArrayList<>();
+        for(int i : array) {
+            newOrderStmt.add(transformationPoint.getStatement(i));
+        }
+    }
 }

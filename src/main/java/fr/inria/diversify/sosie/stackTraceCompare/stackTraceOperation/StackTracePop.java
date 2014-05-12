@@ -1,11 +1,11 @@
-package fr.inria.diversify.sosie.stackTraceCompare;
+package fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation;
 
 import java.util.List;
 
 /**
  * Created by Simon on 17/04/14.
  */
-public class StackTracePop extends StackTraceOperation {
+public class StackTracePop implements StackTraceOperation {
     protected int pop;
 
     public StackTracePop(int pop) {
@@ -15,7 +15,7 @@ public class StackTracePop extends StackTraceOperation {
     public void apply(StackTrace stackTrace) {
         for(int i = 0; i < pop; i++) {
             stackTrace.deep--;
-            stackTrace.stackTrace.pop();
+            stackTrace.stackTraceCalls.pop();
         }
     }
 

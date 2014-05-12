@@ -1,9 +1,9 @@
-package fr.inria.diversify.sosie.stackTraceCompare;
+package fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation;
 
 /**
  * Created by Simon on 17/04/14.
  */
-public abstract class StackTraceOperation {
+public interface StackTraceOperation {
 
     public abstract void apply(StackTrace stackTrace);
 

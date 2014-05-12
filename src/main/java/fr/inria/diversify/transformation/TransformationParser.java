@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.transformation.cvl.*;
+import fr.inria.diversify.transformation.other.ShuffleStmtTransformation;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -18,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtClass;
@@ -134,6 +136,8 @@ public class  TransformationParser {
             trans = parseBytecode(jsonObject);
         if(type.equals("cvl"))
             trans = parseCvl(jsonObject);
+        if(type.equals("foo"))
+                trans = parseOther(jsonObject);
 
         trans.setFailures(getFailures(jsonObject));
         trans.setStatus(jsonObject.getInt("status"));
@@ -147,6 +151,57 @@ public class  TransformationParser {
 //            Log.warn("error during the parsing of "+jsonObject,e);
             return null;
         }
+    }
+
+    protected Transformation parseOther(JSONObject jsonObject) throws Exception {
+        String name = jsonObject.getString("name");
+        ShuffleStmtTransformation shuffle = new ShuffleStmtTransformation();
+        shuffle.setTransformationPoint(getBlock(jsonObject.getString("transformationPoint")));
+
+        int[] array = parseIntArray(jsonObject.getString("newStmtOrder"));
+        boolean ordre = true;
+        for(int i = 0; i < array.length;i++) {
+            if(array[i] != i) {
+                ordre = false;
+                break;
+            }
+        }
+        if(ordre)
+            throw new Exception("");
+
+
+        shuffle.buildNewOrder(array);
+
+        return shuffle;
+    }
+
+    protected int[] parseIntArray(String newStmtOrder) throws JSONException {
+
+        String[] tmp = newStmtOrder.substring(1, newStmtOrder.length() - 1).split(", ");
+        int[] array = new int[tmp.length];
+        for(int i = 0; i < tmp.length; i++)
+            array[i] = Integer.parseInt(tmp[i]);
+
+        return array;
+    }
+
+    protected CtBlock getBlock(String positionObject) throws Exception {
+        CtBlock o = null;
+
+        for (CtElement object : DiversifyEnvironment.getAllElement(CtBlock.class)) {
+            try {
+                String position = object.getParent(CtPackage.class).getQualifiedName()
+                        + "." + object.getPosition().getCompilationUnit().getMainType().getSimpleName() + ":" + object.getPosition().getLine();
+                if (position.equals(positionObject)){
+                    o = (CtBlock) object;
+                    break;
+                }
+            } catch (Exception e) {}
+        }
+        if (o == null) {
+            throw new Exception();
+        }
+        return  o;
     }
 
     protected Transformation parseCvl(JSONObject jsonObject) throws Exception {

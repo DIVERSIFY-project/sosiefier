@@ -1,21 +1,21 @@
-package fr.inria.diversify.sosie.stackTraceCompare;
+package fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation;
 
+import fr.inria.diversify.sosie.stackTraceCompare.stackElement.*;
+import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceElement;
 import fr.inria.diversify.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by Simon on 17/04/14.
  */
 public class StackTrace {
     protected List<StackTraceOperation> stackTraceOperations;
-    protected Stack<StackTraceElement> stackTrace;
+    protected Stack<StackTraceCall> stackTraceCalls;
+    protected Map<String,String> variablesValue;
     protected int position;
     protected int deep;
     protected String name;
@@ -23,8 +23,9 @@ public class StackTrace {
 
 
     public StackTrace() {
-        stackTrace = new Stack<>();
+        stackTraceCalls = new Stack<>();
         stackTraceOperations = new ArrayList<>();
+        variablesValue = new HashMap<>();
     }
 
     public int getDeep() {
@@ -55,15 +56,23 @@ public class StackTrace {
             previous();
     }
 
-    public StackTraceElement getTop() {
-        if(stackTrace.isEmpty())
-            return new StackTraceElement("",0);
-        return stackTrace.peek();
+    public StackTraceCall getTop() {
+        if(stackTraceCalls.isEmpty())
+            return new StackTraceCall(null, 0, new HashMap<>());
+        return stackTraceCalls.peek();
+    }
+    public StackTraceCall getTop2() {
+        if (stackTraceCalls.size() - 2 < 0)
+            return new StackTraceCall(null, 0, new HashMap<>());
+        return stackTraceCalls.get(stackTraceCalls.size() - 2);
     }
 
     public boolean hasNext() {
         return position < stackTraceOperations.size();
     }
+
+
+
 
     public void parseFile(File file, Map<String,String> idMap) throws Exception {
         parseFileName(file.getName());
@@ -82,6 +91,7 @@ public class StackTrace {
                         tmp = "";
                     } catch (Exception e) {
                         Log.error("malformed line: {}",line);
+                        tmp = "";
                     }
                 }
                 else {
@@ -91,30 +101,51 @@ public class StackTrace {
             line = reader.readLine();
         }
         addElement(tmp, idMap);
-        stackTrace.clear();
+        stackTraceCalls.clear();
     }
 
     protected void addElement(String line, Map<String, String> idMap) {
-        String[] tmp = line.split(";");
-        if(!tmp[0].equals("C"))
+        String type = line.substring(0, 1);
+        if(type.equals("A"))
             return;
-        int deep = Integer.parseInt(tmp[2]);
+        int i = line.indexOf(";".charAt(0));
+        int deep =  Integer.parseInt(line.substring(1, i));
 
-        String name = "null";
-        if(idMap.get(tmp[1]) != null)
-            name = idMap.get(tmp[1]);
-        StackTraceElement elem = new StackTraceElement(name, deep);
+        StackTraceElement elem = parseElement(type, deep, line.substring(i+1,line.length()), idMap);
 
+        if(elem instanceof StackTraceCall)
+            addCall((StackTraceCall) elem, deep);
+        else {
+            stackTraceOperations.add(new StackTraceVariableObservation((StackTraceVariable) elem));
+        }
+    }
+
+    protected void addCall(StackTraceCall elem, int deep) {
         int pop = 0;
-        while(!stackTrace.isEmpty() && stackTrace.peek().originalDeep >= deep) {
-            stackTrace.pop();
+        while(!stackTraceCalls.isEmpty() && stackTraceCalls.peek().getOriginalDeep() >= deep) {
+            stackTraceCalls.pop();
             pop++;
         }
         if(pop != 0)
             stackTraceOperations.add(new StackTracePop(pop));
-        stackTrace.push(elem);
+        stackTraceCalls.push(elem);
         stackTraceOperations.add(new StackTracePush(elem));
     }
+
+    protected StackTraceElement parseElement(String type, int deep, String value, Map<String, String> idMap) {
+        StackTraceElement st = null;
+        if(type.equals("M"))
+            st = new StackTraceCall(value, deep, idMap);
+        if(type.equals("V"))
+            st = new StackTraceVariable(value, deep, idMap);
+        if(type.equals("E"))
+            st = new StackTraceException(value, deep);
+        if(type.equals("C"))
+            st = new StackTraceCatch(value, deep);
+
+        return st;
+    }
+
 
     @Override
     public String toString() {
@@ -135,4 +166,11 @@ public class StackTrace {
         return threadName+"_"+name;
     }
 
+    public Stack<StackTraceCall> getStackTraceCalls() {
+        return stackTraceCalls;
+    }
+
+    public Map<String,String> getVariable() {
+        return variablesValue;
+    }
 }
