@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.stackTraceCompare.diff;
 
+import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceCall;
 import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceElement;
 
 import java.io.FileWriter;
@@ -19,7 +20,8 @@ public class CallDiff extends Diff {
 
     public CallDiff(String line) {
         String[] tmp = line.split(";");
-        maxStackDiff = Integer.parseInt(tmp[2]);
+        diffStart = new StackTraceCall(tmp[1], Integer.parseInt(tmp[2]));
+        maxStackDiff = Integer.parseInt(tmp[3]);
     }
 
     public boolean equals(Object other) {
@@ -28,7 +30,7 @@ public class CallDiff extends Diff {
 
         CallDiff cDiff = (CallDiff) other;
 
-        return maxStackDiff == cDiff.maxStackDiff &&
+        return //maxStackDiff == cDiff.maxStackDiff &&
                 diffStart.equals(cDiff.diffStart);
     }
 
@@ -42,5 +44,13 @@ public class CallDiff extends Diff {
 
     public void write(FileWriter writer) throws IOException {
         writer.write("C;"+diffStart+";"+maxStackDiff);
+    }
+
+    public void setMaxStackDiff(int x) {
+        maxStackDiff = x;
+    }
+
+    public int getMaxStackDiff() {
+        return maxStackDiff;
     }
 }

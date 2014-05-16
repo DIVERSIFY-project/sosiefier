@@ -37,11 +37,16 @@ public class CompareStackTrace {
                 maxCurrentDiff = Math.max(maxCurrentDiff, Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
             } else {
                 if(maxCurrentDiff != 0 ) {
-                    Diff diff = new CallDiff(diffStart, maxCurrentDiff);
+                    CallDiff diff = new CallDiff(diffStart, maxCurrentDiff);
                     maxCurrentDiff = 0;
                     diffStart = null;
-                    if(!diffToExclude.contains(diff))
+                    int index = diffToExclude.indexOf(diff);
+                    if(index == -1)
                         diffs.add(diff);
+                    else {
+                       CallDiff d = (CallDiff) diffs.get(index);
+                        d.setMaxStackDiff(Math.max(d.getMaxStackDiff(), maxCurrentDiff));
+                    }
                 }
             }
         }
@@ -98,10 +103,16 @@ public class CompareStackTrace {
                 maxCurrentDiff = Math.max(maxCurrentDiff, Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
             } else {
                 if(maxCurrentDiff != 0 ) {
-                    Diff diff = new CallDiff(diffStart, maxCurrentDiff);
+                    CallDiff diff = new CallDiff(diffStart, maxCurrentDiff);
                     maxCurrentDiff = 0;
-                    if(!diffToExclude.contains(diff))
+                    diffStart = null;
+                    int index = diffs.indexOf(diff);
+                    if(index < 0)
                         diffs.add(diff);
+                    else {
+                        CallDiff d = (CallDiff) diffs.get(index);
+                        d.setMaxStackDiff(Math.max(d.getMaxStackDiff(), maxCurrentDiff));
+                    }
                 }
             }
             Set<VariableDiff> vd = varDiff(stackTrace1,stackTrace2);
@@ -150,7 +161,7 @@ public class CompareStackTrace {
     }
 
     protected boolean valueEqual(String v1, String v2) {
-        if(v1 ==null || v2 == null) {
+        if(v1 == null || v2 == null) {
             return true;
         }
         Object o1;

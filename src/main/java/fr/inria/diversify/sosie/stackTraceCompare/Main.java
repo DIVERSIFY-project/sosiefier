@@ -112,7 +112,6 @@ public class Main {
             diff.write(writer);
             writer.write("\n");
         }
-
         writer.close();
     }
 

@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.stackTraceCompare.diff;
 
+import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceCall;
 import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceElement;
 
 import java.io.FileWriter;
@@ -20,7 +21,8 @@ public class VariableDiff extends Diff {
 
     public VariableDiff(String line) {
         String[] tmp = line.split(";");
-        varDiff = tmp[2];
+        diffStart = new StackTraceCall(tmp[1], Integer.parseInt(tmp[2]));
+        varDiff = tmp[3];
     }
 
     public String getVarDiff() {

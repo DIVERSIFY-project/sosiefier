@@ -1,7 +1,6 @@
 package fr.inria.diversify.sosie.stackTraceCompare.diff;
 
 import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceElement;
-
 import java.io.FileWriter;
 import java.io.IOException;
 

@@ -68,7 +68,10 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
 
         snippet += ");\n";
         if(assertVar.size() != 0)  {
-            snippet += /**executable.getDeclaringType().getPackage()+"."+executable.getDeclaringType().getSimpleName()+"."+**/executable.getSimpleName() + "("+assertVar.get(0);
+            if(executable.isStatic())
+                snippet += executable.getDeclaringType().getPackage()+"."+executable.getDeclaringType().getSimpleName()+"."+executable.getSimpleName() + "("+assertVar.get(0);
+            else
+                snippet += executable.getSimpleName() + "("+assertVar.get(0);
             for(int i = 1; i < assertVar.size(); i++)
                 snippet += ", " + assertVar.get(i);
             snippet += ");\n";

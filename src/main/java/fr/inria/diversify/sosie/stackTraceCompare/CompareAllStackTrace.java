@@ -17,6 +17,7 @@ public class CompareAllStackTrace {
     protected List<StackTrace> stackTraces1;
     protected List<StackTrace> stackTraces2;
     protected List<Diff> diffToExclude;
+    protected Collection<Diff> diffs;
 
     public CompareAllStackTrace(String dirOriginal, String dirSosie, String diffFile) throws IOException {
         stackTraces1 = loadPointSequence(dirOriginal,false);
@@ -100,6 +101,7 @@ public class CompareAllStackTrace {
             map.put(tmp[0],line.substring(tmp[0].length(), line.length()));
             line = reader.readLine();
         }
+
         return map;
     }
 
