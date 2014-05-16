@@ -11,7 +11,7 @@ import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import java.util.Stack;
 
 public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
-	public Printingcontext context = new Printingcontext();
+	public PrintingContext context = new PrintingContext();
 
 	public CodeFragmentEqualPrinter(Environment env) {
 		super(env);
@@ -102,72 +102,31 @@ public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 	return this;
 }
 
-	public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
-		enterCtExpression(fieldAccess);
-//		if (fieldAccess.getTarget() != null) {
-//			scan(fieldAccess.getTarget());
-//			write("....");
-//			context.ignoreStaticAccess = true;
-//		}
-		context.ignoreGenerics = true;
-		scan(fieldAccess.getVariable());
-		context.ignoreGenerics = false;
-		context.ignoreStaticAccess = false;
-		exitCtExpression(fieldAccess);
-	}
+//	public <T> void visitCtFieldAccess(CtFieldAccess<T> fieldAccess) {
+//		enterCtExpression(fieldAccess);
+//
+//		context.ignoreGenerics = true;
+//		scan(fieldAccess.getVariable());
+//		context.ignoreGenerics = false;
+//		context.ignoreStaticAccess = false;
+//		exitCtExpression(fieldAccess);
+//	}
 
-	private class Printingcontext {
+	private class PrintingContext {
 		boolean noTypeDecl = false;
 
-		Stack<CtTypeReference<?>> currentThis = new Stack<CtTypeReference<?>>();
+		Stack<CtTypeReference<?>> currentThis = new Stack<>();
 
 		CtSimpleType<?> currentTopLevel;
 
 		boolean ignoreGenerics = false;
 
-		boolean ignoreImport = false;
-
 		/** Layout variables */
 		int jumped = 0;
-
-		int lineLength = 80;
-
-		int lineLengthMargin = 5;
-
-		int nbTabs = 0;
-
-		Stack<CtExpression<?>> parenthesedExpression = new Stack<CtExpression<?>>();
-
-		boolean printDocs = true;
-
-		boolean printShortName = false;
-		boolean isInvocation = false;
-
-		boolean skipArray = false;
 
 		int target = 0;
 
 		boolean ignoreStaticAccess = false;
-
-		boolean ignoreEnclosingClass = false;
-
-		void enterTarget() {
-			target++;
-		}
-
-		void exitTarget() {
-			if (jumped > 0) {
-				jumped--;
-			} else {
-				target--;
-			}
-		}
-
-		void jumpTarget() {
-			jumped++;
-			target--;
-		}
-
 	}
 	
 }

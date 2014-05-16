@@ -24,6 +24,5 @@ public class Expression extends CodeFragment {
     @Override
     public boolean isReplace(CodeFragment other, boolean varNameMatch) {
         return context.isReplace(other.context, varNameMatch);
-//        return getInputContext().isInclude(other.getInputContext()) && getOutputContext().equals(other.getOutputContext());
     }
 }

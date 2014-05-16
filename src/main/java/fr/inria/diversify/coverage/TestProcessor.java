@@ -1,10 +1,6 @@
 package fr.inria.diversify.coverage;
 
 import spoon.processing.AbstractProcessor;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtSimpleType;

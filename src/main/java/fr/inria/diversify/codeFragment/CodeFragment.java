@@ -3,7 +3,6 @@ package fr.inria.diversify.codeFragment;
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
 import fr.inria.diversify.transformation.ReplaceVariableVisitor;
 import fr.inria.diversify.util.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
@@ -40,11 +39,9 @@ public abstract class CodeFragment {
         this.initInputContext();
     }
 
-
     public CtTypeReference<?> getOutputContext() {
         return context.getOutputContext();
     }
-
 
     public InputContext getInputContext() {
         return context.getInputContext();
@@ -117,7 +114,7 @@ public abstract class CodeFragment {
     public abstract  boolean isReplace(CodeFragment other, boolean varNameMatch);
 
     public Map<String,String> randomVariableMapping(CodeFragment other) {
-        Map<String,String> varMap = new HashMap<String, String>();
+        Map<String,String> varMap = new HashMap<>();
         Random r = new Random();
 
         for (CtVariableReference<?> variable : other.getInputContext().getVar()) {

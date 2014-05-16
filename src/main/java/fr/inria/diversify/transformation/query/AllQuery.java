@@ -21,9 +21,7 @@ public class AllQuery extends TransformationQuery  {
     }
 
     @Override
-    public void setType(String type) {
-
-    }
+    public void setType(String type) {}
 
     @Override
     public Transformation getTransformation() throws Exception {

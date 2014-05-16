@@ -23,7 +23,7 @@ public class TestSosie extends AbstractDiversify {
     public TestSosie(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
-        transformations = new ArrayList<Transformation>();
+        transformations = new ArrayList<>();
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException {

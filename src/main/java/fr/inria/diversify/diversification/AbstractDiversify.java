@@ -33,7 +33,6 @@ public abstract class AbstractDiversify {
     public String printResult(String output) {
         mkDirResult(output);
         String fileName = output + System.currentTimeMillis();// + "_transformation.json";
-        String absoluteFileName = output + "/" + fileName;
         try {
             writeTransformation(fileName);
             Log.info("write result in {}", fileName);

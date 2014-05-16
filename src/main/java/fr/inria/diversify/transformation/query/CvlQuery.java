@@ -21,9 +21,7 @@ import java.util.*;
 public class CvlQuery extends TransformationQuery {
 
     @Override
-    public void setType(String type) {
-
-    }
+    public void setType(String type) {}
 
     @Override
     public Transformation getTransformation() throws Exception {

@@ -24,15 +24,14 @@ public class Diversify extends AbstractDiversify {
     public Diversify(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
-        transformations = new ArrayList<Transformation>();
+        transformations = new ArrayList<>();
     }
 
     public Diversify(String projectDir, String workingDir) {
         this.sourceDir = workingDir;
         this.projectDir = projectDir;
 
-
-        transformations = new ArrayList<Transformation>();
+        transformations = new ArrayList<>();
     }
 
     @Override

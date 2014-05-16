@@ -40,7 +40,7 @@ public class CompareStackTrace {
                     CallDiff diff = new CallDiff(diffStart, maxCurrentDiff);
                     maxCurrentDiff = 0;
                     diffStart = null;
-                    int index = diffToExclude.indexOf(diff);
+                    int index = diffs.indexOf(diff);
                     if(index == -1)
                         diffs.add(diff);
                     else {
@@ -192,9 +192,9 @@ public class CompareStackTrace {
     protected Collection<String> equalListString(String var) {
         Collection<String> collection;
         if(var.startsWith("{"))
-            collection = new HashSet<String>();
+            collection = new HashSet<>();
         else
-            collection = new ArrayList<String>();
+            collection = new ArrayList<>();
 
         for(String s : var.substring(1,var.length()-1).split(", "))
             collection.add(equalString(s));

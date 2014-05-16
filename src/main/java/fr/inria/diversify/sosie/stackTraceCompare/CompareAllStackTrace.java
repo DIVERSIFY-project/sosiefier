@@ -91,7 +91,7 @@ public class CompareAllStackTrace {
     }
 
     protected Map<String,String> loadIdMap(String file) throws IOException {
-        Map<String,String> map = new HashMap<String, String>();
+        Map<String,String> map = new HashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(file));
         reader.readLine();
         String line = reader.readLine();

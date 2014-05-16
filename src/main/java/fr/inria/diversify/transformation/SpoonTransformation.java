@@ -30,7 +30,7 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
     protected void printJavaFile(String directory, CtSimpleType<?> cl) throws IOException {
         CtSimpleType<?> type;
         if(cl == null)
-            type = getOriginalClass(transformationPoint);
+            type = getOriginalClass();
         else
             type = cl;
         Factory factory = type.getFactory();
@@ -43,7 +43,7 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
-    public CtSimpleType<?> getOriginalClass(P cf) {
+    public CtSimpleType<?> getOriginalClass() {
         return transformationPoint.getPosition().getCompilationUnit().getMainType();
     }
 

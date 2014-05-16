@@ -9,7 +9,6 @@ import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtSimpleType;
 
 
-
 /**
  * User: Simon
  * Date: 7/11/13

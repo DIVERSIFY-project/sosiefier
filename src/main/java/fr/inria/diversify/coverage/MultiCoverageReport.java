@@ -19,12 +19,12 @@ public class MultiCoverageReport implements ICoverageReport {
     protected String classesDir;
 
     public MultiCoverageReport(String classesDir) {
-        coverages = new ArrayList<CoverageReport>();
+        coverages = new ArrayList<>();
         this.classesDir = classesDir;
     }
 
     public MultiCoverageReport(String classesDir, File jacocoDir) {
-        coverages = new ArrayList<CoverageReport>();
+        coverages = new ArrayList<>();
         for (File file : jacocoDir.listFiles()) {
             if(file.getName().endsWith(".exec"))
                 coverages.add(new CoverageReport(classesDir,file));

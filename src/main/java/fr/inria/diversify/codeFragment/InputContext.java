@@ -26,7 +26,7 @@ public class InputContext {
 	
 	protected Set<String> inputContextToString() {
 		//todo set ou list ?????
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
 		for (CtVariableReference<?> var : localVariableReferences)
 			set.add(var.getType().toString());
 		return set;
@@ -38,20 +38,19 @@ public class InputContext {
 	}
 
     public List<Object> allCandidate(CtTypeReference<?> type){
-        List<Object> candidate = new ArrayList<Object>();
+        List<Object> candidate = new ArrayList<>();
         candidate.addAll(allCandidateForLocalVar(type));
 
         return candidate;
     }
 
     public List<CtVariableReference> allCandidateForLocalVar(CtTypeReference<?> type){
-        List<CtVariableReference> candidate = new ArrayList<CtVariableReference>();
+        List<CtVariableReference> candidate = new ArrayList<>();
 
         for (CtVariableReference<?> var : localVariableReferences)
             if(var.getType().equals(type)  && var.getType().getActualTypeArguments().equals(type.getActualTypeArguments())) {
                 candidate.add(var);
             }
-
         return candidate;
     }
 
@@ -88,7 +87,7 @@ public class InputContext {
     }
 
     public Set<String> getAllVarName() {
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         for (CtVariableReference<?> var : localVariableReferences)
             set.add(var.getSimpleName());
 
@@ -105,11 +104,10 @@ public class InputContext {
 
 	public String equalString() {
         //todo set ou list ?????
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         for (CtVariableReference<?> var : localVariableReferences)
             set.add(var.getType().toString()+": "+var);
         return set.toString();
-	//	return inputContextToString().toString();
 	}
 	
 	@Override
@@ -135,13 +133,5 @@ public class InputContext {
                types.add(var.getType());
         }
         return types;
-    }
-
-    public boolean hasOnlyPrimitive() {
-        boolean test = true;
-        for(CtTypeReference type : getTypes()) {
-            test = test && type.isPrimitive();
-        }
-        return test;
     }
 }

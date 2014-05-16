@@ -22,7 +22,6 @@ public class ASTReplace extends ASTTransformation {
     protected CodeFragment transplant;
     protected Map<String, String> variableMapping;
 
-
     public ASTReplace() {
         name = "replace";
         type = "adrStmt";
@@ -95,7 +94,6 @@ public class ASTReplace extends ASTTransformation {
     }
 
     public boolean equals(Object other) {
-
         if(other == null)
             return false;
         if(!this.getClass().isAssignableFrom(other.getClass()))

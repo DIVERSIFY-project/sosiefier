@@ -48,9 +48,9 @@ public class  TransformationParser {
 
     public TransformationParser(boolean toSet) {
         if(toSet)
-            transformations = new HashSet<Transformation>();
+            transformations = new HashSet<>();
         else
-            transformations = new ArrayList<Transformation>();
+            transformations = new ArrayList<>();
     }
 
     public Collection<Transformation> parseDir(String dir) throws IOException, JSONException {
@@ -76,7 +76,6 @@ public class  TransformationParser {
 
 
     public Transformation parseUniqueTransformation(File file) throws Exception {
-
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
         String line = br.readLine();
@@ -100,7 +99,7 @@ public class  TransformationParser {
             line = br.readLine();
         }
         if (sb.length() == 0)
-            return new ArrayList<Transformation>();
+            return new ArrayList<>();
         JSONArray array = new JSONArray(sb.toString());
 
         parseFailureDictionay(array);
@@ -124,28 +123,27 @@ public class  TransformationParser {
 
     protected Transformation parseTransformation(JSONObject jsonObject)  {
         try {
+            String type = jsonObject.getString("type");
+            Transformation trans = null;
 
-        String type = jsonObject.getString("type");
-        Transformation trans = null;
-
-        if(type.equals("mutation") )
-            trans = parseMutation(jsonObject);
-        if(type.equals("adrStmt"))
-            trans = parseStmt(jsonObject);
-        if(type.equals("adrBytecode"))
-            trans = parseBytecode(jsonObject);
-        if(type.equals("cvl"))
-            trans = parseCvl(jsonObject);
-        if(type.equals("foo"))
+            if(type.equals("mutation") )
+                trans = parseMutation(jsonObject);
+            if(type.equals("adrStmt"))
+                trans = parseStmt(jsonObject);
+            if(type.equals("adrBytecode"))
+                trans = parseBytecode(jsonObject);
+            if(type.equals("cvl"))
+                trans = parseCvl(jsonObject);
+            if(type.equals("foo"))
                 trans = parseOther(jsonObject);
 
-        trans.setFailures(getFailures(jsonObject));
-        trans.setStatus(jsonObject.getInt("status"));
+            trans.setFailures(getFailures(jsonObject));
+            trans.setStatus(jsonObject.getInt("status"));
 
-        if(jsonObject.has("parent"))
-            trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));
+            if(jsonObject.has("parent"))
+                trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));
 
-        return trans;
+            return trans;
         }catch (Exception e) {
             countError++;
 //            Log.warn("error during the parsing of "+jsonObject,e);
@@ -154,7 +152,6 @@ public class  TransformationParser {
     }
 
     protected Transformation parseOther(JSONObject jsonObject) throws Exception {
-        String name = jsonObject.getString("name");
         ShuffleStmtTransformation shuffle = new ShuffleStmtTransformation();
         shuffle.setTransformationPoint(getBlock(jsonObject.getString("transformationPoint")));
 
@@ -168,7 +165,6 @@ public class  TransformationParser {
         }
         if(ordre)
             throw new Exception("");
-
 
         shuffle.buildNewOrder(array);
 
@@ -259,7 +255,7 @@ public class  TransformationParser {
         if(nodeType.equals("CtClassImpl")) {
             String clName = jsonObject.getString("classOrInterfaceExistence");
             CtClass cl = (CtClass) getObject(jsonObject.getString("transformationPoint"), jsonObject.getString("nodeType"));
-            List<CtTypeReference> set = new ArrayList<CtTypeReference>();
+            List<CtTypeReference> set = new ArrayList<>();
 
             if(cl.getSuperclass() != null)
                 set.add(cl.getSuperclass());
@@ -283,7 +279,7 @@ public class  TransformationParser {
         if(nodeType.equals("CtClassImpl")) {
             String clName = jsonObject.getString("classOrInterfaceExistence");
             CtClass cl = (CtClass) getObject(jsonObject.getString("transformationPoint"), jsonObject.getString("nodeType"));
-            List<CtTypeReference> set = new ArrayList<CtTypeReference>();
+            List<CtTypeReference> set = new ArrayList<>();
 
             if(cl.getSuperclass() != null)
                 set.add(cl.getSuperclass());
@@ -300,7 +296,7 @@ public class  TransformationParser {
 
     protected Transformation parseMutation(JSONObject jsonObject) throws Exception {
         String name = jsonObject.getString("name");
-        Transformation trans = null;
+        Transformation trans;
 
         if(name.equals("inlineConstant"))
             trans = parseInlineConstantMutation(jsonObject);
@@ -472,12 +468,10 @@ public class  TransformationParser {
             } catch (Exception e) {}
         }
         if (cf  == null) {
-            int count = 0;
             for (CodeFragment codeFragment : DiversifyEnvironment.getCodeFragments()) {
                 try {
                     position = position.split(":")[0];
                     if(codeFragment.positionString().startsWith(position)) {
-                        count++;
                         String sourceCode = jsonObject.getString("sourceCode");
                         String cfSourceCode = codeFragment.equalString();
                         if(sourceCode.equals(cfSourceCode)) {
@@ -495,7 +489,7 @@ public class  TransformationParser {
     }
 
     protected Map<String, String> parseVariableMapping(JSONObject jsonObject) throws JSONException {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         Iterator it = jsonObject.keys();
         while (it.hasNext()) {
             String key = it.next().toString();
@@ -523,7 +517,7 @@ public class  TransformationParser {
 
 
     protected List<String> getFailures(JSONObject jsonObject) throws JSONException {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
         JSONArray array = jsonObject.getJSONArray("failures");
         for(int i = 0; i < array.length(); i++) {
@@ -539,7 +533,7 @@ public class  TransformationParser {
         for(int i = 0; i < array.length(); i++) {
             JSONObject object = array.getJSONObject(i);
             if(object.has("failureDictionary")) {
-                failureDictionary = new HashMap<Integer, String>();
+                failureDictionary = new HashMap<>();
                 JSONObject dico = object.getJSONObject("failureDictionary");
                 Iterator it = dico.keys();
                 while (it.hasNext()) {

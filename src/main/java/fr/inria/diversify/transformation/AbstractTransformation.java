@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public abstract class AbstractTransformation implements Transformation {
     protected Integer status = -3;
     protected List<String> failures;
-    protected static Map<String,Integer> failuresDico = new HashMap<String, Integer>();
+    protected static Map<String,Integer> failuresDico = new HashMap<>();
     protected String name;
     protected String type;
     protected Transformation parent;

@@ -72,10 +72,4 @@ public class Statement extends CodeFragment {
         String string = cf.toString();
         return string.contains("super(") || string.contains("super.");
     }
-
-
-//    protected CtStatement getNextStatement() {
-//        if(codeFragment.getParent() instanceof CtBlock)
-//            toStatementList()
-//    }
 }

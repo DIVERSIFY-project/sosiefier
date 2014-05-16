@@ -14,12 +14,10 @@ public class ReplaceVariableVisitor extends CtScanner {
     protected CtVariableReference oldVar;
     protected CtVariableReference newVar;
 
-
     public ReplaceVariableVisitor(CtVariableReference oldVar, CtVariableReference newVar) {
         this.oldVar = oldVar;
         this.newVar = newVar;
     }
-
 
     public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
         if (variableAccess.getVariable().equals(oldVar))
@@ -27,7 +25,6 @@ public class ReplaceVariableVisitor extends CtScanner {
 
         super.visitCtVariableAccess(variableAccess);
     }
-
 
     public <T> void visitCtTargetedAccess(CtTargetedAccess<T> targetedAccess) {
             if(targetedAccess.getVariable().equals(oldVar)) {
@@ -38,15 +35,15 @@ public class ReplaceVariableVisitor extends CtScanner {
             super.visitCtTargetedAccess(targetedAccess);
     }
 
-        public <T> void visitCtThisAccess(CtThisAccess<T> thisAccess) {
-            if(oldVar.getSimpleName().equals("this")) {
-                CodeFactory codeFactory = thisAccess.getFactory().Code();
-                CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
-                thisAccess.replace(variableAccess);
-            }
-
-            super.visitCtThisAccess(thisAccess);
+    public <T> void visitCtThisAccess(CtThisAccess<T> thisAccess) {
+        if(oldVar.getSimpleName().equals("this")) {
+            CodeFactory codeFactory = thisAccess.getFactory().Code();
+            CtVariableAccess variableAccess = codeFactory.createVariableAccess(newVar, false);
+            thisAccess.replace(variableAccess);
         }
+
+        super.visitCtThisAccess(thisAccess);
+    }
 
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 

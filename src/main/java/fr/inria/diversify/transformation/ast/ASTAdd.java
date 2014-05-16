@@ -55,7 +55,7 @@ public class ASTAdd extends ASTTransformation {
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
 
-        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());//sp.getSourceStart();
+        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, transplant.codeFragmentString(), 0));
         Log.debug("----------\n---------");
         Log.debug("{}",originalClass.getQualifiedName());

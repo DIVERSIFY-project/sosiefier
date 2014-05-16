@@ -25,15 +25,13 @@ public class MutantSosieWriter extends AbstractDiversify {
     public MutantSosieWriter(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
-        transformations = new ArrayList<Transformation>();
-
+        transformations = new ArrayList<>();
     }
 
     public MutantSosieWriter(String projectDir, String src) {
         this.sourceDir = src;
         this.projectDir = projectDir;
-        transformations = new ArrayList<Transformation>();
-
+        transformations = new ArrayList<>();
     }
     @Override
     public void run(int n) throws Exception {
@@ -57,7 +55,6 @@ public class MutantSosieWriter extends AbstractDiversify {
 
             Log.debug("apply + sosie");
             trans.applyWithParent(sosieDir + "/" + sourceDir);
-//            trans.apply(sosieDir + "/" + sourceDir);
 
             if(runTest(mutantDir) < -1 || runTest(sosieDir) < -1) {
                 FileUtils.cleanDirectory(mutantDir);

@@ -21,14 +21,14 @@ public class Sosie extends AbstractDiversify {
     public Sosie(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
-        transformations = new ArrayList<Transformation>();
+        transformations = new ArrayList<>();
 
     }
 
     public Sosie(String projectDir, String src) {
         this.sourceDir = src;
         this.projectDir = projectDir;
-        transformations = new ArrayList<Transformation>();
+        transformations = new ArrayList<>();
 
     }
     @Override

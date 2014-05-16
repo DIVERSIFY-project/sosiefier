@@ -36,15 +36,15 @@ public abstract class AbstractBuilder {
     public AbstractBuilder(String directory,String srcDir) {
         this.directory = directory;
         this.srcDir = srcDir;
-        errors = new ArrayList<String>();
-        acceptedErrors = new ArrayList<String>();
+        errors = new ArrayList<>();
+        acceptedErrors = new ArrayList<>();
     }
 
     protected void reset() {
         compileError = false;
         allTestRun = false;
        status = -3;
-        errors = new ArrayList<String>();
+        errors = new ArrayList<>();
     }
 
     public void runBuilder() throws InterruptedException {

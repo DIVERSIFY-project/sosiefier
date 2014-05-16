@@ -75,7 +75,6 @@ public class VariableVisitor extends CtScanner {
 		return thisVariable;
 	}
 
-
     public Set<CtVariableReference<?>> getLocalVariableReferences() {
         return localVariableReferences;
     }
