@@ -18,8 +18,7 @@ public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
 		
 	}
 
-public <T> void visitCtInvocation(CtInvocation<T> invocation) {
-		
+    public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 		if(invocation.getTarget() == null){
 			write(invocation.getExecutable().getDeclaringType().toString());
 			write(".");
@@ -50,7 +49,7 @@ public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 				context.ignoreGenerics = false;
 			}
 		} else {
-			boolean isStatic = false;
+			boolean isStatic;
 			if (reference.getSimpleName().equals("class")) {
 				isStatic = true;
 			} else if (reference.getSimpleName().equals("super")) {

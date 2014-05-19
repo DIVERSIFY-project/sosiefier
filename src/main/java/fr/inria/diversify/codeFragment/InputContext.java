@@ -127,7 +127,7 @@ public class InputContext {
 	}
 
     public List<CtTypeReference<?>> getTypes() {
-        List<CtTypeReference<?>> types = new ArrayList<CtTypeReference<?>>();
+        List<CtTypeReference<?>> types = new ArrayList<>();
 
         for (CtVariableReference var: localVariableReferences) {
                types.add(var.getType());

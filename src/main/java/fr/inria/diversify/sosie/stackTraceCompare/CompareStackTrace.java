@@ -12,18 +12,31 @@ import java.util.*;
 public class CompareStackTrace {
     protected StackTrace stackTrace1;
     protected StackTrace stackTrace2;
-    protected List<Diff> diffToExclude;
+    protected List<Diff> diffs;
+    protected Map<StackTraceElement, Integer> callDiff;
 
+
+    public CompareStackTrace(StackTrace st1, StackTrace st2, List<Diff> diffs) {
+        stackTrace1 = st1;
+        stackTrace2 = st2;
+        this.diffs = new ArrayList<>();
+        callDiff = new HashMap<>();
+        for(Diff diff : diffs)
+            if(diff instanceof CallDiff) {
+                callDiff.put(diff.getDiffStart(), ((CallDiff) diff).getMaxStackDiff());
+            }
+        else
+            diffs.add(diff);
+    }
 
     public CompareStackTrace(StackTrace st1, StackTrace st2) {
         stackTrace1 = st1;
         stackTrace2 = st2;
-        diffToExclude = new ArrayList<>();
+
+        callDiff = new HashMap<>();
     }
 
     public List<Diff> findCallDiff() {
-        int maxCurrentDiff = 0;
-        StackTraceElement diffStart = null;
         List<Diff> diffs = new LinkedList<>();
 
         while(stackTrace1.hasNext() && stackTrace2.hasNext()) {
@@ -32,24 +45,10 @@ public class CompareStackTrace {
 
             if(!stackTrace1.getTop().equals(stackTrace2.getTop())
                     || !(stackTrace1.getDeep() == stackTrace2.getDeep())) {
-                if(diffStart == null)
-                    diffStart = stackTrace1.getTop2();
-                maxCurrentDiff = Math.max(maxCurrentDiff, Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
-            } else {
-                if(maxCurrentDiff != 0 ) {
-                    CallDiff diff = new CallDiff(diffStart, maxCurrentDiff);
-                    maxCurrentDiff = 0;
-                    diffStart = null;
-                    int index = diffs.indexOf(diff);
-                    if(index == -1)
-                        diffs.add(diff);
-                    else {
-                       CallDiff d = (CallDiff) diffs.get(index);
-                        d.setMaxStackDiff(Math.max(d.getMaxStackDiff(), maxCurrentDiff));
-                    }
-                }
+                addCallDiff(stackTrace1.getTop2(), Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
             }
         }
+        formatAndAddCallDiff(diffs);
         return diffs;
     }
 
@@ -62,7 +61,7 @@ public class CompareStackTrace {
 
             Set<VariableDiff> vd = varDiff(stackTrace1,stackTrace2);
             if(!vd.isEmpty()) {
-                vd.removeAll(diffToExclude);
+                vd.removeAll(this.diffs);
                 diffs.addAll(vd);
             }
         }
@@ -88,8 +87,6 @@ public class CompareStackTrace {
     }
 
     public List<Diff> findDiff() {
-        int maxCurrentDiff = 0;
-        StackTraceElement diffStart = null;
         List<Diff> diffs = new LinkedList<>();
 
         while(stackTrace1.hasNext() && stackTrace2.hasNext()) {
@@ -98,30 +95,31 @@ public class CompareStackTrace {
 
             if(!stackTrace1.getTop().equals(stackTrace2.getTop())
                     || !(stackTrace1.getDeep() == stackTrace2.getDeep())) {
-                if(diffStart == null)
-                    diffStart = stackTrace1.getTop2();
-                maxCurrentDiff = Math.max(maxCurrentDiff, Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
-            } else {
-                if(maxCurrentDiff != 0 ) {
-                    CallDiff diff = new CallDiff(diffStart, maxCurrentDiff);
-                    maxCurrentDiff = 0;
-                    diffStart = null;
-                    int index = diffs.indexOf(diff);
-                    if(index < 0)
-                        diffs.add(diff);
-                    else {
-                        CallDiff d = (CallDiff) diffs.get(index);
-                        d.setMaxStackDiff(Math.max(d.getMaxStackDiff(), maxCurrentDiff));
-                    }
-                }
+                addCallDiff(stackTrace1.getTop2(), Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
             }
             Set<VariableDiff> vd = varDiff(stackTrace1,stackTrace2);
             if(!vd.isEmpty()) {
-                vd.removeAll(diffToExclude);
+                vd.removeAll(this.diffs);
                 diffs.addAll(vd);
             }
         }
+        formatAndAddCallDiff(diffs);
         return diffs;
+    }
+
+    protected void formatAndAddCallDiff(List<Diff> diffs) {
+        for(StackTraceElement ste : callDiff.keySet()) {
+            CallDiff tmp = new CallDiff(ste, callDiff.get(ste));
+            diffs.add(tmp);
+        }
+    }
+
+
+    protected void addCallDiff(StackTraceElement diffStart, int nbCallDiff) {
+        if(callDiff.containsKey(diffStart))
+            callDiff.put(diffStart,Math.max(callDiff.get(diffStart),nbCallDiff));
+        else
+            callDiff.put(diffStart,nbCallDiff);
     }
 
     protected void findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
@@ -156,9 +154,9 @@ public class CompareStackTrace {
         return same;
     }
 
-    public void setDiff(List<Diff> diff) {
-        this.diffToExclude = diff;
-    }
+//    public void setDiff(List<Diff> diff) {
+//        this.diffs = diff;
+//    }
 
     protected boolean valueEqual(String v1, String v2) {
         if(v1 == null || v2 == null) {

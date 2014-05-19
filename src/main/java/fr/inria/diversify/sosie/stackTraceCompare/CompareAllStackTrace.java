@@ -57,8 +57,8 @@ public class CompareAllStackTrace {
         Set<Diff> diffs = new HashSet<>();
         for (StackTrace original : stackTraces1) {
             for (StackTrace sosie : stackTraces2) {
-                CompareStackTrace cls = new CompareStackTrace(original, sosie);
-                cls.setDiff(diffToExclude);
+                CompareStackTrace cls = new CompareStackTrace(original, sosie, diffToExclude);
+//                cls.setDiff(diffToExclude);
                 if (sosie.getFullName().equals(original.getFullName())) {
                     Log.debug("compare: {}", original.getFullName());
                     diffs.addAll(diffOperator.apply(cls));

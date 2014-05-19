@@ -10,5 +10,9 @@ import java.io.IOException;
 public abstract class Diff {
     protected StackTraceElement diffStart;
 
+    public StackTraceElement getDiffStart() {
+        return diffStart;
+    }
+
     public abstract void write(FileWriter writer) throws IOException;
 }

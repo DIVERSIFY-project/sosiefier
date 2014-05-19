@@ -12,8 +12,6 @@ import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
 
-
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 

@@ -34,6 +34,10 @@ public class StackTraceCall extends StackTraceElement {
                 methodName.equals(otherElem.methodName);
     }
 
+    public int hashCode() {
+        return methodName.hashCode() + 1;
+    }
+
     public String toString() {
         return methodName + ";" + originalDeep;
     }
