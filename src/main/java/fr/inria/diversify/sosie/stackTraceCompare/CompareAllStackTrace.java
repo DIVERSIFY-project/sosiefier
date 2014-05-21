@@ -3,6 +3,7 @@ package fr.inria.diversify.sosie.stackTraceCompare;
 import fr.inria.diversify.sosie.stackTraceCompare.diff.CallDiff;
 import fr.inria.diversify.sosie.stackTraceCompare.diff.Diff;
 import fr.inria.diversify.sosie.stackTraceCompare.diff.VariableDiff;
+import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 
@@ -57,15 +58,49 @@ public class CompareAllStackTrace {
         Set<Diff> diffs = new HashSet<>();
         for (StackTrace original : stackTraces1) {
             for (StackTrace sosie : stackTraces2) {
-                CompareStackTrace cls = new CompareStackTrace(original, sosie, diffToExclude);
+
 //                cls.setDiff(diffToExclude);
                 if (sosie.getFullName().equals(original.getFullName())) {
+                    CompareStackTrace cls = new CompareStackTrace(original, sosie);
                     Log.debug("compare: {}", original.getFullName());
                     diffs.addAll(diffOperator.apply(cls));
                 }
             }
         }
-        return diffs;
+        return diffFilter(diffs);
+    }
+
+    protected Set<Diff> diffFilter(Set<Diff> diffs) {
+        Set<Diff> filtered = new HashSet<>();
+        Map<StackTraceElement, Integer> callDiffs = new HashMap<>();
+
+        //init of callDiffs
+        for(Diff diff : diffToExclude)
+            if(diff instanceof CallDiff) {
+                int nbCallDiff = ((CallDiff) diff).getMaxStackDiff();
+                StackTraceElement key = diff.getDiffStart();
+                if(callDiffs.containsKey(key))
+                    callDiffs.put(key,Math.max(callDiffs.get(key),nbCallDiff));
+                else
+                    callDiffs.put(key,nbCallDiff);
+            }
+
+        for(Diff diff : diffs) {
+            if(diff instanceof CallDiff) {
+                CallDiff cDiff = (CallDiff) diff;
+                StackTraceElement key = cDiff.getDiffStart();
+                if(!callDiffs.containsKey(key))
+                    filtered.add(diff);
+                if(callDiffs.containsKey(key) && callDiffs.get(key) < cDiff.getMaxStackDiff())
+                    filtered.add(diff);
+
+            }
+            else {
+                filtered.add(diff);
+            }
+        }
+        filtered.removeAll(diffToExclude);
+        return filtered;
     }
 
     protected List<StackTrace> loadPointSequence(String dir, boolean recursive) throws IOException {
@@ -108,7 +143,6 @@ public class CompareAllStackTrace {
     protected List<Diff> parseDiff(String fileName) throws IOException {
         ArrayList<Diff> diff = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        reader.readLine();
 
         String line = reader.readLine();
         while (line != null) {

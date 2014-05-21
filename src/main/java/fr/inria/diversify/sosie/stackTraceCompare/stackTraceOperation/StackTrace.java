@@ -15,7 +15,7 @@ import java.util.*;
 public class StackTrace {
     protected List<StackTraceOperation> stackTraceOperations;
     protected Stack<StackTraceCall> stackTraceCalls;
-    protected Map<String,String> variablesValue;
+    protected Map<String,Object> variablesValue;
     protected int position;
     protected int deep;
     protected String name;
@@ -170,7 +170,7 @@ public class StackTrace {
         return stackTraceCalls;
     }
 
-    public Map<String,String> getVariable() {
+    public Map<String,Object> getVariable() {
         return variablesValue;
     }
 }

@@ -30,7 +30,7 @@ public class CallDiff extends Diff {
 
         CallDiff cDiff = (CallDiff) other;
 
-        return //maxStackDiff == cDiff.maxStackDiff &&
+        return maxStackDiff == cDiff.maxStackDiff &&
                 diffStart.equals(cDiff.diffStart);
     }
 
@@ -46,9 +46,9 @@ public class CallDiff extends Diff {
         writer.write("C;"+diffStart+";"+maxStackDiff);
     }
 
-    public void setMaxStackDiff(int x) {
-        maxStackDiff = x;
-    }
+//    public void setMaxStackDiff(int x) {
+//        maxStackDiff = x;
+//    }
 
     public int getMaxStackDiff() {
         return maxStackDiff;

@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class StackTraceVariableObservation implements StackTraceOperation {
     protected StackTraceVariable vars;
-    protected Map<String,String> previousObservation;
+    protected Map<String,Object> previousObservation;
 
     public StackTraceVariableObservation(StackTraceVariable elem) {
         vars = elem;
@@ -28,11 +28,13 @@ public class StackTraceVariableObservation implements StackTraceOperation {
     @Override
     public void restore(StackTrace stackTrace) {
         for(String key : previousObservation.keySet()) {
-            String value = previousObservation.get(key);
+            Object value = previousObservation.get(key);
             if(value == null)
                 stackTrace.variablesValue.remove(key);
             else
                 stackTrace.variablesValue.put(key,value);
         }
     }
+
+
 }

@@ -19,14 +19,14 @@ public class CompareStackTrace {
     public CompareStackTrace(StackTrace st1, StackTrace st2, List<Diff> diffs) {
         stackTrace1 = st1;
         stackTrace2 = st2;
-        this.diffs = new ArrayList<>();
+        this.diffs = new LinkedList<>();
         callDiff = new HashMap<>();
         for(Diff diff : diffs)
             if(diff instanceof CallDiff) {
                 callDiff.put(diff.getDiffStart(), ((CallDiff) diff).getMaxStackDiff());
             }
-        else
-            diffs.add(diff);
+            else
+                diffs.add(diff);
     }
 
     public CompareStackTrace(StackTrace st1, StackTrace st2) {
@@ -38,7 +38,7 @@ public class CompareStackTrace {
 
     public List<Diff> findCallDiff() {
         List<Diff> diffs = new LinkedList<>();
-
+        //reset stackTrace1 and stackTrace2
         while(stackTrace1.hasNext() && stackTrace2.hasNext()) {
             stackTrace1.next();
             stackTrace2.next();
@@ -54,41 +54,22 @@ public class CompareStackTrace {
 
     public List<Diff> findVariableDiff() {
         List<Diff> diffs = new LinkedList<>();
-
+        //reset stackTrace1 and stackTrace2
         while(stackTrace1.hasNext() && stackTrace2.hasNext()) {
             stackTrace1.next();
             stackTrace2.next();
 
             Set<VariableDiff> vd = varDiff(stackTrace1,stackTrace2);
             if(!vd.isEmpty()) {
-                vd.removeAll(this.diffs);
                 diffs.addAll(vd);
             }
         }
         return diffs;
     }
 
-    protected Set<VariableDiff> varDiff(StackTrace st1, StackTrace st2) {
-        Set<VariableDiff> diff = new HashSet<>();
-        Map<String, String> v1 = st1.getVariable();
-        Map<String, String> v2 = st2.getVariable();
-
-        for(String key : v1.keySet()) {
-            String value = v1.get(key);
-            if(!v2.containsKey(key) || !valueEqual(value, v2.get(key)))
-                diff.add(new VariableDiff(st1.getTop(),key));
-        }
-        for(String key : v2.keySet()) {
-            String value = v2.get(key);
-            if(!v1.containsKey(key) || !valueEqual(value, v1.get(key)))
-                diff.add(new VariableDiff(st1.getTop(),key));
-        }
-        return diff;
-    }
-
     public List<Diff> findDiff() {
         List<Diff> diffs = new LinkedList<>();
-
+        //reset stackTrace1 and stackTrace2
         while(stackTrace1.hasNext() && stackTrace2.hasNext()) {
             stackTrace1.next();
             stackTrace2.next();
@@ -99,12 +80,31 @@ public class CompareStackTrace {
             }
             Set<VariableDiff> vd = varDiff(stackTrace1,stackTrace2);
             if(!vd.isEmpty()) {
-                vd.removeAll(this.diffs);
                 diffs.addAll(vd);
             }
         }
         formatAndAddCallDiff(diffs);
         return diffs;
+    }
+
+    protected Set<VariableDiff> varDiff(StackTrace st1, StackTrace st2) {
+        Set<VariableDiff> diff = new HashSet<>();
+        Map<String, Object> v1 = st1.getVariable();
+        Map<String, Object> v2 = st2.getVariable();
+
+        for(String key : v1.keySet()) {
+            Object value = v1.get(key);
+            Object value2 = v2.get(key);
+            if(!v2.containsKey(key) || !value.equals(value2)) //!valueEqual(value, v2.get(key)))
+                diff.add(new VariableDiff(st1.getTop(),key));
+        }
+        for(String key : v2.keySet()) {
+            Object value = v2.get(key);
+            Object value1 = v1.get(key);
+            if(!v1.containsKey(key) || !value.equals(value1)) //!valueEqual(value, v1.get(key)))
+                diff.add(new VariableDiff(st1.getTop(),key));
+        }
+        return diff;
     }
 
     protected void formatAndAddCallDiff(List<Diff> diffs) {
@@ -154,49 +154,45 @@ public class CompareStackTrace {
         return same;
     }
 
-//    public void setDiff(List<Diff> diff) {
-//        this.diffs = diff;
+//    protected boolean valueEqual(String v1, String v2) {
+//        if(v1 == null || v2 == null) {
+//            return true;
+//        }
+//        Object o1;
+//        Object o2;
+//        if((v1.startsWith("{") && v1.endsWith("}")) ||
+//                v1.startsWith("[") && v1.endsWith("]")) {
+//            o1 = equalListString(v1);
+//        }
+//        else
+//            o1 = equalString(v1);
+//
+//        if((v2.startsWith("{") && v2.endsWith("}")) ||
+//                v2.startsWith("[") && v2.endsWith("]")) {
+//            o2 = equalListString(v2);
+//        }
+//        else
+//            o2 = equalString(v2);
+//
+//        return  o1.equals(o2);
 //    }
-
-    protected boolean valueEqual(String v1, String v2) {
-        if(v1 == null || v2 == null) {
-            return true;
-        }
-        Object o1;
-        Object o2;
-        if((v1.startsWith("{") && v1.endsWith("}")) ||
-                v1.startsWith("[") && v1.endsWith("]")) {
-            o1 = equalListString(v1);
-        }
-        else
-            o1 = equalString(v1);
-
-        if((v2.startsWith("{") && v2.endsWith("}")) ||
-                v2.startsWith("[") && v2.endsWith("]")) {
-            o2 = equalListString(v2);
-        }
-        else
-            o2 = equalString(v2);
-
-        return  o1.equals(o2);
-    }
-
-    protected String equalString(String var) {
-        if(var.contains("@") && var.split("@").length != 0)
-            return var.split("@")[0];
-        return  var;
-    }
-
-    protected Collection<String> equalListString(String var) {
-        Collection<String> collection;
-        if(var.startsWith("{"))
-            collection = new HashSet<>();
-        else
-            collection = new ArrayList<>();
-
-        for(String s : var.substring(1,var.length()-1).split(", "))
-            collection.add(equalString(s));
-
-        return  collection;
-    }
+//
+//    protected String equalString(String var) {
+//        if(var.contains("@") && var.split("@").length != 0)
+//            return var.split("@")[0];
+//        return  var;
+//    }
+//
+//    protected Collection<String> equalListString(String var) {
+//        Collection<String> collection;
+//        if(var.startsWith("{"))
+//            collection = new HashSet<>();
+//        else
+//            collection = new ArrayList<>();
+//
+//        for(String s : var.substring(1,var.length()-1).split(", "))
+//            collection.add(equalString(s));
+//
+//        return  collection;
+//    }
 }
