@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.stackTraceCompare.stackElement;
+package fr.inria.diversify.sosie.compare.stackElement;
 
 import java.util.Map;
 

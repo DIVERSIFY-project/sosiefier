@@ -1,7 +1,7 @@
-package fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation;
+package fr.inria.diversify.sosie.compare.stackTraceOperation;
 
-import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceCall;
-import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceElement;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 
 /**
  * Created by Simon on 17/04/14.

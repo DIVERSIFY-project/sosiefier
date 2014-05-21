@@ -1,6 +1,6 @@
-package fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation;
+package fr.inria.diversify.sosie.compare.stackTraceOperation;
 
-import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceVariable;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceVariable;
 
 import java.util.HashMap;
 import java.util.Map;

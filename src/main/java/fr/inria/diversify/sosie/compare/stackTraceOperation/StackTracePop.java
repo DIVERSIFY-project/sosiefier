@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation;
+package fr.inria.diversify.sosie.compare.stackTraceOperation;
 
 import java.util.List;
 

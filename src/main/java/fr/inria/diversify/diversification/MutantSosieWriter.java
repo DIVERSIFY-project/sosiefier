@@ -1,9 +1,7 @@
 package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.sosie.InstruMethod;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 

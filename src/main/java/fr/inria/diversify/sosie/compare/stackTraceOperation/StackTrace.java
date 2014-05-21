@@ -1,7 +1,7 @@
-package fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation;
+package fr.inria.diversify.sosie.compare.stackTraceOperation;
 
-import fr.inria.diversify.sosie.stackTraceCompare.stackElement.*;
-import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceElement;
+import fr.inria.diversify.sosie.compare.stackElement.*;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.util.Log;
 
 import java.io.BufferedReader;

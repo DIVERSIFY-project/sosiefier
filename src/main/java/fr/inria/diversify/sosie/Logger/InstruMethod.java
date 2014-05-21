@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie;
+package fr.inria.diversify.sosie.logger;
 
 import fr.inria.diversify.sosie.logger.processor.*;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
@@ -26,27 +26,25 @@ import java.util.List;
  * Date: 7/22/13
  * Time: 2:03 PM
  */
-public class InstruTest {
+public class InstruMethod {
 
     public static void main(String[] args) throws Exception {
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(args[0] + "/pom.xml");
 
-        new InstruTest(args[0],args[1],args[2],args[3]);
-
+        new InstruMethod(args[0],args[1],args[2]);
     }
 
-    public InstruTest(String project, String outDir, String srcDir, String testDir) throws Exception {
+    public InstruMethod(String project, String outDir, String srcDir) throws Exception {
+
         File dir = new File(outDir);
         dir.mkdirs();
         FileUtils.copyDirectory(new File(project), dir);
 
         String src = project+ "/" +srcDir;
-        String test = project+ "/" +testDir;
+
 
         Factory factory = initSpoon(src);
-        applyProcessor(factory, new MethodLoggingInstrumenter());
-        applyProcessor(factory, new ConditionalLoggingInstrumenter());
         applyProcessor(factory, new ErrorLoggingInstrumenter());
 
         Environment env = factory.getEnvironment();
@@ -54,17 +52,20 @@ public class InstruTest {
 
         applyProcessor(factory,
                 new JavaOutputProcessorWithFilter(new File(outDir + "/" + srcDir),
-                        new FragmentDrivenJavaPrettyPrinter(env),
-                        allClassesName(new File(src))));
+                    new FragmentDrivenJavaPrettyPrinter(env),
+                    allClassesName(new File(src))));
 
-        factory = initSpoon(src+System.getProperty("path.separator")+test);
+        factory = initSpoon(src);
 
-        applyProcessor(factory, new AssertInstrumenter());
-        applyProcessor(factory, new TestLoggingInstrumenter());
+        applyProcessor(factory, new MethodLoggingInstrumenter());
+
 
 
         factory.getEnvironment().useSourceCodeFragments(true);
-        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir +"/"+ testDir), new FragmentDrivenJavaPrettyPrinter(env), (allClassesName(new File(test)))));
+        applyProcessor(factory,
+                new JavaOutputProcessorWithFilter(new File(outDir +"/"+ srcDir),
+                        new FragmentDrivenJavaPrettyPrinter(env),
+                        allClassesName(new File(src))));
 
         ConditionalLoggingInstrumenter.writeIdFile(outDir);
         copyLogger(outDir, srcDir);

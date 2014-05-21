@@ -1,8 +1,8 @@
-package fr.inria.diversify.sosie.stackTraceCompare;
+package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.stackTraceCompare.diff.*;
-import fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation.StackTrace;
-import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceElement;
+import fr.inria.diversify.sosie.compare.diff.*;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 
 import java.util.*;
 

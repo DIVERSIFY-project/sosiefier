@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation;
+package fr.inria.diversify.sosie.compare.stackTraceOperation;
 
 /**
  * Created by Simon on 17/04/14.

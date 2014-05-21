@@ -1,10 +1,10 @@
-package fr.inria.diversify.sosie.stackTraceCompare;
+package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.stackTraceCompare.diff.CallDiff;
-import fr.inria.diversify.sosie.stackTraceCompare.diff.Diff;
-import fr.inria.diversify.sosie.stackTraceCompare.diff.VariableDiff;
-import fr.inria.diversify.sosie.stackTraceCompare.stackElement.StackTraceElement;
-import fr.inria.diversify.sosie.stackTraceCompare.stackTraceOperation.StackTrace;
+import fr.inria.diversify.sosie.compare.diff.CallDiff;
+import fr.inria.diversify.sosie.compare.diff.Diff;
+import fr.inria.diversify.sosie.compare.diff.VariableDiff;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 
 import java.io.*;

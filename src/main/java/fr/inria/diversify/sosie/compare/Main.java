@@ -1,6 +1,6 @@
-package fr.inria.diversify.sosie.stackTraceCompare;
+package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.stackTraceCompare.diff.Diff;
+import fr.inria.diversify.sosie.compare.diff.Diff;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
