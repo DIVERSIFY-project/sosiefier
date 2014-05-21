@@ -1,7 +1,9 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.sosie.logger.InstruTestAndMethod;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
+import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
@@ -56,22 +58,19 @@ public class Sosie extends AbstractDiversify {
                 FileWriter fileWriter = new FileWriter(tmpDir +"/diversificationPoint");
                 fileWriter.append(trans.toJSONObject().toString());
                 fileWriter.close();
-                instruProject(tmpDir);
             }
         } catch (Exception e) {
             Log.warn("setCompile error during diversification", e);
             FileUtils.cleanDirectory(tmpDir);
             FileUtils.forceDelete(tmpDir);
         }
-        //new tmpdir
+       
         tmpDir = init(projectDir,"output_sosie/sosie");
     }
 
-    protected void instruProject(String projectDir) throws Exception {
-//        String tmpDir = DiversifyProperties.getProperty("out") + "/instru/sosie_" + System.currentTimeMillis();
-//        String src = DiversifyProperties.getProperty("src");
-//        String test =DiversifyProperties.getProperty("testSrc");
-//        new InstruMethod(projectDir, tmpDir, src,test);
-
+    protected void instruTestAndMethod(String project, String output) throws Exception {
+        String src = DiversifyProperties.getProperty("src");
+        String test = project + "/" + DiversifyProperties.getProperty("testSrc");
+        new InstruTestAndMethod(project,output,src,test);
     }
 }

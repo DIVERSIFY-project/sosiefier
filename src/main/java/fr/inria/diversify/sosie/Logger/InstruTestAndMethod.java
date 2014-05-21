@@ -26,17 +26,17 @@ import java.util.List;
  * Date: 7/22/13
  * Time: 2:03 PM
  */
-public class InstruTest {
+public class InstruTestAndMethod {
 
     public static void main(String[] args) throws Exception {
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(args[0] + "/pom.xml");
 
-        new InstruTest(args[0],args[1],args[2],args[3]);
+        new InstruTestAndMethod(args[0],args[1],args[2],args[3]);
 
     }
 
-    public InstruTest(String project, String outDir, String srcDir, String testDir) throws Exception {
+    public InstruTestAndMethod(String project, String outDir, String srcDir, String testDir) throws Exception {
         File dir = new File(outDir);
         dir.mkdirs();
         FileUtils.copyDirectory(new File(project), dir);

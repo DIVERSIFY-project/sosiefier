@@ -16,17 +16,17 @@ import java.util.Collection;
  * Date: 7/22/13
  * Time: 10:20 AM
  */
-public class MutantSosieWriter extends AbstractDiversify {
+public class SosieWithParent extends AbstractDiversify {
     protected String sosieDir;
     protected String mutantDir;
 
-    public MutantSosieWriter(TransformationQuery transQuery, String projectDir) {
+    public SosieWithParent(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
     }
 
-    public MutantSosieWriter(String projectDir, String src) {
+    public SosieWithParent(String projectDir, String src) {
         this.sourceDir = src;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
@@ -48,10 +48,10 @@ public class MutantSosieWriter extends AbstractDiversify {
     protected void run(Transformation trans) throws Exception {
         Log.debug("output dir mutant and sosie: " + tmpDir );
         try {
-            Log.debug("apply mutation");
+            Log.debug("apply parent transformation");
             trans.getParent().apply(mutantDir + "/" + sourceDir);
 
-            Log.debug("apply + sosie");
+            Log.debug("apply parent transformation + transformation");
             trans.applyWithParent(sosieDir + "/" + sourceDir);
 
             if(runTest(mutantDir) < -1 || runTest(sosieDir) < -1) {

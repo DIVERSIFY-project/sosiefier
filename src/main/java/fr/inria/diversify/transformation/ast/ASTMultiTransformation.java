@@ -6,9 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,38 +15,20 @@ import java.util.List;
  * Time: 13:38
  */
 public class ASTMultiTransformation extends AbstractTransformation {
-    protected List<ASTTransformation> transformations;
+    protected List<Transformation> transformations;
 
-    public ASTMultiTransformation() {
-        transformations = new ArrayList<ASTTransformation>();
-    }
-
-    @Override
-    public void apply(String srcDir) throws Exception {
-        for(ASTTransformation trans : transformations)
-            trans.addSourceCode();
-
-        for(ASTTransformation trans : transformations) {
-            trans.printJavaFile(srcDir);
-        }
-
-        for(ASTTransformation trans : transformations)
-            trans.removeSourceCode();
-    }
-
-    @Override
-    public void restore(String srcDir) throws Exception {
-        for(ASTTransformation trans : transformations)
-            trans.restore(srcDir);
+    public ASTMultiTransformation(List<Transformation> transformations) {
+        name = "multi";
+        type = "adrStmt";
+        this.transformations = transformations;
     }
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
-        JSONObject object = new JSONObject();
-        object.put("type", getType());
+        JSONObject object = super.toJSONObject();
         JSONArray array = new JSONArray();
         object.put("transformation",array);
-        for (ASTTransformation t : transformations)
+        for (Transformation t : transformations)
             array.put(t.toJSONObject());
         return object;
     }
@@ -85,16 +65,19 @@ public class ASTMultiTransformation extends AbstractTransformation {
 
     @Override
     public void addSourceCode() throws Exception {
-
+        for(Transformation trans : transformations)
+            trans.addSourceCode();
     }
 
     @Override
     public void printJavaFile(String srcDir) throws IOException {
-
+        for(Transformation trans : transformations)
+            trans.printJavaFile(srcDir);
     }
 
     @Override
     public void removeSourceCode() {
-
+        for(Transformation trans : transformations)
+            trans.removeSourceCode();
     }
 }

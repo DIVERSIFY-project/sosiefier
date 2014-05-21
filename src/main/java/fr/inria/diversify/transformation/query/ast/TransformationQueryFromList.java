@@ -2,7 +2,6 @@ package fr.inria.diversify.transformation.query.ast;
 
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.*;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import org.json.JSONException;
 
@@ -16,7 +15,7 @@ import java.util.*;
  */
 public class TransformationQueryFromList extends TransformationQuery {
     protected ICoverageReport coverageReport;
-    private List<Transformation> transformation;
+    private List<Transformation> transformations;
 
     public TransformationQueryFromList(ICoverageReport cr, String transformationDirectory) throws IOException, JSONException {
         this.coverageReport = cr;
@@ -32,9 +31,9 @@ public class TransformationQueryFromList extends TransformationQuery {
     public Transformation getTransformation() throws Exception {
         Random r = new Random();
         double coverage = 0;
-        Transformation t =transformation.get(r.nextInt(transformation.size()));;
+        Transformation t =transformations.get(r.nextInt(transformations.size()));;
         while(coverage == 0 && t.getType().equals("delete")) {
-            t = transformation.get(r.nextInt(transformation.size()));
+            t = transformations.get(r.nextInt(transformations.size()));
 
         }
         return t;
@@ -44,7 +43,7 @@ public class TransformationQueryFromList extends TransformationQuery {
         HashSet<Transformation> set = new HashSet<Transformation>();
 
         if(nb <= 0) {
-            set.addAll(transformation);
+            set.addAll(transformations);
         }
         else {
             while (set.size() < nb)
@@ -53,45 +52,8 @@ public class TransformationQueryFromList extends TransformationQuery {
         return set;
     }
 
-//    @Override
-//    public ASTTransformation delete() throws Exception {
-//        Random r = new Random();
-//        double coverage = 0;
-//        ASTTransformation t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));;
-//        while(coverage == 0 && t.getType().equals("delete")) {
-//            t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-//            coverage = coverageReport.codeFragmentCoverage(t.getTransplantationPoint());
-//        }
-//        return t;
-//    }
-//
-//    @Override
-//    public ASTTransformation add() throws Exception {
-//        Random r = new Random();
-//        double coverage = 0;
-//        ASTTransformation t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));;
-//        while(coverage == 0&& t.getType().equals("add") ) {
-//            t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-//            coverage = coverageReport.codeFragmentCoverage(t.getTransplantationPoint());
-//        }
-//        return t;
-//    }
-//
-//    @Override
-//    public ASTTransformation replace() throws Exception {
-//        Random r = new Random();
-//        double coverage = 0;
-//        ASTTransformation t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-//        while(coverage == 0 && t.getType().equals("replace")) {
-//            t = (ASTTransformation)transformation.get(r.nextInt(transformation.size()));
-//            coverage = coverageReport.codeFragmentCoverage(t.getTransplantationPoint());
-//        }
-//        return t;
-//    }
-
     protected void init(String transformationDirectory) throws IOException, JSONException {
-//        super.init();
         TransformationParser tf = new TransformationParser(false);
-        transformation = new ArrayList<Transformation>(tf.parseDir(transformationDirectory));
+        transformations = new ArrayList<>(tf.parseDir(transformationDirectory));
     }
 }

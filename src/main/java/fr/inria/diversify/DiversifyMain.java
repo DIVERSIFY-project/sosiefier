@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.*;
 
 import fr.inria.diversify.diversification.*;
+import fr.inria.diversify.sosie.logger.InstruTestAndMethod;
 import fr.inria.diversify.statistic.CVLMetric;
-import fr.inria.diversify.statistic.FailureMatrix;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationsWriter;
@@ -14,6 +14,7 @@ import fr.inria.diversify.diversification.builder.AbstractBuilder;
 import fr.inria.diversify.diversification.builder.AntBuilder;
 import fr.inria.diversify.diversification.builder.MavenBuilder;
 import fr.inria.diversify.transformation.query.*;
+import fr.inria.diversify.transformation.query.ast.ASTMultiTransformationQuery;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.ast.TransformationQueryFromList;
 import fr.inria.diversify.util.DiversifyEnvironment;
@@ -48,7 +49,7 @@ public class DiversifyMain {
     public DiversifyMain(String propertiesFile) throws Exception {
         new DiversifyProperties(propertiesFile);
         initLogLevel();
-        if(DiversifyProperties.getProperty("builder").equals("maven")) {
+        if (DiversifyProperties.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
             t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
         }
@@ -60,9 +61,7 @@ public class DiversifyMain {
         } else {
             if (DiversifyProperties.getProperty("sosieOnMultiProject").equals("true")) {
 //            sosieOnMultiProject();
-            }
-            else
-                initAndRunBuilder();
+            } else initAndRunBuilder();
         }
     }
 
@@ -76,24 +75,19 @@ public class DiversifyMain {
         abstractDiversify.run(n);
 
         String repo = DiversifyProperties.getProperty("gitRepository");
-        if(repo.equals("null"))
-            abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
-        else
-            abstractDiversify.printResult(DiversifyProperties.getProperty("result"),repo+"/sosie-exp");
+        if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
+        else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
     }
 
     protected AbstractDiversify initAbstractDiversify() throws Exception {
         AbstractDiversify ad;
         String projet = DiversifyProperties.getProperty("project");
         String src = DiversifyProperties.getProperty("src");
-        if(DiversifyProperties.getProperty("transformation.type").equals("mutationToSosie"))
-            ad = new DiversifyWithParent(projet,src);
-        else if(DiversifyProperties.getProperty("sosie").equals("false"))
-            ad = new Diversify(projet,src);
-        else if(DiversifyProperties.getProperty("sosie").equals("classic"))
-            ad = new Sosie(projet,src);
-        else
-            ad = new MutantSosieWriter(projet,src);
+        if (DiversifyProperties.getProperty("transformation.type").equals("mutationToSosie"))
+            ad = new DiversifyWithParent(projet, src);
+        else if (DiversifyProperties.getProperty("sosie").equals("false")) ad = new Diversify(projet, src);
+        else if (DiversifyProperties.getProperty("sosie").equals("classic")) ad = new Sosie(projet, src);
+        else ad = new SosieWithParent(projet, src);
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));
         ad.setBuilder(initBuilder(tmpDir));
@@ -102,84 +96,70 @@ public class DiversifyMain {
     }
 
 
-
     protected AbstractBuilder initBuilder(String directory) throws Exception {
         AbstractBuilder rb;
         String src = DiversifyProperties.getProperty("src");
-        if(DiversifyProperties.getProperty("builder").equals("maven")) {
+        if (DiversifyProperties.getProperty("builder").equals("maven")) {
             rb = new MavenBuilder(directory, src);
-            rb.setPhase(new String[]{"clean","test"});
-        }
-        else {
-            rb = new AntBuilder(directory,DiversifyProperties.getProperty("builder.testTarget"));
+            rb.setPhase(new String[]{"clean", "test"});
+        } else {
+            rb = new AntBuilder(directory, DiversifyProperties.getProperty("builder.testTarget"));
             rb.setPhase(new String[]{"clean", DiversifyProperties.getProperty("builder.testTarget")});
         }
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
-        if (t == -1)
-            rb.initTimeOut();
-        else
-            rb.setTimeOut(t);
+        if (t == -1) rb.initTimeOut();
+        else rb.setTimeOut(t);
 
         String pomFile = DiversifyProperties.getProperty("newPomFile");
-        if(!pomFile.equals(""))
-            rb.initPom(pomFile);
+        if (!pomFile.equals("")) rb.initPom(pomFile);
 
-        if (DiversifyProperties.getProperty("clojure").equals("true"))
-            rb.setClojureTest(true);
+        if (DiversifyProperties.getProperty("clojure").equals("true")) rb.setClojureTest(true);
         return rb;
     }
 
 
     protected TransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException, NotFoundException {
         ICoverageReport rg = initCoverageReport();
-
-        TransformationQuery atq = null;
         String type = DiversifyProperties.getProperty("transformation.type");
 
-        if(type.equals("mutation"))
-            atq = new MutationQuery(rg);
-
-        if(type.equals("mutationToSosie")) {
-            String jacocoFile = DiversifyProperties.getProperty("jacoco");
-            String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
-            String mutationDirectory = DiversifyProperties.getProperty("transformation.directory");
-            atq = new MutationToSosieQuery(classes, mutationDirectory, new File(jacocoFile));
+        switch (type) {
+            case "mutation":
+                return new MutationQuery(rg);
+            case "shuffle":
+                return new ShuffleStmtQuery(rg);
+            case "other":
+                return new OtherQuery(rg);
+            case "all":
+                return new AllQuery(rg);
+            case "cvl":
+                return new CvlQuery();
+            case "bytecode":
+                return new ByteCodeTransformationQuery(rg);
+            case "mutationToSosie": {
+                String jacocoFile = DiversifyProperties.getProperty("jacoco");
+                String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
+                String mutationDirectory = DiversifyProperties.getProperty("transformation.directory");
+                return new MutationToSosieQuery(classes, mutationDirectory, new File(jacocoFile));
+            }
+            case "ADR": {
+                Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
+                return new ASTTransformationQuery(rg, cl, false);
+            }
+            case "ADRStupid": {
+                Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
+                return new ASTTransformationQuery(rg, cl, true);
+            }
+            case "list": {
+                String transDirectory = DiversifyProperties.getProperty("transformation.directory");
+                return new TransformationQueryFromList(rg, transDirectory);
+            }
+            case "multi": {
+                String transDirectory = DiversifyProperties.getProperty("transformation.directory");
+                int nbTransformation = Integer.parseInt(DiversifyProperties.getProperty("transformation.nb"));
+                return new ASTMultiTransformationQuery(rg, nbTransformation, transDirectory);
+            }
         }
-
-        if(type.equals("ADR")) {
-            Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-            atq = new ASTTransformationQuery(rg,cl, false);
-        }
-
-        if(type.equals("ADRStupid")) {
-            Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-            atq = new ASTTransformationQuery(rg,cl, true);
-        }
-
-        if(type.equals("shuffle")) {
-            atq = new ShuffleStmtQuery(rg);
-        }
-
-        if(type.equals("other")) {
-            atq = new OtherQuery(rg);
-        }
-
-        if(type.equals("all")) {
-            atq = new AllQuery(rg);
-        }
-
-        if(type.equals("list")) {
-            String transDirectory = DiversifyProperties.getProperty("transformation.directory");
-            atq = new TransformationQueryFromList(rg, transDirectory);
-        }
-
-        if(type.equals("byteCode"))
-            atq = new ByteCodeTransformationQuery(rg);
-
-        if(type.equals("cvl"))
-            atq = new CvlQuery();
-
-        return atq;
+        return null;
     }
 
     protected ICoverageReport initCoverageReport() throws IOException {
@@ -189,12 +169,9 @@ public class DiversifyMain {
 
         if (jacocoFile != null) {
             File file = new File(jacocoFile);
-            if (file.isDirectory())
-                icr = new MultiCoverageReport(classes, file);
-            else
-                icr = new CoverageReport(classes, file);
-        } else
-            icr = new NullCoverageReport();
+            if (file.isDirectory()) icr = new MultiCoverageReport(classes, file);
+            else icr = new CoverageReport(classes, file);
+        } else icr = new NullCoverageReport();
 
         icr.create();
         return icr;
@@ -215,7 +192,7 @@ public class DiversifyMain {
         SpoonCompiler compiler = new JDTBasedSpoonCompiler(factory);
         for (String dir : srcDirectory.split(System.getProperty("path.separator")))
             try {
-                Log.debug("add {} to classpath",dir);
+                Log.debug("add {} to classpath", dir);
                 compiler.addInputSource(new File(dir));
             } catch (IOException e) {
                 Log.error("error in initSpoon", e);
@@ -252,19 +229,19 @@ public class DiversifyMain {
         sd.writeStat(fileName);
 
 
-        for(String type : getAllTransformationType(transformations))
-           write.writeAllTransformation(type);
+        for (String type : getAllTransformationType(transformations))
+            write.writeAllTransformation(type);
 
         write.writeGoodTransformation(null);
 
-        for(String type : getAllTransformationType(transformations))
+        for (String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
 
         CVLMetric cvlMetric = new CVLMetric();
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-        Visu v = new Visu(fileName+"_visu/visu");
+        Visu v = new Visu(fileName + "_visu/visu");
         v.writeJSON(transformations);
 
 //        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
