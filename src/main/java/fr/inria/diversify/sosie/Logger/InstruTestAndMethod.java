@@ -59,7 +59,7 @@ public class InstruTestAndMethod {
 
         factory = initSpoon(src+System.getProperty("path.separator")+test);
 
-        applyProcessor(factory, new AssertInstrumenter());
+//        applyProcessor(factory, new AssertInstrumenter());
         applyProcessor(factory, new TestLoggingInstrumenter());
 
 

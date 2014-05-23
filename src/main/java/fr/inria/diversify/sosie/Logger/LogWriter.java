@@ -17,8 +17,8 @@ public class LogWriter {
     static private Map<Thread, FileWriter> fileWriters;
     static private String separator = ":;:";
     static private String simpleSeparator = ";";
-    protected static String currentTestSignature;
     protected static Map<Thread, String> previousVarLog;
+    protected static Map<Thread, Integer> callDeep;
 
     protected synchronized static FileWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (fileWriters == null) {
@@ -42,6 +42,22 @@ public class LogWriter {
         return f;
     }
 
+    protected static void incCallDeep(Thread thread) {
+        if(callDeep == null)
+            callDeep = new HashMap<Thread, Integer>();
+        if(callDeep.containsKey(thread))
+            callDeep.put(thread, callDeep.get(thread) + 1);
+        else
+            callDeep.put(thread, 1);
+    }
+
+    protected static void decCallDeep(Thread thread) {
+//        if(callDeep.containsKey(thread))
+          int deep = callDeep.get(thread);
+        if(deep > 0)
+            callDeep.put(thread, deep - 1);
+    }
+
     protected static void releaseFileWriter(String id) {
         if(semaphores.containsKey(id))
             semaphores.get(id).release();
@@ -59,7 +75,7 @@ public class LogWriter {
     }
 
     protected static String initFileName(Thread thread) {
-        return "log" + thread.getName() + "_" + currentTestSignature;
+        return "log" + thread.getName();
     }
 
     public static void writeVar(int id, Thread thread, String methodSignatureId, Object... var) {
@@ -68,11 +84,9 @@ public class LogWriter {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("V");
-            string.append(thread.getStackTrace().length);
+            string.append(callDeep.get(thread));
             string.append(simpleSeparator);
             string.append(id + "");
-//            string.append(simpleSeparator);
-//            string.append(classId);
             string.append(simpleSeparator);
             string.append(methodSignatureId);
 
@@ -114,16 +128,18 @@ public class LogWriter {
     public static void methodCall(Thread thread, String methodSignatureId) {
         String semaphore = "";
         try {
-            StringBuilder string = new StringBuilder();
-            string.append("$$$\n");
-            string.append("M"); //new method call
-            string.append(thread.getStackTrace().length);
-            string.append(simpleSeparator);
-            string.append(methodSignatureId);
+            incCallDeep(thread);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("$$$\n");
+            stringBuilder.append("M"); //new method call
+            stringBuilder.append(callDeep.get(thread));
+            stringBuilder.append(simpleSeparator);
+            stringBuilder.append(methodSignatureId);
 
+            String string = stringBuilder.toString();
             FileWriter fileWriter = getFileWriter(thread);
-            semaphore = fileWriter.toString()+ fileWriter.hashCode();
-            fileWriter.append(string.toString());
+            semaphore = fileWriter.toString() + fileWriter.hashCode();
+            fileWriter.append(string);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,14 +149,30 @@ public class LogWriter {
         }
     }
 
-    public static void writeTestStart(String testSignature) {
-        currentTestSignature = testSignature;
+    public static void methodOut(Thread thread) {
+        decCallDeep(thread);
+    }
 
-        if (fileWriters != null) {
-            synchronized (fileWriters) {
-                close();
-                fileWriters.clear();
-            }
+    public static void writeTestStart(Thread thread, String testSignature) {
+
+        String semaphore = "";
+        try {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("$$$\n");
+            stringBuilder.append("NewTest");
+            stringBuilder.append(simpleSeparator);
+            stringBuilder.append(testSignature);
+
+            String string = stringBuilder.toString();
+            FileWriter fileWriter = getFileWriter(thread);
+            semaphore = fileWriter.toString() + fileWriter.hashCode();
+            fileWriter.append(string);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            releaseFileWriter(semaphore);
         }
     }
 
@@ -208,7 +240,7 @@ public class LogWriter {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("E");
-            string.append(thread.getStackTrace().length);
+            string.append(callDeep.get(thread));
             string.append(simpleSeparator);
             string.append(id + "");
             string.append(simpleSeparator);
@@ -239,7 +271,7 @@ public class LogWriter {
             StringBuilder string = new StringBuilder();
             string.append("$$$\n");
             string.append("C");
-            string.append(thread.getStackTrace().length);
+            string.append(callDeep.get(thread));
             string.append(simpleSeparator);
             string.append(id + "");
             string.append(simpleSeparator);;

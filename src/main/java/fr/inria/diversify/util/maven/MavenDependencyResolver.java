@@ -62,7 +62,7 @@ public class MavenDependencyResolver {
         MavenResolver resolver = new MavenResolver();
         resolver.setBasePath("~/.m2/repository");
 
-        List<String> urls = new ArrayList<String>(project.getDependencies().size());
+        List<String> urls = new ArrayList<>(project.getDependencies().size());
         for(Repository repo: project.getRepositories()) {
             urls.add(repo.getUrl());
         }

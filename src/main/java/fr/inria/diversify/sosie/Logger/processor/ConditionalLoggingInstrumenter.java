@@ -31,7 +31,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         return
                 CtIf.class.isAssignableFrom(candidate.getClass())
                         || CtLoop.class.isAssignableFrom(candidate.getClass())
-                        || CtThrow.class.isAssignableFrom(candidate.getClass())
+//                        || CtThrow.class.isAssignableFrom(candidate.getClass())
                 ;
     }
 
@@ -64,7 +64,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         boolean inStaticCode =
                 hasStaticParent(statement);
         String id =  ConditionalLoggingInstrumenter.idFor(getClass(statement).getQualifiedName()+"."+getMethod(statement).getSignature());
-        String snippet = "{\n\tfr.inria.diversify.sosie.logger.LogWriter.writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
+        String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
                 + id + "\"";
 
         int nVisibleVariables = 0;
@@ -108,50 +108,9 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
 
             index = compileUnit.nextLineIndex(sp.getSourceEnd());
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, "}\n", 0));
-//		statement.insertBefore(getFactory().Code().createCodeSnippetStatement(	snippet));
+//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, "}\n", 0));
         }
     }
-
-//    protected void instruThrow(CtThrow throwStmt) {
-//
-//        String snippet = "{\nfr.inria.diversify.sosie.logger.LogWriter.writeException(Thread.currentThread(),\"" +
-//                getClass(throwStmt).getQualifiedName() + "\",\"" + getMethod(throwStmt).getSignature() + "\"," +
-//                throwStmt.getThrownExpression() + ");\n";
-//        SourcePosition sp = throwStmt.getPosition();
-//        CompilationUnit compileUnit = sp.getCompilationUnit();
-//        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-//
-//        snippet = "\n}\n";
-//
-//        index = compileUnit.nextLineIndex(sp.getSourceEnd());
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-//    }
-//
-//
-//
-//
-
-//    protected void instruCatch(CtTry tryStmt) {
-//        List<CtCatch> catchList = tryStmt.getCatchers();
-//        for (CtCatch catchStmt : catchList) {
-//            if(getMethod(tryStmt) != null) {
-//                String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeError(" + getCount(tryStmt) + ",Thread.currentThread(),\"" +
-//                        getClass(tryStmt).getQualifiedName() + "\",\"" + getMethod(tryStmt).getSignature() + "\"," +
-//                        catchStmt.getParameter().getSimpleName() + ".getStackTrace());\n";
-//
-//                CtBlock<?> catchBlock = catchStmt.getBody();
-//                if(!catchBlock.getStatements().isEmpty()) {
-//                    CtStatement statement = catchBlock.getStatements().get(0);
-//                    SourcePosition sp = statement.getPosition();
-//                    CompilationUnit compileUnit = sp.getCompilationUnit();
-//                    int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-//                    compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-//                }
-//            }
-//        }
-//    }
 
 
     private Collection<CtVariable<?>> getVariablesInScope(final CtElement el) {

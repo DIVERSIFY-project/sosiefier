@@ -29,7 +29,7 @@ public class MethodLoggingInstrumenter extends AbstractProcessor<CtMethod> {
         CtStatement stmt = body.getStatement(0);
         String id =  ConditionalLoggingInstrumenter.idFor(getClass(stmt).getQualifiedName()+"."+candidate.getSignature());
 
-        String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.methodCall(Thread.currentThread(),\"" +
+        String snippet = "\ttry{\n\tfr.inria.diversify.sosie.logger.LogWriter.methodCall(Thread.currentThread(),\"" +
                 id + "\");\n";
         SourcePosition sp = stmt.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
@@ -37,15 +37,15 @@ public class MethodLoggingInstrumenter extends AbstractProcessor<CtMethod> {
         int index;
         if(stmt.getPosition().getLine() == candidate.getPosition().getLine()) {
             index = sp.getSourceStart();
-
-        }
-            else {
-
+        } else {
             index = compileUnit.beginOfLineIndex(sp.getSourceStart());
         }
-
-
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+
+
+        sp = body.getLastStatement().getPosition();
+        compileUnit = sp.getCompilationUnit();
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+2 , "\n" + "\t}\n\tfinally{ fr.inria.diversify.sosie.logger.LogWriter.methodOut(Thread.currentThread()); }", 0));
     }
 
     private CtSimpleType<?> getClass(CtStatement stmt) {

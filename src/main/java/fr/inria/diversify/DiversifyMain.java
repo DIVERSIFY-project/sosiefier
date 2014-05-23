@@ -86,7 +86,10 @@ public class DiversifyMain {
         if (DiversifyProperties.getProperty("transformation.type").equals("mutationToSosie"))
             ad = new DiversifyWithParent(projet, src);
         else if (DiversifyProperties.getProperty("sosie").equals("false")) ad = new Diversify(projet, src);
-        else if (DiversifyProperties.getProperty("sosie").equals("classic")) ad = new Sosie(projet, src);
+        else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
+            String testDir = DiversifyProperties.getProperty("testSrc");
+            ad = new Sosie(projet, src,testDir);
+        }
         else ad = new SosieWithParent(projet, src);
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));

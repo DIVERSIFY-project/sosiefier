@@ -74,33 +74,39 @@ public class StackTrace {
 
 
 
-    public void parseFile(File file, Map<String,String> idMap) throws Exception {
-        parseFileName(file.getName());
+    public void parseFile(String name, List<String> trace, Map<String,String> idMap) throws Exception {
+//        parseFileName(file.getName());
 
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        reader.readLine();
-        String line = reader.readLine();
-        String tmp = "";
-        if(line == null)
-            throw new Exception("empty file");
-        while (line != null) {
-            if(!line.isEmpty()) {
-                if(line.endsWith("$$$")) {
-                    try {
-                        addElement(tmp + line.substring(0, line.length() - 3), idMap);
-                        tmp = "";
-                    } catch (Exception e) {
-                        Log.error("malformed line: {}",line);
-                        tmp = "";
-                    }
-                }
-                else {
-                    tmp = tmp + line;
-                }
-            }
-            line = reader.readLine();
+//        BufferedReader reader = new BufferedReader(new FileReader(file));
+//        reader.readLine();
+//        String line = reader.readLine();
+//        String tmp = "";
+//        if(line == null)
+//            throw new Exception("empty file");
+//        while (line != null) {
+//            if(!line.isEmpty()) {
+//                if(line.endsWith("$$$")) {
+//                    try {
+//                        addElement(tmp + line.substring(0, line.length() - 3), idMap);
+//                        tmp = "";
+//                    } catch (Exception e) {
+//                        Log.error("malformed line: {}",line);
+//                        tmp = "";
+//                    }
+//                }
+//                else {
+//                    tmp = tmp + line;
+//                }
+//            }
+//            line = reader.readLine();
+//        }
+//        addElement(tmp, idMap);
+        this.name = name;
+
+        for(String operation: trace) {
+            addElement(operation, idMap);
         }
-        addElement(tmp, idMap);
+
         stackTraceCalls.clear();
     }
 
@@ -116,7 +122,9 @@ public class StackTrace {
         if(elem instanceof StackTraceCall)
             addCall((StackTraceCall) elem, deep);
         else {
-            stackTraceOperations.add(new StackTraceVariableObservation((StackTraceVariable) elem));
+            try {
+                stackTraceOperations.add(new StackTraceVariableObservation((StackTraceVariable) elem));
+            } catch (Exception e) {}
         }
     }
 

@@ -75,6 +75,7 @@ public class MavenBuilder extends AbstractBuilder {
         Pattern errorPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
         Matcher matcher = null;
         boolean result = false;
+        boolean buildFailure = false;
 
         for (String s : r.split("\n")) {
             Log.debug(s);
@@ -83,6 +84,11 @@ public class MavenBuilder extends AbstractBuilder {
             if (s.startsWith("Results :")) {
                 result = true;
             }
+            //for junit
+            if (s.startsWith("[INFO] BUILD FAILURE")) {
+                buildFailure = true;
+            }
+
             Matcher m = pattern.matcher(s);
             if (result && m.matches()) {
                 matcher = m;
@@ -104,6 +110,9 @@ public class MavenBuilder extends AbstractBuilder {
         else {
             status = -2;
         }
+        //for junit
+        if(status == 0 && buildFailure)
+            status = -1;
     }
 
     protected void parseClojureResult(String r) {

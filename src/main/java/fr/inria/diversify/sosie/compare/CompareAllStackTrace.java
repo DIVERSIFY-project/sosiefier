@@ -21,8 +21,8 @@ public class CompareAllStackTrace {
     protected Collection<Diff> diffs;
 
     public CompareAllStackTrace(String dirOriginal, String dirSosie, String diffFile) throws IOException {
-        stackTraces1 = loadPointSequence(dirOriginal,false);
-        stackTraces2 = loadPointSequence(dirSosie,false);
+        stackTraces1 = loadLog(dirOriginal, false);
+        stackTraces2 = loadLog(dirSosie, false);
         diffToExclude = parseDiff(diffFile);
     }
 
@@ -101,7 +101,7 @@ public class CompareAllStackTrace {
         return filtered;
     }
 
-    protected List<StackTrace> loadPointSequence(String dir, boolean recursive) throws IOException {
+    protected List<StackTrace> loadLog(String dir, boolean recursive) throws IOException {
         List<StackTrace> list = new ArrayList<>();
         File file = new File(dir);
         Map<String, String> idMap = loadIdMap(dir + "/id");
@@ -109,18 +109,62 @@ public class CompareAllStackTrace {
         Log.debug("load trace in directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles()) {
             if(recursive && f.isDirectory())
-                list.addAll(loadPointSequence(f.getAbsolutePath(),recursive));
+                list.addAll(loadLog(f.getAbsolutePath(), recursive));
             else {
                 try {
-                    StackTrace st = new StackTrace();
-                    st.parseFile(f,idMap);
-                    list.add(st);
+                    Map<String, List<String>> splitByTest = splitByTest(f);
+                    for(String key: splitByTest.keySet()) {
+                        StackTrace st = new StackTrace();
+                        st.parseFile(key, splitByTest.get(key), idMap);
+                        list.add(st);
+                    }
                 } catch (Exception e) {
                     Log.debug("",e);
                 }
             }
         }
         return list;
+    }
+
+    protected Map<String, List<String>> splitByTest(File file) throws Exception {
+        Map<String, List<String>> traceByTest = new HashMap<>();
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        reader.readLine();
+        String line = reader.readLine();
+        String tmp = "";
+
+        if(line == null)
+            throw new Exception("empty file");
+
+        List<String> trace = new LinkedList<>();
+        traceByTest.put("null",trace);
+        while (line != null) {
+            if(!line.isEmpty()) {
+                if(line.endsWith("$$$")) {
+                    try {
+                        if(line.startsWith("NewTest")) {
+                            String test = line.substring(8, line.length() - 3);
+                            Log.debug("new Test: {}",test);
+                            trace = new LinkedList<>();
+                            traceByTest.put(test,trace);
+                        } else {
+                            trace.add(tmp + line.substring(0, line.length() - 3));
+                        }
+                        tmp = "";
+                    } catch (Exception e) {
+                        Log.error("malformed line: {}",line);
+                        tmp = "";
+                    }
+                }
+                else {
+                    tmp = tmp + line;
+                }
+            }
+            line = reader.readLine();
+        }
+        trace.add(tmp);
+        return traceByTest;
     }
 
     protected Map<String,String> loadIdMap(String file) throws IOException {

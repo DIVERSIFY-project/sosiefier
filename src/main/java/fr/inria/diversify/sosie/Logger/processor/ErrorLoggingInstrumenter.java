@@ -31,20 +31,6 @@ public class ErrorLoggingInstrumenter extends AbstractProcessor<CtStatement> {
                 ;
     }
 
-//    public boolean hasStaticParent(CtElement el) {
-//        if (el instanceof CtModifiable) {
-//            if (((CtModifiable) el).getModifiers().contains(ModifierKind.STATIC)) {
-//                return true;
-//            }
-//        }
-//
-//        if (el.getParent() != null) {
-//            return hasStaticParent(el.getParent());
-//        }
-//
-//        return false;
-//    }
-
     public void process(CtStatement statement) {
         if (CtThrow.class.isAssignableFrom(statement.getClass()))
             instruThrow((CtThrow) statement);
@@ -64,14 +50,14 @@ public class ErrorLoggingInstrumenter extends AbstractProcessor<CtStatement> {
 
         else
             methodName = getMethod(throwStmt).getSignature();
-        String snippet = "{\nfr.inria.diversify.sosie.logger.LogWriter.writeException("+sp.getSourceStart()+",Thread.currentThread(),\"" +
+        String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.writeException("+sp.getSourceStart()+",Thread.currentThread(),\"" +
                  className + "\",\"" + methodName + "\"," +
                 throwStmt.getThrownExpression() + ");\n";
 
         int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
 
-        snippet = "\n}\n";
+        snippet = "\n";
 
         index = compileUnit.nextLineIndex(sp.getSourceEnd());
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));

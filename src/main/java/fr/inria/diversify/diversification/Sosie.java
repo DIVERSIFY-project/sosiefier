@@ -3,7 +3,6 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.sosie.logger.InstruTestAndMethod;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
@@ -17,19 +16,22 @@ import java.util.Collection;
  * Time: 10:20 AM
  */
 public class Sosie extends AbstractDiversify {
+    protected String testDir;
+    protected boolean instru;
 
     public Sosie(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
-
+        instru = false;
     }
 
-    public Sosie(String projectDir, String src) {
+    public Sosie(String projectDir, String src, String test) {
         this.sourceDir = src;
+        this.testDir = test;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
-
+        instru = true;
     }
     @Override
     public void run(int n) throws Exception {
@@ -49,7 +51,9 @@ public class Sosie extends AbstractDiversify {
         Log.debug("output dir sosie: " + tmpDir + "/" + sourceDir);
         try {
             trans.apply(tmpDir + "/" + sourceDir);
-            if(runTest(tmpDir) != 0) {
+            int status = runTest(tmpDir);
+            trans.setStatus(status);
+            if(status != 0) {
                 FileUtils.cleanDirectory(tmpDir);
                 FileUtils.forceDelete(tmpDir);
             }
@@ -58,19 +62,23 @@ public class Sosie extends AbstractDiversify {
                 FileWriter fileWriter = new FileWriter(tmpDir +"/diversificationPoint");
                 fileWriter.append(trans.toJSONObject().toString());
                 fileWriter.close();
+                if(instru)
+                    instruTestAndMethod(tmpDir);
             }
         } catch (Exception e) {
+            trans.setStatus(-2);
             Log.warn("setCompile error during diversification", e);
             FileUtils.cleanDirectory(tmpDir);
             FileUtils.forceDelete(tmpDir);
         }
-       
         tmpDir = init(projectDir,"output_sosie/sosie");
     }
 
-    protected void instruTestAndMethod(String project, String output) throws Exception {
-        String src = DiversifyProperties.getProperty("src");
-        String test = project + "/" + DiversifyProperties.getProperty("testSrc");
-        new InstruTestAndMethod(project,output,src,test);
+    protected void instruTestAndMethod(String project) throws Exception {
+        String output = "output_sosieInstru/instru_"+System.currentTimeMillis();
+        new InstruTestAndMethod(project,output,sourceDir,testDir);
     }
+
+
+
 }
