@@ -45,9 +45,9 @@ public class InstruTestAndMethod {
         String test = project+ "/" +testDir;
 
         Factory factory = initSpoon(src);
-        applyProcessor(factory, new MethodLoggingInstrumenter());
-        applyProcessor(factory, new ConditionalLoggingInstrumenter());
-        applyProcessor(factory, new ErrorLoggingInstrumenter());
+//        applyProcessor(factory, new MethodLoggingInstrumenter());
+//        applyProcessor(factory, new ConditionalLoggingInstrumenter());
+//        applyProcessor(factory, new ErrorLoggingInstrumenter());
 
         Environment env = factory.getEnvironment();
         env.useSourceCodeFragments(true);

@@ -1,6 +1,9 @@
 package fr.inria.diversify.sosie.compare;
 
+import fr.inria.diversify.sosie.compare.diff.CallDiff;
 import fr.inria.diversify.sosie.compare.diff.Diff;
+import fr.inria.diversify.sosie.compare.stackElement.*;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.maven.MavenDependencyResolver;
@@ -14,15 +17,14 @@ import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Simon on 18/04/14.
  */
 public class Main {
     private String dirOriginal;
-    private String varToExclude;
+    private String diffToExclude;
     private String dirSosie;
 
     public static void main(String[] args) throws Exception {
@@ -44,21 +46,20 @@ public class Main {
 
         dirOriginal = DiversifyProperties.getProperty("dirOriginal");
         dirSosie = DiversifyProperties.getProperty("dirSosie");
-        varToExclude = DiversifyProperties.getProperty("excludeDiff");
+        diffToExclude = DiversifyProperties.getProperty("excludeDiff");
 
-//        if(DiversifyProperties.getProperty("logTrace").equals("same"))
+        if(DiversifyProperties.getProperty("logTrace").equals("same"))
             same();
-//        else
-//            diff();
+        else
+            diff();
     }
-
 
     protected void same() throws Exception {
         Log.debug("loading log from dir {}",dirSosie);
         try {
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, varToExclude);
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
             Set<Diff> diff = un.findDiff();
-            writeDiff(DiversifyProperties.getProperty("result")+"/excludeDiff",diff);
+            writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff",  diffUnion(diff, un.getDiffToExclude()));
         } catch (Exception e) {
             Log.error("error",e);
             e.printStackTrace();
@@ -68,9 +69,9 @@ public class Main {
     protected void diff() throws Exception {
         Log.debug("loading log from dir {}",dirSosie);
         try {
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, varToExclude);
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
             Set<Diff> diff = un.findDiff();
-            writeDiff(DiversifyProperties.getProperty("result")+"/diff",diff);
+            writeDiff(DiversifyProperties.getProperty("result")+"/excludeDiff",diff);
         } catch (Exception e) {
             Log.error("error",e);
             e.printStackTrace();
@@ -104,6 +105,7 @@ public class Main {
     }
 
     protected void writeDiff(String fileName, Collection<Diff> diffs) throws IOException {
+        Log.debug("write diff in {}", fileName);
         File file = new File(fileName);
         file.createNewFile();
         FileWriter writer = new FileWriter(file);
@@ -113,6 +115,33 @@ public class Main {
             writer.write("\n");
         }
         writer.close();
+        Log.debug("all diff write");
+    }
+
+    protected Set<Diff> diffUnion(Collection<Diff> diffs1, Collection<Diff> diffs2) {
+        Set<Diff> union = new HashSet<>();
+        Map<StackTraceElement, Integer> callDiffs = new HashMap<>();
+        Set<Diff> tmp = new HashSet<>(diffs1);
+        tmp.addAll(diffs2);
+
+        //init of callDiffs
+        for(Diff diff : tmp) {
+            if (diff instanceof CallDiff) {
+                int nbCallDiff = ((CallDiff) diff).getMaxStackDiff();
+                StackTraceElement key = diff.getDiffStart();
+                if (callDiffs.containsKey(key)) { callDiffs.put(key, Math.max(callDiffs.get(key), nbCallDiff)); }
+                else { callDiffs.put(key, nbCallDiff); }
+            } else {
+                union.add(diff);
+            }
+        }
+
+        for(StackTraceElement ste : callDiffs.keySet()) {
+            union.add(new CallDiff(ste, callDiffs.get(ste)));
+        }
+
+
+        return union;
     }
 
     protected void initLogLevel() {

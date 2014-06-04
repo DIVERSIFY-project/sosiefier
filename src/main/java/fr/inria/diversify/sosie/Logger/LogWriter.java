@@ -52,8 +52,7 @@ public class LogWriter {
     }
 
     protected static void decCallDeep(Thread thread) {
-//        if(callDeep.containsKey(thread))
-          int deep = callDeep.get(thread);
+        int deep = callDeep.get(thread);
         if(deep > 0)
             callDeep.put(thread, deep - 1);
     }
@@ -309,7 +308,6 @@ public class LogWriter {
             releaseFileWriter(semaphore);
         }
     }
-
 
     protected static Map<String, String> loadIdMap(String file) throws IOException {
         Map<String, String> map = new HashMap<String, String>();

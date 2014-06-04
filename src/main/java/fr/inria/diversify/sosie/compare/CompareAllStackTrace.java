@@ -73,15 +73,16 @@ public class CompareAllStackTrace {
         Map<StackTraceElement, Integer> callDiffs = new HashMap<>();
 
         //init of callDiffs
-        for(Diff diff : diffToExclude)
-            if(diff instanceof CallDiff) {
+        for(Diff diff : diffToExclude) {
+            if (diff instanceof CallDiff) {
                 int nbCallDiff = ((CallDiff) diff).getMaxStackDiff();
                 StackTraceElement key = diff.getDiffStart();
-                if(callDiffs.containsKey(key))
-                    callDiffs.put(key,Math.max(callDiffs.get(key),nbCallDiff));
-                else
-                    callDiffs.put(key,nbCallDiff);
+                if (callDiffs.containsKey(key)) callDiffs.put(key, Math.max(callDiffs.get(key), nbCallDiff));
+                else {
+                    callDiffs.put(key, nbCallDiff);
+                }
             }
+        }
 
         for(Diff diff : diffs) {
             if(diff instanceof CallDiff) {
@@ -89,22 +90,26 @@ public class CompareAllStackTrace {
                 StackTraceElement key = cDiff.getDiffStart();
                 if(!callDiffs.containsKey(key))
                     filtered.add(diff);
-                if(callDiffs.containsKey(key) && callDiffs.get(key) < cDiff.getMaxStackDiff())
+                if(callDiffs.containsKey(key) && callDiffs.get(key) < cDiff.getMaxStackDiff()) {
                     filtered.add(diff);
-
+                    callDiffs.put(key,cDiff.getMaxStackDiff());
+                }
             }
             else {
-                filtered.add(diff);
+                if(!diffToExclude.contains(diff))
+                    filtered.add(diff);
             }
         }
-        filtered.removeAll(diffToExclude);
         return filtered;
     }
+
+    protected int idMapSize;
 
     protected List<StackTrace> loadLog(String dir, boolean recursive) throws IOException {
         List<StackTrace> list = new ArrayList<>();
         File file = new File(dir);
         Map<String, String> idMap = loadIdMap(dir + "/id");
+        idMapSize = idMap.size();
 
         Log.debug("load trace in directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles()) {
@@ -146,8 +151,12 @@ public class CompareAllStackTrace {
                         if(line.startsWith("NewTest")) {
                             String test = line.substring(8, line.length() - 3);
                             Log.debug("new Test: {}",test);
-                            trace = new LinkedList<>();
-                            traceByTest.put(test,trace);
+                            if(traceByTest.containsKey(test)) {
+                                trace = traceByTest.get(test);
+                            } else {
+                                trace = new LinkedList<>();
+                                traceByTest.put(test, trace);
+                            }
                         } else {
                             trace.add(tmp + line.substring(0, line.length() - 3));
                         }
@@ -163,7 +172,8 @@ public class CompareAllStackTrace {
             }
             line = reader.readLine();
         }
-        trace.add(tmp);
+        if(!tmp.equals(""))
+            trace.add(tmp);
         return traceByTest;
     }
 
@@ -196,5 +206,9 @@ public class CompareAllStackTrace {
             line = reader.readLine();
         }
         return diff;
+    }
+
+    public List<Diff> getDiffToExclude() {
+        return diffToExclude;
     }
 }

@@ -2,11 +2,7 @@ package fr.inria.diversify.sosie.compare.stackTraceOperation;
 
 import fr.inria.diversify.sosie.compare.stackElement.*;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
-import fr.inria.diversify.util.Log;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.*;
 
 /**
@@ -20,6 +16,7 @@ public class StackTrace {
     protected int deep;
     protected String name;
     protected String threadName;
+    protected boolean variablesValueChange;
 
 
     public StackTrace() {
@@ -33,13 +30,16 @@ public class StackTrace {
     }
 
     public void next() {
-        if(position < stackTraceOperations.size())
+        if(position < stackTraceOperations.size()) {
+            variablesValueChange = false;
             stackTraceOperations.get(position).apply(this);
+        }
         position++;
     }
 
     public void previous() {
         if(position > 0) {
+            variablesValueChange = false;
             position--;
             stackTraceOperations.get(position).restore(this);
         }
@@ -71,36 +71,7 @@ public class StackTrace {
         return position < stackTraceOperations.size();
     }
 
-
-
-
     public void parseFile(String name, List<String> trace, Map<String,String> idMap) throws Exception {
-//        parseFileName(file.getName());
-
-//        BufferedReader reader = new BufferedReader(new FileReader(file));
-//        reader.readLine();
-//        String line = reader.readLine();
-//        String tmp = "";
-//        if(line == null)
-//            throw new Exception("empty file");
-//        while (line != null) {
-//            if(!line.isEmpty()) {
-//                if(line.endsWith("$$$")) {
-//                    try {
-//                        addElement(tmp + line.substring(0, line.length() - 3), idMap);
-//                        tmp = "";
-//                    } catch (Exception e) {
-//                        Log.error("malformed line: {}",line);
-//                        tmp = "";
-//                    }
-//                }
-//                else {
-//                    tmp = tmp + line;
-//                }
-//            }
-//            line = reader.readLine();
-//        }
-//        addElement(tmp, idMap);
         this.name = name;
 
         for(String operation: trace) {
@@ -154,7 +125,6 @@ public class StackTrace {
         return st;
     }
 
-
     @Override
     public String toString() {
         return name;
@@ -180,5 +150,9 @@ public class StackTrace {
 
     public Map<String,Object> getVariable() {
         return variablesValue;
+    }
+
+    public boolean getVariablesValueChange() {
+        return  variablesValueChange;
     }
 }

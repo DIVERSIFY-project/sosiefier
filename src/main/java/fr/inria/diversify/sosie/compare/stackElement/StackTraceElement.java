@@ -5,10 +5,13 @@ package fr.inria.diversify.sosie.compare.stackElement;
  */
 public class StackTraceElement {
     protected int originalDeep;
+    protected String method;
 
     public int getOriginalDeep() {
         return originalDeep;
     }
 
-
+    public String getMethod() {
+        return method;
+    }
 }

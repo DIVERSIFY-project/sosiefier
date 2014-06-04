@@ -69,6 +69,7 @@ public class MutationQuery extends TransformationQuery {
     public Transformation getTransformation() throws Exception {
         Random r = new Random();
         int i = r.nextInt(8);
+
         switch (i) {
             case 0: return getNegateConditionalMutation();
             case 1: return getConditionalBoundaryMutation();

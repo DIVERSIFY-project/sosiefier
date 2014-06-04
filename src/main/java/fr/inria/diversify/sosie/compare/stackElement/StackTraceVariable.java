@@ -8,7 +8,7 @@ import java.util.*;
 public class StackTraceVariable extends StackTraceElement {
     protected Map<String,Object> vars;
     protected int id;
-    protected String method;
+
 
     public StackTraceVariable(String value, int deep, Map<String, String> idMap) {
         originalDeep = deep;
