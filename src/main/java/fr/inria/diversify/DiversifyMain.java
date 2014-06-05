@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.*;
 
 import fr.inria.diversify.diversification.*;
-import fr.inria.diversify.sosie.logger.InstruTestAndMethod;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationParser;
@@ -40,6 +39,8 @@ import fr.inria.diversify.util.Log;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 /**
+ * Main class for the sosie generator
+ *
  * User: Simon
  * Date: 9/11/13
  * Time: 11:41 AM

@@ -6,8 +6,18 @@ import fr.inria.diversify.util.Log;
 import java.io.*;
 import java.lang.management.ManagementFactory;
 
+/**
+ * Main program
+ */
 public class Main {
 
+    /**
+     * Entry point for the sosie-generator
+     *
+     * @param args Program to be sosieficated
+     *
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         if(args[0].equals("git")) {
