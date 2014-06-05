@@ -39,7 +39,7 @@ import fr.inria.diversify.util.Log;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 /**
- * Main class for the sosie generator
+ * Main class for the sosie generator.
  *
  * User: Simon
  * Date: 9/11/13
