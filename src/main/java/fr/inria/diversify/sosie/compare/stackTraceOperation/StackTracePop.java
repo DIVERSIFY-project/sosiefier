@@ -1,5 +1,7 @@
 package fr.inria.diversify.sosie.compare.stackTraceOperation;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,12 +24,17 @@ public class StackTracePop implements StackTraceOperation {
     @Override
     public void restore(StackTrace stackTrace) {
         List<StackTraceOperation> operation = stackTrace.stackTraceOperations;
+        List<StackTraceOperation> toApply = new ArrayList<>();
         int index = stackTrace.position;
         for(int i = 0; i < pop; i++) {
             while(!(operation.get(index) instanceof StackTracePush))
                 index--;
-            operation.get(index).apply(stackTrace);
+            toApply.add(operation.get(index)); //.apply(stackTrace);
             index--;
+        }
+        Collections.reverse(toApply);
+        for(StackTraceOperation op : toApply) {
+            op.apply(stackTrace);
         }
     }
 }

@@ -22,7 +22,7 @@ public class StackTraceCall extends StackTraceElement {
     }
 
     public boolean equals(Object other) {
-        if (other.getClass() != this.getClass()) { return false; }
+        if (!(other instanceof StackTraceCall)) { return false; }
 
         StackTraceCall otherElem = (StackTraceCall) other;
 

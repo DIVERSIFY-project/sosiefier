@@ -51,6 +51,11 @@ public class LogWriter {
             callDeep.put(thread, 1);
     }
 
+    protected static void resetCallDeep(Thread thread) {
+        if(callDeep != null && callDeep.containsKey(thread))
+            callDeep.remove(thread, 0);
+    }
+
     protected static void decCallDeep(Thread thread) {
         int deep = callDeep.get(thread);
         if(deep > 0)
@@ -156,6 +161,7 @@ public class LogWriter {
 
         String semaphore = "";
         try {
+            resetCallDeep(thread);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("$$$\n");
             stringBuilder.append("NewTest");

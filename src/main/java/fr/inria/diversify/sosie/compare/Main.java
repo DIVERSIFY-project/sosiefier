@@ -55,7 +55,6 @@ public class Main {
     }
 
     protected void same() throws Exception {
-        Log.debug("loading log from dir {}",dirSosie);
         try {
             CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
             Set<Diff> diff = un.findDiff();
@@ -67,7 +66,6 @@ public class Main {
     }
 
     protected void diff() throws Exception {
-        Log.debug("loading log from dir {}",dirSosie);
         try {
             CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
             Set<Diff> diff = un.findDiff();

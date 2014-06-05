@@ -70,24 +70,49 @@ public class CompareStackTrace {
     public List<Diff> findDiff() {
         List<Diff> diffs = new LinkedList<>();
         //reset stackTrace1 and stackTrace2
-        while(stackTrace1.hasNext() && stackTrace2.hasNext()) {
-            stackTrace1.next();
-            stackTrace2.next();
 
-            if(!stackTrace1.getTop().equals(stackTrace2.getTop())
-                    || !(stackTrace1.getDeep() == stackTrace2.getDeep())) {
-                CallDiff tmp = new CallDiff(stackTrace1.getTop2(), Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
-                diffs.add(tmp);
-//                addCallDiff(stackTrace1.getTop2(), Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
+        boolean st1Lower = false, st2Lower = false;
+        while(stackTrace1.hasNext() && stackTrace2.hasNext()) {
+            if(!st1Lower) {
+                stackTrace1.next();
             }
-            if(stackTrace1.getVariablesValueChange() || stackTrace2.getVariablesValueChange()) {
+            if(!st2Lower) {
+                stackTrace2.next();
+            }
+
+            int deep1 = stackTrace1.getDeep();
+            int deep2 = stackTrace2.getDeep();
+
+            if(!st1Lower && deep1 < deep2) {
+                st1Lower = true;
+//                stackTrace1.previous();
+            }
+            if(!st2Lower &&  deep1 > deep2) {
+                st1Lower = true;
+//                stackTrace2.previous();
+            }
+            if(deep1 == deep2) {
+                st1Lower = false; st2Lower = false;
+            }
+            if(st1Lower || st2Lower) {
+                diffs.add(new CallDiff(stackTrace1.getTop2(), Math.abs(deep1 - deep2)));
+            }
+            if(st1Lower && st2Lower || !stackTrace1.getTop().equals(stackTrace2.getTop())) {
+                findNewSyncro(8, 2,stackTrace1,stackTrace2);
+            }
+
+//            if(!stackTrace1.getTop().equals(stackTrace2.getTop())
+//                    || !(stackTrace1.getDeep() == stackTrace2.getDeep())) {
+//                CallDiff tmp = new CallDiff(stackTrace1.getTop2(), Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
+//                diffs.add(tmp);
+//            }
+            if(st1Lower == st2Lower && (stackTrace1.getVariablesValueChange() || stackTrace2.getVariablesValueChange())) {
                 Set<VariableDiff> vd = varDiff(stackTrace1, stackTrace2);
                 if (!vd.isEmpty()) {
                     diffs.addAll(vd);
                 }
             }
         }
-//        formatAndAddCallDiff(diffs);
         return diffs;
     }
 
@@ -129,10 +154,11 @@ public class CompareStackTrace {
     protected void findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
         for(int i = 0; i < maxOperation; i++) {
             for(int j = 0; j < maxOperation - i; j++) {
-                st1.next();
-                if(st1.getTop().equals(st2.getTop())) {
-                    isSameForXOperation(syncroRange, st1, st2);
+
+                if(st1.getTop().equals(st2.getTop()) &&  isSameForXOperation(syncroRange, st1, st2)) {
+                    return;
                 }
+                st1.next();
             }
             st1.previous(maxOperation - i);
             st2.next();

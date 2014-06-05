@@ -80,7 +80,6 @@ public class StackTrace {
 
         stackTraceCalls.clear();
     }
-
     protected void addElement(String line, Map<String, String> idMap) {
         String type = line.substring(0, 1);
         if(type.equals("A"))
@@ -89,7 +88,6 @@ public class StackTrace {
         int deep =  Integer.parseInt(line.substring(1, i));
 
         StackTraceElement elem = parseElement(type, deep, line.substring(i+1,line.length()), idMap);
-
         if(elem instanceof StackTraceCall)
             addCall((StackTraceCall) elem, deep);
         else {
@@ -101,6 +99,7 @@ public class StackTrace {
 
     protected void addCall(StackTraceCall elem, int deep) {
         int pop = 0;
+
         while(!stackTraceCalls.isEmpty() && stackTraceCalls.peek().getOriginalDeep() >= deep) {
             stackTraceCalls.pop();
             pop++;
@@ -130,18 +129,18 @@ public class StackTrace {
         return name;
     }
 
-    protected void parseFileName(String fileName) {
-        String[] tmp = fileName.split("_");
-        threadName = tmp[0];
-        name = fileName.substring(threadName.length()+1,fileName.length());
-    }
+//    protected void parseFileName(String fileName) {
+//        String[] tmp = fileName.split("_");
+//        threadName = tmp[0];
+//        name = fileName.substring(threadName.length()+1,fileName.length());
+//    }
 
     public String getName() {
         return name;
     }
 
     public String getFullName() {
-        return threadName+"_"+name;
+        return name;
     }
 
     public Stack<StackTraceCall> getStackTraceCalls() {

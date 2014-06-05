@@ -117,6 +117,7 @@ public class CompareAllStackTrace {
                 list.addAll(loadLog(f.getAbsolutePath(), recursive));
             else {
                 try {
+                    Log.debug("parse file: {}",f.getAbsoluteFile());
                     Map<String, List<String>> splitByTest = splitByTest(f);
                     for(String key: splitByTest.keySet()) {
                         StackTrace st = new StackTrace();
@@ -133,7 +134,7 @@ public class CompareAllStackTrace {
 
     protected Map<String, List<String>> splitByTest(File file) throws Exception {
         Map<String, List<String>> traceByTest = new HashMap<>();
-
+        Set<String> testToExclude = new HashSet<>();
         BufferedReader reader = new BufferedReader(new FileReader(file));
         reader.readLine();
         String line = reader.readLine();
@@ -150,10 +151,11 @@ public class CompareAllStackTrace {
                     try {
                         if(line.startsWith("NewTest")) {
                             String test = line.substring(8, line.length() - 3);
-                            Log.debug("new Test: {}",test);
                             if(traceByTest.containsKey(test)) {
+                                testToExclude.add(test);
                                 trace = traceByTest.get(test);
                             } else {
+                                Log.debug("New test: {}",test);
                                 trace = new LinkedList<>();
                                 traceByTest.put(test, trace);
                             }
@@ -174,13 +176,18 @@ public class CompareAllStackTrace {
         }
         if(!tmp.equals(""))
             trace.add(tmp);
+
+        Log.debug("all test: {}, to exclude: {}", traceByTest.size(), testToExclude.size());
+        for(String test: testToExclude)
+            traceByTest.remove(test);
+
+
         return traceByTest;
     }
 
     protected Map<String,String> loadIdMap(String file) throws IOException {
         Map<String,String> map = new HashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        reader.readLine();
         String line = reader.readLine();
 
         while (line != null) {
