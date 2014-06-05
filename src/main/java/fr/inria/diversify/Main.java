@@ -14,7 +14,7 @@ public class Main {
     /**
      * Entry point for the sosie-generator
      *
-     * @param args Program to be sosieficated
+     * @param args Property file that contains all the input parameters
      *
      * @throws Exception
      */

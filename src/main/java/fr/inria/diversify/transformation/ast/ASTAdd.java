@@ -12,6 +12,8 @@ import spoon.reflect.declaration.CtSimpleType;
 import java.util.Map;
 
 /**
+ * Transformation that adds AST nodes
+ *
  * User: Simon
  * Date: 7/11/13
  * Time: 4:33 PM

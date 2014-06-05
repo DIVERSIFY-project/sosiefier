@@ -1,114 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fr.irisa.diversify</groupId>
-    <artifactId>Sosies-generator</artifactId>
-    <version>1.0-SNAPSHOT</version>
+  <groupId>fr.irisa.diversify</groupId>
+  <artifactId>Sosies-generator</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <!-- Shared version number properties -->
+  <properties>
+    <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+  </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>fr.inria.gforge.spoon</groupId>
-            <artifactId>spoon-core</artifactId>
-            <version>2.0-SNAPSHOT</version>
-        </dependency>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-core</artifactId>
-            <version>3.1.1</version>
-        </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-invoker</artifactId>
-            <version>2.1.1</version>
-        </dependency>
+    <dependency>
+      <groupId>fr.inria.gforge.spoon</groupId>
+      <artifactId>spoon-core</artifactId>
+      <version>2.0-SNAPSHOT</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.kevoree</groupId>
-            <artifactId>org.kevoree.maven.resolver</artifactId>
-            <version>3</version>
-        </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-core</artifactId>
+      <version>3.1.1</version>
+    </dependency>
 
-        <dependency>
-            <groupId>javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.12.1.GA</version>
-        </dependency>
+    <dependency>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>maven-invoker</artifactId>
+      <version>2.1.1</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20090211</version>
-        </dependency>
+    <dependency>
+      <groupId>org.kevoree</groupId>
+      <artifactId>org.kevoree.maven.resolver</artifactId>
+      <version>3</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.core</artifactId>
-            <version>0.7.0.201403182114</version>
-        </dependency>
+    <dependency>
+      <groupId>javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.12.1.GA</version>
+    </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-        </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20090211</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.jacoco</groupId>
+      <artifactId>org.jacoco.core</artifactId>
+      <version>0.7.0.201403182114</version>
+    </dependency>
 
-        <!--&lt;!&ndash; Kevoree dependency &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.kevoree.komponents</groupId>-->
-            <!--<artifactId>ws-api</artifactId>-->
-            <!--<version>1.1.0-SNAPSHOT</version>-->
-        <!--</dependency>-->
-    </dependencies>
-
-    <repositories>
-        <repository>
-            <id>gforge.inria.fr-snapshot</id>
-            <name>Maven Repository for Spoon Snapshot</name>
-            <url>http://spoon.gforge.inria.fr/repositories/snapshots/</url>
-            <snapshots />
-        </repository>
-    </repositories>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+    </dependency>
 
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>fr.inria.diversify.Main</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-my-jar-with-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+    <!--&lt;!&ndash; Kevoree dependency &ndash;&gt;-->
+    <!--<dependency>-->
+    <!--<groupId>org.kevoree.komponents</groupId>-->
+    <!--<artifactId>ws-api</artifactId>-->
+    <!--<version>1.1.0-SNAPSHOT</version>-->
+    <!--</dependency>-->
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>gforge.inria.fr-snapshot</id>
+      <name>Maven Repository for Spoon Snapshot</name>
+      <url>http://spoon.gforge.inria.fr/repositories/snapshots/</url>
+      <snapshots/>
+    </repository>
+  </repositories>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>fr.inria.diversify.Main</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-my-jar-with-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

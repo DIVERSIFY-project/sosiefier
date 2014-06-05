@@ -14,10 +14,13 @@ import java.util.List;
  * Created by Simon on 21/05/14.
  */
 public class ASTMultiTransformationQuery extends TransformationQuery {
+
     protected int nbTransformation;
+
     protected TransformationQueryFromList queryFromList;
 
-    public ASTMultiTransformationQuery(ICoverageReport cr, int nbTransformation, String transformationDirectory) throws IOException, JSONException {
+    public ASTMultiTransformationQuery(ICoverageReport cr, int nbTransformation,
+                                       String transformationDirectory) throws IOException, JSONException {
         queryFromList = new TransformationQueryFromList(cr, transformationDirectory);
         this.nbTransformation = nbTransformation;
     }
@@ -31,7 +34,7 @@ public class ASTMultiTransformationQuery extends TransformationQuery {
     public Transformation getTransformation() throws Exception {
         List<Transformation> transformations = new ArrayList<>();
 
-        for(int i = 0; i< nbTransformation; i++) {
+        for (int i = 0; i < nbTransformation; i++) {
             transformations.add(queryFromList.getTransformation());
         }
 
