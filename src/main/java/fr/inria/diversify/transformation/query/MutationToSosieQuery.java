@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.MultiCoverageReport;
+import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -63,7 +64,7 @@ public class MutationToSosieQuery extends TransformationQuery {
 
             //TODO: Se how to remove the static method. We will get here eventually
             T thread = new T(new ASTTransformationQuery(coverageReport, DiversifyEnvironment.getCodeFragments(),
-                    Statement.class, false));
+                    Statement.class, false, new RandomFactory()));
 
             thread.start();
             int count = 0;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import fr.inria.diversify.diversification.*;
+import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationParser;
@@ -135,7 +136,7 @@ public class DiversifyMain {
                 return new OtherQuery(rg);
             case "all":
                 return new CompositeQuery(new MutationQuery(rg),
-                        new ASTTransformationQuery(rg, DiversifyEnvironment.getCodeFragments()));
+                        new ASTTransformationQuery(rg, DiversifyEnvironment.getCodeFragments(), new RandomFactory()));
             case "cvl":
                 return new CvlQuery();
             case "bytecode":
@@ -149,12 +150,12 @@ public class DiversifyMain {
             case "ADR": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
                 CodeFragmentList cf = DiversifyEnvironment.getCodeFragments();
-                return new ASTTransformationQuery(rg, cf, cl, false);
+                return new ASTTransformationQuery(rg, cf, cl, false, new RandomFactory());
             }
             case "ADRStupid": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
                 CodeFragmentList cf = DiversifyEnvironment.getCodeFragments();
-                return new ASTTransformationQuery(rg, cf, cl, true);
+                return new ASTTransformationQuery(rg, cf, cl, true, new RandomFactory());
             }
             case "list": {
                 String transDirectory = DiversifyProperties.getProperty("transformation.directory");

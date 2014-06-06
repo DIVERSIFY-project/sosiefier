@@ -4,18 +4,23 @@ import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.factory.IRandomFactory;
+import fr.inria.diversify.random.IRandom;
+import fr.inria.diversify.random.Random;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.util.DiversifyEnvironment;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 
 /**
  * A transformation query over the AST
@@ -43,6 +48,11 @@ public class ASTTransformationQuery extends TransformationQuery {
      */
     protected boolean stupid = true;
 
+    /**
+     * Random engine factory to finer grain control of the random generation
+     */
+    IRandomFactory randomFactory;
+
 
     /**
      * Short constructor assuming the fragment class to be statement and the transformation to be stupid
@@ -50,9 +60,10 @@ public class ASTTransformationQuery extends TransformationQuery {
      * @param coverageReport Coverage report of the code
      * @param fragments Code fragments
      */
-    public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList fragments) {
+    public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList fragments, IRandomFactory random) {
         this.coverageReport = coverageReport;
         codeFragments = fragments;
+        randomFactory = random;
     }
 
     /**
@@ -63,11 +74,12 @@ public class ASTTransformationQuery extends TransformationQuery {
      * @param isStupid Is this a stupid transformation?
      */
     public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList fragments,
-                                  Class fragmentClass, boolean isStupid) {
+                                  Class fragmentClass, boolean isStupid, IRandomFactory random) {
         this.coverageReport = coverageReport;
         codeFragments = fragments;
         codeFragmentClass = fragmentClass;
         stupid = isStupid;
+        randomFactory = random;
     }
 
 
@@ -83,7 +95,7 @@ public class ASTTransformationQuery extends TransformationQuery {
      * @throws Exception
      */
     public ASTTransformation buildTransformation() throws Exception {
-        Random r = new Random();
+        IRandom r = randomFactory.buildRandomizer();
         ASTTransformation t = null;
         int i = r.nextInt(stupid ? 15 : 5);
         switch (i) {
@@ -272,7 +284,7 @@ public class ASTTransformationQuery extends TransformationQuery {
      * @return
      */
     protected CodeFragment findRandomFragmentToReplace(boolean withCoverage) {
-        Random r = new Random();
+        IRandom r = randomFactory.buildRandomizer();
         int size = codeFragments.size();
         CodeFragment stmt = codeFragments.get(r.nextInt(size));
 

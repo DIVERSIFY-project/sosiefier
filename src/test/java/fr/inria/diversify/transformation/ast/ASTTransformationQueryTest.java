@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation.ast;
 
+import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import org.junit.Test;
 
@@ -12,7 +13,8 @@ public class ASTTransformationQueryTest {
     public void testCreate() {
         //An initial test. This will force us to refactor the class to a point that it may work in isolation
         //This seams really stupid is just a concept test
-       // ASTTransformationQuery query = new ASTTransformationQuery()
+        NullCoverageReport report = new NullCoverageReport();
+        //ASTTransformationQuery query = new ASTTransformationQuery(report);
     }
 
 
