@@ -1,6 +1,5 @@
-package fr.inria.diversify.util.maven;
+package fr.inria.diversify.buildSystem.maven;
 
-import fr.inria.diversify.util.maven.MavenInvocationResult;
 import org.apache.maven.shared.invoker.*;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.cli.CommandLineException;

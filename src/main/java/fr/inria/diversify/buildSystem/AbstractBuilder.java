@@ -1,4 +1,4 @@
-package fr.inria.diversify.diversification.builder;
+package fr.inria.diversify.buildSystem;
 
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
@@ -19,7 +19,7 @@ public abstract class AbstractBuilder {
     protected String directory;
     protected boolean compileError;
     protected boolean allTestRun;
-    String[] phases;
+    protected String[] phases;
     protected List<String> errors;
     protected List<String> acceptedErrors;
 

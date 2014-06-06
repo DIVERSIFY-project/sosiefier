@@ -2,11 +2,10 @@ package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.sosie.compare.diff.CallDiff;
 import fr.inria.diversify.sosie.compare.diff.Diff;
-import fr.inria.diversify.sosie.compare.stackElement.*;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import fr.inria.diversify.util.maven.MavenDependencyResolver;
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import spoon.compiler.SpoonCompiler;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;

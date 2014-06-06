@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.query.ast;
 
-import fr.inria.diversify.CodeFragmentList;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
@@ -98,6 +98,12 @@ public class ASTTransformationQuery extends TransformationQuery {
         IRandom r = randomFactory.buildRandomizer();
         ASTTransformation t = null;
         int i = r.nextInt(stupid ? 15 : 5);
+
+        //All the methods regarding construction of transformation
+        //should be declared as protected. Otherwise is a violation of the SOLID principle
+        //because we may use this class as a Transformation factory, allowing the class
+        //to have multiple responsibilities
+
         switch (i) {
             case 0:
             case 1:
@@ -133,7 +139,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         return null;
     }
 
-    public ASTReplace replace() throws Exception {
+    protected ASTReplace replace() throws Exception {
         ASTReplace tf = new ASTReplace();
         CodeFragment cfToReplace = null;
         CodeFragment cfReplacedBy = null;
@@ -147,7 +153,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         return tf;
     }
 
-    public ASTReplace replaceWittgenstein() throws Exception {
+    protected ASTReplace replaceWittgenstein() throws Exception {
         ASTReplace tf = new ASTReplace();
         CodeFragment cfToReplace = null;
         CodeFragment cfReplacedBy = null;
@@ -162,7 +168,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         return tf;
     }
 
-    public ASTReplace replaceRandom() throws Exception {
+    protected ASTReplace replaceRandom() throws Exception {
         ASTReplace tf = new ASTReplace();
         tf.setTransplantationPoint(findRandomFragmentToReplace(true));
         tf.setCodeFragmentToReplace(findRandomFragmentToReplace(false));
@@ -170,7 +176,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         return tf;
     }
 
-    public ASTAdd addRandom() throws Exception {
+    protected ASTAdd addRandom() throws Exception {
         ASTAdd tf = new ASTAdd();
         tf.setTransplantationPoint(findRandomFragmentToReplace(true));
         tf.setCodeFragmentToAdd(findRandomFragmentToReplace(false));
@@ -178,7 +184,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         return tf;
     }
 
-    public ASTReplace replace(CodeFragment cfToReplace, boolean varNameMatch) throws Exception {
+    protected ASTReplace replace(CodeFragment cfToReplace, boolean varNameMatch) throws Exception {
         ASTReplace tf = new ASTReplace();
 
         CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
@@ -200,7 +206,7 @@ public class ASTTransformationQuery extends TransformationQuery {
 //        return tf;
 //    }
 
-    public ASTAdd addWittgenstein() throws Exception {
+    protected ASTAdd addWittgenstein() throws Exception {
         ASTAdd tf = new ASTAdd();
         CodeFragment cfToReplace = null;
         CodeFragment cfReplacedBy = null;
@@ -214,7 +220,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         return tf;
     }
 
-    public ASTAdd add() throws Exception {
+    protected ASTAdd add() throws Exception {
         ASTAdd tf = new ASTAdd();
         CodeFragment cfToReplace = null;
         CodeFragment cfReplacedBy = null;
@@ -228,7 +234,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         return tf;
     }
 
-    public ASTAdd add(CodeFragment cfToReplace, boolean varNameMatch) throws Exception {
+    protected ASTAdd add(CodeFragment cfToReplace, boolean varNameMatch) throws Exception {
         ASTAdd tf = new ASTAdd();
 
         CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
@@ -250,7 +256,7 @@ public class ASTTransformationQuery extends TransformationQuery {
 //        return tf;
 //    }
 
-    public ASTDelete delete() throws Exception {
+    protected ASTDelete delete() throws Exception {
         ASTDelete tf = new ASTDelete();
         CodeFragment cfToDelete = null;
         while (cfToDelete == null) {
@@ -263,7 +269,7 @@ public class ASTTransformationQuery extends TransformationQuery {
     }
 
 
-    public ASTDelete delete(CodeFragment cfToDelete) throws Exception {
+    protected ASTDelete delete(CodeFragment cfToDelete) throws Exception {
         ASTDelete tf = new ASTDelete();
         tf.setTransplantationPoint(cfToDelete);
         return tf;

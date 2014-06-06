@@ -1,8 +1,9 @@
-package fr.inria.diversify.diversification.builder;
+package fr.inria.diversify.buildSystem.maven;
 
 
+import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.util.Log;
-import fr.inria.diversify.util.maven.MavenInvoker;
+import fr.inria.diversify.buildSystem.maven.MavenInvoker;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.shared.invoker.*;
 
@@ -143,7 +144,7 @@ public class MavenBuilder extends AbstractBuilder {
 
     public void initPom(String newPomFile) throws Exception {
          super.initPom(newPomFile);
-        File failFastDir = new File(directory+"/"+ srcDir + "/fr/inria/diversify/diversification/builder");
+        File failFastDir = new File(directory+"/"+ srcDir + "/fr/inria/diversify/buildSystem/builder");
         FileUtils.forceMkdir(failFastDir);
         FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/builder/FailFastListener.java"),failFastDir);
 

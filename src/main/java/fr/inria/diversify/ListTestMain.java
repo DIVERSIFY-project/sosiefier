@@ -1,9 +1,9 @@
 package fr.inria.diversify;
 
-import fr.inria.diversify.coverage.*;
+import fr.inria.diversify.coverage.TestProcessor;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import fr.inria.diversify.util.maven.MavenDependencyResolver;
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.factory.FactoryImpl;
@@ -14,8 +14,6 @@ import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class ListTestMain {

@@ -2,7 +2,7 @@ package fr.inria.diversify.sosie.logger;
 
 import fr.inria.diversify.sosie.logger.processor.*;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
-import fr.inria.diversify.util.maven.MavenDependencyResolver;
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
 import spoon.compiler.SpoonCompiler;

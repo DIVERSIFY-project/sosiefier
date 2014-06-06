@@ -1,4 +1,4 @@
-package fr.inria.diversify;
+package fr.inria.diversify.codeFragment;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import spoon.reflect.declaration.CtSimpleType;

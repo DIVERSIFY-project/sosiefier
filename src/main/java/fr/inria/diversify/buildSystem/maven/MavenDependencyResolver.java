@@ -1,4 +1,4 @@
-package fr.inria.diversify.util.maven;
+package fr.inria.diversify.buildSystem.maven;
 
 
 import fr.inria.diversify.util.Log;

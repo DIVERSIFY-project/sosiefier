@@ -213,7 +213,7 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>fr.inria.diversify.diversification.builder.FailFastListener</value>
+                            <value>fr.inria.diversify.buildSystem.FailFastListener</value>
                         </property>
                     </properties>
                     

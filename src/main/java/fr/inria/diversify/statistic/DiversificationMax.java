@@ -1,6 +1,6 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.CodeFragmentList;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;

@@ -1,9 +1,10 @@
-package fr.inria.diversify.diversification.builder;
+package fr.inria.diversify.buildSystem.ant;
 
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.util.Log;
 
 

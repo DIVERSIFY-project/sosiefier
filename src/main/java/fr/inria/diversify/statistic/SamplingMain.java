@@ -1,12 +1,12 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.CodeFragmentList;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import fr.inria.diversify.util.maven.MavenDependencyResolver;
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import spoon.compiler.SpoonCompiler;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.factory.Factory;

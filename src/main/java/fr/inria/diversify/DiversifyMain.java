@@ -4,21 +4,22 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationsWriter;
-import fr.inria.diversify.diversification.builder.AbstractBuilder;
-import fr.inria.diversify.diversification.builder.AntBuilder;
-import fr.inria.diversify.diversification.builder.MavenBuilder;
+import fr.inria.diversify.buildSystem.AbstractBuilder;
+import fr.inria.diversify.buildSystem.ant.AntBuilder;
+import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.transformation.query.ast.ASTMultiTransformationQuery;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.ast.TransformationQueryFromList;
 import fr.inria.diversify.util.DiversifyEnvironment;
-import fr.inria.diversify.util.maven.MavenDependencyResolver;
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 

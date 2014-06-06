@@ -1,6 +1,6 @@
 package fr.inria.diversify.util;
 
-import fr.inria.diversify.CodeFragmentList;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
@@ -10,7 +10,6 @@ import javassist.CtMethod;
 import javassist.NotFoundException;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
-import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtElement;
@@ -22,7 +21,6 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**

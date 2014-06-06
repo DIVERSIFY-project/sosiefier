@@ -1,9 +1,6 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.CodeFragmentList;
-import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 
 import java.io.BufferedWriter;

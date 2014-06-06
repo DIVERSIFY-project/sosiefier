@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.coverage.NullCoverageReport;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import org.junit.Test;
 
 /**

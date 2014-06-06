@@ -1,4 +1,4 @@
-package fr.inria.diversify.diversification.builder;
+package fr.inria.diversify.buildSystem;
 
 
 import org.junit.runner.notification.Failure;
