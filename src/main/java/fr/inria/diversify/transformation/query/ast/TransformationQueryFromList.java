@@ -28,7 +28,7 @@ public class TransformationQueryFromList extends TransformationQuery {
     }
 
     @Override
-    public Transformation getTransformation() throws Exception {
+    public Transformation buildTransformation() throws Exception {
         Random r = new Random();
         double coverage = 0;
         Transformation t =transformations.get(r.nextInt(transformations.size()));;
@@ -47,7 +47,7 @@ public class TransformationQueryFromList extends TransformationQuery {
         }
         else {
             while (set.size() < nb)
-                set.add(getTransformation());
+                set.add(buildTransformation());
         }
         return set;
     }

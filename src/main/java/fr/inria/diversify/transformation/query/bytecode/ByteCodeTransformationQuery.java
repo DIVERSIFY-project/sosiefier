@@ -40,7 +40,7 @@ public class ByteCodeTransformationQuery extends TransformationQuery {
         this.type = type;
     }
 
-    public BytecodeTransformation getTransformation() throws Exception {
+    public BytecodeTransformation buildTransformation() throws Exception {
         String type = this.type;
         if(type == null) {
             Random r = new Random();

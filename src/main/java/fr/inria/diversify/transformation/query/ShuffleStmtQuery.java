@@ -28,7 +28,7 @@ public class ShuffleStmtQuery extends TransformationQuery {
     }
 
     @Override
-    public ShuffleStmtTransformation getTransformation() throws Exception {
+    public ShuffleStmtTransformation buildTransformation() throws Exception {
         ShuffleStmtTransformation sst = new ShuffleStmtTransformation();
         List<CtElement> objects = DiversifyEnvironment.getAllElement(CtBlock.class);
         Random r = new Random();

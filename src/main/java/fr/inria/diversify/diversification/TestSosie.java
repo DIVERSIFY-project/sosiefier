@@ -65,7 +65,7 @@ public class TestSosie extends AbstractDiversify {
     public void run(int n) throws Exception {
         for (int i = 0; i < n; i++) {
             Log.debug("diversification number: " + i);
-            run(transQuery.getTransformation());
+            run(transQuery.buildTransformation());
         }
     }
 

@@ -15,7 +15,6 @@ import spoon.reflect.declaration.CtElement;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -66,7 +65,7 @@ public class MutationQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation getTransformation() throws Exception {
+    public Transformation buildTransformation() throws Exception {
         Random r = new Random();
         int i = r.nextInt(8);
 

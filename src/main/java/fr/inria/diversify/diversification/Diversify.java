@@ -2,7 +2,6 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
@@ -40,7 +39,7 @@ public class Diversify extends AbstractDiversify {
         Log.info("number of diversification: " + n);
         for (int i = 0; i < n; i++) {
             Log.info("diversification: " + i);
-            run(transQuery.getTransformation(), tmpDir);
+            run(transQuery.buildTransformation(), tmpDir);
         }
         FileUtils.cleanDirectory(tmpDir);
         FileUtils.forceDelete(tmpDir);

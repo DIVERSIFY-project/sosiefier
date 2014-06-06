@@ -24,7 +24,7 @@ public class CvlQuery extends TransformationQuery {
     public void setType(String type) {}
 
     @Override
-    public Transformation getTransformation() throws Exception {
+    public Transformation buildTransformation() throws Exception {
         Random r = new Random();
         int i = r.nextInt(8);
         switch (i) {

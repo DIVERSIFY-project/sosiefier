@@ -11,8 +11,6 @@ import spoon.reflect.declaration.*;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Created by Simon on 19/03/14.
@@ -31,7 +29,7 @@ public class OtherQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation getTransformation() throws Exception {
+    public Transformation buildTransformation() throws Exception {
 //        Random r = new Random();
 //        if(r.nextDouble() < 0.5)
             return getEmptyMethodBody();

@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.query.ast;
 
 import fr.inria.diversify.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -17,22 +18,56 @@ import spoon.reflect.factory.Factory;
 import java.util.*;
 
 /**
+ * A transformation query over the AST
+ * <p>
  * User: Simon
+ * Modified: Marcelino
  * Date: 7/9/13
  * Time: 10:02 AM
  */
 public class ASTTransformationQuery extends TransformationQuery {
     protected ICoverageReport coverageReport;
-    protected Class CodeFragmentClass;
+
+    /**
+     * Class of the code fragment. Defaults to Statement
+     */
+    protected Class codeFragmentClass = Statement.class;
+
+    /**
+     * Code fragments over we are working right now
+     */
     protected CodeFragmentList codeFragments;
-    protected boolean stupid;
+
+    /**
+     * Indicates if we do solely simple transformations. Defaults to the simple ones
+     */
+    protected boolean stupid = true;
 
 
-    public ASTTransformationQuery(ICoverageReport coverageReport,Class transformationClass, boolean stupid) {
+    /**
+     * Short constructor assuming the fragment class to be statement and the transformation to be stupid
+     *
+     * @param coverageReport Coverage report of the code
+     * @param fragments Code fragments
+     */
+    public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList fragments) {
         this.coverageReport = coverageReport;
-        init();
-        this.CodeFragmentClass = transformationClass;
-        this.stupid = stupid;
+        codeFragments = fragments;
+    }
+
+    /**
+     * Long constructor assuming nothing
+     * @param coverageReport Coverage report of the code
+     * @param fragments Code fragments
+     * @param fragmentClass Class of the fragments
+     * @param isStupid Is this a stupid transformation?
+     */
+    public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList fragments,
+                                  Class fragmentClass, boolean isStupid) {
+        this.coverageReport = coverageReport;
+        codeFragments = fragments;
+        codeFragmentClass = fragmentClass;
+        stupid = isStupid;
     }
 
 
@@ -41,20 +76,32 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     }
 
-    public ASTTransformation getTransformation() throws Exception {
+    /**
+     * Builds a random Transformation
+     *
+     * @return
+     * @throws Exception
+     */
+    public ASTTransformation buildTransformation() throws Exception {
         Random r = new Random();
         ASTTransformation t = null;
         int i = r.nextInt(stupid ? 15 : 5);
         switch (i) {
-            case 0: case 1:
+            case 0:
+            case 1:
                 return replace();
-            case 2: case 3:
+            case 2:
+            case 3:
                 return add();
             case 4:
                 return delete();
-            case 5: case 6:  case 7:
+            case 5:
+            case 6:
+            case 7:
                 return replaceRandom();
-            case 8: case 9:  case 10:
+            case 8:
+            case 9:
+            case 10:
                 return addRandom();
             case 11:
                 return replaceWittgenstein();
@@ -73,18 +120,18 @@ public class ASTTransformationQuery extends TransformationQuery {
         }
         return null;
     }
-    
+
     public ASTReplace replace() throws Exception {
         ASTReplace tf = new ASTReplace();
-            CodeFragment cfToReplace = null;
-            CodeFragment cfReplacedBy = null;
+        CodeFragment cfToReplace = null;
+        CodeFragment cfReplacedBy = null;
 
-                while (cfReplacedBy == null) {
-                    cfToReplace = randomCodeFragmentToReplace(true);
-                    cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace,false);
-                }
-            tf.setTransplantationPoint(cfToReplace);
-            tf.setCodeFragmentToReplace(cfReplacedBy);
+        while (cfReplacedBy == null) {
+            cfToReplace = findRandomFragmentToReplace(true);
+            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
+        }
+        tf.setTransplantationPoint(cfToReplace);
+        tf.setCodeFragmentToReplace(cfReplacedBy);
         return tf;
     }
 
@@ -94,8 +141,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = randomCodeFragmentToReplace(true);
-            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace,true);
+            cfToReplace = findRandomFragmentToReplace(true);
+            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
         }
         tf.setName("replaceWittgenstein");
         tf.setTransplantationPoint(cfReplacedBy);
@@ -105,16 +152,16 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     public ASTReplace replaceRandom() throws Exception {
         ASTReplace tf = new ASTReplace();
-        tf.setTransplantationPoint(randomCodeFragmentToReplace(true));
-        tf.setCodeFragmentToReplace(randomCodeFragmentToReplace(false));
+        tf.setTransplantationPoint(findRandomFragmentToReplace(true));
+        tf.setCodeFragmentToReplace(findRandomFragmentToReplace(false));
         tf.setName("replaceRandom");
         return tf;
     }
 
     public ASTAdd addRandom() throws Exception {
         ASTAdd tf = new ASTAdd();
-        tf.setTransplantationPoint(randomCodeFragmentToReplace(true));
-        tf.setCodeFragmentToAdd(randomCodeFragmentToReplace(false));
+        tf.setTransplantationPoint(findRandomFragmentToReplace(true));
+        tf.setCodeFragmentToAdd(findRandomFragmentToReplace(false));
         tf.setName("addRandom");
         return tf;
     }
@@ -123,8 +170,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         ASTReplace tf = new ASTReplace();
 
         CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
-        if(cfReplacedBy == null)
-            new Exception("pas de candidat pour "+cfToReplace);
+        if (cfReplacedBy == null)
+            new Exception("pas de candidat pour " + cfToReplace);
         tf.setTransplantationPoint(cfToReplace);
         tf.setCodeFragmentToReplace(cfReplacedBy);
         return tf;
@@ -143,13 +190,13 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     public ASTAdd addWittgenstein() throws Exception {
         ASTAdd tf = new ASTAdd();
-            CodeFragment cfToReplace = null;
-            CodeFragment cfReplacedBy =null;
+        CodeFragment cfToReplace = null;
+        CodeFragment cfReplacedBy = null;
 
-                while (cfReplacedBy == null) {
-                    cfToReplace = randomCodeFragmentToReplace(true);
-                    cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
-                }
+        while (cfReplacedBy == null) {
+            cfToReplace = findRandomFragmentToReplace(true);
+            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
+        }
         tf.setTransplantationPoint(cfReplacedBy);
         tf.setCodeFragmentToAdd(cfToReplace);
         return tf;
@@ -158,10 +205,10 @@ public class ASTTransformationQuery extends TransformationQuery {
     public ASTAdd add() throws Exception {
         ASTAdd tf = new ASTAdd();
         CodeFragment cfToReplace = null;
-        CodeFragment cfReplacedBy =null;
+        CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = randomCodeFragmentToReplace(true);
+            cfToReplace = findRandomFragmentToReplace(true);
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
         }
         tf.setTransplantationPoint(cfToReplace);
@@ -173,8 +220,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         ASTAdd tf = new ASTAdd();
 
         CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
-        if(cfReplacedBy == null)
-            new Exception("pas de candidat pour "+cfToReplace);
+        if (cfReplacedBy == null)
+            new Exception("pas de candidat pour " + cfToReplace);
         tf.setTransplantationPoint(cfToReplace);
         tf.setCodeFragmentToAdd(cfReplacedBy);
         return tf;
@@ -193,13 +240,13 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     public ASTDelete delete() throws Exception {
         ASTDelete tf = new ASTDelete();
-            CodeFragment cfToDelete = null;
-                while (cfToDelete == null) {
-                 cfToDelete = randomCodeFragmentToReplace(true);
-                    if (cfToDelete.getCtCodeFragment() instanceof CtReturn)
-                        cfToDelete = null;
-                }
-            tf.setTransplantationPoint(cfToDelete);
+        CodeFragment cfToDelete = null;
+        while (cfToDelete == null) {
+            cfToDelete = findRandomFragmentToReplace(true);
+            if (cfToDelete.getCtCodeFragment() instanceof CtReturn)
+                cfToDelete = null;
+        }
+        tf.setTransplantationPoint(cfToDelete);
         return tf;
     }
 
@@ -213,12 +260,18 @@ public class ASTTransformationQuery extends TransformationQuery {
     protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace, boolean varNameMatch) throws InstantiationException, IllegalAccessException {
         CodeFragment cfReplacedBy = null;
         if (cfReplacedBy == null) {
-            cfReplacedBy = findRandomCodeFragmentCandidate(cfToReplace, varNameMatch);
+            cfReplacedBy = findRandomFragmentCandidate(cfToReplace, varNameMatch);
         }
         return cfReplacedBy;
     }
 
-    protected CodeFragment randomCodeFragmentToReplace(boolean withCoverage) {
+    /**
+     * Find code fragments to replace, i.e, transplantation points
+     *
+     * @param withCoverage Indicates if the transplantation points must have coverage by the test suite.
+     * @return
+     */
+    protected CodeFragment findRandomFragmentToReplace(boolean withCoverage) {
         Random r = new Random();
         int size = codeFragments.size();
         CodeFragment stmt = codeFragments.get(r.nextInt(size));
@@ -228,7 +281,18 @@ public class ASTTransformationQuery extends TransformationQuery {
         return stmt;
     }
 
-    protected CodeFragment findRandomCodeFragmentCandidate(CodeFragment cf, boolean varNameMatch) throws IllegalAccessException, InstantiationException {
+    /**
+     * Find a random code fragment candidate to replace
+     *
+     *
+     * @param cf
+     * @param varNameMatch
+     * @return
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    protected CodeFragment findRandomFragmentCandidate(CodeFragment cf,
+                                                       boolean varNameMatch) throws IllegalAccessException, InstantiationException {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment codeFragment : getAllUniqueCodeFragments())
             if (cf.isReplace(codeFragment, varNameMatch) && !codeFragment.equalString().equals(cf.equalString())) {
@@ -239,8 +303,8 @@ public class ASTTransformationQuery extends TransformationQuery {
             return null;
 
         Random r = new Random();
-        CtCodeElement tmp = (CtCodeElement)copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
-        CodeFragment ret = (CodeFragment)CodeFragmentClass.newInstance();
+        CtCodeElement tmp = (CtCodeElement) copyElem(list.get(r.nextInt(list.size())).getCtCodeFragment());
+        CodeFragment ret = (CodeFragment) codeFragmentClass.newInstance();
         ret.init(tmp);
         return ret;
     }
@@ -250,10 +314,6 @@ public class ASTTransformationQuery extends TransformationQuery {
         CtElement tmp = factory.Core().clone(elem);
         tmp.setParent(elem.getParent());
         return tmp;
-    }
-
-    protected void init() {
-        codeFragments = DiversifyEnvironment.getCodeFragments();
     }
 
     protected Collection<CodeFragment> getAllUniqueCodeFragments() {

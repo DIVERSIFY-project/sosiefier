@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Deprecated. Will be deleted eventually
+ *
  * Created by Simon on 21/05/14.
  */
 public class ASTMultiTransformationQuery extends TransformationQuery {
@@ -31,11 +33,11 @@ public class ASTMultiTransformationQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation getTransformation() throws Exception {
+    public Transformation buildTransformation() throws Exception {
         List<Transformation> transformations = new ArrayList<>();
 
         for (int i = 0; i < nbTransformation; i++) {
-            transformations.add(queryFromList.getTransformation());
+            transformations.add(queryFromList.buildTransformation());
         }
 
         return new ASTMultiTransformation(transformations);

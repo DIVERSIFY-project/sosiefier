@@ -3,28 +3,38 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 
 import java.util.Random;
 
 /**
+ * Composite query to composite multiple types of queries
+ *
  * Created by Simon on 19/03/14.
  */
-public class AllQuery extends TransformationQuery  {
+public class CompositeQuery extends TransformationQuery  {
+
+    /**
+     * Mutation query of the composite
+     */
     protected MutationQuery mutation;
+
+    /**
+     * Ast query of the composite
+     */
     protected ASTTransformationQuery ast;
 
-    public AllQuery(ICoverageReport coverage) {
-        ast = new ASTTransformationQuery(coverage,Statement.class, true);
-        mutation = new MutationQuery(coverage);
+
+    public CompositeQuery(MutationQuery mutationQuery, ASTTransformationQuery astQuery) {
+        ast = astQuery;
+        mutation = mutationQuery;
     }
 
     @Override
     public void setType(String type) {}
 
     @Override
-    public Transformation getTransformation() throws Exception {
+    public Transformation buildTransformation() throws Exception {
         Transformation transformation = null;
         Random r = new Random();
 
@@ -56,9 +66,9 @@ public class AllQuery extends TransformationQuery  {
         public void run() {
             try {
                 if(r < 0.05)
-                    trans = mutation.getTransformation();
+                    trans = mutation.buildTransformation();
                 else
-                    trans =  ast.getTransformation();
+                    trans =  ast.buildTransformation();
             } catch (Exception e) {
 
             }

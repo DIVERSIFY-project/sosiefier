@@ -134,7 +134,8 @@ public class DiversifyMain {
             case "other":
                 return new OtherQuery(rg);
             case "all":
-                return new AllQuery(rg);
+                return new CompositeQuery(new MutationQuery(rg),
+                        new ASTTransformationQuery(rg, DiversifyEnvironment.getCodeFragments()));
             case "cvl":
                 return new CvlQuery();
             case "bytecode":
@@ -147,11 +148,13 @@ public class DiversifyMain {
             }
             case "ADR": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(rg, cl, false);
+                CodeFragmentList cf = DiversifyEnvironment.getCodeFragments();
+                return new ASTTransformationQuery(rg, cf, cl, false);
             }
             case "ADRStupid": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(rg, cl, true);
+                CodeFragmentList cf = DiversifyEnvironment.getCodeFragments();
+                return new ASTTransformationQuery(rg, cf, cl, true);
             }
             case "list": {
                 String transDirectory = DiversifyProperties.getProperty("transformation.directory");

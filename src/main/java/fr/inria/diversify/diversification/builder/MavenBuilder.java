@@ -44,6 +44,9 @@ public class MavenBuilder extends AbstractBuilder {
             //osx
             mvnHome = new File("/usr/local/Cellar/maven/3.1.1/libexec/");
 
+        if (!mvnHome.exists())
+            mvnHome = new File(System.getenv("M2_HOME"));
+
         invoker.setMavenHome(mvnHome);
         invoker.setTimeOut(timeOut);
 

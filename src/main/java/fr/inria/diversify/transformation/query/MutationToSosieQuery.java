@@ -6,6 +6,7 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
+import fr.inria.diversify.util.DiversifyEnvironment;
 import org.json.JSONException;
 
 import java.io.File;
@@ -42,7 +43,7 @@ public class MutationToSosieQuery extends TransformationQuery {
     }
 
     @Override
-    public ASTTransformation getTransformation() throws Exception {
+    public ASTTransformation buildTransformation() throws Exception {
         Random r = new Random();
         Transformation mutation = null;
         ASTTransformation transformation = null;
@@ -60,7 +61,10 @@ public class MutationToSosieQuery extends TransformationQuery {
                 }
             }
 
-            T thread = new T(new ASTTransformationQuery(coverageReport, Statement.class, false));
+            //TODO: Se how to remove the static method. We will get here eventually
+            T thread = new T(new ASTTransformationQuery(coverageReport, DiversifyEnvironment.getCodeFragments(),
+                    Statement.class, false));
+
             thread.start();
             int count = 0;
             while (thread.trans == null && count < 50) {
@@ -92,7 +96,7 @@ public class MutationToSosieQuery extends TransformationQuery {
         }
         public void run() {
             try {
-                trans = query.getTransformation();
+                trans = query.buildTransformation();
             } catch (Exception e) {
 
             }
