@@ -42,15 +42,31 @@ import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 /**
  * Main class for the sosie generator.
- *
+ * <p>
  * User: Simon
  * Date: 9/11/13
  * Time: 11:41 AM
  */
 public class DiversifyMain {
 
+    /**
+     * The input program that we are about to sosiefy
+     */
+    private InputProgram inputProgram;
+
+    /**
+     * The input configuration given by the user is parsed by this class which helps other parts of the program to
+     * interact with the input parameters
+     */
+    private InputConfiguration inputConfiguration;
+
     public DiversifyMain(String propertiesFile) throws Exception {
+
         new DiversifyProperties(propertiesFile);
+
+        inputConfiguration = new InputConfiguration(propertiesFile);
+
+
         initLogLevel();
         if (DiversifyProperties.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
@@ -91,9 +107,8 @@ public class DiversifyMain {
         else if (DiversifyProperties.getProperty("sosie").equals("false")) ad = new Diversify(projet, src);
         else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
             String testDir = DiversifyProperties.getProperty("testSrc");
-            ad = new Sosie(projet, src,testDir);
-        }
-        else ad = new SosieWithParent(projet, src);
+            ad = new Sosie(projet, src, testDir);
+        } else ad = new SosieWithParent(projet, src);
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));
         ad.setBuilder(initBuilder(tmpDir));
@@ -123,66 +138,99 @@ public class DiversifyMain {
         return rb;
     }
 
+    /**
+     * Initializes the InputProgram dataset
+     */
+    protected void initInputProgram() {
+        inputProgram = new InputProgram();
+        inputProgram.setCoverageReport(initCoverageReport());
+
+        //TODO: See how get rid of the Environment static
+        inputProgram.setCodeFragments(DiversifyEnvironment.getCodeFragments());
+
+        //TODO: See hot to get rid of the Properties static
+        inputProgram.setTransformationPerRun(
+            Integer.parseInt(DiversifyProperties.getProperty("transformation.nb", "1")));
+
+        //Path to pervious transformations made to this input program
+        inputProgram.setPreviousTransformationsPath(
+                DiversifyProperties.getProperty("transformation.directory"));
+
+        inputProgram.setClassesDir(DiversifyProperties.getProperty("project") + "/" +
+                DiversifyProperties.getProperty("classes"));
+
+        inputProgram.setCoverageDir(DiversifyProperties.getProperty("jacoco"));
+    }
 
     protected TransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException, NotFoundException {
-        ICoverageReport rg = initCoverageReport();
+        initInputProgram();
         String type = DiversifyProperties.getProperty("transformation.type");
 
         switch (type) {
             case "mutation":
-                return new MutationQuery(rg);
+                return new MutationQuery(inputProgram.getCoverageReport());
             case "shuffle":
-                return new ShuffleStmtQuery(rg);
+                return new ShuffleStmtQuery(inputProgram.getCoverageReport());
             case "other":
-                return new OtherQuery(rg);
+                return new OtherQuery(inputProgram.getCoverageReport());
             case "all":
-                return new CompositeQuery(new MutationQuery(rg),
-                        new ASTTransformationQuery(rg, DiversifyEnvironment.getCodeFragments(), new RandomFactory()));
+                return new CompositeQuery(new MutationQuery(inputProgram.getCoverageReport()),
+                        new ASTTransformationQuery(inputProgram, new RandomFactory()));
             case "cvl":
                 return new CvlQuery();
             case "bytecode":
-                return new ByteCodeTransformationQuery(rg);
+                return new ByteCodeTransformationQuery(inputProgram.getCoverageReport());
             case "mutationToSosie": {
+                /*
                 String jacocoFile = DiversifyProperties.getProperty("jacoco");
                 String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
                 String mutationDirectory = DiversifyProperties.getProperty("transformation.directory");
-                return new MutationToSosieQuery(classes, mutationDirectory, new File(jacocoFile));
+                */
+                return new MutationToSosieQuery(inputProgram);
             }
             case "ADR": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                CodeFragmentList cf = DiversifyEnvironment.getCodeFragments();
-                return new ASTTransformationQuery(rg, cf, cl, false, new RandomFactory());
+                return new ASTTransformationQuery(inputProgram, cl, false, new RandomFactory());
             }
             case "ADRStupid": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
                 CodeFragmentList cf = DiversifyEnvironment.getCodeFragments();
-                return new ASTTransformationQuery(rg, cf, cl, true, new RandomFactory());
+                return new ASTTransformationQuery(inputProgram, cl, true, new RandomFactory());
             }
             case "list": {
                 String transDirectory = DiversifyProperties.getProperty("transformation.directory");
-                return new TransformationQueryFromList(rg, transDirectory);
+                return new TransformationQueryFromList(inputProgram, new RandomFactory());
             }
             case "multi": {
                 String transDirectory = DiversifyProperties.getProperty("transformation.directory");
                 int nbTransformation = Integer.parseInt(DiversifyProperties.getProperty("transformation.nb"));
-                return new ASTMultiTransformationQuery(rg, nbTransformation, transDirectory);
+                return new ASTMultiTransformationQuery(inputProgram, new RandomFactory());
             }
         }
         return null;
     }
 
-    protected ICoverageReport initCoverageReport() throws IOException {
-        ICoverageReport icr;
+    protected ICoverageReport initCoverageReport() {
         String jacocoFile = DiversifyProperties.getProperty("jacoco");
         String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
 
+        ICoverageReport icr = null;
         if (jacocoFile != null) {
-            File file = new File(jacocoFile);
-            if (file.isDirectory()) icr = new MultiCoverageReport(classes, file);
-            else icr = new CoverageReport(classes, file);
-        } else icr = new NullCoverageReport();
+            try {
+                File file = new File(jacocoFile);
+                if (file.isDirectory()) icr = new MultiCoverageReport(classes, file);
+                else icr = new CoverageReport(classes, file);
+                icr.create();
+                return icr;
+            } catch (IOException e) {
+                Log.warn("Unable to find coverage file or corrupt information: using NullCoverage");
+            }
+        }
 
-        icr.create();
+        if (icr == null) {
+            icr = new NullCoverageReport();
+        }
+
         return icr;
     }
 

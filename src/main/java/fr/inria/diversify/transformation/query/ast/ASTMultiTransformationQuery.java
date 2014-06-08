@@ -1,6 +1,8 @@
 package fr.inria.diversify.transformation.query.ast;
 
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.factory.IRandomFactory;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTMultiTransformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
@@ -21,9 +23,8 @@ public class ASTMultiTransformationQuery extends TransformationQuery {
 
     protected TransformationQueryFromList queryFromList;
 
-    public ASTMultiTransformationQuery(ICoverageReport cr, int nbTransformation,
-                                       String transformationDirectory) throws IOException, JSONException {
-        queryFromList = new TransformationQueryFromList(cr, transformationDirectory);
+    public ASTMultiTransformationQuery(InputProgram inputProgram, IRandomFactory factory) throws IOException, JSONException {
+        queryFromList = new TransformationQueryFromList(inputProgram, factory);
         this.nbTransformation = nbTransformation;
     }
 

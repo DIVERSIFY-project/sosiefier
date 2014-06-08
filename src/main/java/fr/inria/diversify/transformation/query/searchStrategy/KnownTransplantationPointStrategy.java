@@ -1,9 +1,17 @@
 package fr.inria.diversify.transformation.query.searchStrategy;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
+
 /**
- * Search for points of known to have worked transplantation points
+ * Search for transplantation points where we know there is at least one sosie
  *
  * Created by marcel on 6/06/14.
  */
-public class KnownTransplantationPointStrategy {
+public class KnownTransplantationPointStrategy extends SearchStrategy {
+
+    @Override
+    public CodeFragment findNextTransplantationPoint() {
+        return null;
+    }
+
 }

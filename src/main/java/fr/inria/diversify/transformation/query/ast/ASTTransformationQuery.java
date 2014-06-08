@@ -4,6 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factory.IRandomFactory;
 import fr.inria.diversify.random.IRandom;
 import fr.inria.diversify.random.Random;
@@ -12,6 +13,7 @@ import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
+import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtElement;
@@ -53,30 +55,41 @@ public class ASTTransformationQuery extends TransformationQuery {
      */
     IRandomFactory randomFactory;
 
+    /**
+     *  Search strategy to find transplantation points
+     */
+    protected SearchStrategy transplantationPointStrategy;
+
+    /**
+     * Search strategy to find a transplant
+     */
+    protected SearchStrategy transplantStrategy;
 
     /**
      * Short constructor assuming the fragment class to be statement and the transformation to be stupid
      *
-     * @param coverageReport Coverage report of the code
-     * @param fragments Code fragments
+     * @param inputProgram Input program over the queries are going to be made
+     * @param random A random engine factory
      */
-    public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList fragments, IRandomFactory random) {
-        this.coverageReport = coverageReport;
-        codeFragments = fragments;
+    public ASTTransformationQuery(InputProgram inputProgram, IRandomFactory random) {
+        coverageReport = inputProgram.getCoverageReport();
+        codeFragments = inputProgram.getCodeFragments();
+        //This we assume be defect
+        codeFragmentClass = Statement.class;
         randomFactory = random;
     }
 
     /**
      * Long constructor assuming nothing
-     * @param coverageReport Coverage report of the code
-     * @param fragments Code fragments
+     * @param inputProgram Input Input program over the queries are going to be made
      * @param fragmentClass Class of the fragments
      * @param isStupid Is this a stupid transformation?
      */
-    public ASTTransformationQuery(ICoverageReport coverageReport, CodeFragmentList fragments,
+    public ASTTransformationQuery(InputProgram inputProgram,
                                   Class fragmentClass, boolean isStupid, IRandomFactory random) {
-        this.coverageReport = coverageReport;
-        codeFragments = fragments;
+        coverageReport = inputProgram.getCoverageReport();
+        codeFragments = inputProgram.getCodeFragments();
+        //
         codeFragmentClass = fragmentClass;
         stupid = isStupid;
         randomFactory = random;

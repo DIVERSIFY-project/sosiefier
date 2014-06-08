@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.MultiCoverageReport;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
@@ -25,11 +26,13 @@ public class MutationToSosieQuery extends TransformationQuery {
     protected List<Transformation> mutations;
     protected String classesDir;
     protected File jacocoDir;
+    protected InputProgram inputProgram;
 
-    public MutationToSosieQuery(String classesDir,String mutationDirectory ,File jacocoDir) throws IOException, JSONException {
-        this.classesDir = classesDir;
-        this.jacocoDir = jacocoDir;
-        init(mutationDirectory);
+    public MutationToSosieQuery(InputProgram inputProgram) throws IOException, JSONException {
+        this.classesDir = inputProgram.getClassesDir();
+        this.jacocoDir = new File(inputProgram.getCoverageDir());
+        init(inputProgram.getPreviousTransformationsPath());
+        this.inputProgram = inputProgram;
     }
 
     protected void init(String mutationDirectory) throws IOException, JSONException {
@@ -63,8 +66,7 @@ public class MutationToSosieQuery extends TransformationQuery {
             }
 
             //TODO: Se how to remove the static method. We will get here eventually
-            T thread = new T(new ASTTransformationQuery(coverageReport, DiversifyEnvironment.getCodeFragments(),
-                    Statement.class, false, new RandomFactory()));
+            T thread = new T(new ASTTransformationQuery(inputProgram, Statement.class, false, new RandomFactory()));
 
             thread.start();
             int count = 0;

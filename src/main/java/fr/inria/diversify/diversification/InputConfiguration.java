@@ -1,33 +1,62 @@
-package fr.inria.diversify.util;
+package fr.inria.diversify.diversification;
+
+import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.Statement;
+import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
+import fr.inria.diversify.transformation.query.searchStrategy.SimpleRandomStrategy;
+import fr.inria.diversify.util.Log;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Note: This class should be deprecated since it difficult testing
+ * The input configuration class encapsulates all the data and asociated behavior we obtain from the input properties
+ * given by the user.
  *
- * User: Simon
- * Date: 7/17/13
- * Time: 11:01 AM
+ * The InputConfiguration makes other objects life easier by not only being a data holder but also by implementing
+ * behaviors related from this data as the building of new CodeFragments given the CodeFragmentClass property
+ *
+ * Created by marcel on 8/06/14.
  */
-public class DiversifyProperties {
+public class InputConfiguration {
 
-    protected static Properties prop;
+    protected Properties prop;
 
-    public DiversifyProperties(String file) throws IOException {
+    public InputConfiguration(String file) throws IOException, ClassNotFoundException {
         prop = new Properties();
         setDefaultProperties();
         prop.load(new FileInputStream(file));
         setCodeFragmentClass();
     }
 
-    public static String getProperty(String key) {
-        return prop.getProperty(key);
+    /**
+     * Returns the transplantation point search strategy given by the user in the input parameters
+     *
+     * @return A SearchStrategy instance
+     */
+    public SearchStrategy getNewTransplantationPointStrategy() {
+        return new SimpleRandomStrategy();
     }
 
-    public static String getProperty(String key, String defaultValue) {
-        return prop.getProperty(key, defaultValue);
+    /**
+     * Returns a new code fragment given the processing level set by the user in the input properties
+     *
+     * Defaults to statement in case of any error
+     *
+     * @return
+     */
+    public CodeFragment getNewCodeFragment()  {
+        CodeFragment result;
+        try {
+            Class cl = Class.forName(prop.getProperty("CodeFragmentClass"));
+            result = (CodeFragment)cl.newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            result = new Statement();
+            Log.warn("Unable to create the code fragment requested, resolved to Statement level", e);
+            e.printStackTrace();
+        }
+        return result;
     }
 
     protected void setCodeFragmentClass() {

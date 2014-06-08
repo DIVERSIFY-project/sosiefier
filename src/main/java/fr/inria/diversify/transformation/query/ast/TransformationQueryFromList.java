@@ -1,6 +1,9 @@
 package fr.inria.diversify.transformation.query.ast;
 
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.factory.IRandomFactory;
+import fr.inria.diversify.random.IRandom;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import org.json.JSONException;
@@ -14,12 +17,14 @@ import java.util.*;
  * Time: 10:16 AM
  */
 public class TransformationQueryFromList extends TransformationQuery {
+    private final IRandomFactory randomFactory;
     protected ICoverageReport coverageReport;
     private List<Transformation> transformations;
 
-    public TransformationQueryFromList(ICoverageReport cr, String transformationDirectory) throws IOException, JSONException {
-        this.coverageReport = cr;
-        init(transformationDirectory);
+    public TransformationQueryFromList(InputProgram inputProgram, IRandomFactory random) throws IOException, JSONException {
+        this.coverageReport = inputProgram.getCoverageReport();
+        init(inputProgram.getPreviousTransformationsPath());
+        randomFactory = random;
     }
 
     @Override
@@ -29,7 +34,7 @@ public class TransformationQueryFromList extends TransformationQuery {
 
     @Override
     public Transformation buildTransformation() throws Exception {
-        Random r = new Random();
+        IRandom r = randomFactory.buildRandomizer();
         double coverage = 0;
         Transformation t =transformations.get(r.nextInt(transformations.size()));;
         while(coverage == 0 && t.getType().equals("delete")) {
