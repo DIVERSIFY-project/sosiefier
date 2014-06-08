@@ -7,8 +7,6 @@ import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
-import fr.inria.diversify.util.DiversifyEnvironment;
 import org.json.JSONException;
 
 import java.io.File;

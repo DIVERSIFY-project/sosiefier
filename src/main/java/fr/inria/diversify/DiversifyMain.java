@@ -15,9 +15,7 @@ import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.buildSystem.ant.AntBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.transformation.query.*;
-import fr.inria.diversify.transformation.query.ast.ASTMultiTransformationQuery;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
-import fr.inria.diversify.transformation.query.ast.TransformationQueryFromList;
+import fr.inria.diversify.transformation.query.ASTTransformationQuery;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
@@ -197,6 +195,7 @@ public class DiversifyMain {
                 CodeFragmentList cf = DiversifyEnvironment.getCodeFragments();
                 return new ASTTransformationQuery(inputProgram, cl, true, new RandomFactory());
             }
+            /*
             case "list": {
                 String transDirectory = DiversifyProperties.getProperty("transformation.directory");
                 return new TransformationQueryFromList(inputProgram, new RandomFactory());
@@ -205,7 +204,7 @@ public class DiversifyMain {
                 String transDirectory = DiversifyProperties.getProperty("transformation.directory");
                 int nbTransformation = Integer.parseInt(DiversifyProperties.getProperty("transformation.nb"));
                 return new ASTMultiTransformationQuery(inputProgram, new RandomFactory());
-            }
+            }*/
         }
         return null;
     }

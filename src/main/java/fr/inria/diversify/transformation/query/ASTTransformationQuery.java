@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation.query.ast;
+package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;

@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.query.ast.ASTTransformationQuery;
 
 import java.util.Random;
 
