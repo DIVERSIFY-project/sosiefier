@@ -108,6 +108,8 @@ public class  TransformationParser {
                 .filter(object -> object != null )
                 .collect(Collectors.toList());
 
+        if ( countError > 0 && list )
+
         return list;
     }
 
@@ -121,7 +123,7 @@ public class  TransformationParser {
 
 
 
-    protected Transformation parseTransformation(JSONObject jsonObject)  {
+    protected Transformation parseTransformation(JSONObject jsonObject) throws IOException {
         try {
             String type = jsonObject.getString("type");
             Transformation trans = null;
@@ -144,10 +146,12 @@ public class  TransformationParser {
                 trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));
 
             return trans;
-        }catch (Exception e) {
+        }catch ( JSONException e) {
             countError++;
-//            Log.warn("error during the parsing of "+jsonObject,e);
+            Log.warn("error during the parsing of "+jsonObject,e);
             return null;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -294,7 +298,7 @@ public class  TransformationParser {
         return le;
     }
 
-    protected Transformation parseMutation(JSONObject jsonObject) throws Exception {
+    protected Transformation parseMutation(JSONObject jsonObject) throws JSONException {
         String name = jsonObject.getString("name");
         Transformation trans;
 
@@ -394,23 +398,22 @@ public class  TransformationParser {
         return trans;
     }
 
-    protected Transformation parseInlineConstantMutation(JSONObject jsonObject) throws Exception {
+    protected Transformation parseInlineConstantMutation(JSONObject jsonObject) throws JSONException {
         InlineConstantMutation trans = new InlineConstantMutation();
 
         CtLocalVariable p = null;
         for (CtLocalVariable<?> ret : DiversifyEnvironment.getInlineConstant()) {
-            try {
                 String position = ret.getParent(CtPackage.class).getQualifiedName()
                         + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
                 if (position.equals(jsonObject.get("position"))  ){
                     p = ret;
                     break;
                 }
-            } catch (Exception e) {}
         }
+        /*
         if (p == null) {
             throw new Exception();
-        }
+        }*/
         trans.setTransformationPoint(p);
 
         return trans;

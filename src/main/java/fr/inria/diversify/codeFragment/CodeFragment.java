@@ -23,13 +23,26 @@ import java.util.Map;
 import java.util.Random;
 
 /**
+ * The code fragment is the basic unit of diversification. Also known as "Reaction"
+ *
  * User: Simon
  * Date: 5/3/13
  * Time: 3:21 PM
  */
 public abstract class CodeFragment {
+
+    /**
+     * Context of the Code fragment, see article by Baudry, et. al "Tailored Source Code Transformations to Synthesize
+     * Computationally Diverse Program Variants" 2013
+     */
     protected Context context;
+
+    /**
+     * An Spoon code fragment
+     */
     protected CtCodeElement codeFragment;
+
+
     protected String equalString;
 
     public void init(CtCodeElement cf) {
