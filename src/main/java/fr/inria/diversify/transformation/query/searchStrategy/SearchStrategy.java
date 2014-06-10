@@ -1,6 +1,8 @@
 package fr.inria.diversify.transformation.query.searchStrategy;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.diversification.InputProgram;
 
 /**
  * Super class for all transplantation points search strategies
@@ -9,10 +11,38 @@ import fr.inria.diversify.codeFragment.CodeFragment;
  */
 public abstract class SearchStrategy {
 
+    private int pointCount = 1;
+
+    private InputProgram inputProgram;
+
     /**
-     * Finds a transplantation point to be replaced
-     * @return A Code fragment which is the found transplantation point
+     * Input program over the search is going to be made
      */
-    public abstract CodeFragment findNextTransplantationPoint();
+    public InputProgram getInputProgram() {
+        return inputProgram;
+    }
+
+    /**
+     * Number of points to search for
+     */
+    public int getPointCount() {
+        return pointCount;
+    }
+
+    public void setPointCount(int pointCount) {
+        this.pointCount = pointCount;
+    }
+
+
+    public SearchStrategy(InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
+    }
+
+    /**
+     * Finds the fragments
+     * @return The list with all the code fragments found
+     */
+    public abstract CodeFragmentList findFragments();
+
 
 }

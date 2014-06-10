@@ -33,7 +33,7 @@ import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
+import fr.inria.diversify.transformation.query.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;

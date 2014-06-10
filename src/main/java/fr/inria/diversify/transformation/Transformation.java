@@ -41,4 +41,6 @@ public interface Transformation {
 
     void removeSourceCode();
 
+    public boolean isSosie();
+
 }

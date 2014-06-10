@@ -20,6 +20,11 @@ import java.util.stream.Collectors;
  * Time: 10:44
  */
 public abstract class AbstractTransformation implements Transformation {
+
+    public static int COMPILE_FAIL = -3;
+    public static int TEST_FAIL = -2;
+    public static int SOSIE = 0;
+
     protected Integer status = -3;
     protected List<String> failures;
     protected static Map<String,Integer> failuresDico = new HashMap<>();
@@ -34,6 +39,8 @@ public abstract class AbstractTransformation implements Transformation {
     public int getStatus() {
         return status;
     }
+
+    public boolean isSosie() { return status == SOSIE; }
 
     public void setFailures(List<String> f) {
         failures = f;

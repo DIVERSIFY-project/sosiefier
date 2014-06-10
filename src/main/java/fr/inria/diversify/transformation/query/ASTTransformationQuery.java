@@ -36,6 +36,11 @@ public class ASTTransformationQuery extends TransformationQuery {
     protected ICoverageReport coverageReport;
 
     /**
+     *  Sometimes the Search strategy  may find both transplantation point and transplant. Try to use this feature
+     */
+    private boolean tryUseTransformationStrategy;
+
+    /**
      * Class of the code fragment. Defaults to Statement
      */
     protected Class codeFragmentClass = Statement.class;
@@ -77,6 +82,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         //This we assume be defect
         codeFragmentClass = Statement.class;
         randomFactory = random;
+        tryUseTransformationStrategy = true;
     }
 
     /**
@@ -93,6 +99,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         codeFragmentClass = fragmentClass;
         stupid = isStupid;
         randomFactory = random;
+        tryUseTransformationStrategy = true;
     }
 
 
@@ -351,4 +358,14 @@ public class ASTTransformationQuery extends TransformationQuery {
         return codeFragments.getUniqueCodeFragmentList();
     }
 
+    /**
+     *  Sometimes the Search strategy  may find both transplantation point and transplant. Try to use this feature
+     */
+    public boolean getTryUseTransformationStrategy() {
+        return tryUseTransformationStrategy;
+    }
+
+    public void setTryUseTransformationStrategy(boolean tryUseTransformationStrategy) {
+        this.tryUseTransformationStrategy = tryUseTransformationStrategy;
+    }
 }

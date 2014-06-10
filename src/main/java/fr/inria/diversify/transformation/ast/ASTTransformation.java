@@ -21,29 +21,14 @@ import java.io.IOException;
  * Time: 4:15 PM
  */
 public abstract class ASTTransformation extends AbstractTransformation {
+
+    /**
+     * Transplantation point that is going to be modified, either by an Add, Replace or Delete transformation
+     */
     protected CodeFragment transplantationPoint;
 
-    public ASTTransformation() {}
-
-    public void printJavaFile(String directory) throws IOException {
-        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
-        Factory factory = type.getFactory();
-        Environment env = factory.getEnvironment();
-
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new FragmentDrivenJavaPrettyPrinter(env));
-        processor.setFactory(factory);
-
-        processor.createJavaFile(type);
-        Log.debug("copy file: " + directory + " " + type.getQualifiedName());
+    public ASTTransformation() {
     }
-
-    public void removeSourceCode() {
-        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
-        CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
-        if(compileUnit.getSourceCodeFraments() != null)
-            compileUnit.getSourceCodeFraments().clear();
-    }
-
     public CtSimpleType<?> getOriginalClass(CodeFragment cf) {
         return cf.getCompilationUnit().getMainType();
     }
@@ -60,12 +45,14 @@ public abstract class ASTTransformation extends AbstractTransformation {
     public String classLocationName() {
         return transplantationPoint.getSourceClass().getQualifiedName();
     }
+
     public String packageLocationName() {
         return transplantationPoint.getSourcePackage().getQualifiedName();
     }
+
     public String methodLocationName() {
         CtExecutable elem = transplantationPoint.getCtCodeFragment().getParent(CtExecutable.class);
-        if(elem != null)
+        if (elem != null)
             return elem.getSimpleName();
         return "field";
     }
@@ -74,7 +61,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
     @Override
     public String getLevel() {
         CtCodeElement stmt = transplantationPoint.getCtCodeFragment();
-        if(stmt instanceof CtLocalVariable
+        if (stmt instanceof CtLocalVariable
                 || stmt instanceof CtNewClass
                 || stmt instanceof CtBreak
                 || stmt instanceof CtUnaryOperator
@@ -105,6 +92,37 @@ public abstract class ASTTransformation extends AbstractTransformation {
     public String getTransformationString() throws Exception {
         return getTransformationString(transplantationPoint.getCtCodeFragment());
     }
+
+    /**
+     * Prints the modified java file. When the transformation is done a new java file is created. This method performs a
+     * pretty print of it
+     * @param directory Directory where the java file is going to be placed
+     * @throws IOException
+     */
+    public void printJavaFile(String directory) throws IOException {
+        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
+        Factory factory = type.getFactory();
+        Environment env = factory.getEnvironment();
+
+        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new FragmentDrivenJavaPrettyPrinter(env));
+        processor.setFactory(factory);
+
+        processor.createJavaFile(type);
+        Log.debug("copy file: " + directory + " " + type.getQualifiedName());
+    }
+
+    /**
+     * Removes the original source code in the transplantation point
+     */
+    public void removeSourceCode() {
+        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
+        CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
+        if (compileUnit.getSourceCodeFraments() != null)
+            compileUnit.getSourceCodeFraments().clear();
+    }
+
+
+
 }
 
 

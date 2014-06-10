@@ -1,8 +1,9 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.transformation.query.bytecode.ByteCodeTransformationQuery;
+import fr.inria.diversify.transformation.query.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
@@ -71,7 +72,7 @@ public class Diversify extends AbstractDiversify {
             transformations.add(trans);
             int status = runTest(tmpDir);
 
-            if(status == 0)
+            if(status == AbstractTransformation.SOSIE)
                 sosie++;
             trial++;
             trans.setStatus(status);

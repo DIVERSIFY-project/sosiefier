@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation.query.bytecode;
+package fr.inria.diversify.transformation.query;
 
 
 import fr.inria.diversify.util.DiversifyEnvironment;
