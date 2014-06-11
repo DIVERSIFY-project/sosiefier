@@ -108,7 +108,9 @@ public class  TransformationParser {
                 .filter(object -> object != null )
                 .collect(Collectors.toList());
 
-        if ( countError > 0 && list )
+        if ( countError > 0 && list.size() == 0 ) {
+            throw new JSONException("Unable to parse file");
+        }
 
         return list;
     }
@@ -123,7 +125,7 @@ public class  TransformationParser {
 
 
 
-    protected Transformation parseTransformation(JSONObject jsonObject) throws IOException {
+    protected Transformation parseTransformation(JSONObject jsonObject) {
         try {
             String type = jsonObject.getString("type");
             Transformation trans = null;
@@ -146,12 +148,10 @@ public class  TransformationParser {
                 trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));
 
             return trans;
-        }catch ( JSONException e) {
+        } catch (Exception e) {
             countError++;
             Log.warn("error during the parsing of "+jsonObject,e);
             return null;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -298,7 +298,7 @@ public class  TransformationParser {
         return le;
     }
 
-    protected Transformation parseMutation(JSONObject jsonObject) throws JSONException {
+    protected Transformation parseMutation(JSONObject jsonObject) throws Exception {
         String name = jsonObject.getString("name");
         Transformation trans;
 
