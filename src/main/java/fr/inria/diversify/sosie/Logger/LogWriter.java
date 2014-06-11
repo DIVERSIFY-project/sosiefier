@@ -17,8 +17,9 @@ public class LogWriter {
     static private Map<Thread, FileWriter> fileWriters;
     static private String separator = ":;:";
     static private String simpleSeparator = ";";
-    protected static Map<Thread, String> previousVarLog;
-    protected static Map<Thread, Integer> callDeep;
+    static private Map<Thread, String> previousVarLog;
+    static private Map<Thread, Integer> callDeep;
+    static private Map<Thread, Boolean> logMethod;
 
     protected synchronized static FileWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (fileWriters == null) {
@@ -84,72 +85,87 @@ public class LogWriter {
 
     public static void writeVar(int id, Thread thread, String methodSignatureId, Object... var) {
         String semaphore = "";
-        try {
-            StringBuilder string = new StringBuilder();
-            string.append("$$$\n");
-            string.append("V");
-            string.append(callDeep.get(thread));
-            string.append(simpleSeparator);
-            string.append(id + "");
-            string.append(simpleSeparator);
-            string.append(methodSignatureId);
+        if(getLogMethod(thread)) {
+            try {
+                StringBuilder string = new StringBuilder();
+                string.append("$$$\n");
+                string.append("V");
+                string.append(callDeep.get(thread));
+                string.append(simpleSeparator);
+                string.append(id + "");
+                string.append(simpleSeparator);
+                string.append(methodSignatureId);
 
-            StringBuilder vars = new StringBuilder();
-            for (int i = 0; i < var.length / 2; i = i + 2) {
-                StringBuilder tmp = new StringBuilder();
-                try {
-                    tmp.append(separator);
-                    tmp.append(var[i].toString());
-                    tmp.append(simpleSeparator);
-                    if (var[i + 1] == null)
-                        tmp.append("null");
-                    else
-                        tmp.append(var[i + 1].toString());
-                    vars.append(tmp);
-                } catch (Exception e) {
+                StringBuilder vars = new StringBuilder();
+                stopLogMethod(thread);
+                for (int i = 0; i < var.length / 2; i = i + 2) {
+                    StringBuilder tmp = new StringBuilder();
+                    try {
+                        tmp.append(separator);
+                        tmp.append(var[i].toString());
+                        tmp.append(simpleSeparator);
+                        if (var[i + 1] == null) tmp.append("null");
+                        else tmp.append(var[i + 1].toString());
+                        vars.append(tmp);
+                    } catch (Exception e) {
+                    }
                 }
+
+                if (vars.toString().equals(previousVarLog.get(thread))) {
+                    string.append(separator);
+                    string.append("P");
+                } else {
+                    string.append(vars.toString());
+                    previousVarLog.put(thread, vars.toString());
+                }
+                startLogMethod(thread);
+                FileWriter fileWriter = getFileWriter(thread);
+                semaphore = fileWriter.toString() + fileWriter.hashCode();
+                fileWriter.append(string.toString());
+
+            } catch (Exception e) { e.printStackTrace();} finally {
+                startLogMethod(thread);
+                releaseFileWriter(semaphore);
             }
-
-            if (vars.toString().equals(previousVarLog.get(thread))) {
-                string.append(separator);
-                string.append("P");
-            } else {
-                string.append(vars.toString());
-                previousVarLog.put(thread, vars.toString());
-            }
-
-            FileWriter fileWriter = getFileWriter(thread);
-            semaphore = fileWriter.toString()+ fileWriter.hashCode();
-            fileWriter.append(string.toString());
-
-        } catch (Exception e) {  e.printStackTrace();}
-        finally {
-            releaseFileWriter(semaphore);
         }
+    }
 
+    protected static void stopLogMethod(Thread thread) {
+        if(logMethod == null)
+            logMethod = new HashMap<Thread, Boolean>();
+        logMethod.put(thread,false);
+    }
+
+    protected static void startLogMethod(Thread thread) {
+        logMethod.put(thread,true);
+    }
+
+    protected static boolean getLogMethod(Thread thread) {
+        return logMethod == null || !logMethod.containsKey(thread) || logMethod.get(thread);
     }
 
     public static void methodCall(Thread thread, String methodSignatureId) {
         String semaphore = "";
-        try {
-            incCallDeep(thread);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("$$$\n");
-            stringBuilder.append("M"); //new method call
-            stringBuilder.append(callDeep.get(thread));
-            stringBuilder.append(simpleSeparator);
-            stringBuilder.append(methodSignatureId);
+        if(getLogMethod(thread)) {
+            try {
+                incCallDeep(thread);
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("$$$\n");
+                stringBuilder.append("M"); //new method call
+                stringBuilder.append(callDeep.get(thread));
+                stringBuilder.append(simpleSeparator);
+                stringBuilder.append(methodSignatureId);
 
-            String string = stringBuilder.toString();
-            FileWriter fileWriter = getFileWriter(thread);
-            semaphore = fileWriter.toString() + fileWriter.hashCode();
-            fileWriter.append(string);
+                String string = stringBuilder.toString();
+                FileWriter fileWriter = getFileWriter(thread);
+                semaphore = fileWriter.toString() + fileWriter.hashCode();
+                fileWriter.append(string);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        finally {
-            releaseFileWriter(semaphore);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                releaseFileWriter(semaphore);
+            }
         }
     }
 
