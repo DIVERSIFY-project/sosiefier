@@ -236,5 +236,6 @@ filter = function(transformation) {
         || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
         || (steroid  & (name == "delete" || name == "add" || name == "replace"))
         || (mutation  & transformation.type == "mutation")
-        || (cvl  & transformation.type == "cvl");
+        || (cvl  & transformation.type == "cvl")
+        || true;
 }

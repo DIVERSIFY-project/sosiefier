@@ -38,7 +38,8 @@ function VisuClass(JSONObject) {
                     || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
                     || (steroid  & (name == "delete" || name == "add" || name == "replace"))
                     || (mutation  & trans.type == "mutation")
-                    || (cvl  & trans.type == "cvl")) {
+                    || (cvl  & trans.type == "cvl")
+                    || true) {
                     notCompile += trans.notCompile;
                     failTest += trans.failTest;
                     sosie += trans.sosie;
@@ -130,7 +131,8 @@ function VisuZoomClass(JSONObject) {
                     || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
                     || (steroid  & (name == "delete" || name == "add" || name == "replace"))
                     || (mutation  & trans.type == "mutation")
-                    || (cvl  & trans.type == "cvl")) {
+                    || (cvl  & trans.type == "cvl")
+                    || true) {
                     notCompile += trans.notCompile;
                     failTest += trans.failTest;
                     sosie += trans.sosie;
@@ -223,7 +225,8 @@ function VisuZoomClass(JSONObject) {
                         || (wittgenstein  &  (name == "addWittgenstein" || name == "replaceWittgenstein"))
                         || (steroid  & (name == "delete" || name == "add" || name == "replace"))
                         || (mutation  & trans.type == "mutation")
-                        || (cvl  & trans.type == "cvl")) {
+                        || (cvl  & trans.type == "cvl")
+                        || true) {
                         $('#myList').append('<li class="list-group-item">type: '+transformation[i].type+', name: '+transformation[i].name+', status: '+transformation[i].status+
                             '<pre class="prettyprint lang-java">'+transformation[i].string+'</pre></li>');
                     }
