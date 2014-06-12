@@ -38,17 +38,13 @@ public class MavenDependencyResolver {
         MavenProject ret = null;
         MavenXpp3Reader mavenReader = new MavenXpp3Reader();
 
-        if (pomFile != null && pomFile.exists()) {
-            FileReader reader = null;
-            try {
-                reader = new FileReader(pomFile);
-                Model model = mavenReader.read(reader);
-                model.setPomFile(pomFile);
-                ret = new MavenProject(model);
-            } finally {
-                reader.close();
-            }
-        }
+        //Removed null and file exists protections that mask errors
+        FileReader reader = null;
+        reader = new FileReader(pomFile);
+        Model model = mavenReader.read(reader);
+        model.setPomFile(pomFile);
+        ret = new MavenProject(model);
+        reader.close();
 
         return ret;
     }
