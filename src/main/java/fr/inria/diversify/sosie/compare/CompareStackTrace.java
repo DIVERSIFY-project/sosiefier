@@ -85,11 +85,9 @@ public class CompareStackTrace {
 
             if(!st1Lower && deep1 < deep2) {
                 st1Lower = true;
-//                stackTrace1.previous();
             }
             if(!st2Lower &&  deep1 > deep2) {
                 st1Lower = true;
-//                stackTrace2.previous();
             }
             if(deep1 == deep2) {
                 st1Lower = false; st2Lower = false;
@@ -98,14 +96,9 @@ public class CompareStackTrace {
                 diffs.add(new CallDiff(stackTrace1.getTop2(), Math.abs(deep1 - deep2)));
             }
             if(st1Lower && st2Lower || !stackTrace1.getTop().equals(stackTrace2.getTop())) {
-                findNewSyncro(8, 2,stackTrace1,stackTrace2);
+                diffs.add(findNewSyncro(20, 2, stackTrace1, stackTrace2));
             }
 
-//            if(!stackTrace1.getTop().equals(stackTrace2.getTop())
-//                    || !(stackTrace1.getDeep() == stackTrace2.getDeep())) {
-//                CallDiff tmp = new CallDiff(stackTrace1.getTop2(), Math.abs(stackTrace1.getDeep() - stackTrace2.getDeep()));
-//                diffs.add(tmp);
-//            }
             if(st1Lower == st2Lower && (stackTrace1.getVariablesValueChange() || stackTrace2.getVariablesValueChange())) {
                 Set<VariableDiff> vd = varDiff(stackTrace1, stackTrace2);
                 if (!vd.isEmpty()) {
@@ -136,36 +129,41 @@ public class CompareStackTrace {
         return diff;
     }
 
-//    protected void formatAndAddCallDiff(List<Diff> diffs) {
-//        for(StackTraceElement ste : callDiff.keySet()) {
-//            CallDiff tmp = new CallDiff(ste, callDiff.get(ste));
-//            diffs.add(tmp);
-//        }
-//    }
-//
-//
-//    protected void addCallDiff(StackTraceElement diffStart, int nbCallDiff) {
-//        if(callDiff.containsKey(diffStart))
-//            callDiff.put(diffStart,Math.max(callDiff.get(diffStart),nbCallDiff));
-//        else
-//            callDiff.put(diffStart,nbCallDiff);
-//    }
 
-    protected void findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
+    protected CallDiff findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
+        int count1 = 0;
+        int count2 = 0;
+        int maxDiff = 1;
+        CallDiff diff = new CallDiff(stackTrace1.getTop2(),1);
         for(int i = 0; i < maxOperation; i++) {
             for(int j = 0; j < maxOperation - i; j++) {
-
+                maxDiff = Math.max(maxDiff,Math.abs(count1 - count2));
                 if(st1.getTop().equals(st2.getTop()) &&  isSameForXOperation(syncroRange, st1, st2)) {
-                    return;
+                    diff.setMaxStackDiff(maxDiff);
+                    return diff;
                 }
-                st1.next();
+                if(st1.hasNext()) {
+                    count1++;
+                    st1.next();
+                }
             }
-            st1.previous(maxOperation - i);
-            st2.next();
+            st1.previous(count1);
+            count1 = 0;
+            if(st2.hasNext()) {
+                count2++;
+                st2.next();
+            }
         }
+        maxDiff = Math.max(maxDiff,Math.abs(count1 - count2));
+        diff.setMaxStackDiff(maxDiff);
+        st2.previous(count2);
+        return diff;
     }
 
     protected boolean isSameForXOperation(int x, StackTrace st1, StackTrace st2) {
+        if(st1.getDeep() != st2.getDeep())
+            return false;
+
         int undo = 0;
         boolean same = true;
         for (int count = 0; count < x; count++) {

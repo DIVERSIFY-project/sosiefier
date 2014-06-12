@@ -37,7 +37,7 @@ public class TestLoggingInstrumenter extends AbstractProcessor<CtMethod> {
     }
 
     protected boolean isTestClass(CtTypeReference<?> type) {
-        if(type.getSimpleName().endsWith("Test"))
+        if(type.getSimpleName().endsWith("Test") || type.getSimpleName().endsWith("Behaviour")) // Behaviour for jbehave
             return true;
         else {
             try {

@@ -46,11 +46,12 @@ public class CallDiff extends Diff {
         writer.write("C;"+diffStart+";"+maxStackDiff);
     }
 
-//    public void setMaxStackDiff(int x) {
-//        maxStackDiff = x;
-//    }
+    public void setMaxStackDiff(int x) {
+        maxStackDiff = x;
+    }
 
     public int getMaxStackDiff() {
         return maxStackDiff;
     }
+
 }

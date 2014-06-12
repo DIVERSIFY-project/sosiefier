@@ -15,7 +15,7 @@ public class StackTrace {
     protected int position;
     protected int deep;
     protected String name;
-    protected String threadName;
+//    protected String threadName;
     protected boolean variablesValueChange;
 
 
@@ -33,8 +33,8 @@ public class StackTrace {
         if(position < stackTraceOperations.size()) {
             variablesValueChange = false;
             stackTraceOperations.get(position).apply(this);
+            position++;
         }
-        position++;
     }
 
     public void previous() {
