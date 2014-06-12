@@ -1,18 +1,42 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
+import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
+import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.util.DiversifyEnvironment;
+import fr.inria.diversify.util.DiversifyProperties;
+import fr.inria.diversify.util.Log;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.NotFoundException;
+import spoon.processing.AbstractProcessor;
+import spoon.processing.ProcessingManager;
+import spoon.reflect.code.CtLocalVariable;
+import spoon.reflect.code.CtReturn;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtPackage;
+import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.factory.Factory;
+import spoon.reflect.visitor.QueryVisitor;
+import spoon.reflect.visitor.filter.TypeFilter;
+import spoon.support.QueueProcessingManager;
+
+import java.io.File;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- *
  * The InputProgram class encapsulates all the known information of the program being sosiefiecated
- *
+ * <p/>
  * Created by marcel on 6/06/14.
  */
 public class InputProgram {
 
     /**
-     *  List of all the code fragments extracted by Spoon of the input program
+     * List of all the code fragments extracted by Spoon of the input program
      */
     private CodeFragmentList codeFragments;
 
@@ -37,7 +61,7 @@ public class InputProgram {
     private String coverageDir;
 
     /**
-     *  Path to previous transformations made in this input program
+     * Path to previous transformations made in this input program
      */
     private String previousTransformationsPath;
 
@@ -46,20 +70,46 @@ public class InputProgram {
      */
     private int transformationPerRun;
 
+    /**
+     * Root spoon element for an input program, mostly upper level packages
+     */
+    private Set<CtElement> roots;
 
     /**
-     *  List of all the code fragments extracted by Spoon of the input program
+     * List Spoon return statements that can be found in this program
      */
-    public CodeFragmentList getCodeFragments() {
-        return codeFragments;
-    }
+    protected List<CtReturn> returns;
+
+
+    protected Map<Class, List<CtElement>> typeToObject = new HashMap<Class, List<CtElement>>();
 
     /**
-     *  List of all the code fragments extracted by Spoon of the input program
+     * List of inline constants that can be found in this program
      */
-    public void setCodeFragments(CodeFragmentList codeFragments) {
-        this.codeFragments = codeFragments;
+    protected List<CtLocalVariable> inlineConstant;
+
+    /**
+     * Java assists methods for byte code manipulation
+     */
+    private List<CtMethod> javassistMethods;
+
+    /**
+     * Spoon factory to process all AST elements
+     */
+    private Factory factory;
+
+
+    /**
+     * Spoon factory to process all AST elements
+     */
+    public Factory getFactory() {
+        return factory;
     }
+
+    public void setFactory(Factory factory) {
+        this.factory = factory;
+    }
+
 
     /**
      * Coverage report for the input program
@@ -87,7 +137,7 @@ public class InputProgram {
     }
 
     /**
-     *  Path to the know sosie information stored in file
+     * Path to the know sosie information stored in file
      */
     public String getPreviousTransformationsPath() {
         return previousTransformationsPath;
@@ -128,5 +178,122 @@ public class InputProgram {
 
     public void setCoverageDir(String coverageDir) {
         this.coverageDir = coverageDir;
+    }
+
+    /**
+     * List of all the code fragments extracted by Spoon of the input program
+     */
+    public synchronized CodeFragmentList getCodeFragments() {
+        if(codeFragments == null) {
+            ProcessingManager pm = new QueueProcessingManager(factory);
+            StatementProcessor processor = new StatementProcessor();
+            pm.addProcessor(processor);
+            pm.process();
+
+            codeFragments = processor.getCodeFragments();
+        }
+        return codeFragments;
+    }
+
+    /**
+     * Root spoon element for an input program, mostly upper level packages
+     */
+    public synchronized Set<CtElement> getRoots() {
+        if (roots == null) {
+            roots = new HashSet<>();
+            ProcessingManager pm = new QueueProcessingManager(factory);
+            AbstractProcessor<CtPackage> processor = new AbstractProcessor<CtPackage>() {
+                @Override
+                public void process(CtPackage element) {
+                    CtElement root = element;
+                    while (root.getParent() != null) {
+                        root = root.getParent();
+                    }
+                    roots.add(root);
+                }
+            };
+            pm.addProcessor(processor);
+            pm.process();
+        }
+        return roots;
+    }
+
+    /**
+     * Java assists methods for byte code manipulation
+     */
+    public synchronized List<CtMethod> getJavassistMethods() {
+
+        if (javassistMethods == null) {
+            javassistMethods = new ArrayList<>();
+            ClassPool pool = ClassPool.getDefault();
+            //pool.insertClassPath(DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes"));
+            try {
+                pool.insertClassPath(classesDir);
+            } catch (NotFoundException e) {
+                throw new RuntimeException("Cannot find classesDir " + classesDir, e);
+            }
+            for (CtSimpleType cl : getCodeFragments().getAllClasses()) {
+                CtClass cc;
+                try {
+                    cc = pool.get(cl.getQualifiedName());
+                } catch (NotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                for (CtMethod method : cc.getDeclaredMethods())
+                    if (!method.isEmpty()) {
+                        javassistMethods.add(method);
+                    }
+            }
+        }
+        return javassistMethods;
+    }
+
+    /**
+     * Get the inline constant statements on the program
+     * @return
+     */
+    public synchronized List<CtLocalVariable> getInlineConstant() {
+        if (inlineConstant == null) {
+            ProcessingManager pm = new QueueProcessingManager(factory);
+            InlineConstantProcessor processor = new InlineConstantProcessor();
+            pm.addProcessor(processor);
+            pm.process();
+
+            inlineConstant = processor.getInlineConstant();
+        }
+        return inlineConstant;
+    }
+
+    public synchronized List<CtElement> getAllElement(Class cl) {
+
+        if (!typeToObject.containsKey(cl)) {
+            QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
+            getRoots().stream()
+                    .flatMap(root -> {
+                        root.accept(query);
+                        return query.getResult().stream();
+                    })
+                    .collect(Collectors.toList());
+
+            typeToObject.put(cl, query.getResult());
+        }
+        return typeToObject.get(cl);
+    }
+
+
+    /**
+     * Get return statements of the program
+     * @return
+     */
+    public synchronized List<CtReturn> getReturns() {
+        if (returns == null) {
+            ProcessingManager pm = new QueueProcessingManager(factory);
+            ReturnProcessor processor = new ReturnProcessor();
+            pm.addProcessor(processor);
+            pm.process();
+
+            returns = processor.getReturns();
+        }
+        return returns;
     }
 }

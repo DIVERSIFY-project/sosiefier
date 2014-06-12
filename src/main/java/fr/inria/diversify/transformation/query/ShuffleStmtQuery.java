@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.other.ShuffleStmtTransformation;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import spoon.reflect.code.CtBlock;
@@ -16,11 +17,18 @@ import java.util.Random;
  * Created by Simon on 03/04/14.
  */
 public class ShuffleStmtQuery extends TransformationQuery {
+
     protected ICoverageReport coverageReport;
 
-    public ShuffleStmtQuery(ICoverageReport rg) {
-        coverageReport = rg;
+    protected InputProgram inputProgram;
+
+    public ShuffleStmtQuery(InputProgram inputProgram) {
+
+        this.inputProgram = inputProgram;
+
+        coverageReport = inputProgram.getCoverageReport();
     }
+
 
     @Override
     public void setType(String type) {
@@ -30,7 +38,7 @@ public class ShuffleStmtQuery extends TransformationQuery {
     @Override
     public ShuffleStmtTransformation buildTransformation() throws Exception {
         ShuffleStmtTransformation sst = new ShuffleStmtTransformation();
-        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtBlock.class);
+        List<CtElement> objects = inputProgram.getAllElement(CtBlock.class);
         Random r = new Random();
 
         CtBlock block = (CtBlock)objects.get(r.nextInt(objects.size()));

@@ -1,5 +1,6 @@
 package fr.inria.diversify.visu;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.util.Log;
@@ -19,8 +20,10 @@ import java.util.regex.Pattern;
 public class Visu {
     int id = 0;
     String prefix;
+    private InputProgram inputProgram;
 
-    public Visu(String prefix) {
+    public Visu(String prefix, InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
         this.prefix = prefix;
         File file = new File(prefix);
         file.mkdirs();
@@ -120,7 +123,7 @@ public class Visu {
 
     protected CtSimpleType getClass(String packageName, String className) {
 
-        for(CtElement elem : DiversifyEnvironment.getAllElement(CtSimpleType.class)) {
+        for(CtElement elem : inputProgram.getAllElement(CtSimpleType.class)) {
             CtSimpleType cl = (CtSimpleType) elem;
             try {
             if(cl.getPackage().getQualifiedName().endsWith(packageName) && cl.getQualifiedName().equals(className))

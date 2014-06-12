@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -27,9 +28,14 @@ import java.util.*;
 public class TransformationOldParser {
     private int countError = 0;
     private int count = 0;
+
+    InputProgram inputProgram;
+
     Collection<Transformation> transformations;
 
-    public TransformationOldParser(boolean toSet) {
+    public TransformationOldParser(boolean toSet, InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
+
         if(toSet)
             transformations = new HashSet<Transformation>();
         else
@@ -174,7 +180,7 @@ public class TransformationOldParser {
 
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws Exception {
         CodeFragment cf = null;
-        for (CodeFragment codeFragment : DiversifyEnvironment.getCodeFragments()) {
+        for (CodeFragment codeFragment : inputProgram.getCodeFragments()) {
             try {
                 if (codeFragment.positionString().equals(jsonObject.get("Position"))  ){
                     cf = codeFragment;

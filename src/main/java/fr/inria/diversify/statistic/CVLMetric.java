@@ -1,6 +1,6 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.util.DiversifyEnvironment;
+import fr.inria.diversify.diversification.InputProgram;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtField;
@@ -23,11 +23,17 @@ import java.util.stream.Collectors;
  */
 public class CVLMetric {
 
+    InputProgram inputProgram;
+
+    public CVLMetric(InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
+    }
+
     public void printMetrics(String fileName) throws IOException {
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         out.append("nodeType;objectExistence;objectSubstitution;linkExistence;linkSubstitution\n");
 
-        Set<Class<? extends CtElement>> classes = DiversifyEnvironment.getAllElement(CtElement.class).stream()
+        Set<Class<? extends CtElement>> classes = inputProgram.getAllElement(CtElement.class).stream()
                 .map(e -> e.getClass())
                 .collect(Collectors.toSet());
 
@@ -43,22 +49,22 @@ public class CVLMetric {
     }
 
     public long nbObjectExistence(Class cl) {
-        return DiversifyEnvironment.getAllElement(cl).size();
+        return inputProgram.getAllElement(cl).size();
     }
 
     public long nbObjectSubstitution(Class cl) {
-        long nb =  DiversifyEnvironment.getAllElement(cl).size();
+        long nb =  inputProgram.getAllElement(cl).size();
         return nb * nb;
     }
 
     public long nbLinkExistence(Class cl) {
 
         if(CtField.class.isAssignableFrom(cl))
-            return DiversifyEnvironment.getAllElement(CtField.class).size();
+            return inputProgram.getAllElement(CtField.class).size();
 
         if(CtClass.class.isAssignableFrom(cl) && !cl.equals(CtEnumImpl.class)) {
             long m = 0;
-            List<CtElement> classes = DiversifyEnvironment.getAllElement(CtClass.class);
+            List<CtElement> classes = inputProgram.getAllElement(CtClass.class);
             for (CtElement el : classes) {
                 CtClass c = (CtClass) el;
                 if (cl.getSuperclass() != null)
@@ -73,12 +79,12 @@ public class CVLMetric {
 
     public long nbLinkSubstitution(Class cl) {
         if(CtField.class.isAssignableFrom(cl)) {
-            int tmp = DiversifyEnvironment.getAllElement(CtField.class).size();
+            int tmp = inputProgram.getAllElement(CtField.class).size();
             return tmp * tmp;
         }
         if(CtClass.class.isAssignableFrom(cl) && !cl.equals(CtEnumImpl.class)) {
             long m = 0;
-            List<CtElement> classes = DiversifyEnvironment.getAllElement(CtClass.class);
+            List<CtElement> classes = inputProgram.getAllElement(CtClass.class);
             for (CtElement el : classes) {
                 CtClass c = (CtClass) el;
                 if (cl.getSuperclass() != null)

@@ -2,10 +2,9 @@ package fr.inria.diversify.transformation.query.searchStrategy;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationParser;
-import fr.inria.diversify.util.Log;
+import fr.inria.diversify.transformation.TransformationJsonParser;
+import fr.inria.diversify.transformation.TransformationParserException;
 import org.json.JSONException;
 
 import java.io.File;
@@ -25,7 +24,7 @@ public class KnownSosieStrategy extends SearchStrategy implements ITransformatio
      */
     List<Transformation> transformations;
 
-    TransformationParser parser;
+    TransformationJsonParser parser;
 
     private boolean findTransplants;
 
@@ -48,8 +47,8 @@ public class KnownSosieStrategy extends SearchStrategy implements ITransformatio
     }
 
     @Override
-    public List<Transformation> findTransformations() throws SearchException {
-        parser = new TransformationParser(false);
+    public List<Transformation> findTransformations() {
+        parser = new TransformationJsonParser(false, getInputProgram());
         try {
             List<Transformation> ts = parser.parseFile(
                     new File(getInputProgram().getPreviousTransformationsPath()));
@@ -60,6 +59,7 @@ public class KnownSosieStrategy extends SearchStrategy implements ITransformatio
             //making a maximum of ts.size attempts we tried most transformations in the list
             int attempts = 0;
             while ( transformations.size() < getInputProgram().getTransformationPerRun()
+
                     && attempts < ts.size() ) {
                 Transformation t = ts.get(r.nextInt(ts.size()));
                 if ( t.isSosie() && canBeMerged(t) ) {
@@ -68,14 +68,9 @@ public class KnownSosieStrategy extends SearchStrategy implements ITransformatio
                 attempts++;
             }
 
-        } catch (IOException e) {
-            Log.error("Cannot open transformation file", e);
-            throw new SearchException("Cannot open transformation file");
-        } catch (JSONException e) {
-            Log.error("Cannot parse JSON fule", e);
-            throw new SearchException("Cannot parse JSON fule");
+        } catch (TransformationParserException e) {
+            throw new RuntimeException(e);
         }
-
         return transformations;
     }
 }

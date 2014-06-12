@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.Log;
 
 import java.util.Random;
 
@@ -67,7 +68,8 @@ public class CompositeQuery extends TransformationQuery  {
                 else
                     trans =  ast.buildTransformation();
             } catch (Exception e) {
-
+                Log.warn("Exception while running transformation: " + trans);
+                e.printStackTrace();
             }
         }
     }

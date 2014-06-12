@@ -6,6 +6,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
+import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 
@@ -26,15 +27,15 @@ public class MutationToSosieQuery extends TransformationQuery {
     protected File jacocoDir;
     protected InputProgram inputProgram;
 
-    public MutationToSosieQuery(InputProgram inputProgram) throws IOException, JSONException {
+    public MutationToSosieQuery(InputProgram inputProgram) throws TransformationParserException {
         this.classesDir = inputProgram.getClassesDir();
         this.jacocoDir = new File(inputProgram.getCoverageDir());
         init(inputProgram.getPreviousTransformationsPath());
         this.inputProgram = inputProgram;
     }
 
-    protected void init(String mutationDirectory) throws IOException, JSONException {
-        TransformationParser tf = new TransformationParser(true);
+    protected void init(String mutationDirectory) throws TransformationParserException {
+        TransformationParser tf = new TransformationParser(true, inputProgram);
         mutations = new ArrayList<Transformation>(tf.parseDir(mutationDirectory));
     }
 

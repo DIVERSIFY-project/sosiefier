@@ -1,5 +1,6 @@
 package fr.inria.diversify.statistic;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.util.Log;
@@ -15,8 +16,10 @@ import java.util.stream.Collectors;
 public class FailureMatrix {
     protected Collection<Transformation> transformations;
     protected List<String> allTest;
+    InputProgram inputProgram;
 
-    public FailureMatrix(Collection<Transformation> transformations, String allTestFile) throws IOException {
+    public FailureMatrix(InputProgram inputProgram, Collection<Transformation> transformations, String allTestFile) throws IOException {
+        this.inputProgram = inputProgram;
         BufferedReader br = new BufferedReader(new FileReader(allTestFile));
         allTest = new ArrayList<>();
 
@@ -78,7 +81,7 @@ public class FailureMatrix {
 
         printMatrix(prefix+"_matrix/all.csv", buildMatrix());
 
-        List<String> classes = DiversifyEnvironment.getAllElement(CtClass.class).stream()
+        List<String> classes = inputProgram.getAllElement(CtClass.class).stream()
                 .map(cl -> ((CtClass) cl).getQualifiedName())
                 .collect(Collectors.toList());
 

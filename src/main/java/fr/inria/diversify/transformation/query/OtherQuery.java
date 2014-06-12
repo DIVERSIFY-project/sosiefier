@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.other.EmptyMethodBody;
 import fr.inria.diversify.transformation.other.ReplaceLiteral;
@@ -16,11 +17,13 @@ import java.util.Random;
  * Created by Simon on 19/03/14.
  */
 public class OtherQuery extends TransformationQuery {
+    private final InputProgram inputProgram;
     protected ICoverageReport coverageReport;
 
 
-    public OtherQuery(ICoverageReport coverageReport) {
-        this.coverageReport = coverageReport;
+    public OtherQuery(InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
+        this.coverageReport = inputProgram.getCoverageReport();
     }
 
     @Override
@@ -40,7 +43,7 @@ public class OtherQuery extends TransformationQuery {
 
     private ReplaceLiteral getLiteralReplace() {
         ReplaceLiteral rl = new ReplaceLiteral();
-        List<CtElement> literals = DiversifyEnvironment.getAllElement(CtLiteral.class);
+        List<CtElement> literals = inputProgram.getAllElement(CtLiteral.class);
 
         int size = literals.size();
         Random r  = new Random();
@@ -57,7 +60,7 @@ public class OtherQuery extends TransformationQuery {
 
     private ReplaceNew getNewReplace() {
         ReplaceNew rn = new ReplaceNew();
-        List<CtElement> newClasses = DiversifyEnvironment.getAllElement(CtNewClass.class);
+        List<CtElement> newClasses = inputProgram.getAllElement(CtNewClass.class);
 
         int size = newClasses.size();
         Random r  = new Random();
@@ -75,7 +78,7 @@ public class OtherQuery extends TransformationQuery {
     protected EmptyMethodBody getEmptyMethodBody() {
         EmptyMethodBody emb = new EmptyMethodBody();
 
-        List<CtElement> methods = DiversifyEnvironment.getAllElement(CtMethod.class);
+        List<CtElement> methods = inputProgram.getAllElement(CtMethod.class);
         int size = methods.size();
         Random r  = new Random();
 

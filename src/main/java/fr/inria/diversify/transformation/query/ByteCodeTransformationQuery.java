@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.bytecode.BytecodeAdd;
@@ -29,10 +30,12 @@ public class ByteCodeTransformationQuery extends TransformationQuery {
     protected List<CtMethod> methods;
     protected String type = "replace";
     protected ICoverageReport coverageReport;
+    private InputProgram inputProgram;
 
-    public ByteCodeTransformationQuery(ICoverageReport coverageReport) throws NotFoundException {
-        this.coverageReport = coverageReport;
-        methods = DiversifyEnvironment.getJavassistMethods();
+    public ByteCodeTransformationQuery(InputProgram inputProgram) throws NotFoundException {
+        this.inputProgram = inputProgram;
+        this.coverageReport = inputProgram.getCoverageReport();
+        methods = inputProgram.getJavassistMethods();
     }
 
 

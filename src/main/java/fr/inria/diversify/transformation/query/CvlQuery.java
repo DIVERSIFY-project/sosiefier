@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.util.DiversifyEnvironment;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.cvl.LinkExistence;
 import fr.inria.diversify.transformation.cvl.LinkSubstitution;
@@ -19,6 +19,13 @@ import java.util.*;
  * Time: 11:10
  */
 public class CvlQuery extends TransformationQuery {
+
+
+    protected InputProgram inputProgram;
+
+    public CvlQuery(InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
+    }
 
     @Override
     public void setType(String type) {}
@@ -47,7 +54,7 @@ public class CvlQuery extends TransformationQuery {
 
     protected LinkSubstitution getLSForField() {
         LinkSubstitution ls = new LinkSubstitution();
-        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtField.class);
+        List<CtElement> objects = inputProgram.getAllElement(CtField.class);
         Random r = new Random();
 
         ls.setTransformationPoint(objects.get(r.nextInt(objects.size())));
@@ -58,7 +65,7 @@ public class CvlQuery extends TransformationQuery {
 
     protected LinkSubstitution getLSForClass() {
         LinkSubstitution ls = new LinkSubstitution();
-        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtClass.class);
+        List<CtElement> objects = inputProgram.getAllElement(CtClass.class);
         Random r = new Random();
 
         CtClass cl = (CtClass) objects.get(r.nextInt(objects.size()));
@@ -88,7 +95,7 @@ public class CvlQuery extends TransformationQuery {
 
     protected LinkExistence getLEForField() {
         LinkExistence ls = new LinkExistence();
-        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtField.class);
+        List<CtElement> objects = inputProgram.getAllElement(CtField.class);
         Random r = new Random();
 
         ls.setTransformationPoint(objects.get(r.nextInt(objects.size())));
@@ -98,7 +105,7 @@ public class CvlQuery extends TransformationQuery {
 
     protected LinkExistence getLEForClass() {
         LinkExistence ls = new LinkExistence();
-        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtClass.class);
+        List<CtElement> objects = inputProgram.getAllElement(CtClass.class);
         Random r = new Random();
 
         CtClass cl = (CtClass) objects.get(r.nextInt(objects.size()));
@@ -120,10 +127,10 @@ public class CvlQuery extends TransformationQuery {
         ObjectSubstitution os = new  ObjectSubstitution();
         Random r = new Random();
 
-        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtElement.class);
+        List<CtElement> objects = inputProgram.getAllElement(CtElement.class);
         os.setTransformationPoint(objects.get(r.nextInt(objects.size())));
 
-        List<CtElement> transplants = DiversifyEnvironment.getAllElement(os.getTransformationPoint().getClass());
+        List<CtElement> transplants = inputProgram.getAllElement(os.getTransformationPoint().getClass());
         os.setTransplant(transplants.get(r.nextInt(transplants.size())));
 
         return os;
@@ -132,7 +139,7 @@ public class CvlQuery extends TransformationQuery {
     public ObjectExistence getObjectExistence() {
         ObjectExistence oe = new  ObjectExistence();
         Random r = new Random();
-        List<CtElement> objects = DiversifyEnvironment.getAllElement(CtElement.class);
+        List<CtElement> objects = inputProgram.getAllElement(CtElement.class);
         oe.setTransformationPoint(objects.get(r.nextInt(objects.size())));
         return oe;
     }

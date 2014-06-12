@@ -10,6 +10,7 @@ import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationParser;
+import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.buildSystem.ant.AntBuilder;
@@ -139,12 +140,13 @@ public class DiversifyMain {
     /**
      * Initializes the InputProgram dataset
      */
-    protected void initInputProgram() {
+    protected void initInputProgram(Factory factory) {
         inputProgram = new InputProgram();
+        inputProgram.setFactory(factory);
+
         inputProgram.setCoverageReport(initCoverageReport());
 
         //TODO: See how get rid of the Environment static
-        inputProgram.setCodeFragments(DiversifyEnvironment.getCodeFragments());
 
         //TODO: See hot to get rid of the Properties static
         inputProgram.setTransformationPerRun(
@@ -160,24 +162,24 @@ public class DiversifyMain {
         inputProgram.setCoverageDir(DiversifyProperties.getProperty("jacoco"));
     }
 
-    protected TransformationQuery initTransformationQuery() throws IOException, JSONException, ClassNotFoundException, NotFoundException {
-        initInputProgram();
+    protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException {
+
         String type = DiversifyProperties.getProperty("transformation.type");
 
         switch (type) {
             case "mutation":
-                return new MutationQuery(inputProgram.getCoverageReport());
+                return new MutationQuery(inputProgram);
             case "shuffle":
-                return new ShuffleStmtQuery(inputProgram.getCoverageReport());
+                return new ShuffleStmtQuery(inputProgram);
             case "other":
-                return new OtherQuery(inputProgram.getCoverageReport());
+                return new OtherQuery(inputProgram);
             case "all":
-                return new CompositeQuery(new MutationQuery(inputProgram.getCoverageReport()),
+                return new CompositeQuery(new MutationQuery(inputProgram),
                         new ASTTransformationQuery(inputProgram, new RandomFactory()));
             case "cvl":
-                return new CvlQuery();
+                return new CvlQuery(inputProgram);
             case "bytecode":
-                return new ByteCodeTransformationQuery(inputProgram.getCoverageReport());
+                return new ByteCodeTransformationQuery(inputProgram);
             case "mutationToSosie": {
                 /*
                 String jacocoFile = DiversifyProperties.getProperty("jacoco");
@@ -192,7 +194,6 @@ public class DiversifyMain {
             }
             case "ADRStupid": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                CodeFragmentList cf = DiversifyEnvironment.getCodeFragments();
                 return new ASTTransformationQuery(inputProgram, cl, true, new RandomFactory());
             }
             /*
@@ -258,6 +259,8 @@ public class DiversifyMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        initInputProgram(factory);
         DiversifyEnvironment.setFactory(factory);
     }
 
@@ -273,7 +276,7 @@ public class DiversifyMain {
     }
 
     protected void computeDiversifyStat(String transDir, String fileName) throws Exception {
-        TransformationParser tf = new TransformationParser(true);
+        TransformationParser tf = new TransformationParser(true, inputProgram);
 //        TransformationOldParser tf = new TransformationOldParser(true);
         Collection<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
@@ -294,10 +297,10 @@ public class DiversifyMain {
             write.writeGoodTransformation(type);
 
 
-        CVLMetric cvlMetric = new CVLMetric();
+        CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-        Visu v = new Visu(fileName + "_visu/visu");
+        Visu v = new Visu(fileName + "_visu/visu", inputProgram);
         v.writeJSON(transformations);
 
 //        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));

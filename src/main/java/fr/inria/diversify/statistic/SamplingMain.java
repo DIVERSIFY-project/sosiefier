@@ -2,6 +2,7 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.util.DiversifyProperties;
@@ -28,6 +29,8 @@ import java.util.*;
 public class SamplingMain {
     protected CodeFragmentList codeFragments;
 
+    InputProgram inputProgram;
+
     public static void main(String[] args) throws Exception {
         new DiversifyProperties(args[0]);
         new SamplingMain();
@@ -42,14 +45,11 @@ public class SamplingMain {
         }
 
         initSpoon();
-        TransformationParser tf = new TransformationParser(true);
+        TransformationParser tf = new TransformationParser(true, inputProgram);
         Collection<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
         Set<Transformation> set = new HashSet<Transformation>(transformations);
 
-
-
         Sampling s = new Sampling(set, 500);
-
 
         s.splitAndWrite(500, DiversifyProperties.getProperty("result"));
     }
@@ -84,7 +84,35 @@ public class SamplingMain {
         pm.process();
 
         codeFragments = processor.getCodeFragments();
+
+        initInputProgram(factory);
     }
+
+    /**
+     * Initializes the InputProgram dataset
+     */
+    protected void initInputProgram(Factory factory) {
+        inputProgram = new InputProgram();
+        inputProgram.setFactory(factory);
+
+        //inputProgram.setCoverageReport(initCoverageReport());
+
+        //TODO: See how get rid of the Environment static
+
+        //TODO: See hot to get rid of the Properties static
+        inputProgram.setTransformationPerRun(
+                Integer.parseInt(DiversifyProperties.getProperty("transformation.nb", "1")));
+
+        //Path to pervious transformations made to this input program
+        inputProgram.setPreviousTransformationsPath(
+                DiversifyProperties.getProperty("transformation.directory"));
+
+        inputProgram.setClassesDir(DiversifyProperties.getProperty("project") + "/" +
+                DiversifyProperties.getProperty("classes"));
+
+        inputProgram.setCoverageDir(DiversifyProperties.getProperty("jacoco"));
+    }
+
     protected void initLogLevel() {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);

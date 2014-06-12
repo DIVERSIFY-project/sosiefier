@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface ITransformationSearchStrategy {
 
-    public List<Transformation> findTransformations() throws SearchException;
+    public List<Transformation> findTransformations();
 
 }
