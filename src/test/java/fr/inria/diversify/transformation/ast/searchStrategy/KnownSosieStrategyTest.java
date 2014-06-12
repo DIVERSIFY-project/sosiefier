@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.ast.searchStrategy;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
@@ -27,6 +28,8 @@ public class KnownSosieStrategyTest {
     @Before
     public void setUp() throws Exception {
         InputProgram inputProgram = new InputProgram();
+        //This AWFUL! Try to do something better
+        inputProgram.setClassesDir("C:\\MarcelStuff\\projects\\DIVERSE\\programs to sosiefy\\easymock");
         inputProgram.setPreviousTransformationsPath(getResourcePath("transformations.json"));
         st = new KnownSosieStrategy(inputProgram);
     }

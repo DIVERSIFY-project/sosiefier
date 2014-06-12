@@ -1,1 +1,2 @@
 #Used to test the most common input properties
+project=C:/MarcelStuff/projects/DIVERSE/programs to sosiefy/junit
