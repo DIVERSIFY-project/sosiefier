@@ -89,14 +89,15 @@ public class CompareStackTrace {
             if(!st2Lower &&  deep1 > deep2) {
                 st1Lower = true;
             }
-            if(deep1 == deep2) {
-                st1Lower = false; st2Lower = false;
-            }
             if(st1Lower || st2Lower) {
                 diffs.add(new CallDiff(stackTrace1.getTop2(), Math.abs(deep1 - deep2)));
             }
             if(st1Lower && st2Lower || !stackTrace1.getTop().equals(stackTrace2.getTop())) {
                 diffs.add(findNewSyncro(20, 2, stackTrace1, stackTrace2));
+
+                if(stackTrace1.getDeep() == stackTrace2.getDeep()) {
+                    st1Lower = false; st2Lower = false;
+                }
             }
 
             if(st1Lower == st2Lower && (stackTrace1.getVariablesValueChange() || stackTrace2.getVariablesValueChange())) {
