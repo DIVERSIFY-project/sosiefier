@@ -53,7 +53,7 @@ public class InputConfigurationTest {
         String res = getResourcePath("testPropertyFile.txt");
         InputConfiguration configuration = new InputConfiguration(res);
         configuration.setInputProgram(new InputProgram());
-        SearchStrategy se = configuration.getNewPotSearchStrategy();
+        SearchStrategy se = configuration.buildPotSearchStrategy();
         assertTrue(se instanceof SimpleRandomStrategy);
     }
 
@@ -66,7 +66,7 @@ public class InputConfigurationTest {
         String res = getResourcePath("testPropertyFileSpecifiedClasses.txt");
         InputConfiguration configuration = new InputConfiguration(res);
         configuration.setInputProgram(new InputProgram());
-        SearchStrategy se = configuration.getNewPotSearchStrategy();
+        SearchStrategy se = configuration.buildPotSearchStrategy();
         assertTrue(se instanceof KnownSosieStrategy);
     }
 

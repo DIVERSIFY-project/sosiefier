@@ -8,6 +8,7 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
 import org.json.JSONException;
 
 import java.io.File;
@@ -26,8 +27,12 @@ public class MutationToSosieQuery extends TransformationQuery {
     protected String classesDir;
     protected File jacocoDir;
     protected InputProgram inputProgram;
+    SearchStrategy potStrategy;
+    SearchStrategy transplantStrategy;
 
-    public MutationToSosieQuery(InputProgram inputProgram) throws TransformationParserException {
+    public MutationToSosieQuery(InputProgram inputProgram, SearchStrategy potStrategy, SearchStrategy transplantStrategy) throws TransformationParserException {
+        this.potStrategy = potStrategy;
+        this.transplantStrategy = transplantStrategy;
         this.classesDir = inputProgram.getClassesDir();
         this.jacocoDir = new File(inputProgram.getCoverageDir());
         init(inputProgram.getPreviousTransformationsPath());
@@ -65,7 +70,8 @@ public class MutationToSosieQuery extends TransformationQuery {
             }
 
             //TODO: Se how to remove the static method. We will get here eventually
-            T thread = new T(new ASTTransformationQuery(inputProgram, Statement.class, false, new RandomFactory()));
+            T thread = new T(new ASTTransformationQuery(inputProgram, potStrategy, transplantStrategy,
+                    Statement.class, false));
 
             thread.start();
             int count = 0;

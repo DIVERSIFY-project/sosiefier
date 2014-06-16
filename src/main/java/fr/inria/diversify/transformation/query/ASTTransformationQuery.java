@@ -56,14 +56,9 @@ public class ASTTransformationQuery extends TransformationQuery {
     protected boolean stupid = true;
 
     /**
-     * Random engine factory to finer grain control of the random generation
-     */
-    IRandomFactory randomFactory;
-
-    /**
      *  Search strategy to find transplantation points
      */
-    protected SearchStrategy transplantationPointStrategy;
+    protected SearchStrategy potStrategy;
 
     /**
      * Search strategy to find a transplant
@@ -74,32 +69,34 @@ public class ASTTransformationQuery extends TransformationQuery {
      * Short constructor assuming the fragment class to be statement and the transformation to be stupid
      *
      * @param inputProgram Input program over the queries are going to be made
-     * @param random A random engine factory
+     * @param pot Pot (transplantation point) search strategy
+     * @param transplant Transplant strategy
      */
-    public ASTTransformationQuery(InputProgram inputProgram, IRandomFactory random) {
+    public ASTTransformationQuery(InputProgram inputProgram, SearchStrategy pot, SearchStrategy transplant) {
         coverageReport = inputProgram.getCoverageReport();
         codeFragments = inputProgram.getCodeFragments();
         //This we assume be defect
         codeFragmentClass = Statement.class;
-        randomFactory = random;
-        tryUseTransformationStrategy = true;
+        potStrategy = pot;
+        transplantStrategy = transplant;
     }
 
     /**
      * Long constructor assuming nothing
      * @param inputProgram Input Input program over the queries are going to be made
+     * @param pot Pot (transplantation point) search strategy
+     * @param transplant Transplant strategy
      * @param fragmentClass Class of the fragments
      * @param isStupid Is this a stupid transformation?
      */
-    public ASTTransformationQuery(InputProgram inputProgram,
-                                  Class fragmentClass, boolean isStupid, IRandomFactory random) {
+    public ASTTransformationQuery(InputProgram inputProgram, SearchStrategy pot, SearchStrategy transplant,
+                                  Class fragmentClass, boolean isStupid) {
         coverageReport = inputProgram.getCoverageReport();
         codeFragments = inputProgram.getCodeFragments();
-        //
+        potStrategy = pot;
+        transplantStrategy = transplant;
         codeFragmentClass = fragmentClass;
         stupid = isStupid;
-        randomFactory = random;
-        tryUseTransformationStrategy = true;
     }
 
 
@@ -115,7 +112,7 @@ public class ASTTransformationQuery extends TransformationQuery {
      * @throws Exception
      */
     public ASTTransformation buildTransformation() throws Exception {
-        IRandom r = randomFactory.buildRandomizer();
+        Random r = new Random();
         ASTTransformation t = null;
         int i = r.nextInt(stupid ? 15 : 5);
 
@@ -310,7 +307,7 @@ public class ASTTransformationQuery extends TransformationQuery {
      * @return
      */
     protected CodeFragment findRandomFragmentToReplace(boolean withCoverage) {
-        IRandom r = randomFactory.buildRandomizer();
+        Random r = new Random();
         int size = codeFragments.size();
         CodeFragment stmt = codeFragments.get(r.nextInt(size));
 

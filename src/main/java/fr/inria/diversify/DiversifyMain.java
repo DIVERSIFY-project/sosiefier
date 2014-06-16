@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.statistic.CVLMetric;
@@ -17,12 +16,11 @@ import fr.inria.diversify.buildSystem.ant.AntBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.transformation.query.ASTTransformationQuery;
+import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
-
-import org.json.JSONException;
 
 import spoon.compiler.SpoonCompiler;
 import spoon.reflect.factory.Factory;
@@ -64,7 +62,6 @@ public class DiversifyMain {
         new DiversifyProperties(propertiesFile);
 
         inputConfiguration = new InputConfiguration(propertiesFile);
-
 
         initLogLevel();
         if (DiversifyProperties.getProperty("builder").equals("maven")) {
@@ -166,6 +163,9 @@ public class DiversifyMain {
 
         String type = DiversifyProperties.getProperty("transformation.type");
 
+        SearchStrategy potStrategy = inputConfiguration.buildPotSearchStrategy();
+        SearchStrategy transplantStrategy = inputConfiguration.buildTransplantSearchStrategy();
+
         switch (type) {
             case "mutation":
                 return new MutationQuery(inputProgram);
@@ -175,7 +175,7 @@ public class DiversifyMain {
                 return new OtherQuery(inputProgram);
             case "all":
                 return new CompositeQuery(new MutationQuery(inputProgram),
-                        new ASTTransformationQuery(inputProgram, new RandomFactory()));
+                        new ASTTransformationQuery(inputProgram, potStrategy, transplantStrategy));
             case "cvl":
                 return new CvlQuery(inputProgram);
             case "bytecode":
@@ -186,15 +186,15 @@ public class DiversifyMain {
                 String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
                 String mutationDirectory = DiversifyProperties.getProperty("transformation.directory");
                 */
-                return new MutationToSosieQuery(inputProgram);
+                return new MutationToSosieQuery(inputProgram, potStrategy, transplantStrategy);
             }
             case "ADR": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram, cl, false, new RandomFactory());
+                return new ASTTransformationQuery(inputProgram,  potStrategy, transplantStrategy, cl, false);
             }
             case "ADRStupid": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram, cl, true, new RandomFactory());
+                return new ASTTransformationQuery(inputProgram,  potStrategy, transplantStrategy, cl, true);
             }
             /*
             case "list": {

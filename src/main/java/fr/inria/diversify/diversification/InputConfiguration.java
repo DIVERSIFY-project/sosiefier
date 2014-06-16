@@ -3,13 +3,11 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
-import fr.inria.diversify.transformation.query.searchStrategy.SimpleRandomStrategy;
 import fr.inria.diversify.util.Log;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 /**
@@ -62,7 +60,7 @@ public class InputConfiguration {
     }
 
 
-    protected SearchStrategy getNewSearchStrategy(String propertyName) {
+    protected SearchStrategy buildSearchStrategy(String propertyName) {
         SearchStrategy result;
         try {
             Class[] intArgsClass = new Class[] { InputProgram.class };
@@ -80,8 +78,8 @@ public class InputConfiguration {
      *
      * @return A SearchStrategy instance
      */
-    public SearchStrategy getNewPotSearchStrategy() {
-        return getNewSearchStrategy("transplant.point.search.strategy");
+    public SearchStrategy buildPotSearchStrategy() {
+        return buildSearchStrategy("transplant.point.search.strategy");
     }
 
     /**
@@ -89,8 +87,8 @@ public class InputConfiguration {
      *
      * @return A SearchStrategy instance
      */
-    public SearchStrategy getNewTransplantSearchStrategy() {
-        return getNewSearchStrategy("transplant.search.strategy");
+    public SearchStrategy buildTransplantSearchStrategy() {
+        return buildSearchStrategy("transplant.search.strategy");
     }
 
 
@@ -155,6 +153,9 @@ public class InputConfiguration {
         prop.setProperty("processor", "fr.inria.diversify.codeFragmentProcessor.StatementProcessor");
         prop.setProperty("transplant.point.search.strategy",
                 "fr.inria.diversify.transformation.query.searchStrategy.SimpleRandomStrategy");
+        prop.setProperty("transplant.search.strategy",
+                "fr.inria.diversify.transformation.query.searchStrategy.SimpleRandomStrategy");
+
         prop.setProperty("syncroRange","0");
         prop.setProperty("newPomFile","");
         prop.setProperty("transformation.level","statement");
