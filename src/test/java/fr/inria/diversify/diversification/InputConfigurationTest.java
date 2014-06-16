@@ -52,6 +52,7 @@ public class InputConfigurationTest {
     public void testCreationDefaultTransplantPointStrategy() throws Exception {
         String res = getResourcePath("testPropertyFile.txt");
         InputConfiguration configuration = new InputConfiguration(res);
+        configuration.setInputProgram(new InputProgram());
         SearchStrategy se = configuration.getNewPotSearchStrategy();
         assertTrue(se instanceof SimpleRandomStrategy);
     }
@@ -64,6 +65,7 @@ public class InputConfigurationTest {
     public void testCreationTransplantPointStrategy() throws Exception {
         String res = getResourcePath("testPropertyFileSpecifiedClasses.txt");
         InputConfiguration configuration = new InputConfiguration(res);
+        configuration.setInputProgram(new InputProgram());
         SearchStrategy se = configuration.getNewPotSearchStrategy();
         assertTrue(se instanceof KnownSosieStrategy);
     }
