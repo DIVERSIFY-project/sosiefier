@@ -1,8 +1,10 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.TestObjectsFactory;
 import fr.inria.diversify.diversification.InputProgram;
 import org.junit.Assert;
 import org.junit.Test;
+import spoon.reflect.factory.Factory;
 
 import java.io.File;
 import java.util.List;
@@ -18,11 +20,15 @@ public class TransformationJSONParserTest {
 
     @Test
     public void testTransformationJSONParser() throws Exception {
+        Factory factory = new TestObjectsFactory().buildNewFactory(getResourcePath("junit"), 5);
+
         InputProgram inputProgram = new InputProgram();
+        inputProgram.setFactory(factory);
         inputProgram.setSourceCodeDir(getResourcePath("junit"));
-        inputProgram.setPreviousTransformationsPath(getResourcePath("transformations.json"));
+        inputProgram.setPreviousTransformationsPath(getResourcePath("junit-sosie.json"));
+
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-        List<Transformation> transf = parser.parseFile(new File(getResourcePath("transformations.json")));
-        Assert.assertNotEquals(0, transf.size());
+        List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
+        Assert.assertEquals(100, transf.size());
      }
 }

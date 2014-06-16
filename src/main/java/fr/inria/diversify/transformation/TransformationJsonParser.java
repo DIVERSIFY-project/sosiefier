@@ -129,8 +129,13 @@ public class TransformationJsonParser {
             ArrayList<Transformation> list = new ArrayList<Transformation>();
 
             for ( int i = 0; i < array.length(); i++ ) {
-                Transformation t = parseTransformation(array.getJSONObject(i));
-                list.add(t);
+                try {
+                    Transformation t = parseTransformation(array.getJSONObject(i));
+                    list.add(t);
+                } catch (TransformationParserException e) {
+                    Log.warn("Unable to parse transformation " + i);
+                    e.printStackTrace();
+                }
             }
 
             return list;

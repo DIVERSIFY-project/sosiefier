@@ -126,8 +126,7 @@
         <version>2.15</version>
         <configuration>
           <excludes>
-            <exclude>**/ArithmeticTest.class</exclude>
-            <exclude>**/TrigonometryTest.class</exclude>
+            <exclude>**/junit/**</exclude>
           </excludes>
         </configuration>
       </plugin>

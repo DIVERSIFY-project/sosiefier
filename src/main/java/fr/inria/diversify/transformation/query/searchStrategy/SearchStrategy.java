@@ -35,7 +35,9 @@ public abstract class SearchStrategy {
 
 
     public SearchStrategy(InputProgram inputProgram) {
+
         this.inputProgram = inputProgram;
+        this.pointCount = inputProgram.getTransformationPerRun();
     }
 
     /**

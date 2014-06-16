@@ -5,10 +5,12 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,17 +26,30 @@ public class KnownSosieStrategy extends SearchStrategy implements ITransformatio
      */
     List<Transformation> transformations;
 
+    /**
+     * Code fragments found
+     */
+    CodeFragmentList codeFragments;
+
     TransformationJsonParser parser;
 
     private boolean findTransplants;
 
     public KnownSosieStrategy(InputProgram inputProgram) {
+
         super(inputProgram);
+
     }
 
     @Override
     public CodeFragmentList findFragments() {
-        return null;
+        if ( codeFragments == null ) {
+            codeFragments = new CodeFragmentList();
+            for ( Transformation t : findTransformations() ) {
+                codeFragments.add(((ASTTransformation)t).getTransplantationPoint());
+            }
+        }
+        return codeFragments;
     }
 
     /**
@@ -48,28 +63,31 @@ public class KnownSosieStrategy extends SearchStrategy implements ITransformatio
 
     @Override
     public List<Transformation> findTransformations() {
-        parser = new TransformationJsonParser(false, getInputProgram());
-        try {
-            List<Transformation> ts = parser.parseFile(
-                    new File(getInputProgram().getPreviousTransformationsPath()));
 
-            Random r = new Random();
+        if ( transformations == null ) {
+            transformations = new ArrayList();
+            parser = new TransformationJsonParser(false, getInputProgram());
+            try {
+                List<Transformation> ts = parser.parseFile(
+                        new File(getInputProgram().getPreviousTransformationsPath()));
 
-            //Since r is uniformly distributed there is a very good probability that
-            //making a maximum of ts.size attempts we tried most transformations in the list
-            int attempts = 0;
-            while ( transformations.size() < getInputProgram().getTransformationPerRun()
-
-                    && attempts < ts.size() ) {
-                Transformation t = ts.get(r.nextInt(ts.size()));
-                if ( t.isSosie() && canBeMerged(t) ) {
-                    transformations.add(t);
+                //Get all the sosie
+                ArrayList<Transformation> sosies = new ArrayList();
+                for ( Transformation t : ts ) {
+                    if ( t.isSosie() && t instanceof ASTTransformation) { sosies.add(t); }
                 }
-                attempts++;
-            }
 
-        } catch (TransformationParserException e) {
-            throw new RuntimeException(e);
+                Random r = new Random();
+                while (transformations.size() < getPointCount() && sosies.size() > 0) {
+                    int index = r.nextInt(sosies.size());
+                    Transformation t = sosies.get(index);
+                    transformations.add(t);
+                    sosies.remove(index);
+                }
+
+            } catch (TransformationParserException e) {
+                throw new RuntimeException(e);
+            }
         }
         return transformations;
     }
