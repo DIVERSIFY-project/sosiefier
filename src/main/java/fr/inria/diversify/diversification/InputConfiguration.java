@@ -61,25 +61,39 @@ public class InputConfiguration {
         this.inputProgram = inputProgram;
     }
 
+
+    protected SearchStrategy getNewSearchStrategy(String propertyName) {
+        SearchStrategy result;
+        try {
+            Class[] intArgsClass = new Class[] { InputProgram.class };
+            Class strategyClass = Class.forName(prop.getProperty(propertyName));
+            Constructor constructor  = strategyClass.getConstructor(intArgsClass);
+            result = (SearchStrategy)constructor.newInstance(inputProgram);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
     /**
      * Returns the transplantation point search strategy given by the user in the input parameters
      *
      * @return A SearchStrategy instance
      */
-    public SearchStrategy getNewTransplantationPointStrategy() {
-        SearchStrategy result;
-        try {
-            Class[] intArgsClass = new Class[] { InputProgram.class };
-            Class strategyClass = Class.forName(prop.getProperty("transplant.point.search.strategy"));
-            Constructor constructor  = strategyClass.getConstructor(intArgsClass);
-            result = (SearchStrategy)constructor.newInstance(inputProgram);
-        } catch (Exception e) {
-            result = new SimpleRandomStrategy(inputProgram);
-            Log.warn("Unable to create the code fragment requested, resolved to Statement level", e);
-            e.printStackTrace();
-        }
-        return result;
+    public SearchStrategy getNewPotSearchStrategy() {
+        return getNewSearchStrategy("transplant.point.search.strategy");
     }
+
+    /**
+     * Returns the transplantation point search strategy given by the user in the input parameters
+     *
+     * @return A SearchStrategy instance
+     */
+    public SearchStrategy getNewTransplantSearchStrategy() {
+        return getNewSearchStrategy("transplant.search.strategy");
+    }
+
+
 
     /**
      * Returns a new code fragment given the processing level set by the user in the input properties
