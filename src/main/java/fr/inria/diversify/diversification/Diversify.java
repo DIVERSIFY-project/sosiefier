@@ -61,7 +61,7 @@ public class Diversify extends AbstractDiversify {
         FileUtils.cleanDirectory(tmpDir);
         FileUtils.forceDelete(tmpDir);
 
-        Log.debug("{} setCompile error on {} compilation", compileError, trans.size());
+        Log.debug("{} compile error on {} compilation", compileError, trans.size());
         Log.debug("{} sosie on {} trial", sosie, trial);
     }
 
