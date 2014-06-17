@@ -7,7 +7,6 @@ import spoon.reflect.code.CtStatement;
 public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatement> {
 	private ValidStatementVisitor valid;
 
-
 	public void process(CtStatement element) {
 		try {
 			if(isValidStatement(element)) {
@@ -15,7 +14,11 @@ public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatemen
 				addCf(stmt);
 			}
 		} catch (Exception e) {
-            Log.debug("error in StatementProcessor.process with the statement: "+element, e);
+            try{
+                Log.debug("error in StatementProcessor.process with the statement: "+element, e);
+            } catch (Exception ee) {
+                Log.debug("error in StatementProcessor.process with the statement: ", e);
+            }
 		}
 	}
 
