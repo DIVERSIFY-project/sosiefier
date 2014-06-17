@@ -1,4 +1,4 @@
 #Used to test the most common input properties
 
 processor=fr.inria.diversify.codeFragmentProcessor.ExpressionProcessor
-transplant.point.search.strategy=fr.inria.diversify.transformation.query.searchStrategy.KnownSosieStrategy
+transplant.point.search.strategy=fr.inria.diversify.transformation.query.KnownSosieStrategy

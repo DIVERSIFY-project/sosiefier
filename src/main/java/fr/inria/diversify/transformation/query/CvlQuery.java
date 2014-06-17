@@ -24,23 +24,44 @@ public class CvlQuery extends TransformationQuery {
     protected InputProgram inputProgram;
 
     public CvlQuery(InputProgram inputProgram) {
-        this.inputProgram = inputProgram;
+        super(inputProgram);
     }
 
     @Override
     public void setType(String type) {}
 
     @Override
-    public Transformation buildTransformation() throws Exception {
-        Random r = new Random();
-        int i = r.nextInt(8);
-        switch (i) {
-            case 0: return getLinkExistence();
-            case 1: return getLinkSubstitution();
-            case 2: case 3: return getObjectExistence();
-            case 4: case 5: case 6: case 7: return getObjectSubstitution();
+    protected List<Transformation> query(int nb) {
+        try {
+            List<Transformation> result = new ArrayList<>();
+            for (int j = 0; j < nb; j++) {
+                Transformation t = null;
+                Random r = new Random();
+                int i = r.nextInt(8);
+                switch (i) {
+                    case 0:
+                        t = getLinkExistence();
+                        break;
+                    case 1:
+                        t = getLinkSubstitution();
+                        break;
+                    case 2:
+                    case 3:
+                        t = getObjectExistence();
+                        break;
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        t = getObjectSubstitution();
+                        break;
+                }
+                result.add(t);
+            }
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     public LinkSubstitution getLinkSubstitution() {

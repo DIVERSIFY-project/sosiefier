@@ -3,9 +3,7 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Expression;
 import fr.inria.diversify.codeFragment.Statement;
-import fr.inria.diversify.transformation.query.searchStrategy.KnownSosieStrategy;
-import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
-import fr.inria.diversify.transformation.query.searchStrategy.SimpleRandomStrategy;
+import fr.inria.diversify.transformation.query.KnownSosieQuery;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
@@ -42,32 +40,6 @@ public class InputConfigurationTest {
         InputConfiguration configuration = new InputConfiguration(res);
         CodeFragment cf = configuration.getNewCodeFragment();
         assertTrue(cf instanceof Expression);
-    }
-
-    /**
-     * Test the behavior when no statement class is specified
-     * @throws Exception
-     */
-    @Test
-    public void testCreationDefaultTransplantPointStrategy() throws Exception {
-        String res = getResourcePath("testPropertyFile.txt");
-        InputConfiguration configuration = new InputConfiguration(res);
-        configuration.setInputProgram(new InputProgram());
-        SearchStrategy se = configuration.buildPotSearchStrategy();
-        assertTrue(se instanceof SimpleRandomStrategy);
-    }
-
-    /**
-     * Test the behavior when statement class is specified
-     * @throws Exception
-     */
-    @Test
-    public void testCreationTransplantPointStrategy() throws Exception {
-        String res = getResourcePath("testPropertyFileSpecifiedClasses.txt");
-        InputConfiguration configuration = new InputConfiguration(res);
-        configuration.setInputProgram(new InputProgram());
-        SearchStrategy se = configuration.buildPotSearchStrategy();
-        assertTrue(se instanceof KnownSosieStrategy);
     }
 
 }

@@ -2,7 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
-import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
+
 import fr.inria.diversify.util.Log;
 
 import java.io.FileInputStream;
@@ -58,39 +58,6 @@ public class InputConfiguration {
     public void setInputProgram(InputProgram inputProgram) {
         this.inputProgram = inputProgram;
     }
-
-
-    protected SearchStrategy buildSearchStrategy(String propertyName) {
-        SearchStrategy result;
-        try {
-            Class[] intArgsClass = new Class[] { InputProgram.class };
-            Class strategyClass = Class.forName(prop.getProperty(propertyName));
-            Constructor constructor  = strategyClass.getConstructor(intArgsClass);
-            result = (SearchStrategy)constructor.newInstance(inputProgram);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return result;
-    }
-
-    /**
-     * Returns the transplantation point search strategy given by the user in the input parameters
-     *
-     * @return A SearchStrategy instance
-     */
-    public SearchStrategy buildPotSearchStrategy() {
-        return buildSearchStrategy("transplant.point.search.strategy");
-    }
-
-    /**
-     * Returns the transplantation point search strategy given by the user in the input parameters
-     *
-     * @return A SearchStrategy instance
-     */
-    public SearchStrategy buildTransplantSearchStrategy() {
-        return buildSearchStrategy("transplant.search.strategy");
-    }
-
 
 
     /**

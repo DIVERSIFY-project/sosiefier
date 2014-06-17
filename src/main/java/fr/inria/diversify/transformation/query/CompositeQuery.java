@@ -1,8 +1,11 @@
 package fr.inria.diversify.transformation.query;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -23,31 +26,41 @@ public class CompositeQuery extends TransformationQuery  {
     protected ASTTransformationQuery ast;
 
 
-    public CompositeQuery(MutationQuery mutationQuery, ASTTransformationQuery astQuery) {
-        ast = astQuery;
-        mutation = mutationQuery;
+    public CompositeQuery(InputProgram inputProgram) {
+        super(inputProgram);
+        ast = new ASTTransformationQuery(inputProgram);
+        mutation = new MutationQuery(inputProgram);
     }
 
     @Override
     public void setType(String type) {}
 
     @Override
-    public Transformation buildTransformation() throws Exception {
-        Transformation transformation = null;
-        Random r = new Random();
+    protected List<Transformation> query(int nb) {
+        try {
+            List<Transformation> result = new ArrayList<>();
+            for ( int j = 0; j < nb; j++ ) {
+                Transformation transformation = null;
+                Random r = new Random();
 
-        while (transformation == null) {
-            T thread = new T(ast, mutation, r.nextDouble());
-            thread.start();
-            int count = 0;
-            while (thread.trans == null && count < 50) {
-                Thread.sleep(100);
-                count++;
+                while (transformation == null) {
+                    T thread = new T(ast, mutation, r.nextDouble());
+                    thread.start();
+                    int count = 0;
+                    while (thread.trans == null && count < 50) {
+                        Thread.sleep(100);
+                        count++;
+                    }
+                    thread.interrupt();
+                    transformation = thread.trans;
+                }
+                result.add(transformation);
             }
-            thread.interrupt();
-            transformation = thread.trans;
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return transformation;
+
     }
 
     class T extends Thread {

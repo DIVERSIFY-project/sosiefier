@@ -13,6 +13,7 @@ import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtElement;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -23,7 +24,6 @@ import java.util.Random;
  * Time: 14:31
  */
 public class MutationQuery extends TransformationQuery {
-    private final InputProgram inputProgram;
     protected ICoverageReport coverageReport;
     protected List<CtElement> binaryOperators;
     protected List<CtReturn> returns;
@@ -50,7 +50,7 @@ public class MutationQuery extends TransformationQuery {
 
 
     public MutationQuery(InputProgram inputProgram) {
-        this.inputProgram = inputProgram;
+        super(inputProgram);
         this.coverageReport = inputProgram.getCoverageReport();
         init();
     }
@@ -68,19 +68,42 @@ public class MutationQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation buildTransformation() throws Exception {
-        Random r = new Random();
-        int i = r.nextInt(8);
+    protected List<Transformation> query(int nb) {
+        try {
+            List<Transformation> result = new ArrayList<>();
+            Random r = new Random();
+            for (int j = 0; j < nb; j++) {
+                int i = r.nextInt(8);
 
-        switch (i) {
-            case 0: return getNegateConditionalMutation();
-            case 1: return getConditionalBoundaryMutation();
-            case 2: case 3: case 4: return getMathMutation();
-            case 5: return getRemoveConditionalMutation();
-            case 6: return getReturnValueMutation();
-            case 7: return getInlineConstantMutation();
+                Transformation t = null;
+                switch (i) {
+                    case 0:
+                        t = getNegateConditionalMutation();
+                        break;
+                    case 1:
+                        t = getConditionalBoundaryMutation();
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                        t = getMathMutation();
+                        break;
+                    case 5:
+                        t = getRemoveConditionalMutation();
+                        break;
+                    case 6:
+                        t = getReturnValueMutation();
+                        break;
+                    case 7:
+                        t = getInlineConstantMutation();
+                        break;
+                }
+                result.add(t);
+            }
+            return result;
+        } catch ( Exception e ) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     public NegateConditionalMutation getNegateConditionalMutation() throws Exception {

@@ -16,7 +16,7 @@ import fr.inria.diversify.buildSystem.ant.AntBuilder;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.transformation.query.ASTTransformationQuery;
-import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
+
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
@@ -161,12 +161,9 @@ public class DiversifyMain {
 
     protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException {
 
-        String type = DiversifyProperties.getProperty("transformation.type");
+        String type = DiversifyProperties.getProperty("transformation.type").toLowerCase();
 
-        SearchStrategy potStrategy = inputConfiguration.buildPotSearchStrategy();
-        SearchStrategy transplantStrategy = inputConfiguration.buildTransplantSearchStrategy();
-
-        switch (type) {
+        switch ( type ) {
             case "mutation":
                 return new MutationQuery(inputProgram);
             case "shuffle":
@@ -174,28 +171,29 @@ public class DiversifyMain {
             case "other":
                 return new OtherQuery(inputProgram);
             case "all":
-                return new CompositeQuery(new MutationQuery(inputProgram),
-                        new ASTTransformationQuery(inputProgram, potStrategy, transplantStrategy));
+                return new CompositeQuery(inputProgram);
             case "cvl":
                 return new CvlQuery(inputProgram);
             case "bytecode":
                 return new ByteCodeTransformationQuery(inputProgram);
-            case "mutationToSosie": {
+            case "mutationtososie": {
                 /*
                 String jacocoFile = DiversifyProperties.getProperty("jacoco");
                 String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
                 String mutationDirectory = DiversifyProperties.getProperty("transformation.directory");
                 */
-                return new MutationToSosieQuery(inputProgram, potStrategy, transplantStrategy);
+                return new MutationToSosieQuery(inputProgram);
             }
-            case "ADR": {
+            case "adr": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram,  potStrategy, transplantStrategy, cl, false);
+                return new ASTTransformationQuery(inputProgram, cl, false);
             }
-            case "ADRStupid": {
+            case "adrstupid": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram,  potStrategy, transplantStrategy, cl, true);
+                return new ASTTransformationQuery(inputProgram, cl, true);
             }
+            default:
+                throw new RuntimeException("Could not find transformation type: " + type);
             /*
             case "list": {
                 String transDirectory = DiversifyProperties.getProperty("transformation.directory");
@@ -207,7 +205,6 @@ public class DiversifyMain {
                 return new ASTMultiTransformationQuery(inputProgram, new RandomFactory());
             }*/
         }
-        return null;
     }
 
     protected ICoverageReport initCoverageReport() {
@@ -224,6 +221,7 @@ public class DiversifyMain {
                 return icr;
             } catch (IOException e) {
                 Log.warn("Unable to find coverage file or corrupt information: using NullCoverage");
+                icr = null;
             }
         }
 

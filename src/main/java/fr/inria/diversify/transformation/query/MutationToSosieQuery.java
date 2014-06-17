@@ -3,16 +3,12 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
-import org.json.JSONException;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -23,20 +19,17 @@ import java.util.Random;
  * Time: 14:49
  */
 public class MutationToSosieQuery extends TransformationQuery {
+
     protected List<Transformation> mutations;
     protected String classesDir;
     protected File jacocoDir;
     protected InputProgram inputProgram;
-    SearchStrategy potStrategy;
-    SearchStrategy transplantStrategy;
 
-    public MutationToSosieQuery(InputProgram inputProgram, SearchStrategy potStrategy, SearchStrategy transplantStrategy) throws TransformationParserException {
-        this.potStrategy = potStrategy;
-        this.transplantStrategy = transplantStrategy;
+    public MutationToSosieQuery(InputProgram inputProgram) throws TransformationParserException {
+        super(inputProgram);
         this.classesDir = inputProgram.getClassesDir();
         this.jacocoDir = new File(inputProgram.getCoverageDir());
         init(inputProgram.getPreviousTransformationsPath());
-        this.inputProgram = inputProgram;
     }
 
     protected void init(String mutationDirectory) throws TransformationParserException {
@@ -51,39 +44,45 @@ public class MutationToSosieQuery extends TransformationQuery {
     }
 
     @Override
-    public ASTTransformation buildTransformation() throws Exception {
-        Random r = new Random();
-        Transformation mutation = null;
-        ASTTransformation transformation = null;
-        while (transformation == null) {
-            mutation = mutations.get(r.nextInt(mutations.size()));
-            while (mutation.getStatus() != -1)
-                mutation = mutations.get(r.nextInt(mutations.size()));
+    public List<Transformation> query(int nb) {
+        try {
+            List<Transformation> result = new ArrayList<>();
+            for ( int j = 0; j < nb; j++ ) {
+                Random r = new Random();
+                Transformation mutation = null;
+                ASTTransformation transformation = null;
+                while (transformation == null) {
+                    mutation = mutations.get(r.nextInt(mutations.size()));
+                    while (mutation.getStatus() != -1)
+                        mutation = mutations.get(r.nextInt(mutations.size()));
 
-            MultiCoverageReport coverageReport = new MultiCoverageReport(classesDir);
-            for (String failure : mutation.getFailures()) {
-                String test = formatTest(failure);
-                for (File jacocoFile : jacocoDir.listFiles()) {
-                    if (test.equals(jacocoFile.getName()))
-                        coverageReport.addJacocoFile(jacocoFile);
+                    MultiCoverageReport coverageReport = new MultiCoverageReport(classesDir);
+                    for (String failure : mutation.getFailures()) {
+                        String test = formatTest(failure);
+                        for (File jacocoFile : jacocoDir.listFiles()) {
+                            if (test.equals(jacocoFile.getName()))
+                                coverageReport.addJacocoFile(jacocoFile);
+                        }
+                    }
+
+                    T thread = new T(new ASTTransformationQuery(inputProgram, Statement.class, false));
+
+                    thread.start();
+                    int count = 0;
+                    while (thread.trans == null && count < 50) {
+                        Thread.sleep(100);
+                        count++;
+                    }
+                    thread.interrupt();
+                    transformation = thread.trans;
                 }
+                transformation.setParent(mutation);
+                result.add(transformation);
             }
-
-            //TODO: Se how to remove the static method. We will get here eventually
-            T thread = new T(new ASTTransformationQuery(inputProgram, potStrategy, transplantStrategy,
-                    Statement.class, false));
-
-            thread.start();
-            int count = 0;
-            while (thread.trans == null && count < 50) {
-                Thread.sleep(100);
-                count++;
-            }
-            thread.interrupt();
-            transformation = thread.trans;
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        transformation.setParent(mutation);
-        return transformation;
     }
 
     protected String formatTest(String failure) {
@@ -104,7 +103,7 @@ public class MutationToSosieQuery extends TransformationQuery {
         }
         public void run() {
             try {
-                trans = query.buildTransformation();
+                trans = (ASTTransformation) query.buildTransformation();
             } catch (Exception e) {
 
             }

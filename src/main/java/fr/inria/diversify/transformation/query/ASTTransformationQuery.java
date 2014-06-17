@@ -5,15 +5,12 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.factory.IRandomFactory;
-import fr.inria.diversify.random.IRandom;
 import fr.inria.diversify.random.Random;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.transformation.query.searchStrategy.SearchStrategy;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtElement;
@@ -33,68 +30,34 @@ import java.util.List;
  * Time: 10:02 AM
  */
 public class ASTTransformationQuery extends TransformationQuery {
-    protected ICoverageReport coverageReport;
-
-    /**
-     *  Sometimes the Search strategy  may find both transplantation point and transplant. Try to use this feature
-     */
-    private boolean tryUseTransformationStrategy;
-
     /**
      * Class of the code fragment. Defaults to Statement
      */
     protected Class codeFragmentClass = Statement.class;
 
     /**
-     * Code fragments over we are working right now
-     */
-    protected CodeFragmentList codeFragments;
-
-    /**
      * Indicates if we do solely simple transformations. Defaults to the simple ones
      */
     protected boolean stupid = true;
-
-    /**
-     *  Search strategy to find transplantation points
-     */
-    protected SearchStrategy potStrategy;
-
-    /**
-     * Search strategy to find a transplant
-     */
-    protected SearchStrategy transplantStrategy;
-
     /**
      * Short constructor assuming the fragment class to be statement and the transformation to be stupid
      *
      * @param inputProgram Input program over the queries are going to be made
-     * @param pot Pot (transplantation point) search strategy
-     * @param transplant Transplant strategy
      */
-    public ASTTransformationQuery(InputProgram inputProgram, SearchStrategy pot, SearchStrategy transplant) {
-        coverageReport = inputProgram.getCoverageReport();
-        codeFragments = inputProgram.getCodeFragments();
+    public ASTTransformationQuery(InputProgram inputProgram) {
         //This we assume be defect
+        super(inputProgram);
         codeFragmentClass = Statement.class;
-        potStrategy = pot;
-        transplantStrategy = transplant;
     }
 
     /**
      * Long constructor assuming nothing
      * @param inputProgram Input Input program over the queries are going to be made
-     * @param pot Pot (transplantation point) search strategy
-     * @param transplant Transplant strategy
      * @param fragmentClass Class of the fragments
      * @param isStupid Is this a stupid transformation?
      */
-    public ASTTransformationQuery(InputProgram inputProgram, SearchStrategy pot, SearchStrategy transplant,
-                                  Class fragmentClass, boolean isStupid) {
-        coverageReport = inputProgram.getCoverageReport();
-        codeFragments = inputProgram.getCodeFragments();
-        potStrategy = pot;
-        transplantStrategy = transplant;
+    public ASTTransformationQuery(InputProgram inputProgram, Class fragmentClass, boolean isStupid) {
+        super(inputProgram);
         codeFragmentClass = fragmentClass;
         stupid = isStupid;
     }
@@ -106,55 +69,71 @@ public class ASTTransformationQuery extends TransformationQuery {
     }
 
     /**
-     * Builds a random Transformation
-     *
-     * @return
-     * @throws Exception
+     * A method to progresively change into the multi
+     * @param nb
      */
-    public ASTTransformation buildTransformation() throws Exception {
-        Random r = new Random();
-        ASTTransformation t = null;
-        int i = r.nextInt(stupid ? 15 : 5);
+    @Override
+    protected List<Transformation> query(int nb) {
 
-        //All the methods regarding construction of transformation
-        //should be declared as protected. Otherwise is a violation of the SOLID principle
-        //because we may use this class as a Transformation factory, allowing the class
-        //to have multiple responsibilities
+        ArrayList<Transformation> result = new ArrayList<>(nb);
+        try {
+            for (int j = 0; j < nb; j++) {
+                Random r = new Random();
+                ASTTransformation t = null;
+                int i = r.nextInt(stupid ? 15 : 5);
 
-        switch (i) {
-            case 0:
-            case 1:
-                return replace();
-            case 2:
-            case 3:
-                return add();
-            case 4:
-                return delete();
-            case 5:
-            case 6:
-            case 7:
-                return replaceRandom();
-            case 8:
-            case 9:
-            case 10:
-                return addRandom();
-            case 11:
-                return replaceWittgenstein();
-            case 12:
-                return addWittgenstein();
-            case 13: {
-                t = replace();
-                t.setName("replaceReaction");
-                return t;
+                //All the methods regarding construction of transformation
+                //should be declared as protected. Otherwise is a violation of the SOLID principle
+                //because we may use this class as a Transformation factory, allowing the class
+                //to have multiple responsibilities
+
+                switch (i) {
+                    case 0:
+                    case 1:
+                        t = replace();
+                        break;
+                    case 2:
+                    case 3:
+                        t = add();
+                        break;
+                    case 4:
+                        t = delete();
+                        break;
+                    case 5:
+                    case 6:
+                    case 7:
+                        t = replaceRandom();
+                        break;
+                    case 8:
+                    case 9:
+                    case 10:
+                        t = addRandom();
+                        break;
+                    case 11:
+                        t = replaceWittgenstein();
+                        break;
+                    case 12:
+                        t = addWittgenstein();
+                        break;
+                    case 13: {
+                        t = replace();
+                        t.setName("replaceReaction");
+                        break;
+                    }
+                    case 14: {
+                        t = add();
+                        t.setName("addReaction");
+                        break;
+                    }
+                }
+                result.add(t);
             }
-            case 14: {
-                t = add();
-                t.setName("addReaction");
-                return t;
-            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return null;
+        return result;
     }
+
 
     protected ASTReplace replace() throws Exception {
         ASTReplace tf = new ASTReplace();
@@ -308,11 +287,11 @@ public class ASTTransformationQuery extends TransformationQuery {
      */
     protected CodeFragment findRandomFragmentToReplace(boolean withCoverage) {
         Random r = new Random();
-        int size = codeFragments.size();
-        CodeFragment stmt = codeFragments.get(r.nextInt(size));
+        int size = inputProgram.getCodeFragments().size();
+        CodeFragment stmt = inputProgram.getCodeFragments().get(r.nextInt(size));
 
-        while (withCoverage && coverageReport.codeFragmentCoverage(stmt) == 0)
-            stmt = codeFragments.get(r.nextInt(size));
+        while (withCoverage && inputProgram.getCoverageReport().codeFragmentCoverage(stmt) == 0)
+            stmt = inputProgram.getCodeFragments().get(r.nextInt(size));
         return stmt;
     }
 
@@ -352,17 +331,7 @@ public class ASTTransformationQuery extends TransformationQuery {
     }
 
     protected Collection<CodeFragment> getAllUniqueCodeFragments() {
-        return codeFragments.getUniqueCodeFragmentList();
+        return inputProgram.getCodeFragments().getUniqueCodeFragmentList();
     }
 
-    /**
-     *  Sometimes the Search strategy  may find both transplantation point and transplant. Try to use this feature
-     */
-    public boolean getTryUseTransformationStrategy() {
-        return tryUseTransformationStrategy;
-    }
-
-    public void setTryUseTransformationStrategy(boolean tryUseTransformationStrategy) {
-        this.tryUseTransformationStrategy = tryUseTransformationStrategy;
-    }
 }

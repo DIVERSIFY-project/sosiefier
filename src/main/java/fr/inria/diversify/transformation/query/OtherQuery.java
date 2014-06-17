@@ -10,6 +10,7 @@ import fr.inria.diversify.util.DiversifyEnvironment;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -17,12 +18,11 @@ import java.util.Random;
  * Created by Simon on 19/03/14.
  */
 public class OtherQuery extends TransformationQuery {
-    private final InputProgram inputProgram;
     protected ICoverageReport coverageReport;
 
 
     public OtherQuery(InputProgram inputProgram) {
-        this.inputProgram = inputProgram;
+        super(inputProgram);
         this.coverageReport = inputProgram.getCoverageReport();
     }
 
@@ -32,13 +32,17 @@ public class OtherQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation buildTransformation() throws Exception {
+    public List<Transformation> query(int nb) {
 //        Random r = new Random();
 //        if(r.nextDouble() < 0.5)
-            return getEmptyMethodBody();
+        List<Transformation> result = new ArrayList<>();
+        for ( int j = 0; j < nb; j++ ) {
+            result.add(getEmptyMethodBody());
+        }
 //        else
 //            return LiteralReplace();
 //        return null;
+        return result;
     }
 
     private ReplaceLiteral getLiteralReplace() {

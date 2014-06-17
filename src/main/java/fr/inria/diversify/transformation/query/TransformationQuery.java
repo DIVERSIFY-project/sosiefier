@@ -1,12 +1,15 @@
 package fr.inria.diversify.transformation.query;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
- * Super class for all transformation queries. The query is in charge of search transplantation points and build
+ * Super class for all transformation queries. The query is in charge of search transplantation points (pots) and
  * transformations to transplant
  *
  * User: Simon
@@ -16,17 +19,39 @@ import java.util.Set;
 public abstract class TransformationQuery {
     protected String type;
 
-    public abstract void setType(String type);
+    protected InputProgram inputProgram;
 
-    public abstract Transformation buildTransformation() throws Exception;
+    List<Transformation> transformations;
 
-    public Set<Transformation> getTransformations(int nb) throws Exception {
-        HashSet<Transformation> set = new HashSet<Transformation>();
-
-        while (set.size() < nb)
-            set.add(buildTransformation());
-
-        return set;
+    public TransformationQuery(InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
     }
 
+    public abstract void setType(String type);
+
+    public Transformation buildTransformation() {
+        return query(1).get(0);
+    }
+
+    /**
+     * Search for at most nb transformations
+     * @param nb
+     */
+    protected abstract List<Transformation> query(int nb);
+
+    /**
+     * Performs the search for transformations
+     */
+    public void query() {
+        transformations = query(inputProgram.getTransformationPerRun());
+    }
+
+    /**
+     * Returns the list of found transformations a collection of transformations
+     * @return
+     * @throws Exception
+     */
+    public Collection<Transformation> getTransformations() {
+        return transformations;
+    }
 }

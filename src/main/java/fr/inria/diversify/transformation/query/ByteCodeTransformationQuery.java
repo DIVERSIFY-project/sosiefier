@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 
 import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.bytecode.BytecodeAdd;
@@ -33,8 +34,10 @@ public class ByteCodeTransformationQuery extends TransformationQuery {
     private InputProgram inputProgram;
 
     public ByteCodeTransformationQuery(InputProgram inputProgram) throws NotFoundException {
-        this.inputProgram = inputProgram;
+        super(inputProgram);
+
         this.coverageReport = inputProgram.getCoverageReport();
+
         methods = inputProgram.getJavassistMethods();
     }
 
@@ -43,29 +46,38 @@ public class ByteCodeTransformationQuery extends TransformationQuery {
         this.type = type;
     }
 
-    public BytecodeTransformation buildTransformation() throws Exception {
-        String type = this.type;
-        if(type == null) {
-            Random r = new Random();
-            int i = r.nextInt(3);
-            if(i == 0)
-                type = "replace";
-            if(i == 1)
-                type = "add";
-            if(i == 2)
-                type = "delete";
+    @Override
+    public List<Transformation> query(int nb) {
+        try {
+            List<Transformation> result = new ArrayList<>();
+            for (int j = 0; j < nb; j++) {
+                String type = this.type;
+                if (type == null) {
+                    Random r = new Random();
+                    int i = r.nextInt(3);
+                    if (i == 0)
+                        type = "replace";
+                    if (i == 1)
+                        type = "add";
+                    if (i == 2)
+                        type = "delete";
+                }
+
+                if (type.equals("replace"))
+                    result.add( replace());
+
+                if (type.equals("add"))
+                    result.add( add());
+
+                if (type.equals("delete"))
+                    result.add( delete());
+
+                result.add(null);
+            }
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        if(type.equals("replace"))
-            return replace();
-
-        if(type.equals("add"))
-            return add();
-
-        if(type.equals("delete"))
-            return delete();
-
-        return null;
     }
 
 

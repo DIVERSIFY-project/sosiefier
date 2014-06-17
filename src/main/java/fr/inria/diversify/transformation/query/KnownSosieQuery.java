@@ -1,4 +1,4 @@
-package fr.inria.diversify.transformation.query.searchStrategy;
+package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.diversification.InputProgram;
@@ -6,10 +6,7 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import org.json.JSONException;
-
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,12 +16,7 @@ import java.util.Random;
  * <p>
  * Created by marcel on 6/06/14.
  */
-public class KnownSosieStrategy extends SearchStrategy implements ITransformationSearchStrategy {
-
-    /**
-     * Transformations found
-     */
-    List<Transformation> transformations;
+public class KnownSosieQuery extends TransformationQuery {
 
     /**
      * Code fragments found
@@ -35,41 +27,25 @@ public class KnownSosieStrategy extends SearchStrategy implements ITransformatio
 
     private boolean findTransplants;
 
-    public KnownSosieStrategy(InputProgram inputProgram) {
+    public KnownSosieQuery(InputProgram inputProgram) {
 
         super(inputProgram);
 
     }
 
     @Override
-    public CodeFragmentList findFragments() {
-        if ( codeFragments == null ) {
-            codeFragments = new CodeFragmentList();
-            for ( Transformation t : findTransformations() ) {
-                codeFragments.add(((ASTTransformation)t).getTransplantationPoint());
-            }
-        }
-        return codeFragments;
-    }
+    public void setType(String type) {
 
-    /**
-     * Indicates if the trasnformation can be merged with the current ones
-     * @param t
-     * @return
-     */
-    protected boolean canBeMerged(Transformation t) {
-        return true;
     }
 
     @Override
-    public List<Transformation> findTransformations() {
-
+    protected List<Transformation> query(int nb) {
         if ( transformations == null ) {
             transformations = new ArrayList();
-            parser = new TransformationJsonParser(false, getInputProgram());
+            parser = new TransformationJsonParser(false, inputProgram);
             try {
                 List<Transformation> ts = parser.parseFile(
-                        new File(getInputProgram().getPreviousTransformationsPath()));
+                        new File(inputProgram.getPreviousTransformationsPath()));
 
                 //Get all the sosie
                 ArrayList<Transformation> sosies = new ArrayList();
@@ -78,7 +54,7 @@ public class KnownSosieStrategy extends SearchStrategy implements ITransformatio
                 }
 
                 Random r = new Random();
-                while (transformations.size() < getPointCount() && sosies.size() > 0) {
+                while (transformations.size() < nb && sosies.size() > 0) {
                     int index = r.nextInt(sosies.size());
                     Transformation t = sosies.get(index);
                     transformations.add(t);
@@ -91,4 +67,14 @@ public class KnownSosieStrategy extends SearchStrategy implements ITransformatio
         }
         return transformations;
     }
+
+    /**
+     * Indicates if the trasnformation can be merged with the current ones
+     * @param t
+     * @return
+     */
+    protected boolean canBeMerged(Transformation t) {
+        return true;
+    }
+
 }
