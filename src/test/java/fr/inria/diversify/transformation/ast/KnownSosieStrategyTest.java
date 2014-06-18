@@ -43,7 +43,7 @@ public class KnownSosieStrategyTest {
      * @throws Exception
      */
     @Test
-    public void testShareTransformations() throws Exception {
+    public void testQuery() throws Exception {
         //Set the amount of points we must find
         st.query();
         Collection<Transformation> cf1 = st.getTransformations();

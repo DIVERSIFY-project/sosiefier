@@ -2,6 +2,7 @@ package fr.inria.diversify;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.*;
 
 import fr.inria.diversify.diversification.*;
@@ -147,16 +148,18 @@ public class DiversifyMain {
 
         //TODO: See hot to get rid of the Properties static
         inputProgram.setTransformationPerRun(
-            Integer.parseInt(DiversifyProperties.getProperty("transformation.nb", "1")));
+            Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
 
         //Path to pervious transformations made to this input program
         inputProgram.setPreviousTransformationsPath(
-                DiversifyProperties.getProperty("transformation.directory"));
+                inputConfiguration.getProperty("transformation.directory"));
 
         inputProgram.setClassesDir(DiversifyProperties.getProperty("project") + "/" +
-                DiversifyProperties.getProperty("classes"));
+                inputConfiguration.getProperty("classes"));
 
-        inputProgram.setCoverageDir(DiversifyProperties.getProperty("jacoco"));
+        inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
+
+
     }
 
     protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException {
@@ -192,8 +195,18 @@ public class DiversifyMain {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
                 return new ASTTransformationQuery(inputProgram, cl, true);
             }
+            case "knownsosies":
+                return new KnownSosieQuery(inputProgram);
             default:
-                throw new RuntimeException("Could not find transformation type: " + type);
+                //Try to construct the query from the explicit class
+                try {
+                    Class[] intArgsClass = new Class[] { InputProgram.class };
+                    Class strategyClass = Class.forName(type);
+                    Constructor constructor = strategyClass.getConstructor(intArgsClass);
+                    return (TransformationQuery)constructor.newInstance(inputProgram);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             /*
             case "list": {
                 String transDirectory = DiversifyProperties.getProperty("transformation.directory");

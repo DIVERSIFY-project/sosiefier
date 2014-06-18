@@ -7,6 +7,7 @@ import fr.inria.diversify.transformation.query.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -37,10 +38,15 @@ public class Diversify extends AbstractDiversify {
 
     @Override
     public void run(int n) throws Exception {
-        Log.info("number of diversification: " + n);
+        Log.info("===========================");
+        Log.info("DIVERSIFICATION RUN :: " + n);
+        Log.info("===========================");
+
         for (int i = 0; i < n; i++) {
             Log.info("diversification: " + i);
-            run(transQuery.buildTransformation(), tmpDir);
+            //The amount of transformations are set by the transQuery
+            transQuery.query();
+            run(transQuery.getTransformations());
         }
         FileUtils.cleanDirectory(tmpDir);
         FileUtils.forceDelete(tmpDir);
@@ -50,16 +56,41 @@ public class Diversify extends AbstractDiversify {
     }
 
     @Override
-    public void run(Collection<Transformation> trans) throws Exception {
+    protected void run(Collection<Transformation> trans) throws Exception {
         Log.info("number of diversification: " + trans.size());
         int i = 0;
         for (Transformation tran : trans) {
             Log.info("diversification: " + i);
-            run(tran, tmpDir);
+            Log.debug("output dir: " + tmpDir + "/" + sourceDir);
+
+            tran.apply(tmpDir + "/" + sourceDir);
+            transformations.add(tran);
+            //run(tran, tmpDir);
             i++;
         }
-        FileUtils.cleanDirectory(tmpDir);
-        FileUtils.forceDelete(tmpDir);
+
+        int status;
+        try {
+            status = runTest(tmpDir);
+        } catch (Exception e) {
+            compileError++;
+            status = -2;
+        }
+
+        for (Transformation tran : trans) {
+            if (tran.getStatus() == AbstractTransformation.NOT_TESTED) {
+                tran.setStatus(status);
+                tran.setFailures(builder.getErrors());
+            }
+        }
+        //tran.restore(tmpDir + "/" + sourceDir);
+
+        try {
+            FileUtils.cleanDirectory(tmpDir);
+            FileUtils.forceDelete(tmpDir);
+        } catch (IOException e) {
+            Log.warn("Unable to delete " + tmpDir + " : " + e.getMessage());
+        }
 
         Log.debug("{} setCompile error on {} compilation", compileError, trans.size());
         Log.debug("{} sosie on {} trial", sosie, trial);

@@ -21,8 +21,9 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractTransformation implements Transformation {
 
-    public static int COMPILE_FAIL = -3;
-    public static int TEST_FAIL = -2;
+    public static int NOT_TESTED = -3;
+    public static int COMPILED_FAIL = -2;
+    public static int TEST_FAIL = -1;
     public static int SOSIE = 0;
 
     protected Integer status = -3;

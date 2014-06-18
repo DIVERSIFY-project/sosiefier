@@ -75,7 +75,7 @@ public class MavenBuilder extends AbstractBuilder {
     }
 
     protected void parseResult(String r) {
-        Pattern pattern = Pattern.compile("Tests run: (\\d+), Failures: (\\d+), Errors: (\\d+), Skipped: (\\d+)");
+        Pattern pattern = Pattern.compile("Tests run:(\\s*)(\\d+),(\\s*)Failures:(\\s*)(\\d+),(\\s*)Errors:(\\s*)(\\d+),(\\s*)Skipped:(\\s*)(\\d+)");
         Pattern errorPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
         Matcher matcher = null;
         boolean result = false;
@@ -94,7 +94,7 @@ public class MavenBuilder extends AbstractBuilder {
             }
 
             Matcher m = pattern.matcher(s);
-            if (result && m.matches()) {
+            if ( m.find() && result ) {
                 matcher = m;
             }
 

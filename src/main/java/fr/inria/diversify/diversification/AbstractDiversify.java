@@ -28,7 +28,7 @@ public abstract class AbstractDiversify {
 
     public abstract void run(int n) throws Exception;
 
-    public abstract void run(Collection<Transformation> trans) throws Exception;
+    protected abstract void run(Collection<Transformation> trans) throws Exception;
 
     public String printResult(String output) {
         mkDirResult(output);

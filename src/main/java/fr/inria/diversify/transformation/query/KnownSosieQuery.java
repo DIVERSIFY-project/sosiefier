@@ -25,6 +25,11 @@ public class KnownSosieQuery extends TransformationQuery {
 
     TransformationJsonParser parser;
 
+    /**
+     * Previous sosies found.
+     */
+    ArrayList<Transformation> sosies;
+
     private boolean findTransplants;
 
     public KnownSosieQuery(InputProgram inputProgram) {
@@ -40,31 +45,37 @@ public class KnownSosieQuery extends TransformationQuery {
 
     @Override
     protected List<Transformation> query(int nb) {
-        if ( transformations == null ) {
-            transformations = new ArrayList();
-            parser = new TransformationJsonParser(false, inputProgram);
-            try {
-                List<Transformation> ts = parser.parseFile(
-                        new File(inputProgram.getPreviousTransformationsPath()));
 
+        //Check that all what we need is OK to fetch the transformations
+        if ( inputProgram.getPreviousTransformationsPath() == null ) {
+            throw new RuntimeException("Input program has no previous transformation information");
+        }
+
+        transformations = new ArrayList();
+        parser = new TransformationJsonParser(false, inputProgram);
+        try {
+            if ( sosies == null ) {
+                List<Transformation> ts = parser.parseFile(
+                    new File(inputProgram.getPreviousTransformationsPath()));
                 //Get all the sosie
-                ArrayList<Transformation> sosies = new ArrayList();
+                sosies = new ArrayList<>();
                 for ( Transformation t : ts ) {
                     if ( t.isSosie() && t instanceof ASTTransformation) { sosies.add(t); }
                 }
-
-                Random r = new Random();
-                while (transformations.size() < nb && sosies.size() > 0) {
-                    int index = r.nextInt(sosies.size());
-                    Transformation t = sosies.get(index);
-                    transformations.add(t);
-                    sosies.remove(index);
-                }
-
-            } catch (TransformationParserException e) {
-                throw new RuntimeException(e);
             }
+
+            Random r = new Random();
+            if ( nb > sosies.size() ) nb = sosies.size();
+            while (transformations.size() < nb ) {
+                int index = r.nextInt(sosies.size());
+                Transformation t = sosies.get(index);
+                if ( !transformations.contains(t) ) { transformations.add(t); }
+            }
+
+        } catch (TransformationParserException e) {
+            throw new RuntimeException(e);
         }
+
         return transformations;
     }
 
