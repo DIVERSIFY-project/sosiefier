@@ -6,7 +6,6 @@ import java.lang.reflect.Constructor;
 import java.util.*;
 
 import fr.inria.diversify.diversification.*;
-import fr.inria.diversify.factory.RandomFactory;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationParser;
@@ -158,8 +157,6 @@ public class DiversifyMain {
                 inputConfiguration.getProperty("classes"));
 
         inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
-
-
     }
 
     protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException {

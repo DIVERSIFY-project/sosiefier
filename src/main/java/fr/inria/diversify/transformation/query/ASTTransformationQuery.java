@@ -1,11 +1,8 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
-import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.random.Random;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -19,6 +16,7 @@ import spoon.reflect.factory.Factory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -141,7 +139,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(true);
+            cfToReplace = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
         }
         tf.setTransplantationPoint(cfToReplace);
@@ -155,7 +153,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(true);
+            cfToReplace = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
         }
         tf.setName("replaceWittgenstein");
@@ -166,7 +164,7 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     protected ASTReplace replaceRandom() throws Exception {
         ASTReplace tf = new ASTReplace();
-        tf.setTransplantationPoint(findRandomFragmentToReplace(true));
+        tf.setTransplantationPoint(findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals("")));
         tf.setCodeFragmentToReplace(findRandomFragmentToReplace(false));
         tf.setName("replaceRandom");
         return tf;
@@ -174,7 +172,7 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     protected ASTAdd addRandom() throws Exception {
         ASTAdd tf = new ASTAdd();
-        tf.setTransplantationPoint(findRandomFragmentToReplace(true));
+        tf.setTransplantationPoint(findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals("")));
         tf.setCodeFragmentToAdd(findRandomFragmentToReplace(false));
         tf.setName("addRandom");
         return tf;
@@ -208,7 +206,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(true);
+            cfToReplace = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
         }
         tf.setTransplantationPoint(cfReplacedBy);
@@ -222,7 +220,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(true);
+            cfToReplace = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
         }
         tf.setTransplantationPoint(cfToReplace);
@@ -256,7 +254,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         ASTDelete tf = new ASTDelete();
         CodeFragment cfToDelete = null;
         while (cfToDelete == null) {
-            cfToDelete = findRandomFragmentToReplace(true);
+            cfToDelete = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
             if (cfToDelete.getCtCodeFragment() instanceof CtReturn)
                 cfToDelete = null;
         }

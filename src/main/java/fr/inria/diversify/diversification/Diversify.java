@@ -38,12 +38,10 @@ public class Diversify extends AbstractDiversify {
 
     @Override
     public void run(int n) throws Exception {
-        Log.info("===========================");
-        Log.info("DIVERSIFICATION RUN :: " + n);
-        Log.info("===========================");
-
         for (int i = 0; i < n; i++) {
-            Log.info("diversification: " + i);
+            Log.info("===========================");
+            Log.info("DIVERSIFICATION RUN :: " + n);
+            Log.info("===========================");
             //The amount of transformations are set by the transQuery
             transQuery.query();
             run(transQuery.getTransformations());
@@ -60,7 +58,7 @@ public class Diversify extends AbstractDiversify {
         Log.info("number of diversification: " + trans.size());
         int i = 0;
         for (Transformation tran : trans) {
-            Log.info("diversification: " + i);
+            Log.info("Transformation: " + i);
             Log.debug("output dir: " + tmpDir + "/" + sourceDir);
 
             tran.apply(tmpDir + "/" + sourceDir);
@@ -71,6 +69,9 @@ public class Diversify extends AbstractDiversify {
 
         int status;
         try {
+            Log.info("===========================");
+            Log.info("BUILDING DIVERSIFIED PROGRAM");
+            Log.info("===========================");
             status = runTest(tmpDir);
         } catch (Exception e) {
             compileError++;
@@ -83,6 +84,13 @@ public class Diversify extends AbstractDiversify {
                 tran.setFailures(builder.getErrors());
             }
         }
+
+
+        String[] statusCode = {"SOSIE!!", "Test failed :P", "Compile failed" };
+        Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        Log.info(statusCode[status]);
+        Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
         //tran.restore(tmpDir + "/" + sourceDir);
 
         try {
