@@ -27,7 +27,7 @@ public class MethodLoggingInstrumenter extends AbstractProcessor<CtMethod> {
     public void process(CtMethod candidate) {
         CtBlock body = candidate.getBody();
         CtStatement stmt = body.getStatement(0);
-        String id =  ConditionalLoggingInstrumenter.idFor(getClass(stmt).getQualifiedName()+"."+candidate.getSignature());
+        String id =  VariableLoggingInstrumenter.idFor(getClass(stmt).getQualifiedName() + "." + candidate.getSignature());
 
         String snippet = "\ttry{\n\tfr.inria.diversify.sosie.logger.LogWriter.methodCall(Thread.currentThread(),\"" +
                 id + "\");\n";
@@ -41,7 +41,6 @@ public class MethodLoggingInstrumenter extends AbstractProcessor<CtMethod> {
             index = compileUnit.beginOfLineIndex(sp.getSourceStart());
         }
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-
 
         sp = body.getLastStatement().getPosition();
         compileUnit = sp.getCompilationUnit();
