@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.ast;
 
-import fr.inria.diversify.TestObjectsFactory;
-import fr.inria.diversify.codeFragment.CodeFragmentList;
+import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.KnownSosieQuery;
@@ -10,7 +9,6 @@ import org.junit.Test;
 import spoon.reflect.factory.Factory;
 
 import java.util.Collection;
-import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -27,7 +25,7 @@ public class KnownSosieStrategyTest {
 
     @Before
     public void setUp() throws Exception {
-        Factory factory = new TestObjectsFactory().buildNewFactory(getResourcePath("junit"), 5);
+        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("junit"), 5);
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);

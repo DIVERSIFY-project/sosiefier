@@ -21,9 +21,8 @@ public class MavenBuilder {
     @Test
     public void testParseError() {
         Pattern pattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
-        Matcher m = pattern.matcher("Tests run: 829, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 9.075 sec <<< FAILURE! - in org.junit.tests.AllTests");
         Matcher m2 = pattern.matcher("testFail(junit.tests.framework.AssertTest)  Time elapsed: 0.005 sec  <<< ERROR!");
 
-        Assert.assertTrue(m.find() && m2.find());
+        Assert.assertTrue( m2.find());
     }
 }

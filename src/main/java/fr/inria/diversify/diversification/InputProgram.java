@@ -110,7 +110,6 @@ public class InputProgram {
         this.factory = factory;
     }
 
-
     /**
      * Coverage report for the input program
      */

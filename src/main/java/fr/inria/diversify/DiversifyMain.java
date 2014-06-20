@@ -143,9 +143,6 @@ public class DiversifyMain {
 
         inputProgram.setCoverageReport(initCoverageReport());
 
-        //TODO: See how get rid of the Environment static
-
-        //TODO: See hot to get rid of the Properties static
         inputProgram.setTransformationPerRun(
             Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
 

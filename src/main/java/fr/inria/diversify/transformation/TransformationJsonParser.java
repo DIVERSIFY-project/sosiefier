@@ -33,8 +33,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * The TransformationJSONParser is a great tool to load Transformations from a JSON file and link them to the existing
@@ -47,6 +45,8 @@ import java.util.stream.IntStream;
  * Modified by Marcelino
  */
 public class TransformationJsonParser {
+
+    private Properties filterProperties;
 
     /**
      * Number of json tuples that we where unable to parse
@@ -128,10 +128,13 @@ public class TransformationJsonParser {
 
             ArrayList<Transformation> list = new ArrayList<Transformation>();
 
-            for ( int i = 0; i < array.length(); i++ ) {
+            for (int i = 0; i < array.length(); i++) {
                 try {
-                    Transformation t = parseTransformation(array.getJSONObject(i));
-                    list.add(t);
+                    JSONObject jsonObject = array.getJSONObject(i);
+                    if ( filter(jsonObject) ) {
+                        Transformation t = parseTransformation(jsonObject);
+                        list.add(t);
+                    }
                 } catch (TransformationParserException e) {
                     Log.warn("Unable to parse transformation " + i);
                     e.printStackTrace();
@@ -143,6 +146,27 @@ public class TransformationJsonParser {
             throw new TransformationParserException(e);
         }
 
+    }
+
+    /**
+     * Filter by the given properties to avoid reading every transformation, wich can be potentially slow
+     * @param o Object to be filtered
+     * @return
+     */
+    protected boolean filter(JSONObject o) {
+        try {
+            if (getFilterProperties() == null) return true;
+
+            for (Object k : getFilterProperties().keySet()) {
+                String p = (String) k;
+                if (!o.has(p) || !o.get(p).toString().equals(getFilterProperties().getProperty(p))) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (JSONException e) {
+            return false;
+        }
     }
 
     protected JSONObject getObject(JSONArray array, int index) {
@@ -426,12 +450,12 @@ public class TransformationJsonParser {
         CtReturn p = null;
 
         for (CtReturn<?> ret : inputProgram.getReturns()) {
-                String position = ret.getParent(CtPackage.class).getQualifiedName()
-                        + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
-                if (position.equals(jsonPosition)) {
-                    p = ret;
-                    break;
-                }
+            String position = ret.getParent(CtPackage.class).getQualifiedName()
+                    + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
+            if (position.equals(jsonPosition)) {
+                p = ret;
+                break;
+            }
         }
         if (p == null) {
             throw new TransformationParserException("Cannot find return statement that matches position " + jsonPosition);
@@ -505,7 +529,7 @@ public class TransformationJsonParser {
     }
 
     protected ASTTransformation parseASTReplace(JSONObject jsonObject) throws JSONException,
-            TransformationParserException{
+            TransformationParserException {
         ASTReplace trans = new ASTReplace();
 
         trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("transplant")));
@@ -621,4 +645,14 @@ public class TransformationJsonParser {
     }
 
 
+    /**
+     * Used to filter what properties in the JSON we want, making the processing faster.
+     */
+    public Properties getFilterProperties() {
+        return filterProperties;
+    }
+
+    public void setFilterProperties(Properties filterProperties) {
+        this.filterProperties = filterProperties;
+    }
 }

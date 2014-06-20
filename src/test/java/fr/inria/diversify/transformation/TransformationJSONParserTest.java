@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.TestObjectsFactory;
+import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.diversification.InputProgram;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class TransformationJSONParserTest {
 
     @Test
     public void testTransformationJSONParser() throws Exception {
-        Factory factory = new TestObjectsFactory().buildNewFactory(getResourcePath("junit"), 5);
+        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("junit"), 5);
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);

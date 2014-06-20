@@ -1,4 +1,4 @@
-package fr.inria.diversify;
+package fr.inria.diversify.factories;
 
 import fr.inria.diversify.util.Log;
 import spoon.compiler.SpoonCompiler;
@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by marodrig on 16/06/2014.
  */
-public class TestObjectsFactory {
+public class SpoonMetaFactory{
 
     public Factory buildNewFactory(String srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         //String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
