@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 /**
  *
@@ -40,7 +42,7 @@ public class Diversify extends AbstractDiversify {
     public void run(int n) throws Exception {
         for (int i = 0; i < n; i++) {
             Log.info("===========================");
-            Log.info("DIVERSIFICATION RUN :: " + n);
+            Log.info("DIVERSIFICATION RUN :: " + i);
             Log.info("===========================");
             //The amount of transformations are set by the transQuery
             transQuery.query();
@@ -78,30 +80,28 @@ public class Diversify extends AbstractDiversify {
             status = -2;
         }
 
-        for (Transformation tran : trans) {
+         for (Transformation tran : trans) {
             if (tran.getStatus() == AbstractTransformation.NOT_TESTED) {
                 tran.setStatus(status);
                 tran.setFailures(builder.getErrors());
             }
+            tran.restore(tmpDir + "/" + sourceDir);
         }
 
-
-        String[] statusCode = {"SOSIE!!", "Test failed :P", "Compile failed" };
+        String[] statusCode = {"SOSIE!!", "TEST FAILED :P", "COMPILE FAILED :(" };
         Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        Log.info(statusCode[status]);
+        Log.info(statusCode[status * -1]);
+        Log.debug("{} setCompile error on {} compilation", compileError, trans.size());
+        Log.debug("{} sosie on {} trial", sosie, trial);
         Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
-        //tran.restore(tmpDir + "/" + sourceDir);
-
+        /*
         try {
             FileUtils.cleanDirectory(tmpDir);
             FileUtils.forceDelete(tmpDir);
         } catch (IOException e) {
             Log.warn("Unable to delete " + tmpDir + " : " + e.getMessage());
-        }
-
-        Log.debug("{} setCompile error on {} compilation", compileError, trans.size());
-        Log.debug("{} sosie on {} trial", sosie, trial);
+        }*/
     }
 
     protected void run(Transformation trans, String tmpDir) throws Exception {

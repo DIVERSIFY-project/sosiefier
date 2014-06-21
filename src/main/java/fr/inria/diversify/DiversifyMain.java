@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.util.*;
 
 import fr.inria.diversify.diversification.*;
+import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationParser;
@@ -59,9 +60,9 @@ public class DiversifyMain {
 
     public DiversifyMain(String propertiesFile) throws Exception {
 
-        new DiversifyProperties(propertiesFile);
-
         inputConfiguration = new InputConfiguration(propertiesFile);
+
+        new DiversifyProperties(inputConfiguration);
 
         initLogLevel();
         if (DiversifyProperties.getProperty("builder").equals("maven")) {
@@ -123,7 +124,7 @@ public class DiversifyMain {
             rb = new AntBuilder(directory, DiversifyProperties.getProperty("builder.testTarget"));
             rb.setPhase(new String[]{"clean", DiversifyProperties.getProperty("builder.testTarget")});
         }
-        int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut"));
+        int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut").trim());
         if (t == -1) rb.initTimeOut();
         else rb.setTimeOut(t);
 
@@ -240,33 +241,12 @@ public class DiversifyMain {
     }
 
 
-    protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
-
-        StandardEnvironment env = new StandardEnvironment();
-        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
-        env.setComplianceLevel(javaVersion);
-        env.setVerbose(true);
-        env.setDebug(true);
-
-        DefaultCoreFactory f = new DefaultCoreFactory();
-        Factory factory = new FactoryImpl(f, env);
-        SpoonCompiler compiler = new JDTBasedSpoonCompiler(factory);
-        for (String dir : srcDirectory.split(System.getProperty("path.separator")))
-            try {
-                Log.debug("add {} to classpath", dir);
-                compiler.addInputSource(new File(dir));
-            } catch (IOException e) {
-                Log.error("error in initSpoon", e);
-            }
-        try {
-            compiler.build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    protected void initSpoon() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        Factory factory = new SpoonMetaFactory().buildNewFactory(
+                inputConfiguration.getProperty("project") + "/" +
+                inputConfiguration.getProperty("src"),
+                Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
         initInputProgram(factory);
-        DiversifyEnvironment.setFactory(factory);
     }
 
     protected void computeStatistic() throws Exception {

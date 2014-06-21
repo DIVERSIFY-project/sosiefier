@@ -72,6 +72,15 @@ public abstract class AbstractDiversify {
         Log.debug("mkdir: {}",dirs);
     }
 
+    /**
+     * Initializes de temporal directory to copy the sources of the sosiefied program
+     * @param dirProject Directory where the original program is. Is going to be copy to dirTarget
+     * @param dirTarget Directory where the sosiefied program is going to be after the transformation are run.
+     *                  Transformations are applied to the source in dirTarget
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public String init(String dirProject, String dirTarget) throws IOException, InterruptedException {
         tmpDir = dirTarget + "/tmp_" + System.currentTimeMillis();
         File dir = new File(tmpDir);

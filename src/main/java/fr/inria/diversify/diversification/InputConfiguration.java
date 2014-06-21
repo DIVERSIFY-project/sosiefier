@@ -25,7 +25,7 @@ public class InputConfiguration {
 
     private InputProgram inputProgram;
 
-    public InputConfiguration(String file) throws IOException, ClassNotFoundException {
+    public InputConfiguration(String file) throws IOException {
         prop = new Properties();
         setDefaultProperties();
         prop.load(new FileInputStream(file));
@@ -90,6 +90,7 @@ public class InputConfiguration {
     }
 
     protected void setDefaultProperties() {
+        //Directory where the
         prop.setProperty("src", "src/main/java");
         prop.setProperty("testSrc", "src/test/java");
         prop.setProperty("classes", "target/classes");
