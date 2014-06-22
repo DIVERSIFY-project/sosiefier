@@ -18,11 +18,28 @@ import java.util.List;
  * Time: 3:05 PM
  */
 public abstract class AbstractDiversify {
+    /**
+     * Directory project
+     */
     protected String projectDir;
+    /**
+     * Temporal directory where the diversificated programs are going to be temporary stored
+     */
     protected String tmpDir;
-    protected List<Transformation> transformations;
+    /**
+     * Source directory of the project
+     */
     protected String sourceDir;
+
+    protected List<Transformation> transformations;
+
+    /**
+     * Query to find transformations
+     */
     protected TransformationQuery transQuery;
+    /**
+     * Build system to perform the build lifecycle
+     */
     protected AbstractBuilder builder;
 
 
@@ -30,11 +47,16 @@ public abstract class AbstractDiversify {
 
     protected abstract void run(Collection<Transformation> trans) throws Exception;
 
+    /**
+     *
+     * @param output
+     * @return
+     */
     public String printResult(String output) {
         mkDirResult(output);
         String fileName = output + System.currentTimeMillis();// + "_transformation.json";
         try {
-            writeTransformation(fileName);
+            writeTransformations(fileName);
             Log.info("write result in {}", fileName);
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
@@ -43,40 +65,50 @@ public abstract class AbstractDiversify {
     }
 
     public void printResult(String output, String git) {
-        String absoluteFileName = printResult(git+"/"+output);
+        String absoluteFileName = printResult(git + "/" + output);
 
-            String[] split = absoluteFileName.split("/");
-            String tmp = split[0];
-            for (int i = 1;i < split.length - 1; i++) {
-                tmp = tmp + "/" + split[i];
-            }
-            Log.debug(tmp+"/   "+split[split.length - 1]);
-        GitUtil.addToGit(tmp+"/", "*");
+        String[] split = absoluteFileName.split("/");
+        String tmp = split[0];
+        for (int i = 1; i < split.length - 1; i++) {
+            tmp = tmp + "/" + split[i];
+        }
+        Log.debug(tmp + "/   " + split[split.length - 1]);
+        GitUtil.addToGit(tmp + "/", "*");
     }
 
-    public void writeTransformation(String fileName) throws IOException, JSONException {
+    /**
+     * Write found transformations to file.
+     *
+     * TODO: A sugestion, we should move this to AbstractQuery
+     *
+     * @param fileName File name where the transformations are going to be stored.
+     * @throws IOException
+     * @throws JSONException
+     */
+    public void writeTransformations(String fileName) throws IOException, JSONException {
         if (transformations.isEmpty())
             return;
 
-        TransformationsWriter write = new TransformationsWriter(transformations,fileName);
+        TransformationsWriter write = new TransformationsWriter(transformations, fileName);
         write.writeAllTransformation(null);
     }
 
     protected void mkDirResult(String output) {
         String[] tmp = output.split("/");
         String dirs = "";
-        for (int i = 0; i< tmp.length - 1;i++) {
+        for (int i = 0; i < tmp.length - 1; i++) {
             dirs = dirs + tmp[i] + "/";
         }
         new File(dirs).mkdirs();
-        Log.debug("mkdir: {}",dirs);
+        Log.debug("mkdir: {}", dirs);
     }
 
     /**
      * Initializes de temporal directory to copy the sources of the sosiefied program
+     *
      * @param dirProject Directory where the original program is. Is going to be copy to dirTarget
-     * @param dirTarget Directory where the sosiefied program is going to be after the transformation are run.
-     *                  Transformations are applied to the source in dirTarget
+     * @param dirTarget  Directory where the diversified program is going to be after the transformation are run.
+     *                   Transformations are applied to the source in dirTarget
      * @return
      * @throws IOException
      * @throws InterruptedException
@@ -94,7 +126,7 @@ public abstract class AbstractDiversify {
         Log.debug("run test in directory: {}", directory);
         builder.setDirectory(directory);
         builder.runBuilder();
-        Log.info("status: " + builder.getStatus()+", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getErrors().size());
+        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getErrors().size());
         if (builder.getCompileError()) {
             throw new CompileException("compile error in maven");
         }
@@ -106,7 +138,13 @@ public abstract class AbstractDiversify {
         this.transQuery = transQuery;
     }
 
-    public List<Transformation> getTransformations() {return transformations;}
+    public List<Transformation> getTransformations() {
+        return transformations;
+    }
+
+    public AbstractBuilder getBuilder() {
+        return builder;
+    }
 
     public void setBuilder(AbstractBuilder builder) {
         this.builder = builder;

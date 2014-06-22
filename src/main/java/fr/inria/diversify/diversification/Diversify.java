@@ -15,15 +15,41 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 /**
- *
  * User: Simon
  * Date: 5/2/13
  * Time: 5:39 PM
  */
 public class Diversify extends AbstractDiversify {
+    /**
+     * Number of compiled errors
+     */
     protected int compileError = 0;
+
+    /**
+     * Number of sosies found
+     */
     protected int sosie = 0;
+
+    /**
+     * Number of trials performed
+     */
     protected int trial = 0;
+
+    /** Reports results on every step. Slower, but allows to stop the process without
+     *  loosing all the information
+     */
+    private boolean earlyReport = false;
+
+    /** Reports results on every step. Slower, but allows to stop the process without
+     *  loosing all the information
+     */
+    public boolean getEarlyReport() {
+        return earlyReport;
+    }
+
+    public void setEarlyReport(boolean earlyReport) {
+        this.earlyReport = earlyReport;
+    }
 
     public Diversify(TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
@@ -40,12 +66,20 @@ public class Diversify extends AbstractDiversify {
 
     @Override
     public void run(int n) throws Exception {
+
+        trial = 0;
+        sosie = 0;
+
         for (int i = 0; i < n; i++) {
             Log.info("===========================");
             Log.info("DIVERSIFICATION RUN :: " + i);
             Log.info("===========================");
-            //The amount of transformations are set by the transQuery
+
+            //Increase the trial count
+            trial++;
+            //The amount of transformations are given in the query by the InputProgram
             transQuery.query();
+            //Run transformations found
             run(transQuery.getTransformations());
         }
         FileUtils.cleanDirectory(tmpDir);
@@ -57,15 +91,15 @@ public class Diversify extends AbstractDiversify {
 
     @Override
     protected void run(Collection<Transformation> trans) throws Exception {
+
+
         Log.info("number of diversification: " + trans.size());
         int i = 0;
         for (Transformation tran : trans) {
-            Log.info("Transformation: " + i);
+            Log.info("APPLY TRANSFORMATION: " + i);
             Log.debug("output dir: " + tmpDir + "/" + sourceDir);
-
             tran.apply(tmpDir + "/" + sourceDir);
             transformations.add(tran);
-            //run(tran, tmpDir);
             i++;
         }
 
@@ -80,7 +114,7 @@ public class Diversify extends AbstractDiversify {
             status = -2;
         }
 
-         for (Transformation tran : trans) {
+        for (Transformation tran : trans) {
             if (tran.getStatus() == AbstractTransformation.NOT_TESTED) {
                 tran.setStatus(status);
                 tran.setFailures(builder.getErrors());
@@ -88,20 +122,12 @@ public class Diversify extends AbstractDiversify {
             tran.restore(tmpDir + "/" + sourceDir);
         }
 
-        String[] statusCode = {"SOSIE!!", "TEST FAILED :P", "COMPILE FAILED :(" };
+        String[] statusCode = {"SOSIE!!", "TEST FAILED :P", "COMPILE FAILED :("};
         Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         Log.info(statusCode[status * -1]);
         Log.debug("{} setCompile error on {} compilation", compileError, trans.size());
         Log.debug("{} sosie on {} trial", sosie, trial);
         Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
-        /*
-        try {
-            FileUtils.cleanDirectory(tmpDir);
-            FileUtils.forceDelete(tmpDir);
-        } catch (IOException e) {
-            Log.warn("Unable to delete " + tmpDir + " : " + e.getMessage());
-        }*/
     }
 
     protected void run(Transformation trans, String tmpDir) throws Exception {
@@ -111,7 +137,7 @@ public class Diversify extends AbstractDiversify {
             transformations.add(trans);
             int status = runTest(tmpDir);
 
-            if(status == AbstractTransformation.SOSIE)
+            if (status == AbstractTransformation.SOSIE)
                 sosie++;
             trial++;
             trans.setStatus(status);
@@ -127,9 +153,11 @@ public class Diversify extends AbstractDiversify {
     }
 
     protected String[] getMavenPhase() {
-        if(transQuery != null && transQuery instanceof ByteCodeTransformationQuery)
+        if (transQuery != null && transQuery instanceof ByteCodeTransformationQuery)
             return new String[]{"test"};
         else
             return new String[]{"clean", "test"};
     }
+
+
 }

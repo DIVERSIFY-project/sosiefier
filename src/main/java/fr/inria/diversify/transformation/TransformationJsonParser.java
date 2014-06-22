@@ -178,7 +178,7 @@ public class TransformationJsonParser {
     }
 
 
-    protected Transformation parseTransformation(JSONObject jsonObject) throws TransformationParserException {
+    public Transformation parseTransformation(JSONObject jsonObject) throws TransformationParserException {
         try {
             String type = jsonObject.getString("type");
             Transformation trans = null;
