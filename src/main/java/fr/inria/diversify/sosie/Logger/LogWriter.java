@@ -54,7 +54,7 @@ public class LogWriter {
 
     protected static void resetCallDeep(Thread thread) {
         if(callDeep != null && callDeep.containsKey(thread))
-            callDeep.remove(thread, 0);
+            callDeep.remove(thread);
     }
 
     protected static void decCallDeep(Thread thread) {

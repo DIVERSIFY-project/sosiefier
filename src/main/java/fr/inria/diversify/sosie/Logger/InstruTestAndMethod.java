@@ -1,25 +1,8 @@
 package fr.inria.diversify.sosie.logger;
 
-import fr.inria.diversify.sosie.logger.processor.*;
-import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
+import fr.inria.diversify.diversification.InputConfiguration;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
-import org.apache.commons.io.FileUtils;
-import spoon.compiler.Environment;
-import spoon.compiler.SpoonCompiler;
-import spoon.processing.AbstractProcessor;
-import spoon.processing.ProcessingManager;
-import spoon.reflect.factory.Factory;
-import spoon.reflect.factory.FactoryImpl;
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
-import spoon.support.DefaultCoreFactory;
-import spoon.support.QueueProcessingManager;
-import spoon.support.StandardEnvironment;
-import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User: Simon
@@ -28,99 +11,29 @@ import java.util.List;
  */
 public class InstruTestAndMethod {
 
-    public static void main(String[] args) throws Exception {
+
+    public InstruTestAndMethod(String propertiesFile) throws Exception {
+        InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
+        InputProgram inputProgram = inputConfiguration.getInputProgram();
         MavenDependencyResolver t = new MavenDependencyResolver();
-        t.DependencyResolver(args[0] + "/pom.xml");
+        t.DependencyResolver(inputProgram.getProgramDir() + "/pom.xml");
 
-        new InstruTestAndMethod(args[0],args[1],args[2],args[3]);
+        boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
+        boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
+        boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError"));
+        boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert"));
+        boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
 
+        String project = inputConfiguration.getProperty("project");
+        String src = inputConfiguration.getProperty("src");
+        String test = inputConfiguration.getProperty("testSrc");
+        String out = inputConfiguration.getProperty("outputDirectory");
+
+        Instru instru = new Instru(project, src, test, out);
+        instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
     }
 
-    public InstruTestAndMethod(String project, String outDir, String srcDir, String testDir) throws Exception {
-        File dir = new File(outDir);
-        dir.mkdirs();
-        FileUtils.copyDirectory(new File(project), dir);
-
-        String src = project+ "/" +srcDir;
-        String test = project+ "/" +testDir;
-
-        Factory factory = initSpoon(src);
-        applyProcessor(factory, new MethodLoggingInstrumenter());
-//        applyProcessor(factory, new ConditionalLoggingInstrumenter());
-//        applyProcessor(factory, new ErrorLoggingInstrumenter());
-
-        Environment env = factory.getEnvironment();
-        env.useSourceCodeFragments(true);
-
-        applyProcessor(factory,
-                new JavaOutputProcessorWithFilter(new File(outDir + "/" + srcDir),
-                        new FragmentDrivenJavaPrettyPrinter(env),
-                        allClassesName(new File(src))));
-
-        factory = initSpoon(src+System.getProperty("path.separator")+test);
-
-//        applyProcessor(factory, new AssertInstrumenter());
-        applyProcessor(factory, new TestLoggingInstrumenter());
-
-
-        factory.getEnvironment().useSourceCodeFragments(true);
-        applyProcessor(factory, new JavaOutputProcessorWithFilter(new File(outDir +"/"+ testDir), new FragmentDrivenJavaPrettyPrinter(env), (allClassesName(new File(test)))));
-
-        ConditionalLoggingInstrumenter.writeIdFile(outDir);
-        copyLogger(outDir, srcDir);
-    }
-
-    protected Factory initSpoon(String srcDirectory) {
-
-        StandardEnvironment env = new StandardEnvironment();
-//        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
-//        env.setComplianceLevel(javaVersion);
-        env.setVerbose(true);
-        env.setDebug(true);
-
-        DefaultCoreFactory f = new DefaultCoreFactory();
-        Factory factory = new FactoryImpl(f, env);
-        SpoonCompiler c = new JDTBasedSpoonCompiler(factory);
-        for (String dir : srcDirectory.split(System.getProperty("path.separator")))
-            try {
-                c.addInputSource(new File(dir));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        try {
-            c.build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return factory;
-    }
-
-    protected void applyProcessor(Factory factory, AbstractProcessor processor) {
-        ProcessingManager pm = new QueueProcessingManager(factory);
-        pm.addProcessor(processor);
-        pm.process();
-    }
-
-    protected List<String> allClassesName(File dir) {
-        List<String> list = new ArrayList<String>();
-
-        for(File file : dir.listFiles())
-            if(file.isDirectory())
-                list.addAll(allClassesName(file));
-            else {
-                String name = file.getName();
-                if(name.endsWith(".java")) {
-                    String[] tmp = name.substring(0, name.length() - 5).split("/");
-                    list.add(tmp[tmp.length - 1]);
-                }
-            }
-        return list;
-    }
-
-    protected void copyLogger(String tmpDir, String src) throws IOException {
-        File dir = new File(tmpDir+"/"+src+"/fr/inria/diversify/sosie/logger");
-        FileUtils.forceMkdir(dir);
-        FileUtils.copyFileToDirectory(new File(System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/LogWriter.java"),dir);
-        FileUtils.copyFileToDirectory(new File(System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/ShutdownHookLog.java"),dir);
+    public static void main(String[] args) throws Exception {
+        new InstruTestAndMethod(args[0]);
     }
 }

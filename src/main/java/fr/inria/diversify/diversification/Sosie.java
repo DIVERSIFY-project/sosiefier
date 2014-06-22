@@ -1,5 +1,6 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.sosie.logger.InstruTestAndMethod;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
@@ -76,7 +77,8 @@ public class Sosie extends AbstractDiversify {
 
     protected void instruTestAndMethod(String project) throws Exception {
         String output = "output_sosieInstru/instru_"+System.currentTimeMillis();
-        new InstruTestAndMethod(project,output,sourceDir,testDir);
+        Instru instru = new Instru(project,sourceDir,testDir,output);
+        instru.instru(true,true,false,true,false);
     }
 
 

@@ -46,9 +46,19 @@ public class InputProgram {
     private ICoverageReport coverageReport;
 
     /**
+     * Path to the root directory of the input program
+     */
+    private String programDir;
+
+    /**
      * Path to the source code of the input program
      */
     private String sourceCodeDir;
+
+    /**
+     * Path to the test source code of the input program
+     */
+    private String testSourceCodeDir;
 
     /**
      * Path to the built classes
@@ -125,6 +135,17 @@ public class InputProgram {
     }
 
     /**
+     * Path to the test source code of the input program
+     */
+    public String getTestSourceCodeDir() {
+        return testSourceCodeDir;
+    }
+
+    public void setTestSourceCodeDir(String testSourceCodeDir) {
+        this.testSourceCodeDir = testSourceCodeDir;
+    }
+
+    /**
      * Path to the source of the input program
      */
     public String getSourceCodeDir() {
@@ -134,6 +155,7 @@ public class InputProgram {
     public void setSourceCodeDir(String sourceCodeDir) {
         this.sourceCodeDir = sourceCodeDir;
     }
+
 
     /**
      * Path to the know sosie information stored in file
@@ -158,6 +180,17 @@ public class InputProgram {
     }
 
     /**
+     * Path to the root directory of the input program
+     */
+    public String getProgramDir() {
+        return programDir;
+    }
+
+    public void setProgramDir(String programDir) {
+        this.programDir = programDir;
+    }
+
+    /**
      * Path to the built classes
      */
     public String getClassesDir() {
@@ -167,6 +200,7 @@ public class InputProgram {
     public void setClassesDir(String classesDir) {
         this.classesDir = classesDir;
     }
+
 
     /**
      * Path to the coverage information

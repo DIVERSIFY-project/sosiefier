@@ -8,6 +8,8 @@ import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.CtAbstractVisitor;
+import spoon.reflect.visitor.QueryVisitor;
+import spoon.reflect.visitor.filter.TypeFilter;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,9 +21,10 @@ import java.util.*;
  * Use basic scope inference (the real one is hard due to the complex semantics of "static" and "final"
  * (w.r.t. init, anonymous classes, etc.)
  */
-public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatement> {
-    protected static Map<CtExecutable,Integer> count = new HashMap<CtExecutable, Integer>();
-    protected static Map<String,String> idMap = new HashMap<String, String>();
+public class VariableLoggingInstrumenter extends AbstractProcessor<CtStatement> {
+    protected static Map<CtExecutable,Integer> count = new HashMap();
+    protected static Map<String,String> idMap = new HashMap();
+    protected int tmpVarCount = 0;
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {
@@ -29,9 +32,9 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
             return false;
 
         return
-                CtIf.class.isAssignableFrom(candidate.getClass())
-                        || CtLoop.class.isAssignableFrom(candidate.getClass())
-//                        || CtThrow.class.isAssignableFrom(candidate.getClass())
+                (CtIf.class.isAssignableFrom(candidate.getClass())
+                        || CtLoop.class.isAssignableFrom(candidate.getClass()))
+                            && !hasLabelAndGoto(candidate)
                 ;
     }
 
@@ -63,9 +66,12 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
     private void instruLoopOrIf(CtStatement statement) {
         boolean inStaticCode =
                 hasStaticParent(statement);
-        String id =  ConditionalLoggingInstrumenter.idFor(getClass(statement).getQualifiedName()+"."+getMethod(statement).getSignature());
-        String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
-                + id + "\"";
+        String id =  VariableLoggingInstrumenter.idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
+//        String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
+//                + id + "\",{";
+
+        String tmpVar = "tmpVarWrite" + tmpVarCount++;
+        String snippet = "Object[] " + tmpVar +" = {";
 
         int nVisibleVariables = 0;
         for (CtVariable<?> var : getVariablesInScope(statement)) {
@@ -83,15 +89,16 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
                     }
                 }
                 nVisibleVariables++;
-
                 // we remove the "final" for solving "may have not been in initialized" in constructor code
                 // this does not work for case statements
                 // var.getModifiers().remove(ModifierKind.FINAL);
 
-                snippet += ",\"" + idFor(var.getSimpleName()) + "\"," + var.getSimpleName();
+                snippet += "\"" + idFor(var.getSimpleName()) + "\"," + var.getSimpleName() + ",";
             }
         }
-        snippet += ");\n";
+        snippet = snippet.substring(0, snippet.length()-1);
+        snippet += "};\n\tfr.inria.diversify.sosie.logger.LogWriter.writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
+                + id + "\"," +tmpVar+");\n";
         if (
                 nVisibleVariables > 0 // do not add the monitoring if nothing to ignore
                         &&
@@ -106,9 +113,6 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
 
             int index = sp.getSourceStart();
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-
-            index = compileUnit.nextLineIndex(sp.getSourceEnd());
-//            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, "}\n", 0));
         }
     }
 
@@ -202,10 +206,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
             }
 
             @Override
-            public <T> void visitCtThisAccess(CtThisAccess<T> tCtThisAccess) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
+            public <T> void visitCtThisAccess(CtThisAccess<T> tCtThisAccess) {}
         };
 
         visitor.scan(el);
@@ -231,7 +232,6 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
         fw.close();
     }
 
-
     protected int getCount(CtStatement stmt) {
         CtExecutable parent = stmt.getParent(CtExecutable.class);
         if(count.containsKey(parent))
@@ -240,6 +240,7 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
             count.put(parent,0);
         return count.get(parent);
     }
+
 
     protected CtSimpleType<?> getClass(CtStatement stmt) {
         return stmt.getParent(CtSimpleType.class);
@@ -251,5 +252,18 @@ public class ConditionalLoggingInstrumenter extends AbstractProcessor<CtStatemen
             ret = stmt.getParent(CtConstructor.class);
         return ret;
     }
+
+    public boolean hasLabelAndGoto(CtStatement stmt) {
+        CtExecutable parent = stmt.getParent(CtExecutable.class);
+
+        if(parent == null)
+            return false;
+
+        QueryVisitor query = new QueryVisitor(new TypeFilter(CtContinue.class));
+        parent.accept(query);
+        return query.getResult().stream()
+                .anyMatch(cnt -> ((CtContinue) cnt).getTargetLabel() != null);
+    }
+
 
 }
