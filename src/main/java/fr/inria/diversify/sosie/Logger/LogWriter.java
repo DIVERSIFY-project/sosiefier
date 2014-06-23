@@ -123,7 +123,8 @@ public class LogWriter {
                 semaphore = fileWriter.toString() + fileWriter.hashCode();
                 fileWriter.append(string.toString());
 
-            } catch (Exception e) { e.printStackTrace();} finally {
+            } catch (Exception e) { e.printStackTrace();}
+            finally {
                 startLogMethod(thread);
                 releaseFileWriter(semaphore);
             }
@@ -266,7 +267,7 @@ public class LogWriter {
             string.append(id + "");
             string.append(simpleSeparator);
             string.append(className);
-            string.append(simpleSeparator);;
+            string.append(simpleSeparator);
             string.append(methodSignature);
             string.append(simpleSeparator);
             if (exception != null)
@@ -295,7 +296,7 @@ public class LogWriter {
             string.append(callDeep.get(thread));
             string.append(simpleSeparator);
             string.append(id + "");
-            string.append(simpleSeparator);;
+            string.append(simpleSeparator);
             string.append(className);
             string.append(simpleSeparator);
             string.append(methodSignature);

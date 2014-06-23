@@ -86,11 +86,4 @@ public class Diversify extends AbstractDiversify {
         trans.restore(tmpDir + "/" + sourceDir);
         Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
     }
-
-    protected String[] getMavenPhase() {
-        if(transQuery != null && transQuery instanceof ByteCodeTransformationQuery)
-            return new String[]{"test"};
-        else
-            return new String[]{"clean", "test"};
-    }
 }

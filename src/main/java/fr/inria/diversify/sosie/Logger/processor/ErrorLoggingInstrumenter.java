@@ -16,8 +16,8 @@ import java.util.*;
  * Time: 11:32
  */
 public class ErrorLoggingInstrumenter extends AbstractProcessor<CtStatement> {
-    protected static Map<CtExecutable,Integer> count = new HashMap<CtExecutable, Integer>();
-    protected static Map<String,String> idMap = new HashMap<String, String>();
+    protected static Map<CtExecutable,Integer> count = new HashMap();
+    protected static Map<String,String> idMap = new HashMap();
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {

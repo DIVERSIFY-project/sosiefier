@@ -1,7 +1,5 @@
 package fr.inria.diversify.sosie.logger;
 
-import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.sosie.logger.processor.*;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import org.apache.commons.io.FileUtils;
@@ -63,8 +61,8 @@ public class Instru {
     }
 
     protected void instruMainSrc(boolean intruMethodCall, boolean intruVariable, boolean intruError) {
-        String src = projectDirectory + System.getProperty("path.separator") + srcDirectory;
-        String out = outputDirectory + System.getProperty("path.separator") + srcDirectory;
+        String src = projectDirectory + "/" + srcDirectory;
+        String out = outputDirectory + "/" + srcDirectory;
         Factory factory = initSpoon(src);
 
         if(intruMethodCall) {
@@ -87,9 +85,9 @@ public class Instru {
     }
 
     protected void instruTestSrc(boolean intruNewTest, boolean intruAssert) {
-        String src = projectDirectory + System.getProperty("path.separator") + srcDirectory;
-        String test = projectDirectory + System.getProperty("path.separator") + testDirectory;
-        String out = outputDirectory + System.getProperty("path.separator") + testDirectory;
+        String src = projectDirectory + "/" + srcDirectory;
+        String test = projectDirectory + "/" + testDirectory;
+        String out = outputDirectory + "/" + testDirectory;
 
         Factory factory = initSpoon(src+System.getProperty("path.separator")+test);
 
@@ -148,7 +146,7 @@ public class Instru {
     }
 
     protected List<String> allClassesName(File dir) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
         for(File file : dir.listFiles())
             if(file.isDirectory())

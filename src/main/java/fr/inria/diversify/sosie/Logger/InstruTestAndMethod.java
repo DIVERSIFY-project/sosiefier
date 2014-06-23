@@ -1,7 +1,6 @@
 package fr.inria.diversify.sosie.logger;
 
 import fr.inria.diversify.diversification.InputConfiguration;
-import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 
 /**
@@ -14,9 +13,14 @@ public class InstruTestAndMethod {
 
     public InstruTestAndMethod(String propertiesFile) throws Exception {
         InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
-        InputProgram inputProgram = inputConfiguration.getInputProgram();
+
+        String project = inputConfiguration.getProperty("project");
+        String src = inputConfiguration.getProperty("src");
+        String test = inputConfiguration.getProperty("testSrc");
+        String out = inputConfiguration.getProperty("outputDirectory");
+
         MavenDependencyResolver t = new MavenDependencyResolver();
-        t.DependencyResolver(inputProgram.getProgramDir() + "/pom.xml");
+        t.DependencyResolver(project + "/pom.xml");
 
         boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
         boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
@@ -24,10 +28,6 @@ public class InstruTestAndMethod {
         boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert"));
         boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
 
-        String project = inputConfiguration.getProperty("project");
-        String src = inputConfiguration.getProperty("src");
-        String test = inputConfiguration.getProperty("testSrc");
-        String out = inputConfiguration.getProperty("outputDirectory");
 
         Instru instru = new Instru(project, src, test, out);
         instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
