@@ -161,6 +161,8 @@ public class DiversifyMain {
                 inputConfiguration.getProperty("classes"));
 
         inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
+
+
     }
 
     protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException {
@@ -197,8 +199,12 @@ public class DiversifyMain {
                 return new ASTTransformationQuery(inputProgram, cl, true);
             }
             case "knownsosies":
+                //This query benefits from a early processCodeFragments
+                inputProgram.processCodeFragments();
                 return new KnownSosieQuery(inputProgram);
             case "knownmultisosies":
+                //This query benefits from a early processCodeFragments
+                inputProgram.processCodeFragments();
                 return new KnowMultisosieQuery(inputProgram);
             default:
                 //Try to construct the query from the explicit class

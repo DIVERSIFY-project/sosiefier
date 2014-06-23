@@ -214,9 +214,9 @@ public class InputProgram {
     }
 
     /**
-     * List of all the code fragments extracted by Spoon of the input program
+     * Process all code fragments. Used to early process them.
      */
-    public synchronized CodeFragmentList getCodeFragments() {
+    public void processCodeFragments() {
         if(codeFragments == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
             StatementProcessor processor = new StatementProcessor();
@@ -225,6 +225,13 @@ public class InputProgram {
 
             codeFragments = processor.getCodeFragments();
         }
+    }
+
+    /**
+     * List of all the code fragments extracted by Spoon of the input program
+     */
+    public synchronized CodeFragmentList getCodeFragments() {
+        processCodeFragments();
         return codeFragments;
     }
 

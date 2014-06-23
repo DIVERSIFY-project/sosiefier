@@ -169,13 +169,11 @@ public class Diversify extends AbstractDiversify {
         }
 
         //Store the whole sosie program.
-        /*
         if ( status == 0 && getSocieSourcesDir() != null && (new File(getSocieSourcesDir()).exists()) ) {
             File source = new File(tmpDir);
             File dest = new File(getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial);
             org.apache.commons.io.FileUtils.copyDirectory(source, dest);
-        }*/
-
+        }
     }
 
     protected void run(Transformation trans, String tmpDir) throws Exception {

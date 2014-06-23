@@ -35,14 +35,18 @@ public class KnowMultisosieQuery extends TransformationQuery {
 
             List<Transformation> result = null;
 
-            int index = 0;
+            int index = currentRunResult;
             while ( result == null && index < files.length ) {
-                RunResults run = new RunResults();
-                run.loadFromFile(files[currentRunResult]);
-                index ++;
-                if ( run.isSosieRun() ) {
-                    result = run.parseTransformations(inputProgram);
+                String fileName = files[index].getName();
+                if ( fileName.substring(fileName.length() - 4).toLowerCase().equals("json") ) {
+                    RunResults run = new RunResults();
+                    run.loadFromFile(files[index]);
+                    if (run.isSosieRun()) {
+                        result = run.parseTransformations(inputProgram);
+                        currentRunResult = index;
+                    }
                 }
+                index++;
             }
 
             if ( result ==  null ) {
