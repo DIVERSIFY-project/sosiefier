@@ -79,7 +79,7 @@ public class Diversify extends AbstractDiversify {
 
         sessionResults = new SessionResults();
 
-        File f = new File(getResultDir() + "/" + sessionResults.getBeginTime());
+        File f = new File(getResultDir());
         if ( earlyReport && !(f.exists())) { f.mkdirs(); }
 
         trial = 0;
@@ -155,10 +155,10 @@ public class Diversify extends AbstractDiversify {
                     result.setStatus(status);
                     result.setTransformations(trans);
                     result.setFailedTests(builder.getErrors());
-                    result.saveToFile(getResultDir() + "/" + sessionResults.getBeginTime() + "/" +
+                    result.saveToFile(getResultDir() + "/" +
                             "trial_" + trial + "_size_" + trans.size() + "_stat_" + status + ".json");
                     sessionResults.addRunResults(result);
-                    sessionResults.saveReport(getResultDir() + "/" + sessionResults.getBeginTime() + "/session.txt" );
+                    sessionResults.saveReport(getResultDir() + "/session" + trans.size() + ".txt" );
                 } catch ( IOException e ) {
                     Log.warn("Cannot output early report: ", e);
                 } catch ( JSONException e ) {

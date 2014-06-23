@@ -4,7 +4,6 @@ import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.other.ShuffleStmtTransformation;
-import fr.inria.diversify.util.DiversifyEnvironment;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
@@ -37,12 +36,12 @@ public class ShuffleStmtQuery extends TransformationQuery {
     }
 
     @Override
-    protected List<Transformation> query(int nb) {
+    public List<Transformation> query(int nb) {
 
         List<Transformation> result = new ArrayList<>();
         for ( int j = 0; j < nb; j ++) {
             ShuffleStmtTransformation sst = new ShuffleStmtTransformation();
-            List<CtElement> objects = inputProgram.getAllElement(CtBlock.class);
+            List<CtElement> objects = getInputProgram().getAllElement(CtBlock.class);
             Random r = new Random();
 
             CtBlock block = (CtBlock) objects.get(r.nextInt(objects.size()));

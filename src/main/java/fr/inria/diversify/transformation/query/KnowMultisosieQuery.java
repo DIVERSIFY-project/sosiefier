@@ -28,9 +28,9 @@ public class KnowMultisosieQuery extends TransformationQuery {
     }
 
     @Override
-    protected List<Transformation> query(int nb) {
+    public List<Transformation> query(int nb) {
         try {
-            File folder = new File(inputProgram.getPreviousTransformationsPath());
+            File folder = new File(getInputProgram().getPreviousTransformationsPath());
             File[] files = folder.listFiles();
 
             List<Transformation> result = null;
@@ -42,7 +42,7 @@ public class KnowMultisosieQuery extends TransformationQuery {
                     RunResults run = new RunResults();
                     run.loadFromFile(files[index]);
                     if (run.isSosieRun()) {
-                        result = run.parseTransformations(inputProgram);
+                        result = run.parseTransformations(getInputProgram());
                         currentRunResult = index;
                     }
                 }

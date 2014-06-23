@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.util.DiversifyEnvironment;
 
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.Transformation;
@@ -57,9 +56,9 @@ public class MutationQuery extends TransformationQuery {
 
     protected void init() {
 
-        binaryOperators = inputProgram.getAllElement(CtBinaryOperator.class);
-        returns = inputProgram.getReturns();
-        inlineConstant = inputProgram.getInlineConstant();
+        binaryOperators = getInputProgram().getAllElement(CtBinaryOperator.class);
+        returns = getInputProgram().getReturns();
+        inlineConstant = getInputProgram().getInlineConstant();
     }
 
     @Override
@@ -68,7 +67,7 @@ public class MutationQuery extends TransformationQuery {
     }
 
     @Override
-    protected List<Transformation> query(int nb) {
+    public List<Transformation> query(int nb) {
         try {
             List<Transformation> result = new ArrayList<>();
             Random r = new Random();

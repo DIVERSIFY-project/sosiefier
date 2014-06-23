@@ -81,6 +81,11 @@ public class InputProgram {
     private int transformationPerRun;
 
     /**
+     * Minimum number of transformations that we are going to attempt in every run of the diversificator
+     */
+    private int minTransformationsPerRun;
+
+    /**
      * Root spoon element for an input program, mostly upper level packages
      */
     private Set<CtElement> roots;
@@ -214,6 +219,17 @@ public class InputProgram {
     }
 
     /**
+     * Minimum number of transformations that we are going to attempt in every run of the diversificator
+     */
+    public int getMinTransformationsPerRun() {
+        return minTransformationsPerRun;
+    }
+
+    public void setMinTransformationsPerRun(int minTransformationsPerRun) {
+        this.minTransformationsPerRun = minTransformationsPerRun;
+    }
+
+    /**
      * Process all code fragments. Used to early process them.
      */
     public void processCodeFragments() {
@@ -336,4 +352,5 @@ public class InputProgram {
         }
         return returns;
     }
+
 }

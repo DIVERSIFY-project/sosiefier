@@ -44,19 +44,19 @@ public class KnownSosieQuery extends TransformationQuery {
     }
 
     @Override
-    protected List<Transformation> query(int nb) {
+    public List<Transformation> query(int nb) {
 
         //Check that all what we need is OK to fetch the transformations
-        if ( inputProgram.getPreviousTransformationsPath() == null ) {
+        if ( getInputProgram().getPreviousTransformationsPath() == null ) {
             throw new RuntimeException("Input program has no previous transformation information");
         }
 
         transformations = new ArrayList();
-        parser = new TransformationJsonParser(false, inputProgram);
+        parser = new TransformationJsonParser(false, getInputProgram());
         try {
             if ( sosies == null ) {
                 List<Transformation> ts = parser.parseFile(
-                    new File(inputProgram.getPreviousTransformationsPath()));
+                    new File(getInputProgram().getPreviousTransformationsPath()));
                 //Get all the sosie
                 sosies = new ArrayList<>();
                 for ( Transformation t : ts ) {

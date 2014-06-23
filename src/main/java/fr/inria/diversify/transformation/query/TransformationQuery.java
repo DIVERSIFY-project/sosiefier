@@ -4,9 +4,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Super class for all transformation queries. The query is in charge of search transplantation points (pots) and
@@ -19,7 +17,7 @@ import java.util.Set;
 public abstract class TransformationQuery {
     protected String type;
 
-    protected InputProgram inputProgram;
+    private InputProgram inputProgram;
 
     List<Transformation> transformations;
 
@@ -37,13 +35,13 @@ public abstract class TransformationQuery {
      * Search for at most nb transformations
      * @param nb
      */
-    protected abstract List<Transformation> query(int nb);
+    public abstract List<Transformation> query(int nb);
 
     /**
      * Performs the search for transformations
      */
     public void query() {
-        transformations = query(inputProgram.getTransformationPerRun());
+        transformations = query(getInputProgram().getTransformationPerRun());
     }
 
     /**
@@ -53,5 +51,9 @@ public abstract class TransformationQuery {
      */
     public Collection<Transformation> getTransformations() {
         return transformations;
+    }
+
+    public InputProgram getInputProgram() {
+        return inputProgram;
     }
 }

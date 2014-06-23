@@ -31,7 +31,7 @@ public class CvlQuery extends TransformationQuery {
     public void setType(String type) {}
 
     @Override
-    protected List<Transformation> query(int nb) {
+    public List<Transformation> query(int nb) {
         try {
             List<Transformation> result = new ArrayList<>();
             for (int j = 0; j < nb; j++) {

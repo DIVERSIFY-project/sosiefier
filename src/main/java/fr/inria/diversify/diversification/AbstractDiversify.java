@@ -41,6 +41,7 @@ public abstract class AbstractDiversify {
      */
     private String socieSourcesDir = null;
 
+
     public void setTransformationQuery(TransformationQuery transQuery) {
         this.transQuery = transQuery;
     }

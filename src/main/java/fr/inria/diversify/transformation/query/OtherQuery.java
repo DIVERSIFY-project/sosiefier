@@ -6,7 +6,6 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.other.EmptyMethodBody;
 import fr.inria.diversify.transformation.other.ReplaceLiteral;
 import fr.inria.diversify.transformation.other.ReplaceNew;
-import fr.inria.diversify.util.DiversifyEnvironment;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 
@@ -47,7 +46,7 @@ public class OtherQuery extends TransformationQuery {
 
     private ReplaceLiteral getLiteralReplace() {
         ReplaceLiteral rl = new ReplaceLiteral();
-        List<CtElement> literals = inputProgram.getAllElement(CtLiteral.class);
+        List<CtElement> literals = getInputProgram().getAllElement(CtLiteral.class);
 
         int size = literals.size();
         Random r  = new Random();
@@ -64,7 +63,7 @@ public class OtherQuery extends TransformationQuery {
 
     private ReplaceNew getNewReplace() {
         ReplaceNew rn = new ReplaceNew();
-        List<CtElement> newClasses = inputProgram.getAllElement(CtNewClass.class);
+        List<CtElement> newClasses = getInputProgram().getAllElement(CtNewClass.class);
 
         int size = newClasses.size();
         Random r  = new Random();
@@ -82,7 +81,7 @@ public class OtherQuery extends TransformationQuery {
     protected EmptyMethodBody getEmptyMethodBody() {
         EmptyMethodBody emb = new EmptyMethodBody();
 
-        List<CtElement> methods = inputProgram.getAllElement(CtMethod.class);
+        List<CtElement> methods = getInputProgram().getAllElement(CtMethod.class);
         int size = methods.size();
         Random r  = new Random();
 

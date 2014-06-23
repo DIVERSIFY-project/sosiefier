@@ -71,7 +71,7 @@ public class ASTTransformationQuery extends TransformationQuery {
      * @param nb
      */
     @Override
-    protected List<Transformation> query(int nb) {
+    public List<Transformation> query(int nb) {
 
         ArrayList<Transformation> result = new ArrayList<>(nb);
         try {
@@ -139,7 +139,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
+            cfToReplace = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
         }
         tf.setTransplantationPoint(cfToReplace);
@@ -153,7 +153,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
+            cfToReplace = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
         }
         tf.setName("replaceWittgenstein");
@@ -164,7 +164,7 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     protected ASTReplace replaceRandom() throws Exception {
         ASTReplace tf = new ASTReplace();
-        tf.setTransplantationPoint(findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals("")));
+        tf.setTransplantationPoint(findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals("")));
         tf.setCodeFragmentToReplace(findRandomFragmentToReplace(false));
         tf.setName("replaceRandom");
         return tf;
@@ -172,7 +172,7 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     protected ASTAdd addRandom() throws Exception {
         ASTAdd tf = new ASTAdd();
-        tf.setTransplantationPoint(findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals("")));
+        tf.setTransplantationPoint(findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals("")));
         tf.setCodeFragmentToAdd(findRandomFragmentToReplace(false));
         tf.setName("addRandom");
         return tf;
@@ -206,7 +206,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
+            cfToReplace = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
         }
         tf.setTransplantationPoint(cfReplacedBy);
@@ -220,7 +220,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         CodeFragment cfReplacedBy = null;
 
         while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
+            cfToReplace = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
             cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
         }
         tf.setTransplantationPoint(cfToReplace);
@@ -254,7 +254,7 @@ public class ASTTransformationQuery extends TransformationQuery {
         ASTDelete tf = new ASTDelete();
         CodeFragment cfToDelete = null;
         while (cfToDelete == null) {
-            cfToDelete = findRandomFragmentToReplace(!inputProgram.getCoverageDir().equals(""));
+            cfToDelete = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
             if (cfToDelete.getCtCodeFragment() instanceof CtReturn)
                 cfToDelete = null;
         }
@@ -285,11 +285,11 @@ public class ASTTransformationQuery extends TransformationQuery {
      */
     protected CodeFragment findRandomFragmentToReplace(boolean withCoverage) {
         Random r = new Random();
-        int size = inputProgram.getCodeFragments().size();
-        CodeFragment stmt = inputProgram.getCodeFragments().get(r.nextInt(size));
+        int size = getInputProgram().getCodeFragments().size();
+        CodeFragment stmt = getInputProgram().getCodeFragments().get(r.nextInt(size));
 
-        while (withCoverage && inputProgram.getCoverageReport().codeFragmentCoverage(stmt) == 0)
-            stmt = inputProgram.getCodeFragments().get(r.nextInt(size));
+        while (withCoverage && getInputProgram().getCoverageReport().codeFragmentCoverage(stmt) == 0)
+            stmt = getInputProgram().getCodeFragments().get(r.nextInt(size));
         return stmt;
     }
 
@@ -329,7 +329,7 @@ public class ASTTransformationQuery extends TransformationQuery {
     }
 
     protected Collection<CodeFragment> getAllUniqueCodeFragments() {
-        return inputProgram.getCodeFragments().getUniqueCodeFragmentList();
+        return getInputProgram().getCodeFragments().getUniqueCodeFragmentList();
     }
 
 }

@@ -84,15 +84,18 @@ public class DiversifyMain {
     protected void initAndRunBuilder() throws Exception {
         AbstractDiversify abstractDiversify = initAbstractDiversify();
 
-        TransformationQuery query = initTransformationQuery();
-        abstractDiversify.setTransformationQuery(query);
-
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
-        abstractDiversify.run(n);
-
-        String repo = DiversifyProperties.getProperty("gitRepository");
-        if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
-        else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
+        int max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
+        int min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
+        TransformationQuery query = initTransformationQuery();
+        for ( int i = min; i <= max; i++ ) {
+            inputProgram.setTransformationPerRun(i);
+            abstractDiversify.setTransformationQuery(query);
+            abstractDiversify.run(n);
+            String repo = DiversifyProperties.getProperty("gitRepository");
+            if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
+            else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
+        }
     }
 
     protected AbstractDiversify initAbstractDiversify() throws Exception {
@@ -106,7 +109,7 @@ public class DiversifyMain {
             ad = new Diversify(projet, src);
             boolean early = DiversifyProperties.getProperty("early.report","false").equals("true");
             ((Diversify)ad).setEarlyReport(early);
-            ad.setSocieSourcesDir(DiversifyProperties.getProperty("copy.sosie.sources.to",""));
+            ad.setSocieSourcesDir(DiversifyProperties.getProperty("copy.sosie.sources.to", ""));
         }
         else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
             String testDir = DiversifyProperties.getProperty("testSrc");
