@@ -104,8 +104,9 @@ public class DiversifyMain {
             ad = new DiversifyWithParent(projet, src);
         else if (DiversifyProperties.getProperty("sosie").equals("false")) {
             ad = new Diversify(projet, src);
-            boolean early = DiversifyProperties.getProperty("early.report","0").equals("1");
+            boolean early = DiversifyProperties.getProperty("early.report","false").equals("true");
             ((Diversify)ad).setEarlyReport(early);
+            ad.setSocieSourcesDir(DiversifyProperties.getProperty("copy.sosie.sources.to",""));
         }
         else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
             String testDir = DiversifyProperties.getProperty("testSrc");
@@ -197,6 +198,8 @@ public class DiversifyMain {
             }
             case "knownsosies":
                 return new KnownSosieQuery(inputProgram);
+            case "knownmultisosies":
+                return new KnowMultisosieQuery(inputProgram);
             default:
                 //Try to construct the query from the explicit class
                 try {

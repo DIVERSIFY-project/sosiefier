@@ -12,13 +12,9 @@ import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.ListIterator;
 
 /**
  * User: Simon
@@ -33,7 +29,7 @@ public class Diversify extends AbstractDiversify {
     SessionResults sessionResults;
 
     /**
-     * Number of compiled errors
+     * Number of compiled errors. TODO: This info is already in SessionResults
      */
     protected int compileError = 0;
 
@@ -47,9 +43,6 @@ public class Diversify extends AbstractDiversify {
      */
     protected int trial = 0;
 
-    /** Reports results on every step. Slower, but allows to stop the process without
-     *  loosing all the information
-     */
     private boolean earlyReport = false;
 
     /**
@@ -86,12 +79,12 @@ public class Diversify extends AbstractDiversify {
 
         sessionResults = new SessionResults();
 
-        if ( earlyReport && !(new File(getResultDir()).exists()) ) {
-            mkDirResult(getResultDir());
-        }
+        File f = new File(getResultDir() + "/" + sessionResults.getBeginTime());
+        if ( earlyReport && !(f.exists())) { f.mkdirs(); }
 
         trial = 0;
         sosie = 0;
+
 
         for (int i = 0; i < n; i++) {
             Log.info("===========================");
@@ -115,12 +108,15 @@ public class Diversify extends AbstractDiversify {
 
     @Override
     protected void run(Collection<Transformation> trans) throws Exception {
+
+        String outputDir = tmpDir + "/" + sourceDir;
+
         Log.info("number of diversification: " + trans.size());
         int i = 0;
         for (Transformation tran : trans) {
             Log.info("APPLY TRANSFORMATION: " + i);
-            Log.debug("output dir: " + tmpDir + "/" + sourceDir);
-            tran.apply(tmpDir + "/" + sourceDir);
+            Log.debug("output dir: " + outputDir);
+            tran.apply(outputDir);
             transformations.add(tran);
             i++;
         }
@@ -159,19 +155,27 @@ public class Diversify extends AbstractDiversify {
                     result.setStatus(status);
                     result.setTransformations(trans);
                     result.setFailedTests(builder.getErrors());
-                    result.saveToFile(getResultDir() + "/" + "session_" + sessionResults.getBeginTime() +
-                            "_trial_" + trial + "_size_" + trans.size() + "_stat_" + status + ".json");
+                    result.saveToFile(getResultDir() + "/" + sessionResults.getBeginTime() + "/" +
+                            "trial_" + trial + "_size_" + trans.size() + "_stat_" + status + ".json");
                     sessionResults.addRunResults(result);
-                    sessionResults.saveReport(getResultDir() + "/session_" + sessionResults.getBeginTime() + ".txt" );
+                    sessionResults.saveReport(getResultDir() + "/" + sessionResults.getBeginTime() + "/session.txt" );
                 } catch ( IOException e ) {
                     Log.warn("Cannot output early report: ", e);
                 } catch ( JSONException e ) {
                     //Not my mf problem!! (Hard rock in the background)
                     throw e;
                 }
-
             }
         }
+
+        //Store the whole sosie program.
+        /*
+        if ( status == 0 && getSocieSourcesDir() != null && (new File(getSocieSourcesDir()).exists()) ) {
+            File source = new File(tmpDir);
+            File dest = new File(getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial);
+            org.apache.commons.io.FileUtils.copyDirectory(source, dest);
+        }*/
+
     }
 
     protected void run(Transformation trans, String tmpDir) throws Exception {

@@ -7,10 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -83,18 +80,18 @@ public class RunResults {
         }
     }
 
+
     /**
      * Loads the serialization from file to this RunResult object
      *
-     * @param fileName Name of the json file containing this object
+     * @param file Json file containing this object
      * @throws IOException
      * @throws JSONException
      */
-    public void loadFromFile(String fileName) throws IOException, JSONException {
-
+    public void loadFromFile(File file) throws IOException, JSONException {
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(fileName));
+            br = new BufferedReader(new FileReader(file));
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {
@@ -104,7 +101,6 @@ public class RunResults {
 
             JSONObject jsonObject = new JSONObject(sb.toString());
             fromJSONObject(jsonObject);
-
         } finally {
             if (br != null) {
                 br.close();
@@ -113,12 +109,23 @@ public class RunResults {
     }
 
     /**
+     * Loads the serialization from file to this RunResult object
+     *
+     * @param fileName Name of the json file containing this object
+     * @throws IOException
+     * @throws JSONException
+     */
+    public void loadFromFile(String fileName) throws IOException, JSONException {
+        loadFromFile(new File(fileName));
+    }
+
+    /**
      * Parse the stored transformations.
      *
      * @param inputProgram Input program over which the transformations where made
      * @return
      */
-    public Collection<Transformation> parseTransformations(InputProgram inputProgram) {
+    public List<Transformation> parseTransformations(InputProgram inputProgram) {
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
         ArrayList<Transformation> result = new ArrayList<>();
         for (int i = 0; i < transformationsJSON.length(); i++) {
@@ -202,5 +209,9 @@ public class RunResults {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isSosieRun() {
+        return status == 0;
     }
 }

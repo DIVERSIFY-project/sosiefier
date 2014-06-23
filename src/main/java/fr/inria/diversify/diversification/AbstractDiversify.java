@@ -31,7 +31,48 @@ public abstract class AbstractDiversify {
      */
     protected String sourceDir;
 
+    /**
+     * Directory to store result information, i.e number of trials, number of sosies, transformations, etc.
+     */
     private String resultDir;
+
+    /**
+     * Directory to copy sosies programs source code to.
+     */
+    private String socieSourcesDir = null;
+
+    public void setTransformationQuery(TransformationQuery transQuery) {
+        this.transQuery = transQuery;
+    }
+
+    public List<Transformation> getTransformations() {
+        return transformations;
+    }
+
+    public AbstractBuilder getBuilder() {
+        return builder;
+    }
+
+    public void setBuilder(AbstractBuilder builder) {
+        this.builder = builder;
+    }
+
+    /**
+     * Result directory
+     */
+    public String getResultDir() { return resultDir; }
+
+    public void setResultDir(String resultDir) { this.resultDir = resultDir; }
+
+    /**
+     * Directory to copy sosies programs source code to.
+     */
+
+    public String getSocieSourcesDir() { return socieSourcesDir; }
+
+    public void setSocieSourcesDir(String socieSourcesDir) {
+        this.socieSourcesDir = socieSourcesDir;
+    }
 
     protected List<Transformation> transformations;
 
@@ -43,7 +84,6 @@ public abstract class AbstractDiversify {
      * Build system to perform the build lifecycle
      */
     protected AbstractBuilder builder;
-
 
     public abstract void run(int n) throws Exception;
 
@@ -136,31 +176,5 @@ public abstract class AbstractDiversify {
     }
 
 
-    public void setTransformationQuery(TransformationQuery transQuery) {
-        this.transQuery = transQuery;
-    }
 
-    public List<Transformation> getTransformations() {
-        return transformations;
-    }
-
-    public AbstractBuilder getBuilder() {
-        return builder;
-    }
-
-    public void setBuilder(AbstractBuilder builder) {
-        this.builder = builder;
-    }
-
-
-    /**
-     * Result directory
-     */
-    public String getResultDir() {
-        return resultDir;
-    }
-
-    public void setResultDir(String resultDir) {
-        this.resultDir = resultDir;
-    }
 }
