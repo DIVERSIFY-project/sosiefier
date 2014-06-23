@@ -31,6 +31,8 @@ public abstract class AbstractDiversify {
      */
     protected String sourceDir;
 
+    private String resultDir;
+
     protected List<Transformation> transformations;
 
     /**
@@ -151,4 +153,14 @@ public abstract class AbstractDiversify {
     }
 
 
+    /**
+     * Result directory
+     */
+    public String getResultDir() {
+        return resultDir;
+    }
+
+    public void setResultDir(String resultDir) {
+        this.resultDir = resultDir;
+    }
 }

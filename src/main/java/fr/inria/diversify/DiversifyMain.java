@@ -99,9 +99,14 @@ public class DiversifyMain {
         AbstractDiversify ad;
         String projet = DiversifyProperties.getProperty("project");
         String src = DiversifyProperties.getProperty("src");
+        String resultDir = DiversifyProperties.getProperty("result");
         if (DiversifyProperties.getProperty("transformation.type").equals("mutationToSosie"))
             ad = new DiversifyWithParent(projet, src);
-        else if (DiversifyProperties.getProperty("sosie").equals("false")) ad = new Diversify(projet, src);
+        else if (DiversifyProperties.getProperty("sosie").equals("false")) {
+            ad = new Diversify(projet, src);
+            boolean early = DiversifyProperties.getProperty("early.report","0").equals("1");
+            ((Diversify)ad).setEarlyReport(early);
+        }
         else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
             String testDir = DiversifyProperties.getProperty("testSrc");
             ad = new Sosie(projet, src, testDir);
@@ -109,7 +114,7 @@ public class DiversifyMain {
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));
         ad.setBuilder(initBuilder(tmpDir));
-
+        ad.setResultDir(resultDir);
         return ad;
     }
 

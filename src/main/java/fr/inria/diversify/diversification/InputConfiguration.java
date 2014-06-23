@@ -101,6 +101,9 @@ public class InputConfiguration {
         prop.setProperty("stat", "false");
         prop.setProperty("sosie", "false");
 
+        //Indicates if the Diversify must report early
+        prop.setProperty("early.report", "0");
+
         //tempory directory
         prop.setProperty("tmpDir", "tmpDir");
 

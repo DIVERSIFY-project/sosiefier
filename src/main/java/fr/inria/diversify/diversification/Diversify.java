@@ -1,13 +1,19 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.statistic.RunResults;
+import fr.inria.diversify.statistic.SessionResults;
 import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.transformation.query.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.codehaus.plexus.util.FileUtils;
+import org.json.JSONException;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -20,6 +26,12 @@ import java.util.ListIterator;
  * Time: 5:39 PM
  */
 public class Diversify extends AbstractDiversify {
+
+    /**
+     * Session report
+     */
+    SessionResults sessionResults;
+
     /**
      * Number of compiled errors
      */
@@ -39,6 +51,11 @@ public class Diversify extends AbstractDiversify {
      *  loosing all the information
      */
     private boolean earlyReport = false;
+
+    /**
+     * Indicates if we must early report sosies only
+     */
+    private boolean earlyReportSosiesOnly = false;
 
     /** Reports results on every step. Slower, but allows to stop the process without
      *  loosing all the information
@@ -67,6 +84,12 @@ public class Diversify extends AbstractDiversify {
     @Override
     public void run(int n) throws Exception {
 
+        sessionResults = new SessionResults();
+
+        if ( earlyReport && !(new File(getResultDir()).exists()) ) {
+            mkDirResult(getResultDir());
+        }
+
         trial = 0;
         sosie = 0;
 
@@ -80,7 +103,8 @@ public class Diversify extends AbstractDiversify {
             //The amount of transformations are given in the query by the InputProgram
             transQuery.query();
             //Run transformations found
-            run(transQuery.getTransformations());
+            Collection<Transformation> ts = transQuery.getTransformations();
+            run(ts);
         }
         FileUtils.cleanDirectory(tmpDir);
         FileUtils.forceDelete(tmpDir);
@@ -91,8 +115,6 @@ public class Diversify extends AbstractDiversify {
 
     @Override
     protected void run(Collection<Transformation> trans) throws Exception {
-
-
         Log.info("number of diversification: " + trans.size());
         int i = 0;
         for (Transformation tran : trans) {
@@ -128,6 +150,28 @@ public class Diversify extends AbstractDiversify {
         Log.debug("{} setCompile error on {} compilation", compileError, trans.size());
         Log.debug("{} sosie on {} trial", sosie, trial);
         Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+        if ( earlyReport && getResultDir() != null ) {
+            if ( earlyReportSosiesOnly == false || status == 0 ) {
+                try {
+                    RunResults result = new RunResults();
+                    result.setId(trial);
+                    result.setStatus(status);
+                    result.setTransformations(trans);
+                    result.setFailedTests(builder.getErrors());
+                    result.saveToFile(getResultDir() + "/" + "session_" + sessionResults.getBeginTime() +
+                            "_trial_" + trial + "_size_" + trans.size() + "_stat_" + status + ".json");
+                    sessionResults.addRunResults(result);
+                    sessionResults.saveReport(getResultDir() + "/session_" + sessionResults.getBeginTime() + ".txt" );
+                } catch ( IOException e ) {
+                    Log.warn("Cannot output early report: ", e);
+                } catch ( JSONException e ) {
+                    //Not my mf problem!! (Hard rock in the background)
+                    throw e;
+                }
+
+            }
+        }
     }
 
     protected void run(Transformation trans, String tmpDir) throws Exception {
@@ -160,4 +204,14 @@ public class Diversify extends AbstractDiversify {
     }
 
 
+    /**
+     * Indicates if we must early report sosies only
+     */
+    public boolean getEarlyReportSosiesOnly() {
+        return earlyReportSosiesOnly;
+    }
+
+    public void setEarlyReportSosiesOnly(boolean earlyReportSosiesOnly) {
+        this.earlyReportSosiesOnly = earlyReportSosiesOnly;
+    }
 }

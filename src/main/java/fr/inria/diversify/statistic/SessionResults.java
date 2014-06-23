@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Class to store information of a session (i.e several runs of a Diversified program)
@@ -12,6 +15,8 @@ import java.util.ArrayList;
  * Created by marcel on 22/06/14.
  */
 public class SessionResults {
+
+    private String beginTime;
 
     /**
      * Transformation size of a Run Result. As for now this number is constant during the whole session
@@ -57,6 +62,10 @@ public class SessionResults {
         sosieCount = 0;
         testFailedCount = 0;
         compileFailedCount = 0;
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
+        Date date = new Date();
+        beginTime = dateFormat.format(date);
         //runResults = new ArrayList<>();
     }
 
@@ -90,5 +99,12 @@ public class SessionResults {
 
     public int getCompileFailedCount() {
         return compileFailedCount;
+    }
+
+    /**
+     * A nice string with the time of the construction of the session
+     */
+    public String getBeginTime() {
+        return beginTime;
     }
 }

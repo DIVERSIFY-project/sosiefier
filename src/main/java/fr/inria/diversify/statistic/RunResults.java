@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Class to store and retrieve information on the results of each Diversify run
@@ -28,7 +29,7 @@ public class RunResults {
     /**
      * Description of the test failed for this transformation
      */
-    private ArrayList<String> failedTests;
+    private List<String> failedTests;
 
     /**
      * List of transformations applied in the run already serialized to JSON
@@ -138,6 +139,18 @@ public class RunResults {
         return transformationsJSON;
     }
 
+    public void setTransformations(Collection<Transformation> transformations) {
+        JSONArray array = new JSONArray();
+        for ( Transformation t : transformations ) {
+            try {
+                array.put(t.toJSONObject());
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        setTransformations(array);
+    }
+
     public void setTransformations(JSONArray transformations) {
         this.transformationsJSON = transformations;
     }
@@ -145,11 +158,11 @@ public class RunResults {
     /**
      * Description of the test failed for this transformation
      */
-    public ArrayList<String> getFailedTests() {
+    public List<String> getFailedTests() {
         return failedTests;
     }
 
-    public void setFailedTests(ArrayList<String> failedTests) {
+    public void setFailedTests(List<String> failedTests) {
         this.failedTests = failedTests;
     }
 
