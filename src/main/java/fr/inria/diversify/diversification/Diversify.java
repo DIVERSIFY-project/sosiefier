@@ -179,10 +179,7 @@ public class Diversify extends AbstractDiversify {
     protected void copySosieProgram() throws IOException {
         //Store the whole sosie program.
         if ( getSocieSourcesDir() != null && (new File(getSocieSourcesDir()).exists()) ) {
-            File source = new File(tmpDir);
             String destPath = getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
-            File dest = new File(destPath);
-
 
             boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
             boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
@@ -191,10 +188,11 @@ public class Diversify extends AbstractDiversify {
             boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
 
             if ( intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest ) {
-                Instru instru = new Instru(projectDir, tmpDir, inputConfiguration.getProperty("testSrc"), destPath);
+                Instru instru = new Instru(
+                        tmpDir, tmpDir + "/" + sourceDir,
+                        tmpDir + "/" + inputConfiguration.getProperty("testSrc"), destPath);
                 instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
             }
-            org.apache.commons.io.FileUtils.copyDirectory(source, dest);
         }
     }
 
