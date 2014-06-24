@@ -12,12 +12,12 @@ import fr.inria.diversify.util.Log;
  */
 public class DiversifyWithParent extends Diversify {
 
-    public DiversifyWithParent(TransformationQuery transQuery, String projectDir) {
-        super(transQuery, projectDir);
+    public DiversifyWithParent(InputConfiguration inputConfiguration, TransformationQuery transQuery, String projectDir) {
+        super(inputConfiguration, transQuery, projectDir);
     }
 
-    public DiversifyWithParent(String projectDir, String workingDir) {
-       super(projectDir,workingDir);
+    public DiversifyWithParent(InputConfiguration inputConfiguration, String projectDir, String workingDir) {
+       super(inputConfiguration, projectDir,workingDir);
     }
 
 

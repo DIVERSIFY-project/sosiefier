@@ -18,6 +18,12 @@ import java.util.List;
  * Time: 3:05 PM
  */
 public abstract class AbstractDiversify {
+
+    /**
+     * The original temporal directory. This is a patch. Sometimes we cannot delete the tmpDir
+     */
+    protected String originalTmpDir;
+
     /**
      * Directory project
      */
@@ -41,6 +47,12 @@ public abstract class AbstractDiversify {
      */
     private String socieSourcesDir = null;
 
+    /**
+     * The original temporal directory. This is a patch. Sometimes we cannot delete the tmpDir
+     */
+    public String getOriginalTmpDir() { return originalTmpDir; }
+
+    public void setOriginalTmpDir(String originalTmpDir) { this.originalTmpDir = originalTmpDir; }
 
     public void setTransformationQuery(TransformationQuery transQuery) {
         this.transQuery = transQuery;
@@ -157,12 +169,29 @@ public abstract class AbstractDiversify {
      * @throws InterruptedException
      */
     public String init(String dirProject, String dirTarget) throws IOException, InterruptedException {
+        originalTmpDir = dirTarget;
         tmpDir = dirTarget + "/tmp_" + System.currentTimeMillis();
         File dir = new File(tmpDir);
         dir.mkdirs();
         FileUtils.copyDirectory(new File(dirProject), dir);
 
         return tmpDir;
+    }
+
+    /**
+     * Delete the temporal files that we have created
+     */
+    public void deleteTmpFiles() {
+        try {
+            org.codehaus.plexus.util.FileUtils.cleanDirectory(tmpDir);
+            org.codehaus.plexus.util.FileUtils.forceDelete(tmpDir);
+        } catch (IOException e) {
+            try {
+                init(projectDir, originalTmpDir);
+            } catch (Exception e1) {
+                throw new RuntimeException(e1);
+            }
+        }
     }
 
     protected Integer runTest(String directory) throws InterruptedException, CompileException, InstantiationException, IllegalAccessException {

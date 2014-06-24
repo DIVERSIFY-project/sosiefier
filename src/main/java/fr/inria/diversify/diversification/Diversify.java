@@ -1,5 +1,6 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.statistic.SessionResults;
 import fr.inria.diversify.transformation.AbstractTransformation;
@@ -22,6 +23,11 @@ import java.util.Collection;
  * Time: 5:39 PM
  */
 public class Diversify extends AbstractDiversify {
+
+    /**
+     * Input configuration
+     */
+    InputConfiguration inputConfiguration;
 
     /**
      * Session report
@@ -61,17 +67,17 @@ public class Diversify extends AbstractDiversify {
         this.earlyReport = earlyReport;
     }
 
-    public Diversify(TransformationQuery transQuery, String projectDir) {
+    public Diversify(InputConfiguration inputConfiguration, TransformationQuery transQuery, String projectDir) {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
     }
 
-    public Diversify(String projectDir, String workingDir) {
+    public Diversify(InputConfiguration inputConfiguration, String projectDir, String workingDir) {
         this.sourceDir = workingDir;
         this.projectDir = projectDir;
-
         transformations = new ArrayList<>();
+        this.inputConfiguration = inputConfiguration;
     }
 
     @Override
@@ -99,8 +105,6 @@ public class Diversify extends AbstractDiversify {
             Collection<Transformation> ts = transQuery.getTransformations();
             run(ts);
         }
-        FileUtils.cleanDirectory(tmpDir);
-        FileUtils.forceDelete(tmpDir);
 
         Log.debug("{} setCompile error on {} compilation", compileError, n);
         Log.debug("{} sosie on {} trial", sosie, trial);
@@ -167,11 +171,29 @@ public class Diversify extends AbstractDiversify {
                 }
             }
         }
+        if ( status == 0 ) {
+            copySosieProgram();
+        }
+    }
 
+    protected void copySosieProgram() throws IOException {
         //Store the whole sosie program.
-        if ( status == 0 && getSocieSourcesDir() != null && (new File(getSocieSourcesDir()).exists()) ) {
+        if ( getSocieSourcesDir() != null && (new File(getSocieSourcesDir()).exists()) ) {
             File source = new File(tmpDir);
-            File dest = new File(getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial);
+            String destPath = getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
+            File dest = new File(destPath);
+
+
+            boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
+            boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
+            boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError"));
+            boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert"));
+            boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
+
+            if ( intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest ) {
+                Instru instru = new Instru(projectDir, tmpDir, inputConfiguration.getProperty("testSrc"), destPath);
+                instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
+            }
             org.apache.commons.io.FileUtils.copyDirectory(source, dest);
         }
     }

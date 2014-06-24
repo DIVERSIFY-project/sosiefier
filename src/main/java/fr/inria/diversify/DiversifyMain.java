@@ -96,6 +96,7 @@ public class DiversifyMain {
             if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
             else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
         }
+        abstractDiversify.deleteTmpFiles();
     }
 
     protected AbstractDiversify initAbstractDiversify() throws Exception {
@@ -104,9 +105,9 @@ public class DiversifyMain {
         String src = DiversifyProperties.getProperty("src");
         String resultDir = DiversifyProperties.getProperty("result");
         if (DiversifyProperties.getProperty("transformation.type").equals("mutationToSosie"))
-            ad = new DiversifyWithParent(projet, src);
+            ad = new DiversifyWithParent(inputConfiguration, projet, src);
         else if (DiversifyProperties.getProperty("sosie").equals("false")) {
-            ad = new Diversify(projet, src);
+            ad = new Diversify(inputConfiguration, projet, src);
             boolean early = DiversifyProperties.getProperty("early.report","false").equals("true");
             ((Diversify)ad).setEarlyReport(early);
             ad.setSocieSourcesDir(DiversifyProperties.getProperty("copy.sosie.sources.to", ""));
