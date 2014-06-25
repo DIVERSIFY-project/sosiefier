@@ -66,10 +66,12 @@ public class KnownSosieQuery extends TransformationQuery {
 
             Random r = new Random();
             if ( nb > sosies.size() ) nb = sosies.size();
-            while (transformations.size() < nb ) {
+            int attempts = 0;
+            while (transformations.size() < nb && attempts <= sosies.size() ) {
                 int index = r.nextInt(sosies.size());
                 Transformation t = sosies.get(index);
-                if ( !transformations.contains(t) ) { transformations.add(t); }
+                if ( canBeMerged(t) ) { transformations.add(t); }
+                attempts++;
             }
 
         } catch (TransformationParserException e) {
@@ -85,7 +87,16 @@ public class KnownSosieQuery extends TransformationQuery {
      * @return
      */
     protected boolean canBeMerged(Transformation t) {
-        return true;
+
+        boolean result = true;
+        ASTTransformation ast = (ASTTransformation) t;
+        String classFileT = ast.getTransplantationPoint().getCompilationUnit().getFile().getName();
+        for (int i = 0; i < transformations.size() && result; i++) {
+            ASTTransformation a = (ASTTransformation) transformations.get(i);
+            String classFileA = a.getTransplantationPoint().getCompilationUnit().getFile().getName();
+            result &= result && !classFileA.equals(classFileT);
+        }
+        return result;
     }
 
 }
