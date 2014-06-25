@@ -48,7 +48,6 @@ public class CompareStackTrace {
                 diffs.add(tmp);
             }
         }
-//        formatAndAddCallDiff(diffs);
         return diffs;
     }
 
@@ -182,47 +181,4 @@ public class CompareStackTrace {
         st2.previous(undo);
         return same;
     }
-
-
-//    protected boolean valueEqual(String v1, String v2) {
-//        if(v1 == null || v2 == null) {
-//            return true;
-//        }
-//        Object o1;
-//        Object o2;
-//        if((v1.startsWith("{") && v1.endsWith("}")) ||
-//                v1.startsWith("[") && v1.endsWith("]")) {
-//            o1 = equalListString(v1);
-//        }
-//        else
-//            o1 = equalString(v1);
-//
-//        if((v2.startsWith("{") && v2.endsWith("}")) ||
-//                v2.startsWith("[") && v2.endsWith("]")) {
-//            o2 = equalListString(v2);
-//        }
-//        else
-//            o2 = equalString(v2);
-//
-//        return  o1.equals(o2);
-//    }
-//
-//    protected String equalString(String var) {
-//        if(var.contains("@") && var.split("@").length != 0)
-//            return var.split("@")[0];
-//        return  var;
-//    }
-//
-//    protected Collection<String> equalListString(String var) {
-//        Collection<String> collection;
-//        if(var.startsWith("{"))
-//            collection = new HashSet<>();
-//        else
-//            collection = new ArrayList<>();
-//
-//        for(String s : var.substring(1,var.length()-1).split(", "))
-//            collection.add(equalString(s));
-//
-//        return  collection;
-//    }
 }

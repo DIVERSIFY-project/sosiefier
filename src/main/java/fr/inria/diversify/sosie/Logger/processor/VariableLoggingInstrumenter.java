@@ -54,12 +54,7 @@ public class VariableLoggingInstrumenter extends AbstractProcessor<CtStatement> 
 
     public void process(CtStatement statement) {
         try {
-//
-//            if (CtThrow.class.isAssignableFrom(statement.getClass())) {
-//                instruThrow((CtThrow) statement);
-//            } else {
-                instruLoopOrIf(statement);
-//            }
+            instruLoopOrIf(statement);
         } catch (Exception e) {}
     }
 
