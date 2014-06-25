@@ -55,7 +55,7 @@ public class DiversifyMain {
     /**
      * The input configuration given by the user is parsed by this class which helps other parts of the program to
      * interact with the input parameters
-     */
+ s    */
     private InputConfiguration inputConfiguration;
 
     public DiversifyMain(String propertiesFile) throws Exception {
@@ -85,17 +85,15 @@ public class DiversifyMain {
         AbstractDiversify abstractDiversify = initAbstractDiversify();
 
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
-        int max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
-        int min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
+        int size = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
         TransformationQuery query = initTransformationQuery();
-        for ( int i = min; i <= max; i++ ) {
-            inputProgram.setTransformationPerRun(i);
-            abstractDiversify.setTransformationQuery(query);
-            abstractDiversify.run(n);
-            String repo = DiversifyProperties.getProperty("gitRepository");
-            if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
-            else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
-        }
+        inputProgram.setTransformationPerRun(size);
+        abstractDiversify.setTransformationQuery(query);
+        abstractDiversify.run(n);
+        String repo = DiversifyProperties.getProperty("gitRepository");
+        if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
+        else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
+
         abstractDiversify.deleteTmpFiles();
     }
 
