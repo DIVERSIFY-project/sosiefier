@@ -121,26 +121,28 @@ test <- function(data,selector) {
 
 test2 <- function(data) {
   frame <- data.frame()
-  for(i in set(data[,"name"])) {
+  for(i in c("addRandom","replaceRandom","addReaction","replaceReaction","addWittgenstein","replaceWittgenstein", "addSteroid","replaceSteroid","delete" )) {
+    print(i)
     frame <- rbind(frame,test(data,i));
   }
   t <- t(as.matrix(frame[,2:4]))
-  barplot(t, col=c("red", "darkblue","darkgreen"), beside = TRUE, names.arg = frame$name, ylim=c(0,100))  
+  t2 <- factor(t, c("addRandom","replaceRandom","addReaction","replaceReaction","addittgenstein","replaceWittgenstein","add","delete","replace"))
+  t3 <- sort(table(t2), decreasing = TRUE)
+  barplot(t, col=c("red", "darkblue","darkgreen"), beside = TRUE, names.arg = frame$name, ylim=c(0,100), xlab="type of transformation", ylab="rate over the total number of trials")  
 }
 
 
 test3 <- function() {
   f1 <- data.frame(name=c("easymock"), diversity=c(46.88),"call diversity"=c(34.62),
-                   "var. diversity"=c(29.89))
+                   "var diversity"=c(29.89))
   
   f2 <- data.frame(name=c("dagger"), diversity=c(66.94),"call diversity"=c(66.32),
-                   "var. diversity"=c(3.95))
+                   "var diversity"=c(3.95))
   
   f3 <- data.frame(name=c("junit"), diversity=c(45.96),"call diversity"=c(43.5),
                    "var diversity"=c(21.3))
   
   frame <- rbind(f1,f2,f3)
   t <- t(as.matrix(frame[,2:4]))
-  barplot(t, col=c("red", "darkblue","darkgreen"), beside = TRUE, names.arg = frame$name,, ylim=c(0,70),legend.text = TRUE)  
-  
+  barplot(t, col=c("purple", "blue","green"), beside = TRUE, names.arg = frame$name,, ylim=c(0,70),legend.text = TRUE, ylab="rate of sosies")  
 }
