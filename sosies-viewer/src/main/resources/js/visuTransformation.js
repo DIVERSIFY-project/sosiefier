@@ -17,6 +17,7 @@ buildVisu = function (jsonArray, dataPath) {
         var visu = new Visu(jsonData);
         visu.draw();
         dataDir = dataPath;
+    console.log(dataPath)
 };
 
 $(document).find('#random-button').click(function () {
