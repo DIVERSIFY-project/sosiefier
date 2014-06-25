@@ -23,8 +23,8 @@ import java.util.Map;
  * Time: 11:32
  */
 public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
-    protected static Map<CtExecutable,Integer> count = new HashMap<CtExecutable, Integer>();
-    protected static Map<String,String> idMap = new HashMap<String, String>();
+    protected static Map<CtExecutable,Integer> count = new HashMap();
+    protected static Map<String,String> idMap = new HashMap();
 
     @Override
     public boolean isToBeProcessed(CtInvocation<?> candidate) {
@@ -38,8 +38,8 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
         SourcePosition sp = invocation.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
         String snippet = "";
-        List<String> assertVar = new ArrayList<String>();
-        List<String> types = new ArrayList<String>();
+        List<String> assertVar = new ArrayList();
+        List<String> types = new ArrayList();
 
         for(CtExpression expression : invocation.getArguments()) {
             String var = "asssertVar_"+getCount(invocation);
