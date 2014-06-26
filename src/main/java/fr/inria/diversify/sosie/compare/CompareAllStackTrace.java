@@ -23,13 +23,23 @@ public class CompareAllStackTrace {
     protected List<Diff> diffToExclude;
     protected Collection<Diff> diffs;
 
-    protected Map<StackTrace, Report> reports;
+    protected Map<String, Report> reports;
+    protected JSONObject previousReport;
 
-    public CompareAllStackTrace(String dirOriginal, String dirSosie, String diffFile) throws IOException {
+    public CompareAllStackTrace(String dirOriginal, String dirSosie, String diffFile, JSONObject previousReport) throws IOException, JSONException {
         stackTraces1 = loadLog(dirOriginal, false);
         stackTraces2 = loadLog(dirSosie, false);
         diffToExclude = parseDiff(diffFile);
         reports = new HashMap();
+        if(previousReport != null) {
+            Log.debug("previousReport used");
+
+            reports.put("allTest", new Report(previousReport.getJSONObject("allTest")));
+            Log.debug(reports.get("allTest").summary());
+        } else {
+            reports.put("allTest", new Report());
+        }
+        this.previousReport = previousReport;
     }
 
 //    /**
@@ -66,9 +76,17 @@ public class CompareAllStackTrace {
             for (StackTrace sosie : stackTraces2) {
                 if (sosie.getFullName().equals(original.getFullName())) {
                     CompareStackTrace cls = new CompareStackTrace(original, sosie);
-                    Log.debug("compare: {}", original.getFullName());
+//                    Log.debug("compare: {}", original.getFullName());
                     diffs.addAll(diffOperator.apply(cls));
-                    reports.put(original,cls.getReport());
+
+                    Report report = cls.getReport();
+                    reports.get("allTest").merge(report);
+                    if(previousReport != null && previousReport.has(original.getName())) {
+                       report.merge(previousReport.getJSONObject(original.getName()));
+                        reports.put(original.getName(), report);
+                    } else {
+                        reports.put(original.getName(), report);
+                    }
                 }
             }
         }
@@ -132,7 +150,7 @@ public class CompareAllStackTrace {
                         list.add(st);
                     }
                 } catch (Exception e) {
-                    Log.debug("",e);
+                    Log.debug("error for: {}",f.getAbsoluteFile());
                 }
             }
         }
@@ -162,7 +180,7 @@ public class CompareAllStackTrace {
                                 testToExclude.add(test);
                                 trace = traceByTest.get(test);
                             } else {
-                                Log.debug("New test: {}",test);
+//                                Log.debug("New test: {}",test);
                                 trace = new LinkedList<>();
                                 traceByTest.put(test, trace);
                             }
@@ -229,26 +247,27 @@ public class CompareAllStackTrace {
 
     public JSONObject buildReport() throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        Report allTest = new Report();
-        for(StackTrace st : reports.keySet()) {
+        for(String st : reports.keySet()) {
             Report report = reports.get(st);
-            jsonObject.put(st.getName(),report.buildReport());
-            allTest.merge(report);
+            jsonObject.put(st,report.buildReport());
         }
-        jsonObject.put("allTest",allTest.buildReport());
+        if(previousReport != null) {
+            Iterator it = previousReport.keys();
+            while (it.hasNext()) {
+                String key = (String) it.next();
+                if (!reports.containsKey(key)) jsonObject.put(key, previousReport.getJSONObject(key));
+            }
+        }
+        Log.debug("AllTest: "+reports.get("allTest").summary());
         return jsonObject;
     }
 
-    public JSONObject buildReport(JSONObject previousReport) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        Report allTest = new Report();
-        for(StackTrace st : reports.keySet()) {
-            Report report = reports.get(st);
 
-            jsonObject.put(st.getName(),report.buildReport(previousReport.getJSONObject(st.getName())));
-            allTest.merge(report);
+    public String summary()  {
+        String summary = "";
+        for(String st : reports.keySet()) {
+            summary += reports.get(st).summary() + "-----------------------\n"+st+"\n";
         }
-        jsonObject.put("allTest",allTest.buildReport(previousReport.getJSONObject("allTest")));
-        return jsonObject;
+        return summary;
     }
 }

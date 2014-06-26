@@ -56,15 +56,19 @@ public class Main {
 
     protected void same() throws Exception {
         try {
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
+            String previousReport = DiversifyProperties.getProperty("previousReport");
+            JSONObject pr = null;
+            if(previousReport != null) {
+                pr = loadJSON(previousReport);
+            }
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, pr);
             Set<Diff> diff = un.findDiff();
             writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff",  diffUnion(diff, un.getDiffToExclude()));
-            String previousReport = DiversifyProperties.getProperty("previousReport");
-            if(previousReport != null) {
-                writeReport(DiversifyProperties.getProperty("result") + "/report.json", un.buildReport(loadJSON(previousReport)));
-            } else {
-                writeReport(DiversifyProperties.getProperty("result") + "/report.json", un.buildReport());
-            }
+
+
+
+                writeReport(DiversifyProperties.getProperty("result") + "/report", un);
+
 
         } catch (Exception e) {
             Log.error("error",e);
@@ -75,7 +79,7 @@ public class Main {
 
     protected void diff() throws Exception {
         try {
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, null);
             Set<Diff> diff = un.findDiff();
             writeDiff(DiversifyProperties.getProperty("result")+"/excludeDiff",diff);
         } catch (Exception e) {
@@ -123,13 +127,23 @@ public class Main {
         writer.close();
     }
 
-    protected void writeReport(String fileName, JSONObject jsonObject) throws IOException {
-        Log.debug("write report in {}", fileName);
-        File file = new File(fileName);
+    protected void writeReport(String fileName, CompareAllStackTrace compareTraces) throws IOException, JSONException {
+
+        Log.debug("write report in {}.json", fileName);
+        File file = new File(fileName+".json");
         file.createNewFile();
         FileWriter writer = new FileWriter(file);
 
-        writer.write(jsonObject.toString());
+        writer.write(compareTraces.buildReport().toString());
+
+        writer.close();
+
+        file = new File(fileName+".txt");
+        file.createNewFile();
+        writer = new FileWriter(file);
+
+        writer.write(compareTraces.summary());
+
         writer.close();
     }
 

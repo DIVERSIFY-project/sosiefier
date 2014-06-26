@@ -6,10 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Simon on 26/06/14.
@@ -28,9 +25,13 @@ public class Report {
         init();
     }
 
+    public Report(JSONObject object) throws JSONException {
+        parseJSONObject(object);
+    }
+
     public void updateVar(Map<String, Object> vars, StackTraceCall call) {
         for(String var: vars.keySet()) {
-            String key = call.getId() + ":" + var;
+            String key = call.getMethod() + ":" + var;
             String newValue = vars.get(var).toString();
             if (variable.containsKey(key)) {
                 String previousValue = variable.get(key);
@@ -44,49 +45,16 @@ public class Report {
 
     public void updateVarDiff(Set<VariableDiff> diffs) {
         for (VariableDiff diff: diffs) {
-            String key = diff.getDiffStart().getId() + ":" + diff.getVarDiff();
+            String key = diff.getDiffStart().getMethod() + ":" + diff.getVarDiff();
             if(variable.containsKey(key))
                 variableDiff.add(key);
         }
     }
 
-    public JSONObject buildReport() throws JSONException {
-        Set<String> variableConst = new HashSet();
-        Set<String> variableConstDiff = new HashSet();
-        Set<String> variableEvol = new HashSet();
-        Set<String> variableEvolDiff = new HashSet();
-
-        for(String var : variable.keySet()) {
-            if(variableDiff.contains(var)) {
-                if (variableChange.get(var)) { variableEvolDiff.add(var);}
-                else {variableConstDiff.add(var);}
-            } else {
-                if (variableChange.get(var)) { variableEvol.add(var);}
-                else {variableConst.add(var);}
-            }
-        }
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("variableConst",variableConst);
-        jsonObject.put("variableConstDiff",variableConstDiff);
-        jsonObject.put("variableEvol",variableEvol);
-        jsonObject.put("variableEvolDiff",variableEvolDiff);
-
-        HashSet sameCall = new HashSet();
-        sameCall.addAll(methodCall);
-        sameCall.removeAll(diffCall);
-        jsonObject.put("sameCall",sameCall);
-        jsonObject.put("diffCall",diffCall);
-        Log.info("----------------------------");
-        Log.info("variableConst: {}", variableConst.size());
-        Log.info("variableConstDiff: {}", variableConstDiff.size());
-        Log.info("variableEvol: {}", variableEvol.size());
-        Log.info("variableEvolDiff: {}", variableEvolDiff.size());
-        Log.info("sameCall: {}", sameCall.size());
-        Log.info("diffCall: {}", diffCall.size());
-
-        return jsonObject;
+    public void merge(JSONObject otherReport) throws JSONException {
+        Report other = new Report(otherReport);
+        this.merge(other);
     }
-
     public void merge(Report other){
         variable.putAll(other.variable);
         variableDiff.addAll(other.variableDiff);
@@ -109,11 +77,11 @@ public class Report {
     }
 
     public void addSameMethodCall(StackTraceCall top) {
-        methodCall.add(top.getId());
+        methodCall.add(top.getMethod());
     }
 
     public void addDiffMethodCall(StackTraceCall top) {
-        diffCall.add(top.getId());
+        diffCall.add(top.getMethod());
     }
 
     protected void init() {
@@ -125,61 +93,96 @@ public class Report {
     }
 
     public JSONObject buildReport(JSONObject otherReport) throws JSONException {
-        Set<String> otherVariableConst = parseJSONArray(otherReport.getJSONArray("variableConst"));
-        Set<String> otherVariableConstDiff = parseJSONArray(otherReport.getJSONArray("variableConstDiff"));
-        Set<String> otherVariableEvol = parseJSONArray(otherReport.getJSONArray("variableEvol"));
+        Report other = new Report(otherReport);
+        this.merge(other);
 
-        Set<String> otherSameCall = parseJSONArray(otherReport.getJSONArray("sameCall"));
-        Set<String> otherDiffCall = parseJSONArray(otherReport.getJSONArray("diffCall"));
+        return buildReport();
+    }
 
+    public String summary() {
         Set<String> variableConst = new HashSet();
         Set<String> variableConstDiff = new HashSet();
         Set<String> variableEvol = new HashSet();
         Set<String> variableEvolDiff = new HashSet();
 
         for(String var : variable.keySet()) {
-            if(!variableDiff.contains(var) && (otherVariableConst.contains(var) || otherVariableEvol.contains(var))) {
-                if (!variableChange.get(var) && otherVariableConst.contains(var)) { variableConst.add(var);}
-                else {variableEvol.add(var);}
+            if(variableDiff.contains(var)) {
+                if (variableChange.get(var)) { variableEvolDiff.add(var);}
+                else {variableConstDiff.add(var);}
             } else {
-                if (!variableChange.get(var) && otherVariableConstDiff.contains(var)) { variableConstDiff.add(var);}
-                else {variableEvolDiff.add(var);}
+                if (variableChange.get(var)) { variableEvol.add(var);}
+                else {variableConst.add(var);}
             }
         }
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("variableConst",variableConst);
-        jsonObject.put("variableConstDiff",variableConstDiff);
-        jsonObject.put("variableEvol",variableEvol);
-        jsonObject.put("variableEvolDiff",variableEvolDiff);
-
-        HashSet tmpDiffCall = new HashSet();
-        tmpDiffCall.addAll(diffCall); tmpDiffCall.addAll(otherDiffCall);
-
         HashSet sameCall = new HashSet();
-        sameCall.addAll(methodCall); sameCall.addAll(otherSameCall); sameCall.addAll(otherDiffCall);
-        sameCall.removeAll(tmpDiffCall);
-        jsonObject.put("sameCall",sameCall);
-        jsonObject.put("diffCall",tmpDiffCall);
+        sameCall.addAll(methodCall);
+        sameCall.removeAll(diffCall);
 
-        Log.info("----------------------------");
-        Log.info("variableConst: {}", variableConst.size());
-        Log.info("variableConstDiff: {}", variableConstDiff.size());
-        Log.info("variableEvol: {}", variableEvol.size());
-        Log.info("variableEvolDiff: {}", variableEvolDiff.size());
-        Log.info("sameCall: {}", sameCall.size());
-        Log.info("diffCall: {}", diffCall.size());
+        String summary = "";
+        summary += "variableConst: " + variableConst.size() + "\n";
+        summary += "variableConstDiff: " + variableConstDiff.size() + "\n";
+        summary += "variableEvol: " + variableEvol.size() + "\n";
+        summary += "variableEvolDiff: " + variableEvolDiff.size() + "\n";
+        summary += "sameCall: " + sameCall.size() + "\n";
+        summary += "diffCall: " + diffCall.size() + "\n";
+
+        return summary;
+    }
+
+    public JSONObject buildReport() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("methodCall",methodCall);
+        jsonObject.put("diffCall",diffCall);
+        jsonObject.put("variable",variable);
+        jsonObject.put("variableChange",variableChange);
+        jsonObject.put("variableDiff",variableDiff);
 
         return jsonObject;
     }
 
+    public void parseJSONObject(JSONObject jsonObject) throws JSONException {
+        diffCall = parseJSONArray(jsonObject.getJSONArray("diffCall"));
+        methodCall = parseJSONArray(jsonObject.getJSONArray("methodCall"));
+
+        variableDiff = parseJSONArray(jsonObject.getJSONArray("variableDiff"));
+        variable = parseVariableValue(jsonObject.getJSONObject("variable"));
+        variableChange = parseVariableChange(jsonObject.getJSONObject("variableChange"));
+    }
+
     protected Set<String> parseJSONArray(JSONArray array) throws JSONException {
-        HashSet<String> set = new HashSet();
+        HashSet<String> set = new HashSet(array.length());
 
         for(int i = 0; i < array.length(); i++) {
             set.add(array.getString(i));
         }
 
         return set;
+    }
+
+    protected Map<String,String> parseVariableValue(JSONObject map) throws JSONException {
+        HashMap<String,String> variableValue = new HashMap();
+
+        Iterator it = map.keys();
+        while(it.hasNext()) {
+            String o = (String) it.next();
+            ;
+            variableValue.put(o,map.getString(o));
+        }
+
+        return variableValue;
+    }
+
+    protected Map<String,Boolean> parseVariableChange(JSONObject map) throws JSONException {
+        HashMap<String,Boolean> variableChange = new HashMap();
+
+        Iterator it = map.keys();
+        while(it.hasNext()) {
+            String o = (String) it.next();
+            variableChange.put(o,map.getBoolean(o));
+        }
+
+        return variableChange;
     }
 }
