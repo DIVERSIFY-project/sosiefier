@@ -110,16 +110,16 @@ public class StackTrace {
         stackTraceOperations.add(new StackTracePush(elem));
     }
 
-    protected StackTraceElement parseElement(String type, int deep, String value, Map<String, String> idMap) {
+    protected StackTraceElement parseElement(String type, int deep, String id, Map<String, String> idMap) {
         StackTraceElement st = null;
         if(type.equals("M"))
-            st = new StackTraceCall(value, deep, idMap);
+            st = new StackTraceCall(id, deep, idMap);
         if(type.equals("V"))
-            st = new StackTraceVariable(value, deep, idMap);
+            st = new StackTraceVariable(id, deep, idMap);
         if(type.equals("E"))
-            st = new StackTraceException(value, deep);
+            st = new StackTraceException(id, deep);
         if(type.equals("C"))
-            st = new StackTraceCatch(value, deep);
+            st = new StackTraceCatch(id, deep);
 
         return st;
     }

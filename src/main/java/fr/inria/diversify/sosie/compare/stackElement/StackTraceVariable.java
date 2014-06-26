@@ -7,14 +7,15 @@ import java.util.*;
  */
 public class StackTraceVariable extends StackTraceElement {
     protected Map<String,Object> vars;
-    protected int id;
+    protected int id2;
 
 
     public StackTraceVariable(String value, int deep, Map<String, String> idMap) {
         originalDeep = deep;
         String[] tmp = value.split(":;:");
         String[] idTmp = tmp[0].split(";");
-        id = Integer.parseInt(idTmp[0]);
+        id2 = Integer.parseInt(idTmp[0]);
+        id = idTmp[1];
         method = idMap.get(idTmp[1]);
 
         vars = new HashMap<>();

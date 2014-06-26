@@ -6,6 +6,7 @@ package fr.inria.diversify.sosie.compare.stackElement;
 public class StackTraceElement {
     protected int originalDeep;
     protected String method;
+    protected String id;
 
     public int getOriginalDeep() {
         return originalDeep;
@@ -13,5 +14,9 @@ public class StackTraceElement {
 
     public String getMethod() {
         return method;
+    }
+
+    public String getId() {
+        return id;
     }
 }

@@ -13,7 +13,7 @@ public class CallDiff extends Diff {
     protected int maxStackDiff;
 
 
-    public CallDiff(StackTraceElement diffStart, int maxStackDiff) {
+    public CallDiff(StackTraceCall diffStart, int maxStackDiff) {
         this.diffStart = diffStart;
         this.maxStackDiff = maxStackDiff;
     }

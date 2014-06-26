@@ -2,10 +2,13 @@ package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.sosie.compare.diff.CallDiff;
 import fr.inria.diversify.sosie.compare.diff.Diff;
+import fr.inria.diversify.sosie.compare.diff.Report;
 import fr.inria.diversify.sosie.compare.diff.VariableDiff;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.util.*;
@@ -20,30 +23,33 @@ public class CompareAllStackTrace {
     protected List<Diff> diffToExclude;
     protected Collection<Diff> diffs;
 
+    protected Map<StackTrace, Report> reports;
+
     public CompareAllStackTrace(String dirOriginal, String dirSosie, String diffFile) throws IOException {
         stackTraces1 = loadLog(dirOriginal, false);
         stackTraces2 = loadLog(dirSosie, false);
         diffToExclude = parseDiff(diffFile);
+        reports = new HashMap();
     }
 
-    /**
-     * search if the original and sosie (two set of trace) not diverge at the call level
-     *
-     * @throws java.io.IOException
-     */
-    public Set<Diff> findCallDiff() throws Exception {
-        return findDiff(cls -> cls.findCallDiff());
-    }
-
-
-    /**
-     * search if the original and sosie (two set of trace) not diverge at the  variable level
-     *
-     * @throws java.io.IOException
-     */
-    public Set<Diff> findVariableDiff() throws Exception {
-        return findDiff(cls -> cls.findVariableDiff());
-    }
+//    /**
+//     * search if the original and sosie (two set of trace) not diverge at the call level
+//     *
+//     * @throws java.io.IOException
+//     */
+//    public Set<Diff> findCallDiff() throws Exception {
+//        return findDiff(cls -> cls.findCallDiff());
+//    }
+//
+//
+//    /**
+//     * search if the original and sosie (two set of trace) not diverge at the  variable level
+//     *
+//     * @throws java.io.IOException
+//     */
+//    public Set<Diff> findVariableDiff() throws Exception {
+//        return findDiff(cls -> cls.findVariableDiff());
+//    }
 
     /**
      * search if the original and sosie (two set of trace) not diverge at the call level and variable level
@@ -62,6 +68,7 @@ public class CompareAllStackTrace {
                     CompareStackTrace cls = new CompareStackTrace(original, sosie);
                     Log.debug("compare: {}", original.getFullName());
                     diffs.addAll(diffOperator.apply(cls));
+                    reports.put(original,cls.getReport());
                 }
             }
         }
@@ -217,5 +224,31 @@ public class CompareAllStackTrace {
 
     public List<Diff> getDiffToExclude() {
         return diffToExclude;
+    }
+
+
+    public JSONObject buildReport() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        Report allTest = new Report();
+        for(StackTrace st : reports.keySet()) {
+            Report report = reports.get(st);
+            jsonObject.put(st.getName(),report.buildReport());
+            allTest.merge(report);
+        }
+        jsonObject.put("allTest",allTest.buildReport());
+        return jsonObject;
+    }
+
+    public JSONObject buildReport(JSONObject previousReport) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        Report allTest = new Report();
+        for(StackTrace st : reports.keySet()) {
+            Report report = reports.get(st);
+
+            jsonObject.put(st.getName(),report.buildReport(previousReport.getJSONObject(st.getName())));
+            allTest.merge(report);
+        }
+        jsonObject.put("allTest",allTest.buildReport(previousReport.getJSONObject("allTest")));
+        return jsonObject;
     }
 }

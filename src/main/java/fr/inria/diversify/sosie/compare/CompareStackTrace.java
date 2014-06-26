@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.sosie.compare.diff.*;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 
@@ -13,25 +14,13 @@ public class CompareStackTrace {
     protected StackTrace stackTrace1;
     protected StackTrace stackTrace2;
     protected List<Diff> diffs;
-//    protected Map<StackTraceElement, Integer> callDiff;
-
-//    public CompareStackTrace(StackTrace st1, StackTrace st2, List<Diff> diffs) {
-//        stackTrace1 = st1;
-//        stackTrace2 = st2;
-//        this.diffs = new LinkedList<>();
-//        callDiff = new HashMap<>();
-//        for(Diff diff : diffs) {
-//            if (diff instanceof CallDiff) {
-//                callDiff.put(diff.getDiffStart(), ((CallDiff) diff).getMaxStackDiff());
-//            } else { this.diffs.add(diff); }
-//        }
-//    }
+    protected Report report;
 
     public CompareStackTrace(StackTrace st1, StackTrace st2) {
         stackTrace1 = st1;
         stackTrace2 = st2;
         diffs = new LinkedList<>();
-//        callDiff = new HashMap<>();
+        report = new Report();
     }
 
     public List<Diff> findCallDiff() {
@@ -78,7 +67,8 @@ public class CompareStackTrace {
             if(!st2Lower) {
                 stackTrace2.next();
             }
-
+            StackTraceCall top1 = stackTrace1.getTop();
+            StackTraceCall top2 = stackTrace2.getTop();
             int deep1 = stackTrace1.getDeep();
             int deep2 = stackTrace2.getDeep();
 
@@ -89,14 +79,21 @@ public class CompareStackTrace {
                 st1Lower = true;
             }
             if(st1Lower || st2Lower) {
+                report.addDiffMethodCall(top1);
+                report.addDiffMethodCall(top2);
                 diffs.add(new CallDiff(stackTrace1.getTop2(), Math.abs(deep1 - deep2)));
             }
-            if(st1Lower && st2Lower || !stackTrace1.getTop().equals(stackTrace2.getTop())) {
+
+            boolean sameTop = top1.equals(top2);
+            if(st1Lower && st2Lower || !sameTop) {
                 diffs.add(findNewSyncro(20, 2, stackTrace1, stackTrace2));
 
                 if(stackTrace1.getDeep() == stackTrace2.getDeep()) {
                     st1Lower = false; st2Lower = false;
                 }
+            }
+            if(sameTop && !(st1Lower && st2Lower)){ //same stack trace
+                report.addSameMethodCall(top1);
             }
 
             if(st1Lower == st2Lower && (stackTrace1.getVariablesValueChange() || stackTrace2.getVariablesValueChange())) {
@@ -114,6 +111,8 @@ public class CompareStackTrace {
         Map<String, Object> v1 = st1.getVariable();
         Map<String, Object> v2 = st2.getVariable();
 
+
+
         for(String key : v1.keySet()) {
             Object value = v1.get(key);
             Object value2 = v2.get(key);
@@ -126,8 +125,13 @@ public class CompareStackTrace {
             if(!v1.containsKey(key) || !value.equals(value1)) //!valueEqual(value, v1.get(key)))
                 diff.add(new VariableDiff(st1.getTop(),key));
         }
+
+        report.updateVar(v1, st1.getTop());
+        report.updateVarDiff(diff);
         return diff;
     }
+
+
 
 
     protected CallDiff findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
@@ -141,6 +145,9 @@ public class CompareStackTrace {
                 if(st1.getTop().equals(st2.getTop()) &&  isSameForXOperation(syncroRange, st1, st2)) {
                     diff.setMaxStackDiff(maxDiff);
                     return diff;
+                } else {
+                    report.addDiffMethodCall(st1.getTop());
+                    report.addDiffMethodCall(st2.getTop());
                 }
                 if(st1.hasNext()) {
                     count1++;
@@ -180,5 +187,10 @@ public class CompareStackTrace {
         st1.previous(undo);
         st2.previous(undo);
         return same;
+    }
+
+
+    public Report getReport() {
+        return report;
     }
 }
