@@ -22,7 +22,7 @@ import java.util.Map;
  * Date: 25/02/14
  * Time: 11:32
  */
-public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
+public class AssertInstrumenter extends AbstractLogginInstrumenter<CtInvocation<?>> {
     protected static Map<CtExecutable,Integer> count = new HashMap();
     protected static Map<String,String> idMap = new HashMap();
 
@@ -58,7 +58,7 @@ public class AssertInstrumenter extends AbstractProcessor<CtInvocation<?>> {
             snippet += type + " " + var + " = "+ expression + ";\n";
         }
 
-        snippet += "fr.inria.diversify.sosie.logger.LogWriter.writeAssert("+sp.getSourceStart()+",Thread.currentThread(),\"" +
+        snippet += getLogName()+ ".writeAssert("+sp.getSourceStart()+",Thread.currentThread(),\"" +
             getClass(invocation).getQualifiedName() + "\",\"" + getMethod(invocation).getSignature() + "\",\"" +
                 executable.getSimpleName()+ "\"";
 

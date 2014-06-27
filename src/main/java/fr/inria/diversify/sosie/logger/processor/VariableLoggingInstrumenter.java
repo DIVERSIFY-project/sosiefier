@@ -21,7 +21,7 @@ import java.util.*;
  * Use basic scope inference (the real one is hard due to the complex semantics of "static" and "final"
  * (w.r.t. init, anonymous classes, etc.)
  */
-public class VariableLoggingInstrumenter extends AbstractProcessor<CtStatement> {
+public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtStatement> {
     protected static Map<CtExecutable,Integer> count = new HashMap();
     protected static Map<String,String> idMap = new HashMap();
     protected int tmpVarCount = 0;
@@ -92,7 +92,7 @@ public class VariableLoggingInstrumenter extends AbstractProcessor<CtStatement> 
             }
         }
         snippet = snippet.substring(0, snippet.length()-1);
-        snippet += "};\n\tfr.inria.diversify.sosie.logger.LogWriter.writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
+        snippet += "};\n\t"+getLogName()+".writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
                 + id + "\"," +tmpVar+");\n";
         if (
                 nVisibleVariables > 0 // do not add the monitoring if nothing to ignore

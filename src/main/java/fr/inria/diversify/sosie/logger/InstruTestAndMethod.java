@@ -7,6 +7,8 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
  * User: Simon
  * Date: 7/22/13
  * Time: 2:03 PM
+ *
+ * TODO: Move this to Test folder
  */
 public class InstruTestAndMethod {
 

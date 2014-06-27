@@ -15,7 +15,7 @@ import java.util.*;
  * Date: 25/02/14
  * Time: 11:32
  */
-public class ErrorLoggingInstrumenter extends AbstractProcessor<CtStatement> {
+public class ErrorLoggingInstrumenter extends AbstractLogginInstrumenter<CtStatement> {
     protected static Map<CtExecutable,Integer> count = new HashMap();
     protected static Map<String,String> idMap = new HashMap();
 
@@ -50,7 +50,7 @@ public class ErrorLoggingInstrumenter extends AbstractProcessor<CtStatement> {
 
         else
             methodName = getMethod(throwStmt).getSignature();
-        String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.writeException("+sp.getSourceStart()+",Thread.currentThread(),\"" +
+        String snippet = "\t"+getLogName()+".writeException("+sp.getSourceStart()+",Thread.currentThread(),\"" +
                  className + "\",\"" + methodName + "\"," +
                 throwStmt.getThrownExpression() + ");\n";
 
@@ -79,7 +79,7 @@ public class ErrorLoggingInstrumenter extends AbstractProcessor<CtStatement> {
                 CtStatement statement = catchBlock.getStatements().get(0);
                 SourcePosition sp = statement.getPosition();
 
-                String snippet = "fr.inria.diversify.sosie.logger.LogWriter.writeCatch("+sp.getSourceStart()+",Thread.currentThread(),\"" +
+                String snippet = getLogName() + ".writeCatch("+sp.getSourceStart()+",Thread.currentThread(),\"" +
                         className + "\",\"" + methodName + "\"," +
                         catchStmt.getParameter().getSimpleName() + ");\n";
 

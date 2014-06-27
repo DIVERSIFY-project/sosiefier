@@ -15,7 +15,7 @@ import spoon.reflect.declaration.CtSimpleType;
  * Date: 06/01/14
  * Time: 10:04
  */
-public class MethodLoggingInstrumenter extends AbstractProcessor<CtMethod> {
+public class MethodLoggingInstrumenter extends AbstractLogginInstrumenter<CtMethod> {
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
         return !candidate.isImplicit()
@@ -29,7 +29,7 @@ public class MethodLoggingInstrumenter extends AbstractProcessor<CtMethod> {
         CtStatement stmt = body.getStatement(0);
         String id =  VariableLoggingInstrumenter.idFor(getClass(stmt).getQualifiedName() + "." + candidate.getSignature());
 
-        String snippet = "\ttry{\n\tfr.inria.diversify.sosie.logger.LogWriter.methodCall(Thread.currentThread(),\"" +
+        String snippet = "\ttry{\n\t"+ getLogName() + ".methodCall(Thread.currentThread(),\"" +
                 id + "\");\n";
         SourcePosition sp = stmt.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
@@ -44,7 +44,8 @@ public class MethodLoggingInstrumenter extends AbstractProcessor<CtMethod> {
 
         sp = body.getLastStatement().getPosition();
         compileUnit = sp.getCompilationUnit();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+2 , "\n" + "\t}\n\tfinally{ fr.inria.diversify.sosie.logger.LogWriter.methodOut(Thread.currentThread()); }", 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+2 ,
+                "\n" + "\t}\n\tfinally{"+getLogName()+".methodOut(Thread.currentThread()); }", 0));
     }
 
     private CtSimpleType<?> getClass(CtStatement stmt) {

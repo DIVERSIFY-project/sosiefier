@@ -14,7 +14,7 @@ import spoon.reflect.reference.CtTypeReference;
  * Date: 10/21/13
  * Time: 9:27 AM
  */
-public class TestLoggingInstrumenter extends AbstractProcessor<CtMethod> {
+public class TestLoggingInstrumenter extends AbstractLogginInstrumenter<CtMethod> {
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
@@ -51,7 +51,8 @@ public class TestLoggingInstrumenter extends AbstractProcessor<CtMethod> {
     public void process(CtMethod element) {
         Log.info(element.getDeclaringType().getQualifiedName()+" "+element.getSignature());
         CtStatement firstStmt = element.getBody().getStatement(0);
-        String snippet = "\t\tfr.inria.diversify.sosie.logger.LogWriter.writeTestStart(Thread.currentThread(),\""
+        String snippet = "\t\t"+
+                getLogName()+ ".writeTestStart(Thread.currentThread(),\""
                 + element.getPosition().getCompilationUnit().getMainType().getQualifiedName() +"."+element.getSimpleName() + "\");\n";
         SourcePosition sp = firstStmt.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
