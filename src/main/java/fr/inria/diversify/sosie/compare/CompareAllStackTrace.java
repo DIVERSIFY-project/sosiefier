@@ -9,6 +9,7 @@ import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
 import java.util.*;
@@ -130,6 +131,22 @@ public class CompareAllStackTrace {
 
     protected int idMapSize;
 
+    /**
+     * Loads a binary log from a directory
+     * @param dir Directory containing the logs
+     * @return A list of stack traces separated by unit tests
+     */
+    protected List<StackTrace> loadBinaryLog(String dir, boolean recursive) {
+        throw new NotImplementedException();
+    }
+
+    /**
+     * Loads a text log from a directory
+     * @param dir Directory containing the logs
+     * @param recursive
+     * @return
+     * @throws IOException
+     */
     protected List<StackTrace> loadLog(String dir, boolean recursive) throws IOException {
         List<StackTrace> list = new ArrayList<>();
         File file = new File(dir);

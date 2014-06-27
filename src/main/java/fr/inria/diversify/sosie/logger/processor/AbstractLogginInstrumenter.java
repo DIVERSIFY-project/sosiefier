@@ -19,7 +19,7 @@ public abstract class AbstractLogginInstrumenter <E extends CtElement> extends A
     }
 
     protected String getLogName() {
-        String packName = "fr.inria.diversify.sosie.logger";
+        String packName = "fr.inria.diversify.sosie.logger.";
         return packName + (useCompactLog ? "BinLogWriter" : "LogWriter" );
     }
 }

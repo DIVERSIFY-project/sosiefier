@@ -143,7 +143,10 @@ public class InstruCompactLog extends InstruLogWriter {
                 os.writeInt(getMethodSignatureId(methodSignatureId));
                 os.writeInt(callDeep.get(thread));
                 String vars = buildVars(thread, separator, simpleSeparator, var);
-                os.writeChars(vars);
+                if ( vars != previousVarLog.get(thread) ) {
+                    os.writeChars(vars);
+                }
+                else { os.writeChars("P"); }
             } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
