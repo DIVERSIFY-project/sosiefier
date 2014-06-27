@@ -20,8 +20,6 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     private String simpleSeparator = ";";
 
-    private Map<Thread, String> previousVarLog;
-
     public InstruVerboseLog() {
         super();
         previousVarLog = new HashMap<Thread, String>();
@@ -128,27 +126,14 @@ public class InstruVerboseLog extends InstruLogWriter {
                 string.append(simpleSeparator);
                 string.append(methodSignatureId);
 
-                StringBuilder vars = new StringBuilder();
-                stopLogMethod(thread);
-                for (int i = 0; i < var.length / 2; i = i + 2) {
-                    StringBuilder tmp = new StringBuilder();
-                    try {
-                        tmp.append(separator);
-                        tmp.append(var[i].toString());
-                        tmp.append(simpleSeparator);
-                        if (var[i + 1] == null) tmp.append("null");
-                        else tmp.append(var[i + 1].toString());
-                        vars.append(tmp);
-                    } catch (Exception e) {
-                    }
-                }
+                String varsString = buildVars(thread, separator, simpleSeparator, var);
 
-                if (vars.toString().equals(previousVarLog.get(thread))) {
+                if (varsString.equals(previousVarLog.get(thread))) {
                     string.append(separator);
                     string.append("P");
                 } else {
-                    string.append(vars.toString());
-                    previousVarLog.put(thread, vars.toString());
+                    string.append(varsString);
+                    previousVarLog.put(thread, varsString);
                 }
                 startLogMethod(thread);
                 FileWriter fileWriter = getFileWriter(thread);

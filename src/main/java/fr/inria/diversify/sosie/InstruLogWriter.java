@@ -26,7 +26,8 @@ public abstract class InstruLogWriter {
     ///Semaphores for locking output streams
     protected Map<String, Semaphore> semaphores;
 
-
+    ///Previous logs of variables status. Useful to check whether they have change
+    protected Map<Thread, String> previousVarLog;
 
     public void InstrulLogWriter() {
         if (dir == null) initDir();
@@ -171,6 +172,25 @@ public abstract class InstruLogWriter {
         } else
             string = o.toString();
         return string;
+    }
+
+    protected String buildVars(Thread thread, String separator, String simpleSeparator, Object[] var) {
+        StringBuilder vars = new StringBuilder();
+        stopLogMethod(thread);
+        for (int i = 0; i < var.length / 2; i = i + 2) {
+            StringBuilder tmp = new StringBuilder();
+            try {
+                tmp.append(separator);
+                tmp.append(var[i].toString());
+                tmp.append(simpleSeparator);
+                if (var[i + 1] == null) tmp.append("null");
+                else tmp.append(var[i + 1].toString());
+                vars.append(tmp);
+            } catch (Exception e) {
+            }
+        }
+
+        return vars.toString();
     }
 
 }

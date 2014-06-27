@@ -131,6 +131,10 @@ public class InstruCompactLog extends InstruLogWriter {
 
     @Override
     public void writeVar(int id, Thread thread, String methodSignatureId, Object... var) {
+
+        String separator = ":;:";
+        String simpleSeparator = ";";
+
         if (getLogMethod(thread)) {
             try {
                 DataOutputStream os = getStream(thread);
@@ -138,7 +142,8 @@ public class InstruCompactLog extends InstruLogWriter {
                 os.writeInt(id);
                 os.writeInt(getMethodSignatureId(methodSignatureId));
                 os.writeInt(callDeep.get(thread));
-                //TODO:Write actuall vars
+                String vars = buildVars(thread, separator, simpleSeparator, var);
+                os.writeChars(vars);
             } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
