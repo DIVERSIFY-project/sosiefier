@@ -39,6 +39,7 @@ do
 
     java -Xmx4000m -cp ~/Documents/code/sosies-generator/target/Sosies-generator-1.0-SNAPSHOT-jar-with-dependencies.jar fr.inria.diversify.sosie.compare.Main same.properties
 
+    echo previousReport=report.json >> same.properties
 
     sizeNew=$( wc -m < excludeDiff)
     echo $sizeNew

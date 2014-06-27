@@ -117,16 +117,16 @@ public class Diversify extends AbstractDiversify {
 
         Log.info("number of diversification: " + trans.size());
         int i = 0;
-        for (Transformation tran : trans) {
-            Log.info("APPLY TRANSFORMATION: " + i);
-            Log.debug("output dir: " + outputDir);
-            tran.apply(outputDir);
-            transformations.add(tran);
-            i++;
-        }
-
         int status;
         try {
+            for (Transformation tran : trans) {
+                Log.info("APPLY TRANSFORMATION: " + i);
+                Log.debug("output dir: " + outputDir);
+                tran.apply(outputDir);
+                transformations.add(tran);
+                i++;
+            }
+
             Log.info("===========================");
             Log.info("BUILDING DIVERSIFIED PROGRAM");
             Log.info("===========================");
@@ -151,32 +151,39 @@ public class Diversify extends AbstractDiversify {
         Log.debug("{} sosie on {} trial", sosie, trial);
         Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
-        if ( earlyReport && getResultDir() != null ) {
-            if ( earlyReportSosiesOnly == false || status == 0 ) {
+        if (earlyReport && getResultDir() != null) {
+            if (earlyReportSosiesOnly == false || status == 0) {
                 try {
-                    RunResults result = new RunResults();
-                    result.setId(trial);
-                    result.setStatus(status);
-                    result.setTransformations(trans);
-                    result.setFailedTests(builder.getErrors());
+                    RunResults result = buildRunResult(trans, status);
                     result.saveToFile(getResultDir() + "/" +
-                            "trial_" + trial + "_size_" + trans.size() + "_stat_" + status + ".json");
+                                              "trial_" + trial + "_size_" + trans.size() + "_stat_" + status + ".json");
                     sessionResults.addRunResults(result);
-                    sessionResults.saveReport(getResultDir() + "/session" + trans.size() + ".txt" );
-                } catch ( IOException e ) {
+                    sessionResults.saveReport(getResultDir() + "/session" + trans.size() + ".txt");
+                } catch (IOException e) {
                     Log.warn("Cannot output early report: ", e);
-                } catch ( JSONException e ) {
+                } catch (JSONException e) {
                     //Not my mf problem!! (Hard rock in the background)
                     throw e;
                 }
             }
         }
-        if ( status == 0 ) {
-            copySosieProgram();
+        if (status == 0) {
+            copySosieProgram(trans);
+
         }
     }
 
-    protected void copySosieProgram() throws IOException {
+    protected RunResults buildRunResult(Collection<Transformation> trans, int status) {
+        RunResults result = new RunResults();
+        result.setId(trial);
+        result.setStatus(status);
+        result.setTransformations(trans);
+        result.setFailedTests(builder.getErrors());
+
+        return result;
+    }
+
+    protected void copySosieProgram(Collection<Transformation> trans) throws IOException, JSONException {
         //Store the whole sosie program.
         if ( getSocieSourcesDir() != null && (new File(getSocieSourcesDir()).exists()) ) {
             String destPath = getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
@@ -189,10 +196,12 @@ public class Diversify extends AbstractDiversify {
 
             if ( intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest ) {
                 Instru instru = new Instru(
-                        tmpDir, tmpDir + "/" + sourceDir,
-                        tmpDir + "/" + inputConfiguration.getProperty("testSrc"), destPath);
+                        tmpDir, sourceDir,
+                        inputConfiguration.getProperty("testSrc"), destPath);
                 instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
             }
+            RunResults result = buildRunResult(trans, 0);
+            result.saveToFile(destPath + "/transformations.json");
         }
     }
 

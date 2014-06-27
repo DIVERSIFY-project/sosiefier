@@ -155,6 +155,7 @@ public class TransformationJsonParser {
      */
     protected boolean filter(JSONObject o) {
         try {
+            if(o.has("failureDictionary")) return false;
             if (getFilterProperties() == null) return true;
 
             for (Object k : getFilterProperties().keySet()) {

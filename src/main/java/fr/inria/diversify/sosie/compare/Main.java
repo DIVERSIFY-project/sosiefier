@@ -2,10 +2,13 @@ package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.sosie.compare.diff.CallDiff;
 import fr.inria.diversify.sosie.compare.diff.Diff;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
+import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.compiler.SpoonCompiler;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;
@@ -13,9 +16,7 @@ import spoon.support.DefaultCoreFactory;
 import spoon.support.StandardEnvironment;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -55,18 +56,30 @@ public class Main {
 
     protected void same() throws Exception {
         try {
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
+            String previousReport = DiversifyProperties.getProperty("previousReport");
+            JSONObject pr = null;
+            if(previousReport != null) {
+                pr = loadJSON(previousReport);
+            }
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, pr);
             Set<Diff> diff = un.findDiff();
             writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff",  diffUnion(diff, un.getDiffToExclude()));
+
+
+
+                writeReport(DiversifyProperties.getProperty("result") + "/report", un);
+
+
         } catch (Exception e) {
             Log.error("error",e);
             e.printStackTrace();
         }
     }
 
+
     protected void diff() throws Exception {
         try {
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, null);
             Set<Diff> diff = un.findDiff();
             writeDiff(DiversifyProperties.getProperty("result")+"/excludeDiff",diff);
         } catch (Exception e) {
@@ -112,12 +125,31 @@ public class Main {
             writer.write("\n");
         }
         writer.close();
-        Log.debug("all diff write");
+    }
+
+    protected void writeReport(String fileName, CompareAllStackTrace compareTraces) throws IOException, JSONException {
+
+        Log.debug("write report in {}.json", fileName);
+        File file = new File(fileName+".json");
+        file.createNewFile();
+        FileWriter writer = new FileWriter(file);
+
+        writer.write(compareTraces.buildReport().toString());
+
+        writer.close();
+
+        file = new File(fileName+".txt");
+        file.createNewFile();
+        writer = new FileWriter(file);
+
+        writer.write(compareTraces.summary());
+
+        writer.close();
     }
 
     protected Set<Diff> diffUnion(Collection<Diff> diffs1, Collection<Diff> diffs2) {
         Set<Diff> union = new HashSet<>();
-        Map<StackTraceElement, Integer> callDiffs = new HashMap<>();
+        Map<StackTraceCall, Integer> callDiffs = new HashMap<>();
         Set<Diff> tmp = new HashSet<>(diffs1);
         tmp.addAll(diffs2);
 
@@ -125,7 +157,7 @@ public class Main {
         for(Diff diff : tmp) {
             if (diff instanceof CallDiff) {
                 int nbCallDiff = ((CallDiff) diff).getMaxStackDiff();
-                StackTraceElement key = diff.getDiffStart();
+                StackTraceCall key = diff.getDiffStart();
                 if (callDiffs.containsKey(key)) { callDiffs.put(key, Math.max(callDiffs.get(key), nbCallDiff)); }
                 else { callDiffs.put(key, nbCallDiff); }
             } else {
@@ -133,12 +165,23 @@ public class Main {
             }
         }
 
-        for(StackTraceElement ste : callDiffs.keySet()) {
+        for(StackTraceCall ste : callDiffs.keySet()) {
             union.add(new CallDiff(ste, callDiffs.get(ste)));
         }
-
-
         return union;
+    }
+
+    protected JSONObject loadJSON(String file) throws IOException, JSONException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        StringBuilder sb = new StringBuilder();
+
+        String line = br.readLine();
+        while (line != null) {
+            sb.append(line);
+            line = br.readLine();
+        }
+
+       return new JSONObject(sb.toString());
     }
 
     protected void initLogLevel() {

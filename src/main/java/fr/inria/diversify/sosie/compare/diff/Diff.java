@@ -1,6 +1,6 @@
 package fr.inria.diversify.sosie.compare.diff;
 
-import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -8,9 +8,9 @@ import java.io.IOException;
  * Created by Simon on 23/04/14.
  */
 public abstract class Diff {
-    protected StackTraceElement diffStart;
+    protected StackTraceCall diffStart;
 
-    public StackTraceElement getDiffStart() {
+    public StackTraceCall getDiffStart() {
         return diffStart;
     }
 
