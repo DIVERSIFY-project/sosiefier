@@ -10,6 +10,8 @@ import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.CtAbstractVisitor;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
+import spoon.support.reflect.code.CtBlockImpl;
+import spoon.support.reflect.code.CtIfImpl;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,19 +24,19 @@ import java.util.*;
  * (w.r.t. init, anonymous classes, etc.)
  */
 public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtStatement> {
-    protected static Map<CtExecutable,Integer> count = new HashMap();
-    protected static Map<String,String> idMap = new HashMap();
+    protected static Map<CtExecutable, Integer> count = new HashMap();
+    protected static Map<String, String> idMap = new HashMap();
     protected int tmpVarCount = 0;
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {
-        if(candidate.getParent(CtCase.class) != null)
+        if (candidate.getParent(CtCase.class) != null)
             return false;
 
         return
                 (CtIf.class.isAssignableFrom(candidate.getClass())
                         || CtLoop.class.isAssignableFrom(candidate.getClass()))
-                            && !hasLabelAndGoto(candidate)
+                        && !hasLabelAndGoto(candidate)
                 ;
     }
 
@@ -54,19 +56,26 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
 
     public void process(CtStatement statement) {
         try {
+            //Now instrument.
             instruLoopOrIf(statement);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
+    /**
+     * Instruments the loop of If
+     *
+     * @param statement Statement to instrument
+     */
     private void instruLoopOrIf(CtStatement statement) {
-        boolean inStaticCode =
-                hasStaticParent(statement);
-        String id =  VariableLoggingInstrumenter.idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
+
+        boolean inStaticCode = hasStaticParent(statement);
+        String id = VariableLoggingInstrumenter.idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
 //        String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
 //                + id + "\",{";
 
         String tmpVar = "tmpVarWrite" + tmpVarCount++;
-        String snippet = "Object[] " + tmpVar +" = {";
+        String snippet = "Object[] " + tmpVar + " = {";
 
         int nVisibleVariables = 0;
         for (CtVariable<?> var : getVariablesInScope(statement)) {
@@ -87,13 +96,12 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
                 // we remove the "final" for solving "may have not been in initialized" in constructor code
                 // this does not work for case statements
                 // var.getModifiers().remove(ModifierKind.FINAL);
-
                 snippet += "\"" + idFor(var.getSimpleName()) + "\"," + var.getSimpleName() + ",";
             }
         }
-        snippet = snippet.substring(0, snippet.length()-1);
-        snippet += "};\n\t"+getLogName()+".writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
-                + id + "\"," +tmpVar+");\n";
+        snippet = snippet.substring(0, snippet.length() - 1);
+        snippet += "};\n\t" + getLogName() + ".writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
+                + id + "\"," + tmpVar + ");\n";
         if (
                 nVisibleVariables > 0 // do not add the monitoring if nothing to ignore
                         &&
@@ -107,7 +115,23 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
             SourcePosition sp = statement.getPosition();
 
             int index = sp.getSourceStart();
+
+            //Check for else if ( ... ) statements to wrap them inside brackets. This is an special case
+            boolean isElseIfSpecialCase = statement instanceof CtIfImpl && statement.getParent() instanceof CtIfImpl &&
+                    ((CtIfImpl) statement.getParent()).getElseStatement().equals(statement);
+            if (isElseIfSpecialCase) {
+                //Open the bracket at the "else"
+                compileUnit.addSourceCodeFragment(new SourceCodeFragment(index - 1, "{", 0));
+            }
+
+            //Insert the snippet
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+
+            if (isElseIfSpecialCase) {
+                //Close the previously inserted "else" bracket
+                int endIndex = sp.getSourceEnd();
+                compileUnit.addSourceCodeFragment(new SourceCodeFragment(endIndex, "}", 0));
+            }
         }
     }
 
@@ -201,7 +225,8 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
             }
 
             @Override
-            public <T> void visitCtThisAccess(CtThisAccess<T> tCtThisAccess) {}
+            public <T> void visitCtThisAccess(CtThisAccess<T> tCtThisAccess) {
+            }
         };
 
         visitor.scan(el);
@@ -210,29 +235,29 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
     }
 
     protected static String idFor(String string) {
-        if(!idMap.containsKey(string))
-            idMap.put(string,idMap.size()+"");
+        if (!idMap.containsKey(string))
+            idMap.put(string, idMap.size() + "");
 
         return idMap.get(string);
     }
 
     public static void writeIdFile(String dir) throws IOException {
-        File file = new File(dir+"/log");
+        File file = new File(dir + "/log");
         file.mkdirs();
-        FileWriter fw = new FileWriter(file.getAbsoluteFile()+"/id");
+        FileWriter fw = new FileWriter(file.getAbsoluteFile() + "/id");
 
-        for(String s : idMap.keySet())
-            fw.write(idMap.get(s)+ " " +s+"\n");
+        for (String s : idMap.keySet())
+            fw.write(idMap.get(s) + " " + s + "\n");
 
         fw.close();
     }
 
     protected int getCount(CtStatement stmt) {
         CtExecutable parent = stmt.getParent(CtExecutable.class);
-        if(count.containsKey(parent))
-            count.put(parent,count.get(parent) + 1);
+        if (count.containsKey(parent))
+            count.put(parent, count.get(parent) + 1);
         else
-            count.put(parent,0);
+            count.put(parent, 0);
         return count.get(parent);
     }
 
@@ -251,7 +276,7 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
     public boolean hasLabelAndGoto(CtStatement stmt) {
         CtExecutable parent = stmt.getParent(CtExecutable.class);
 
-        if(parent == null)
+        if (parent == null)
             return false;
 
         QueryVisitor query = new QueryVisitor(new TypeFilter(CtContinue.class));

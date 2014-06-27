@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie;
 
 import fr.inria.diversify.sosie.logger.ShutdownHookLog;
+import fr.inria.diversify.util.Log;
 
 import java.io.*;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public abstract class InstruLogWriter {
     protected Map<Thread, Integer> callDeep;
 
     ///Directory where the log is being stored
-    protected File dir;
+    protected File dir = null;
 
     ///Dictionary indicating if the methods of a thread are to be logged.
     protected Map<Thread, Boolean> logMethod;
@@ -134,6 +135,7 @@ public abstract class InstruLogWriter {
         } catch (IOException e) {
             dir = new File("log");
         }
+        Log.debug("LOG DIR:" + dir.getAbsolutePath());
         dir.mkdir();
     }
 
