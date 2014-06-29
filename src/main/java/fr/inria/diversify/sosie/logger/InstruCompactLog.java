@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie;
+package fr.inria.diversify.sosie.logger;
 
 import java.io.*;
 import java.util.HashMap;

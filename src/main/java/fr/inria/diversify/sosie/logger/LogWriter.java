@@ -1,14 +1,5 @@
 package fr.inria.diversify.sosie.logger;
 
-import fr.inria.diversify.sosie.InstruLogWriter;
-import fr.inria.diversify.sosie.InstruVerboseLog;
-
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
-
 /**
  * User: Simon
  * Date: 7/23/13

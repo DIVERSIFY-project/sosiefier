@@ -110,8 +110,12 @@ public class Instru {
     protected void copyLogger(String tmpDir, String src) throws IOException {
         File dir = new File(tmpDir+"/"+src+"/fr/inria/diversify/sosie/logger");
         FileUtils.forceMkdir(dir);
-        FileUtils.copyFileToDirectory(new File(System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/LogWriter.java"),dir);
-        FileUtils.copyFileToDirectory(new File(System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/ShutdownHookLog.java"),dir);
+        String packagePath = System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/";
+        FileUtils.copyFileToDirectory(new File(packagePath + LogWriter.class.getSimpleName() + ".java"), dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + BinLogWriter.class.getSimpleName() + ".java"),dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + InstruLogWriter.class.getSimpleName() + ".java"),dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + InstruVerboseLog.class.getSimpleName() + ".java"),dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + InstruCompactLog.class.getSimpleName() + ".java"),dir);
     }
 
     protected Factory initSpoon(String srcDirectory) {

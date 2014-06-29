@@ -1,4 +1,4 @@
-package fr.inria.diversify.sosie;
+package fr.inria.diversify.sosie.logger;
 
 import fr.inria.diversify.sosie.logger.ShutdownHookLog;
 import fr.inria.diversify.util.Log;

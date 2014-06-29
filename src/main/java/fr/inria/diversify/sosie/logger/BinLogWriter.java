@@ -1,8 +1,5 @@
 package fr.inria.diversify.sosie.logger;
 
-import fr.inria.diversify.sosie.InstruLogWriter;
-import fr.inria.diversify.sosie.InstruCompactLog;
-
 /**
  * User: Simon
  * Date: 7/23/13
