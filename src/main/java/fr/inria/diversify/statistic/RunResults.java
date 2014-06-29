@@ -3,6 +3,7 @@ package fr.inria.diversify.statistic;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,7 +15,7 @@ import java.util.List;
 
 /**
  * Class to store and retrieve information on the results of each Diversify run
- *
+ * <p>
  * Created by marcel on 22/06/14.
  */
 public class RunResults {
@@ -39,14 +40,20 @@ public class RunResults {
      * @param run JSON object containing the result information
      */
     public void fromJSONObject(JSONObject run) throws JSONException {
-        id = run.getInt("id");
-        status = run.getInt("status");
-        JSONArray failedArray = run.getJSONArray("failedTests");
-        failedTests = new ArrayList<>();
-        for (int i = 0; i < failedArray.length(); i++) {
-            failedTests.add(failedArray.getString(i));
+        try {
+            id = run.getInt("id");
+            status = run.getInt("status");
+            JSONArray failedArray = run.getJSONArray("failedTests");
+            failedTests = new ArrayList<>();
+            for (int i = 0; i < failedArray.length(); i++) {
+                failedTests.add(failedArray.getString(i));
+            }
+            transformationsJSON = run.getJSONArray("transformations");
+        } catch (JSONException e) {
+            throw new JSONException(
+                    "Make sure the .json file given is a Sosie Run. Cannot parse the Results object because: "
+                            + e.getMessage());
         }
-        transformationsJSON = run.getJSONArray("transformations");
     }
 
     /**
@@ -101,6 +108,7 @@ public class RunResults {
 
             JSONObject jsonObject = new JSONObject(sb.toString());
             fromJSONObject(jsonObject);
+
         } finally {
             if (br != null) {
                 br.close();
@@ -148,7 +156,7 @@ public class RunResults {
 
     public void setTransformations(Collection<Transformation> transformations) {
         JSONArray array = new JSONArray();
-        for ( Transformation t : transformations ) {
+        for (Transformation t : transformations) {
             try {
                 array.put(t.toJSONObject());
             } catch (JSONException e) {
