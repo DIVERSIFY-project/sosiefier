@@ -85,15 +85,17 @@ public class DiversifyMain {
         AbstractDiversify abstractDiversify = initAbstractDiversify();
 
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
-        int size = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
+        int max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
+        int min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
         TransformationQuery query = initTransformationQuery();
-        inputProgram.setTransformationPerRun(size);
-        abstractDiversify.setTransformationQuery(query);
-        abstractDiversify.run(n);
-        String repo = DiversifyProperties.getProperty("gitRepository");
-        if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
-        else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
-
+        for ( int i = min; i <= max; i++ ) {
+            inputProgram.setTransformationPerRun(i);
+            abstractDiversify.setTransformationQuery(query);
+            abstractDiversify.run(n);
+            String repo = DiversifyProperties.getProperty("gitRepository");
+            if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
+            else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
+        }
         abstractDiversify.deleteTmpFiles();
     }
 
