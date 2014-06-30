@@ -17,6 +17,9 @@ import java.util.concurrent.Semaphore;
  */
 public abstract class InstruLogWriter {
 
+    //Dir where the logs are going to be stored
+    private String logDir = "LogDirName";
+
     ///The call deep is how deep in the stack are we.
     protected Map<Thread, Integer> callDeep;
 
@@ -32,12 +35,30 @@ public abstract class InstruLogWriter {
     ///Previous logs of variables status. Useful to check whether they have change
     protected Map<Thread, String> previousVarLog;
 
-    public void InstrulLogWriter() {
-        if (dir == null) initDir();
+    public int getCallDeep(Thread t) {
+        return callDeep.containsKey(t) ? callDeep.get(t) : 0;
+    }
+
+    /**
+     * Constructor for the logger
+     * @param logDir Directory where the logging is going to be stored
+     */
+    public InstruLogWriter(String logDir) {
+        if (dir == null) initDir(logDir);
         semaphores = new HashMap<String, Semaphore>();
+        callDeep = new  HashMap<Thread, Integer>();
         logMethod = new HashMap<Thread, Boolean>();
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
+    }
+
+    /**
+     * Gets the loggin path for the current thread
+     * @param thread Thread to log
+     * @return The path with the log file
+     */
+    public String getThreadLogFilePath(Thread thread) {
+        return dir.getAbsolutePath() + "/" + getThreadFileName(thread);
     }
 
     /**
@@ -130,9 +151,9 @@ public abstract class InstruLogWriter {
     /**
      * Initializes the directory where the files for each thread are going to be stored
      */
-    protected void initDir() {
+    protected void initDir(String logDir) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("LogDirName"));
+            BufferedReader reader = new BufferedReader(new FileReader(logDir));
             dir = new File("log" + reader.readLine());
         } catch (IOException e) {
             dir = new File("log");
@@ -197,4 +218,12 @@ public abstract class InstruLogWriter {
         return vars.toString();
     }
 
+
+    public String getLogDir() {
+        return logDir;
+    }
+
+    public void setLogDir(String logDir) {
+        this.logDir = logDir;
+    }
 }

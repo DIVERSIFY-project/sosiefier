@@ -58,8 +58,8 @@ public class InstruCompactLog extends InstruLogWriter {
     //Number of exceptions names so far. ID of the method signatures as they come
     private int foundExceptions;
 
-    public InstruCompactLog() {
-        super();
+    public InstruCompactLog(String logDir) {
+        super(logDir);
 
         //Remember we are copying these files to another source file
         //so they must be maintain in java 1.5
@@ -67,6 +67,8 @@ public class InstruCompactLog extends InstruLogWriter {
         testID = new HashMap<String, Integer>();
         classID = new HashMap<String, Integer>();
         exceptionsID = new HashMap<String, Integer>();
+        streamsPerThread = new HashMap<Thread, DataOutputStream>();
+
 
         foundMethodSignatures = 0;
         foundClasses = 0;
@@ -192,7 +194,6 @@ public class InstruCompactLog extends InstruLogWriter {
             os.writeInt(getClassId(className));
             os.writeInt(getMethodSignatureId(methodSignature));
             os.writeInt(getExceptionId(exception));
-
         } catch ( InterruptedException e ) {
             e.printStackTrace();
         } catch ( IOException e ) {
@@ -245,7 +246,7 @@ public class InstruCompactLog extends InstruLogWriter {
     protected DataOutputStream getStream(Thread thread) throws InterruptedException {
 
         if (!streamsPerThread.containsKey(thread)) {
-            String fileName = getThreadFileName(thread);
+            String fileName = getThreadLogFilePath(thread);
             try {
                 DataOutputStream s = new DataOutputStream(new BufferedOutputStream(
                         new FileOutputStream(fileName, true)));

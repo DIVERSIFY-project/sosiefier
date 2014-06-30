@@ -20,8 +20,8 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     private String simpleSeparator = ";";
 
-    public InstruVerboseLog() {
-        super();
+    public InstruVerboseLog(String logDir) {
+        super(logDir);
         previousVarLog = new HashMap<Thread, String>();
         fileWriters = new HashMap<Thread, FileWriter>();
     }
@@ -224,11 +224,6 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
-
-
-
-
-
     protected Map<String, String> loadIdMap(String file) throws IOException {
         Map<String, String> map = new HashMap<String, String>();
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -245,8 +240,7 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     protected synchronized FileWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (!fileWriters.containsKey(thread)) {
-            String fileName = getThreadFileName(thread);
-            FileWriter f = new FileWriter(dir.getAbsolutePath() + "/" + fileName);
+            FileWriter f = new FileWriter(getThreadLogFilePath(thread));
             fileWriters.put(thread, f);
             semaphores.put(f.toString() + f.hashCode(), new Semaphore(1));
         }
