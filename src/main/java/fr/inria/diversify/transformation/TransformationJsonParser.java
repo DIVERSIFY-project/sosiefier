@@ -131,7 +131,7 @@ public class TransformationJsonParser {
             for (int i = 0; i < array.length(); i++) {
                 try {
                     JSONObject jsonObject = array.getJSONObject(i);
-                    if ( filter(jsonObject) ) {
+                    if (filter(jsonObject)) {
                         Transformation t = parseTransformation(jsonObject);
                         list.add(t);
                     }
@@ -150,17 +150,18 @@ public class TransformationJsonParser {
 
     /**
      * Filter by the given properties to avoid reading every transformation, wich can be potentially slow
+     *
      * @param o Object to be filtered
      * @return
      */
     protected boolean filter(JSONObject o) {
         try {
-            if(o.has("failureDictionary")) return false;
+            if (o.has("failureDictionary")) return false;
             if (getFilterProperties() == null) return true;
 
             for (Object k : getFilterProperties().keySet()) {
                 String p = (String) k;
-                if (!o.has(p) || !o.get(p).toString().equals(getFilterProperties().getProperty(p))) {
+                if (!o.has(p) || !(getFilterProperties().getProperty(p).contains(o.get(p).toString()))) {
                     return false;
                 }
             }
