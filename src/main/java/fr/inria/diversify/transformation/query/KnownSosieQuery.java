@@ -29,7 +29,10 @@ public class KnownSosieQuery extends TransformationQuery {
 
         super(inputProgram);
         TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
-        Collection<Transformation> ts = parser.parseDir(getInputProgram().getPreviousTransformationsPath());
+        File f = new File(getInputProgram().getPreviousTransformationsPath());
+        Collection<Transformation> ts;
+        if (f.isDirectory() ) { ts = parser.parseDir(f.getAbsolutePath()); }
+        else { ts = parser.parseFile(f); }
         //Get all the sosie
         sosies = new ArrayList<>();
         for ( Transformation t : ts ) {

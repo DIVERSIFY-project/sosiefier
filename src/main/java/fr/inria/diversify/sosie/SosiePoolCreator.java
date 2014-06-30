@@ -15,7 +15,7 @@ import java.util.Properties;
 
 /**
  * A class to create a pool of sosies from a transformation directory
- *
+ * <p/>
  * Created by marodrig on 19/06/2014.
  */
 public class SosiePoolCreator {
@@ -24,12 +24,24 @@ public class SosiePoolCreator {
 
     private Properties properties;
 
+    public Properties getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
+
     public SosiePoolCreator(InputProgram inputProgram) {
 
         this.inputProgram = inputProgram;
         setProperties(new Properties());
+        //Collecto only sosies, this is for the parser and should not be
         getProperties().setProperty("status", "0");
+        //Types fo transformations that we want by default
         getProperties().setProperty("type", "adrStmt");
+        //Names of the transformations that we want by default
+        getProperties().setProperty("name", "replace replaceRandom replaceReaction replaceWittgenstein  delete");
     }
 
     /**
@@ -43,6 +55,9 @@ public class SosiePoolCreator {
             }
 
             TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
+            //Collecto only sosies, this is for the parser and should not be changed.
+            // Overwrite in case the user has changed this.
+            getProperties().setProperty("status", "0");
             parser.setFilterProperties(properties);
             Collection<Transformation> ts = parser.parseDir(inputProgram.getPreviousTransformationsPath());
 
@@ -54,11 +69,17 @@ public class SosiePoolCreator {
                     boolean unique = true;
                     int index = 0;
                     JSONObject transJson = t.toJSONObject();
-                    while ( unique && array.length() > index ) {
+                    while (unique && array.length() > index) {
                         unique = !transJson.toString().equals(array.getJSONObject(index).toString());
                         index++;
                     }
-                    if ( unique ) array.put(transJson);
+                    String type = getProperties().getProperty("type", "");
+                    String names = getProperties().getProperty("name", "");
+                    if (unique &&
+                            (type.equals("") || transJson.get("type").equals(type)) &&
+                            (names.equals("") || names.contains((String) transJson.get("name")))) {
+                        array.put(transJson);
+                    }
                 }
             }
             FileWriter fw = new FileWriter(outputFile);
@@ -70,11 +91,5 @@ public class SosiePoolCreator {
 
     }
 
-    public Properties getProperties() {
-        return properties;
-    }
 
-    public void setProperties(Properties properties) {
-        this.properties = properties;
-    }
 }

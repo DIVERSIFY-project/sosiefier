@@ -36,26 +36,16 @@ public class SosiePoolCreatorMain {
     public void init(InputConfiguration configuration) {
 
         try {
-            /**
-             Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("commons-collections/src/main"), 5);
-
-             InputProgram inputProgram = new InputProgram();
-             inputProgram.setFactory(factory);
-             inputProgram.setPreviousTransformationsPath(getResourcePath("commons-collections-json"));
-             SosiePoolCreator creator = new SosiePoolCreator(inputProgram);
-
-             creator.create("testCreate.json");
-             */
-
             Factory factory = new SpoonMetaFactory().buildNewFactory(configuration.getProperty("project"), 5);
 
             InputProgram inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
             inputProgram.setPreviousTransformationsPath(
                     configuration.getProperty("transformation.directory"));
+            inputProgram.processCodeFragments();
             SosiePoolCreator creator = new SosiePoolCreator(inputProgram);
 
-            creator.create(configuration.getProperty("outputDirectory"));
+            creator.create(configuration.getProperty("output.directory"));
         } catch (Exception e ) {
             throw new RuntimeException(e);
         }
