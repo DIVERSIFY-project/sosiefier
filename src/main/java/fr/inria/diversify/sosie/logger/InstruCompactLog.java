@@ -61,10 +61,12 @@ public class InstruCompactLog extends InstruLogWriter {
     public InstruCompactLog() {
         super();
 
-        methodID = new HashMap<>();
-        testID = new HashMap<>();
-        classID = new HashMap<>();
-        exceptionsID = new HashMap<>();
+        //Remember we are copying these files to another source file
+        //so they must be maintain in java 1.5
+        methodID = new HashMap<String, Integer>();
+        testID = new HashMap<String, Integer>();
+        classID = new HashMap<String, Integer>();
+        exceptionsID = new HashMap<String, Integer>();
 
         foundMethodSignatures = 0;
         foundClasses = 0;
@@ -87,7 +89,9 @@ public class InstruCompactLog extends InstruLogWriter {
                 os.writeInt(getMethodSignatureId(methodSignatureId));
                 os.writeInt(depth);
             }
-        } catch (InterruptedException | IOException e) {
+        } catch ( InterruptedException e ) {
+            e.printStackTrace();
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
     }
@@ -101,7 +105,9 @@ public class InstruCompactLog extends InstruLogWriter {
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_TEST);
             os.writeInt(getTestSignatureId(testSignature));
-        } catch (InterruptedException | IOException e) {
+        } catch ( InterruptedException e ) {
+            e.printStackTrace();
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
     }
@@ -110,7 +116,6 @@ public class InstruCompactLog extends InstruLogWriter {
     @Override
     public void writeAssert(int id, Thread thread, String className, String methodSignature, String assertName, Object... var) {
         try {
-
             //Each test runs in a 0 depth for what we care
             resetCallDepth(thread);
             DataOutputStream os = getStream(thread);
@@ -122,11 +127,11 @@ public class InstruCompactLog extends InstruLogWriter {
             for (int i = 0; i < var.length; i++) {
                 os.writeChars(printString(var[i]));
             }
-
-        } catch (InterruptedException | IOException e) {
+        } catch ( InterruptedException e ) {
+            e.printStackTrace();
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -147,7 +152,9 @@ public class InstruCompactLog extends InstruLogWriter {
                     os.writeChars(vars);
                 }
                 else { os.writeChars("P"); }
-            } catch (InterruptedException | IOException e) {
+            } catch ( InterruptedException e ) {
+                e.printStackTrace();
+            } catch ( IOException e ) {
                 e.printStackTrace();
             }
         }
@@ -165,7 +172,9 @@ public class InstruCompactLog extends InstruLogWriter {
             os.writeInt(getMethodSignatureId(methodSignature));
             os.writeInt(getExceptionId(exception));
 
-        } catch (InterruptedException | IOException e) {
+        } catch ( InterruptedException e ) {
+            e.printStackTrace();
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
 
@@ -184,7 +193,9 @@ public class InstruCompactLog extends InstruLogWriter {
             os.writeInt(getMethodSignatureId(methodSignature));
             os.writeInt(getExceptionId(exception));
 
-        } catch (InterruptedException | IOException e) {
+        } catch ( InterruptedException e ) {
+            e.printStackTrace();
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
     }

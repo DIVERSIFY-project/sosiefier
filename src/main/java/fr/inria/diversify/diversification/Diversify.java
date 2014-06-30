@@ -13,6 +13,8 @@ import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -185,7 +187,9 @@ public class Diversify extends AbstractDiversify {
 
     protected void copySosieProgram(Collection<Transformation> trans) throws IOException, JSONException {
         //Store the whole sosie program.
-        if ( getSocieSourcesDir() != null && (new File(getSocieSourcesDir()).exists()) ) {
+        File f = new File(getSocieSourcesDir());
+        if ( !(f.exists()) ) { f.mkdirs(); }
+        if ( getSocieSourcesDir() != null ) {
             String destPath = getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
 
             boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));

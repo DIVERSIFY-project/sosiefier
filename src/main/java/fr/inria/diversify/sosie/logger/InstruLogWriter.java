@@ -1,7 +1,9 @@
 package fr.inria.diversify.sosie.logger;
 
+/*
 import fr.inria.diversify.sosie.logger.ShutdownHookLog;
 import fr.inria.diversify.util.Log;
+*/
 
 import java.io.*;
 import java.util.HashMap;
@@ -135,7 +137,7 @@ public abstract class InstruLogWriter {
         } catch (IOException e) {
             dir = new File("log");
         }
-        Log.debug("LOG DIR:" + dir.getAbsolutePath());
+        //Log.debug("LOG DIR:" + dir.getAbsolutePath());
         dir.mkdir();
     }
 
