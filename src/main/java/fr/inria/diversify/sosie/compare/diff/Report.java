@@ -39,8 +39,8 @@ public class Report {
         for(String var: vars.keySet()) {
             String key = call.getMethod() + ":" + var;
             String newValue = vars.get(var).toString();
-            if (variable.containsKey(key)) {
-                String previousValue = variable.get(key);
+            String previousValue = variable.get(key);
+            if (previousValue != null) {
                 variableChange.put(key,variableChange.get(key) || !newValue.equals(previousValue));
             } else {
                 variable.put(key,newValue);
