@@ -46,4 +46,4 @@ do
     echo $sizeOld
 done
 
-rm same.properties
+#rm same.properties

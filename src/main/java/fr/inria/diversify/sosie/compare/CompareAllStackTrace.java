@@ -9,7 +9,6 @@ import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
 import java.util.*;
@@ -32,7 +31,7 @@ public class CompareAllStackTrace {
         stackTraces2 = loadLog(dirSosie, false);
         diffToExclude = parseDiff(diffFile);
         reports = new HashMap();
-        if (previousReport != null) {
+        if(previousReport != null) {
             Log.debug("previousReport used");
 
             reports.put("allTest", new Report(previousReport.getJSONObject("allTest")));
@@ -77,17 +76,16 @@ public class CompareAllStackTrace {
             for (StackTrace sosie : stackTraces2) {
                 if (sosie.getFullName().equals(original.getFullName())) {
                     CompareStackTrace cls = new CompareStackTrace(original, sosie);
-//                    Log.debug("compare: {}", original.getFullName());
                     diffs.addAll(diffOperator.apply(cls));
-
                     Report report = cls.getReport();
-                    reports.get("allTest").merge(report);
-                    if (previousReport != null && previousReport.has(original.getName())) {
-                        report.merge(previousReport.getJSONObject(original.getName()));
+                    if(previousReport != null && previousReport.has(original.getName())) {
+                       Report r = new Report(previousReport.getJSONObject(original.getName()));
+                       report.merge2(r);
                         reports.put(original.getName(), report);
                     } else {
                         reports.put(original.getName(), report);
                     }
+                    reports.get("allTest").merge(report);
                 }
             }
         }
@@ -99,7 +97,7 @@ public class CompareAllStackTrace {
         Map<StackTraceElement, Integer> callDiffs = new HashMap<>();
 
         //init of callDiffs
-        for (Diff diff : diffToExclude) {
+        for(Diff diff : diffToExclude) {
             if (diff instanceof CallDiff) {
                 int nbCallDiff = ((CallDiff) diff).getMaxStackDiff();
                 StackTraceElement key = diff.getDiffStart();
@@ -110,18 +108,19 @@ public class CompareAllStackTrace {
             }
         }
 
-        for (Diff diff : diffs) {
-            if (diff instanceof CallDiff) {
+        for(Diff diff : diffs) {
+            if(diff instanceof CallDiff) {
                 CallDiff cDiff = (CallDiff) diff;
                 StackTraceElement key = cDiff.getDiffStart();
-                if (!callDiffs.containsKey(key))
+                if(!callDiffs.containsKey(key))
                     filtered.add(diff);
-                if (callDiffs.containsKey(key) && callDiffs.get(key) < cDiff.getMaxStackDiff()) {
+                if(callDiffs.containsKey(key) && callDiffs.get(key) < cDiff.getMaxStackDiff()) {
                     filtered.add(diff);
-                    callDiffs.put(key, cDiff.getMaxStackDiff());
+                    callDiffs.put(key,cDiff.getMaxStackDiff());
                 }
-            } else {
-                if (!diffToExclude.contains(diff))
+            }
+            else {
+                if(!diffToExclude.contains(diff))
                     filtered.add(diff);
             }
         }
@@ -130,59 +129,33 @@ public class CompareAllStackTrace {
 
     protected int idMapSize;
 
-    /**
-     * Loads a binary log from a directory
-     *
-     * @param dir Directory containing the logs
-     * @return A list of stack traces separated by unit tests
-     */
-    protected List<StackTrace> loadBinaryLog(String dir, boolean recursive) {
-        throw new NotImplementedException();
-    }
-
-    /**
-     * Loads a text log from a directory
-     *
-     * @param dir       Directory containing the logs
-     * @param recursive
-     * @return
-     * @throws IOException
-     */
     protected List<StackTrace> loadLog(String dir, boolean recursive) throws IOException {
-
-        //One stack trace per logged thread
         List<StackTrace> list = new ArrayList<>();
-
-        //Directory containing all log files
         File file = new File(dir);
-
-        //Id map for each file. This structure maps every id to a shorter key
-        Map<Integer, String> idMap = loadIdMap(dir + "/id");
+        Map<String, String> idMap = loadIdMap(dir + "/id");
         idMapSize = idMap.size();
 
         Log.debug("load trace in directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles()) {
-            if (recursive && f.isDirectory())
+            if(recursive && f.isDirectory())
                 list.addAll(loadLog(f.getAbsolutePath(), recursive));
             else {
                 try {
-                    Log.debug("parse file: {}", f.getAbsoluteFile());
+                    Log.debug("parse file: {}",f.getAbsoluteFile());
                     Map<String, List<String>> splitByTest = splitByTest(f);
-                    for (String key : splitByTest.keySet()) {
+                    for(String key: splitByTest.keySet()) {
                         StackTrace st = new StackTrace();
-                        //TODO: To StackElementReader
                         st.parseFile(key, splitByTest.get(key), idMap);
                         list.add(st);
                     }
                 } catch (Exception e) {
-                    Log.debug("error for: {}", f.getAbsoluteFile());
+                    Log.debug("error for: {}",f.getAbsoluteFile());
                 }
             }
         }
         return list;
     }
 
-    //TODO: To StackElementReader
     protected Map<String, List<String>> splitByTest(File file) throws Exception {
         Map<String, List<String>> traceByTest = new HashMap<>();
         Set<String> testToExclude = new HashSet<>();
@@ -191,18 +164,18 @@ public class CompareAllStackTrace {
         String line = reader.readLine();
         String tmp = "";
 
-        if (line == null)
+        if(line == null)
             throw new Exception("empty file");
 
         List<String> trace = new LinkedList<>();
-        traceByTest.put("null", trace);
+        traceByTest.put("null",trace);
         while (line != null) {
-            if (!line.isEmpty()) {
-                if (line.endsWith("$$$")) {
+            if(!line.isEmpty()) {
+                if(line.endsWith("$$$")) {
                     try {
-                        if (line.startsWith("NewTest")) {
+                        if(line.startsWith("NewTest")) {
                             String test = line.substring(8, line.length() - 3);
-                            if (traceByTest.containsKey(test)) {
+                            if(traceByTest.containsKey(test)) {
                                 testToExclude.add(test);
                                 trace = traceByTest.get(test);
                             } else {
@@ -215,37 +188,38 @@ public class CompareAllStackTrace {
                         }
                         tmp = "";
                     } catch (Exception e) {
-                        Log.error("malformed line: {}", line);
+                        Log.error("malformed line: {}",line);
                         tmp = "";
                     }
-                } else {
+                }
+                else {
                     tmp = tmp + line;
                 }
             }
             line = reader.readLine();
         }
-        if (!tmp.equals(""))
+        if(!tmp.equals(""))
             trace.add(tmp);
 
         Log.debug("all test: {}, to exclude: {}", traceByTest.size(), testToExclude.size());
-        for (String test : testToExclude)
+        for(String test: testToExclude)
             traceByTest.remove(test);
 
 
         return traceByTest;
     }
 
-    //TODO: To StackElementReader
-    protected Map<Integer, String> loadIdMap(String file) throws IOException {
-        Map<Integer, String> map = new HashMap<>();
+    protected Map<String,String> loadIdMap(String file) throws IOException {
+        Map<String,String> map = new HashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = reader.readLine();
 
         while (line != null) {
             String[] tmp = line.split(" ");
-            map.put(Integer.parseInt(tmp[0]), line.substring(tmp[0].length(), line.length()));
+            map.put(tmp[0],line.substring(tmp[0].length(), line.length()));
             line = reader.readLine();
         }
+
         return map;
     }
 
@@ -255,9 +229,9 @@ public class CompareAllStackTrace {
 
         String line = reader.readLine();
         while (line != null) {
-            if (line.startsWith("C"))
+            if(line.startsWith("C"))
                 diff.add(new CallDiff(line));
-            if (line.startsWith("V"))
+            if(line.startsWith("V"))
                 diff.add(new VariableDiff(line));
 
             line = reader.readLine();
@@ -270,40 +244,49 @@ public class CompareAllStackTrace {
     }
 
 
-    /**
-     * Builds a report of the founded differences
-     *
-     * @return a JSON object containing the differences.
-     * @throws JSONException
-     */
-    public JSONObject buildReport() throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        for (String st : reports.keySet()) {
+//    public JSONObject buildReport() throws JSONException {
+//        JSONObject jsonObject = new JSONObject();
+//        for(String st : reports.keySet()) {
+//            Report report = reports.get(st);
+//            jsonObject.put(st,report.buildReport());
+//        }
+//        if(previousReport != null) {
+//            Iterator it = previousReport.keys();
+//            while (it.hasNext()) {
+//                String key = (String) it.next();
+//                if (!reports.containsKey(key))
+//                    jsonObject.put(key, previousReport.getJSONObject(key));
+//            }
+//        }
+//        Log.info("AllTest: "+reports.get("allTest").summary());
+//        return jsonObject;
+//    }
+
+    public Map<String,Report> reports() throws JSONException {
+        Map<String,Report> allReport = new HashMap();
+        for(String st : reports.keySet()) {
             Report report = reports.get(st);
-            jsonObject.put(st, report.buildReport());
+            allReport.put(st,report);
         }
-        if (previousReport != null) {
-            Iterator it = previousReport.keys();
-            while (it.hasNext()) {
-                String key = (String) it.next();
-                if (!reports.containsKey(key)) jsonObject.put(key, previousReport.getJSONObject(key));
-            }
-        }
-        Log.debug("AllTest: " + reports.get("allTest").summary());
-        return jsonObject;
+//        if(previousReport != null) {
+//            Iterator it = previousReport.keys();
+//            while (it.hasNext()) {
+//                String key = (String) it.next();
+//                if (!reports.containsKey(key))
+//                    jsonObject.put(key, previousReport.getJSONObject(key));
+//            }
+//        }
+//
+        return allReport;
     }
 
 
-    /**
-     * Prints a summary of all tests
-     *
-     * @return
-     */
-    public String summary() {
-        String summary = "";
-        for (String st : reports.keySet()) {
-            summary += reports.get(st).summary() + "-----------------------\n" + st + "\n";
-        }
-        return summary;
+    public String summary()  {
+//        String summary = "";
+//        for(String st : reports.keySet()) {
+//            summary += reports.get(st).summary() + "-----------------------\n"+st+"\n";
+//        }
+//        return summary;
+        return reports.get("allTest").summary();
     }
 }
