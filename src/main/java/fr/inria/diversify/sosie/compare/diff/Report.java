@@ -27,6 +27,14 @@ public class Report {
         parseJSONObject(object);
     }
 
+    public Report(Report report) {
+        diffCall = new HashSet(report.diffCall);
+        methodCall = new HashSet(report.methodCall);
+        variable = new HashMap(report.variable);
+        variableDiff = new HashSet(report.variableDiff);
+        variableChange = new HashMap(report.variableChange);
+    }
+
     public void updateVar(Map<String, Object> vars, StackTraceCall call) {
         for(String var: vars.keySet()) {
             String key = call.getMethod() + ":" + var;
@@ -71,7 +79,7 @@ public class Report {
         diffCall.addAll(other.diffCall);
     }
 
-    public void merge2(Report other){
+    public void merge2(Report other) {
         for(String var : variable.keySet()) {
             if(!other.variable.containsKey(var)) {
                 variableDiff.add(var);
@@ -98,9 +106,15 @@ public class Report {
                 variableChange.put(var,other.variableChange.get(var));
             }
         }
-
         methodCall.addAll(other.methodCall);
         diffCall.addAll(other.diffCall);
+    }
+
+    public void mergeAndRemoveDiff(Report other) {
+        this.merge(other);
+
+        variableDiff.removeAll(other.variableDiff);
+        diffCall.removeAll(other.diffCall);
     }
 
     public void addSameMethodCall(StackTraceCall top) {
@@ -206,6 +220,19 @@ public class Report {
             variableChange.put(o,map.getBoolean(o));
         }
         return variableChange;
+    }
+
+    public boolean equals(Object other) {
+        if(!(other instanceof  Report))
+            return false;
+
+        Report otherReport = (Report) other;
+
+        return variable.equals(otherReport.variable)
+                && variableDiff.equals(otherReport.variableDiff)
+                && variableChange.equals(otherReport.variableChange)
+                && methodCall.equals(otherReport.methodCall)
+                && diffCall.equals(otherReport.diffCall);
     }
 
     public int size() {

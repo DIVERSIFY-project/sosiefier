@@ -67,7 +67,7 @@ public class Main {
 
 //            Log.debug(un.summary());
             writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff", diffUnion(diff, un.getDiffToExclude()));
-            writeReport(DiversifyProperties.getProperty("result") + "/report", un.buildReport());
+//            writeReport(DiversifyProperties.getProperty("result") + "/report", un.buildReport());
 
         } catch (Exception e) {
             Log.error("error",e);
@@ -88,7 +88,7 @@ public class Main {
 
             Log.debug(un.summary());
             writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff", diff);
-            writeReport(DiversifyProperties.getProperty("result") + "/report", un.buildReport());
+//            writeReport(DiversifyProperties.getProperty("result") + "/report", un.buildReport());
 
         } catch (Exception e) {
             Log.error("error",e);

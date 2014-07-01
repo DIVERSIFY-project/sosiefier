@@ -244,22 +244,40 @@ public class CompareAllStackTrace {
     }
 
 
-    public JSONObject buildReport() throws JSONException {
-        JSONObject jsonObject = new JSONObject();
+//    public JSONObject buildReport() throws JSONException {
+//        JSONObject jsonObject = new JSONObject();
+//        for(String st : reports.keySet()) {
+//            Report report = reports.get(st);
+//            jsonObject.put(st,report.buildReport());
+//        }
+//        if(previousReport != null) {
+//            Iterator it = previousReport.keys();
+//            while (it.hasNext()) {
+//                String key = (String) it.next();
+//                if (!reports.containsKey(key))
+//                    jsonObject.put(key, previousReport.getJSONObject(key));
+//            }
+//        }
+//        Log.info("AllTest: "+reports.get("allTest").summary());
+//        return jsonObject;
+//    }
+
+    public Map<String,Report> reports() throws JSONException {
+        Map<String,Report> allReport = new HashMap();
         for(String st : reports.keySet()) {
             Report report = reports.get(st);
-            jsonObject.put(st,report.buildReport());
+            allReport.put(st,report);
         }
-        if(previousReport != null) {
-            Iterator it = previousReport.keys();
-            while (it.hasNext()) {
-                String key = (String) it.next();
-                if (!reports.containsKey(key))
-                    jsonObject.put(key, previousReport.getJSONObject(key));
-            }
-        }
-        Log.debug("AllTest: "+reports.get("allTest").summary());
-        return jsonObject;
+//        if(previousReport != null) {
+//            Iterator it = previousReport.keys();
+//            while (it.hasNext()) {
+//                String key = (String) it.next();
+//                if (!reports.containsKey(key))
+//                    jsonObject.put(key, previousReport.getJSONObject(key));
+//            }
+//        }
+//
+        return allReport;
     }
 
 
