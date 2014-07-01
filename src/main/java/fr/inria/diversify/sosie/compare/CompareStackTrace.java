@@ -107,7 +107,7 @@ public class CompareStackTrace {
     }
 
     protected Set<VariableDiff> varDiff(StackTrace st1, StackTrace st2) {
-        Set<VariableDiff> diff = new HashSet<>();
+        Set<VariableDiff> diff = new HashSet();
         Map<String, Object> v1 = st1.getVariable();
         Map<String, Object> v2 = st2.getVariable();
 

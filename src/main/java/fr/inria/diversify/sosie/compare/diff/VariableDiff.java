@@ -16,7 +16,11 @@ public class VariableDiff extends Diff {
 
     public VariableDiff(StackTraceCall stackTraceElement, String varDiff) {
         this.diffStart = stackTraceElement;
-        this.varDiff = varDiff;
+        if(varDiff == null) {
+            this.varDiff = "null";
+        } else {
+            this.varDiff = varDiff;
+        }
     }
 
     public VariableDiff(String line) {

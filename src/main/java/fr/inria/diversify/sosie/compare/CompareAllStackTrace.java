@@ -76,17 +76,16 @@ public class CompareAllStackTrace {
             for (StackTrace sosie : stackTraces2) {
                 if (sosie.getFullName().equals(original.getFullName())) {
                     CompareStackTrace cls = new CompareStackTrace(original, sosie);
-//                    Log.debug("compare: {}", original.getFullName());
                     diffs.addAll(diffOperator.apply(cls));
-
                     Report report = cls.getReport();
-                    reports.get("allTest").merge(report);
                     if(previousReport != null && previousReport.has(original.getName())) {
-                       report.merge(previousReport.getJSONObject(original.getName()));
+                       Report r = new Report(previousReport.getJSONObject(original.getName()));
+                       report.merge2(r);
                         reports.put(original.getName(), report);
                     } else {
                         reports.put(original.getName(), report);
                     }
+                    reports.get("allTest").merge(report);
                 }
             }
         }
@@ -255,7 +254,8 @@ public class CompareAllStackTrace {
             Iterator it = previousReport.keys();
             while (it.hasNext()) {
                 String key = (String) it.next();
-                if (!reports.containsKey(key)) jsonObject.put(key, previousReport.getJSONObject(key));
+                if (!reports.containsKey(key))
+                    jsonObject.put(key, previousReport.getJSONObject(key));
             }
         }
         Log.debug("AllTest: "+reports.get("allTest").summary());
@@ -264,10 +264,11 @@ public class CompareAllStackTrace {
 
 
     public String summary()  {
-        String summary = "";
-        for(String st : reports.keySet()) {
-            summary += reports.get(st).summary() + "-----------------------\n"+st+"\n";
-        }
-        return summary;
+//        String summary = "";
+//        for(String st : reports.keySet()) {
+//            summary += reports.get(st).summary() + "-----------------------\n"+st+"\n";
+//        }
+//        return summary;
+        return reports.get("allTest").summary();
     }
 }

@@ -1,7 +1,6 @@
 package fr.inria.diversify.sosie.compare.diff;
 
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
-import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +18,6 @@ public class Report {
     protected Map<String,String> variable;
     protected Set<String> variableDiff;
     protected Map<String,Boolean> variableChange;
-
 
     public Report() {
         init();
@@ -51,11 +49,40 @@ public class Report {
         }
     }
 
-    public void merge(JSONObject otherReport) throws JSONException {
-        Report other = new Report(otherReport);
-        this.merge(other);
-    }
+
     public void merge(Report other){
+        variable.putAll(other.variable);
+        variableDiff.addAll(other.variableDiff);
+
+        Set<String> keys = new HashSet();
+        keys.addAll(variableChange.keySet());
+        keys.addAll(other.variableChange.keySet());
+        for(String var : keys) {
+            if(variableChange.containsKey(var)) {
+                if(other.variableChange.containsKey(var)) {
+                    variableChange.put(var, variableChange.get(var) || other.variableChange.get(var));
+                }
+            } else {
+                variableChange.put(var,other.variableChange.get(var));
+            }
+        }
+
+        methodCall.addAll(other.methodCall);
+        diffCall.addAll(other.diffCall);
+    }
+
+    public void merge2(Report other){
+        for(String var : variable.keySet()) {
+            if(!other.variable.containsKey(var)) {
+                variableDiff.add(var);
+            }
+        }
+        for(String var : other.variable.keySet()) {
+            if(!variable.containsKey(var)) {
+                variableDiff.add(var);
+            }
+        }
+
         variable.putAll(other.variable);
         variableDiff.addAll(other.variableDiff);
 
@@ -92,12 +119,12 @@ public class Report {
         variableChange = new HashMap();
     }
 
-    public JSONObject buildReport(JSONObject otherReport) throws JSONException {
-        Report other = new Report(otherReport);
-        this.merge(other);
-
-        return buildReport();
-    }
+//    public JSONObject buildReport(JSONObject otherReport) throws JSONException {
+//        Report other = new Report(otherReport);
+//        this.merge(other);
+//
+//        return buildReport();
+//    }
 
     public String summary() {
         Set<String> variableConst = new HashSet();
@@ -114,16 +141,15 @@ public class Report {
                 else {variableConst.add(var);}
             }
         }
-
         HashSet sameCall = new HashSet();
         sameCall.addAll(methodCall);
         sameCall.removeAll(diffCall);
 
         String summary = "";
         summary += "variableConst: " + variableConst.size() + "\n";
-        summary += "variableConstDiff: " + variableConstDiff.size() + "\n";
+        summary += "variableConstDiff: " + variableConstDiff.size() + "\n";//+ " "+variableConstDiff+ "\n";
         summary += "variableEvol: " + variableEvol.size() + "\n";
-        summary += "variableEvolDiff: " + variableEvolDiff.size() + "\n";
+        summary += "variableEvolDiff: " + variableEvolDiff.size() + "\n";//+ " "+variableEvolDiff+ "\n";
         summary += "sameCall: " + sameCall.size() + "\n";
         summary += "diffCall: " + diffCall.size() + "\n";
 
@@ -157,7 +183,6 @@ public class Report {
         for(int i = 0; i < array.length(); i++) {
             set.add(array.getString(i));
         }
-
         return set;
     }
 
@@ -167,10 +192,8 @@ public class Report {
         Iterator it = map.keys();
         while(it.hasNext()) {
             String o = (String) it.next();
-            ;
             variableValue.put(o,map.getString(o));
         }
-
         return variableValue;
     }
 
@@ -182,7 +205,10 @@ public class Report {
             String o = (String) it.next();
             variableChange.put(o,map.getBoolean(o));
         }
-
         return variableChange;
+    }
+
+    public int size() {
+        return variable.size() + methodCall.size();
     }
 }

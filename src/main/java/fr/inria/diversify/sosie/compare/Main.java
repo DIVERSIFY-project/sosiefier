@@ -2,6 +2,7 @@ package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.sosie.compare.diff.CallDiff;
 import fr.inria.diversify.sosie.compare.diff.Diff;
+import fr.inria.diversify.sosie.compare.diff.Report;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.util.DiversifyProperties;
@@ -35,14 +36,14 @@ public class Main {
 
     protected void init() throws Exception {
         initLogLevel();
-        try {
-            if(DiversifyProperties.getProperty("builder").equals("maven")) {
-                MavenDependencyResolver t = new MavenDependencyResolver();
-                t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
-            }
-        } catch (Exception e) {}
+//        try {
+//            if(DiversifyProperties.getProperty("builder").equals("maven")) {
+//                MavenDependencyResolver t = new MavenDependencyResolver();
+//                t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
+//            }
+//        } catch (Exception e) {}
 
-        initSpoon();
+//        initSpoon();
 
         dirOriginal = DiversifyProperties.getProperty("dirOriginal");
         dirSosie = DiversifyProperties.getProperty("dirSosie");
@@ -58,17 +59,15 @@ public class Main {
         try {
             String previousReport = DiversifyProperties.getProperty("previousReport");
             JSONObject pr = null;
-            if(previousReport != null) {
+            if(previousReport != null && new File(previousReport).exists()) {
                 pr = loadJSON(previousReport);
             }
             CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, pr);
             Set<Diff> diff = un.findDiff();
-            writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff",  diffUnion(diff, un.getDiffToExclude()));
 
-
-
-                writeReport(DiversifyProperties.getProperty("result") + "/report", un);
-
+//            Log.debug(un.summary());
+            writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff", diffUnion(diff, un.getDiffToExclude()));
+            writeReport(DiversifyProperties.getProperty("result") + "/report", un.buildReport());
 
         } catch (Exception e) {
             Log.error("error",e);
@@ -79,9 +78,18 @@ public class Main {
 
     protected void diff() throws Exception {
         try {
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, null);
+            String previousReport = DiversifyProperties.getProperty("previousReport");
+            JSONObject pr = null;
+            if(previousReport != null) {
+                pr = loadJSON(previousReport);
+            }
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, pr);
             Set<Diff> diff = un.findDiff();
-            writeDiff(DiversifyProperties.getProperty("result")+"/excludeDiff",diff);
+
+            Log.debug(un.summary());
+            writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff", diff);
+            writeReport(DiversifyProperties.getProperty("result") + "/report", un.buildReport());
+
         } catch (Exception e) {
             Log.error("error",e);
             e.printStackTrace();
@@ -116,6 +124,7 @@ public class Main {
 
     protected void writeDiff(String fileName, Collection<Diff> diffs) throws IOException {
         Log.debug("write diff in {}", fileName);
+        Log.debug("number of diff: {}", diffs.size());
         File file = new File(fileName);
         file.createNewFile();
         FileWriter writer = new FileWriter(file);
@@ -127,24 +136,24 @@ public class Main {
         writer.close();
     }
 
-    protected void writeReport(String fileName, CompareAllStackTrace compareTraces) throws IOException, JSONException {
+    protected void writeReport(String fileName, JSONObject report) throws IOException, JSONException {
 
         Log.debug("write report in {}.json", fileName);
         File file = new File(fileName+".json");
         file.createNewFile();
         FileWriter writer = new FileWriter(file);
 
-        writer.write(compareTraces.buildReport().toString());
+        writer.write(report.toString());
 
         writer.close();
 
-        file = new File(fileName+".txt");
-        file.createNewFile();
-        writer = new FileWriter(file);
-
-        writer.write(compareTraces.summary());
-
-        writer.close();
+//        file = new File(fileName+".txt");
+//        file.createNewFile();
+//        writer = new FileWriter(file);
+//
+//        writer.write(compareTraces.summary());
+//
+//        writer.close();
     }
 
     protected Set<Diff> diffUnion(Collection<Diff> diffs1, Collection<Diff> diffs2) {
@@ -172,6 +181,7 @@ public class Main {
     }
 
     protected JSONObject loadJSON(String file) throws IOException, JSONException {
+        Log.debug("load json file: {}", file);
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
 
