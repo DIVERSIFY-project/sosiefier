@@ -131,9 +131,6 @@ public class CompareStackTrace {
         return diff;
     }
 
-
-
-
     protected CallDiff findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
         int count1 = 0;
         int count2 = 0;
@@ -188,7 +185,6 @@ public class CompareStackTrace {
         st2.previous(undo);
         return same;
     }
-
 
     public Report getReport() {
         return report;

@@ -10,7 +10,7 @@ public class StackTraceCall extends StackTraceElement {
 
 
 
-    public StackTraceCall(String id, int deep, Map<String, String> idMap) {
+    public StackTraceCall(int id, int deep, Map<Integer, String> idMap) {
         originalDeep = deep;
         this.id = id;
         if (!idMap.containsKey(id)) { this.method = "null"; } else { this.method = idMap.get(id); }

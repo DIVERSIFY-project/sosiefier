@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class ErrorLoggingInstrumenter extends AbstractLogginInstrumenter<CtStatement> {
     protected static Map<CtExecutable,Integer> count = new HashMap();
-    protected static Map<String,String> idMap = new HashMap();
+    protected static Map<Integer,String> idMap = new HashMap();
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {

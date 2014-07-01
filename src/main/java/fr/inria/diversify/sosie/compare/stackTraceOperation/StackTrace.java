@@ -58,12 +58,12 @@ public class StackTrace {
 
     public StackTraceCall getTop() {
         if(stackTraceCalls.isEmpty())
-            return new StackTraceCall(null, 0, new HashMap<>());
+            return new StackTraceCall(0, 0, new HashMap<>());
         return stackTraceCalls.peek();
     }
     public StackTraceCall getTop2() {
         if (stackTraceCalls.size() - 2 < 0)
-            return new StackTraceCall(null, 0, new HashMap<>());
+            return new StackTraceCall(0, 0, new HashMap<>());
         return stackTraceCalls.get(stackTraceCalls.size() - 2);
     }
 
@@ -71,7 +71,7 @@ public class StackTrace {
         return position < stackTraceOperations.size();
     }
 
-    public void parseFile(String name, List<String> trace, Map<String,String> idMap) throws Exception {
+    public void parseFile(String name, List<String> trace, Map<Integer,String> idMap) throws Exception {
         this.name = name;
 
         for(String operation: trace) {
@@ -80,7 +80,7 @@ public class StackTrace {
 
         stackTraceCalls.clear();
     }
-    protected void addElement(String line, Map<String, String> idMap) {
+    protected void addElement(String line, Map<Integer,String> idMap) {
         String type = line.substring(0, 1);
         if(type.equals("A"))
             return;
@@ -110,10 +110,10 @@ public class StackTrace {
         stackTraceOperations.add(new StackTracePush(elem));
     }
 
-    protected StackTraceElement parseElement(String type, int deep, String id, Map<String, String> idMap) {
+    protected StackTraceElement parseElement(String type, int deep, String id, Map<Integer,String> idMap) {
         StackTraceElement st = null;
         if(type.equals("M"))
-            st = new StackTraceCall(id, deep, idMap);
+            st = new StackTraceCall(Integer.parseInt(id), deep, idMap);
         if(type.equals("V"))
             st = new StackTraceVariable(id, deep, idMap);
         if(type.equals("E"))

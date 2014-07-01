@@ -10,13 +10,13 @@ public class StackTraceVariable extends StackTraceElement {
     protected int id2;
 
 
-    public StackTraceVariable(String value, int deep, Map<String, String> idMap) {
+    public StackTraceVariable(String value, int deep, Map<Integer,String> idMap) {
         originalDeep = deep;
         String[] tmp = value.split(":;:");
         String[] idTmp = tmp[0].split(";");
         id2 = Integer.parseInt(idTmp[0]);
-        id = idTmp[1];
-        method = idMap.get(idTmp[1]);
+        id = Integer.parseInt(idTmp[1]);
+        method = idMap.get(id);
 
         vars = new HashMap<>();
         if(tmp[1].equals("P"))
@@ -24,10 +24,11 @@ public class StackTraceVariable extends StackTraceElement {
 
         for(int i = 1; i < tmp.length; i++ ) {
             String[] varTmp = tmp[i].split(";");
+            int key = Integer.parseInt(varTmp[0]);
             if(varTmp.length == 1)
-                vars.put(idMap.get(varTmp[0]), "");
+                vars.put(idMap.get(key), "");
             else
-                vars.put(idMap.get(varTmp[0]), parseValue(varTmp[1]));
+                vars.put(idMap.get(key), parseValue(varTmp[1]));
         }
     }
 

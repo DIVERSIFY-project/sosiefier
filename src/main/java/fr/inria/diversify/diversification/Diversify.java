@@ -58,8 +58,9 @@ public class Diversify extends AbstractDiversify {
      */
     private boolean earlyReportSosiesOnly = false;
 
-    /** Reports results on every step. Slower, but allows to stop the process without
-     *  loosing all the information
+    /**
+     * Reports results on every step. Slower, but allows to stop the process without
+     * loosing all the information
      */
     public boolean getEarlyReport() {
         return earlyReport;
@@ -88,7 +89,9 @@ public class Diversify extends AbstractDiversify {
         sessionResults = new SessionResults();
 
         File f = new File(getResultDir());
-        if ( earlyReport && !(f.exists())) { f.mkdirs(); }
+        if (earlyReport && !(f.exists())) {
+            f.mkdirs();
+        }
 
         trial = 0;
         sosie = 0;
@@ -148,7 +151,11 @@ public class Diversify extends AbstractDiversify {
 
         String[] statusCode = {"SOSIE!!", "TEST FAILED :P", "COMPILE FAILED :("};
         Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        Log.info(statusCode[status * -1]);
+        try {
+            Log.info(statusCode[Math.abs(status)]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Log.debug("INVALID STATUS!! Status: " + status);
+        }
         Log.debug("{} setCompile error on {} compilation", compileError, trans.size());
         Log.debug("{} sosie on {} trial", sosie, trial);
         Log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -158,7 +165,7 @@ public class Diversify extends AbstractDiversify {
                 try {
                     RunResults result = buildRunResult(trans, status);
                     result.saveToFile(getResultDir() + "/" +
-                                              "trial_" + trial + "_size_" + trans.size() + "_stat_" + status + ".json");
+                            "trial_" + trial + "_size_" + trans.size() + "_stat_" + status + ".json");
                     sessionResults.addRunResults(result);
                     sessionResults.saveReport(getResultDir() + "/session" + trans.size() + ".txt");
                 } catch (IOException e) {
@@ -169,10 +176,7 @@ public class Diversify extends AbstractDiversify {
                 }
             }
         }
-        if (status == 0) {
-            copySosieProgram(trans);
-
-        }
+        if (status == 0) { copySosieProgram(trans); }
     }
 
     protected RunResults buildRunResult(Collection<Transformation> trans, int status) {
@@ -187,9 +191,13 @@ public class Diversify extends AbstractDiversify {
 
     protected void copySosieProgram(Collection<Transformation> trans) throws IOException, JSONException {
         //Store the whole sosie program.
-        File f = new File(getSocieSourcesDir());
-        if ( !(f.exists()) ) { f.mkdirs(); }
-        if ( getSocieSourcesDir() != null ) {
+        //think this over!
+        if (getSocieSourcesDir() != null && getSocieSourcesDir().length() > 0) {
+            File f = new File(getSocieSourcesDir());
+            if (!(f.exists())) {
+                f.mkdirs();
+            }
+
             String destPath = getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
 
             boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
@@ -198,14 +206,12 @@ public class Diversify extends AbstractDiversify {
             boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert"));
             boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
 
-            if ( intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest ) {
+            if (intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest) {
                 Instru instru = new Instru(
                         tmpDir, sourceDir,
                         inputConfiguration.getProperty("testSrc"), destPath);
                 instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
             }
-            RunResults result = buildRunResult(trans, 0);
-            result.saveToFile(destPath + "/transformations.json");
         }
     }
 

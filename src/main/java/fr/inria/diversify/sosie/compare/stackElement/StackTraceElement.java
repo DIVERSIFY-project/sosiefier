@@ -4,9 +4,13 @@ package fr.inria.diversify.sosie.compare.stackElement;
  * Created by Simon on 17/04/14.
  */
 public class StackTraceElement {
+
+    //Depth in wich this stack element was logged
     protected int originalDeep;
+    //Method where the stack element was logged
     protected String method;
-    protected String id;
+    //Element id
+    protected Integer id;
 
     public int getOriginalDeep() {
         return originalDeep;
@@ -16,7 +20,7 @@ public class StackTraceElement {
         return method;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 }

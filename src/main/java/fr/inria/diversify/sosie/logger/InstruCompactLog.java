@@ -19,61 +19,39 @@ public class InstruCompactLog extends InstruLogWriter {
     ///Magic number for class in log tuples
     public static final byte LOG_CLASS = 2;
     ///Magic number for tests in log tuples
-    private static final byte LOG_TEST = 3;
+    public static final byte LOG_TEST = 3;
     ///Magic number for asserts in log tuples
-    private static final byte LOG_ASSERT = 4;
+    public static final byte LOG_ASSERT = 4;
     ///Magic number for vars in log tuples
-    private static final byte LOG_VAR = 5;
+    public static final byte LOG_VAR = 5;
     ///Magic number for exceptions in log tuples
-    private static final byte LOG_EXCEPTION = 6;
+    public static final byte LOG_EXCEPTION = 6;
     ///Magic number for catchs in log tuples
-    private static final byte LOG_CATCH = 7;
+    public static final byte LOG_CATCH = 7;
     ///Magic number for the end of the file
-    private static final byte LOG_CLOSE = 8;
+    public static final byte LOG_CLOSE = 8;
 
     ///DataInput for each thread. Each one saved in a different file
     private Map<Thread, DataOutputStream> streamsPerThread;
 
-    ///Each method signature is assigned an integer value. This way we save lots of space
-    protected Map<String, Integer> methodID;
+    ///Each method, class, test, exception has a signature that is assigned an integer value.
+    // This way we save lots of space
+    protected Map<String, Integer> idMap;
 
-    ///Each class name is assigned an integer value. This way we save lots of space
-    protected Map<String, Integer> classID;
+    //Current ID signature
+    private int currentId;
 
-    ///Each class name is assigned an integer value. This way we save lots of space
-    private Map<String, Integer> testID;
 
-    ///Each class name is assigned an integer value. This way we save lots of space
-    private Map<String, Integer> exceptionsID;
-
-    //Number of found method signatures so far. ID of the method signatures as they come
-    private int foundMethodSignatures;
-
-    //Number of class names so far. ID of the method signatures as they come
-    private int foundClasses;
-
-    //Number of tests names so far. ID of the method signatures as they come
-    private int foundTest;
-
-    //Number of exceptions names so far. ID of the method signatures as they come
-    private int foundExceptions;
 
     public InstruCompactLog(String logDir) {
         super(logDir);
 
         //Remember we are copying these files to another source file
         //so they must be maintain in java 1.5
-        methodID = new HashMap<String, Integer>();
-        testID = new HashMap<String, Integer>();
-        classID = new HashMap<String, Integer>();
-        exceptionsID = new HashMap<String, Integer>();
+        idMap = new HashMap<String, Integer>();
+        currentId = 0;
+
         streamsPerThread = new HashMap<Thread, DataOutputStream>();
-
-
-        foundMethodSignatures = 0;
-        foundClasses = 0;
-        foundTest = 0;
-        foundExceptions = 0;
     }
 
     /**
@@ -88,7 +66,7 @@ public class InstruCompactLog extends InstruLogWriter {
                 int depth = incCallDepth(thread);
                 DataOutputStream os = getStream(thread);
                 os.writeByte(LOG_METHOD);
-                os.writeInt(getMethodSignatureId(methodSignatureId));
+                os.writeInt(getSignatureId(methodSignatureId));
                 os.writeInt(depth);
             }
         } catch ( InterruptedException e ) {
@@ -106,7 +84,7 @@ public class InstruCompactLog extends InstruLogWriter {
             int depth = incCallDepth(thread);
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_TEST);
-            os.writeInt(getTestSignatureId(testSignature));
+            os.writeInt(getSignatureId(testSignature));
         } catch ( InterruptedException e ) {
             e.printStackTrace();
         } catch ( IOException e ) {
@@ -122,10 +100,10 @@ public class InstruCompactLog extends InstruLogWriter {
             resetCallDepth(thread);
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_ASSERT);
-            os.writeInt(getClassId(className));
-            os.writeInt(getMethodSignatureId(methodSignature));
+            os.writeInt(getSignatureId(className));
+            os.writeInt(getSignatureId(methodSignature));
             //The asserts are methods two...
-            os.writeInt(getMethodSignatureId(assertName));
+            os.writeInt(getSignatureId(assertName));
             for (int i = 0; i < var.length; i++) {
                 os.writeChars(printString(var[i]));
             }
@@ -147,7 +125,7 @@ public class InstruCompactLog extends InstruLogWriter {
                 DataOutputStream os = getStream(thread);
                 os.writeByte(LOG_VAR);
                 os.writeInt(id);
-                os.writeInt(getMethodSignatureId(methodSignatureId));
+                os.writeInt(getSignatureId(methodSignatureId));
                 os.writeInt(callDeep.get(thread));
                 String vars = buildVars(thread, separator, simpleSeparator, var);
                 if ( vars != previousVarLog.get(thread) ) {
@@ -170,9 +148,9 @@ public class InstruCompactLog extends InstruLogWriter {
             os.writeByte(LOG_EXCEPTION);
             os.writeInt(callDeep.get(thread));
             os.writeInt(id);
-            os.writeInt(getClassId(className));
-            os.writeInt(getMethodSignatureId(methodSignature));
-            os.writeInt(getExceptionId(exception));
+            os.writeInt(getSignatureId(className));
+            os.writeInt(getSignatureId(methodSignature));
+            os.writeInt(getSignatureId(exception.toString()));
 
         } catch ( InterruptedException e ) {
             e.printStackTrace();
@@ -191,9 +169,9 @@ public class InstruCompactLog extends InstruLogWriter {
             os.writeByte(LOG_CATCH);
             os.writeInt(callDeep.get(thread));
             os.writeInt(id);
-            os.writeInt(getClassId(className));
-            os.writeInt(getMethodSignatureId(methodSignature));
-            os.writeInt(getExceptionId(exception));
+            os.writeInt(getSignatureId(className));
+            os.writeInt(getSignatureId(methodSignature));
+            os.writeInt(getSignatureId(exception.toString()));
         } catch ( InterruptedException e ) {
             e.printStackTrace();
         } catch ( IOException e ) {
@@ -203,33 +181,20 @@ public class InstruCompactLog extends InstruLogWriter {
 
     @Override
     public void close() {
+
         for (Thread thread : streamsPerThread.keySet()) {
+            File f = new File(getThreadLogFilePath(thread) + ".id");
             String semaphore = "";
             try {
-                DataOutputStream os = getStream(thread);
+                DataOutputStream os = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
 
                 os.writeByte(LOG_CLOSE);
 
-                os.writeInt(methodID.keySet().size());
-                for (String s : methodID.keySet()) {
+                os.writeInt(idMap.keySet().size());
+                for (String s : idMap.keySet()) {
+                    os.write(idMap.get(s));
                     os.writeChars(s);
                 }
-
-                os.writeInt(classID.keySet().size());
-                for (String s : classID.keySet()) {
-                    os.writeChars(s);
-                }
-
-                os.writeInt(testID.keySet().size());
-                for (String s : testID.keySet()) {
-                    os.writeChars(s);
-                }
-
-                os.writeInt(exceptionsID.keySet().size());
-                for (String s : exceptionsID.keySet()) {
-                    os.writeChars(s);
-                }
-
                 os.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -262,37 +227,17 @@ public class InstruCompactLog extends InstruLogWriter {
         return s;
     }
 
-    protected int getMethodSignatureId(String methodSignatureId) {
-        if (!methodID.containsKey(methodSignatureId)) {
-            methodID.put(methodSignatureId, foundMethodSignatures++);
-            return foundMethodSignatures;
+    /**
+     * Gets the id Map id for a signature
+     * @param signature
+     * @return
+     */
+    protected int getSignatureId(String signature) {
+        if (!idMap.containsKey(signature)) {
+            idMap.put(signature, currentId++);
+            return currentId;
         }
-        return methodID.get(methodSignatureId);
-    }
-
-    protected int getTestSignatureId(String testSignature) {
-        if (!testID.containsKey(testSignature)) {
-            testID.put(testSignature, foundTest++);
-            return foundTest;
-        }
-        return testID.get(testSignature);
-    }
-
-    protected int getClassId(String classSignature) {
-        if (!classID.containsKey(classSignature)) {
-            classID.put(classSignature, foundClasses++);
-            return foundClasses;
-        }
-        return classID.get(classSignature);
-    }
-
-    private int getExceptionId(Object exception) {
-        String key = exception == null ? "Null" : exception.toString();
-        if (!exceptionsID.containsKey(key)) {
-            exceptionsID.put(key, foundExceptions++);
-            return foundExceptions;
-        }
-        return exceptionsID.get(key);
+        return idMap.get(signature);
     }
 
     /**
@@ -304,4 +249,27 @@ public class InstruCompactLog extends InstruLogWriter {
     private void printVars(Object[] var, DataOutputStream os) {
 
     }
+
+
+    /*
+    ///Each class name is assigned an integer value. This way we save lots of space
+    protected Map<String, Integer> classID;
+
+    ///Each class name is assigned an integer value. This way we save lots of space
+    private Map<String, Integer> testID;
+
+    ///Each class name is assigned an integer value. This way we save lots of space
+    private Map<String, Integer> exceptionsID;
+    */
+    //Number of found method signatures so far. ID of the method signatures as they come
+    /*
+    //Number of class names so far. ID of the method signatures as they come
+    private int foundClasses;
+
+    //Number of tests names so far. ID of the method signatures as they come
+    private int foundTest;
+
+    //Number of exceptions names so far. ID of the method signatures as they come
+    private int foundExceptions;
+    */
 }

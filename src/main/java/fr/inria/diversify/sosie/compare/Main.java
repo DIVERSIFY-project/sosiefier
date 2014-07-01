@@ -36,19 +36,21 @@ public class Main {
     protected void init() throws Exception {
         initLogLevel();
         try {
-            if(DiversifyProperties.getProperty("builder").equals("maven")) {
+            if (DiversifyProperties.getProperty("builder").equals("maven")) {
                 MavenDependencyResolver t = new MavenDependencyResolver();
                 t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
-        initSpoon();
+
+        //initSpoon();
 
         dirOriginal = DiversifyProperties.getProperty("dirOriginal");
         dirSosie = DiversifyProperties.getProperty("dirSosie");
         diffToExclude = DiversifyProperties.getProperty("excludeDiff");
 
-        if(DiversifyProperties.getProperty("logTrace").equals("same"))
+        if (DiversifyProperties.getProperty("logTrace").equals("same"))
             same();
         else
             diff();
@@ -58,20 +60,15 @@ public class Main {
         try {
             String previousReport = DiversifyProperties.getProperty("previousReport");
             JSONObject pr = null;
-            if(previousReport != null) {
+            if (previousReport != null) {
                 pr = loadJSON(previousReport);
             }
             CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, pr);
             Set<Diff> diff = un.findDiff();
-            writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff",  diffUnion(diff, un.getDiffToExclude()));
-
-
-
-                writeReport(DiversifyProperties.getProperty("result") + "/report", un);
-
-
+            writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff", diffUnion(diff, un.getDiffToExclude()));
+            writeReport(DiversifyProperties.getProperty("result") + "/report", un);
         } catch (Exception e) {
-            Log.error("error",e);
+            Log.error("error", e);
             e.printStackTrace();
         }
     }
@@ -81,13 +78,14 @@ public class Main {
         try {
             CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, null);
             Set<Diff> diff = un.findDiff();
-            writeDiff(DiversifyProperties.getProperty("result")+"/excludeDiff",diff);
+            writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff", diff);
         } catch (Exception e) {
-            Log.error("error",e);
+            Log.error("error", e);
             e.printStackTrace();
         }
     }
 
+    /*
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
 
@@ -112,7 +110,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     protected void writeDiff(String fileName, Collection<Diff> diffs) throws IOException {
         Log.debug("write diff in {}", fileName);
@@ -120,7 +118,7 @@ public class Main {
         file.createNewFile();
         FileWriter writer = new FileWriter(file);
 
-        for(Diff diff : diffs) {
+        for (Diff diff : diffs) {
             diff.write(writer);
             writer.write("\n");
         }
@@ -130,7 +128,7 @@ public class Main {
     protected void writeReport(String fileName, CompareAllStackTrace compareTraces) throws IOException, JSONException {
 
         Log.debug("write report in {}.json", fileName);
-        File file = new File(fileName+".json");
+        File file = new File(fileName + ".json");
         file.createNewFile();
         FileWriter writer = new FileWriter(file);
 
@@ -138,7 +136,7 @@ public class Main {
 
         writer.close();
 
-        file = new File(fileName+".txt");
+        file = new File(fileName + ".txt");
         file.createNewFile();
         writer = new FileWriter(file);
 
@@ -154,18 +152,21 @@ public class Main {
         tmp.addAll(diffs2);
 
         //init of callDiffs
-        for(Diff diff : tmp) {
+        for (Diff diff : tmp) {
             if (diff instanceof CallDiff) {
                 int nbCallDiff = ((CallDiff) diff).getMaxStackDiff();
                 StackTraceCall key = diff.getDiffStart();
-                if (callDiffs.containsKey(key)) { callDiffs.put(key, Math.max(callDiffs.get(key), nbCallDiff)); }
-                else { callDiffs.put(key, nbCallDiff); }
+                if (callDiffs.containsKey(key)) {
+                    callDiffs.put(key, Math.max(callDiffs.get(key), nbCallDiff));
+                } else {
+                    callDiffs.put(key, nbCallDiff);
+                }
             } else {
                 union.add(diff);
             }
         }
 
-        for(StackTraceCall ste : callDiffs.keySet()) {
+        for (StackTraceCall ste : callDiffs.keySet()) {
             union.add(new CallDiff(ste, callDiffs.get(ste)));
         }
         return union;
@@ -181,7 +182,7 @@ public class Main {
             line = br.readLine();
         }
 
-       return new JSONObject(sb.toString());
+        return new JSONObject(sb.toString());
     }
 
     protected void initLogLevel() {
