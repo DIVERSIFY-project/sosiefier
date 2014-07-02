@@ -275,5 +275,4 @@ filter = function(transformation) {
         || (steroid  & (name == "delete" || name == "add" || name == "replace"))
         || (mutation  & transformation.type == "mutation")
         || (cvl  & transformation.type == "cvl")
-        || true;
 }
