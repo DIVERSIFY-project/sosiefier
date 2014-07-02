@@ -1,8 +1,9 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.BufferedOutputStreamMock;
-import fr.inria.diversify.sosie.compare.stackElement.*;
-import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
+import fr.inria.diversify.FileOutputStreamMock;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTracePop;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTracePush;
 import fr.inria.diversify.sosie.logger.InstruCompactLog;
 
 import org.junit.Assert;
@@ -10,6 +11,8 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by marodrig on 01/07/2014.
@@ -21,27 +24,58 @@ public class StackElementReaderTest {
         log.methodCall(t, "foo");
         log.methodOut(t);
         log.methodCall(t, "bar");
+        log.writeTestStart(t, "sampleTest2");
     }
 
     @Test
-    public void testStackElementReaderTest() {
+    public void testRead_Methods() throws IOException {
 
         //Create some data and store the result in the mocked array instead of the file
-        BufferedOutputStreamMock mock = new BufferedOutputStreamMock();
+        FileOutputStreamMock mock = new FileOutputStreamMock();
         InstruCompactLog log = new InstruCompactLog("logTest");
         Thread t = Thread.currentThread();
 
-        buildDataAndReader(log, t);
+        //Build some data for the reader
+        log.writeTestStart(t, "sampleTest");
+        log.methodCall(t, "foo");
+        log.methodOut(t);
+        log.methodCall(t, "bar");
+        log.writeTestStart(t, "sampleTest2");
+        log.close();
 
         //Make the reader read from the byte[] buffer
-        StackElementBinaryReader reader = new StackElementBinaryReader(
-                new DataInputStream(new ByteArrayInputStream(mock.buffer)));
-        StackTraceElement e = reader.next();
-        Assert.assertTrue(e instanceof StackTraceCall);
-        Assert.assertEquals("foo", e.getMethod());
-        Assert.assertEquals("bar", reader.next().getMethod());
+        StackElementBinaryReader reader = new StackElementBinaryReader();
+        List<StackTrace> st = reader.loadLog(new DataInputStream(new ByteArrayInputStream(mock.buffer)));
+
+        Assert.assertEquals(2, st.size());
+        Assert.assertEquals("sampleTest", st.get(0).getName());
+        Assert.assertEquals("sampleTest2", st.get(1).getName());
+        Assert.assertEquals("bar", st.get(0).getTop().getMethod());
+        Assert.assertTrue(st.get(0).getStackTraceOperations().get(2) instanceof StackTracePush);
+
     }
 
+    @Test
+    public void testRead_Exception() throws IOException {
+        //Create some data and store the result in the mocked array instead of the file
+        FileOutputStreamMock mock = new FileOutputStreamMock();
+        InstruCompactLog log = new InstruCompactLog("logTest");
+        Thread t = Thread.currentThread();
 
+        //Build some data for the reader
+        log.writeTestStart(t, "sampleTest");
+        log.methodCall(t, "foo");
+        log.writeException(10, t, "A", "foo", new Exception("e"));
+        log.close();
+
+        //Make the reader read from the byte[] buffer
+        StackElementBinaryReader reader = new StackElementBinaryReader();
+        List<StackTrace> st = reader.loadLog(new DataInputStream(new ByteArrayInputStream(mock.buffer)));
+
+        Assert.assertEquals("foo", st.get(0).getTop().getMethod());
+        Assert.assertTrue(st.get(0).getStackTraceOperations().size() > 0);
+
+
+    }
 
 }

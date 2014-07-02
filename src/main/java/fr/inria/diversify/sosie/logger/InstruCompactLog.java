@@ -1,8 +1,7 @@
 package fr.inria.diversify.sosie.logger;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -42,16 +41,35 @@ public class InstruCompactLog extends InstruLogWriter {
     private int currentId;
 
 
+    //We write the id map as we go. That way we may store it in the same file
+    private int lastHashEntry = 0;
+
+    //List of new hash entries before the last call of a write method
+    ArrayList<HashMap.Entry<String, Integer>> lastSignatures;
 
     public InstruCompactLog(String logDir) {
         super(logDir);
-
+        lastSignatures = new ArrayList<HashMap.Entry<String, Integer>>();
         //Remember we are copying these files to another source file
         //so they must be maintain in java 1.5
         idMap = new HashMap<String, Integer>();
         currentId = 0;
 
         streamsPerThread = new HashMap<Thread, DataOutputStream>();
+    }
+
+    protected void writeSignatures(DataOutputStream os) {
+        try {
+            os.writeInt(lastSignatures.size());
+            for (HashMap.Entry<String, Integer> e : lastSignatures) {
+                os.writeUTF(e.getKey());
+                os.writeInt(e.getValue());
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        lastSignatures.clear();
     }
 
     /**
@@ -65,13 +83,15 @@ public class InstruCompactLog extends InstruLogWriter {
             if (getLogMethod(thread)) {
                 int depth = incCallDepth(thread);
                 DataOutputStream os = getStream(thread);
+                int id = getSignatureId(methodSignatureId);
                 os.writeByte(LOG_METHOD);
-                os.writeInt(getSignatureId(methodSignatureId));
+                writeSignatures(os);
+                os.writeInt(id);
                 os.writeInt(depth);
             }
-        } catch ( InterruptedException e ) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -84,10 +104,12 @@ public class InstruCompactLog extends InstruLogWriter {
             int depth = incCallDepth(thread);
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_TEST);
-            os.writeInt(getSignatureId(testSignature));
-        } catch ( InterruptedException e ) {
+            int id = getSignatureId(testSignature);
+            writeSignatures(os);
+            os.writeInt(id);
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -97,19 +119,22 @@ public class InstruCompactLog extends InstruLogWriter {
     public void writeAssert(int id, Thread thread, String className, String methodSignature, String assertName, Object... var) {
         try {
             //Each test runs in a 0 depth for what we care
-            resetCallDepth(thread);
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_ASSERT);
-            os.writeInt(getSignatureId(className));
-            os.writeInt(getSignatureId(methodSignature));
-            //The asserts are methods two...
-            os.writeInt(getSignatureId(assertName));
+            int classID = getSignatureId(className);
+            int methdID = getSignatureId(methodSignature);
+            int assrtID = getSignatureId(assertName);
+            writeSignatures(os);
+            os.writeInt(classID);
+            os.writeInt(methdID);
+            os.writeInt(assrtID);
+            os.writeInt(var.length);
             for (int i = 0; i < var.length; i++) {
-                os.writeChars(printString(var[i]));
+                os.writeUTF(printString(var[i]));
             }
-        } catch ( InterruptedException e ) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -125,16 +150,20 @@ public class InstruCompactLog extends InstruLogWriter {
                 DataOutputStream os = getStream(thread);
                 os.writeByte(LOG_VAR);
                 os.writeInt(id);
-                os.writeInt(getSignatureId(methodSignatureId));
-                os.writeInt(callDeep.get(thread));
+                int methdID = getSignatureId(methodSignatureId);
+                writeSignatures(os);
+                os.writeInt(methdID);
+                os.writeInt(getCallDeep(thread));
                 String vars = buildVars(thread, separator, simpleSeparator, var);
-                if ( vars != previousVarLog.get(thread) ) {
-                    os.writeChars(vars);
+                os.writeInt(vars.length());
+                if (vars != previousVarLog.get(thread)) {
+                    os.writeUTF(vars);
+                } else {
+                    os.writeUTF("P");
                 }
-                else { os.writeChars("P"); }
-            } catch ( InterruptedException e ) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
-            } catch ( IOException e ) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -146,15 +175,19 @@ public class InstruCompactLog extends InstruLogWriter {
         try {
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_EXCEPTION);
-            os.writeInt(callDeep.get(thread));
+            os.writeInt(getCallDeep(thread));
             os.writeInt(id);
-            os.writeInt(getSignatureId(className));
-            os.writeInt(getSignatureId(methodSignature));
-            os.writeInt(getSignatureId(exception.toString()));
+            int classId = getSignatureId(className);
+            int methdId = getSignatureId(methodSignature);
+            int excepId = getSignatureId(exception.toString());
+            writeSignatures(os);
+            os.writeInt(classId);
+            os.writeInt(methdId);
+            os.writeInt(excepId);
 
-        } catch ( InterruptedException e ) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -167,14 +200,18 @@ public class InstruCompactLog extends InstruLogWriter {
         try {
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_CATCH);
-            os.writeInt(callDeep.get(thread));
+            os.writeInt(getCallDeep(thread));
             os.writeInt(id);
-            os.writeInt(getSignatureId(className));
-            os.writeInt(getSignatureId(methodSignature));
-            os.writeInt(getSignatureId(exception.toString()));
-        } catch ( InterruptedException e ) {
+            int classId = getSignatureId(className);
+            int methdId = getSignatureId(methodSignature);
+            int excepId = getSignatureId(exception.toString());
+            writeSignatures(os);
+            os.writeInt(classId);
+            os.writeInt(methdId);
+            os.writeInt(excepId);
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -184,17 +221,11 @@ public class InstruCompactLog extends InstruLogWriter {
 
         for (Thread thread : streamsPerThread.keySet()) {
             File f = new File(getThreadLogFilePath(thread) + ".id");
-            String semaphore = "";
+            //String semaphore = "";
             try {
-                DataOutputStream os = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
-
+                DataOutputStream os = getStream(thread);
                 os.writeByte(LOG_CLOSE);
-
-                os.writeInt(idMap.keySet().size());
-                for (String s : idMap.keySet()) {
-                    os.write(idMap.get(s));
-                    os.writeChars(s);
-                }
+                os.flush();
                 os.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -229,13 +260,20 @@ public class InstruCompactLog extends InstruLogWriter {
 
     /**
      * Gets the id Map id for a signature
+     *
      * @param signature
      * @return
      */
     protected int getSignatureId(String signature) {
         if (!idMap.containsKey(signature)) {
-            idMap.put(signature, currentId++);
+            //Add the entry to log it now
+            currentId++;
+            HashMap.Entry<String, Integer> e = new HashMap.SimpleImmutableEntry<String, Integer>(signature, currentId);
+            lastSignatures.add(e);
+            //The map to know all the entries
+            idMap.put(signature, currentId);
             return currentId;
+
         }
         return idMap.get(signature);
     }

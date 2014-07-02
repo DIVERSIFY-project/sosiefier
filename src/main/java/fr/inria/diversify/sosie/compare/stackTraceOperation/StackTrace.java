@@ -2,6 +2,7 @@ package fr.inria.diversify.sosie.compare.stackTraceOperation;
 
 import fr.inria.diversify.sosie.compare.stackElement.*;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
+import fr.inria.diversify.util.Log;
 
 import java.util.*;
 
@@ -9,7 +10,7 @@ import java.util.*;
  * Created by Simon on 17/04/14.
  */
 public class StackTrace {
-    protected List<StackTraceOperation> stackTraceOperations;
+    private List<StackTraceOperation> stackTraceOperations;
     protected Stack<StackTraceCall> stackTraceCalls;
     protected Map<String,Object> variablesValue;
     protected int position;
@@ -30,9 +31,9 @@ public class StackTrace {
     }
 
     public void next() {
-        if(position < stackTraceOperations.size()) {
+        if(position < getStackTraceOperations().size()) {
             variablesValueChange = false;
-            stackTraceOperations.get(position).apply(this);
+            getStackTraceOperations().get(position).apply(this);
             position++;
         }
     }
@@ -41,7 +42,7 @@ public class StackTrace {
         if(position > 0) {
             variablesValueChange = false;
             position--;
-            stackTraceOperations.get(position).restore(this);
+            getStackTraceOperations().get(position).restore(this);
         }
     }
 
@@ -68,7 +69,7 @@ public class StackTrace {
     }
 
     public boolean hasNext() {
-        return position < stackTraceOperations.size();
+        return position < getStackTraceOperations().size();
     }
 
     public void parseFile(String name, List<String> trace, Map<Integer,String> idMap) throws Exception {
@@ -92,8 +93,24 @@ public class StackTrace {
             addCall((StackTraceCall) elem, deep);
         else {
             try {
-                stackTraceOperations.add(new StackTraceVariableObservation((StackTraceVariable) elem));
+                getStackTraceOperations().add(new StackTraceVariableObservation((StackTraceVariable) elem));
             } catch (Exception e) {}
+        }
+    }
+
+    /**
+     * Adds an element to the trace
+     *
+     * @param element Element to be added
+     */
+    public void addElement(StackTraceElement element) {
+        if ( element instanceof StackTraceCall ) {
+            addCall((StackTraceCall) element, element.getOriginalDeep());
+        }
+        try {
+            getStackTraceOperations().add(new StackTraceVariableObservation((StackTraceVariable) element));
+        } catch (Exception e) {
+            Log.warn("CANNOT add an StackTraceOperation");
         }
     }
 
@@ -105,9 +122,9 @@ public class StackTrace {
             pop++;
         }
         if(pop != 0)
-            stackTraceOperations.add(new StackTracePop(pop));
+            getStackTraceOperations().add(new StackTracePop(pop));
         stackTraceCalls.push(elem);
-        stackTraceOperations.add(new StackTracePush(elem));
+        getStackTraceOperations().add(new StackTracePush(elem));
     }
 
     protected StackTraceElement parseElement(String type, int deep, String id, Map<Integer,String> idMap) {
@@ -139,6 +156,8 @@ public class StackTrace {
         return name;
     }
 
+    public void setName(String name) { this.name = name; }
+
     public String getFullName() {
         return name;
     }
@@ -153,5 +172,14 @@ public class StackTrace {
 
     public boolean getVariablesValueChange() {
         return  variablesValueChange;
+    }
+
+
+    public void setDepth(int depth) {
+        this.deep = depth;
+    }
+
+    public List<StackTraceOperation> getStackTraceOperations() {
+        return stackTraceOperations;
     }
 }

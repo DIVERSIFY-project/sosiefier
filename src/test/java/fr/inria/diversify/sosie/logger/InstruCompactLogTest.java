@@ -1,9 +1,11 @@
 package fr.inria.diversify.sosie.logger;
 
-import fr.inria.diversify.BufferedOutputStreamMock;
+import fr.inria.diversify.FileOutputStreamMock;
 import org.junit.Assert;
 import org.junit.Test;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 /**
  * Created by marodrig on 27/06/2014.
@@ -12,12 +14,21 @@ import java.io.File;
 public class InstruCompactLogTest {
 
 
+    private String getString(byte[] bytes, int size) throws UnsupportedEncodingException {
+        byte[] b2 = new byte[255];
+        Arrays.fill(b2, (byte)32);
+        for ( int i = 0; i < size; i++ ) {
+            if ( bytes[i] != 0 ) { b2[i] = bytes[i]; }
+        }
+        return new String(b2, "UTF-8");
+    }
 
     @Test
-    public void testCall() {
-        BufferedOutputStreamMock mock = new BufferedOutputStreamMock();
-
+    public void testCall() throws UnsupportedEncodingException {
         InstruCompactLog log = new InstruCompactLog("logTest");
+        //Builds a mock and magically replaces the FileOutputStream. See JMockit help
+        FileOutputStreamMock mock = new FileOutputStreamMock();
+
         Thread t = Thread.currentThread();
         log.methodCall(t, "foo");
         log.methodCall(t, "bar");
@@ -27,9 +38,8 @@ public class InstruCompactLogTest {
         //Assert the call depth is OK
         Assert.assertEquals(log.getCallDeep(t), 1);
 
-        Assert.assertEquals(47, mock.bufferSize);
-        Assert.assertEquals(mock.buffer[0], InstruCompactLog.LOG_METHOD);
-        Assert.assertEquals(mock.buffer[9], InstruCompactLog.LOG_METHOD);
+        String s = new String(mock.buffer);
+        Assert.assertTrue(s.contains("foo") && s.contains("bar"));
     }
 
     @Test
@@ -57,42 +67,61 @@ public class InstruCompactLogTest {
     @Test
     public void tesWriteTestStart() {
         Thread t = Thread.currentThread();
-
-        BufferedOutputStreamMock mock = new BufferedOutputStreamMock();
+        //Builds a mock and magically replaces the FileOutputStream. See JMockit help
+        FileOutputStreamMock mock = new FileOutputStreamMock();
 
         InstruCompactLog log = new InstruCompactLog("logTest");
         log.writeTestStart(t, "tesWriteTestStart");
         log.close();
 
-        Assert.assertEquals(56, mock.bufferSize);
-        Assert.assertEquals(mock.buffer[0], InstruCompactLog.LOG_TEST);
-        Assert.assertEquals(log.getCallDeep(t), 1);
+        String s = new String(mock.buffer);
+        Assert.assertTrue(s.contains("tesWriteTestStart"));
     }
 
     @Test
-    public void writeAssert() {
+    public void testWriteAssert() {
         Thread t = Thread.currentThread();
-        BufferedOutputStreamMock mock = new BufferedOutputStreamMock();
+        //Builds a mock and magically replaces the FileOutputStream. See JMockit help
+        FileOutputStreamMock mock = new FileOutputStreamMock();
 
         InstruCompactLog log = new InstruCompactLog("logTest");
         Object[] a = { 0, 4 };
         log.writeAssert (5, t, "Class1", "method", "assertEquals", a);
         log.close();
 
-        Assert.assertEquals(mock.buffer[0], InstruCompactLog.LOG_ASSERT);
-        Assert.assertEquals(82, mock.bufferSize);
-        Assert.assertEquals(log.getCallDeep(t), 0);
+        String s = new String(mock.buffer);
+        Assert.assertTrue(s.contains("Class1") && s.contains("method") && s.contains("assertEquals"));
     }
 
-    /*
-    *
-    public abstract void writeVar(int id, Thread thread, String methodSignatureId, Object... var);
 
-    public abstract void writeException(int id, Thread thread,
-                                        String className, String methodSignature, Object exception);
+    @Test
+    public void tesWriteVar() {
+        Thread t = Thread.currentThread();
+        //Builds a mock and magically replaces the FileOutputStream. See JMockit help
+        FileOutputStreamMock mock = new FileOutputStreamMock();
 
-    public abstract void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception);
+        InstruCompactLog log = new InstruCompactLog("logTest");
+        Object[] a = { 0, 4 };
+        log.writeAssert (5, t, "Class1", "method", "assertEquals", a);
+        log.close();
 
-    * */
+        String s = new String(mock.buffer);
+        Assert.assertTrue(s.contains("Class1") && s.contains("method") && s.contains("assertEquals"));
+    }
+
+    @Test
+    public void testWriteException() {
+        Thread t = Thread.currentThread();
+        //Builds a mock and magically replaces the FileOutputStream. See JMockit help
+        FileOutputStreamMock mock = new FileOutputStreamMock();
+
+        InstruCompactLog log = new InstruCompactLog("logTest");
+        Object[] a = { 0, 4 };
+        log.writeException(5, t, "Class1", "method", a);
+        log.close();
+
+        String s = new String(mock.buffer);
+        Assert.assertTrue(s.contains("Class1") && s.contains("method"));
+    }
 
 }
