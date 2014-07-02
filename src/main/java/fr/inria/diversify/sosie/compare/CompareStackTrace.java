@@ -112,17 +112,16 @@ public class CompareStackTrace {
         Map<String, Object> v2 = st2.getVariable();
 
 
-
         for(String key : v1.keySet()) {
             Object value = v1.get(key);
             Object value2 = v2.get(key);
-            if(!v2.containsKey(key) || !value.equals(value2)) //!valueEqual(value, v2.get(key)))
+            if(value2 == null || !value.equals(value2)) //!valueEqual(value, v2.get(key)))
                 diff.add(new VariableDiff(st1.getTop(),key));
         }
         for(String key : v2.keySet()) {
             Object value = v2.get(key);
             Object value1 = v1.get(key);
-            if(!v1.containsKey(key) || !value.equals(value1)) //!valueEqual(value, v1.get(key)))
+            if(value1 == null || !value.equals(value1)) //!valueEqual(value, v1.get(key)))
                 diff.add(new VariableDiff(st1.getTop(),key));
         }
 

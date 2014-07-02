@@ -57,13 +57,11 @@ public class Report {
         }
     }
 
-
     public void merge(Report other){
         variable.putAll(other.variable);
         variableDiff.addAll(other.variableDiff);
 
-        Set<String> keys = new HashSet();
-        keys.addAll(variableChange.keySet());
+        Set<String> keys = new HashSet(variableChange.keySet());
         keys.addAll(other.variableChange.keySet());
         for(String var : keys) {
             if(variableChange.containsKey(var)) {
@@ -127,18 +125,11 @@ public class Report {
 
     protected void init() {
         diffCall = new HashSet();
-        methodCall = new HashSet();
-        variable = new HashMap();
-        variableDiff = new HashSet();
-        variableChange = new HashMap();
+        methodCall = new HashSet(100);
+        variable = new HashMap(2000);
+        variableDiff = new HashSet(100);
+        variableChange = new HashMap(200);
     }
-
-//    public JSONObject buildReport(JSONObject otherReport) throws JSONException {
-//        Report other = new Report(otherReport);
-//        this.merge(other);
-//
-//        return buildReport();
-//    }
 
     public String summary() {
         Set<String> variableConst = new HashSet();

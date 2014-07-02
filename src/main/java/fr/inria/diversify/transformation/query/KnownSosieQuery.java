@@ -58,7 +58,7 @@ public class KnownSosieQuery extends TransformationQuery {
             while (transformations.size() < nb ) {
                 int index = r.nextInt(sosies.size());
                 Transformation t = sosies.get(index);
-                if ( !transformations.contains(t) ) { transformations.add(t); }
+                if ( !transformations.contains(t) && t.getType().equals("adrStmt") && !t.getName().startsWith("add")) { transformations.add(t); }
             }
         return transformations;
     }

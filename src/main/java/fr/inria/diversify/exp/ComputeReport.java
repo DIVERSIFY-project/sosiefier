@@ -24,12 +24,11 @@ public class ComputeReport {
     String logSosieDirectory;
 
     public static void main(String[] args) throws Exception {
-        String resultDirectory = args[4];
+        String resultDirectory = args[3];
         String sosiesDirectory = args[0];
         ComputeReport computeReport = new ComputeReport();
-       computeReport.setDiffToExclude(args[1]);
-       computeReport.setLogSosieDirectory(args[2]);
-        computeReport.setOriginalReport(computeReport.buildReport(computeReport.loadJSON(args[3])));
+       computeReport.setLogSosieDirectory(args[1]);
+        computeReport.setOriginalReport(computeReport.buildReport(computeReport.loadJSON(args[2])));
 
         Map<String, Map<String, Report>> reportInternal = computeReport.buildAllReport(new File(sosiesDirectory), false);
         computeReport.writeSummary(reportInternal, resultDirectory + "/reportInternal");
@@ -47,7 +46,9 @@ public class ComputeReport {
             if(sosie.isDirectory()) {
                 try {
                     Log.info("update report with {}",sosie.getName());
-                    reports.put(sosie.getName(), buildReportFor(sosie, withSosie));
+                    Map<String, Report> report = buildReportFor(sosie, withSosie);
+                    if(reportSize(report) != 0)
+                        reports.put(sosie.getName(), report);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -77,7 +78,8 @@ public class ComputeReport {
             Map<String, Report> sosie = sosies.get(key);
             for(String test : sosie.keySet()) {
                 Report testReport = sosie.get(test);
-                testReport.mergeAndRemoveDiff(internal.get(key).get(test));
+                if(internal.get(key).containsKey(test))
+                    testReport.mergeAndRemoveDiff(internal.get(key).get(test));
                 testReport.mergeAndRemoveDiff(originalReport.get(test));
             }
         }
@@ -133,9 +135,7 @@ public class ComputeReport {
         report = un.reports();
         Log.debug(un.summary());
         report = mergeReports(report, un.reports());
-        newSize = report.entrySet().stream()
-                        .mapToInt(entry -> entry.getValue().size())
-                        .sum();
+        newSize = reportSize(report);
 
         while(oldSize != newSize) {
             makeLogFor(programDirectory);
@@ -145,9 +145,7 @@ public class ComputeReport {
             Log.debug(un.summary());
             report = mergeReports(report, un.reports());
             oldSize = newSize;
-            newSize = report.entrySet().stream()
-                            .mapToInt(entry -> entry.getValue().size())
-                            .sum();
+            newSize = reportSize(report);
         }
 
         Log.info(report.get("allTest").summary());
@@ -222,10 +220,6 @@ public class ComputeReport {
         }
     }
 
-    public void setDiffToExclude(String diffToExclude) {
-        this.diffToExclude = diffToExclude;
-    }
-
     public void setLogSosieDirectory(String logSosieDirectory) {
         this.logSosieDirectory = logSosieDirectory;
     }
@@ -257,5 +251,11 @@ public class ComputeReport {
             line = br.readLine();
         }
         return new JSONObject(sb.toString());
+    }
+
+    protected int reportSize(Map<String, Report> report) {
+        return report.entrySet().stream()
+              .mapToInt(entry -> entry.getValue().size())
+              .sum();
     }
 }

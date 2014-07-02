@@ -5,27 +5,26 @@ import fr.inria.diversify.sosie.compare.CompareAllStackTrace;
 import fr.inria.diversify.sosie.compare.diff.Report;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
-import org.json.JSONException;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 /**
  * Created by Simon on 01/07/14.
  */
 public class ComputeReportForClient extends ComputeReport{
-
+    protected File installToRemove;
     protected File client;
 
     public static void main(String[] args) throws Exception {
         String resultDirectory = args[4];
         String sosiesDirectory = args[0];
         ComputeReportForClient computeReport = new ComputeReportForClient();
-//        computeReport.setDiffToExclude(args[1]);
+        computeReport.setInstallToRemove(new File(args[5]));
         computeReport.setClient(new File(args[1]));
         computeReport.setLogSosieDirectory(args[2]);
         computeReport.setOriginalReport(computeReport.buildReport(computeReport.loadJSON(args[3])));
+
 
         Map<String, Map<String, Report>> reportInternal = computeReport.buildAllReport(new File(sosiesDirectory), false);
         computeReport.writeSummary(reportInternal, resultDirectory + "/reportInternal");
@@ -39,6 +38,8 @@ public class ComputeReportForClient extends ComputeReport{
 
     protected Map<String, Report> buildReportFor(File sosieDir, boolean withSosie) throws Exception {
         Map<String, Report> reports;
+        if(installToRemove.exists())
+            FileUtils.forceDelete(installToRemove);
 
         if(withSosie) {
             reports = buildReportFor(sosieDir, logSosieDirectory);
@@ -49,6 +50,8 @@ public class ComputeReportForClient extends ComputeReport{
             moveLogFile(newLodDir,originalLodDir);
             reports = buildReportFor(sosieDir, newLodDir.getAbsolutePath());
         }
+        if(installToRemove.exists())
+            FileUtils.forceDelete(installToRemove);
         return reports;
     }
 
@@ -64,9 +67,7 @@ public class ComputeReportForClient extends ComputeReport{
         report = un.reports();
         Log.debug(un.summary());
         report = mergeReports(report, un.reports());
-        newSize = report.entrySet().stream()
-                        .mapToInt(entry -> entry.getValue().size())
-                        .sum();
+        newSize = reportSize(report);
 
         while(oldSize != newSize) {
             makeLogFor(sosieDir);
@@ -76,9 +77,7 @@ public class ComputeReportForClient extends ComputeReport{
             Log.debug(un.summary());
             report = mergeReports(report, un.reports());
             oldSize = newSize;
-            newSize = report.entrySet().stream()
-                            .mapToInt(entry -> entry.getValue().size())
-                            .sum();
+            newSize = reportSize(report);
         }
 
         Log.info(report.get("allTest").summary());
@@ -141,5 +140,9 @@ public class ComputeReportForClient extends ComputeReport{
 
     public void setClient(File client) {
         this.client = client;
+    }
+
+    public void setInstallToRemove(File installToRemove) {
+        this.installToRemove = installToRemove;
     }
 }
