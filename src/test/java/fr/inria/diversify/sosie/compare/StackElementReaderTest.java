@@ -56,6 +56,28 @@ public class StackElementReaderTest {
     }
 
     @Test
+    public void testVar() throws IOException {
+        //Create some data and store the result in the mocked array instead of the file
+        FileOutputStreamMock mock = new FileOutputStreamMock();
+        InstruCompactLog log = new InstruCompactLog("logTest");
+        Thread t = Thread.currentThread();
+
+        //Build some data for the reader
+        log.writeTestStart(t, "sampleTest");
+        Object[] a = { 4, 10 };
+        log.writeVar(10, t, "A", a);
+        Object[] b = { 422, 1000 };
+        log.writeVar(10, t, "A", b);
+        log.close();
+
+        //Make the reader read from the byte[] buffer
+        StackElementBinaryReader reader = new StackElementBinaryReader();
+        List<StackTrace> st = reader.loadLog(new DataInputStream(new ByteArrayInputStream(mock.buffer)));
+
+        Assert.assertTrue(st.get(0).getStackTraceOperations().size() > 0);
+    }
+
+    @Test
     public void testRead_Exception() throws IOException {
         //Create some data and store the result in the mocked array instead of the file
         FileOutputStreamMock mock = new FileOutputStreamMock();
@@ -74,8 +96,6 @@ public class StackElementReaderTest {
 
         Assert.assertEquals("foo", st.get(0).getTop().getMethod());
         Assert.assertTrue(st.get(0).getStackTraceOperations().size() > 0);
-
-
     }
 
 }
