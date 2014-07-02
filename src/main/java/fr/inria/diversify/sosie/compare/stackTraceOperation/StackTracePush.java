@@ -7,17 +7,17 @@ import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
  * Created by Simon on 17/04/14.
  */
 public class StackTracePush implements StackTraceOperation {
-    protected StackTraceElement elem;
+    protected StackTraceCall elem;
 
 
-    public StackTracePush(StackTraceElement elem) {
+    public StackTracePush(StackTraceCall elem) {
         this.elem = elem;
     }
 
     @Override
     public void apply(StackTrace stackTrace) {
         stackTrace.deep++;
-        stackTrace.stackTraceCalls.push((StackTraceCall) elem);
+        stackTrace.stackTraceCalls.push(elem);
     }
 
     @Override

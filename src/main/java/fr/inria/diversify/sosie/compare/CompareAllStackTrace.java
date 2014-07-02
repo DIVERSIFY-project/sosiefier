@@ -136,6 +136,9 @@ public class CompareAllStackTrace {
 
     protected List<Diff> parseDiff(String fileName) throws IOException {
         ArrayList<Diff> diff = new ArrayList<>();
+        if(fileName == null)
+            return diff;
+
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
         String line = reader.readLine();
