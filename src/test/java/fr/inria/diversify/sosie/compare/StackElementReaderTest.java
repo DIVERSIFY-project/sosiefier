@@ -1,9 +1,11 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.FileOutputStreamMock;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceVariable;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTracePop;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTracePush;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTraceVariableObservation;
 import fr.inria.diversify.sosie.logger.InstruCompactLog;
 
 import org.junit.Assert;
@@ -13,6 +15,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by marodrig on 01/07/2014.
@@ -74,7 +77,12 @@ public class StackElementReaderTest {
         StackElementBinaryReader reader = new StackElementBinaryReader();
         List<StackTrace> st = reader.loadLog(new DataInputStream(new ByteArrayInputStream(mock.buffer)));
 
-        Assert.assertTrue(st.get(0).getStackTraceOperations().size() > 0);
+        Assert.assertEquals(2, st.get(0).getStackTraceOperations().size());
+        Assert.assertTrue(st.get(0).getStackTraceOperations().get(1) instanceof StackTraceVariableObservation);
+        Map<String, Object> vars =
+                ((StackTraceVariableObservation)st.get(0).getStackTraceOperations().get(1)).getVars().getVariables();
+        Assert.assertTrue(vars.containsValue("1000"));
+
     }
 
     @Test

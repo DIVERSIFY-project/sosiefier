@@ -6,10 +6,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Class to apply an observation of a variable in the stack trace
+ *
  * Created by Simon on 24/04/14.
  */
 public class StackTraceVariableObservation implements StackTraceOperation {
-    protected StackTraceVariable vars;
+    /**
+     * Observed variables
+     */
+    private StackTraceVariable vars;
+
+    /**
+     * Previous observed variables in this thread
+     */
     protected Map<String,Object> previousObservation;
 
     public StackTraceVariableObservation(StackTraceVariable elem) {
@@ -20,10 +29,10 @@ public class StackTraceVariableObservation implements StackTraceOperation {
     public void apply(StackTrace stackTrace) {
         previousObservation = new HashMap();
         stackTrace.variablesValueChange = true;
-        for(String key : vars.getVariables().keySet()) {
+        for(String key : getVars().getVariables().keySet()) {
             previousObservation.put(key, stackTrace.variablesValue.get(key));
         }
-        stackTrace.variablesValue.putAll(vars.getVariables());
+        stackTrace.variablesValue.putAll(getVars().getVariables());
     }
 
     @Override
@@ -39,4 +48,7 @@ public class StackTraceVariableObservation implements StackTraceOperation {
     }
 
 
+    public StackTraceVariable getVars() {
+        return vars;
+    }
 }
