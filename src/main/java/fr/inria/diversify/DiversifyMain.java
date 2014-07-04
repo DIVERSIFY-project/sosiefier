@@ -18,16 +18,11 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.transformation.query.ASTTransformationQuery;
 
-import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
-import spoon.compiler.SpoonCompiler;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.factory.FactoryImpl;
-import spoon.support.DefaultCoreFactory;
-import spoon.support.StandardEnvironment;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
@@ -36,7 +31,6 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 /**
  * Main class for the sosie generator.
@@ -126,6 +120,7 @@ public class DiversifyMain {
 
     protected AbstractBuilder initBuilder(String directory) throws Exception {
         AbstractBuilder rb;
+
         String src = DiversifyProperties.getProperty("src");
         if (DiversifyProperties.getProperty("builder").equals("maven")) {
             rb = new MavenBuilder(directory, src);
@@ -141,7 +136,14 @@ public class DiversifyMain {
         String pomFile = DiversifyProperties.getProperty("newPomFile");
         if (!pomFile.equals("")) rb.initPom(pomFile);
 
-        if (DiversifyProperties.getProperty("clojure").equals("true")) rb.setClojureTest(true);
+        //Obtain some other builder properties
+        boolean saveOutput = Boolean.parseBoolean(DiversifyProperties.getProperty("save.builder.output", "false"));
+        boolean useClojure = Boolean.parseBoolean(DiversifyProperties.getProperty("clojure", "false"));
+        String results = DiversifyProperties.getProperty("result");
+        rb.setSaveOutputDir(results);
+        rb.setClojureTest(useClojure);
+        rb.setSaveOutputToFile(saveOutput);
+
         return rb;
     }
 

@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
  */
 public class MavenBuilder extends AbstractBuilder {
 
+
     public MavenBuilder(String directory, String srcDir) throws IOException {
         super(directory, srcDir);
     }
@@ -45,8 +46,8 @@ public class MavenBuilder extends AbstractBuilder {
         if (!mvnHome.exists())
             //osx
             mvnHome = new File("/usr/local/Cellar/maven/3.1.1/libexec/");
-
         if (!mvnHome.exists())
+            //win
             mvnHome = new File(System.getenv("M2_HOME"));
 
         invoker.setMavenHome(mvnHome);
@@ -59,10 +60,12 @@ public class MavenBuilder extends AbstractBuilder {
         invoker.setErrorHandler(psh);
         try {
             invoker.execute(request);
+            String output = os.toString();
+            if (getSaveOutputToFile()) { saveOutputToFile(output); }
             if (clojureTest)
-                parseClojureResult(os.toString());
+                parseClojureResult(output);
             else
-                parseResult(os.toString());
+                parseResult(output);
 
         } catch (MavenInvocationException e) {
             Log.debug("Error in run Maven", e);
@@ -73,9 +76,14 @@ public class MavenBuilder extends AbstractBuilder {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //Tell the main thread that we are done
+        latch.countDown();
     }
 
     protected void parseResult(String r) {
+        //Save r to further analysis
+
 
         Pattern pattern = Pattern.compile("Tests run:\\s*(\\d+),\\s*Failures:\\s*(\\d+),\\s*Errors:\\s*(\\d+),\\s*Skipped:\\s*(\\d+)");
         Pattern errorPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
@@ -88,7 +96,7 @@ public class MavenBuilder extends AbstractBuilder {
         compileError = false;
 
         for (String s : r.split("\n")) {
-            Log.debug(s);
+            //Log.debug(s);
 
             //If we find a compile error there is no need for parsing more output
             if ( !compileError  ) {
@@ -157,4 +165,6 @@ public class MavenBuilder extends AbstractBuilder {
         FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/builder/FailFastListener.java"), failFastDir);
 
     }
+
+
 }
