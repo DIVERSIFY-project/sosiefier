@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.transformation.SeveralTriesUnsuccessful;
 import fr.inria.diversify.transformation.Transformation;
 
 import java.util.Collection;
@@ -39,9 +40,24 @@ public abstract class TransformationQuery {
 
     /**
      * Performs the search for transformations
+     *
+     * @throws fr.inria.diversify.transformation.SeveralTriesUnsuccessful when several unsuccessful attempts have been made to get the transformations
      */
     public void query() {
-        transformations = query(getInputProgram().getTransformationPerRun());
+        Exception[] causes = new Exception[10];
+        int trials = 0;
+        boolean failed = true;
+        while ( trials < 10 && failed)
+            try {
+                //The amount of transformations are given in the query by the InputProgram
+                transformations = query(getInputProgram().getTransformationPerRun());
+                failed = false;
+            } catch ( Exception e ) {
+                causes[trials] = e;
+                failed = true;
+                trials++;
+            }
+        if ( trials >= 10 ) { throw new SeveralTriesUnsuccessful(causes); }
     }
 
     /**

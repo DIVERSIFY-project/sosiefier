@@ -98,9 +98,14 @@ public abstract class AbstractDiversify {
      */
     protected AbstractBuilder builder;
 
+    /**
+     * Runs the diversificator.
+     * @param n Number of times the diversification process will run, i.e trials
+     * @throws Exception
+     */
     public abstract void run(int n) throws Exception;
 
-    protected abstract void run(Collection<Transformation> trans) throws Exception;
+    //protected abstract void run(Collection<Transformation> trans) throws Exception;
 
     /**
      *
@@ -194,14 +199,11 @@ public abstract class AbstractDiversify {
         }
     }
 
-    protected Integer runTest(String directory) throws InterruptedException, CompileException, InstantiationException, IllegalAccessException {
+    protected Integer runTest(String directory) throws InterruptedException {
         Log.debug("run test in directory: {}", directory);
         builder.setDirectory(directory);
         builder.runBuilder();
         Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getErrors().size());
-        if (builder.getCompileError()) {
-            throw new CompileException("compile error in maven");
-        }
         return builder.getStatus();
     }
 

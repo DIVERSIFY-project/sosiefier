@@ -27,9 +27,13 @@ public class MavenBuilder extends AbstractBuilder {
     }
 
     protected void runPrivate() {
+
         Log.debug("run maven");
+
         InvocationRequest request = new DefaultInvocationRequest();
+
         request.setPomFile(new File(directory + "/pom.xml"));
+
         List<String> l = new ArrayList<String>();
 
         for (String phase : phases)
@@ -81,57 +85,17 @@ public class MavenBuilder extends AbstractBuilder {
         latch.countDown();
     }
 
+    /**
+     * Parse status from the maven output
+     * @param r
+     */
     protected void parseResult(String r) {
         //Save r to further analysis
-
-
-        Pattern pattern = Pattern.compile("Tests run:\\s*(\\d+),\\s*Failures:\\s*(\\d+),\\s*Errors:\\s*(\\d+),\\s*Skipped:\\s*(\\d+)");
-        Pattern errorPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
-
-        boolean buildFailure = false;
-
-        int testRuns = 0;
-        int testFail = 0;
-
-        compileError = false;
-
-        for (String s : r.split("\n")) {
-            //Log.debug(s);
-
-            //If we find a compile error there is no need for parsing more output
-            if ( !compileError  ) {
-                if (s.startsWith("[ERROR] COMPILATION ERROR"))
-                    compileError = true;
-
-                if (s.startsWith("[INFO] BUILD FAILURE")) {
-                    buildFailure = true;
-                }
-
-                Matcher m = pattern.matcher(s);
-                boolean found = m.find();
-                if ( found )
-                    Log.debug(s);
-                if ( found ) {
-                    testRuns += Integer.parseInt(m.group(1));
-                    testFail += Integer.parseInt(m.group(2)) + Integer.parseInt(m.group(3));
-                }
-
-                Matcher errorMatcher = errorPattern.matcher(s);
-                if (errorMatcher.matches()) {
-                    errors.add(errorMatcher.group(2) + "." + errorMatcher.group(1));
-                }
-            }
-        }
-
-        if (compileError || (buildFailure && testRuns == 0)) {
-            status = -2;
-        } else if (buildFailure || testFail > 0) {
-            status = -1;
-        } else {
-            status = 0;
-        }
-        if (acceptedErrors.containsAll(errors) && testFail == 0)
-            status = 0;
+        MavenOutputParser parser = new MavenOutputParser();
+        parser.setAcceptedErrors(acceptedErrors);
+        parser.parse(r, "\n");
+        errors = parser.getErrors();
+        status = parser.getStatus();
     }
 
 

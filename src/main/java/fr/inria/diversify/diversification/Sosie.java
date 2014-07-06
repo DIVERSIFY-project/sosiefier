@@ -35,7 +35,7 @@ public class Sosie extends AbstractDiversify {
         }
     }
 
-    @Override
+    //@Override
     public void run(Collection<Transformation> trans) throws Exception {
         for (Transformation tran : trans)
             run(tran);
