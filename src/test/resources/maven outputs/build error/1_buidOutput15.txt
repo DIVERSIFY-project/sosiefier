@@ -1,0 +1,75 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] Using the builder org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder with a thread count of 1
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Apache Commons Lang 3.4-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ commons-lang3 ---
+[INFO] Deleting C:\MarcelStuff\projects\DIVERSE\sosies-generator\tmpDir\tmp_1404475978349\target
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.7:run (javadoc.resources) @ commons-lang3 ---
+[INFO] Executing tasks
+
+main:
+     [copy] Copying 2 files to C:\MarcelStuff\projects\DIVERSE\sosies-generator\tmpDir\tmp_1404475978349\target\apidocs\META-INF
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.5:process (default) @ commons-lang3 ---
+[INFO] 
+[INFO] --- buildnumber-maven-plugin:1.2:create (default) @ commons-lang3 ---
+[INFO] Checking for local modifications: skipped.
+[INFO] Updating project files from SCM: skipped.
+[INFO] Executing: cmd.exe /X /C "svn --non-interactive info"
+[INFO] Working directory: C:\MarcelStuff\projects\DIVERSE\sosies-generator\tmpDir\tmp_1404475978349
+[INFO] Storing buildNumber: ?????? at timestamp: 1404476693048
+[INFO] Executing: cmd.exe /X /C "svn --non-interactive info"
+[INFO] Working directory: C:\MarcelStuff\projects\DIVERSE\sosies-generator\tmpDir\tmp_1404475978349
+[INFO] Storing buildScmBranch: UNKNOWN_BRANCH
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ commons-lang3 ---
+[INFO] Using 'ISO-8859-1' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\MarcelStuff\projects\DIVERSE\sosies-generator\tmpDir\tmp_1404475978349\src\main\resources
+[INFO] Copying 2 resources to META-INF
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ commons-lang3 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 132 source files to C:\MarcelStuff\projects\DIVERSE\sosies-generator\tmpDir\tmp_1404475978349\target\classes
+[INFO] 
+[INFO] --- maven-bundle-plugin:2.4.0:manifest (bundle-manifest) @ commons-lang3 ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ commons-lang3 ---
+[INFO] Using 'ISO-8859-1' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Copying 2 resources to META-INF
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ commons-lang3 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 142 source files to C:\MarcelStuff\projects\DIVERSE\sosies-generator\tmpDir\tmp_1404475978349\target\test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/MarcelStuff/projects/DIVERSE/sosies-generator/tmpDir/tmp_1404475978349/src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java:[706,53] cannot find symbol
+  symbol:   variable WILDCARD_ALL
+  location: class org.apache.commons.lang3.reflect.TypeUtils
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 17.739 s
+[INFO] Finished at: 2014-07-04T14:25:07+01:00
+[INFO] Final Memory: 20M/162M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:testCompile (default-testCompile) on project commons-lang3: Compilation failure
+[ERROR] /C:/MarcelStuff/projects/DIVERSE/sosies-generator/tmpDir/tmp_1404475978349/src/test/java/org/apache/commons/lang3/reflect/TypeUtilsTest.java:[706,53] cannot find symbol
+[ERROR] symbol:   variable WILDCARD_ALL
+[ERROR] location: class org.apache.commons.lang3.reflect.TypeUtils
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
