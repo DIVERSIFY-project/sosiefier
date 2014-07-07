@@ -3,6 +3,7 @@ package fr.inria.diversify.buildSystem.maven;
 import fr.inria.diversify.util.Log;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,8 +39,9 @@ public class MavenOutputParser {
 
     /**
      * Parse an output
+     *
      * @param output Output
-     * @param regex Regex to split the string
+     * @param regex  Regex to split the string
      * @return 0 if build success, -1 if test fails, -2 compilation error, -3 nothing parsed, -4 parsing error
      */
     public int parse(String output, String regex) {
@@ -48,10 +50,11 @@ public class MavenOutputParser {
 
     /**
      * Parse an output
+     *
      * @param output lines of compilation
      * @return 0 if build success, -1 if test fails, -2 compilation error, -3 nothing parsed, -4 parsing error
      */
-    public int parse (String[] output) {
+    public int parse(String[] output) {
         Pattern pattern = Pattern.compile("Tests run:\\s*(\\d+),\\s*Failures:\\s*(\\d+),\\s*Errors:\\s*(\\d+),\\s*Skipped:\\s*(\\d+)");
         Pattern errorPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
 
@@ -62,31 +65,33 @@ public class MavenOutputParser {
 
         setCompileError(false);
 
-        for (String s : output) {
-            //Log.debug(s);
+        for (int i = 0; i < output.length && getCompileError() == false; i++) {
+            String s = output[i];
 
             //If we find a compile error there is no need for parsing more output
-            if ( !getCompileError()) {
-                if (s.startsWith("[ERROR] COMPILATION ERROR"))
-                    setCompileError(true);
-
-                if (s.startsWith("[INFO] BUILD FAILURE")) {
+            //if ( !getCompileError()) {
+            if (s.contains("[ERROR] COMPILATION ERROR")) {
+                setCompileError(true);
+                /*
+                Matcher errorMatcher = errorPattern.matcher(s);
+                if (errorMatcher.matches()) {
+                    getErrors().add(errorMatcher.group(2) + "." + errorMatcher.group(1));
+                }*/
+            } else {
+                if (s.contains("[INFO] BUILD FAILURE")) {
                     buildFailure = true;
                 }
 
                 Matcher m = pattern.matcher(s);
                 boolean found = m.find();
-                if ( found )
+                if (found)
                     Log.debug(s);
-                if ( found ) {
+                if (found) {
                     testRuns += Integer.parseInt(m.group(1));
                     testFail += Integer.parseInt(m.group(2)) + Integer.parseInt(m.group(3));
                 }
 
-                Matcher errorMatcher = errorPattern.matcher(s);
-                if (errorMatcher.matches()) {
-                    getErrors().add(errorMatcher.group(2) + "." + errorMatcher.group(1));
-                }
+
             }
         }
 
@@ -97,14 +102,18 @@ public class MavenOutputParser {
         } else {
             status = 0;
         }
+
+        //For now just get the status. We will collect the erros later
+        /*
         if (getAcceptedErrors().containsAll(getErrors()) && testFail == 0)
             status = 0;
-
+        */
         return status;
     }
 
     /**
      * Indicates if they where compile errors
+     *
      * @return True if there where compile errors
      */
     public boolean getCompileError() {
@@ -117,6 +126,7 @@ public class MavenOutputParser {
 
     /**
      * Errors found during the parsing
+     *
      * @return
      */
     public List<String> getErrors() {
@@ -129,6 +139,7 @@ public class MavenOutputParser {
 
     /**
      * Get errors that we don't mind about
+     *
      * @return
      */
     public List<String> getAcceptedErrors() {
@@ -141,6 +152,7 @@ public class MavenOutputParser {
 
     /**
      * Return the status of the parser
+     *
      * @return
      */
     public int getStatus() {

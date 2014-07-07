@@ -49,12 +49,27 @@ public class MavenOutputParserTest {
         MavenOutputParser parser = new MavenOutputParser();
         String[] lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput6.txt"));
         Assert.assertEquals(-2, parser.parse(lines));
+
+        lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput18.txt"));
+        Assert.assertEquals(-2, parser.parse(lines));
+
+        lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput13.txt"));
+        Assert.assertEquals(-2, parser.parse(lines));
+
+        lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput15.txt"));
+        Assert.assertEquals(-2, parser.parse(lines));
     }
 
     @Test
     public void testParseTestFail() throws Exception {
         MavenOutputParser parser = new MavenOutputParser();
-        String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput7.txt"));
+        String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput1.txt"));
+        Assert.assertEquals(-1, parser.parse(lines));
+
+        lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput7.txt"));
+        Assert.assertEquals(-1, parser.parse(lines));
+
+        lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput16.txt"));
         Assert.assertEquals(-1, parser.parse(lines));
     }
 
@@ -62,6 +77,12 @@ public class MavenOutputParserTest {
     public void testSuccess() throws Exception {
         MavenOutputParser parser = new MavenOutputParser();
         String[] lines = readFile(getResourcePath("maven outputs/success/1_buidOutput4.txt"));
+        Assert.assertEquals(0, parser.parse(lines));
+
+        lines = readFile(getResourcePath("maven outputs/success/1_buidOutput12.txt"));
+        Assert.assertEquals(0, parser.parse(lines));
+
+        lines = readFile(getResourcePath("maven outputs/success/1_buidOutput20.txt"));
         Assert.assertEquals(0, parser.parse(lines));
     }
 }
