@@ -1,14 +1,9 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.compare.diff.CallDiff;
-import fr.inria.diversify.sosie.compare.diff.Diff;
-import fr.inria.diversify.sosie.compare.diff.Report;
-import fr.inria.diversify.sosie.compare.diff.VariableDiff;
+import fr.inria.diversify.sosie.compare.diff.*;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
-import fr.inria.diversify.util.Log;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.*;
 import java.util.*;
@@ -23,43 +18,14 @@ public class CompareAllStackTrace {
     protected List<Diff> diffToExclude;
     protected Collection<Diff> diffs;
 
-    protected Map<String, Report> reports;
-    protected JSONObject previousReport;
+    protected Report reports;
 
-    public CompareAllStackTrace(String dirOriginal, String dirSosie, String diffFile, JSONObject previousReport) throws IOException, JSONException {
+    public CompareAllStackTrace(String dirOriginal, String dirSosie, String diffFile) throws IOException, JSONException {
         stackTraces1 = loadLog(dirOriginal, false);
         stackTraces2 = loadLog(dirSosie, false);
         diffToExclude = parseDiff(diffFile);
-        reports = new HashMap();
-        if(previousReport != null) {
-            Log.debug("previousReport used");
-
-            reports.put("allTest", new Report(previousReport.getJSONObject("allTest")));
-            Log.debug(reports.get("allTest").summary());
-        } else {
-            reports.put("allTest", new Report());
-        }
-        this.previousReport = previousReport;
+        reports = new Report();
     }
-
-//    /**
-//     * search if the original and sosie (two set of trace) not diverge at the call level
-//     *
-//     * @throws java.io.IOException
-//     */
-//    public Set<Diff> findCallDiff() throws Exception {
-//        return findDiff(cls -> cls.findCallDiff());
-//    }
-//
-//
-//    /**
-//     * search if the original and sosie (two set of trace) not diverge at the  variable level
-//     *
-//     * @throws java.io.IOException
-//     */
-//    public Set<Diff> findVariableDiff() throws Exception {
-//        return findDiff(cls -> cls.findVariableDiff());
-//    }
 
     /**
      * search if the original and sosie (two set of trace) not diverge at the call level and variable level
@@ -77,15 +43,8 @@ public class CompareAllStackTrace {
                 if (sosie.getFullName().equals(original.getFullName())) {
                     CompareStackTrace cls = new CompareStackTrace(original, sosie);
                     diffs.addAll(diffOperator.apply(cls));
-                    Report report = cls.getReport();
-                    if(previousReport != null && previousReport.has(original.getName())) {
-                       Report r = new Report(previousReport.getJSONObject(original.getName()));
-                       report.merge2(r);
-                        reports.put(original.getName(), report);
-                    } else {
-                        reports.put(original.getName(), report);
-                    }
-                    reports.get("allTest").merge(report);
+                    TestReport testReport = cls.getTestReport();
+                    reports.putTestReport(original.getName(), testReport);
                 }
             }
         }
@@ -158,49 +117,7 @@ public class CompareAllStackTrace {
     }
 
 
-//    public JSONObject buildReport() throws JSONException {
-//        JSONObject jsonObject = new JSONObject();
-//        for(String st : reports.keySet()) {
-//            Report report = reports.get(st);
-//            jsonObject.put(st,report.buildReport());
-//        }
-//        if(previousReport != null) {
-//            Iterator it = previousReport.keys();
-//            while (it.hasNext()) {
-//                String key = (String) it.next();
-//                if (!reports.containsKey(key))
-//                    jsonObject.put(key, previousReport.getJSONObject(key));
-//            }
-//        }
-//        Log.info("AllTest: "+reports.get("allTest").summary());
-//        return jsonObject;
-//    }
-
-    public Map<String,Report> reports() throws JSONException {
-        Map<String,Report> allReport = new HashMap();
-        for(String st : reports.keySet()) {
-            Report report = reports.get(st);
-            allReport.put(st,report);
-        }
-//        if(previousReport != null) {
-//            Iterator it = previousReport.keys();
-//            while (it.hasNext()) {
-//                String key = (String) it.next();
-//                if (!reports.containsKey(key))
-//                    jsonObject.put(key, previousReport.getJSONObject(key));
-//            }
-//        }
-//
-        return allReport;
-    }
-
-
-    public String summary()  {
-//        String summary = "";
-//        for(String st : reports.keySet()) {
-//            summary += reports.get(st).summary() + "-----------------------\n"+st+"\n";
-//        }
-//        return summary;
-        return reports.get("allTest").summary();
+    public Report getReport() throws JSONException {
+        return reports;
     }
 }

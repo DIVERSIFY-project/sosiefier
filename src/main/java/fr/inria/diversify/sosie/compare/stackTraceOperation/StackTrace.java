@@ -74,9 +74,14 @@ public class StackTrace {
 
     public void parseFile(String name, List<String> trace, Map<Integer,String> idMap) throws Exception {
         this.name = name;
-
+        int i = 0;
         for(String operation: trace) {
-            addElement(operation, idMap);
+            try {
+                i++;
+                addElement(operation, idMap);
+            } catch (Exception e) {
+//                e.printStackTrace();
+            }
         }
 
         stackTraceCalls.clear();

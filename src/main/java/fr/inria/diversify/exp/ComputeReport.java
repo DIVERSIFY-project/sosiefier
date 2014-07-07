@@ -3,6 +3,7 @@ package fr.inria.diversify.exp;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.sosie.compare.CompareAllStackTrace;
 import fr.inria.diversify.sosie.compare.diff.Report;
+import fr.inria.diversify.sosie.compare.diff.TestReport;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
@@ -17,99 +18,153 @@ import java.util.Map;
  * Created by Simon on 01/07/14.
  */
 public class ComputeReport {
-    String diffToExclude;
-    Map<String,Report> originalReport;
+    String sosieSosieSummary = "";
+    String originalSosieSummary = "";
+    String filterSosieSosieSummary = "";
+    String filterOriginalSosieSummary = "";
 
+    Report globalFilterOriginalSosieReport;
+    Report globalSosieSosieReport;
+    Report globalOriginalSosieReport;
+    Report globalFilterSosieSosieReport;
+    Report originalReport;
 
     String logSosieDirectory;
 
     public static void main(String[] args) throws Exception {
+//        Log.DEBUG();
         String resultDirectory = args[3];
         String sosiesDirectory = args[0];
         ComputeReport computeReport = new ComputeReport();
-       computeReport.setLogSosieDirectory(args[1]);
-        computeReport.setOriginalReport(computeReport.buildReport(computeReport.loadJSON(args[2])));
+        computeReport.setLogSosieDirectory(args[1]);
+        computeReport.setOriginalReport(new Report(computeReport.loadJSON(args[2])));
 
-        Map<String, Map<String, Report>> reportInternal = computeReport.buildAllReport(new File(sosiesDirectory), false);
-        computeReport.writeSummary(reportInternal, resultDirectory + "/reportInternal");
-
-        Map<String, Map<String, Report>> reportWhitSosie = computeReport.buildAllReport(new File(sosiesDirectory), true);
-        computeReport.writeSummary(reportWhitSosie, resultDirectory+"/reportWithSosie");
-
-        computeReport.writeSummary(computeReport.removeKnowDiffInSosie(reportInternal,reportWhitSosie), resultDirectory+"/reportWithSosie2");
+        computeReport.buildAllReport(new File(sosiesDirectory));
+        computeReport.writeSummary(resultDirectory);
     }
 
-    public Map<String, Map<String,Report>> buildAllReport(File sosiesDir, boolean withSosie) {
-        Map<String, Map<String,Report>> reports = new HashMap();
+//    public Map<String, Report> buildAllReport(File sosiesDir, boolean withSosie) {
+//        Map<String, Report> reports = new HashMap();
+//
+//        for(File sosie : sosiesDir.listFiles()) {
+//            if(sosie.isDirectory()) {
+//                try {
+//                    Log.info("update report with {}",sosie.getName());
+//                    Report report = buildReportFor(sosie, withSosie);
+//                    if(report.size() < originalReport.size()/2 )
+//                        reports.put(sosie.getName(), report);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//        return reports;
+//    }
+
+    public void writeSummary(String directory) throws IOException {
+        sosieSosieSummary += "global: \n" + globalSosieSosieReport.summary() + "\n";
+        originalSosieSummary += "global: \n" + globalOriginalSosieReport.summary() + "\n";
+        filterOriginalSosieSummary += "global: \n" + globalFilterOriginalSosieReport.summary() + "\n";
+        filterSosieSosieSummary += "global: \n" + globalFilterSosieSosieReport.summary() + "\n";
+
+        File file = new File(directory + "sosieSosieSummary");
+        file.createNewFile();
+        FileWriter writer = new FileWriter(file);
+        writer.write(sosieSosieSummary);
+        writer.close();
+
+        file = new File(directory + "originalSosieSummary");
+        file.createNewFile();
+        writer = new FileWriter(file);
+        writer.write(originalSosieSummary);
+        writer.close();
+
+        file = new File(directory + "filterOriginalSosieSummary");
+        file.createNewFile();
+        writer = new FileWriter(file);
+        writer.write(filterOriginalSosieSummary);
+        writer.close();
+
+        file = new File(directory + "filterSosieSosieSummary");
+        file.createNewFile();
+        writer = new FileWriter(file);
+        writer.write(filterSosieSosieSummary);
+        writer.close();
+    }
+
+    public void buildAllReport(File sosiesDir) {
 
         for(File sosie : sosiesDir.listFiles()) {
             if(sosie.isDirectory()) {
                 try {
-                    Log.info("update report with {}",sosie.getName());
-                    Map<String, Report> report = buildReportFor(sosie, withSosie);
-                    if(reportSize(report) != 0)
-                        reports.put(sosie.getName(), report);
+                    Log.info("build report for {}",sosie.getName());
+
+                    Report sosieSosieReport = buildReportFor(sosie, false);
+                    Report originalSosieReport = buildReportFor(sosie, true);
+
+                    if(sosieSosieReport.size() > originalReport.size()/2
+                            && originalSosieReport.size() > originalReport.size()/2) {
+
+                        sosieSosieSummary += sosie.getName() + ": \n" + sosieSosieReport.summary() + "\n";
+                        globalSosieSosieReport = updateGlobalReport(globalSosieSosieReport, sosieSosieReport);
+
+                        originalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
+                        globalOriginalSosieReport = updateGlobalReport(globalOriginalSosieReport, originalSosieReport);
+
+                        originalSosieReport.filter(sosieSosieReport);
+                        originalSosieReport.filter(originalReport);
+                        filterOriginalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
+                        globalFilterOriginalSosieReport = updateGlobalReport(globalFilterOriginalSosieReport, originalSosieReport);
+
+                        sosieSosieReport.filter(originalReport);
+                        filterSosieSosieSummary += sosie.getName() + ": \n" + sosieSosieReport.summary() + "\n";
+                        globalFilterSosieSosieReport = updateGlobalReport(globalFilterSosieSosieReport, sosieSosieReport);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
-        return reports;
     }
 
-    public void writeSummary(Map<String, Map<String,Report>> reports, String fileName) throws IOException {
-        File file = new File(fileName);
-        file.createNewFile();
-        FileWriter writer = new FileWriter(file);
-
-        Report global = buildGlobalReport(reports);
-        writer.write("global:\n" + global.summary() + "\n");
-        Log.info("global: {}", global.summary());
-
-        for(String key : reports.keySet()) {
-            writer.write(key + ":\n");
-            writer.write(reports.get(key).get("allTest").summary() + "\n");
-        }
-        writer.close();
-    }
-
-    protected Map<String, Map<String,Report>> removeKnowDiffInSosie(Map<String, Map<String,Report>> internal, Map<String, Map<String,Report>> sosies) {
-        for(String key : internal.keySet()) {
-            Map<String, Report> sosie = sosies.get(key);
-            for(String test : sosie.keySet()) {
-                Report testReport = sosie.get(test);
-                if(internal.get(key).containsKey(test))
-                    testReport.mergeAndRemoveDiff(internal.get(key).get(test));
-                testReport.mergeAndRemoveDiff(originalReport.get(test));
-            }
-        }
-        return sosies;
-    }
-
-    protected Map<String, Map<String,Report>> removeKnowDiff(Map<String, Map<String,Report>> internals) {
-        for(String key : internals.keySet()) {
-            Map<String, Report> internal = internals.get(key);
-            for(String test : internal.keySet()) {
-                Report testReport = internal.get(test);
-                testReport.mergeAndRemoveDiff(originalReport.get(test));
-            }
-        }
-        return internals;
-    }
-
-    protected Report buildGlobalReport(Map<String, Map<String,Report>> reports) {
-        Report global = null;
-        for(String key : reports.keySet()) {
-            if(global == null) {
-                global = new Report(reports.get(key).get("allTest"));
-            }
-            global.merge2(reports.get(key).get("allTest"));
+    protected Report updateGlobalReport(Report global, Report update) {
+        if(global == null) {
+            global = new Report(update);
+        } else {
+            global.merge2(update);
         }
         return global;
     }
 
-    protected Map<String, Report> buildReportFor(File programDirectory, boolean withSosie) throws Exception {
-        Map<String, Report> reports;
+//    public void writeSummary(Map<String, Map<String,TestReport>> reports, String fileName) throws IOException {
+//        File file = new File(fileName);
+//        file.createNewFile();
+//        FileWriter writer = new FileWriter(file);
+//
+//        TestReport global = buildGlobalReport(reports);
+//        writer.write("global:\n" + global.summary() + "\n");
+//        Log.info("global: {}", global.summary());
+//
+//        for(String key : reports.keySet()) {
+//            writer.write(key + ":\n");
+//            writer.write(reports.get(key).get("allTest").summary() + "\n");
+//        }
+//        writer.close();
+//    }
+
+//    protected TestReport buildGlobalReport(Map<String, Map<String,TestReport>> reports) {
+//        TestReport global = null;
+//        for(String key : reports.keySet()) {
+//            if(global == null) {
+//                global = new TestReport(reports.get(key).get("allTest"));
+//            }
+//            global.merge2(reports.get(key).get("allTest"));
+//        }
+//        return global;
+//    }
+
+    protected Report buildReportFor(File programDirectory, boolean withSosie) throws Exception {
+        Report reports;
 
         if(withSosie) {
             reports = buildReportFor(programDirectory, logSosieDirectory);
@@ -123,45 +178,43 @@ public class ComputeReport {
         return reports;
     }
 
-    protected Map<String, Report> buildReportFor(File programDirectory, String sosieLogDir) throws Exception {
+    protected Report buildReportFor(File programDirectory, String sosieLogDir) throws Exception {
         String originalLodDir = programDirectory.getAbsolutePath()+"/log";
-        Map<String, Report> report;
+        Report report;
         int oldSize = 1;
         int newSize;
 
         makeLogFor(programDirectory);
-        CompareAllStackTrace un = new CompareAllStackTrace(originalLodDir, sosieLogDir, diffToExclude, null);
+        CompareAllStackTrace un = new CompareAllStackTrace(originalLodDir, sosieLogDir, null);
         un.findDiff();
-        report = un.reports();
-        Log.debug(un.summary());
-        report = mergeReports(report, un.reports());
-        newSize = reportSize(report);
+        report = un.getReport();
+        Log.debug(report.summary());
+        newSize = report.size();
 
         while(oldSize != newSize) {
             makeLogFor(programDirectory);
-            un = new CompareAllStackTrace(originalLodDir, sosieLogDir, diffToExclude, null);
+            un = new CompareAllStackTrace(originalLodDir, sosieLogDir, null);
             un.findDiff();
-            report = un.reports();
-            Log.debug(un.summary());
-            report = mergeReports(report, un.reports());
+            Log.debug(report.summary());
+            report.merge(un.getReport());
             oldSize = newSize;
-            newSize = reportSize(report);
+            newSize = report.size();
         }
 
-        Log.info(report.get("allTest").summary());
+        Log.info(report.summary());
         return report;
     }
 
-    protected Map<String,Report> mergeReports(Map<String, Report> report1, Map<String, Report> report2) {
-        for(String key : report2.keySet()) {
-            if(report1.containsKey(key)) {
-                report1.get(key).merge2(report2.get(key));
-            } else {
-                report1.put(key,report2.get(key));
-            }
-        }
-        return report1;
-    }
+//    protected Map<String,TestReport> mergeReports(Map<String, TestReport> report1, Map<String, TestReport> report2) {
+//        for(String key : report2.keySet()) {
+//            if(report1.containsKey(key)) {
+//                report1.get(key).merge2(report2.get(key));
+//            } else {
+//                report1.put(key,report2.get(key));
+//            }
+//        }
+//        return report1;
+//    }
 
     protected void makeLogFor(File programDirectory) throws Exception {
         File logDir = new File(programDirectory.getAbsolutePath()+"/log");
@@ -224,18 +277,18 @@ public class ComputeReport {
         this.logSosieDirectory = logSosieDirectory;
     }
 
-    public void setOriginalReport(Map<String, Report> originalReport) {
+    public void setOriginalReport(Report originalReport) {
         this.originalReport = originalReport;
     }
 
-    protected Map<String,Report> buildReport(JSONObject object) throws JSONException {
-        Map<String,Report> report = new HashMap();
+    protected Map<String,TestReport> buildReport(JSONObject object) throws JSONException {
+        Map<String,TestReport> report = new HashMap();
 
         Iterator it = object.keys();
         while (it.hasNext()) {
             String key = (String) it.next();
             JSONObject o = object.getJSONObject(key);
-            report.put(key, new Report(o));
+            report.put(key, new TestReport(o));
         }
         return report;
     }
@@ -253,9 +306,5 @@ public class ComputeReport {
         return new JSONObject(sb.toString());
     }
 
-    protected int reportSize(Map<String, Report> report) {
-        return report.entrySet().stream()
-              .mapToInt(entry -> entry.getValue().size())
-              .sum();
-    }
+
 }

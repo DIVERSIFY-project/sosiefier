@@ -3,6 +3,7 @@ package fr.inria.diversify.exp;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.sosie.compare.CompareAllStackTrace;
 import fr.inria.diversify.sosie.compare.diff.Report;
+import fr.inria.diversify.sosie.compare.diff.TestReport;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 
@@ -23,21 +24,16 @@ public class ComputeReportForClient extends ComputeReport{
         computeReport.setInstallToRemove(new File(args[5]));
         computeReport.setClient(new File(args[1]));
         computeReport.setLogSosieDirectory(args[2]);
-        computeReport.setOriginalReport(computeReport.buildReport(computeReport.loadJSON(args[3])));
 
+        computeReport.setOriginalReport(new Report(computeReport.loadJSON(args[3])));
 
-        Map<String, Map<String, Report>> reportInternal = computeReport.buildAllReport(new File(sosiesDirectory), false);
-        computeReport.writeSummary(reportInternal, resultDirectory + "/reportInternal");
-
-        Map<String, Map<String, Report>> reportWhitSosie = computeReport.buildAllReport(new File(sosiesDirectory), true);
-        computeReport.writeSummary(reportWhitSosie, resultDirectory+"/reportWithSosie");
-
-        computeReport.writeSummary(computeReport.removeKnowDiffInSosie(reportInternal,reportWhitSosie), resultDirectory+"/reportWithSosie2");
+        computeReport.buildAllReport(new File(sosiesDirectory));
+        computeReport.writeSummary(resultDirectory);
     }
 
 
-    protected Map<String, Report> buildReportFor(File sosieDir, boolean withSosie) throws Exception {
-        Map<String, Report> reports;
+    protected Report buildReportFor(File sosieDir, boolean withSosie) throws Exception {
+        Report reports;
         if(installToRemove.exists())
             FileUtils.forceDelete(installToRemove);
 
@@ -55,32 +51,29 @@ public class ComputeReportForClient extends ComputeReport{
         return reports;
     }
 
-    protected Map<String, Report> buildReportFor(File sosieDir, String sosieLogDir) throws Exception {
+    protected Report buildReportFor(File sosieDir, String sosieLogDir) throws Exception {
         String originalLodDir = client.getAbsolutePath()+"/log";
-        Map<String, Report> report;
+        Report report;
         int oldSize = 1;
         int newSize;
 
         makeLogFor(sosieDir);
-        CompareAllStackTrace un = new CompareAllStackTrace(originalLodDir, sosieLogDir, diffToExclude, null);
+        CompareAllStackTrace un = new CompareAllStackTrace(originalLodDir, sosieLogDir, null);
         un.findDiff();
-        report = un.reports();
-        Log.debug(un.summary());
-        report = mergeReports(report, un.reports());
-        newSize = reportSize(report);
+        report = un.getReport();
+        newSize = report.size();
 
         while(oldSize != newSize) {
             makeLogFor(sosieDir);
-            un = new CompareAllStackTrace(originalLodDir, sosieLogDir, diffToExclude, null);
+            un = new CompareAllStackTrace(originalLodDir, sosieLogDir, null);
             un.findDiff();
-            report = un.reports();
-            Log.debug(un.summary());
-            report = mergeReports(report, un.reports());
+            Log.debug(report.summary());
+            report.merge(un.getReport());
             oldSize = newSize;
-            newSize = reportSize(report);
+            newSize = report.size();
         }
 
-        Log.info(report.get("allTest").summary());
+        Log.info(report.summary());
         return report;
     }
 
