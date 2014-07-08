@@ -9,7 +9,6 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 
 import java.io.*;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -205,7 +204,7 @@ public abstract class AbstractDiversify {
         Log.debug("run test in directory: {}", directory);
         builder.setDirectory(directory);
         builder.runBuilder();
-        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getErrors().size());
+        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
         return builder.getStatus();
     }
 

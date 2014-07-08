@@ -2,17 +2,13 @@ package fr.inria.diversify.buildSystem.maven;
 
 
 import fr.inria.diversify.buildSystem.AbstractBuilder;
-import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.util.Log;
-import fr.inria.diversify.buildSystem.maven.MavenInvoker;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.shared.invoker.*;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * User: Simon
@@ -20,6 +16,8 @@ import java.util.regex.Pattern;
  * Time: 11:34 AM
  */
 public class MavenBuilder extends AbstractBuilder {
+
+
 
 
     public MavenBuilder(String directory, String srcDir) throws IOException {
@@ -94,7 +92,8 @@ public class MavenBuilder extends AbstractBuilder {
         MavenOutputParser parser = new MavenOutputParser();
         parser.setAcceptedErrors(acceptedErrors);
         parser.parse(r, "\n");
-        errors = parser.getErrors();
+        errors = parser.getCompileErrors();
+        failedTests = parser.getFailedTests();
         status = parser.getStatus();
     }
 
@@ -127,8 +126,5 @@ public class MavenBuilder extends AbstractBuilder {
         File failFastDir = new File(directory + "/" + srcDir + "/fr/inria/diversify/buildSystem/builder");
         FileUtils.forceMkdir(failFastDir);
         FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/builder/FailFastListener.java"), failFastDir);
-
     }
-
-
 }

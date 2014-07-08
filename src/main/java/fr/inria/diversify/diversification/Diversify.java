@@ -205,7 +205,7 @@ public class Diversify extends AbstractDiversify {
         for (Transformation tran : transformations) {
             if (tran.getStatus() == AbstractTransformation.NOT_TESTED) {
                 tran.setStatus(status);
-                tran.setFailures(builder.getErrors());
+                tran.setFailures(builder.getTestFail());
             }
             tran.restore(tmpDir + "/" + sourceDir);
         }
@@ -266,7 +266,7 @@ public class Diversify extends AbstractDiversify {
         result.setId(trial);
         result.setStatus(status);
         result.setTransformations(trans);
-        result.setFailedTests(builder.getErrors());
+        result.setFailedTests(builder.getTestFail());
         return result;
     }
 
@@ -314,7 +314,7 @@ public class Diversify extends AbstractDiversify {
                 sosie++;
             trial++;
             trans.setStatus(status);
-            trans.setFailures(builder.getErrors());
+            trans.setFailures(builder.getTestFail());
         } catch (Exception e) {
             compileError++;
             trans.setStatus(-2);

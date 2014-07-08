@@ -74,6 +74,13 @@ public abstract class AbstractBuilder {
         return saveOutputToFile;
     }
 
+    protected List<String> failedTests;
+
+    public List<String> getFailedTests() {
+        return failedTests;
+    }
+
+
     /**
      * Resettable latch to wait for the builder
      */
@@ -233,7 +240,7 @@ public abstract class AbstractBuilder {
         return status;
     }
 
-    public List<String> getErrors() {
+    public List<String> getTestFail() {
         return errors;
     }
 

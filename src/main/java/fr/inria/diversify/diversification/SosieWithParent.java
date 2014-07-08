@@ -62,7 +62,7 @@ public class SosieWithParent extends AbstractDiversify {
                 FileUtils.forceDelete(sosieDir);
             }
             else {
-                trans.setFailures(builder.getErrors());
+                trans.setFailures(builder.getTestFail());
                 transformations.add(trans);
                 FileWriter fileWriter = new FileWriter(mutantDir +"/diversificationPoint");
                 fileWriter.append(trans.toJSONObject().toString());
