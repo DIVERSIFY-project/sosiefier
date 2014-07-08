@@ -28,10 +28,7 @@ import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.reference.CtTypeReference;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -82,6 +79,7 @@ public class TransformationJsonParser {
         Log.debug("transformation directory: {}", file.getAbsolutePath());
 
 
+
         for (File f : file.listFiles())
             if (f.getName().endsWith(".json")) {
                 countFile++;
@@ -96,22 +94,7 @@ public class TransformationJsonParser {
     }
 
 
-    public Transformation parseUniqueTransformation(File file) throws Exception {
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        StringBuilder sb = new StringBuilder();
-        String line = br.readLine();
-        while (line != null) {
-            sb.append(line);
-            line = br.readLine();
-        }
-        if (sb.length() == 0)
-            return null;
-        JSONObject jsonObject = new JSONObject(sb.toString());
-        return parseTransformation(jsonObject);
-    }
-
-    public List<Transformation> parseFile(File file) throws TransformationParserException {
-
+    public Transformation parseUniqueTransformation(File file) throws TransformationParserException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             StringBuilder sb = new StringBuilder();
@@ -121,8 +104,41 @@ public class TransformationJsonParser {
                 line = br.readLine();
             }
             if (sb.length() == 0)
-                return new ArrayList<>();
-            JSONArray array = new JSONArray(sb.toString());
+                return null;
+            JSONObject jsonObject = new JSONObject(sb.toString());
+            return parseTransformation(jsonObject);
+        } catch (IOException | JSONException e) {
+            throw new TransformationParserException(e);
+        }
+    }
+
+    public List<Transformation> parseFile(File file) throws TransformationParserException {
+
+        try {
+            BufferedReader br = null;
+            StringBuilder sb = null;
+            try {
+                br = new BufferedReader(new FileReader(file));
+                sb = new StringBuilder();
+                String line = br.readLine();
+                while (line != null) {
+                    sb.append(line);
+                    line = br.readLine();
+                }
+                if (sb.length() == 0)
+                    return new ArrayList<>();
+            } finally {
+                if (br != null) br.close();
+            }
+
+            JSONArray array = null;
+            try {
+                array = new JSONArray(sb.toString());
+            } catch (JSONException e) {
+                if (e.toString().contains("A JSONArray text must start with '['")) {
+                    array = new JSONObject(sb.toString()).getJSONArray("transformations");
+                }
+            }
 
             parseFailureDictionay(array);
 
@@ -180,9 +196,38 @@ public class TransformationJsonParser {
     }
 
 
+    /**
+     * Tries to get the type of a transformation
+     *
+     * @param jsonObject JSONOBject Containing the transformation
+     * @return A string with the type of the transformation
+     * @throws JSONException
+     */
+    /*
+    private String tryToGetType(JSONObject jsonObject) throws JSONException {
+        String type = "";
+        try {
+            type = jsonObject.getString("type");
+        } catch (JSONException e) {
+
+            if  ( e.getMessage().contains("[\"type\"] not found") ) {
+
+                if ( jsonObject.has("name") ) {
+                    String name = jsonObject.getString("name");
+                    if ( name.contains("replace") ||  name.contains("delete") ||  name.contains("add") ) {
+                        return "adrStmt";
+                    }
+                    //OTHER TYPES BY NAMES GOES HERE!!!!
+                } else { throw e; }
+
+            } else { throw e; }
+        }
+        return type;
+    } */
     public Transformation parseTransformation(JSONObject jsonObject) throws TransformationParserException {
         try {
             String type = jsonObject.getString("type");
+
             Transformation trans = null;
 
             if (type.equals("mutation"))
@@ -195,6 +240,9 @@ public class TransformationJsonParser {
                 trans = parseCvl(jsonObject);
             if (type.equals("foo"))
                 trans = parseOther(jsonObject);
+
+            if (trans == null)
+                throw new TransformationParserException("Unknown transformation type for " + jsonObject.toString());
 
             trans.setFailures(getFailures(jsonObject));
             trans.setStatus(jsonObject.getInt("status"));

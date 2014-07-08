@@ -1,11 +1,9 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.SeveralTriesUnsuccessful;
 import fr.inria.diversify.transformation.Transformation;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Super class for all transformation queries. The query is in charge of search transplantation points (pots) and
@@ -16,6 +14,46 @@ import java.util.List;
  * Time: 18:09
  */
 public abstract class TransformationQuery {
+
+    protected class TransformationFound {
+
+        ArrayList<Integer> transformation;
+
+        int myHashCode = 0;
+
+        public TransformationFound(Integer[] indexes) {
+            transformation = new ArrayList<>(Arrays.asList(indexes));
+        }
+
+
+        @Override
+        public boolean equals(Object p) {
+            ArrayList<Integer> t = ((TransformationFound) p).transformation;
+            if ( t.size() != transformation.size() ) return false;
+            for (Integer ti : t) {
+                if (!transformation.contains(ti)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            if (myHashCode == 0) {
+                if (transformation == null) return 0;
+                for (Integer i : transformation) {
+                    myHashCode += i * 17;
+                }
+                myHashCode %= 5009;
+            }
+
+            return myHashCode;
+        }
+    }
+
+    private HashSet<TransformationFound> transformationFounds;
+
     protected String type;
 
     private InputProgram inputProgram;
@@ -24,12 +62,20 @@ public abstract class TransformationQuery {
 
     public TransformationQuery(InputProgram inputProgram) {
         this.inputProgram = inputProgram;
+        transformationFounds = new HashSet<>();
     }
 
     public abstract void setType(String type);
 
     public Transformation buildTransformation() {
         return query(1).get(0);
+    }
+
+    /**
+     * Clears the transformations founds
+     */
+    public void clearTransformationFounds() {
+        transformationFounds.clear();
     }
 
     /**
@@ -41,7 +87,7 @@ public abstract class TransformationQuery {
     /**
      * Performs the search for transformations
      *
-     * @throws fr.inria.diversify.transformation.SeveralTriesUnsuccessful when several unsuccessful attempts have been made to get the transformations
+     * @throws SeveralTriesUnsuccessful when several unsuccessful attempts have been made to get the transformations
      */
     public void query() {
         Exception[] causes = new Exception[10];
@@ -58,6 +104,21 @@ public abstract class TransformationQuery {
                 trials++;
             }
         if ( trials >= 10 ) { throw new SeveralTriesUnsuccessful(causes); }
+    }
+
+    /**
+     * Tells you if you already found a similar transformation
+     * @param indexes transformation indexes found
+     * @return true if already found
+     */
+    protected boolean alreadyFound(Integer[] indexes) {
+        TransformationFound tf = new TransformationFound(indexes);
+        if (transformationFounds.contains(tf)) {
+            return true;
+        } else {
+            transformationFounds.add(tf);
+            return false;
+        }
     }
 
     /**

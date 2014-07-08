@@ -82,14 +82,22 @@ public class DiversifyMain {
         int max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
         int min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
         TransformationQuery query = initTransformationQuery();
+
         for ( int i = min; i <= max; i++ ) {
+
             inputProgram.setTransformationPerRun(i);
             abstractDiversify.setTransformationQuery(query);
             abstractDiversify.run(n);
+
+            //Clear the found transformations for the next step to speed up. No needed since the new ones are going
+            //to be of different size and therefore different
+            query.clearTransformationFounds();
+
             String repo = DiversifyProperties.getProperty("gitRepository");
             if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
             else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
         }
+
         abstractDiversify.deleteTmpFiles();
     }
 
@@ -103,6 +111,8 @@ public class DiversifyMain {
         else if (DiversifyProperties.getProperty("sosie").equals("false")) {
             ad = new Diversify(inputConfiguration, projet, src);
             boolean early = DiversifyProperties.getProperty("early.report","false").equals("true");
+            boolean earlySosies = DiversifyProperties.getProperty("early.report.sosies.only","false").equals("true");
+            ((Diversify)ad).setEarlyReportSosiesOnly(earlySosies);
             ((Diversify)ad).setEarlyReport(early);
             ad.setSocieSourcesDir(DiversifyProperties.getProperty("copy.sosie.sources.to", ""));
         }
@@ -112,6 +122,7 @@ public class DiversifyMain {
         } else ad = new SosieWithParent(projet, src);
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));
+
         ad.setBuilder(initBuilder(tmpDir));
         ad.setResultDir(resultDir);
         return ad;
@@ -212,6 +223,10 @@ public class DiversifyMain {
                 //This query benefits from a early processCodeFragments
                 inputProgram.processCodeFragments();
                 return new KnowMultisosieQuery(inputProgram);
+            case "singleconsecutive":
+                inputProgram.processCodeFragments();
+                return new ConsecutiveKnownSosieQuery(inputProgram);
+
             default:
                 //Try to construct the query from the explicit class
                 try {

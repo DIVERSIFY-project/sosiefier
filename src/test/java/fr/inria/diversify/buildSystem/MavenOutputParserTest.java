@@ -27,14 +27,14 @@ public class MavenOutputParserTest {
         try {
             String line;
             br = new BufferedReader(new FileReader(fileName));
-            while ( (line = br.readLine()) != null ) {
+            while ((line = br.readLine()) != null) {
                 results.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (br != null)br.close();
+                if (br != null) br.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -44,45 +44,85 @@ public class MavenOutputParserTest {
         return results.toArray(list2);
     }
 
+    private void testParse(String fileName, int expectedStatus) throws Exception {
+        MavenOutputParser parser = new MavenOutputParser();
+        String[] lines = readFile(getResourcePath(fileName));
+        Assert.assertEquals(expectedStatus, parser.parse(lines));
+    }
+
     @Test
-    public void testParseBuildFailure() throws Exception {
+    public void testParseBuildFailureInclompleteBuild() throws Exception {
+        testParse("maven outputs/build error/incompleteBuild.txt", -2);
+    }
+
+    @Test
+    public void testParseBuildFailure6() throws Exception {
         MavenOutputParser parser = new MavenOutputParser();
         String[] lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput6.txt"));
         Assert.assertEquals(-2, parser.parse(lines));
+    }
 
-        lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput18.txt"));
-        Assert.assertEquals(-2, parser.parse(lines));
-
-        lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput13.txt"));
-        Assert.assertEquals(-2, parser.parse(lines));
-
-        lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput15.txt"));
+    @Test
+    public void testParseBuildFailure18() throws Exception {
+        MavenOutputParser parser = new MavenOutputParser();
+        String[] lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput18.txt"));
         Assert.assertEquals(-2, parser.parse(lines));
     }
 
     @Test
-    public void testParseTestFail() throws Exception {
+    public void testParseBuildFailure13() throws Exception {
+        MavenOutputParser parser = new MavenOutputParser();
+        String[] lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput13.txt"));
+        Assert.assertEquals(-2, parser.parse(lines));
+    }
+
+    @Test
+    public void testParseBuildFailure15() throws Exception {
+        MavenOutputParser parser = new MavenOutputParser();
+        String[] lines = readFile(getResourcePath("maven outputs/build error/1_buidOutput15.txt"));
+        Assert.assertEquals(-2, parser.parse(lines));
+    }
+
+    @Test
+    public void testParseTestFail1() throws Exception {
         MavenOutputParser parser = new MavenOutputParser();
         String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput1.txt"));
         Assert.assertEquals(-1, parser.parse(lines));
+    }
 
-        lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput7.txt"));
-        Assert.assertEquals(-1, parser.parse(lines));
-
-        lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput16.txt"));
+    @Test
+    public void testParseTestFail2() throws Exception {
+        MavenOutputParser parser = new MavenOutputParser();
+        String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput2.txt"));
         Assert.assertEquals(-1, parser.parse(lines));
     }
 
     @Test
-    public void testSuccess() throws Exception {
+    public void testParseTestFail7() throws Exception {
+        MavenOutputParser parser = new MavenOutputParser();
+        String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput7.txt"));
+        Assert.assertEquals(-1, parser.parse(lines));
+    }
+
+    @Test
+    public void testParseTestFail16() throws Exception {
+        MavenOutputParser parser = new MavenOutputParser();
+        String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput16.txt"));
+        Assert.assertEquals(-1, parser.parse(lines));
+    }
+
+    @Test
+    public void testSuccess4() throws Exception {
         MavenOutputParser parser = new MavenOutputParser();
         String[] lines = readFile(getResourcePath("maven outputs/success/1_buidOutput4.txt"));
         Assert.assertEquals(0, parser.parse(lines));
+    }
 
-        lines = readFile(getResourcePath("maven outputs/success/1_buidOutput12.txt"));
-        Assert.assertEquals(0, parser.parse(lines));
-
-        lines = readFile(getResourcePath("maven outputs/success/1_buidOutput20.txt"));
+    @Test
+    public void testSuccess12() throws Exception {
+        MavenOutputParser parser = new MavenOutputParser();
+        String[] lines = readFile(getResourcePath("maven outputs/success/1_buidOutput12.txt"));
         Assert.assertEquals(0, parser.parse(lines));
     }
+
 }

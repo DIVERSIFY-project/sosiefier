@@ -47,6 +47,8 @@ public abstract class AbstractDiversify {
      */
     private String socieSourcesDir = null;
 
+
+
     /**
      * The original temporal directory. This is a patch. Sometimes we cannot delete the tmpDir
      */

@@ -98,16 +98,19 @@ public abstract class AbstractBuilder {
     }
 
     public void runBuilder() throws InterruptedException {
+
+        /*
         if (System.getProperty("os.name").contains("Windows")) {
             //Increases the number
             reset();
             runCount++;
             runPrivate();
         } else {
-
+        */
 
             initThreadGroup();
             reset();
+            runCount++;
             Thread thread = new Thread() {
                 public void run() {
                     runPrivate();
@@ -123,15 +126,16 @@ public abstract class AbstractBuilder {
             thread.interrupt();
             //So we can kill it afterwards
             killUselessThread();
-        }
+        //}
     }
 
     public void initTimeOut() throws InterruptedException {
+        /*
         if ( System.getProperty("os.name").contains("Windows")) {
             reset();
             runPrivate();
         } else {
-
+        */
             initThreadGroup();
             reset();
             Thread thread = new Thread() {
@@ -156,7 +160,7 @@ public abstract class AbstractBuilder {
             thread.interrupt();
             //See if we are in windows and not call this
             killUselessThread();
-        }
+        //}
     }
 
     public void initPom(String newPomFile) throws Exception {

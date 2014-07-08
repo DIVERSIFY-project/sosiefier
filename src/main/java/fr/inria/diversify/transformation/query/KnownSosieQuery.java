@@ -1,6 +1,5 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
@@ -8,10 +7,7 @@ import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Search for points of known sosies
@@ -19,15 +15,26 @@ import java.util.Random;
  * Created by marcel on 6/06/14.
  */
 public class KnownSosieQuery extends TransformationQuery {
+
     /**
      * Previous sosies found.
      */
-    ArrayList<Transformation> sosies;
+    public ArrayList<Transformation> getSosies() {
+        return sosies;
+    }
+
+    private ArrayList<Transformation> sosies;
 
     private boolean findTransplants;
 
-    public KnownSosieQuery(InputProgram inputProgram) throws TransformationParserException {
 
+
+    public KnownSosieQuery(InputProgram inputProgram, ArrayList<Transformation> transf) {
+        super(inputProgram);
+        extractSosies(transf);
+    }
+
+    public KnownSosieQuery(InputProgram inputProgram) throws TransformationParserException {
         super(inputProgram);
         TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
         File f = new File(getInputProgram().getPreviousTransformationsPath());
@@ -37,44 +44,99 @@ public class KnownSosieQuery extends TransformationQuery {
         } else {
             ts = parser.parseFile(f);
         }
-        //Get all the sosie
+        extractSosies(ts);
+    }
+
+    /**
+     * Extracts the sosies from a transformation list
+     * @param transf
+     */
+    private void extractSosies(Collection<Transformation> transf) {
         sosies = new ArrayList<>();
-        for (Transformation t : ts) {
+        for (Transformation t : transf) {
             if (t.isSosie()) {
                 sosies.add(t);
             }
         }
-
     }
+
+
 
     @Override
     public void setType(String type) {
 
     }
 
+
+    /**
+     * Estimate the max number of multisosie transformations
+     */
+    private long maxNumberOfTransformations(int nb) {
+
+        long z = getSosies().size();
+        long max = z;
+        for (int i = 0; i < nb - 1; i++) {
+            z--;
+            long preMax = max * z;
+            //Avoid overflow
+            if ( preMax < 0 ) return Long.MAX_VALUE;
+            max = preMax;
+        }
+
+        z = nb;
+        for ( int i = nb; i > 1; i-- ) {
+            nb--;
+            z = z * nb;
+        }
+        return max/z;
+    }
+
     @Override
     public List<Transformation> query(int nb) {
-
-        //Check that all what we need is OK to fetch the transformations
-        if (getInputProgram().getPreviousTransformationsPath() == null) {
-            throw new RuntimeException("Input program has no previous transformation information");
-        }
 
         transformations = new ArrayList();
 
         Random r = new Random();
-        if (nb > sosies.size()) nb = sosies.size();
-        int attempts = 0;
-        while (transformations.size() < nb && attempts <= sosies.size()) {
-            int index = r.nextInt(sosies.size());
-            Transformation t = sosies.get(index);
-            if (canBeMerged(t)) {
-                transformations.add(t);
+
+        if (nb > getSosies().size()) nb = getSosies().size();
+        long maxTransfNumbers = maxNumberOfTransformations(nb);
+
+        int transAttempts = 0;
+
+        boolean found = true;
+
+        //Try several times searching for a transformation we haven't found before.
+        Integer[] indexes = new Integer[nb];
+        while (found && transAttempts < maxTransfNumbers) {
+            int attempts = 0;
+            int i = 0;
+            Arrays.fill(indexes,-1);
+            //Build the transformation
+            while (transformations.size() < nb && attempts < getSosies().size()) {
+                int index = r.nextInt(getSosies().size());
+                Transformation t = getSosies().get(index);
+                if (canBeMerged(t)) {
+                    indexes[i] = index;
+                    i++;
+                    transformations.add(t);
+                }
+                attempts++;
             }
-            attempts++;
+
+            //See if the transformation was already found
+            found = alreadyFound(indexes);
+
+            transAttempts++;
         }
+
+        if (transAttempts >= maxTransfNumbers) {
+            throw new MaxNumberOfAttemptsReach(maxTransfNumbers, transAttempts);
+        }
+
         return transformations;
     }
+
+
 
     /**
      * Indicates if the trasnformation can be merged with the current ones

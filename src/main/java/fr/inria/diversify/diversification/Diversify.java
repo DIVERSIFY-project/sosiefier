@@ -4,19 +4,14 @@ import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.statistic.SessionResults;
 import fr.inria.diversify.transformation.AbstractTransformation;
-import fr.inria.diversify.transformation.SeveralTriesUnsuccessful;
+import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.transformation.query.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
-import javassist.convert.TransformNew;
-import org.codehaus.plexus.util.FileUtils;
 import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -56,10 +51,17 @@ public class Diversify extends AbstractDiversify {
 
     private boolean earlyReport = false;
 
+    private boolean earlyReportSosiesOnly = false;
     /**
      * Indicates if we must early report sosies only
      */
-    private boolean earlyReportSosiesOnly = false;
+    public boolean getEarlyReportSosiesOnly() {
+        return earlyReportSosiesOnly;
+    }
+
+    public void setEarlyReportSosiesOnly(boolean earlyReportSosiesOnly) {
+        this.earlyReportSosiesOnly = earlyReportSosiesOnly;
+    }
 
     /**
      * Reports results on every step. Slower, but allows to stop the process without
@@ -77,6 +79,9 @@ public class Diversify extends AbstractDiversify {
         this.transQuery = transQuery;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
+        sessionResults = new SessionResults();
+        String[] p = projectDir.split("/");
+        sessionResults.setName(p[p.length - 1]);
     }
 
     public Diversify(InputConfiguration inputConfiguration, String projectDir, String workingDir) {
@@ -84,6 +89,9 @@ public class Diversify extends AbstractDiversify {
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
         this.inputConfiguration = inputConfiguration;
+        sessionResults = new SessionResults();
+        String[] p = projectDir.split("/");
+        sessionResults.setName(p[p.length - 1]);
     }
 
     @Override
@@ -93,9 +101,6 @@ public class Diversify extends AbstractDiversify {
      * @throws Exception
      */
     public void run(int n) throws Exception {
-
-        //Results for the session
-        sessionResults = new SessionResults();
 
         //Create the folder for the output
         File f = new File(getResultDir());
@@ -228,18 +233,18 @@ public class Diversify extends AbstractDiversify {
 
     /**
      * Early reports the advance of the system.
+     *
      * @param status Status of the current transformations, Sosie, build failed, etc.
      */
     protected void earlyReport(int status) {
-        if (earlyReportSosiesOnly == false || status == 0) {
+        if (getEarlyReportSosiesOnly() == false || status == 0) {
             try {
                 RunResults result = buildRunResult(transformations, status);
                 result.saveToFile(getResultDir() + "/" + Thread.currentThread().getId() +
                         "_trial_" + trial + "_size_" + transformations.size() + "_stat_" + status + ".json");
                 sessionResults.addRunResults(result);
                 sessionResults.saveReport(
-                        getResultDir() + "/" + Thread.currentThread().getId() + "_session" +
-                                transformations.size() + ".txt");
+                        getResultDir() + "/" + Thread.currentThread().getId() + "_session.html");
             } catch (IOException | JSONException e) {
                 //Not my mf problem!! (Hard rock in the background)
                 //I mean, user usually want to stop process if no output is possible
@@ -295,6 +300,7 @@ public class Diversify extends AbstractDiversify {
             throw new RuntimeException(e);
         }
     }
+
 
     /*
     protected void run(Transformation trans, String tmpDir) throws Exception {
