@@ -47,7 +47,7 @@ public class Report {
 
     public void filter(Report report) {
         for(String test : testReports.keySet()) {
-            TestReport testReport = report.getTestReport(test);
+            TestReport testReport = getTestReport(test);
             if(report.testReports.containsKey(test))
                 testReport.mergeAndRemoveDiff(report.getTestReport(test));
         }
@@ -59,6 +59,10 @@ public class Report {
 
     public String summary() {
         return testReports.get("allTest").summary();
+    }
+
+    public String summary2() {
+        return testReports.get("allTest").summary2();
     }
 
     public void merge(Report other) {

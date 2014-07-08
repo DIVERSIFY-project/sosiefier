@@ -43,29 +43,21 @@ public class ComputeReport {
         computeReport.writeSummary(resultDirectory);
     }
 
-//    public Map<String, Report> buildAllReport(File sosiesDir, boolean withSosie) {
-//        Map<String, Report> reports = new HashMap();
-//
-//        for(File sosie : sosiesDir.listFiles()) {
-//            if(sosie.isDirectory()) {
-//                try {
-//                    Log.info("update report with {}",sosie.getName());
-//                    Report report = buildReportFor(sosie, withSosie);
-//                    if(report.size() < originalReport.size()/2 )
-//                        reports.put(sosie.getName(), report);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return reports;
-//    }
-
     public void writeSummary(String directory) throws IOException {
         sosieSosieSummary += "global: \n" + globalSosieSosieReport.summary() + "\n";
         originalSosieSummary += "global: \n" + globalOriginalSosieReport.summary() + "\n";
         filterOriginalSosieSummary += "global: \n" + globalFilterOriginalSosieReport.summary() + "\n";
         filterSosieSosieSummary += "global: \n" + globalFilterSosieSosieReport.summary() + "\n";
+
+        Log.info("globalSosieSosieReport: ");
+        Log.info( globalSosieSosieReport.summary2());
+        Log.info("globalOriginalSosieReport: ");
+        Log.info( globalOriginalSosieReport.summary2());
+        Log.info("globalFilterOriginalSosieReport: ");
+        Log.info( globalFilterOriginalSosieReport.summary2());
+        Log.info("globalFilterSosieSosieReport: ");
+        Log.info( globalFilterSosieSosieReport.summary2());
+
 
         File file = new File(directory + "sosieSosieSummary");
         file.createNewFile();
@@ -93,7 +85,6 @@ public class ComputeReport {
     }
 
     public void buildAllReport(File sosiesDir) {
-
         for(File sosie : sosiesDir.listFiles()) {
             if(sosie.isDirectory()) {
                 try {
@@ -136,33 +127,6 @@ public class ComputeReport {
         return global;
     }
 
-//    public void writeSummary(Map<String, Map<String,TestReport>> reports, String fileName) throws IOException {
-//        File file = new File(fileName);
-//        file.createNewFile();
-//        FileWriter writer = new FileWriter(file);
-//
-//        TestReport global = buildGlobalReport(reports);
-//        writer.write("global:\n" + global.summary() + "\n");
-//        Log.info("global: {}", global.summary());
-//
-//        for(String key : reports.keySet()) {
-//            writer.write(key + ":\n");
-//            writer.write(reports.get(key).get("allTest").summary() + "\n");
-//        }
-//        writer.close();
-//    }
-
-//    protected TestReport buildGlobalReport(Map<String, Map<String,TestReport>> reports) {
-//        TestReport global = null;
-//        for(String key : reports.keySet()) {
-//            if(global == null) {
-//                global = new TestReport(reports.get(key).get("allTest"));
-//            }
-//            global.merge2(reports.get(key).get("allTest"));
-//        }
-//        return global;
-//    }
-
     protected Report buildReportFor(File programDirectory, boolean withSosie) throws Exception {
         Report reports;
 
@@ -204,17 +168,6 @@ public class ComputeReport {
         Log.info(report.summary());
         return report;
     }
-
-//    protected Map<String,TestReport> mergeReports(Map<String, TestReport> report1, Map<String, TestReport> report2) {
-//        for(String key : report2.keySet()) {
-//            if(report1.containsKey(key)) {
-//                report1.get(key).merge2(report2.get(key));
-//            } else {
-//                report1.put(key,report2.get(key));
-//            }
-//        }
-//        return report1;
-//    }
 
     protected void makeLogFor(File programDirectory) throws Exception {
         File logDir = new File(programDirectory.getAbsolutePath()+"/log");
@@ -305,6 +258,4 @@ public class ComputeReport {
         }
         return new JSONObject(sb.toString());
     }
-
-
 }

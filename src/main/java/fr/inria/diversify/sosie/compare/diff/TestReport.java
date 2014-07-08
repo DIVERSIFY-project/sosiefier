@@ -161,6 +161,37 @@ public class TestReport {
         return summary;
     }
 
+
+    public String summary2() {
+        Set<String> variableConst = new HashSet();
+        Set<String> variableConstDiff = new HashSet();
+        Set<String> variableEvol = new HashSet();
+        Set<String> variableEvolDiff = new HashSet();
+
+        for(String var : variable.keySet()) {
+            if(variableDiff.contains(var)) {
+                if (variableChange.get(var)) { variableEvolDiff.add(var);}
+                else {variableConstDiff.add(var);}
+            } else {
+                if (variableChange.get(var)) { variableEvol.add(var);}
+                else {variableConst.add(var);}
+            }
+        }
+        HashSet sameCall = new HashSet();
+        sameCall.addAll(methodCall);
+        sameCall.removeAll(diffCall);
+
+        String summary = "";
+        summary += "variableConst: " + variableConst.size() + "\n";
+        summary += "variableConstDiff: " + variableConstDiff.size() + " "+variableConstDiff+ "\n";
+        summary += "variableEvol: " + variableEvol.size() + "\n";
+        summary += "variableEvolDiff: " + variableEvolDiff.size() + " "+variableEvolDiff+ "\n";
+        summary += "sameCall: " + sameCall.size() + "\n";
+        summary += "diffCall: " + diffCall.size() + "\n";
+
+        return summary;
+    }
+
     public JSONObject buildReport() throws JSONException {
         JSONObject jsonObject = new JSONObject();
 
