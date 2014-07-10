@@ -15,9 +15,10 @@ public class TestReport {
     protected Set<String> methodCall;
     protected Set<String> diffCall;
 
-    protected Map<String,String> variable;
+    protected Map<String,Set<String>> variable;
     protected Set<String> variableDiff;
-    protected Map<String,Boolean> variableChange;
+    protected Map<String,Integer> nbOfExec;
+
 
     public TestReport() {
         init();
@@ -32,19 +33,19 @@ public class TestReport {
         methodCall = new HashSet(testReport.methodCall);
         variable = new HashMap(testReport.variable);
         variableDiff = new HashSet(testReport.variableDiff);
-        variableChange = new HashMap(testReport.variableChange);
     }
 
     public void updateVar(Map<String, Object> vars, StackTraceCall call) {
         for(String var: vars.keySet()) {
             String key = call.getMethod() + ":" + var;
             String newValue = vars.get(var).toString();
-            String previousValue = variable.get(key);
-            if (previousValue != null) {
-                variableChange.put(key,variableChange.get(key) || !newValue.equals(previousValue));
+            Set<String> values = variable.get(key);
+            if (values != null) {
+                values.add(newValue);
             } else {
-                variable.put(key,newValue);
-                variableChange.put(key,false);
+                values = new HashSet();
+                values.add(newValue);
+                variable.put(key,values);
             }
         }
     }
@@ -57,60 +58,33 @@ public class TestReport {
         }
     }
 
-    public void merge(TestReport other){
-        variable.putAll(other.variable);
-        variableDiff.addAll(other.variableDiff);
-
-        Set<String> keys = new HashSet(variableChange.keySet());
-        keys.addAll(other.variableChange.keySet());
-        for(String var : keys) {
-            if(variableChange.containsKey(var)) {
-                if(other.variableChange.containsKey(var)) {
-                    variableChange.put(var, variableChange.get(var) || other.variableChange.get(var));
+    public void merge(TestReport other, boolean withSameTest){
+        for(String key : variable.keySet()) {
+            if(!other.variable.containsKey(key)) {
+                if(withSameTest) {
+                    variableDiff.add(key);
                 }
             } else {
-                variableChange.put(var,other.variableChange.get(var));
+                variable.get(key).addAll(other.variable.get(key));
             }
         }
+        for(String key : other.variable.keySet()) {
+            if(!variable.containsKey(key)) {
+                if(withSameTest) {
+                    variableDiff.add(key);
+                }
+                Set<String> values = new HashSet();
+                values.addAll(other.variable.get(key));
+                variable.put(key,values);
+            }
+        }
+        variableDiff.addAll(other.variableDiff);
 
         methodCall.addAll(other.methodCall);
         diffCall.addAll(other.diffCall);
     }
 
-    public void merge2(TestReport other) {
-        for(String var : variable.keySet()) {
-            if(!other.variable.containsKey(var)) {
-                variableDiff.add(var);
-            }
-        }
-        for(String var : other.variable.keySet()) {
-            if(!variable.containsKey(var)) {
-                variableDiff.add(var);
-            }
-        }
-
-        variable.putAll(other.variable);
-        variableDiff.addAll(other.variableDiff);
-
-        Set<String> keys = new HashSet();
-        keys.addAll(variableChange.keySet());
-        keys.addAll(other.variableChange.keySet());
-        for(String var : keys) {
-            if(variableChange.containsKey(var)) {
-                if(other.variableChange.containsKey(var)) {
-                    variableChange.put(var, variableChange.get(var) || other.variableChange.get(var));
-                }
-            } else {
-                variableChange.put(var,other.variableChange.get(var));
-            }
-        }
-        methodCall.addAll(other.methodCall);
-        diffCall.addAll(other.diffCall);
-    }
-
-    public void mergeAndRemoveDiff(TestReport other) {
-        this.merge(other);
-
+    public void removeDiff(TestReport other) {
         variableDiff.removeAll(other.variableDiff);
         diffCall.removeAll(other.diffCall);
     }
@@ -128,7 +102,6 @@ public class TestReport {
         methodCall = new HashSet(100);
         variable = new HashMap(2000);
         variableDiff = new HashSet(100);
-        variableChange = new HashMap(200);
     }
 
     public String summary() {
@@ -139,10 +112,10 @@ public class TestReport {
 
         for(String var : variable.keySet()) {
             if(variableDiff.contains(var)) {
-                if (variableChange.get(var)) { variableEvolDiff.add(var);}
+                if (variable.get(var).size() != 1) { variableEvolDiff.add(var);}
                 else {variableConstDiff.add(var);}
             } else {
-                if (variableChange.get(var)) { variableEvol.add(var);}
+                if (variable.get(var).size() != 1) { variableEvol.add(var);}
                 else {variableConst.add(var);}
             }
         }
@@ -152,9 +125,9 @@ public class TestReport {
 
         String summary = "";
         summary += "variableConst: " + variableConst.size() + "\n";
-        summary += "variableConstDiff: " + variableConstDiff.size() + "\n";//+ " "+variableConstDiff+ "\n";
+        summary += "variableConstDiff: " + variableConstDiff.size() + "\n";
         summary += "variableEvol: " + variableEvol.size() + "\n";
-        summary += "variableEvolDiff: " + variableEvolDiff.size() + "\n";//+ " "+variableEvolDiff+ "\n";
+        summary += "variableEvolDiff: " + variableEvolDiff.size() + "\n";
         summary += "sameCall: " + sameCall.size() + "\n";
         summary += "diffCall: " + diffCall.size() + "\n";
 
@@ -170,10 +143,10 @@ public class TestReport {
 
         for(String var : variable.keySet()) {
             if(variableDiff.contains(var)) {
-                if (variableChange.get(var)) { variableEvolDiff.add(var);}
+                if (variable.get(var).size() != 1) { variableEvolDiff.add(var);}
                 else {variableConstDiff.add(var);}
             } else {
-                if (variableChange.get(var)) { variableEvol.add(var);}
+                if (variable.get(var).size() != 1) { variableEvol.add(var);}
                 else {variableConst.add(var);}
             }
         }
@@ -198,7 +171,6 @@ public class TestReport {
         jsonObject.put("methodCall",methodCall);
         jsonObject.put("diffCall",diffCall);
         jsonObject.put("variable",variable);
-        jsonObject.put("variableChange",variableChange);
         jsonObject.put("variableDiff",variableDiff);
 
         return jsonObject;
@@ -210,7 +182,6 @@ public class TestReport {
 
         variableDiff = parseJSONArray(jsonObject.getJSONArray("variableDiff"));
         variable = parseVariableValue(jsonObject.getJSONObject("variable"));
-        variableChange = parseVariableChange(jsonObject.getJSONObject("variableChange"));
     }
 
     protected Set<String> parseJSONArray(JSONArray array) throws JSONException {
@@ -222,26 +193,15 @@ public class TestReport {
         return set;
     }
 
-    protected Map<String,String> parseVariableValue(JSONObject map) throws JSONException {
-        HashMap<String,String> variableValue = new HashMap();
+    protected Map<String,Set<String>> parseVariableValue(JSONObject map) throws JSONException {
+        HashMap<String,Set<String>> variableValue = new HashMap();
 
         Iterator it = map.keys();
         while(it.hasNext()) {
             String o = (String) it.next();
-            variableValue.put(o,map.getString(o));
+            variableValue.put(o,parseJSONArray(map.getJSONArray(o)));
         }
         return variableValue;
-    }
-
-    protected Map<String,Boolean> parseVariableChange(JSONObject map) throws JSONException {
-        HashMap<String,Boolean> variableChange = new HashMap();
-
-        Iterator it = map.keys();
-        while(it.hasNext()) {
-            String o = (String) it.next();
-            variableChange.put(o,map.getBoolean(o));
-        }
-        return variableChange;
     }
 
     public boolean equals(Object other) {
@@ -252,7 +212,6 @@ public class TestReport {
 
         return variable.equals(otherTestReport.variable)
                 && variableDiff.equals(otherTestReport.variableDiff)
-                && variableChange.equals(otherTestReport.variableChange)
                 && methodCall.equals(otherTestReport.methodCall)
                 && diffCall.equals(otherTestReport.diffCall);
     }

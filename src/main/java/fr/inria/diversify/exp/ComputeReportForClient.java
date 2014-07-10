@@ -3,12 +3,10 @@ package fr.inria.diversify.exp;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.sosie.compare.CompareAllStackTrace;
 import fr.inria.diversify.sosie.compare.diff.Report;
-import fr.inria.diversify.sosie.compare.diff.TestReport;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.util.Map;
 
 /**
  * Created by Simon on 01/07/14.

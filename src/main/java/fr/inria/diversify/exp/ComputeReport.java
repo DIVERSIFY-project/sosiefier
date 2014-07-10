@@ -122,7 +122,7 @@ public class ComputeReport {
         if(global == null) {
             global = new Report(update);
         } else {
-            global.merge2(update);
+            global.merge(update);
         }
         return global;
     }

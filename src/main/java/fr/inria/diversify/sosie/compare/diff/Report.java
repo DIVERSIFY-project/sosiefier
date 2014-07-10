@@ -41,7 +41,7 @@ public class Report {
 
     public void putTestReport(String key, TestReport testReport) {
         testReports.put(key, testReport);
-        testReports.get("allTest").merge(testReport);
+        testReports.get("allTest").merge(testReport, false);
     }
 
 
@@ -49,7 +49,7 @@ public class Report {
         for(String test : testReports.keySet()) {
             TestReport testReport = getTestReport(test);
             if(report.testReports.containsKey(test))
-                testReport.mergeAndRemoveDiff(report.getTestReport(test));
+                testReport.removeDiff(report.getTestReport(test));
         }
     }
 
@@ -68,17 +68,7 @@ public class Report {
     public void merge(Report other) {
         for(String key : other.testReports.keySet()) {
             if(testReports.containsKey(key)) {
-                getTestReport(key).merge(other.getTestReport(key));
-            } else {
-                testReports.put(key,other.getTestReport(key));
-            }
-        }
-    }
-
-    public void merge2(Report other) {
-        for(String key : other.testReports.keySet()) {
-            if(testReports.containsKey(key)) {
-                getTestReport(key).merge(other.getTestReport(key));
+                getTestReport(key).merge(other.getTestReport(key), true);
             } else {
                 testReports.put(key,other.getTestReport(key));
             }
