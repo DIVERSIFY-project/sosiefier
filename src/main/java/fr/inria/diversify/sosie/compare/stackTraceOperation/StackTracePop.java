@@ -43,6 +43,7 @@ public class StackTracePop implements StackTraceOperation {
 //        }
             for(int i = 0; i < pop ; i++) {
                 stackTrace.stackTraceCalls.push(callsPop.pop());
+                stackTrace.deep++;
             }
 
     }

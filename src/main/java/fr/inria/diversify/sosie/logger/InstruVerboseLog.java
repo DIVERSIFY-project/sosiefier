@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class InstruVerboseLog extends InstruLogWriter {
 
     ///File writer for each thread. Each one saved in a different file
-    private Map<Thread, FileWriter> fileWriters;
+    private Map<Thread, PrintWriter> fileWriters;
 
     private String separator = ":;:";
 
@@ -23,7 +23,7 @@ public class InstruVerboseLog extends InstruLogWriter {
     public InstruVerboseLog(String logDir) {
         super(logDir);
         previousVarLog = new HashMap<Thread, String>();
-        fileWriters = new HashMap<Thread, FileWriter>();
+        fileWriters = new HashMap<Thread, PrintWriter>();
     }
 
     public void methodCall(Thread thread, String methodSignatureId) {
@@ -39,7 +39,7 @@ public class InstruVerboseLog extends InstruLogWriter {
                 stringBuilder.append(methodSignatureId);
 
                 String string = stringBuilder.toString();
-                FileWriter fileWriter = getFileWriter(thread);
+                PrintWriter fileWriter = getFileWriter(thread);
                 semaphore = fileWriter.toString() + fileWriter.hashCode();
                 fileWriter.append(string);
 
@@ -67,7 +67,7 @@ public class InstruVerboseLog extends InstruLogWriter {
             stringBuilder.append(testSignature);
 
             String string = stringBuilder.toString();
-            FileWriter fileWriter = getFileWriter(thread);
+            PrintWriter fileWriter = getFileWriter(thread);
             semaphore = fileWriter.toString() + fileWriter.hashCode();
             fileWriter.append(string);
 
@@ -103,7 +103,7 @@ public class InstruVerboseLog extends InstruLogWriter {
                 }
                 string.append(vars.toString());
             }
-            FileWriter fileWriter = getFileWriter(thread);
+            PrintWriter fileWriter = getFileWriter(thread);
             semaphore = fileWriter.toString() + fileWriter.hashCode();
             fileWriter.append(string.toString());
         } catch (Exception e) {
@@ -136,7 +136,7 @@ public class InstruVerboseLog extends InstruLogWriter {
                     previousVarLog.put(thread, varsString);
                 }
                 startLogMethod(thread);
-                FileWriter fileWriter = getFileWriter(thread);
+                PrintWriter fileWriter = getFileWriter(thread);
                 semaphore = fileWriter.toString() + fileWriter.hashCode();
                 fileWriter.append(string.toString());
 
@@ -169,7 +169,7 @@ public class InstruVerboseLog extends InstruLogWriter {
             else
                 string.append("NullException");
 
-            FileWriter fileWriter = getFileWriter(thread);
+            PrintWriter fileWriter = getFileWriter(thread);
             semaphore = fileWriter.toString() + fileWriter.hashCode();
             fileWriter.append(string.toString());
 
@@ -199,7 +199,7 @@ public class InstruVerboseLog extends InstruLogWriter {
             else
                 string.append("NullException");
 
-            FileWriter fileWriter = getFileWriter(thread);
+            PrintWriter fileWriter = getFileWriter(thread);
             semaphore = fileWriter.toString() + fileWriter.hashCode();
             fileWriter.append(string.toString());
 
@@ -214,7 +214,7 @@ public class InstruVerboseLog extends InstruLogWriter {
         for (Thread thread : fileWriters.keySet()) {
             String semaphore = "";
             try {
-                FileWriter flw = getFileWriter(thread);
+                PrintWriter flw = getFileWriter(thread);
                 semaphore = flw.toString() + flw.hashCode();
                 flw.close();
             } catch (Exception e) {
@@ -238,13 +238,13 @@ public class InstruVerboseLog extends InstruLogWriter {
         return map;
     }
 
-    protected synchronized FileWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
+    protected synchronized PrintWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (!fileWriters.containsKey(thread)) {
-            FileWriter f = new FileWriter(getThreadLogFilePath(thread));
+            PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(getThreadLogFilePath(thread))));
             fileWriters.put(thread, f);
             semaphores.put(f.toString() + f.hashCode(), new Semaphore(1));
         }
-        FileWriter f = fileWriters.get(thread);
+        PrintWriter f = fileWriters.get(thread);
         semaphores.get(f.toString() + f.hashCode()).tryAcquire(50, TimeUnit.MILLISECONDS);
         return f;
     }

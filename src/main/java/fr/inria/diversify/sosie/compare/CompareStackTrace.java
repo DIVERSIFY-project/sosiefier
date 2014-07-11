@@ -3,6 +3,7 @@ package fr.inria.diversify.sosie.compare;
 import fr.inria.diversify.sosie.compare.diff.*;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
+import fr.inria.diversify.util.Log;
 
 import java.util.*;
 
@@ -56,16 +57,25 @@ public class CompareStackTrace {
 
     public List<Diff> findDiff() {
         List<Diff> diffs = new LinkedList<>();
-        //reset stackTrace1 and stackTrace2
 
         boolean st1Lower = false, st2Lower = false;
         while(stackTrace1.hasNext() && stackTrace2.hasNext()) {
-            if(!st1Lower) {
-                stackTrace1.next();
+            if (!(stackTrace1.nextIsVar() || stackTrace1.nextIsVar())) {
+                if (!st1Lower) {
+                    stackTrace1.next();
+                }
+                if (!st2Lower) {
+                    stackTrace2.next();
+                }
+            } else {
+                if(stackTrace1.nextIsVar()) {
+                    stackTrace1.next();
+                }
+                if(stackTrace2.nextIsVar()) {
+                    stackTrace2.next();
+                }
             }
-            if(!st2Lower) {
-                stackTrace2.next();
-            }
+
             StackTraceCall top1 = stackTrace1.getTop();
             StackTraceCall top2 = stackTrace2.getTop();
             int deep1 = stackTrace1.getDeep();
@@ -78,6 +88,7 @@ public class CompareStackTrace {
                 st1Lower = true;
             }
             if(st1Lower || st2Lower) {
+                Log.debug("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
                 testReport.addDiffMethodCall(top1);
                 testReport.addDiffMethodCall(top2);
                 diffs.add(new CallDiff(stackTrace1.getTop2(), Math.abs(deep1 - deep2)));
@@ -85,6 +96,7 @@ public class CompareStackTrace {
 
             boolean sameTop = top1.equals(top2);
             if(st1Lower && st2Lower || !sameTop) {
+                Log.debug("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
                 diffs.add(findNewSyncro(20, 2, stackTrace1, stackTrace2));
 
                 if(stackTrace1.getDeep() == stackTrace2.getDeep()) {
@@ -137,7 +149,7 @@ public class CompareStackTrace {
         for(int i = 0; i < maxOperation; i++) {
             for(int j = 0; j < maxOperation - i; j++) {
                 maxDiff = Math.max(maxDiff,Math.abs(count1 - count2));
-                if(st1.getTop().equals(st2.getTop()) &&  isSameForXOperation(syncroRange, st1, st2)) {
+                if(st1.getTop().equals(st2.getTop()) && isSameForXOperation(syncroRange, st1, st2)) {
                     diff.setMaxStackDiff(maxDiff);
                     return diff;
                 } else {

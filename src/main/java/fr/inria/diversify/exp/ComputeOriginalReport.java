@@ -16,6 +16,7 @@ import java.util.Map;
  */
 public class ComputeOriginalReport extends ComputeReport {
     public static void main(String[] args) throws Exception {
+//        Log.DEBUG();
         String originalDirectory = args[0];
         ComputeOriginalReport computeReport = new ComputeOriginalReport();
 

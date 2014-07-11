@@ -208,8 +208,15 @@ public abstract class InstruLogWriter {
                 tmp.append(separator);
                 tmp.append(var[i].toString());
                 tmp.append(simpleSeparator);
-                if (var[i + 1] == null) tmp.append("null");
-                else tmp.append(var[i + 1].toString());
+                if (var[i + 1] == null) {
+                    tmp.append("null");
+                } else {
+                    try {
+                        tmp.append(var[i + 1].toString());
+                    } catch (Exception e) {
+                        tmp.append("error");
+                    }
+                }
                 vars.append(tmp);
             } catch (Exception e) {
             }

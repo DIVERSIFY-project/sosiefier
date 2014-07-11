@@ -78,7 +78,11 @@ public class StackTrace {
         for(String operation: trace) {
             try {
                 i++;
-                addElement(operation, idMap);
+                if(operation.length() < 1000000) {
+                    addElement(operation, idMap);
+                } else {
+                    Log.warn("error too big operation");
+                }
             } catch (Exception e) {
 //                e.printStackTrace();
             }
@@ -99,7 +103,10 @@ public class StackTrace {
         else {
             try {
                 getStackTraceOperations().add(new StackTraceVariableObservation((StackTraceVariable) elem));
-            } catch (Exception e) {}
+            } catch (Exception e) {
+
+                Log.warn("errorin add element");
+            }
         }
     }
 
@@ -186,5 +193,9 @@ public class StackTrace {
 
     public List<StackTraceOperation> getStackTraceOperations() {
         return stackTraceOperations;
+    }
+
+    public boolean nextIsVar() {
+        return stackTraceOperations.get(position) instanceof StackTraceVariableObservation;
     }
 }
