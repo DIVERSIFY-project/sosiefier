@@ -23,7 +23,6 @@ public class StackElementTextReader extends StackElementReader {
         List<StackTrace> list = new ArrayList<>();
         File file = new File(dir);
         Map<Integer, String> idMap = loadIdMap(dir + "/id");
-        int idMapSize = idMap.size();
 
         Log.debug("load trace in directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles()) {
@@ -39,7 +38,7 @@ public class StackElementTextReader extends StackElementReader {
                         list.add(st);
                     }
                 } catch (Exception e) {
-                    Log.debug("error for: {}", f.getAbsoluteFile());
+                    Log.info("error for: {}", f.getAbsoluteFile());
                 }
             }
         }

@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.compare.stackElement;
 
+
 import java.util.*;
 
 /**
@@ -49,8 +50,14 @@ public class StackTraceVariable extends StackTraceElement {
             return list;
         }
 
-        if(valueString.contains("@") && valueString.split("@").length != 0)
-            return valueString.split("@")[0];
+        if(valueString.split("@").length > 1)
+            return parseValue(valueString.split("@")[0]);
+
+
+        if( valueString.split("\\$\\$").length > 1) {
+            return parseValue(valueString.split("\\$\\$")[0]);
+        }
+
 
         return valueString;
     }

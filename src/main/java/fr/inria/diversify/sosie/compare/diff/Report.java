@@ -15,16 +15,12 @@ public class Report {
 
     public Report() {
         testReports = new HashMap();
-        testReports.put("allTest", new TestReport());
     }
 
     public Report(Report other) {
         testReports = new HashMap();
         for(String key : other.testReports.keySet())
         testReports.put(key, new TestReport(other.testReports.get(key)));
-
-        if(!testReports.containsKey("allTest"))
-            testReports.put("allTest", new TestReport());
     }
 
     public Report(JSONObject object) throws JSONException {
@@ -35,13 +31,10 @@ public class Report {
             JSONObject o = object.getJSONObject(key);
             testReports.put(key, new TestReport(o));
         }
-        if(!testReports.containsKey("allTest"))
-            testReports.put("allTest", new TestReport());
     }
 
     public void putTestReport(String key, TestReport testReport) {
         testReports.put(key, testReport);
-        testReports.get("allTest").merge(testReport, false);
     }
 
 
@@ -58,11 +51,23 @@ public class Report {
     }
 
     public String summary() {
-        return testReports.get("allTest").summary();
+        return buildAllTest().summary();
+    }
+
+    protected TestReport buildAllTest() {
+        TestReport allTest = null;
+        for (TestReport report : testReports.values()) {
+            if(allTest == null) {
+                allTest = new TestReport(report);
+            } else {
+                allTest.merge(report,false);
+            }
+        }
+       return allTest;
     }
 
     public String summary2() {
-        return testReports.get("allTest").summary2();
+        return buildAllTest().summary2();
     }
 
     public void merge(Report other) {

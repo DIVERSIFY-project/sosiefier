@@ -75,7 +75,7 @@ public class ComputeReportForClient extends ComputeReport{
         return report;
     }
 
-    protected void makeLogFor(File sosieDir) throws Exception {
+    protected String makeLogFor(File sosieDir) throws Exception {
         File logDir = new File(client.getAbsolutePath()+"/log");
 
         deleteLog(logDir);
@@ -85,6 +85,8 @@ public class ComputeReportForClient extends ComputeReport{
         runClient();
 
         deleteUselessLog(logDir);
+
+        return logDir.getAbsolutePath();
     }
 
     protected void installProgam(File programDirectory) throws Exception {

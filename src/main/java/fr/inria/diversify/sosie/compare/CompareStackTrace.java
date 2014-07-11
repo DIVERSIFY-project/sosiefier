@@ -114,13 +114,13 @@ public class CompareStackTrace {
         for(String key : v1.keySet()) {
             Object value = v1.get(key);
             Object value2 = v2.get(key);
-            if(value2 == null || !value.equals(value2)) //!valueEqual(value, v2.get(key)))
+            if(value2 == null || !value.equals(value2))
                 diff.add(new VariableDiff(st1.getTop(),key));
         }
         for(String key : v2.keySet()) {
             Object value = v2.get(key);
             Object value1 = v1.get(key);
-            if(value1 == null || !value.equals(value1)) //!valueEqual(value, v1.get(key)))
+            if(value1 == null || !value.equals(value1))
                 diff.add(new VariableDiff(st1.getTop(),key));
         }
 

@@ -1,5 +1,6 @@
 package fr.inria.diversify.exp;
 
+import com.oracle.javafx.jmx.json.JSONReader;
 import fr.inria.diversify.sosie.compare.diff.Report;
 import fr.inria.diversify.sosie.compare.diff.TestReport;
 import fr.inria.diversify.util.Log;
@@ -27,6 +28,7 @@ public class ComputeOriginalReport extends ComputeReport {
         writer.write(report.toJSON().toString());
         Log.info("global: {}", report.summary());
         writer.close();
+
 
         file = new File(originalDirectory + "/report.txt");
         file.createNewFile();

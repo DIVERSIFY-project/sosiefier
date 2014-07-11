@@ -33,6 +33,7 @@ public class TestReport {
         methodCall = new HashSet(testReport.methodCall);
         variable = new HashMap(testReport.variable);
         variableDiff = new HashSet(testReport.variableDiff);
+        nbOfExec = new HashMap(testReport.nbOfExec);
     }
 
     public void updateVar(Map<String, Object> vars, StackTraceCall call) {
@@ -41,8 +42,10 @@ public class TestReport {
             String newValue = vars.get(var).toString();
             Set<String> values = variable.get(key);
             if (values != null) {
+                nbOfExec.put(key, nbOfExec.get(key) + 1);
                 values.add(newValue);
             } else {
+                nbOfExec.put(key,1);
                 values = new HashSet();
                 values.add(newValue);
                 variable.put(key,values);
@@ -102,6 +105,7 @@ public class TestReport {
         methodCall = new HashSet(100);
         variable = new HashMap(2000);
         variableDiff = new HashSet(100);
+        nbOfExec = new HashMap(2000);
     }
 
     public String summary() {
@@ -124,6 +128,7 @@ public class TestReport {
         sameCall.removeAll(diffCall);
 
         String summary = "";
+        summary += "allVariable: " + variable.size() + "\n";
         summary += "variableConst: " + variableConst.size() + "\n";
         summary += "variableConstDiff: " + variableConstDiff.size() + "\n";
         summary += "variableEvol: " + variableEvol.size() + "\n";
@@ -155,6 +160,7 @@ public class TestReport {
         sameCall.removeAll(diffCall);
 
         String summary = "";
+        summary += "allVariable: " + variable.size() + "\n";
         summary += "variableConst: " + variableConst.size() + "\n";
         summary += "variableConstDiff: " + variableConstDiff.size() + " "+variableConstDiff+ "\n";
         summary += "variableEvol: " + variableEvol.size() + "\n";
@@ -165,6 +171,31 @@ public class TestReport {
         return summary;
     }
 
+    public Map<String,String> pointReport(boolean varReport) {
+        Map<String,String> point = new HashMap();
+        //"point: exec;diff;
+        for(String var: variable.keySet()) {
+            point.put(var, nbOfExec.get(var)+";"+type(var));
+        }
+        return point;
+    }
+
+    protected String type(String var) {
+        if(variableDiff.contains(var)) {
+            if (variable.get(var).size() != 1) {
+                return "VD";
+            } else {
+                return "FD";
+            }
+        } else {
+            if (variable.get(var).size() != 1) {
+                return "VS";
+            } else {
+                return "FS";
+            }
+        }
+    }
+
     public JSONObject buildReport() throws JSONException {
         JSONObject jsonObject = new JSONObject();
 
@@ -172,6 +203,7 @@ public class TestReport {
         jsonObject.put("diffCall",diffCall);
         jsonObject.put("variable",variable);
         jsonObject.put("variableDiff",variableDiff);
+        jsonObject.put("exec",nbOfExec);
 
         return jsonObject;
     }
@@ -182,6 +214,7 @@ public class TestReport {
 
         variableDiff = parseJSONArray(jsonObject.getJSONArray("variableDiff"));
         variable = parseVariableValue(jsonObject.getJSONObject("variable"));
+        nbOfExec = parseNbExec(jsonObject.getJSONObject("exec"));
     }
 
     protected Set<String> parseJSONArray(JSONArray array) throws JSONException {
@@ -200,6 +233,17 @@ public class TestReport {
         while(it.hasNext()) {
             String o = (String) it.next();
             variableValue.put(o,parseJSONArray(map.getJSONArray(o)));
+        }
+        return variableValue;
+    }
+
+    protected Map<String,Integer> parseNbExec(JSONObject map) throws JSONException {
+        HashMap<String,Integer> variableValue = new HashMap();
+
+        Iterator it = map.keys();
+        while(it.hasNext()) {
+            String o = (String) it.next();
+            variableValue.put(o,map.getInt(o));
         }
         return variableValue;
     }

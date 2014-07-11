@@ -43,7 +43,7 @@ public class ComputeReport {
         computeReport.writeSummary(resultDirectory);
     }
 
-    public void writeSummary(String directory) throws IOException {
+    public void writeSummary(String directory) throws IOException, JSONException {
         sosieSosieSummary += "global: \n" + globalSosieSosieReport.summary() + "\n";
         originalSosieSummary += "global: \n" + globalOriginalSosieReport.summary() + "\n";
         filterOriginalSosieSummary += "global: \n" + globalFilterOriginalSosieReport.summary() + "\n";
@@ -82,6 +82,21 @@ public class ComputeReport {
         writer = new FileWriter(file);
         writer.write(filterSosieSosieSummary);
         writer.close();
+
+        file = new File(directory + "_sosieSosie_Report.json");
+        file.createNewFile();
+        writer = new FileWriter(file);
+        globalSosieSosieReport.toJSON().write(writer);
+        writer.close();
+
+        file = new File(directory + "_OriginalSosie_Report.json");
+        file.createNewFile();
+        writer = new FileWriter(file);
+
+        globalOriginalSosieReport.toJSON().write(writer);
+        writer.close();
+
+
     }
 
     public void buildAllReport(File sosiesDir) {
@@ -90,7 +105,10 @@ public class ComputeReport {
                 try {
                     Log.info("build report for {}",sosie.getName());
 
+                    Log.info("compare sosie/sosie");
                     Report sosieSosieReport = buildReportFor(sosie, false);
+
+                    Log.info("compare sosie/original");
                     Report originalSosieReport = buildReportFor(sosie, true);
 
                     if(sosieSosieReport.size() > originalReport.size()/2
@@ -133,9 +151,9 @@ public class ComputeReport {
         if(withSosie) {
             reports = buildReportFor(programDirectory, logSosieDirectory);
         } else {
-            File originalLodDir = new File(programDirectory.getAbsolutePath()+"/log");
+//            File originalLodDir = new File(programDirectory.getAbsolutePath()+"/log");
             File newLodDir = new File(programDirectory.getAbsolutePath()+"/oldLog");
-            makeLogFor(programDirectory);
+            File originalLodDir = new File(makeLogFor(programDirectory));
             moveLogFile(newLodDir,originalLodDir);
             reports = buildReportFor(programDirectory, newLodDir.getAbsolutePath());
         }
@@ -143,21 +161,21 @@ public class ComputeReport {
     }
 
     protected Report buildReportFor(File programDirectory, String sosieLogDir) throws Exception {
-        String originalLodDir = programDirectory.getAbsolutePath()+"/log";
-        Report report;
+//         = programDirectory.getAbsolutePath()+"/log";
         int oldSize = 1;
         int newSize;
 
-        makeLogFor(programDirectory);
+        String originalLodDir = makeLogFor(programDirectory);
+        Log.info("compare trace for {} with {}", originalLodDir, sosieLogDir);
         CompareAllStackTrace un = new CompareAllStackTrace(originalLodDir, sosieLogDir, null);
         un.findDiff();
-        report = un.getReport();
-        Log.debug(report.summary());
+        Report report = un.getReport();
+//        Log.debug(report.summary());
         newSize = report.size();
 
         while(oldSize != newSize) {
-            makeLogFor(programDirectory);
-            un = new CompareAllStackTrace(originalLodDir, sosieLogDir, null);
+            originalLodDir = makeLogFor(programDirectory);
+            un = new CompareAllStackTrace(sosieLogDir,originalLodDir, null);
             un.findDiff();
             Log.debug(report.summary());
             report.merge(un.getReport());
@@ -169,13 +187,15 @@ public class ComputeReport {
         return report;
     }
 
-    protected void makeLogFor(File programDirectory) throws Exception {
+    protected String makeLogFor(File programDirectory) throws Exception {
         File logDir = new File(programDirectory.getAbsolutePath()+"/log");
 
         deleteLog(logDir);
         runProgram(programDirectory);
 
         deleteUselessLog(logDir);
+
+        return logDir.getAbsolutePath();
     }
 
     protected void runProgram(File directory) throws Exception {
