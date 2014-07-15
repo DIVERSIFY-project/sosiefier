@@ -11,6 +11,13 @@ public class StackTraceVariable extends StackTraceElement {
     protected int id2;
 
 
+    public StackTraceVariable(int id, int depth, String method, Map<Integer,String> idMap, String variables) {
+        id2 = id;
+        originalDeep = depth;
+        this.method = method;
+        initVariablesFromString(variables.split(":;:"), idMap, 1);
+    }
+
     public StackTraceVariable(String value, int deep, Map<Integer,String> idMap) {
         originalDeep = deep;
         String[] tmp = value.split(":;:");
@@ -18,18 +25,23 @@ public class StackTraceVariable extends StackTraceElement {
         id2 = Integer.parseInt(idTmp[0]);
         id = Integer.parseInt(idTmp[1]);
         method = idMap.get(id);
+        initVariablesFromString(tmp, idMap, 1);
+    }
 
+
+    protected void initVariablesFromString(String[] varStr, Map<Integer,String> idMap, int start) {
         vars = new HashMap<>();
-        if(tmp[1].equals("P"))
-            return;
+        if(varStr[start].equals("P")) return;
 
-        for(int i = 1; i < tmp.length; i++ ) {
-            String[] varTmp = tmp[i].split(";");
-            int key = Integer.parseInt(varTmp[0]);
-            if(varTmp.length == 1)
-                vars.put(idMap.get(key), "");
-            else
-                vars.put(idMap.get(key), parseValue(varTmp[1]));
+        for(int i = start; i < varStr.length; i++ ) {
+            String[] varTmp = varStr[i].split(";");
+            try {
+                int key = Integer.parseInt(varTmp[0]);
+                if (varTmp.length == 1)
+                    vars.put(idMap.get(key), "");
+                else
+                    vars.put(idMap.get(key), parseValue(varTmp[1]));
+            } catch ( NumberFormatException e ) {}
         }
     }
 

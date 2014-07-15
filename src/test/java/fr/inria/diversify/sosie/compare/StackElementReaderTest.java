@@ -1,9 +1,11 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.FileOutputStreamMock;
+import fr.inria.diversify.sosie.compare.stackElement.StackTraceVariable;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTracePop;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTracePush;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTraceVariableObservation;
 import fr.inria.diversify.sosie.logger.InstruCompactLog;
 
 import org.junit.Assert;
@@ -13,6 +15,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by marodrig on 01/07/2014.
@@ -56,6 +59,33 @@ public class StackElementReaderTest {
     }
 
     @Test
+    public void testVar() throws IOException {
+        //Create some data and store the result in the mocked array instead of the file
+        FileOutputStreamMock mock = new FileOutputStreamMock();
+        InstruCompactLog log = new InstruCompactLog("logTest");
+        Thread t = Thread.currentThread();
+
+        //Build some data for the reader
+        log.writeTestStart(t, "sampleTest");
+        Object[] a = { 4, 10 };
+        log.writeVar(10, t, "A", a);
+        Object[] b = { 422, 1000 };
+        log.writeVar(10, t, "A", b);
+        log.close();
+
+        //Make the reader read from the byte[] buffer
+        StackElementBinaryReader reader = new StackElementBinaryReader();
+        List<StackTrace> st = reader.loadLog(new DataInputStream(new ByteArrayInputStream(mock.buffer)));
+
+        Assert.assertEquals(2, st.get(0).getStackTraceOperations().size());
+        Assert.assertTrue(st.get(0).getStackTraceOperations().get(1) instanceof StackTraceVariableObservation);
+        Map<String, Object> vars =
+                ((StackTraceVariableObservation)st.get(0).getStackTraceOperations().get(1)).getVars().getVariables();
+        Assert.assertTrue(vars.containsValue("1000"));
+
+    }
+
+    @Test
     public void testRead_Exception() throws IOException {
         //Create some data and store the result in the mocked array instead of the file
         FileOutputStreamMock mock = new FileOutputStreamMock();
@@ -74,8 +104,6 @@ public class StackElementReaderTest {
 
         Assert.assertEquals("foo", st.get(0).getTop().getMethod());
         Assert.assertTrue(st.get(0).getStackTraceOperations().size() > 0);
-
-
     }
 
 }

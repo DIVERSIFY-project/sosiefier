@@ -26,7 +26,7 @@ public class TestSosie extends AbstractDiversify {
         transformations = new ArrayList<>();
     }
 
-    protected Integer runTest(String directory) throws InterruptedException, CompileException {
+    protected Integer runTest(String directory) throws InterruptedException /*, CompileException*/ {
         if(PrunTest(directory) != 0)
             return -1;
 
@@ -43,7 +43,7 @@ public class TestSosie extends AbstractDiversify {
         return 0;
     }
 
-    protected Integer PrunTest(String directory) throws InterruptedException, CompileException {
+    protected Integer PrunTest(String directory) throws InterruptedException /*, CompileException*/ {
 
 //        builder.start();
 //        int count = 0;
@@ -69,7 +69,7 @@ public class TestSosie extends AbstractDiversify {
         }
     }
 
-    @Override
+    //@Override
     public void run(Collection<Transformation> trans) throws Exception {
         for (Transformation tran : trans)
             run(tran);

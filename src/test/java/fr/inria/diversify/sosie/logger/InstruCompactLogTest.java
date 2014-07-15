@@ -101,12 +101,15 @@ public class InstruCompactLogTest {
         FileOutputStreamMock mock = new FileOutputStreamMock();
 
         InstruCompactLog log = new InstruCompactLog("logTest");
-        Object[] a = { 0, 4 };
-        log.writeAssert (5, t, "Class1", "method", "assertEquals", a);
+        log.writeTestStart(t, "sampleTest");
+        Object[] a = { 4, 10 };
+        log.writeVar(10, t, "A", a);
+        Object[] b = { 422, 1000 };
+        log.writeVar(11, t, "A", b);
         log.close();
 
         String s = new String(mock.buffer);
-        Assert.assertTrue(s.contains("Class1") && s.contains("method") && s.contains("assertEquals"));
+        Assert.assertTrue(s.contains("A") && s.contains("422") && s.contains("1000"));
     }
 
     @Test

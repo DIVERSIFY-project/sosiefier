@@ -9,7 +9,6 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 
 import java.io.*;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -46,6 +45,8 @@ public abstract class AbstractDiversify {
      * Directory to copy sosies programs source code to.
      */
     private String socieSourcesDir = null;
+
+
 
     /**
      * The original temporal directory. This is a patch. Sometimes we cannot delete the tmpDir
@@ -98,9 +99,14 @@ public abstract class AbstractDiversify {
      */
     protected AbstractBuilder builder;
 
+    /**
+     * Runs the diversificator.
+     * @param n Number of times the diversification process will run, i.e trials
+     * @throws Exception
+     */
     public abstract void run(int n) throws Exception;
 
-    protected abstract void run(Collection<Transformation> trans) throws Exception;
+    //protected abstract void run(Collection<Transformation> trans) throws Exception;
 
     /**
      *
@@ -194,14 +200,11 @@ public abstract class AbstractDiversify {
         }
     }
 
-    protected Integer runTest(String directory) throws InterruptedException, CompileException, InstantiationException, IllegalAccessException {
+    protected Integer runTest(String directory) throws InterruptedException {
         Log.debug("run test in directory: {}", directory);
         builder.setDirectory(directory);
         builder.runBuilder();
-        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getErrors().size());
-        if (builder.getCompileError()) {
-            throw new CompileException("compile error in maven");
-        }
+        Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
         return builder.getStatus();
     }
 

@@ -221,7 +221,7 @@ public abstract class InstruLogWriter {
             } catch (Exception e) {
             }
         }
-
+        startLogMethod(thread);
         return vars.toString();
     }
 

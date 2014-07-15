@@ -99,6 +99,8 @@ public class StackElementBinaryReader extends StackElementReader {
                 case InstruCompactLog.LOG_ASSERT:
                     readAssert(dataInputStream, currentStackTrace);
                     break;
+                case InstruCompactLog.LOG_CLOSE:
+                    break;
                 default:
                     throw new IOException("Unknown magic number, File is corrupted or not proper format");
             }
@@ -127,16 +129,13 @@ public class StackElementBinaryReader extends StackElementReader {
                 }
                 else { os.writeUTF("P"); }
         * */
-        int id = stream.readInt();
         readSignatureChunk(stream);
+        int id = stream.readInt();
         int methdId = stream.readInt();
         currentDepth = stream.readInt();
         int len = stream.readInt();
-        String s = "";
-        for (int i = 0; i < len; i++) {
-            s += stream.readUTF();
-        }
-        StackTraceVariable v = new StackTraceVariable(s, currentDepth, idMap);
+        String s = stream.readUTF();
+        StackTraceVariable v = new StackTraceVariable(id, currentDepth, idMap.get(methdId), idMap, s);
         trace.setDepth(currentDepth);
         trace.addElement(v);
     }
@@ -219,8 +218,20 @@ public class StackElementBinaryReader extends StackElementReader {
      * @throws IOException
      */
     private void readExceptions(DataInputStream stream, StackTrace trace) throws IOException {
+        /*
+            DataOutputStream os = getStream(thread);
+            os.writeByte(LOG_EXCEPTION);
+            writeSignatures(os);
+            os.writeInt(getCallDeep(thread));
+            os.writeInt(id);
+            os.writeInt(getSignatureId(className));
+            os.writeInt(getSignatureId(exception.toString()));
+            os.writeInt(getSignatureId(methodSignature));
+        * */
         //why are we reading all this?
         readSignatureChunk(stream);
+        int id = stream.readInt();
+        currentDepth = stream.readInt();
         int classId = stream.readInt();
         int methdId = stream.readInt();
         int excepId = stream.readInt();

@@ -145,21 +145,25 @@ public class InstruCompactLog extends InstruLogWriter {
         String separator = ":;:";
         String simpleSeparator = ";";
 
+        if ( previousVarLog == null ) { previousVarLog = new HashMap<Thread, String>(); }
+
         if (getLogMethod(thread)) {
             try {
                 DataOutputStream os = getStream(thread);
                 os.writeByte(LOG_VAR);
-                os.writeInt(id);
                 int methdID = getSignatureId(methodSignatureId);
                 writeSignatures(os);
+                os.writeInt(id);
                 os.writeInt(methdID);
                 os.writeInt(getCallDeep(thread));
                 String vars = buildVars(thread, separator, simpleSeparator, var);
                 os.writeInt(vars.length());
-                if (vars != previousVarLog.get(thread)) {
+                if ( previousVarLog.containsKey(thread) &&
+                     !vars.equals(previousVarLog.get(thread)) ) {
                     os.writeUTF(vars);
                 } else {
-                    os.writeUTF("P");
+                    previousVarLog.put(thread, vars);
+                    os.writeUTF(separator+"P");
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -175,16 +179,15 @@ public class InstruCompactLog extends InstruLogWriter {
         try {
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_EXCEPTION);
-            os.writeInt(getCallDeep(thread));
-            os.writeInt(id);
             int classId = getSignatureId(className);
             int methdId = getSignatureId(methodSignature);
             int excepId = getSignatureId(exception.toString());
             writeSignatures(os);
+            os.writeInt(id);
+            os.writeInt(getCallDeep(thread));
             os.writeInt(classId);
             os.writeInt(methdId);
             os.writeInt(excepId);
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {

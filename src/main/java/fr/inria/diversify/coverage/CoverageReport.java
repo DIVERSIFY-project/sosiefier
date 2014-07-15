@@ -22,7 +22,7 @@ import java.io.IOException;
 
 public class CoverageReport implements ICoverageReport {
 
-    CoverageBuilder coverageBuilder;
+    protected CoverageBuilder coverageBuilder;
     private final File executionDataFile;
     private final File classesDirectory;
 
@@ -56,7 +56,7 @@ public class CoverageReport implements ICoverageReport {
         fis.close();
     }
 
-    private CoverageBuilder analyzeStructure() throws IOException {
+    protected CoverageBuilder analyzeStructure() throws IOException {
         final CoverageBuilder coverageBuilder = new CoverageBuilder();
         final Analyzer analyzer = new Analyzer(executionDataStore,
                 coverageBuilder);

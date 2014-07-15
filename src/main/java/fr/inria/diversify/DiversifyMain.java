@@ -18,16 +18,11 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.transformation.query.ASTTransformationQuery;
 
-import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
-import spoon.compiler.SpoonCompiler;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.factory.FactoryImpl;
-import spoon.support.DefaultCoreFactory;
-import spoon.support.StandardEnvironment;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
@@ -36,7 +31,6 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 /**
  * Main class for the sosie generator.
@@ -88,14 +82,22 @@ public class DiversifyMain {
         int max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
         int min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
         TransformationQuery query = initTransformationQuery();
+
         for ( int i = min; i <= max; i++ ) {
+
             inputProgram.setTransformationPerRun(i);
             abstractDiversify.setTransformationQuery(query);
             abstractDiversify.run(n);
+
+            //Clear the found transformations for the next step to speed up. No needed since the new ones are going
+            //to be of different size and therefore different
+            //query.clearTransformationFounds();
+
             String repo = DiversifyProperties.getProperty("gitRepository");
             if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
             else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
         }
+
         abstractDiversify.deleteTmpFiles();
     }
 
@@ -109,6 +111,8 @@ public class DiversifyMain {
         else if (DiversifyProperties.getProperty("sosie").equals("false")) {
             ad = new Diversify(inputConfiguration, projet, src);
             boolean early = DiversifyProperties.getProperty("early.report","false").equals("true");
+            boolean earlySosies = DiversifyProperties.getProperty("early.report.sosies.only","false").equals("true");
+            ((Diversify)ad).setEarlyReportSosiesOnly(earlySosies);
             ((Diversify)ad).setEarlyReport(early);
             ad.setSocieSourcesDir(DiversifyProperties.getProperty("copy.sosie.sources.to", ""));
         }
@@ -118,6 +122,7 @@ public class DiversifyMain {
         } else ad = new SosieWithParent(projet, src);
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));
+
         ad.setBuilder(initBuilder(tmpDir));
         ad.setResultDir(resultDir);
         return ad;
@@ -126,6 +131,7 @@ public class DiversifyMain {
 
     protected AbstractBuilder initBuilder(String directory) throws Exception {
         AbstractBuilder rb;
+
         String src = DiversifyProperties.getProperty("src");
         if (DiversifyProperties.getProperty("builder").equals("maven")) {
             rb = new MavenBuilder(directory, src);
@@ -141,7 +147,14 @@ public class DiversifyMain {
         String pomFile = DiversifyProperties.getProperty("newPomFile");
         if (!pomFile.equals("")) rb.initPom(pomFile);
 
-        if (DiversifyProperties.getProperty("clojure").equals("true")) rb.setClojureTest(true);
+        //Obtain some other builder properties
+        boolean saveOutput = Boolean.parseBoolean(DiversifyProperties.getProperty("save.builder.output", "false"));
+        boolean useClojure = Boolean.parseBoolean(DiversifyProperties.getProperty("clojure", "false"));
+        String results = DiversifyProperties.getProperty("result");
+        rb.setSaveOutputDir(results);
+        rb.setClojureTest(useClojure);
+        rb.setSaveOutputToFile(saveOutput);
+
         return rb;
     }
 
@@ -210,6 +223,10 @@ public class DiversifyMain {
                 //This query benefits from a early processCodeFragments
                 inputProgram.processCodeFragments();
                 return new KnowMultisosieQuery(inputProgram);
+            case "singleconsecutive":
+                inputProgram.processCodeFragments();
+                return new ConsecutiveKnownSosieQuery(inputProgram);
+
             default:
                 //Try to construct the query from the explicit class
                 try {
