@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * User: Simon
@@ -83,6 +84,7 @@ public class Diversify extends AbstractDiversify {
         sessionResults = new SessionResults();
         String[] p = projectDir.split("/");
         sessionResults.setName(p[p.length - 1]);
+        this.inputConfiguration = inputConfiguration;
     }
 
     public Diversify(InputConfiguration inputConfiguration, String projectDir, String workingDir) {
@@ -131,7 +133,7 @@ public class Diversify extends AbstractDiversify {
                 //1. We query for transformations.
                 transQuery.query();
                 //Obtain transformations
-                transformations = (java.util.List<Transformation>) transQuery.getTransformations();
+                transformations = (List<Transformation>) transQuery.getTransformations();
 
                 //2. We try to apply them
                 try {
@@ -202,7 +204,7 @@ public class Diversify extends AbstractDiversify {
 
         status = runTest(tmpDir);
 
-        if (status == 0) { copySosieProgram(trans); }
+        if (status == 0) { copySosieProgram(); }
 
         //Store transformation status
         for (Transformation tran : transformations) {
@@ -227,10 +229,6 @@ public class Diversify extends AbstractDiversify {
 
         if (earlyReport && getResultDir() != null) {
             earlyReport(status);
-        }
-        if (status == 0) {
-            copySosieProgram();
-
         }
     }
 
@@ -292,14 +290,14 @@ public class Diversify extends AbstractDiversify {
                 boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
 
                 if (intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest) {
-                    Instru instru = new Instru(
-                            tmpDir, sourceDir,
-                            inputConfiguration.getProperty("testSrc"), destPath);
+                    Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), destPath);
                     instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
                 }
-            FileWriter writer = new FileWriter(destPath+"/trans.json");
-            for(Transformation t : trans) {
-                    writer.write(t.toJSONObject().toString()+"\n");
+                FileWriter writer = new FileWriter(destPath + "/trans.json");
+                for (Transformation t : transformations) {
+                    writer.write(t.toJSONObject().toString() + "\n");
+                }
+                writer.close();
             }
         } catch (IOException e) {
             //We may also don't want to recover from here. If no instrumentation possible... now what?
