@@ -88,7 +88,7 @@ public class CompareStackTrace {
                 st1Lower = true;
             }
             if(st1Lower || st2Lower) {
-                Log.debug("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
+//                Log.info("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
                 testReport.addDiffMethodCall(top1);
                 testReport.addDiffMethodCall(top2);
                 diffs.add(new CallDiff(stackTrace1.getTop2(), Math.abs(deep1 - deep2)));
@@ -96,7 +96,7 @@ public class CompareStackTrace {
 
             boolean sameTop = top1.equals(top2);
             if(st1Lower && st2Lower || !sameTop) {
-                Log.debug("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
+//                Log.info("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
                 diffs.add(findNewSyncro(20, 2, stackTrace1, stackTrace2));
 
                 if(stackTrace1.getDeep() == stackTrace2.getDeep()) {

@@ -15,7 +15,7 @@ public class TestReport {
     protected Set<String> methodCall;
     protected Set<String> diffCall;
 
-    protected Map<String,Set<String>> variable;
+    protected Map<String,Set<Object>> variable;
     protected Set<String> variableDiff;
     protected Map<String,Integer> nbOfExec;
 
@@ -39,8 +39,8 @@ public class TestReport {
     public void updateVar(Map<String, Object> vars, StackTraceCall call) {
         for(String var: vars.keySet()) {
             String key = call.getMethod() + ":" + var;
-            String newValue = vars.get(var).toString();
-            Set<String> values = variable.get(key);
+            Object newValue = vars.get(var);
+            Set<Object> values = variable.get(key);
             if (values != null) {
                 nbOfExec.put(key, nbOfExec.get(key) + 1);
                 values.add(newValue);
@@ -68,6 +68,7 @@ public class TestReport {
                     variableDiff.add(key);
                 }
             } else {
+                nbOfExec.put(key,nbOfExec.get(key) + other.nbOfExec.get(key));
                 variable.get(key).addAll(other.variable.get(key));
             }
         }
@@ -76,8 +77,9 @@ public class TestReport {
                 if(withSameTest) {
                     variableDiff.add(key);
                 }
-                Set<String> values = new HashSet();
+                Set<Object> values = new HashSet();
                 values.addAll(other.variable.get(key));
+                nbOfExec.put(key,other.nbOfExec.get(key));
                 variable.put(key,values);
             }
         }
@@ -85,6 +87,18 @@ public class TestReport {
 
         methodCall.addAll(other.methodCall);
         diffCall.addAll(other.diffCall);
+
+        for(String method : methodCall) {
+            Integer i1 = 0;
+            Integer i2 = 0;
+            if(nbOfExec.containsKey(method)) {
+                i1 = nbOfExec.get(method);
+            }
+            if(other.nbOfExec.containsKey(method)) {
+                i2 = other.nbOfExec.get(method);
+            }
+            nbOfExec.put(method,i1+i2);
+        }
     }
 
     public void removeDiff(TestReport other) {
@@ -93,11 +107,25 @@ public class TestReport {
     }
 
     public void addSameMethodCall(StackTraceCall top) {
-        methodCall.add(top.getMethod());
+        String method = top.getMethod();
+
+        methodCall.add(method);
+        Integer nb = nbOfExec.get(method);
+        if(nb != null)
+            nbOfExec.put(method,nb+1);
+        else
+            nbOfExec.put(method,1);
     }
 
     public void addDiffMethodCall(StackTraceCall top) {
+        String method = top.getMethod();
+
         diffCall.add(top.getMethod());
+        Integer nb = nbOfExec.get(method);
+        if(nb != null)
+            nbOfExec.put(method,nb+1);
+        else
+            nbOfExec.put(method,1);
     }
 
     protected void init() {
@@ -139,7 +167,6 @@ public class TestReport {
         return summary;
     }
 
-
     public String summary2() {
         Set<String> variableConst = new HashSet();
         Set<String> variableConstDiff = new HashSet();
@@ -171,11 +198,18 @@ public class TestReport {
         return summary;
     }
 
-    public Map<String,String> pointReport(boolean varReport) {
+    public Map<String,String> pointReport() {
         Map<String,String> point = new HashMap();
-        //"point: exec;diff;
+        //"point: type;
         for(String var: variable.keySet()) {
-            point.put(var, nbOfExec.get(var)+";"+type(var));
+            point.put(var, type(var));
+        }
+        for(String method: methodCall) {
+            if(diffCall.contains(method)) {
+                point.put(method, "D");
+            } else {
+                point.put(method, "S");
+            }
         }
         return point;
     }
@@ -226,13 +260,18 @@ public class TestReport {
         return set;
     }
 
-    protected Map<String,Set<String>> parseVariableValue(JSONObject map) throws JSONException {
-        HashMap<String,Set<String>> variableValue = new HashMap();
+    protected Map<String,Set<Object>> parseVariableValue(JSONObject map) throws JSONException {
+        HashMap<String,Set<Object>> variableValue = new HashMap();
 
         Iterator it = map.keys();
         while(it.hasNext()) {
             String o = (String) it.next();
-            variableValue.put(o,parseJSONArray(map.getJSONArray(o)));
+
+            Set<Object> objects = new HashSet();
+            for(String object :parseJSONArray(map.getJSONArray(o))) {
+                objects.add(parseValue(object));
+            }
+            variableValue.put(o,objects);
         }
         return variableValue;
     }
@@ -262,5 +301,34 @@ public class TestReport {
 
     public int size() {
         return variable.size() + methodCall.size();
+    }
+
+    public Map<String, Integer> getNbOfExec() {
+        return nbOfExec;
+    }
+
+    protected Object parseValue(String valueString) {
+        if(valueString.startsWith("{") && valueString.endsWith("}")) {
+            Set<Object> set = new HashSet<>();
+            for(String s : valueString.substring(1,valueString.length()-1).split(", "))
+                set.add(parseValue(s));
+            return set;
+        }
+
+        if(valueString.startsWith("[") && valueString.endsWith("]")) {
+            List<Object> list = new ArrayList<>();
+            for(String s : valueString.substring(1,valueString.length()-1).split(", "))
+                list.add(parseValue(s));
+            return list;
+        }
+
+        if(valueString.split("@").length > 1)
+            return parseValue(valueString.split("@")[0]);
+
+
+        if( valueString.split("\\$\\$").length > 1) {
+            return parseValue(valueString.split("\\$\\$")[0]);
+        }
+        return valueString;
     }
 }

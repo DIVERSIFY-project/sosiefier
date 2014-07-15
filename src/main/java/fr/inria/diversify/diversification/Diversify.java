@@ -12,6 +12,7 @@ import org.codehaus.plexus.util.FileUtils;
 import org.json.JSONException;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -141,6 +142,8 @@ public class Diversify extends AbstractDiversify {
             status = -2;
         }
 
+        if (status == 0) { copySosieProgram(trans); }
+
         for (Transformation tran : trans) {
             if (tran.getStatus() == AbstractTransformation.NOT_TESTED) {
                 tran.setStatus(status);
@@ -176,7 +179,6 @@ public class Diversify extends AbstractDiversify {
                 }
             }
         }
-        if (status == 0) { copySosieProgram(trans); }
     }
 
     protected RunResults buildRunResult(Collection<Transformation> trans, int status) {
@@ -212,6 +214,11 @@ public class Diversify extends AbstractDiversify {
                         inputConfiguration.getProperty("testSrc"), destPath);
                 instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
             }
+            FileWriter writer = new FileWriter(destPath+"/trans.json");
+            for(Transformation t : trans) {
+                    writer.write(t.toJSONObject().toString()+"\n");
+            }
+            writer.close();
         }
     }
 

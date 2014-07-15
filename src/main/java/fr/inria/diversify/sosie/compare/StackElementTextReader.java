@@ -69,7 +69,7 @@ public class StackElementTextReader extends StackElementReader {
                                 testToExclude.add(test);
                                 trace = traceByTest.get(test);
                             } else {
-//                                Log.debug("New test: {}",test);
+
                                 trace = new LinkedList<>();
                                 traceByTest.put(test, trace);
                             }

@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Simon on 03/07/14.
@@ -54,7 +55,7 @@ public class Report {
         return buildAllTest().summary();
     }
 
-    protected TestReport buildAllTest() {
+    public TestReport buildAllTest() {
         TestReport allTest = null;
         for (TestReport report : testReports.values()) {
             if(allTest == null) {
@@ -94,6 +95,4 @@ public class Report {
                      .mapToInt(entry -> entry.getValue().size())
                      .sum();
     }
-
-
 }

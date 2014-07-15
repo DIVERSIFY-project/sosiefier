@@ -10,9 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Simon on 01/07/14.
@@ -20,13 +18,9 @@ import java.util.Map;
 public class ComputeReport {
     String sosieSosieSummary = "";
     String originalSosieSummary = "";
-//    String filterSosieSosieSummary = "";
-//    String filterOriginalSosieSummary = "";
 
-//    Report globalFilterOriginalSosieReport;
     Report globalSosieSosieReport;
     Report globalOriginalSosieReport;
-//    Report globalFilterSosieSosieReport;
     Report originalReport;
 
     String logSosieDirectory;
@@ -39,25 +33,19 @@ public class ComputeReport {
         computeReport.setLogSosieDirectory(args[1]);
         computeReport.setOriginalReport(new Report(computeReport.loadJSON(args[2])));
 
-        computeReport.buildAllReport(new File(sosiesDirectory));
+        computeReport.buildAllReport(new File(sosiesDirectory), new File(sosiesDirectory+"/result"));
         computeReport.writeSummary(resultDirectory);
     }
 
     public void writeSummary(String directory) throws IOException, JSONException {
         sosieSosieSummary += "global: \n" + globalSosieSosieReport.summary() + "\n";
         originalSosieSummary += "global: \n" + globalOriginalSosieReport.summary() + "\n";
-//        filterOriginalSosieSummary += "global: \n" + globalFilterOriginalSosieReport.summary() + "\n";
-//        filterSosieSosieSummary += "global: \n" + globalFilterSosieSosieReport.summary() + "\n";
 
         Log.info("globalSosieSosieReport: ");
         Log.info( globalSosieSosieReport.summary2());
         Log.info("globalOriginalSosieReport: ");
         Log.info( globalOriginalSosieReport.summary2());
         Log.info("globalFilterOriginalSosieReport: ");
-//        Log.info( globalFilterOriginalSosieReport.summary2());
-//        Log.info("globalFilterSosieSosieReport: ");
-//        Log.info( globalFilterSosieSosieReport.summary2());
-
 
         File file = new File(directory + "sosieSosieSummary");
         file.createNewFile();
@@ -71,18 +59,6 @@ public class ComputeReport {
         writer.write(originalSosieSummary);
         writer.close();
 
-//        file = new File(directory + "filterOriginalSosieSummary");
-//        file.createNewFile();
-//        writer = new FileWriter(file);
-//        writer.write(filterOriginalSosieSummary);
-//        writer.close();
-//
-//        file = new File(directory + "filterSosieSosieSummary");
-//        file.createNewFile();
-//        writer = new FileWriter(file);
-//        writer.write(filterSosieSosieSummary);
-//        writer.close();
-
         file = new File(directory + "_sosieSosie_Report.json");
         file.createNewFile();
         writer = new FileWriter(file);
@@ -94,12 +70,14 @@ public class ComputeReport {
         writer = new FileWriter(file);
 
         globalOriginalSosieReport.toJSON().write(writer);
+
+        writeCSVReport(originalReport.buildAllTest(),
+                       globalSosieSosieReport.buildAllTest(),
+                       directory + "/globalReport.csv");
         writer.close();
-
-
     }
 
-    public void buildAllReport(File sosiesDir) {
+    public void buildAllReport(File sosiesDir, File resultDir) throws IOException {
         for(File sosie : sosiesDir.listFiles()) {
             if(sosie.isDirectory()) {
                 try {
@@ -114,20 +92,19 @@ public class ComputeReport {
                     if(sosieSosieReport.size() > originalReport.size()/2
                             && originalSosieReport.size() > originalReport.size()/2) {
 
+//                        FileWriter file = new FileWriter(sosiesDir.getAbsolutePath() + "/" + sosie.getName() + ".json");
+//                        file.write(originalSosieReport.toJSON().toString());
+//                        file.close();
+                        writeCSVReport(originalReport.buildAllTest(),
+                                       originalSosieReport.buildAllTest(),
+                                       resultDir.getAbsolutePath() + "/" + sosie.getName()+ ".csv");
+
+
                         sosieSosieSummary += sosie.getName() + ": \n" + sosieSosieReport.summary() + "\n";
                         globalSosieSosieReport = updateGlobalReport(globalSosieSosieReport, sosieSosieReport);
 
                         originalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
                         globalOriginalSosieReport = updateGlobalReport(globalOriginalSosieReport, originalSosieReport);
-
-//                        originalSosieReport.filter(sosieSosieReport);
-//                        originalSosieReport.filter(originalReport);
-//                        filterOriginalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
-//                        globalFilterOriginalSosieReport = updateGlobalReport(globalFilterOriginalSosieReport, originalSosieReport);
-//
-//                        sosieSosieReport.filter(originalReport);
-//                        filterSosieSosieSummary += sosie.getName() + ": \n" + sosieSosieReport.summary() + "\n";
-//                        globalFilterSosieSosieReport = updateGlobalReport(globalFilterSosieSosieReport, sosieSosieReport);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -151,7 +128,6 @@ public class ComputeReport {
         if(withSosie) {
             reports = buildReportFor(programDirectory, logSosieDirectory);
         } else {
-//            File originalLodDir = new File(programDirectory.getAbsolutePath()+"/log");
             File newLodDir = new File(programDirectory.getAbsolutePath()+"/oldLog");
             File originalLodDir = new File(makeLogFor(programDirectory));
             moveLogFile(newLodDir,originalLodDir);
@@ -161,7 +137,6 @@ public class ComputeReport {
     }
 
     protected Report buildReportFor(File programDirectory, String sosieLogDir) throws Exception {
-//         = programDirectory.getAbsolutePath()+"/log";
         int oldSize = 1;
         int newSize;
 
@@ -170,7 +145,7 @@ public class ComputeReport {
         CompareAllStackTrace un = new CompareAllStackTrace(originalLodDir, sosieLogDir, null);
         un.findDiff();
         Report report = un.getReport();
-//        Log.debug(report.summary());
+
         newSize = report.size();
 
         while(oldSize != newSize) {
@@ -278,4 +253,28 @@ public class ComputeReport {
         }
         return new JSONObject(sb.toString());
     }
+
+    protected void writeCSVReport(TestReport o, TestReport so, String fileName) throws IOException {
+        FileWriter writer = new FileWriter(fileName);
+
+        Map<String, String> oPoint = o.pointReport();
+        Map<String, Integer> oExec = o.getNbOfExec();
+        Map<String, String> soPoint = so.pointReport();
+        Map<String, Integer> soExec = so.getNbOfExec();
+        Set<String> allPoint = new HashSet();
+        allPoint.addAll(oPoint.keySet());
+        allPoint.addAll(soPoint.keySet());
+
+        writer.write("point;original;originalExec;diff;sosieExec\n");
+        for(String point : allPoint) {
+            writer.write(point + ";");
+            writer.write(oPoint.get(point)+";");
+            writer.write(oExec.get(point)+";");
+
+            writer.write(soPoint.get(point)+";");
+            writer.write(soExec.get(point)+"\n");
+        }
+        writer.close();
+    }
+
 }

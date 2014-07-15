@@ -25,7 +25,7 @@ public class ComputeReportForClient extends ComputeReport{
 
         computeReport.setOriginalReport(new Report(computeReport.loadJSON(args[3])));
 
-        computeReport.buildAllReport(new File(sosiesDirectory));
+        computeReport.buildAllReport(new File(sosiesDirectory), new File(resultDirectory+"/result"));
         computeReport.writeSummary(resultDirectory);
     }
 
