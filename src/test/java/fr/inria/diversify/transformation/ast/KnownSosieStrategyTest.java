@@ -14,6 +14,7 @@ import java.util.Collection;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by marcel on 8/06/14.
@@ -54,11 +55,11 @@ public class KnownSosieStrategyTest {
     }
 
     /**
-     * Test the sharing of transformations
+     * Test that the transformations are taken without reposition
      * @throws Exception
      */
     @Test
-    public void testMultipleQuery() throws Exception {
+    public void testMultipleQueryWithoutReposition() throws Exception {
         //Set the amount of points we must find
         KnownSosieQuery st = new KnownSosieQuery(inputProgram, sosies);
 
@@ -82,4 +83,65 @@ public class KnownSosieStrategyTest {
         assertFalse(s3.equals(s2));
     }
 
+
+    /**
+     * Test that the transformations are taken incrementally, simple case
+     * @throws Exception
+     */
+    @Test
+    public void testIncrementalMultiSosieQuery() throws Exception {
+        //Set the amount of points we must find
+        KnownSosieQuery st = new KnownSosieQuery(inputProgram, sosies);
+
+        //Query three times
+        inputProgram.setTransformationPerRun(5);
+        st.query();
+        Collection<Transformation> cf1 = st.getTransformations();
+        inputProgram.setTransformationPerRun(6);
+        st.query();
+        Collection<Transformation> cf2 = st.getTransformations();
+        inputProgram.setTransformationPerRun(5);
+
+        String s1 = "";
+        String s2 = "";
+        for ( Transformation t : cf1 ) { s1 += t.toString(); }
+        for ( Transformation t : cf2 ) { s2 += t.toString(); }
+        assertTrue(s2.contains(s1));
+    }
+
+    /**
+     * Test that the transformations are taken incrementally
+     * @throws Exception
+     */
+    @Test
+    public void testIncrementalMultiSosieQuery2() throws Exception {
+        //Set the amount of points we must find
+        KnownSosieQuery st = new KnownSosieQuery(inputProgram, sosies);
+
+        //Query three times
+        inputProgram.setTransformationPerRun(5);
+        st.query();
+        Collection<Transformation> cf51 = st.getTransformations();
+        st.query();
+        Collection<Transformation> cf52 = st.getTransformations();
+
+        inputProgram.setTransformationPerRun(6);
+        st.query();
+        Collection<Transformation> cf62 = st.getTransformations();
+        st.query();
+        Collection<Transformation> cf61 = st.getTransformations();
+        inputProgram.setTransformationPerRun(5);
+
+        String s51 = "";
+        String s52 = "";
+        String s61 = "";
+        String s62 = "";
+        for ( Transformation t : cf51 ) { s51 += t.toString(); }
+        for ( Transformation t : cf52 ) { s52 += t.toString(); }
+        for ( Transformation t : cf61 ) { s61 += t.toString(); }
+        for ( Transformation t : cf62 ) { s62 += t.toString(); }
+
+        assertTrue(s62.contains(s52));
+        assertTrue(s61.contains(s51));
+    }
 }

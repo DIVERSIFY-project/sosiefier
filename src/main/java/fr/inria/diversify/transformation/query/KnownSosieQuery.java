@@ -25,13 +25,25 @@ public class KnownSosieQuery extends TransformationQuery {
 
     private ArrayList<Transformation> sosies;
 
-    private boolean findTransplants;
+    //Indicates if the sosies are build with the previous query
+    private boolean incrementalSosiefication = true;
 
+    /**
+     * Sosies found in the last session
+     */
+    //protected ArrayList<Transformation> lastSessionSosies;
+
+    //Last multisosie found
+    protected TransformationFound prevMultiSosieFound = null;
+
+    //Last size of transformation elements we where ask to query for.
+    protected int lastTransfSizeNOfElems = 0;
 
 
     public KnownSosieQuery(InputProgram inputProgram, ArrayList<Transformation> transf) {
         super(inputProgram);
         extractSosies(transf);
+        //lastSessionSosies = new ArrayList<>();
     }
 
     public KnownSosieQuery(InputProgram inputProgram) throws TransformationParserException {
@@ -45,10 +57,12 @@ public class KnownSosieQuery extends TransformationQuery {
             ts = parser.parseFile(f);
         }
         extractSosies(ts);
+        //lastSessionSosies = new ArrayList<>();
     }
 
     /**
      * Extracts the sosies from a transformation list
+     *
      * @param transf
      */
     private void extractSosies(Collection<Transformation> transf) {
@@ -59,7 +73,6 @@ public class KnownSosieQuery extends TransformationQuery {
             }
         }
     }
-
 
 
     @Override
@@ -79,26 +92,47 @@ public class KnownSosieQuery extends TransformationQuery {
             z--;
             long preMax = max * z;
             //Avoid overflow
-            if ( preMax < 0 ) return Long.MAX_VALUE;
+            if (preMax < 0) return Long.MAX_VALUE;
             max = preMax;
         }
 
         z = nb;
-        for ( int i = nb; i > 1; i-- ) {
+        for (int i = nb; i > 1; i--) {
             nb--;
             z = z * nb;
         }
-        return max/z;
+        return max / z;
     }
 
     @Override
     public List<Transformation> query(int nb) {
 
         transformations = new ArrayList();
+        Integer[] indexes = new Integer[nb];
+
+        if (incrementalSosiefication && prevMultiSosieFound != null) {
+            ArrayList<Integer> tf = null;
+            if (lastTransfSizeNOfElems != nb) {
+                //This means that we have changed the transformation size and therefore we must use
+                //the previously found multisosie as the parent of the current transformation
+                tf = prevMultiSosieFound.transformation;
+            } else if (prevMultiSosieFound.parent != null) {
+                //On the other hand we may continue creating multisosies incrementing an existing one
+                tf = prevMultiSosieFound.parent.previous.transformation;
+            }
+            //Copy the parent transformations and index in the pool of transformations
+            if (tf != null) {
+                for (int i = 0; i < tf.size(); i++) {
+                    transformations.add(getSosies().get(tf.get(i)));
+                    indexes[i] = tf.get(i);
+                }
+            }
+        }
 
         Random r = new Random();
 
         if (nb > getSosies().size()) nb = getSosies().size();
+
         long maxTransfNumbers = maxNumberOfTransformations(nb);
 
         int transAttempts = 0;
@@ -106,26 +140,39 @@ public class KnownSosieQuery extends TransformationQuery {
         boolean found = true;
 
         //Try several times searching for a transformation we haven't found before.
-        Integer[] indexes = new Integer[nb];
         while (found && transAttempts < maxTransfNumbers) {
             int attempts = 0;
-            int i = 0;
-            Arrays.fill(indexes,-1);
+            ArrayList<Transformation> tf = new ArrayList<>(transformations);
+            int i = tf.size();
+            Arrays.fill(indexes, tf.size(), indexes.length, -1);
+
             //Build the transformation
-            while (transformations.size() < nb && attempts < getSosies().size()) {
+            while (tf.size() < nb && attempts < getSosies().size()) {
                 int index = r.nextInt(getSosies().size());
                 Transformation t = getSosies().get(index);
                 if (canBeMerged(t)) {
                     indexes[i] = index;
                     i++;
-                    transformations.add(t);
+                    tf.add(t);
                 }
                 attempts++;
             }
 
             //See if the transformation was already found
-            found = alreadyFound(indexes);
-
+            found = alreadyFound(nb, prevMultiSosieFound);
+            if (!found) {
+                //Linking list mechanism to know the parent of a multisosie
+                if (prevMultiSosieFound == null) {
+                    prevMultiSosieFound = new TransformationFound(indexes, null, null);
+                } else if (lastTransfSizeNOfElems != nb) {
+                    prevMultiSosieFound = new TransformationFound(indexes, prevMultiSosieFound, null);
+                } else if ( prevMultiSosieFound.parent == null ) {
+                    prevMultiSosieFound = new TransformationFound(indexes, null, prevMultiSosieFound);
+                } else {
+                    prevMultiSosieFound = new TransformationFound(indexes, prevMultiSosieFound.parent.previous, prevMultiSosieFound);
+                }
+                transformations = tf;
+            }
             transAttempts++;
         }
 
@@ -133,13 +180,14 @@ public class KnownSosieQuery extends TransformationQuery {
             throw new MaxNumberOfAttemptsReach(maxTransfNumbers, transAttempts);
         }
 
+        lastTransfSizeNOfElems = nb;
+
         return transformations;
     }
 
 
-
     /**
-     * Indicates if the trasnformation can be merged with the current ones
+     * Indicates if the transformation can be merged with the current ones
      *
      * @param t
      * @return
@@ -157,4 +205,14 @@ public class KnownSosieQuery extends TransformationQuery {
         return result;
     }
 
+    /**
+     * Uses sosies from previous runs
+     */
+    public boolean getIncrementalSosiefication() {
+        return incrementalSosiefication;
+    }
+
+    public void setIncrementalSosiefication(boolean incrementalSosiefication) {
+        this.incrementalSosiefication = incrementalSosiefication;
+    }
 }

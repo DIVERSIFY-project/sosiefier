@@ -91,7 +91,7 @@ public class DiversifyMain {
 
             //Clear the found transformations for the next step to speed up. No needed since the new ones are going
             //to be of different size and therefore different
-            query.clearTransformationFounds();
+            //query.clearTransformationFounds();
 
             String repo = DiversifyProperties.getProperty("gitRepository");
             if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));

@@ -83,32 +83,59 @@ public class MavenOutputParserTest {
         Assert.assertEquals(-2, parser.parse(lines));
     }
 
+    public void testParseTest(String fileName, String[] failed) throws Exception {
+        MavenOutputParser parser = new MavenOutputParser();
+        String[] lines = readFile(getResourcePath(fileName));
+        Assert.assertEquals(-1, parser.parse(lines));
+        Assert.assertTrue(failed.length <= parser.getFailedTests().size());
+        for (int i = 0; i < failed.length; i++) {
+            Assert.assertTrue(parser.getFailedTests().get(i).contains(failed[i]));
+        }
+    }
+
+
     @Test
     public void testParseTestFail1() throws Exception {
-        MavenOutputParser parser = new MavenOutputParser();
-        String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput1.txt"));
-        Assert.assertEquals(-1, parser.parse(lines));
+        String[] failed = {"testEquivalence", "testNonEquivalentAnnotationsOfSameType"};
+        try {
+            testParseTest("maven outputs/test failed/1_buidOutput1.txt", failed);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Test
     public void testParseTestFail2() throws Exception {
-        MavenOutputParser parser = new MavenOutputParser();
-        String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput2.txt"));
-        Assert.assertEquals(-1, parser.parse(lines));
+        String[] failed = {"testGetPublicMethod"};
+        try {
+            testParseTest("maven outputs/test failed/1_buidOutput2.txt", failed);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Test
     public void testParseTestFail7() throws Exception {
-        MavenOutputParser parser = new MavenOutputParser();
-        String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput7.txt"));
-        Assert.assertEquals(-1, parser.parse(lines));
+        String[] failed = {
+                "test_getInstance", "test_changeDefault_Locale_DateInstance",
+                "testTimeDateDefaults", "testDateDefaults", "testCheckDefaults",
+                "testCheckDifferingStyles", "test_changeDefault_Locale_DateTimeInstance", "testTimeDefaults",
+                "testShortDateStyleWithLocales"};
+        try {
+            testParseTest("maven outputs/test failed/1_buidOutput7.txt", failed);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Test
     public void testParseTestFail16() throws Exception {
-        MavenOutputParser parser = new MavenOutputParser();
-        String[] lines = readFile(getResourcePath("maven outputs/test failed/1_buidOutput16.txt"));
-        Assert.assertEquals(-1, parser.parse(lines));
+        String[] failed = {"testGetPublicMethod"};
+        try {
+            testParseTest("maven outputs/test failed/1_buidOutput16.txt", failed);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Test

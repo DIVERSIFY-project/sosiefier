@@ -55,8 +55,8 @@ public class MavenOutputParser {
      */
     public int parse(String[] output) {
 
-        Pattern pattern = Pattern.compile("Tests run:\\s*(\\d+),\\s*Failures:\\s*(\\d+),\\s*Errors:\\s*(\\d+),\\s*Skipped:\\s*(\\d+)");
-        Pattern errorPattern = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
+        Pattern testResumePattern = Pattern.compile("Tests run:\\s*(\\d+),\\s*Failures:\\s*(\\d+),\\s*Errors:\\s*(\\d+),\\s*Skipped:\\s*(\\d+)");
+        Pattern failedTest = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
 
         boolean buildFailure = false;
 
@@ -70,17 +70,16 @@ public class MavenOutputParser {
         for (int i = 0; i < output.length && getCompileError() == false; i++) {
             String s = output[i];
 
-            Matcher m = pattern.matcher(s);
+            Matcher m = testResumePattern.matcher(s);
             boolean matches = m.find();
             if (matches) {
                 testRuns += Integer.parseInt(m.group(1));
                 testFail += Integer.parseInt(m.group(2)) + Integer.parseInt(m.group(3));
-                failedTest.add(s);
             } else {
-                m = errorPattern.matcher(s);
+                m = failedTest.matcher(s);
                 matches = m.find();
                 if ( matches ) {
-                    compilationErrors.add(s);
+                    this.failedTest.add(s);
                 }
             }
 
@@ -96,23 +95,9 @@ public class MavenOutputParser {
             }
         }
 
-        //We assume that if no explicit Build succes message was issue something really wrong happened
+        //We assume that if no explicit Build success message was issue something really wrong happened
         if ( status == -3 ) status = -2;
 
-        /*
-        if (getCompileError() || (buildFailure && testRuns == 0) || status == -3) {
-            status = -2;
-        } else if (buildFailure || testFail > 0) {
-            status = -1;
-        } else {
-            status = 0;
-        }
-        */
-        //For now just get the status. We will collect the erros later
-        /*
-        if (getAcceptedErrors().containsAll(getTestFail()) && testFail == 0)
-            status = 0;
-        */
         return status;
     }
 
