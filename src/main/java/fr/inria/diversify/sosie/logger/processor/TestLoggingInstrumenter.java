@@ -1,7 +1,5 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.util.Log;
-import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
@@ -49,7 +47,6 @@ public class TestLoggingInstrumenter extends AbstractLogginInstrumenter<CtMethod
 
     @Override
     public void process(CtMethod element) {
-        Log.info(element.getDeclaringType().getQualifiedName()+" "+element.getSignature());
         CtStatement firstStmt = element.getBody().getStatement(0);
         String snippet = "\t\t"+
                 getLogName()+ ".writeTestStart(Thread.currentThread(),\""

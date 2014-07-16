@@ -11,7 +11,7 @@ import java.io.File;
 /**
  * Created by Simon on 01/07/14.
  */
-public class ComputeReportForClient extends ComputeReport{
+public class ComputeReportForClient extends ComputeReport {
     protected File installToRemove;
     protected File client;
 
@@ -25,7 +25,7 @@ public class ComputeReportForClient extends ComputeReport{
 
         computeReport.setOriginalReport(new Report(computeReport.loadJSON(args[3])));
 
-        computeReport.buildAllReport(new File(sosiesDirectory), new File(resultDirectory+"/result"));
+        computeReport.buildAllReport(new File(sosiesDirectory), new File(resultDirectory));
         computeReport.writeSummary(resultDirectory);
     }
 

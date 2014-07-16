@@ -33,7 +33,7 @@ public class ComputeReport {
         computeReport.setLogSosieDirectory(args[1]);
         computeReport.setOriginalReport(new Report(computeReport.loadJSON(args[2])));
 
-        computeReport.buildAllReport(new File(sosiesDirectory), new File(sosiesDirectory+"/result"));
+        computeReport.buildAllReport(new File(sosiesDirectory), new File(resultDirectory));
         computeReport.writeSummary(resultDirectory);
     }
 
