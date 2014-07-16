@@ -17,6 +17,8 @@ import java.util.*;
  */
 public class KnownSosieQuery extends TransformationQuery {
 
+
+
     /**
      * An small helper class to order sosies by their coverage
      */
@@ -25,6 +27,7 @@ public class KnownSosieQuery extends TransformationQuery {
         private Transformation transformation;
         public SosieWithCoverage(Transformation t) {
             this.transformation = t;
+            coverage = new ArrayList<>();
         }
     }
 
@@ -89,16 +92,21 @@ public class KnownSosieQuery extends TransformationQuery {
                 }
             }
         }
-
-        Collections.sort(sosies, (o1, o2) -> {
-            int sizeDiff = o1.coverage.size() - o2.coverage.size();
-            if ( sizeDiff == 0 ) {
-                int i = 0;
-                while ( i < o1.coverage.size() && o1.coverage.get(i) - o1.coverage.get(i) == 0 ) { i++; }
-                return o1.coverage.get(i) - o1.coverage.get(i);
-            }
-            return  sizeDiff;
-        });
+        //Order the sosies from less covered to more covered. This way we increases the chances that an uniformly
+        //distributed selection covers most of the clients
+        if (coverageReport != null) {
+            Collections.sort(sosies, (o1, o2) -> {
+                int sizeDiff = o1.coverage.size() - o2.coverage.size();
+                if (sizeDiff == 0) {
+                    int i = 0;
+                    while (i < o1.coverage.size() && o1.coverage.get(i) - o1.coverage.get(i) == 0) {
+                        i++;
+                    }
+                    return o1.coverage.get(i) - o1.coverage.get(i);
+                }
+                return sizeDiff;
+            });
+        }
     }
 
     @Override
@@ -135,6 +143,7 @@ public class KnownSosieQuery extends TransformationQuery {
         transformations = new ArrayList();
         Integer[] indexes = new Integer[nb];
 
+        //Create the linked list data structure to allow incremental multisosies
         if (incrementalSosiefication && prevMultiSosieFound != null) {
             ArrayList<Integer> tf = null;
             if (lastTransfSizeNOfElems != nb) {
@@ -156,6 +165,7 @@ public class KnownSosieQuery extends TransformationQuery {
 
         Random r = new Random();
 
+        //Don't create a sosie bigger than the sosie pool duh!
         if (nb > sosies.size()) nb = sosies.size();
 
         long maxTransfNumbers = maxNumberOfTransformations(nb);
@@ -166,6 +176,7 @@ public class KnownSosieQuery extends TransformationQuery {
 
         //Try several times searching for a transformation we haven't found before.
         while (found && transAttempts < maxTransfNumbers) {
+
             int attempts = 0;
             ArrayList<Transformation> tf = new ArrayList<>(transformations);
             int i = tf.size();
@@ -239,5 +250,17 @@ public class KnownSosieQuery extends TransformationQuery {
 
     public void setIncrementalSosiefication(boolean incrementalSosiefication) {
         this.incrementalSosiefication = incrementalSosiefication;
+    }
+
+    /**
+     * Returns the sosies found from the pool of transformations
+     * @return
+     */
+    public ArrayList<Transformation> getSosies() {
+        ArrayList<Transformation> result = new ArrayList<>();
+        for ( SosieWithCoverage s: sosies) {
+            result.add(s.transformation);
+        }
+        return result;
     }
 }
