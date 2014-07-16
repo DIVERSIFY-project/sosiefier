@@ -15,7 +15,9 @@ import java.util.List;
  * Time: 1:21 PM
  */
 public class MultiCoverageReport implements ICoverageReport {
+
     protected List<CoverageReport> coverages;
+
     protected String classesDir;
 
     public MultiCoverageReport(String classesDir) {
@@ -68,5 +70,16 @@ public class MultiCoverageReport implements ICoverageReport {
             ret = Math.max(ret, cr.elementCoverage(operator));
         }
         return ret;
+    }
+
+    @Override
+    public List<Integer> getCoverageDistribution(CodeFragment stmt) {
+        ArrayList<Integer> result = new ArrayList<>(coverages.size());
+        int i = 0;
+        for (CoverageReport cr : coverages) {
+            result.set(i, cr.codeFragmentCoverage(stmt) > 0 ? 1 : 0);
+            i++;
+        }
+        return result;
     }
 }

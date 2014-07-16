@@ -18,7 +18,6 @@ import java.util.*;
 public abstract class TransformationQuery {
 
 
-
     protected class TransformationFound {
         //Transformation that this transformation increments.
         //A parent transformation of {1, 2, 3} is for example {1, 2}, {1, 3} or {2, 3}
@@ -66,9 +65,6 @@ public abstract class TransformationQuery {
         }
 
     }
-
-    //The code coverage that we have for the current project
-    private ArrayList<CoverageSourcePosition> codeCoverage;
 
     protected HashMap<Integer, HashSet<TransformationFound>> transformationFounds;
 
@@ -165,15 +161,4 @@ public abstract class TransformationQuery {
         return inputProgram;
     }
 
-
-    /**
-     * The code coverage that we have for the current project
-     */
-    public ArrayList<CoverageSourcePosition> getCodeCoverage() {
-        return codeCoverage;
-    }
-
-    public void setCodeCoverage(ArrayList<CoverageSourcePosition> codeCoverage) {
-        this.codeCoverage = codeCoverage;
-    }
 }

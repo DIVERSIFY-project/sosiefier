@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
+import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
@@ -17,21 +18,27 @@ import java.util.*;
 public class KnownSosieQuery extends TransformationQuery {
 
     /**
-     * Previous sosies found.
+     * An small helper class to order sosies by their coverage
      */
-    public ArrayList<Transformation> getSosies() {
-        return sosies;
+    private class SosieWithCoverage {
+        private List<Integer> coverage;
+        private Transformation transformation;
+        public SosieWithCoverage(Transformation t) {
+            this.transformation = t;
+        }
     }
 
-    private ArrayList<Transformation> sosies;
-
-    //Indicates if the sosies are build with the previous query
-    private boolean incrementalSosiefication = true;
-
     /**
-     * Sosies found in the last session
+     * Sosies found from the transformation pool passed as paramethers.
      */
-    //protected ArrayList<Transformation> lastSessionSosies;
+    protected Transformation getSosies(int index) {
+        return sosies.get(index).transformation;
+    }
+
+    private ArrayList<SosieWithCoverage> sosies;
+
+    //Indicates if the multi-sosies are build incrementing a the previously found smaller multi-sosie
+    private boolean incrementalSosiefication = true;
 
     //Last multisosie found
     protected TransformationFound prevMultiSosieFound = null;
@@ -43,7 +50,6 @@ public class KnownSosieQuery extends TransformationQuery {
     public KnownSosieQuery(InputProgram inputProgram, ArrayList<Transformation> transf) {
         super(inputProgram);
         extractSosies(transf);
-        //lastSessionSosies = new ArrayList<>();
     }
 
     public KnownSosieQuery(InputProgram inputProgram) throws TransformationParserException {
@@ -57,36 +63,55 @@ public class KnownSosieQuery extends TransformationQuery {
             ts = parser.parseFile(f);
         }
         extractSosies(ts);
-        //lastSessionSosies = new ArrayList<>();
     }
 
     /**
-     * Extracts the sosies from a transformation list
+     * Extracts the sosies from a transformation list. This method also extract the coverage report and sorts
+     * the sosies by their coverage
      *
      * @param transf
      */
     private void extractSosies(Collection<Transformation> transf) {
+
+        ICoverageReport coverageReport = getInputProgram().getCoverageReport();
+
         sosies = new ArrayList<>();
+
         for (Transformation t : transf) {
             if (t.isSosie()) {
-                sosies.add(t);
+                SosieWithCoverage c = new SosieWithCoverage(t);
+                sosies.add(c);
+                if (coverageReport != null) {
+                    //Distribution of this transformation transplant point
+                    //each client creates a jacoco file, each one is assigned an index
+                    c.coverage = coverageReport.getCoverageDistribution(((ASTTransformation) t).getTransplantationPoint());
+                    Collections.sort(c.coverage);
+                }
             }
         }
-    }
 
+        Collections.sort(sosies, (o1, o2) -> {
+            int sizeDiff = o1.coverage.size() - o2.coverage.size();
+            if ( sizeDiff == 0 ) {
+                int i = 0;
+                while ( i < o1.coverage.size() && o1.coverage.get(i) - o1.coverage.get(i) == 0 ) { i++; }
+                return o1.coverage.get(i) - o1.coverage.get(i);
+            }
+            return  sizeDiff;
+        });
+    }
 
     @Override
     public void setType(String type) {
 
     }
 
-
     /**
      * Estimate the max number of multisosie transformations
      */
     private long maxNumberOfTransformations(int nb) {
 
-        long z = getSosies().size();
+        long z = sosies.size();
         long max = z;
         for (int i = 0; i < nb - 1; i++) {
             z--;
@@ -123,7 +148,7 @@ public class KnownSosieQuery extends TransformationQuery {
             //Copy the parent transformations and index in the pool of transformations
             if (tf != null) {
                 for (int i = 0; i < tf.size(); i++) {
-                    transformations.add(getSosies().get(tf.get(i)));
+                    transformations.add(getSosies(tf.get(i)));
                     indexes[i] = tf.get(i);
                 }
             }
@@ -131,7 +156,7 @@ public class KnownSosieQuery extends TransformationQuery {
 
         Random r = new Random();
 
-        if (nb > getSosies().size()) nb = getSosies().size();
+        if (nb > sosies.size()) nb = sosies.size();
 
         long maxTransfNumbers = maxNumberOfTransformations(nb);
 
@@ -147,9 +172,9 @@ public class KnownSosieQuery extends TransformationQuery {
             Arrays.fill(indexes, tf.size(), indexes.length, -1);
 
             //Build the transformation
-            while (tf.size() < nb && attempts < getSosies().size()) {
-                int index = r.nextInt(getSosies().size());
-                Transformation t = getSosies().get(index);
+            while (tf.size() < nb && attempts < sosies.size()) {
+                int index = r.nextInt(sosies.size());
+                Transformation t = getSosies(index);
                 if (canBeMerged(t)) {
                     indexes[i] = index;
                     i++;
@@ -166,7 +191,7 @@ public class KnownSosieQuery extends TransformationQuery {
                     prevMultiSosieFound = new TransformationFound(indexes, null, null);
                 } else if (lastTransfSizeNOfElems != nb) {
                     prevMultiSosieFound = new TransformationFound(indexes, prevMultiSosieFound, null);
-                } else if ( prevMultiSosieFound.parent == null ) {
+                } else if (prevMultiSosieFound.parent == null) {
                     prevMultiSosieFound = new TransformationFound(indexes, null, prevMultiSosieFound);
                 } else {
                     prevMultiSosieFound = new TransformationFound(indexes, prevMultiSosieFound.parent.previous, prevMultiSosieFound);

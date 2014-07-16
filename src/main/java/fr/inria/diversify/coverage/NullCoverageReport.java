@@ -5,6 +5,8 @@ import javassist.CtMethod;
 import spoon.reflect.declaration.CtElement;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Simon
@@ -29,4 +31,11 @@ public class NullCoverageReport implements ICoverageReport {
     public double elementCoverage(CtElement operator) {
         return 1;
     }
+
+    @Override
+    public List<Integer> getCoverageDistribution(CodeFragment stmt) {
+        return new ArrayList<>();
+    }
+
+
 }
