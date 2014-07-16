@@ -70,6 +70,7 @@ public class Instru {
         }
         if(intruVariable) {
             applyProcessor(factory, new VariableLoggingInstrumenter());
+//            applyProcessor(factory, new FieldUsedInstrumenter());
         }
         if(intruError) {
             applyProcessor(factory, new ErrorLoggingInstrumenter());

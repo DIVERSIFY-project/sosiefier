@@ -42,7 +42,7 @@ public class MethodLoggingInstrumenter extends AbstractLogginInstrumenter<CtMeth
     public void process(CtMethod candidate) {
         CtBlock body = candidate.getBody();
         CtStatement stmt = body.getStatement(0);
-        String id =  VariableLoggingInstrumenter.idFor(getClass(stmt).getQualifiedName() + "." + candidate.getSignature());
+        String id = idFor(getClass(stmt).getQualifiedName() + "." + candidate.getSignature());
 
         String snippet = "\ttry{\n\t"+ getLogName() + ".methodCall(Thread.currentThread(),\"" +
                 id + "\");\n";
