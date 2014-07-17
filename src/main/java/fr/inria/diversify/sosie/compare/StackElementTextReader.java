@@ -1,7 +1,5 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.compare.stackElement.*;
-import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 
@@ -47,8 +45,8 @@ public class StackElementTextReader extends StackElementReader {
 
 
     protected Map<String, List<String>> splitByTest(File file) throws Exception {
-        Map<String, List<String>> traceByTest = new HashMap<>();
-        Set<String> testToExclude = new HashSet<>();
+        Map<String, List<String>> traceByTest = new HashMap();
+        Set<String> testToExclude = new HashSet();
         BufferedReader reader = new BufferedReader(new FileReader(file));
         reader.readLine();
         String line = reader.readLine();
@@ -57,8 +55,9 @@ public class StackElementTextReader extends StackElementReader {
         if(line == null)
             throw new Exception("empty file");
 
-        List<String> trace = new LinkedList<>();
+        List<String> trace = new LinkedList();
         traceByTest.put("null",trace);
+        testToExclude.add("null");
         while (line != null) {
             if(!line.isEmpty()) {
                 if(line.endsWith("$$$")) {
@@ -69,8 +68,7 @@ public class StackElementTextReader extends StackElementReader {
                                 testToExclude.add(test);
                                 trace = traceByTest.get(test);
                             } else {
-
-                                trace = new LinkedList<>();
+                                trace = new LinkedList();
                                 traceByTest.put(test, trace);
                             }
                         } else {

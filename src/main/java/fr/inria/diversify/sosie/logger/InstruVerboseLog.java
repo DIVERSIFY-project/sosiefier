@@ -1,8 +1,11 @@
 package fr.inria.diversify.sosie.logger;
 
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -22,8 +25,11 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     public InstruVerboseLog(String logDir) {
         super(logDir);
-        previousVarLog = new HashMap<Thread, String>();
-        fileWriters = new HashMap<Thread, PrintWriter>();
+        previousVarLog = new HashMap<Thread, Set<String>>();
+        fileWriters  = new HashMap<Thread, PrintWriter>();
+        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+        System.out.println("new logger: "+  pid+ ", "+Thread.currentThread() + ", "+ Thread.currentThread().hashCode());
+        System.out.println("fileWriters: "+  fileWriters);
     }
 
     public void methodCall(Thread thread, String methodSignatureId) {
@@ -128,18 +134,18 @@ public class InstruVerboseLog extends InstruLogWriter {
 
                 String varsString = buildVars(thread, separator, simpleSeparator, var);
 
-                if (varsString.equals(previousVarLog.get(thread))) {
-                    string.append(separator);
-                    string.append("P");
-                } else {
+//                if (varsString.equals(previousVarLog.get(thread))) {
+////                    string.append(separator);
+////                    string.append("P");
+//                    return;
+//                } else {
                     string.append(varsString);
-                    previousVarLog.put(thread, varsString);
-                }
+//                    previousVarLog.put(thread, varsString);
+//                }
                 startLogMethod(thread);
                 PrintWriter fileWriter = getFileWriter(thread);
                 semaphore = fileWriter.toString() + fileWriter.hashCode();
                 fileWriter.append(string.toString());
-
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -240,15 +246,18 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     protected synchronized PrintWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (!fileWriters.containsKey(thread)) {
-            PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(getThreadLogFilePath(thread))));
+            String fileName = getThreadLogFilePath(thread) + "_" + System.currentTimeMillis();
+            System.out.println("new log file: " + fileName);
+
+            PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
             fileWriters.put(thread, f);
+            previousVarLog.put(thread,new HashSet());
             semaphores.put(f.toString() + f.hashCode(), new Semaphore(1));
         }
         PrintWriter f = fileWriters.get(thread);
         semaphores.get(f.toString() + f.hashCode()).tryAcquire(50, TimeUnit.MILLISECONDS);
         return f;
     }
-
 
 
     protected void releaseFileWriter(String id) {

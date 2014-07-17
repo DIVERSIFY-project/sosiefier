@@ -145,7 +145,7 @@ public class InstruCompactLog extends InstruLogWriter {
         String separator = ":;:";
         String simpleSeparator = ";";
 
-        if ( previousVarLog == null ) { previousVarLog = new HashMap<Thread, String>(); }
+//        if ( previousVarLog == null ) { previousVarLog = new HashMap<Thread, String>(); }
 
         if (getLogMethod(thread)) {
             try {
@@ -162,7 +162,7 @@ public class InstruCompactLog extends InstruLogWriter {
                      !vars.equals(previousVarLog.get(thread)) ) {
                     os.writeUTF(vars);
                 } else {
-                    previousVarLog.put(thread, vars);
+//                    previousVarLog.put(thread, vars);
                     os.writeUTF(separator+"P");
                 }
             } catch (InterruptedException e) {

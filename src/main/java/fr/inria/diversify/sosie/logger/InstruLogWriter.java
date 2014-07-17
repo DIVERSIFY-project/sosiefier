@@ -8,6 +8,7 @@ import fr.inria.diversify.util.Log;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -33,7 +34,7 @@ public abstract class InstruLogWriter {
     protected Map<String, Semaphore> semaphores;
 
     ///Previous logs of variables status. Useful to check whether they have change
-    protected Map<Thread, String> previousVarLog;
+    protected Map<Thread, Set<String>> previousVarLog;
 
     public int getCallDeep(Thread t) {
         return callDeep.containsKey(t) ? callDeep.get(t) : 0;
@@ -199,32 +200,36 @@ public abstract class InstruLogWriter {
         return string;
     }
 
-    protected String buildVars(Thread thread, String separator, String simpleSeparator, Object[] var) {
-        StringBuilder vars = new StringBuilder();
+    protected String buildVars(Thread thread, String separator, String simpleSeparator, Object[] vars) {
+        StringBuilder varsString = new StringBuilder();
         stopLogMethod(thread);
-        for (int i = 0; i < var.length / 2; i = i + 2) {
+        Set<String> previousVar = previousVarLog.get(thread);
+        for (int i = 0; i < vars.length / 2; i = i + 2) {
             StringBuilder tmp = new StringBuilder();
             try {
                 tmp.append(separator);
-                tmp.append(var[i].toString());
+                tmp.append(vars[i].toString());
                 tmp.append(simpleSeparator);
-                if (var[i + 1] == null) {
+                if (vars[i + 1] == null) {
                     tmp.append("null");
                 } else {
                     try {
-                        tmp.append(var[i + 1].toString());
+                        tmp.append(vars[i + 1].toString());
                     } catch (Exception e) {
                         tmp.append("error");
                     }
                 }
-                vars.append(tmp);
+                String varString = tmp.toString();
+                if(!previousVar.contains(varString)) {
+                    varsString.append(varString);
+                    previousVar.add(varString);
+                }
             } catch (Exception e) {
             }
         }
         startLogMethod(thread);
-        return vars.toString();
+        return varsString.toString();
     }
-
 
     public String getLogDir() {
         return logDir;

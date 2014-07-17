@@ -86,9 +86,6 @@ public class CompareAllStackTrace {
         return filtered;
     }
 
-    protected int idMapSize;
-
-
     protected List<StackTrace> loadLog(String dir, boolean recursive) throws IOException {
         return new StackElementTextReader().loadLog(dir, recursive);
     }
