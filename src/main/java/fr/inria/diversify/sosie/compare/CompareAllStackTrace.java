@@ -3,6 +3,7 @@ package fr.inria.diversify.sosie.compare;
 import fr.inria.diversify.sosie.compare.diff.*;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
+import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 
 import java.io.*;
@@ -41,6 +42,7 @@ public class CompareAllStackTrace {
         for (StackTrace original : stackTraces1) {
             for (StackTrace sosie : stackTraces2) {
                 if (sosie.getFullName().equals(original.getFullName())) {
+                    Log.debug("compare: {}",sosie.toString());
                     CompareStackTrace cls = new CompareStackTrace(original, sosie);
                     diffs.addAll(diffOperator.apply(cls));
                     TestReport testReport = cls.getTestReport();

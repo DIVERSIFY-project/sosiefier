@@ -11,7 +11,7 @@ import java.io.FileWriter;
  */
 public class ComputeOriginalReport extends ComputeReport {
     public static void main(String[] args) throws Exception {
-//        Log.DEBUG();
+        Log.DEBUG();
         String originalDirectory = args[0];
         ComputeOriginalReport computeReport = new ComputeOriginalReport();
 

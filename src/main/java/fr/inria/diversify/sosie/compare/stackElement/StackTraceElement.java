@@ -10,7 +10,7 @@ public class StackTraceElement {
     //Method where the stack element was logged
     protected String method;
     //Element id
-    protected Integer id;
+    protected Integer methodId;
 
     public int getOriginalDeep() {
         return originalDeep;
@@ -21,6 +21,6 @@ public class StackTraceElement {
     }
 
     public Integer getId() {
-        return id;
+        return methodId;
     }
 }

@@ -34,7 +34,7 @@ public abstract class InstruLogWriter {
     protected Map<String, Semaphore> semaphores;
 
     ///Previous logs of variables status. Useful to check whether they have change
-    protected Map<Thread, String> previousVarLog;
+    protected Map<Thread, Map<String,String>> previousVarLog;
 
     public int getCallDeep(Thread t) {
         return callDeep.containsKey(t) ? callDeep.get(t) : 0;
@@ -203,18 +203,29 @@ public abstract class InstruLogWriter {
     protected String buildVars(Thread thread, String separator, String simpleSeparator, Object[] vars) {
         StringBuilder varsString = new StringBuilder();
         stopLogMethod(thread);
+        Map<String, String> previousVars = previousVarLog.get(thread);
         for (int i = 0; i < vars.length / 2; i = i + 2) {
             StringBuilder tmp = new StringBuilder();
             try {
-                tmp.append(separator);
-                tmp.append(vars[i].toString());
-                tmp.append(simpleSeparator);
+                String varName = vars[i].toString();
+                String value;
                 if (vars[i + 1] == null) {
-                    tmp.append("null");
+                    value = "null";
                 } else {
-                    tmp.append(vars[i + 1].toString());
+                    value = vars[i + 1].toString();
                 }
-                varsString.append(tmp);
+
+                String previousValue = previousVars.get(varName);
+                if(!value.equals(previousValue)) {
+                    previousVars.put(varName,value);
+
+                    tmp.append(separator);
+                    tmp.append(varName);
+                    tmp.append(simpleSeparator);
+                    tmp.append(value);
+
+                    varsString.append(tmp);
+                }
             } catch (Exception e) {
             }
         }

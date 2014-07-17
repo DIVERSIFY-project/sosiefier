@@ -23,11 +23,8 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     public InstruVerboseLog(String logDir) {
         super(logDir);
-        previousVarLog = new HashMap<Thread, String>();
+        previousVarLog = new HashMap();
         fileWriters  = new HashMap<Thread, PrintWriter>();
-        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        System.out.println("new logger: "+  pid+ ", "+Thread.currentThread() + ", "+ Thread.currentThread().hashCode());
-        System.out.println("fileWriters: "+  fileWriters);
     }
 
     public void methodCall(Thread thread, String methodSignatureId) {
@@ -130,16 +127,12 @@ public class InstruVerboseLog extends InstruLogWriter {
                 string.append(simpleSeparator);
                 string.append(methodSignatureId);
 
-                String varsString = buildVars(thread, separator, simpleSeparator, var);
-
-                if (varsString.equals(previousVarLog.get(thread))) {
-//                    string.append(separator);
-//                    string.append("P");
+                String varsString = buildVars(thread, id+methodSignatureId, var);
+                if(varsString.isEmpty())
                     return;
-                } else {
-                    string.append(varsString);
-                    previousVarLog.put(thread, varsString);
-                }
+
+                string.append(varsString);
+
                 startLogMethod(thread);
                 PrintWriter fileWriter = getFileWriter(thread);
                 semaphore = fileWriter.toString() + fileWriter.hashCode();
@@ -152,6 +145,37 @@ public class InstruVerboseLog extends InstruLogWriter {
             }
         }
     }
+
+    protected String buildVars(Thread thread, String methodSignatureId, Object[] vars) {
+        StringBuilder varsString = new StringBuilder();
+        stopLogMethod(thread);
+        Map<String, String> previousVars = previousVarLog.get(thread);
+        for (int i = 0; i < vars.length / 2; i = i + 2) {
+            try {
+                String varName = vars[i].toString();
+                String value;
+                if (vars[i + 1] == null) {
+                    value = "null";
+                } else {
+                    value = vars[i + 1].toString();
+                }
+
+                String previousValue = previousVars.get(methodSignatureId+":"+varName);
+                if(!value.equals(previousValue)) {
+                    previousVars.put(methodSignatureId+":"+varName,value);
+
+                    varsString.append(separator);
+                    varsString.append(varName);
+                    varsString.append(simpleSeparator);
+                    varsString.append(value);
+                }
+            } catch (Exception e) {
+            }
+        }
+        startLogMethod(thread);
+        return varsString.toString();
+    }
+
 
 
     public void writeException(int id, Thread thread, String className, String methodSignature, Object exception) {
@@ -245,8 +269,7 @@ public class InstruVerboseLog extends InstruLogWriter {
     protected synchronized PrintWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (!fileWriters.containsKey(thread)) {
             String fileName = getThreadLogFilePath(thread) + "_" + System.currentTimeMillis();
-            System.out.println("new log file: " + fileName);
-
+            previousVarLog.put(thread,new HashMap<String, String>());
             PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
             fileWriters.put(thread, f);
             semaphores.put(f.toString() + f.hashCode(), new Semaphore(1));

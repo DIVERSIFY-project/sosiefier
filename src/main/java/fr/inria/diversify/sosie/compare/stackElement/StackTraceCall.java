@@ -10,10 +10,10 @@ public class StackTraceCall extends StackTraceElement {
 
 
 
-    public StackTraceCall(int id, int deep, Map<Integer, String> idMap) {
+    public StackTraceCall(int methodId, int deep, Map<Integer, String> idMap) {
         originalDeep = deep;
-        this.id = id;
-        if (!idMap.containsKey(id)) { this.method = "null"; } else { this.method = idMap.get(id); }
+        this.methodId = methodId;
+        if (!idMap.containsKey(methodId)) { this.method = "null"; } else { this.method = idMap.get(methodId); }
     }
 
     //only for parseDiff
@@ -28,11 +28,11 @@ public class StackTraceCall extends StackTraceElement {
         StackTraceCall otherElem = (StackTraceCall) other;
 
         return //className.equals(otherElem.className) &&
-                method.equals(otherElem.method);
+                methodId.equals(otherElem.methodId);
     }
 
     public int hashCode() {
-        return method.hashCode() + 1;
+        return methodId.hashCode() + 1;
     }
 
     public String toString() {
