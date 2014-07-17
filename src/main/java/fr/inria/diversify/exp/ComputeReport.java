@@ -72,6 +72,7 @@ public class ComputeReport {
         globalOriginalSosieReport.toJSON().write(writer);
 
         writeCSVReport(originalReport.buildAllTest(),
+                       globalOriginalSosieReport.buildAllTest(),
                        globalSosieSosieReport.buildAllTest(),
                        directory + "/globalReport.csv");
         writer.close();
@@ -92,11 +93,9 @@ public class ComputeReport {
                     if(sosieSosieReport.size() > originalReport.size()/2
                             && originalSosieReport.size() > originalReport.size()/2) {
 
-//                        FileWriter file = new FileWriter(sosiesDir.getAbsolutePath() + "/" + sosie.getName() + ".json");
-//                        file.write(originalSosieReport.toJSON().toString());
-//                        file.close();
                         writeCSVReport(originalReport.buildAllTest(),
                                        originalSosieReport.buildAllTest(),
+                                       sosieSosieReport.buildAllTest(),
                                        resultDir.getAbsolutePath() + "/" + sosie.getName()+ ".csv");
 
 
@@ -257,22 +256,27 @@ public class ComputeReport {
         return new JSONObject(sb.toString());
     }
 
-    protected void writeCSVReport(TestReport o, TestReport so, String fileName) throws IOException {
+    protected void writeCSVReport(TestReport o, TestReport so, TestReport ss, String fileName) throws IOException {
         FileWriter writer = new FileWriter(fileName);
 
         Map<String, String> oPoint = o.pointReport();
         Map<String, Integer> oExec = o.getNbOfExec();
         Map<String, String> soPoint = so.pointReport();
         Map<String, Integer> soExec = so.getNbOfExec();
+        Map<String, String> ssPoint = ss.pointReport();
+        Map<String, Integer> ssExec = ss.getNbOfExec();
         Set<String> allPoint = new HashSet();
         allPoint.addAll(oPoint.keySet());
         allPoint.addAll(soPoint.keySet());
 
-        writer.write("point;original;originalExec;diff;sosieExec\n");
+        writer.write("point;OO;OOExec;SS;SSExec;OS;OSExec\n");
         for(String point : allPoint) {
             writer.write(point + ";");
             writer.write(oPoint.get(point)+";");
             writer.write(oExec.get(point)+";");
+
+            writer.write(ssPoint.get(point)+";");
+            writer.write(ssExec.get(point)+";");
 
             writer.write(soPoint.get(point)+";");
             writer.write(soExec.get(point)+"\n");
