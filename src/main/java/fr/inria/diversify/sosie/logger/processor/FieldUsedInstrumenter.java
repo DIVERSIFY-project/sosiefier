@@ -36,9 +36,9 @@ public class FieldUsedInstrumenter extends AbstractLogginInstrumenter<CtExpressi
         boolean isStaticVar = field.getModifiers().contains(ModifierKind.STATIC);
 
         if (!isStaticVar && getMethod(expression) != null) {
-//            String id = idFor(getClass(expression).getQualifiedName() + "." + getMethod(expression).getSignature());
+            String id = idFor(getClass(expression).getQualifiedName() + "." + getMethod(expression).getSignature());
 
-            String snippet = "\n\t"+ getLogName() + ".writeVar(" + getCount(expression) +",Thread.currentThread(),\"" + idFor(field.getSimpleName()) + "\"," + field.getSimpleName() + ");";
+            String snippet = "\n\t"+ getLogName() + ".writeVar(" + getCount(expression) +",Thread.currentThread(),\"" + id + "\",\"" +idFor(field.getSimpleName()) + "\"," + field.getSimpleName() + ");";
 
             SourcePosition sp = expression.getPosition();
             CompilationUnit compileUnit = sp.getCompilationUnit();

@@ -159,6 +159,9 @@ public class ComputeReport {
         }
 
         Log.info(report.summary());
+        Log.info("remove log file");
+        deleteLog(new File(originalLodDir));
+
         return report;
     }
 

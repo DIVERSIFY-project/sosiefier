@@ -1,15 +1,10 @@
 package fr.inria.diversify.exp;
 
-import com.oracle.javafx.jmx.json.JSONReader;
 import fr.inria.diversify.sosie.compare.diff.Report;
-import fr.inria.diversify.sosie.compare.diff.TestReport;
 import fr.inria.diversify.util.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Map;
 
 /**
  * Created by Simon on 01/07/14.
