@@ -21,6 +21,10 @@ public class InstruTestAndMethod {
         String test = inputConfiguration.getProperty("testSrc");
         String out = inputConfiguration.getProperty("outputDirectory");
 
+        if(project.equals(out)) {
+            throw new Exception();
+        }
+
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(project + "/pom.xml");
 

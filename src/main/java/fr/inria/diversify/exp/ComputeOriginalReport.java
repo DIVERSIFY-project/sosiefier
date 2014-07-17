@@ -1,10 +1,10 @@
 package fr.inria.diversify.exp;
 
 import fr.inria.diversify.sosie.compare.diff.Report;
+import fr.inria.diversify.sosie.compare.diff.TestReport;
 import fr.inria.diversify.util.Log;
 
 import java.io.File;
-import java.io.FileWriter;
 
 /**
  * Created by Simon on 01/07/14.
@@ -17,21 +17,20 @@ public class ComputeOriginalReport extends ComputeReport {
 
         Report report = computeReport.buildReportFor(new File(originalDirectory), false);
 
-        File file = new File(originalDirectory + "/report.json");
-        file.createNewFile();
-        FileWriter writer = new FileWriter(file);
 
-        writer.write(report.toJSON().toString());
+//        report.toJSON().write(writer);
         Log.info("global: {}", report.summary());
-        writer.close();
+//        writer.close();
 
+        TestReport allTest = report.buildAllTest();
+        computeReport.writeCSVReport(allTest,allTest, originalDirectory + "/report.csv");
 
-        file = new File(originalDirectory + "/report.txt");
-        file.createNewFile();
-        writer = new FileWriter(file);
-
-        writer.write(report.summary());
-        writer.close();
+//        File file = new File(originalDirectory + "/report.txt");
+//        file.createNewFile();
+//        writer = new FileWriter(file);
+//
+//        writer.write(report.summary());
+//        writer.close();
 
     }
 }

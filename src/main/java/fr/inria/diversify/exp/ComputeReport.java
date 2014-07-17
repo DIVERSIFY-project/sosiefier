@@ -21,17 +21,16 @@ public class ComputeReport {
 
     Report globalSosieSosieReport;
     Report globalOriginalSosieReport;
-    Report originalReport;
 
     String logSosieDirectory;
 
     public static void main(String[] args) throws Exception {
 //        Log.DEBUG();
-        String resultDirectory = args[3];
-        String sosiesDirectory = args[0];
         ComputeReport computeReport = new ComputeReport();
+        String resultDirectory = args[2];
+        String sosiesDirectory = args[0];
+
         computeReport.setLogSosieDirectory(args[1]);
-        computeReport.setOriginalReport(new Report(computeReport.loadJSON(args[2])));
 
         computeReport.buildAllReport(new File(sosiesDirectory), new File(resultDirectory));
         computeReport.writeSummary(resultDirectory);
@@ -71,7 +70,7 @@ public class ComputeReport {
 
         globalOriginalSosieReport.toJSON().write(writer);
 
-        writeCSVReport(originalReport.buildAllTest(),
+        writeCSVReport(
                        globalOriginalSosieReport.buildAllTest(),
                        globalSosieSosieReport.buildAllTest(),
                        directory + "/globalReport.csv");
@@ -90,10 +89,10 @@ public class ComputeReport {
                     Log.info("compare sosie/original");
                     Report originalSosieReport = buildReportFor(sosie, true);
 
-                    if(sosieSosieReport.size() > originalReport.size()/2
-                            && originalSosieReport.size() > originalReport.size()/2) {
+//                    if(sosieSosieReport.size() > originalReport.size()/2
+//                            && originalSosieReport.size() > originalReport.size()/2) {
 
-                        writeCSVReport(originalReport.buildAllTest(),
+                        writeCSVReport(
                                        originalSosieReport.buildAllTest(),
                                        sosieSosieReport.buildAllTest(),
                                        resultDir.getAbsolutePath() + "/" + sosie.getName()+ ".csv");
@@ -104,7 +103,7 @@ public class ComputeReport {
 
                         originalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
                         globalOriginalSosieReport = updateGlobalReport(globalOriginalSosieReport, originalSosieReport);
-                    }
+//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -131,6 +130,7 @@ public class ComputeReport {
             File originalLodDir = new File(makeLogFor(programDirectory));
             moveLogFile(newLodDir,originalLodDir);
             reports = buildReportFor(programDirectory, newLodDir.getAbsolutePath());
+            deleteLog(newLodDir);
         }
         return reports;
     }
@@ -227,10 +227,6 @@ public class ComputeReport {
         this.logSosieDirectory = logSosieDirectory;
     }
 
-    public void setOriginalReport(Report originalReport) {
-        this.originalReport = originalReport;
-    }
-
     protected Map<String,TestReport> buildReport(JSONObject object) throws JSONException {
         Map<String,TestReport> report = new HashMap();
 
@@ -256,24 +252,20 @@ public class ComputeReport {
         return new JSONObject(sb.toString());
     }
 
-    protected void writeCSVReport(TestReport o, TestReport so, TestReport ss, String fileName) throws IOException {
+    protected void writeCSVReport(TestReport so, TestReport ss, String fileName) throws IOException {
         FileWriter writer = new FileWriter(fileName);
 
-        Map<String, String> oPoint = o.pointReport();
-        Map<String, Integer> oExec = o.getNbOfExec();
         Map<String, String> soPoint = so.pointReport();
         Map<String, Integer> soExec = so.getNbOfExec();
         Map<String, String> ssPoint = ss.pointReport();
         Map<String, Integer> ssExec = ss.getNbOfExec();
         Set<String> allPoint = new HashSet();
-        allPoint.addAll(oPoint.keySet());
+        allPoint.addAll(ssPoint.keySet());
         allPoint.addAll(soPoint.keySet());
 
-        writer.write("point;OO;OOExec;SS;SSExec;OS;OSExec\n");
+        writer.write("point;SS;SSExec;OS;OSExec\n");
         for(String point : allPoint) {
             writer.write(point + ";");
-            writer.write(oPoint.get(point)+";");
-            writer.write(oExec.get(point)+";");
 
             writer.write(ssPoint.get(point)+";");
             writer.write(ssExec.get(point)+";");

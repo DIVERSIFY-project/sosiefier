@@ -12,18 +12,17 @@ import java.io.File;
  * Created by Simon on 01/07/14.
  */
 public class ComputeReportForClient extends ComputeReport {
-    protected File installToRemove;
+    protected File toRemove;
     protected File client;
 
     public static void main(String[] args) throws Exception {
-        String resultDirectory = args[4];
+        String resultDirectory = args[3];
         String sosiesDirectory = args[0];
         ComputeReportForClient computeReport = new ComputeReportForClient();
-        computeReport.setInstallToRemove(new File(args[5]));
+        computeReport.setToRemove(new File(args[5]));
         computeReport.setClient(new File(args[1]));
         computeReport.setLogSosieDirectory(args[2]);
 
-        computeReport.setOriginalReport(new Report(computeReport.loadJSON(args[3])));
 
         computeReport.buildAllReport(new File(sosiesDirectory), new File(resultDirectory));
         computeReport.writeSummary(resultDirectory);
@@ -32,8 +31,8 @@ public class ComputeReportForClient extends ComputeReport {
 
     protected Report buildReportFor(File sosieDir, boolean withSosie) throws Exception {
         Report reports;
-        if(installToRemove.exists())
-            FileUtils.forceDelete(installToRemove);
+        if(toRemove.exists())
+            FileUtils.forceDelete(toRemove);
 
         if(withSosie) {
             reports = buildReportFor(sosieDir, logSosieDirectory);
@@ -44,8 +43,8 @@ public class ComputeReportForClient extends ComputeReport {
             moveLogFile(newLodDir,originalLodDir);
             reports = buildReportFor(sosieDir, newLodDir.getAbsolutePath());
         }
-        if(installToRemove.exists())
-            FileUtils.forceDelete(installToRemove);
+        if(toRemove.exists())
+            FileUtils.forceDelete(toRemove);
         return reports;
     }
 
@@ -135,7 +134,7 @@ public class ComputeReportForClient extends ComputeReport {
         this.client = client;
     }
 
-    public void setInstallToRemove(File installToRemove) {
-        this.installToRemove = installToRemove;
+    public void setToRemove(File toRemove) {
+        this.toRemove = toRemove;
     }
 }
