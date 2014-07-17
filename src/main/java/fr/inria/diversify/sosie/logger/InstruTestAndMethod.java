@@ -25,8 +25,8 @@ public class InstruTestAndMethod {
             throw new Exception();
         }
 
-        MavenDependencyResolver t = new MavenDependencyResolver();
-        t.DependencyResolver(project + "/pom.xml");
+//        MavenDependencyResolver t = new MavenDependencyResolver();
+//        t.DependencyResolver(project + "/pom.xml");
 
         boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
         boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));

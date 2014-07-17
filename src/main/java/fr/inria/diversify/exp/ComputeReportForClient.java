@@ -19,7 +19,7 @@ public class ComputeReportForClient extends ComputeReport {
         String resultDirectory = args[3];
         String sosiesDirectory = args[0];
         ComputeReportForClient computeReport = new ComputeReportForClient();
-        computeReport.setToRemove(new File(args[5]));
+        computeReport.setToRemove(new File(args[4]));
         computeReport.setClient(new File(args[1]));
         computeReport.setLogSosieDirectory(args[2]);
 
