@@ -70,7 +70,7 @@ public class Run {
     protected void runProgram(String programDirectory, boolean install) throws Exception {
         MavenBuilder builder = new MavenBuilder(programDirectory, "src/main/java");
 
-        builder.setTimeOut(100);
+        builder.setTimeOut(1000);
         if(install) {
             builder.setPhase(new String[]{"clean", "test"});
 
