@@ -46,29 +46,29 @@ public class ComputeReport {
         Log.info( globalOriginalSosieReport.summary2());
         Log.info("globalFilterOriginalSosieReport: ");
 
-        File file = new File(directory + "sosieSosieSummary");
+        File file = new File(directory + "/sosieSosieSummary");
         file.createNewFile();
         FileWriter writer = new FileWriter(file);
         writer.write(sosieSosieSummary);
         writer.close();
 
-        file = new File(directory + "originalSosieSummary");
+        file = new File(directory + "/originalSosieSummary");
         file.createNewFile();
         writer = new FileWriter(file);
         writer.write(originalSosieSummary);
         writer.close();
 
-        file = new File(directory + "_sosieSosie_Report.json");
-        file.createNewFile();
-        writer = new FileWriter(file);
-        globalSosieSosieReport.toJSON().write(writer);
-        writer.close();
+//        file = new File(directory + "_sosieSosie_Report.json");
+//        file.createNewFile();
+//        writer = new FileWriter(file);
+//        globalSosieSosieReport.toJSON().write(writer);
+//        writer.close();
+//
+//        file = new File(directory + "_OriginalSosie_Report.json");
+//        file.createNewFile();
+//        writer = new FileWriter(file);
 
-        file = new File(directory + "_OriginalSosie_Report.json");
-        file.createNewFile();
-        writer = new FileWriter(file);
-
-        globalOriginalSosieReport.toJSON().write(writer);
+//        globalOriginalSosieReport.toJSON().write(writer);
 
         writeCSVReport(
                        globalOriginalSosieReport.buildAllTest(),
@@ -136,8 +136,8 @@ public class ComputeReport {
     }
 
     protected Report buildReportFor(File programDirectory, String sosieLogDir) throws Exception {
-        int oldSize = 1;
-        int newSize;
+//        int oldSize = 1;
+//        int newSize;
 
         String originalLodDir = makeLogFor(programDirectory);
         Log.info("compare trace for {} with {}", originalLodDir, sosieLogDir);
@@ -145,17 +145,17 @@ public class ComputeReport {
         un.findDiff();
         Report report = un.getReport();
 
-        newSize = report.size();
+//        newSize = report.size();
 
-        while(oldSize != newSize) {
+//        while(oldSize != newSize) {
             originalLodDir = makeLogFor(programDirectory);
             un = new CompareAllStackTrace(sosieLogDir,originalLodDir, null);
             un.findDiff();
             Log.debug(report.summary());
             report.merge(un.getReport());
-            oldSize = newSize;
-            newSize = report.size();
-        }
+//            oldSize = newSize;
+//            newSize = report.size();
+//        }
 
         Log.info(report.summary());
         Log.info("remove log file");
