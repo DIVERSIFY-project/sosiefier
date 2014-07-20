@@ -40,6 +40,8 @@ public class InstruCompactLogTest {
 
         String s = new String(mock.buffer);
         Assert.assertTrue(s.contains("foo") && s.contains("bar"));
+        //3 bytes each method call, 5 bytes (size + chars) each + 1 byte close.
+        Assert.assertEquals(16, mock.bufferSize - 1); //BufferSize is more like a buffer index
     }
 
     @Test

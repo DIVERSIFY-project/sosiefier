@@ -56,7 +56,8 @@ public class LogWriter {
     }
 
     public  static void close() {
-        if ( log == null ) { log = new InstruVerboseLog("LogDirName"); }
-        log.close();
+        if ( log != null ) {
+            log.close();
+        }
     }
 }

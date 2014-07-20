@@ -20,6 +20,7 @@ public class InstruTestAndMethod {
         String src = inputConfiguration.getProperty("src");
         String test = inputConfiguration.getProperty("testSrc");
         String out = inputConfiguration.getProperty("outputDirectory");
+        boolean compact = Boolean.parseBoolean(inputConfiguration.getProperty("compact.log", "false"));
 
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(project + "/pom.xml");
@@ -32,6 +33,7 @@ public class InstruTestAndMethod {
 
 
         Instru instru = new Instru(project, src, test, out);
+        instru.setCompactLog(compact);
         instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
     }
 

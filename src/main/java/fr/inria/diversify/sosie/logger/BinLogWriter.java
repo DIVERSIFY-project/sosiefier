@@ -56,7 +56,8 @@ public class BinLogWriter {
     }
 
     public  static void close() {
-        if ( log == null ) { log = new InstruCompactLog("LogDirName"); }
-        log.close();
+        if ( log != null ) {
+            log.close();
+        }
     }
 }

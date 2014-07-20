@@ -28,6 +28,7 @@ public class Instru {
     protected String projectDirectory;
     protected String srcDirectory;
     protected String testDirectory;
+    private boolean compactLog;
 
 
     public Instru(String projectDirectory, String srcDirectory, String testDirectory ,String outputDirectory) {
@@ -66,13 +67,19 @@ public class Instru {
         Factory factory = initSpoon(src);
 
         if(intruMethodCall) {
-            applyProcessor(factory, new MethodLoggingInstrumenter());
+            MethodLoggingInstrumenter m = new MethodLoggingInstrumenter();
+            m.setUseCompactLog(compactLog);
+            applyProcessor(factory, m);
         }
         if(intruVariable) {
-            applyProcessor(factory, new VariableLoggingInstrumenter());
+            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter();
+            v.setUseCompactLog(compactLog);
+            applyProcessor(factory, v);
         }
         if(intruError) {
-            applyProcessor(factory, new ErrorLoggingInstrumenter());
+            ErrorLoggingInstrumenter e = new ErrorLoggingInstrumenter();
+            e.setUseCompactLog(compactLog);
+            applyProcessor(factory, e);
         }
 
         Environment env = factory.getEnvironment();
@@ -92,10 +99,12 @@ public class Instru {
         Factory factory = initSpoon(src+System.getProperty("path.separator")+test);
 
         if(intruNewTest) {
-            applyProcessor(factory, new TestLoggingInstrumenter());
+            TestLoggingInstrumenter t = new TestLoggingInstrumenter();
+            applyProcessor(factory, t);
         }
         if(intruAssert) {
-            applyProcessor(factory, new AssertInstrumenter());
+            AssertInstrumenter a = new AssertInstrumenter();
+            applyProcessor(factory, a);
         }
 
         Environment env = factory.getEnvironment();
@@ -164,5 +173,13 @@ public class Instru {
                 }
             }
         return list;
+    }
+
+    public void setCompactLog(boolean compactLog) {
+        this.compactLog = compactLog;
+    }
+
+    public boolean getCompactLog() {
+        return compactLog;
     }
 }

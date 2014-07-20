@@ -14,8 +14,8 @@ public abstract class AbstractLogginInstrumenter <E extends CtElement> extends A
         return useCompactLog;
     }
 
-    public void setUseCompactLog(boolean logClassFullName) {
-        this.useCompactLog = logClassFullName;
+    public void setUseCompactLog(boolean useCompactLog) {
+        this.useCompactLog = useCompactLog;
     }
 
     protected String getLogName() {

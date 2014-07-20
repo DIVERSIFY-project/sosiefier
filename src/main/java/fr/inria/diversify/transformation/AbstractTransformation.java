@@ -120,7 +120,7 @@ public abstract class AbstractTransformation implements Transformation {
         addSourceCode();
         printJavaFile(srcDir);
 
-        if(parent != null) {
+        if (parent != null) {
             parent.addSourceCode();
             parent.printJavaFile(srcDir);
             parent.removeSourceCode();

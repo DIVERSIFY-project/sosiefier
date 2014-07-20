@@ -102,7 +102,7 @@ public class KnownSosieQuery extends TransformationQuery {
                     while (i < o1.coverage.size() && o1.coverage.get(i) - o1.coverage.get(i) == 0) {
                         i++;
                     }
-                    return o1.coverage.get(i) - o1.coverage.get(i);
+                    return i >= o1.coverage.size() ? sizeDiff : o1.coverage.get(i) - o1.coverage.get(i);
                 }
                 return sizeDiff;
             });
@@ -165,7 +165,7 @@ public class KnownSosieQuery extends TransformationQuery {
 
         Random r = new Random();
 
-        //Don't create a sosie bigger than the sosie pool duh!
+        //Don't create a sosie bigger than the sosie pool. Duh!
         if (nb > sosies.size()) nb = sosies.size();
 
         long maxTransfNumbers = maxNumberOfTransformations(nb);

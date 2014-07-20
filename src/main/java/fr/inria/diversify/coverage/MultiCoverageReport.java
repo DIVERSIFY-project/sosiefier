@@ -74,11 +74,11 @@ public class MultiCoverageReport implements ICoverageReport {
 
     @Override
     public List<Integer> getCoverageDistribution(CodeFragment stmt) {
-        ArrayList<Integer> result = new ArrayList<>(coverages.size());
-        int i = 0;
-        for (CoverageReport cr : coverages) {
-            result.set(i, cr.codeFragmentCoverage(stmt) > 0 ? 1 : 0);
-            i++;
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = 0; i < coverages.size(); i++) {
+            if ( coverages.get(i).codeFragmentCoverage(stmt) > 0 ) {
+                result.add(i);
+            }
         }
         return result;
     }

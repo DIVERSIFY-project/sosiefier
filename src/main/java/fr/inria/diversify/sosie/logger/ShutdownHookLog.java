@@ -7,6 +7,9 @@ package fr.inria.diversify.sosie.logger;
  */
 public class ShutdownHookLog extends Thread {
     public void run() {
+
         LogWriter.close();
+        BinLogWriter.close();
+
     }
 }
