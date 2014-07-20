@@ -1,8 +1,8 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.FileOutputStreamMock;
-import fr.inria.diversify.sosie.logger.InstruCompactLog;
-import junit.framework.Assert;
+import fr.inria.diversify.sosie.logger.BinaryLogReader;
+import fr.inria.diversify.sosie.logger.InstruBinaryLog;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -23,7 +23,7 @@ public class BinaryLogReaderTest {
         return getClass().getResource("/" + name).toURI().getPath();
     }
 
-    private void buildDataAndReader(InstruCompactLog log, Thread t) {
+    private void buildDataAndReader(InstruBinaryLog log, Thread t) {
         log.writeTestStart(t, "sampleTest");
         log.methodCall(t, "foo");
         log.methodOut(t);
@@ -36,7 +36,7 @@ public class BinaryLogReaderTest {
 
         //Create some data and store the result in the mocked array instead of the file
         FileOutputStreamMock mock = new FileOutputStreamMock();
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         Thread t = Thread.currentThread();
 
         buildDataAndReader(log, t);

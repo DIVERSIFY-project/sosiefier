@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * <p/>
  * Created by marodrig on 25/06/2014.
  */
-public class InstruCompactLog extends InstruLogWriter {
+public class InstruBinaryLog extends InstruLogWriter {
 
     ///Magic number for method in log tuples
     public static final byte LOG_METHOD = 1;
@@ -60,7 +60,7 @@ public class InstruCompactLog extends InstruLogWriter {
     //List of new hash entries before the last call of a write method
     ArrayList<HashMap.Entry<String, Integer>> lastSignatures;
 
-    public InstruCompactLog(String logDir) {
+    public InstruBinaryLog(String logDir) {
         super(logDir);
 
         //ATTENTION!!!: Remember we are copying these files to another source file

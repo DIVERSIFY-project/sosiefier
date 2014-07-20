@@ -1,6 +1,5 @@
-package fr.inria.diversify.sosie.compare;
+package fr.inria.diversify.sosie.logger;
 
-import fr.inria.diversify.sosie.logger.InstruCompactLog;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
@@ -125,23 +124,23 @@ public class BinaryLogReader {
         //Only the first 3 bits of the optByte are the magic number
         byte magic = (byte)(optByte & 7);
         switch (magic) {
-            case InstruCompactLog.LOG_TEST:
+            case InstruBinaryLog.LOG_TEST:
                 return new TestChunk(stream);
-            case InstruCompactLog.LOG_METHOD:
+            case InstruBinaryLog.LOG_METHOD:
                 return new MethodCallChunk(optByte, stream);
-            case InstruCompactLog.LOG_VAR:
+            case InstruBinaryLog.LOG_VAR:
                 throw new NotImplementedException();
 
-            case InstruCompactLog.LOG_EXCEPTION:
+            case InstruBinaryLog.LOG_EXCEPTION:
                 throw new NotImplementedException();
 
-            case InstruCompactLog.LOG_CATCH:
+            case InstruBinaryLog.LOG_CATCH:
                 throw new NotImplementedException();
 
-            case InstruCompactLog.LOG_ASSERT:
+            case InstruBinaryLog.LOG_ASSERT:
                 throw new NotImplementedException();
 
-            case InstruCompactLog.LOG_CLOSE:
+            case InstruBinaryLog.LOG_CLOSE:
                 eof = true;
                 return null;
 

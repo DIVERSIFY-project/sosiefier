@@ -1,9 +1,8 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.sosie.compare.stackElement.*;
-import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
-import fr.inria.diversify.sosie.logger.InstruCompactLog;
+import fr.inria.diversify.sosie.logger.BinaryLogReader;
 import fr.inria.diversify.util.Log;
 
 import java.io.*;
