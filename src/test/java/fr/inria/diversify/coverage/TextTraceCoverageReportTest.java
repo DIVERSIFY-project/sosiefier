@@ -1,15 +1,14 @@
 package fr.inria.diversify.coverage;
 
+import junit.framework.Assert;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
-import static junit.framework.TestCase.assertEquals;
 
 /**
- * Created by marodrig on 18/07/2014.
+ * Created by marodrig on 20/07/2014.
  */
-public class BinaryTraceCoverageReportTest {
-
+public class TextTraceCoverageReportTest {
 
     private String getResourcePath(String name) throws Exception {
         return getClass().getResource("/" + name).toURI().getPath();
@@ -17,9 +16,16 @@ public class BinaryTraceCoverageReportTest {
 
     @Test
     public void testCreateCoverage() throws Exception {
-        BinaryTraceCoverageReport report = new BinaryTraceCoverageReport(getResourcePath("tracebinarylog.log"));
+        TextTraceCoverageReport report = new TextTraceCoverageReport(getResourcePath("text-trace"));
         report.create();
         assertTrue(report.getMethodSignatures().size() > 0);
+
+        /*
+        int i = 0;
+        for (String s : report.getMethodSignatures() ) {
+            i++;
+            System.out.println(i + " " + s);
+        }*/
     }
 
 }

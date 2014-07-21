@@ -7,6 +7,7 @@ import spoon.reflect.declaration.CtElement;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class MultiCoverageReport implements ICoverageReport {
 
-    protected List<CoverageReport> coverages;
+    protected List<ICoverageReport> coverages;
 
     protected String classesDir;
 
@@ -25,11 +26,34 @@ public class MultiCoverageReport implements ICoverageReport {
         this.classesDir = classesDir;
     }
 
+    /**
+     * Creates a multicoverage report using jacoco files
+     *
+     * @param classesDir Directory where the build classes are
+     * @param jacocoDir Directory with the client jacoco coverage files
+     */
     public MultiCoverageReport(String classesDir, File jacocoDir) {
         coverages = new ArrayList<>();
         for (File file : jacocoDir.listFiles()) {
-            if(file.getName().endsWith(".exec"))
-                coverages.add(new CoverageReport(classesDir,file));
+            if (file.getName().endsWith(".exec"))
+                coverages.add(new CoverageReport(classesDir, file));
+        }
+    }
+
+    /**
+     * Creates a multicoverage report using Trace coverage report objects
+     *
+     * @param traces      Trace directories
+     * @param binaryTrace Value indicating that the trace is binary
+     */
+
+    public MultiCoverageReport(Collection<File> traces, boolean binaryTrace) {
+        for (File f : traces) {
+            if (binaryTrace) {
+                coverages.add(new BinaryTraceCoverageReport(f));
+            } else {
+                coverages.add(new TextTraceCoverageReport(f));
+            }
         }
     }
 
@@ -41,14 +65,14 @@ public class MultiCoverageReport implements ICoverageReport {
 
     @Override
     public void create() throws IOException {
-        for (CoverageReport cr : coverages)
+        for (ICoverageReport cr : coverages)
             cr.create();
     }
 
     @Override
     public double codeFragmentCoverage(CodeFragment stmt) {
         double ret = 0;
-        for (CoverageReport cr : coverages) {
+        for (ICoverageReport cr : coverages) {
             ret = Math.max(ret, cr.codeFragmentCoverage(stmt));
         }
         return ret;
@@ -57,8 +81,8 @@ public class MultiCoverageReport implements ICoverageReport {
     @Override
     public int opCodeCoverage(CtMethod method, int indexOpcode) {
         int ret = 0;
-        for (CoverageReport cr : coverages) {
-            ret = Math.max(ret, cr.opCodeCoverage(method,indexOpcode));
+        for (ICoverageReport cr : coverages) {
+            ret = Math.max(ret, cr.opCodeCoverage(method, indexOpcode));
         }
         return ret;
     }
@@ -66,7 +90,7 @@ public class MultiCoverageReport implements ICoverageReport {
     @Override
     public double elementCoverage(CtElement operator) {
         double ret = 0;
-        for (CoverageReport cr : coverages) {
+        for (ICoverageReport cr : coverages) {
             ret = Math.max(ret, cr.elementCoverage(operator));
         }
         return ret;
@@ -76,7 +100,7 @@ public class MultiCoverageReport implements ICoverageReport {
     public List<Integer> getCoverageDistribution(CodeFragment stmt) {
         ArrayList<Integer> result = new ArrayList<>();
         for (int i = 0; i < coverages.size(); i++) {
-            if ( coverages.get(i).codeFragmentCoverage(stmt) > 0 ) {
+            if (coverages.get(i).codeFragmentCoverage(stmt) > 0) {
                 result.add(i);
             }
         }

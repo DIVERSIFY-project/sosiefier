@@ -124,7 +124,7 @@ public class Instru {
         FileUtils.copyFileToDirectory(new File(packagePath + ShutdownHookLog.class.getSimpleName() + ".java"), dir);
         FileUtils.copyFileToDirectory(new File(packagePath + BinLogWriter.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + InstruLogWriter.class.getSimpleName() + ".java"),dir);
-        FileUtils.copyFileToDirectory(new File(packagePath + InstruTextLog.class.getSimpleName() + ".java"),dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + InstruVerboseLog.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + InstruBinaryLog.class.getSimpleName() + ".java"),dir);
     }
 

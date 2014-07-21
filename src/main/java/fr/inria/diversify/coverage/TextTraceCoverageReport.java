@@ -1,7 +1,6 @@
 package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import javassist.CtMethod;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtSimpleType;
 
@@ -9,15 +8,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by marodrig on 20/07/2014.
  */
-public class TextTraceCoverage extends TraceCoverage {
+public class TextTraceCoverageReport extends TraceCoverageReport {
 
     /**
      * Create the text trace coverage. Assumes that in the coverage dir is the "id" file containing
@@ -25,19 +23,42 @@ public class TextTraceCoverage extends TraceCoverage {
      * with methods
      * @param coverageDir
      */
-    public TextTraceCoverage(File coverageDir) {
+    public TextTraceCoverageReport(File coverageDir) {
         super(coverageDir);
+    }
+
+    public TextTraceCoverageReport(String trace) throws IOException {
+        super(trace);
     }
 
 
     @Override
     public void create() throws IOException {
         //Read the ids from file
-        BufferedReader reader = new BufferedReader(new FileReader(trace.getAbsolutePath() + "/id"));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] k = line.split(" ");
-            methodSignatures.add(k[1]);
+        BufferedReader idreader = new BufferedReader(new FileReader(trace.getAbsolutePath() + "/id"));
+        String idline;
+        //The ID file contains all signatures instrumented
+        HashMap<Integer, String> idSignatures = new HashMap<>();
+        while ((idline = idreader.readLine()) != null) {
+            String[] k = idline.split(" ");
+            idSignatures.put(Integer.parseInt(k[0]), k[1] + " " + k[2]);
+        }
+
+        //Read the method from the trace
+        Pattern methodPattern = Pattern.compile("M(\\d+);(\\d+)\\$\\$\\$");
+        File[] files = trace.listFiles();
+        for (File file : files) {
+            if (file.isFile() && file.getName().startsWith("log")) {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    Matcher m = methodPattern.matcher(line);
+                    if ( m.matches() ) {
+                        int id = Integer.parseInt(m.group(2));
+                        methodSignatures.add(idSignatures.get(id));
+                    }
+                }
+            }
         }
     }
 

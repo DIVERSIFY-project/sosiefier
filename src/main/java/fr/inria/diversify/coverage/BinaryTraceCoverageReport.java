@@ -2,24 +2,16 @@ package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.sosie.logger.BinaryLogReader;
-import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtSimpleType;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by marodrig on 17/07/2014.
  */
-public class BinaryTraceCoverageReport extends TraceCoverage {
-
-    List<String> methodSignatures;
-
-    File trace;
+public class BinaryTraceCoverageReport extends TraceCoverageReport {
 
     public BinaryTraceCoverageReport(File coverageDir) {
         super(coverageDir);

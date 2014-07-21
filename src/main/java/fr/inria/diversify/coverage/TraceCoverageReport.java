@@ -7,25 +7,27 @@ import spoon.reflect.declaration.CtElement;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by marodrig on 20/07/2014.
  */
-public abstract class TraceCoverage implements ICoverageReport {
+public abstract class TraceCoverageReport implements ICoverageReport {
 
     //List containing all method signatures found
-    protected List<String> methodSignatures;
+    protected Set<String> methodSignatures;
 
     //File or dir containing the trace
     protected File trace;
 
-    public TraceCoverage(File coverageDir) {
-        methodSignatures = new ArrayList<>();
+    public TraceCoverageReport(File trace) {
+        methodSignatures = new HashSet<>();
         this.trace = trace;
     }
 
-    public TraceCoverage(String trace) throws IOException {
+    public TraceCoverageReport(String trace) throws IOException {
         this(new File(trace));
     }
 
@@ -44,5 +46,9 @@ public abstract class TraceCoverage implements ICoverageReport {
         ArrayList<Integer> r = new ArrayList<>();
         r.add((int)codeFragmentCoverage(stmt));
         return r;
+    }
+
+    public Set<String> getMethodSignatures() {
+        return methodSignatures;
     }
 }

@@ -34,7 +34,7 @@ import fr.inria.diversify.util.Log;
 
 /**
  * Main class for the sosie generator.
- * <p>
+ * <p/>
  * User: Simon
  * Date: 9/11/13
  * Time: 11:41 AM
@@ -49,7 +49,8 @@ public class DiversifyMain {
     /**
      * The input configuration given by the user is parsed by this class which helps other parts of the program to
      * interact with the input parameters
- s    */
+     * s
+     */
     private InputConfiguration inputConfiguration;
 
     public DiversifyMain(String propertiesFile) throws Exception {
@@ -83,7 +84,7 @@ public class DiversifyMain {
         int min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
         TransformationQuery query = initTransformationQuery();
 
-        for ( int i = min; i <= max; i++ ) {
+        for (int i = min; i <= max; i++) {
 
             inputProgram.setTransformationPerRun(i);
             abstractDiversify.setTransformationQuery(query);
@@ -110,13 +111,12 @@ public class DiversifyMain {
             ad = new DiversifyWithParent(inputConfiguration, projet, src);
         else if (DiversifyProperties.getProperty("sosie").equals("false")) {
             ad = new Diversify(inputConfiguration, projet, src);
-            boolean early = DiversifyProperties.getProperty("early.report","false").equals("true");
-            boolean earlySosies = DiversifyProperties.getProperty("early.report.sosies.only","false").equals("true");
-            ((Diversify)ad).setEarlyReportSosiesOnly(earlySosies);
-            ((Diversify)ad).setEarlyReport(early);
+            boolean early = DiversifyProperties.getProperty("early.report", "false").equals("true");
+            boolean earlySosies = DiversifyProperties.getProperty("early.report.sosies.only", "false").equals("true");
+            ((Diversify) ad).setEarlyReportSosiesOnly(earlySosies);
+            ((Diversify) ad).setEarlyReport(early);
             ad.setSocieSourcesDir(DiversifyProperties.getProperty("copy.sosie.sources.to", ""));
-        }
-        else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
+        } else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
             String testDir = DiversifyProperties.getProperty("testSrc");
             ad = new Sosie(projet, src, testDir);
         } else ad = new SosieWithParent(projet, src);
@@ -168,7 +168,7 @@ public class DiversifyMain {
         inputProgram.setCoverageReport(initCoverageReport());
 
         inputProgram.setTransformationPerRun(
-            Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
+                Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
 
         //Path to pervious transformations made to this input program
         inputProgram.setPreviousTransformationsPath(
@@ -186,7 +186,7 @@ public class DiversifyMain {
 
         String type = DiversifyProperties.getProperty("transformation.type").toLowerCase();
 
-        switch ( type ) {
+        switch (type) {
             case "mutation":
                 return new MutationQuery(inputProgram);
             case "shuffle":
@@ -230,10 +230,10 @@ public class DiversifyMain {
             default:
                 //Try to construct the query from the explicit class
                 try {
-                    Class[] intArgsClass = new Class[] { InputProgram.class };
+                    Class[] intArgsClass = new Class[]{InputProgram.class};
                     Class strategyClass = Class.forName(type);
                     Constructor constructor = strategyClass.getConstructor(intArgsClass);
-                    return (TransformationQuery)constructor.newInstance(inputProgram);
+                    return (TransformationQuery) constructor.newInstance(inputProgram);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -266,8 +266,26 @@ public class DiversifyMain {
                 Log.warn("Unable to find coverage file or corrupt information: using NullCoverage");
                 icr = null;
             }
+        } else {
+            //Try to use the trace coverage
+            String traceDir = DiversifyProperties.getProperty("trace.dirs");
+            Boolean binaryTrace = Boolean.parseBoolean(DiversifyProperties.getProperty("binary.trace", "false"));
+            if (traceDir != null) {
+                String[] dirs = traceDir.split(";");
+                ArrayList<File> traceFiles = new ArrayList<>();
+                for (String s : dirs) {
+                    File f = new File(s);
+                    if (f.exists() && f.isDirectory()) {
+                        traceFiles.add(f);
+                    } else {
+                        Log.warn("Invalid trace dir: " + s);
+                    }
+                    if (traceFiles.size() > 0) {
+                        icr = new MultiCoverageReport(traceFiles, binaryTrace);
+                    }
+                }
+            }
         }
-
         if (icr == null) {
             icr = new NullCoverageReport();
         }
@@ -279,7 +297,7 @@ public class DiversifyMain {
     protected void initSpoon() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         Factory factory = new SpoonMetaFactory().buildNewFactory(
                 inputConfiguration.getProperty("project") + "/" +
-                inputConfiguration.getProperty("src"),
+                        inputConfiguration.getProperty("src"),
                 Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
         initInputProgram(factory);
     }
