@@ -1,13 +1,14 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -24,10 +25,17 @@ public class KnownSosieQuery extends TransformationQuery {
      */
     private class SosieWithCoverage {
         private List<Integer> coverage;
+
         private Transformation transformation;
+
         public SosieWithCoverage(Transformation t) {
             this.transformation = t;
             coverage = new ArrayList<>();
+        }
+
+        @Override
+        public String toString() {
+            return "Coverage size: " + coverage.size() + " " + this.transformation.toString();
         }
     }
 
@@ -78,23 +86,29 @@ public class KnownSosieQuery extends TransformationQuery {
 
         ICoverageReport coverageReport = getInputProgram().getCoverageReport();
 
+        boolean coveragePresent =  coverageReport != null && !(coverageReport instanceof NullCoverageReport);
+
         sosies = new ArrayList<>();
 
         for (Transformation t : transf) {
             if (t.isSosie()) {
                 SosieWithCoverage c = new SosieWithCoverage(t);
-                sosies.add(c);
-                if (coverageReport != null) {
+
+                if ( coveragePresent ) {
                     //Distribution of this transformation transplant point
                     //each client creates a jacoco file, each one is assigned an index
                     c.coverage = coverageReport.getCoverageDistribution(((ASTTransformation) t).getTransplantationPoint());
                     Collections.sort(c.coverage);
                 }
+                //Don't add sosies without coverage in case such coverage exists
+                if ( !coveragePresent || c.coverage.size() > 0 ) {
+                    sosies.add(c);
+                }
             }
         }
         //Order the sosies from less covered to more covered. This way we increases the chances that an uniformly
         //distributed selection covers most of the clients
-        if (coverageReport != null) {
+        if ( coveragePresent ) {
             Collections.sort(sosies, (o1, o2) -> {
                 int sizeDiff = o1.coverage.size() - o2.coverage.size();
                 if (sizeDiff == 0) {
@@ -208,6 +222,19 @@ public class KnownSosieQuery extends TransformationQuery {
                     prevMultiSosieFound = new TransformationFound(indexes, prevMultiSosieFound.parent.previous, prevMultiSosieFound);
                 }
                 transformations = tf;
+
+                //Log the transformation found in the run
+                try {
+                    StringBuilder sb = new StringBuilder();
+                    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("multisosiesfound.txt", true)));
+                    for ( int k = 0; k < indexes.length && indexes[k] > -1; k++ ) {
+                        sb.append(", ").append(indexes[k]);
+                    }
+                    out.println(sb.toString());
+                    out.close();
+                } catch (IOException e) {
+                    //Nothing to do here
+                }
             }
             transAttempts++;
         }

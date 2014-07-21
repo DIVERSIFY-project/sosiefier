@@ -80,13 +80,34 @@ public class DiversifyMain {
         AbstractDiversify abstractDiversify = initAbstractDiversify();
 
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
-        int max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
-        int min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
+
         TransformationQuery query = initTransformationQuery();
+
+        //Get sizes of incremental sosies that we want
+        int max;
+        int min;
+        String sosieSizes = DiversifyProperties.getProperty("transformation.size.set");
+        ArrayList<Integer> intSosieSizes = null;
+        if (sosieSizes != null) {
+            intSosieSizes = new ArrayList<>();
+            for (String s : sosieSizes.split(";")) {
+                intSosieSizes.add(Integer.parseInt(s));
+            }
+            max = intSosieSizes.size();
+            min = 0;
+        } else {
+            max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size", "1"));
+            min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
+        }
 
         for (int i = min; i <= max; i++) {
 
-            inputProgram.setTransformationPerRun(i);
+            if (intSosieSizes != null) {
+                inputProgram.setTransformationPerRun(intSosieSizes.get(i));
+            } else {
+                inputProgram.setTransformationPerRun(i);
+            }
+
             abstractDiversify.setTransformationQuery(query);
             abstractDiversify.run(n);
 
@@ -280,8 +301,15 @@ public class DiversifyMain {
                     } else {
                         Log.warn("Invalid trace dir: " + s);
                     }
-                    if (traceFiles.size() > 0) {
+                }
+                if (traceFiles.size() > 0) {
+                    try {
                         icr = new MultiCoverageReport(traceFiles, binaryTrace);
+                        icr.create();
+                        return icr;
+                    } catch (IOException e) {
+                        Log.warn("Unable to find coverage file or corrupt information: using NullCoverage");
+                        icr = null;
                     }
                 }
             }

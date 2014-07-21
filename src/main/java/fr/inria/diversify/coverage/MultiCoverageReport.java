@@ -48,6 +48,7 @@ public class MultiCoverageReport implements ICoverageReport {
      */
 
     public MultiCoverageReport(Collection<File> traces, boolean binaryTrace) {
+        coverages = new ArrayList<>();
         for (File f : traces) {
             if (binaryTrace) {
                 coverages.add(new BinaryTraceCoverageReport(f));

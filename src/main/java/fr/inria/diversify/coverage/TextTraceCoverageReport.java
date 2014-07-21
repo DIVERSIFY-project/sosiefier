@@ -1,6 +1,7 @@
 package fr.inria.diversify.coverage;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtSimpleType;
 
@@ -44,7 +45,7 @@ public class TextTraceCoverageReport extends TraceCoverageReport {
             idSignatures.put(Integer.parseInt(k[0]), k[1] + " " + k[2]);
         }
 
-        //Read the method from the trace
+        //Read the method id's from the trace
         Pattern methodPattern = Pattern.compile("M(\\d+);(\\d+)\\$\\$\\$");
         File[] files = trace.listFiles();
         for (File file : files) {
@@ -55,7 +56,10 @@ public class TextTraceCoverageReport extends TraceCoverageReport {
                     Matcher m = methodPattern.matcher(line);
                     if ( m.matches() ) {
                         int id = Integer.parseInt(m.group(2));
-                        methodSignatures.add(idSignatures.get(id));
+                        String signature = idSignatures.get(id);
+                        if ( !methodSignatures.contains(signature) ) {
+                            methodSignatures.add(idSignatures.get(id));
+                        }
                     }
                 }
             }
@@ -64,17 +68,22 @@ public class TextTraceCoverageReport extends TraceCoverageReport {
 
     @Override
     public double codeFragmentCoverage(CodeFragment stmt) {
+
         CtElement e = stmt.getCtCodeFragment();
-        while ( e != null && !(e instanceof spoon.reflect.declaration.CtMethod) ) {
+
+        boolean foundMethod = false;
+        while ( e != null && !foundMethod ) {
             e = e.getParent();
+            foundMethod = e != null && (e instanceof spoon.reflect.declaration.CtMethod || e instanceof  CtConstructor);
         }
 
-        if ( e != null && e instanceof spoon.reflect.declaration.CtMethod) {
+        if (foundMethod ) {
             String className = stmt.getCtCodeFragment().getParent(CtSimpleType.class).getQualifiedName();
-            spoon.reflect.declaration.CtMethod m = (spoon.reflect.declaration.CtMethod)e;
-            return methodSignatures.contains(className + "." + m.getSignature()) ? 1.0 : 0.0;
+            return methodSignatures.contains(className + "." + e.getSignature()) ? 1.0 : 0.0;
         }
-        throw new RuntimeException("Unable to find parent method");
+        return 0.0;
+        //throw new RuntimeException("Unable to find parent method");
+
     }
 
 }

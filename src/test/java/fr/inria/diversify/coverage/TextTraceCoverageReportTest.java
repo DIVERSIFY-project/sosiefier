@@ -20,12 +20,12 @@ public class TextTraceCoverageReportTest {
         report.create();
         assertTrue(report.getMethodSignatures().size() > 0);
 
-        /*
+
         int i = 0;
         for (String s : report.getMethodSignatures() ) {
             i++;
             System.out.println(i + " " + s);
-        }*/
+        }
     }
 
 }
