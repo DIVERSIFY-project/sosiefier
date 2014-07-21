@@ -38,7 +38,7 @@ public class ComputeReportForClient extends ComputeReport {
             reports = buildReportFor(sosieDir, logSosieDirectory);
         } else {
             File originalLodDir = new File(client.getAbsolutePath()+"/log");
-            File newLodDir = new File(client.getAbsolutePath()+"/oldLog");
+            File newLodDir = new File(client.getAbsolutePath()+"/oLog");
             makeLogFor(sosieDir);
             moveLogFile(newLodDir,originalLodDir);
             reports = buildReportFor(sosieDir, newLodDir.getAbsolutePath());
@@ -79,7 +79,7 @@ public class ComputeReportForClient extends ComputeReport {
 
         deleteLog(logDir);
 
-        installProgam(sosieDir);
+        installProgram(sosieDir);
         FileUtils.copyFileToDirectory(new File(sosieDir.getAbsolutePath()+"/log/id"), logDir);
         runClient();
 
@@ -88,7 +88,7 @@ public class ComputeReportForClient extends ComputeReport {
         return logDir.getAbsolutePath();
     }
 
-    protected void installProgam(File programDirectory) throws Exception {
+    protected void installProgram(File programDirectory) throws Exception {
         MavenBuilder builder = new MavenBuilder(programDirectory.getAbsolutePath(), "src/main/java");
 
         builder.setTimeOut(100);

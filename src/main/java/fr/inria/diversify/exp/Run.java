@@ -27,6 +27,7 @@ public class Run {
         run.makeReportAndOLog(originalDir);
 
         for(String client : clients) {
+            Log.info("client: {}",client);
             run.runProgram(originalDir, true);
             run.makeReportAndOLog(client);
 
@@ -42,7 +43,7 @@ public class Run {
             computeReport.setLogSosieDirectory(client+"/oLog");
             computeReport.buildAllReport(new File(sosiesDir), clientResultDir);
             computeReport.writeSummary(clientResultDir.getAbsolutePath());
-            FileUtils.copyFile(new File(clientResultDir.getAbsolutePath() + "/*.csv"),
+            FileUtils.copyFile(new File(clientResultDir.getAbsolutePath() + "/globalReport.csv"),
                                new File(resultDir + "/" +clientDir.getName() + ".csv"));
 
         }
@@ -72,10 +73,9 @@ public class Run {
 
         builder.setTimeOut(1000);
         if(install) {
-            builder.setPhase(new String[]{"clean", "test"});
-
-        } else {
             builder.setPhase(new String[]{"clean", "install"});
+        } else {
+            builder.setPhase(new String[]{"clean", "test"});
         }
         builder.runBuilder();
         int status = builder.getStatus();
@@ -86,6 +86,7 @@ public class Run {
             builder.runBuilder();
             status = builder.getStatus();
         }
+        Log.info("run program: {}, install: {}, status: {}",programDirectory,install,builder.getStatus() );
         if(status != 0) {
             throw new Exception("error during the build of " + programDirectory);
         }

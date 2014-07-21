@@ -44,7 +44,6 @@ public class ComputeReport {
         Log.info( globalSosieSosieReport.summary2());
         Log.info("globalOriginalSosieReport: ");
         Log.info( globalOriginalSosieReport.summary2());
-        Log.info("globalFilterOriginalSosieReport: ");
 
         File file = new File(directory + "/sosieSosieSummary");
         file.createNewFile();
@@ -126,7 +125,7 @@ public class ComputeReport {
         if(withSosie) {
             reports = buildReportFor(programDirectory, logSosieDirectory);
         } else {
-            File newLodDir = new File(programDirectory.getAbsolutePath()+"/oldLog");
+            File newLodDir = new File(programDirectory.getAbsolutePath()+"/oLog");
             File originalLodDir = new File(makeLogFor(programDirectory));
             moveLogFile(newLodDir,originalLodDir);
             reports = buildReportFor(programDirectory, newLodDir.getAbsolutePath());
@@ -148,11 +147,11 @@ public class ComputeReport {
 //        newSize = report.size();
 
 //        while(oldSize != newSize) {
-            originalLodDir = makeLogFor(programDirectory);
-            un = new CompareAllStackTrace(sosieLogDir,originalLodDir, null);
-            un.findDiff();
-            Log.debug(report.summary());
-            report.merge(un.getReport());
+//            originalLodDir = makeLogFor(programDirectory);
+//            un = new CompareAllStackTrace(sosieLogDir,originalLodDir, null);
+//            un.findDiff();
+//            Log.debug(report.summary());
+//            report.merge(un.getReport());
 //            oldSize = newSize;
 //            newSize = report.size();
 //        }

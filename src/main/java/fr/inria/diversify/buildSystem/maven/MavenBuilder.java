@@ -26,7 +26,7 @@ public class MavenBuilder extends AbstractBuilder {
 
     protected void runPrivate() {
 
-        Log.debug("run maven");
+        Log.debug("run maven (timeout {})",timeOut);
 
         InvocationRequest request = new DefaultInvocationRequest();
 

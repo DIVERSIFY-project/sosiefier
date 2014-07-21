@@ -110,10 +110,11 @@ public abstract class TransformationQuery {
      * @throws SeveralTriesUnsuccessful when several unsuccessful attempts have been made to get the transformations
      */
     public void query() {
-        Exception[] causes = new Exception[10];
+        int max = 100;
+        Exception[] causes = new Exception[max];
         int trials = 0;
         boolean failed = true;
-        while (trials < 10 && failed)
+        while (trials < max && failed)
             try {
                 //The amount of transformations are given in the query by the InputProgram
                 transformations = query(getInputProgram().getTransformationPerRun());
@@ -123,7 +124,7 @@ public abstract class TransformationQuery {
                 failed = true;
                 trials++;
             }
-        if (trials >= 10) {
+        if (trials >= max) {
             throw new SeveralTriesUnsuccessful(causes);
         }
     }
