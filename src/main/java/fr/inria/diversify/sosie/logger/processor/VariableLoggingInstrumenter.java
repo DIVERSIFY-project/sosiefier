@@ -31,7 +31,8 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
                 (CtIf.class.isAssignableFrom(candidate.getClass())
                         || CtLoop.class.isAssignableFrom(candidate.getClass()))
                         && !hasLabelAndGoto(candidate)
-                ;
+                        && !containsGoto(candidate);
+
     }
 
     public boolean hasStaticParent(CtElement el) {

@@ -1,8 +1,11 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 import spoon.processing.AbstractProcessor;
+import spoon.reflect.code.CtBreak;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.*;
+import spoon.reflect.visitor.QueryVisitor;
+import spoon.reflect.visitor.filter.TypeFilter;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -69,5 +72,17 @@ public abstract class AbstractLogginInstrumenter <E extends CtElement> extends A
         else
             count.put(parent, 0);
         return count.get(parent);
+    }
+
+    protected boolean containsGoto(CtElement elem) {
+        QueryVisitor query = new QueryVisitor(new TypeFilter(CtBreak.class));
+        elem.accept(query);
+        for(Object o : query.getResult()) {
+            CtBreak ctBreak = (CtBreak) o;
+            if(ctBreak.getTargetLabel() != null) {
+                return true;
+            }
+        }
+        return false;
     }
 }

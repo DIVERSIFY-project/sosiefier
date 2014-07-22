@@ -40,6 +40,7 @@ public class StackElementTextReader extends StackElementReader {
                 }
             }
         }
+        Log.debug("number of stackTrace: {}",list.size());
         return list;
     }
 
@@ -92,7 +93,6 @@ public class StackElementTextReader extends StackElementReader {
         Log.debug("all test: {}, to exclude: {}", traceByTest.size(), testToExclude.size());
         for(String test: testToExclude)
             traceByTest.remove(test);
-
 
         return traceByTest;
     }

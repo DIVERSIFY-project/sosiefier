@@ -135,10 +135,10 @@ public class ComputeReport {
     }
 
     protected Report buildReportFor(File programDirectory, String sosieLogDir) throws Exception {
-//        int oldSize = 1;
-//        int newSize;
+
 
         String originalLodDir = makeLogFor(programDirectory);
+        Log.debug("sosie: {}", programDirectory);
         Log.info("compare trace for {} with {}", originalLodDir, sosieLogDir);
         CompareAllStackTrace un = new CompareAllStackTrace(originalLodDir, sosieLogDir, null);
         un.findDiff();
@@ -177,13 +177,13 @@ public class ComputeReport {
     protected void runProgram(File directory) throws Exception {
         MavenBuilder builder = new MavenBuilder(directory.getAbsolutePath(), "src/main/java");
 
-        builder.setTimeOut(100);
+        builder.setTimeOut(300);
         builder.setPhase(new String[]{"clean", "test"});
         builder.runBuilder();
         int status = builder.getStatus();
 
         int count = 0;
-        while(status != 0 && count < 5) {
+        while(status != 0 && count < 4) {
             count++;
             builder.runBuilder();
             status = builder.getStatus();
@@ -204,10 +204,8 @@ public class ComputeReport {
     protected void deleteUselessLog(File logDirectory) throws IOException {
         for(File file : logDirectory.listFiles()) {
             String fileName = file.getName();
-            if(fileName.startsWith("logThread")
-                    || fileName.startsWith("logTime")
-                    || fileName.startsWith("logpool")
-                    || fileName.startsWith("logFinalizer")) {
+            if(!fileName.startsWith("logmain_")
+                    && !fileName.equals("id")) {
                 FileUtils.forceDelete(file);
             }
         }

@@ -108,6 +108,7 @@ public class CompareAllStackTrace {
 
             line = reader.readLine();
         }
+
         return diff;
     }
 

@@ -32,10 +32,12 @@ public class MethodLoggingInstrumenter extends AbstractLogginInstrumenter<CtMeth
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
+        containsGoto(candidate);
         return !candidate.isImplicit()
                 && candidate.getBody() != null
                 && candidate.getBody().getStatements().size() != 0
                 && hasCall(candidate);
+
     }
 
     @Override
