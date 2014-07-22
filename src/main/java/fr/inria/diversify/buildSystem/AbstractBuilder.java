@@ -36,6 +36,9 @@ public abstract class AbstractBuilder {
     //Phases of the compiler
     protected String[] phases;
 
+    //setting file for the compiler
+    protected File setting;
+
     //List containing all errors
     protected List<String> errors;
 
@@ -299,5 +302,9 @@ public abstract class AbstractBuilder {
 
     public void setSaveOutputDir(String saveOutputDir) {
         this.saveOutputDir = saveOutputDir;
+    }
+
+    public void setSetting(File setting) {
+        this.setting = setting;
     }
 }

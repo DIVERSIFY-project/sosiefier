@@ -7,27 +7,45 @@ import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
  * Created by Simon on 18/07/14.
  */
 public class Run {
-
+    File localRepository;
 
     public static void main(String[] args) throws Exception {
         String originalDir = args[0];
         String sosiesDir = args[1];
         String resultDir = args[2];
-        String toDelete = args[3];
-        String[] clients = Arrays.copyOfRange(args, 4, args.length);
+        String[] clients = Arrays.copyOfRange(args, 3, args.length);
 
         Run run = new Run();
+        run.localRepository = run.makeTmpSetting(resultDir);
 
+        Log.info("build report for sosie/sosie");
         run.makeReportAndOLog(originalDir);
 
+        File result = new File(resultDir + "/sosie");
+
+        if(!result.exists()) {
+            result.mkdirs();
+        }
+        Log.info("build report for original/sosie");
+        ComputeReport computeReport = new ComputeReport();
+        computeReport.setLogSosieDirectory(originalDir + "/oLog");
+
+        computeReport.buildAllReport(new File(sosiesDir), result);
+        computeReport.writeSummary(result.getAbsolutePath());
+        FileUtils.copyFile(new File(result + "/globalReport.csv"),
+                           new File(resultDir + "/original.csv"));
+
+
         for(String client : clients) {
-            Log.info("client: {}",client);
+            Log.info("build report for client: {}",client);
             run.runProgram(originalDir, true);
             run.makeReportAndOLog(client);
 
@@ -37,33 +55,19 @@ public class Run {
                 clientResultDir.mkdirs();
             }
 
-            ComputeReportForClient computeReport = new ComputeReportForClient();
-            computeReport.setToRemove(new File(toDelete));
-            computeReport.setClient(new File(client));
-            computeReport.setLogSosieDirectory(client+"/oLog");
-            computeReport.buildAllReport(new File(sosiesDir), clientResultDir);
-            computeReport.writeSummary(clientResultDir.getAbsolutePath());
+            ComputeReportForClient computeReportForClient = new ComputeReportForClient();
+            computeReportForClient.setLocalRepository(run.localRepository);
+            computeReportForClient.setClient(new File(client));
+            computeReportForClient.setLogSosieDirectory(client+"/oLog");
+            computeReportForClient.buildAllReport(new File(sosiesDir), clientResultDir);
+            computeReportForClient.writeSummary(clientResultDir.getAbsolutePath());
             FileUtils.copyFile(new File(clientResultDir.getAbsolutePath() + "/globalReport.csv"),
                                new File(resultDir + "/" +clientDir.getName() + ".csv"));
 
         }
-        File result = new File(resultDir + "/sosie");
 
-        if(!result.exists()) {
-            result.mkdirs();
-        }
-
-        ComputeReport computeReport = new ComputeReport();
-        computeReport.setLogSosieDirectory(originalDir + "/oLog");
-
-        computeReport.buildAllReport(new File(sosiesDir), result);
-        computeReport.writeSummary(result.getAbsolutePath());
-        FileUtils.copyFile(new File(result + "/globalReport.csv"),
-                           new File(resultDir + "/original.csv"));
-
-        File toRemove = new File(toDelete);
-        if(toRemove.exists())
-            FileUtils.forceDelete(toRemove);
+        if(run.localRepository.exists())
+            FileUtils.forceDelete(run.localRepository);
     }
 
 
@@ -72,10 +76,11 @@ public class Run {
         MavenBuilder builder = new MavenBuilder(programDirectory, "src/main/java");
 
         builder.setTimeOut(1000);
+        builder.setSetting(localRepository);
         if(install) {
-            builder.setPhase(new String[]{"clean", "install"});
+            builder.setPhase(new String[]{ "clean", "install"});
         } else {
-            builder.setPhase(new String[]{"clean", "test"});
+            builder.setPhase(new String[]{ "clean", "test"});
         }
         builder.runBuilder();
         int status = builder.getStatus();
@@ -112,13 +117,33 @@ public class Run {
     }
 
     protected void makeReport(String originalDir) throws Exception {
-        ComputeOriginalReport computeReport = new ComputeOriginalReport();
-
+        ComputeReport computeReport = new ComputeReport();
+        computeReport.setLocalRepository(localRepository);
         Report report = computeReport.buildReportFor(new File(originalDir), false);
 
         Log.info("report of {}: {}", originalDir, report.summary());
 
         TestReport allTest = report.buildAllTest();
         computeReport.writeCSVReport(allTest,allTest, originalDir + "/report.csv");
+    }
+
+    protected File makeTmpSetting(String resultDirName) throws IOException {
+        File resultDir = new File(resultDirName);
+        if(!resultDir.exists()) {
+            resultDir.mkdirs();
+        }
+        File localRepository = new File(resultDirName + "/repository_" +System.currentTimeMillis());
+        if(localRepository.exists()) {
+            FileUtils.forceDelete(localRepository);
+        }
+        localRepository.mkdirs();
+
+        FileWriter writer = new FileWriter(resultDir + "/setting.xml");
+        writer.write("<settings>\n\t<localRepository>");
+        writer.write(localRepository.getAbsolutePath());
+        writer.write("</localRepository>\n</settings>");
+        writer.close();
+
+        return localRepository;
     }
 }

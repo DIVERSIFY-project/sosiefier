@@ -11,10 +11,11 @@ import java.io.File;
  */
 public class ComputeOriginalReport extends ComputeReport {
 
+
     public static void main(String[] args) throws Exception {
         Log.DEBUG();
         String originalDirectory = args[0];
-        ComputeOriginalReport computeReport = new ComputeOriginalReport();
+        ComputeReport computeReport = new ComputeReport();
 
         Report report = computeReport.buildReportFor(new File(originalDirectory), false);
 

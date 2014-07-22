@@ -71,7 +71,7 @@ public class MethodLoggingInstrumenter extends AbstractLogginInstrumenter<CtMeth
 
         for(Object o : query.getResult()) {
             CtInvocation target = (CtInvocation) o;
-            if(target.getExecutable().getDeclaration() != null)
+            if(target.getExecutable() != null && target.getExecutable().getDeclaration() != null)
                 if (getAllMethod(method.getFactory()).contains(target.getExecutable().getDeclaration())) {
                     return true;
                 }

@@ -12,14 +12,12 @@ import java.io.File;
  * Created by Simon on 01/07/14.
  */
 public class ComputeReportForClient extends ComputeReport {
-    protected File toRemove;
     protected File client;
 
     public static void main(String[] args) throws Exception {
         String resultDirectory = args[3];
         String sosiesDirectory = args[0];
         ComputeReportForClient computeReport = new ComputeReportForClient();
-        computeReport.setToRemove(new File(args[4]));
         computeReport.setClient(new File(args[1]));
         computeReport.setLogSosieDirectory(args[2]);
 
@@ -31,8 +29,6 @@ public class ComputeReportForClient extends ComputeReport {
 
     protected Report buildReportFor(File sosieDir, boolean withSosie) throws Exception {
         Report reports;
-        if(toRemove.exists())
-            FileUtils.forceDelete(toRemove);
 
         if(withSosie) {
             reports = buildReportFor(sosieDir, logSosieDirectory);
@@ -43,8 +39,7 @@ public class ComputeReportForClient extends ComputeReport {
             moveLogFile(newLodDir,originalLodDir);
             reports = buildReportFor(sosieDir, newLodDir.getAbsolutePath());
         }
-        if(toRemove.exists())
-            FileUtils.forceDelete(toRemove);
+
         return reports;
     }
 
@@ -89,9 +84,11 @@ public class ComputeReportForClient extends ComputeReport {
     }
 
     protected void installProgram(File programDirectory) throws Exception {
+        Log.info("run program: {}",programDirectory.getAbsoluteFile());
         MavenBuilder builder = new MavenBuilder(programDirectory.getAbsolutePath(), "src/main/java");
 
-        builder.setTimeOut(100);
+        builder.setTimeOut(300);
+        builder.setSetting(localRepository);
         builder.setPhase(new String[]{"clean", "install"});
         builder.runBuilder();
         int status = builder.getStatus();
@@ -112,9 +109,12 @@ public class ComputeReportForClient extends ComputeReport {
     }
 
     protected void runProgram(File directory) throws Exception {
+        Log.info("run program: {}",directory.getAbsoluteFile());
+
         MavenBuilder builder = new MavenBuilder(directory.getAbsolutePath(), "src/main/java");
 
         builder.setTimeOut(100);
+        builder.setSetting(localRepository);
         builder.setPhase(new String[]{"clean", "test"});
         builder.runBuilder();
         int status = builder.getStatus();
@@ -132,9 +132,5 @@ public class ComputeReportForClient extends ComputeReport {
 
     public void setClient(File client) {
         this.client = client;
-    }
-
-    public void setToRemove(File toRemove) {
-        this.toRemove = toRemove;
     }
 }

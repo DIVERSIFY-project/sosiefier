@@ -36,7 +36,7 @@ public class MavenBuilder extends AbstractBuilder {
 
         for (String phase : phases)
             l.add(phase);
-
+        request.setLocalRepositoryDirectory(setting);
         request.setGoals(l);
 
         MavenInvoker invoker = new MavenInvoker();

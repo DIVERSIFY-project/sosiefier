@@ -16,6 +16,7 @@ import java.util.*;
  * Created by Simon on 01/07/14.
  */
 public class ComputeReport {
+    File localRepository;
     String sosieSosieSummary = "";
     String originalSosieSummary = "";
 
@@ -157,7 +158,6 @@ public class ComputeReport {
 //        }
 
         Log.info(report.summary());
-        Log.info("remove log file");
         deleteLog(new File(originalLodDir));
 
         return report;
@@ -175,10 +175,12 @@ public class ComputeReport {
     }
 
     protected void runProgram(File directory) throws Exception {
+        Log.info("run program: {}",directory.getAbsoluteFile());
         MavenBuilder builder = new MavenBuilder(directory.getAbsolutePath(), "src/main/java");
 
         builder.setTimeOut(300);
-        builder.setPhase(new String[]{"clean", "test"});
+        builder.setSetting(localRepository);
+        builder.setPhase(new String[]{ "clean", "test"});
         builder.runBuilder();
         int status = builder.getStatus();
 
@@ -273,4 +275,7 @@ public class ComputeReport {
         writer.close();
     }
 
+    public void setLocalRepository(File localRepository) {
+        this.localRepository = localRepository;
+    }
 }

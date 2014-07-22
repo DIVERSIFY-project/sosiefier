@@ -120,9 +120,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
         if (compileUnit.getSourceCodeFraments() != null)
             compileUnit.getSourceCodeFraments().clear();
     }
-
-
-
 }
 
 
