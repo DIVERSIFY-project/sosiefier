@@ -1,13 +1,12 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 
-import fr.inria.diversify.util.Log;
+import fr.inria.diversify.transformation.Transformation;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtTargetedExpression;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
@@ -27,8 +26,12 @@ import java.util.stream.Collectors;
  * Date: 06/01/14
  * Time: 10:04
  */
-public class MethodLoggingInstrumenter extends AbstractLogginInstrumenter<CtMethod> {
+public class MethodLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMethod> {
     protected List<CtMethod> methods;
+
+    public MethodLoggingInstrumenter(List<Transformation> transformations) {
+        super(transformations);
+    }
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
@@ -46,8 +49,14 @@ public class MethodLoggingInstrumenter extends AbstractLogginInstrumenter<CtMeth
         CtStatement stmt = body.getStatement(0);
         String id = idFor(getClass(stmt).getQualifiedName() + "." + candidate.getSignature());
 
-        String snippet = "\ttry{\n\t"+ getLogName() + ".methodCall(Thread.currentThread(),\"" +
+        String snippet;
+        if (containsTransformation(candidate)) {
+            snippet = "try{\n\t"+getLogName()+".startLogging(Thread.currentThread(),\""+id+"\");\n\t" + getLogName() + ".methodCall(Thread.currentThread(),\"" +
+                    id + "\");\n";
+        } else {
+            snippet = "\ttry{\n\t" + getLogName() + ".methodCall(Thread.currentThread(),\"" +
                 id + "\");\n";
+        }
         SourcePosition sp = stmt.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
@@ -79,7 +88,7 @@ public class MethodLoggingInstrumenter extends AbstractLogginInstrumenter<CtMeth
         return false;
     }
 
-    public List<CtMethod> getAllMethod(Factory factory) {
+    protected List<CtMethod> getAllMethod(Factory factory) {
         if(methods == null) {
             QueryVisitor query = new QueryVisitor(new TypeFilter(CtMethod.class));
             Set<CtElement> roots = getRoots(factory);
@@ -94,7 +103,7 @@ public class MethodLoggingInstrumenter extends AbstractLogginInstrumenter<CtMeth
         return methods;
     }
 
-    public  Set<CtElement> getRoots(Factory factory) {
+    protected Set<CtElement> getRoots(Factory factory) {
         Set<CtElement> roots = new HashSet<>();
         ProcessingManager pm = new QueueProcessingManager(factory);
         AbstractProcessor<CtPackage> processor = new AbstractProcessor<CtPackage>() {
@@ -112,5 +121,4 @@ public class MethodLoggingInstrumenter extends AbstractLogginInstrumenter<CtMeth
 
         return roots;
     }
-
 }

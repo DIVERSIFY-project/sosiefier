@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
+import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
@@ -7,12 +8,19 @@ import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtTypeReference;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * User: Simon
  * Date: 10/21/13
  * Time: 9:27 AM
  */
-public class TestLoggingInstrumenter extends AbstractLogginInstrumenter<CtMethod> {
+public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMethod> {
+
+    public TestLoggingInstrumenter() {
+        super(new ArrayList<>());
+    }
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {

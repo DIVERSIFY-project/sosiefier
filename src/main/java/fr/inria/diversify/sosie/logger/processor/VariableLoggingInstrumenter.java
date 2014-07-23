@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 
+import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
@@ -19,8 +20,12 @@ import java.util.*;
  * Use basic scope inference (the real one is hard due to the complex semantics of "static" and "final"
  * (w.r.t. init, anonymous classes, etc.)
  */
-public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtStatement> {
+public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
     protected int tmpVarCount = 0;
+
+    public VariableLoggingInstrumenter(List<Transformation> transformations) {
+        super(transformations);
+    }
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {
@@ -32,7 +37,6 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
                         || CtLoop.class.isAssignableFrom(candidate.getClass()))
                         && !hasLabelAndGoto(candidate)
                         && !containsGoto(candidate);
-
     }
 
     public boolean hasStaticParent(CtElement el) {
@@ -65,11 +69,14 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
 
         boolean inStaticCode = hasStaticParent(statement);
         String id = idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
-//        String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
-//                + id + "\",{";
 
         String tmpVar = "tmpVarWrite" + tmpVarCount++;
-        String snippet = "Object[] " + tmpVar + " = {";
+        String snippet;
+        if(containsTransformation(statement.getParent(CtExecutable.class))) {
+            snippet = getLogName()+".startLogging(Thread.currentThread(),\""+id+"\");\n\tObject[] " + tmpVar + " = {";
+        } else {
+            snippet = "Object[] " + tmpVar + " = {";
+        }
 
         int nVisibleVariables = 0;
         for (CtVariable<?> var : getVariablesInScope(statement)) {

@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
+import fr.inria.diversify.transformation.Transformation;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtBreak;
 import spoon.reflect.code.CtStatement;
@@ -11,17 +12,24 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by marodrig on 27/06/2014.
  */
-public abstract class AbstractLogginInstrumenter <E extends CtElement> extends AbstractProcessor<E> {
+public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends AbstractProcessor<E> {
     protected static Map<String, String> idMap = new HashMap();
     protected static Map<CtExecutable, Integer> count = new HashMap();
 
+    protected List<Transformation> transformations;
+
     protected boolean useCompactLog = false;
 
+    public AbstractLoggingInstrumenter(List<Transformation> transformations) {
+        this.transformations = transformations;
+    }
+    
     public boolean getUseCompactLog() {
         return useCompactLog;
     }
@@ -80,6 +88,20 @@ public abstract class AbstractLogginInstrumenter <E extends CtElement> extends A
         for(Object o : query.getResult()) {
             CtBreak ctBreak = (CtBreak) o;
             if(ctBreak.getTargetLabel() != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected boolean containsTransformation(CtExecutable method) {
+        if(transformations == null) {
+            return false;
+        }
+        String methodSignature = method.getDeclaringType().getQualifiedName() +"."+ method.getSimpleName();
+        for (Transformation trans : transformations) {
+            String transSignature = trans.classLocationName() +"."+ trans.methodLocationName();
+            if(transSignature.equals(methodSignature)) {
                 return true;
             }
         }

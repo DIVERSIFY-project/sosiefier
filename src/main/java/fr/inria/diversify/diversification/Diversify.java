@@ -290,7 +290,7 @@ public class Diversify extends AbstractDiversify {
                 boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
 
                 if (intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest) {
-                    Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), destPath);
+                    Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), destPath, transformations);
                     instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
                 }
                 FileWriter writer = new FileWriter(destPath + "/trans.json");

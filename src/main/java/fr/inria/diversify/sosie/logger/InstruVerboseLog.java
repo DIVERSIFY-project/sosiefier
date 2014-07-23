@@ -29,7 +29,7 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     public void methodCall(Thread thread, String methodSignatureId) {
         String semaphore = "";
-        if (getLogMethod(thread)) {
+        if (getLogMethod(thread) && log(thread)) {
             try {
                 incCallDepth(thread);
                 StringBuilder stringBuilder = new StringBuilder();
@@ -60,6 +60,8 @@ public class InstruVerboseLog extends InstruLogWriter {
 
         String semaphore = "";
         try {
+            partialLoggingThread = null;
+
             resetCallDepth(thread);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("$$$\n");
@@ -116,7 +118,7 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     public void writeVar(int id, Thread thread, String methodSignatureId, Object... var) {
         String semaphore = "";
-        if (getLogMethod(thread)) {
+        if (getLogMethod(thread) && log(thread)) {
             try {
                 StringBuilder string = new StringBuilder();
                 string.append("$$$\n");
@@ -180,61 +182,61 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     public void writeException(int id, Thread thread, String className, String methodSignature, Object exception) {
         String semaphore = "";
-        try {
-            StringBuilder string = new StringBuilder();
-            string.append("$$$\n");
-            string.append("E");
-            string.append(callDeep.get(thread));
-            string.append(simpleSeparator);
-            string.append(id + "");
-            string.append(simpleSeparator);
-            string.append(className);
-            string.append(simpleSeparator);
-            string.append(methodSignature);
-            string.append(simpleSeparator);
-            if (exception != null)
-                string.append(exception.toString());
-            else
-                string.append("NullException");
+        if (getLogMethod(thread) && log(thread)) {
+            try {
+                StringBuilder string = new StringBuilder();
+                string.append("$$$\n");
+                string.append("E");
+                string.append(callDeep.get(thread));
+                string.append(simpleSeparator);
+                string.append(id + "");
+                string.append(simpleSeparator);
+                string.append(className);
+                string.append(simpleSeparator);
+                string.append(methodSignature);
+                string.append(simpleSeparator);
+                if (exception != null) string.append(exception.toString());
+                else string.append("NullException");
 
-            PrintWriter fileWriter = getFileWriter(thread);
-            semaphore = fileWriter.toString() + fileWriter.hashCode();
-            fileWriter.append(string.toString());
+                PrintWriter fileWriter = getFileWriter(thread);
+                semaphore = fileWriter.toString() + fileWriter.hashCode();
+                fileWriter.append(string.toString());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            releaseFileWriter(semaphore);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                releaseFileWriter(semaphore);
+            }
         }
     }
 
     public void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
         String semaphore = "";
-        try {
-            StringBuilder string = new StringBuilder();
-            string.append("$$$\n");
-            string.append("C");
-            string.append(callDeep.get(thread));
-            string.append(simpleSeparator);
-            string.append(id + "");
-            string.append(simpleSeparator);
-            string.append(className);
-            string.append(simpleSeparator);
-            string.append(methodSignature);
-            string.append(simpleSeparator);
-            if (exception != null)
-                string.append(exception.toString());
-            else
-                string.append("NullException");
+        if (getLogMethod(thread) && log(thread)) {
+            try {
+                StringBuilder string = new StringBuilder();
+                string.append("$$$\n");
+                string.append("C");
+                string.append(callDeep.get(thread));
+                string.append(simpleSeparator);
+                string.append(id + "");
+                string.append(simpleSeparator);
+                string.append(className);
+                string.append(simpleSeparator);
+                string.append(methodSignature);
+                string.append(simpleSeparator);
+                if (exception != null) string.append(exception.toString());
+                else string.append("NullException");
 
-            PrintWriter fileWriter = getFileWriter(thread);
-            semaphore = fileWriter.toString() + fileWriter.hashCode();
-            fileWriter.append(string.toString());
+                PrintWriter fileWriter = getFileWriter(thread);
+                semaphore = fileWriter.toString() + fileWriter.hashCode();
+                fileWriter.append(string.toString());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            releaseFileWriter(semaphore);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                releaseFileWriter(semaphore);
+            }
         }
     }
 

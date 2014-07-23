@@ -1,6 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import spoon.processing.AbstractProcessor;
+import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
@@ -15,9 +15,13 @@ import java.util.*;
  * Date: 25/02/14
  * Time: 11:32
  */
-public class ErrorLoggingInstrumenter extends AbstractLogginInstrumenter<CtStatement> {
+public class ErrorLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
     protected static Map<CtExecutable,Integer> count = new HashMap();
     protected static Map<Integer,String> idMap = new HashMap();
+
+    public ErrorLoggingInstrumenter(List<Transformation> transformations) {
+        super(transformations);
+    }
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {

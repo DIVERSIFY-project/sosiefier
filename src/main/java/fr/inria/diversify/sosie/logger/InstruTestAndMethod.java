@@ -35,7 +35,7 @@ public class InstruTestAndMethod {
         boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
 
 
-        Instru instru = new Instru(project, src, test, out);
+        Instru instru = new Instru(project, src, test, out, null);
         instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
     }
 

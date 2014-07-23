@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
+import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
@@ -7,11 +8,19 @@ import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtField;
 import spoon.reflect.declaration.ModifierKind;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by Simon on 16/07/14.
  */
-public class FieldUsedInstrumenter extends AbstractLogginInstrumenter<CtExpression> {
+public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtExpression> {
+
+
+    public FieldUsedInstrumenter(List<Transformation> transformations) {
+        super(transformations);
+    }
 
     @Override
     public void process(CtExpression expression) {

@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
+import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
 
 import spoon.reflect.cu.CompilationUnit;
@@ -19,9 +20,13 @@ import java.util.Map;
  * Date: 25/02/14
  * Time: 11:32
  */
-public class AssertInstrumenter extends AbstractLogginInstrumenter<CtInvocation<?>> {
+public class AssertInstrumenter extends AbstractLoggingInstrumenter<CtInvocation<?>> {
     protected static Map<CtExecutable, Integer> count = new HashMap();
     protected static Map<Integer,String> idMap = new HashMap();
+
+    public AssertInstrumenter() {
+        super(new ArrayList<>());
+    }
 
     @Override
     public boolean isToBeProcessed(CtInvocation<?> candidate) {

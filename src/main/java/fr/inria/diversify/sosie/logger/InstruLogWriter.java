@@ -7,6 +7,7 @@ import fr.inria.diversify.util.Log;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Semaphore;
@@ -35,6 +36,9 @@ public abstract class InstruLogWriter {
 
     ///Previous logs of variables status. Useful to check whether they have change
     protected Map<Thread, Map<String,String>> previousVarLog;
+
+
+    protected Set<Thread> partialLoggingThread;
 
     public int getCallDeep(Thread t) {
         return callDeep.containsKey(t) ? callDeep.get(t) : 0;
@@ -231,6 +235,19 @@ public abstract class InstruLogWriter {
         }
         startLogMethod(thread);
         return varsString.toString();
+    }
+
+    public void startLogging(Thread thread, String id) {
+        if(partialLoggingThread == null) {
+            partialLoggingThread = new HashSet();
+        }
+        partialLoggingThread.add(thread);
+        methodCall(thread, id);
+    }
+
+    protected boolean log(Thread thread) {
+        return  !PartialLogging.partialLogging
+                || (partialLoggingThread != null && partialLoggingThread.contains(thread));
     }
 
     public String getLogDir() {
