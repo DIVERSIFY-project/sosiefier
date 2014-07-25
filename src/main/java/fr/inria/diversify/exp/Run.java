@@ -3,6 +3,7 @@ package fr.inria.diversify.exp;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.sosie.compare.diff.Report;
 import fr.inria.diversify.sosie.compare.diff.TestReport;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Simon on 18/07/14.
@@ -22,21 +24,21 @@ public class Run {
         String sosiesDir = args[1];
         String resultDir = args[2];
         String[] clients = Arrays.copyOfRange(args, 3, args.length);
-
+//        Log.DEBUG();
         Run run = new Run();
         run.localRepository = run.makeTmpSetting(resultDir);
 
-        Log.info("build report for sosie/sosie");
-        run.makeReportAndOLog(originalDir);
+        Log.info("build report for original/original");
+        List<StackTrace> originalLog = run.makeReportAndOLog(originalDir);
 
         File result = new File(resultDir + "/sosie");
-
         if(!result.exists()) {
             result.mkdirs();
         }
-        Log.info("build report for original/sosie");
+
+        Log.info("build report for sosie");
         ComputeReport computeReport = new ComputeReport();
-        computeReport.setLogSosieDirectory(originalDir + "/oLog");
+        computeReport.setOriginalLog(originalLog);
 
         computeReport.buildAllReport(new File(sosiesDir), result);
         computeReport.writeSummary(result.getAbsolutePath());
@@ -46,8 +48,11 @@ public class Run {
 
         for(String client : clients) {
             Log.info("build report for client: {}",client);
+            FileUtils.copyFile(new File(originalDir+"/log/id"),new File(client+"/log/id"));
+            run.setPartialLogging(originalDir, false);
             run.runProgram(originalDir, true);
-            run.makeReportAndOLog(client);
+
+          originalLog = run.makeReportAndOLog(client);
 
             File clientDir = new File(client);
             File clientResultDir = new File(resultDir + "/" + clientDir.getName());
@@ -55,10 +60,11 @@ public class Run {
                 clientResultDir.mkdirs();
             }
 
+            run.setPartialLogging(client, true);
             ComputeReportForClient computeReportForClient = new ComputeReportForClient();
             computeReportForClient.setLocalRepository(run.localRepository);
             computeReportForClient.setClient(new File(client));
-            computeReportForClient.setLogSosieDirectory(client+"/oLog");
+            computeReportForClient.setOriginalLog(originalLog);
             computeReportForClient.buildAllReport(new File(sosiesDir), clientResultDir);
             computeReportForClient.writeSummary(clientResultDir.getAbsolutePath());
             FileUtils.copyFile(new File(clientResultDir.getAbsolutePath() + "/globalReport.csv"),
@@ -70,6 +76,12 @@ public class Run {
             FileUtils.forceDelete(run.localRepository);
     }
 
+    protected void setPartialLogging(String dir, boolean partialLogging) throws IOException {
+        FileWriter partialLoggingFile = new FileWriter(dir + "/log/partialLogging");
+
+        partialLoggingFile.write(partialLogging+"");
+        partialLoggingFile.close();
+    }
 
 
     protected void runProgram(String programDirectory, boolean install) throws Exception {
@@ -86,7 +98,7 @@ public class Run {
         int status = builder.getStatus();
 
         int count = 0;
-        while(status != 0 && count < 5) {
+        while(status != 0 && count < 2) {
             count++;
             builder.runBuilder();
             status = builder.getStatus();
@@ -97,34 +109,27 @@ public class Run {
         }
     }
 
-    protected void makeReportAndOLog(String originalDir) throws Exception {
-        makeReport(originalDir);
+    protected List<StackTrace> makeReportAndOLog(String originalDir) throws Exception {
+        ComputeReport computeReport = new ComputeReport();
+        computeReport.setLocalRepository(localRepository);
+        Report  report = computeReport.buildOriginalReport(new File(originalDir));
 
-        runProgram(originalDir, false);
-        File logDir = new File(originalDir + "/log");
-        File oLogDir = new File(originalDir + "/oLog");
-        if(oLogDir.exists()) {
-            FileUtils.forceDelete(oLogDir);
+        TestReport allTest = report.buildAllTest();
+        computeReport.writeCSVReport(allTest,allTest, originalDir + "/report.csv");
+
+        File originalLogDir = new File(originalDir + "/originalLog");
+        if(originalLogDir.exists()) {
+            FileUtils.forceDelete(originalLogDir);
         }
-        FileUtils.forceMkdir(oLogDir);
-        FileUtils.copyDirectory(logDir, oLogDir);
+        originalLogDir.mkdirs();
 
-        for(File file : oLogDir.listFiles()) {
+        computeReport.moveLogFile(originalLogDir, new File(originalDir +"/log"));
+        for(File file : originalLogDir.listFiles()) {
             if(!(file.getName().equals("id") || file.getName().startsWith("logmain"))) {
                 FileUtils.forceDelete(file);
             }
         }
-    }
-
-    protected void makeReport(String originalDir) throws Exception {
-        ComputeReport computeReport = new ComputeReport();
-        computeReport.setLocalRepository(localRepository);
-        Report report = computeReport.buildReportFor(new File(originalDir), false);
-
-        Log.info("report of {}: {}", originalDir, report.summary());
-
-        TestReport allTest = report.buildAllTest();
-        computeReport.writeCSVReport(allTest,allTest, originalDir + "/report.csv");
+        return computeReport.loadLog(originalLogDir,false);
     }
 
     protected File makeTmpSetting(String resultDirName) throws IOException {

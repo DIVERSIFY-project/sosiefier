@@ -62,7 +62,9 @@ public class InstruVerboseLog extends InstruLogWriter {
         try {
             partialLoggingThread = null;
 
+//            previousVarLog.get(thread).clear();
             resetCallDepth(thread);
+
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("$$$\n");
             stringBuilder.append("NewTest");
@@ -113,6 +115,30 @@ public class InstruVerboseLog extends InstruLogWriter {
             e.printStackTrace();
         } finally {
             releaseFileWriter(semaphore);
+        }
+    }
+
+    protected  void writeStartLogging(Thread thread, String id) {
+        String semaphore = "";
+        if (getLogMethod(thread)) {
+            try {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("$$$\n");
+                stringBuilder.append("S"); //start logging
+                stringBuilder.append(simpleSeparator);
+                stringBuilder.append(id);
+
+                String string = stringBuilder.toString();
+                PrintWriter fileWriter = getFileWriter(thread);
+                semaphore = fileWriter.toString() + fileWriter.hashCode();
+                fileWriter.append(string);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                startLogMethod(thread);
+                releaseFileWriter(semaphore);
+            }
         }
     }
 

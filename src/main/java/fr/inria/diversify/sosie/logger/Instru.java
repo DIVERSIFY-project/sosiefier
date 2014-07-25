@@ -65,16 +65,13 @@ public class Instru {
         copyLogger(outputDirectory, srcDirectory);
 
 
+        FileWriter partialLogging = new FileWriter(outputDirectory + "/log/partialLogging");
         if(transformations != null) {
-            String packagePath = System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/";
-            FileWriter partialLogging = new FileWriter(packagePath + PartialLogging.class.getSimpleName() + ".java");
-            partialLogging.write("package fr.inria.diversify.sosie.logger;\n" +
-                                         "\n" +
-                                         "public class PartialLogging {\n" +
-                                         "    public static boolean partialLogging = true;\n" +
-                                         "}\n");
-            partialLogging.close();
+            partialLogging.write("true");
+        } else {
+            partialLogging.write("false");
         }
+        partialLogging.close();
     }
 
     protected void instruMainSrc(boolean intruMethodCall, boolean intruVariable, boolean intruError) {
@@ -135,7 +132,6 @@ public class Instru {
         FileUtils.copyFileToDirectory(new File(packagePath + InstruLogWriter.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + InstruVerboseLog.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + InstruCompactLog.class.getSimpleName() + ".java"),dir);
-        FileUtils.copyFileToDirectory(new File(packagePath + PartialLogging.class.getSimpleName() + ".java"),dir);
     }
 
     protected Factory initSpoon(String srcDirectory) {

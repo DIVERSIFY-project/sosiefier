@@ -75,7 +75,7 @@ public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtS
         if(containsTransformation(statement.getParent(CtExecutable.class))) {
             snippet = getLogName()+".startLogging(Thread.currentThread(),\""+id+"\");\n\tObject[] " + tmpVar + " = {";
         } else {
-            snippet = "Object[] " + tmpVar + " = {";
+            snippet =  "Object[] " + tmpVar + " = {";
         }
 
         int nVisibleVariables = 0;
@@ -97,7 +97,7 @@ public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtS
                 // we remove the "final" for solving "may have not been in initialized" in constructor code
                 // this does not work for case statements
                 // var.getModifiers().remove(ModifierKind.FINAL);
-                snippet += "\"" + idFor(var.getSimpleName()) + "\"," + var.getSimpleName() + ",";
+                snippet += "\"" + idForVar(var,statement) + "\"," + var.getSimpleName() + ",";
             }
         }
         snippet = snippet.substring(0, snippet.length() - 1);
@@ -134,6 +134,16 @@ public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtS
                 compileUnit.addSourceCodeFragment(new SourceCodeFragment(endIndex, "}", 0));
             }
         }
+    }
+
+    protected String idForVar(CtVariable<?> var, CtStatement statement) {
+        String varName;
+        if(var instanceof CtField) {
+            varName = getClass(statement).getQualifiedName() +" "+var.getSimpleName();
+        } else {
+            varName = getMethod(statement).getSignature()+"."+var.getSimpleName();
+        }
+        return idFor(varName);
     }
 
 

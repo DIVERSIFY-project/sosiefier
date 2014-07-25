@@ -59,7 +59,7 @@ public class Main {
             if(previousReport != null && new File(previousReport).exists()) {
                 pr = loadJSON(previousReport);
             }
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, false);
             Set<Diff> diff = un.findDiff();
 
 //            Log.debug(un.summary());
@@ -80,7 +80,7 @@ public class Main {
             if(previousReport != null) {
                 pr = loadJSON(previousReport);
             }
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude);
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, false);
             Set<Diff> diff = un.findDiff();
 
 //            Log.debug(un.summary());

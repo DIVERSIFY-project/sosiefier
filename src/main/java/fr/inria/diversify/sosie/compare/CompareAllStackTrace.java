@@ -14,18 +14,26 @@ import java.util.function.Function;
  * Created by Simon on 18/04/14.
  */
 public class CompareAllStackTrace {
-    protected List<StackTrace> stackTraces1;
-    protected List<StackTrace> stackTraces2;
+    protected List<StackTrace> originalStackTraces;
+    protected List<StackTrace> sosieStackTraces;
     protected List<Diff> diffToExclude;
+    protected boolean partialTrace;
     protected Collection<Diff> diffs;
 
     protected Report reports;
 
-    public CompareAllStackTrace(String dirOriginal, String dirSosie, String diffFile) throws IOException, JSONException {
-        stackTraces1 = loadLog(dirOriginal, false);
-        stackTraces2 = loadLog(dirSosie, false);
-        diffToExclude = parseDiff(diffFile);
+    public CompareAllStackTrace(String dirOriginal, String dirSosie, boolean partialTrace) throws IOException, JSONException {
+        originalStackTraces = loadLog(dirOriginal, false);
+        sosieStackTraces = loadLog(dirSosie, false);
+        this.partialTrace = partialTrace;
         reports = new Report();
+    }
+
+    public CompareAllStackTrace(List<StackTrace> originalStackTraces, List<StackTrace> sosieStackTraces, boolean partialTrace) throws IOException, JSONException {
+        this.originalStackTraces = originalStackTraces;
+        this.sosieStackTraces = sosieStackTraces;
+        this.partialTrace = partialTrace;
+        this.reports = new Report();
     }
 
     /**
@@ -37,20 +45,27 @@ public class CompareAllStackTrace {
         return findDiff(cls -> cls.findDiff());
     }
 
-    protected Set<Diff> findDiff(Function<CompareStackTrace, List<Diff>> diffOperator) throws Exception {
+    protected Set<Diff> findDiff(Function<AbstractCompareStackTrace, List<Diff>> diffOperator) throws Exception {
         Set<Diff> diffs = new HashSet<>();
-        for (StackTrace original : stackTraces1) {
-            for (StackTrace sosie : stackTraces2) {
+        for (StackTrace original : originalStackTraces) {
+            for (StackTrace sosie : sosieStackTraces) {
                 if (sosie.getFullName().equals(original.getFullName())) {
                     Log.debug("compare: {}",sosie.toString());
-                    CompareStackTrace cls = new CompareStackTrace(original, sosie);
+
+                    AbstractCompareStackTrace cls;
+                    if(partialTrace) {
+                        cls = new ComparePartialStackTrace(original,sosie);
+                    } else {
+                        cls = new CompareStackTrace(original, sosie);
+                    }
                     diffs.addAll(diffOperator.apply(cls));
                     TestReport testReport = cls.getTestReport();
                     reports.putTestReport(original.getName(), testReport);
                 }
             }
         }
-        return diffFilter(diffs);
+//        return diffFilter(diffs);
+        return diffs;
     }
 
     protected Set<Diff> diffFilter(Set<Diff> diffs) {
@@ -115,7 +130,6 @@ public class CompareAllStackTrace {
     public List<Diff> getDiffToExclude() {
         return diffToExclude;
     }
-
 
     public Report getReport() throws JSONException {
         return reports;

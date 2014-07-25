@@ -18,12 +18,14 @@ public class StackTrace {
     protected String name;
 //    protected String threadName;
     protected boolean variablesValueChange;
+    protected Set<Integer> startLogging;
 
 
     public StackTrace() {
-        stackTraceCalls = new Stack<>();
-        stackTraceOperations = new ArrayList<>();
-        variablesValue = new HashMap<>();
+        stackTraceCalls = new Stack();
+        stackTraceOperations = new ArrayList();
+        variablesValue = new HashMap();
+        startLogging = new HashSet();
     }
 
     public int getDeep() {
@@ -55,6 +57,14 @@ public class StackTrace {
     public void previous(int count) {
         for(int i = 0; i < count; i++)
             previous();
+    }
+
+    public void reset() {
+        stackTraceCalls = new Stack();
+        variablesValue = new HashMap();
+        startLogging = new HashSet();
+        deep = 0;
+        position = 0;
     }
 
     public StackTraceCall getTop() {
@@ -94,18 +104,23 @@ public class StackTrace {
         String type = line.substring(0, 1);
         if(type.equals("A"))
             return;
-        int i = line.indexOf(";".charAt(0));
-        int deep =  Integer.parseInt(line.substring(1, i));
 
-        StackTraceElement elem = parseElement(type, deep, line.substring(i+1,line.length()), idMap);
-        if(elem instanceof StackTraceCall)
-            addCall((StackTraceCall) elem, deep);
-        else {
-            try {
-                getStackTraceOperations().add(new StackTraceVariableObservation((StackTraceVariable) elem));
-            } catch (Exception e) {
+        if(type.equals("S")) {
+            startLogging.add(Integer.parseInt(line.substring(2,line.length())));
+        } else {
 
-                Log.warn("errorin add element");
+            int i = line.indexOf(";".charAt(0));
+            int deep = Integer.parseInt(line.substring(1, i));
+
+            StackTraceElement elem = parseElement(type, deep, line.substring(i + 1, line.length()), idMap);
+            if (elem instanceof StackTraceCall) addCall((StackTraceCall) elem, deep);
+            else {
+                try {
+                    getStackTraceOperations().add(new StackTraceVariableObservation((StackTraceVariable) elem));
+                } catch (Exception e) {
+
+                    Log.warn("error in add element");
+                }
             }
         }
     }
@@ -186,6 +201,9 @@ public class StackTrace {
         return  variablesValueChange;
     }
 
+    public Set<Integer> getStartLogging() {
+        return startLogging;
+    }
 
     public void setDepth(int depth) {
         this.deep = depth;
@@ -197,5 +215,12 @@ public class StackTrace {
 
     public boolean nextIsVar() {
         return stackTraceOperations.get(position) instanceof StackTraceVariableObservation;
+    }
+
+    public void copy(StackTrace originalStackTrace) {
+        deep = originalStackTrace.deep;
+        variablesValue.clear();
+        variablesValue.putAll(originalStackTrace.variablesValue);
+        stackTraceCalls = (Stack) originalStackTrace.stackTraceCalls.clone();
     }
 }

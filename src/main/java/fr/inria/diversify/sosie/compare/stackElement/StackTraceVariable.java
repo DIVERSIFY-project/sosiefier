@@ -37,10 +37,11 @@ public class StackTraceVariable extends StackTraceElement {
             String[] varTmp = varStr[i].split(";");
             try {
                 int key = Integer.parseInt(varTmp[0]);
+                String varName = idMap.get(key);
                 if (varTmp.length == 1)
-                    vars.put(idMap.get(key), "");
+                    vars.put(varName, "");
                 else
-                    vars.put(idMap.get(key), parseValue(varTmp[1]));
+                    vars.put(varName, parseValue(varTmp[1]));
             } catch ( NumberFormatException e ) {}
         }
     }
@@ -66,8 +67,8 @@ public class StackTraceVariable extends StackTraceElement {
             return parseValue(valueString.split("@")[0]);
 
 
-        if( valueString.split("\\$\\$").length > 1) {
-            return parseValue(valueString.split("\\$\\$")[0]);
+        if( valueString.split("\\$").length > 1) {
+            return parseValue(valueString.split("\\$")[0]);
         }
 
 

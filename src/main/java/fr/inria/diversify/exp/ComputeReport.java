@@ -2,8 +2,10 @@ package fr.inria.diversify.exp;
 
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.sosie.compare.CompareAllStackTrace;
+import fr.inria.diversify.sosie.compare.StackElementTextReader;
 import fr.inria.diversify.sosie.compare.diff.Report;
 import fr.inria.diversify.sosie.compare.diff.TestReport;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
@@ -23,7 +25,13 @@ public class ComputeReport {
     Report globalSosieSosieReport;
     Report globalOriginalSosieReport;
 
-    String logSosieDirectory;
+    Set<String> errorSosie;
+
+    List<StackTrace> originalLog;
+
+    public ComputeReport() {
+        errorSosie = new HashSet<>();
+    }
 
     public static void main(String[] args) throws Exception {
 //        Log.DEBUG();
@@ -31,7 +39,7 @@ public class ComputeReport {
         String resultDirectory = args[2];
         String sosiesDirectory = args[0];
 
-        computeReport.setLogSosieDirectory(args[1]);
+//        computeReport.setOriginalLogDirectory(new File(args[1]));
 
         computeReport.buildAllReport(new File(sosiesDirectory), new File(resultDirectory));
         computeReport.writeSummary(resultDirectory);
@@ -58,17 +66,7 @@ public class ComputeReport {
         writer.write(originalSosieSummary);
         writer.close();
 
-//        file = new File(directory + "_sosieSosie_Report.json");
-//        file.createNewFile();
-//        writer = new FileWriter(file);
-//        globalSosieSosieReport.toJSON().write(writer);
-//        writer.close();
-//
-//        file = new File(directory + "_OriginalSosie_Report.json");
-//        file.createNewFile();
-//        writer = new FileWriter(file);
-
-//        globalOriginalSosieReport.toJSON().write(writer);
+        writeErrorReport(directory);
 
         writeCSVReport(
                        globalOriginalSosieReport.buildAllTest(),
@@ -82,12 +80,25 @@ public class ComputeReport {
             if(sosie.isDirectory()) {
                 try {
                     Log.info("build report for {}",sosie.getName());
+                    setPartialLogging(sosie, false);
+
+                    File sosieLogDir2 = new File(sosie+"/oLog");
+                    if(sosieLogDir2.exists()) {
+                        FileUtils.forceDelete(sosieLogDir2);
+                    }
+                    FileUtils.forceMkdir(sosieLogDir2);
+
+                    File sosieLogDir1 = new File(makeLogFor(sosie));
+                    moveLogFile(sosieLogDir2,sosieLogDir1);
+                    makeLogFor(sosie);
+                    List<StackTrace> stackTrace1 = loadLog(sosieLogDir1, false);
+                    List<StackTrace> stackTrace2 = loadLog(sosieLogDir2, false);
 
                     Log.info("compare sosie/sosie");
-                    Report sosieSosieReport = buildReportFor(sosie, false);
+                    Report sosieSosieReport = compareTrace(stackTrace1, stackTrace2, false);
 
                     Log.info("compare sosie/original");
-                    Report originalSosieReport = buildReportFor(sosie, true);
+                    Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
 
 //                    if(sosieSosieReport.size() > originalReport.size()/2
 //                            && originalSosieReport.size() > originalReport.size()/2) {
@@ -105,10 +116,35 @@ public class ComputeReport {
                         globalOriginalSosieReport = updateGlobalReport(globalOriginalSosieReport, originalSosieReport);
 //                    }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.info("error for sosie: {}",sosie.getName());
+                   errorSosie.add(sosie.getName());
                 }
             }
         }
+    }
+
+    public List<StackTrace> loadLog(File dir, boolean recursive) throws IOException {
+        return new StackElementTextReader().loadLog(dir.getAbsolutePath(), recursive);
+    }
+
+    protected Report buildOriginalReport(File originalDir) throws Exception {
+        Log.info("compare orignal/orignal: {}", originalDir);
+
+        File originalLogDir2 = new File(originalDir.getAbsolutePath()+"/oLog");
+        if(originalLogDir2.exists()) {
+            FileUtils.forceDelete(originalLogDir2);
+        }
+        FileUtils.forceMkdir(originalLogDir2);
+
+        setPartialLogging(originalDir, false);
+
+        File originalLogDir1 = new File(makeLogFor(originalDir));
+        moveLogFile(originalLogDir2, originalLogDir1);
+        makeLogFor(originalDir);
+        List<StackTrace> stackTrace1 = loadLog(originalLogDir1, false);
+        List<StackTrace> stackTrace2 = loadLog(originalLogDir2, false);
+
+        return compareTrace(stackTrace1, stackTrace2, false);
     }
 
     protected Report updateGlobalReport(Report global, Report update) {
@@ -120,45 +156,13 @@ public class ComputeReport {
         return global;
     }
 
-    protected Report buildReportFor(File programDirectory, boolean withSosie) throws Exception {
-        Report reports;
-
-        if(withSosie) {
-            reports = buildReportFor(programDirectory, logSosieDirectory);
-        } else {
-            File newLodDir = new File(programDirectory.getAbsolutePath()+"/oLog");
-            File originalLodDir = new File(makeLogFor(programDirectory));
-            moveLogFile(newLodDir,originalLodDir);
-            reports = buildReportFor(programDirectory, newLodDir.getAbsolutePath());
-            deleteLog(newLodDir);
-        }
-        return reports;
-    }
-
-    protected Report buildReportFor(File programDirectory, String sosieLogDir) throws Exception {
-
-
-        String originalLodDir = makeLogFor(programDirectory);
-        Log.debug("sosie: {}", programDirectory);
-        Log.info("compare trace for {} with {}", originalLodDir, sosieLogDir);
-        CompareAllStackTrace un = new CompareAllStackTrace(originalLodDir, sosieLogDir, null);
+    protected Report compareTrace(List<StackTrace> sosieLog, List<StackTrace> originalLog, boolean partialTrace) throws Exception {
+//        Log.info("compare trace for {} with {}", originalLogDir, sosieLogDir);
+        CompareAllStackTrace un = new CompareAllStackTrace(originalLog, sosieLog, partialTrace);
         un.findDiff();
         Report report = un.getReport();
 
-//        newSize = report.size();
-
-//        while(oldSize != newSize) {
-//            originalLodDir = makeLogFor(programDirectory);
-//            un = new CompareAllStackTrace(sosieLogDir,originalLodDir, null);
-//            un.findDiff();
-//            Log.debug(report.summary());
-//            report.merge(un.getReport());
-//            oldSize = newSize;
-//            newSize = report.size();
-//        }
-
         Log.info(report.summary());
-        deleteLog(new File(originalLodDir));
 
         return report;
     }
@@ -178,7 +182,7 @@ public class ComputeReport {
         Log.info("run program: {}",directory.getAbsoluteFile());
         MavenBuilder builder = new MavenBuilder(directory.getAbsolutePath(), "src/main/java");
 
-        builder.setTimeOut(300);
+        builder.setTimeOut(600);
         builder.setSetting(localRepository);
         builder.setPhase(new String[]{ "clean", "test"});
         builder.runBuilder();
@@ -195,19 +199,20 @@ public class ComputeReport {
         }
     }
 
-    protected void moveLogFile(File oldDir, File newDir) throws IOException {
-        if(oldDir.exists()) {
-           FileUtils.forceDelete(oldDir);
+    protected void moveLogFile(File destDir, File srcDir) throws IOException {
+        if(destDir.exists()) {
+           FileUtils.forceDelete(destDir);
         }
-        FileUtils.forceMkdir(oldDir);
-        FileUtils.copyDirectory(newDir, oldDir);
+        FileUtils.forceMkdir(destDir);
+        FileUtils.copyDirectory(srcDir, destDir);
     }
 
     protected void deleteUselessLog(File logDirectory) throws IOException {
         for(File file : logDirectory.listFiles()) {
             String fileName = file.getName();
             if(!fileName.startsWith("logmain_")
-                    && !fileName.equals("id")) {
+                    && !fileName.equals("id")
+                    && !fileName.equals("partialLogging") ) {
                 FileUtils.forceDelete(file);
             }
         }
@@ -216,14 +221,14 @@ public class ComputeReport {
     protected void deleteLog(File logDirectory) throws IOException {
         for(File file : logDirectory.listFiles()) {
             String fileName = file.getName();
-            if(!fileName.equals("id")) {
+            if(!fileName.equals("id") && !fileName.equals("partialLogging")) {
                 FileUtils.forceDelete(file);
             }
         }
     }
 
-    public void setLogSosieDirectory(String logSosieDirectory) {
-        this.logSosieDirectory = logSosieDirectory;
+    public void setOriginalLog(List<StackTrace> originalLog) {
+        this.originalLog = originalLog;
     }
 
     protected Map<String,TestReport> buildReport(JSONObject object) throws JSONException {
@@ -275,7 +280,24 @@ public class ComputeReport {
         writer.close();
     }
 
+    protected void writeErrorReport(String resultDir) throws IOException {
+        File file = new File(resultDir + "/errorSosieRepport");
+        file.createNewFile();
+        FileWriter writer = new FileWriter(file);
+        writer.write(errorSosie.toString());
+        writer.close();
+    }
+
+    protected void setPartialLogging(File dir, boolean partialLogging) throws IOException {
+        FileWriter partialLoggingFile = new FileWriter(dir.getAbsolutePath() + "/log/partialLogging");
+
+        partialLoggingFile.write(partialLogging+"");
+        partialLoggingFile.close();
+    }
+
     public void setLocalRepository(File localRepository) {
         this.localRepository = localRepository;
     }
+
+
 }

@@ -236,6 +236,11 @@ public class InstruCompactLog extends InstruLogWriter {
         }
     }
 
+    @Override
+    protected void writeStartLogging(Thread thread, String id) {
+
+    }
+
     /**
      * Gets the stream for a thread each one saved in a different file
      *

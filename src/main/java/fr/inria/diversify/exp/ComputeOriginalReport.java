@@ -13,17 +13,17 @@ public class ComputeOriginalReport extends ComputeReport {
 
 
     public static void main(String[] args) throws Exception {
-        Log.DEBUG();
-        String originalDirectory = args[0];
-        ComputeReport computeReport = new ComputeReport();
-
-        Report report = computeReport.buildReportFor(new File(originalDirectory), false);
-
-
-        Log.info("global: {}", report.summary());
-
-        TestReport allTest = report.buildAllTest();
-        computeReport.writeCSVReport(allTest,allTest, originalDirectory + "/report.csv");
+//        Log.DEBUG();
+//        String originalDirectory = args[0];
+//        ComputeReport computeReport = new ComputeReport();
+//
+//        Report report = computeReport.buildReportFor(new File(originalDirectory), false);
+//
+//
+//        Log.info("global: {}", report.summary());
+//
+//        TestReport allTest = report.buildAllTest();
+//        computeReport.writeCSVReport(allTest,allTest, originalDirectory + "/report.csv");
 
     }
 }

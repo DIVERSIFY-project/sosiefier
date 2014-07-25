@@ -64,6 +64,9 @@ public class Report {
                 allTest.merge(report,false);
             }
         }
+        if(allTest == null) {
+            allTest = new TestReport();
+        }
        return allTest;
     }
 

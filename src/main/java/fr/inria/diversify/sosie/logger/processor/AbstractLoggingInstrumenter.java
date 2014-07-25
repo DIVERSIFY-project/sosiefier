@@ -62,6 +62,7 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
     }
 
 
+
     public static void writeIdFile(String dir) throws IOException {
         File file = new File(dir + "/log");
         file.mkdirs();

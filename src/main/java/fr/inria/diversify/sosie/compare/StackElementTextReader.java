@@ -18,7 +18,7 @@ public class StackElementTextReader extends StackElementReader {
 
     @Override
     public List<StackTrace> loadLog(String dir, boolean recursive) throws IOException {
-        List<StackTrace> list = new ArrayList<>();
+        List<StackTrace> list = new ArrayList();
         File file = new File(dir);
         Map<Integer, String> idMap = loadIdMap(dir + "/id");
 
@@ -36,7 +36,7 @@ public class StackElementTextReader extends StackElementReader {
                         list.add(st);
                     }
                 } catch (Exception e) {
-                    Log.info("error for: {}", f.getAbsoluteFile());
+                    Log.debug("error for: {}", f.getAbsoluteFile());
                 }
             }
         }

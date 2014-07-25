@@ -101,6 +101,7 @@ public class TestReport {
         }
     }
 
+
     public void removeDiff(TestReport other) {
         variableDiff.removeAll(other.variableDiff);
         diffCall.removeAll(other.diffCall);
@@ -126,6 +127,12 @@ public class TestReport {
             nbOfExec.put(method,nb+1);
         else
             nbOfExec.put(method,1);
+    }
+
+    public void addAllDiffMethodCall(Collection<StackTraceCall> collection) {
+        for(StackTraceCall stc : collection) {
+            addDiffMethodCall(stc);
+        }
     }
 
     protected void init() {

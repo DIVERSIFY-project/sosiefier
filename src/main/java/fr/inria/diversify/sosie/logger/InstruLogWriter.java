@@ -37,6 +37,7 @@ public abstract class InstruLogWriter {
     ///Previous logs of variables status. Useful to check whether they have change
     protected Map<Thread, Map<String,String>> previousVarLog;
 
+    protected Boolean partialLogging = null;
 
     protected Set<Thread> partialLoggingThread;
 
@@ -242,12 +243,26 @@ public abstract class InstruLogWriter {
             partialLoggingThread = new HashSet();
         }
         partialLoggingThread.add(thread);
-        methodCall(thread, id);
+        writeStartLogging(thread, id);
     }
 
+    protected abstract void writeStartLogging(Thread thread, String id);
+
     protected boolean log(Thread thread) {
-        return  !PartialLogging.partialLogging
+        return  !getPartialLogging()
                 || (partialLoggingThread != null && partialLoggingThread.contains(thread));
+    }
+
+    protected boolean getPartialLogging() {
+        if(partialLogging == null) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader( "log/partialLogging"));
+                partialLogging = Boolean.parseBoolean(reader.readLine());
+            } catch (IOException e) {
+                partialLogging = false;
+            }
+        }
+        return partialLogging;
     }
 
     public String getLogDir() {
