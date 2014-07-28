@@ -77,6 +77,11 @@ public class ComputeReportForClient extends ComputeReport {
 
                     originalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
                     globalOriginalSosieReport = updateGlobalReport(globalOriginalSosieReport, originalSosieReport);
+                    } else {
+                        if(!errorClient.containsKey(client.getAbsolutePath())) {
+                            errorClient.put(client.getAbsolutePath(),new HashSet());
+                        }
+                        errorClient.get(client.getAbsolutePath()).add(sosie.getAbsolutePath());
                     }
                 } catch (Exception e) {
                     if(!errorClient.containsKey(client.getAbsolutePath())) {

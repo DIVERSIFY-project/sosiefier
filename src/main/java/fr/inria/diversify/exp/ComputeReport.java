@@ -115,6 +115,8 @@ public class ComputeReport {
 
                         originalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
                         globalOriginalSosieReport = updateGlobalReport(globalOriginalSosieReport, originalSosieReport);
+                    } else {
+                        errorSosie.add(sosie.getName());
                     }
                 } catch (Exception e) {
                     Log.info("error for sosie: {}",sosie.getName());
