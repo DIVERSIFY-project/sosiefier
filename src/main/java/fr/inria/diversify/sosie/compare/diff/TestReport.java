@@ -224,9 +224,9 @@ public class TestReport {
     protected String type(String var) {
         if(variableDiff.contains(var)) {
             if (variable.get(var).size() != 1) {
-                return "VD";
+                return "VD"; //vari diff
             } else {
-                return "FD";
+                return "FD"; // fix diff
             }
         } else {
             if (variable.get(var).size() != 1) {

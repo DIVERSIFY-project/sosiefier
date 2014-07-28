@@ -28,6 +28,7 @@ public class ComputeReport {
     Set<String> errorSosie;
 
     List<StackTrace> originalLog;
+    protected int minReportSize;
 
     public ComputeReport() {
         errorSosie = new HashSet<>();
@@ -100,8 +101,8 @@ public class ComputeReport {
                     Log.info("compare sosie/original");
                     Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
 
-//                    if(sosieSosieReport.size() > originalReport.size()/2
-//                            && originalSosieReport.size() > originalReport.size()/2) {
+                    if(sosieSosieReport.size() > minReportSize
+                            && originalSosieReport.size() > minReportSize) {
 
                         writeCSVReport(
                                        originalSosieReport.buildAllTest(),
@@ -114,7 +115,7 @@ public class ComputeReport {
 
                         originalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
                         globalOriginalSosieReport = updateGlobalReport(globalOriginalSosieReport, originalSosieReport);
-//                    }
+                    }
                 } catch (Exception e) {
                     Log.info("error for sosie: {}",sosie.getName());
                    errorSosie.add(sosie.getName());
@@ -299,5 +300,7 @@ public class ComputeReport {
         this.localRepository = localRepository;
     }
 
-
+    public void setMinReportSize(int minReportSize) {
+        this.minReportSize = minReportSize;
+    }
 }

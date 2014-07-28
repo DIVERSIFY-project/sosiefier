@@ -63,8 +63,8 @@ public class ComputeReportForClient extends ComputeReport {
                     Log.info("compare sosie/original");
                     Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
 
-//                    if(sosieSosieReport.size() > originalReport.size()/2
-//                            && originalSosieReport.size() > originalReport.size()/2) {
+                    if(sosieSosieReport.size() > minReportSize
+                            && originalSosieReport.size() > minReportSize) {
 
                     writeCSVReport(
                             originalSosieReport.buildAllTest(),
@@ -77,7 +77,7 @@ public class ComputeReportForClient extends ComputeReport {
 
                     originalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
                     globalOriginalSosieReport = updateGlobalReport(globalOriginalSosieReport, originalSosieReport);
-//                    }
+                    }
                 } catch (Exception e) {
                     if(!errorClient.containsKey(client.getAbsolutePath())) {
                         errorClient.put(client.getAbsolutePath(),new HashSet());

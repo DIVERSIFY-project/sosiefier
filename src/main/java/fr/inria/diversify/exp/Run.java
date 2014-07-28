@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class Run {
     File localRepository;
+    protected int minReportSize;
 
     public static void main(String[] args) throws Exception {
         String originalDir = args[0];
@@ -38,6 +39,7 @@ public class Run {
 
         Log.info("build report for sosie");
         ComputeReport computeReport = new ComputeReport();
+        computeReport.setMinReportSize(run.minReportSize);
         computeReport.setOriginalLog(originalLog);
 
         computeReport.buildAllReport(new File(sosiesDir), result);
@@ -60,8 +62,10 @@ public class Run {
                 clientResultDir.mkdirs();
             }
 
-            run.setPartialLogging(client, true);
+            run.setPartialLogging(client, false);
+
             ComputeReportForClient computeReportForClient = new ComputeReportForClient();
+            computeReportForClient.setMinReportSize(run.minReportSize);
             computeReportForClient.setLocalRepository(run.localRepository);
             computeReportForClient.setClient(new File(client));
             computeReportForClient.setOriginalLog(originalLog);
@@ -117,6 +121,7 @@ public class Run {
         TestReport allTest = report.buildAllTest();
         computeReport.writeCSVReport(allTest,allTest, originalDir + "/report.csv");
 
+        minReportSize = allTest.size();
         File originalLogDir = new File(originalDir + "/originalLog");
         if(originalLogDir.exists()) {
             FileUtils.forceDelete(originalLogDir);
