@@ -50,29 +50,33 @@ public class Run {
 
         for(String client : clients) {
             Log.info("build report for client: {}",client);
-            FileUtils.copyFile(new File(originalDir+"/log/id"),new File(client+"/log/id"));
-            run.setPartialLogging(originalDir, false);
-            run.runProgram(originalDir, true);
+            try {
+                FileUtils.copyFile(new File(originalDir + "/log/id"), new File(client + "/log/id"));
+                run.setPartialLogging(originalDir, false);
+                run.runProgram(originalDir, true);
 
-          originalLog = run.makeReportAndOLog(client);
+                originalLog = run.makeReportAndOLog(client);
 
-            File clientDir = new File(client);
-            File clientResultDir = new File(resultDir + "/" + clientDir.getName());
-            if(!clientResultDir.exists()) {
-                clientResultDir.mkdirs();
+                File clientDir = new File(client);
+                File clientResultDir = new File(resultDir + "/" + clientDir.getName());
+                if (!clientResultDir.exists()) {
+                    clientResultDir.mkdirs();
+                }
+
+                run.setPartialLogging(client, false);
+
+                ComputeReportForClient computeReportForClient = new ComputeReportForClient();
+                computeReportForClient.setMinReportSize(run.minReportSize);
+                computeReportForClient.setLocalRepository(run.localRepository);
+                computeReportForClient.setClient(new File(client));
+                computeReportForClient.setOriginalLog(originalLog);
+                computeReportForClient.buildAllReport(new File(sosiesDir), clientResultDir);
+                computeReportForClient.writeSummary(clientResultDir.getAbsolutePath());
+
+                FileUtils.copyFile(new File(clientResultDir.getAbsolutePath() + "/globalReport.csv"), new File(resultDir + "/" + clientDir.getName() + ".csv"));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            run.setPartialLogging(client, false);
-
-            ComputeReportForClient computeReportForClient = new ComputeReportForClient();
-            computeReportForClient.setMinReportSize(run.minReportSize);
-            computeReportForClient.setLocalRepository(run.localRepository);
-            computeReportForClient.setClient(new File(client));
-            computeReportForClient.setOriginalLog(originalLog);
-            computeReportForClient.buildAllReport(new File(sosiesDir), clientResultDir);
-            computeReportForClient.writeSummary(clientResultDir.getAbsolutePath());
-            FileUtils.copyFile(new File(clientResultDir.getAbsolutePath() + "/globalReport.csv"),
-                               new File(resultDir + "/" +clientDir.getName() + ".csv"));
 
         }
 
