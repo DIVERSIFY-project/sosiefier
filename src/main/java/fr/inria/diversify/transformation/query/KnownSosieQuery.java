@@ -257,14 +257,20 @@ public class KnownSosieQuery extends TransformationQuery {
      */
     protected boolean canBeMerged(Transformation t) {
 
-        boolean result = true;
+        //Avoid sosies already in the transformation
+        boolean result = !transformations.contains(t);
+
+        //Get the class name of the transformation
         ASTTransformation ast = (ASTTransformation) t;
         String classFileT = ast.getTransplantationPoint().getCompilationUnit().getFile().getName();
+
+        //Avoid sosies in the same class
         for (int i = 0; i < transformations.size() && result; i++) {
             ASTTransformation a = (ASTTransformation) transformations.get(i);
             String classFileA = a.getTransplantationPoint().getCompilationUnit().getFile().getName();
-            result &= result && !classFileA.equals(classFileT);
+            result = result && !classFileA.equals(classFileT);
         }
+
         return result;
     }
 

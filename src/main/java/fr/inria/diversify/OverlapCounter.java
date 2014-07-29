@@ -20,8 +20,7 @@ import org.jacoco.core.tools.ExecFileLoader;
 import org.junit.Test;
 
 /**
- * This example reads execution data files given as program arguments and dumps
- * their content.
+ * This programs calculates the overlapping of clients
  */
 public class OverlapCounter {
 
