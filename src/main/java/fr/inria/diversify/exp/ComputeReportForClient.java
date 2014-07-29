@@ -63,14 +63,16 @@ public class ComputeReportForClient extends ComputeReport {
                     Log.info("compare sosie/original");
                     Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
 
-                    if(sosieSosieReport.size() > minReportSize
-                            && originalSosieReport.size() > minReportSize) {
+
 
                     writeCSVReport(
                             originalSosieReport.buildAllTest(),
                             sosieSosieReport.buildAllTest(),
                             resultDir.getAbsolutePath() + "/" + sosie.getName()+ ".csv");
 
+
+                    if(sosieSosieReport.size() > minReportSize
+                            && originalSosieReport.size() > minReportSize) {
 
                     sosieSosieSummary += sosie.getName() + ": \n" + sosieSosieReport.summary() + "\n";
                     globalSosieSosieReport = updateGlobalReport(globalSosieSosieReport, sosieSosieReport);
