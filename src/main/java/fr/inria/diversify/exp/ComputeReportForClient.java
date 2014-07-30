@@ -6,6 +6,8 @@ import fr.inria.diversify.sosie.compare.diff.Report;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -63,7 +65,7 @@ public class ComputeReportForClient extends ComputeReport {
                     Log.info("compare sosie/original");
                     Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
 
-
+                    writeGoodDiff(resultDir.getAbsolutePath(), sosie.getName(), sosieSosieReport, originalSosieReport);
 
                     writeCSVReport(
                             originalSosieReport.buildAllTest(),
@@ -93,6 +95,18 @@ public class ComputeReportForClient extends ComputeReport {
                 }
             }
         }
+    }
+
+    protected void writeGoodDiff(String resultDir, String sosieName , Report ss, Report os) throws JSONException, IOException {
+        Object map = os.getDiffVarPerTestFor(ss.getSameVarPerTest());
+
+        JSONObject json = new JSONObject();
+        json.put("sosie",sosieName);
+        json.put("diff", map);
+
+        FileWriter writer = new FileWriter(resultDir+"/"+sosieName+"_good.json");
+        json.write(writer);
+        writer.close();
     }
 
     protected void installProgram(File programDirectory) throws Exception {
