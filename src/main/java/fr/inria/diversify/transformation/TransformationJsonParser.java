@@ -705,4 +705,22 @@ public class TransformationJsonParser {
     public void setFilterProperties(Properties filterProperties) {
         this.filterProperties = filterProperties;
     }
+
+    public static void saveToFile(List<Transformation> transf, String fileName) throws JSONException, IOException {
+
+        JSONArray a = new JSONArray();
+        for ( Transformation t : transf ) {
+            a.put(t.toJSONObject());
+        }
+
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(fileName);
+            a.write(fw);
+        } finally {
+            if (fw != null) {
+                fw.close();
+            }
+        }
+    }
 }

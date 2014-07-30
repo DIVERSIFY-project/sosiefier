@@ -26,7 +26,6 @@ public class MutateTests {
         processor.setTestDirectory(projectDir + "/" + p.getProperty("test.directory"));
         processor.setOutputDirectory(p.getProperty("output.directory") + "/" + p.getProperty("test.directory") + "/java/");
 
-
         processor.getProcessors().add(new AssertionWrapperProcessor());
         processor.getProcessors().add(new IntegerInputModification());
         processor.getProcessors().add(new FloatInputModification());

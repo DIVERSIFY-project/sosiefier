@@ -41,7 +41,7 @@ public class SosiePoolCreator {
         //Types fo transformations that we want by default
         getProperties().setProperty("type", "adrStmt");
         //Names of the transformations that we want by default
-        getProperties().setProperty("name", "replace replaceRandom replaceReaction replaceWittgenstein  delete");
+        getProperties().setProperty("name", "replace replaceRandom replaceReaction replaceWittgenstein replaceSteroid delete");
     }
 
     /**

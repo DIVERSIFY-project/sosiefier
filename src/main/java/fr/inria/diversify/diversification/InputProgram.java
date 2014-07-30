@@ -5,9 +5,6 @@ import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.util.DiversifyEnvironment;
-import fr.inria.diversify.util.DiversifyProperties;
-import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -24,7 +21,6 @@ import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
-import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -353,4 +349,15 @@ public class InputProgram {
         return returns;
     }
 
+    /**
+     * Copies properties from the configuration
+     *
+     * @param configuration
+     */
+    public void configure(InputConfiguration configuration) {
+        setSourceCodeDir(configuration.getSourceCodeDir());
+        setPreviousTransformationsPath(configuration.getPreviousTransformationDir());
+        setClassesDir(configuration.getClassesDir());
+        setCoverageDir(configuration.getCoverageDir());
+    }
 }

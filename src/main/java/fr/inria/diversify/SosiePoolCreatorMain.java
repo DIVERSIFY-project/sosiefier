@@ -45,6 +45,13 @@ public class SosiePoolCreatorMain {
             inputProgram.processCodeFragments();
             SosiePoolCreator creator = new SosiePoolCreator(inputProgram);
 
+            //Filter properties
+            //Collecto only sosies, this is for the parser and should not be
+            creator.getProperties().setProperty("status", "0");
+            //Types fo transformations that we want by default
+            creator.getProperties().setProperty("type", "adrStmt");
+            //Names of the transformations that we want by default
+            creator.getProperties().setProperty("name", "replace replaceRandom replaceReaction replaceWittgenstein replaceSteroid delete");
             creator.create(configuration.getProperty("output.directory"));
         } catch (Exception e ) {
             throw new RuntimeException(e);

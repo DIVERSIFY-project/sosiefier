@@ -24,6 +24,7 @@ public class InputConfiguration {
     protected Properties prop;
 
     private InputProgram inputProgram;
+    private String outputPath;
 
     public InputConfiguration(String file) throws IOException {
         prop = new Properties();
@@ -57,6 +58,15 @@ public class InputConfiguration {
 
     public void setInputProgram(InputProgram inputProgram) {
         this.inputProgram = inputProgram;
+    }
+
+    /**
+     * Gets the project path
+     *
+     * @return
+     */
+    public String getProjectPath() {
+        return getProperty("project");
     }
 
 
@@ -134,4 +144,46 @@ public class InputConfiguration {
     }
 
 
+    /**
+     * Returns the full path of the source.
+     *
+     * @return
+     */
+    public String getSourceCodeDir() {
+        return prop.getProperty("project") + "/" + prop.getProperty("src");
+    }
+
+
+    /**
+     * Returns the path of the previously found transformations
+     * @return
+     */
+    public String getPreviousTransformationDir() {
+        return prop.getProperty("transformation.directory", "");
+    }
+
+    /**
+     * Returns the path of the classes dir
+     * @return
+     */
+    public String getClassesDir() {
+        return prop.getProperty("project") + "/" + prop.getProperty("classes");
+    }
+
+    /**
+     * Get coverage dir
+     *
+     * @return
+     */
+    public String getCoverageDir() {
+        return prop.getProperty("jacoco") == null ? prop.getProperty("coverage", "") : prop.getProperty("jacoco");
+    }
+
+    /**
+     * Returns the results path
+     * @return
+     */
+    public String getResultPath() {
+        return prop.getProperty("result", prop.getProperty("outputDirectory", ""));
+    }
 }
