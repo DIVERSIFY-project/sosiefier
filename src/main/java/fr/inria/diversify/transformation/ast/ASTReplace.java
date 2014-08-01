@@ -81,11 +81,11 @@ public class ASTReplace extends ASTTransformation {
 
 
         if (DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**\n", 0));
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** replace \n", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n" +
                     getTransplant().codeFragmentString() + "\n", 0));
         } else {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/** ", 0));
+            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/** replace\n", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd() + 1, " **/\n" +
                     getTransplant().codeFragmentString(), 0));
         }

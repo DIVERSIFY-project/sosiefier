@@ -3,10 +3,7 @@ package fr.inria.diversify.sosie.compare.diff;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Simon on 03/07/14.
@@ -97,5 +94,42 @@ public class Report {
         return testReports.entrySet().stream()
                      .mapToInt(entry -> entry.getValue().size())
                      .sum();
+    }
+
+    public Map<String, Set<String>> getSameVarPerTest() {
+        Map<String, Set<String>> map = new HashMap();
+
+        for(String test: testReports.keySet()) {
+            Map<String, String> pointType = testReports.get(test).pointReport();
+            for(String point : pointType.keySet()) {
+                String type = pointType.get(point);
+                if(type.equals("FS") || type.equals("VS")) {
+                    //
+                    if(!map.containsKey(test)) {
+                        map.put(test, new HashSet());
+                    }
+                    map.get(test).add(point);
+                }
+            }
+        }
+        return map;
+    }
+
+    public Map<String, Set<String>> getDiffVarPerTestFor(Map<String, Set<String>> sameVarPerTest) {
+        Map<String, Set<String>> map = new HashMap();
+
+        for(String test: sameVarPerTest.keySet()) {
+            Map<String, String> pointType = testReports.get(test).pointReport();
+            for(String point : sameVarPerTest.get(test)) {
+                String type = pointType.get(point);
+                if(type.equals("FD") || type.equals("VD")) {
+                    if(!map.containsKey(test)) {
+                        map.put(test, new HashSet());
+                    }
+                    map.get(test).add(point);
+                }
+            }
+        }
+        return map;
     }
 }

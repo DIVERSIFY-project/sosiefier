@@ -144,5 +144,5 @@ test3 <- function() {
   
   frame <- rbind(f1,f2,f3)
   t <- t(as.matrix(frame[,2:4]))
-  barplot(t, col=c("purple", "blue","green"), beside = TRUE, names.arg = frame$name,, ylim=c(0,70),legend.text = TRUE, ylab="rate of sosies")  
+  barplot(t, col=c("purple", "blue","green"), beside = TRUE, names.arg = frame$name, ylim=c(0,70),legend.text = TRUE, ylab="rate of sosies")  
 }

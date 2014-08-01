@@ -102,10 +102,7 @@ public class ComputeReport {
                     Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
 
 
-                        writeCSVReport(
-                                       originalSosieReport.buildAllTest(),
-                                       sosieSosieReport.buildAllTest(),
-                                       resultDir.getAbsolutePath() + "/" + sosie.getName()+ ".csv");
+                        writeCSVReport(originalSosieReport.buildAllTest(), sosieSosieReport.buildAllTest(), resultDir.getAbsolutePath() + "/" + sosie.getName() + ".csv");
 
                     if(sosieSosieReport.size() > minReportSize
                             && originalSosieReport.size() > minReportSize) {
@@ -125,6 +122,8 @@ public class ComputeReport {
             }
         }
     }
+
+
 
     public List<StackTrace> loadLog(File dir, boolean recursive) throws IOException {
         return new StackElementTextReader().loadLog(dir.getAbsolutePath(), recursive);
