@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.logger;
 
 import fr.inria.diversify.sosie.logger.processor.*;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
@@ -16,6 +17,7 @@ import spoon.support.StandardEnvironment;
 import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class Instru {
     protected String projectDirectory;
     protected String srcDirectory;
     protected String testDirectory;
+    protected List<Transformation> transformations;
     private boolean compactLog;
 
 
@@ -36,6 +39,7 @@ public class Instru {
         this.srcDirectory = srcDirectory;
         this.testDirectory = testDirectory;
         this.outputDirectory = outputDirectory;
+        this.transformations = transformations;
     }
 
     public void instru(boolean intruMethodCall, boolean intruVariable, boolean intruError, boolean intruNewTest, boolean intruAssert) throws IOException {
@@ -59,6 +63,15 @@ public class Instru {
     protected void writeId() throws IOException {
         VariableLoggingInstrumenter.writeIdFile(outputDirectory);
         copyLogger(outputDirectory, srcDirectory);
+
+
+        FileWriter partialLogging = new FileWriter(outputDirectory + "/log/partialLogging");
+        if(transformations != null) {
+            partialLogging.write("true");
+        } else {
+            partialLogging.write("false");
+        }
+        partialLogging.close();
     }
 
     protected void instruMainSrc(boolean intruMethodCall, boolean intruVariable, boolean intruError) {
@@ -99,12 +112,10 @@ public class Instru {
         Factory factory = initSpoon(src+System.getProperty("path.separator")+test);
 
         if(intruNewTest) {
-            TestLoggingInstrumenter t = new TestLoggingInstrumenter();
-            applyProcessor(factory, t);
+            applyProcessor(factory, new TestLoggingInstrumenter());
         }
         if(intruAssert) {
-            AssertInstrumenter a = new AssertInstrumenter();
-            applyProcessor(factory, a);
+            applyProcessor(factory, new AssertInstrumenter());
         }
 
         Environment env = factory.getEnvironment();

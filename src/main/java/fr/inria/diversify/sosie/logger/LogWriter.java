@@ -60,4 +60,9 @@ public class LogWriter {
             log.close();
         }
     }
+
+    public static void startLogging(Thread thread, String id) {
+        if ( log == null ) { log = new InstruVerboseLog("LogDirName"); }
+        log.startLogging(thread, id);
+    }
 }

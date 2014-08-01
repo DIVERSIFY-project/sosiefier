@@ -70,7 +70,7 @@ public class Sosie extends AbstractDiversify {
 
     protected void instruTestAndMethod(String project) throws Exception {
         String output = "output_sosieInstru/instru_"+System.currentTimeMillis();
-        Instru instru = new Instru(project,sourceDir,testDir,output);
+        Instru instru = new Instru(project,sourceDir,testDir,output, transformations);
         instru.instru(true,true,false,true,false);
     }
 

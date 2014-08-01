@@ -16,7 +16,7 @@ import java.util.List;
 public class KnowMultisosieQuery extends TransformationQuery {
 
     //Current run result being replayed
-    int currentRunResult = 0;
+    int currentRunResult = -1;
 
     public KnowMultisosieQuery(InputProgram inputProgram) {
         super(inputProgram);
@@ -35,18 +35,16 @@ public class KnowMultisosieQuery extends TransformationQuery {
 
             List<Transformation> result = null;
 
-            int index = currentRunResult;
-            while ( result == null && index < files.length ) {
-                String fileName = files[index].getName();
+            while ( result == null && currentRunResult < files.length ) {
+                currentRunResult++;
+                String fileName = files[currentRunResult].getName();
                 if ( fileName.substring(fileName.length() - 4).toLowerCase().equals("json") ) {
                     RunResults run = new RunResults();
-                    run.loadFromFile(files[index]);
+                    run.loadFromFile(files[currentRunResult]);
                     if (run.isSosieRun()) {
                         result = run.parseTransformations(getInputProgram());
-                        currentRunResult = index;
                     }
                 }
-                index++;
             }
 
             if ( result ==  null ) {

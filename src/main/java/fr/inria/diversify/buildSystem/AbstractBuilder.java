@@ -36,6 +36,9 @@ public abstract class AbstractBuilder {
     //Phases of the compiler
     protected String[] phases;
 
+    //setting file for the compiler
+    protected File setting;
+
     //List containing all errors
     protected List<String> errors;
 
@@ -125,11 +128,11 @@ public abstract class AbstractBuilder {
             };
             thread.start();
             //Wait until the maven thread is over...
-            latch.await();
-            latch = new CountDownLatch(1);
-            /*
+//            latch.await();
+//            latch = new CountDownLatch(1);
+
             thread.join(1000 * timeOut);
-            */
+
             thread.interrupt();
             //So we can kill it afterwards
             killUselessThread();
@@ -151,11 +154,11 @@ public abstract class AbstractBuilder {
                 }
             };
             thread.start();
-            latch.await();
-            latch = new CountDownLatch(1);
+//            latch.await();
+//            latch = new CountDownLatch(1);
 
             //No need for timeouts with latch
-        /*
+
         int tmpTimeOut = 0;
         int factor = 12;
         while (status == -3) {
@@ -163,7 +166,7 @@ public abstract class AbstractBuilder {
             Thread.sleep(1000);
         }
         Log.debug("timeOut init: " + tmpTimeOut);
-        timeOut = tmpTimeOut;*/
+        timeOut = tmpTimeOut;
             thread.interrupt();
             //See if we are in windows and not call this
             killUselessThread();
@@ -299,5 +302,9 @@ public abstract class AbstractBuilder {
 
     public void setSaveOutputDir(String saveOutputDir) {
         this.saveOutputDir = saveOutputDir;
+    }
+
+    public void setSetting(File setting) {
+        this.setting = setting;
     }
 }

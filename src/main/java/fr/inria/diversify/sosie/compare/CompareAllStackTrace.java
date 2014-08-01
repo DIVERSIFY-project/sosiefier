@@ -1,14 +1,10 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.compare.diff.CallDiff;
-import fr.inria.diversify.sosie.compare.diff.Diff;
-import fr.inria.diversify.sosie.compare.diff.Report;
-import fr.inria.diversify.sosie.compare.diff.VariableDiff;
+import fr.inria.diversify.sosie.compare.diff.*;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.*;
 import java.util.*;
@@ -18,48 +14,27 @@ import java.util.function.Function;
  * Created by Simon on 18/04/14.
  */
 public class CompareAllStackTrace {
-    protected List<StackTrace> stackTraces1;
-    protected List<StackTrace> stackTraces2;
+    protected List<StackTrace> originalStackTraces;
+    protected List<StackTrace> sosieStackTraces;
     protected List<Diff> diffToExclude;
+    protected boolean partialTrace;
     protected Collection<Diff> diffs;
 
-    protected Map<String, Report> reports;
-    protected JSONObject previousReport;
+    protected Report reports;
 
-    public CompareAllStackTrace(String dirOriginal, String dirSosie, String diffFile, JSONObject previousReport) throws IOException, JSONException {
-        stackTraces1 = loadLog(dirOriginal, false);
-        stackTraces2 = loadLog(dirSosie, false);
-        diffToExclude = parseDiff(diffFile);
-        reports = new HashMap();
-        if(previousReport != null) {
-            Log.debug("previousReport used");
-
-            reports.put("allTest", new Report(previousReport.getJSONObject("allTest")));
-            Log.debug(reports.get("allTest").summary());
-        } else {
-            reports.put("allTest", new Report());
-        }
-        this.previousReport = previousReport;
+    public CompareAllStackTrace(String dirOriginal, String dirSosie, boolean partialTrace) throws IOException, JSONException {
+        originalStackTraces = loadLog(dirOriginal, false);
+        sosieStackTraces = loadLog(dirSosie, false);
+        this.partialTrace = partialTrace;
+        reports = new Report();
     }
 
-//    /**
-//     * search if the original and sosie (two set of trace) not diverge at the call level
-//     *
-//     * @throws java.io.IOException
-//     */
-//    public Set<Diff> findCallDiff() throws Exception {
-//        return findDiff(cls -> cls.findCallDiff());
-//    }
-//
-//
-//    /**
-//     * search if the original and sosie (two set of trace) not diverge at the  variable level
-//     *
-//     * @throws java.io.IOException
-//     */
-//    public Set<Diff> findVariableDiff() throws Exception {
-//        return findDiff(cls -> cls.findVariableDiff());
-//    }
+    public CompareAllStackTrace(List<StackTrace> originalStackTraces, List<StackTrace> sosieStackTraces, boolean partialTrace) throws IOException, JSONException {
+        this.originalStackTraces = originalStackTraces;
+        this.sosieStackTraces = sosieStackTraces;
+        this.partialTrace = partialTrace;
+        this.reports = new Report();
+    }
 
     /**
      * search if the original and sosie (two set of trace) not diverge at the call level and variable level
@@ -70,26 +45,27 @@ public class CompareAllStackTrace {
         return findDiff(cls -> cls.findDiff());
     }
 
-    protected Set<Diff> findDiff(Function<CompareStackTrace, List<Diff>> diffOperator) throws Exception {
+    protected Set<Diff> findDiff(Function<AbstractCompareStackTrace, List<Diff>> diffOperator) throws Exception {
         Set<Diff> diffs = new HashSet<>();
-        for (StackTrace original : stackTraces1) {
-            for (StackTrace sosie : stackTraces2) {
+        for (StackTrace original : originalStackTraces) {
+            for (StackTrace sosie : sosieStackTraces) {
                 if (sosie.getFullName().equals(original.getFullName())) {
-                    CompareStackTrace cls = new CompareStackTrace(original, sosie);
-                    diffs.addAll(diffOperator.apply(cls));
-                    Report report = cls.getReport();
-                    if(previousReport != null && previousReport.has(original.getName())) {
-                       Report r = new Report(previousReport.getJSONObject(original.getName()));
-                       report.merge2(r);
-                        reports.put(original.getName(), report);
+                    Log.debug("compare: {}",sosie.toString());
+
+                    AbstractCompareStackTrace cls;
+                    if(partialTrace) {
+                        cls = new ComparePartialStackTrace(original,sosie);
                     } else {
-                        reports.put(original.getName(), report);
+                        cls = new CompareStackTrace(original, sosie);
                     }
-                    reports.get("allTest").merge(report);
+                    diffs.addAll(diffOperator.apply(cls));
+                    TestReport testReport = cls.getTestReport();
+                    reports.putTestReport(original.getName(), testReport);
                 }
             }
         }
-        return diffFilter(diffs);
+//        return diffFilter(diffs);
+        return diffs;
     }
 
     protected Set<Diff> diffFilter(Set<Diff> diffs) {
@@ -127,9 +103,6 @@ public class CompareAllStackTrace {
         return filtered;
     }
 
-    protected int idMapSize;
-
-
     protected List<StackTrace> loadLog(String dir, boolean recursive) throws IOException {
         return new StackElementTextReader().loadLog(dir, recursive);
     }
@@ -150,6 +123,7 @@ public class CompareAllStackTrace {
 
             line = reader.readLine();
         }
+
         return diff;
     }
 
@@ -157,50 +131,7 @@ public class CompareAllStackTrace {
         return diffToExclude;
     }
 
-
-//    public JSONObject buildReport() throws JSONException {
-//        JSONObject jsonObject = new JSONObject();
-//        for(String st : reports.keySet()) {
-//            Report report = reports.get(st);
-//            jsonObject.put(st,report.buildReport());
-//        }
-//        if(previousReport != null) {
-//            Iterator it = previousReport.keys();
-//            while (it.hasNext()) {
-//                String key = (String) it.next();
-//                if (!reports.containsKey(key))
-//                    jsonObject.put(key, previousReport.getJSONObject(key));
-//            }
-//        }
-//        Log.info("AllTest: "+reports.get("allTest").summary());
-//        return jsonObject;
-//    }
-
-    public Map<String,Report> reports() throws JSONException {
-        Map<String,Report> allReport = new HashMap();
-        for(String st : reports.keySet()) {
-            Report report = reports.get(st);
-            allReport.put(st,report);
-        }
-//        if(previousReport != null) {
-//            Iterator it = previousReport.keys();
-//            while (it.hasNext()) {
-//                String key = (String) it.next();
-//                if (!reports.containsKey(key))
-//                    jsonObject.put(key, previousReport.getJSONObject(key));
-//            }
-//        }
-//
-        return allReport;
-    }
-
-
-    public String summary()  {
-//        String summary = "";
-//        for(String st : reports.keySet()) {
-//            summary += reports.get(st).summary() + "-----------------------\n"+st+"\n";
-//        }
-//        return summary;
-        return reports.get("allTest").summary();
+    public Report getReport() throws JSONException {
+        return reports;
     }
 }

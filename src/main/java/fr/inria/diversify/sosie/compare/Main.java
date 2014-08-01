@@ -2,12 +2,9 @@ package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.sosie.compare.diff.CallDiff;
 import fr.inria.diversify.sosie.compare.diff.Diff;
-import fr.inria.diversify.sosie.compare.diff.Report;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
-import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
-import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.compiler.SpoonCompiler;
@@ -62,7 +59,7 @@ public class Main {
             if(previousReport != null && new File(previousReport).exists()) {
                 pr = loadJSON(previousReport);
             }
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, pr);
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, false);
             Set<Diff> diff = un.findDiff();
 
 //            Log.debug(un.summary());
@@ -83,10 +80,10 @@ public class Main {
             if(previousReport != null) {
                 pr = loadJSON(previousReport);
             }
-            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, diffToExclude, pr);
+            CompareAllStackTrace un = new CompareAllStackTrace(dirOriginal, dirSosie, false);
             Set<Diff> diff = un.findDiff();
 
-            Log.debug(un.summary());
+//            Log.debug(un.summary());
             writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff", diff);
 //            writeReport(DiversifyProperties.getProperty("result") + "/report", un.buildReport());
 

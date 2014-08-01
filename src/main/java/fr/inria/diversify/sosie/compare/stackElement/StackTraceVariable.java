@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.compare.stackElement;
 
+
 import java.util.*;
 
 /**
@@ -7,11 +8,11 @@ import java.util.*;
  */
 public class StackTraceVariable extends StackTraceElement {
     protected Map<String,Object> vars;
-    protected int id2;
+//    protected int id2;
 
 
     public StackTraceVariable(int id, int depth, String method, Map<Integer,String> idMap, String variables) {
-        id2 = id;
+//        id2 = id;
         originalDeep = depth;
         this.method = method;
         initVariablesFromString(variables.split(":;:"), idMap, 1);
@@ -21,9 +22,9 @@ public class StackTraceVariable extends StackTraceElement {
         originalDeep = deep;
         String[] tmp = value.split(":;:");
         String[] idTmp = tmp[0].split(";");
-        id2 = Integer.parseInt(idTmp[0]);
-        id = Integer.parseInt(idTmp[1]);
-        method = idMap.get(id);
+//        id2 = Integer.parseInt(idTmp[0]);
+        methodId = Integer.parseInt(idTmp[1]);
+        method = idMap.get(methodId);
         initVariablesFromString(tmp, idMap, 1);
     }
 
@@ -36,10 +37,11 @@ public class StackTraceVariable extends StackTraceElement {
             String[] varTmp = varStr[i].split(";");
             try {
                 int key = Integer.parseInt(varTmp[0]);
+                String varName = idMap.get(key);
                 if (varTmp.length == 1)
-                    vars.put(idMap.get(key), "");
+                    vars.put(varName, "");
                 else
-                    vars.put(idMap.get(key), parseValue(varTmp[1]));
+                    vars.put(varName, parseValue(varTmp[1]));
             } catch ( NumberFormatException e ) {}
         }
     }
@@ -61,8 +63,14 @@ public class StackTraceVariable extends StackTraceElement {
             return list;
         }
 
-        if(valueString.contains("@") && valueString.split("@").length != 0)
-            return valueString.split("@")[0];
+        if(valueString.split("@").length > 1)
+            return parseValue(valueString.split("@")[0]);
+
+
+        if( valueString.split("\\$").length > 1) {
+            return parseValue(valueString.split("\\$")[0]);
+        }
+
 
         return valueString;
     }

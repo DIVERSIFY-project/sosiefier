@@ -26,7 +26,7 @@ public class MavenBuilder extends AbstractBuilder {
 
     protected void runPrivate() {
 
-        Log.debug("run maven");
+        Log.debug("run maven (timeout {})",timeOut);
 
         InvocationRequest request = new DefaultInvocationRequest();
 
@@ -36,7 +36,7 @@ public class MavenBuilder extends AbstractBuilder {
 
         for (String phase : phases)
             l.add(phase);
-
+        request.setLocalRepositoryDirectory(setting);
         request.setGoals(l);
 
         MavenInvoker invoker = new MavenInvoker();

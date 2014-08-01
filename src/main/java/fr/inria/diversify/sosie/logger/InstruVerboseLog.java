@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.logger;
 
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class InstruVerboseLog extends InstruLogWriter {
 
     ///File writer for each thread. Each one saved in a different file
-    private Map<Thread, FileWriter> fileWriters;
+    private Map<Thread, PrintWriter> fileWriters;
 
     private String separator = ":;:";
 
@@ -22,13 +23,13 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     public InstruVerboseLog(String logDir) {
         super(logDir);
-        previousVarLog = new HashMap<Thread, String>();
-        fileWriters = new HashMap<Thread, FileWriter>();
+        previousVarLog = new HashMap();
+        fileWriters  = new HashMap<Thread, PrintWriter>();
     }
 
     public void methodCall(Thread thread, String methodSignatureId) {
         String semaphore = "";
-        if (getLogMethod(thread)) {
+        if (getLogMethod(thread) && log(thread)) {
             try {
                 incCallDepth(thread);
                 StringBuilder stringBuilder = new StringBuilder();
@@ -39,7 +40,7 @@ public class InstruVerboseLog extends InstruLogWriter {
                 stringBuilder.append(methodSignatureId);
 
                 String string = stringBuilder.toString();
-                FileWriter fileWriter = getFileWriter(thread);
+                PrintWriter fileWriter = getFileWriter(thread);
                 semaphore = fileWriter.toString() + fileWriter.hashCode();
                 fileWriter.append(string);
 
@@ -59,7 +60,11 @@ public class InstruVerboseLog extends InstruLogWriter {
 
         String semaphore = "";
         try {
+            partialLoggingThread = null;
+
+//            previousVarLog.get(thread).clear();
             resetCallDepth(thread);
+
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("$$$\n");
             stringBuilder.append("NewTest");
@@ -67,7 +72,7 @@ public class InstruVerboseLog extends InstruLogWriter {
             stringBuilder.append(testSignature);
 
             String string = stringBuilder.toString();
-            FileWriter fileWriter = getFileWriter(thread);
+            PrintWriter fileWriter = getFileWriter(thread);
             semaphore = fileWriter.toString() + fileWriter.hashCode();
             fileWriter.append(string);
 
@@ -103,7 +108,7 @@ public class InstruVerboseLog extends InstruLogWriter {
                 }
                 string.append(vars.toString());
             }
-            FileWriter fileWriter = getFileWriter(thread);
+            PrintWriter fileWriter = getFileWriter(thread);
             semaphore = fileWriter.toString() + fileWriter.hashCode();
             fileWriter.append(string.toString());
         } catch (Exception e) {
@@ -113,32 +118,20 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
-    public void writeVar(int id, Thread thread, String methodSignatureId, Object... var) {
+    protected  void writeStartLogging(Thread thread, String id) {
         String semaphore = "";
         if (getLogMethod(thread)) {
             try {
-                StringBuilder string = new StringBuilder();
-                string.append("$$$\n");
-                string.append("V");
-                string.append(callDeep.get(thread));
-                string.append(simpleSeparator);
-                string.append(id + "");
-                string.append(simpleSeparator);
-                string.append(methodSignatureId);
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("$$$\n");
+                stringBuilder.append("S"); //start logging
+                stringBuilder.append(simpleSeparator);
+                stringBuilder.append(id);
 
-                String varsString = buildVars(thread, separator, simpleSeparator, var);
-
-                if (varsString.equals(previousVarLog.get(thread))) {
-                    string.append(separator);
-                    string.append("P");
-                } else {
-                    string.append(varsString);
-                    previousVarLog.put(thread, varsString);
-                }
-                startLogMethod(thread);
-                FileWriter fileWriter = getFileWriter(thread);
+                String string = stringBuilder.toString();
+                PrintWriter fileWriter = getFileWriter(thread);
                 semaphore = fileWriter.toString() + fileWriter.hashCode();
-                fileWriter.append(string.toString());
+                fileWriter.append(string);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -149,64 +142,127 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
+    public void writeVar(int id, Thread thread, String methodSignatureId, Object... var) {
+        String semaphore = "";
+        if (getLogMethod(thread) && log(thread)) {
+            try {
+                StringBuilder string = new StringBuilder();
+                string.append("$$$\n");
+                string.append("V");
+                string.append(callDeep.get(thread));
+                string.append(simpleSeparator);
+                string.append(id + "");
+                string.append(simpleSeparator);
+                string.append(methodSignatureId);
+
+                String varsString = buildVars(thread, id+methodSignatureId, var);
+                if(varsString.isEmpty())
+                    return;
+
+                string.append(varsString);
+
+                startLogMethod(thread);
+                PrintWriter fileWriter = getFileWriter(thread);
+                semaphore = fileWriter.toString() + fileWriter.hashCode();
+                fileWriter.append(string.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                startLogMethod(thread);
+                releaseFileWriter(semaphore);
+            }
+        }
+    }
+
+    protected String buildVars(Thread thread, String methodSignatureId, Object[] vars) {
+        StringBuilder varsString = new StringBuilder();
+        stopLogMethod(thread);
+        Map<String, String> previousVars = previousVarLog.get(thread);
+        for (int i = 0; i < vars.length / 2; i = i + 2) {
+            try {
+                String varName = vars[i].toString();
+                String value;
+                if (vars[i + 1] == null) {
+                    value = "null";
+                } else {
+                    value = vars[i + 1].toString();
+                }
+
+                String previousValue = previousVars.get(methodSignatureId+":"+varName);
+                if(!value.equals(previousValue)) {
+                    previousVars.put(methodSignatureId+":"+varName,value);
+
+                    varsString.append(separator);
+                    varsString.append(varName);
+                    varsString.append(simpleSeparator);
+                    varsString.append(value);
+                }
+            } catch (Exception e) {
+            }
+        }
+        startLogMethod(thread);
+        return varsString.toString();
+    }
+
+
 
     public void writeException(int id, Thread thread, String className, String methodSignature, Object exception) {
         String semaphore = "";
-        try {
-            StringBuilder string = new StringBuilder();
-            string.append("$$$\n");
-            string.append("E");
-            string.append(callDeep.get(thread));
-            string.append(simpleSeparator);
-            string.append(id + "");
-            string.append(simpleSeparator);
-            string.append(className);
-            string.append(simpleSeparator);
-            string.append(methodSignature);
-            string.append(simpleSeparator);
-            if (exception != null)
-                string.append(exception.toString());
-            else
-                string.append("NullException");
+        if (getLogMethod(thread) && log(thread)) {
+            try {
+                StringBuilder string = new StringBuilder();
+                string.append("$$$\n");
+                string.append("E");
+                string.append(callDeep.get(thread));
+                string.append(simpleSeparator);
+                string.append(id + "");
+                string.append(simpleSeparator);
+                string.append(className);
+                string.append(simpleSeparator);
+                string.append(methodSignature);
+                string.append(simpleSeparator);
+                if (exception != null) string.append(exception.toString());
+                else string.append("NullException");
 
-            FileWriter fileWriter = getFileWriter(thread);
-            semaphore = fileWriter.toString() + fileWriter.hashCode();
-            fileWriter.append(string.toString());
+                PrintWriter fileWriter = getFileWriter(thread);
+                semaphore = fileWriter.toString() + fileWriter.hashCode();
+                fileWriter.append(string.toString());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            releaseFileWriter(semaphore);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                releaseFileWriter(semaphore);
+            }
         }
     }
 
     public void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
         String semaphore = "";
-        try {
-            StringBuilder string = new StringBuilder();
-            string.append("$$$\n");
-            string.append("C");
-            string.append(callDeep.get(thread));
-            string.append(simpleSeparator);
-            string.append(id + "");
-            string.append(simpleSeparator);
-            string.append(className);
-            string.append(simpleSeparator);
-            string.append(methodSignature);
-            string.append(simpleSeparator);
-            if (exception != null)
-                string.append(exception.toString());
-            else
-                string.append("NullException");
+        if (getLogMethod(thread) && log(thread)) {
+            try {
+                StringBuilder string = new StringBuilder();
+                string.append("$$$\n");
+                string.append("C");
+                string.append(callDeep.get(thread));
+                string.append(simpleSeparator);
+                string.append(id + "");
+                string.append(simpleSeparator);
+                string.append(className);
+                string.append(simpleSeparator);
+                string.append(methodSignature);
+                string.append(simpleSeparator);
+                if (exception != null) string.append(exception.toString());
+                else string.append("NullException");
 
-            FileWriter fileWriter = getFileWriter(thread);
-            semaphore = fileWriter.toString() + fileWriter.hashCode();
-            fileWriter.append(string.toString());
+                PrintWriter fileWriter = getFileWriter(thread);
+                semaphore = fileWriter.toString() + fileWriter.hashCode();
+                fileWriter.append(string.toString());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            releaseFileWriter(semaphore);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                releaseFileWriter(semaphore);
+            }
         }
     }
 
@@ -214,7 +270,7 @@ public class InstruVerboseLog extends InstruLogWriter {
         for (Thread thread : fileWriters.keySet()) {
             String semaphore = "";
             try {
-                FileWriter flw = getFileWriter(thread);
+                PrintWriter flw = getFileWriter(thread);
                 semaphore = flw.toString() + flw.hashCode();
                 flw.close();
             } catch (Exception e) {
@@ -238,13 +294,15 @@ public class InstruVerboseLog extends InstruLogWriter {
         return map;
     }
 
-    protected synchronized FileWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
+    protected synchronized PrintWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (!fileWriters.containsKey(thread)) {
-            FileWriter f = new FileWriter(getThreadLogFilePath(thread));
+            String fileName = getThreadLogFilePath(thread) + "_" + System.currentTimeMillis();
+            previousVarLog.put(thread,new HashMap<String, String>());
+            PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
             fileWriters.put(thread, f);
             semaphores.put(f.toString() + f.hashCode(), new Semaphore(1));
         }
-        FileWriter f = fileWriters.get(thread);
+        PrintWriter f = fileWriters.get(thread);
         semaphores.get(f.toString() + f.hashCode()).tryAcquire(50, TimeUnit.MILLISECONDS);
         return f;
     }

@@ -3,103 +3,104 @@ package fr.inria.diversify.exp;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.sosie.compare.CompareAllStackTrace;
 import fr.inria.diversify.sosie.compare.diff.Report;
+import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.util.Map;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Created by Simon on 01/07/14.
  */
-public class ComputeReportForClient extends ComputeReport{
-    protected File installToRemove;
+public class ComputeReportForClient extends ComputeReport {
     protected File client;
+    Map<String, Set<String>> errorClient;
+
+    public ComputeReportForClient() {
+        super();
+        errorClient = new HashMap();
+    }
 
     public static void main(String[] args) throws Exception {
-        String resultDirectory = args[4];
+        String resultDirectory = args[3];
         String sosiesDirectory = args[0];
         ComputeReportForClient computeReport = new ComputeReportForClient();
-        computeReport.setInstallToRemove(new File(args[5]));
         computeReport.setClient(new File(args[1]));
-        computeReport.setLogSosieDirectory(args[2]);
-        computeReport.setOriginalReport(computeReport.buildReport(computeReport.loadJSON(args[3])));
+//        computeReport.setOriginalLogDirectory(new File(args[2]));
 
 
-        Map<String, Map<String, Report>> reportInternal = computeReport.buildAllReport(new File(sosiesDirectory), false);
-        computeReport.writeSummary(reportInternal, resultDirectory + "/reportInternal");
-
-        Map<String, Map<String, Report>> reportWhitSosie = computeReport.buildAllReport(new File(sosiesDirectory), true);
-        computeReport.writeSummary(reportWhitSosie, resultDirectory+"/reportWithSosie");
-
-        computeReport.writeSummary(computeReport.removeKnowDiffInSosie(reportInternal,reportWhitSosie), resultDirectory+"/reportWithSosie2");
+        computeReport.buildAllReport(new File(sosiesDirectory), new File(resultDirectory));
+        computeReport.writeSummary(resultDirectory);
     }
 
 
-    protected Map<String, Report> buildReportFor(File sosieDir, boolean withSosie) throws Exception {
-        Map<String, Report> reports;
-        if(installToRemove.exists())
-            FileUtils.forceDelete(installToRemove);
+    public void buildAllReport(File sosiesDir, File resultDir) throws IOException {
+        for(File sosie : sosiesDir.listFiles()) {
+            if(sosie.isDirectory()) {
+                try {
+                    Log.info("build report for {} with the sosie {}",client, sosie.getName());
+                    setPartialLogging(sosie, false);
+                    installProgram(sosie);
 
-        if(withSosie) {
-            reports = buildReportFor(sosieDir, logSosieDirectory);
-        } else {
-            File originalLodDir = new File(client.getAbsolutePath()+"/log");
-            File newLodDir = new File(client.getAbsolutePath()+"/oldLog");
-            makeLogFor(sosieDir);
-            moveLogFile(newLodDir,originalLodDir);
-            reports = buildReportFor(sosieDir, newLodDir.getAbsolutePath());
+                    File sosieLogDir2 = new File(client+"/oLog");
+                    if(sosieLogDir2.exists()) {
+                        FileUtils.forceDelete(sosieLogDir2);
+                    }
+                    FileUtils.forceMkdir(sosieLogDir2);
+
+                    File sosieLogDir1 = new File(makeLogFor(client));
+                    moveLogFile(sosieLogDir2,sosieLogDir1);
+                    makeLogFor(client);
+                    List<StackTrace> stackTrace1 = loadLog(sosieLogDir1, false);
+                    List<StackTrace> stackTrace2 = loadLog(sosieLogDir2, false);
+
+                    Log.info("compare sosie/sosie");
+                    Report sosieSosieReport = compareTrace(stackTrace1, stackTrace2, false);
+
+                    Log.info("compare sosie/original");
+                    Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
+
+
+
+                    writeCSVReport(
+                            originalSosieReport.buildAllTest(),
+                            sosieSosieReport.buildAllTest(),
+                            resultDir.getAbsolutePath() + "/" + sosie.getName()+ ".csv");
+
+
+                    if(sosieSosieReport.size() > minReportSize
+                            && originalSosieReport.size() > minReportSize) {
+
+                    sosieSosieSummary += sosie.getName() + ": \n" + sosieSosieReport.summary() + "\n";
+                    globalSosieSosieReport = updateGlobalReport(globalSosieSosieReport, sosieSosieReport);
+
+                    originalSosieSummary += sosie.getName() + ": \n" + originalSosieReport.summary() + "\n";
+                    globalOriginalSosieReport = updateGlobalReport(globalOriginalSosieReport, originalSosieReport);
+                    } else {
+                        if(!errorClient.containsKey(client.getAbsolutePath())) {
+                            errorClient.put(client.getAbsolutePath(),new HashSet());
+                        }
+                        errorClient.get(client.getAbsolutePath()).add(sosie.getAbsolutePath());
+                    }
+                } catch (Exception e) {
+                    if(!errorClient.containsKey(client.getAbsolutePath())) {
+                        errorClient.put(client.getAbsolutePath(),new HashSet());
+                    }
+                    errorClient.get(client.getAbsolutePath()).add(sosie.getAbsolutePath());
+                }
+            }
         }
-        if(installToRemove.exists())
-            FileUtils.forceDelete(installToRemove);
-        return reports;
     }
 
-    protected Map<String, Report> buildReportFor(File sosieDir, String sosieLogDir) throws Exception {
-        String originalLodDir = client.getAbsolutePath()+"/log";
-        Map<String, Report> report;
-        int oldSize = 1;
-        int newSize;
-
-        makeLogFor(sosieDir);
-        CompareAllStackTrace un = new CompareAllStackTrace(originalLodDir, sosieLogDir, diffToExclude, null);
-        un.findDiff();
-        report = un.reports();
-        Log.debug(un.summary());
-        report = mergeReports(report, un.reports());
-        newSize = reportSize(report);
-
-        while(oldSize != newSize) {
-            makeLogFor(sosieDir);
-            un = new CompareAllStackTrace(originalLodDir, sosieLogDir, diffToExclude, null);
-            un.findDiff();
-            report = un.reports();
-            Log.debug(un.summary());
-            report = mergeReports(report, un.reports());
-            oldSize = newSize;
-            newSize = reportSize(report);
-        }
-
-        Log.info(report.get("allTest").summary());
-        return report;
-    }
-
-    protected void makeLogFor(File sosieDir) throws Exception {
-        File logDir = new File(client.getAbsolutePath()+"/log");
-
-        deleteLog(logDir);
-
-        installProgam(sosieDir);
-        FileUtils.copyFileToDirectory(new File(sosieDir.getAbsolutePath()+"/log/id"), logDir);
-        runClient();
-
-        deleteUselessLog(logDir);
-    }
-
-    protected void installProgam(File programDirectory) throws Exception {
+    protected void installProgram(File programDirectory) throws Exception {
+        Log.info("install program: {}",programDirectory.getAbsoluteFile());
         MavenBuilder builder = new MavenBuilder(programDirectory.getAbsolutePath(), "src/main/java");
 
-        builder.setTimeOut(100);
+        builder.setTimeOut(600);
+        builder.setSetting(localRepository);
         builder.setPhase(new String[]{"clean", "install"});
         builder.runBuilder();
         int status = builder.getStatus();
@@ -115,34 +116,16 @@ public class ComputeReportForClient extends ComputeReport{
         }
     }
 
-    protected void runClient() throws Exception {
-        runProgram(client);
-    }
+    protected void writeErrorReport(String resultDir) throws IOException {
+        File file = new File(resultDir + "/errorClientRepport");
+        file.createNewFile();
+        FileWriter writer = new FileWriter(file);
 
-    protected void runProgram(File directory) throws Exception {
-        MavenBuilder builder = new MavenBuilder(directory.getAbsolutePath(), "src/main/java");
-
-        builder.setTimeOut(100);
-        builder.setPhase(new String[]{"clean", "test"});
-        builder.runBuilder();
-        int status = builder.getStatus();
-
-        int count = 0;
-        while(status != 0 && count < 5) {
-            count++;
-            builder.runBuilder();
-            status = builder.getStatus();
-        }
-        if(status != 0) {
-            throw new Exception("error during the build of " + directory.getAbsolutePath());
-        }
+        writer.write(errorClient.toString());
+        writer.close();
     }
 
     public void setClient(File client) {
         this.client = client;
-    }
-
-    public void setInstallToRemove(File installToRemove) {
-        this.installToRemove = installToRemove;
     }
 }

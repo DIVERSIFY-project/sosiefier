@@ -69,7 +69,7 @@ public class MavenOutputParser {
 
         for (int i = 0; i < output.length && getCompileError() == false; i++) {
             String s = output[i];
-
+            Log.debug(s);
             Matcher m = testResumePattern.matcher(s);
             boolean matches = m.find();
             if (matches) {

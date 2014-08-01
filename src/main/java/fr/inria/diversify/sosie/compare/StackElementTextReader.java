@@ -1,7 +1,5 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.compare.stackElement.*;
-import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
 
@@ -21,10 +19,9 @@ public class StackElementTextReader extends StackElementReader {
 
     @Override
     public List<StackTrace> loadLog(String dir, boolean recursive) throws IOException {
-        List<StackTrace> list = new ArrayList<>();
+        List<StackTrace> list = new ArrayList();
         File file = new File(dir);
         Map<Integer, String> idMap = loadIdMap(dir + "/id");
-        int idMapSize = idMap.size();
 
         Log.debug("load trace in directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles()) {
@@ -44,13 +41,14 @@ public class StackElementTextReader extends StackElementReader {
                 }
             }
         }
+        Log.debug("number of stackTrace: {}",list.size());
         return list;
     }
 
 
     protected Map<String, List<String>> splitByTest(File file) throws Exception {
-        Map<String, List<String>> traceByTest = new HashMap<>();
-        Set<String> testToExclude = new HashSet<>();
+        Map<String, List<String>> traceByTest = new HashMap();
+        Set<String> testToExclude = new HashSet();
         BufferedReader reader = new BufferedReader(new FileReader(file));
         reader.readLine();
         String line = reader.readLine();
@@ -59,8 +57,9 @@ public class StackElementTextReader extends StackElementReader {
         if(line == null)
             throw new Exception("empty file");
 
-        List<String> trace = new LinkedList<>();
+        List<String> trace = new LinkedList();
         traceByTest.put("null",trace);
+        testToExclude.add("null");
         while (line != null) {
             if(!line.isEmpty()) {
                 if(line.endsWith("$$$")) {
@@ -71,8 +70,7 @@ public class StackElementTextReader extends StackElementReader {
                                 testToExclude.add(test);
                                 trace = traceByTest.get(test);
                             } else {
-//                                Log.debug("New test: {}",test);
-                                trace = new LinkedList<>();
+                                trace = new LinkedList();
                                 traceByTest.put(test, trace);
                             }
                         } else {
@@ -96,7 +94,6 @@ public class StackElementTextReader extends StackElementReader {
         Log.debug("all test: {}, to exclude: {}", traceByTest.size(), testToExclude.size());
         for(String test: testToExclude)
             traceByTest.remove(test);
-
 
         return traceByTest;
     }

@@ -1,7 +1,7 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 
-import spoon.processing.AbstractProcessor;
+import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
@@ -10,12 +10,9 @@ import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.CtAbstractVisitor;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
-import spoon.support.reflect.code.CtBlockImpl;
 import spoon.support.reflect.code.CtIfImpl;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.*;
 
 /**
@@ -23,10 +20,12 @@ import java.util.*;
  * Use basic scope inference (the real one is hard due to the complex semantics of "static" and "final"
  * (w.r.t. init, anonymous classes, etc.)
  */
-public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtStatement> {
-    protected static Map<CtExecutable, Integer> count = new HashMap();
-    protected static Map<String, String> idMap = new HashMap();
+public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
     protected int tmpVarCount = 0;
+
+    public VariableLoggingInstrumenter(List<Transformation> transformations) {
+        super(transformations);
+    }
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {
@@ -37,7 +36,7 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
                 (CtIf.class.isAssignableFrom(candidate.getClass())
                         || CtLoop.class.isAssignableFrom(candidate.getClass()))
                         && !hasLabelAndGoto(candidate)
-                ;
+                        && !containsGoto(candidate);
     }
 
     public boolean hasStaticParent(CtElement el) {
@@ -61,7 +60,6 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
         } catch (Exception e) {
         }
     }
-
     /**
      * Instruments the loop of If
      *
@@ -70,12 +68,15 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
     private void instruLoopOrIf(CtStatement statement) {
 
         boolean inStaticCode = hasStaticParent(statement);
-        String id = VariableLoggingInstrumenter.idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
-//        String snippet = "\tfr.inria.diversify.sosie.logger.LogWriter.writeVar(" + getCount(statement) + ",Thread.currentThread(),\""
-//                + id + "\",{";
+        String id = idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
 
         String tmpVar = "tmpVarWrite" + tmpVarCount++;
-        String snippet = "Object[] " + tmpVar + " = {";
+        String snippet;
+        if(containsTransformation(statement.getParent(CtExecutable.class))) {
+            snippet = getLogName()+".startLogging(Thread.currentThread(),\""+id+"\");\n\tObject[] " + tmpVar + " = {";
+        } else {
+            snippet =  "Object[] " + tmpVar + " = {";
+        }
 
         int nVisibleVariables = 0;
         for (CtVariable<?> var : getVariablesInScope(statement)) {
@@ -96,7 +97,7 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
                 // we remove the "final" for solving "may have not been in initialized" in constructor code
                 // this does not work for case statements
                 // var.getModifiers().remove(ModifierKind.FINAL);
-                snippet += "\"" + idFor(var.getSimpleName()) + "\"," + var.getSimpleName() + ",";
+                snippet += "\"" + idForVar(var,statement) + "\"," + var.getSimpleName() + ",";
             }
         }
         snippet = snippet.substring(0, snippet.length() - 1);
@@ -133,6 +134,16 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
                 compileUnit.addSourceCodeFragment(new SourceCodeFragment(endIndex, "}", 0));
             }
         }
+    }
+
+    protected String idForVar(CtVariable<?> var, CtStatement statement) {
+        String varName;
+        if(var instanceof CtField) {
+            varName = getClass(statement).getQualifiedName() +" "+var.getSimpleName();
+        } else {
+            varName = getMethod(statement).getSignature()+"."+var.getSimpleName();
+        }
+        return idFor(varName);
     }
 
 
@@ -214,8 +225,6 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
                 }
             }
 
-            ;
-
             // for a class we add the fields
             @Override
             public <T> void visitCtClass(CtClass<T> ctClass) {
@@ -232,45 +241,6 @@ public class VariableLoggingInstrumenter extends AbstractLogginInstrumenter<CtSt
         visitor.scan(el);
 
         return variables;
-    }
-
-    protected static String idFor(String string) {
-        if (!idMap.containsKey(string))
-            idMap.put(string, idMap.size() + "");
-
-        return idMap.get(string);
-    }
-
-    public static void writeIdFile(String dir) throws IOException {
-        File file = new File(dir + "/log");
-        file.mkdirs();
-        FileWriter fw = new FileWriter(file.getAbsoluteFile() + "/id");
-
-        for (String s : idMap.keySet())
-            fw.write(idMap.get(s) + " " + s + "\n");
-
-        fw.close();
-    }
-
-    protected int getCount(CtStatement stmt) {
-        CtExecutable parent = stmt.getParent(CtExecutable.class);
-        if (count.containsKey(parent))
-            count.put(parent, count.get(parent) + 1);
-        else
-            count.put(parent, 0);
-        return count.get(parent);
-    }
-
-
-    protected CtSimpleType<?> getClass(CtStatement stmt) {
-        return stmt.getParent(CtSimpleType.class);
-    }
-
-    protected CtExecutable<?> getMethod(CtStatement stmt) {
-        CtExecutable<?> ret = stmt.getParent(CtMethod.class);
-        if (ret == null)
-            ret = stmt.getParent(CtConstructor.class);
-        return ret;
     }
 
     public boolean hasLabelAndGoto(CtStatement stmt) {
