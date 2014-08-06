@@ -267,6 +267,10 @@ public class InstruVerboseLog extends InstruLogWriter {
     }
 
     public void close() {
+
+        //Writes the Source position calls to file
+        writeSourcePositionCallToFile("sourcePositionCall.log");
+
         for (Thread thread : fileWriters.keySet()) {
             String semaphore = "";
             try {

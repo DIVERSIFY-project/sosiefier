@@ -29,26 +29,29 @@ public class OverlapCounter {
      *
      * @throws IOException in case of errors executing the example
      */
-    public void main() throws IOException {
+    public static void main(String[] args) throws IOException {
 
         HashMap<String, Integer> statements = new HashMap<>();
 
-        String execDir = "C:\\MarcelStuff\\projects\\DIVERSE\\programs\\coverage information\\";
+        //String execDir = "C:\\MarcelStuff\\projects\\DIVERSE\\programs\\coverage data\\jacoco\\easymock\\";
+        String execDir = "C:\\MarcelStuff\\projects\\DIVERSE\\programs\\coverage data\\jacoco\\junit\\";
         String[] s = {
-                execDir + "commons-collections-4.0.exec", execDir + "commons-configuration.exec",
-                execDir + "commons-lang-3.1.exec", execDir + "netty.exec"};
+                execDir + "common-collections.4.0.exec", execDir + "common-configuration.exec",
+                execDir + "common-lang.exec", execDir + "easymock3.2.exec", execDir + "netty.exec"};
 
-        String classesDir = "C:\\MarcelStuff\\projects\\DIVERSE\\programs\\input-programs\\easymock-light-3.2\\target\\classes";
+        String classesDir = "C:\\MarcelStuff\\projects\\DIVERSE\\programs\\input-programs\\junit\\target\\classes";
 
         for (String path : s) {
             //Obtain the coverage bundle
             ExecFileLoader loader = new ExecFileLoader();
-            loader.load(new File(path));
+            File fcoverage = new File(path);
+            if ( !fcoverage.exists() ) { continue; }
+            loader.load(fcoverage);
             final CoverageBuilder coverageBuilder = new CoverageBuilder();
             final Analyzer analyzer = new Analyzer(loader.getExecutionDataStore(), coverageBuilder);
             analyzer.analyzeAll(new File(classesDir));
 
-            HashMap<String, Integer> localStatements = new HashMap<>();
+            HashSet<String> localStatements = new HashSet<>();
             Collection<IClassCoverage> clss = coverageBuilder.getClasses();
 
             for (IClassCoverage c : clss) {
@@ -58,14 +61,15 @@ public class OverlapCounter {
                         if (line.getStatus() > ICounter.NOT_COVERED) {
                             String ls = c.getName() + "::" + m.getName() + "::" + i;
                             System.out.println(ls);
-                            if (localStatements.containsKey(ls)) throw new RuntimeException("toString is not good");
-                            localStatements.put(ls, 1);
+                            if (!localStatements.contains(ls)) {
+                                localStatements.add(ls);
+                            }
                         }
                     }
                 }
             }
 
-            for (String k : localStatements.keySet()) {
+            for (String k : localStatements) {
                 if (statements.containsKey(k)) {
                     Integer v = statements.get(k);
                     v++;
@@ -96,8 +100,8 @@ public class OverlapCounter {
         String result = "";
         for (Object o : list) {
             Map.Entry<String, Integer> se1 = (Map.Entry<String, Integer>) o;
-            result += se1.getValue() + ", ";
+            System.out.println(se1.getValue() + ", " + se1.getKey());
         }
-        System.out.print(result);
+        //System.out.print(result);
     }
 }

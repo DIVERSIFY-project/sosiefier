@@ -37,6 +37,9 @@ public abstract class InstruLogWriter {
     ///Previous logs of variables status. Useful to check whether they have change
     protected Map<Thread, Map<String,String>> previousVarLog;
 
+    //Number of times a transplantation point is called
+    protected HashMap<String, Integer> transplantPointCallCount;
+
     protected Boolean partialLogging = null;
 
     protected Set<Thread> partialLoggingThread;
@@ -52,8 +55,9 @@ public abstract class InstruLogWriter {
     public InstruLogWriter(String logDir) {
         if (dir == null) initDir(logDir);
         semaphores = new HashMap<String, Semaphore>();
-        callDeep = new  HashMap<Thread, Integer>();
+        callDeep = new HashMap<Thread, Integer>();
         logMethod = new HashMap<Thread, Boolean>();
+        transplantPointCallCount = new HashMap<String, Integer>();
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
@@ -95,6 +99,36 @@ public abstract class InstruLogWriter {
     public abstract void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception);
 
     public  abstract void close();
+
+    public void countSourcePositionCall(String transplantationPoint) {
+        if  ( !transplantPointCallCount.containsKey(transplantationPoint) ) {
+            transplantPointCallCount.put(transplantationPoint, 1);
+        } else {
+            int k = transplantPointCallCount.get(transplantationPoint) + 1;
+            transplantPointCallCount.put(transplantationPoint, k);
+        }
+    }
+
+
+    /**
+     * Writes the source position calls information to file
+     *
+     * @param filePath
+     */
+    protected void writeSourcePositionCallToFile(String filePath) {
+        try {
+            if ( transplantPointCallCount.size() > 0 ) {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath), 8 * 1024);
+                StringBuilder sb = new StringBuilder();
+                for (Map.Entry<String, Integer> p : transplantPointCallCount.entrySet()) {
+                    sb.append(p.getKey()).append(", ").append(p.getValue()).append("\n");
+                }
+                writer.write(sb.toString());
+            }
+        } catch (IOException e ) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
     /**
      * Increases the depth of the stack for a given thread

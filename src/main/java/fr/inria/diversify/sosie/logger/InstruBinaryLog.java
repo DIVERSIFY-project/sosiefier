@@ -2,6 +2,7 @@ package fr.inria.diversify.sosie.logger;
 
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.security.KeyPair;
 import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -16,8 +17,8 @@ public class InstruBinaryLog extends InstruLogWriter {
     ///Magic number for method in log tuples
     public static final byte LOG_METHOD = 1;
 
-    ///Magic number for class in log tuples
-    public static final byte LOG_CLASS = 2;
+    ///Magic number for transplantation point in log tuples
+    public static final byte LOG_TRANSPLANT_CALL = 2;
 
     ///Magic number for tests in log tuples
     public static final byte LOG_TEST = 3;
@@ -285,6 +286,9 @@ public class InstruBinaryLog extends InstruLogWriter {
     @Override
     public void close() {
 
+        //Writes the Source position calls to file
+        writeSourcePositionCallToFile("sourcePositionCall.log");
+
         for (Thread thread : streamsPerThread.keySet()) {
             //String semaphore = "";
             try {
@@ -297,6 +301,8 @@ public class InstruBinaryLog extends InstruLogWriter {
             }
         }
     }
+
+
 
     @Override
     protected void writeStartLogging(Thread thread, String id) {

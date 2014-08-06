@@ -116,7 +116,7 @@ public class ComputeReport {
                         errorSosie.add(sosie.getName());
                     }
                 } catch (Exception e) {
-                    Log.info("error for sosie: {}",sosie.getName());
+                    Log.info("error for sosie: {}. Error{}",sosie.getName(), e.getMessage());
                    errorSosie.add(sosie.getName());
                 }
             }

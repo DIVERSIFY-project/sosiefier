@@ -31,10 +31,28 @@ public class Instru {
     protected String srcDirectory;
     protected String testDirectory;
     protected List<Transformation> transformations;
+
     private boolean compactLog;
 
+    //What to instrument?
 
-    public Instru(String projectDirectory, String srcDirectory, String testDirectory ,String outputDirectory) {
+    //Instrument method calls
+    private boolean intruMethodCall;
+    //Instrument variables
+    private boolean intruVariable;
+    //Instrument errors
+    private boolean intruError;
+    //Instrument asserts
+    private boolean intruAssert;
+    //Instrument new test
+    private boolean intruNewTest;
+
+    //Instrument call counts over transplantation points
+    private boolean instruTransplantationPointCallCount;
+
+
+    public Instru(String projectDirectory, String srcDirectory, String testDirectory ,String outputDirectory,
+                  List<Transformation> transformations) {
         this.projectDirectory = projectDirectory;
         this.srcDirectory = srcDirectory;
         this.testDirectory = testDirectory;
@@ -43,6 +61,7 @@ public class Instru {
     }
 
     public void instru(boolean intruMethodCall, boolean intruVariable, boolean intruError, boolean intruNewTest, boolean intruAssert) throws IOException {
+
         initOutputDirectory();
 
         if(intruMethodCall || intruVariable || intruError)
@@ -50,6 +69,18 @@ public class Instru {
 
         if(intruAssert || intruNewTest)
             instruTestSrc(intruNewTest, intruAssert);
+
+        writeId();
+    }
+
+    public void instru() throws IOException {
+        initOutputDirectory();
+
+        if(getIntruMethodCall() || getIntruVariable() || getIntruError() || getInstruTransplantationPointCallCount())
+            instruMainSrc(getIntruMethodCall(), getIntruVariable(), getIntruError());
+
+        if(getIntruAssert() || getIntruNewTest())
+            instruTestSrc(getIntruNewTest(), getIntruAssert());
 
         writeId();
     }
@@ -80,24 +111,29 @@ public class Instru {
         Factory factory = initSpoon(src);
 
         if(intruMethodCall) {
-            MethodLoggingInstrumenter m = new MethodLoggingInstrumenter();
+            MethodLoggingInstrumenter m = new MethodLoggingInstrumenter(transformations);
             m.setUseCompactLog(compactLog);
             applyProcessor(factory, m);
         }
         if(intruVariable) {
-            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter();
+            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter(transformations);
             v.setUseCompactLog(compactLog);
             applyProcessor(factory, v);
         }
         if(intruError) {
-            ErrorLoggingInstrumenter e = new ErrorLoggingInstrumenter();
+            ErrorLoggingInstrumenter e = new ErrorLoggingInstrumenter(transformations);
             e.setUseCompactLog(compactLog);
             applyProcessor(factory, e);
+        }
+        if ( instruTransplantationPointCallCount ) {
+            TransplantationPointCallCountInstrumenter tcp =
+                    new TransplantationPointCallCountInstrumenter(transformations);
+            tcp.setUseCompactLog(compactLog);
+            applyProcessor(factory, tcp);
         }
 
         Environment env = factory.getEnvironment();
         env.useSourceCodeFragments(true);
-
         applyProcessor(factory,
                        new JavaOutputProcessorWithFilter(new File(out),
                                                          new FragmentDrivenJavaPrettyPrinter(env),
@@ -192,5 +228,53 @@ public class Instru {
 
     public boolean getCompactLog() {
         return compactLog;
+    }
+
+    public boolean getIntruMethodCall() {
+        return intruMethodCall;
+    }
+
+    public void setIntruMethodCall(boolean intruMethodCall) {
+        this.intruMethodCall = intruMethodCall;
+    }
+
+    public boolean getIntruVariable() {
+        return intruVariable;
+    }
+
+    public void setIntruVariable(boolean intruVariable) {
+        this.intruVariable = intruVariable;
+    }
+
+    public boolean getIntruError() {
+        return intruError;
+    }
+
+    public void setIntruError(boolean intruError) {
+        this.intruError = intruError;
+    }
+
+    public boolean getIntruAssert() {
+        return intruAssert;
+    }
+
+    public void setIntruAssert(boolean intruAssert) {
+        this.intruAssert = intruAssert;
+    }
+
+    public boolean getIntruNewTest() {
+        return intruNewTest;
+    }
+
+    public void setIntruNewTest(boolean intruNewTest) {
+        this.intruNewTest = intruNewTest;
+    }
+
+    public boolean getInstruTransplantationPointCallCount() {
+        return instruTransplantationPointCallCount;
+    }
+
+    public void setInstruTransplantationPointCallCount(boolean instruTransplantationPointCallCount) {
+        this.instruTransplantationPointCallCount = instruTransplantationPointCallCount;
     }
 }

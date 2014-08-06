@@ -40,6 +40,9 @@ public class DoubleInputModification extends LiteralInputModification {
                 subsString = "(" + String.valueOf(((double) valueObj) * -1) + "d)";
                 break;
             //Random
+
+            //have adds and subs
+
             case 3:
                 Double fVal = (Double) valueObj;
                 subsString = String.valueOf(fVal * r.nextFloat() * 10) + "d";

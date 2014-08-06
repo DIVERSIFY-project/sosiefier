@@ -245,8 +245,11 @@ public class DiversifyMain {
                 inputProgram.processCodeFragments();
                 return new KnowMultisosieQuery(inputProgram);
             case "singleconsecutive":
+                int startSosieIndex = Integer.parseInt(DiversifyProperties.getProperty("start.sosie.index", "0"));
                 inputProgram.processCodeFragments();
-                return new ConsecutiveKnownSosieQuery(inputProgram);
+                ConsecutiveKnownSosieQuery q = new ConsecutiveKnownSosieQuery(inputProgram);
+                q.setCurrentTrial(startSosieIndex);
+                return q;
 
             default:
                 //Try to construct the query from the explicit class

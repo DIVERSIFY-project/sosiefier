@@ -3,6 +3,7 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.diversification.Sosie;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
@@ -106,6 +107,7 @@ public class KnownSosieQuery extends TransformationQuery {
                 }
             }
         }
+
         //Order the sosies from less covered to more covered. This way we increases the chances that an uniformly
         //distributed selection covers most of the clients
         if ( coveragePresent ) {
@@ -121,6 +123,19 @@ public class KnownSosieQuery extends TransformationQuery {
                 return sizeDiff;
             });
         }
+
+        HashSet<String> setPos = new HashSet<>();
+        ArrayList<SosieWithCoverage> overlap = new ArrayList<>();
+
+        for ( int i = sosies.size() - 1; i >= 0; i-- ) {
+            String pos = ((ASTTransformation)sosies.get(i).transformation).
+                    getTransplantationPoint().getCtCodeFragment().getPosition().toString();
+            if ( !setPos.contains(pos) ) {
+                System.out.println(sosies.get(i).coverage.size() + ", " + pos);
+                setPos.add(pos);
+            }
+        }
+        System.out.println("OverlapEnd");
     }
 
     @Override
