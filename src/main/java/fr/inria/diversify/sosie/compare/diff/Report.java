@@ -122,7 +122,7 @@ public class Report {
             Map<String, String> pointType = testReports.get(test).pointReport();
             for(String point : sameVarPerTest.get(test)) {
                 String type = pointType.get(point);
-                if(type.equals("FD") || type.equals("VD")) {
+                if(type != null && (type.equals("FD") || type.equals("VD"))) {
                     if(!map.containsKey(test)) {
                         map.put(test, new HashSet());
                     }

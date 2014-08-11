@@ -102,7 +102,7 @@ public class ComputeReport {
                     Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
 
 
-                        writeCSVReport(originalSosieReport.buildAllTest(), sosieSosieReport.buildAllTest(), resultDir.getAbsolutePath() + "/" + sosie.getName() + ".csv");
+                    writeCSVReport(originalSosieReport.buildAllTest(), sosieSosieReport.buildAllTest(), resultDir.getAbsolutePath() + "/" + sosie.getName() + ".csv");
 
                     if(sosieSosieReport.size() > minReportSize
                             && originalSosieReport.size() > minReportSize) {

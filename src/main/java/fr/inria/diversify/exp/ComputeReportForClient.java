@@ -64,9 +64,11 @@ public class ComputeReportForClient extends ComputeReport {
 
                     Log.info("compare sosie/original");
                     Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
-
-                    writeGoodDiff(resultDir.getAbsolutePath(), sosie.getName(), sosieSosieReport, originalSosieReport);
-
+                    try {
+                        writeGoodDiff(resultDir.getAbsolutePath(), sosie.getName(), sosieSosieReport, originalSosieReport);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     writeCSVReport(
                             originalSosieReport.buildAllTest(),
                             sosieSosieReport.buildAllTest(),

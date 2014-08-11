@@ -48,30 +48,32 @@ public class StackTraceVariable extends StackTraceElement {
 
     public Map<String,Object> getVariables() {return vars;}
 
-    protected Object parseValue(String valueString) {
-        if(valueString.startsWith("{") && valueString.endsWith("}")) {
+    protected Object parseValue(String value) {
+        //value is a set
+        if(value.startsWith("{") && value.endsWith("}")) {
+
             Set<Object> set = new HashSet<>();
-            for(String s : valueString.substring(1,valueString.length()-1).split(", "))
+            for(String s : value.substring(1,value.length()-1).split(", ")) {
                 set.add(parseValue(s));
+            }
             return set;
         }
-
-        if(valueString.startsWith("[") && valueString.endsWith("]")) {
+        //value is a array or a list
+        if(value.startsWith("[") && value.endsWith("]")) {
             List<Object> list = new ArrayList<>();
-            for(String s : valueString.substring(1,valueString.length()-1).split(", "))
+            for(String s : value.substring(1,value.length()-1).split(", ")) {
                 list.add(parseValue(s));
+            }
             return list;
         }
-
-        if(valueString.split("@").length > 1)
-            return parseValue(valueString.split("@")[0]);
-
-
-        if( valueString.split("\\$").length > 1) {
-            return parseValue(valueString.split("\\$")[0]);
+        //toString() is not define
+        if(value.split("@").length > 1) {
+            return parseValue(value.split("@")[0]);
         }
-
-
-        return valueString;
+        //toString() is not define
+        if( value.split("\\$").length > 1) {
+            return parseValue(value.split("\\$")[0]);
+        }
+        return value;
     }
 }

@@ -12,6 +12,8 @@ import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
 
 import java.io.*;
@@ -31,7 +33,7 @@ public class GenerateReport {
     }
 
     public GenerateReport(String propertiesFile) throws Exception {
-
+            Log.DEBUG();
             inputConfiguration = new InputConfiguration(propertiesFile);
 
             new DiversifyProperties(inputConfiguration);
@@ -40,6 +42,7 @@ public class GenerateReport {
         if (DiversifyProperties.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
             t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
+            t.DependencyResolver(DiversifyProperties.getProperty("client") + "/pom.xml");
         }
         initSpoon();
         buildReport();
@@ -47,8 +50,11 @@ public class GenerateReport {
 
 
     protected void initSpoon() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        Factory factory = new SpoonMetaFactory().buildNewFactory(inputConfiguration.getProperty("project") + "/" +
-                                                                         inputConfiguration.getProperty("src"), Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
+        String src = inputConfiguration.getProperty("project") + "/" + inputConfiguration.getProperty("src");
+        String srcClient = inputConfiguration.getProperty("client") + "/" + inputConfiguration.getProperty("src");
+        String testClient = inputConfiguration.getProperty("client") + "/" + inputConfiguration.getProperty("testSrc");
+        Factory factory = new SpoonMetaFactory().buildNewFactory(
+                src+System.getProperty("path.separator")+srcClient+System.getProperty("path.separator")+testClient, Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
         initInputProgram(factory);
     }
 
@@ -84,10 +90,11 @@ public class GenerateReport {
     protected void writeReportOf(String sosie, String point, List<String> tests) throws Exception {
         String trans = inputConfiguration.getProperty("sosieDir") +"/"+sosie+"/trans.json";
 
-        String result = "sosie: "+sosie +"\npoint:"+point +"\ntest";
+        String result = "sosie: "+sosie +"\npoint:"+point +"\ntests:";
 
         for(String test: tests) {
-            result += "\n\t"+test;
+//            result += "\n"+test+":\n";
+            result += "\n"+getTest(test).toString();
         }
 
            int i = 0;
@@ -96,10 +103,23 @@ public class GenerateReport {
                 result += "\n\nTransformation: "+i+":\n"+transformationDetail(t);
 
         }
-
+        File dir = new File(inputConfiguration.getProperty("resultDir"));
+        if(!dir.exists()) {
+            dir.mkdirs();
+        }
         Writer writer = new FileWriter(inputConfiguration.getProperty("resultDir")+"/"+sosie+"_"+point);
         writer.write(result);
         writer.close();
+    }
+
+    protected CtMethod getTest(String name) {
+
+        for(CtElement elem: inputProgram.getAllElement(CtMethod.class)) {
+            CtMethod method = (CtMethod) elem;
+            if(name.equals(method.getDeclaringType().getQualifiedName() +"."+ method.getSimpleName()))
+                return method;
+        }
+        return null;
     }
 
     protected String  transformationDetail(Transformation transformation) throws Exception {
