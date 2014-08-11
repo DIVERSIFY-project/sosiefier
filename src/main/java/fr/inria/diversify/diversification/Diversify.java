@@ -54,6 +54,7 @@ public class Diversify extends AbstractDiversify {
     private boolean earlyReport = false;
 
     private boolean earlyReportSosiesOnly = false;
+
     /**
      * Indicates if we must early report sosies only
      */
@@ -117,9 +118,9 @@ public class Diversify extends AbstractDiversify {
 
         String outputDir = tmpDir + "/" + sourceDir;
 
-        for (int i = 0; i < n; i++) {
+        while (sosie < n) {
             Log.info("===========================");
-            Log.info("DIVERSIFICATION RUN :: " + i);
+            Log.info("DIVERSIFICATION RUN :: " + trial);
             Log.info("===========================");
             //Increase the trial count
             trial++;
@@ -204,7 +205,10 @@ public class Diversify extends AbstractDiversify {
 
         status = runTest(tmpDir);
 
-        if (status == 0) { copySosieProgram(); }
+        if (status == AbstractTransformation.SOSIE) {
+            sosie++;
+            copySosieProgram();
+        }
 
         //Store transformation status
         for (Transformation tran : transformations) {

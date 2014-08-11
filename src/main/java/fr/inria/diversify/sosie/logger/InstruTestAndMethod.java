@@ -30,11 +30,12 @@ public class InstruTestAndMethod {
         boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError"));
         boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert"));
         boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
-        boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
+        boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruTransplantPointCount"));
 
 
         Instru instru = new Instru(project, src, test, out, null);
         instru.setCompactLog(compact);
+        instru.setInstruTransplantationPointCallCount(intruTransplantPoint);
         instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
     }
 

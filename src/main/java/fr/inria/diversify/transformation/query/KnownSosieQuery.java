@@ -124,6 +124,7 @@ public class KnownSosieQuery extends TransformationQuery {
             });
         }
 
+        /*
         HashSet<String> setPos = new HashSet<>();
         ArrayList<SosieWithCoverage> overlap = new ArrayList<>();
 
@@ -136,6 +137,7 @@ public class KnownSosieQuery extends TransformationQuery {
             }
         }
         System.out.println("OverlapEnd");
+        */
     }
 
     @Override
