@@ -13,13 +13,19 @@ public class StackTraceCall extends StackTraceElement {
     public StackTraceCall(int methodId, int deep, Map<Integer, String> idMap) {
         originalDeep = deep;
         this.methodId = methodId;
-        if (!idMap.containsKey(methodId)) { this.method = "null"; } else { this.method = idMap.get(methodId); }
+        if (!idMap.containsKey(methodId)) {
+            this.method = "null";
+        } else {
+            this.method = idMap.get(methodId);
+            className = parseClassName(this.method);
+        }
     }
 
     //only for parseDiff
     public StackTraceCall(String methodName, int deep) {
         originalDeep = deep;
         this.method = methodName;
+        className = parseClassName(this.method);
     }
 
     public boolean equals(Object other) {
@@ -37,5 +43,18 @@ public class StackTraceCall extends StackTraceElement {
 
     public String toString() {
         return method + ";" + originalDeep;
+    }
+
+    protected String parseClassName(String methodSignature) {
+        String[] tmp = methodSignature.split(" ");
+        int i = 0;
+        while(tmp[i].length() == 0) {
+            i++;
+        }
+        return tmp[i];
+    }
+
+    public String getClassName() {
+        return className;
     }
 }
