@@ -3,7 +3,7 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.diversification.Sosie;
+import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
@@ -19,7 +19,13 @@ import java.util.*;
  */
 public class KnownSosieQuery extends TransformationQuery {
 
+    public boolean isCleanSeriesOnly() {
+        return cleanSeriesOnly;
+    }
 
+    public void setCleanSeriesOnly(boolean cleanSeriesOnly) {
+        this.cleanSeriesOnly = cleanSeriesOnly;
+    }
 
     /**
      * An small helper class to order sosies by their coverage
@@ -40,6 +46,8 @@ public class KnownSosieQuery extends TransformationQuery {
         }
     }
 
+    private boolean cleanSeriesOnly = true;
+
     /**
      * Sosies found from the transformation pool passed as paramethers.
      */
@@ -53,11 +61,21 @@ public class KnownSosieQuery extends TransformationQuery {
     private boolean incrementalSosiefication = true;
 
     //Last multisosie found
-    protected TransformationFound prevMultiSosieFound = null;
+    protected TransformationFoundRecord prevRecord = null;
 
     //Last size of transformation elements we where ask to query for.
     protected int lastTransfSizeNOfElems = 0;
 
+    //Increment of the last series number
+    private boolean seriesIncrement = true;
+
+    @Override
+    public void setLastTransformationStatus(int lastTransformationStatus) {
+        super.setLastTransformationStatus(lastTransformationStatus);
+        if (prevRecord != null) {
+            prevRecord.status = lastTransformationStatus;
+        }
+    }
 
     public KnownSosieQuery(InputProgram inputProgram, ArrayList<Transformation> transf) {
         super(inputProgram);
@@ -87,7 +105,7 @@ public class KnownSosieQuery extends TransformationQuery {
 
         ICoverageReport coverageReport = getInputProgram().getCoverageReport();
 
-        boolean coveragePresent =  coverageReport != null && !(coverageReport instanceof NullCoverageReport);
+        boolean coveragePresent = coverageReport != null && !(coverageReport instanceof NullCoverageReport);
 
         sosies = new ArrayList<>();
 
@@ -95,14 +113,14 @@ public class KnownSosieQuery extends TransformationQuery {
             if (t.isSosie()) {
                 SosieWithCoverage c = new SosieWithCoverage(t);
 
-                if ( coveragePresent ) {
+                if (coveragePresent) {
                     //Distribution of this transformation transplant point
                     //each client creates a jacoco file, each one is assigned an index
                     c.coverage = coverageReport.getCoverageDistribution(((ASTTransformation) t).getTransplantationPoint());
                     Collections.sort(c.coverage);
                 }
                 //Don't add sosies without coverage in case such coverage exists
-                if ( !coveragePresent || c.coverage.size() > 0 ) {
+                if (!coveragePresent || c.coverage.size() > 0) {
                     sosies.add(c);
                 }
             }
@@ -110,7 +128,7 @@ public class KnownSosieQuery extends TransformationQuery {
 
         //Order the sosies from less covered to more covered. This way we increases the chances that an uniformly
         //distributed selection covers most of the clients
-        if ( coveragePresent ) {
+        if (coveragePresent) {
             Collections.sort(sosies, (o1, o2) -> {
                 int sizeDiff = o1.coverage.size() - o2.coverage.size();
                 if (sizeDiff == 0) {
@@ -168,23 +186,64 @@ public class KnownSosieQuery extends TransformationQuery {
         return max / z;
     }
 
-    @Override
-    public List<Transformation> query(int nb) {
-
-        transformations = new ArrayList();
+    /**
+     * Finds an sosie transformation to increment (inherit from)
+     * @param nb Current transformation size
+     * @return An integer array with the index of the single-transformations forming the multi-transformation
+     * @throws QueryException
+     */
+    private Integer[] initIncrementalTransformation(int nb) throws QueryException {
         Integer[] indexes = new Integer[nb];
 
         //Create the linked list data structure to allow incremental multisosies
-        if (incrementalSosiefication && prevMultiSosieFound != null) {
+        if (incrementalSosiefication && prevRecord != null) {
             ArrayList<Integer> tf = null;
-            if (lastTransfSizeNOfElems != nb) {
-                //This means that we have changed the transformation size and therefore we must use
-                //the previously found multisosie as the parent of the current transformation
-                tf = prevMultiSosieFound.transformation;
-            } else if (prevMultiSosieFound.parent != null) {
-                //On the other hand we may continue creating multisosies incrementing an existing one
-                tf = prevMultiSosieFound.parent.previous.transformation;
+
+            do {
+                if (lastTransfSizeNOfElems != nb) {
+                    seriesIncrement = false;
+                    //This means that we have changed the transformation size and therefore we must use
+                    //the previously found multisosie as the parent of the current transformation
+                    if (isCleanSeriesOnly() && prevRecord.status != AbstractTransformation.SOSIE) {
+                        //The last transformation was not a sosie. Create an empty slot and continue search
+                        prevRecord = new TransformationFoundRecord(
+                                prevRecord, null, prevRecord.status);
+                        //Since we create and empty slot we are not longer on the edge
+                        lastTransfSizeNOfElems = nb;
+                    } else {
+                        tf = prevRecord.transformation;
+                    }
+                } else if (prevRecord.getParent() != null) {
+
+                    if ( prevRecord.getParent().getPrevious() == null ) {
+                        //Special case when we reach the end of the previous sosie list
+                        // and we are still searching for new sosies
+                        throw new QueryException(QueryException.Reasons.UNABLE_TO_FIND_SOSIE_PARENT);
+                    }
+
+                    //On the other hand we may continue creating multisosies incrementing an existing one
+
+                    int s = prevRecord.getParent().getPrevious().status;
+                    if (isCleanSeriesOnly() && s != AbstractTransformation.SOSIE) {
+                        //The last transformation was not a sosie. Create an empty slot and continue search
+                        prevRecord = new TransformationFoundRecord(
+                                prevRecord.getParent().getPrevious(),
+                                prevRecord, s);
+                    } else {
+                        tf = prevRecord.getParent().getPrevious().transformation;
+                    }
+                }
+            } while (!(tf != null ||
+                    prevRecord.getParent() == null ||
+                    prevRecord.getParent().getPrevious() == null));
+
+            //We found none... go boom
+            if (tf == null &&
+                    prevRecord.getParent() != null &&
+                    prevRecord.getParent().getPrevious() == null) {
+                throw new QueryException(QueryException.Reasons.UNABLE_TO_FIND_SOSIE_PARENT);
             }
+
             //Copy the parent transformations and index in the pool of transformations
             if (tf != null) {
                 for (int i = 0; i < tf.size(); i++) {
@@ -193,6 +252,50 @@ public class KnownSosieQuery extends TransformationQuery {
                 }
             }
         }
+
+        return indexes;
+    }
+
+
+    /**
+     * Completes the incremental transformation process
+     * @param nb Current transformation size
+     * @param indexes Indexes of the transformations found
+     * @param tf Transformations found
+     * @param f
+     */
+    private void completeIncrementalTransformation(int nb, Integer[] indexes,
+                                                   ArrayList<Transformation> tf, TransformationFoundRecord f) {
+        //Linking list mechanism to know the parent of a multisosie
+        if (prevRecord == null) {
+            prevRecord = f;
+        } else if (lastTransfSizeNOfElems != nb) {
+            prevRecord = new TransformationFoundRecord(indexes, prevRecord, null);
+        } else if (prevRecord.getParent() == null) {
+            prevRecord = new TransformationFoundRecord(indexes, null, prevRecord);
+            if ( seriesIncrement ){
+                lastIncrementalSeries += 1;
+            }
+            prevRecord.setIncrementalSeries(lastIncrementalSeries);
+        } else {
+            prevRecord = new TransformationFoundRecord(indexes, prevRecord.getParent().getPrevious(), prevRecord);
+        }
+        transformations = tf;
+
+
+        //prevRecord.setIncrementalSeries(lastIncrementalSeries);
+    }
+
+    @Override
+    public List<Transformation> query(int nb) throws QueryException {
+
+        //Update the incremental series number
+        if (prevRecord == null) lastIncrementalSeries = 0;
+
+        transformations = new ArrayList();
+        //Integer[] indexes = new Integer[nb];
+
+        Integer[] indexes = initIncrementalTransformation(nb);
 
         Random r = new Random();
 
@@ -224,28 +327,22 @@ public class KnownSosieQuery extends TransformationQuery {
                 }
                 attempts++;
             }
-
+            TransformationFoundRecord f = new TransformationFoundRecord(indexes, null, null);
             //See if the transformation was already found
-            found = alreadyFound(nb, prevMultiSosieFound);
+            found = alreadyFound(nb, f);
             if (!found) {
-                //Linking list mechanism to know the parent of a multisosie
-                if (prevMultiSosieFound == null) {
-                    prevMultiSosieFound = new TransformationFound(indexes, null, null);
-                } else if (lastTransfSizeNOfElems != nb) {
-                    prevMultiSosieFound = new TransformationFound(indexes, prevMultiSosieFound, null);
-                } else if (prevMultiSosieFound.parent == null) {
-                    prevMultiSosieFound = new TransformationFound(indexes, null, prevMultiSosieFound);
-                } else {
-                    prevMultiSosieFound = new TransformationFound(indexes, prevMultiSosieFound.parent.previous, prevMultiSosieFound);
-                }
-                transformations = tf;
+                completeIncrementalTransformation(nb, indexes, tf, f);
 
                 //Log the transformation found in the run
                 try {
                     StringBuilder sb = new StringBuilder();
                     PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("multisosiesfound.txt", true)));
-                    for ( int k = 0; k < indexes.length && indexes[k] > -1; k++ ) {
-                        sb.append(", ").append(indexes[k]);
+                    if (transformationFounds.get(nb).size() > 1) {
+                        sb.append(" Status: ").append(getLastTransformationStatus());
+                    }
+                    sb.append("\n Serie:: ").append(prevRecord.getIncrementalSeries()).append(". Transf::");
+                    for (int k = 0; k < indexes.length && indexes[k] > -1; k++) {
+                        sb.append(indexes[k]).append(", ");
                     }
                     out.println(sb.toString());
                     out.close();
@@ -259,6 +356,8 @@ public class KnownSosieQuery extends TransformationQuery {
         if (transAttempts >= maxTransfNumbers) {
             throw new MaxNumberOfAttemptsReach(maxTransfNumbers, transAttempts);
         }
+
+        lastIncrementalSeries = prevRecord.getIncrementalSeries();
 
         lastTransfSizeNOfElems = nb;
 
@@ -304,11 +403,12 @@ public class KnownSosieQuery extends TransformationQuery {
 
     /**
      * Returns the sosies found from the pool of transformations
+     *
      * @return
      */
     public ArrayList<Transformation> getSosies() {
         ArrayList<Transformation> result = new ArrayList<>();
-        for ( SosieWithCoverage s: sosies) {
+        for (SosieWithCoverage s : sosies) {
             result.add(s.transformation);
         }
         return result;

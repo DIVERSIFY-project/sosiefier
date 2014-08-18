@@ -50,6 +50,8 @@ public class Instru {
     //Instrument call counts over transplantation points
     private boolean instruTransplantationPointCallCount;
 
+    private TransplantationPointCallCountInstrumenter tpcInstrumenter = null;
+
 
     public Instru(String projectDirectory, String srcDirectory, String testDirectory ,String outputDirectory,
                   List<Transformation> transformations) {
@@ -64,7 +66,7 @@ public class Instru {
 
         initOutputDirectory();
 
-        if(intruMethodCall || intruVariable || intruError)
+        if(intruMethodCall || intruVariable || intruError || getInstruTransplantationPointCallCount())
             instruMainSrc(intruMethodCall, intruVariable, intruError);
 
         if(intruAssert || intruNewTest)
@@ -92,6 +94,7 @@ public class Instru {
     }
 
     protected void writeId() throws IOException {
+        tpcInstrumenter.writeIdMapToFile(outputDirectory + "/tpcid.json");
         VariableLoggingInstrumenter.writeIdFile(outputDirectory);
         copyLogger(outputDirectory, srcDirectory);
 
@@ -126,10 +129,10 @@ public class Instru {
             applyProcessor(factory, e);
         }
         if ( instruTransplantationPointCallCount ) {
-            TransplantationPointCallCountInstrumenter tcp =
+            tpcInstrumenter =
                     new TransplantationPointCallCountInstrumenter(transformations);
-            tcp.setUseCompactLog(compactLog);
-            applyProcessor(factory, tcp);
+            tpcInstrumenter.setUseCompactLog(compactLog);
+            applyProcessor(factory, tpcInstrumenter);
         }
 
         Environment env = factory.getEnvironment();

@@ -226,7 +226,7 @@ public abstract class AbstractBuilder {
                 if (!f.exists()) {
                     f.mkdirs();
                 }
-                File newTextFile = new File(getSaveOutputDir() + "/"+Thread.currentThread().getId()+"_buidOutput" + runCount + ".txt");
+                File newTextFile = new File(getSaveOutputDir() + "/buidOutput" + runCount + ".txt");
 
                 FileWriter fileWriter = new FileWriter(newTextFile);
                 fileWriter.write(output);

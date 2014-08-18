@@ -21,10 +21,13 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractTransformation implements Transformation {
 
+    public static int EXCEPTION = -4;
     public static int NOT_TESTED = -3;
     public static int COMPILED_FAIL = -2;
     public static int TEST_FAIL = -1;
     public static int SOSIE = 0;
+
+    private int series;
 
     protected Integer status = -3;
     protected List<String> failures;
@@ -182,4 +185,6 @@ public abstract class AbstractTransformation implements Transformation {
         else
             return exe.getPosition().getEndLine()+1;
     }
+
+
 }

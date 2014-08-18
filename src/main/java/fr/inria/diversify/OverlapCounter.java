@@ -58,6 +58,7 @@ public class OverlapCounter {
                 for (IMethodCoverage m : c.getMethods()) {
                     for (int i = m.getFirstLine(); i <= m.getLastLine(); i++) {
                         ILine line = m.getLine(i);
+                        line.getInstructionCounter().getCoveredCount();
                         if (line.getStatus() > ICounter.NOT_COVERED) {
                             String ls = c.getName() + "::" + m.getName() + "::" + i;
                             System.out.println(ls);

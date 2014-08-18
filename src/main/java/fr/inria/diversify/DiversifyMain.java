@@ -93,7 +93,7 @@ public class DiversifyMain {
             for (String s : sosieSizes.split(";")) {
                 intSosieSizes.add(Integer.parseInt(s));
             }
-            max = intSosieSizes.size();
+            max = intSosieSizes.size() - 1;
             min = 0;
         } else {
             max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size", "1"));
@@ -110,6 +110,7 @@ public class DiversifyMain {
 
             abstractDiversify.setTransformationQuery(query);
             abstractDiversify.run(n);
+
 
             //Clear the found transformations for the next step to speed up. No needed since the new ones are going
             //to be of different size and therefore different

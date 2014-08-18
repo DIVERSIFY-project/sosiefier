@@ -2,6 +2,14 @@ package fr.inria.diversify.sosie.logger;
 
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
+import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.factories.SpoonMetaFactory;
+import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.TransformationJsonParser;
+import spoon.reflect.factory.Factory;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * User: Simon
@@ -33,7 +41,25 @@ public class InstruTestAndMethod {
         boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruTransplantPointCount"));
 
 
-        Instru instru = new Instru(project, src, test, out, null);
+        String prevTransfPath = inputConfiguration.getPreviousTransformationDir();
+
+        Instru instru;
+
+        if ( intruTransplantPoint ) {
+            Factory factory = new SpoonMetaFactory().buildNewFactory(project + "/" + src, 5);
+
+            InputProgram inputProgram = new InputProgram();
+            inputProgram.setFactory(factory);
+            inputProgram.setSourceCodeDir(src);
+            inputProgram.setPreviousTransformationsPath(prevTransfPath);
+
+            TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
+            List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
+            instru = new Instru(project, src, test, out, transf);
+        }
+        else {
+            instru = new Instru(project, src, test, out, null);
+        }
         instru.setCompactLog(compact);
         instru.setInstruTransplantationPointCallCount(intruTransplantPoint);
         instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);

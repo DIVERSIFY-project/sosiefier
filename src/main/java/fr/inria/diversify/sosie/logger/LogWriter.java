@@ -55,6 +55,12 @@ public class LogWriter {
         log.writeCatch(id, thread, className, methodSignature, exception);
     }
 
+    public static boolean countSourcePositionCall(int sourcePosition) {
+        if ( log == null ) { log = new InstruVerboseLog("LogDirName"); }
+        log.countSourcePositionCall(sourcePosition);
+        return false;
+    }
+
     public  static void close() {
         if ( log != null ) {
             log.close();
