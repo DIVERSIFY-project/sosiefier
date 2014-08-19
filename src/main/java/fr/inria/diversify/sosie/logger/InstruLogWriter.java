@@ -40,6 +40,15 @@ public abstract class InstruLogWriter {
     //Number of times a transplantation point is called
     protected HashMap<Integer, Integer> transplantPointCallCount;
 
+    //Number of test a transplantation point is called on
+    protected HashMap<Integer, Integer> testCallsPerTransplantation;
+
+    //Transplantation points called in this test
+    protected HashSet<Integer> transplantPointCalledInThisTest;
+
+    //Number of assertions per transplantation
+    protected HashMap<Integer, Integer> assertionsPerTransplantation;
+
     protected Boolean partialLogging = null;
 
     protected Set<Thread> partialLoggingThread;
@@ -59,8 +68,11 @@ public abstract class InstruLogWriter {
         callDeep = new HashMap<Thread, Integer>();
         logMethod = new HashMap<Thread, Boolean>();
         transplantPointCallCount = new HashMap<Integer, Integer>();
+        assertionsPerTransplantation = new HashMap<Integer, Integer>();
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
+        //transplantPointCalledInThisTest = new HashSet<Integer>();
+        //testCallsPerTransplantation = new HashMap<Integer, Integer>();
     }
 
     /**
@@ -90,10 +102,38 @@ public abstract class InstruLogWriter {
         decCallDepth(thread);
     }
 
-    public abstract void writeTestStart(Thread thread, String testSignature);
+    /**
+     * Logs the begining of a test method
+     *
+     * @param thread
+     * @param testSignature
+     */
+    public void writeTestStart(Thread thread, String testSignature) {
+        if (transplantPointCalledInThisTest == null) {
+            testCallsPerTransplantation = new HashMap<Integer, Integer>();
+            transplantPointCalledInThisTest = new HashSet<Integer>();
+        }
+        transplantPointCalledInThisTest.clear();
+    }
 
     public abstract void writeAssert(int id, Thread thread, String className,
                                      String methodSignature, String assertName, Object... var);
+
+    /**
+     * Counts an assert.
+     *
+     * Counts how many asserts per transformation line
+     */
+    public void countAssert() {
+        for (Integer i : transplantPointCalledInThisTest) {
+            if (!assertionsPerTransplantation.containsKey(i)) {
+                assertionsPerTransplantation.put(i, 1);
+            } else {
+                int k = assertionsPerTransplantation.get(i) + 1;
+                assertionsPerTransplantation.put(i, k);
+            }
+        }
+    }
 
     public abstract void writeVar(int id, Thread thread, String methodSignatureId, Object... var);
 
@@ -104,12 +144,35 @@ public abstract class InstruLogWriter {
 
     public abstract void close();
 
+    /**
+     * Count the call of a transplant point.
+     *
+     * @param transplantationPoint
+     */
     public void countSourcePositionCall(int transplantationPoint) {
+
+        //Count point calls
         if (!transplantPointCallCount.containsKey(transplantationPoint)) {
             transplantPointCallCount.put(transplantationPoint, 1);
         } else {
             int k = transplantPointCallCount.get(transplantationPoint) + 1;
             transplantPointCallCount.put(transplantationPoint, k);
+        }
+
+        //Count test calls
+        if (transplantPointCalledInThisTest != null) {
+
+            //Add just once the test to the transplantation point
+            if (!transplantPointCalledInThisTest.contains(transplantationPoint)) {
+                transplantPointCalledInThisTest.add(transplantationPoint);
+
+                if (!testCallsPerTransplantation.containsKey(transplantationPoint)) {
+                    testCallsPerTransplantation.put(transplantationPoint, 1);
+                } else {
+                    int k = testCallsPerTransplantation.get(transplantationPoint) + 1;
+                    testCallsPerTransplantation.put(transplantationPoint, k);
+                }
+            }
         }
     }
 
@@ -125,7 +188,20 @@ public abstract class InstruLogWriter {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(filePath), 8 * 1024);
                 for (Map.Entry<Integer, Integer> p : transplantPointCallCount.entrySet()) {
                     StringBuilder sb = new StringBuilder();
-                    sb.append(p.getKey()).append(", ").append(p.getValue()).append("\r\n");
+                    sb.append(p.getKey())
+                            .append(", ")
+                            .append(p.getValue());
+                    if (transplantPointCalledInThisTest != null) {
+                        sb.append(", ")
+                                .append(testCallsPerTransplantation.get(p.getKey()))
+                                .append(", ");
+                        if (assertionsPerTransplantation.containsKey(p.getKey())) {
+                            sb.append(assertionsPerTransplantation.get(p.getKey()));
+                        } else {
+                            sb.append(0);
+                        }
+                    }
+                    sb.append("\r\n");
                     writer.write(sb.toString());
                 }
                 writer.close();

@@ -25,7 +25,7 @@ public class ReplaceLiteral extends AbstractTransformation {
     protected CtLiteral transplantationPoint;
 
     public void restore(String srcDir) throws Exception {
-        if(parent != null) {
+        if (parent != null) {
             parent.removeSourceCode();
             parent.printJavaFile(srcDir);
         }
@@ -48,12 +48,14 @@ public class ReplaceLiteral extends AbstractTransformation {
     public String classLocationName() {
         return transplantationPoint.getParent(CtSimpleType.class).getQualifiedName();
     }
+
     public String packageLocationName() {
         return transplantationPoint.getParent(CtPackage.class).getQualifiedName();
     }
+
     public String methodLocationName() {
         CtExecutable elem = transplantationPoint.getParent(CtExecutable.class);
-        if(elem != null)
+        if (elem != null)
             return elem.getSimpleName();
         return "field";
     }
@@ -74,14 +76,14 @@ public class ReplaceLiteral extends AbstractTransformation {
     }
 
     public void addSourceCode() {
-        Log.debug("transformation: {}, {}",type,name);
+        Log.debug("transformation: {}, {}", type, name);
         Log.debug("transplant:\n {}", transplant);
-        Log.debug("--------------------\npostion:\n{}",transplantationPoint.getPosition());
+        Log.debug("--------------------\npostion:\n{}", transplantationPoint.getPosition());
         SourcePosition sp = transplantationPoint.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/**", 0));
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+1, "**/"+transplant.toString(), 0));
+        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd() + 1, "**/" + transplant.toString(), 0));
     }
 
     public void removeSourceCode() {

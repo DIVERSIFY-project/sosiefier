@@ -61,13 +61,13 @@ public class SosiePoolCreator {
             parser.setFilterProperties(properties);
             Collection<Transformation> ts = parser.parseDir(inputProgram.getPreviousTransformationsPath());
 
+            int index = 0;
             JSONArray array = new JSONArray();
             for (Transformation t : ts) {
                 //Allow only sosies
                 if (t.isSosie()) {
                     //Avoid repeated transformations
                     boolean unique = true;
-                    int index = 0;
                     JSONObject transJson = t.toJSONObject();
                     while (unique && array.length() > index) {
                         unique = !transJson.toString().equals(array.getJSONObject(index).toString());
@@ -79,6 +79,8 @@ public class SosiePoolCreator {
                             (type.equals("") || transJson.get("type").equals(type)) &&
                             (names.equals("") || names.contains((String) transJson.get("name")))) {
                         array.put(transJson);
+                        transJson.put("tindex", index);
+                        index++;
                     }
                 }
             }

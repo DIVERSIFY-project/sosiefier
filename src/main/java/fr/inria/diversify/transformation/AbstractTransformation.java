@@ -27,6 +27,8 @@ public abstract class AbstractTransformation implements Transformation {
     public static int TEST_FAIL = -1;
     public static int SOSIE = 0;
 
+    private int index;
+
     private int series;
 
     protected Integer status = -3;
@@ -68,6 +70,7 @@ public abstract class AbstractTransformation implements Transformation {
         object.put("name", name);
         object.put("failures", failuresToJSON());
         object.put("status", status);
+        object.put("tindex", index);
 
         if(parent != null)
             object.put("parent",parent.toJSONObject());
@@ -187,4 +190,12 @@ public abstract class AbstractTransformation implements Transformation {
     }
 
 
+    @Override
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 }

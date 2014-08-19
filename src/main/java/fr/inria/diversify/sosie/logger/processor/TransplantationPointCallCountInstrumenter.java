@@ -140,9 +140,9 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
         for (Map.Entry<String, LogPoint> s : elementsMap.entrySet()) {
             JSONObject o = new JSONObject();
             try {
+                o.put("index", s.getValue().index);
                 o.put("code", s.getValue().element.toString());
                 o.put("source_position", s.getKey());
-                o.put("index", s.getValue().index);
                 JSONArray transf = new JSONArray();
                 for ( Transformation f : s.getValue().transformations ) {
                     JSONObject t = f.toJSONObject();

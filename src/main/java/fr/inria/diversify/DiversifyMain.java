@@ -251,7 +251,15 @@ public class DiversifyMain {
                 ConsecutiveKnownSosieQuery q = new ConsecutiveKnownSosieQuery(inputProgram);
                 q.setCurrentTrial(startSosieIndex);
                 return q;
-
+            case "specificindexes":
+                ArrayList<Integer> spIndex = new ArrayList<>();
+                for ( String s : DiversifyProperties.getProperty("specific.indexes").split(",") ) {
+                    spIndex.add(Integer.parseInt(s));
+                }
+                inputProgram.processCodeFragments();
+                SpecificSosiesQuery query = new SpecificSosiesQuery(inputProgram);
+                query.setSpecificIndex(spIndex);
+                return query;
             default:
                 //Try to construct the query from the explicit class
                 try {

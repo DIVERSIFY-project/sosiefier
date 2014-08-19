@@ -9,6 +9,7 @@ import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
+import org.codehaus.plexus.util.FileUtils;
 import org.json.JSONException;
 
 import java.io.File;
@@ -323,12 +324,16 @@ public class Diversify extends AbstractDiversify {
                 if (intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest) {
                     Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), destPath, transformations);
                     instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
+                } else {
+                    FileUtils.copyDirectory(new File(tmpDir), f);
                 }
+
                 FileWriter writer = new FileWriter(destPath + "/trans.json");
                 for (Transformation t : transformations) {
                     writer.write(t.toJSONObject().toString() + "\n");
                 }
                 writer.close();
+
             }
         } catch (IOException e) {
             //We may also don't want to recover from here. If no instrumentation possible... now what?

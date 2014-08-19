@@ -43,4 +43,8 @@ public interface Transformation {
 
     public boolean isSosie();
 
+    public int getIndex();
+
+    public void setIndex(int index);
+
 }

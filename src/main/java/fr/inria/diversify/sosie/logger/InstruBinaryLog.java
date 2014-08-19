@@ -163,6 +163,7 @@ public class InstruBinaryLog extends InstruLogWriter {
 
     @Override
     public void writeTestStart(Thread thread, String testSignature) {
+        super.writeTestStart(thread, testSignature);
         try {
             //Each test runs in a 0 depth for what we care
             resetCallDepth(thread);

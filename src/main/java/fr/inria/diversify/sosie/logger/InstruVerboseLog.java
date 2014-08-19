@@ -58,6 +58,8 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     public void writeTestStart(Thread thread, String testSignature) {
 
+        super.writeTestStart(thread, testSignature);
+
         String semaphore = "";
         try {
             partialLoggingThread = null;

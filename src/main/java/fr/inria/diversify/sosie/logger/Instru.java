@@ -1,20 +1,19 @@
 package fr.inria.diversify.sosie.logger;
 
+import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.sosie.logger.processor.*;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
-import spoon.compiler.SpoonCompiler;
+import org.hamcrest.Matcher;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.factory.FactoryImpl;
+
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
-import spoon.support.DefaultCoreFactory;
+
 import spoon.support.QueueProcessingManager;
-import spoon.support.StandardEnvironment;
-import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -44,6 +43,8 @@ public class Instru {
     private boolean intruError;
     //Instrument asserts
     private boolean intruAssert;
+    //Instrument count assertions a simpler, faster processor to count assertions
+    private boolean instruCountAssertions;
     //Instrument new test
     private boolean intruNewTest;
 
@@ -51,6 +52,9 @@ public class Instru {
     private boolean instruTransplantationPointCallCount;
 
     private TransplantationPointCallCountInstrumenter tpcInstrumenter = null;
+    private Factory sourceFactory = null;
+
+    private Factory testFactorty = null;
 
 
     public Instru(String projectDirectory, String srcDirectory, String testDirectory ,String outputDirectory,
@@ -69,7 +73,7 @@ public class Instru {
         if(intruMethodCall || intruVariable || intruError || getInstruTransplantationPointCallCount())
             instruMainSrc(intruMethodCall, intruVariable, intruError);
 
-        if(intruAssert || intruNewTest)
+        if(intruAssert || intruNewTest || instruCountAssertions)
             instruTestSrc(intruNewTest, intruAssert);
 
         writeId();
@@ -111,55 +115,63 @@ public class Instru {
     protected void instruMainSrc(boolean intruMethodCall, boolean intruVariable, boolean intruError) {
         String src = projectDirectory + "/" + srcDirectory;
         String out = outputDirectory + "/" + srcDirectory;
-        Factory factory = initSpoon(src);
+
+        if ( sourceFactory == null ) {
+            sourceFactory = initSpoon(src);
+        }
 
         if(intruMethodCall) {
             MethodLoggingInstrumenter m = new MethodLoggingInstrumenter(transformations);
             m.setUseCompactLog(compactLog);
-            applyProcessor(factory, m);
+            applyProcessor(sourceFactory, m);
         }
         if(intruVariable) {
             VariableLoggingInstrumenter v = new VariableLoggingInstrumenter(transformations);
             v.setUseCompactLog(compactLog);
-            applyProcessor(factory, v);
+            applyProcessor(sourceFactory, v);
         }
         if(intruError) {
             ErrorLoggingInstrumenter e = new ErrorLoggingInstrumenter(transformations);
             e.setUseCompactLog(compactLog);
-            applyProcessor(factory, e);
+            applyProcessor(sourceFactory, e);
         }
         if ( instruTransplantationPointCallCount ) {
             tpcInstrumenter =
                     new TransplantationPointCallCountInstrumenter(transformations);
             tpcInstrumenter.setUseCompactLog(compactLog);
-            applyProcessor(factory, tpcInstrumenter);
+            applyProcessor(sourceFactory, tpcInstrumenter);
         }
 
-        Environment env = factory.getEnvironment();
+        Environment env = sourceFactory.getEnvironment();
         env.useSourceCodeFragments(true);
-        applyProcessor(factory,
+        applyProcessor(sourceFactory,
                        new JavaOutputProcessorWithFilter(new File(out),
                                                          new FragmentDrivenJavaPrettyPrinter(env),
                                                          allClassesName(new File(src))));
     }
 
     protected void instruTestSrc(boolean intruNewTest, boolean intruAssert) {
-        String src = projectDirectory + "/" + srcDirectory;
+
         String test = projectDirectory + "/" + testDirectory;
         String out = outputDirectory + "/" + testDirectory;
 
-        Factory factory = initSpoon(src+System.getProperty("path.separator")+test);
-
-        if(intruNewTest) {
-            applyProcessor(factory, new TestLoggingInstrumenter());
+        if ( testFactorty == null ) {
+            //testFactorty = initSpoon(src + System.getProperty("path.separator") + test);
+            testFactorty = initSpoon(test);
         }
+
         if(intruAssert) {
-            applyProcessor(factory, new AssertInstrumenter());
+            applyProcessor(testFactorty, new AssertInstrumenter());
+        } else if ( instruCountAssertions ) {
+            applyProcessor(testFactorty, new SimpleAssertCounter());
+        }
+        if(intruNewTest) {
+            applyProcessor(testFactorty, new TestLoggingInstrumenter());
         }
 
-        Environment env = factory.getEnvironment();
+        Environment env = testFactorty.getEnvironment();
         env.useSourceCodeFragments(true);
-        applyProcessor(factory,
+        applyProcessor(testFactorty,
                        new JavaOutputProcessorWithFilter(new File(out),
                                                          new FragmentDrivenJavaPrettyPrinter(env),
                                                          allClassesName(new File(test))));
@@ -180,6 +192,13 @@ public class Instru {
 
     protected Factory initSpoon(String srcDirectory) {
 
+        try {
+            return new SpoonMetaFactory().buildNewFactory(srcDirectory, 5);
+        } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+
+        /*
         StandardEnvironment env = new StandardEnvironment();
 //        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
 //        env.setComplianceLevel(javaVersion);
@@ -200,7 +219,7 @@ public class Instru {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return factory;
+        return factory;*/
     }
 
     protected void applyProcessor(Factory factory, AbstractProcessor processor) {
@@ -279,5 +298,29 @@ public class Instru {
 
     public void setInstruTransplantationPointCallCount(boolean instruTransplantationPointCallCount) {
         this.instruTransplantationPointCallCount = instruTransplantationPointCallCount;
+    }
+
+    public void setSourceFactory(Factory sourceFactory) {
+        this.sourceFactory = sourceFactory;
+    }
+
+    public Factory getSourceFactory() {
+        return sourceFactory;
+    }
+
+    public Factory getTestFactorty() {
+        return testFactorty;
+    }
+
+    public void setTestFactorty(Factory testFactorty) {
+        this.testFactorty = testFactorty;
+    }
+
+    public boolean isInstruCountAssertions() {
+        return instruCountAssertions;
+    }
+
+    public void setInstruCountAssertions(boolean instruCountAssertions) {
+        this.instruCountAssertions = instruCountAssertions;
     }
 }
