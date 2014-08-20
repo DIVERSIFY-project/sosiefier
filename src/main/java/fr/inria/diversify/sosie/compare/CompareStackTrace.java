@@ -1,6 +1,5 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.compare.diff.*;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 
@@ -16,8 +15,8 @@ public class CompareStackTrace extends AbstractCompareStackTrace {
     }
 
 
-    public List<Diff> findDiff() {
-        List<Diff> diffs = new LinkedList();
+    public List<String> findDiff() {
+        List<String> diffs = new LinkedList();
 
         originalStackTrace.reset();
         sosieStackTrace.reset();
@@ -57,14 +56,14 @@ public class CompareStackTrace extends AbstractCompareStackTrace {
 //                Log.info("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
                 testReport.addDiffMethodCall(top1);
                 testReport.addDiffMethodCall(top2);
-                diffs.add(new CallDiff(originalStackTrace.getTop2(), Math.abs(deep1 - deep2)));
+//                diffs.add(new CallDiff(originalStackTrace.getTop2(), Math.abs(deep1 - deep2)));
             }
 
             boolean sameTop = top1.equals(top2);
             if(st1Lower && st2Lower || !sameTop) {
 //                Log.info("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
-                diffs.add(findNewSyncro(20, 2, originalStackTrace, sosieStackTrace));
-
+//                diffs.add(findNewSyncro(20, 2, originalStackTrace, sosieStackTrace));
+                findNewSyncro(20, 2, originalStackTrace, sosieStackTrace);
                 if(originalStackTrace.getDeep() == sosieStackTrace.getDeep()) {
                     st1Lower = false; st2Lower = false;
                 }
@@ -74,7 +73,7 @@ public class CompareStackTrace extends AbstractCompareStackTrace {
             }
 
             if(st1Lower == st2Lower && (originalStackTrace.getVariablesValueChange() || sosieStackTrace.getVariablesValueChange())) {
-                Set<VariableDiff> vd = varDiff(originalStackTrace, sosieStackTrace);
+                Set<String> vd = varDiff(originalStackTrace, sosieStackTrace);
                 if (!vd.isEmpty()) {
                     diffs.addAll(vd);
                 }

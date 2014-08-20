@@ -1,9 +1,7 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.compare.diff.CallDiff;
-import fr.inria.diversify.sosie.compare.diff.Diff;
+
 import fr.inria.diversify.sosie.compare.diff.TestReport;
-import fr.inria.diversify.sosie.compare.diff.VariableDiff;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 
@@ -15,7 +13,6 @@ import java.util.*;
 public abstract class  AbstractCompareStackTrace {
     protected StackTrace originalStackTrace;
     protected StackTrace sosieStackTrace;
-    protected List<Diff> diffs;
     protected TestReport testReport;
 
     //used for ComparePartialStackTrace
@@ -24,15 +21,14 @@ public abstract class  AbstractCompareStackTrace {
     public AbstractCompareStackTrace(StackTrace st1, StackTrace st2) {
         originalStackTrace = st1;
         sosieStackTrace = st2;
-        diffs = new LinkedList();
         testReport = new TestReport();
     }
 
 
-    public abstract List<Diff> findDiff();
+    public abstract List<String> findDiff();
 
-    protected Set<VariableDiff> varDiff(StackTrace st1, StackTrace st2) {
-        Set<VariableDiff> diff = new HashSet();
+    protected Set<String> varDiff(StackTrace st1, StackTrace st2) {
+        Set<String> diff = new HashSet();
         Map<String, Object> v1 = st1.getVariable();
         Map<String, Object> v2 = st2.getVariable();
 
@@ -40,14 +36,16 @@ public abstract class  AbstractCompareStackTrace {
         for(String key : v1.keySet()) {
             Object value = v1.get(key);
             Object value2 = v2.get(key);
-            if(value2 == null || !value.equals(value2))
-                diff.add(new VariableDiff(st1.getTop(),key));
+            if(value2 == null || !value.equals(value2)) {
+                diff.add(st1.getTop().getClassName() + ":" + key);
+            }
         }
         for(String key : v2.keySet()) {
             Object value = v2.get(key);
             Object value1 = v1.get(key);
-            if(value1 == null || !value.equals(value1))
-                diff.add(new VariableDiff(st1.getTop(),key));
+            if(value1 == null || !value.equals(value1)) {
+                diff.add(st1.getTop().getClassName() + ":" + key);
+            }
         }
 
         testReport.updateVar(v1, st1.getTop());
@@ -55,7 +53,7 @@ public abstract class  AbstractCompareStackTrace {
         return diff;
     }
 
-    protected CallDiff findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
+    protected void findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
         int count1 = 0;
         int count2 = 0;
         int maxDiff = 1;
@@ -63,15 +61,13 @@ public abstract class  AbstractCompareStackTrace {
         List<StackTraceCall> callDiff1 = new ArrayList<>();
         List<StackTraceCall> callDiff2 = new ArrayList<>();
 
-        CallDiff diff = new CallDiff(originalStackTrace.getTop2(),1);
         for(int i = 0; i < maxOperation; i++) {
             for(int j = 0; j < maxOperation - i; j++) {
                 maxDiff = Math.max(maxDiff,Math.abs(count1 - count2));
                 if(st1.getTop().equals(st2.getTop()) &&  isSameForXOperation(syncroRange, st1, st2)) {
-                    diff.setMaxStackDiff(maxDiff);
                     testReport.addAllDiffMethodCall(callDiff1);
                     testReport.addAllDiffMethodCall(callDiff2);
-                    return diff;
+                    return;
                 }
                 if(st1.hasNext()) {
                     count1++;
@@ -89,10 +85,7 @@ public abstract class  AbstractCompareStackTrace {
 
             }
         }
-        maxDiff = Math.max(maxDiff,Math.abs(count1 - count2));
-        diff.setMaxStackDiff(maxDiff);
         st2.previous(count2);
-        return diff;
     }
 
     protected boolean isSameForXOperation(int x, StackTrace st1, StackTrace st2) {
@@ -134,5 +127,4 @@ public abstract class  AbstractCompareStackTrace {
     public TestReport getTestReport() {
         return testReport;
     }
-
 }

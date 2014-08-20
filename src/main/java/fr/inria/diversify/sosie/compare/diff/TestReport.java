@@ -53,11 +53,10 @@ public class TestReport {
         }
     }
 
-    public void updateVarDiff(Set<VariableDiff> diffs) {
-        for (VariableDiff diff: diffs) {
-            String key = diff.getDiffStart().getClassName() + ":" + diff.getVarDiff();
-            if(variable.containsKey(key))
-                variableDiff.add(key);
+    public void updateVarDiff(Set<String> vars) {
+        for (String var: vars) {
+            if(variable.containsKey(var))
+                variableDiff.add(var);
         }
     }
 
