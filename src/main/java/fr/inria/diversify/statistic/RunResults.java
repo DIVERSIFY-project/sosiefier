@@ -24,6 +24,8 @@ public class RunResults {
 
     private int status;
 
+    private int incrementalSeries;
+
     /**
      * Description of the test failed for this transformation
      */
@@ -34,6 +36,7 @@ public class RunResults {
      */
     private JSONArray transformationsJSON;
 
+
     /**
      * Deserialises the run result from a JSON object
      *
@@ -43,6 +46,7 @@ public class RunResults {
         try {
             id = run.getInt("id");
             status = run.getInt("status");
+            incrementalSeries = run.getInt("incrementalSeries");
             JSONArray failedArray = run.getJSONArray("failedTests");
             failedTests = new ArrayList<>();
             for (int i = 0; i < failedArray.length(); i++) {
@@ -65,10 +69,18 @@ public class RunResults {
     public JSONObject toJSONObject() throws JSONException {
         JSONObject result = new JSONObject();
         result.put("id", id);
+        result.put("incrementalSeries", incrementalSeries);
         result.put("status", status);
         result.put("failedTests", failedTests);
         result.put("transformations", transformationsJSON);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: ").append(getIncrementalSeries()).append("Sz: ").append(getTransformationSize());
+        return sb.toString();
     }
 
     /**
@@ -222,4 +234,14 @@ public class RunResults {
     public boolean isSosieRun() {
         return status == 0;
     }
+
+    public int getIncrementalSeries() {
+        return incrementalSeries;
+    }
+
+    public void setIncrementalSeries(int incrementalSeries) {
+        this.incrementalSeries = incrementalSeries;
+    }
+
+
 }

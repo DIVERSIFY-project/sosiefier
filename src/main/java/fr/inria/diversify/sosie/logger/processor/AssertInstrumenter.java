@@ -30,10 +30,14 @@ public class AssertInstrumenter extends AbstractLoggingInstrumenter<CtInvocation
 
     @Override
     public boolean isToBeProcessed(CtInvocation<?> candidate) {
-        return candidate.getExecutable().getSimpleName().startsWith("assert");
+        try {
+            return candidate.getExecutable().getSimpleName().startsWith("assert");
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 
-    //Obtains a proper argument type string... yes, is not as simple as toString some ver special times
+    //Obtains a proper argument type string... yes, is not as simple as toString some very special times
     private String buildTypedArgumentString(CtTypeReference typedElement) {
         String result = "";
 

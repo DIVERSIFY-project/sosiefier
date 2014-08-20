@@ -18,6 +18,8 @@ import spoon.reflect.declaration.CtSimpleType;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CoverageReport implements ICoverageReport {
@@ -135,5 +137,16 @@ public class CoverageReport implements ICoverageReport {
 
     public String getFileName() {
         return executionDataFile.getName();
+    }
+
+    /**
+     * Returns a distribution of coverage from a given statement along the list of coverage files
+     *
+     * @return An integer list containing the distribution
+     */
+    public List<Integer> getCoverageDistribution(CodeFragment stmt) {
+        ArrayList<Integer> result = new ArrayList<>(1);
+        result.add(codeFragmentCoverage(stmt) > 0 ? 1 : 0);
+        return result;
     }
 }

@@ -20,9 +20,9 @@ public class SessionResultTest {
         r3.setStatus(-1);
 
         SessionResults session = new SessionResults();
-        session.addRunResults(r1);
-        session.addRunResults(r2);
-        session.addRunResults(r3);
+        session.addRunResults(r1, "", "");
+        session.addRunResults(r2, "", "");
+        session.addRunResults(r3, "", "");
         return session;
     }
 

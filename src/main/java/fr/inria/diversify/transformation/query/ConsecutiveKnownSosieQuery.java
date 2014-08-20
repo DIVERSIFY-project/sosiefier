@@ -4,10 +4,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
-
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -50,6 +47,7 @@ public class ConsecutiveKnownSosieQuery extends TransformationQuery {
 
     /**
      * Extracts the sosies from a transformation list
+     *
      * @param transf
      */
     private void extractSosies(Collection<Transformation> transf) {
@@ -78,4 +76,19 @@ public class ConsecutiveKnownSosieQuery extends TransformationQuery {
     }
 
 
+    /**
+     *  Gets the current running trial
+     * @return
+     */
+    public int getCurrentTrial() {
+        return currentTrial;
+    }
+
+    /**
+     * Sets the trial. In case you want to start over
+     * @param currentTrial
+     */
+    public void setCurrentTrial(int currentTrial) {
+        this.currentTrial = currentTrial;
+    }
 }

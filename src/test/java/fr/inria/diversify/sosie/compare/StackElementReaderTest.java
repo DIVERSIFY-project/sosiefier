@@ -1,12 +1,10 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.FileOutputStreamMock;
-import fr.inria.diversify.sosie.compare.stackElement.StackTraceVariable;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
-import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTracePop;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTracePush;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTraceVariableObservation;
-import fr.inria.diversify.sosie.logger.InstruCompactLog;
+import fr.inria.diversify.sosie.logger.InstruBinaryLog;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +20,7 @@ import java.util.Map;
  */
 public class StackElementReaderTest {
 
-    private void buildDataAndReader(InstruCompactLog log, Thread t) {
+    private void buildDataAndReader(InstruBinaryLog log, Thread t) {
         log.writeTestStart(t, "sampleTest");
         log.methodCall(t, "foo");
         log.methodOut(t);
@@ -35,7 +33,7 @@ public class StackElementReaderTest {
 
         //Create some data and store the result in the mocked array instead of the file
         FileOutputStreamMock mock = new FileOutputStreamMock();
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         Thread t = Thread.currentThread();
 
         //Build some data for the reader
@@ -62,7 +60,7 @@ public class StackElementReaderTest {
     public void testVar() throws IOException {
         //Create some data and store the result in the mocked array instead of the file
         FileOutputStreamMock mock = new FileOutputStreamMock();
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         Thread t = Thread.currentThread();
 
         //Build some data for the reader
@@ -89,7 +87,7 @@ public class StackElementReaderTest {
     public void testRead_Exception() throws IOException {
         //Create some data and store the result in the mocked array instead of the file
         FileOutputStreamMock mock = new FileOutputStreamMock();
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         Thread t = Thread.currentThread();
 
         //Build some data for the reader

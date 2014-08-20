@@ -1,9 +1,8 @@
 package fr.inria.diversify.sosie.compare;
 
 import fr.inria.diversify.sosie.compare.stackElement.*;
-import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
-import fr.inria.diversify.sosie.logger.InstruCompactLog;
+import fr.inria.diversify.sosie.logger.BinaryLogReader;
 import fr.inria.diversify.util.Log;
 
 import java.io.*;
@@ -20,7 +19,7 @@ import java.util.Map;
 public class StackElementBinaryReader extends StackElementReader {
 
     //Map bein readed
-    private Map<Integer, String> idMap;
+    protected Map<Integer, String> idMap;
 
     //Current log depth being readed
     private int currentDepth;
@@ -75,18 +74,28 @@ public class StackElementBinaryReader extends StackElementReader {
         int magic = 0;
         StackTrace currentStackTrace = null;
 
+        BinaryLogReader reader = new BinaryLogReader(dataInputStream);
+
+        while (!reader.eof()) {
+            BinaryLogReader.LogChunk chunk = reader.next();
+            if ( chunk instanceof BinaryLogReader.MethodCallChunk ) {
+                BinaryLogReader.MethodCallChunk m = (BinaryLogReader.MethodCallChunk)chunk;
+                StackTraceCall call = new StackTraceCall(m.getSignature(), m.getCurrentDepth());
+                currentStackTrace.addElement(call);
+            } else if ( chunk instanceof BinaryLogReader.TestChunk ) {
+                BinaryLogReader.TestChunk t = (BinaryLogReader.TestChunk)chunk;
+                currentStackTrace = new StackTrace();
+                currentStackTrace.setName(t.getName());
+                result.add(currentStackTrace);
+            }
+
+        }
+
+        /*
         while (magic != InstruCompactLog.LOG_CLOSE) {
 
             magic = dataInputStream.readByte();
             switch (magic) {
-                case InstruCompactLog.LOG_TEST:
-                    currentStackTrace = new StackTrace();
-                    readTest(dataInputStream, currentStackTrace);
-                    result.add(currentStackTrace);
-                    break;
-                case InstruCompactLog.LOG_METHOD:
-                    readMethod(dataInputStream, currentStackTrace);
-                    break;
                 case InstruCompactLog.LOG_VAR:
                     readVar(dataInputStream, currentStackTrace);
                     break;
@@ -104,7 +113,7 @@ public class StackElementBinaryReader extends StackElementReader {
                 default:
                     throw new IOException("Unknown magic number, File is corrupted or not proper format");
             }
-        }
+        }*/
         //dataInputStream.g
         //dataInputStream.reset();
         return result;

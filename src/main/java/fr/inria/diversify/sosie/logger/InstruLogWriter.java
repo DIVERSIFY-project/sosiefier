@@ -14,7 +14,7 @@ import java.util.concurrent.Semaphore;
 
 /**
  * Abstract classes for all loggers
- *
+ * <p/>
  * Created by marodrig on 25/06/2014.
  */
 public abstract class InstruLogWriter {
@@ -35,7 +35,19 @@ public abstract class InstruLogWriter {
     protected Map<String, Semaphore> semaphores;
 
     ///Previous logs of variables status. Useful to check whether they have change
-    protected Map<Thread, Map<String,String>> previousVarLog;
+    protected Map<Thread, Map<String, String>> previousVarLog;
+
+    //Number of times a transplantation point is called
+    protected HashMap<Integer, Integer> transplantPointCallCount;
+
+    //Number of test a transplantation point is called on
+    protected HashMap<Integer, Integer> testCallsPerTransplantation;
+
+    //Transplantation points called in this test
+    protected HashSet<Integer> transplantPointCalledInThisTest;
+
+    //Number of assertions per transplantation
+    protected HashMap<Integer, Integer> assertionsPerTransplantation;
 
     protected Boolean partialLogging = null;
 
@@ -47,19 +59,25 @@ public abstract class InstruLogWriter {
 
     /**
      * Constructor for the logger
+     *
      * @param logDir Directory where the logging is going to be stored
      */
     public InstruLogWriter(String logDir) {
         if (dir == null) initDir(logDir);
         semaphores = new HashMap<String, Semaphore>();
-        callDeep = new  HashMap<Thread, Integer>();
+        callDeep = new HashMap<Thread, Integer>();
         logMethod = new HashMap<Thread, Boolean>();
+        transplantPointCallCount = new HashMap<Integer, Integer>();
+        assertionsPerTransplantation = new HashMap<Integer, Integer>();
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
+        //transplantPointCalledInThisTest = new HashSet<Integer>();
+        //testCallsPerTransplantation = new HashMap<Integer, Integer>();
     }
 
     /**
      * Gets the loggin path for the current thread
+     *
      * @param thread Thread to log
      * @return The path with the log file
      */
@@ -69,23 +87,53 @@ public abstract class InstruLogWriter {
 
     /**
      * Log a call to a method
-     * @param thread Thread where the call is invoked
+     *
+     * @param thread            Thread where the call is invoked
      * @param methodSignatureId Signature of the method
      */
     public abstract void methodCall(Thread thread, String methodSignatureId);
 
     /**
      * Method that logs and return from a method
+     *
      * @param thread Thread where the method returns
      */
     public void methodOut(Thread thread) {
         decCallDepth(thread);
     }
 
-    public abstract void writeTestStart(Thread thread, String testSignature);
+    /**
+     * Logs the begining of a test method
+     *
+     * @param thread
+     * @param testSignature
+     */
+    public void writeTestStart(Thread thread, String testSignature) {
+        if (transplantPointCalledInThisTest == null) {
+            testCallsPerTransplantation = new HashMap<Integer, Integer>();
+            transplantPointCalledInThisTest = new HashSet<Integer>();
+        }
+        transplantPointCalledInThisTest.clear();
+    }
 
     public abstract void writeAssert(int id, Thread thread, String className,
                                      String methodSignature, String assertName, Object... var);
+
+    /**
+     * Counts an assert.
+     *
+     * Counts how many asserts per transformation line
+     */
+    public void countAssert() {
+        for (Integer i : transplantPointCalledInThisTest) {
+            if (!assertionsPerTransplantation.containsKey(i)) {
+                assertionsPerTransplantation.put(i, 1);
+            } else {
+                int k = assertionsPerTransplantation.get(i) + 1;
+                assertionsPerTransplantation.put(i, k);
+            }
+        }
+    }
 
     public abstract void writeVar(int id, Thread thread, String methodSignatureId, Object... var);
 
@@ -94,10 +142,78 @@ public abstract class InstruLogWriter {
 
     public abstract void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception);
 
-    public  abstract void close();
+    public abstract void close();
+
+    /**
+     * Count the call of a transplant point.
+     *
+     * @param transplantationPoint
+     */
+    public void countSourcePositionCall(int transplantationPoint) {
+
+        //Count point calls
+        if (!transplantPointCallCount.containsKey(transplantationPoint)) {
+            transplantPointCallCount.put(transplantationPoint, 1);
+        } else {
+            int k = transplantPointCallCount.get(transplantationPoint) + 1;
+            transplantPointCallCount.put(transplantationPoint, k);
+        }
+
+        //Count test calls
+        if (transplantPointCalledInThisTest != null) {
+
+            //Add just once the test to the transplantation point
+            if (!transplantPointCalledInThisTest.contains(transplantationPoint)) {
+                transplantPointCalledInThisTest.add(transplantationPoint);
+
+                if (!testCallsPerTransplantation.containsKey(transplantationPoint)) {
+                    testCallsPerTransplantation.put(transplantationPoint, 1);
+                } else {
+                    int k = testCallsPerTransplantation.get(transplantationPoint) + 1;
+                    testCallsPerTransplantation.put(transplantationPoint, k);
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Writes the source position calls information to file
+     *
+     * @param filePath
+     */
+    protected void writeSourcePositionCallToFile(String filePath) {
+        try {
+            if (transplantPointCallCount.size() > 0) {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath), 8 * 1024);
+                for (Map.Entry<Integer, Integer> p : transplantPointCallCount.entrySet()) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(p.getKey())
+                            .append(", ")
+                            .append(p.getValue());
+                    if (transplantPointCalledInThisTest != null) {
+                        sb.append(", ")
+                                .append(testCallsPerTransplantation.get(p.getKey()))
+                                .append(", ");
+                        if (assertionsPerTransplantation.containsKey(p.getKey())) {
+                            sb.append(assertionsPerTransplantation.get(p.getKey()));
+                        } else {
+                            sb.append(0);
+                        }
+                    }
+                    sb.append("\r\n");
+                    writer.write(sb.toString());
+                }
+                writer.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
     /**
      * Increases the depth of the stack for a given thread
+     *
      * @param thread Thread to increase depth
      */
     protected int incCallDepth(Thread thread) {
@@ -107,8 +223,7 @@ public abstract class InstruLogWriter {
             int c = callDeep.get(thread) + 1;
             callDeep.put(thread, c);
             return c;
-        }
-        else {
+        } else {
             callDeep.put(thread, 1);
             return 1;
         }
@@ -116,6 +231,7 @@ public abstract class InstruLogWriter {
 
     /**
      * Resets the depth of the stack for a given thread
+     *
      * @param thread Thread to reset depth
      */
     protected void resetCallDepth(Thread thread) {
@@ -125,6 +241,7 @@ public abstract class InstruLogWriter {
 
     /**
      * Decreases the depth of the stack for a given thread
+     *
      * @param thread Thread to decrease depth
      */
     protected int decCallDepth(Thread thread) {
@@ -139,6 +256,7 @@ public abstract class InstruLogWriter {
 
     /**
      * Gets a boolean value indicating if the methods of a thread are to be logged.
+     *
      * @param thread Log this thread?
      * @return True if log, false otherwise
      */
@@ -170,6 +288,7 @@ public abstract class InstruLogWriter {
 
     /**
      * Returns the file name of the file where this thread's log is being stored
+     *
      * @param thread
      * @return Relative filename of the file where this thread's log is being stored
      */
@@ -179,6 +298,7 @@ public abstract class InstruLogWriter {
 
     /**
      * A print string representation for an Object o
+     *
      * @param o Object that is going to be printed
      * @return A string representation of the object
      */
@@ -221,8 +341,8 @@ public abstract class InstruLogWriter {
                 }
 
                 String previousValue = previousVars.get(varName);
-                if(!value.equals(previousValue)) {
-                    previousVars.put(varName,value);
+                if (!value.equals(previousValue)) {
+                    previousVars.put(varName, value);
 
                     tmp.append(separator);
                     tmp.append(varName);
@@ -239,7 +359,7 @@ public abstract class InstruLogWriter {
     }
 
     public void startLogging(Thread thread, String id) {
-        if(partialLoggingThread == null) {
+        if (partialLoggingThread == null) {
             partialLoggingThread = new HashSet();
         }
         partialLoggingThread.add(thread);
@@ -249,14 +369,14 @@ public abstract class InstruLogWriter {
     protected abstract void writeStartLogging(Thread thread, String id);
 
     protected boolean log(Thread thread) {
-        return  !getPartialLogging()
+        return !getPartialLogging()
                 || (partialLoggingThread != null && partialLoggingThread.contains(thread));
     }
 
     protected boolean getPartialLogging() {
-        if(partialLogging == null) {
+        if (partialLogging == null) {
             try {
-                BufferedReader reader = new BufferedReader(new FileReader( "log/partialLogging"));
+                BufferedReader reader = new BufferedReader(new FileReader("log/partialLogging"));
                 partialLogging = Boolean.parseBoolean(reader.readLine());
             } catch (IOException e) {
                 partialLogging = false;

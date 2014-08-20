@@ -2,6 +2,14 @@ package fr.inria.diversify.sosie.logger;
 
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
+import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.factories.SpoonMetaFactory;
+import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.TransformationJsonParser;
+import spoon.reflect.factory.Factory;
+import org.hamcrest.Matcher;
+import java.io.File;
+import java.util.List;
 
 /**
  * User: Simon
@@ -16,26 +24,47 @@ public class InstruTestAndMethod {
     public InstruTestAndMethod(String propertiesFile) throws Exception {
         InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
 
+        //Configuration
         String project = inputConfiguration.getProperty("project");
         String src = inputConfiguration.getProperty("src");
         String test = inputConfiguration.getProperty("testSrc");
         String out = inputConfiguration.getProperty("outputDirectory");
-
-        if(project.equals(out)) {
-            throw new Exception();
-        }
-
-//        MavenDependencyResolver t = new MavenDependencyResolver();
-//        t.DependencyResolver(project + "/pom.xml");
+        String prevTransfPath = inputConfiguration.getPreviousTransformationDir();
 
         boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
         boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
         boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError"));
         boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert"));
+        boolean intruCountAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruCountAssert"));
         boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
+        boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruTransplantPointCount"));
+        boolean compact = Boolean.parseBoolean(inputConfiguration.getProperty("compact.log", "false"));
 
+        MavenDependencyResolver t = new MavenDependencyResolver();
+        t.DependencyResolver(project + "/pom.xml");
 
-        Instru instru = new Instru(project, src, test, out, null);
+        Instru instru;
+
+        if ( intruTransplantPoint ) {
+            Factory factory = new SpoonMetaFactory().buildNewFactory(project + "/" + src, 5);
+
+            InputProgram inputProgram = new InputProgram();
+            inputProgram.setFactory(factory);
+            inputProgram.setSourceCodeDir(src);
+            inputProgram.setPreviousTransformationsPath(prevTransfPath);
+            inputProgram.processCodeFragments();
+
+            TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
+            List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
+            instru = new Instru(project, src, test, out, transf);
+            instru.setSourceFactory(factory);
+        }
+        else {
+            instru = new Instru(project, src, test, out, null);
+        }
+        instru.setCompactLog(compact);
+        instru.setInstruTransplantationPointCallCount(intruTransplantPoint);
+        instru.setInstruCountAssertions(intruCountAssert);
         instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
     }
 

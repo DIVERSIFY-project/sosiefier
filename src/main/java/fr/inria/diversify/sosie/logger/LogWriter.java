@@ -55,9 +55,26 @@ public class LogWriter {
         log.writeCatch(id, thread, className, methodSignature, exception);
     }
 
-    public  static void close() {
+    public static void countAssert(){
         if ( log == null ) { log = new InstruVerboseLog("LogDirName"); }
-        log.close();
+        log.countAssert();
+    }
+
+    /**
+     * Counts the transplant source position. Is boolean to be able to insert it in boolean expressions
+     * @param sourcePosition
+     * @return false always
+     */
+    public static boolean countSourcePositionCall(int sourcePosition) {
+        if ( log == null ) { log = new InstruVerboseLog("LogDirName"); }
+        log.countSourcePositionCall(sourcePosition);
+        return false;
+    }
+
+    public  static void close() {
+        if ( log != null ) {
+            log.close();
+        }
     }
 
     public static void startLogging(Thread thread, String id) {

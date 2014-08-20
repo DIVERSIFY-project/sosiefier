@@ -34,7 +34,7 @@ import fr.inria.diversify.util.Log;
 
 /**
  * Main class for the sosie generator.
- * <p>
+ * <p/>
  * User: Simon
  * Date: 9/11/13
  * Time: 11:41 AM
@@ -49,7 +49,8 @@ public class DiversifyMain {
     /**
      * The input configuration given by the user is parsed by this class which helps other parts of the program to
      * interact with the input parameters
- s    */
+     * s
+     */
     private InputConfiguration inputConfiguration;
 
     public DiversifyMain(String propertiesFile) throws Exception {
@@ -79,15 +80,37 @@ public class DiversifyMain {
         AbstractDiversify abstractDiversify = initAbstractDiversify();
 
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
-        int max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size"));
-        int min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
+
         TransformationQuery query = initTransformationQuery();
 
-        for ( int i = min; i <= max; i++ ) {
+        //Get sizes of incremental sosies that we want
+        int max;
+        int min;
+        String sosieSizes = DiversifyProperties.getProperty("transformation.size.set");
+        ArrayList<Integer> intSosieSizes = null;
+        if (sosieSizes != null) {
+            intSosieSizes = new ArrayList<>();
+            for (String s : sosieSizes.split(";")) {
+                intSosieSizes.add(Integer.parseInt(s));
+            }
+            max = intSosieSizes.size() - 1;
+            min = 0;
+        } else {
+            max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size", "1"));
+            min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
+        }
 
-            inputProgram.setTransformationPerRun(i);
+        for (int i = min; i <= max; i++) {
+
+            if (intSosieSizes != null) {
+                inputProgram.setTransformationPerRun(intSosieSizes.get(i));
+            } else {
+                inputProgram.setTransformationPerRun(i);
+            }
+
             abstractDiversify.setTransformationQuery(query);
             abstractDiversify.run(n);
+
 
             //Clear the found transformations for the next step to speed up. No needed since the new ones are going
             //to be of different size and therefore different
@@ -110,13 +133,12 @@ public class DiversifyMain {
             ad = new DiversifyWithParent(inputConfiguration, projet, src);
         else if (DiversifyProperties.getProperty("sosie").equals("false")) {
             ad = new Diversify(inputConfiguration, projet, src);
-            boolean early = DiversifyProperties.getProperty("early.report","false").equals("true");
-            boolean earlySosies = DiversifyProperties.getProperty("early.report.sosies.only","false").equals("true");
-            ((Diversify)ad).setEarlyReportSosiesOnly(earlySosies);
-            ((Diversify)ad).setEarlyReport(early);
+            boolean early = DiversifyProperties.getProperty("early.report", "false").equals("true");
+            boolean earlySosies = DiversifyProperties.getProperty("early.report.sosies.only", "false").equals("true");
+            ((Diversify) ad).setEarlyReportSosiesOnly(earlySosies);
+            ((Diversify) ad).setEarlyReport(early);
             ad.setSocieSourcesDir(DiversifyProperties.getProperty("copy.sosie.sources.to", ""));
-        }
-        else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
+        } else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
             String testDir = DiversifyProperties.getProperty("testSrc");
             ad = new Sosie(projet, src, testDir);
         } else ad = new SosieWithParent(projet, src);
@@ -168,7 +190,7 @@ public class DiversifyMain {
         inputProgram.setCoverageReport(initCoverageReport());
 
         inputProgram.setTransformationPerRun(
-            Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
+                Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1")));
 
         //Path to pervious transformations made to this input program
         inputProgram.setPreviousTransformationsPath(
@@ -186,7 +208,7 @@ public class DiversifyMain {
 
         String type = DiversifyProperties.getProperty("transformation.type").toLowerCase();
 
-        switch ( type ) {
+        switch (type) {
             case "mutation":
                 return new MutationQuery(inputProgram);
             case "shuffle":
@@ -224,16 +246,27 @@ public class DiversifyMain {
                 inputProgram.processCodeFragments();
                 return new KnowMultisosieQuery(inputProgram);
             case "singleconsecutive":
+                int startSosieIndex = Integer.parseInt(DiversifyProperties.getProperty("start.sosie.index", "0"));
                 inputProgram.processCodeFragments();
-                return new ConsecutiveKnownSosieQuery(inputProgram);
-
+                ConsecutiveKnownSosieQuery q = new ConsecutiveKnownSosieQuery(inputProgram);
+                q.setCurrentTrial(startSosieIndex);
+                return q;
+            case "specificindexes":
+                ArrayList<Integer> spIndex = new ArrayList<>();
+                for ( String s : DiversifyProperties.getProperty("specific.indexes").split(",") ) {
+                    spIndex.add(Integer.parseInt(s));
+                }
+                inputProgram.processCodeFragments();
+                SpecificSosiesQuery query = new SpecificSosiesQuery(inputProgram);
+                query.setSpecificIndex(spIndex);
+                return query;
             default:
                 //Try to construct the query from the explicit class
                 try {
-                    Class[] intArgsClass = new Class[] { InputProgram.class };
+                    Class[] intArgsClass = new Class[]{InputProgram.class};
                     Class strategyClass = Class.forName(type);
                     Constructor constructor = strategyClass.getConstructor(intArgsClass);
-                    return (TransformationQuery)constructor.newInstance(inputProgram);
+                    return (TransformationQuery) constructor.newInstance(inputProgram);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -266,8 +299,33 @@ public class DiversifyMain {
                 Log.warn("Unable to find coverage file or corrupt information: using NullCoverage");
                 icr = null;
             }
+        } else {
+            //Try to use the trace coverage
+            String traceDir = DiversifyProperties.getProperty("trace.dirs");
+            Boolean binaryTrace = Boolean.parseBoolean(DiversifyProperties.getProperty("binary.trace", "false"));
+            if (traceDir != null) {
+                String[] dirs = traceDir.split(";");
+                ArrayList<File> traceFiles = new ArrayList<>();
+                for (String s : dirs) {
+                    File f = new File(s);
+                    if (f.exists() && f.isDirectory()) {
+                        traceFiles.add(f);
+                    } else {
+                        Log.warn("Invalid trace dir: " + s);
+                    }
+                }
+                if (traceFiles.size() > 0) {
+                    try {
+                        icr = new MultiCoverageReport(traceFiles, binaryTrace);
+                        icr.create();
+                        return icr;
+                    } catch (IOException e) {
+                        Log.warn("Unable to find coverage file or corrupt information: using NullCoverage");
+                        icr = null;
+                    }
+                }
+            }
         }
-
         if (icr == null) {
             icr = new NullCoverageReport();
         }
@@ -279,7 +337,7 @@ public class DiversifyMain {
     protected void initSpoon() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         Factory factory = new SpoonMetaFactory().buildNewFactory(
                 inputConfiguration.getProperty("project") + "/" +
-                inputConfiguration.getProperty("src"),
+                        inputConfiguration.getProperty("src"),
                 Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
         initInputProgram(factory);
     }

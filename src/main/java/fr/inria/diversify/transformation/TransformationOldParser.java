@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -36,7 +37,7 @@ public class TransformationOldParser {
     public TransformationOldParser(boolean toSet, InputProgram inputProgram) {
         this.inputProgram = inputProgram;
 
-        if(toSet)
+        if (toSet)
             transformations = new HashSet<Transformation>();
         else
             transformations = new ArrayList<Transformation>();
@@ -46,17 +47,17 @@ public class TransformationOldParser {
 
         File file = new File(dir);
         int countFile = 0;
-        Log.debug("transformation directory: {}",file.getAbsolutePath());
+        Log.debug("transformation directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles())
-            if(f.getName().endsWith(".json")) {
+            if (f.getName().endsWith(".json")) {
                 countFile++;
-                Log.debug("Current number of transformation {}",transformations.size());
-                Log.debug("parse tranformation file: "+f.getName());
+                Log.debug("Current number of transformation {}", transformations.size());
+                Log.debug("parse tranformation file: " + f.getName());
                 transformations.addAll(parseFile(f));
             }
-        Log.debug("number of transformation file: {}",countFile);
-        Log.debug("number of transformation : {}",transformations.size());
-        Log.debug("number of parse error : {}",countError);
+        Log.debug("number of transformation file: {}", countFile);
+        Log.debug("number of transformation : {}", transformations.size());
+        Log.debug("number of parse error : {}", countError);
 
         return transformations;
     }
@@ -89,14 +90,14 @@ public class TransformationOldParser {
         if (sb.length() == 0)
             return new ArrayList<Transformation>();
         JSONArray array = new JSONArray(sb.toString());
-        for(int i = 0; i < array.length(); i++)  {
+        for (int i = 0; i < array.length(); i++) {
             count++;
             try {
                 list.add(parseTransformation(array.getJSONObject(i)));
-            }  catch (Exception e) {
+            } catch (Exception e) {
                 countError++;
-//                Log.warn("error during the parsing of "+array.getJSONObject(i),e);
-                Log.debug("{} {} ",count, countError);
+                Log.warn("Error during the parsing of "+ array.getJSONObject(i), e);
+                //Log.debug("{} {} ", count, countError);
             }
         }
 
@@ -107,43 +108,46 @@ public class TransformationOldParser {
         String type = jsonObject.getString("type");
         ASTTransformation trans = null;
 
-        if(type.endsWith("eplace"))
-            trans = parseASTReplace(jsonObject);
-        if(type.endsWith("dd"))
-            trans = parseASTAdd(jsonObject);
-        if(type.equals("delete"))
-            trans = parseASTDelete(jsonObject);
+        if (type.endsWith("eplace"))
+            trans = parseASTReplace(jsonObject.getJSONArray("transformation").getJSONObject(0));
+        if (type.endsWith("dd"))
+            trans = parseASTAdd(jsonObject.getJSONArray("transformation").getJSONObject(0));
+        if (type.equals("delete"))
+            trans = parseASTDelete(jsonObject.getJSONArray("transformation").getJSONObject(0));
 
         trans.setFailures(new ArrayList<String>());
 
-        if(type.equals("notContextAdd"))
+        if (type.equals("notContextAdd"))
             trans.setName("addRandom");
-        if(type.equals("notContextReplace"))
+        if (type.equals("notContextReplace"))
             trans.setName("replaceRandom");
 
-        if(type.equals("notMappingVariableAdd"))
+        if (type.equals("notMappingVariableAdd"))
             trans.setName("addReaction");
-        if(type.equals("notMappingVariableReplace"))
+        if (type.equals("notMappingVariableReplace"))
             trans.setName("replaceReaction");
 
-        if(type.equals("notContextMappingVariableNameAdd"))
+        if (type.equals("notContextMappingVariableNameAdd"))
             trans.setName("addittgenstein");
-        if(type.equals("notContextMappingVariableNameReplace"))
+        if (type.equals("notContextMappingVariableNameReplace"))
             trans.setName("replaceWittgenstein");
 
-        if(type.equals("add"))
+        if (type.equals("add"))
             trans.setName("addSteroid");
-        if(type.equals("replace"))
+        if (type.equals("replace"))
             trans.setName("replaceSteroid");
-        if(type.equals("delete"))
+        if (type.equals("delete"))
             trans.setName("delete");
 
 
-        boolean compile = jsonObject.getBoolean("setCompile");
+        boolean compile = true;
+        if ( jsonObject.has("setCompile") ) {
+            compile = jsonObject.getBoolean("setCompile");
+        }
         int failure = jsonObject.getInt("Failures");
-        if(!compile)
+        if (!compile)
             trans.setStatus(-2);
-        else if(failure > 0)
+        else if (failure > 0)
             trans.setStatus(-1);
         else
             trans.setStatus(failure);
@@ -168,28 +172,36 @@ public class TransformationOldParser {
         return trans;
     }
 
-    protected ASTTransformation parseASTReplace(JSONObject jsonObject) throws Exception {
+    protected ASTTransformation parseASTReplace(JSONObject jsonObject) throws TransformationParserException {
         ASTReplace trans = new ASTReplace();
 
-        trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("CodeFragmentReplace")));
-        trans.setTransplantationPoint(findCodeFragment(jsonObject.getJSONObject("CodeFragmentPosition")));
-        trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
+        try {
+            trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("CodeFragmentReplace")));
+            trans.setTransplantationPoint(findCodeFragment(jsonObject.getJSONObject("CodeFragmentPosition")));
+            trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
+        } catch (JSONException e) {
+            throw new TransformationParserException("Cannot find Json properties", e);
+        }
 
         return trans;
     }
 
-    protected CodeFragment findCodeFragment(JSONObject jsonObject) throws Exception {
+    protected CodeFragment findCodeFragment(JSONObject jsonObject) throws TransformationParserException, JSONException {
         CodeFragment cf = null;
-        for (CodeFragment codeFragment : inputProgram.getCodeFragments()) {
-            try {
-                if (codeFragment.positionString().equals(jsonObject.get("Position"))  ){
-                    cf = codeFragment;
-                    break;
-                }
-            } catch (Exception e) {}
+        String position;
+        try {
+            position = (String) jsonObject.get("Position");
+        } catch (Exception e) {
+            throw new TransformationParserException(e);
         }
-        if (cf  == null) {
-            throw new Exception();
+        for (CodeFragment codeFragment : inputProgram.getCodeFragments()) {
+           if (codeFragment.positionString().equals(position)) {
+                cf = codeFragment;
+                break;
+            }
+        }
+        if (cf == null) {
+            throw new TransformationParserException("Cannot find code fragment for position: " + position);
         }
         return cf;
     }
@@ -199,7 +211,7 @@ public class TransformationOldParser {
         Iterator it = jsonObject.keys();
         while (it.hasNext()) {
             String key = it.next().toString();
-            map.put(key,jsonObject.get(key).toString());
+            map.put(key, jsonObject.get(key).toString());
         }
         return map;
     }

@@ -1,6 +1,8 @@
 package fr.inria.diversify.sosie.logger;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.security.KeyPair;
 import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -10,36 +12,48 @@ import java.util.concurrent.TimeUnit;
  * <p/>
  * Created by marodrig on 25/06/2014.
  */
-public class InstruCompactLog extends InstruLogWriter {
-
+public class InstruBinaryLog extends InstruLogWriter {
 
     ///Magic number for method in log tuples
     public static final byte LOG_METHOD = 1;
-    ///Magic number for class in log tuples
-    public static final byte LOG_CLASS = 2;
+
+    ///Magic number for transplantation point in log tuples
+    public static final byte LOG_TRANSPLANT_CALL = 2;
+
     ///Magic number for tests in log tuples
     public static final byte LOG_TEST = 3;
+
     ///Magic number for asserts in log tuples
     public static final byte LOG_ASSERT = 4;
+
     ///Magic number for vars in log tuples
     public static final byte LOG_VAR = 5;
+
     ///Magic number for exceptions in log tuples
     public static final byte LOG_EXCEPTION = 6;
+
     ///Magic number for catchs in log tuples
     public static final byte LOG_CATCH = 7;
+
     ///Magic number for the end of the file
     public static final byte LOG_CLOSE = 8;
 
     ///DataInput for each thread. Each one saved in a different file
     private Map<Thread, DataOutputStream> streamsPerThread;
 
-    ///Each method, class, test, exception has a signature that is assigned an integer value.
+    ///Class, test, exception has a signature that is assigned an integer value.
     // This way we save lots of space
     protected Map<String, Integer> idMap;
+
+    ///Each method has a signature that is assigned an numeric value.
+    // This way we save space
+    protected Map<String, Integer> methodMap;
 
     //Current ID signature
     private int currentId;
 
+    //Current ID signature for methods
+    private int methodId;
 
     //We write the id map as we go. That way we may store it in the same file
     private int lastHashEntry = 0;
@@ -47,14 +61,16 @@ public class InstruCompactLog extends InstruLogWriter {
     //List of new hash entries before the last call of a write method
     ArrayList<HashMap.Entry<String, Integer>> lastSignatures;
 
-    public InstruCompactLog(String logDir) {
+    public InstruBinaryLog(String logDir) {
         super(logDir);
-        lastSignatures = new ArrayList<HashMap.Entry<String, Integer>>();
-        //Remember we are copying these files to another source file
+
+        //ATTENTION!!!: Remember we are copying these files to another source file
         //so they must be maintain in java 1.5
+        lastSignatures = new ArrayList<HashMap.Entry<String, Integer>>();
         idMap = new HashMap<String, Integer>();
         currentId = 0;
-
+        methodId = 0;
+        methodMap = new HashMap<String, Integer>();
         streamsPerThread = new HashMap<Thread, DataOutputStream>();
     }
 
@@ -73,6 +89,31 @@ public class InstruCompactLog extends InstruLogWriter {
     }
 
     /**
+     * Calculate the size in bytes a number takes
+     * @param value
+     * @return
+     */
+    private byte valueSize(int value) {
+        byte size = 3;
+        if ( value < 256 ) { size = 0; }
+        else if ( value < 65536 ) { size = 1; }
+        else if ( value < 16777216 ) { size = 2; }
+        return size;
+    }
+
+    /**
+     * Converts a integer into a byte array
+     * @return A byte array
+     */
+    private byte[] fromIntToByte(int value, int valueSize) {
+        byte[] result = new byte[valueSize];
+        for (int i = 0; i < valueSize; i++) {
+            result[i] = (byte) (value >> (i * 8));
+        }
+        return result;
+    }
+
+    /**
      * Log a call to a method
      *
      * @param thread            Thread where the call is invoked
@@ -81,13 +122,37 @@ public class InstruCompactLog extends InstruLogWriter {
     public void methodCall(Thread thread, String methodSignatureId) {
         try {
             if (getLogMethod(thread)) {
-                int depth = incCallDepth(thread);
+                int id;
+
+                boolean mustWriteSignature = !methodMap.containsKey(methodSignatureId);
+                if (mustWriteSignature) {
+                    methodId++;
+                    methodMap.put(methodSignatureId, methodId);
+                    id = methodId;
+                } else {
+                    id = methodMap.get(methodSignatureId);
+                }
                 DataOutputStream os = getStream(thread);
-                int id = getSignatureId(methodSignatureId);
-                os.writeByte(LOG_METHOD);
-                writeSignatures(os);
-                os.writeInt(id);
-                os.writeInt(depth);
+                int depth = incCallDepth(thread);
+                //Write options byte for this method
+                byte valueSizeId = valueSize(id);
+                byte valueSizeDepth = valueSize(depth);
+
+                //Write the options byte to file
+                byte optByte = 0;
+                optByte = (byte) (optByte | valueSizeId << 3);
+                optByte = (byte) (optByte | valueSizeDepth << 5);
+                optByte = (byte) (optByte | (mustWriteSignature ? (byte)1 : (byte)0) << 7);
+                os.write(optByte);
+
+                //Write the signature in case we need it
+                if ( mustWriteSignature ) {
+                    os.writeUTF(methodSignatureId);
+                }
+                //Write the id
+                os.write(fromIntToByte(id, valueSizeId + 1));
+                ///Write the depth
+                os.write(fromIntToByte(depth, valueSizeDepth + 1));
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -98,15 +163,15 @@ public class InstruCompactLog extends InstruLogWriter {
 
     @Override
     public void writeTestStart(Thread thread, String testSignature) {
+        super.writeTestStart(thread, testSignature);
         try {
             //Each test runs in a 0 depth for what we care
             resetCallDepth(thread);
-            int depth = incCallDepth(thread);
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_TEST);
-            int id = getSignatureId(testSignature);
+            //int id = getSignatureId(testSignature);
+            //Does not seem probable that the same test is called several times
             writeSignatures(os);
-            os.writeInt(id);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -222,8 +287,10 @@ public class InstruCompactLog extends InstruLogWriter {
     @Override
     public void close() {
 
+        //Writes the Source position calls to file
+        writeSourcePositionCallToFile("sourcePositionCall.log");
+
         for (Thread thread : streamsPerThread.keySet()) {
-            File f = new File(getThreadLogFilePath(thread) + ".id");
             //String semaphore = "";
             try {
                 DataOutputStream os = getStream(thread);
@@ -235,6 +302,8 @@ public class InstruCompactLog extends InstruLogWriter {
             }
         }
     }
+
+
 
     @Override
     protected void writeStartLogging(Thread thread, String id) {
@@ -252,19 +321,19 @@ public class InstruCompactLog extends InstruLogWriter {
         if (!streamsPerThread.containsKey(thread)) {
             String fileName = getThreadLogFilePath(thread);
             try {
-                DataOutputStream s = new DataOutputStream(new BufferedOutputStream(
-                        new FileOutputStream(fileName, true)));
+                BufferedOutputStream bf = new BufferedOutputStream(new FileOutputStream(fileName, true), 16 * 1024);
+                DataOutputStream s = new DataOutputStream(bf);
                 streamsPerThread.put(thread, s);
-                semaphores.put(s.toString() + s.hashCode(), new Semaphore(1));
-
+                //semaphores.put(s.toString() + s.hashCode(), new Semaphore(1));
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }
         DataOutputStream s = streamsPerThread.get(thread);
-        semaphores.get(s.toString() + s.hashCode()).tryAcquire(50, TimeUnit.MILLISECONDS);
+        //semaphores.get(s.toString() + s.hashCode()).tryAcquire(50, TimeUnit.MILLISECONDS);
         return s;
     }
+
 
     /**
      * Gets the id Map id for a signature

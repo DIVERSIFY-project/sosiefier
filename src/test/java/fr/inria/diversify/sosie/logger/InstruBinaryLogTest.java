@@ -11,7 +11,7 @@ import java.util.Arrays;
  * Created by marodrig on 27/06/2014.
  */
 
-public class InstruCompactLogTest {
+public class InstruBinaryLogTest {
 
 
     private String getString(byte[] bytes, int size) throws UnsupportedEncodingException {
@@ -25,7 +25,7 @@ public class InstruCompactLogTest {
 
     @Test
     public void testCall() throws UnsupportedEncodingException {
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         //Builds a mock and magically replaces the FileOutputStream. See JMockit help
         FileOutputStreamMock mock = new FileOutputStreamMock();
 
@@ -40,11 +40,13 @@ public class InstruCompactLogTest {
 
         String s = new String(mock.buffer);
         Assert.assertTrue(s.contains("foo") && s.contains("bar"));
+        //3 bytes each method call, 5 bytes (size + chars) each + 1 byte close.
+        Assert.assertEquals(16, mock.bufferSize - 1); //BufferSize is more like a buffer index
     }
 
     @Test
     public void testCallResetDepth() {
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         Thread t = Thread.currentThread();
         log.methodCall(t, "foo");
         log.methodCall(t, "bar");
@@ -56,7 +58,7 @@ public class InstruCompactLogTest {
 
     @Test
     public void testClose() {
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         Thread t = Thread.currentThread();
         log.methodCall(t, "foo");
         log.close();
@@ -70,7 +72,7 @@ public class InstruCompactLogTest {
         //Builds a mock and magically replaces the FileOutputStream. See JMockit help
         FileOutputStreamMock mock = new FileOutputStreamMock();
 
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         log.writeTestStart(t, "tesWriteTestStart");
         log.close();
 
@@ -84,7 +86,7 @@ public class InstruCompactLogTest {
         //Builds a mock and magically replaces the FileOutputStream. See JMockit help
         FileOutputStreamMock mock = new FileOutputStreamMock();
 
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         Object[] a = { 0, 4 };
         log.writeAssert (5, t, "Class1", "method", "assertEquals", a);
         log.close();
@@ -100,7 +102,7 @@ public class InstruCompactLogTest {
         //Builds a mock and magically replaces the FileOutputStream. See JMockit help
         FileOutputStreamMock mock = new FileOutputStreamMock();
 
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         log.writeTestStart(t, "sampleTest");
         Object[] a = { 4, 10 };
         log.writeVar(10, t, "A", a);
@@ -118,7 +120,7 @@ public class InstruCompactLogTest {
         //Builds a mock and magically replaces the FileOutputStream. See JMockit help
         FileOutputStreamMock mock = new FileOutputStreamMock();
 
-        InstruCompactLog log = new InstruCompactLog("logTest");
+        InstruBinaryLog log = new InstruBinaryLog("logTest");
         Object[] a = { 0, 4 };
         log.writeException(5, t, "Class1", "method", a);
         log.close();

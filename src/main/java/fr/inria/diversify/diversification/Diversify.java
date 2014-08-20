@@ -4,10 +4,12 @@ import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.statistic.SessionResults;
 import fr.inria.diversify.transformation.AbstractTransformation;
+import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
+import org.codehaus.plexus.util.FileUtils;
 import org.json.JSONException;
 
 import java.io.File;
@@ -54,6 +56,7 @@ public class Diversify extends AbstractDiversify {
     private boolean earlyReport = false;
 
     private boolean earlyReportSosiesOnly = false;
+
     /**
      * Indicates if we must early report sosies only
      */
@@ -100,7 +103,7 @@ public class Diversify extends AbstractDiversify {
     @Override
     /**
      * Runs the diversificator.
-     * @param n Number of times the diversification process will run, i.e trials
+     * @param n Number of sosies we want
      * @throws Exception
      */
     public void run(int n) throws Exception {
@@ -117,40 +120,61 @@ public class Diversify extends AbstractDiversify {
 
         String outputDir = tmpDir + "/" + sourceDir;
 
-        for (int i = 0; i < n; i++) {
+        //We will try several times, collecting errors in the way
+        boolean success = true;
+        boolean ableToFindMoreSosies = true;
+        while (sosie < n && success && ableToFindMoreSosies) {
             Log.info("===========================");
-            Log.info("DIVERSIFICATION RUN :: " + i);
+            Log.info("DIVERSIFICATION RUN :: " + trial);
             Log.info("===========================");
             //Increase the trial count
             trial++;
 
+            success = false;
 
-            //We will try several times, collecting errors in the way
-            boolean success = false;
             int attempts = 0;
             Exception[] causes = new Exception[10];
             while (success == false && attempts < 10) {
                 //1. We query for transformations.
-                transQuery.query();
-                //Obtain transformations
-                transformations = (List<Transformation>) transQuery.getTransformations();
-
-                //2. We try to apply them
                 try {
-                    applyTransformations(transformations, outputDir);
+                    transQuery.query();
+                    //Obtain transformations
+                    transformations = (List<Transformation>) transQuery.getTransformations();
                     success = true;
-                } catch (Exception ex) {
-                    Log.error("Query application failed! " + ex.getMessage());
-                    //Application failed!... we'll query and apply again
-                    causes[attempts] = ex;
+                } catch (SeveralTriesUnsuccessful e ) {
+                    if ( e.getCauses()[0] instanceof QueryException) {
+                        QueryException qe = (QueryException)e.getCauses()[0];
+                        if ( qe.getReason().equals(QueryException.Reasons.UNABLE_TO_FIND_SOSIE_PARENT) ) {
+                            //Gently stop the search
+                            attempts = 100;
+                            ableToFindMoreSosies = false;
+                        }
+                    }
                     attempts++;
+                    success = false;
                 }
 
-                //Run transformations found
+                //2. We try to apply them
+                if ( success ) {
+                    try {
+                        applyTransformations(transformations, outputDir);
+                        success = true;
+                    } catch (Exception ex) {
+                        transQuery.setLastTransformationStatus(AbstractTransformation.EXCEPTION);
+                        success = false;
+                        Log.error("Query application failed! " + ex.getMessage());
+                        //Application failed!... we'll query and apply again
+                        causes[attempts] = ex;
+                        attempts++;
+                    }
+                }
+
+                //3. We run transformations found
                 if (success) {
                     try {
                         run();
                     } catch (Exception ex) {
+                        transQuery.setLastTransformationStatus(AbstractTransformation.EXCEPTION);
                         Log.error("Diversified program run failed! " + ex.getMessage());
                         success = false;
                         //Application failed!... we'll query, apply and run again
@@ -159,8 +183,8 @@ public class Diversify extends AbstractDiversify {
                     }
                 }
             }
-            //OK, we where unable to do anything...
-            if (!success) {
+            //OK, we where unable to do anything... while there was chance to do something
+            if (!success && ableToFindMoreSosies) {
                 throw new SeveralTriesUnsuccessful(causes);
             }
         }
@@ -202,9 +226,15 @@ public class Diversify extends AbstractDiversify {
         Log.info("BUILDING DIVERSIFIED PROGRAM");
         Log.info("============================");
 
+        //Build and run the transformation
         status = runTest(tmpDir);
+        //Give back to the query the value of the las transformation
+        transQuery.setLastTransformationStatus(status);
 
-        if (status == 0) { copySosieProgram(); }
+        if (status == AbstractTransformation.SOSIE) {
+            sosie++;
+            copySosieProgram();
+        }
 
         //Store transformation status
         for (Transformation tran : transformations) {
@@ -240,10 +270,11 @@ public class Diversify extends AbstractDiversify {
     protected void earlyReport(int status) {
         if (getEarlyReportSosiesOnly() == false || status == 0) {
             try {
-                RunResults result = buildRunResult(transformations, status);
-                result.saveToFile(getResultDir() + "/" + Thread.currentThread().getId() +
-                        "_trial_" + trial + "_size_" + transformations.size() + "_stat_" + status + ".json");
-                sessionResults.addRunResults(result);
+                RunResults result = buildRunResult(transformations, status, transQuery.getLastIncrementalSeries());
+                String jsonFile = getResultDir() + "/" + Thread.currentThread().getId() +
+                        "_trial_" + trial + "_size_" + transformations.size() + "_stat_" + status + ".json";
+                result.saveToFile(jsonFile);
+                sessionResults.addRunResults(result, jsonFile, getResultDir() + "/buidOutput" + builder.getRunCount() + ".txt");
                 sessionResults.saveReport(
                         getResultDir() + "/" + Thread.currentThread().getId() + "_session.html");
             } catch (IOException | JSONException e) {
@@ -262,9 +293,10 @@ public class Diversify extends AbstractDiversify {
      * @param status Resulting status
      * @return A run result
      */
-    protected RunResults buildRunResult(Collection<Transformation> trans, int status) {
+    protected RunResults buildRunResult(Collection<Transformation> trans, int status, int series) {
         RunResults result = new RunResults();
         result.setId(trial);
+        result.setIncrementalSeries(series);
         result.setStatus(status);
         result.setTransformations(trans);
         result.setFailedTests(builder.getTestFail());
@@ -292,12 +324,16 @@ public class Diversify extends AbstractDiversify {
                 if (intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest) {
                     Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), destPath, transformations);
                     instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
+                } else {
+                    FileUtils.copyDirectory(new File(tmpDir), f);
                 }
+
                 FileWriter writer = new FileWriter(destPath + "/trans.json");
                 for (Transformation t : transformations) {
                     writer.write(t.toJSONObject().toString() + "\n");
                 }
                 writer.close();
+
             }
         } catch (IOException e) {
             //We may also don't want to recover from here. If no instrumentation possible... now what?

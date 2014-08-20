@@ -37,6 +37,7 @@ public class ASTTransformationQuery extends TransformationQuery {
      * Indicates if we do solely simple transformations. Defaults to the simple ones
      */
     protected boolean stupid = true;
+
     /**
      * Short constructor assuming the fragment class to be statement and the transformation to be stupid
      *
@@ -79,11 +80,6 @@ public class ASTTransformationQuery extends TransformationQuery {
                 Random r = new Random();
                 ASTTransformation t = null;
                 int i = r.nextInt(stupid ? 15 : 5);
-
-                //All the methods regarding construction of transformation
-                //should be declared as protected. Otherwise is a violation of the SOLID principle
-                //because we may use this class as a Transformation factory, allowing the class
-                //to have multiple responsibilities
 
                 switch (i) {
                     case 0:
@@ -133,6 +129,11 @@ public class ASTTransformationQuery extends TransformationQuery {
     }
 
 
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     protected ASTReplace replace() throws Exception {
         ASTReplace tf = new ASTReplace();
         CodeFragment cfToReplace = null;
