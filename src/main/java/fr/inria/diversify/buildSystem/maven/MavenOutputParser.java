@@ -58,23 +58,15 @@ public class MavenOutputParser {
         Pattern testResumePattern = Pattern.compile("Tests run:\\s*(\\d+),\\s*Failures:\\s*(\\d+),\\s*Errors:\\s*(\\d+),\\s*Skipped:\\s*(\\d+)");
         Pattern failedTest = Pattern.compile("(\\w+)\\(((\\w+\\.)*\\w+)\\)\\s+Time elapsed:\\s+((\\d+\\.)?\\d+)\\s+sec\\s+<<<\\s+((FAILURE)|(ERROR))!");
 
-        boolean buildFailure = false;
-
-        int testRuns = 0;
-        int testFail = 0;
-
         setCompileError(false);
-
         status = -3;
 
         for (int i = 0; i < output.length && getCompileError() == false; i++) {
             String s = output[i];
-            Log.debug(s);
             Matcher m = testResumePattern.matcher(s);
             boolean matches = m.find();
             if (matches) {
-                testRuns += Integer.parseInt(m.group(1));
-                testFail += Integer.parseInt(m.group(2)) + Integer.parseInt(m.group(3));
+
             } else {
                 m = failedTest.matcher(s);
                 matches = m.find();
@@ -82,7 +74,6 @@ public class MavenOutputParser {
                     this.failedTest.add(s);
                 }
             }
-
             //If we find a compile error there is no need for parsing more output
             //if ( !getCompileError()) {
             if (s.contains("[ERROR] COMPILATION ERROR")) {
@@ -96,8 +87,9 @@ public class MavenOutputParser {
         }
 
         //We assume that if no explicit Build success message was issue something really wrong happened
-        if ( status == -3 ) status = -2;
-
+        if ( status == -3 ) {
+            status = -2;
+        }
         return status;
     }
 

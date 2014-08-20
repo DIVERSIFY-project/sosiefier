@@ -19,6 +19,11 @@ import java.util.List;
 public abstract class AbstractDiversify {
 
     /**
+     * Input configuration
+     */
+    protected InputConfiguration inputConfiguration;
+
+    /**
      * The original temporal directory. This is a patch. Sometimes we cannot delete the tmpDir
      */
     protected String originalTmpDir;

@@ -97,7 +97,7 @@ public class Util {
     public List<CodeFragment> findCandidate(CodeFragment cf, boolean varNameMatch) {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
-            if (cf.isReplace(statement,varNameMatch) && !statement.equalString().equals(cf.equalString()))
+            if (cf.isReplaceableBy(statement, varNameMatch) && !statement.equalString().equals(cf.equalString()))
                 list.add(statement);
 
         return list;
@@ -158,8 +158,8 @@ public class Util {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
 
-            if (cf.isReplace(statement,false)
-                    && cf.isReplace(statement,true)
+            if (cf.isReplaceableBy(statement, false)
+                    && cf.isReplaceableBy(statement, true)
 //                    && !statement.equalString().equals(cf.equalString())
                     && rg.codeFragmentCoverage(statement) !=0)
                 list.add(statement);
@@ -180,7 +180,7 @@ public class Util {
                                 ASTReplace r = new ASTReplace();
                                 CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
                                 r.setTransplantationPoint(cfTmp);
-                                r.setCodeFragmentToReplace(new Statement(tmp));
+                                r.setTransplant(new Statement(tmp));
                                 r.setVarMapping(varMapping);
                                 synchronized (allReplace) {
                                     allReplace.add(r);
@@ -220,7 +220,7 @@ public class Util {
                             ASTAdd r = new ASTAdd();
                             CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
                             r.setTransplantationPoint(cfTmp);
-                            r.setCodeFragmentToAdd(new Statement(tmp));
+                            r.setTransplant(new Statement(tmp));
                             r.setVarMapping(varMapping);
                             synchronized (allReplace) {
                                 allReplace.add(r);

@@ -91,6 +91,7 @@ public class MavenBuilder extends AbstractBuilder {
         //Save r to further analysis
         MavenOutputParser parser = new MavenOutputParser();
         parser.setAcceptedErrors(acceptedErrors);
+        Log.debug(r);
         parser.parse(r, "\n");
         errors = parser.getCompileErrors();
         failedTests = parser.getFailedTests();

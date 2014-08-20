@@ -67,7 +67,7 @@ public class InputContext {
         return candidate;
         }
 	
-	public boolean isInclude(InputContext other){
+	public boolean containsAll(InputContext other){
 		boolean isReplace = true;
 		for (CtVariableReference<?> variable : other.localVariableReferences)
 			isReplace = isReplace && hasCandidate(variable.getType());

@@ -42,11 +42,6 @@ public class ASTReplace extends ASTTransformation {
         this.transplant = transplant;
     }
 
-    public boolean setCodeFragmentToReplace(CodeFragment replace) {
-        this.setTransplant(replace);
-        return true;
-    }
-
     public void setVarMapping(Map<String, String> mapping) {
         variableMapping = mapping;
     }
@@ -65,7 +60,7 @@ public class ASTReplace extends ASTTransformation {
         Log.debug("transplantation point:\n{}", transplantationPoint);
         Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
         Log.debug("{}", transplantationPoint.getCodeFragmentType());
-        Log.debug("replace by: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
+        Log.debug("replace by: ({})\n{}", transplant.getCodeFragmentType(), transplant);
 
         if (withVarMapping()) {
             if (variableMapping == null)

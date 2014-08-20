@@ -71,9 +71,8 @@ public class ASTAdd extends ASTTransformation {
         variableMapping = mapping;
     }
 
-    public boolean setCodeFragmentToAdd(CodeFragment add) {
+    public void setTransplant(CodeFragment add) {
         this.transplant = add;
-        return true;
     }
 
     public  int hashCode() {

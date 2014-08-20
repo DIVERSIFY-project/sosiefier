@@ -28,10 +28,6 @@ import java.util.List;
  */
 public class Diversify extends AbstractDiversify {
 
-    /**
-     * Input configuration
-     */
-    InputConfiguration inputConfiguration;
 
     /**
      * Session report
@@ -139,7 +135,7 @@ public class Diversify extends AbstractDiversify {
                 try {
                     transQuery.query();
                     //Obtain transformations
-                    transformations = (List<Transformation>) transQuery.getTransformations();
+                    transformations = (List<Transformation>) transQuery.getMultiTransformations();
                     success = true;
                 } catch (SeveralTriesUnsuccessful e ) {
                     if ( e.getCauses()[0] instanceof QueryException) {

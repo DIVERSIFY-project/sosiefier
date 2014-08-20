@@ -136,57 +136,71 @@ public class ASTTransformationQuery extends TransformationQuery {
      */
     protected ASTReplace replace() throws Exception {
         ASTReplace tf = new ASTReplace();
-        CodeFragment cfToReplace = null;
-        CodeFragment cfReplacedBy = null;
+        CodeFragment transplantationPoint = null;
+        CodeFragment transplant = null;
 
-        while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
-            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
+        while (transplant == null) {
+            transplantationPoint = findRandomFragmentToReplace(true);
+            transplant = findRandomFragmentCandidate(transplantationPoint, false);
         }
-        tf.setTransplantationPoint(cfToReplace);
-        tf.setCodeFragmentToReplace(cfReplacedBy);
+        tf.setTransplantationPoint(transplantationPoint);
+        tf.setTransplant(transplant);
         return tf;
     }
 
+    protected ASTReplace replaceReaction(CodeFragment transplantationPoint) throws Exception {
+        ASTReplace tf = new ASTReplace();
+
+        CodeFragment transplant = findRandomFragmentCandidate(transplantationPoint, false);
+        if (transplant == null)
+            throw new Exception("pas de candidat pour " + transplant);
+
+        tf.setTransplantationPoint(transplantationPoint);
+        tf.setTransplant(transplant);
+        tf.setName("replaceReaction");
+        return tf;
+    }
+
+
     protected ASTReplace replaceWittgenstein() throws Exception {
         ASTReplace tf = new ASTReplace();
-        CodeFragment cfToReplace = null;
-        CodeFragment cfReplacedBy = null;
+        CodeFragment transplant = null;
+        CodeFragment transplantationPoint = null;
 
-        while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
-            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
+        while (transplantationPoint == null) {
+            transplant = findRandomFragmentToReplace(true);
+            transplantationPoint = findRandomFragmentCandidate(transplant, true);
         }
         tf.setName("replaceWittgenstein");
-        tf.setTransplantationPoint(cfReplacedBy);
-        tf.setCodeFragmentToReplace(cfToReplace);
+        tf.setTransplantationPoint(transplantationPoint);
+        tf.setTransplant(transplant);
         return tf;
     }
 
     protected ASTReplace replaceRandom() throws Exception {
         ASTReplace tf = new ASTReplace();
-        tf.setTransplantationPoint(findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals("")));
-        tf.setCodeFragmentToReplace(findRandomFragmentToReplace(false));
+        tf.setTransplantationPoint(findRandomFragmentToReplace(true));
+        tf.setTransplant(findRandomFragmentToReplace(false));
         tf.setName("replaceRandom");
         return tf;
     }
 
     protected ASTAdd addRandom() throws Exception {
         ASTAdd tf = new ASTAdd();
-        tf.setTransplantationPoint(findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals("")));
-        tf.setCodeFragmentToAdd(findRandomFragmentToReplace(false));
+        tf.setTransplantationPoint(findRandomFragmentToReplace(true));
+        tf.setTransplant(findRandomFragmentToReplace(false));
         tf.setName("addRandom");
         return tf;
     }
 
-    protected ASTReplace replace(CodeFragment cfToReplace, boolean varNameMatch) throws Exception {
+    protected ASTReplace replace(CodeFragment transplantationPoint, boolean varNameMatch) throws Exception {
         ASTReplace tf = new ASTReplace();
 
-        CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
+        CodeFragment cfReplacedBy = findRandomFragmentCandidate(transplantationPoint, varNameMatch);
         if (cfReplacedBy == null)
-            new Exception("pas de candidat pour " + cfToReplace);
-        tf.setTransplantationPoint(cfToReplace);
-        tf.setCodeFragmentToReplace(cfReplacedBy);
+            throw new Exception("pas de candidat pour " + transplantationPoint);
+        tf.setTransplantationPoint(transplantationPoint);
+        tf.setTransplant(cfReplacedBy);
         return tf;
     }
 
@@ -203,79 +217,77 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     protected ASTAdd addWittgenstein() throws Exception {
         ASTAdd tf = new ASTAdd();
-        CodeFragment cfToReplace = null;
-        CodeFragment cfReplacedBy = null;
+        CodeFragment transplantationPoint = null;
+        CodeFragment transplant = null;
 
-        while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
-            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, true);
+        while (transplant == null) {
+            transplantationPoint = findRandomFragmentToReplace(true);
+            transplant = findRandomFragmentCandidate(transplantationPoint, true);
         }
-        tf.setTransplantationPoint(cfReplacedBy);
-        tf.setCodeFragmentToAdd(cfToReplace);
+
+        tf.setTransplantationPoint(transplantationPoint);
+        tf.setTransplant(transplant);
+        tf.setName("addWittgenstein");
         return tf;
     }
 
     protected ASTAdd add() throws Exception {
         ASTAdd tf = new ASTAdd();
-        CodeFragment cfToReplace = null;
-        CodeFragment cfReplacedBy = null;
+        CodeFragment transplantationPoint = null;
+        CodeFragment transplant = null;
 
-        while (cfReplacedBy == null) {
-            cfToReplace = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
-            cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, false);
+        while (transplant == null) {
+            transplantationPoint = findRandomFragmentToReplace(true);
+            transplant = findRandomFragmentCandidate(transplantationPoint, false);
         }
-        tf.setTransplantationPoint(cfToReplace);
-        tf.setCodeFragmentToAdd(cfReplacedBy);
+        tf.setTransplantationPoint(transplantationPoint);
+        tf.setTransplant(transplant);
         return tf;
     }
 
-    protected ASTAdd add(CodeFragment cfToReplace, boolean varNameMatch) throws Exception {
+    protected ASTAdd addReaction(CodeFragment transplantationPoint) throws Exception {
         ASTAdd tf = new ASTAdd();
 
-        CodeFragment cfReplacedBy = getCodeFragmentReplacedBy(cfToReplace, varNameMatch);
-        if (cfReplacedBy == null)
-            new Exception("pas de candidat pour " + cfToReplace);
-        tf.setTransplantationPoint(cfToReplace);
-        tf.setCodeFragmentToAdd(cfReplacedBy);
+        CodeFragment transplant = findRandomFragmentCandidate(transplantationPoint, false);
+        if (transplant == null)
+            throw new Exception("pas de candidat pour " + transplant);
+
+        tf.setTransplantationPoint(transplantationPoint);
+        tf.setTransplant(transplant);
+        tf.setName("addReaction");
         return tf;
     }
 
-//    public ASTAdd notContextAdd(CodeFragment cfToReplace) throws Exception {
-//        Random r = new Random();
-//        ASTAdd tf = new ASTAdd();
-//        tf.setName("notContextAdd");
-//        int size = codeFragments.size();
-//        CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
-//        tf.setTransplantationPoint(cfToReplace);
-//        tf.setCodeFragmentToAdd(cfReplacedBy);
-//        return tf;
-//    }
+    protected ASTAdd add(CodeFragment transplantationPoint, boolean varNameMatch) throws Exception {
+        ASTAdd tf = new ASTAdd();
+
+        CodeFragment transplant = findRandomFragmentCandidate(transplantationPoint, varNameMatch);
+        if (transplant == null)
+            throw new Exception("pas de candidat pour " + transplantationPoint);
+        tf.setTransplantationPoint(transplantationPoint);
+        tf.setTransplant(transplant);
+        return tf;
+    }
+
+
 
     protected ASTDelete delete() throws Exception {
         ASTDelete tf = new ASTDelete();
-        CodeFragment cfToDelete = null;
-        while (cfToDelete == null) {
-            cfToDelete = findRandomFragmentToReplace(!getInputProgram().getCoverageDir().equals(""));
-            if (cfToDelete.getCtCodeFragment() instanceof CtReturn)
-                cfToDelete = null;
+        CodeFragment transplantationPoint = null;
+        while (transplantationPoint == null) {
+            transplantationPoint = findRandomFragmentToReplace(true);
+            if (transplantationPoint.getCtCodeFragment() instanceof CtReturn)
+                transplantationPoint = null;
         }
-        tf.setTransplantationPoint(cfToDelete);
+        tf.setTransplantationPoint(transplantationPoint);
         return tf;
     }
 
 
-    protected ASTDelete delete(CodeFragment cfToDelete) throws Exception {
+    protected ASTDelete delete(CodeFragment transplantationPoint) throws Exception {
         ASTDelete tf = new ASTDelete();
-        tf.setTransplantationPoint(cfToDelete);
+        tf.setTransplantationPoint(transplantationPoint);
         return tf;
-    }
-
-    protected CodeFragment getCodeFragmentReplacedBy(CodeFragment cfToReplace, boolean varNameMatch) throws InstantiationException, IllegalAccessException {
-        CodeFragment cfReplacedBy = null;
-        if (cfReplacedBy == null) {
-            cfReplacedBy = findRandomFragmentCandidate(cfToReplace, varNameMatch);
-        }
-        return cfReplacedBy;
     }
 
     /**
@@ -306,9 +318,9 @@ public class ASTTransformationQuery extends TransformationQuery {
      */
     protected CodeFragment findRandomFragmentCandidate(CodeFragment cf,
                                                        boolean varNameMatch) throws IllegalAccessException, InstantiationException {
-        List<CodeFragment> list = new ArrayList<CodeFragment>();
+        List<CodeFragment> list = new ArrayList();
         for (CodeFragment codeFragment : getAllUniqueCodeFragments())
-            if (cf.isReplace(codeFragment, varNameMatch) && !codeFragment.equalString().equals(cf.equalString())) {
+            if (cf.isReplaceableBy(codeFragment, varNameMatch) && !codeFragment.equalString().equals(cf.equalString())) {
                 list.add(codeFragment);
             }
 
@@ -331,6 +343,64 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     protected Collection<CodeFragment> getAllUniqueCodeFragments() {
         return getInputProgram().getCodeFragments().getUniqueCodeFragmentList();
+    }
+
+    public Collection<Transformation> isstaTransformation(int nb) throws Exception {
+        List<Transformation> transformations = new ArrayList<>();
+        for(int i = 0; i< nb; i++) {
+            ASTReplace replace = replace();
+            transformations.add(replace);
+
+            try {
+                ASTReplace replaceW = replace(replace.getTransplantationPoint(), true);
+                replaceW.setName("replaceWittgenstein");
+                transformations.add(replaceW);
+            } catch (Exception e) {}
+
+            try {
+                ASTReplace replaceReaction = replaceReaction(replace.getTransplantationPoint());
+                transformations.add(replaceReaction);
+            } catch (Exception e) {}
+
+            try {
+                ASTReplace replaceRandom = new ASTReplace();
+                replaceRandom.setTransplantationPoint(replace.getTransplantationPoint());
+                replaceRandom.setTransplant(findRandomFragmentToReplace(false));
+                replaceRandom.setName("replaceRandom");
+                transformations.add(replaceRandom);
+            } catch (Exception e) {}
+
+            try {
+                ASTAdd add = add(replace.getTransplantationPoint(), false);
+                transformations.add(add);
+            } catch (Exception e) {}
+
+            try {
+                ASTAdd addW = add(replace.getTransplantationPoint(), true);
+                addW.setName("addWittgenstein");
+                transformations.add(addW);
+            } catch (Exception e) {}
+
+            try {
+                ASTAdd addReaction = addReaction(replace.getTransplantationPoint());
+                transformations.add(addReaction);
+            } catch (Exception e) {}
+
+            try {
+                ASTAdd addRandom = new ASTAdd();
+                addRandom.setTransplantationPoint(replace.getTransplantationPoint());
+                addRandom.setTransplant(findRandomFragmentToReplace(false));
+                addRandom.setName("addRandom");
+                transformations.add(addRandom);
+            } catch (Exception e) {}
+
+            try {
+                ASTDelete delete = new ASTDelete();
+                delete.setTransplantationPoint(replace.getTransplantationPoint());
+                transformations.add(delete);
+            } catch (Exception e) {}
+        }
+        return transformations;
     }
 
 }

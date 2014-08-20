@@ -576,7 +576,7 @@ public class TransformationJsonParser {
     protected ASTTransformation parseASTAdd(JSONObject jsonObject) throws JSONException, TransformationParserException {
         ASTAdd trans = new ASTAdd();
 
-        trans.setCodeFragmentToAdd(findCodeFragment(jsonObject.getJSONObject("transplant")));
+        trans.setTransplant(findCodeFragment(jsonObject.getJSONObject("transplant")));
         trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("variableMapping")));
 
         return trans;
@@ -586,7 +586,7 @@ public class TransformationJsonParser {
             TransformationParserException {
         ASTReplace trans = new ASTReplace();
 
-        trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("transplant")));
+        trans.setTransplant(findCodeFragment(jsonObject.getJSONObject("transplant")));
         trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("variableMapping")));
 
         return trans;

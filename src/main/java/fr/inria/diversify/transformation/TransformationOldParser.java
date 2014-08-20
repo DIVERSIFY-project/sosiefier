@@ -6,14 +6,10 @@ import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.util.Log;
-import javassist.CtMethod;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtPackage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -165,7 +161,7 @@ public class TransformationOldParser {
     protected ASTTransformation parseASTAdd(JSONObject jsonObject) throws Exception {
         ASTAdd trans = new ASTAdd();
 
-        trans.setCodeFragmentToAdd(findCodeFragment(jsonObject.getJSONObject("CodeFragmentAdd")));
+        trans.setTransplant(findCodeFragment(jsonObject.getJSONObject("CodeFragmentAdd")));
         trans.setTransplantationPoint(findCodeFragment(jsonObject.getJSONObject("CodeFragmentPosition")));
         trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
 
@@ -176,7 +172,7 @@ public class TransformationOldParser {
         ASTReplace trans = new ASTReplace();
 
         try {
-            trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("CodeFragmentReplace")));
+            trans.setTransplant(findCodeFragment(jsonObject.getJSONObject("CodeFragmentReplace")));
             trans.setTransplantationPoint(findCodeFragment(jsonObject.getJSONObject("CodeFragmentPosition")));
             trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("VariableMapping")));
         } catch (JSONException e) {

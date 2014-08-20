@@ -68,67 +68,75 @@ public class DiversifyMain {
 
         if (DiversifyProperties.getProperty("stat").equals("true")) {
             computeStatistic();
-
         } else {
-            if (DiversifyProperties.getProperty("sosieOnMultiProject").equals("true")) {
-//            sosieOnMultiProject();
-            } else initAndRunBuilder();
+           initAndRunBuilder();
         }
     }
 
     protected void initAndRunBuilder() throws Exception {
-        AbstractDiversify abstractDiversify = initAbstractDiversify();
+        AbstractDiversify abstractDiversify;
 
         int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
 
-        TransformationQuery query = initTransformationQuery();
+        if(DiversifyProperties.getProperty("transformation.type").equals("issta")) {
+            abstractDiversify = initAbstractDiversify();
+            ASTTransformationQuery query = new ASTTransformationQuery(inputProgram);
 
-        //Get sizes of incremental sosies that we want
-        int max;
-        int min;
-        String sosieSizes = DiversifyProperties.getProperty("transformation.size.set");
-        ArrayList<Integer> intSosieSizes = null;
-        if (sosieSizes != null) {
-            intSosieSizes = new ArrayList<>();
-            for (String s : sosieSizes.split(";")) {
-                intSosieSizes.add(Integer.parseInt(s));
-            }
-            max = intSosieSizes.size() - 1;
-            min = 0;
-        } else {
-            max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size", "1"));
-            min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
-        }
-
-        for (int i = min; i <= max; i++) {
-
-            if (intSosieSizes != null) {
-                inputProgram.setTransformationPerRun(intSosieSizes.get(i));
-            } else {
-                inputProgram.setTransformationPerRun(i);
-            }
-
-            abstractDiversify.setTransformationQuery(query);
-            abstractDiversify.run(n);
-
-
-            //Clear the found transformations for the next step to speed up. No needed since the new ones are going
-            //to be of different size and therefore different
-            //query.clearTransformationFounds();
-
+            ((SimpleDiversify) abstractDiversify).run(query.isstaTransformation(n));
             String repo = DiversifyProperties.getProperty("gitRepository");
-            if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
-            else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
-        }
+            abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
+        } else {
+            abstractDiversify = initAbstractDiversify();
+            TransformationQuery query = initTransformationQuery();
 
+            //Get sizes of incremental sosies that we want
+            int max;
+            int min;
+            String sosieSizes = DiversifyProperties.getProperty("transformation.size.set");
+            ArrayList<Integer> intSosieSizes = null;
+            if (sosieSizes != null) {
+                intSosieSizes = new ArrayList<>();
+                for (String s : sosieSizes.split(";")) {
+                    intSosieSizes.add(Integer.parseInt(s));
+                }
+                max = intSosieSizes.size() - 1;
+                min = 0;
+            } else {
+                max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size", "1"));
+                min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
+            }
+
+            for (int i = min; i <= max; i++) {
+
+                if (intSosieSizes != null) {
+                    inputProgram.setTransformationPerRun(intSosieSizes.get(i));
+                } else {
+                    inputProgram.setTransformationPerRun(i);
+                }
+
+                abstractDiversify.setTransformationQuery(query);
+                abstractDiversify.run(n);
+
+
+                //Clear the found transformations for the next step to speed up. No needed since the new ones are going
+                //to be of different size and therefore different
+                //query.clearTransformationFounds();
+
+                String repo = DiversifyProperties.getProperty("gitRepository");
+                if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
+                else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
+            }
+        }
         abstractDiversify.deleteTmpFiles();
     }
 
     protected AbstractDiversify initAbstractDiversify() throws Exception {
         AbstractDiversify ad;
+
         String projet = DiversifyProperties.getProperty("project");
         String src = DiversifyProperties.getProperty("src");
         String resultDir = DiversifyProperties.getProperty("result");
+
         if (DiversifyProperties.getProperty("transformation.type").equals("mutationToSosie"))
             ad = new DiversifyWithParent(inputConfiguration, projet, src);
         else if (DiversifyProperties.getProperty("sosie").equals("false")) {
@@ -142,6 +150,10 @@ public class DiversifyMain {
             String testDir = DiversifyProperties.getProperty("testSrc");
             ad = new Sosie(projet, src, testDir);
         } else ad = new SosieWithParent(projet, src);
+
+        if(DiversifyProperties.getProperty("transformation.type").equals("issta")) {
+            ad = new SimpleDiversify(inputConfiguration, projet, src);
+        }
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));
 
@@ -397,16 +409,4 @@ public class DiversifyMain {
         int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
         Log.set(level);
     }
-
-    protected void sosieOnMultiProject() throws Exception {
-//        TestSosie d = new TestSosie(initTransformationQuery(), DiversifyProperties.getProperty("project"));
-//
-//        List<String> list = new ArrayList<String>();
-//        for (String mvn : DiversifyProperties.getProperty("mavenProjects").split(System.getProperty("path.separator")))
-//            list.add(mvn);
-//        d.setMavenProject(list);
-//
-//        initAndRunBuilder(d);
-    }
-
 }

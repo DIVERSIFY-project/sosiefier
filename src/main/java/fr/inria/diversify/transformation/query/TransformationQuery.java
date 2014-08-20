@@ -18,6 +18,8 @@ import java.util.*;
 public abstract class TransformationQuery {
 
 
+
+
     /**
      * A class containing data and logic to help increase the speed of the search process of a previously found
      * transformation
@@ -249,8 +251,12 @@ public abstract class TransformationQuery {
      * @return
      * @throws Exception
      */
-    public Collection<Transformation> getTransformations() {
+    public Collection<Transformation> getMultiTransformations() {
         return transformations;
+    }
+
+    public Transformation getTransformation() throws QueryException {
+        return query(1).get(0);
     }
 
     public InputProgram getInputProgram() {

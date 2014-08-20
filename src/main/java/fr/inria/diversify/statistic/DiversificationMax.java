@@ -34,7 +34,7 @@ public class DiversificationMax extends Thread {
     public List<CodeFragment> findCandidate(CodeFragment cf) {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
-            if (cf.isReplace(statement, false) && !statement.equalString().equals(cf.equalString()))
+            if (cf.isReplaceableBy(statement, false) && !statement.equalString().equals(cf.equalString()))
                 list.add(statement);
 
         return list;
