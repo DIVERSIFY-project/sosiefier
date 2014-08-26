@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -24,7 +25,7 @@ import java.util.Random;
  */
 public class MutationQuery extends TransformationQuery {
     protected ICoverageReport coverageReport;
-    protected List<CtElement> binaryOperators;
+    protected List<CtBinaryOperator> binaryOperators;
     protected List<CtReturn> returns;
     protected List<CtLocalVariable> inlineConstant;
 
@@ -56,9 +57,15 @@ public class MutationQuery extends TransformationQuery {
 
     protected void init() {
 
-        binaryOperators = getInputProgram().getAllElement(CtBinaryOperator.class);
-        returns = getInputProgram().getReturns();
-        inlineConstant = getInputProgram().getInlineConstant();
+        binaryOperators = getInputProgram().getAllElement(CtBinaryOperator.class).stream()
+            .map(operator -> (CtBinaryOperator)operator)
+            .collect(Collectors.toList());
+        returns = getInputProgram().getAllElement(CtReturn.class).stream()
+                                   .map(operator -> (CtReturn)operator)
+                                   .collect(Collectors.toList());
+        inlineConstant = getInputProgram().getAllElement(CtLocalVariable.class).stream()
+            .map(operator -> (CtLocalVariable)operator)
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -110,9 +117,9 @@ public class MutationQuery extends TransformationQuery {
 
         Random r  = new Random();
 
-        CtBinaryOperator operator = (CtBinaryOperator)binaryOperators.get(r.nextInt(binaryOperators.size()));
+        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0 || !negateConditional.contains(operator.getKind())) {
-            operator = (CtBinaryOperator)binaryOperators.get(r.nextInt(binaryOperators.size()));
+            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
         mutation.setTransformationPoint(operator);
         return mutation;
@@ -123,9 +130,9 @@ public class MutationQuery extends TransformationQuery {
 
         Random r  = new Random();
 
-        CtBinaryOperator operator = (CtBinaryOperator)binaryOperators.get(r.nextInt(binaryOperators.size()));
+        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0 || !conditionalBoundary.contains(operator.getKind())) {
-            operator = (CtBinaryOperator)binaryOperators.get(r.nextInt(binaryOperators.size()));
+            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
         mutation.setTransformationPoint(operator);
         return mutation;
@@ -135,9 +142,9 @@ public class MutationQuery extends TransformationQuery {
         MathMutation mutation = new MathMutation();
 
         Random r  = new Random();
-        CtBinaryOperator operator = (CtBinaryOperator)binaryOperators.get(r.nextInt(binaryOperators.size()));
+        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0 || !math.contains(operator.getKind())) {
-            operator = (CtBinaryOperator)binaryOperators.get(r.nextInt(binaryOperators.size()));
+            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
         mutation.setTransformationPoint(operator);
         return mutation;
@@ -147,9 +154,9 @@ public class MutationQuery extends TransformationQuery {
         RemoveConditionalMutation mutation = new RemoveConditionalMutation();
 
         Random r  = new Random();
-        CtBinaryOperator operator = (CtBinaryOperator)binaryOperators.get(r.nextInt(binaryOperators.size()));
+        CtBinaryOperator operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         while (coverageReport.elementCoverage(operator) == 0) {
-            operator = (CtBinaryOperator)binaryOperators.get(r.nextInt(binaryOperators.size()));
+            operator = binaryOperators.get(r.nextInt(binaryOperators.size()));
         }
         mutation.setTransformationPoint(operator);
         return mutation;

@@ -1,8 +1,13 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,7 +26,7 @@ public class SimpleDiversify extends AbstractDiversify {
     @Override
     public void run(int n) throws Exception {
         for(int i = 0;i < n; i++  ) {
-            run(transQuery.getTransformation());
+            run(transQuery.buildTransformation());
         }
     }
 
@@ -35,12 +40,13 @@ public class SimpleDiversify extends AbstractDiversify {
     protected void run(Transformation trans) throws Exception {
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
+            writePosition(tmpDir+"/transplant.json",(ASTTransformation) trans);
+
             trans.apply(tmpDir + "/" + sourceDir);
             transformations.add(trans);
             int status = runTest(tmpDir);
 
             trans.setStatus(status);
-//            Log.debug("current: {}, parent: {} status: {}", builder.getTestFail().size(), trans.getParent().getFailures().size(), status);
             trans.setFailures(builder.getTestFail());
         } catch (Exception e) {
             trans.setStatus(-2);
@@ -48,5 +54,16 @@ public class SimpleDiversify extends AbstractDiversify {
         }
         trans.restore(tmpDir + "/" + sourceDir);
         Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
+    }
+
+    protected void writePosition(String fileName, ASTTransformation transformation) throws IOException {
+        FileWriter out = new FileWriter(fileName);
+
+        String className = transformation.classLocationName();
+        int line = transformation.getTransplantationPoint().getCtCodeFragment().getPosition().getLine();
+
+        out.write("{\"Position\": \""+ className+ ":"+ line +"\"}");
+
+        out.close();
     }
 }

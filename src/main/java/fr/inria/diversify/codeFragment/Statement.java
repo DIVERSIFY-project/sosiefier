@@ -2,8 +2,11 @@ package fr.inria.diversify.codeFragment;
 
 
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
+import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtCodeElement;
+import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.*;
 
@@ -34,15 +37,19 @@ public class Statement extends CodeFragment {
             return false;
 
 
-
         SubStatementVisitor sub = new SubStatementVisitor();
         other.codeFragment.accept(sub);
         if (sub.getStatements().contains(codeFragment))  {
             return false;
         }
-        if (!context.isReplaceableBy(other.context, varNameMatch))
-            return false;
 
+        if (!context.isReplaceableBy(other.context, varNameMatch)) {
+            return false;
+        }
+
+        if(other.getCtCodeFragment() instanceof CtReturn && ! deadCode()) {
+            return false;
+        }
 
         //check for return
         CtTypeReference t1 = this.hasReturn();
@@ -66,6 +73,18 @@ public class Statement extends CodeFragment {
             return "{\n"+string+"\n}";
         else
             return string;
+    }
+
+    protected boolean deadCode() {
+        int position = 0;
+        CtBlock block = codeFragment.getParent(CtBlock.class);
+        for(Object stmt: block.getStatements()) {
+            position++;
+            if(codeFragment == stmt) {
+
+            }
+        }
+        return  position == block.getStatements().size();
     }
 
     protected boolean containsSuper(CtCodeElement cf) {

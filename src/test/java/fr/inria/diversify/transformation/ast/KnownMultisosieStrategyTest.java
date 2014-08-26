@@ -44,7 +44,7 @@ public class KnownMultisosieStrategyTest {
     public void testQuery() throws Exception {
         //Set the amount of points we must find
         st.query();
-        Collection<Transformation> cf1 = st.getTransformations();
+        Collection<Transformation> cf1 = st.getMultiTransformations();
         assertEquals(5, cf1.size());
     }
 

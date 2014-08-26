@@ -501,9 +501,9 @@ public class TransformationJsonParser {
         ReturnValueMutation trans = new ReturnValueMutation();
 
         Object jsonPosition = jsonObject.get("position");
-        CtReturn p = null;
+        CtElement p = null;
 
-        for (CtReturn<?> ret : inputProgram.getReturns()) {
+        for (CtElement ret : inputProgram.getAllElement(CtReturn.class)) {
             String position = ret.getParent(CtPackage.class).getQualifiedName()
                     + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
             if (position.equals(jsonPosition)) {
@@ -514,7 +514,7 @@ public class TransformationJsonParser {
         if (p == null) {
             throw new TransformationParserException("Cannot find return statement that matches position " + jsonPosition);
         }
-        trans.setTransformationPoint(p);
+        trans.setTransformationPoint((CtReturn) p);
 
         return trans;
     }
@@ -530,11 +530,11 @@ public class TransformationJsonParser {
         }
 
         CtLocalVariable p = null;
-        for (CtLocalVariable<?> ret : inputProgram.getInlineConstant()) {
+        for (CtElement ret : inputProgram.getAllElement(CtLocalVariable.class)) {
             String position = ret.getParent(CtPackage.class).getQualifiedName()
                     + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
             if (position.equals(jsonPos)) {
-                p = ret;
+                p = (CtLocalVariable) ret;
                 break;
             }
         }

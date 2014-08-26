@@ -300,22 +300,6 @@ public class InputProgram {
         return javassistMethods;
     }
 
-    /**
-     * Get the inline constant statements on the program
-     * @return
-     */
-    public synchronized List<CtLocalVariable> getInlineConstant() {
-        if (inlineConstant == null) {
-            ProcessingManager pm = new QueueProcessingManager(factory);
-            InlineConstantProcessor processor = new InlineConstantProcessor();
-            pm.addProcessor(processor);
-            pm.process();
-
-            inlineConstant = processor.getInlineConstant();
-        }
-        return inlineConstant;
-    }
-
     public synchronized List<CtElement> getAllElement(Class cl) {
 
         if (!typeToObject.containsKey(cl)) {
@@ -330,23 +314,6 @@ public class InputProgram {
             typeToObject.put(cl, query.getResult());
         }
         return typeToObject.get(cl);
-    }
-
-
-    /**
-     * Get return statements of the program
-     * @return
-     */
-    public synchronized List<CtReturn> getReturns() {
-        if (returns == null) {
-            ProcessingManager pm = new QueueProcessingManager(factory);
-            ReturnProcessor processor = new ReturnProcessor();
-            pm.addProcessor(processor);
-            pm.process();
-
-            returns = processor.getReturns();
-        }
-        return returns;
     }
 
     /**

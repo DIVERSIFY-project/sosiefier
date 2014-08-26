@@ -132,12 +132,12 @@ public class DiversifyMain {
 
     protected AbstractDiversify initAbstractDiversify() throws Exception {
         AbstractDiversify ad;
-
+        String transformationType = DiversifyProperties.getProperty("transformation.type");
         String projet = DiversifyProperties.getProperty("project");
         String src = DiversifyProperties.getProperty("src");
         String resultDir = DiversifyProperties.getProperty("result");
 
-        if (DiversifyProperties.getProperty("transformation.type").equals("mutationToSosie"))
+        if (transformationType.equals("mutationToSosie"))
             ad = new DiversifyWithParent(inputConfiguration, projet, src);
         else if (DiversifyProperties.getProperty("sosie").equals("false")) {
             ad = new Diversify(inputConfiguration, projet, src);
@@ -151,7 +151,16 @@ public class DiversifyMain {
             ad = new Sosie(projet, src, testDir);
         } else ad = new SosieWithParent(projet, src);
 
-        if(DiversifyProperties.getProperty("transformation.type").equals("issta")) {
+        if(transformationType.equals("issta")
+                || transformationType.equals("adr")
+                || transformationType.equals("all")
+                || transformationType.equals("mutation")
+                || transformationType.equals("cvl")
+                || transformationType.equals("other")
+                || transformationType.equals("checkReturn")
+                || transformationType.equals("adrstupid")
+                || transformationType.equals("shuffle")
+                ) {
             ad = new SimpleDiversify(inputConfiguration, projet, src);
         }
 
@@ -165,9 +174,10 @@ public class DiversifyMain {
 
     protected AbstractBuilder initBuilder(String directory) throws Exception {
         AbstractBuilder rb;
+        String builder =  DiversifyProperties.getProperty("builder");
 
         String src = DiversifyProperties.getProperty("src");
-        if (DiversifyProperties.getProperty("builder").equals("maven")) {
+        if (builder.equals("maven")) {
             rb = new MavenBuilder(directory, src);
             rb.setPhase(new String[]{"clean", "test"});
         } else {
@@ -177,6 +187,12 @@ public class DiversifyMain {
         int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut").trim());
         if (t == -1) rb.initTimeOut();
         else rb.setTimeOut(t);
+
+        rb.copyClasses(DiversifyProperties.getProperty("classes"));
+        rb.initTimeOut();
+        if(builder.equals("maven")) {
+            rb.setPhase(new String[]{"test"});
+        }
 
         String pomFile = DiversifyProperties.getProperty("newPomFile");
         if (!pomFile.equals("")) rb.initPom(pomFile);
@@ -221,6 +237,8 @@ public class DiversifyMain {
         String type = DiversifyProperties.getProperty("transformation.type").toLowerCase();
 
         switch (type) {
+            case "checkreturn":
+                return new CheckReturn(inputProgram);
             case "mutation":
                 return new MutationQuery(inputProgram);
             case "shuffle":

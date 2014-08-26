@@ -8,6 +8,7 @@ import org.apache.maven.shared.invoker.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class MavenBuilder extends AbstractBuilder {
 
     protected void runPrivate() {
 
-        Log.debug("run maven (timeout {})",timeOut);
+        Log.debug("run maven, phase: {}, timeout {}", Arrays.toString(phases), timeOut);
 
         InvocationRequest request = new DefaultInvocationRequest();
 

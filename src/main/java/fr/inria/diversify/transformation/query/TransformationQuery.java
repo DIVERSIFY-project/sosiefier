@@ -255,10 +255,6 @@ public abstract class TransformationQuery {
         return transformations;
     }
 
-    public Transformation getTransformation() throws QueryException {
-        return query(1).get(0);
-    }
-
     public InputProgram getInputProgram() {
         return inputProgram;
     }

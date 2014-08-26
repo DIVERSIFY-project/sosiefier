@@ -140,24 +140,14 @@ public abstract class AbstractBuilder {
     }
 
     public void initTimeOut() throws InterruptedException {
-        /*
-        if ( System.getProperty("os.name").contains("Windows")) {
-            reset();
-            runPrivate();
-        } else {
-        */
-            initThreadGroup();
-            reset();
-            Thread thread = new Thread() {
-                public void run() {
-                    runPrivate();
-                }
-            };
-            thread.start();
-//            latch.await();
-//            latch = new CountDownLatch(1);
-
-            //No need for timeouts with latch
+        initThreadGroup();
+        reset();
+        Thread thread = new Thread() {
+            public void run() {
+                runPrivate();
+            }
+        };
+        thread.start();
 
         int tmpTimeOut = 0;
         int factor = 12;
@@ -167,10 +157,19 @@ public abstract class AbstractBuilder {
         }
         Log.debug("timeOut init: " + tmpTimeOut);
         timeOut = tmpTimeOut;
-            thread.interrupt();
-            //See if we are in windows and not call this
-            killUselessThread();
-        //}
+        thread.interrupt();
+        //See if we are in windows and not call this
+        killUselessThread();
+    }
+
+    public void copyClasses(String classes) throws IOException {
+        File destDir = new File(directory+"/classes2");
+        File classesDir = new File(directory+"/"+classes);
+        FileUtils.deleteDirectory(destDir);
+        FileUtils.copyDirectory(classesDir, destDir);
+//        for(File file : classesDir.listFiles()) {
+//            FileUtils.copyDirectory(file, destDir);
+//        }
     }
 
     public void initPom(String newPomFile) throws Exception {

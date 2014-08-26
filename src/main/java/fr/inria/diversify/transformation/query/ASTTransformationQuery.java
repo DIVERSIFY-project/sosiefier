@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 
 /**
@@ -318,11 +319,10 @@ public class ASTTransformationQuery extends TransformationQuery {
      */
     protected CodeFragment findRandomFragmentCandidate(CodeFragment cf,
                                                        boolean varNameMatch) throws IllegalAccessException, InstantiationException {
-        List<CodeFragment> list = new ArrayList();
-        for (CodeFragment codeFragment : getAllUniqueCodeFragments())
-            if (cf.isReplaceableBy(codeFragment, varNameMatch) && !codeFragment.equalString().equals(cf.equalString())) {
-                list.add(codeFragment);
-            }
+        String cfString = cf.equalString();
+        List<CodeFragment> list = getAllUniqueCodeFragments().stream()
+            .filter(codeFragment -> cf.isReplaceableBy(codeFragment, varNameMatch) && !codeFragment.equalString().equals(cfString))
+            .collect(Collectors.toList());
 
         if (list.isEmpty())
             return null;
