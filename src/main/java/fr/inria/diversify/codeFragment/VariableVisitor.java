@@ -16,8 +16,8 @@ import java.util.Set;
 
 public class VariableVisitor extends CtScanner {
     protected boolean withField;
-    protected Set<CtVariableReference<?>> localVariableReferences = new HashSet<CtVariableReference<?>>();
- 	protected Set<CtVariableReference<?>> localVariableCreate = new HashSet<CtVariableReference<?>>();
+    protected Set<CtVariableReference<?>> variableReferences = new HashSet();
+ 	protected Set<CtVariableReference<?>> localVariableCreate = new HashSet();
 	protected CtTypeReference<?> refThis;
 
 
@@ -30,11 +30,11 @@ public class VariableVisitor extends CtScanner {
     }
 
 	public InputContext input() {
-        localVariableReferences.removeAll(localVariableCreate);
+        variableReferences.removeAll(localVariableCreate);
 
 		if(refThis != null)
-            localVariableReferences.add(getThis());
-		return new InputContext(localVariableReferences);
+            variableReferences.add(getThis());
+		return new InputContext(variableReferences);
 	}
 
 	public <T> void visitCtLocalVariable(CtLocalVariable<T> localVariable) {
@@ -43,19 +43,19 @@ public class VariableVisitor extends CtScanner {
 	}
 
 	public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
-		localVariableReferences.add(variableAccess.getVariable());
+		variableReferences.add(variableAccess.getVariable());
 		super.visitCtVariableAccess(variableAccess);
 	}
 
 	public <T> void visitCtLocalVariableReference(CtLocalVariableReference<T> reference) {
-		localVariableReferences.add(reference);
+		variableReferences.add(reference);
 
 		super.visitCtLocalVariableReference(reference);
 	}
 
     public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
         if(withField && !(reference.getSimpleName() == "super"))
-                localVariableReferences.add(reference);
+                variableReferences.add(reference);
 
         super.visitCtFieldReference(reference);
     }
@@ -75,7 +75,7 @@ public class VariableVisitor extends CtScanner {
 		return thisVariable;
 	}
 
-    public Set<CtVariableReference<?>> getLocalVariableReferences() {
-        return localVariableReferences;
+    public Set<CtVariableReference<?>> getVariableReferences() {
+        return variableReferences;
     }
 }

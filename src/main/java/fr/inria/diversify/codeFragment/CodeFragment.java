@@ -131,8 +131,8 @@ public abstract class CodeFragment {
         Random r = new Random();
 
         for (CtVariableReference<?> variable : other.getInputContext().getVar()) {
-            List<Object> list = getInputContext().allCandidate(variable.getType());
-            Object candidate = list.get(r.nextInt(list.size()));
+            List<CtVariableReference> list = getInputContext().allCandidate(variable.getType());
+            CtVariableReference candidate = list.get(r.nextInt(list.size()));
             varMap.put(variable.toString(), candidate.toString());
         }
         return varMap;

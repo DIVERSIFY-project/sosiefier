@@ -3,6 +3,7 @@ package fr.inria.diversify.codeFragmentProcessor;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtField;
 import spoon.reflect.visitor.CtScanner;
 
 import java.util.Collection;
@@ -92,11 +93,15 @@ public class ValidStatementVisitor extends CtScanner {
 		super.visitCtForEach(foreach);
 	}
 
-
 	public void visitCtIf(CtIf ifElement) {
 		addAllSubStatement(ifElement.getCondition());
 		super.visitCtIf(ifElement);
 	}
+
+    public void visitCtField(CtField field) {
+        valid = false;
+        super.visitCtField(field);
+    }
 
 	public <T> void visitCtNewArray(CtNewArray<T> newArray) {
 		for (CtExpression<?> i : newArray.getDimensionExpressions()) 

@@ -1,6 +1,5 @@
 package fr.inria.diversify.codeFragment;
 
-import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 
@@ -10,11 +9,11 @@ import java.util.List;
 import java.util.Set;
 
 public class InputContext {
-	protected Set<CtVariableReference<?>> localVariableReferences;
+	protected Set<CtVariableReference<?>> variableReferences;
 	protected Integer hashCode = null;
 
 	public InputContext(Set<CtVariableReference<?>> inputContext) {
-		this.localVariableReferences = inputContext;
+		this.variableReferences = inputContext;
 	}
 
 	@Override
@@ -27,37 +26,25 @@ public class InputContext {
 	protected Set<String> inputContextToString() {
 		//todo set ou list ?????
         Set<String> set = new HashSet<>();
-		for (CtVariableReference<?> var : localVariableReferences)
+		for (CtVariableReference<?> var : variableReferences)
 			set.add(var.getType().toString());
 		return set;
 	}
-	
-	public Object candidate(CtTypeReference<?> type){
-        Object candidate =  candidateForLocalVar(type);;
-        return candidate;
-	}
 
-    public List<Object> allCandidate(CtTypeReference<?> type){
-        List<Object> candidate = new ArrayList<>();
-        candidate.addAll(allCandidateForLocalVar(type));
 
-        return candidate;
-    }
-
-    public List<CtVariableReference> allCandidateForLocalVar(CtTypeReference<?> type){
+    public List<CtVariableReference> allCandidate(CtTypeReference<?> type){
         List<CtVariableReference> candidate = new ArrayList<>();
 
-        for (CtVariableReference<?> var : localVariableReferences)
+        for (CtVariableReference<?> var : variableReferences)
             if(var.getType().equals(type)  && var.getType().getActualTypeArguments().equals(type.getActualTypeArguments())) {
                 candidate.add(var);
             }
         return candidate;
     }
 
-
-    public CtVariableReference<?> candidateForLocalVar(CtTypeReference<?> type){
+    public CtVariableReference<?> candidate(CtTypeReference<?> type){
         CtVariableReference<?> candidate = null;
-        for (CtVariableReference<?> var : localVariableReferences) {
+        for (CtVariableReference<?> var : variableReferences) {
             CtTypeReference<?> varType = var.getType();
             if(varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
                 candidate = var;
@@ -68,10 +55,12 @@ public class InputContext {
         }
 	
 	public boolean containsAll(InputContext other){
-		boolean isReplace = true;
-		for (CtVariableReference<?> variable : other.localVariableReferences)
-			isReplace = isReplace && hasCandidate(variable.getType());
-        return isReplace;
+		for (CtVariableReference<?> variable : other.variableReferences) {
+            if(!hasCandidate(variable.getType())) {
+                return false;
+            }
+        }
+        return true;
 	}
 
     public CtVariableReference getVariableOrFieldNamed(String name) {
@@ -88,7 +77,7 @@ public class InputContext {
 
     public Set<String> getAllVarName() {
         Set<String> set = new HashSet<>();
-        for (CtVariableReference<?> var : localVariableReferences)
+        for (CtVariableReference<?> var : variableReferences)
             set.add(var.getSimpleName());
 
         return set;
@@ -99,13 +88,13 @@ public class InputContext {
 	}
 
 	public Set<CtVariableReference<?>> getVar() {
-		return localVariableReferences;
+		return variableReferences;
 	}
 
 	public String equalString() {
         //todo set ou list ?????
         Set<String> set = new HashSet<>();
-        for (CtVariableReference<?> var : localVariableReferences)
+        for (CtVariableReference<?> var : variableReferences)
             set.add(var.getType().toString()+": "+var);
         return set.toString();
 	}
@@ -123,13 +112,13 @@ public class InputContext {
 	}
 
 	public int size() {
-		return localVariableReferences.size();
+		return variableReferences.size();
 	}
 
     public List<CtTypeReference<?>> getTypes() {
         List<CtTypeReference<?>> types = new ArrayList<>();
 
-        for (CtVariableReference var: localVariableReferences) {
+        for (CtVariableReference var: variableReferences) {
                types.add(var.getType());
         }
         return types;

@@ -2,10 +2,7 @@ package fr.inria.diversify.codeFragment;
 
 
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtCodeElement;
-import spoon.reflect.code.CtReturn;
-import spoon.reflect.code.CtStatement;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.*;
@@ -47,7 +44,8 @@ public class Statement extends CodeFragment {
             return false;
         }
 
-        if(other.getCtCodeFragment() instanceof CtReturn && ! deadCode()) {
+        if((other.codeFragment instanceof CtReturn || other.codeFragment instanceof CtThrow)
+            && !deadCode()) {
             return false;
         }
 
@@ -81,7 +79,7 @@ public class Statement extends CodeFragment {
         for(Object stmt: block.getStatements()) {
             position++;
             if(codeFragment == stmt) {
-
+                break;
             }
         }
         return  position == block.getStatements().size();
