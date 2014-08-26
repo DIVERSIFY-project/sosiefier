@@ -63,7 +63,6 @@ public abstract class CodeFragment {
     protected CtTypeReference<?> initOutputContext() {
         if (codeFragment instanceof CtTypedElement) {
             return ((CtTypedElement<?>) codeFragment).getType();
-
         } else
             return FactoryImpl.getLauchingFactory().Type().createReference(void.class);
     }

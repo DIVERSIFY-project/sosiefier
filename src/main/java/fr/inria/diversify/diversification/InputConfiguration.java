@@ -158,7 +158,7 @@ public class InputConfiguration {
      * Returns the path of the previously found transformations
      * @return
      */
-    public String getPreviousTransformationDir() {
+    public String getPreviousTransformationPath() {
         return prop.getProperty("transformation.directory", "");
     }
 

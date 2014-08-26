@@ -30,7 +30,7 @@ public class SimpleAssertCounter extends AbstractLoggingInstrumenter<CtInvocatio
     @Override
     public void process(CtInvocation ctInvocation) {
         spoon.reflect.cu.CompilationUnit cu = ctInvocation.getPosition().getCompilationUnit();
-        int b = cu.beginOfLineIndex(ctInvocation.getPosition().getSourceStart());
+        int b = ctInvocation.getPosition().getSourceEnd() + 2;
         cu.addSourceCodeFragment(new SourceCodeFragment(b,
                 getLogName() + ".countAssert();", 0));
 

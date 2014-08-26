@@ -61,6 +61,7 @@ public class TransformationJsonParser {
     InputProgram inputProgram;
 
     private HashMap<Integer, String> failureDictionary;
+    private int parsingTransfIndex;
 
     public TransformationJsonParser(boolean toSet, InputProgram inputProgram) {
 
@@ -146,6 +147,7 @@ public class TransformationJsonParser {
 
             for (int i = 0; i < array.length(); i++) {
                 try {
+                    parsingTransfIndex = i;
                     JSONObject jsonObject = array.getJSONObject(i);
                     if (filter(jsonObject)) {
                         Transformation t = parseTransformation(jsonObject);

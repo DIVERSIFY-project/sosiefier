@@ -112,4 +112,8 @@ public class ASTAdd extends ASTTransformation {
 
         return ret;
     }
+
+    public CodeFragment getTransplant() {
+        return transplant;
+    }
 }

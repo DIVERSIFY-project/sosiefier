@@ -2,6 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
+import fr.inria.diversify.codeFragmentProcessor.KnownTransfStatementProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
@@ -9,6 +10,8 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
+import org.json.JSONArray;
+import org.json.JSONException;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.code.CtLocalVariable;
@@ -229,12 +232,31 @@ public class InputProgram {
      * Process all code fragments. Used to early process them.
      */
     public void processCodeFragments() {
-        if(codeFragments == null) {
+        if (codeFragments == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
             StatementProcessor processor = new StatementProcessor();
             pm.addProcessor(processor);
             pm.process();
+            codeFragments = processor.getCodeFragments();
+        }
+    }
 
+
+    /**
+     * Process only the code fragments needed to handle a known set of transformations.
+     * <p/>
+     * This is faster than processing all. Useful for multi-sosies when we start from a known set of single-sosies
+     * instead of searching out of the fragments.
+     *
+     * @param transformations An array of stored transformations.
+     */
+    public void processCodeFragments(JSONArray transformations) throws JSONException {
+        if (codeFragments == null) {
+            ProcessingManager pm = new QueueProcessingManager(factory);
+            KnownTransfStatementProcessor processor = null;
+            processor = new KnownTransfStatementProcessor(transformations);
+            pm.addProcessor(processor);
+            pm.process();
             codeFragments = processor.getCodeFragments();
         }
     }
@@ -302,6 +324,7 @@ public class InputProgram {
 
     /**
      * Get the inline constant statements on the program
+     *
      * @return
      */
     public synchronized List<CtLocalVariable> getInlineConstant() {
@@ -335,6 +358,7 @@ public class InputProgram {
 
     /**
      * Get return statements of the program
+     *
      * @return
      */
     public synchronized List<CtReturn> getReturns() {
@@ -356,7 +380,7 @@ public class InputProgram {
      */
     public void configure(InputConfiguration configuration) {
         setSourceCodeDir(configuration.getSourceCodeDir());
-        setPreviousTransformationsPath(configuration.getPreviousTransformationDir());
+        setPreviousTransformationsPath(configuration.getPreviousTransformationPath());
         setClassesDir(configuration.getClassesDir());
         setCoverageDir(configuration.getCoverageDir());
     }

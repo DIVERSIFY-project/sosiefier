@@ -7,7 +7,7 @@ import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import spoon.reflect.factory.Factory;
-import org.hamcrest.Matcher;
+
 import java.io.File;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class InstruTestAndMethod {
         String src = inputConfiguration.getProperty("src");
         String test = inputConfiguration.getProperty("testSrc");
         String out = inputConfiguration.getProperty("outputDirectory");
-        String prevTransfPath = inputConfiguration.getPreviousTransformationDir();
+        String prevTransfPath = inputConfiguration.getPreviousTransformationPath();
 
         boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
         boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
