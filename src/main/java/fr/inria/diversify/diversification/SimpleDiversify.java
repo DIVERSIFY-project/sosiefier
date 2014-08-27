@@ -1,5 +1,9 @@
 package fr.inria.diversify.diversification;
 
+import com.sun.media.jfxmedia.logging.Logger;
+import fr.inria.diversify.statistic.RunResults;
+import fr.inria.diversify.statistic.SessionResults;
+import fr.inria.diversify.statistic.SystemInformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
@@ -16,11 +20,17 @@ import java.util.Collection;
  */
 public class SimpleDiversify extends AbstractDiversify {
 
+    private final SessionResults sessionResults;
+
     public SimpleDiversify(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
         this.sourceDir = srcDir;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
         this.inputConfiguration = inputConfiguration;
+
+        sessionResults = new SessionResults();
+        String[] p = projectDir.split("/");
+        sessionResults.setName(p[p.length - 1]);
     }
 
     @Override
@@ -40,7 +50,7 @@ public class SimpleDiversify extends AbstractDiversify {
     protected void run(Transformation trans) throws Exception {
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
-            writePosition(tmpDir+"/transplant.json",(ASTTransformation) trans);
+            writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
 
             trans.apply(tmpDir + "/" + sourceDir);
             transformations.add(trans);
@@ -66,4 +76,22 @@ public class SimpleDiversify extends AbstractDiversify {
 
         out.close();
     }
+
+
+    /**
+     * Builds the results from a transformation  and a resulting status
+     *
+     * @param trans  Transformationt
+     * @param status Resulting status
+     * @return A run result
+     */
+    protected RunResults buildRunResult(Transformation trans, int trial, int status) {
+        RunResults result = new RunResults();
+        result.setId(trial);
+        result.setStatus(status);
+//        result.setTransformations(trans);
+        result.setFailedTests(builder.getTestFail());
+        return result;
+    }
+
 }
