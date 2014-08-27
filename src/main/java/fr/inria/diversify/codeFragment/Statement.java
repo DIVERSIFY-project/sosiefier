@@ -16,7 +16,7 @@ public class Statement extends CodeFragment {
     public Statement() {}
 
     //check if this can be replaced by other
-    public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch) {
+    public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch, boolean subType) {
         Class<?> cl = codeFragment.getClass();
         Class<?> clOther = other.codeFragment.getClass();
 
@@ -40,7 +40,7 @@ public class Statement extends CodeFragment {
             return false;
         }
 
-        if (!context.isReplaceableBy(other.context, varNameMatch)) {
+        if (!context.isReplaceableBy(other.context, varNameMatch, subType)) {
             return false;
         }
 

@@ -28,6 +28,8 @@ import java.util.concurrent.TimeUnit;
 public class Util {
     protected CodeFragmentList codeFragments;
 
+    protected boolean subType;
+
     public Util(CodeFragmentList list) {
         codeFragments = list;
     }
@@ -41,7 +43,7 @@ public class Util {
             pool.submit(new Runnable() {
                 @Override
                 public void run() {
-                    if(findCandidate(cfTmp, false).isEmpty())
+                    if(findCandidate(cfTmp, false ,subType).isEmpty())
                     synchronized (list) {list.add(true);}
                 }
             });
@@ -56,7 +58,7 @@ public class Util {
     public BigInteger numberOfNotDiversification(CodeFragment cf) {
         BigInteger nb = new BigInteger("0");
 
-        for (CodeFragment cf2 : findCandidate(cf, false)) {
+        for (CodeFragment cf2 : findCandidate(cf, false, subType)) {
             BigInteger tmp = getNumberOfVarMapping(cf, cf2);
             nb = nb.add(tmp);
             if(max.compareTo(tmp) < 0) {
@@ -77,7 +79,7 @@ public class Util {
                 @Override
                 public void run() {
                     BigInteger nb = new BigInteger("0");
-                    for (CodeFragment cf2 : findCandidate(cfTmp, false)) {
+                    for (CodeFragment cf2 : findCandidate(cfTmp, false, subType)) {
                         nb = nb.add(getNumberOfVarMapping(cfTmp,cf2));
                     }
                     synchronized (list) {list.add(nb);}
@@ -94,10 +96,10 @@ public class Util {
         return result;
     }
 
-    public List<CodeFragment> findCandidate(CodeFragment cf, boolean varNameMatch) {
+    public List<CodeFragment> findCandidate(CodeFragment cf, boolean varNameMatch, boolean subType) {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
         for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
-            if (cf.isReplaceableBy(statement, varNameMatch) && !statement.equalString().equals(cf.equalString()))
+            if (cf.isReplaceableBy(statement, varNameMatch, subType) && !statement.equalString().equals(cf.equalString()))
                 list.add(statement);
 
         return list;
@@ -114,59 +116,6 @@ public class Util {
         return nb;
     }
 
-//    public Set<Transformation> getStupidTransformation(int nb, ASTTransformationQuery query) {
-//        Set<Transformation> transformations = new HashSet<Transformation>();
-//        for(int i = 0; i < nb; i++) {
-//            try {
-//                ASTReplace replace = query.replace();
-//                CodeFragment position = replace.getTransplantationPoint();
-//
-//                transformations.add(replace);
-//
-//                ASTReplace stupidReplace = query.replace(position, false);
-//                stupidReplace.setType("notMappingVariableReplace");
-//                transformations.add(stupidReplace);
-//
-//                stupidReplace = query.replace(position, true);
-//                stupidReplace.setType("notContextMappingVariableNameReplace");
-//                transformations.add(stupidReplace);
-//
-//                transformations.add(query.notContextReplace(position));
-//
-//                transformations.add(query.add(position,false));
-//
-//                ASTAdd stupidASTAdd = query.add(position,false);
-//                stupidASTAdd.setName("notMappingVariableAdd");
-//                transformations.add(stupidASTAdd);
-//
-//                stupidASTAdd = query.add(position,true);
-//                stupidASTAdd.setName("notContextMappingVariableNameAdd");
-//                transformations.add(stupidASTAdd);
-//
-//                transformations.add(query.notContextAdd(position));
-//
-//                transformations.add(query.delete(position));
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return  transformations;
-//    }
-
-    public List<CodeFragment> findStupidCandidate(CodeFragment cf, ICoverageReport rg) {
-        List<CodeFragment> list = new ArrayList<CodeFragment>();
-        for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
-
-            if (cf.isReplaceableBy(statement, false)
-                    && cf.isReplaceableBy(statement, true)
-//                    && !statement.equalString().equals(cf.equalString())
-                    && rg.codeFragmentCoverage(statement) !=0)
-                list.add(statement);
-
-        return list;
-    }
-
     public Set<Transformation> getAllReplace() throws InterruptedException {
         final Set<Transformation> allReplace = new HashSet<Transformation>();
         ExecutorService pool = Executors.newFixedThreadPool(50);
@@ -175,7 +124,7 @@ public class Util {
                 pool.submit(new Runnable() {
                     @Override
                     public void run() {
-                        for (CodeFragment cf2 : findCandidate(cfTmp, false)) {
+                        for (CodeFragment cf2 : findCandidate(cfTmp, false, subType)) {
                             for (Map<String, String> varMapping : getAllVarMapping(cfTmp, cf2)) {
                                 ASTReplace r = new ASTReplace();
                                 CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());
@@ -215,7 +164,7 @@ public class Util {
             pool.submit(new Runnable() {
                 @Override
                 public void run() {
-                    for (CodeFragment cf2 : findCandidate(cfTmp, false)) {
+                    for (CodeFragment cf2 : findCandidate(cfTmp, false, subType)) {
                         for (Map<String,String> varMapping : getAllVarMapping(cfTmp,cf2)) {
                             ASTAdd r = new ASTAdd();
                             CtStatement tmp = (CtStatement) copyElem(cf2.getCtCodeFragment());

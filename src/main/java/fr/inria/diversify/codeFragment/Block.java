@@ -22,14 +22,13 @@ public class Block extends CodeFragment {
 
     @Override
     //check if this can be replaced by other
-    public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch) {
+    public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch, boolean subType) {
         Class<?> cl = codeFragment.getClass();
         Class<?> clOther = other.codeFragment.getClass();
 
         if(clOther != cl )
             return false;
 
-        return context.isReplaceableBy(other.context, varNameMatch);
-//        return getInputContext().containsAll(other.getInputContext()) && getOutputContext().equals(other.getOutputContext());
+        return context.isReplaceableBy(other.context, varNameMatch, subType);
     }
 }

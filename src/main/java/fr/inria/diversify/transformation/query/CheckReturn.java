@@ -133,7 +133,7 @@ public class CheckReturn extends ASTTransformationQuery {
     protected CodeFragment findRandomCheck(CodeFragment cf,
                                                       boolean varNameMatch) throws IllegalAccessException, InstantiationException {
         List<CodeFragment> list = checks.stream()
-                .filter(codeFragment -> cf.isReplaceableBy(codeFragment, varNameMatch))
+                .filter(codeFragment -> cf.isReplaceableBy(codeFragment, varNameMatch, subType))
                 .collect(Collectors.toList());
 
         if (list.isEmpty())
@@ -152,7 +152,7 @@ public class CheckReturn extends ASTTransformationQuery {
         for(CodeFragment transplant: returns) {
             List<CodeFragment> list = new ArrayList();
             for (CodeFragment  check : checks)
-                if (transplant.isReplaceableBy( check, varNameMatch) && transplant.getCtCodeFragment().getParent(CtIf.class) != check) {
+                if (transplant.isReplaceableBy( check, varNameMatch, subType) && transplant.getCtCodeFragment().getParent(CtIf.class) != check) {
                     list.add(check);
                 }
             nb = nb + list.size();

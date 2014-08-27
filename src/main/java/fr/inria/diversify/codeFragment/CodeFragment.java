@@ -124,7 +124,7 @@ public abstract class CodeFragment {
     }
 
     //check if this can be replaced by other
-    public abstract  boolean isReplaceableBy(CodeFragment other, boolean varNameMatch);
+    public abstract  boolean isReplaceableBy(CodeFragment other, boolean varNameMatch , boolean subType);
 
     public Map<String,String> randomVariableMapping(CodeFragment other) {
         Map<String,String> varMap = new HashMap<>();

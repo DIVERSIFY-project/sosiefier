@@ -1,6 +1,5 @@
 package fr.inria.diversify.codeFragment;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
 import spoon.reflect.declaration.CtSimpleType;
 
 import java.util.*;

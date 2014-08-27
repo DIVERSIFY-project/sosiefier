@@ -21,7 +21,7 @@ public class Expression extends CodeFragment {
     }
 
     @Override
-    public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch) {
-        return context.isReplaceableBy(other.context, varNameMatch);
+    public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch, boolean subType) {
+        return context.isReplaceableBy(other.context, varNameMatch, subType);
     }
 }

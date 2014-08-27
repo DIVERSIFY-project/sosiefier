@@ -42,21 +42,25 @@ public class InputContext {
         return candidate;
     }
 
-    public CtVariableReference<?> candidate(CtTypeReference<?> type){
-        CtVariableReference<?> candidate = null;
+    public CtVariableReference<?> candidate(CtTypeReference<?> type, boolean subType){
         for (CtVariableReference<?> var : variableReferences) {
             CtTypeReference<?> varType = var.getType();
-            if(varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
-                candidate = var;
-                break;
+            if(subType) {
+                if(type.isSubtypeOf(varType) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                    return var;
+                }
+            } else {
+                if(varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                    return var;
+                }
             }
         }
-        return candidate;
+        return null;
         }
 	
-	public boolean containsAll(InputContext other){
+	public boolean containsAll(InputContext other, boolean subType){
 		for (CtVariableReference<?> variable : other.variableReferences) {
-            if(!hasCandidate(variable.getType())) {
+            if(!hasCandidate(variable.getType(), subType)) {
                 return false;
             }
         }
@@ -83,8 +87,8 @@ public class InputContext {
         return set;
     }
 
-	protected boolean hasCandidate(CtTypeReference<?> type) {
-		return candidate(type) != null;
+	protected boolean hasCandidate(CtTypeReference<?> type, boolean subType) {
+		return candidate(type, subType) != null;
 	}
 
 	public Set<CtVariableReference<?>> getVar() {

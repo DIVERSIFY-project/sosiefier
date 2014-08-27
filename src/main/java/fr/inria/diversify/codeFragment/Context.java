@@ -37,11 +37,11 @@ public class Context {
 		return inputContext.hashCode() * outputContext.hashCode();
 	}
 
-    public boolean isReplaceableBy(Context other, boolean varNameMatch) {
+    public boolean isReplaceableBy(Context other, boolean varNameMatch,  boolean subType) {
         if(varNameMatch)
             return inputContext.getAllVarName().containsAll(other.inputContext.getAllVarName());
         else
-            return inputContext.containsAll(other.inputContext)
+            return inputContext.containsAll(other.inputContext, subType)
                 && outputContext.equals(other.outputContext)
                 && outputContext.getActualTypeArguments().equals(other.outputContext.getActualTypeArguments());
     }
