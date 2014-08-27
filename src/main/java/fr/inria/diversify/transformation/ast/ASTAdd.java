@@ -49,7 +49,7 @@ public class ASTAdd extends ASTTransformation {
 
         if(withVarMapping()) {
             if(variableMapping == null)
-                variableMapping = transplantationPoint.randomVariableMapping(transplant);
+                variableMapping = transplantationPoint.randomVariableMapping(transplant, subType);
 
             Log.debug("random variable mapping: {}",variableMapping);
             transplant.replaceVar(transplantationPoint, variableMapping);

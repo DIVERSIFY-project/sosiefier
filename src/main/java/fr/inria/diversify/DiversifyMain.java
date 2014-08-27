@@ -22,6 +22,8 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
+import org.apache.log4j.Level;
+import spoon.Launcher;
 import spoon.reflect.factory.Factory;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
@@ -58,7 +60,7 @@ public class DiversifyMain {
         inputConfiguration = new InputConfiguration(propertiesFile);
 
         new DiversifyProperties(inputConfiguration);
-
+        Launcher.logger.setLevel(Level.OFF);
         initLogLevel();
         if (DiversifyProperties.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();

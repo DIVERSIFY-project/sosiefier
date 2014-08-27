@@ -64,7 +64,7 @@ public class ASTReplace extends ASTTransformation {
 
         if (withVarMapping()) {
             if (variableMapping == null)
-                variableMapping = transplantationPoint.randomVariableMapping(getTransplant());
+                variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
 
             Log.debug("random variable mapping: {}", variableMapping);
             getTransplant().replaceVar(transplantationPoint, variableMapping);

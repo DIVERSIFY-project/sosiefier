@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.statistic.SystemInformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,7 +73,7 @@ public class TransformationsWriter {
         JSONObject dico = new JSONObject();
         dico.put("failureDictionary",AbstractTransformation.failuresDico);
         obj.put(dico);
-
+        obj.put(new SystemInformation().toJson());
         obj.write(out);
         out.newLine();
         out.close();

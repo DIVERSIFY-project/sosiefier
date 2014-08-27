@@ -126,12 +126,12 @@ public abstract class CodeFragment {
     //check if this can be replaced by other
     public abstract  boolean isReplaceableBy(CodeFragment other, boolean varNameMatch , boolean subType);
 
-    public Map<String,String> randomVariableMapping(CodeFragment other) {
+    public Map<String,String> randomVariableMapping(CodeFragment other, boolean subType) {
         Map<String,String> varMap = new HashMap<>();
         Random r = new Random();
 
         for (CtVariableReference<?> variable : other.getInputContext().getVar()) {
-            List<CtVariableReference> list = getInputContext().allCandidate(variable.getType());
+            List<CtVariableReference> list = getInputContext().allCandidate(variable.getType(), subType);
             CtVariableReference candidate = list.get(r.nextInt(list.size()));
             varMap.put(variable.toString(), candidate.toString());
         }
@@ -144,7 +144,7 @@ public abstract class CodeFragment {
         object.put("type", getCodeFragmentType().getSimpleName());
 //        object.put("inputContext", new JSONArray(getInputContext().inputContextToString()));
 //        object.put("outputContext", getOutputContext().toString());
-        object.put("sourceCode", equalString());
+//        object.put("sourceCode", equalString());
         return object;
     }
 

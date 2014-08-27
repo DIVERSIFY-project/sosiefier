@@ -35,7 +35,7 @@ public class SystemInformation {
         try {
             JSONArray cpus = new JSONArray();
             object.put("cpu", cpus);
-            for(CpuInfo cpuInfo: getCpuInfo()) {
+            for(CpuInfo cpuInfo: sigar.getCpuInfoList()) {
                 JSONObject cpu = new JSONObject();
                 cpus.put(cpu);
 
@@ -58,8 +58,7 @@ public class SystemInformation {
             ret += "total men:" + (sigar.getMem().getTotal() / 1024 / 1024);
 
             int i = 0;
-            for(CpuInfo cpuInfo: getCpuInfo()) {
-                ret += cpuInfo.toString();
+            for(CpuInfo cpuInfo: sigar.getCpuInfoList()) {
                 ret +=  "\ncpu " + i +":\n"
                     + "\tmodel: "+ cpuInfo.getModel() + "\n"
                     + "\tvendor: "+ cpuInfo.getVendor() + "\n"

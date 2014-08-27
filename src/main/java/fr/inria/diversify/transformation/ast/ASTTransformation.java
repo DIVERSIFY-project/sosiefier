@@ -22,6 +22,8 @@ import java.io.IOException;
  */
 public abstract class ASTTransformation extends AbstractTransformation {
 
+    protected boolean subType = true;
+
     /**
      * Transplantation point that is going to be modified, either by an Add, Replace or Delete transformation
      */

@@ -110,7 +110,7 @@ public class Util {
         BigInteger nb = new BigInteger("1");
 
         for (CtVariableReference<?> variable : after.getInputContext().getVar()) {
-            BigInteger tmp = new BigInteger(before.getInputContext().allCandidate(variable.getType()).size()+"");
+            BigInteger tmp = new BigInteger(before.getInputContext().allCandidate(variable.getType(), subType).size()+"");
             nb = nb.multiply(tmp);
         }
         return nb;
@@ -191,7 +191,7 @@ public class Util {
         for (CtVariableReference<?> variable : after.getInputContext().getVar()) {
             List<String> mapping = new ArrayList<String>();
             vars.add(mapping);
-            for (Object candidate : before.getInputContext().allCandidate(variable.getType()))
+            for (Object candidate : before.getInputContext().allCandidate(variable.getType(), subType))
                     mapping.add(variable.toString()+"==="+candidate.toString() );
 
         }
