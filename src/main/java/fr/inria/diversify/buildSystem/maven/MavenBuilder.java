@@ -122,11 +122,4 @@ public class MavenBuilder extends AbstractBuilder {
         }
         status = tmpFailure;
     }
-
-    public void initPom(String newPomFile) throws Exception {
-        super.initPom(newPomFile);
-        File failFastDir = new File(directory + "/" + srcDir + "/fr/inria/diversify/buildSystem/builder");
-        FileUtils.forceMkdir(failFastDir);
-        FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/builder/FailFastListener.java"), failFastDir);
-    }
 }
