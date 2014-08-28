@@ -2,6 +2,7 @@
 cd /root
 git clone https://github.com/marcelinorc/junco-provider.git
 cd junco-provider
+git pull
 mvn clean install
 
 cd /root/diversify-statements
@@ -10,8 +11,6 @@ mvn -Dmaven.test.skip=true clean package
 
 
 rm -rf repo/sosie-exp
-#mkdir repo
-#sh script/git/init.sh repo
 
 java -Djava.library.path=lib -jar target/Sosies-generator-1.0-SNAPSHOT-jar-with-dependencies.jar git repo
 
