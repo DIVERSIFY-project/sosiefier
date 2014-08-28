@@ -1,5 +1,5 @@
 #!/bin/sh
-cd root
+cd /root
 git clone git@github.com:marcelinorc/junco-provider.git
 cd junco-provider
 mvn clean install
