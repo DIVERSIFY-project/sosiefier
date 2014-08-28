@@ -190,14 +190,14 @@ public class DiversifyMain {
         if (t == -1) rb.initTimeOut();
         else rb.setTimeOut(t);
 
+        String pomFile = DiversifyProperties.getProperty("newPomFile");
+        if (!pomFile.equals("")) rb.initPom(pomFile);
+
         rb.copyClasses(DiversifyProperties.getProperty("classes"));
         rb.initTimeOut();
         if(builder.equals("maven")) {
             rb.setPhase(new String[]{"test"});
         }
-
-        String pomFile = DiversifyProperties.getProperty("newPomFile");
-        if (!pomFile.equals("")) rb.initPom(pomFile);
 
         //Obtain some other builder properties
         boolean saveOutput = Boolean.parseBoolean(DiversifyProperties.getProperty("save.builder.output", "false"));
