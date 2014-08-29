@@ -1,7 +1,8 @@
 package fr.inria.diversify;
 
-import fr.inria.diversify.util.GitUtil;
+import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
+import org.eclipse.jgit.api.errors.GitAPIException;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
@@ -34,11 +35,11 @@ public class Main {
     }
 
 
-    protected static void initPropertiesFile(String git) throws IOException, InterruptedException {
-        GitUtil.initGit(git);
+    protected static void initPropertiesFile(String git) throws IOException, InterruptedException, GitAPIException {
+        GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", git);
+        gitUtils.cloneRepo();
 
-        String propertiesFile = GitUtil.getFirstPropertyFile();
-        Runtime r = Runtime.getRuntime();
+        String propertiesFile = gitUtils.getFirstPropertyFile();
         BufferedWriter out = new BufferedWriter(new FileWriter("propertiesFile"));
         out.write(propertiesFile);
         out.close();

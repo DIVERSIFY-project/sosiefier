@@ -6,8 +6,10 @@ import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.GitUtil;
+import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.json.JSONException;
 
 import java.io.*;
@@ -132,9 +134,10 @@ public abstract class AbstractDiversify {
      */
     public String printResult(String output) {
         mkDirResult(output);
-        String fileName = output + System.currentTimeMillis();
+        String prefix = output + System.currentTimeMillis();
+        String fileName = "";
         try {
-            writeTransformations(fileName);
+            fileName = writeTransformations(prefix);
             Log.info("write result in {}", fileName);
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
@@ -144,15 +147,23 @@ public abstract class AbstractDiversify {
 
     public void printResult(String output, String git) {
         String absoluteFileName = printResult(git + "/" + output);
+        String fileName = absoluteFileName.substring(git.length() + 1, absoluteFileName.length());
 
-        String[] split = absoluteFileName.split("/");
-        String tmp = split[0];
-        for (int i = 1; i < split.length - 1; i++) {
-            tmp = tmp + "/" + split[i];
+        try {
+            GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", git);
+            gitUtils.pull();
+            gitUtils.add(fileName);
+            gitUtils.commit("test");
+            gitUtils.push();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        } catch (GitAPIException e) {
+            e.printStackTrace();
         }
-        Log.debug(tmp + "/   " + split[split.length - 1]);
-        GitUtil.addToGit(tmp + "/", "*");
-        GitUtil.pushGit();
+
+//        GitUtil.addToGit(tmp + "/", "*");
+//        GitUtil.pushGit();
     }
 
     /**
@@ -164,12 +175,12 @@ public abstract class AbstractDiversify {
      * @throws IOException
      * @throws JSONException
      */
-    public void writeTransformations(String fileName) throws IOException, JSONException {
+    public String writeTransformations(String fileName) throws IOException, JSONException {
         if (transformations.isEmpty())
-            return;
+            return "";
 
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
-        write.writeAllTransformation(null);
+        return write.writeAllTransformation(null);
     }
 
     protected void mkDirResult(String output) {

@@ -126,7 +126,7 @@ public class DiversifyMain {
 
                 String repo = DiversifyProperties.getProperty("gitRepository");
                 if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
-                else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
+                else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo);
             }
         }
         abstractDiversify.deleteTmpFiles();
