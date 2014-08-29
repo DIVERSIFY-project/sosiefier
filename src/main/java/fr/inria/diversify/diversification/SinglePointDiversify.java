@@ -13,13 +13,13 @@ import java.util.Collection;
 /**
  * Created by Simon on 20/08/14.
  */
-public class SimpleDiversify extends AbstractDiversify {
+public class SinglePointDiversify extends AbstractDiversify {
 
     protected int trial = 0;
     protected int compile = 0;
     protected int sosie = 0;
 
-    public SimpleDiversify(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
+    public SinglePointDiversify(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
         this.sourceDir = srcDir;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
