@@ -58,10 +58,11 @@ public class ASTTransformationQuery extends TransformationQuery {
      * @param fragmentClass Class of the fragments
      * @param isStupid Is this a stupid transformation?
      */
-    public ASTTransformationQuery(InputProgram inputProgram, Class fragmentClass, boolean isStupid) {
+    public ASTTransformationQuery(InputProgram inputProgram, Class fragmentClass, boolean subType, boolean isStupid) {
         super(inputProgram);
         codeFragmentClass = fragmentClass;
         stupid = isStupid;
+        this.subType = subType;
     }
 
 
@@ -148,6 +149,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         }
         tf.setTransplantationPoint(transplantationPoint);
         tf.setTransplant(transplant);
+        tf.setSubType(subType);
+
         return tf;
     }
 
@@ -161,6 +164,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         tf.setTransplantationPoint(transplantationPoint);
         tf.setTransplant(transplant);
         tf.setName("replaceReaction");
+        tf.setSubType(subType);
+
         return tf;
     }
 
@@ -177,6 +182,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         tf.setName("replaceWittgenstein");
         tf.setTransplantationPoint(transplantationPoint);
         tf.setTransplant(transplant);
+        tf.setSubType(subType);
+
         return tf;
     }
 
@@ -185,6 +192,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         tf.setTransplantationPoint(findRandomFragmentToReplace(true));
         tf.setTransplant(findRandomFragmentToReplace(false));
         tf.setName("replaceRandom");
+        tf.setSubType(subType);
+
         return tf;
     }
 
@@ -193,6 +202,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         tf.setTransplantationPoint(findRandomFragmentToReplace(true));
         tf.setTransplant(findRandomFragmentToReplace(false));
         tf.setName("addRandom");
+        tf.setSubType(subType);
+
         return tf;
     }
 
@@ -204,19 +215,11 @@ public class ASTTransformationQuery extends TransformationQuery {
             throw new Exception("pas de candidat pour " + transplantationPoint);
         tf.setTransplantationPoint(transplantationPoint);
         tf.setTransplant(cfReplacedBy);
+        tf.setSubType(subType);
+
         return tf;
     }
 
-//    public ASTReplace notContextReplace(CodeFragment cfToReplace) throws Exception {
-//        Random r = new Random();
-//        ASTReplace tf = new ASTReplace();
-//        tf.setType("notContextReplace");
-//        int size = codeFragments.size();
-//        CodeFragment cfReplacedBy = codeFragments.get(r.nextInt(size));
-//        tf.setTransplantationPoint(cfToReplace);
-//        tf.setCodeFragmentToReplace(cfReplacedBy);
-//        return tf;
-//    }
 
     protected ASTAdd addWittgenstein() throws Exception {
         ASTAdd tf = new ASTAdd();
@@ -231,6 +234,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         tf.setTransplantationPoint(transplantationPoint);
         tf.setTransplant(transplant);
         tf.setName("addWittgenstein");
+        tf.setSubType(subType);
+
         return tf;
     }
 
@@ -245,6 +250,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         }
         tf.setTransplantationPoint(transplantationPoint);
         tf.setTransplant(transplant);
+        tf.setSubType(subType);
+
         return tf;
     }
 
@@ -258,6 +265,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         tf.setTransplantationPoint(transplantationPoint);
         tf.setTransplant(transplant);
         tf.setName("addReaction");
+        tf.setSubType(subType);
+
         return tf;
     }
 
@@ -269,6 +278,8 @@ public class ASTTransformationQuery extends TransformationQuery {
             throw new Exception("pas de candidat pour " + transplantationPoint);
         tf.setTransplantationPoint(transplantationPoint);
         tf.setTransplant(transplant);
+        tf.setSubType(subType);
+
         return tf;
     }
 
@@ -283,6 +294,7 @@ public class ASTTransformationQuery extends TransformationQuery {
                 transplantationPoint = null;
         }
         tf.setTransplantationPoint(transplantationPoint);
+
         return tf;
     }
 
@@ -351,8 +363,9 @@ public class ASTTransformationQuery extends TransformationQuery {
             transformations.add(replace);
 
             try {
-                ASTReplace replaceW = replace(replace.getTransplantationPoint(), true, false);
+                ASTReplace replaceW = replace(replace.getTransplantationPoint(), true, subType);
                 replaceW.setName("replaceWittgenstein");
+
                 transformations.add(replaceW);
             } catch (Exception e) {}
 

@@ -20,6 +20,7 @@ import java.util.Random;
  */
 public class MutationToSosieQuery extends TransformationQuery {
 
+    protected boolean subType;
     protected List<Transformation> mutations;
     protected String classesDir;
     protected File jacocoDir;
@@ -65,7 +66,7 @@ public class MutationToSosieQuery extends TransformationQuery {
                         }
                     }
 
-                    T thread = new T(new ASTTransformationQuery(inputProgram, Statement.class, false));
+                    T thread = new T(new ASTTransformationQuery(inputProgram, Statement.class, subType, false));
 
                     thread.start();
                     int count = 0;

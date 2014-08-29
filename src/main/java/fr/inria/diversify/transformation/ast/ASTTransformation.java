@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public abstract class ASTTransformation extends AbstractTransformation {
 
-    protected boolean subType = true;
+    protected boolean subType;
 
     /**
      * Transplantation point that is going to be modified, either by an Add, Replace or Delete transformation
@@ -123,7 +123,9 @@ public abstract class ASTTransformation extends AbstractTransformation {
             compileUnit.getSourceCodeFraments().clear();
     }
 
-
+    public void setSubType(boolean subType) {
+        this.subType = subType;
+    }
 }
 
 

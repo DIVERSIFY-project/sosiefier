@@ -1,6 +1,7 @@
 package fr.inria.diversify.diversification;
 
 
+import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
@@ -9,21 +10,29 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Created by Simon on 20/08/14.
  */
 public class SinglePointDiversify extends AbstractDiversify {
+    /**
+     * Indicates if we also apply the parent transformation
+     */
+    protected boolean withParent = false;
 
-    protected int trial = 0;
-    protected int compile = 0;
-    protected int sosie = 0;
+    /**
+     * Indicates if we set the accepted errors for the parent
+     */
+    protected boolean acceptedErrors = false;
+
 
     public SinglePointDiversify(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
         this.sourceDir = srcDir;
         this.projectDir = projectDir;
         transformations = new ArrayList<>();
         this.inputConfiguration = inputConfiguration;
+        sessionResults = new SinglePointSessionResults();
     }
 
     @Override
@@ -31,10 +40,7 @@ public class SinglePointDiversify extends AbstractDiversify {
         for(int i = 0;i < n; i++  ) {
             run(transQuery.buildTransformation());
         }
-        Log.info("session result:");
-        Log.info("\ttrial: {}", trial);
-        Log.info("\tcompile: {}", compile);
-        Log.info("\tsosie: {}", sosie);
+        Log.info("session result: {}", sessionResults);
     }
 
 
@@ -42,10 +48,7 @@ public class SinglePointDiversify extends AbstractDiversify {
         for(Transformation transformation: trans) {
             run(transformation);
         }
-        Log.info("session result:");
-        Log.info("\ttrial: {}", trial);
-        Log.info("\tcompile: {}", compile);
-        Log.info("\tsosie: {}", sosie);
+        Log.info("session result: {}", sessionResults);
     }
 
     protected void run(Transformation trans) throws Exception {
@@ -54,26 +57,36 @@ public class SinglePointDiversify extends AbstractDiversify {
         try {
             writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
 
-            trans.apply(tmpDir + "/" + sourceDir);
+            applyTransformation(trans);
             transformations.add(trans);
             int status = runTest(tmpDir);
 
             trans.setStatus(status);
             trans.setFailures(builder.getTestFail());
             if(status == 0) {
-                sosie ++;
+                copySosieProgram();
             }
-            if(status == -2) {
-                compile++;
-            }
+
 
         } catch (Exception e) {
             trans.setStatus(-2);
-            Log.warn("compile error during diversification", e);
+            Log.debug("compile error during diversification", e);
         }
         trial++;
         trans.restore(tmpDir + "/" + sourceDir);
+        ((SinglePointSessionResults) sessionResults).addRunResults(trans);
         Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
+    }
+
+    protected void applyTransformation(Transformation trans) throws Exception {
+        if(withParent) {
+            if(acceptedErrors) {
+                builder.setAcceptedErrors(trans.getParent().getFailures());
+            }
+            trans.applyWithParent(tmpDir + "/" + sourceDir);
+        } else {
+            trans.apply(tmpDir + "/" + sourceDir);
+        }
     }
 
     protected void writePosition(String fileName, ASTTransformation transformation) throws IOException {
@@ -85,5 +98,13 @@ public class SinglePointDiversify extends AbstractDiversify {
         out.write("{\"Position\": \""+ className+ ":"+ line +"\"}");
 
         out.close();
+    }
+
+    public void setWithParent(boolean withParent) {
+        this.withParent = withParent;
+    }
+
+    public void setAcceptedErrors(boolean acceptedErrors) {
+        this.acceptedErrors = acceptedErrors;
     }
 }

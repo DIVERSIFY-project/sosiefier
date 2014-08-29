@@ -2,11 +2,9 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.transformation.AbstractTransformation;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -16,37 +14,19 @@ import java.util.*;
  * <p/>
  * Created by marcel on 22/06/14.
  */
-public class SessionResults {
+public class SessionResults extends AbstractSessionResults {
 
     private HashMap<Integer, int[]> runsPerSize;
 
     //Max incremental series number
     private int maxSeries = Integer.MIN_VALUE;
 
-    //Name of the session. Mostly the project being run
-    private String name;
-
-    private String beginTime;
 
     /**
      * Transformation size of a Run Result. As for now this number is constant during the whole session
      */
     //private int transformationSize;
 
-    /**
-     * Amount of sosies found during the session
-     */
-    private int sosieCount;
-
-    /**
-     * Amount of failed tests runs during the session
-     */
-    private int testFailedCount;
-
-    /**
-     * Amount of build compile failed  runs during the session
-     */
-    private int compileFailedCount;
 
     /**
      * List of results for every run in this session.
@@ -250,30 +230,5 @@ public class SessionResults {
 
     }
 
-    public int getSosieCount() {
-        return sosieCount;
-    }
 
-    public int getTestFailedCount() {
-        return testFailedCount;
-    }
-
-    public int getCompileFailedCount() {
-        return compileFailedCount;
-    }
-
-    /**
-     * A nice string with the time of the construction of the session
-     */
-    public String getBeginTime() {
-        return beginTime;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

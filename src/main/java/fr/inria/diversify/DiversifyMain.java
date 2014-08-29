@@ -84,7 +84,7 @@ public class DiversifyMain {
             abstractDiversify = initAbstractDiversify();
             ASTTransformationQuery query = new ASTTransformationQuery(inputProgram);
 
-            ((SimpleDiversify) abstractDiversify).run(query.isstaTransformation(n));
+            ((SinglePointDiversify) abstractDiversify).run(query.isstaTransformation(n));
             String repo = DiversifyProperties.getProperty("gitRepository");
             abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
         } else {
@@ -132,44 +132,38 @@ public class DiversifyMain {
         abstractDiversify.deleteTmpFiles();
     }
 
+
     protected AbstractDiversify initAbstractDiversify() throws Exception {
-        AbstractDiversify ad;
+        AbstractDiversify ad = null;
         String transformationType = DiversifyProperties.getProperty("transformation.type");
         String projet = DiversifyProperties.getProperty("project");
         String src = DiversifyProperties.getProperty("src");
         String resultDir = DiversifyProperties.getProperty("result");
+        String sosieDir = DiversifyProperties.getProperty("copy.sosie.sources.to", "");
 
-        if (transformationType.equals("mutationToSosie"))
-            ad = new DiversifyWithParent(inputConfiguration, projet, src);
-        else if (DiversifyProperties.getProperty("sosie").equals("false")) {
+        if (transformationType.equals("knownsosies")
+                || transformationType.equals("knownmultisosies")
+                || transformationType.equals("singleconsecutive")
+                || transformationType.equals("specificindexes")) {
             ad = new Diversify(inputConfiguration, projet, src);
             boolean early = DiversifyProperties.getProperty("early.report", "false").equals("true");
             boolean earlySosies = DiversifyProperties.getProperty("early.report.sosies.only", "false").equals("true");
             ((Diversify) ad).setEarlyReportSosiesOnly(earlySosies);
             ((Diversify) ad).setEarlyReport(early);
-            ad.setSocieSourcesDir(DiversifyProperties.getProperty("copy.sosie.sources.to", ""));
-        } else if (DiversifyProperties.getProperty("sosie").equals("classic")) {
-            String testDir = DiversifyProperties.getProperty("testSrc");
-            ad = new Sosie(projet, src, testDir);
-        } else ad = new SosieWithParent(projet, src);
-
-        if(transformationType.equals("issta")
-                || transformationType.equals("adr")
-                || transformationType.equals("all")
-                || transformationType.equals("mutation")
-                || transformationType.equals("cvl")
-                || transformationType.equals("other")
-                || transformationType.equals("checkReturn")
-                || transformationType.equals("adrstupid")
-                || transformationType.equals("shuffle")
-                ) {
-            ad = new SimpleDiversify(inputConfiguration, projet, src);
+        }
+        else {
+            ad = new SinglePointDiversify(inputConfiguration, projet, src);
+            boolean withParent = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.withparent", "false"));
+            boolean acceptedError = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.acceptederror", "false"));
+            ((SinglePointDiversify) ad).setWithParent(withParent);
+            ((SinglePointDiversify) ad).setAcceptedErrors(acceptedError);
         }
 
         String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));
-
+        ad.setSocieSourcesDir(sosieDir);
         ad.setBuilder(initBuilder(tmpDir));
         ad.setResultDir(resultDir);
+
         return ad;
     }
 
@@ -263,11 +257,13 @@ public class DiversifyMain {
             }
             case "adr": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram, cl, false);
+                boolean subType = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.subtype", "false"));
+                return new ASTTransformationQuery(inputProgram, cl, subType, false);
             }
             case "adrstupid": {
                 Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram, cl, true);
+                boolean subType = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.subtype", "false"));
+                return new ASTTransformationQuery(inputProgram, cl, subType, true);
             }
             case "knownsosies":
                 //This query benefits from a early processCodeFragments
@@ -302,16 +298,6 @@ public class DiversifyMain {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-            /*
-            case "list": {
-                String transDirectory = DiversifyProperties.getProperty("transformation.directory");
-                return new TransformationQueryFromList(inputProgram, new RandomFactory());
-            }
-            case "multi": {
-                String transDirectory = DiversifyProperties.getProperty("transformation.directory");
-                int nbTransformation = Integer.parseInt(DiversifyProperties.getProperty("transformation.nb"));
-                return new ASTMultiTransformationQuery(inputProgram, new RandomFactory());
-            }*/
         }
     }
 

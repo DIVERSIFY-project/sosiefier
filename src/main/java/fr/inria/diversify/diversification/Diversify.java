@@ -28,11 +28,10 @@ import java.util.List;
  */
 public class Diversify extends AbstractDiversify {
 
-
-    /**
-     * Session report
-     */
-    SessionResults sessionResults;
+//    /**
+//     * Session report
+//     */
+//    protected SessionResults sessionResults;
 
     /**
      * Number of compiled errors. TODO: This info is already in SessionResults
@@ -44,10 +43,6 @@ public class Diversify extends AbstractDiversify {
      */
     protected int sosie = 0;
 
-    /**
-     * Number of trials performed
-     */
-    protected int trial = 0;
 
     private boolean earlyReport = false;
 
@@ -270,8 +265,8 @@ public class Diversify extends AbstractDiversify {
                 String jsonFile = getResultDir() + "/" + Thread.currentThread().getId() +
                         "_trial_" + trial + "_size_" + transformations.size() + "_stat_" + status + ".json";
                 result.saveToFile(jsonFile);
-                sessionResults.addRunResults(result, jsonFile, getResultDir() + "/buidOutput" + builder.getRunCount() + ".txt");
-                sessionResults.saveReport(
+                ((SessionResults) sessionResults).addRunResults(result, jsonFile, getResultDir() + "/buidOutput" + builder.getRunCount() + ".txt");
+                ((SessionResults) sessionResults).saveReport(
                         getResultDir() + "/" + Thread.currentThread().getId() + "_session.html");
             } catch (IOException | JSONException e) {
                 //Not my mf problem!! (Hard rock in the background)
@@ -299,43 +294,7 @@ public class Diversify extends AbstractDiversify {
         return result;
     }
 
-    protected void copySosieProgram() throws IOException, JSONException {
-        //Store the whole sosie program.
-        try {
 
-            if (getSocieSourcesDir() != null && getSocieSourcesDir().length() > 0) {
-                File f = new File(getSocieSourcesDir());
-                if (!(f.exists())) {
-                    f.mkdirs();
-                }
-
-                String destPath = getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
-
-                boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
-                boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
-                boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError"));
-                boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert"));
-                boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
-
-                if (intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest) {
-                    Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), destPath, transformations);
-                    instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
-                } else {
-                    FileUtils.copyDirectory(new File(tmpDir), f);
-                }
-
-                FileWriter writer = new FileWriter(destPath + "/trans.json");
-                for (Transformation t : transformations) {
-                    writer.write(t.toJSONObject().toString() + "\n");
-                }
-                writer.close();
-
-            }
-        } catch (IOException e) {
-            //We may also don't want to recover from here. If no instrumentation possible... now what?
-            throw new RuntimeException(e);
-        }
-    }
 
 
     /*
