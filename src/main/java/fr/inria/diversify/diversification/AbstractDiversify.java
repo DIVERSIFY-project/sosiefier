@@ -5,7 +5,6 @@ import fr.inria.diversify.statistic.AbstractSessionResults;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.util.GitUtil;
 import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
