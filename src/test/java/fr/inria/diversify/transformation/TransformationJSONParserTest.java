@@ -26,6 +26,7 @@ public class TransformationJSONParserTest {
         inputProgram.setFactory(factory);
         inputProgram.setSourceCodeDir(getResourcePath("junit"));
         inputProgram.setPreviousTransformationsPath(getResourcePath("junit-sosie.json"));
+        inputProgram.processCodeFragments();
 
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
         List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));

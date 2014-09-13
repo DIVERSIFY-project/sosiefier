@@ -1,11 +1,13 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
 import fr.inria.diversify.codeFragmentProcessor.KnownTransfStatementProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.transformation.TransformationParserException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -16,6 +18,7 @@ import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
@@ -267,6 +270,37 @@ public class InputProgram {
     public synchronized CodeFragmentList getCodeFragments() {
         processCodeFragments();
         return codeFragments;
+    }
+
+    /**
+     * Returns an specific code fragment given its position and source. The source is optional.
+     * However, you should supply both, since is possible that a code fragment
+     * is not found given only position since a difference of line numbers is usual.
+     *
+     * @param position Position of the code fragment
+     * @param source Source of the code Fragment
+     * @return
+     */
+    public synchronized CodeFragment getCodeFragment(String position, String source) {
+
+        for (CodeFragment codeFragment : getCodeFragments()) {
+            if (codeFragment.positionString().equals(position)) {
+                return codeFragment;
+            }
+        }
+
+        //Not found using position, try to find it using source
+        for (CodeFragment codeFragment : getCodeFragments()) {
+            position = position.split(":")[0];
+            if (codeFragment.positionString().startsWith(position)) {
+                String cfSourceCode = codeFragment.equalString();
+                if (source.equals(cfSourceCode)) {
+                    return codeFragment;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**

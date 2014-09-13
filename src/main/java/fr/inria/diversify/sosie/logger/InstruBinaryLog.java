@@ -163,7 +163,6 @@ public class InstruBinaryLog extends InstruLogWriter {
 
     @Override
     public void writeTestStart(Thread thread, String testSignature) {
-        super.writeTestStart(thread, testSignature);
         try {
             //Each test runs in a 0 depth for what we care
             resetCallDepth(thread);
@@ -177,6 +176,16 @@ public class InstruBinaryLog extends InstruLogWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void writeSourcePositionCall(String transplantationPoint) {
+
+    }
+
+    @Override
+    public void countAssert(String assertSignature) {
+
     }
 
 
@@ -286,10 +295,6 @@ public class InstruBinaryLog extends InstruLogWriter {
 
     @Override
     public void close() {
-
-        //Writes the Source position calls to file
-        writeSourcePositionCallToFile("sourcePositionCall.log");
-
         for (Thread thread : streamsPerThread.keySet()) {
             //String semaphore = "";
             try {
@@ -307,6 +312,11 @@ public class InstruBinaryLog extends InstruLogWriter {
 
     @Override
     protected void writeStartLogging(Thread thread, String id) {
+
+    }
+
+    @Override
+    public void writeTestFinish() {
 
     }
 

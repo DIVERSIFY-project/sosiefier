@@ -98,6 +98,11 @@ public class Instru {
     }
 
     protected void writeId() throws IOException {
+
+        TestLoggingInstrumenter.writeIdFile(outputDirectory);
+        SimpleAssertCounter.writeIdFile(outputDirectory);
+        TransplantationPointCallCountInstrumenter.writeIdFile(outputDirectory);
+
         tpcInstrumenter.writeIdMapToFile(outputDirectory + "/tpcid.json");
         VariableLoggingInstrumenter.writeIdFile(outputDirectory);
         copyLogger(outputDirectory, srcDirectory);

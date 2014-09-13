@@ -14,6 +14,7 @@ import java.util.List;
 public class SimpleAssertCounter extends AbstractLoggingInstrumenter<CtInvocation<?>> {
 
 
+
     public SimpleAssertCounter() {
         super(new ArrayList<>());
     }
@@ -31,8 +32,11 @@ public class SimpleAssertCounter extends AbstractLoggingInstrumenter<CtInvocatio
     public void process(CtInvocation ctInvocation) {
         spoon.reflect.cu.CompilationUnit cu = ctInvocation.getPosition().getCompilationUnit();
         int b = ctInvocation.getPosition().getSourceEnd() + 2;
+        String pos = ctInvocation.getPosition().getCompilationUnit().getMainType().getQualifiedName() + ":" +
+                ctInvocation.getPosition().getLine();
+
         cu.addSourceCodeFragment(new SourceCodeFragment(b,
-                getLogName() + ".countAssert();", 0));
+                getLogName() + ".countAssert(\"" + idFor(pos) + "\");", 0));
 
     }
 }

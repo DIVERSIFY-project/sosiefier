@@ -21,14 +21,25 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractTransformation implements Transformation {
 
+    //A global ID for the transformations. For our purposes is enough a simple global increment.
+    private static int globalID = 0;
+
     public static int EXCEPTION = -4;
     public static int NOT_TESTED = -3;
     public static int COMPILED_FAIL = -2;
     public static int TEST_FAIL = -1;
     public static int SOSIE = 0;
 
-    private int index;
+    /**
+     * An index to identify the
+     */
+    private int index = -1;
 
+    /**
+     * The series number is an ID for a given serie containing this transformation.
+     *
+     * Remember that a series is a set of multi-sosies, each one being child of another in the set.
+     */
     private int series;
 
     protected Integer status = -3;
@@ -70,7 +81,12 @@ public abstract class AbstractTransformation implements Transformation {
         object.put("name", name);
         object.put("failures", failuresToJSON());
         object.put("status", status);
+        if ( index == -1 ) {
+            globalID++;
+            index = globalID;
+        }
         object.put("tindex", index);
+        object.put("series", getSeries());
 
         if(parent != null)
             object.put("parent",parent.toJSONObject());
@@ -197,5 +213,18 @@ public abstract class AbstractTransformation implements Transformation {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    /**
+     * The series number is an ID for a given serie containing this transformation.
+     *
+     * Remember that a series is a set of multi-sosies, each one being child of another in the set.
+     */
+    public int getSeries() {
+        return series;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
     }
 }

@@ -18,7 +18,7 @@ public class IndexifyTransformations {
     public static void main(String[] args) throws Exception {
 
         StringBuilder sb = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\easymock3.2.json"));
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\easymock3.2-non-rep.json"));
         String line = null;
         while ((line = reader.readLine()) != null) {
             sb.append(line);
@@ -30,7 +30,7 @@ public class IndexifyTransformations {
                 array.getJSONObject(i).put("tindex", i);
             }
         }
-        FileWriter fw = new FileWriter("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\easymock3.2-index.json");
+        FileWriter fw = new FileWriter("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\easymock3.2-non-rep-index.json");
         array.write(fw);
         fw.close();
     }

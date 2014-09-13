@@ -33,7 +33,9 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
             return false;
 
         for(CtAnnotation<?> annotation: candidate.getAnnotations())
-            if(annotation.toString().startsWith("@org.junit.Test"))
+            if(annotation.toString().startsWith("@org.junit.Test") ||
+               annotation.toString().startsWith("@org.junit.Before") ||
+               annotation.toString().startsWith("@org.junit.After"))
                 return true;
 
         if(candidate.getSimpleName().contains("test"))
@@ -69,5 +71,9 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
             index = compileUnit.beginOfLineIndex(sp.getSourceStart());
 
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+
+        CompilationUnit cu = element.getPosition().getCompilationUnit();
+        int pos = element.getBody().getPosition().getSourceEnd();
+        cu.addSourceCodeFragment(new SourceCodeFragment(pos, getLogName() + ".writeTestFinish();\n", 0));
     }
 }

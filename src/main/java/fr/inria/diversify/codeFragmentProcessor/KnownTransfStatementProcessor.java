@@ -14,6 +14,7 @@ import java.util.Set;
 public class KnownTransfStatementProcessor extends StatementProcessor {
 
     private Set<String> positions;
+    private Set<String> classNames;
     private Set<String> source;
 
     /**
@@ -24,6 +25,8 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
     public KnownTransfStatementProcessor(JSONArray array) throws JSONException {
         positions = new HashSet<>();
         source = new HashSet<>();
+        classNames = new HashSet<>();
+
         for (int i = 0; i < array.length(); i++) {
             JSONObject obj = array.getJSONObject(i);
             if (obj.has("transplant")) {
@@ -35,7 +38,10 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
                 if (!source.contains(s)) {
                     source.add(s);
                 }
-
+                String klass = s.split(":")[0];
+                if ( !classNames.contains(klass) ) {
+                    classNames.add(klass);
+                }
             }
             if (obj.has("transplantationPoint")) {
                 String s = obj.getJSONObject("transplantationPoint").getString("position");
@@ -46,16 +52,18 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
                 if (!source.contains(s)) {
                     source.add(s);
                 }
+                String klass = s.split(":")[0];
+                if ( !classNames.contains(klass) ) {
+                    classNames.add(klass);
+                }
             }
         }
     }
 
     public void process(CtStatement element) {
         try {
-
             Statement stmt = new Statement(element);
             addCf(stmt);
-
         } catch (Exception e) {
             try {
                 Log.debug("error in StatementProcessor.process with the statement: " + element, e);
@@ -70,14 +78,14 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
     @Override
     public boolean isToBeProcessed(CtStatement e) {
 
-        String sourcePackage = e.getPosition().getCompilationUnit().getMainType().getPackage().getQualifiedName();
-        String className = e.getPosition().getCompilationUnit().getMainType().getSimpleName();
-        //getSourcePackage().getQualifiedName()+"."+getSourceClass().getSimpleName()+ ":" +element.getPosition().getLine();
-        String pos = sourcePackage + "." + className + ":" + e.getPosition().getLine();
+        //String sourcePackage = e.getPosition().getCompilationUnit().getMainType().getPackage().getQualifiedName();
+        String klass = e.getPosition().getCompilationUnit().getMainType().getQualifiedName();
+        //klass = sourcePackage + "." + klass;
+        String pos = klass + ":" + e.getPosition().getLine();
 
         if (positions.contains(pos)) {
             return true;
-        } else {
+        } else if (classNames.contains(klass)) {
             try {
                 count++;
                 CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(e.getFactory().getEnvironment());

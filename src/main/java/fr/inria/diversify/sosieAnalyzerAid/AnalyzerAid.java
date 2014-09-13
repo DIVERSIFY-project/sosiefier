@@ -12,7 +12,6 @@ import spoon.reflect.factory.Factory;
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.util.Collection;
 
@@ -27,8 +26,6 @@ public class AnalyzerAid {
                 Log.error("Unable to find properties file");
                 return;
             }
-
-
             InputConfiguration inputConfiguration = new InputConfiguration(args[0]);
 
             Log.info("Scanning the project source code (this may take a minute)");
@@ -50,16 +47,9 @@ public class AnalyzerAid {
             long milis = System.currentTimeMillis();
             inputProgram.processCodeFragments(array);
             //inputProgram.processCodeFragments();
-
-
             Collection<Transformation> transformations;
             TransformationJsonParser p = new TransformationJsonParser(false, inputProgram);
-            File transfFile = new File(inputConfiguration.getPreviousTransformationPath());
-            if ( transfFile.isDirectory() ) {
-                transformations = p.parseDir(transfFile.getAbsolutePath());
-            } else {
-                transformations = p.parseFile(transfFile);
-            }
+            transformations = p.parseArray(array);
 
             Log.info("Time: " + (System.currentTimeMillis()-milis));
 

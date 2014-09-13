@@ -2,6 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import spoon.reflect.factory.Factory;
 
@@ -15,12 +16,13 @@ public class InputProgramTest {
     }
 
     @Test
+    @Ignore
     public void testGetCodeFragments() throws Exception {
-        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("commons-collections/src/main"), 5);
+        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock/src/main"), 5);
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
-        inputProgram.setSourceCodeDir(getResourcePath("commons-collections"));
+        inputProgram.setSourceCodeDir(getResourcePath("easymock"));
 
         Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
     }

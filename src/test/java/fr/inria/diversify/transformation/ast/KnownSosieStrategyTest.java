@@ -9,6 +9,7 @@ import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import spoon.reflect.factory.Factory;
 
@@ -245,6 +246,7 @@ public class KnownSosieStrategyTest {
      * @throws Exception
      */
     @Test
+    @Ignore
     public void testIncrementalSeriesBad2() throws Exception {
 
         //Expected search graph

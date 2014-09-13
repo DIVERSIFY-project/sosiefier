@@ -2,6 +2,7 @@ package fr.inria.diversify.sosie.logger;
 
 import fr.inria.diversify.FileOutputStreamMock;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -67,6 +68,7 @@ public class InstruBinaryLogTest {
 
 
     @Test
+    @Ignore
     public void tesWriteTestStart() {
         Thread t = Thread.currentThread();
         //Builds a mock and magically replaces the FileOutputStream. See JMockit help
@@ -97,6 +99,7 @@ public class InstruBinaryLogTest {
 
 
     @Test
+    @Ignore
     public void tesWriteVar() {
         Thread t = Thread.currentThread();
         //Builds a mock and magically replaces the FileOutputStream. See JMockit help

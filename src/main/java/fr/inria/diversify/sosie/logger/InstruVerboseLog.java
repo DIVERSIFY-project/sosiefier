@@ -1,8 +1,8 @@
 package fr.inria.diversify.sosie.logger;
 
 import java.io.*;
-import java.lang.management.ManagementFactory;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -21,10 +21,14 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     private String simpleSeparator = ";";
 
+
+    //TPs called in this test
+    protected HashSet<Integer> transplantPointCalledInThisTest;
+
     public InstruVerboseLog(String logDir) {
         super(logDir);
         previousVarLog = new HashMap();
-        fileWriters  = new HashMap<Thread, PrintWriter>();
+        fileWriters = new HashMap<Thread, PrintWriter>();
     }
 
     public void methodCall(Thread thread, String methodSignatureId) {
@@ -120,7 +124,52 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
-    protected  void writeStartLogging(Thread thread, String id) {
+    public void writeSourcePositionCall(String id) {
+        Thread thread = Thread.currentThread();
+        HashMap<String, Integer> h = transplantPointCallCount.get(thread);
+        if (h.containsKey(id)) {
+            int k = h.get(id);
+            h.put(id, k + 1);
+        } else {
+            h.put(id, 1);
+            writeStartLogging(Thread.currentThread(), id);
+        }
+    }
+
+    @Override
+    public void countAssert(String id) {
+        Thread thread = Thread.currentThread();
+
+        HashMap<String, Integer> h = assertCallCount.get(thread);
+        if (h.containsKey(id)) {
+            int k = h.get(id);
+            h.put(id, k + 1);
+        } else {
+            String semaphore = "";
+            if (getLogMethod(thread)) {
+                try {
+                    h.put(id, 1);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("$$$\n");
+                    stringBuilder.append("SA"); //start logging
+                    stringBuilder.append(simpleSeparator);
+                    stringBuilder.append(id);
+
+                    String string = stringBuilder.toString();
+                    PrintWriter fileWriter = getFileWriter(thread);
+                    semaphore = fileWriter.toString() + fileWriter.hashCode();
+                    fileWriter.append(string);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    startLogMethod(thread);
+                    releaseFileWriter(semaphore);
+                }
+            }
+        }
+    }
+
+    protected void writeStartLogging(Thread thread, String id) {
         String semaphore = "";
         if (getLogMethod(thread)) {
             try {
@@ -144,6 +193,7 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
+
     public void writeVar(int id, Thread thread, String methodSignatureId, Object... var) {
         String semaphore = "";
         if (getLogMethod(thread) && log(thread)) {
@@ -157,8 +207,8 @@ public class InstruVerboseLog extends InstruLogWriter {
                 string.append(simpleSeparator);
                 string.append(methodSignatureId);
 
-                String varsString = buildVars(thread, id+methodSignatureId, var);
-                if(varsString.isEmpty())
+                String varsString = buildVars(thread, id + methodSignatureId, var);
+                if (varsString.isEmpty())
                     return;
 
                 string.append(varsString);
@@ -190,9 +240,9 @@ public class InstruVerboseLog extends InstruLogWriter {
                     value = vars[i + 1].toString();
                 }
 
-                String previousValue = previousVars.get(methodSignatureId+":"+varName);
-                if(!value.equals(previousValue)) {
-                    previousVars.put(methodSignatureId+":"+varName,value);
+                String previousValue = previousVars.get(methodSignatureId + ":" + varName);
+                if (!value.equals(previousValue)) {
+                    previousVars.put(methodSignatureId + ":" + varName, value);
 
                     varsString.append(separator);
                     varsString.append(varName);
@@ -205,7 +255,6 @@ public class InstruVerboseLog extends InstruLogWriter {
         startLogMethod(thread);
         return varsString.toString();
     }
-
 
 
     public void writeException(int id, Thread thread, String className, String methodSignature, Object exception) {
@@ -268,11 +317,30 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
+    @Override
+    public void writeTestFinish() {
+        for (Thread thread : fileWriters.keySet()) {
+            String semaphore = "";
+            try {
+                PrintWriter flw = getFileWriter(thread);
+                //Writes the subtotal of transplantation points called
+                if (transplantPointCallCount.containsKey(thread)) {
+                    writeSubTotal("TPC", flw, transplantPointCallCount.get(thread));
+                }
+                //Writes the subtotal of assertions called
+                if (assertCallCount.containsKey(thread)) {
+                    writeSubTotal("ASC", flw, assertCallCount.get(thread));
+                }
+                semaphore = flw.toString() + flw.hashCode();
+                flw.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            releaseFileWriter(semaphore);
+        }
+    }
+
     public void close() {
-
-        //Writes the Source position calls to file
-        writeSourcePositionCallToFile("sourcePositionCall.log");
-
         for (Thread thread : fileWriters.keySet()) {
             String semaphore = "";
             try {
@@ -284,6 +352,29 @@ public class InstruVerboseLog extends InstruLogWriter {
             }
             releaseFileWriter(semaphore);
         }
+    }
+
+    /**
+     * Writes a sub-total count to the PrintWriter
+     *
+     * @param flw PrintWriter where the data is going to be printed
+     * @param map Map containing the subtotals
+     */
+    private void writeSubTotal(String subTotalId, PrintWriter flw, HashMap<String, Integer> map) {
+        StringBuilder sb = new StringBuilder();
+
+        for (Map.Entry<String, Integer> e : map.entrySet()) {
+            if ( e.getValue() > 1 ) {
+                //Don't spend more space in login an occurrence of something we already log
+                sb.append("\n").
+                        append(subTotalId).
+                        append(simpleSeparator).
+                        append(e.getKey()).
+                        append(simpleSeparator).
+                        append(e.getValue());
+            }
+        }
+        flw.write(sb.toString());
     }
 
     protected Map<String, String> loadIdMap(String file) throws IOException {
@@ -303,7 +394,7 @@ public class InstruVerboseLog extends InstruLogWriter {
     protected synchronized PrintWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (!fileWriters.containsKey(thread)) {
             String fileName = getThreadLogFilePath(thread) + "_" + System.currentTimeMillis();
-            previousVarLog.put(thread,new HashMap<String, String>());
+            previousVarLog.put(thread, new HashMap<String, String>());
             PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
             fileWriters.put(thread, f);
             semaphores.put(f.toString() + f.hashCode(), new Semaphore(1));
@@ -312,7 +403,6 @@ public class InstruVerboseLog extends InstruLogWriter {
         semaphores.get(f.toString() + f.hashCode()).tryAcquire(50, TimeUnit.MILLISECONDS);
         return f;
     }
-
 
 
     protected void releaseFileWriter(String id) {

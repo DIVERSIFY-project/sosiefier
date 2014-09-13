@@ -127,11 +127,6 @@ public class FrmMain {
             }
             List<String> keyList = new ArrayList<>(transfPerPosition.keySet());
             Collections.sort(keyList);
-            StringBuilder sbCommon = new StringBuilder(keyList.get(0));
-            for (String k : keyList) {
-                StringBuilder sb = new StringBuilder(k);
-
-            }
             for (String k : keyList) {
                 DefaultMutableTreeNode tp = new DefaultMutableTreeNode(k);
                 tp.setUserObject(transfPerPosition.get(k));

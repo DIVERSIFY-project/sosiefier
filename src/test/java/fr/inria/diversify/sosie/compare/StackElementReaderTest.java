@@ -7,6 +7,7 @@ import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTraceVariableOb
 import fr.inria.diversify.sosie.logger.InstruBinaryLog;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -18,6 +19,8 @@ import java.util.Map;
 /**
  * Created by marodrig on 01/07/2014.
  */
+
+@Ignore
 public class StackElementReaderTest {
 
     private void buildDataAndReader(InstruBinaryLog log, Thread t) {

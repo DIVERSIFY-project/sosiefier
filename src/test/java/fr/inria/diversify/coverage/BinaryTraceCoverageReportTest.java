@@ -1,5 +1,6 @@
 package fr.inria.diversify.coverage;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
@@ -16,6 +17,7 @@ public class BinaryTraceCoverageReportTest {
     }
 
     @Test
+    @Ignore
     public void testCreateCoverage() throws Exception {
         BinaryTraceCoverageReport report = new BinaryTraceCoverageReport(getResourcePath("tracebinarylog.log"));
         report.create();
