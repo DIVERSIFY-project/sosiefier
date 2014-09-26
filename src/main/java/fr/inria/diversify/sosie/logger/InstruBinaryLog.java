@@ -59,14 +59,14 @@ public class InstruBinaryLog extends InstruLogWriter {
     private int lastHashEntry = 0;
 
     //List of new hash entries before the last call of a write method
-    ArrayList<HashMap.Entry<String, Integer>> lastSignatures;
+    ArrayList<Map.Entry<String, Integer>> lastSignatures;
 
     public InstruBinaryLog(String logDir) {
         super(logDir);
 
         //ATTENTION!!!: Remember we are copying these files to another source file
         //so they must be maintain in java 1.5
-        lastSignatures = new ArrayList<HashMap.Entry<String, Integer>>();
+        lastSignatures = new ArrayList<Map.Entry<String, Integer>>();
         idMap = new HashMap<String, Integer>();
         currentId = 0;
         methodId = 0;
@@ -77,7 +77,7 @@ public class InstruBinaryLog extends InstruLogWriter {
     protected void writeSignatures(DataOutputStream os) {
         try {
             os.writeInt(lastSignatures.size());
-            for (HashMap.Entry<String, Integer> e : lastSignatures) {
+            for (Map.Entry<String, Integer> e : lastSignatures) {
                 os.writeUTF(e.getKey());
                 os.writeInt(e.getValue());
             }
@@ -355,7 +355,7 @@ public class InstruBinaryLog extends InstruLogWriter {
         if (!idMap.containsKey(signature)) {
             //Add the entry to log it now
             currentId++;
-            HashMap.Entry<String, Integer> e = new HashMap.SimpleImmutableEntry<String, Integer>(signature, currentId);
+            Map.Entry<String, Integer> e = new HashMap.SimpleImmutableEntry<String, Integer>(signature, currentId);
             lastSignatures.add(e);
             //The map to know all the entries
             idMap.put(signature, currentId);
