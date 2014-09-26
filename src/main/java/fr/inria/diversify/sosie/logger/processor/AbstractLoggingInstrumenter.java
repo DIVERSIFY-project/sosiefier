@@ -3,7 +3,6 @@ package fr.inria.diversify.sosie.logger.processor;
 import fr.inria.diversify.transformation.Transformation;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtBreak;
-import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.*;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -54,13 +53,17 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
         return ret;
     }
 
-    protected String idFor(String string) {
-        if (!idMap.containsKey(string))
-            idMap.put(string, idMap.size() + "");
+    protected String idFor(String string, String anotation) {
+        String key = string + " " + anotation;
+        if (!idMap.containsKey(key))
+            idMap.put(key, Integer.toString(idMap.size()));
 
-        return idMap.get(string);
+        return idMap.get(key);
     }
 
+    protected String idFor(String string) {
+        return idFor(string, "");
+    }
 
 
     public static void writeIdFile(String dir) throws IOException {
