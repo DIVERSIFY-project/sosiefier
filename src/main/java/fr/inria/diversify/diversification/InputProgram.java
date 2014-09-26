@@ -7,7 +7,6 @@ import fr.inria.diversify.codeFragmentProcessor.KnownTransfStatementProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.transformation.TransformationParserException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -16,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
+import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.cu.SourcePosition;
@@ -28,7 +28,7 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
 import java.util.*;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 /**
  * The InputProgram class encapsulates all the known information of the program being sosiefiecated
@@ -282,14 +282,6 @@ public class InputProgram {
      * @return
      */
     public synchronized CodeFragment getCodeFragment(String position, String source) {
-
-        for (CodeFragment codeFragment : getCodeFragments()) {
-            if (codeFragment.positionString().equals(position)) {
-                return codeFragment;
-            }
-        }
-
-        //Not found using position, try to find it using source
         for (CodeFragment codeFragment : getCodeFragments()) {
             position = position.split(":")[0];
             if (codeFragment.positionString().startsWith(position)) {
@@ -375,18 +367,26 @@ public class InputProgram {
 
     public synchronized List<CtElement> getAllElement(Class cl) {
 
+
         if (!typeToObject.containsKey(cl)) {
             QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
+            List<CtElement> elements = new ArrayList<>();
+            for (CtElement e : getRoots()) {
+                e.accept(query);
+                elements.addAll(query.getResult());
+            }
+            /*
             getRoots().stream()
                     .flatMap(root -> {
                         root.accept(query);
                         return query.getResult().stream();
                     })
                     .collect(Collectors.toList());
-
-            typeToObject.put(cl, query.getResult());
+            */
+            typeToObject.put(cl, elements);
         }
         return typeToObject.get(cl);
+        // return null;
     }
 
 
