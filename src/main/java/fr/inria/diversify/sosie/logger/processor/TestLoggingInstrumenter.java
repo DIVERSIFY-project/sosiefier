@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 import fr.inria.diversify.transformation.Transformation;
+import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
@@ -19,13 +20,14 @@ import java.util.List;
 public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMethod> {
 
     public TestLoggingInstrumenter() {
-        super(new ArrayList<>());
+        super(new ArrayList<Transformation>());
     }
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
+        /*
         if(!(isTestClass(candidate.getDeclaringType().getReference())))
-            return false;
+            return false;*/
 
         if(candidate.isImplicit()
                 || candidate.getBody() == null
@@ -58,9 +60,13 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
     @Override
     public void process(CtMethod element) {
         CtStatement firstStmt = element.getBody().getStatement(0);
-        String snippet = "\t\t"+
-                getLogName()+ ".writeTestStart(Thread.currentThread(),\""
-                + element.getPosition().getCompilationUnit().getMainType().getQualifiedName() +"."+element.getSimpleName() + "\");\n";
+
+        String testName =  element.getPosition().getCompilationUnit().getMainType().getQualifiedName()
+                + "." + element.getSimpleName();
+        idFor(testName, "TEST"); //Save the id of the test to be able to count all processed tests
+
+        String snippet = "\t\t" + getLogName() + ".writeTestStart(Thread.currentThread(),\"" + testName + "\");\n";
+
         SourcePosition sp = firstStmt.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
 
@@ -72,8 +78,23 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
 
         compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
 
-        CompilationUnit cu = element.getPosition().getCompilationUnit();
-        int pos = element.getBody().getPosition().getSourceEnd();
-        cu.addSourceCodeFragment(new SourceCodeFragment(pos, getLogName() + ".writeTestFinish();\n", 0));
+        //Search the return statement
+        boolean returnSt = false;
+        List<CtStatement> sts = element.getBody().getStatements();
+        for ( CtStatement st :  sts ) {
+            if  ( st instanceof CtReturn ) {
+                CompilationUnit cu = st.getPosition().getCompilationUnit();
+                int pos = st.getPosition().getSourceStart();
+                cu.addSourceCodeFragment(new SourceCodeFragment(pos, getLogName() + ".writeTestFinish();\n", 0));
+                returnSt = true;
+            }
+        }
+
+        if ( returnSt == false ) {
+            CompilationUnit cu = element.getPosition().getCompilationUnit();
+            int pos = element.getBody().getPosition().getSourceEnd();
+            cu.addSourceCodeFragment(new SourceCodeFragment(pos, getLogName() + ".writeTestFinish();\n", 0));
+        }
+
     }
 }
