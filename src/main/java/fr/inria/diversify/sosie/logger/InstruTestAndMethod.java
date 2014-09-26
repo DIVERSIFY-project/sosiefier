@@ -46,7 +46,7 @@ public class InstruTestAndMethod {
         Instru instru;
 
         if ( intruTransplantPoint ) {
-            Factory factory = new SpoonMetaFactory().buildNewFactory(project + "/" + src, 5);
+            Factory factory = new SpoonMetaFactory().buildNewFactory(project, 7);
 
             InputProgram inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
