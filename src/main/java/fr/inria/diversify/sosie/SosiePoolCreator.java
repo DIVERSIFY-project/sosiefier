@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
@@ -59,7 +60,13 @@ public class SosiePoolCreator {
             // Overwrite in case the user has changed this.
             getProperties().setProperty("status", "0");
             parser.setFilterProperties(properties);
-            Collection<Transformation> ts = parser.parseDir(inputProgram.getPreviousTransformationsPath());
+            Collection<Transformation> ts;
+            File f = new File(inputProgram.getPreviousTransformationsPath());
+            if ( f.isDirectory() ) {
+                ts = parser.parseDir(inputProgram.getPreviousTransformationsPath());
+            } else {
+                ts = parser.parseFile(f);
+            }
 
             int index = 0;
             JSONArray array = new JSONArray();
