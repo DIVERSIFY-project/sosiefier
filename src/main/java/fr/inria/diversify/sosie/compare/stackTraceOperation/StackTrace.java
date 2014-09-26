@@ -69,12 +69,12 @@ public class StackTrace {
 
     public StackTraceCall getTop() {
         if(stackTraceCalls.isEmpty())
-            return new StackTraceCall(0, 0, new HashMap<>());
+            return new StackTraceCall(0, 0, new HashMap<Integer, String>());
         return stackTraceCalls.peek();
     }
     public StackTraceCall getTop2() {
         if (stackTraceCalls.size() - 2 < 0)
-            return new StackTraceCall(0, 0, new HashMap<>());
+            return new StackTraceCall(0, 0, new HashMap<Integer, String>());
         return stackTraceCalls.get(stackTraceCalls.size() - 2);
     }
 
