@@ -1,5 +1,6 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -16,13 +17,13 @@ public class InputProgramTest {
     }
 
     @Test
-    @Ignore
     public void testGetCodeFragments() throws Exception {
-        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock/src/main"), 5);
 
+        MavenDependencyResolver dr = new MavenDependencyResolver();
+        dr.DependencyResolver(getResourcePath("easymock-light-3.2/pom.xml"));
         InputProgram inputProgram = new InputProgram();
-        inputProgram.setFactory(factory);
-        inputProgram.setSourceCodeDir(getResourcePath("easymock"));
+        inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2/src/main"), 5));
+        inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
 
         Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
     }
