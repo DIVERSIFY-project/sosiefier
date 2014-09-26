@@ -25,7 +25,7 @@ public class AssertInstrumenter extends AbstractLoggingInstrumenter<CtInvocation
     protected static Map<Integer,String> idMap = new HashMap();
 
     public AssertInstrumenter() {
-        super(new ArrayList<>());
+        super(new ArrayList<Transformation>());
     }
 
     @Override
