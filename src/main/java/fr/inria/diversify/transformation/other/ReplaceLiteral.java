@@ -24,6 +24,11 @@ public class ReplaceLiteral extends AbstractTransformation {
     protected CtLiteral transplant;
     protected CtLiteral transplantationPoint;
 
+    @Override
+    public String getTransformationString() throws Exception {
+        return "";
+    }
+
     public void restore(String srcDir) throws Exception {
         if (parent != null) {
             parent.removeSourceCode();
