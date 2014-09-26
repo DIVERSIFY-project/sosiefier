@@ -5,6 +5,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -14,6 +16,10 @@ import java.util.Properties;
  * Created by marodrig on 25/07/2014.
  */
 public class CleanTransformations {
+
+    private HashMap<String, Integer> classNumber;
+
+    private Boolean countClasses = true;
 
     /**
      * Test if two transformations defined by their JSONObjects are equals
@@ -31,6 +37,9 @@ public class CleanTransformations {
     }
 
     private void clean(String input, String output) throws Exception {
+
+        classNumber = new HashMap<>();
+
         StringBuilder sb = new StringBuilder();
         BufferedReader reader = new BufferedReader(new FileReader(input));
         String line = null;
@@ -40,6 +49,7 @@ public class CleanTransformations {
         JSONArray array = new JSONArray(sb.toString());
 
         JSONArray nonRepeated = new JSONArray();
+        int index = 0;
         for (int i = 0; i < array.length(); i++) {
             boolean insert = true;
 
@@ -63,15 +73,35 @@ public class CleanTransformations {
                                 b.getJSONObject("transplant"));
                     }
                 }
+
+
             }
 
             if (insert) {
+                JSONObject obj = array.getJSONObject(i);
+                index++;
+                obj.put("tindex", index);
                 nonRepeated.put(array.get(i));
+
+                //Count the classes.
+                if ( countClasses ) {
+                    int k = 1;
+                    String name = obj.getString("name");
+                    if ( classNumber.containsKey(name) ) {
+                        k = classNumber.get(name);
+                        k++;
+                    }
+                    classNumber.put(name, k);
+                }
             }
         }
 
         System.out.println("Repeated length: " + array.length());
         System.out.println("Non repeated length: " + nonRepeated.length());
+
+        for (Map.Entry<String, Integer> entry : classNumber.entrySet()) {
+            System.out.println(entry.getKey() + " :" + entry.getValue());
+        }
 
         FileWriter fw = new FileWriter(output);
         nonRepeated.write(fw);
@@ -88,8 +118,8 @@ public class CleanTransformations {
         c.clean(path, outputPath)
 */
         CleanTransformations c = new CleanTransformations();
-        c.clean("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\easymock3.2.json",
-                "C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\easymock3.2-non-rep.json");
+        c.clean("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\commons-lang.json",
+                "C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\commons-lang-index-non-rep.json");
     }
 
 }
