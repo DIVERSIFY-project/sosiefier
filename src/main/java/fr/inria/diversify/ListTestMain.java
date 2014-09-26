@@ -1,7 +1,7 @@
 package fr.inria.diversify;
 
 import fr.inria.diversify.coverage.TestProcessor;
-import fr.inria.diversify.util.DiversifyProperties;
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import spoon.compiler.SpoonCompiler;
@@ -18,6 +18,8 @@ import java.util.*;
 
 public class ListTestMain {
 
+    private final InputConfiguration inputConfigureation;
+
     public static void main(String[] args) throws Exception {
 //        new ListTestMain(args[0]);
 
@@ -32,21 +34,21 @@ public class ListTestMain {
     }
 
     public ListTestMain(String propertiesFile) throws Exception {
-        new DiversifyProperties(propertiesFile);
+        inputConfigureation = new InputConfiguration(propertiesFile);
         initLogLevel();
-        if(DiversifyProperties.getProperty("builder").equals("maven")) {
+        if(inputConfigureation.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
-            t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
+            t.DependencyResolver(inputConfigureation.getProperty("project") + "/pom.xml");
         }
         initSpoon();
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException, IOException {
-        String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
-        srcDirectory += System.getProperty("path.separator")+DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("testSrc");
+        String srcDirectory = inputConfigureation.getProperty("project") + "/" + inputConfigureation.getProperty("src");
+        srcDirectory += System.getProperty("path.separator")+inputConfigureation.getProperty("project") + "/" + inputConfigureation.getProperty("testSrc");
 
         StandardEnvironment env = new StandardEnvironment();
-        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
+        int javaVersion = Integer.parseInt(inputConfigureation.getProperty("javaVersion"));
         env.setComplianceLevel(javaVersion);
         env.setVerbose(true);
         env.setDebug(true);
@@ -73,7 +75,7 @@ public class ListTestMain {
     }
 
     protected void initLogLevel() {
-        int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
+        int level = Integer.parseInt(inputConfigureation.getProperty("logLevel"));
         Log.set(level);
     }
 
