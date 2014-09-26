@@ -6,7 +6,6 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
-import org.hamcrest.Matcher;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.factory.Factory;
@@ -100,7 +99,7 @@ public class Instru {
     protected void writeId() throws IOException {
 
         TestLoggingInstrumenter.writeIdFile(outputDirectory);
-        SimpleAssertCounter.writeIdFile(outputDirectory);
+        SimpleAssertInvocationCounter.writeIdFile(outputDirectory);
         TransplantationPointCallCountInstrumenter.writeIdFile(outputDirectory);
 
         tpcInstrumenter.writeIdMapToFile(outputDirectory + "/tpcid.json");
@@ -168,6 +167,7 @@ public class Instru {
         if(intruAssert) {
             applyProcessor(testFactorty, new AssertInstrumenter());
         } else if ( instruCountAssertions ) {
+            applyProcessor(testFactorty, new SimpleAssertInvocationCounter());
             applyProcessor(testFactorty, new SimpleAssertCounter());
         }
         if(intruNewTest) {
