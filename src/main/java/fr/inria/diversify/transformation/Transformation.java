@@ -31,7 +31,8 @@ public interface Transformation {
     public String methodLocationName();
     public String stmtType();
 
-    public default String getTransformationString() throws Exception {return "";}
+    //public default String getTransformationString() throws Exception {return "";}
+    public String getTransformationString() throws Exception;
 
     public int line();
 
