@@ -16,6 +16,11 @@ import java.util.List;
  */
 public class BytecodeDelete extends BytecodeTransformation {
 
+    @Override
+    public String getTransformationString() throws Exception {
+        return "";
+    }
+
     public BytecodeDelete(CtMethod method, int index, List<CtMethod> methods)  {
         methodLocation = method;
         opcodeIndex = index;
