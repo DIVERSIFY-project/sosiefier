@@ -106,6 +106,10 @@ public abstract class CodeFragment {
     }
 
     public void replaceVar(CodeFragment other, Map<String,String> varMapping) {
+        if ( varMapping == null || varMapping.size() == 0 ) {
+            Log.debug("No replacement where made, varMapping null or zero size");
+            return;
+        }
         Log.debug("replace variable");
         Log.debug("avant:");
         Log.debug("{}",codeFragment);
