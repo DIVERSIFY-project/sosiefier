@@ -2,10 +2,10 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import spoon.compiler.SpoonCompiler;
@@ -27,38 +27,41 @@ import java.util.*;
  * Time: 2:03 PM
  */
 public class SamplingMain {
+    private InputConfiguration inputConfiguration;
+
     protected CodeFragmentList codeFragments;
 
     InputProgram inputProgram;
 
     public static void main(String[] args) throws Exception {
-        new DiversifyProperties(args[0]);
-        new SamplingMain();
+        new SamplingMain(args);
     }
 
-    public SamplingMain() throws Exception {
+    public SamplingMain(String[] args) throws Exception {
         initLogLevel();
 
-        if(DiversifyProperties.getProperty("builder").equals("maven")) {
+        inputConfiguration = new InputConfiguration(args[0]);
+
+        if(inputConfiguration.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
-            t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
+            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
         }
 
         initSpoon();
         TransformationParser tf = new TransformationParser(true, inputProgram);
-        Collection<Transformation> transformations = tf.parseDir(DiversifyProperties.getProperty("transformation.directory"));
+        Collection<Transformation> transformations = tf.parseDir(inputConfiguration.getProperty("transformation.directory"));
         Set<Transformation> set = new HashSet<Transformation>(transformations);
 
         Sampling s = new Sampling(set, 500);
 
-        s.splitAndWrite(500, DiversifyProperties.getProperty("result"));
+        s.splitAndWrite(500, inputConfiguration.getProperty("result"));
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
+        String srcDirectory = inputConfiguration.getProperty("project") + "/" + inputConfiguration.getProperty("src");
 
         StandardEnvironment env = new StandardEnvironment();
-        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
+        int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion"));
         env.setComplianceLevel(javaVersion);
         env.setVerbose(true);
         env.setDebug(true);
@@ -78,7 +81,7 @@ public class SamplingMain {
             e.printStackTrace();
         }
         ProcessingManager pm = new QueueProcessingManager(factory);
-        Class classz = Class.forName(DiversifyProperties.getProperty("processor"));
+        Class classz = Class.forName(inputConfiguration.getProperty("processor"));
         AbstractCodeFragmentProcessor processor =  (AbstractCodeFragmentProcessor)classz.newInstance();
         pm.addProcessor(processor);
         pm.process();
@@ -101,20 +104,20 @@ public class SamplingMain {
 
         //TODO: See hot to get rid of the Properties static
         inputProgram.setTransformationPerRun(
-                Integer.parseInt(DiversifyProperties.getProperty("transformation.nb", "1")));
+                Integer.parseInt(inputConfiguration.getProperty("transformation.nb", "1")));
 
         //Path to pervious transformations made to this input program
         inputProgram.setPreviousTransformationsPath(
-                DiversifyProperties.getProperty("transformation.directory"));
+                inputConfiguration.getProperty("transformation.directory"));
 
-        inputProgram.setClassesDir(DiversifyProperties.getProperty("project") + "/" +
-                DiversifyProperties.getProperty("classes"));
+        inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
+                inputConfiguration.getProperty("classes"));
 
-        inputProgram.setCoverageDir(DiversifyProperties.getProperty("jacoco"));
+        inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
     }
 
     protected void initLogLevel() {
-        int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
+        int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
         Log.set(level);
     }
 }
