@@ -34,13 +34,13 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
                 if (!positions.contains(s)) {
                     positions.add(s);
                 }
-                s = obj.getJSONObject("transplant").getString("sourceCode");
-                if (!source.contains(s)) {
-                    source.add(s);
-                }
                 String klass = s.split(":")[0];
                 if ( !classNames.contains(klass) ) {
                     classNames.add(klass);
+                }
+                s = obj.getJSONObject("transplant").getString("sourceCode");
+                if (!source.contains(s)) {
+                    source.add(s);
                 }
             }
             if (obj.has("transplantationPoint")) {
@@ -48,13 +48,13 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
                 if (!positions.contains(s)) {
                     positions.add(s);
                 }
-                s = obj.getJSONObject("transplantationPoint").getString("sourceCode");
-                if (!source.contains(s)) {
-                    source.add(s);
-                }
                 String klass = s.split(":")[0];
                 if ( !classNames.contains(klass) ) {
                     classNames.add(klass);
+                }
+                s = obj.getJSONObject("transplantationPoint").getString("sourceCode");
+                if (!source.contains(s)) {
+                    source.add(s);
                 }
             }
         }
@@ -90,7 +90,7 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
                 count++;
                 CodeFragmentEqualPrinter pp = new CodeFragmentEqualPrinter(e.getFactory().getEnvironment());
                 e.accept(pp);
-                if (source.contains(pp.toString())) {
+                if (source.contains(pp.toString().trim())) {
                     return true;
                 }
             } catch (RuntimeException ex) {
