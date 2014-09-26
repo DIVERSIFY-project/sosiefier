@@ -95,7 +95,7 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
             try {
                 CompilationUnit cu = e.getPosition().getCompilationUnit();
                 String posId = Integer.toString(elementsMap.get(e.getPosition().toString()).transformations.get(0).getIndex());
-                posId = idFor(posId);
+                posId = idFor(posId, "POT");
                 String probeStr = getLogName() + ".writeSourcePositionCall(\"" + posId + "\")";
                 stop = true;
                 if (e != null) {
