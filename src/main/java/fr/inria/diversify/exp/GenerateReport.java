@@ -8,7 +8,6 @@ import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,14 +31,12 @@ public class GenerateReport {
 
     public GenerateReport(String propertiesFile) throws Exception {
 
-            inputConfiguration = new InputConfiguration(propertiesFile);
-
-            new DiversifyProperties(inputConfiguration);
+        inputConfiguration = new InputConfiguration(propertiesFile);
 
         initLogLevel();
-        if (DiversifyProperties.getProperty("builder").equals("maven")) {
+        if (inputConfiguration.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
-            t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
+            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
         }
         initSpoon();
         buildReport();
@@ -48,12 +45,12 @@ public class GenerateReport {
 
     protected void initSpoon() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         Factory factory = new SpoonMetaFactory().buildNewFactory(inputConfiguration.getProperty("project") + "/" +
-                                                                         inputConfiguration.getProperty("src"), Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
+                inputConfiguration.getProperty("src"), Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
         initInputProgram(factory);
     }
 
     protected void initLogLevel() {
-        int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
+        int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
         Log.set(level);
     }
 
@@ -61,20 +58,20 @@ public class GenerateReport {
         inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
 
-        inputProgram.setClassesDir(DiversifyProperties.getProperty("project") + "/" +
-                                           inputConfiguration.getProperty("classes"));
+        inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
+                inputConfiguration.getProperty("classes"));
     }
 
-  protected void buildReport() throws Exception {
+    protected void buildReport() throws Exception {
         List<JSONObject> jsonReport = loadJSONReport();
         List<String> diffVar = loadDiffVar();
 
-        for(String var: diffVar) {
+        for (String var : diffVar) {
             String sosie = var.split("::")[0];
             String point = var.split("::")[1];
-            for(JSONObject object : jsonReport) {
+            for (JSONObject object : jsonReport) {
                 List<String> tests = contain(sosie, point, object);
-                if(!tests.isEmpty()) {
+                if (!tests.isEmpty()) {
                     writeReportOf(sosie, point, tests);
                 }
             }
@@ -82,36 +79,36 @@ public class GenerateReport {
     }
 
     protected void writeReportOf(String sosie, String point, List<String> tests) throws Exception {
-        String trans = inputConfiguration.getProperty("sosieDir") +"/"+sosie+"/trans.json";
+        String trans = inputConfiguration.getProperty("sosieDir") + "/" + sosie + "/trans.json";
 
-        String result = "sosie: "+sosie +"\npoint:"+point +"\ntest";
+        String result = "sosie: " + sosie + "\npoint:" + point + "\ntest";
 
-        for(String test: tests) {
-            result += "\n\t"+test;
+        for (String test : tests) {
+            result += "\n\t" + test;
         }
 
-           int i = 0;
-            for (Transformation t : loadFromFile(new File(trans))) {
-                i++;
-                result += "\n\nTransformation: "+i+":\n"+transformationDetail(t);
+        int i = 0;
+        for (Transformation t : loadFromFile(new File(trans))) {
+            i++;
+            result += "\n\nTransformation: " + i + ":\n" + transformationDetail(t);
 
         }
 
-        Writer writer = new FileWriter(inputConfiguration.getProperty("resultDir")+"/"+sosie+"_"+point);
+        Writer writer = new FileWriter(inputConfiguration.getProperty("resultDir") + "/" + sosie + "_" + point);
         writer.write(result);
         writer.close();
     }
 
-    protected String  transformationDetail(Transformation transformation) throws Exception {
-        String detail ="";
-        detail+= "package: " + transformation.packageLocationName();
-        detail += "\nclass: "+ transformation.classLocationName();
+    protected String transformationDetail(Transformation transformation) throws Exception {
+        String detail = "";
+        detail += "package: " + transformation.packageLocationName();
+        detail += "\nclass: " + transformation.classLocationName();
 
         detail += "\nname: " + transformation.getName();
         detail += "\ntype: " + transformation.getType();
 
         try {
-            detail += "\n"+transformation.getTransformationString();
+            detail += "\n" + transformation.getTransformationString();
         } catch (Exception e) {
             Log.debug("");
         }
@@ -121,11 +118,11 @@ public class GenerateReport {
 
     protected List<String> contain(String sosie, String point, JSONObject object) throws JSONException {
         List<String> list = new ArrayList<>();
-        if(object.get("sosie").equals(sosie)) {
+        if (object.get("sosie").equals(sosie)) {
             Map<String, List<String>> map = parseMap(object.getJSONObject("diff"));
 
-            for(String key : map.keySet()) {
-                if(map.get(key).contains(point)) {
+            for (String key : map.keySet()) {
+                if (map.get(key).contains(point)) {
                     list.add(key);
                 }
             }
@@ -137,14 +134,14 @@ public class GenerateReport {
         Map<String, List<String>> map = new HashMap<>();
 
         Iterator it = o.keys();
-       while(it.hasNext()) {
-           String key = (String) it.next();
-           List<String> list = new ArrayList<>();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            List<String> list = new ArrayList<>();
             int size = o.getJSONArray(key).length();
-            for(int i = 0; i < size; i++) {
+            for (int i = 0; i < size; i++) {
                 list.add(o.getJSONArray(key).getString(i));
             }
-           map.put(key, list);
+            map.put(key, list);
         }
 
         return map;
@@ -155,8 +152,8 @@ public class GenerateReport {
 
         File file = new File(inputConfiguration.getProperty("reportDir"));
 
-        for(File f : file.listFiles()) {
-            if(f.getName().endsWith("_good.json")) {
+        for (File f : file.listFiles()) {
+            if (f.getName().endsWith("_good.json")) {
                 BufferedReader br = new BufferedReader(new FileReader(f));
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
