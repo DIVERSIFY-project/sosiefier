@@ -7,10 +7,12 @@ import spoon.reflect.code.CtReturn;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +37,7 @@ public class EmptyMethodBody extends SpoonTransformation<CtMethod, CtElement> {
         Factory factory = transformationPoint.getFactory();
         CtMethod newMethod = factory.Core().clone(transformationPoint);
 
-        newMethod.setAnnotations(new ArrayList<>());
+        newMethod.setAnnotations(new ArrayList<CtAnnotation<? extends Annotation>>());
 
         CtBlock body = factory.Core().createBlock();
         body.setParent(newMethod);
