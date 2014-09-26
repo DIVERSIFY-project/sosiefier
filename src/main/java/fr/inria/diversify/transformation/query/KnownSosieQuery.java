@@ -129,16 +129,19 @@ public class KnownSosieQuery extends TransformationQuery {
         //Order the sosies from less covered to more covered. This way we increases the chances that an uniformly
         //distributed selection covers most of the clients
         if (coveragePresent) {
-            Collections.sort(sosies, (o1, o2) -> {
-                int sizeDiff = o1.coverage.size() - o2.coverage.size();
-                if (sizeDiff == 0) {
-                    int i = 0;
-                    while (i < o1.coverage.size() && o1.coverage.get(i) - o1.coverage.get(i) == 0) {
-                        i++;
+            Collections.sort(sosies, new Comparator<SosieWithCoverage>() {
+                @Override
+                public int compare(SosieWithCoverage o1, SosieWithCoverage o2) {
+                    int sizeDiff = o1.coverage.size() - o2.coverage.size();
+                    if (sizeDiff == 0) {
+                        int i = 0;
+                        while (i < o1.coverage.size() && o1.coverage.get(i) - o1.coverage.get(i) == 0) {
+                            i++;
+                        }
+                        return i >= o1.coverage.size() ? sizeDiff : o1.coverage.get(i) - o1.coverage.get(i);
                     }
-                    return i >= o1.coverage.size() ? sizeDiff : o1.coverage.get(i) - o1.coverage.get(i);
+                    return sizeDiff;
                 }
-                return sizeDiff;
             });
         }
 
@@ -188,6 +191,7 @@ public class KnownSosieQuery extends TransformationQuery {
 
     /**
      * Finds an sosie transformation to increment (inherit from)
+     *
      * @param nb Current transformation size
      * @return An integer array with the index of the single-transformations forming the multi-transformation
      * @throws QueryException
@@ -215,7 +219,7 @@ public class KnownSosieQuery extends TransformationQuery {
                     }
                 } else if (prevRecord.getParent() != null) {
 
-                    if ( prevRecord.getParent().getPrevious() == null ) {
+                    if (prevRecord.getParent().getPrevious() == null) {
                         //Special case when we reach the end of the previous sosie list
                         // and we are still searching for new sosies
                         throw new QueryException(QueryException.Reasons.UNABLE_TO_FIND_SOSIE_PARENT);
@@ -259,9 +263,10 @@ public class KnownSosieQuery extends TransformationQuery {
 
     /**
      * Completes the incremental transformation process
-     * @param nb Current transformation size
+     *
+     * @param nb      Current transformation size
      * @param indexes Indexes of the transformations found
-     * @param tf Transformations found
+     * @param tf      Transformations found
      * @param f
      */
     private void completeIncrementalTransformation(int nb, Integer[] indexes,
@@ -273,7 +278,7 @@ public class KnownSosieQuery extends TransformationQuery {
             prevRecord = new TransformationFoundRecord(indexes, prevRecord, null);
         } else if (prevRecord.getParent() == null) {
             prevRecord = new TransformationFoundRecord(indexes, null, prevRecord);
-            if ( seriesIncrement ){
+            if (seriesIncrement) {
                 lastIncrementalSeries += 1;
             }
             prevRecord.setIncrementalSeries(lastIncrementalSeries);
