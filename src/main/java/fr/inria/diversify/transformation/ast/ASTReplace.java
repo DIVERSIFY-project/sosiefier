@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,8 +78,8 @@ public class ASTReplace extends ASTTransformation {
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
 
-
-        if (DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
+        String processor = getInputConfiguration() == null ?  "" : getInputConfiguration().getProperty("processor");
+        if (processor.equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** replace \n", 0));
             compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n" +
                     getTransplant().codeFragmentString() + "\n", 0));

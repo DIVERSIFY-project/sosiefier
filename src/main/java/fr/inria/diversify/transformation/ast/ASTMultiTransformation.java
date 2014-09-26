@@ -17,6 +17,11 @@ import java.util.List;
 public class ASTMultiTransformation extends AbstractTransformation {
     protected List<Transformation> transformations;
 
+    @Override
+    public String getTransformationString() throws Exception {
+        return "";
+    }
+
     public ASTMultiTransformation(List<Transformation> transformations) {
         name = "multi";
         type = "adrStmt";
