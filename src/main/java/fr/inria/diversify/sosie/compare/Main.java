@@ -1,9 +1,9 @@
 package fr.inria.diversify.sosie.compare;
 
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.sosie.compare.diff.CallDiff;
 import fr.inria.diversify.sosie.compare.diff.Diff;
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,29 +24,34 @@ public class Main {
     private String dirOriginal;
     private String diffToExclude;
     private String dirSosie;
+    private InputConfiguration inputConfiguration;
 
     public static void main(String[] args) throws Exception {
-        new DiversifyProperties(args[0]);
+
         Main clm = new Main();
-        clm.init();
+        clm.init(args);
     }
 
-    protected void init() throws Exception {
+
+    protected void init(String[] args) throws Exception {
+
+        inputConfiguration = new InputConfiguration(args[0]);
+
         initLogLevel();
 //        try {
-//            if(DiversifyProperties.getProperty("builder").equals("maven")) {
+//            if(inputConfiguration.getProperty("builder").equals("maven")) {
 //                MavenDependencyResolver t = new MavenDependencyResolver();
-//                t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
+//                t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
 //            }
 //        } catch (Exception e) {}
 
 //        initSpoon();
 
-        dirOriginal = DiversifyProperties.getProperty("dirOriginal");
-        dirSosie = DiversifyProperties.getProperty("dirSosie");
-        diffToExclude = DiversifyProperties.getProperty("excludeDiff");
+        dirOriginal = inputConfiguration.getProperty("dirOriginal");
+        dirSosie = inputConfiguration.getProperty("dirSosie");
+        diffToExclude = inputConfiguration.getProperty("excludeDiff");
 
-        if(DiversifyProperties.getProperty("logTrace").equals("same"))
+        if(inputConfiguration.getProperty("logTrace").equals("same"))
             same();
         else
             diff();
@@ -54,7 +59,7 @@ public class Main {
 
     protected void same() throws Exception {
         try {
-            String previousReport = DiversifyProperties.getProperty("previousReport");
+            String previousReport = inputConfiguration.getProperty("previousReport");
             JSONObject pr = null;
             if(previousReport != null && new File(previousReport).exists()) {
                 pr = loadJSON(previousReport);
@@ -63,8 +68,8 @@ public class Main {
             Set<Diff> diff = un.findDiff();
 
 //            Log.debug(un.summary());
-            writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff", diffUnion(diff, un.getDiffToExclude()));
-//            writeReport(DiversifyProperties.getProperty("result") + "/report", un.buildReport());
+            writeDiff(inputConfiguration.getProperty("result") + "/excludeDiff", diffUnion(diff, un.getDiffToExclude()));
+//            writeReport(inputConfiguration.getProperty("result") + "/report", un.buildReport());
 
         } catch (Exception e) {
             Log.error("error",e);
@@ -75,7 +80,7 @@ public class Main {
 
     protected void diff() throws Exception {
         try {
-            String previousReport = DiversifyProperties.getProperty("previousReport");
+            String previousReport = inputConfiguration.getProperty("previousReport");
             JSONObject pr = null;
             if(previousReport != null) {
                 pr = loadJSON(previousReport);
@@ -84,8 +89,8 @@ public class Main {
             Set<Diff> diff = un.findDiff();
 
 //            Log.debug(un.summary());
-            writeDiff(DiversifyProperties.getProperty("result") + "/excludeDiff", diff);
-//            writeReport(DiversifyProperties.getProperty("result") + "/report", un.buildReport());
+            writeDiff(inputConfiguration.getProperty("result") + "/excludeDiff", diff);
+//            writeReport(inputConfiguration.getProperty("result") + "/report", un.buildReport());
 
         } catch (Exception e) {
             Log.error("error",e);
@@ -94,10 +99,10 @@ public class Main {
     }
 
     protected void initSpoon() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
+        String srcDirectory = inputConfiguration.getProperty("project") + "/" + inputConfiguration.getProperty("src");
 
         StandardEnvironment env = new StandardEnvironment();
-        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
+        int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion"));
         env.setComplianceLevel(javaVersion);
         env.setVerbose(true);
         env.setDebug(true);
@@ -192,7 +197,7 @@ public class Main {
     }
 
     protected void initLogLevel() {
-        int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
+        int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
         Log.set(level);
     }
 }
