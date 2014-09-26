@@ -20,14 +20,13 @@ public class SosiePoolCreatorTest
     }
 
     @Test
-    @Ignore
     public void testCreate() throws Exception {
 
-        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock/src/main"), 5);
+        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2/src/main"), 5);
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
-        inputProgram.setPreviousTransformationsPath(getResourcePath("easymock-json"));
+        inputProgram.setPreviousTransformationsPath(getResourcePath("easymock3.2-non-rep-index.json"));
         SosiePoolCreator creator = new SosiePoolCreator(inputProgram);
 
         creator.create("testCreate.json");
