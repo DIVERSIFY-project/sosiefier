@@ -14,3 +14,5 @@ rm -rf repo
 java -Djava.library.path=lib -Dhttp.proxyHost=proxy.rennes.grid5000.fr -Dhttps.proxyPort=3128 -Dhttps.proxyHost=proxy.rennes.grid5000.fr -Dhttp.proxyPort=3128 -jar target/Sosies-generator-1.0-SNAPSHOT-jar-with-dependencies.jar git repo
 
 sh script/runFromGit.sh 1000 repo &
+
+sh grid5000.sh
