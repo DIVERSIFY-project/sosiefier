@@ -92,13 +92,31 @@ public abstract class InstruLogWriter {
     protected Set<Thread> partialLoggingThread;
 
     //Number of times a TP is called
-    protected final HashMap<Thread, HashMap<String, Integer>> transplantPointCallCount;
+    private HashMap<Thread, HashMap<String, Integer>> transplantPointCallCount;
 
     //Number of times an assertion is called
-    protected final HashMap<Thread, HashMap<String, Integer>> assertCallCount;
+    private HashMap<Thread, HashMap<String, Integer>> assertCallCount;
 
     public int getCallDeep(Thread t) {
         return callDeep.containsKey(t) ? callDeep.get(t) : 0;
+    }
+
+    /**
+     * Constructor for the logger
+     *
+     * @param logDir Directory where the logging is going to be stored
+     */
+    public InstruLogWriter(String logDir, InstruLogWriter parent) {
+        if (dir == null) initDir(logDir);
+        semaphores = new HashMap<String, Semaphore>();
+        callDeep = new HashMap<Thread, Integer>();
+        logMethod = new HashMap<Thread, Boolean>();
+
+        setTransplantPointCallCount(parent.getTransplantPointCallCount());
+        setAssertCallCount(parent.getAssertCallCount());
+
+        ShutdownHookLog shutdownHook = new ShutdownHookLog();
+        Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
 
     /**
@@ -157,15 +175,15 @@ public abstract class InstruLogWriter {
      * @param testSignature
      */
     public void writeTestStart(Thread thread, String testSignature) {
-        if ( transplantPointCallCount.containsKey(thread) ) {
-            transplantPointCallCount.get(thread).clear();
+        if ( getTransplantPointCallCount().containsKey(thread) ) {
+            getTransplantPointCallCount().get(thread).clear();
         } else {
-            transplantPointCallCount.put(thread, new HashMap<String, Integer>());
+            getTransplantPointCallCount().put(thread, new HashMap<String, Integer>());
         }
-        if ( assertCallCount.containsKey(thread) ) {
-            assertCallCount.get(thread).clear();
+        if ( getAssertCallCount().containsKey(thread) ) {
+            getAssertCallCount().get(thread).clear();
         } else {
-            assertCallCount.put(thread, new HashMap<String, Integer>());
+            getAssertCallCount().put(thread, new HashMap<String, Integer>());
         }
     }
 
@@ -193,7 +211,7 @@ public abstract class InstruLogWriter {
      * @param id
      */
     public void writeSourcePositionCall(String id) {
-        incCallCount(transplantPointCallCount, id);
+        incCallCount(getTransplantPointCallCount(), id);
     }
 
     /**
@@ -202,7 +220,7 @@ public abstract class InstruLogWriter {
      * Counts how many asserts per transformation line
      */
     public void countAssert(String id) {
-        incCallCount(assertCallCount, id);
+        incCallCount(getAssertCallCount(), id);
     }
 
 
@@ -463,4 +481,20 @@ public abstract class InstruLogWriter {
      * Logs the completion of a tests
      */
     public abstract void writeTestFinish();
+
+    protected synchronized HashMap<Thread, HashMap<String, Integer>> getTransplantPointCallCount() {
+        return transplantPointCallCount;
+    }
+
+    protected synchronized void setTransplantPointCallCount(HashMap<Thread, HashMap<String, Integer>> value) {
+        transplantPointCallCount = value;
+    }
+
+    protected synchronized HashMap<Thread, HashMap<String, Integer>> getAssertCallCount() {
+        return assertCallCount;
+    }
+
+    public synchronized void setAssertCallCount(HashMap<Thread,HashMap<String,Integer>> assertCallCount) {
+        this.assertCallCount = assertCallCount;
+    }
 }

@@ -28,4 +28,29 @@ public class InputProgramTest {
         Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
     }
 
+    @Test
+    @Ignore
+    public void testGetCodeFragmentsJunit() throws Exception {
+
+        MavenDependencyResolver dr = new MavenDependencyResolver();
+        dr.DependencyResolver(getResourcePath("junit/pom.xml"));
+        InputProgram inputProgram = new InputProgram();
+        inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("junit/src/main/java"), 5));
+        //inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
+
+        Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
+    }
+
+    @Test
+    @Ignore
+    public void testGetCodeFragmentsCollection() throws Exception {
+
+        MavenDependencyResolver dr = new MavenDependencyResolver();
+        dr.DependencyResolver("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\input-programs\\commons-collections-trunk\\pom.xml");
+        InputProgram inputProgram = new InputProgram();
+        inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\input-programs\\commons-collections-trunk\\src", 5));
+        //inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
+
+        Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
+    }
 }

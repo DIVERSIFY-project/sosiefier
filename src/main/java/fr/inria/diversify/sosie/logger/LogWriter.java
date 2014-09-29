@@ -12,6 +12,9 @@ public class LogWriter {
 
     private static HashMap<Thread, InstruLogWriter> logs = null;
 
+    private static Thread currentTestThread = null
+            ;
+
     /**
      * This is an option. By the default the verbose log is used.
      * @param log
@@ -29,7 +32,12 @@ public class LogWriter {
         if ( logs.containsKey(thread) ) {
             return logs.get(thread);
         } else {
-            InstruVerboseLog l = new InstruVerboseLog("LogDirName");
+            InstruVerboseLog l;
+            if ( currentTestThread == null ) {
+                l = new InstruVerboseLog("LogDirName");
+            } else {
+                l = new InstruVerboseLog("LogDirName", logs.get(currentTestThread));
+            }
             logs.put(thread, l);
             return l;
         }
@@ -45,6 +53,7 @@ public class LogWriter {
 
     public static void writeTestStart(Thread thread, String testSignature) {
         getLog(thread).writeTestStart(thread, testSignature);
+        currentTestThread = thread;
     }
 
     public static void writeAssert(int id, Thread thread, String className,
@@ -84,6 +93,7 @@ public class LogWriter {
      */
     public static void writeTestFinish() {
         getLog().writeTestFinish();
+        currentTestThread = null;
     }
 
     public  static void close() {

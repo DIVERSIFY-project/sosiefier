@@ -25,6 +25,17 @@ public class InstruVerboseLog extends InstruLogWriter {
     //TPs called in this test
     protected HashSet<Integer> transplantPointCalledInThisTest;
 
+    /**
+     * Constructor of the verbose log
+     * @param logDir Directory of the logger
+     * @param parentLog Parent log (the logger of the thread launching the test)
+     */
+    public InstruVerboseLog(String logDir, InstruLogWriter parentLog) {
+        super(logDir, parentLog);
+        previousVarLog = new HashMap();
+        fileWriters = new HashMap<Thread, PrintWriter>();
+    }
+
     public InstruVerboseLog(String logDir) {
         super(logDir);
         previousVarLog = new HashMap();
@@ -126,7 +137,7 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     public void writeSourcePositionCall(String id) {
         Thread thread = Thread.currentThread();
-        HashMap<String, Integer> h = transplantPointCallCount.get(thread);
+        HashMap<String, Integer> h = getTransplantPointCallCount().get(thread);
         if (h.containsKey(id)) {
             int k = h.get(id);
             h.put(id, k + 1);
@@ -140,7 +151,7 @@ public class InstruVerboseLog extends InstruLogWriter {
     public void countAssert(String id) {
         Thread thread = Thread.currentThread();
 
-        HashMap<String, Integer> h = assertCallCount.get(thread);
+        HashMap<String, Integer> h = getAssertCallCount().get(thread);
         if (h.containsKey(id)) {
             int k = h.get(id);
             h.put(id, k + 1);
@@ -324,12 +335,12 @@ public class InstruVerboseLog extends InstruLogWriter {
             try {
                 PrintWriter flw = getFileWriter(thread);
                 //Writes the subtotal of transplantation points called
-                if (transplantPointCallCount.containsKey(thread)) {
-                    writeSubTotal("TPC", flw, transplantPointCallCount.get(thread));
+                if (getTransplantPointCallCount().containsKey(thread)) {
+                    writeSubTotal("TPC", flw, getTransplantPointCallCount().get(thread));
                 }
                 //Writes the subtotal of assertions called
-                if (assertCallCount.containsKey(thread)) {
-                    writeSubTotal("ASC", flw, assertCallCount.get(thread));
+                if (getAssertCallCount().containsKey(thread)) {
+                    writeSubTotal("ASC", flw, getAssertCallCount().get(thread));
                 }
                 semaphore = flw.toString() + flw.hashCode();
                 flw.flush();

@@ -278,21 +278,39 @@ public class InputProgram {
      * is not found given only position since a difference of line numbers is usual.
      *
      * @param position Position of the code fragment
-     * @param source Source of the code Fragment
+     * @param source   Source of the code Fragment
      * @return
      */
     public synchronized CodeFragment getCodeFragment(String position, String source) {
+
+        CodeFragment result = null;
+
+        String[] s = position.split(":");
+        position = s[0];
+        int lineNumber = Integer.parseInt(s[1]);
+        int minDiff = Integer.MAX_VALUE;
+
         for (CodeFragment codeFragment : getCodeFragments()) {
-            position = position.split(":")[0];
-            if (codeFragment.positionString().startsWith(position)) {
+            String cfPos = codeFragment.positionString();
+            //Analyze only code fragments in the file of the one we are looking for
+            if (cfPos.startsWith(position)) {
+                int cfLine = Integer.parseInt(cfPos.split(":")[1]);
                 String cfSourceCode = codeFragment.equalString();
-                if (source.equals(cfSourceCode)) {
+                if (source.equals(cfSourceCode) && cfLine == lineNumber) {
+                    //If it is of the same code and the same line: we found it!!
                     return codeFragment;
+                } else {
+                    int d = Math.abs(cfLine - lineNumber);
+                    if (d < minDiff) {
+                        //else return the nearest one with same code
+                        result = codeFragment;
+                        minDiff = d;
+                    }
                 }
             }
         }
 
-        return null;
+        return result;
     }
 
     /**
