@@ -7,11 +7,10 @@ mvn clean install
 
 cd /root/diversify-statements
 git pull
-mvn -Dmaven.test.skip=true clean package
+mvn clean -Dmaven.test.skip=true package
 
+rm -rf repo
 
-rm -rf repo/sosie-exp
-
-java -Djava.library.path=lib -jar target/Sosies-generator-1.0-SNAPSHOT-jar-with-dependencies.jar git repo
+java -Djava.library.path=lib -Dhttp.proxyHost=proxy.rennes.grid5000.fr -Dhttps.proxyPort=3128 -Dhttps.proxyHost=proxy.rennes.grid5000.fr -Dhttp.proxyPort=3128 -jar target/Sosies-generator-1.0-SNAPSHOT-jar-with-dependencies.jar git repo
 
 sh script/runFromGit.sh 1000 repo &
