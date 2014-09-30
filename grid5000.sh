@@ -15,4 +15,3 @@ java -Djava.library.path=lib -Dhttp.proxyHost=proxy.rennes.grid5000.fr -Dhttps.p
 
 sh script/runFromGit.sh 1000 repo &
 
-sh grid5000.sh
