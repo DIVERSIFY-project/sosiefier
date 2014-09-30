@@ -26,6 +26,7 @@ public class GitUtils {
     public GitUtils(String remotePath, String localPath) throws IOException, GitAPIException {
         this.remotePath = remotePath;
         this.localPath = localPath;
+
         localRepository = new FileRepository(localPath + "/.git");
         git = new Git(localRepository);
     }
@@ -34,7 +35,6 @@ public class GitUtils {
         File localDir = new File(localPath);
         if(localDir.exists())
             FileUtils.forceDelete(localDir);
-//        localDir.mkdirs();
 
         Git.cloneRepository().setURI(remotePath)
            .setDirectory(localDir).call();
@@ -52,7 +52,7 @@ public class GitUtils {
         git.add().addFilepattern(filePattern).call();
     }
 
-    public  String getFirstPropertyFile() throws IOException, GitAPIException {
+    public String getFirstPropertyFile() throws IOException, GitAPIException {
         BufferedReader br = new BufferedReader(new FileReader(localPath + "/exp"));
         StringBuilder sb = new StringBuilder();
         String line = br.readLine();
@@ -71,16 +71,16 @@ public class GitUtils {
         return ret;
     }
 
-    private  void updateExpList(String s) throws IOException, GitAPIException {
+    public void commit(String message) throws GitAPIException {
+        git.commit().setMessage(message).call();
+    }
+
+    private void updateExpList(String s) throws IOException, GitAPIException {
         BufferedWriter out = new BufferedWriter(new FileWriter(localPath + "/exp"));
         out.write(s);
         out.close();
         add("exp");
         commit("update");
         push();
-    }
-
-    public void commit(String message) throws GitAPIException {
-        git.commit().setMessage(message).call();
     }
 }

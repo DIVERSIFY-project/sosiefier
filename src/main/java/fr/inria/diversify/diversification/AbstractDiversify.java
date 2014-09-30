@@ -160,9 +160,6 @@ public abstract class AbstractDiversify {
         } catch (GitAPIException e) {
             e.printStackTrace();
         }
-
-//        GitUtil.addToGit(tmp + "/", "*");
-//        GitUtil.pushGit();
     }
 
     /**

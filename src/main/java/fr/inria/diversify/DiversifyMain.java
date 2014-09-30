@@ -86,7 +86,7 @@ public class DiversifyMain {
 
             ((SinglePointDiversify) abstractDiversify).run(query.isstaTransformation(n));
             String repo = DiversifyProperties.getProperty("gitRepository");
-            abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo + "/sosie-exp");
+            abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo);
         } else {
             abstractDiversify = initAbstractDiversify();
             TransformationQuery query = initTransformationQuery();
