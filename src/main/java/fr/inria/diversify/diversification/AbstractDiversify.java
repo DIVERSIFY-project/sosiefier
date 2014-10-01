@@ -152,7 +152,7 @@ public abstract class AbstractDiversify {
             GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", git);
             gitUtils.pull();
             gitUtils.add(fileName);
-            gitUtils.commit("test");
+            gitUtils.commit("update");
             gitUtils.push();
         } catch (IOException e) {
 
