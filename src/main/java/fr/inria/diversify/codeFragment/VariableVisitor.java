@@ -1,5 +1,6 @@
 package fr.inria.diversify.codeFragment;
 
+import fr.inria.diversify.util.Log;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtVariableAccess;
@@ -10,6 +11,7 @@ import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.reflect.visitor.CtScanner;
 import spoon.support.reflect.reference.CtLocalVariableReferenceImpl;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,7 +42,7 @@ public class VariableVisitor extends CtScanner {
 	public <T> void visitCtLocalVariable(CtLocalVariable<T> localVariable) {
 		localVariableCreate.add(localVariable.getReference());
 		super.visitCtLocalVariable(localVariable);
-	}
+    }
 
 	public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
 		variableReferences.add(variableAccess.getVariable());

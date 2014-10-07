@@ -76,45 +76,42 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
 
         alreadyVisited.add(statement.getPosition().toString());
 
-        int index = elementsMap.get(statement.getPosition().toString()).index;
+        //int index = elementsMap.get(statement.getPosition().toString()).index;
 
         //System.out.println("Index: " + index);
         //System.out.println("Pos: " + statement.getPosition());
 
         CtElement e = statement;
-        CompilationUnit cuc = e.getPosition().getCompilationUnit();
-        cuc.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(), "/*" + index + "*/", 0));
+
+        //CompilationUnit cuc = e.getPosition().getCompilationUnit();
+        //cuc.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(), "/*" + index + "*/", 0));
 
         //Search for the parent block first
         //TODO: Hacer esto con un visitor
 
         boolean stop = false;
         while (stop == false) {
+
             try {
+                CompilationUnit cu = e.getPosition().getCompilationUnit();
+                String posId = Integer.toString(elementsMap.get(e.getPosition().toString()).transformations.get(0).getIndex());
+                posId = idFor(posId, "POT");
+                String probeStr = getLogName() + ".writeSourcePositionCall(\"" + posId + "\")";
                 stop = true;
                 if (e != null) {
                     if (e.getParent() instanceof CtClass) {
                         stop = true;
                     } else if (e instanceof CtBreak) {
-                        CompilationUnit cu = e.getPosition().getCompilationUnit();
-                        cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(),
-                                getLogName() + ".countSourcePositionCall(" + index + ");", 0));
-                        //System.out.println("break");
+                        cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(), probeStr + ";", 0));
                     } else if (e instanceof CtBlock) {
                         e = e.getParent();
                         stop = false;
                     } else if (e.getParent() instanceof CtBlock) {
-                        CompilationUnit cu = e.getPosition().getCompilationUnit();
                         int b = cu.beginOfLineIndex(e.getPosition().getSourceStart());
-                        cu.addSourceCodeFragment(new SourceCodeFragment(b,
-                                getLogName() + ".countSourcePositionCall(" + index + ");", 0));
-
-                        //System.out.println("Parent block");
-
+                        cu.addSourceCodeFragment(new SourceCodeFragment(b, probeStr + ";", 0));
                     } else if (e.getParent() instanceof CtIf) {
-                        CompilationUnit cu = e.getPosition().getCompilationUnit();
                         cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(),
-                                "(" + getLogName() + ".countSourcePositionCall(" + index + ") ||", 0));
+                                "(" + probeStr + "||", 0));
                         cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceEnd() + 1, ")", 0));
                         //System.out.println("Parent if");
                     } else {

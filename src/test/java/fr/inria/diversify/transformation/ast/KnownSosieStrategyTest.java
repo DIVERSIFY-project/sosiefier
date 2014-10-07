@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation.ast;
 
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.AbstractTransformation;
@@ -8,6 +9,7 @@ import fr.inria.diversify.transformation.query.KnownSosieQuery;
 import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import spoon.reflect.factory.Factory;
 
@@ -21,7 +23,7 @@ import static junit.framework.Assert.*;
  */
 public class KnownSosieStrategyTest {
 
-    private static InputProgram inputProgram;
+    private static InputProgram inputProgram = null;
 
     private static ArrayList<Transformation> sosies;
 
@@ -29,16 +31,21 @@ public class KnownSosieStrategyTest {
         return getClass().getResource("/" + name).toURI().getPath();
     }
 
-    @BeforeClass
-    public static void setUp() throws Exception {
-        Factory factory = new SpoonMetaFactory().buildNewFactory(new KnownSosieStrategyTest().getResourcePath("junit"), 5);
-        inputProgram = new InputProgram();
-        inputProgram.setFactory(factory);
-        inputProgram.setSourceCodeDir(new KnownSosieStrategyTest().getResourcePath("junit"));
-        inputProgram.setPreviousTransformationsPath(new KnownSosieStrategyTest().getResourcePath("junit-sosie.json"));
-        inputProgram.setTransformationPerRun(5);
-        KnownSosieQuery st = new KnownSosieQuery(inputProgram);
-        sosies = st.getSosies();
+    @Before
+    public void setUp() throws Exception {
+        if (inputProgram == null) {
+            MavenDependencyResolver dr = new MavenDependencyResolver();
+            dr.DependencyResolver(getResourcePath("easymock-light-3.2/pom.xml"));
+            Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2"), 5);
+            inputProgram = new InputProgram();
+            inputProgram.setFactory(factory);
+            inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
+            inputProgram.setPreviousTransformationsPath(getResourcePath("easymock3.2-non-rep-index.json"));
+            inputProgram.setTransformationPerRun(5);
+            inputProgram.processCodeFragments();
+            KnownSosieQuery st = new KnownSosieQuery(inputProgram);
+            sosies = st.getSosies();
+        }
     }
 
     /**
@@ -244,6 +251,7 @@ public class KnownSosieStrategyTest {
      * @throws Exception
      */
     @Test
+    @Ignore
     public void testIncrementalSeriesBad2() throws Exception {
 
         //Expected search graph

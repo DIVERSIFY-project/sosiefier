@@ -59,14 +59,14 @@ public class InstruBinaryLog extends InstruLogWriter {
     private int lastHashEntry = 0;
 
     //List of new hash entries before the last call of a write method
-    ArrayList<HashMap.Entry<String, Integer>> lastSignatures;
+    ArrayList<Map.Entry<String, Integer>> lastSignatures;
 
     public InstruBinaryLog(String logDir) {
         super(logDir);
 
         //ATTENTION!!!: Remember we are copying these files to another source file
         //so they must be maintain in java 1.5
-        lastSignatures = new ArrayList<HashMap.Entry<String, Integer>>();
+        lastSignatures = new ArrayList<Map.Entry<String, Integer>>();
         idMap = new HashMap<String, Integer>();
         currentId = 0;
         methodId = 0;
@@ -77,7 +77,7 @@ public class InstruBinaryLog extends InstruLogWriter {
     protected void writeSignatures(DataOutputStream os) {
         try {
             os.writeInt(lastSignatures.size());
-            for (HashMap.Entry<String, Integer> e : lastSignatures) {
+            for (Map.Entry<String, Integer> e : lastSignatures) {
                 os.writeUTF(e.getKey());
                 os.writeInt(e.getValue());
             }
@@ -163,7 +163,6 @@ public class InstruBinaryLog extends InstruLogWriter {
 
     @Override
     public void writeTestStart(Thread thread, String testSignature) {
-        super.writeTestStart(thread, testSignature);
         try {
             //Each test runs in a 0 depth for what we care
             resetCallDepth(thread);
@@ -177,6 +176,16 @@ public class InstruBinaryLog extends InstruLogWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void writeSourcePositionCall(String transplantationPoint) {
+
+    }
+
+    @Override
+    public void countAssert(String assertSignature) {
+
     }
 
 
@@ -286,10 +295,6 @@ public class InstruBinaryLog extends InstruLogWriter {
 
     @Override
     public void close() {
-
-        //Writes the Source position calls to file
-        writeSourcePositionCallToFile("sourcePositionCall.log");
-
         for (Thread thread : streamsPerThread.keySet()) {
             //String semaphore = "";
             try {
@@ -307,6 +312,11 @@ public class InstruBinaryLog extends InstruLogWriter {
 
     @Override
     protected void writeStartLogging(Thread thread, String id) {
+
+    }
+
+    @Override
+    public void writeTestFinish() {
 
     }
 
@@ -345,7 +355,7 @@ public class InstruBinaryLog extends InstruLogWriter {
         if (!idMap.containsKey(signature)) {
             //Add the entry to log it now
             currentId++;
-            HashMap.Entry<String, Integer> e = new HashMap.SimpleImmutableEntry<String, Integer>(signature, currentId);
+            Map.Entry<String, Integer> e = new HashMap.SimpleImmutableEntry<String, Integer>(signature, currentId);
             lastSignatures.add(e);
             //The map to know all the entries
             idMap.put(signature, currentId);

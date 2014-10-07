@@ -1,15 +1,7 @@
 package fr.inria.diversify.sosie.logger;
 
-/*
-import fr.inria.diversify.sosie.logger.ShutdownHookLog;
-import fr.inria.diversify.util.Log;
-*/
-
 import java.io.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -19,6 +11,10 @@ import java.util.concurrent.Semaphore;
  */
 public abstract class InstruLogWriter {
 
+    //Thread containing the test
+    private final Thread thread;
+
+    private final InstruLogWriter parent;
     //Dir where the logs are going to be stored
     private String logDir = "LogDirName";
 
@@ -37,24 +33,39 @@ public abstract class InstruLogWriter {
     ///Previous logs of variables status. Useful to check whether they have change
     protected Map<Thread, Map<String, String>> previousVarLog;
 
-    //Number of times a transplantation point is called
-    protected HashMap<Integer, Integer> transplantPointCallCount;
-
-    //Number of test a transplantation point is called on
-    protected HashMap<Integer, Integer> testCallsPerTransplantation;
-
-    //Transplantation points called in this test
-    protected HashSet<Integer> transplantPointCalledInThisTest;
-
-    //Number of assertions per transplantation
-    protected HashMap<Integer, Integer> assertionsPerTransplantation;
-
     protected Boolean partialLogging = null;
 
     protected Set<Thread> partialLoggingThread;
 
+    //Number of times a TP is called
+    private HashMap<String, Integer> transplantPointCallCount;
+
+    //Number of times an assertion is called
+    private HashMap<String, Integer> assertCallCount;
+
     public int getCallDeep(Thread t) {
         return callDeep.containsKey(t) ? callDeep.get(t) : 0;
+    }
+
+    /**
+     * Constructor for the logger
+     *
+     * @param logDir Directory where the logging is going to be stored
+     */
+    public InstruLogWriter(String logDir, InstruLogWriter parent) {
+        if (dir == null) initDir(logDir);
+        semaphores = new HashMap<String, Semaphore>();
+        callDeep = new HashMap<Thread, Integer>();
+        logMethod = new HashMap<Thread, Boolean>();
+
+        setTransplantPointCallCount(parent.getTransplantPointCallCount());
+        setAssertCallCount(parent.getAssertCallCount());
+
+        this.parent = parent;
+        thread = parent.getThread();
+
+        ShutdownHookLog shutdownHook = new ShutdownHookLog();
+        Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
 
     /**
@@ -67,12 +78,15 @@ public abstract class InstruLogWriter {
         semaphores = new HashMap<String, Semaphore>();
         callDeep = new HashMap<Thread, Integer>();
         logMethod = new HashMap<Thread, Boolean>();
-        transplantPointCallCount = new HashMap<Integer, Integer>();
-        assertionsPerTransplantation = new HashMap<Integer, Integer>();
+
+        transplantPointCallCount = new HashMap<String, Integer>();
+
+        assertCallCount = new HashMap<String, Integer>();
+
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
-        //transplantPointCalledInThisTest = new HashSet<Integer>();
-        //testCallsPerTransplantation = new HashMap<Integer, Integer>();
+        parent = null;
+        thread = Thread.currentThread();
     }
 
     /**
@@ -102,37 +116,48 @@ public abstract class InstruLogWriter {
         decCallDepth(thread);
     }
 
+    public abstract void writeAssert(int id, Thread thread, String className,
+                                     String methodSignature, String assertName, Object... var);
+
     /**
-     * Logs the begining of a test method
+     * Logs the beginning of a test method
      *
      * @param thread
      * @param testSignature
      */
     public void writeTestStart(Thread thread, String testSignature) {
-        if (transplantPointCalledInThisTest == null) {
-            testCallsPerTransplantation = new HashMap<Integer, Integer>();
-            transplantPointCalledInThisTest = new HashSet<Integer>();
-        }
-        transplantPointCalledInThisTest.clear();
+        getTransplantPointCallCount().clear();
+        getAssertCallCount().clear();
     }
 
-    public abstract void writeAssert(int id, Thread thread, String className,
-                                     String methodSignature, String assertName, Object... var);
+    private void incCallCount(HashMap<String, Integer> map, String id) {
+        if (!map.containsKey(id)) {
+            map.put(id, 1);
+        } else {
+            int k = map.get(id) + 1;
+            map.put(id, k);
+        }
+    }
+
+    /**
+     * Count the call of a transplant point.
+     *
+     * @param id
+     */
+    public void writeSourcePositionCall(String id) {
+        if ( !getTransplantPointCallCount().containsKey(id) ) {
+            writeStartLogging(Thread.currentThread(), id);
+        }
+        incCallCount(getTransplantPointCallCount(), id);
+    }
 
     /**
      * Counts an assert.
-     *
+     * <p/>
      * Counts how many asserts per transformation line
      */
-    public void countAssert() {
-        for (Integer i : transplantPointCalledInThisTest) {
-            if (!assertionsPerTransplantation.containsKey(i)) {
-                assertionsPerTransplantation.put(i, 1);
-            } else {
-                int k = assertionsPerTransplantation.get(i) + 1;
-                assertionsPerTransplantation.put(i, k);
-            }
-        }
+    public void countAssert(String id) {
+        incCallCount(getAssertCallCount(), id);
     }
 
     public abstract void writeVar(int id, Thread thread, String methodSignatureId, Object... var);
@@ -144,72 +169,6 @@ public abstract class InstruLogWriter {
 
     public abstract void close();
 
-    /**
-     * Count the call of a transplant point.
-     *
-     * @param transplantationPoint
-     */
-    public void countSourcePositionCall(int transplantationPoint) {
-
-        //Count point calls
-        if (!transplantPointCallCount.containsKey(transplantationPoint)) {
-            transplantPointCallCount.put(transplantationPoint, 1);
-        } else {
-            int k = transplantPointCallCount.get(transplantationPoint) + 1;
-            transplantPointCallCount.put(transplantationPoint, k);
-        }
-
-        //Count test calls
-        if (transplantPointCalledInThisTest != null) {
-
-            //Add just once the test to the transplantation point
-            if (!transplantPointCalledInThisTest.contains(transplantationPoint)) {
-                transplantPointCalledInThisTest.add(transplantationPoint);
-
-                if (!testCallsPerTransplantation.containsKey(transplantationPoint)) {
-                    testCallsPerTransplantation.put(transplantationPoint, 1);
-                } else {
-                    int k = testCallsPerTransplantation.get(transplantationPoint) + 1;
-                    testCallsPerTransplantation.put(transplantationPoint, k);
-                }
-            }
-        }
-    }
-
-
-    /**
-     * Writes the source position calls information to file
-     *
-     * @param filePath
-     */
-    protected void writeSourcePositionCallToFile(String filePath) {
-        try {
-            if (transplantPointCallCount.size() > 0) {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath), 8 * 1024);
-                for (Map.Entry<Integer, Integer> p : transplantPointCallCount.entrySet()) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(p.getKey())
-                            .append(", ")
-                            .append(p.getValue());
-                    if (transplantPointCalledInThisTest != null) {
-                        sb.append(", ")
-                                .append(testCallsPerTransplantation.get(p.getKey()))
-                                .append(", ");
-                        if (assertionsPerTransplantation.containsKey(p.getKey())) {
-                            sb.append(assertionsPerTransplantation.get(p.getKey()));
-                        } else {
-                            sb.append(0);
-                        }
-                    }
-                    sb.append("\r\n");
-                    writer.write(sb.toString());
-                }
-                writer.close();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
 
     /**
      * Increases the depth of the stack for a given thread
@@ -391,5 +350,35 @@ public abstract class InstruLogWriter {
 
     public void setLogDir(String logDir) {
         this.logDir = logDir;
+    }
+
+    /**
+     * Logs the completion of a tests
+     */
+    public abstract void writeTestFinish();
+
+    protected synchronized HashMap<String, Integer> getTransplantPointCallCount() {
+        return transplantPointCallCount;
+    }
+
+    protected synchronized void setTransplantPointCallCount(HashMap<String, Integer> value) {
+        transplantPointCallCount = value;
+    }
+
+    protected synchronized HashMap<String, Integer> getAssertCallCount() {
+        return assertCallCount;
+    }
+
+    public synchronized void setAssertCallCount(HashMap<String, Integer> assertCallCount) {
+        this.assertCallCount = assertCallCount;
+    }
+
+    public InstruLogWriter getParent() {
+        return parent;
+    }
+
+    //Thread containing the test
+    public Thread getThread() {
+        return thread;
     }
 }

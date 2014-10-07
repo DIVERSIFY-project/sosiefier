@@ -1,7 +1,9 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
+import fr.inria.diversify.codeFragmentProcessor.KnownTransfStatementProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
@@ -9,10 +11,14 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
+import org.json.JSONArray;
+import org.json.JSONException;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
+import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
@@ -22,7 +28,7 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
 import java.util.*;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 /**
  * The InputProgram class encapsulates all the known information of the program being sosiefiecated
@@ -229,12 +235,31 @@ public class InputProgram {
      * Process all code fragments. Used to early process them.
      */
     public void processCodeFragments() {
-        if(codeFragments == null) {
+        if (codeFragments == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
             StatementProcessor processor = new StatementProcessor();
             pm.addProcessor(processor);
             pm.process();
+            codeFragments = processor.getCodeFragments();
+        }
+    }
 
+
+    /**
+     * Process only the code fragments needed to handle a known set of transformations.
+     * <p/>
+     * This is faster than processing all. Useful for multi-sosies when we start from a known set of single-sosies
+     * instead of searching out of the fragments.
+     *
+     * @param transformations An array of stored transformations.
+     */
+    public void processCodeFragments(JSONArray transformations) throws JSONException {
+        if (codeFragments == null) {
+            ProcessingManager pm = new QueueProcessingManager(factory);
+            KnownTransfStatementProcessor processor = null;
+            processor = new KnownTransfStatementProcessor(transformations);
+            pm.addProcessor(processor);
+            pm.process();
             codeFragments = processor.getCodeFragments();
         }
     }
@@ -245,6 +270,47 @@ public class InputProgram {
     public synchronized CodeFragmentList getCodeFragments() {
         processCodeFragments();
         return codeFragments;
+    }
+
+    /**
+     * Returns an specific code fragment given its position and source. The source is optional.
+     * However, you should supply both, since is possible that a code fragment
+     * is not found given only position since a difference of line numbers is usual.
+     *
+     * @param position Position of the code fragment
+     * @param source   Source of the code Fragment
+     * @return
+     */
+    public synchronized CodeFragment getCodeFragment(String position, String source) {
+
+        CodeFragment result = null;
+
+        String[] s = position.split(":");
+        position = s[0];
+        int lineNumber = Integer.parseInt(s[1]);
+        int minDiff = Integer.MAX_VALUE;
+
+        for (CodeFragment codeFragment : getCodeFragments()) {
+            String cfPos = codeFragment.positionString();
+            //Analyze only code fragments in the file of the one we are looking for
+            if (cfPos.startsWith(position)) {
+                int cfLine = Integer.parseInt(cfPos.split(":")[1]);
+                String cfSourceCode = codeFragment.equalString();
+                if (source.equals(cfSourceCode) && cfLine == lineNumber) {
+                    //If it is of the same code and the same line: we found it!!
+                    return codeFragment;
+                } else {
+                    int d = Math.abs(cfLine - lineNumber);
+                    if (d < minDiff) {
+                        //else return the nearest one with same code
+                        result = codeFragment;
+                        minDiff = d;
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
     /**
@@ -300,20 +366,63 @@ public class InputProgram {
         return javassistMethods;
     }
 
+    /**
+     * Get the inline constant statements on the program
+     *
+     * @return
+     */
+    public synchronized List<CtLocalVariable> getInlineConstant() {
+        if (inlineConstant == null) {
+            ProcessingManager pm = new QueueProcessingManager(factory);
+            InlineConstantProcessor processor = new InlineConstantProcessor();
+            pm.addProcessor(processor);
+            pm.process();
+
+            inlineConstant = processor.getInlineConstant();
+        }
+        return inlineConstant;
+    }
+
     public synchronized List<CtElement> getAllElement(Class cl) {
+
 
         if (!typeToObject.containsKey(cl)) {
             QueryVisitor query = new QueryVisitor(new TypeFilter(cl));
+            List<CtElement> elements = new ArrayList<>();
+            for (CtElement e : getRoots()) {
+                e.accept(query);
+                elements.addAll(query.getResult());
+            }
+            /*
             getRoots().stream()
                     .flatMap(root -> {
                         root.accept(query);
                         return query.getResult().stream();
                     })
                     .collect(Collectors.toList());
-
-            typeToObject.put(cl, query.getResult());
+            */
+            typeToObject.put(cl, elements);
         }
         return typeToObject.get(cl);
+        // return null;
+    }
+
+
+    /**
+     * Get return statements of the program
+     *
+     * @return
+     */
+    public synchronized List<CtReturn> getReturns() {
+        if (returns == null) {
+            ProcessingManager pm = new QueueProcessingManager(factory);
+            ReturnProcessor processor = new ReturnProcessor();
+            pm.addProcessor(processor);
+            pm.process();
+
+            returns = processor.getReturns();
+        }
+        return returns;
     }
 
     /**
@@ -323,7 +432,7 @@ public class InputProgram {
      */
     public void configure(InputConfiguration configuration) {
         setSourceCodeDir(configuration.getSourceCodeDir());
-        setPreviousTransformationsPath(configuration.getPreviousTransformationDir());
+        setPreviousTransformationsPath(configuration.getPreviousTransformationPath());
         setClassesDir(configuration.getClassesDir());
         setCoverageDir(configuration.getCoverageDir());
     }

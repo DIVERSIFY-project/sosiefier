@@ -3,6 +3,7 @@ package fr.inria.diversify.sosie;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import spoon.reflect.factory.Factory;
 
@@ -21,11 +22,11 @@ public class SosiePoolCreatorTest
     @Test
     public void testCreate() throws Exception {
 
-        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("commons-collections/src/main"), 5);
+        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2/src/main"), 5);
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
-        inputProgram.setPreviousTransformationsPath(getResourcePath("commons-collections-json"));
+        inputProgram.setPreviousTransformationsPath(getResourcePath("easymock3.2-non-rep-index.json"));
         SosiePoolCreator creator = new SosiePoolCreator(inputProgram);
 
         creator.create("testCreate.json");

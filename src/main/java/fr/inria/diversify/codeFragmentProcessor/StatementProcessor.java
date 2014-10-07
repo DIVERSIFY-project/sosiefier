@@ -10,7 +10,7 @@ public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatemen
 	public void process(CtStatement element) {
 		try {
 			if(isValidStatement(element)) {
-				Statement stmt = new Statement(element);
+                Statement stmt = new Statement(element);
 				addCf(stmt);
 			}
 		} catch (Exception e) {

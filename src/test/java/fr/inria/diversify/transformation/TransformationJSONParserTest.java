@@ -20,12 +20,13 @@ public class TransformationJSONParserTest {
 
     @Test
     public void testTransformationJSONParser() throws Exception {
-        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("junit"), 5);
+        Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2"), 5);
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
-        inputProgram.setSourceCodeDir(getResourcePath("junit"));
-        inputProgram.setPreviousTransformationsPath(getResourcePath("junit-sosie.json"));
+        inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
+        inputProgram.setPreviousTransformationsPath(getResourcePath("easymock3.2-non-rep-index.json"));
+        inputProgram.processCodeFragments();
 
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
         List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));

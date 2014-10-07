@@ -3,6 +3,7 @@ package fr.inria.diversify.sosie.compare;
 import fr.inria.diversify.FileOutputStreamMock;
 import fr.inria.diversify.sosie.logger.BinaryLogReader;
 import fr.inria.diversify.sosie.logger.InstruBinaryLog;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -17,6 +18,8 @@ import static junit.framework.TestCase.assertEquals;
 /**
  * Created by marodrig on 17/07/2014.
  */
+
+@Ignore
 public class BinaryLogReaderTest {
 
     private String getResourcePath(String name) throws Exception {

@@ -31,7 +31,6 @@ import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.ByteCodeTransformationQuery;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 
 /**
@@ -59,56 +58,47 @@ public class DiversifyMain {
 
         inputConfiguration = new InputConfiguration(propertiesFile);
 
-        new DiversifyProperties(inputConfiguration);
-        Launcher.logger.setLevel(Level.OFF);
         initLogLevel();
-        if (DiversifyProperties.getProperty("builder").equals("maven")) {
+        if (inputConfiguration.getProperty("builder").equals("maven")) {
             MavenDependencyResolver t = new MavenDependencyResolver();
-            t.DependencyResolver(DiversifyProperties.getProperty("project") + "/pom.xml");
+            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
         }
         initSpoon();
 
-        if (DiversifyProperties.getProperty("stat").equals("true")) {
+        if (inputConfiguration.getProperty("stat").equals("true")) {
             computeStatistic();
         } else {
-           initAndRunBuilder();
+            if (inputConfiguration.getProperty("sosieOnMultiProject").equals("true")) {
+//            sosieOnMultiProject();
+            } else initAndRunBuilder();
         }
     }
 
     protected void initAndRunBuilder() throws Exception {
         AbstractDiversify abstractDiversify;
 
-        int n = Integer.parseInt(DiversifyProperties.getProperty("nbRun"));
+        int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
 
-        if(DiversifyProperties.getProperty("transformation.type").equals("issta")) {
-            abstractDiversify = initAbstractDiversify();
-            ASTTransformationQuery query = new ASTTransformationQuery(inputProgram);
+        TransformationQuery query = initTransformationQuery();
 
-            ((SinglePointDiversify) abstractDiversify).run(query.isstaTransformation(n));
-            String repo = DiversifyProperties.getProperty("gitRepository");
-            abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo);
-        } else {
-            abstractDiversify = initAbstractDiversify();
-            TransformationQuery query = initTransformationQuery();
-
-            //Get sizes of incremental sosies that we want
-            int max;
-            int min;
-            String sosieSizes = DiversifyProperties.getProperty("transformation.size.set");
-            ArrayList<Integer> intSosieSizes = null;
-            if (sosieSizes != null) {
-                intSosieSizes = new ArrayList<>();
-                for (String s : sosieSizes.split(";")) {
-                    intSosieSizes.add(Integer.parseInt(s));
-                }
-                max = intSosieSizes.size() - 1;
-                min = 0;
-            } else {
-                max = Integer.parseInt(DiversifyProperties.getProperty("transformation.size", "1"));
-                min = Integer.parseInt(DiversifyProperties.getProperty("transformation.size.min", Integer.toString(max)));
+        //Get sizes of incremental sosies that we want
+        int max;
+        int min;
+        String sosieSizes = inputConfiguration.getProperty("transformation.size.set");
+        ArrayList<Integer> intSosieSizes = null;
+        if (sosieSizes != null) {
+            intSosieSizes = new ArrayList<>();
+            for (String s : sosieSizes.split(";")) {
+                intSosieSizes.add(Integer.parseInt(s));
             }
+            max = intSosieSizes.size() - 1;
+            min = 0;
+        } else {
+            max = Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1"));
+            min = Integer.parseInt(inputConfiguration.getProperty("transformation.size.min", Integer.toString(max)));
+        }
 
-            for (int i = min; i <= max; i++) {
+        for (int i = min; i <= max; i++) {
 
                 if (intSosieSizes != null) {
                     inputProgram.setTransformationPerRun(intSosieSizes.get(i));
@@ -123,9 +113,9 @@ public class DiversifyMain {
                 //Clear the found transformations for the next step to speed up. No needed since the new ones are going
                 //to be of different size and therefore different
                 //query.clearTransformationFounds();
-                String repo = DiversifyProperties.getProperty("gitRepository");
-                if (repo.equals("null")) abstractDiversify.printResult(DiversifyProperties.getProperty("result"));
-                else abstractDiversify.printResult(DiversifyProperties.getProperty("result"), repo);
+                String repo = inputConfiguration.getProperty("gitRepository");
+                if (repo.equals("null")) abstractDiversify.printResult(inputConfiguration.getProperty("result"));
+                else abstractDiversify.printResult(inputConfiguration.getProperty("result"), repo);
             }
         }
         abstractDiversify.deleteTmpFiles();
@@ -145,8 +135,8 @@ public class DiversifyMain {
                 || transformationType.equals("singleconsecutive")
                 || transformationType.equals("specificindexes")) {
             ad = new Diversify(inputConfiguration, projet, src);
-            boolean early = DiversifyProperties.getProperty("early.report", "false").equals("true");
-            boolean earlySosies = DiversifyProperties.getProperty("early.report.sosies.only", "false").equals("true");
+            boolean early = inputConfiguration.getProperty("early.report", "false").equals("true");
+            boolean earlySosies = inputConfiguration.getProperty("early.report.sosies.only", "false").equals("true");
             ((Diversify) ad).setEarlyReportSosiesOnly(earlySosies);
             ((Diversify) ad).setEarlyReport(early);
         } else if(transformationType.equals("endless")){
@@ -159,7 +149,7 @@ public class DiversifyMain {
             ((SinglePointDiversify) ad).setAcceptedErrors(acceptedError);
         }
 
-        String tmpDir = ad.init(projet, DiversifyProperties.getProperty("tmpDir"));
+        String tmpDir = ad.init(projet, inputConfiguration.getProperty("tmpDir"));
         ad.setSosieSourcesDir(sosieDir);
         ad.setBuilder(initBuilder(tmpDir));
         ad.setResultDir(resultDir);
@@ -172,19 +162,19 @@ public class DiversifyMain {
         AbstractBuilder rb;
         String builder =  DiversifyProperties.getProperty("builder");
 
-        String src = DiversifyProperties.getProperty("src");
-        if (builder.equals("maven")) {
+        String src = inputConfiguration.getProperty("src");
+        if (inputConfiguration.getProperty("builder").equals("maven")) {
             rb = new MavenBuilder(directory, src);
             rb.setPhase(new String[]{"clean", "test"});
         } else {
-            rb = new AntBuilder(directory, DiversifyProperties.getProperty("builder.testTarget"));
-            rb.setPhase(new String[]{"clean", DiversifyProperties.getProperty("builder.testTarget")});
+            rb = new AntBuilder(directory, inputConfiguration.getProperty("builder.testTarget"));
+            rb.setPhase(new String[]{"clean", inputConfiguration.getProperty("builder.testTarget")});
         }
-        int t = Integer.parseInt(DiversifyProperties.getProperty("timeOut").trim());
+        int t = Integer.parseInt(inputConfiguration.getProperty("timeOut").trim());
         if (t == -1) rb.initTimeOut();
         else rb.setTimeOut(t);
 
-        String pomFile = DiversifyProperties.getProperty("newPomFile");
+        String pomFile = inputConfiguration.getProperty("newPomFile");
         if (!pomFile.equals("")) rb.initPom(pomFile);
 
         rb.copyClasses(DiversifyProperties.getProperty("classes"));
@@ -194,9 +184,9 @@ public class DiversifyMain {
         }
 
         //Obtain some other builder properties
-        boolean saveOutput = Boolean.parseBoolean(DiversifyProperties.getProperty("save.builder.output", "false"));
-        boolean useClojure = Boolean.parseBoolean(DiversifyProperties.getProperty("clojure", "false"));
-        String results = DiversifyProperties.getProperty("result");
+        boolean saveOutput = Boolean.parseBoolean(inputConfiguration.getProperty("save.builder.output", "false"));
+        boolean useClojure = Boolean.parseBoolean(inputConfiguration.getProperty("clojure", "false"));
+        String results = inputConfiguration.getProperty("result");
         rb.setSaveOutputDir(results);
         rb.setClojureTest(useClojure);
         rb.setSaveOutputToFile(saveOutput);
@@ -220,7 +210,7 @@ public class DiversifyMain {
         inputProgram.setPreviousTransformationsPath(
                 inputConfiguration.getProperty("transformation.directory"));
 
-        inputProgram.setClassesDir(DiversifyProperties.getProperty("project") + "/" +
+        inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
                 inputConfiguration.getProperty("classes"));
 
         inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
@@ -230,7 +220,7 @@ public class DiversifyMain {
 
     protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException {
 
-        String type = DiversifyProperties.getProperty("transformation.type").toLowerCase();
+        String type = inputConfiguration.getProperty("transformation.type").toLowerCase();
 
         switch (type) {
             case "checkreturn":
@@ -249,9 +239,9 @@ public class DiversifyMain {
                 return new ByteCodeTransformationQuery(inputProgram);
             case "mutationtososie": {
                 /*
-                String jacocoFile = DiversifyProperties.getProperty("jacoco");
-                String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
-                String mutationDirectory = DiversifyProperties.getProperty("transformation.directory");
+                String jacocoFile = inputConfiguration.getProperty("jacoco");
+                String classes = inputConfiguration.getProperty("project") + "/" + inputConfiguration.getProperty("classes");
+                String mutationDirectory = inputConfiguration.getProperty("transformation.directory");
                 */
                 return new MutationToSosieQuery(inputProgram);
             }
@@ -261,12 +251,12 @@ public class DiversifyMain {
                 return new ASTTransformationQuery(inputProgram, cl, subType, false);
             }
             case "adr": {
-                Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
+                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
                 boolean subType = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.subtype", "false"));
                 return new ASTTransformationQuery(inputProgram, cl, subType, false);
             }
             case "adrstupid": {
-                Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
+                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
                 boolean subType = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.subtype", "false"));
                 return new ASTTransformationQuery(inputProgram, cl, subType, true);
             }
@@ -279,14 +269,14 @@ public class DiversifyMain {
                 inputProgram.processCodeFragments();
                 return new KnowMultisosieQuery(inputProgram);
             case "singleconsecutive":
-                int startSosieIndex = Integer.parseInt(DiversifyProperties.getProperty("start.sosie.index", "0"));
+                int startSosieIndex = Integer.parseInt(inputConfiguration.getProperty("start.sosie.index", "0"));
                 inputProgram.processCodeFragments();
                 ConsecutiveKnownSosieQuery q = new ConsecutiveKnownSosieQuery(inputProgram);
                 q.setCurrentTrial(startSosieIndex);
                 return q;
             case "specificindexes":
                 ArrayList<Integer> spIndex = new ArrayList<>();
-                for ( String s : DiversifyProperties.getProperty("specific.indexes").split(",") ) {
+                for ( String s : inputConfiguration.getProperty("specific.indexes").split(",") ) {
                     spIndex.add(Integer.parseInt(s));
                 }
                 inputProgram.processCodeFragments();
@@ -307,8 +297,8 @@ public class DiversifyMain {
     }
 
     protected ICoverageReport initCoverageReport() {
-        String jacocoFile = DiversifyProperties.getProperty("jacoco");
-        String classes = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("classes");
+        String jacocoFile = inputConfiguration.getProperty("jacoco");
+        String classes = inputConfiguration.getProperty("project") + "/" + inputConfiguration.getProperty("classes");
 
         ICoverageReport icr = null;
         if (jacocoFile != null) {
@@ -324,8 +314,8 @@ public class DiversifyMain {
             }
         } else {
             //Try to use the trace coverage
-            String traceDir = DiversifyProperties.getProperty("trace.dirs");
-            Boolean binaryTrace = Boolean.parseBoolean(DiversifyProperties.getProperty("binary.trace", "false"));
+            String traceDir = inputConfiguration.getProperty("trace.dirs");
+            Boolean binaryTrace = Boolean.parseBoolean(inputConfiguration.getProperty("binary.trace", "false"));
             if (traceDir != null) {
                 String[] dirs = traceDir.split(";");
                 ArrayList<File> traceFiles = new ArrayList<>();
@@ -366,10 +356,10 @@ public class DiversifyMain {
     }
 
     protected void computeStatistic() throws Exception {
-        String out = DiversifyProperties.getProperty("result");
+        String out = inputConfiguration.getProperty("result");
 //        computeCodeFragmentStatistic(out);
 
-        String transDir = DiversifyProperties.getProperty("transformation.directory");
+        String transDir = inputConfiguration.getProperty("transformation.directory");
         if (transDir != null) {
             computeDiversifyStat(transDir, out);
         }
@@ -404,7 +394,7 @@ public class DiversifyMain {
         Visu v = new Visu(fileName + "_visu/visu", inputProgram);
         v.writeJSON(transformations);
 
-//        FailureMatrix matrix = new FailureMatrix(transformations,DiversifyProperties.getProperty("allTestFile"));
+//        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);
     }
 
@@ -417,7 +407,7 @@ public class DiversifyMain {
 
 
     protected void initLogLevel() {
-        int level = Integer.parseInt(DiversifyProperties.getProperty("logLevel"));
+        int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
         Log.set(level);
     }
 }

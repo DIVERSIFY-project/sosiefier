@@ -187,6 +187,10 @@ public class Diversify extends AbstractDiversify {
         try {
             //Try to apply transformations
             for (Transformation t : trans) {
+                //Input the configuration
+                if ( t instanceof AbstractTransformation ) {
+                    ((AbstractTransformation)t).setInputConfiguration(inputConfiguration);
+                }
                 t.apply(outputDir);
                 successful++;
             }
@@ -194,7 +198,11 @@ public class Diversify extends AbstractDiversify {
             //Revert to the original state
             try {
                 for (Iterator<Transformation> i = trans.iterator(); i.hasNext() && successful > 0; successful--) {
-                    i.next().restore(outputDir);
+                    Transformation t = i.next();
+                    if ( t instanceof AbstractTransformation ) {
+                        ((AbstractTransformation)t).setInputConfiguration(inputConfiguration);
+                    }
+                    t.restore(outputDir);
                 }
             } catch (Exception ex) {
                 //From here I just don't want to recover

@@ -10,13 +10,16 @@ import java.util.List;
 
 /**
  * Query used to replay multisosie programs given in a RunResult.json format
- *
+ * <p/>
  * Created by marodrig on 23/06/2014.
  */
 public class KnowMultisosieQuery extends TransformationQuery {
 
     //Current run result being replayed
-    int currentRunResult = -1;
+    //int currentRunResult = -1;
+    int currentRunResult = 0;
+
+    File[] files = null;
 
     public KnowMultisosieQuery(InputProgram inputProgram) {
         super(inputProgram);
@@ -31,23 +34,36 @@ public class KnowMultisosieQuery extends TransformationQuery {
     public List<Transformation> query(int nb) {
         try {
             File folder = new File(getInputProgram().getPreviousTransformationsPath());
-            File[] files = folder.listFiles();
 
-            List<Transformation> result = null;
-
-            while ( result == null && currentRunResult < files.length ) {
-                currentRunResult++;
-                String fileName = files[currentRunResult].getName();
-                if ( fileName.substring(fileName.length() - 4).toLowerCase().equals("json") ) {
-                    RunResults run = new RunResults();
-                    run.loadFromFile(files[currentRunResult]);
-                    if (run.isSosieRun()) {
-                        result = run.parseTransformations(getInputProgram());
-                    }
+            if (files == null) {
+                if (folder.isDirectory()) {
+                    files = folder.listFiles();
+                } else {
+                    files = new File[1];
+                    files[0] = folder;
                 }
             }
 
-            if ( result ==  null ) {
+            List<Transformation> result = null;
+
+            while (result == null && currentRunResult < files.length) {
+
+                String fileName = files[currentRunResult].getName();
+                if (fileName.substring(fileName.length() - 4).toLowerCase().equals("json")) {
+                    RunResults run = new RunResults();
+                    run.loadFromFile(files[currentRunResult]);
+                    //if (run.isSosieRun()) {
+                    result = run.parseTransformations(getInputProgram());
+                    //}
+                }
+
+                currentRunResult++;
+                if (currentRunResult >= files.length) {
+                    currentRunResult = 0;
+                }
+            }
+
+            if (result == null) {
                 throw new TransformationParserException("Could not found any suitable run result");
             }
 

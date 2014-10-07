@@ -2,7 +2,6 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.util.DiversifyEnvironment;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.declaration.CtClass;
 

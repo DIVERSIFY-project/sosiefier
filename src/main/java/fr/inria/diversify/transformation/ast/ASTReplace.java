@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.util.DiversifyProperties;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +41,11 @@ public class ASTReplace extends ASTTransformation {
         this.transplant = transplant;
     }
 
+    public boolean setCodeFragmentToReplace(CodeFragment replace) {
+        this.setTransplant(replace);
+        return true;
+    }
+
     public void setVarMapping(Map<String, String> mapping) {
         variableMapping = mapping;
     }
@@ -60,7 +64,7 @@ public class ASTReplace extends ASTTransformation {
         Log.debug("transplantation point:\n{}", transplantationPoint);
         Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
         Log.debug("{}", transplantationPoint.getCodeFragmentType());
-        Log.debug("replace by: ({})\n{}", transplant.getCodeFragmentType(), transplant);
+        Log.debug("replace by: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
 
         if (withVarMapping()) {
             if (variableMapping == null)
@@ -74,8 +78,8 @@ public class ASTReplace extends ASTTransformation {
         CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
         SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
 
-
-        if (DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
+        String processor = getInputConfiguration() == null ?  "" : getInputConfiguration().getProperty("processor");
+        if (processor.equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
             sourceCodeFragments.add(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** replace \n", 0));
             sourceCodeFragments.add(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n" +
                     getTransplant().codeFragmentString() + "\n", 0));

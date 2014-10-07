@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.diversification.InputConfiguration;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,7 +13,7 @@ import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 
 import java.util.*;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -21,14 +22,25 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractTransformation implements Transformation {
 
+    //A global ID for the transformations. For our purposes is enough a simple global increment.
+    private static int globalID = 0;
+
     public static int EXCEPTION = -4;
     public static int NOT_TESTED = -3;
     public static int COMPILED_FAIL = -2;
     public static int TEST_FAIL = -1;
     public static int SOSIE = 0;
 
-    private int index;
+    /**
+     * An index to identify the
+     */
+    private int index = -1;
 
+    /**
+     * The series number is an ID for a given serie containing this transformation.
+     *
+     * Remember that a series is a set of multi-sosies, each one being child of another in the set.
+     */
     private int series;
 
     protected Integer status = -3;
@@ -37,6 +49,8 @@ public abstract class AbstractTransformation implements Transformation {
     protected String name;
     protected String type;
     protected Transformation parent;
+
+    private InputConfiguration inputConfiguration;
 
     public void setStatus(Integer result) {
         status = result;
@@ -70,7 +84,12 @@ public abstract class AbstractTransformation implements Transformation {
         object.put("name", name);
         object.put("failures", failuresToJSON());
         object.put("status", status);
+        if ( index == -1 ) {
+            globalID++;
+            index = globalID;
+        }
         object.put("tindex", index);
+        object.put("series", getSeries());
 
         if(parent != null)
             object.put("parent",parent.toJSONObject());
@@ -106,24 +125,47 @@ public abstract class AbstractTransformation implements Transformation {
         return parent;
     }
 
-    public void apply(String srcDir) throws Exception {
+    /**
+     * Applies the transformations and saves into the destination directory.
+     * 
+     * @param destinationDir The parent directory to store the transformation. The transformation
+     *                       will try maintain the project structure. For example if we try to
+     *                       apply an transformation over org.pack.myclass, destination dir
+     *                       could be 'modified/src/main/java' and the file will be save in
+     *                       'modified/src/main/java/org/pack/myclass.java'
+     * @throws Exception
+     */
+    public void apply(String destinationDir) throws Exception {
+        
         addSourceCode();
 
-        printJavaFile(srcDir);
+        printJavaFile(destinationDir);
         removeSourceCode();
     }
 
-    public void restore(String srcDir) throws Exception {
+    /**
+     * Restores the original code and stores it in the destination directory
+     *
+     * @param destinationDir The parent directory to store the transformation. The transformation
+     *                       will try maintain the project structure. For example if we try to
+     *                       apply an transformation over org.pack.myclass, destination dir
+     *                       could be 'modified/src/main/java' and the file will be save in
+     *                       'modified/src/main/java/org/pack/myclass.java'
+     * @throws Exception
+     */
+    public void restore(String destinationDir) throws Exception {
         if(parent != null) {
             parent.removeSourceCode();
-            parent.printJavaFile(srcDir);
+            parent.printJavaFile(destinationDir);
         }
         removeSourceCode();
-        printJavaFile(srcDir);
+        printJavaFile(destinationDir);
     }
 
     public void applyWithParent(String srcDir) throws Exception {
+        String processor = getInputConfiguration() == null ? "" : getInputConfiguration().getProperty("processor");
         addSourceCode();
+
         printJavaFile(srcDir);
 
         if (parent != null) {
@@ -149,7 +191,9 @@ public abstract class AbstractTransformation implements Transformation {
         SourcePosition sp = parentMethod.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
         Environment env = compileUnit.getFactory().getEnvironment();
+
         addSourceCode();
+
 
         FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
         printer.calculate(compileUnit,null);
@@ -159,8 +203,7 @@ public abstract class AbstractTransformation implements Transformation {
         int begin = sp.getLine() - 1;
         int end = getLineEnd(parentMethod) + code.length - printer.getResult().split("\n").length;
 
-        return Arrays.stream(code, begin, end)
-                .collect(Collectors.joining("\n"));
+        return code + "\n" + begin + "\n" + end + "\n";
     }
 
     protected CtElement getParentMethod(CtElement son) {
@@ -197,5 +240,29 @@ public abstract class AbstractTransformation implements Transformation {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    /**
+     * The series number is an ID for a given serie containing this transformation.
+     *
+     * Remember that a series is a set of multi-sosies, each one being child of another in the set.
+     */
+    public int getSeries() {
+        return series;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
+    }
+
+    public void setInputConfiguration(InputConfiguration inputConfiguration) {
+        this.inputConfiguration = inputConfiguration;
+    }
+
+    /**
+     * Global input configuration
+     */
+    public InputConfiguration getInputConfiguration() {
+        return inputConfiguration;
     }
 }

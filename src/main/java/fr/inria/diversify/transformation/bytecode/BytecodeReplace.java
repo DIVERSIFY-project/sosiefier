@@ -47,6 +47,10 @@ public class BytecodeReplace extends BytecodeTransformation {
         return object;
     }
 
+    @Override
+    public String getTransformationString() throws Exception {
+        return "";
+    }
 
 
     @Override

@@ -1,5 +1,6 @@
 package fr.inria.diversify;
 
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.transformation.Transformation;
