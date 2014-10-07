@@ -6,6 +6,7 @@ import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
+import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
@@ -14,6 +15,8 @@ import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Simon
@@ -21,6 +24,8 @@ import java.io.IOException;
  * Time: 4:15 PM
  */
 public abstract class ASTTransformation extends AbstractTransformation {
+
+    protected List<SourceCodeFragment> sourceCodeFragments;
 
     protected boolean subType;
 
@@ -30,7 +35,9 @@ public abstract class ASTTransformation extends AbstractTransformation {
     protected CodeFragment transplantationPoint;
 
     public ASTTransformation() {
+        sourceCodeFragments = new ArrayList<>();
     }
+
     public CtSimpleType<?> getOriginalClass(CodeFragment cf) {
         return cf.getCompilationUnit().getMainType();
     }
@@ -120,7 +127,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
         CtSimpleType<?> type = getOriginalClass(transplantationPoint);
         CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
         if (compileUnit.getSourceCodeFraments() != null)
-            compileUnit.getSourceCodeFraments().clear();
+            compileUnit.getSourceCodeFraments().removeAll(sourceCodeFragments);
     }
 
     public void setSubType(boolean subType) {

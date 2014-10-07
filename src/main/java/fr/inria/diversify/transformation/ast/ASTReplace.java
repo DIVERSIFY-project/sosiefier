@@ -76,13 +76,17 @@ public class ASTReplace extends ASTTransformation {
 
 
         if (DiversifyProperties.getProperty("processor").equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** replace \n", 0));
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n" +
+            sourceCodeFragments.add(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** replace \n", 0));
+            sourceCodeFragments.add(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n" +
                     getTransplant().codeFragmentString() + "\n", 0));
+            compileUnit.addSourceCodeFragment(sourceCodeFragments.get(0));
+            compileUnit.addSourceCodeFragment(sourceCodeFragments.get(1));
         } else {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/** replace\n", 0));
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd() + 1, " **/\n" +
+            sourceCodeFragments.add(new SourceCodeFragment(sp.getSourceStart(), "/** replace\n", 0));
+            sourceCodeFragments.add(new SourceCodeFragment(sp.getSourceEnd() + 1, " **/\n" +
                     getTransplant().codeFragmentString(), 0));
+            compileUnit.addSourceCodeFragment(sourceCodeFragments.get(0));
+            compileUnit.addSourceCodeFragment(sourceCodeFragments.get(1));
         }
     }
 

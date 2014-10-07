@@ -62,7 +62,7 @@ public abstract class AbstractDiversify {
     /**
      * Directory to copy sosies programs source code to.
      */
-    private String socieSourcesDir = null;
+    private String sosieSourcesDir = null;
 
 
 
@@ -100,10 +100,10 @@ public abstract class AbstractDiversify {
      * Directory to copy sosies programs source code to.
      */
 
-    public String getSocieSourcesDir() { return socieSourcesDir; }
+    public String getSosieSourcesDir() { return sosieSourcesDir; }
 
-    public void setSocieSourcesDir(String socieSourcesDir) {
-        this.socieSourcesDir = socieSourcesDir;
+    public void setSosieSourcesDir(String sosieSourcesDir) {
+        this.sosieSourcesDir = sosieSourcesDir;
     }
 
     protected List<Transformation> transformations;
@@ -238,13 +238,13 @@ public abstract class AbstractDiversify {
         //Store the whole sosie program.
         try {
 
-            if (getSocieSourcesDir() != null && getSocieSourcesDir().length() > 0) {
-                File f = new File(getSocieSourcesDir());
+            if (getSosieSourcesDir() != null && getSosieSourcesDir().length() > 0) {
+                File f = new File(getSosieSourcesDir());
                 if (!(f.exists())) {
                     f.mkdirs();
                 }
 
-                String destPath = getSocieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
+                String destPath = getSosieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
 
                 boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
                 boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
@@ -256,7 +256,7 @@ public abstract class AbstractDiversify {
                     Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), destPath, transformations);
                     instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
                 } else {
-                    org.codehaus.plexus.util.FileUtils.copyDirectory(new File(tmpDir), f);
+                    FileUtils.copyDirectory(new File(tmpDir), f);
                 }
 
                 FileWriter writer = new FileWriter(destPath + "/trans.json");
@@ -264,7 +264,6 @@ public abstract class AbstractDiversify {
                     writer.write(t.toJSONObject().toString() + "\n");
                 }
                 writer.close();
-
             }
         } catch (IOException e) {
             //We may also don't want to recover from here. If no instrumentation possible... now what?
