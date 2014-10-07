@@ -39,13 +39,20 @@ public class InstruTestAndMethod {
         boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
         boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruTransplantPointCount"));
         boolean compact = Boolean.parseBoolean(inputConfiguration.getProperty("compact.log", "false"));
+        boolean onlyUpdateLoggerCode = Boolean.parseBoolean(inputConfiguration.getProperty("only.copy.logger", "false"));
+
+
 
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(project + "/pom.xml");
 
         Instru instru;
+        if ( onlyUpdateLoggerCode ) {
+            instru = new Instru(project, src, test, out, null);
+            instru.copyLogger();
+            return;
+        } else if ( intruTransplantPoint ) {
 
-        if ( intruTransplantPoint ) {
             Factory factory = new SpoonMetaFactory().buildNewFactory(project, 7);
 
             InputProgram inputProgram = new InputProgram();
@@ -58,13 +65,14 @@ public class InstruTestAndMethod {
             List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
             instru = new Instru(project, src, test, out, transf);
             instru.setSourceFactory(factory);
-        }
-        else {
+        } else {
             instru = new Instru(project, src, test, out, null);
         }
         instru.setCompactLog(compact);
         instru.setInstruTransplantationPointCallCount(intruTransplantPoint);
         instru.setInstruCountAssertions(intruCountAssert);
+        instru.setOnlyCopyLoggerCode(onlyUpdateLoggerCode);
+
         instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
     }
 

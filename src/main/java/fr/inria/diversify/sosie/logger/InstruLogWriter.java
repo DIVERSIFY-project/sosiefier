@@ -1,9 +1,5 @@
 package fr.inria.diversify.sosie.logger;
 
-/*
-import fr.inria.diversify.sosie.logger.ShutdownHookLog;
-import fr.inria.diversify.util.Log;
-*/
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.Semaphore;
@@ -15,60 +11,10 @@ import java.util.concurrent.Semaphore;
  */
 public abstract class InstruLogWriter {
 
+    //Thread containing the test
+    private final Thread thread;
 
-    /*
-    private class LogPair {
-        int x = 0;
-
-        int y = 0;
-
-        LogPair(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            LogPair p = (LogPair) obj;
-            return x == p.x && y == p.y;
-        }
-
-        @Override
-        public String toString() {
-            return x + ";" + y;
-        }
-    }*/
-
-/*
-    //Test - Position joint pairs
-    protected HashMap<Integer, HashSet<Integer>> testPerTP;
-
-    //Asserts ordered per test. The key is the index of the test. The array is the indexes of all assertions
-    protected HashMap<Integer, ArrayList<Integer>> assertPerTest;
-
-    //Number of assertions hits per transplantation. The first index is the TP, the second the assertion, the value is
-    //the number of assertions hits of the assertion in the TP
-    protected HashMap<LogPair, Integer> assertsHitsPerTest;
-
-    //Number of times a transplantation point is called
-    protected HashMap<Integer, Integer> transplantPointCallCount;
-    //Assertions indexes. The key is the position of the assertion
-    protected HashMap<String, Integer> assertsIndexes;
-    //Test indexes. The key is the signature of the assertion
-    protected HashMap<String, Integer> testsIndexes;
-    //Transplant point indexes
-    protected HashMap<String, Integer> tpIndexes;
-
-    //TPs called in this test
-    //protected HashSet<Integer> transplantPointCalledInThisTest;
-
-    //Index of current test
-    int testCurrentIndex = 0;
-    //Index of current assert
-    int assertCurrentIndex = 0;
-    //Index of current TP
-    int tpCurrentIndex = 0;*/
-
+    private final InstruLogWriter parent;
     //Dir where the logs are going to be stored
     private String logDir = "LogDirName";
 
@@ -92,10 +38,10 @@ public abstract class InstruLogWriter {
     protected Set<Thread> partialLoggingThread;
 
     //Number of times a TP is called
-    private HashMap<Thread, HashMap<String, Integer>> transplantPointCallCount;
+    private HashMap<String, Integer> transplantPointCallCount;
 
     //Number of times an assertion is called
-    private HashMap<Thread, HashMap<String, Integer>> assertCallCount;
+    private HashMap<String, Integer> assertCallCount;
 
     public int getCallDeep(Thread t) {
         return callDeep.containsKey(t) ? callDeep.get(t) : 0;
@@ -115,6 +61,9 @@ public abstract class InstruLogWriter {
         setTransplantPointCallCount(parent.getTransplantPointCallCount());
         setAssertCallCount(parent.getAssertCallCount());
 
+        this.parent = parent;
+        thread = parent.getThread();
+
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
@@ -130,12 +79,14 @@ public abstract class InstruLogWriter {
         callDeep = new HashMap<Thread, Integer>();
         logMethod = new HashMap<Thread, Boolean>();
 
-        transplantPointCallCount = new HashMap<Thread, HashMap<String, Integer>>();
+        transplantPointCallCount = new HashMap<String, Integer>();
 
-        assertCallCount = new HashMap<Thread, HashMap<String, Integer>>();
+        assertCallCount = new HashMap<String, Integer>();
 
         ShutdownHookLog shutdownHook = new ShutdownHookLog();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
+        parent = null;
+        thread = Thread.currentThread();
     }
 
     /**
@@ -175,33 +126,16 @@ public abstract class InstruLogWriter {
      * @param testSignature
      */
     public void writeTestStart(Thread thread, String testSignature) {
-        if ( getTransplantPointCallCount().containsKey(thread) ) {
-            getTransplantPointCallCount().get(thread).clear();
-        } else {
-            getTransplantPointCallCount().put(thread, new HashMap<String, Integer>());
-        }
-        if ( getAssertCallCount().containsKey(thread) ) {
-            getAssertCallCount().get(thread).clear();
-        } else {
-            getAssertCallCount().put(thread, new HashMap<String, Integer>());
-        }
+        getTransplantPointCallCount().clear();
+        getAssertCallCount().clear();
     }
 
-    private void incCallCount(HashMap<Thread, HashMap<String, Integer>> map, String id) {
-        Thread thread = Thread.currentThread();
-        HashMap<String, Integer> t;
-        if ( !map.containsKey(thread) ) {
-            t = map.get(thread);
+    private void incCallCount(HashMap<String, Integer> map, String id) {
+        if (!map.containsKey(id)) {
+            map.put(id, 1);
         } else {
-            t = new HashMap<String, Integer>();
-            map.put(thread, t);
-        }
-
-        if (!t.containsKey(id)) {
-            t.put(id, 1);
-        } else {
-            int k = t.get(id) + 1;
-            t.put(id, k);
+            int k = map.get(id) + 1;
+            map.put(id, k);
         }
     }
 
@@ -211,6 +145,9 @@ public abstract class InstruLogWriter {
      * @param id
      */
     public void writeSourcePositionCall(String id) {
+        if ( !getTransplantPointCallCount().containsKey(id) ) {
+            writeStartLogging(Thread.currentThread(), id);
+        }
         incCallCount(getTransplantPointCallCount(), id);
     }
 
@@ -222,68 +159,6 @@ public abstract class InstruLogWriter {
     public void countAssert(String id) {
         incCallCount(getAssertCallCount(), id);
     }
-
-
-
-    /*
-    public void writeSourcePositionCall(String transplantationPoint) {
-
-        int tp = tpCurrentIndex;
-        if (!tpIndexes.containsKey(transplantationPoint)) {
-            tpIndexes.put(transplantationPoint, tpCurrentIndex);
-        } else {
-            tp = tpIndexes.get(transplantationPoint);
-        }
-
-
-        //Count point calls
-        if (!transplantPointCallCount.containsKey(tp)) {
-            transplantPointCallCount.put(tp, 1);
-        } else {
-            int k = transplantPointCallCount.get(tp) + 1;
-            transplantPointCallCount.put(tp, k);
-        }
-
-        //Register test calls
-        if (transplantPointCalledInThisTest != null) {
-            //Add just once the test to the transplantation point
-            if (!transplantPointCalledInThisTest.contains(tp)) {
-                transplantPointCalledInThisTest.add(tp);
-                if (!testPerTP.containsKey(tp)) {
-                    HashSet<Integer> set = new HashSet<Integer>();
-                    set.add(testCurrentIndex);
-                    testPerTP.put(tp, set);
-                } else {
-                    HashSet<Integer> set = testPerTP.get(tp);
-                    if (!set.contains(testCurrentIndex)) {
-                        set.add(testCurrentIndex);
-                    }
-                }
-            }
-        }
-
-        tpCurrentIndex++;
-    }*/
-
-     /*{
-
-        if (!assertsIndexes.containsKey(assertSignature)) {
-            assertsIndexes.put(assertSignature, assertCurrentIndex);
-
-        }
-
-        //Augment the count of this assert in all related TP
-        for (Integer i : transplantPointCalledInThisTest) {
-            LogPair k = new LogPair(assertCurrentIndex, i);
-            if (!assertsHitsPerTest.containsKey(k)) {
-                assertsHitsPerTest.put(k, 1);
-            } else {
-                int count = assertsHitsPerTest.get(k) + 1;
-                assertsHitsPerTest.put(k, count);
-            }
-        }
-        assertCurrentIndex++;
-    }*/
 
     public abstract void writeVar(int id, Thread thread, String methodSignatureId, Object... var);
 
@@ -482,19 +357,28 @@ public abstract class InstruLogWriter {
      */
     public abstract void writeTestFinish();
 
-    protected synchronized HashMap<Thread, HashMap<String, Integer>> getTransplantPointCallCount() {
+    protected synchronized HashMap<String, Integer> getTransplantPointCallCount() {
         return transplantPointCallCount;
     }
 
-    protected synchronized void setTransplantPointCallCount(HashMap<Thread, HashMap<String, Integer>> value) {
+    protected synchronized void setTransplantPointCallCount(HashMap<String, Integer> value) {
         transplantPointCallCount = value;
     }
 
-    protected synchronized HashMap<Thread, HashMap<String, Integer>> getAssertCallCount() {
+    protected synchronized HashMap<String, Integer> getAssertCallCount() {
         return assertCallCount;
     }
 
-    public synchronized void setAssertCallCount(HashMap<Thread,HashMap<String,Integer>> assertCallCount) {
+    public synchronized void setAssertCallCount(HashMap<String, Integer> assertCallCount) {
         this.assertCallCount = assertCallCount;
+    }
+
+    public InstruLogWriter getParent() {
+        return parent;
+    }
+
+    //Thread containing the test
+    public Thread getThread() {
+        return thread;
     }
 }

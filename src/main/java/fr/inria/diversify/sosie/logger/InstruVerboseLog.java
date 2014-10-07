@@ -27,7 +27,8 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     /**
      * Constructor of the verbose log
-     * @param logDir Directory of the logger
+     *
+     * @param logDir    Directory of the logger
      * @param parentLog Parent log (the logger of the thread launching the test)
      */
     public InstruVerboseLog(String logDir, InstruLogWriter parentLog) {
@@ -87,6 +88,8 @@ public class InstruVerboseLog extends InstruLogWriter {
             stringBuilder.append("NewTest");
             stringBuilder.append(simpleSeparator);
             stringBuilder.append(testSignature);
+            stringBuilder.append(simpleSeparator);
+            stringBuilder.append(System.currentTimeMillis());
 
             String string = stringBuilder.toString();
             PrintWriter fileWriter = getFileWriter(thread);
@@ -136,35 +139,35 @@ public class InstruVerboseLog extends InstruLogWriter {
     }
 
     public void writeSourcePositionCall(String id) {
-        Thread thread = Thread.currentThread();
-        HashMap<String, Integer> h = getTransplantPointCallCount().get(thread);
-        if (h.containsKey(id)) {
-            int k = h.get(id);
-            h.put(id, k + 1);
+        if (getTransplantPointCallCount().containsKey(id)) {
+            int k = getTransplantPointCallCount().get(id);
+            getTransplantPointCallCount().put(id, k + 1);
         } else {
-            h.put(id, 1);
+            getTransplantPointCallCount().put(id, 1);
             writeStartLogging(Thread.currentThread(), id);
         }
     }
 
     @Override
     public void countAssert(String id) {
-        Thread thread = Thread.currentThread();
 
-        HashMap<String, Integer> h = getAssertCallCount().get(thread);
-        if (h.containsKey(id)) {
-            int k = h.get(id);
-            h.put(id, k + 1);
+        Thread thread = getParent() == null ? Thread.currentThread() : getParent().getThread();
+
+        if (getAssertCallCount().containsKey(id)) {
+            int k = getAssertCallCount().get(id);
+            getAssertCallCount().put(id, k + 1);
         } else {
             String semaphore = "";
             if (getLogMethod(thread)) {
                 try {
-                    h.put(id, 1);
+                    getAssertCallCount().put(id, 1);
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append("$$$\n");
                     stringBuilder.append("SA"); //start logging
                     stringBuilder.append(simpleSeparator);
                     stringBuilder.append(id);
+                    stringBuilder.append(simpleSeparator);
+                    stringBuilder.append(System.currentTimeMillis());
 
                     String string = stringBuilder.toString();
                     PrintWriter fileWriter = getFileWriter(thread);
@@ -189,6 +192,8 @@ public class InstruVerboseLog extends InstruLogWriter {
                 stringBuilder.append("S"); //start logging
                 stringBuilder.append(simpleSeparator);
                 stringBuilder.append(id);
+                stringBuilder.append(simpleSeparator);
+                stringBuilder.append(System.currentTimeMillis());
 
                 String string = stringBuilder.toString();
                 PrintWriter fileWriter = getFileWriter(thread);
@@ -335,14 +340,17 @@ public class InstruVerboseLog extends InstruLogWriter {
             try {
                 PrintWriter flw = getFileWriter(thread);
                 //Writes the subtotal of transplantation points called
-                if (getTransplantPointCallCount().containsKey(thread)) {
-                    writeSubTotal("TPC", flw, getTransplantPointCallCount().get(thread));
-                }
+                writeSubTotal("TPC", flw, getTransplantPointCallCount());
+
                 //Writes the subtotal of assertions called
-                if (getAssertCallCount().containsKey(thread)) {
-                    writeSubTotal("ASC", flw, getAssertCallCount().get(thread));
-                }
+                writeSubTotal("ASC", flw, getAssertCallCount());
+
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("\nTE");
+                stringBuilder.append(simpleSeparator);
+                stringBuilder.append(System.currentTimeMillis());
                 semaphore = flw.toString() + flw.hashCode();
+                flw.append(stringBuilder.toString());
                 flw.flush();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -375,14 +383,16 @@ public class InstruVerboseLog extends InstruLogWriter {
         StringBuilder sb = new StringBuilder();
 
         for (Map.Entry<String, Integer> e : map.entrySet()) {
-            if ( e.getValue() > 1 ) {
+            if (e.getValue() > 1) {
                 //Don't spend more space in login an occurrence of something we already log
                 sb.append("\n").
                         append(subTotalId).
                         append(simpleSeparator).
                         append(e.getKey()).
                         append(simpleSeparator).
-                        append(e.getValue());
+                        append(e.getValue()).
+                        append(simpleSeparator).
+                        append(System.currentTimeMillis());
             }
         }
         flw.write(sb.toString());

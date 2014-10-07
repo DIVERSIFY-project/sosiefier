@@ -54,6 +54,7 @@ public class Instru {
     private Factory sourceFactory = null;
 
     private Factory testFactorty = null;
+    private boolean onlyCopyLoggerCode;
 
 
     public Instru(String projectDirectory, String srcDirectory, String testDirectory ,String outputDirectory,
@@ -65,7 +66,14 @@ public class Instru {
         this.transformations = transformations;
     }
 
+    public void copyLogger() throws IOException {
+        copyLogger(outputDirectory, srcDirectory);
+    }
+
     public void instru(boolean intruMethodCall, boolean intruVariable, boolean intruError, boolean intruNewTest, boolean intruAssert) throws IOException {
+        if ( onlyCopyLoggerCode ) {
+            copyLogger(outputDirectory, srcDirectory);
+        }
 
         initOutputDirectory();
 
@@ -79,6 +87,10 @@ public class Instru {
     }
 
     public void instru() throws IOException {
+        if ( onlyCopyLoggerCode ) {
+            copyLogger(outputDirectory, srcDirectory);
+        }
+
         initOutputDirectory();
 
         if(getIntruMethodCall() || getIntruVariable() || getIntruError() || getInstruTransplantationPointCallCount())
@@ -327,5 +339,13 @@ public class Instru {
 
     public void setInstruCountAssertions(boolean instruCountAssertions) {
         this.instruCountAssertions = instruCountAssertions;
+    }
+
+    public void setOnlyCopyLoggerCode(boolean onlyCopyLoggerCode) {
+        this.onlyCopyLoggerCode = onlyCopyLoggerCode;
+    }
+
+    public boolean isOnlyCopyLoggerCode() {
+        return onlyCopyLoggerCode;
     }
 }
