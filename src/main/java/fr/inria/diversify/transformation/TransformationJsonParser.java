@@ -30,6 +30,8 @@ import spoon.reflect.reference.CtTypeReference;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * The TransformationJSONParser is a great tool to load Transformations from a JSON file and link them to the existing
@@ -73,24 +75,38 @@ public class TransformationJsonParser {
             transformations = new ArrayList<>();
     }
 
-    public Collection<Transformation> parseDir(String dir) throws TransformationParserException {
+    public Collection<Transformation> parseDir(String dir) {
 
         File file = new File(dir);
         int countFile = 0;
         Log.debug("transformation directory: {}", file.getAbsolutePath());
 
-        for (File f : file.listFiles())
-            if (f.getName().endsWith(".json")) {
-                countFile++;
-                Log.debug("Current number of transformation {}", transformations.size());
-                Log.debug("parse tranformation file: " + f.getName());
-                transformations.addAll(parseFile(f));
-            }
+        List<File> files = Arrays.asList(file.listFiles());
+        transformations = files.parallelStream()
+                .filter(f -> f.getName().endsWith(".json"))
+                .flatMap(f -> {
+                    try {
+                        return parseFile(f).stream();
+                    } catch (TransformationParserException e) {
+                        e.printStackTrace();
+                    }
+                    return new ArrayList<Transformation>().stream();
+                })
+                .collect(Collectors.toList());
+
+//        for (File f : file.listFiles())
+//            if (f.getName().endsWith(".json")) {
+//                countFile++;
+//                Log.debug("Current number of transformation {}", transformations.size());
+//                Log.debug("parse tranformation file: " + f.getName());
+//                transformations.addAll(parseFile(f));
+//            }
         Log.debug("number of transformation file: {}", countFile);
         Log.debug("number of parse error : {}", countError);
 
         return transformations;
     }
+
 
 
     public Transformation parseUniqueTransformation(File file) throws TransformationParserException {
@@ -603,8 +619,12 @@ public class TransformationJsonParser {
         CodeFragment cf = null;
         try {
             String position = jsonObject.getString("position");
-            String sourceCode = jsonObject.getString("sourceCode");
-            cf = inputProgram.getCodeFragment(position, sourceCode);
+            for (CodeFragment codeFragment : inputProgram.getCodeFragments()) {
+                if (codeFragment.positionString().equals(position)) {
+                    cf = codeFragment;
+                    break;
+                }
+            }
         } catch (JSONException e) {
             throw new TransformationParserException(
                     "Unnable to obtain at least one field from JSON object " + jsonObject.toString(), e);

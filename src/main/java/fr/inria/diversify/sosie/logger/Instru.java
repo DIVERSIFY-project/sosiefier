@@ -142,7 +142,8 @@ public class Instru {
             applyProcessor(sourceFactory, m);
         }
         if(intruVariable) {
-            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter(transformations);
+//            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter(transformations);
+            FieldUsedInstrumenter v = new FieldUsedInstrumenter(transformations);
             v.setUseCompactLog(compactLog);
             applyProcessor(sourceFactory, v);
         }

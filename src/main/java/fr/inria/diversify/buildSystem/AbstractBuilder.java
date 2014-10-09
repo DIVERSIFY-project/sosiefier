@@ -150,7 +150,7 @@ public abstract class AbstractBuilder {
         thread.start();
 
         int tmpTimeOut = 0;
-        int factor = 12;
+        int factor = 6;
         while (status == -3) {
             tmpTimeOut = tmpTimeOut + factor;
             Thread.sleep(1000);

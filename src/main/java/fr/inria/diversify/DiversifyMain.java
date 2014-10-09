@@ -76,40 +76,40 @@ public class DiversifyMain {
 
     protected void initAndRunBuilder() throws Exception {
         AbstractDiversify abstractDiversify;
-
         int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
-
-        TransformationQuery query = initTransformationQuery();
-
-        //Get sizes of incremental sosies that we want
-        int max;
-        int min;
-        String sosieSizes = inputConfiguration.getProperty("transformation.size.set");
-        ArrayList<Integer> intSosieSizes = null;
-        if (sosieSizes != null) {
-            intSosieSizes = new ArrayList<>();
-            for (String s : sosieSizes.split(";")) {
-                intSosieSizes.add(Integer.parseInt(s));
-            }
-            max = intSosieSizes.size() - 1;
-            min = 0;
+        if(inputConfiguration.getProperty("transformation.type").equals("issta")) {
+            abstractDiversify = initAbstractDiversify();
+            ASTTransformationQuery query = new ASTTransformationQuery(inputProgram);
+            ((SinglePointDiversify) abstractDiversify).run(query.isstaTransformation(n));
+            String repo = inputConfiguration.getProperty("gitRepository");
+            abstractDiversify.printResult(inputConfiguration.getProperty("result"), repo);
         } else {
-            max = Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1"));
-            min = Integer.parseInt(inputConfiguration.getProperty("transformation.size.min", Integer.toString(max)));
-        }
-
-        for (int i = min; i <= max; i++) {
-
+            abstractDiversify = initAbstractDiversify();
+            TransformationQuery query = initTransformationQuery();
+            //Get sizes of incremental sosies that we want
+            int max;
+            int min;
+            String sosieSizes = inputConfiguration.getProperty("transformation.size.set");
+            ArrayList<Integer> intSosieSizes = null;
+            if (sosieSizes != null) {
+                intSosieSizes = new ArrayList<>();
+                for (String s : sosieSizes.split(";")) {
+                    intSosieSizes.add(Integer.parseInt(s));
+                }
+                max = intSosieSizes.size() - 1;
+                min = 0;
+            } else {
+                max = Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1"));
+                min = Integer.parseInt(inputConfiguration.getProperty("transformation.size.min", Integer.toString(max)));
+            }
+            for (int i = min; i <= max; i++) {
                 if (intSosieSizes != null) {
                     inputProgram.setTransformationPerRun(intSosieSizes.get(i));
                 } else {
                     inputProgram.setTransformationPerRun(i);
                 }
-
                 abstractDiversify.setTransformationQuery(query);
                 abstractDiversify.run(n);
-
-
                 //Clear the found transformations for the next step to speed up. No needed since the new ones are going
                 //to be of different size and therefore different
                 //query.clearTransformationFounds();
@@ -124,11 +124,11 @@ public class DiversifyMain {
 
     protected AbstractDiversify initAbstractDiversify() throws Exception {
         AbstractDiversify ad = null;
-        String transformationType = DiversifyProperties.getProperty("transformation.type");
-        String projet = DiversifyProperties.getProperty("project");
-        String src = DiversifyProperties.getProperty("src");
-        String resultDir = DiversifyProperties.getProperty("result");
-        String sosieDir = DiversifyProperties.getProperty("copy.sosie.sources.to", "");
+        String transformationType = inputConfiguration.getProperty("transformation.type");
+        String projet = inputConfiguration.getProperty("project");
+        String src = inputConfiguration.getProperty("src");
+        String resultDir = inputConfiguration.getProperty("result");
+        String sosieDir = inputConfiguration.getProperty("copy.sosie.sources.to", "");
 
         if (transformationType.equals("knownsosies")
                 || transformationType.equals("knownmultisosies")
@@ -143,8 +143,8 @@ public class DiversifyMain {
             ad = new EndlessDiversify(inputConfiguration, projet, src);
         } else {
             ad = new SinglePointDiversify(inputConfiguration, projet, src);
-            boolean withParent = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.withparent", "false"));
-            boolean acceptedError = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.acceptederror", "false"));
+            boolean withParent = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.withparent", "false"));
+            boolean acceptedError = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.acceptederror", "false"));
             ((SinglePointDiversify) ad).setWithParent(withParent);
             ((SinglePointDiversify) ad).setAcceptedErrors(acceptedError);
         }
@@ -160,7 +160,7 @@ public class DiversifyMain {
 
     protected AbstractBuilder initBuilder(String directory) throws Exception {
         AbstractBuilder rb;
-        String builder =  DiversifyProperties.getProperty("builder");
+        String builder =  inputConfiguration.getProperty("builder");
 
         String src = inputConfiguration.getProperty("src");
         if (inputConfiguration.getProperty("builder").equals("maven")) {
@@ -177,7 +177,7 @@ public class DiversifyMain {
         String pomFile = inputConfiguration.getProperty("newPomFile");
         if (!pomFile.equals("")) rb.initPom(pomFile);
 
-        rb.copyClasses(DiversifyProperties.getProperty("classes"));
+        rb.copyClasses(inputConfiguration.getProperty("classes"));
         rb.initTimeOut();
         if(builder.equals("maven")) {
             rb.setPhase(new String[]{"test"});
@@ -246,18 +246,18 @@ public class DiversifyMain {
                 return new MutationToSosieQuery(inputProgram);
             }
             case "endless":{
-                Class cl = Class.forName(DiversifyProperties.getProperty("CodeFragmentClass"));
-                boolean subType = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.subtype", "false"));
+                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
+                boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
                 return new ASTTransformationQuery(inputProgram, cl, subType, false);
             }
             case "adr": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                boolean subType = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.subtype", "false"));
+                boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
                 return new ASTTransformationQuery(inputProgram, cl, subType, false);
             }
             case "adrstupid": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                boolean subType = Boolean.parseBoolean(DiversifyProperties.getProperty("transformation.subtype", "false"));
+                boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
                 return new ASTTransformationQuery(inputProgram, cl, subType, true);
             }
             case "knownsosies":
@@ -391,8 +391,8 @@ public class DiversifyMain {
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-        Visu v = new Visu(fileName + "_visu/visu", inputProgram);
-        v.writeJSON(transformations);
+//        Visu v = new Visu(fileName + "_visu/visu", inputProgram);
+//        v.writeJSON(transformations);
 
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);
