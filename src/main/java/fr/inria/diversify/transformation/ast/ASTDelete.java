@@ -42,7 +42,7 @@ public class ASTDelete extends ASTTransformation {
         sourceCodeFragments.add(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**delete\n", 0));
         sourceCodeFragments.add(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
         compileUnit.addSourceCodeFragment(sourceCodeFragments.get(0));
-        compileUnit.addSourceCodeFragment(sourceCodeFragments.get(0));
+        compileUnit.addSourceCodeFragment(sourceCodeFragments.get(1));
     }
 
 
@@ -65,6 +65,9 @@ public class ASTDelete extends ASTTransformation {
                    transplantationPoint.getCtCodeFragment().getPosition().equals(otherDelete.transplantationPoint.getCtCodeFragment().getPosition());
     }
 
+    public boolean usedOfSubType() {
+        return false;
+    }
 
     @Override
     public String toString() {

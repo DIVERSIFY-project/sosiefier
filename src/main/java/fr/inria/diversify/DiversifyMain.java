@@ -391,8 +391,8 @@ public class DiversifyMain {
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-//        Visu v = new Visu(fileName + "_visu/visu", inputProgram);
-//        v.writeJSON(transformations);
+       Visu v = new Visu(fileName + "_visu/visu", inputProgram);
+        v.writeJSON(transformations);
 
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);

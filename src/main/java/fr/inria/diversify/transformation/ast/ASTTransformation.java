@@ -133,6 +133,8 @@ public abstract class ASTTransformation extends AbstractTransformation {
     public void setSubType(boolean subType) {
         this.subType = subType;
     }
+
+    public abstract boolean usedOfSubType();
 }
 
 

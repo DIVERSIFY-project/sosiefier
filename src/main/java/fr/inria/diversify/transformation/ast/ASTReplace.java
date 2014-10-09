@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.InputContext;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,6 +9,7 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.reference.CtVariableReference;
 
 import java.util.Map;
 
@@ -149,5 +151,18 @@ public class ASTReplace extends ASTTransformation {
         this.type = type;
     }
 
+    public boolean usedOfSubType() {
+        InputContext tpInputContext = transplant.getContext().getInputContext();
+        InputContext tInputContext = transplantationPoint.getContext().getInputContext();
+        for(Map.Entry<String, String> var : variableMapping.entrySet()) {
+            CtVariableReference variable = tpInputContext.getVariableOrFieldNamed(var.getKey());
+            CtVariableReference candidate = tInputContext.getVariableOrFieldNamed(var.getValue());
+
+            if(!variable.getType().equals(candidate.getType())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -13,6 +13,7 @@ import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 
 import java.util.*;
+import java.util.stream.Collectors;
 //import java.util.stream.Collectors;
 
 /**
@@ -191,9 +192,7 @@ public abstract class AbstractTransformation implements Transformation {
         SourcePosition sp = parentMethod.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
         Environment env = compileUnit.getFactory().getEnvironment();
-
         addSourceCode();
-
 
         FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
         printer.calculate(compileUnit,null);
@@ -203,7 +202,8 @@ public abstract class AbstractTransformation implements Transformation {
         int begin = sp.getLine() - 1;
         int end = getLineEnd(parentMethod) + code.length - printer.getResult().split("\n").length;
 
-        return code + "\n" + begin + "\n" + end + "\n";
+        return Arrays.stream(code, begin, end)
+                     .collect(Collectors.joining("\n"));
     }
 
     protected CtElement getParentMethod(CtElement son) {

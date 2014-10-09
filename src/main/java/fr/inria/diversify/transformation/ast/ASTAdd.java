@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.InputContext;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
@@ -9,6 +10,7 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.reference.CtVariableReference;
 
 import java.util.Map;
 
@@ -20,7 +22,6 @@ import java.util.Map;
  * Time: 4:33 PM
  */
 public class ASTAdd extends ASTTransformation {
-    //private final InputConfiguration inputConfiguration;
     protected CodeFragment transplant;
     protected Map<String, String> variableMapping;
 
@@ -28,7 +29,6 @@ public class ASTAdd extends ASTTransformation {
     public ASTAdd() {
         name = "add";
         type = "adrStmt";
-        //inputConfiguration = configuration;
     }
 
     @Override
@@ -118,5 +118,19 @@ public class ASTAdd extends ASTTransformation {
 
     public CodeFragment getTransplant() {
         return transplant;
+    }
+
+    public boolean usedOfSubType() {
+        InputContext tpInputContext = transplant.getContext().getInputContext();
+        InputContext tInputContext = transplantationPoint.getContext().getInputContext();
+        for(Map.Entry<String, String> var : variableMapping.entrySet()) {
+            CtVariableReference variable = tpInputContext.getVariableOrFieldNamed(var.getKey());
+            CtVariableReference candidate = tInputContext.getVariableOrFieldNamed(var.getValue());
+
+            if(!variable.getType().equals(candidate.getType())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

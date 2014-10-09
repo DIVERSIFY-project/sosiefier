@@ -1,6 +1,7 @@
 package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 
 import java.io.BufferedWriter;
@@ -90,7 +91,7 @@ public class StatisticDiversification {
         Log.debug("write data for source city in file {}",fileName);
         bw.write("type"+separator+"name"+separator+"package"+separator+
                 "class"+separator+"method"+separator+"status"+separator+
-                "stmtType"+separator+"level"+separator+"line\n");
+                "stmtType"+separator+"level"+separator+"line"+separator+"usedSubType\n");
         for(Transformation trans : transformations) {
             StringBuffer sb = new StringBuffer();
             try {
@@ -111,10 +112,13 @@ public class StatisticDiversification {
                 sb.append(trans.getLevel());
                 sb.append(separator);
                 sb.append(trans.line());
+                sb.append(separator);
+                sb.append(((ASTTransformation)trans).usedOfSubType());
                 sb.append("\n");
                 bw.write(sb.toString());
             }catch (Exception e) {
                 Log.error("writeSourceCity",e);
+                e.printStackTrace();
             }
         }
         bw.close();
