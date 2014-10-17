@@ -2,6 +2,7 @@ package fr.inria.diversify.sosie.compare.stackTraceOperation;
 
 import fr.inria.diversify.sosie.compare.stackElement.StackTraceCall;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -9,14 +10,14 @@ import java.util.Stack;
  */
 public class StackTracePop implements StackTraceOperation {
     protected int pop;
-    protected Stack<StackTraceCall> callsPop;
+    protected LinkedList<StackTraceCall> callsPop;
 
     public StackTracePop(int pop) {
         this.pop = pop;
     }
 
     public void apply(StackTrace stackTrace) {
-        callsPop = new Stack<>();
+        callsPop = new LinkedList<>();
         for(int i = 0; i < pop; i++) {
             if(!stackTrace.stackTraceCalls.isEmpty()) {
                 stackTrace.deep--;

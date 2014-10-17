@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.logger;
 
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.sosie.logger.processor.*;
 import fr.inria.diversify.transformation.Transformation;
@@ -30,6 +31,8 @@ public class Instru {
     protected String testDirectory;
     protected List<Transformation> transformations;
 
+    private  int javaVersion;
+
     private boolean compactLog;
 
     //What to instrument?
@@ -57,13 +60,14 @@ public class Instru {
     private boolean onlyCopyLoggerCode;
 
 
-    public Instru(String projectDirectory, String srcDirectory, String testDirectory ,String outputDirectory,
+    public Instru(String projectDirectory, String srcDirectory, String testDirectory, int javaVersion, String outputDirectory,
                   List<Transformation> transformations) {
         this.projectDirectory = projectDirectory;
         this.srcDirectory = srcDirectory;
         this.testDirectory = testDirectory;
         this.outputDirectory = outputDirectory;
         this.transformations = transformations;
+        this.javaVersion = javaVersion;
     }
 
     public void copyLogger() throws IOException {
@@ -114,7 +118,9 @@ public class Instru {
         SimpleAssertInvocationCounter.writeIdFile(outputDirectory);
         TransplantationPointCallCountInstrumenter.writeIdFile(outputDirectory);
 
-        tpcInstrumenter.writeIdMapToFile(outputDirectory + "/tpcid.json");
+        if(tpcInstrumenter != null)
+            tpcInstrumenter.writeIdMapToFile(outputDirectory + "/tpcid.json");
+
         VariableLoggingInstrumenter.writeIdFile(outputDirectory);
         copyLogger(outputDirectory, srcDirectory);
 
@@ -173,7 +179,7 @@ public class Instru {
         String out = outputDirectory + "/" + testDirectory;
 
         if ( testFactorty == null ) {
-            //testFactorty = initSpoon(src + System.getProperty("path.separator") + test);
+            // = initSpoon(src + System.getProperty("path.separator") + test);
             testFactorty = initSpoon(test);
         }
 
@@ -209,9 +215,8 @@ public class Instru {
     }
 
     protected Factory initSpoon(String srcDirectory) {
-
         try {
-            return new SpoonMetaFactory().buildNewFactory(srcDirectory, 5);
+            return new SpoonMetaFactory().buildNewFactory(srcDirectory, javaVersion);
         } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);
         }

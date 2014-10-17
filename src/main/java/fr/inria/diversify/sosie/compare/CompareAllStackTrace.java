@@ -18,12 +18,12 @@ public class CompareAllStackTrace {
 
     protected Report reports;
 
-    public CompareAllStackTrace(String dirOriginal, String dirSosie, boolean partialTrace) throws IOException, JSONException {
-        originalStackTraces = loadLog(dirOriginal, false);
-        sosieStackTraces = loadLog(dirSosie, false);
-        this.partialTrace = partialTrace;
-        reports = new Report();
-    }
+//    public CompareAllStackTrace(String dirOriginal, String dirSosie, boolean partialTrace) throws IOException, JSONException {
+//        originalStackTraces = loadLog(dirOriginal, false);
+//        sosieStackTraces = loadLog(dirSosie, false);
+//        this.partialTrace = partialTrace;
+//        reports = new Report();
+//    }
 
     public CompareAllStackTrace(List<StackTrace> originalStackTraces, List<StackTrace> sosieStackTraces, boolean partialTrace) throws IOException, JSONException {
         this.originalStackTraces = originalStackTraces;

@@ -80,7 +80,7 @@ public class StackElementReaderTest {
 
         Assert.assertEquals(2, st.get(0).getStackTraceOperations().size());
         Assert.assertTrue(st.get(0).getStackTraceOperations().get(1) instanceof StackTraceVariableObservation);
-        Map<String, Object> vars =
+        Map<String, Long> vars =
                 ((StackTraceVariableObservation)st.get(0).getStackTraceOperations().get(1)).getVars().getVariables();
         Assert.assertTrue(vars.containsValue("1000"));
 

@@ -120,7 +120,7 @@ public class Run {
     protected List<StackTrace> makeReportAndOLog(String originalDir) throws Exception {
         ComputeReport computeReport = new ComputeReport();
         computeReport.setLocalRepository(localRepository);
-        Report  report = computeReport.buildOriginalReport(new File(originalDir));
+        Report report = computeReport.buildOriginalReport(new File(originalDir));
 
         TestReport allTest = report.buildAllTest();
         computeReport.writeCSVReport(allTest,allTest, originalDir + "/report.csv");

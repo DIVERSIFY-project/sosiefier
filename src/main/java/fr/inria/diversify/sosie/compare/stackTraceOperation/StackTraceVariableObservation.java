@@ -27,7 +27,7 @@ public class StackTraceVariableObservation implements StackTraceOperation {
 
     @Override
     public void apply(StackTrace stackTrace) {
-        previousObservation = new HashMap();
+        previousObservation = new HashMap(vars.getVariables().size());
         stackTrace.variablesValueChange = true;
         for(String key : getVars().getVariables().keySet()) {
             previousObservation.put(key, stackTrace.variablesValue.get(key));

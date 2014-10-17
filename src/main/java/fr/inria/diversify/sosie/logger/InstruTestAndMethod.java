@@ -16,7 +16,6 @@ import java.util.List;
  * Date: 7/22/13
  * Time: 2:03 PM
  *
- * TODO: Move this to Test folder
  */
 public class InstruTestAndMethod {
 
@@ -40,7 +39,7 @@ public class InstruTestAndMethod {
         boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruTransplantPointCount"));
         boolean compact = Boolean.parseBoolean(inputConfiguration.getProperty("compact.log", "false"));
         boolean onlyUpdateLoggerCode = Boolean.parseBoolean(inputConfiguration.getProperty("only.copy.logger", "false"));
-
+        int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion"));
 
 
         MavenDependencyResolver t = new MavenDependencyResolver();
@@ -48,7 +47,7 @@ public class InstruTestAndMethod {
 
         Instru instru;
         if ( onlyUpdateLoggerCode ) {
-            instru = new Instru(project, src, test, out, null);
+            instru = new Instru(project, src, test, javaVersion, out, null);
             instru.copyLogger();
             return;
         } else if ( intruTransplantPoint ) {
@@ -63,10 +62,10 @@ public class InstruTestAndMethod {
 
             TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
             List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
-            instru = new Instru(project, src, test, out, transf);
+            instru = new Instru(project, src, test, javaVersion, out, transf);
             instru.setSourceFactory(factory);
         } else {
-            instru = new Instru(project, src, test, out, null);
+            instru = new Instru(project, src, test, javaVersion, out, null);
         }
         instru.setCompactLog(compact);
         instru.setInstruTransplantationPointCallCount(intruTransplantPoint);

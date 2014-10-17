@@ -53,15 +53,17 @@ public class InputContext {
     public CtVariableReference<?> candidate(CtTypeReference<?> type, boolean subType){
         for (CtVariableReference<?> var : variableReferences) {
             CtTypeReference<?> varType = var.getType();
-            if(subType) {
-                if(type.isSubtypeOf(varType) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
-                    return var;
+            try {
+                if (subType) {
+                    if (type.isSubtypeOf(varType) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                        return var;
+                    }
+                } else {
+                    if (varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                        return var;
+                    }
                 }
-            } else {
-                if(varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
-                    return var;
-                }
-            }
+            } catch (Exception e) {}
         }
         return null;
         }

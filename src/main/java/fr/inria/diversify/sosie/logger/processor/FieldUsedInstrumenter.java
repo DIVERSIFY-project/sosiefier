@@ -5,69 +5,102 @@ import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.declaration.*;
+import spoon.reflect.reference.CtFieldReference;
+import spoon.reflect.visitor.QueryVisitor;
+import spoon.reflect.visitor.filter.TypeFilter;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.*;
 
 /**
  * Created by Simon on 16/07/14.
  */
-public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtExpression> {
+public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
 
+    protected Set<CtStatement> alreadyInstrument;
 
     public FieldUsedInstrumenter(List<Transformation> transformations) {
         super(transformations);
+        alreadyInstrument = new HashSet<>();
     }
-
     @Override
-    public void process(CtExpression expression) {
-        if(expression instanceof CtAssignment) {
-            CtAssignment assignment = (CtAssignment) expression;
+    public void process(CtStatement statement) {
+        if(!alreadyInstrumented(statement)) {
+            FieldReferenceVisitor scanner = getFieldUsed(statement);
+            Map<CtFieldReference, String> fieldUsed = scanner.getFields();
+            Set<CtFieldReference> after = scanner.getAfter();
 
-            if (isField(assignment.getAssigned())) {
-                CtVariableAccess var = (CtVariableAccess) assignment.getAssigned();
-                instruField(expression, (CtField) var.getVariable().getDeclaration(), false);
-            }
-        }
-        if(expression instanceof CtInvocation) {
-            CtInvocation invocation = (CtInvocation) expression;
-            if(isField(invocation.getTarget())) {
-                CtVariableAccess var = (CtVariableAccess) invocation.getTarget();
-                instruField(expression, (CtField) var.getVariable().getDeclaration(), true);
+            for (CtFieldReference<?> var : fieldUsed.keySet()) {
+                if (getMethod(statement) != null && ok(statement)
+                        && !statement.toString().startsWith("this(")
+                        && !statement.toString().startsWith("super(")
+                        && !var.getSimpleName().equals("class") && !oneLineMethod(statement)) {
+                    try {
+                        alreadyInstrument.add(statement);
+                        String id = idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
+
+                        String snippet = "\t" + getLogName() + ".writeVar(" + getCount(statement) + ",Thread.currentThread(),\"" + id + "\",\"" + idFor(var.getSimpleName()) + "\"," + fieldUsed.get(var) + ");\n\t";
+
+                        if(fieldUsed.get(var).contains(".")) {
+                            snippet = "\ttry {\n\t" + snippet + "} catch (Exception e) {}\n";
+                        }
+                        SourcePosition sp = statement.getPosition();
+                        CompilationUnit compileUnit = sp.getCompilationUnit();
+                        int index;
+                        if (!after.contains(var)) {
+                            index = compileUnit.beginOfLineIndex(sp.getSourceStart());
+                        } else {
+                            index = compileUnit.nextLineIndex(sp.getSourceEnd());
+                        }
+
+                        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }
 
-    protected void instruField(CtExpression expression, CtField field, boolean before) {
-        boolean isStaticVar = field.getModifiers().contains(ModifierKind.STATIC);
+    protected boolean alreadyInstrumented(CtStatement statement) {
+        boolean match = getSubStatement(statement).stream().anyMatch(stmt -> alreadyInstrument.contains(stmt));
 
-        if (!isStaticVar && getMethod(expression) != null) {
-            String id = idFor(getClass(expression).getQualifiedName() + "." + getMethod(expression).getSignature());
 
-            String snippet = "\n\t"+ getLogName() + ".writeVar(" + getCount(expression) +",Thread.currentThread(),\"" + id + "\",\"" +idFor(field.getSimpleName()) + "\"," + field.getSimpleName() + ");";
-
-            SourcePosition sp = expression.getPosition();
-            CompilationUnit compileUnit = sp.getCompilationUnit();
-            int index;
-            if(before) {
-                index = compileUnit.beginOfLineIndex(sp.getSourceEnd());
-            } else {
-                index = compileUnit.nextLineIndex(sp.getSourceEnd());
-            }
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-        }
+        return match;
     }
 
-    protected boolean isField(CtExpression expression) {
-        if (expression instanceof CtVariableAccess) {
-            CtVariableAccess var = (CtVariableAccess) expression;
-            if (var.getVariable().getDeclaration() instanceof CtField) {
-                return true;
-            }
-        }
-        return false;
+    protected boolean ok(CtStatement statement) {
+        if(statement instanceof CtBlock)
+            return false;
+        CtStatement parent = statement.getParent(CtStatement.class);
+        if(parent instanceof CtBlock)
+            return true;
+        else
+            return false;
+    }
+
+    protected boolean oneLineMethod(CtStatement statement) {
+        SourcePosition sp = statement.getPosition();
+        CompilationUnit stmtCompileUnit = sp.getCompilationUnit();
+
+        SourcePosition sp2 = statement.getParent(CtExecutable.class).getPosition();
+        CompilationUnit mthCompileUnit = sp2.getCompilationUnit();
+
+        return  stmtCompileUnit.beginOfLineIndex(sp.getSourceEnd()) ==  mthCompileUnit.beginOfLineIndex(sp2.getSourceEnd());
+    }
+
+
+    protected FieldReferenceVisitor getFieldUsed(CtStatement statement) {
+        FieldReferenceVisitor scanner = new FieldReferenceVisitor();
+        statement.accept(scanner);
+        return scanner;
+    }
+
+    protected List<CtStatement> getSubStatement(CtStatement statement) {
+        QueryVisitor query = new QueryVisitor(new TypeFilter(CtStatement.class));
+
+        statement.accept(query);
+        return query.getResult();
     }
 }
