@@ -163,13 +163,11 @@ public abstract class AbstractBuilder {
     }
 
     public void copyClasses(String classes) throws IOException {
-        File destDir = new File(directory+"/classes2");
+        String[] tmp = classes.split("target");
+        File destDir = new File(directory+"/"+tmp[0]+"/classes2");
         File classesDir = new File(directory+"/"+classes);
         FileUtils.deleteDirectory(destDir);
         FileUtils.copyDirectory(classesDir, destDir);
-//        for(File file : classesDir.listFiles()) {
-//            FileUtils.copyDirectory(file, destDir);
-//        }
     }
 
     public void initPom(String newPomFile) throws Exception {

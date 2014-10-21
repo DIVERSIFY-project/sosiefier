@@ -62,13 +62,15 @@ public class MavenDependencyResolver {
         List<URL> jarURL = new ArrayList<URL>();
         Properties properties = project.getProperties();
         for (Dependency dependency : project.getDependencies()) {
-            String artifactId = "mvn:" + resolveName(dependency.getGroupId(), properties) +
-                    ":" + resolveName(dependency.getArtifactId(), properties) +
-                    ":" + resolveName(dependency.getVersion(), properties) +
-                    ":" + resolveName(dependency.getType(), properties);
-            Log.debug("revolve artifact: {}", artifactId);
-            File cachedFile = resolver.resolve(artifactId, urls);
-            jarURL.add(cachedFile.toURI().toURL());
+            try {
+                String artifactId = "mvn:" + resolveName(dependency.getGroupId(), properties) +
+                        ":" + resolveName(dependency.getArtifactId(), properties) +
+                        ":" + resolveName(dependency.getVersion(), properties) +
+                        ":" + resolveName(dependency.getType(), properties);
+                Log.debug("revolve artifact: {}", artifactId);
+                File cachedFile = resolver.resolve(artifactId, urls);
+                jarURL.add(cachedFile.toURI().toURL());
+            } catch (Exception e) {}
         }
 
         URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
