@@ -77,7 +77,6 @@ public class Run {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
 
         if(run.localRepository.exists())

@@ -40,8 +40,6 @@ public class ComputeReport {
         String resultDirectory = args[2];
         String sosiesDirectory = args[0];
 
-//        computeReport.setOriginalLogDirectory(new File(args[1]));
-
         computeReport.buildAllReport(new File(sosiesDirectory), new File(resultDirectory));
         computeReport.writeSummary(resultDirectory);
     }
@@ -146,7 +144,24 @@ public class ComputeReport {
         List<StackTrace> stackTrace1 = loadLog(originalLogDir1, false);
         List<StackTrace> stackTrace2 = loadLog(originalLogDir2, false);
 
-        return compareTrace(stackTrace1, stackTrace2, false);
+        CompareAllStackTrace un = new CompareAllStackTrace(stackTrace2, stackTrace1, false);
+        un.findDiff();
+        Report report = un.getReport();
+
+        int reportSize = 0;
+        while(reportSize != report.size()) {
+            reportSize = report.size();
+            Log.info(report.summary());
+            makeLogFor(originalDir);
+            stackTrace1 = loadLog(originalLogDir1, false);
+            un.setSosieStackTraces(stackTrace1);
+            un.findDiff();
+            report = un.getReport();
+        }
+
+        Log.info(report.summary());
+
+        return report;
     }
 
     protected Report updateGlobalReport(Report global, Report update) {

@@ -63,7 +63,7 @@ public class CompareStackTrace extends AbstractCompareStackTrace {
             if(st1Lower && st2Lower || !sameTop) {
 //                Log.info("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
 //                diffs.add(findNewSyncro(20, 2, originalStackTrace, sosieStackTrace));
-                findNewSyncro(20, 2, originalStackTrace, sosieStackTrace);
+                findNewSyncro(20, 1, originalStackTrace, sosieStackTrace);
                 if(originalStackTrace.getDeep() == sosieStackTrace.getDeep()) {
                     st1Lower = false; st2Lower = false;
                 }

@@ -65,4 +65,8 @@ public class CompareAllStackTrace {
     public Report getReport() throws JSONException {
         return reports;
     }
+
+    public void setSosieStackTraces(List<StackTrace> sosieStackTraces) {
+        this.sosieStackTraces = sosieStackTraces;
+    }
 }
