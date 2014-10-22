@@ -64,20 +64,28 @@ public class CompareStackTrace extends AbstractCompareStackTrace {
 //                Log.info("stack trace diff: st1 size: {}, st2 size: {},\nst1 top: {}, st2 top: {}",deep1,deep2,top1,top2);
 //                diffs.add(findNewSyncro(20, 2, originalStackTrace, sosieStackTrace));
                 findNewSyncro(20, 1, originalStackTrace, sosieStackTrace);
+                testReport.addDiffMethodCall(top1);
+                testReport.addDiffMethodCall(top2);
                 if(originalStackTrace.getDeep() == sosieStackTrace.getDeep()) {
                     st1Lower = false; st2Lower = false;
                 }
             }
             if(sameTop && !(st1Lower && st2Lower)){ //same stack trace
                 testReport.addSameMethodCall(top1);
-            }
-
-            if(st1Lower == st2Lower && (originalStackTrace.getVariablesValueChange() || sosieStackTrace.getVariablesValueChange())) {
-                Set<String> vd = varDiff(originalStackTrace, sosieStackTrace);
-                if (!vd.isEmpty()) {
-                    diffs.addAll(vd);
+                if(originalStackTrace.getVariablesValueChange() || sosieStackTrace.getVariablesValueChange()) {
+                    Set<String> vd = varDiff(originalStackTrace, sosieStackTrace);
+                    if (!vd.isEmpty()) {
+                        diffs.addAll(vd);
+                    }
                 }
             }
+
+//            if(sameTop && st1Lower == st2Lower && (originalStackTrace.getVariablesValueChange() || sosieStackTrace.getVariablesValueChange())) {
+//                Set<String> vd = varDiff(originalStackTrace, sosieStackTrace);
+//                if (!vd.isEmpty()) {
+//                    diffs.addAll(vd);
+//                }
+//            }
         }
 //        originalStackTrace.reset();
 //        sosieStackTrace.reset();

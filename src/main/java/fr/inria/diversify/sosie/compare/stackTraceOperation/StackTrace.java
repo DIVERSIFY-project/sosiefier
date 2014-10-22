@@ -16,11 +16,17 @@ public class StackTrace {
     protected int position;
     protected int deep;
     protected String name;
-//    protected String threadName;
     protected boolean variablesValueChange;
     protected Set<Integer> startLogging;
 
 
+    public void reset() {
+        stackTraceCalls = new Stack();
+        variablesValue = new HashMap();
+        startLogging = new HashSet();
+        deep = 0;
+        position = 0;
+    }
     public StackTrace() {
         stackTraceCalls = new Stack();
         stackTraceOperations = new ArrayList();
@@ -57,14 +63,6 @@ public class StackTrace {
     public void previous(int count) {
         for(int i = 0; i < count; i++)
             previous();
-    }
-
-    public void reset() {
-        stackTraceCalls = new Stack();
-        variablesValue = new HashMap();
-        startLogging = new HashSet();
-        deep = 0;
-        position = 0;
     }
 
     public StackTraceCall getTop() {
