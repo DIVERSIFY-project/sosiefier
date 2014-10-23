@@ -28,6 +28,8 @@ public abstract class AbstractSessionResults {
     protected int compileFailedCount;
 
 
+
+
     public int getSosieCount() {
         return sosieCount;
     }

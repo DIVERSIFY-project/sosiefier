@@ -20,7 +20,9 @@ public class Run {
     File localRepository;
     protected int minReportSize;
 
+
     public static void main(String[] args) throws Exception {
+        int reportCount = 0;
         String originalDir = args[0];
         String sosiesDir = args[1];
         String resultDir = args[2];
@@ -30,7 +32,7 @@ public class Run {
         run.localRepository = run.makeTmpSetting(resultDir);
 
         Log.info("build report for original/original");
-        List<StackTrace> originalLog = run.makeReportAndOLog(originalDir);
+        List<StackTrace> originalLog = run.makeReportAndOLog(originalDir, resultDir+ "/original"+reportCount++);
 
         File result = new File(resultDir + "/sosie");
         if(!result.exists()) {
@@ -55,7 +57,7 @@ public class Run {
                 run.setPartialLogging(originalDir, false);
                 run.runProgram(originalDir, true);
 
-                originalLog = run.makeReportAndOLog(client);
+                originalLog = run.makeReportAndOLog(client, resultDir+ "/original"+reportCount++);
 
                 File clientDir = new File(client);
                 File clientResultDir = new File(resultDir + "/" + clientDir.getName());
@@ -116,13 +118,13 @@ public class Run {
         }
     }
 
-    protected List<StackTrace> makeReportAndOLog(String originalDir) throws Exception {
+    protected List<StackTrace> makeReportAndOLog(String originalDir, String reportName) throws Exception {
         ComputeReport computeReport = new ComputeReport();
         computeReport.setLocalRepository(localRepository);
         Report report = computeReport.buildOriginalReport(new File(originalDir));
 
         TestReport allTest = report.buildAllTest();
-        computeReport.writeCSVReport(allTest,allTest, originalDir + "/report.csv");
+        computeReport.writeCSVReport(allTest,allTest, reportName + ".csv");
 
         minReportSize = allTest.size();
         File originalLogDir = new File(originalDir + "/originalLog");

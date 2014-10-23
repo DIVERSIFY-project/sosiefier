@@ -141,6 +141,12 @@ public class DiversifyMain {
             ((Diversify) ad).setEarlyReport(early);
         } else if(transformationType.equals("endless")){
             ad = new EndlessDiversify(inputConfiguration, projet, src);
+        } else if(transformationType.equals("uniquesosies")) {
+            ad = new UniqueSosieGenerator(inputConfiguration, projet, src);
+            String transDir = inputConfiguration.getProperty("transformation.directory");
+            TransformationParser tf = new TransformationParser(true, inputProgram);
+            Collection<Transformation> transformations = tf.parseDir(transDir);
+            ((UniqueSosieGenerator) ad).setTransformation(transformations);
         } else {
             ad = new SinglePointDiversify(inputConfiguration, projet, src);
             boolean withParent = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.withparent", "false"));
@@ -255,6 +261,9 @@ public class DiversifyMain {
                 boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
                 return new ASTTransformationQuery(inputProgram, cl, subType, false);
             }
+            case "uniquesosies":
+                //todo fix
+
             case "adrstupid": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
                 boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
