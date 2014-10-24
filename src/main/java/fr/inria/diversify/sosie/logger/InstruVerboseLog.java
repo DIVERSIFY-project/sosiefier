@@ -71,8 +71,9 @@ public class InstruVerboseLog extends InstruLogWriter {
         String semaphore = "";
         try {
             partialLoggingThread = null;
-
-            previousVarLog.get(thread).clear();
+            if(previousVarLog.get(thread) != null) {
+                previousVarLog.get(thread).clear();
+            }
             resetCallDepth(thread);
 
             StringBuilder stringBuilder = new StringBuilder();
