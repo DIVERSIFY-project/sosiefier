@@ -99,6 +99,8 @@ public class ComputeReport {
                     Log.info("compare sosie/original");
                     Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
 
+                    FileUtils.forceDelete(sosieLogDir1);
+                    FileUtils.forceDelete(sosieLogDir2);
 
                     writeCSVReport(originalSosieReport.buildAllTest(), sosieSosieReport.buildAllTest(), resultDir.getAbsolutePath() + "/" + sosie.getName() + ".csv");
 
