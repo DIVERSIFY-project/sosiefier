@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Simon on 23/10/2014.
@@ -32,9 +33,11 @@ public class UniqueSosieGenerator extends AbstractDiversify {
 
     @Override
     public void run(int n) throws Exception {
-
+        Random random = new Random();
         while (transformations.size() < n && !allTransformation.isEmpty()) {
-            run(allTransformation.remove(0));
+            Transformation t = allTransformation.get(random.nextInt(allTransformation.size()));
+            allTransformation.remove(t);
+            run(t);
         }
     }
 
