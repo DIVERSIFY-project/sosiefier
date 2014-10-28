@@ -1,8 +1,9 @@
 /output_diversify/
 /output_sosie/
-/result/
-/repo/
-/sortResult/
+/result/**
+/repo/**
+/repoTest/**
+/sortResult/**
 /mavenProjects/
 /test/
 **/target/
