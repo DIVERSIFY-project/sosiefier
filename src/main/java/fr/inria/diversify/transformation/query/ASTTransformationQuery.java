@@ -84,7 +84,6 @@ public class ASTTransformationQuery extends TransformationQuery {
                 Random r = new Random();
                 ASTTransformation t = null;
                 int i = r.nextInt(stupid ? 15 : 5);
-
                 switch (i) {
                     case 0:
                     case 1:

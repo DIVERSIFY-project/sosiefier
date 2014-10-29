@@ -7,9 +7,11 @@ import spoon.compiler.Environment;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
+import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
@@ -61,8 +63,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     public String methodLocationName() {
         CtExecutable elem = transplantationPoint.getCtCodeFragment().getParent(CtExecutable.class);
-        if (elem != null)
-            return elem.getSimpleName();
+        if (elem != null) return elem.getSimpleName();
         return "field";
     }
 
@@ -70,15 +71,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
     @Override
     public String getLevel() {
         CtCodeElement stmt = transplantationPoint.getCtCodeFragment();
-        if (stmt instanceof CtLocalVariable
-                || stmt instanceof CtNewClass
-                || stmt instanceof CtBreak
-                || stmt instanceof CtUnaryOperator
-                || stmt instanceof CtAssignment
-                || stmt instanceof CtReturn
-                || stmt instanceof CtOperatorAssignment
-                || stmt instanceof CtContinue
-                || stmt instanceof CtInvocation)
+        if (stmt instanceof CtLocalVariable || stmt instanceof CtNewClass || stmt instanceof CtBreak || stmt instanceof CtUnaryOperator || stmt instanceof CtAssignment || stmt instanceof CtReturn || stmt instanceof CtOperatorAssignment || stmt instanceof CtContinue || stmt instanceof CtInvocation)
             return "statement";
         return "block";
     }
@@ -105,6 +98,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
     /**
      * Prints the modified java file. When the transformation is done a new java file is created. This method performs a
      * pretty print of it
+     *
      * @param directory Directory where the java file is going to be placed
      * @throws IOException
      */
@@ -113,7 +107,8 @@ public abstract class ASTTransformation extends AbstractTransformation {
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new FragmentDrivenJavaPrettyPrinter(env));
+//        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new FragmentDrivenJavaPrettyPrinter(env));
+        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
         processor.setFactory(factory);
 
         processor.createJavaFile(type);
@@ -135,6 +130,50 @@ public abstract class ASTTransformation extends AbstractTransformation {
     }
 
     public abstract boolean usedOfSubType();
+
+
+    protected void openFile(String file) {
+        String[] command = {"open", file};
+        ProcessBuilder probuilder = new ProcessBuilder( command );
+
+        probuilder.directory(new File(System.getProperty("user.dir")));
+
+        try {
+            probuilder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addSourceCode() throws Exception {
+
+    }
+
+    protected CtElement copyElem(CtElement elem) {
+        Factory factory = elem.getFactory();
+        CtElement tmp = factory.Core().clone(elem);
+        tmp.setParent(elem.getParent());
+        tmp.setFactory(factory);
+        return tmp;
+    }
+
+    protected abstract void applyInfo();
+
+    public void apply(String srcDir) throws Exception {
+        applyInfo();
+        copyTransplant = buildCopyTransplant();
+        transplantationPoint.getCtCodeFragment().replace(copyTransplant);
+        printJavaFile(srcDir);
+    }
+
+    protected abstract CtCodeElement buildCopyTransplant() throws Exception;
+
+    CtCodeElement copyTransplant;
+    public void restore(String srcDir) throws Exception {
+        copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+        printJavaFile(srcDir);
+    }
 }
 
 

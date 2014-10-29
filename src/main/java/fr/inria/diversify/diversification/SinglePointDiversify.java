@@ -52,7 +52,7 @@ public class SinglePointDiversify extends AbstractDiversify {
     }
 
     protected void run(Transformation trans) throws Exception {
-        Log.info("trial {}",trial);
+        Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
             writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
@@ -63,7 +63,7 @@ public class SinglePointDiversify extends AbstractDiversify {
 
             trans.setStatus(status);
             trans.setFailures(builder.getTestFail());
-            if(status == 0) {
+            if (status == 0) {
                 copySosieProgram();
             }
 
@@ -74,9 +74,14 @@ public class SinglePointDiversify extends AbstractDiversify {
         }
         trial++;
         trans.restore(tmpDir + "/" + sourceDir);
+        int status = runTest(tmpDir);
+        if(status != 0) {
+            Log.error("errur");
+        }
         ((SinglePointSessionResults) sessionResults).addRunResults(trans);
         Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
     }
+
 
     protected void applyTransformation(Transformation trans) throws Exception {
         if(withParent) {

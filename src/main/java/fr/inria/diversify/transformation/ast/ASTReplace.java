@@ -5,11 +5,16 @@ import fr.inria.diversify.codeFragment.InputContext;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
+import spoon.reflect.code.CtCodeElement;
+import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtVariableReference;
+import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import java.util.Map;
 
@@ -57,44 +62,28 @@ public class ASTReplace extends ASTTransformation {
         type = "adrStmt";
     }
 
-
-    @Override
-    public void addSourceCode() throws Exception {
-        CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
-
+    protected void applyInfo() {
         Log.debug("transformation: {}, {}", type, name);
         Log.debug("transplantation point:\n{}", transplantationPoint);
         Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
         Log.debug("{}", transplantationPoint.getCodeFragmentType());
         Log.debug("replace by: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
+    }
 
+    protected CtCodeElement buildCopyTransplant() throws Exception {
+        CodeFragment stmt = transplant.clone();
         if (withVarMapping()) {
             if (variableMapping == null)
                 variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
 
             Log.debug("random variable mapping: {}", variableMapping);
-            getTransplant().replaceVar(transplantationPoint, variableMapping);
-            if (getTransplant().equals(transplantationPoint.codeFragmentString()))
+            stmt.replaceVar(transplantationPoint, variableMapping);
+            if (stmt.codeFragmentString().equals(transplantationPoint.codeFragmentString()))
                 throw new Exception("same statment");
         }
-        CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
-        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
-
-        String processor = getInputConfiguration() == null ?  "" : getInputConfiguration().getProperty("processor");
-        if (processor.equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
-            sourceCodeFragments.add(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** replace \n", 0));
-            sourceCodeFragments.add(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n" +
-                    getTransplant().codeFragmentString() + "\n", 0));
-            compileUnit.addSourceCodeFragment(sourceCodeFragments.get(0));
-            compileUnit.addSourceCodeFragment(sourceCodeFragments.get(1));
-        } else {
-            sourceCodeFragments.add(new SourceCodeFragment(sp.getSourceStart(), "/** replace\n", 0));
-            sourceCodeFragments.add(new SourceCodeFragment(sp.getSourceEnd() + 1, " **/\n" +
-                    getTransplant().codeFragmentString(), 0));
-            compileUnit.addSourceCodeFragment(sourceCodeFragments.get(0));
-            compileUnit.addSourceCodeFragment(sourceCodeFragments.get(1));
-        }
+        return stmt.getCtCodeFragment();
     }
+
 
     protected boolean withVarMapping() {
         //todo a remplacer par un attribut

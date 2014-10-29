@@ -31,4 +31,8 @@ public class Block extends CodeFragment {
 
         return context.isReplaceableBy(other.context, varNameMatch, subType);
     }
+
+    public Block clone() {
+        return new Block((CtBlock) copyElem(codeFragment));
+    }
 }

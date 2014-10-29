@@ -7,10 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
-import spoon.reflect.declaration.CtTypedElement;
+import spoon.reflect.declaration.*;
+import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
@@ -221,6 +219,15 @@ public abstract class CodeFragment {
 //        if(codeFragment instanceof CtExpression)
 //            return CtExpression.class;
        return CtStatement.class;
+    }
+
+    public abstract CodeFragment clone();
+
+    protected CtElement copyElem(CtElement elem) {
+        Factory factory = elem.getFactory();
+        CtElement tmp = factory.Core().clone(elem);
+        tmp.setParent(elem.getParent());
+        return tmp;
     }
 }
 

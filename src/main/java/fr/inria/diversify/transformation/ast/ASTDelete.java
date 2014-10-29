@@ -1,12 +1,17 @@
 package fr.inria.diversify.transformation.ast;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
+import spoon.reflect.code.CtCodeElement;
+import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtSimpleType;
+import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 
 /**
@@ -30,19 +35,17 @@ public class ASTDelete extends ASTTransformation {
         return object;
     }
 
-    public void addSourceCode() throws Exception {
-        CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
-        Log.debug("transformation: {}, {}",type,name);
-        Log.debug("transplantation Point:\n {}", transplantationPoint);
+    protected void applyInfo() {
+        Log.debug("transformation: {}, {}", type, name);
+        Log.debug("transplantation point:\n{}", transplantationPoint);
         Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
         Log.debug("{}", transplantationPoint.getCodeFragmentType());
+    }
 
-        CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
-        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
-        sourceCodeFragments.add(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/**delete\n", 0));
-        sourceCodeFragments.add(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n", 0));
-        compileUnit.addSourceCodeFragment(sourceCodeFragments.get(0));
-        compileUnit.addSourceCodeFragment(sourceCodeFragments.get(1));
+    protected  CtCodeElement buildCopyTransplant() {
+        CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
+        snippetStatement.setValue("");
+        return snippetStatement;
     }
 
 

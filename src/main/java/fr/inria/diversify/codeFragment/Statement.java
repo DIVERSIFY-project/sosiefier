@@ -89,4 +89,8 @@ public class Statement extends CodeFragment {
         String string = cf.toString();
         return string.contains("super(") || string.contains("super.");
     }
+
+    public Statement clone() {
+        return new Statement((CtStatement) copyElem(codeFragment));
+    }
 }
