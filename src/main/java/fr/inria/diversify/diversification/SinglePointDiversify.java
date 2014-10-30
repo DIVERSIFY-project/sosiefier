@@ -4,13 +4,14 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Created by Simon on 20/08/14.
@@ -54,32 +55,37 @@ public class SinglePointDiversify extends AbstractDiversify {
     protected void run(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
+        writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
+
         try {
-            writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
-
             applyTransformation(trans);
-            transformations.add(trans);
-            int status = runTest(tmpDir);
 
-            trans.setStatus(status);
-            trans.setFailures(builder.getTestFail());
-            if (status == 0) {
-                copySosieProgram();
+            try {
+                transformations.add(trans);
+                int status = runTest(tmpDir);
+
+                trans.setStatus(status);
+                trans.setFailures(builder.getTestFail());
+                if (status == 0) {
+                    copySosieProgram();
+                }
+                // error during runTest
+            } catch (Exception e) {
+                trans.setStatus(-2);
+                Log.debug("compile error during diversification", e);
             }
 
+            trial++;
+            trans.restore(tmpDir + "/" + sourceDir);
 
-        } catch (Exception e) {
-            trans.setStatus(-2);
-            Log.debug("compile error during diversification", e);
-        }
-        trial++;
-        trans.restore(tmpDir + "/" + sourceDir);
-        int status = runTest(tmpDir);
-        if(status != 0) {
-            Log.error("errur");
-        }
-        ((SinglePointSessionResults) sessionResults).addRunResults(trans);
-        Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
+            ((SinglePointSessionResults) sessionResults).addRunResults(trans);
+            Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
+        } catch (ApplyTransformationException e) {
+            int status = runTest(tmpDir);
+            if (status != 0) {
+                throw new Exception(e);
+            }
+        } catch (BuildTransplantException e) {}
     }
 
 

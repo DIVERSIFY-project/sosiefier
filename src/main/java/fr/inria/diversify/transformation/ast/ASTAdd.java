@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.InputContext;
+import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,34 +49,37 @@ public class ASTAdd extends ASTTransformation {
         Log.debug("transplant: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    protected CtCodeElement buildCopyTransplant() {
-        CodeFragment stmtToAdd = transplant.clone();
-        if (withVarMapping()) {
-            if (variableMapping == null)
-                variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
+    protected CtCodeElement buildCopyTransplant() throws BuildTransplantException {
+        try {
+            CodeFragment stmtToAdd = transplant.clone();
+            if (withVarMapping()) {
+                if (variableMapping == null) variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
 
-            Log.debug("random variable mapping: {}", variableMapping);
-            stmtToAdd.replaceVar(transplantationPoint, variableMapping);
+                Log.debug("random variable mapping: {}", variableMapping);
+                stmtToAdd.replaceVar(transplantationPoint, variableMapping);
+            }
+
+            Factory factory = transplantationPoint.getCtCodeFragment().getFactory();
+
+            CtIf stmtIf = factory.Core().createIf();
+            stmtIf.setParent(transplantationPoint.getCtCodeFragment().getParent());
+
+            stmtIf.setCondition(factory.Code().createLiteral(true));
+
+            CtBlock body = factory.Core().createBlock();
+            stmtIf.setThenStatement(body);
+            CtStatement tmp = (CtStatement) factory.Core().clone(transplantationPoint.getCtCodeFragment());
+
+            tmp.setParent(stmtIf);
+            body.addStatement(tmp);
+
+            stmtToAdd.getCtCodeFragment().setParent(stmtIf);
+            body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
+
+            return stmtIf;
+        } catch (Exception e) {
+            throw new BuildTransplantException("", e);
         }
-
-        Factory factory = transplantationPoint.getCtCodeFragment().getFactory();
-
-        CtIf stmtIf = factory.Core().createIf();
-        stmtIf.setParent(transplantationPoint.getCtCodeFragment().getParent());
-
-        stmtIf.setCondition(factory.Code().createLiteral(true));
-
-        CtBlock body = factory.Core().createBlock();
-        stmtIf.setThenStatement(body);
-        CtStatement tmp = (CtStatement) factory.Core().clone(transplantationPoint.getCtCodeFragment());
-
-        tmp.setParent(stmtIf);
-        body.addStatement(tmp);
-
-        stmtToAdd.getCtCodeFragment().setParent(stmtIf);
-        body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
-
-        return stmtIf;
     }
     protected boolean withVarMapping() {
         return name.equals("add");

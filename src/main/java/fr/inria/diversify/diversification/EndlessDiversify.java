@@ -3,6 +3,8 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 
@@ -28,28 +30,35 @@ public class EndlessDiversify extends AbstractDiversify {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
-            writeTransformation(trans);
-
             applyTransformation(trans);
-            transformations.add(trans);
+            try {
+                transformations.add(trans);
+                int status = runTest(tmpDir);
+
+                trans.setStatus(status);
+                trans.setFailures(builder.getTestFail());
+
+            } catch (Exception e) {
+                trans.setStatus(-2);
+                Log.debug("compile error during diversification", e);
+            }
+            trial++;
+            ((SinglePointSessionResults) sessionResults).addRunResults(trans);
+            if (trans.getStatus() != 0) {
+                trans.restore(tmpDir + "/" + sourceDir);
+            } else {
+                Log.info(sessionResults.toString());
+                copySosieProgram();
+                ((ASTTransformation) trans).updateStatementList();
+                sessionResults.saveReport(getResultDir() + "/" + Thread.currentThread().getId() + "_session");
+                writeTransformation(trans);
+            }
+        } catch (ApplyTransformationException e) {
             int status = runTest(tmpDir);
-
-            trans.setStatus(status);
-            trans.setFailures(builder.getTestFail());
-
-        } catch (Exception e) {
-            trans.setStatus(-2);
-            Log.debug("compile error during diversification", e);
-        }
-        trial++;
-        ((SinglePointSessionResults) sessionResults).addRunResults(trans);
-        if(trans.getStatus() != 0) {
-            trans.restore(tmpDir + "/" + sourceDir);
-        } else {
-            Log.info(sessionResults.toString());
-            copySosieProgram();
-            ((ASTTransformation) trans).updateStatementList();
-        }
+            if (status != 0) {
+                throw new Exception(e);
+            }
+        } catch (BuildTransplantException e) {}
     }
 
     private void writeTransformation(Transformation trans) throws IOException, JSONException {
@@ -57,7 +66,7 @@ public class EndlessDiversify extends AbstractDiversify {
         if(!dir.exists())
             dir.mkdirs();
 
-        FileWriter results = new FileWriter(getSosieSourcesDir() + "/result.json", true);
+        FileWriter results = new FileWriter(getResultDir() + "/" + Thread.currentThread().getId() + "_trans.json", true);
 
         trans.toJSONObject().write(results);
         results.flush();

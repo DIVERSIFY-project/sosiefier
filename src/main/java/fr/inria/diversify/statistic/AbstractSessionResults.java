@@ -1,6 +1,7 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.util.Log;
+
+import java.io.IOException;
 
 /**
  * Created by Simon on 28/08/14.
@@ -28,7 +29,7 @@ public abstract class AbstractSessionResults {
     protected int compileFailedCount;
 
 
-
+    public abstract void saveReport(String report) throws IOException;
 
     public int getSosieCount() {
         return sosieCount;

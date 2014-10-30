@@ -274,7 +274,7 @@ public class Diversify extends AbstractDiversify {
                         "_trial_" + trial + "_size_" + transformations.size() + "_stat_" + status + ".json";
                 result.saveToFile(jsonFile);
                 ((SessionResults) sessionResults).addRunResults(result, jsonFile, getResultDir() + "/buidOutput" + builder.getRunCount() + ".txt");
-                ((SessionResults) sessionResults).saveReport(
+                sessionResults.saveReport(
                         getResultDir() + "/" + Thread.currentThread().getId() + "_session.html");
             } catch (IOException | JSONException e) {
                 //Not my mf problem!! (Hard rock in the background)

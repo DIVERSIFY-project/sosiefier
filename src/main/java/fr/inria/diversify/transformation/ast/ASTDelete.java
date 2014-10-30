@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation.ast;
 
 
+import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;

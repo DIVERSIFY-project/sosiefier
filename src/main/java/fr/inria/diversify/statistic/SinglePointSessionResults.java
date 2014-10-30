@@ -2,6 +2,9 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.transformation.Transformation;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,5 +41,15 @@ public class SinglePointSessionResults extends AbstractSessionResults {
         } else if (results.getStatus() == -2) {
             compileFailedCount++;
         }
+    }
+
+
+    public void saveReport(String report) throws IOException {
+        File f = new File(report);
+        FileWriter fw = new FileWriter(f);
+
+        fw.write(toString());
+
+        fw.close();
     }
 }

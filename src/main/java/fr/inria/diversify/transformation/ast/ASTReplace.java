@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.InputContext;
+import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,18 +63,23 @@ public class ASTReplace extends ASTTransformation {
         Log.debug("replace by: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    protected CtCodeElement buildCopyTransplant() throws Exception {
-        CodeFragment stmt = transplant.clone();
-        if (withVarMapping()) {
-            if (variableMapping == null)
-                variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
-
-            Log.debug("random variable mapping: {}", variableMapping);
-            stmt.replaceVar(transplantationPoint, variableMapping);
-            if (stmt.codeFragmentString().equals(transplantationPoint.codeFragmentString()))
-                throw new Exception("same statment");
+    protected CtCodeElement buildCopyTransplant() throws BuildTransplantException {
+        try {
+            CodeFragment stmt = transplant.clone();
+            if (withVarMapping()) {
+                if (variableMapping == null) {
+                    variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
+                }
+                Log.debug("random variable mapping: {}", variableMapping);
+                stmt.replaceVar(transplantationPoint, variableMapping);
+                if (stmt.codeFragmentString().equals(transplantationPoint.codeFragmentString())) {
+                    throw new BuildTransplantException("same statment");
+                }
+            }
+            return stmt.getCtCodeFragment();
+        } catch (Exception e) {
+            throw new BuildTransplantException("", e);
         }
-        return stmt.getCtCodeFragment();
     }
 
 

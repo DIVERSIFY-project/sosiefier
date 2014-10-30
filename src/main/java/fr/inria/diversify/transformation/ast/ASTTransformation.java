@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.AbstractTransformation;
+import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
@@ -39,7 +40,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
     public void setTransplantationPoint(CodeFragment transplantationPoint) {
         this.transplantationPoint = transplantationPoint;
     }
-
 
     public String classLocationName() {
         return transplantationPoint.getSourceClass().getQualifiedName();
@@ -108,34 +108,22 @@ public abstract class ASTTransformation extends AbstractTransformation {
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
-
-
     public void setSubType(boolean subType) {
         this.subType = subType;
     }
 
     public abstract boolean usedOfSubType();
 
-
-    protected void openFile(String file) {
-        String[] command = {"open", file};
-        ProcessBuilder probuilder = new ProcessBuilder( command );
-
-        probuilder.directory(new File(System.getProperty("user.dir")));
-
-        try {
-            probuilder.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     protected abstract void applyInfo();
 
     public void apply(String srcDir) throws Exception {
         applyInfo();
         copyTransplant = buildCopyTransplant();
-        transplantationPoint.getCtCodeFragment().replace(copyTransplant);
+        try {
+            transplantationPoint.getCtCodeFragment().replace(copyTransplant);
+        } catch (Exception e) {
+            throw new ApplyTransformationException("", e);
+        }
         printJavaFile(srcDir);
     }
 
