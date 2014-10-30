@@ -1,6 +1,6 @@
 package fr.inria.diversify.transformation.other;
 
-import fr.inria.diversify.transformation.AbstractTransformation;
+import fr.inria.diversify.transformation.SourceCodeTransformation;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.CtLiteral;
@@ -20,7 +20,7 @@ import java.io.IOException;
 /**
  * Created by Simon on 19/03/14.
  */
-public class ReplaceLiteral extends AbstractTransformation {
+public class ReplaceLiteral extends SourceCodeTransformation {
     protected CtLiteral transplant;
     protected CtLiteral transplantationPoint;
 
@@ -29,14 +29,6 @@ public class ReplaceLiteral extends AbstractTransformation {
         return "";
     }
 
-    public void restore(String srcDir) throws Exception {
-        if (parent != null) {
-            parent.removeSourceCode();
-            parent.printJavaFile(srcDir);
-        }
-        removeSourceCode();
-        printJavaFile(srcDir);
-    }
 
     public void printJavaFile(String directory) throws IOException {
         CtSimpleType<?> type = transplantationPoint.getPosition().getCompilationUnit().getMainType();

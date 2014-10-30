@@ -2,21 +2,12 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.InputContext;
-import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtVariableReference;
-import spoon.support.reflect.code.CtBlockImpl;
-import spoon.support.reflect.code.CtIfImpl;
-import spoon.support.reflect.code.CtLiteralImpl;
-import spoon.support.reflect.code.CtStatementListImpl;
 
 import java.util.Map;
 
@@ -37,6 +28,7 @@ public class ASTAdd extends ASTTransformation {
         type = "adrStmt";
     }
 
+
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = super.toJSONObject();
@@ -56,9 +48,6 @@ public class ASTAdd extends ASTTransformation {
         Log.debug("transplant: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-
-
-
     protected CtCodeElement buildCopyTransplant() {
         CodeFragment stmtToAdd = transplant.clone();
         if (withVarMapping()) {
@@ -77,13 +66,14 @@ public class ASTAdd extends ASTTransformation {
         stmtIf.setCondition(factory.Code().createLiteral(true));
 
         CtBlock body = factory.Core().createBlock();
-       stmtIf.setThenStatement(body);
-        CtStatement tmp = (CtStatement) copyElem(transplantationPoint.getCtCodeFragment());
+        stmtIf.setThenStatement(body);
+        CtStatement tmp = (CtStatement) factory.Core().clone(transplantationPoint.getCtCodeFragment());
+
         tmp.setParent(stmtIf);
         body.addStatement(tmp);
 
         stmtToAdd.getCtCodeFragment().setParent(stmtIf);
-        body.addStatement((CtStatement) copyElem(stmtToAdd.getCtCodeFragment()));
+        body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
 
         return stmtIf;
     }
@@ -122,10 +112,6 @@ public class ASTAdd extends ASTTransformation {
                 transplant.getCtCodeFragment().getPosition().equals(otherASTAdd.transplant.getCtCodeFragment().getPosition());
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public String toString() {
         String ret = new String();
@@ -153,4 +139,6 @@ public class ASTAdd extends ASTTransformation {
         }
         return false;
     }
+
+    public void updateStatementList() {}
 }

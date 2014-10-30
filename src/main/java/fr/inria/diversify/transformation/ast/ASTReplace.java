@@ -6,15 +6,7 @@ import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.CtCodeElement;
-import spoon.reflect.code.CtCodeSnippetStatement;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtSimpleType;
-import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtVariableReference;
-import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import java.util.Map;
 
@@ -152,6 +144,10 @@ public class ASTReplace extends ASTTransformation {
             }
         }
         return false;
+    }
+
+    public  void updateStatementList() {
+        getInputConfiguration().getInputProgram().getCodeFragments().remove(transplantationPoint);
     }
 
 }

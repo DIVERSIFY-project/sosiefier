@@ -5,20 +5,14 @@ import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User: Simon
@@ -27,18 +21,12 @@ import java.util.List;
  */
 public abstract class ASTTransformation extends AbstractTransformation {
 
-    protected List<SourceCodeFragment> sourceCodeFragments;
-
     protected boolean subType;
 
     /**
      * Transplantation point that is going to be modified, either by an Add, Replace or Delete transformation
      */
     protected CodeFragment transplantationPoint;
-
-    public ASTTransformation() {
-        sourceCodeFragments = new ArrayList<>();
-    }
 
     public CtSimpleType<?> getOriginalClass(CodeFragment cf) {
         return cf.getCompilationUnit().getMainType();
@@ -67,7 +55,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
         return "field";
     }
 
-
     @Override
     public String getLevel() {
         CtCodeElement stmt = transplantationPoint.getCtCodeFragment();
@@ -92,7 +79,14 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     @Override
     public String getTransformationString() throws Exception {
-        return getTransformationString(transplantationPoint.getCtCodeFragment());
+        copyTransplant = buildCopyTransplant();
+        transplantationPoint.getCtCodeFragment().replace(copyTransplant);
+
+        String ret = transplantationPoint.getCtCodeFragment().getParent().toString();
+
+        copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+
+        return ret;
     }
 
     /**
@@ -107,7 +101,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
-//        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new FragmentDrivenJavaPrettyPrinter(env));
         JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
         processor.setFactory(factory);
 
@@ -115,15 +108,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
-    /**
-     * Removes the original source code in the transplantation point
-     */
-    public void removeSourceCode() {
-        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
-        CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
-        if (compileUnit.getSourceCodeFraments() != null)
-            compileUnit.getSourceCodeFraments().removeAll(sourceCodeFragments);
-    }
+
 
     public void setSubType(boolean subType) {
         this.subType = subType;
@@ -145,19 +130,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
         }
     }
 
-    @Override
-    public void addSourceCode() throws Exception {
-
-    }
-
-    protected CtElement copyElem(CtElement elem) {
-        Factory factory = elem.getFactory();
-        CtElement tmp = factory.Core().clone(elem);
-        tmp.setParent(elem.getParent());
-        tmp.setFactory(factory);
-        return tmp;
-    }
-
     protected abstract void applyInfo();
 
     public void apply(String srcDir) throws Exception {
@@ -167,13 +139,27 @@ public abstract class ASTTransformation extends AbstractTransformation {
         printJavaFile(srcDir);
     }
 
+    @Override
+    public void applyWithParent(String srcDir) throws Exception {
+        if(parent != null) {
+            parent.apply(srcDir);
+        }
+        apply(srcDir);
+    }
+
     protected abstract CtCodeElement buildCopyTransplant() throws Exception;
 
     CtCodeElement copyTransplant;
+
     public void restore(String srcDir) throws Exception {
+        if(parent != null) {
+            parent.restore(srcDir);
+        }
         copyTransplant.replace(transplantationPoint.getCtCodeFragment());
         printJavaFile(srcDir);
     }
+
+    public abstract void updateStatementList();
 }
 
 

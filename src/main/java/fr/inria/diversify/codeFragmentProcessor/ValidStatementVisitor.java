@@ -51,7 +51,7 @@ public class ValidStatementVisitor extends CtScanner {
 	}
 	
 	public <T> void visitCtClass(CtClass<T> ctClass) {
-        if(ctClass == root)
+//        if(ctClass == root)
 		    valid = false;
 	}
 

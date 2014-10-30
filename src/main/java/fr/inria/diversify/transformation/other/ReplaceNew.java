@@ -12,16 +12,6 @@ import spoon.reflect.cu.SourcePosition;
 public class ReplaceNew extends SpoonTransformation<CtNewClass, CtNewClass> {
 
 
-    public void restore(String srcDir) throws Exception {
-        if(parent != null) {
-            parent.removeSourceCode();
-            parent.printJavaFile(srcDir);
-        }
-        removeSourceCode();
-        printJavaFile(srcDir);
-    }
-
-
     public void addSourceCode() {
         logInfo();
 

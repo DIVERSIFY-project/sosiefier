@@ -19,7 +19,7 @@ import java.io.IOException;
 /**
  * Created by Simon on 02/04/14.
  */
-public abstract class SpoonTransformation<P extends CtElement, T extends CtElement> extends AbstractTransformation {
+public abstract class SpoonTransformation<P extends CtElement, T extends CtElement> extends SourceCodeTransformation {
     protected P transformationPoint;
     protected T transplant;
 

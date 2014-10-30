@@ -1,16 +1,11 @@
 package fr.inria.diversify.transformation.ast;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.codeFragment.Statement;
+
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtCodeSnippetStatement;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtSimpleType;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 
@@ -70,6 +65,10 @@ public class ASTDelete extends ASTTransformation {
 
     public boolean usedOfSubType() {
         return false;
+    }
+
+    public void updateStatementList() {
+        getInputConfiguration().getInputProgram().getCodeFragments().remove(transplantationPoint);
     }
 
     @Override

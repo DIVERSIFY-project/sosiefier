@@ -36,11 +36,7 @@ public interface Transformation {
 
     public int line();
 
-    void addSourceCode() throws Exception;
-
     void printJavaFile(String srcDir) throws IOException;
-
-    void removeSourceCode();
 
     public boolean isSosie();
 

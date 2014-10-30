@@ -2,6 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 
@@ -47,6 +48,7 @@ public class EndlessDiversify extends AbstractDiversify {
         } else {
             Log.info(sessionResults.toString());
             copySosieProgram();
+            ((ASTTransformation) trans).updateStatementList();
         }
     }
 
