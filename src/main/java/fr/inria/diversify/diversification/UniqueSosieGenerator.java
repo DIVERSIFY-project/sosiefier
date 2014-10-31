@@ -33,11 +33,11 @@ public class UniqueSosieGenerator extends AbstractDiversify {
 
     @Override
     public void run(int n) throws Exception {
-        Random random = new Random();
+//        Random random = new Random();
         while (transformations.size() < n && !allTransformation.isEmpty()) {
-            Transformation t = allTransformation.get(random.nextInt(allTransformation.size()));
-            allTransformation.remove(t);
-            run(t);
+//            Transformation t = allTransformation.get(random.nextInt(allTransformation.size()));
+//            allTransformation.remove(t);
+            run(allTransformation.remove(0));
         }
     }
 
