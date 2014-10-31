@@ -26,11 +26,9 @@ public class MavenBuilder extends AbstractBuilder {
     }
 
     protected void runPrivate() {
-
         Log.debug("run maven, phase: {}, timeout {}", Arrays.toString(phases), timeOut);
 
         InvocationRequest request = new DefaultInvocationRequest();
-
         request.setPomFile(new File(directory + "/pom.xml"));
 
         List<String> l = new ArrayList<String>();
@@ -80,8 +78,8 @@ public class MavenBuilder extends AbstractBuilder {
             e.printStackTrace();
         }
 
-        //Tell the main thread that we are done
-        latch.countDown();
+//        //Tell the main thread that we are done
+//        latch.countDown();
     }
 
     /**

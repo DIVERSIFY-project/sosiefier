@@ -1,10 +1,7 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 import fr.inria.diversify.util.Log;
-import spoon.reflect.code.CtAssignment;
-import spoon.reflect.code.CtFieldAccess;
-import spoon.reflect.code.CtTargetedAccess;
-import spoon.reflect.code.CtThisAccess;
+import spoon.reflect.code.*;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.visitor.CtScanner;
 
@@ -46,6 +43,11 @@ public class FieldReferenceVisitor extends CtScanner {
             fields.put(((CtFieldReference)targetedAccess.getVariable()),targetedAccess.toString());
 
         super.visitCtTargetedAccess(targetedAccess);
+    }
+
+    public <R> void visitCtReturn(CtReturn<R> returnStatement) {
+        super.visitCtReturn(returnStatement);
+        after.clear();
     }
 
     public Map<CtFieldReference, String> getFields() {

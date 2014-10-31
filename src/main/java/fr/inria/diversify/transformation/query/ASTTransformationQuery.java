@@ -123,6 +123,7 @@ public class ASTTransformationQuery extends TransformationQuery {
                         break;
                     }
                 }
+                t.setInputProgram(getInputProgram());
                 result.add(t);
             }
         } catch (Exception e) {
@@ -130,7 +131,6 @@ public class ASTTransformationQuery extends TransformationQuery {
         }
         return result;
     }
-
 
     /**
      *

@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.diversification.InputConfiguration;
+import fr.inria.diversify.diversification.InputProgram;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,7 +52,7 @@ public abstract class AbstractTransformation implements Transformation {
     protected String type;
     protected Transformation parent;
 
-    private InputConfiguration inputConfiguration;
+    private InputProgram inputProgram;
 
     public void setStatus(Integer result) {
         status = result;
@@ -187,14 +188,14 @@ public abstract class AbstractTransformation implements Transformation {
         this.series = series;
     }
 
-    public void setInputConfiguration(InputConfiguration inputConfiguration) {
-        this.inputConfiguration = inputConfiguration;
+    public void setInputProgram(InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
     }
 
     /**
      * Global input configuration
      */
-    public InputConfiguration getInputConfiguration() {
-        return inputConfiguration;
+    public InputProgram getInputProgram() {
+        return inputProgram;
     }
 }

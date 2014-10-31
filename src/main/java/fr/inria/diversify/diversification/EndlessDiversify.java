@@ -50,10 +50,12 @@ public class EndlessDiversify extends AbstractDiversify {
                 Log.info(sessionResults.toString());
                 copySosieProgram();
                 ((ASTTransformation) trans).updateStatementList();
-                sessionResults.saveReport(getResultDir() + "/" + Thread.currentThread().getId() + "_session");
+
+                saveReport();
                 writeTransformation(trans);
             }
         } catch (ApplyTransformationException e) {
+            trans.printJavaFile(tmpDir);
             int status = runTest(tmpDir);
             if (status != 0) {
                 throw new Exception(e);
@@ -61,7 +63,16 @@ public class EndlessDiversify extends AbstractDiversify {
         } catch (BuildTransplantException e) {}
     }
 
-    private void writeTransformation(Transformation trans) throws IOException, JSONException {
+    protected void saveReport() throws IOException {
+        File dir = new File(getResultDir());
+        if(!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        sessionResults.saveReport(getResultDir() + "/" + Thread.currentThread().getId() + "_session");
+    }
+
+    protected void writeTransformation(Transformation trans) throws IOException, JSONException {
         File dir = new File(getSosieSourcesDir());
         if(!dir.exists())
             dir.mkdirs();
@@ -78,6 +89,7 @@ public class EndlessDiversify extends AbstractDiversify {
 
     @Override
     public void run(int n) throws Exception {
+        setSosieSourcesDir(getResultDir());
         if(n <= 0) {
             while (true) {
                 run(transQuery.buildTransformation());

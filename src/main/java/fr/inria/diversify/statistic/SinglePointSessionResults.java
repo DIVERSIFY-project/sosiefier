@@ -1,6 +1,7 @@
 package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.transformation.Transformation;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -46,6 +47,8 @@ public class SinglePointSessionResults extends AbstractSessionResults {
 
     public void saveReport(String report) throws IOException {
         File f = new File(report);
+        f.createNewFile();
+
         FileWriter fw = new FileWriter(f);
 
         fw.write(toString());

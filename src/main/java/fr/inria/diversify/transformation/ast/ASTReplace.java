@@ -153,7 +153,7 @@ public class ASTReplace extends ASTTransformation {
     }
 
     public  void updateStatementList() {
-        getInputConfiguration().getInputProgram().getCodeFragments().remove(transplantationPoint);
+        getInputProgram().getCodeFragments().remove(transplantationPoint);
     }
 
 }

@@ -69,7 +69,7 @@ public class ASTDelete extends ASTTransformation {
     }
 
     public void updateStatementList() {
-        getInputConfiguration().getInputProgram().getCodeFragments().remove(transplantationPoint);
+        getInputProgram().getCodeFragments().remove(transplantationPoint);
     }
 
     @Override

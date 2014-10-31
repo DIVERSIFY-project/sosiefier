@@ -84,10 +84,10 @@ public abstract class AbstractBuilder {
     }
 
 
-    /**
-     * Resettable latch to wait for the builder
-     */
-    protected CountDownLatch latch;
+//    /**
+//     * Resettable latch to wait for the builder
+//     */
+//    protected CountDownLatch latch;
 
     public AbstractBuilder(String directory, String srcDir) {
         this.directory = directory;
@@ -97,7 +97,7 @@ public abstract class AbstractBuilder {
         runCount = 0;
         saveOutputToFile = false;
         saveOutputDir = "buildoutput";
-        latch = new CountDownLatch(1);
+//        latch = new CountDownLatch(1);
     }
 
     protected void reset() {

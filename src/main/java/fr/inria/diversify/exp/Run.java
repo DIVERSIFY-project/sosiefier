@@ -45,9 +45,9 @@ public class Run {
         computeReport.setOriginalLog(originalLog);
 
         computeReport.buildAllReport(new File(sosiesDir), result);
-        computeReport.writeSummary(result.getAbsolutePath());
-        FileUtils.copyFile(new File(result + "/globalReport.csv"),
-                           new File(resultDir + "/original.csv"));
+//        computeReport.writeSummary(result.getAbsolutePath());
+//        FileUtils.copyFile(new File(result + "/globalReport.csv"),
+//                           new File(resultDir + "/original.csv"));
 
 
         for(String client : clients) {

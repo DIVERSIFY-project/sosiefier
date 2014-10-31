@@ -189,7 +189,7 @@ public class Diversify extends AbstractDiversify {
             for (Transformation t : trans) {
                 //Input the configuration
                 if ( t instanceof AbstractTransformation ) {
-                    ((AbstractTransformation)t).setInputConfiguration(inputConfiguration);
+                    ((AbstractTransformation)t).setInputProgram(inputConfiguration.getInputProgram());
                 }
                 t.apply(outputDir);
                 successful++;
@@ -200,7 +200,7 @@ public class Diversify extends AbstractDiversify {
                 for (Iterator<Transformation> i = trans.iterator(); i.hasNext() && successful > 0; successful--) {
                     Transformation t = i.next();
                     if ( t instanceof AbstractTransformation ) {
-                        ((AbstractTransformation)t).setInputConfiguration(inputConfiguration);
+                        ((AbstractTransformation)t).setInputProgram(inputConfiguration.getInputProgram());
                     }
                     t.restore(outputDir);
                 }

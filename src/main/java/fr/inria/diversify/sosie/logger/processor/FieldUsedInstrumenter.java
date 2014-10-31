@@ -7,6 +7,7 @@ import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtFieldReference;
+import spoon.reflect.visitor.CtAbstractVisitor;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 
@@ -43,7 +44,7 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
                         String snippet = "\t" + getLogName() + ".writeVar(" + getCount(statement) + ",Thread.currentThread(),\"" + id + "\",\"" + idFor(var.getSimpleName()) + "\"," + fieldUsed.get(var) + ");\n\t";
 
                         if(fieldUsed.get(var).contains(".")) {
-                            snippet = "\ttry {\n\t" + snippet + "} catch (Exception e) {}\n";
+                            snippet = "\ttry {\n\t" + snippet + "} catch (Exception eeee) {}\n";
                         }
                         SourcePosition sp = statement.getPosition();
                         CompilationUnit compileUnit = sp.getCompilationUnit();
@@ -89,7 +90,6 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
 
         return  stmtCompileUnit.beginOfLineIndex(sp.getSourceEnd()) ==  mthCompileUnit.beginOfLineIndex(sp2.getSourceEnd());
     }
-
 
     protected FieldReferenceVisitor getFieldUsed(CtStatement statement) {
         FieldReferenceVisitor scanner = new FieldReferenceVisitor();
