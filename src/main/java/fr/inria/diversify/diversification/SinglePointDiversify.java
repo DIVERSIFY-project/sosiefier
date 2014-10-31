@@ -81,6 +81,10 @@ public class SinglePointDiversify extends AbstractDiversify {
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
             Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
         } catch (ApplyTransformationException e) {
+            try {
+                trans.restore(tmpDir + "/" + sourceDir);
+                trans.printJavaFile(tmpDir + "/" + sourceDir);
+            } catch (Exception ee) {}
             int status = runTest(tmpDir);
             if (status != 0) {
                 throw new Exception(e);

@@ -3,6 +3,8 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
+import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 
 import java.io.FileWriter;
@@ -44,27 +46,42 @@ public class UniqueSosieGenerator extends AbstractDiversify {
     protected void run(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
+        writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
+
         try {
-            writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
-            trial++;
             trans.apply(tmpDir + "/" + sourceDir);
-            int status = runTest(tmpDir);
 
-            if(status == 0) {
+            try {
                 transformations.add(trans);
-                copySosieProgram();
+                int status = runTest(tmpDir);
+
+                trans.setStatus(status);
+                trans.setFailures(builder.getTestFail());
+                if (status == 0) {
+                    copySosieProgram();
+                }
+                // error during runTest
+            } catch (Exception e) {
+                trans.setStatus(-2);
+                Log.debug("compile error during diversification", e);
             }
-            trans.setStatus(status);
-            trans.setFailures(builder.getTestFail());
 
-        } catch (Exception e) {
-            Log.debug("compile error during diversification", e);
-        }
-        trans.restore(tmpDir + "/" + sourceDir);
-        ((SinglePointSessionResults) sessionResults).addRunResults(trans);
+            trial++;
+            trans.restore(tmpDir + "/" + sourceDir);
+
+            ((SinglePointSessionResults) sessionResults).addRunResults(trans);
+            Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
+        } catch (ApplyTransformationException e) {
+            try {
+                trans.restore(tmpDir + "/" + sourceDir);
+                trans.printJavaFile(tmpDir + "/" + sourceDir);
+            } catch (Exception ee) {}
+            int status = runTest(tmpDir);
+            if (status != 0) {
+                throw new Exception(e);
+            }
+        } catch (BuildTransplantException e) {}
     }
-
-
 
     protected void writePosition(String fileName, ASTTransformation transformation) throws IOException {
         FileWriter out = new FileWriter(fileName);

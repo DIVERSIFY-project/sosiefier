@@ -55,7 +55,10 @@ public class EndlessDiversify extends AbstractDiversify {
                 writeTransformation(trans);
             }
         } catch (ApplyTransformationException e) {
-            trans.printJavaFile(tmpDir);
+            try {
+                trans.restore(tmpDir + "/" + sourceDir);
+                trans.printJavaFile(tmpDir + "/" + sourceDir);
+            } catch (Exception ee) {}
             int status = runTest(tmpDir);
             if (status != 0) {
                 throw new Exception(e);
