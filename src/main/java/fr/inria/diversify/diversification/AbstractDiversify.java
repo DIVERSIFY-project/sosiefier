@@ -276,4 +276,19 @@ public abstract class AbstractDiversify {
         }
     }
 
+    protected void tryRestore(Transformation trans, Exception e) throws Exception {
+        try {
+            trans.restore(tmpDir + "/" + sourceDir);
+        } catch (Exception restore) {}
+
+        try {
+            trans.printJavaFile(tmpDir + "/" + sourceDir);
+        } catch (Exception print) {}
+
+        int status = runTest(tmpDir);
+        if (status != 0) {
+            throw new Exception(e);
+        }
+    }
+
 }

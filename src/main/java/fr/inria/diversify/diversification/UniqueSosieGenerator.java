@@ -6,6 +6,7 @@ import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
+import org.json.JSONException;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class UniqueSosieGenerator extends AbstractDiversify {
     protected void run(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
-        writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
+        writeTransformation(tmpDir + "/transplant.json", (ASTTransformation) trans);
 
         try {
             trans.apply(tmpDir + "/" + sourceDir);
@@ -72,24 +73,14 @@ public class UniqueSosieGenerator extends AbstractDiversify {
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
             Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
         } catch (ApplyTransformationException e) {
-            try {
-                trans.restore(tmpDir + "/" + sourceDir);
-                trans.printJavaFile(tmpDir + "/" + sourceDir);
-            } catch (Exception ee) {}
-            int status = runTest(tmpDir);
-            if (status != 0) {
-                throw new Exception(e);
-            }
+            tryRestore(trans, e);
         } catch (BuildTransplantException e) {}
     }
 
-    protected void writePosition(String fileName, ASTTransformation transformation) throws IOException {
+    protected void writeTransformation(String fileName, ASTTransformation transformation) throws IOException, JSONException {
         FileWriter out = new FileWriter(fileName);
 
-        String className = transformation.classLocationName();
-        int line = transformation.getTransplantationPoint().getCtCodeFragment().getPosition().getLine();
-
-        out.write("{\"Position\": \""+ className+ ":"+ line +"\"}");
+        out.write(transformation.toJSONObject().toString());
 
         out.close();
     }
