@@ -28,6 +28,7 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
 import java.util.*;
+import java.util.stream.Collectors;
 //import java.util.stream.Collectors;
 
 /**
@@ -307,6 +308,44 @@ public class InputProgram {
                         minDiff = d;
                     }
                 }
+            }
+        }
+
+        return result;
+    }
+
+
+    /**
+     * Returns an specific code fragment given its position, source and type. The source is optional.
+     * However, you should supply both, since is possible that a code fragment
+     * is not found given only position since a difference of line numbers is usual.
+     *
+     * @param position Position of the code fragment
+     * @param source   Source of the code Fragment
+     * @return
+     */
+    public synchronized CodeFragment getCodeFragment(String position, String source, String type) {
+
+        CodeFragment result = null;
+
+        String[] s = position.split(":");
+        String qualifiedName = s[0];
+        int lineNumber = Integer.parseInt(s[1]);
+        int minDiff = Integer.MAX_VALUE;
+
+        Set<CodeFragment> set = getCodeFragments()
+                .stream()
+                .filter(codeFragment -> source == null || codeFragment.getSourceClass().getQualifiedName().equals(qualifiedName))
+                .filter(codeFragment -> codeFragment.getCodeFragmentType().getSimpleName().equals(type))
+                .collect(Collectors.toSet());
+
+        for (CodeFragment codeFragment : set) {
+            int cfLine = codeFragment.getStartLine();
+            int d = Math.abs(cfLine - lineNumber);
+            if (d < minDiff) {
+                //else return the nearest one with same code
+                result = codeFragment;
+                minDiff = d;
             }
         }
 

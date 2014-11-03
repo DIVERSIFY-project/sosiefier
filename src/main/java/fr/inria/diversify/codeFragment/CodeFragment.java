@@ -145,7 +145,7 @@ public abstract class CodeFragment {
         object.put("type", getCodeFragmentType().getSimpleName());
 //        object.put("inputContext", new JSONArray(getInputContext().inputContextToString()));
 //        object.put("outputContext", getOutputContext().toString());
-//        object.put("sourceCode", equalString());
+        object.put("sourcecode", equalString());
         return object;
     }
 

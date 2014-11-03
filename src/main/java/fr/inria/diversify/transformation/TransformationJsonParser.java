@@ -615,16 +615,15 @@ public class TransformationJsonParser {
     }
 
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws TransformationParserException {
-
         CodeFragment cf = null;
         try {
             String position = jsonObject.getString("position");
-            for (CodeFragment codeFragment : inputProgram.getCodeFragments()) {
-                if (codeFragment.positionString().equals(position)) {
-                    cf = codeFragment;
-                    break;
-                }
+            String sourCode = null;
+            if(jsonObject.has("sourcecode")) {
+                sourCode = jsonObject.getString("sourcecode");
             }
+            String type = jsonObject.getString("type");
+            inputProgram.getCodeFragment(position, sourCode, type);
         } catch (JSONException e) {
             throw new TransformationParserException(
                     "Unnable to obtain at least one field from JSON object " + jsonObject.toString(), e);
