@@ -80,11 +80,13 @@ public class TransformationJsonParser {
         Log.debug("transformation directory: {}", file.getAbsolutePath());
 
         for (File f : file.listFiles())
-            if (f.getName().endsWith(".json")) {
+            if (f.getName().endsWith(".json") && f.getName().contains("transplant")) { //patch to handle latest sosie
                 countFile++;
                 Log.debug("Current number of transformation {}", transformations.size());
                 Log.debug("parse tranformation file: " + f.getName());
                 transformations.addAll(parseFile(f));
+            } else if ( f.isDirectory() ) {
+                transformations.addAll(parseDir(f.getAbsolutePath()));
             }
         Log.debug("number of transformation file: {}", countFile);
         Log.debug("number of parse error : {}", countError);
@@ -131,6 +133,20 @@ public class TransformationJsonParser {
         return list;
     }
 
+    /**
+     * Parses a list of files
+     * @param files Files to parse
+     * @return A list of transformations
+     * @throws TransformationParserException
+     */
+    public List<Transformation> parseFileList(List<String> files) throws TransformationParserException {
+        ArrayList<Transformation> result = new ArrayList<>();
+        for ( String s : files ) {
+            result.addAll(parseFile(new File(s)));
+        }
+        return result;
+    }
+
     public List<Transformation> parseFile(File file) throws TransformationParserException {
 
         try {
@@ -151,11 +167,19 @@ public class TransformationJsonParser {
             }
 
             JSONArray array = null;
+            String fileStr = sb.toString();
             try {
-                array = new JSONArray(sb.toString());
+                array = new JSONArray(fileStr);
             } catch (JSONException e) {
                 if (e.toString().contains("A JSONArray text must start with '['")) {
-                    array = new JSONObject(sb.toString()).getJSONArray("transformations");
+                    try {
+                        array = new JSONObject(fileStr).getJSONArray("transformations");
+                    } catch (JSONException ex) {
+                        //Try contingency plan with malformed JSON files
+                        fileStr.replace("\n", ",");
+                        fileStr = "[" + fileStr + "]";
+                        array = new JSONArray(fileStr);
+                    }
                 }
             }
 

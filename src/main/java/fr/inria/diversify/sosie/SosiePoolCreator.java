@@ -46,6 +46,66 @@ public class SosiePoolCreator {
     }
 
     /**
+     * Test if two transformations defined by their JSONObjects are equals
+     *
+     * @param a A transformation defined by a JSONObject
+     * @param b Another transformation defined by a JSONObject
+     * @return True if they are equals
+     */
+    private boolean different(JSONObject a, JSONObject b) throws JSONException {
+        boolean result = a.get("position").equals(b.get("position")) &&
+                a.get("sourceCode").equals(b.get("sourceCode")) &&
+                a.get("type").equals(b.get("type"));
+
+        return !result;
+    }
+
+    /**
+     * Clean the sosies to avoid repreated sosies
+     *
+     * @param sosies
+     */
+    private JSONArray cleanRepeated(JSONArray sosies) throws JSONException {
+        JSONArray nonRepeated = new JSONArray();
+        int index = 0;
+        for (int i = 0; i < sosies.length(); i++) {
+            boolean insert = true;
+
+            JSONObject a = sosies.getJSONObject(i);
+            JSONObject pa = a.getJSONObject("transplantationPoint");
+            JSONObject ta = a.has("transplant") ? a.getJSONObject("transplant") : null;
+
+            //Test that the Transplantation Point and the Transplantation are different
+            if (ta == null || different(pa, ta)) {
+                for (int j = 0; j < nonRepeated.length() && insert; j++) {
+                    JSONObject b = nonRepeated.getJSONObject(j);
+                    insert = different(
+                            a.getJSONObject("transplantationPoint"),
+                            b.getJSONObject("transplantationPoint"));
+
+                    insert = insert || (a.has("transplant") != b.has("transplant"));
+
+                    if (!insert && a.has("transplant")) {
+                        insert = different(
+                                a.getJSONObject("transplant"),
+                                b.getJSONObject("transplant"));
+                    }
+                }
+
+
+            }
+
+            if (insert) {
+                JSONObject obj = sosies.getJSONObject(i);
+                index++;
+                obj.put("tindex", index);
+                nonRepeated.put(sosies.get(i));
+            }
+        }
+        return nonRepeated;
+    }
+
+    /**
      * Creates the pool of transformations
      */
     public void create(String outputFile) throws TransformationParserException {
@@ -62,7 +122,7 @@ public class SosiePoolCreator {
             parser.setFilterProperties(properties);
             Collection<Transformation> ts;
             File f = new File(inputProgram.getPreviousTransformationsPath());
-            if ( f.isDirectory() ) {
+            if (f.isDirectory()) {
                 ts = parser.parseDir(inputProgram.getPreviousTransformationsPath());
             } else {
                 ts = parser.parseFile(f);
@@ -92,7 +152,8 @@ public class SosiePoolCreator {
                 }
             }
             FileWriter fw = new FileWriter(outputFile);
-            array.write(fw);
+            JSONArray noRepeated = cleanRepeated(array);
+            noRepeated.write(fw);
             fw.close();
         } catch (JSONException | IOException e) {
             throw new TransformationParserException(e);

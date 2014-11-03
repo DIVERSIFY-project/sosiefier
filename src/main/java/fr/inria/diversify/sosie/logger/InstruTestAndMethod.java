@@ -52,7 +52,6 @@ public class InstruTestAndMethod {
             instru.copyLogger();
             return;
         } else if ( intruTransplantPoint ) {
-
             Factory factory = new SpoonMetaFactory().buildNewFactory(project, 7);
 
             InputProgram inputProgram = new InputProgram();
