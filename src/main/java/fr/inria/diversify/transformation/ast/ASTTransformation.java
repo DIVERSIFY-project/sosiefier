@@ -121,10 +121,11 @@ public abstract class ASTTransformation extends AbstractTransformation {
         copyTransplant = buildCopyTransplant();
         try {
             transplantationPoint.getCtCodeFragment().replace(copyTransplant);
+            printJavaFile(srcDir);
         } catch (Exception e) {
             throw new ApplyTransformationException("", e);
         }
-        printJavaFile(srcDir);
+
     }
 
     @Override
