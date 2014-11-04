@@ -94,14 +94,8 @@ public class TransformationJsonParser {
                 })
                 .collect(Collectors.toList());
 
-//        for (File f : file.listFiles())
-//            if (f.getName().endsWith(".json")) {
-//                countFile++;
-//                Log.debug("Current number of transformation {}", transformations.size());
-//                Log.debug("parse tranformation file: " + f.getName());
-//                transformations.addAll(parseFile(f));
-//            }
         Log.debug("number of transformation file: {}", countFile);
+        Log.debug("number of transformation : {}", transformations.size());
         Log.debug("number of parse error : {}", countError);
 
         return transformations;
@@ -456,7 +450,7 @@ public class TransformationJsonParser {
             }
 
             trans.setName(jsonObject.getString("name"));
-            String p = jsonObject.getJSONObject("transplantationPoint").getString("position");
+
             trans.setTransplantationPoint(findCodeFragment(jsonObject.getJSONObject("transplantationPoint")));
         } catch (JSONException e) {
             throw new TransformationParserException(e);
