@@ -333,11 +333,11 @@ public class InputProgram {
         int lineNumber = Integer.parseInt(s[1]);
         int minDiff = Integer.MAX_VALUE;
 
-        Set<CodeFragment> set = getCodeFragments()
+        List<CodeFragment> set = getCodeFragments()
                 .stream()
                 .filter(codeFragment -> source == null || codeFragment.getSourceClass().getQualifiedName().equals(qualifiedName))
                 .filter(codeFragment -> codeFragment.getCodeFragmentType().getSimpleName().equals(type))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
         for (CodeFragment codeFragment : set) {
             int cfLine = codeFragment.getStartLine();
@@ -346,6 +346,7 @@ public class InputProgram {
                 //else return the nearest one with same code
                 result = codeFragment;
                 minDiff = d;
+                break;
             }
         }
 
