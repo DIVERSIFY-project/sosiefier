@@ -623,7 +623,7 @@ public class TransformationJsonParser {
                 sourCode = jsonObject.getString("sourcecode");
             }
             String type = jsonObject.getString("type");
-            inputProgram.getCodeFragment(position, sourCode, type);
+            cf = inputProgram.getCodeFragment(position, sourCode, type);
         } catch (JSONException e) {
             throw new TransformationParserException(
                     "Unnable to obtain at least one field from JSON object " + jsonObject.toString(), e);

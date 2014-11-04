@@ -346,7 +346,9 @@ public class InputProgram {
                 //else return the nearest one with same code
                 result = codeFragment;
                 minDiff = d;
-                break;
+              if(minDiff == 0) {
+                  break;
+              }
             }
         }
 
