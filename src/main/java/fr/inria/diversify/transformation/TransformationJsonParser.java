@@ -208,35 +208,6 @@ public class TransformationJsonParser {
         }
     }
 
-
-    /**
-     * Tries to get the type of a transformation
-     *
-     * @param jsonObject JSONOBject Containing the transformation
-     * @return A string with the type of the transformation
-     * @throws JSONException
-     */
-    /*
-    private String tryToGetType(JSONObject jsonObject) throws JSONException {
-        String type = "";
-        try {
-            type = jsonObject.getString("type");
-        } catch (JSONException e) {
-
-            if  ( e.getMessage().contains("[\"type\"] not found") ) {
-
-                if ( jsonObject.has("name") ) {
-                    String name = jsonObject.getString("name");
-                    if ( name.contains("replace") ||  name.contains("delete") ||  name.contains("add") ) {
-                        return "adrStmt";
-                    }
-                    //OTHER TYPES BY NAMES GOES HERE!!!!
-                } else { throw e; }
-
-            } else { throw e; }
-        }
-        return type;
-    } */
     public Transformation parseTransformation(JSONObject jsonObject) throws TransformationParserException {
         try {
             String type = jsonObject.getString("type");
@@ -262,6 +233,7 @@ public class TransformationJsonParser {
             }
             trans.setFailures(getFailures(jsonObject));
             trans.setStatus(jsonObject.getInt("status"));
+            trans.setInputProgram(inputProgram);
 
             if (jsonObject.has("parent"))
                 trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));

@@ -31,17 +31,8 @@ public class OtherQuery extends TransformationQuery {
     }
 
     @Override
-    public List<Transformation> query(int nb) {
-//        Random r = new Random();
-//        if(r.nextDouble() < 0.5)
-        List<Transformation> result = new ArrayList<>();
-        for ( int j = 0; j < nb; j++ ) {
-            result.add(getEmptyMethodBody());
-        }
-//        else
-//            return LiteralReplace();
-//        return null;
-        return result;
+    public Transformation query() {
+        return getEmptyMethodBody();
     }
 
     private ReplaceLiteral getLiteralReplace() {
@@ -99,28 +90,4 @@ public class OtherQuery extends TransformationQuery {
 
         return emb;
     }
-
-//    private List<CtNewClass> newReplaceCandidate(CtNewClass newClass) {
-//        String superType = null;
-//        CtElement parent = newClass.getParent();
-//
-//        if(parent instanceof CtAssignment) {
-//            CtAssignment assignment = (CtAssignment)parent;
-//            superType = assignment.getAssigned().getType().getDeclaration().getQualifiedName();
-//        }
-//        if(parent instanceof CtLocalVariable) {
-//            CtLocalVariable var = (CtLocalVariable)parent;
-//            superType = var.getType().getDeclaration().getQualifiedName();
-//        }
-//        superType = newClass.getType().getDeclaration().getQualifiedName();
-//
-//
-//        List<CtNewClass> classes = new ArrayList<CtNewClass>();
-//        for(CtElement element : newClasses) {
-//            CtNewClass nl = (CtNewClass)element;
-//            if(nl.getType().getDeclaration().s)
-//        }
-//
-//    }
-
 }

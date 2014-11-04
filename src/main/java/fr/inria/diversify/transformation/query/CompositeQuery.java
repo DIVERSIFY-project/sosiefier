@@ -9,19 +9,19 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Composite query to composite multiple types of queries
+ * Composite executeQuery to composite multiple types of queries
  *
  * Created by Simon on 19/03/14.
  */
 public class CompositeQuery extends TransformationQuery  {
 
     /**
-     * Mutation query of the composite
+     * Mutation executeQuery of the composite
      */
     protected MutationQuery mutation;
 
     /**
-     * Ast query of the composite
+     * Ast executeQuery of the composite
      */
     protected ASTTransformationQuery ast;
 
@@ -36,31 +36,26 @@ public class CompositeQuery extends TransformationQuery  {
     public void setType(String type) {}
 
     @Override
-    public List<Transformation> query(int nb) {
+    public Transformation query() {
         try {
-            List<Transformation> result = new ArrayList<>();
-            for ( int j = 0; j < nb; j++ ) {
-                Transformation transformation = null;
-                Random r = new Random();
+            Transformation transformation = null;
+            Random r = new Random();
 
-                while (transformation == null) {
-                    T thread = new T(ast, mutation, r.nextDouble());
-                    thread.start();
-                    int count = 0;
-                    while (thread.trans == null && count < 50) {
-                        Thread.sleep(100);
-                        count++;
-                    }
-                    thread.interrupt();
-                    transformation = thread.trans;
+            while (transformation == null) {
+                T thread = new T(ast, mutation, r.nextDouble());
+                thread.start();
+                int count = 0;
+                while (thread.trans == null && count < 50) {
+                    Thread.sleep(100);
+                    count++;
                 }
-                result.add(transformation);
+                thread.interrupt();
+                transformation = thread.trans;
             }
-            return result;
+            return transformation;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     class T extends Thread {
@@ -77,9 +72,9 @@ public class CompositeQuery extends TransformationQuery  {
         public void run() {
             try {
                 if(r < 0.05)
-                    trans = mutation.buildTransformation();
+                    trans = mutation.query();
                 else
-                    trans =  ast.buildTransformation();
+                    trans =  ast.query();
             } catch (Exception e) {
                 Log.warn("Exception while running transformation: " + trans);
                 e.printStackTrace();

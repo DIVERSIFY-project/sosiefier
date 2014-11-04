@@ -30,7 +30,7 @@ public class SimpleCoverageReport extends CoverageReport {
     }
 
     /**
-     * Converts the coverage data from an exec file into a more potable data structure for the transformation query
+     * Converts the coverage data from an exec file into a more potable data structure for the transformation executeQuery
      *
      * @return A list of CoverageSourcePosition instances
      */

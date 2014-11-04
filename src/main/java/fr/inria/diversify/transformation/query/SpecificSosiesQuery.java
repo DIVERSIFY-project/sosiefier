@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * A query to apply several specific single transformations. This is similar to KnownMultiSosie but instead of applying
+ * A executeQuery to apply several specific single transformations. This is similar to KnownMultiSosie but instead of applying
  * previously found multisosies, apply an arbitrary set of single-sosies
  *
  * Created by marodrig on 19/08/2014.
@@ -41,10 +41,14 @@ public class SpecificSosiesQuery extends TransformationQuery {
         transformations.addAll(ts);
     }
 
-
     @Override
     public void setType(String type) {
 
+    }
+
+    @Override
+    public Transformation query() throws QueryException {
+        return null;
     }
 
     @Override

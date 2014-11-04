@@ -39,7 +39,7 @@ public class SinglePointDiversify extends AbstractDiversify {
     @Override
     public void run(int n) throws Exception {
         for(int i = 0;i < n; i++  ) {
-            run(transQuery.buildTransformation());
+            run(transQuery.query());
         }
         Log.info("session result: {}", sessionResults);
     }

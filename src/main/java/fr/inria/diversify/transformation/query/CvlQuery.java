@@ -31,34 +31,30 @@ public class CvlQuery extends TransformationQuery {
     public void setType(String type) {}
 
     @Override
-    public List<Transformation> query(int nb) {
+    public Transformation query() {
         try {
-            List<Transformation> result = new ArrayList<>();
-            for (int j = 0; j < nb; j++) {
-                Transformation t = null;
-                Random r = new Random();
-                int i = r.nextInt(8);
-                switch (i) {
-                    case 0:
-                        t = getLinkExistence();
-                        break;
-                    case 1:
-                        t = getLinkSubstitution();
-                        break;
-                    case 2:
-                    case 3:
-                        t = getObjectExistence();
-                        break;
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                        t = getObjectSubstitution();
-                        break;
-                }
-                result.add(t);
+            Transformation t = null;
+            Random r = new Random();
+            int i = r.nextInt(8);
+            switch (i) {
+                case 0:
+                    t = getLinkExistence();
+                    break;
+                case 1:
+                    t = getLinkSubstitution();
+                    break;
+                case 2:
+                case 3:
+                    t = getObjectExistence();
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    t = getObjectSubstitution();
+                    break;
             }
-            return result;
+            return t;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

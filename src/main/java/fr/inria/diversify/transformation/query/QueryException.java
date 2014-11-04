@@ -5,6 +5,10 @@ package fr.inria.diversify.transformation.query;
  */
 public class QueryException extends Exception {
 
+    public QueryException(Exception e) {
+        super(e);
+    }
+
     public Reasons getReason() {
         return reason;
     }

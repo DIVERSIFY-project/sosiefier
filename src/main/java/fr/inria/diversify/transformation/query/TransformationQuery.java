@@ -5,10 +5,11 @@ import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
- * Super class for all transformation queries. The query is in charge of search transplantation points (pots) and
+ * Super class for all transformation queries. The executeQuery is in charge of search transplantation points (pots) and
  * transformations to transplant
  * <p/>
  * User: Simon
@@ -175,9 +176,7 @@ public abstract class TransformationQuery {
 
     public abstract void setType(String type);
 
-    public Transformation buildTransformation() throws QueryException {
-        return query(1).get(0);
-    }
+    public abstract  Transformation query() throws QueryException;
 
 
     //public void prepareForNextTransformationSize()
@@ -187,21 +186,31 @@ public abstract class TransformationQuery {
      *
      * @param nb
      */
-    public abstract List<Transformation> query(int nb) throws QueryException;
+    public List<Transformation> query(int nb) throws QueryException {
+        try {
+            List<Transformation> result = new ArrayList<>();
+            for ( int j = 0; j < nb; j++ ) {
+                result.add(query());
+            }
+            return result;
+        } catch (Exception e) {
+            throw new QueryException(e);
+        }
+    }
 
     /**
      * Performs the search for transformations
      *
      * @throws SeveralTriesUnsuccessful when several unsuccessful attempts have been made to get the transformations
      */
-    public void query() {
+    public void executeQuery() {
         int max = 100;
         Exception[] causes = new Exception[max];
         int trials = 0;
         boolean failed = true;
         while (trials < max && failed)
             try {
-                //The amount of transformations are given in the query by the InputProgram
+                //The amount of transformations are given in the executeQuery by the InputProgram
                 transformations = query(getInputProgram().getTransformationPerRun());
                 failed = false;
             } catch (QueryException qe) {
@@ -211,7 +220,7 @@ public abstract class TransformationQuery {
                     trials = max + 1;
                 }
             } catch (Exception e) {
-                Log.warn("Unable to query: " + e.getMessage());
+                Log.warn("Unable to executeQuery: " + e.getMessage());
                 causes[trials] = e;
                 failed = true;
                 trials++;

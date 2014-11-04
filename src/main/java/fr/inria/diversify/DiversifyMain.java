@@ -112,7 +112,7 @@ public class DiversifyMain {
                 abstractDiversify.run(n);
                 //Clear the found transformations for the next step to speed up. No needed since the new ones are going
                 //to be of different size and therefore different
-                //query.clearTransformationFounds();
+                //executeQuery.clearTransformationFounds();
                 String repo = inputConfiguration.getProperty("gitRepository");
                 if (repo.equals("null")) abstractDiversify.printResult(inputConfiguration.getProperty("result"));
                 else abstractDiversify.printResult(inputConfiguration.getProperty("result"), repo);
@@ -139,7 +139,7 @@ public class DiversifyMain {
             boolean earlySosies = inputConfiguration.getProperty("early.report.sosies.only", "false").equals("true");
             ((Diversify) ad).setEarlyReportSosiesOnly(earlySosies);
             ((Diversify) ad).setEarlyReport(early);
-        } else if(transformationType.equals("endless")){
+        } else if(transformationType.startsWith("endless")){
             ad = new EndlessDiversify(inputConfiguration, projet, src);
         } else if(transformationType.equals("uniquesosies")) {
             ad = new UniqueSosieGenerator(inputConfiguration, projet, src);
@@ -251,10 +251,13 @@ public class DiversifyMain {
                 */
                 return new MutationToSosieQuery(inputProgram);
             }
-            case "endless":{
+            case "endless": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
                 boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
                 return new ASTTransformationQuery(inputProgram, cl, subType, false);
+            }
+            case "endless2": {
+                return new ConsecutiveKnownSosieQuery(inputProgram);
             }
             case "adr": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
@@ -270,11 +273,11 @@ public class DiversifyMain {
                 return new ASTTransformationQuery(inputProgram, cl, subType, true);
             }
             case "knownsosies":
-                //This query benefits from a early processCodeFragments
+                //This executeQuery benefits from a early processCodeFragments
                 inputProgram.processCodeFragments();
                 return new KnownSosieQuery(inputProgram);
             case "knownmultisosies":
-                //This query benefits from a early processCodeFragments
+                //This executeQuery benefits from a early processCodeFragments
                 inputProgram.processCodeFragments();
                 return new KnowMultisosieQuery(inputProgram);
             case "singleconsecutive":
@@ -293,7 +296,7 @@ public class DiversifyMain {
                 query.setSpecificIndex(spIndex);
                 return query;
             default:
-                //Try to construct the query from the explicit class
+                //Try to construct the executeQuery from the explicit class
                 try {
                     Class[] intArgsClass = new Class[]{InputProgram.class};
                     Class strategyClass = Class.forName(type);

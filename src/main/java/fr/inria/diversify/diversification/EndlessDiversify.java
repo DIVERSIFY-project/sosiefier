@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Simon on 02/10/14.
@@ -52,7 +53,7 @@ public class EndlessDiversify extends AbstractDiversify {
                 ((ASTTransformation) trans).updateStatementList();
 
                 saveReport();
-                writeTransformation(trans);
+                writeTransformations(getSosieSourcesDir());
             }
         } catch (ApplyTransformationException e) {
             tryRestore(trans,e);
@@ -87,12 +88,16 @@ public class EndlessDiversify extends AbstractDiversify {
         setSosieSourcesDir(getResultDir());
         if(n <= 0) {
             while (true) {
-                run(transQuery.buildTransformation());
+                run(transQuery.query());
             }
         } else {
             for(int i = 0;i < n; i++) {
-                run(transQuery.buildTransformation());
+                run(transQuery.query());
             }
         }
+    }
+
+    protected String getSosieDestinationPath() {
+        return getSosieSourcesDir() + "/" + sessionResults.getBeginTime();
     }
 }

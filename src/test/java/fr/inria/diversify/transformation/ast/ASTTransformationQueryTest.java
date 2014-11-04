@@ -15,7 +15,7 @@ public class ASTTransformationQueryTest {
         //An initial test. This will force us to refactor the class to a point that it may work in isolation
         //This seams really stupid is just a concept test
         NullCoverageReport report = new NullCoverageReport();
-        //ASTTransformationQuery query = new ASTTransformationQuery(report);
+        //ASTTransformationQuery executeQuery = new ASTTransformationQuery(report);
     }
 
 

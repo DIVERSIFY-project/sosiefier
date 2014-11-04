@@ -1,6 +1,5 @@
 package fr.inria.diversify.diversification;
 
-import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.statistic.SessionResults;
 import fr.inria.diversify.transformation.AbstractTransformation;
@@ -9,11 +8,9 @@ import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
-import org.codehaus.plexus.util.FileUtils;
 import org.json.JSONException;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -126,9 +123,9 @@ public class Diversify extends AbstractDiversify {
             int attempts = 0;
             Exception[] causes = new Exception[10];
             while (success == false && attempts < 10) {
-                //1. We query for transformations.
+                //1. We executeQuery for transformations.
                 try {
-                    transQuery.query();
+                    transQuery.executeQuery();
                     //Obtain transformations
                     transformations = (List<Transformation>) transQuery.getMultiTransformations();
                     success = true;
@@ -154,7 +151,7 @@ public class Diversify extends AbstractDiversify {
                         transQuery.setLastTransformationStatus(AbstractTransformation.EXCEPTION);
                         success = false;
                         Log.error("Query application failed! " + ex.getMessage());
-                        //Application failed!... we'll query and apply again
+                        //Application failed!... we'll executeQuery and apply again
                         causes[attempts] = ex;
                         attempts++;
                     }
@@ -168,7 +165,7 @@ public class Diversify extends AbstractDiversify {
                         transQuery.setLastTransformationStatus(AbstractTransformation.EXCEPTION);
                         Log.error("Diversified program run failed! " + ex.getMessage());
                         success = false;
-                        //Application failed!... we'll query, apply and run again
+                        //Application failed!... we'll executeQuery, apply and run again
                         causes[attempts] = ex;
                         attempts++;
                     }
@@ -227,7 +224,7 @@ public class Diversify extends AbstractDiversify {
 
         //Build and run the transformation
         status = runTest(tmpDir);
-        //Give back to the query the value of the las transformation
+        //Give back to the executeQuery the value of the las transformation
         transQuery.setLastTransformationStatus(status);
 
         if (status == AbstractTransformation.SOSIE) {

@@ -14,18 +14,9 @@ import java.util.*;
  */
 public class ConsecutiveKnownSosieQuery extends TransformationQuery {
 
-    /**
-     * Previous sosies found.
-     */
-    public ArrayList<Transformation> getSosies() {
-        return sosies;
-    }
-
     private ArrayList<Transformation> sosies;
 
     private int currentTrial = 0;
-
-
 
     public ConsecutiveKnownSosieQuery(InputProgram inputProgram, ArrayList<Transformation> transf) {
         super(inputProgram);
@@ -66,13 +57,11 @@ public class ConsecutiveKnownSosieQuery extends TransformationQuery {
 
     }
 
-
     @Override
-    public List<Transformation> query(int nb) {
-        ArrayList<Transformation> q = new ArrayList<>();
-        q.add(sosies.get(currentTrial));
+    public Transformation query() {
+        Transformation t = sosies.get(currentTrial);
         currentTrial++;
-        return q;
+        return t;
     }
 
 

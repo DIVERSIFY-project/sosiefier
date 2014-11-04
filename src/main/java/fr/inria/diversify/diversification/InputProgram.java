@@ -438,8 +438,8 @@ public class InputProgram {
             /*
             getRoots().stream()
                     .flatMap(root -> {
-                        root.accept(query);
-                        return query.getResult().stream();
+                        root.accept(executeQuery);
+                        return executeQuery.getResult().stream();
                     })
                     .collect(Collectors.toList());
             */

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * A transformation query over the AST
+ * A transformation executeQuery over the AST
  * <p>
  * User: Simon
  * Modified: Marcelino
@@ -71,65 +71,57 @@ public class ASTTransformationQuery extends TransformationQuery {
 
     }
 
-    /**
-     * A method to progresively change into the multi
-     * @param nb
-     */
     @Override
-    public List<Transformation> query(int nb) {
-
-        ArrayList<Transformation> result = new ArrayList<>(nb);
+    public Transformation query() throws QueryException {
         try {
-            for (int j = 0; j < nb; j++) {
-                Random r = new Random();
-                ASTTransformation t = null;
-                int i = r.nextInt(stupid ? 15 : 5);
-                switch (i) {
-                    case 0:
-                    case 1:
-                        t = replace(subType);
-                        break;
-                    case 2:
-                    case 3:
-                        t = add(subType);
-                        break;
-                    case 4:
-                        t = delete();
-                        break;
-                    case 5:
-                    case 6:
-                    case 7:
-                        t = replaceRandom();
-                        break;
-                    case 8:
-                    case 9:
-                    case 10:
-                        t = addRandom();
-                        break;
-                    case 11:
-                        t = replaceWittgenstein();
-                        break;
-                    case 12:
-                        t = addWittgenstein();
-                        break;
-                    case 13: {
-                        t = replace(subType);
-                        t.setName("replaceReaction");
-                        break;
-                    }
-                    case 14: {
-                        t = add(subType);
-                        t.setName("addReaction");
-                        break;
-                    }
+            Random r = new Random();
+            ASTTransformation t = null;
+            int i = r.nextInt(stupid ? 15 : 5);
+            switch (i) {
+                case 0:
+                case 1:
+                    t = replace(subType);
+                    break;
+                case 2:
+                case 3:
+                    t = add(subType);
+                    break;
+                case 4:
+                    t = delete();
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                    t = replaceRandom();
+                    break;
+                case 8:
+                case 9:
+                case 10:
+                    t = addRandom();
+                    break;
+                case 11:
+                    t = replaceWittgenstein();
+                    break;
+                case 12:
+                    t = addWittgenstein();
+                    break;
+                case 13: {
+                    t = replace(subType);
+                    t.setName("replaceReaction");
+                    break;
                 }
-                t.setInputProgram(getInputProgram());
-                result.add(t);
+                case 14: {
+                    t = add(subType);
+                    t.setName("addReaction");
+                    break;
+                }
             }
+            t.setInputProgram(getInputProgram());
+            return t;
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new QueryException(e);
         }
-        return result;
     }
 
     /**

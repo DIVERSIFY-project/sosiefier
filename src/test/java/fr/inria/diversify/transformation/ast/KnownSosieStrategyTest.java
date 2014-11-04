@@ -9,7 +9,6 @@ import fr.inria.diversify.transformation.query.KnownSosieQuery;
 import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import spoon.reflect.factory.Factory;
@@ -57,7 +56,7 @@ public class KnownSosieStrategyTest {
     public void testQuery() throws Exception {
         //Set the amount of points we must find
         KnownSosieQuery st = new KnownSosieQuery(inputProgram, sosies);
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf1 = st.getMultiTransformations();
         assertEquals(5, cf1.size());
     }
@@ -72,11 +71,11 @@ public class KnownSosieStrategyTest {
         KnownSosieQuery st = new KnownSosieQuery(inputProgram, sosies);
 
         //Query three times
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf1 = st.getMultiTransformations();
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf2 = st.getMultiTransformations();
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf3 = st.getMultiTransformations();
 
         String s1 = "";
@@ -103,10 +102,10 @@ public class KnownSosieStrategyTest {
 
         //Query three times
         inputProgram.setTransformationPerRun(5);
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf1 = st.getMultiTransformations();
         inputProgram.setTransformationPerRun(6);
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf2 = st.getMultiTransformations();
         inputProgram.setTransformationPerRun(5);
 
@@ -128,15 +127,15 @@ public class KnownSosieStrategyTest {
 
         //Query three times
         inputProgram.setTransformationPerRun(5);
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf51 = st.getMultiTransformations();
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf52 = st.getMultiTransformations();
 
         inputProgram.setTransformationPerRun(6);
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf62 = st.getMultiTransformations();
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf61 = st.getMultiTransformations();
         inputProgram.setTransformationPerRun(5);
 
@@ -176,24 +175,24 @@ public class KnownSosieStrategyTest {
         inputProgram.setTransformationPerRun(5);
 
         //51
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf51 = st.getMultiTransformations();
         assertEquals(0, st.getLastIncrementalSeries());
 
         //52
-        st.query();
+        st.executeQuery();
         st.setLastTransformationStatus(AbstractTransformation.COMPILED_FAIL);
         assertEquals(1, st.getLastIncrementalSeries());
 
         //53
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf53 = st.getMultiTransformations();
         assertEquals(2, st.getLastIncrementalSeries());
 
 
         //63
         inputProgram.setTransformationPerRun(6);
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf63 = st.getMultiTransformations();
         st.setLastTransformationStatus(AbstractTransformation.COMPILED_FAIL);
         assertEquals(2, st.getLastIncrementalSeries());
@@ -201,13 +200,13 @@ public class KnownSosieStrategyTest {
         //62 is bad blood
 
         //61
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf61 = st.getMultiTransformations();
         assertEquals(0, st.getLastIncrementalSeries());
 
         try {
             //Query again to simulate that we din't get all the sosies we wanted
-            st.query();
+            st.executeQuery();
             fail();
         } catch (SeveralTriesUnsuccessful e) {
             assertTrue(((QueryException)e.getCauses()[0]).getReason().equals(
@@ -216,14 +215,14 @@ public class KnownSosieStrategyTest {
 
         //71
         inputProgram.setTransformationPerRun(7);
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf71 = st.getMultiTransformations();
         assertEquals(0, st.getLastIncrementalSeries());
 
         // 71 and 72 are bad blood
 
         try {
-            st.query();
+            st.executeQuery();
             fail();
         } catch (SeveralTriesUnsuccessful e) {
             assertTrue(((QueryException)e.getCauses()[0]).getReason().equals(
@@ -271,31 +270,31 @@ public class KnownSosieStrategyTest {
         inputProgram.setTransformationPerRun(5);
 
         //51
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf51 = st.getMultiTransformations();
         assertEquals(0, st.getLastIncrementalSeries());
 
         //52
-        st.query();
+        st.executeQuery();
         st.setLastTransformationStatus(AbstractTransformation.COMPILED_FAIL);
         assertEquals(1, st.getLastIncrementalSeries());
 
         //53
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf53 = st.getMultiTransformations();
         assertEquals(2, st.getLastIncrementalSeries());
 
 
         //63
         inputProgram.setTransformationPerRun(6);
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf63 = st.getMultiTransformations();
         assertEquals(2, st.getLastIncrementalSeries());
 
         //62 is bad blood
 
         //61
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf61 = st.getMultiTransformations();
         st.setLastTransformationStatus(-1);
         assertEquals(0, st.getLastIncrementalSeries());
@@ -304,7 +303,7 @@ public class KnownSosieStrategyTest {
         //71 and 72 are bad blood
 
         inputProgram.setTransformationPerRun(7);
-        st.query();
+        st.executeQuery();
         Collection<Transformation> cf73 = st.getMultiTransformations();
         assertEquals(2, st.getLastIncrementalSeries());
 

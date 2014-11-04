@@ -74,39 +74,35 @@ public class MutationQuery extends TransformationQuery {
     }
 
     @Override
-    public List<Transformation> query(int nb) {
+    public Transformation query() {
         try {
-            List<Transformation> result = new ArrayList<>();
             Random r = new Random();
-            for (int j = 0; j < nb; j++) {
-                int i = r.nextInt(8);
+            int i = r.nextInt(8);
 
-                Transformation t = null;
-                switch (i) {
-                    case 0:
-                        t = getNegateConditionalMutation();
-                        break;
-                    case 1:
-                        t = getConditionalBoundaryMutation();
-                        break;
-                    case 2:
-                    case 3:
-                    case 4:
-                        t = getMathMutation();
-                        break;
-                    case 5:
-                        t = getRemoveConditionalMutation();
-                        break;
-                    case 6:
-                        t = getReturnValueMutation();
-                        break;
-                    case 7:
-                        t = getInlineConstantMutation();
-                        break;
-                }
-                result.add(t);
+            Transformation t = null;
+            switch (i) {
+                case 0:
+                    t = getNegateConditionalMutation();
+                    break;
+                case 1:
+                    t = getConditionalBoundaryMutation();
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    t = getMathMutation();
+                    break;
+                case 5:
+                    t = getRemoveConditionalMutation();
+                    break;
+                case 6:
+                    t = getReturnValueMutation();
+                    break;
+                case 7:
+                    t = getInlineConstantMutation();
+                    break;
             }
-            return result;
+            return t;
         } catch ( Exception e ) {
             throw new RuntimeException(e);
         }

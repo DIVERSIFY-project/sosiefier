@@ -63,7 +63,7 @@ public class KnownSosieQuery extends TransformationQuery {
     //Last multisosie found
     protected TransformationFoundRecord prevRecord = null;
 
-    //Last size of transformation elements we where ask to query for.
+    //Last size of transformation elements we where ask to executeQuery for.
     protected int lastTransfSizeNOfElems = 0;
 
     //Increment of the last series number
@@ -164,6 +164,11 @@ public class KnownSosieQuery extends TransformationQuery {
     @Override
     public void setType(String type) {
 
+    }
+
+    @Override
+    public Transformation query() throws QueryException {
+        return null;
     }
 
     /**

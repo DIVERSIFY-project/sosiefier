@@ -244,7 +244,7 @@ public abstract class AbstractDiversify {
                     f.mkdirs();
                 }
 
-                String destPath = getSosieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
+                String destPath = getSosieDestinationPath();
 
                 boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall","false"));
                 boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable","false"));
@@ -274,6 +274,10 @@ public abstract class AbstractDiversify {
             //We may also don't want to recover from here. If no instrumentation possible... now what?
             throw new RuntimeException(e);
         }
+    }
+
+    protected String getSosieDestinationPath() {
+        return getSosieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
     }
 
     protected void tryRestore(Transformation trans, Exception e) throws Exception {

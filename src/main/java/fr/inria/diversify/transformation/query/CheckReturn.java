@@ -9,6 +9,7 @@ import spoon.reflect.code.*;
 import spoon.reflect.reference.CtVariableReference;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -87,17 +88,7 @@ public class CheckReturn extends ASTTransformationQuery {
 
     }
 
-    @Override
-    public List<Transformation> query(int nb) {
-        List<Transformation> result = new ArrayList<>();
 
-        for(int i = 0; i < nb; i++) {
-            try {
-                result.add(transformation());
-            } catch (Exception e) {}
-        }
-        return result;
-    }
 
     protected ASTReplace transformation() throws Exception {
         ASTReplace tf = new ASTReplace();

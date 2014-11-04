@@ -187,7 +187,7 @@ public class FailOnTimeout extends Statement {
 
     /**
      * Returns the CPU time used by a thread, if possible.
-     * @param thr The thread to query.
+     * @param thr The thread to executeQuery.
      * @return The CPU time used by {@code thr}, or 0 if it cannot be determined.
      */
     private long cpuTime (Thread thr) {

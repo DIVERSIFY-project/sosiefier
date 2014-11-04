@@ -139,9 +139,9 @@ public class InputConfiguration {
         prop.setProperty("gitRepository", "null");
         prop.setProperty("processor", "fr.inria.diversify.codeFragmentProcessor.StatementProcessor");
         prop.setProperty("transplant.point.search.strategy",
-                "fr.inria.diversify.transformation.query.searchStrategy.SimpleRandomStrategy");
+                "fr.inria.diversify.transformation.executeQuery.searchStrategy.SimpleRandomStrategy");
         prop.setProperty("transplant.search.strategy",
-                "fr.inria.diversify.transformation.query.searchStrategy.SimpleRandomStrategy");
+                "fr.inria.diversify.transformation.executeQuery.searchStrategy.SimpleRandomStrategy");
 
         prop.setProperty("syncroRange","0");
         prop.setProperty("newPomFile","");
