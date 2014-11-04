@@ -53,12 +53,12 @@ public class UniqueSosieGenerator extends AbstractDiversify {
             trans.apply(tmpDir + "/" + sourceDir);
 
             try {
-                transformations.add(trans);
                 int status = runTest(tmpDir);
 
                 trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
                 if (status == 0) {
+                    transformations.add(trans);
                     copySosieProgram();
                 }
                 // error during runTest
