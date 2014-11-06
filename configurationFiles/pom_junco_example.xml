@@ -187,17 +187,6 @@
               </properties>
               <!-- Sets the VM argument line used when unit tests are run. -->
               <argLine>${surefireArgLine}</argLine>
-              
-              
-            <includes>
-              <include>**/*Test.java</include>
-            </includes>
-            <excludes>
-              <exclude>**/*$*</exclude>
-              <exclude>**/TestUtils.java</exclude>
-              <exclude>**/Abstract*.java</exclude>
-              <exclude>**/BulkTest.java</exclude>
-            </excludes>
         </configuration>
       </plugin>
       <plugin>
