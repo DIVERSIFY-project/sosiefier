@@ -108,36 +108,19 @@ public abstract class AbstractBuilder {
     }
 
     public void runBuilder() throws InterruptedException {
-
-        /*
-        if (System.getProperty("os.name").contains("Windows")) {
-            //Increases the number
-            reset();
-            runCount++;
-            runPrivate();
-        } else {
-        */
-
-            initThreadGroup();
-            reset();
-            runCount++;
-            Thread thread = new Thread() {
-                public void run() {
-                    runPrivate();
-                }
-            };
-            thread.start();
-            //Wait until the maven thread is over...
-//            latch.await();
-//            latch = new CountDownLatch(1);
-
-            thread.join(1000 * timeOut);
-
-            thread.interrupt();
-            //So we can kill it afterwards
-            killUselessThread();
-        //}
+        initThreadGroup();
+        reset();
+        Thread thread = new Thread() {
+            public void run() {
+                runPrivate();
+            }
+        };
+        thread.start();
+        thread.join(1000 * timeOut);
+        thread.interrupt();
+        killUselessThread();
     }
+
 
     public void initTimeOut() throws InterruptedException {
         initThreadGroup();
