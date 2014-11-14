@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.ast;
 
 
-import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +24,6 @@ public class ASTDelete extends ASTTransformation {
     @Override
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = super.toJSONObject();
-
         object.put("transplantationPoint", transplantationPoint.toJSONObject());
 
         return object;

@@ -168,25 +168,32 @@ public class DiversifyMain {
         AbstractBuilder rb;
         String builder =  inputConfiguration.getProperty("builder");
 
-        String src = inputConfiguration.getProperty("src");
-        if (inputConfiguration.getProperty("builder").equals("maven")) {
+        if(builder.equals("maven")) {
+            String src = inputConfiguration.getProperty("src");
             rb = new MavenBuilder(directory, src);
             rb.setPhase(new String[]{"clean", "test"});
-        } else {
+
+            initTimeOut(rb);
+
+            String pomFile = inputConfiguration.getProperty("newPomFile");
+            if (!pomFile.equals("")) {
+                rb.initPom(pomFile);
+            }
+
+            rb.copyClasses(inputConfiguration.getProperty("classes"));
+            rb.initTimeOut();
+            rb.setPhase(new String[]{"test"});
+
+        } else { //builder == ant
             rb = new AntBuilder(directory, inputConfiguration.getProperty("builder.testTarget"));
             rb.setPhase(new String[]{"clean", inputConfiguration.getProperty("builder.testTarget")});
+
+            initTimeOut(rb);
         }
-        int t = Integer.parseInt(inputConfiguration.getProperty("timeOut").trim());
-        if (t == -1) rb.initTimeOut();
-        else rb.setTimeOut(t);
 
-        String pomFile = inputConfiguration.getProperty("newPomFile");
-        if (!pomFile.equals("")) rb.initPom(pomFile);
-
-        rb.copyClasses(inputConfiguration.getProperty("classes"));
-        rb.initTimeOut();
-        if(builder.equals("maven")) {
-            rb.setPhase(new String[]{"test"});
+        String phases = inputConfiguration.getProperty("phase");
+        if(phases != null) {
+            rb.setPhase(new String[]{phases});
         }
 
         //Obtain some other builder properties
@@ -198,6 +205,15 @@ public class DiversifyMain {
         rb.setSaveOutputToFile(saveOutput);
 
         return rb;
+    }
+
+    protected void initTimeOut(AbstractBuilder rb) throws InterruptedException {
+        int t = Integer.parseInt(inputConfiguration.getProperty("timeOut").trim());
+        if (t == -1) {
+            rb.initTimeOut();
+        } else {
+            rb.setTimeOut(t);
+        }
     }
 
     /**

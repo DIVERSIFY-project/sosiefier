@@ -75,7 +75,6 @@ public class ASTAdd extends ASTTransformation {
 
             stmtToAdd.getCtCodeFragment().setParent(stmtIf);
             body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
-
             return stmtIf;
         } catch (Exception e) {
             throw new BuildTransplantException("", e);
