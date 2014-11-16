@@ -19,8 +19,6 @@ import java.util.List;
 public class MavenBuilder extends AbstractBuilder {
 
 
-
-
     public MavenBuilder(String directory, String srcDir) throws IOException {
         super(directory, srcDir);
     }
@@ -44,6 +42,9 @@ public class MavenBuilder extends AbstractBuilder {
         if (!mvnHome.exists())
             //ubuntu
             mvnHome = new File("/usr/share/maven");
+        if (!mvnHome.exists())
+            //debian
+            mvnHome = new File("/opt/maven");
         if (!mvnHome.exists())
             //osx
             mvnHome = new File("/usr/local/Cellar/maven/3.2.3/libexec/");
@@ -96,7 +97,6 @@ public class MavenBuilder extends AbstractBuilder {
         failedTests = parser.getFailedTests();
         status = parser.getStatus();
     }
-
 
     protected void parseClojureResult(String r) {
         Integer tmpFailure = null;
