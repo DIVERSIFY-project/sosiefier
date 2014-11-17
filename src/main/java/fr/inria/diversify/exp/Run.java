@@ -99,9 +99,9 @@ public class Run {
         builder.setTimeOut(1000);
         builder.setSetting(localRepository);
         if(install) {
-            builder.setPhase(new String[]{ "clean", "install"});
+            builder.setGoals(new String[]{"clean", "install" });
         } else {
-            builder.setPhase(new String[]{ "clean", "test"});
+            builder.setGoals(new String[]{"clean", "test" });
         }
         builder.runBuilder();
         int status = builder.getStatus();

@@ -20,7 +20,10 @@ public class AntBuilder extends AbstractBuilder {
         this.testTarget = testTarget;
     }
 
-    protected void runPrivate() {
+    protected void runPrivate(String[] goals) {
+        if(goals == null) {
+            goals = this.goals;
+        }
         Log.debug("run ant: sh script/runAnt.sh "+directory+ " "+testTarget);
 
         String[] command = {"sh", "script/runAnt.sh", directory,testTarget};

@@ -3,7 +3,6 @@ package fr.inria.diversify.buildSystem.maven;
 
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 import org.apache.maven.shared.invoker.*;
 
 import java.io.*;
@@ -23,15 +22,18 @@ public class MavenBuilder extends AbstractBuilder {
         super(directory, srcDir);
     }
 
-    protected void runPrivate() {
-        Log.debug("run maven, phase: {}, timeout {}", Arrays.toString(phases), timeOut);
+    protected void runPrivate(String[] goals) {
+        if(goals == null) {
+            goals = this.goals;
+        }
+        Log.debug("run maven, phase: {}, timeout {}", Arrays.toString(goals), timeOut);
 
         InvocationRequest request = new DefaultInvocationRequest();
         request.setPomFile(new File(directory + "/pom.xml"));
 
         List<String> l = new ArrayList<String>();
 
-        for (String phase : phases)
+        for (String phase : goals)
             l.add(phase);
         request.setLocalRepositoryDirectory(setting);
         request.setGoals(l);

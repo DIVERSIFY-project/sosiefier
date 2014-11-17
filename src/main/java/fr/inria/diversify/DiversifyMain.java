@@ -22,8 +22,6 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
-import org.apache.log4j.Level;
-import spoon.Launcher;
 import spoon.reflect.factory.Factory;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
@@ -159,7 +157,8 @@ public class DiversifyMain {
         ad.setSosieSourcesDir(sosieDir);
         ad.setBuilder(initBuilder(tmpDir));
         ad.setResultDir(resultDir);
-
+        boolean isAndroid = Boolean.parseBoolean(inputConfiguration.getProperty("isAndroid", "false"));
+        ad.setAndroid(isAndroid);
         return ad;
     }
 
@@ -169,9 +168,13 @@ public class DiversifyMain {
         String builder =  inputConfiguration.getProperty("builder");
 
         if(builder.equals("maven")) {
+            String[] phases = new String[]{inputConfiguration.getProperty("phase")};
+            if(phases[0] == null) {
+                phases = new String[]{"clean", "test" };
+            }
             String src = inputConfiguration.getProperty("src");
             rb = new MavenBuilder(directory, src);
-            rb.setPhase(new String[]{"clean", "test"});
+            rb.setGoals(phases);
 
             initTimeOut(rb);
 
@@ -182,18 +185,12 @@ public class DiversifyMain {
 
             rb.copyClasses(inputConfiguration.getProperty("classes"));
             rb.initTimeOut();
-            rb.setPhase(new String[]{"test"});
-
+//            rb.setGoals(new String[]{"test"});
         } else { //builder == ant
             rb = new AntBuilder(directory, inputConfiguration.getProperty("builder.testTarget"));
-            rb.setPhase(new String[]{"clean", inputConfiguration.getProperty("builder.testTarget")});
+            rb.setGoals(new String[]{"clean", inputConfiguration.getProperty("builder.testTarget")});
 
             initTimeOut(rb);
-        }
-
-        String phases = inputConfiguration.getProperty("phase");
-        if(phases != null) {
-            rb.setPhase(new String[]{phases});
         }
 
         //Obtain some other builder properties

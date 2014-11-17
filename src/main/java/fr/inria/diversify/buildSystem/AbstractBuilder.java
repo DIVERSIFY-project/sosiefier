@@ -10,7 +10,6 @@ import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * User: Simon
@@ -33,8 +32,8 @@ public abstract class AbstractBuilder {
     //Did all the test run
     protected boolean allTestRun;
 
-    //Phases of the compiler
-    protected String[] phases;
+    //Goals of the compiler
+    protected String[] goals;
 
     //setting file for the compiler
     protected File setting;
@@ -112,7 +111,7 @@ public abstract class AbstractBuilder {
         reset();
         Thread thread = new Thread() {
             public void run() {
-                runPrivate();
+                runPrivate(null);
             }
         };
         thread.start();
@@ -123,26 +122,43 @@ public abstract class AbstractBuilder {
 
 
     public void initTimeOut() throws InterruptedException {
+        timeOut = runGoals(goals) * 6;
+        Log.debug("timeOut init: " + timeOut);
+    }
+
+    public void startAndroidEmulation() throws InterruptedException {
+        Log.debug("start android emulation");
+        runGoals(new String[]{"android:emulator-start", "-Dandroid.emulator.avd=myandroid",
+                "-Dandroid.emulator.options=\"-no-window -no-audio\"", "-Dandroid.emulator.wait=100000"});
+    }
+
+    public void stopAndroidEmulation() throws InterruptedException {
+        Log.debug("stop android emulation");
+        runGoals(new String[]{"android:emulator-stop" });
+    }
+
+    protected int runGoals(String[] goals) throws InterruptedException {
         initThreadGroup();
         reset();
+
         Thread thread = new Thread() {
             public void run() {
-                runPrivate();
+                runPrivate(goals);
             }
         };
         thread.start();
 
-        int tmpTimeOut = 0;
-        int factor = 6;
+        int time = 0;
         while (status == -3) {
-            tmpTimeOut = tmpTimeOut + factor;
+            time++;
             Thread.sleep(1000);
         }
-        Log.debug("timeOut init: " + tmpTimeOut);
-        timeOut = tmpTimeOut;
+        Log.debug("timeOut init: " + time);
         thread.interrupt();
         //See if we are in windows and not call this
         killUselessThread();
+
+        return time;
     }
 
     public void copyClasses(String classes) throws IOException {
@@ -161,10 +177,8 @@ public abstract class AbstractBuilder {
 
     /**
      * Method to run in the compiler's thread
-     *
-     * @remark: IMPORTANT: latch.countDown() MUST BE CALLED FROM THE runPrivate Implementation. Otherwise ill never stop...
      */
-    protected abstract void runPrivate();
+    protected abstract void runPrivate(String[] goals);
 
     protected void initThreadGroup() {
         threadSet = Thread.getAllStackTraces().keySet();
@@ -243,8 +257,8 @@ public abstract class AbstractBuilder {
         this.clojureTest = clojureTest;
     }
 
-    public void setPhase(String[] phases) {
-        this.phases = phases;
+    public void setGoals(String[] goals) {
+        this.goals = goals;
     }
 
     public void setDirectory(String directory) {

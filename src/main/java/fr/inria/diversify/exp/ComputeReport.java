@@ -204,7 +204,7 @@ public class ComputeReport {
 
         builder.setTimeOut(600);
         builder.setSetting(localRepository);
-        builder.setPhase(new String[]{ "clean", "test"});
+        builder.setGoals(new String[]{"clean", "test" });
         builder.runBuilder();
         int status = builder.getStatus();
 

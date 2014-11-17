@@ -64,6 +64,7 @@ public abstract class AbstractDiversify {
      */
     private String sosieSourcesDir = null;
 
+    private boolean android = false;
 
 
     /**
@@ -226,10 +227,19 @@ public abstract class AbstractDiversify {
     }
 
     protected Integer runTest(String directory) throws InterruptedException {
+        if(android) {
+            builder.startAndroidEmulation();
+        }
+
         Log.debug("run test in directory: {}", directory);
         builder.setDirectory(directory);
         builder.runBuilder();
         Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
+
+        if(android) {
+            builder.stopAndroidEmulation();
+        }
+
         return builder.getStatus();
     }
 
@@ -295,4 +305,7 @@ public abstract class AbstractDiversify {
         }
     }
 
+    public void setAndroid(boolean android) {
+        this.android = android;
+    }
 }
