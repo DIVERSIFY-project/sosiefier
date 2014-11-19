@@ -4,12 +4,28 @@ import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.code.CtStatement;
 
-public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatement> {
-	private ValidStatementVisitor valid;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-	public void process(CtStatement element) {
+public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatement> {
+	protected ValidStatementVisitor valid;
+    protected List<File> sourceFilter;
+
+
+    public StatementProcessor(String externalSourceCodeDir) {
+         sourceFilter = Arrays.asList(externalSourceCodeDir.split(System.getProperty("path.separator")))
+                              .stream()
+                              .map(s -> new File(s))
+                              .collect(Collectors.toList());
+    }
+
+    public void process(CtStatement element) {
 		try {
 			if(isValidStatement(element)) {
+
                 Statement stmt = new Statement(element);
 				addCf(stmt);
 			}
@@ -17,13 +33,19 @@ public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatemen
             try{
                 Log.debug("error in StatementProcessor.process with the statement: "+element, e);
             } catch (Exception ee) {
-                Log.debug("error in StatementProcessor.process with the statement: ", e);
+                Log.debug("error in StatementProcessor.process with the statement ");
             }
 		}
 	}
 
 
-	protected boolean isValidStatement(CtStatement element) {
+	protected boolean isValidStatement(CtStatement element) throws IOException {
+        String file = element.getPosition().getCompilationUnit().getFile().toString();
+        for (File filter : sourceFilter) {
+            if(file.contains(filter.getCanonicalPath().toString()))
+                return false;
+        }
+
 		 valid = new ValidStatementVisitor(element, false);
 		element.getParent().accept(valid);
 		return !valid.inExpression(element) && valid.isValid();

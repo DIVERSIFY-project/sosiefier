@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.statistic.CVLMetric;
@@ -22,6 +25,7 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
+import org.apache.commons.io.FileUtils;
 import spoon.reflect.factory.Factory;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
@@ -52,23 +56,45 @@ public class DiversifyMain {
      */
     private InputConfiguration inputConfiguration;
 
-    public DiversifyMain(String propertiesFile) throws Exception {
+    public DiversifyMain(String propertiesFile) throws Exception, InvalidSdkException {
 
         inputConfiguration = new InputConfiguration(propertiesFile);
 
         initLogLevel();
-        if (inputConfiguration.getProperty("builder").equals("maven")) {
-            MavenDependencyResolver t = new MavenDependencyResolver();
-            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
-        }
+        initDependency();
         initSpoon();
 
         if (inputConfiguration.getProperty("stat").equals("true")) {
             computeStatistic();
         } else {
             if (inputConfiguration.getProperty("sosieOnMultiProject").equals("true")) {
-//            sosieOnMultiProject();
             } else initAndRunBuilder();
+        }
+    }
+
+    protected void initDependency() throws Exception, InvalidSdkException {
+        MavenDependencyResolver t = new MavenDependencyResolver();
+        String builder = inputConfiguration.getProperty("builder");
+
+        if (builder.equals("maven")) {
+            File pom = new File(inputConfiguration.getProperty("project") + "/pom.xml");
+            File originalPom = new File(inputConfiguration.getProperty("project") + "/_originalPom.xml");
+            FileUtils.copyFile(pom, originalPom);
+
+            String dependencyPom = inputConfiguration.getProperty("dependencyPom");
+            if(dependencyPom != null) {
+                FileUtils.copyFile(new File(inputConfiguration.getProperty("project") + "/" +dependencyPom), pom);
+            }
+
+            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
+
+            FileUtils.copyFile(originalPom, pom);
+            FileUtils.forceDelete(originalPom);
+        }
+
+        String androidSdk = inputConfiguration.getProperty("AndroidSdk");
+        if(androidSdk != null) {
+            t.resolveAndroidDependencies(androidSdk);
         }
     }
 
@@ -157,8 +183,9 @@ public class DiversifyMain {
         ad.setSosieSourcesDir(sosieDir);
         ad.setBuilder(initBuilder(tmpDir));
         ad.setResultDir(resultDir);
-        boolean isAndroid = Boolean.parseBoolean(inputConfiguration.getProperty("isAndroid", "false"));
-        ad.setAndroid(isAndroid);
+
+        String androidSDK = inputConfiguration.getProperty("androidSdk");
+        ad.setAndroid(androidSDK != null);
         return ad;
     }
 
@@ -220,6 +247,16 @@ public class DiversifyMain {
         inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
 
+        inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
+        inputProgram.setSourceCodeDir(inputConfiguration.getSourceCodeDir());
+
+        if(inputConfiguration.getProperty("externalSrc") != null) {
+            List<String> list = Arrays.asList(inputConfiguration.getProperty("externalSrc").split(System.getProperty("path.separator")));
+            String sourcesDir = list.stream()
+                              .map(src -> inputProgram.getProgramDir() + "/" + src)
+                             .collect(Collectors.joining(System.getProperty("path.separator")));
+            inputProgram.setExternalSourceCodeDir(sourcesDir);
+        }
         inputProgram.setCoverageReport(initCoverageReport());
 
         inputProgram.setTransformationPerRun(
@@ -343,7 +380,7 @@ public class DiversifyMain {
             Boolean binaryTrace = Boolean.parseBoolean(inputConfiguration.getProperty("binary.trace", "false"));
             if (traceDir != null) {
                 String[] dirs = traceDir.split(";");
-                ArrayList<File> traceFiles = new ArrayList<>();
+                ArrayList<File> traceFiles = new ArrayList();
                 for (String s : dirs) {
                     File f = new File(s);
                     if (f.exists() && f.isDirectory()) {
@@ -373,9 +410,16 @@ public class DiversifyMain {
 
 
     protected void initSpoon() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        String project = inputConfiguration.getProperty("project");
+        String  sourcesDir =  project + "/" +
+                inputConfiguration.getProperty("src");
+        if(inputConfiguration.getProperty("externalSrc") != null) {
+            for(String externalScr : inputConfiguration.getProperty("externalSrc").split(System.getProperty("path.separator"))) {
+                sourcesDir += System.getProperty("path.separator") + project + "/" + externalScr;
+            }
+        }
         Factory factory = new SpoonMetaFactory().buildNewFactory(
-                inputConfiguration.getProperty("project") + "/" +
-                        inputConfiguration.getProperty("src"),
+                sourcesDir,
                 Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
         initInputProgram(factory);
     }

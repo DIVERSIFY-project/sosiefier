@@ -58,6 +58,9 @@ public class InputProgram {
      */
     private String sourceCodeDir;
 
+
+    private String externalSourceCodeDir;
+
     /**
      * Path to the test source code of the input program
      */
@@ -164,6 +167,13 @@ public class InputProgram {
         this.sourceCodeDir = sourceCodeDir;
     }
 
+    public void setExternalSourceCodeDir(String externalSourceCodeDir) {
+        this.externalSourceCodeDir = externalSourceCodeDir;
+    }
+
+    public String getExternalSourceCodeDir() {
+        return externalSourceCodeDir;
+    }
 
     /**
      * Path to the know sosie information stored in file
@@ -238,7 +248,7 @@ public class InputProgram {
     public void processCodeFragments() {
         if (codeFragments == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
-            StatementProcessor processor = new StatementProcessor();
+            StatementProcessor processor = new StatementProcessor(externalSourceCodeDir);
             pm.addProcessor(processor);
             pm.process();
             codeFragments = processor.getCodeFragments();

@@ -1,5 +1,6 @@
 package fr.inria.diversify;
 
+import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -19,7 +20,7 @@ public class Main {
      *
      * @throws Exception
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception, InvalidSdkException {
 
         if(args[0].equals("git")) {
             try {

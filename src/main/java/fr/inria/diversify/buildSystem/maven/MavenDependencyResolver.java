@@ -1,11 +1,14 @@
 package fr.inria.diversify.buildSystem.maven;
 
 
+import fr.inria.diversify.buildSystem.android.AndroidSdk;
+import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.util.Log;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Repository;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -28,6 +31,8 @@ import java.util.Properties;
  * Time: 3:47 PM
  */
 public class MavenDependencyResolver {
+    List<URL> jarURL = new ArrayList();
+
 
     public void DependencyResolver(String pomFile) throws Exception {
         MavenProject project = loadProject(new File(pomFile));
@@ -35,7 +40,7 @@ public class MavenDependencyResolver {
     }
 
     public MavenProject loadProject(File pomFile) throws IOException, XmlPullParserException {
-        MavenProject ret = null;
+        MavenProject ret;
         MavenXpp3Reader mavenReader = new MavenXpp3Reader();
 
         //Removed null and file exists protections that mask errors
@@ -59,7 +64,7 @@ public class MavenDependencyResolver {
         }
         urls.add("http://repo1.maven.org/maven2/");
 
-        List<URL> jarURL = new ArrayList<URL>();
+
         Properties properties = project.getProperties();
         for (Dependency dependency : project.getDependencies()) {
             try {
@@ -67,11 +72,23 @@ public class MavenDependencyResolver {
                         ":" + resolveName(dependency.getArtifactId(), properties) +
                         ":" + resolveName(dependency.getVersion(), properties) +
                         ":" + resolveName(dependency.getType(), properties);
-                Log.debug("revolve artifact: {}", artifactId);
+
                 File cachedFile = resolver.resolve(artifactId, urls);
                 jarURL.add(cachedFile.toURI().toURL());
+                Log.debug("revolve artifact: {}", artifactId);
             } catch (Exception e) {}
         }
+
+        URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
+        Thread.currentThread().setContextClassLoader(child);
+    }
+
+    public void resolveAndroidDependencies(String chosenSdkPlatform) throws InvalidSdkException, MojoExecutionException, MalformedURLException {
+        File chosenSdkPath = new File( getAndroidHomeOrThrow() );
+
+        AndroidSdk androidSdk = new AndroidSdk( chosenSdkPath, chosenSdkPlatform );
+        jarURL.add(androidSdk.getAndroidJar().toURI().toURL());
+        jarURL.add(new File(androidSdk.getDxJarPath()).toURI().toURL());
 
         URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
         Thread.currentThread().setContextClassLoader(child);
@@ -96,4 +113,11 @@ public class MavenDependencyResolver {
         }
         return string;
     }
+
+    protected String getAndroidHomeOrThrow()
+    {
+        final String androidHome = System.getenv( AndroidSdk.ENV_ANDROID_HOME );
+        return androidHome;
+    }
+
 }

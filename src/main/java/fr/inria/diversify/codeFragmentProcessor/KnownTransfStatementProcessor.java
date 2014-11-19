@@ -23,6 +23,7 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
      * @param array
      */
     public KnownTransfStatementProcessor(JSONArray array) throws JSONException {
+        super("");
         positions = new HashSet<>();
         source = new HashSet<>();
         classNames = new HashSet<>();

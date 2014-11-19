@@ -228,7 +228,7 @@ public abstract class AbstractDiversify {
 
     protected Integer runTest(String directory) throws InterruptedException {
         if(android) {
-            builder.startAndroidEmulation();
+//            builder.startAndroidEmulation();
         }
 
         Log.debug("run test in directory: {}", directory);
@@ -237,7 +237,7 @@ public abstract class AbstractDiversify {
         Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
 
         if(android) {
-            builder.stopAndroidEmulation();
+//            builder.stopAndroidEmulation();
         }
 
         return builder.getStatus();

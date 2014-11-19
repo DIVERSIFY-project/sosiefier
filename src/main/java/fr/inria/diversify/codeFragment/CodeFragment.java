@@ -46,8 +46,8 @@ public abstract class CodeFragment {
     public void init(CtCodeElement cf) {
         codeFragment = cf;
         context = new Context(initInputContext(), initOutputContext());
-        this.initOutputContext();
-        this.initInputContext();
+//        this.initOutputContext();
+//        this.initInputContext();
     }
 
     public CtTypeReference<?> getOutputContext() {

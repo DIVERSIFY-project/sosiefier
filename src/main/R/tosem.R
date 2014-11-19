@@ -1,13 +1,12 @@
 
-diffVar <- function(original, client) {
+diffVar <- function(original, sosie) {
   diff <- vector();
   count <- 1;
-  #rownames(original) <- original$point;
   for(p in original$point) {
-    if(!is.na(client[p,"OS"]) & !is.na(client[p,"SS"])) {
+    if(!is.na(sosie[p,"OS"]) & !is.na(sosie[p,"SS"])) {
       if(is.var(original,p)) {
-        if(original[p,"OS"] == "S"
-         & client[p,"OS"] == "D") {
+        if((original[p,"OS"] == "FS" | original[p,"OS"] == "VS") 
+         & (sosie[p,"OS"] == "FD" | sosie[p,"OS"] == "VD")) {
         diff[count] <- p;
         count <- count + 1;
         }
@@ -17,15 +16,14 @@ diffVar <- function(original, client) {
   return(diff)
 }
 
-diffCall <- function(original, client) {
+diffCall <- function(original, sosie) {
   diff <- vector();
   count <- 1;
-  #rownames(original) <- original$point;
   for(p in original$point) {
-    if(!is.na(client[p,"OS"]) & !is.na(client[p,"SS"])) {
+    if(!is.na(sosie[p,"OS"]) & !is.na(sosie[p,"SS"])) {
       if(!is.var(original,p)) {
         if(original[p,"OS"] == "S"
-           & client[p,"OS"] == "D") {
+           & sosie[p,"OS"] == "D") {
           diff[count] <- p;
           count <- count + 1;
         }
@@ -85,23 +83,52 @@ loadAllsosieReport <- function(dir) {
                      return(tmp)})
 }
 
-findDiff <- function(original) {
+findDiff <- function(original, outputDir) {
   diffSummary <- data.frame();
   for(i in 1:length(sosieReport)) {
     call <- diffCall(original, sosieReport[[i]]);
-    var <- diffVar(original, sosieReport[[i]]);
+    var <- removeVar(diffVar(original, sosieReport[[i]]));
     name <- unlist(strsplit(sosieName[[i]], "[.]"))[1]
-   
-    diffSummary[name, "var"] <- length(var)
-    diffSummary[name, "call"] <- length(call)
-    if(length(var) != 0) {
-      print(name) 
+   print(name)
+    diffSummary[name, "nbVar"] <- length(var)
+    diffSummary[name, "nbC all"] <- length(call)
+   printResult(outputDir, name, var, call)
+    if(length(var) != 0 | length(call) != 0) {
       print(var);
+      print(call);
    }
   } 
   return(diffSummary)
 }
 
+removeVar <- function(var) {
+  varToRemove <- c("org.apache.commons.lang3.time.DateUtils.java.util.Calendar: endFinal ",
+    "org.apache.commons.lang3.time.DateUtils.java.util.Calendar: spot ")
+  v <- c(var)
+  for (r in varToRemove) {
+    v <- v[v != r]
+  }
+  
+  return(v)
+}
+
+printResult <- function(outputDir, sosieName, var, call) {
+  
+  if(length(var) != 0 | length(call) != 0) {
+    fileConn<-file(paste(outputDir, sosieName, sep="/"))
+    line <- c()
+    if(length(var) != 0) {
+      line <- c("var:")
+      line <- c(line, var)
+    }
+    if(length(call) != 0) {
+      line <- c(line,"call:")
+      line <- c(line, call)
+    }
+    writeLines(line, fileConn)
+    close(fileConn)
+  }
+}
 
 
 loadAndMerge <- function(dir) {
@@ -200,6 +227,18 @@ mergePoint <- function(v1, v2) {
      return("VD");
    }     
  }
+}
+
+set <- function(collection) {
+  vec <- vector()
+  count <- 1;
+  for(i in collection) {
+    if(!(i %in% vec)) {
+      vec[count] <- i;
+      count <- count + 1;
+    }
+  }
+  return(sort(vec))
 }
 
 is.dir <- function(x)    # helper function

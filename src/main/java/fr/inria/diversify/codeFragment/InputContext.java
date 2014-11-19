@@ -36,16 +36,20 @@ public class InputContext {
         List<CtVariableReference> candidate = new ArrayList<>();
 
         for (CtVariableReference<?> var : variableReferences) {
-            CtTypeReference<?> varType = var.getType();
-            if (subType) {
-                if (type.isSubtypeOf(varType) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
-                    candidate.add(var);
+            try {
+
+
+                CtTypeReference<?> varType = var.getType();
+                if (subType) {
+                    if (type.isSubtypeOf(varType) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                        candidate.add(var);
+                    }
+                } else {
+                    if (varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                        candidate.add(var);
+                    }
                 }
-            } else {
-                if (varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
-                    candidate.add(var);
-                }
-            }
+            } catch (Throwable e) {}
         }
         return candidate;
     }
@@ -63,7 +67,7 @@ public class InputContext {
                         return var;
                     }
                 }
-            } catch (Exception e) {}
+            } catch (Throwable e) {}
         }
         return null;
         }
