@@ -44,7 +44,7 @@ public abstract class AbstractBuilder {
     //Errors that we are OK with...
     protected List<String> acceptedErrors;
 
-    //-3 nothing ¿?
+    //-3 nothing
     //-2 not compile
     //-1 compile, error in test
     //0 compile, all test green

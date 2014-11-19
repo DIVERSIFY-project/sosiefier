@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.diversification.*;
@@ -62,6 +61,7 @@ public class DiversifyMain {
 
         initLogLevel();
         initDependency();
+        initInputProgram();
         initSpoon();
 
         if (inputConfiguration.getProperty("stat").equals("true")) {
@@ -243,9 +243,8 @@ public class DiversifyMain {
     /**
      * Initializes the InputProgram dataset
      */
-    protected void initInputProgram(Factory factory) {
+    protected void initInputProgram() {
         inputProgram = new InputProgram();
-        inputProgram.setFactory(factory);
 
         inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
         inputProgram.setSourceCodeDir(inputConfiguration.getSourceCodeDir());
@@ -270,8 +269,6 @@ public class DiversifyMain {
                 inputConfiguration.getProperty("classes"));
 
         inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
-
-
     }
 
     protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException {
@@ -410,18 +407,15 @@ public class DiversifyMain {
 
 
     protected void initSpoon() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        String project = inputConfiguration.getProperty("project");
-        String  sourcesDir =  project + "/" +
-                inputConfiguration.getProperty("src");
-        if(inputConfiguration.getProperty("externalSrc") != null) {
-            for(String externalScr : inputConfiguration.getProperty("externalSrc").split(System.getProperty("path.separator"))) {
-                sourcesDir += System.getProperty("path.separator") + project + "/" + externalScr;
-            }
+        String sourcesDir = inputProgram.getSourceCodeDir();
+        if(inputProgram.getExternalSourceCodeDir() != null) {
+            sourcesDir += System.getProperty("path.separator") + inputProgram.getExternalSourceCodeDir();
         }
+
         Factory factory = new SpoonMetaFactory().buildNewFactory(
                 sourcesDir,
                 Integer.parseInt(inputConfiguration.getProperty("javaVersion")));
-        initInputProgram(factory);
+        inputProgram.setFactory(factory);
     }
 
     protected void computeStatistic() throws Exception {
