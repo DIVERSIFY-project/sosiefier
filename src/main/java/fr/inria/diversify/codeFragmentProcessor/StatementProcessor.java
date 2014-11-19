@@ -31,9 +31,9 @@ public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatemen
 			}
 		} catch (Exception e) {
             try{
-                Log.debug("error in StatementProcessor.process with the statement: "+element, e);
+//                Log.debug("error in StatementProcessor.process with the statement: "+element, e);
             } catch (Exception ee) {
-                Log.debug("error in StatementProcessor.process with the statement ");
+//                Log.debug("error in StatementProcessor.process with the statement ");
             }
 		}
 	}
