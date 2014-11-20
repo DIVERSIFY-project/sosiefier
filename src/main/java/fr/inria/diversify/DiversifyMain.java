@@ -184,7 +184,7 @@ public class DiversifyMain {
         ad.setBuilder(initBuilder(tmpDir));
         ad.setResultDir(resultDir);
 
-        String androidSDK = inputConfiguration.getProperty("androidSdk");
+        String androidSDK = inputConfiguration.getProperty("AndroidSdk");
         ad.setAndroid(androidSDK != null);
         return ad;
     }
@@ -472,5 +472,6 @@ public class DiversifyMain {
     protected void initLogLevel() {
         int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
         Log.set(level);
+
     }
 }
