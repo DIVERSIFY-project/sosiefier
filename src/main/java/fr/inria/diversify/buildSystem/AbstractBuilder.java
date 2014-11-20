@@ -127,13 +127,13 @@ public abstract class AbstractBuilder {
     }
 
     public void startAndroidEmulation() throws InterruptedException {
-        Log.debug("start android emulation");
+        Log.debug("start android emulator");
         runGoals(new String[]{"android:emulator-start", "-Dandroid.emulator.avd=myandroid",
-                "-Dandroid.emulator.options=\"-no-window -no-audio\"", "-Dandroid.emulator.wait=100000"});
+                "-Dandroid.emulator.options=\"-no-window -no-audio -wipe-data\"", "-Dandroid.emulator.wait=100000"});
     }
 
     public void stopAndroidEmulation() throws InterruptedException {
-        Log.debug("stop android emulation");
+        Log.debug("stop android emulator");
         runGoals(new String[]{"android:emulator-stop-all"});
     }
 
