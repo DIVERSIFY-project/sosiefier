@@ -134,7 +134,7 @@ public abstract class AbstractBuilder {
 
     public void stopAndroidEmulation() throws InterruptedException {
         Log.debug("stop android emulation");
-        runGoals(new String[]{"android:emulator-stop" });
+        runGoals(new String[]{"android:emulator-stop-all"});
     }
 
     protected int runGoals(String[] goals) throws InterruptedException {
