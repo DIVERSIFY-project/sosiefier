@@ -21,10 +21,12 @@ import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.transformation.query.ASTTransformationQuery;
 
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
+import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import spoon.reflect.factory.Factory;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
@@ -62,6 +64,7 @@ public class DiversifyMain {
         initLogLevel();
         initDependency();
         initInputProgram();
+        initRepo();
         initSpoon();
 
         if (inputConfiguration.getProperty("stat").equals("true")) {
@@ -69,6 +72,16 @@ public class DiversifyMain {
         } else {
             if (inputConfiguration.getProperty("sosieOnMultiProject").equals("true")) {
             } else initAndRunBuilder();
+        }
+    }
+
+    protected void initRepo() throws GitAPIException, IOException {
+        String repo = inputConfiguration.getProperty("gitRepository");
+
+        if(repo != null) {
+            Log.debug("clone https://github.com/simonAllier/sosie-exp.git in {}", repo);
+            GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", repo);
+            gitUtils.cloneRepo();
         }
     }
 
@@ -98,7 +111,7 @@ public class DiversifyMain {
         }
     }
 
-    protected void initAndRunBuilder() throws Exception {
+    protected AbstractDiversify initAndRunBuilder() throws Exception {
         AbstractDiversify abstractDiversify;
         int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
         if(inputConfiguration.getProperty("transformation.type").equals("issta")) {
@@ -133,6 +146,7 @@ public class DiversifyMain {
                     inputProgram.setTransformationPerRun(i);
                 }
                 abstractDiversify.setTransformationQuery(query);
+
                 abstractDiversify.run(n);
                 //Clear the found transformations for the next step to speed up. No needed since the new ones are going
                 //to be of different size and therefore different
@@ -143,6 +157,7 @@ public class DiversifyMain {
             }
         }
         abstractDiversify.deleteTmpFiles();
+        return abstractDiversify;
     }
 
 

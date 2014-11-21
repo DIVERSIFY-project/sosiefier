@@ -200,7 +200,6 @@ public abstract class AbstractBuilder {
 
     protected void killAllChildrenProcess() {
         String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        Log.debug("PID :" + pid);
         Runtime r = Runtime.getRuntime();
         try {
             r.exec("pkill -P " + pid);
@@ -209,7 +208,7 @@ public abstract class AbstractBuilder {
         } catch (Exception e) {
             Log.error("killallchildren ", e);
         }
-        Log.debug("all children process kill");
+        Log.debug("all children process kill (pid: {})", pid);
     }
 
     protected void saveOutputToFile(String output) {
