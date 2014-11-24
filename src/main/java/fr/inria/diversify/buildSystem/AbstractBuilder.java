@@ -111,7 +111,7 @@ public abstract class AbstractBuilder {
         reset();
         Thread thread = new Thread() {
             public void run() {
-                runPrivate(null);
+                runPrivate(null, true);
             }
         };
         thread.start();
@@ -122,28 +122,28 @@ public abstract class AbstractBuilder {
 
 
     public void initTimeOut() throws InterruptedException {
-        timeOut = runGoals(goals) * 6;
+        timeOut = runGoals(goals, true) * 6;
         Log.debug("timeOut init: " + timeOut);
     }
 
     public void startAndroidEmulation() throws InterruptedException {
         Log.debug("start android emulator");
         runGoals(new String[]{"android:emulator-start", "-Dandroid.emulator.avd=myandroid",
-                "-Dandroid.emulator.options=\"-no-window -no-audio -wipe-data\"", "-Dandroid.emulator.wait=100000"});
+                "-Dandroid.emulator.options=\"-no-window -no-audio -wipe-data\"", "-Dandroid.emulator.wait=100000"}, false);
     }
 
     public void stopAndroidEmulation() throws InterruptedException {
         Log.debug("stop android emulator");
-        runGoals(new String[]{"android:emulator-stop-all"});
+        runGoals(new String[]{"android:emulator-stop-all"}, false);
     }
 
-    protected int runGoals(String[] goals) throws InterruptedException {
+    protected int runGoals(String[] goals, boolean verbose) throws InterruptedException {
         initThreadGroup();
         reset();
 
         Thread thread = new Thread() {
             public void run() {
-                runPrivate(goals);
+                runPrivate(goals, verbose);
             }
         };
         thread.start();
@@ -178,7 +178,7 @@ public abstract class AbstractBuilder {
     /**
      * Method to run in the compiler's thread
      */
-    protected abstract void runPrivate(String[] goals);
+    protected abstract void runPrivate(String[] goals, boolean verbose);
 
     protected void initThreadGroup() {
         threadSet = Thread.getAllStackTraces().keySet();

@@ -20,7 +20,7 @@ public class AntBuilder extends AbstractBuilder {
         this.testTarget = testTarget;
     }
 
-    protected void runPrivate(String[] goals) {
+    protected void runPrivate(String[] goals, boolean verbose) {
         if(goals == null) {
             goals = this.goals;
         }

@@ -22,7 +22,7 @@ public class MavenBuilder extends AbstractBuilder {
         super(directory, srcDir);
     }
 
-    protected void runPrivate(String[] goals) {
+    protected void runPrivate(String[] goals, boolean verbose) {
         if(goals == null) {
             goals = this.goals;
         }
@@ -65,6 +65,9 @@ public class MavenBuilder extends AbstractBuilder {
         try {
             invoker.execute(request);
             String output = os.toString();
+            if(verbose) {
+                Log.debug(output);
+            }
             if (getSaveOutputToFile()) { saveOutputToFile(output); }
             if (clojureTest)
                 parseClojureResult(output);
@@ -93,7 +96,7 @@ public class MavenBuilder extends AbstractBuilder {
         //Save r to further analysis
         MavenOutputParser parser = new MavenOutputParser();
         parser.setAcceptedErrors(acceptedErrors);
-        Log.debug(r);
+
         parser.parse(r, "\n");
         errors = parser.getCompileErrors();
         failedTests = parser.getFailedTests();
@@ -103,7 +106,7 @@ public class MavenBuilder extends AbstractBuilder {
     protected void parseClojureResult(String r) {
         Integer tmpFailure = null;
         for (String s : r.split("\n")) {
-            Log.debug(s);
+
             if (s.startsWith("[ERROR] COMPILATION ERROR")) {
                 tmpFailure = -2;
                 compileError = true;
