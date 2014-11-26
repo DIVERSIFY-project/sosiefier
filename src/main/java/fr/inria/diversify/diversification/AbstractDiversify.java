@@ -145,7 +145,7 @@ public abstract class AbstractDiversify {
         return fileName;
     }
 
-    public void printResult(String output, String git) {
+    public void printResultInGitRepo(String output, String git) {
         String absoluteFileName = printResult(git + "/" + output);
         String fileName = absoluteFileName.substring(git.length() + 1, absoluteFileName.length());
 
@@ -227,7 +227,7 @@ public abstract class AbstractDiversify {
     }
 
     protected Integer runTest(String directory) throws InterruptedException {
-        int status = -2;
+        int status;
         if(android) {
             builder.startAndroidEmulation();
         }
@@ -241,7 +241,7 @@ public abstract class AbstractDiversify {
         if(android) {
             builder.stopAndroidEmulation();
         }
-
+        builder.setStatus(status);
         return status;
     }
 

@@ -129,7 +129,7 @@ public abstract class AbstractBuilder {
     public void startAndroidEmulation() throws InterruptedException {
         Log.debug("start android emulator");
         runGoals(new String[]{"android:emulator-start", "-Dandroid.emulator.avd=myandroid",
-                "-Dandroid.emulator.options=\"-no-window -no-audio -wipe-data\"", "-Dandroid.emulator.wait=100000"}, false);
+                "-Dandroid.emulator.options=\"-no-window -no-audio -no-boot-anim -wipe-data\"", "-Dandroid.emulator.wait=100000"}, false);
     }
 
     public void stopAndroidEmulation() throws InterruptedException {
@@ -299,5 +299,9 @@ public abstract class AbstractBuilder {
 
     public void setSetting(File setting) {
         this.setting = setting;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

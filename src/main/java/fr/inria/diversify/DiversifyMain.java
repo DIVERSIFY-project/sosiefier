@@ -78,7 +78,7 @@ public class DiversifyMain {
     protected void initRepo() throws GitAPIException, IOException {
         String repo = inputConfiguration.getProperty("gitRepository");
 
-        if(repo != null) {
+        if(!repo.equals("null")) {
             Log.debug("clone https://github.com/simonAllier/sosie-exp.git in {}", repo);
             GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", repo);
             gitUtils.cloneRepo();
@@ -119,7 +119,7 @@ public class DiversifyMain {
             ASTTransformationQuery query = new ASTTransformationQuery(inputProgram);
             ((SinglePointDiversify) abstractDiversify).run(query.isstaTransformation(n));
             String repo = inputConfiguration.getProperty("gitRepository");
-            abstractDiversify.printResult(inputConfiguration.getProperty("result"), repo);
+            abstractDiversify.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
         } else {
             abstractDiversify = initAbstractDiversify();
             TransformationQuery query = initTransformationQuery();
@@ -153,7 +153,7 @@ public class DiversifyMain {
                 //executeQuery.clearTransformationFounds();
                 String repo = inputConfiguration.getProperty("gitRepository");
                 if (repo.equals("null")) abstractDiversify.printResult(inputConfiguration.getProperty("result"));
-                else abstractDiversify.printResult(inputConfiguration.getProperty("result"), repo);
+                else abstractDiversify.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
             }
         }
         abstractDiversify.deleteTmpFiles();
@@ -469,8 +469,8 @@ public class DiversifyMain {
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-       Visu v = new Visu(fileName + "_visu/visu", inputProgram);
-        v.writeJSON(transformations);
+//       Visu v = new Visu(fileName + "_visu/visu", inputProgram);
+//        v.writeJSON(transformations);
 
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);
