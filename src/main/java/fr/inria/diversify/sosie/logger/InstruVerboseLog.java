@@ -1,6 +1,9 @@
 package fr.inria.diversify.sosie.logger;
 
+//import fr.inria.diversify.util.Log;
+
 import java.io.*;
+import java.lang.StackTraceElement;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -21,9 +24,10 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     private String simpleSeparator = ";";
 
-
     //TPs called in this test
     protected HashSet<Integer> transplantPointCalledInThisTest;
+
+    int nullCallDepths = 0;
 
     /**
      * Constructor of the verbose log
@@ -35,6 +39,7 @@ public class InstruVerboseLog extends InstruLogWriter {
         super(logDir, parentLog);
         previousVarLog = new HashMap();
         fileWriters = new HashMap<Thread, PrintWriter>();
+        setCurrentTestSignature(parentLog.getCurrentTestSignature());
     }
 
     public InstruVerboseLog(String logDir) {
@@ -75,6 +80,8 @@ public class InstruVerboseLog extends InstruLogWriter {
     public void writeTestStart(Thread thread, String testSignature) {
 
         super.writeTestStart(thread, testSignature);
+
+        nullCallDepths = 0;
 
         String semaphore = "";
         try {
@@ -138,13 +145,45 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
+    /**
+     * Updates the depth of the test
+     * @param id ID of the call position
+     * @param depth Depth of the call position
+     */
+    /**
+     * Updates the depth of the test
+     *
+     * @param id    ID of the call position
+     * @param depth Depth of the call position
+     */
+    private void updateDepth(String id, int depth, int count, boolean exists) {
+        int min = depth;
+        int max = depth;
+        int mean = depth;
+        Integer[] arr = getDepthArray(id);
+        if (arr == null) setDepthArray(id, min, mean, max);
+        else {
+            if (min < arr[0] || arr[0] == -1) arr[0] = min;
+            arr[1] = (arr[1] * count + depth) / (count + 1);
+            if (max > arr[2] || arr[2] == -1) arr[2] = max;
+        }
+    }
+
     public void writeSourcePositionCall(String id) {
+        Thread t = Thread.currentThread();
+        Integer depth = callDeep.get(t); //Attempt the fast way first
+        if (depth == null) {
+            depth = getDepth();
+            nullCallDepths++;
+        }
         if (getTransplantPointCallCount().containsKey(id)) {
             int k = getTransplantPointCallCount().get(id);
+            updateDepth(id, depth, k, true);
             getTransplantPointCallCount().put(id, k + 1);
         } else {
+            updateDepth(id, depth, 1, true);
             getTransplantPointCallCount().put(id, 1);
-            writeStartLogging(Thread.currentThread(), id);
+            writeStartLogging(t, id);
         }
     }
 
@@ -183,6 +222,34 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
+
+    /**
+     * Get how deep in the stack is the call position
+     *
+     * @return
+     */
+    private int getDepth() {
+        //Search first in the current thread
+        Thread thread = Thread.currentThread();
+        StackTraceElement[] a = thread.getStackTrace();
+
+        for (int k = 0; k < 2; k++) {
+            int i = 3;
+            while (i < a.length) {
+                String sig = a[i].getClassName() + "." + a[i].getMethodName();
+                if (sig.equals(getCurrentTestSignature())) return i - 4; //The log depth of this method +4 of the call
+                i++;
+            }
+            //If we don't find the test in the current thread search in the parent log thread.
+            if (getThread() == null || getThread().equals(thread)) {
+                return -1;
+            }
+            thread = getThread();
+        }
+
+        return -1; //Not found for some reason
+    }
+
     protected void writeStartLogging(Thread thread, String id) {
         String semaphore = "";
         if (getLogMethod(thread)) {
@@ -194,6 +261,10 @@ public class InstruVerboseLog extends InstruLogWriter {
                 stringBuilder.append(id);
                 stringBuilder.append(simpleSeparator);
                 stringBuilder.append(System.currentTimeMillis());
+                stringBuilder.append(simpleSeparator);
+                //stringBuilder.append(getDepth());
+                stringBuilder.append(callDeep.get(thread));
+
 
                 String string = stringBuilder.toString();
                 PrintWriter fileWriter = getFileWriter(thread);
@@ -259,7 +330,6 @@ public class InstruVerboseLog extends InstruLogWriter {
                 String previousValue = previousVars.get(methodSignatureId + ":" + varName);
                 if (!value.equals(previousValue)) {
                     previousVars.put(methodSignatureId + ":" + varName, value);
-
                     varsString.append(separator);
                     varsString.append(varName);
                     varsString.append(simpleSeparator);
@@ -335,6 +405,11 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     @Override
     public void writeTestFinish() {
+
+        if ( nullCallDepths > 0 )
+            System.out.println(nullCallDepths + " depth with slow method at " + getCurrentTestSignature());
+
+
         for (Thread thread : fileWriters.keySet()) {
             String semaphore = "";
             try {
@@ -385,6 +460,7 @@ public class InstruVerboseLog extends InstruLogWriter {
         for (Map.Entry<String, Integer> e : map.entrySet()) {
             if (e.getValue() > 1) {
                 //Don't spend more space in login an occurrence of something we already log
+
                 sb.append("\n").
                         append(subTotalId).
                         append(simpleSeparator).
@@ -393,6 +469,16 @@ public class InstruVerboseLog extends InstruLogWriter {
                         append(e.getValue()).
                         append(simpleSeparator).
                         append(System.currentTimeMillis());
+                if (subTotalId.equals("TPC")) {
+                    Integer[] depth = getDepthArray(e.getKey());
+                    if ( depth == null ) depth = new Integer[] {-1, -1, -1};
+                    sb.append(simpleSeparator).
+                            append(depth[0]).
+                            append(simpleSeparator).
+                            append(depth[1]).
+                            append(simpleSeparator).
+                            append(depth[2]);
+                }
             }
         }
         flw.write(sb.toString());

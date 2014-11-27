@@ -1,6 +1,7 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.Log;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.CompilationUnit;
@@ -69,6 +70,8 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
 
         SourcePosition sp = firstStmt.getPosition();
         CompilationUnit compileUnit = sp.getCompilationUnit();
+
+        Log.info("Instrumenting test " + testName) ;
 
         int index;
         if(firstStmt.getPosition().getLine() == element.getPosition().getLine())

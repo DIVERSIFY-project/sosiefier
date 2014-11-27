@@ -114,7 +114,9 @@ public class Instru {
         SimpleAssertInvocationCounter.writeIdFile(outputDirectory);
         TransplantationPointCallCountInstrumenter.writeIdFile(outputDirectory);
 
-        tpcInstrumenter.writeIdMapToFile(outputDirectory + "/tpcid.json");
+        if ( tpcInstrumenter != null ) {
+            tpcInstrumenter.writeIdMapToFile(outputDirectory + "/tpcid.json");
+        }
         VariableLoggingInstrumenter.writeIdFile(outputDirectory);
         copyLogger(outputDirectory, srcDirectory);
 
@@ -136,6 +138,19 @@ public class Instru {
             sourceFactory = initSpoon(src);
         }
 
+        if ( instruTransplantationPointCallCount ) {
+            tpcInstrumenter =
+                    new TransplantationPointCallCountInstrumenter(transformations);
+            tpcInstrumenter.setUseCompactLog(compactLog);
+            applyProcessor(sourceFactory, tpcInstrumenter);
+
+            //TODO: Ask if we want to calculate the depth
+            DepthOnlyMethodInstrumenter m = new DepthOnlyMethodInstrumenter(transformations);
+            m.setUseCompactLog(compactLog);
+            applyProcessor(sourceFactory, m);
+
+        }
+
         if(intruMethodCall) {
             MethodLoggingInstrumenter m = new MethodLoggingInstrumenter(transformations);
             m.setUseCompactLog(compactLog);
@@ -151,12 +166,7 @@ public class Instru {
             e.setUseCompactLog(compactLog);
             applyProcessor(sourceFactory, e);
         }
-        if ( instruTransplantationPointCallCount ) {
-            tpcInstrumenter =
-                    new TransplantationPointCallCountInstrumenter(transformations);
-            tpcInstrumenter.setUseCompactLog(compactLog);
-            applyProcessor(sourceFactory, tpcInstrumenter);
-        }
+
 
         Environment env = sourceFactory.getEnvironment();
         env.useSourceCodeFragments(true);
@@ -210,7 +220,7 @@ public class Instru {
     protected Factory initSpoon(String srcDirectory) {
 
         try {
-            return new SpoonMetaFactory().buildNewFactory(srcDirectory, 5);
+            return new SpoonMetaFactory().buildNewFactory(srcDirectory, 7);
         } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);
         }
@@ -329,7 +339,7 @@ public class Instru {
         return testFactorty;
     }
 
-    public void setTestFactorty(Factory testFactorty) {
+    public void setTestFactory(Factory testFactorty) {
         this.testFactorty = testFactorty;
     }
 

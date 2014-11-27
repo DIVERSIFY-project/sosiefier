@@ -40,12 +40,18 @@ public abstract class InstruLogWriter {
     //Number of times a TP is called
     private HashMap<String, Integer> transplantPointCallCount;
 
+    //Mean depth of the call
+    private HashMap<String, Integer[]> depthArray;
+
     //Number of times an assertion is called
     private HashMap<String, Integer> assertCallCount;
 
     public int getCallDeep(Thread t) {
         return callDeep.containsKey(t) ? callDeep.get(t) : 0;
     }
+
+    //Signature of the last test method logged
+    private String currentTestSignature;
 
     /**
      * Constructor for the logger
@@ -126,8 +132,11 @@ public abstract class InstruLogWriter {
      * @param testSignature
      */
     public void writeTestStart(Thread thread, String testSignature) {
+        setCurrentTestSignature(testSignature);
         getTransplantPointCallCount().clear();
         getAssertCallCount().clear();
+        if (depthArray == null) depthArray = new HashMap<String, Integer[]>();
+        else depthArray.clear();
     }
 
     private void incCallCount(HashMap<String, Integer> map, String id) {
@@ -145,7 +154,7 @@ public abstract class InstruLogWriter {
      * @param id
      */
     public void writeSourcePositionCall(String id) {
-        if ( !getTransplantPointCallCount().containsKey(id) ) {
+        if (!getTransplantPointCallCount().containsKey(id)) {
             writeStartLogging(Thread.currentThread(), id);
         }
         incCallCount(getTransplantPointCallCount(), id);
@@ -380,5 +389,46 @@ public abstract class InstruLogWriter {
     //Thread containing the test
     public Thread getThread() {
         return thread;
+    }
+
+    public synchronized Integer[] getDepthArray(String key) {
+        if (depthArray == null) depthArray = new HashMap<String, Integer[]>();
+        return depthArray.get(key);
+    }
+
+    public synchronized void setDepthArray(String id, int index, int value) {
+        Integer[] arr = depthArray.get(id);
+        if (arr == null) {
+            arr = new Integer[4];
+            depthArray.put(id, arr);
+        }
+        arr[index] = value;
+    }
+
+    public synchronized void setDepthArray(String id, int min, int mean, int max) {
+        Integer[] arr = depthArray.get(id);
+        if (arr == null) {
+            arr = new Integer[3];
+            depthArray.put(id, arr);
+        }
+        arr[0] = min;
+        arr[1] = mean;
+        arr[2] = max;
+    }
+
+
+    protected String getCurrentTestSignature() {
+        if (parent != null) {
+            return parent.getCurrentTestSignature();
+        }
+        return currentTestSignature;
+    }
+
+    protected void setCurrentTestSignature(String currentTestSignature) {
+        this.currentTestSignature = currentTestSignature;
+    }
+
+    public void depthOnlyMethodCall(Thread thread) {
+        incCallDepth(thread);
     }
 }

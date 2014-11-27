@@ -33,7 +33,7 @@ public class LogWriter {
             return logs.get(thread);
         } else {
             InstruVerboseLog l;
-            if ( currentTestThread == null ) {
+            if ( currentTestThread == null || !logs.containsKey(currentTestThread) ) {
                 l = new InstruVerboseLog("LogDirName");
             } else {
                 l = new InstruVerboseLog("LogDirName", logs.get(currentTestThread));
@@ -41,6 +41,14 @@ public class LogWriter {
             logs.put(thread, l);
             return l;
         }
+    }
+
+    /**
+     * Only to register method call depth
+     * @param thread Thread being registered
+     */
+    public static void depthOnlyMethodCall(Thread thread) {
+        getLog(thread).depthOnlyMethodCall(thread);
     }
 
     public static void methodCall(Thread thread, String methodSignatureId) {
@@ -52,8 +60,8 @@ public class LogWriter {
     }
 
     public static void writeTestStart(Thread thread, String testSignature) {
-        getLog(thread).writeTestStart(thread, testSignature);
         currentTestThread = thread;
+        getLog(thread).writeTestStart(thread, testSignature);
     }
 
     public static void writeAssert(int id, Thread thread, String className,

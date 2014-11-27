@@ -7,12 +7,14 @@ import fr.inria.diversify.codeFragmentProcessor.KnownTransfStatementProcessor;
 import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.util.Log;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.code.CtCodeElement;
@@ -28,6 +30,8 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 //import java.util.stream.Collectors;
 
 /**
@@ -273,15 +277,44 @@ public class InputProgram {
     }
 
     /**
-     * Returns an specific code fragment given its position and source. The source is optional.
-     * However, you should supply both, since is possible that a code fragment
-     * is not found given only position since a difference of line numbers is usual.
+     * Search for a specific code fragment given its serialized JSON object.
+     * <p/>
+     * Note: The JSON object is the serialized version OF THE CODE FRAGMENT by no means
+     * THE TRANSFORMATION containing a particular code fragment.
      *
-     * @param position Position of the code fragment
-     * @param source   Source of the code Fragment
+     * @param serialized Serialized object
+     * @return The code fragment
+     */
+    public synchronized CodeFragment getCodeFragment(JSONObject serialized) {
+        if (serialized.has("position")) {
+            try {
+                String position = serialized.getString("position");
+                if (serialized.has("sourceCode")) {
+                    return getCodeFragment(position, serialized.getString("sourceCode"));
+                } else if (serialized.has("type")) {
+                    return findCodeFragment(position, serialized.getString("type"),
+                            cf -> cf.getCodeFragmentType().getSimpleName());
+                } else {
+                    return null;
+                }
+            } catch (JSONException e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Search for a code fragment given a search predicate. The method will always search for code locations
+     * in the proximity of the position that meet some features.
+     *
+     * @param position    position where the source code was "last seen".
+     * @param searchValue Value to search for
+     * @param accesor     Accesor function to the property we are looking for
      * @return
      */
-    public synchronized CodeFragment getCodeFragment(String position, String source) {
+    public CodeFragment findCodeFragment(String position, String searchValue,
+                                            Function<CodeFragment, String> accesor) {
 
         CodeFragment result = null;
 
@@ -291,16 +324,19 @@ public class InputProgram {
         int minDiff = Integer.MAX_VALUE;
 
         for (CodeFragment codeFragment : getCodeFragments()) {
-            String cfPos = codeFragment.positionString();
+            String[] cfPos = codeFragment.positionString().split(":");
             //Analyze only code fragments in the file of the one we are looking for
-            if (cfPos.startsWith(position)) {
-                int cfLine = Integer.parseInt(cfPos.split(":")[1]);
-                String cfSourceCode = codeFragment.equalString();
-                if (source.equals(cfSourceCode) && cfLine == lineNumber) {
+            if (cfPos[0].equals(position)) {
+                int cfLine = Integer.parseInt(cfPos[1]);
+                //String cfSourceCode = codeFragment.equalString();
+                //source.equals(cfSourceCode)
+                String ctValue = accesor.apply(codeFragment);
+                if (ctValue.equals(searchValue) && cfLine == lineNumber) {
                     //If it is of the same code and the same line: we found it!!
                     return codeFragment;
                 } else {
-                    int d = Math.abs(cfLine - lineNumber);
+                    int penalty = ctValue.equals(searchValue) ? 0 : 10000; //Establish a high penalty for lines of different type
+                    int d = Math.abs(cfLine - lineNumber) + penalty;
                     if (d < minDiff) {
                         //else return the nearest one with same code
                         result = codeFragment;
@@ -310,7 +346,24 @@ public class InputProgram {
             }
         }
 
+        if ( result == null ) {
+            Log.warn("Unable to find " + position + " Search value " + searchValue);
+        }
+
         return result;
+    }
+
+    /**
+     * Returns an specific code fragment given its position and source. The source is optional.
+     * However, you should supply both, since is possible that a code fragment
+     * is not found given only position since a difference of line numbers is usual.
+     *
+     * @param position Position of the code fragment
+     * @param source   Source of the code Fragment
+     * @return
+     */
+    public synchronized CodeFragment getCodeFragment(String position, String source) {
+        return findCodeFragment(position, source, cf -> cf.equalString());
     }
 
     /**
