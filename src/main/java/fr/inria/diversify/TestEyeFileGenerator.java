@@ -19,7 +19,7 @@ import java.util.Iterator;
  * <p/>
  * Created by marodrig on 27/11/2014.
  */
-public class JSONFileGenerator {
+public class TestEyeFileGenerator {
 
     private ArrayList<CtCodeElement> replaced;
 
