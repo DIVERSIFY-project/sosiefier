@@ -84,6 +84,9 @@ public class TestEyeFileGenerator {
             JSONObject t = elementToJSON(replacementIt.next());
             i++;
             JSONObject object = new JSONObject();
+            object.put("variableMapping", new JSONObject()); //This field is "sosie specific"
+            object.put("failures", new JSONArray()); //This field is "sosie specific"
+            object.put("status", 0); //This field is "sosie specific"
             object.put("type", "adrStmt");//This field is "sosie specific"
             object.put("name", "replace");//This field is "sosie specific"
             object.put("tindex", i);//ID of the transformation.
