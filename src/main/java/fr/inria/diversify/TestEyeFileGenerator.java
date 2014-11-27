@@ -25,6 +25,11 @@ public class TestEyeFileGenerator {
 
     private ArrayList<CtCodeElement> replacement;
 
+    public TestEyeFileGenerator() {
+        replaced = new ArrayList<>();
+        replacement = new ArrayList<>();
+    }
+
     /**
      * Sets a list of replaced and replacement fragments. Element the i-th element of the replaced list will be replaced
      * with the i-th of the replacement list.
@@ -55,6 +60,7 @@ public class TestEyeFileGenerator {
     private JSONObject elementToJSON(CtCodeElement element) throws JSONException {
         String pos = element.getPosition().getCompilationUnit().getMainType().getQualifiedName() + ":" + element.getPosition().getLine();
         CodeFragmentEqualPrinter p = new CodeFragmentEqualPrinter(element.getPosition().getCompilationUnit().getFactory().getEnvironment());
+        element.accept(p);
         String source = p.toString();
         JSONObject tp = new JSONObject();
         tp.put("position", pos);
@@ -75,14 +81,15 @@ public class TestEyeFileGenerator {
         Iterator<CtCodeElement> replacementIt = replacement .iterator();
         while (replacedIt.hasNext()) {
             JSONObject tp = elementToJSON(replacedIt.next());
-            JSONObject t = new JSONObject(replacementIt.next());
+            JSONObject t = elementToJSON(replacementIt.next());
             i++;
             JSONObject object = new JSONObject();
-            object.put("type", "replace");//This filed is "sosie specific"
-            object.put("name", "adrStmt");//This filed is "sosie specific"
+            object.put("type", "adrStmt");//This field is "sosie specific"
+            object.put("name", "replace");//This field is "sosie specific"
             object.put("tindex", i);//ID of the transformation.
             object.put("transplantationPoint", tp);//replaced code
             object.put("transplant", t);//replacement.
+            result.put(object);
         }
         return result;
     }
