@@ -199,8 +199,8 @@ public class DiversifyMain {
         ad.setBuilder(initBuilder(tmpDir));
         ad.setResultDir(resultDir);
 
-        String androidSDK = inputConfiguration.getProperty("AndroidSdk");
-        ad.setAndroid(androidSDK != null);
+//        String androidSDK = inputConfiguration.getProperty("AndroidSdk");
+//        ad.setAndroid(androidSDK != null);
         return ad;
     }
 
@@ -216,6 +216,13 @@ public class DiversifyMain {
             }
             String src = inputConfiguration.getProperty("src");
             rb = new MavenBuilder(directory, src);
+
+            String androidSdk = inputConfiguration.getProperty("AndroidSdk");
+            if(!androidSdk.equals("null") ) {
+                rb.stopAndroidEmulation();
+                rb.startAndroidEmulation();
+            }
+
             rb.setGoals(phases);
 
             initTimeOut(rb);
@@ -319,7 +326,9 @@ public class DiversifyMain {
                 return new ASTTransformationQuery(inputProgram, cl, subType, false);
             }
             case "endless2": {
-                return new ConsecutiveKnownSosieQuery(inputProgram);
+                FromListQuery query = new FromListQuery(inputProgram);
+                query.setShuffle(true);
+                return query;
             }
             case "adr": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
