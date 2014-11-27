@@ -25,28 +25,33 @@ public class TestEyeFileGeneratorTest {
         return getClass().getResource("/" + name).toURI().getPath();
     }
 
-    @Test
-    public void testSave() throws Exception {
-
-        //All this is to load the program
+    private InputProgram getSosieInputProgram() throws Exception {
         MavenDependencyResolver dr = new MavenDependencyResolver();
         dr.DependencyResolver(getResourcePath("easymock-light-3.2/pom.xml"));
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2/src/main"), 5));
         inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
+        return inputProgram;
+    }
 
+    @Test
+    public void testSave() throws Exception {
 
+        //Obtain a list of code fragments
+        InputProgram inputProgram = getSosieInputProgram();
         CodeFragmentList fl = inputProgram.getCodeFragments();
 
-        //What you really care is this
+        //This is what you really care:
+        //Create the generator
         TestEyeFileGenerator generator = new TestEyeFileGenerator();
         //Put a pair <code to be replaced, replacement>
         generator.addPairs(fl.get(0).getCtCodeFragment(), fl.get(1).getCtCodeFragment());
         generator.addPairs(fl.get(2).getCtCodeFragment(), fl.get(3).getCtCodeFragment());
+        //Save it to file
         generator.saveToFile("testGeneration.json");
 
 
-        //Test that the Reader can read them
+        //Test that the Sosie reader can read them
         TransformationParser parser = new TransformationParser(false, inputProgram);
         Collection<Transformation> t = parser.parseFile(new File("testGeneration.json"));
         assertEquals(2, t.size());
