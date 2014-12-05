@@ -43,9 +43,18 @@ public class LogWriter {
         }
     }
 
+    public static void testCount(String methodSignatureId) {
+        getLog().testCount(methodSignatureId);
+    }
+
+    public static void assertCount(String methodSignatureId) {
+        getLog().assertCount(methodSignatureId);
+    }
+
     public static void methodCall(Thread thread, String methodSignatureId) {
         getLog(thread).methodCall(thread, methodSignatureId);
     }
+
 
     public static void methodOut(Thread thread) {
         getLog(thread).methodOut(thread);

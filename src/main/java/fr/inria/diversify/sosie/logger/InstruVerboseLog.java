@@ -293,6 +293,17 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
+    static long testCount = 0;
+    static long assertCount = 0;
+    public void testCount(String signature) {
+    System.out.println("test: "+ ++testCount);
+    }
+
+    public void assertCount(String signature) {
+        System.out.println("assert: "+ ++assertCount);
+
+    }
+
     public void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
         String semaphore = "";
         if (getLogMethod(thread) && log(thread)) {

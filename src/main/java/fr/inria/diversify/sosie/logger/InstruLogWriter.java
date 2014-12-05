@@ -357,6 +357,10 @@ public abstract class InstruLogWriter {
      */
     public abstract void writeTestFinish();
 
+    public abstract void testCount(String signature);
+
+    public abstract void assertCount(String signature);
+
     protected synchronized HashMap<String, Integer> getTransplantPointCallCount() {
         return transplantPointCallCount;
     }

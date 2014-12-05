@@ -19,19 +19,23 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * User: Simon
  * Date: 5/29/13
  * Time: 2:14 PM
  */
-public class Util {
+public class ComputeAllPossibleTransformation {
     protected CodeFragmentList codeFragments;
+    protected ICoverageReport coverageReport;
 
     protected boolean subType;
 
-    public Util(CodeFragmentList list) {
-        codeFragments = list;
+    public ComputeAllPossibleTransformation(CodeFragmentList list, ICoverageReport coverageReport) {
+        codeFragments = new CodeFragmentList(list.stream()
+            .filter(fragment -> coverageReport.codeFragmentCoverage(fragment) != 0)
+            .collect(Collectors.toList()));
     }
 
     public long numberOfNotDiversification() throws InterruptedException {

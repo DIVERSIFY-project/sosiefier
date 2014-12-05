@@ -320,6 +320,16 @@ public class InstruBinaryLog extends InstruLogWriter {
 
     }
 
+    @Override
+    public void testCount(String signature) {
+
+    }
+
+    @Override
+    public void assertCount(String signature) {
+
+    }
+
     /**
      * Gets the stream for a thread each one saved in a different file
      *

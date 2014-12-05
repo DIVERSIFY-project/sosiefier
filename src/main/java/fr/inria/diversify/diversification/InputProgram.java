@@ -59,7 +59,7 @@ public class InputProgram {
     private String sourceCodeDir;
 
 
-    private String externalSourceCodeDir;
+    private String externalSourceCodeDir = "";
 
     /**
      * Path to the test source code of the input program

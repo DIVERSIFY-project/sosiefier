@@ -261,13 +261,16 @@ public abstract class AbstractDiversify {
                 boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall","false"));
                 boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable","false"));
                 boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError","false"));
-                boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert","false"));
                 boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest","false"));
                 int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion"));
 
-                if (intruMethodCall || intruVariable || intruError || intruAssert || intruNewTest) {
+                if (intruMethodCall || intruVariable || intruError || intruNewTest) {
                     Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), javaVersion, destPath, transformations);
-                    instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
+                    instru.setMethodCall(intruMethodCall);
+                    instru.setVariable(intruVariable);
+                    instru.setError(intruError);
+                    instru.setNewTest(intruNewTest);
+                    instru.instru();
                 } else {
                     File dest = new File(destPath);
                     if (!(dest.exists())) {

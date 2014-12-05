@@ -75,7 +75,7 @@ public class MavenDependencyResolver {
 
                 File cachedFile = resolver.resolve(artifactId, urls);
                 jarURL.add(cachedFile.toURI().toURL());
-                Log.debug("revolve artifact: {}", artifactId);
+                Log.debug("resolve artifact: {}", artifactId);
             } catch (Exception e) {}
         }
 
