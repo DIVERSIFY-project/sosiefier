@@ -125,7 +125,7 @@ public class InstruBinaryLogTest {
 
         InstruBinaryLog log = new InstruBinaryLog("logTest");
         Object[] a = { 0, 4 };
-        log.writeException(5, t, "Class1", "method", a);
+        log.writeException(5, t, a);
         log.close();
 
         String s = new String(mock.buffer);

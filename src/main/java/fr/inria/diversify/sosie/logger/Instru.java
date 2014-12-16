@@ -58,9 +58,8 @@ public class Instru {
     private boolean transplantationPointCallCount;
 
     private TransplantationPointCallCountInstrumenter tpcInstrumenter = null;
-    private Factory sourceFactory = null;
 
-    private Factory testFactorty = null;
+    private Factory factory = null;
     private boolean onlyCopyLoggerCode;
 
 
@@ -82,6 +81,8 @@ public class Instru {
         if ( onlyCopyLoggerCode ) {
             copyLogger(outputDirectory, srcDirectory);
         }
+
+        factory = initSpoon();
 
         initOutputDirectory();
 
@@ -123,75 +124,72 @@ public class Instru {
 
     protected void instruMainSrc() {
         String src = projectDirectory + "/" + srcDirectory;
+        List<String> classFilter = allClassesName(new File(src));
 
-        if ( sourceFactory == null ) {
-            sourceFactory = initSpoon(src);
-        }
-
-        if(methodCall) {
-            MethodLoggingInstrumenter m = new MethodLoggingInstrumenter(transformations);
-            m.setUseCompactLog(compactLog);
-            applyProcessor(sourceFactory, m);
-        }
         if(variable) {
 //            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter(transformations);
             FieldUsedInstrumenter v = new FieldUsedInstrumenter(transformations);
             v.setUseCompactLog(compactLog);
-            applyProcessor(sourceFactory, v);
+            applyProcessor(v, classFilter);
         }
         if(error) {
             ErrorLoggingInstrumenter e = new ErrorLoggingInstrumenter(transformations);
             e.setUseCompactLog(compactLog);
-            applyProcessor(sourceFactory, e);
+            applyProcessor(e, classFilter);
         }
+        if(methodCall) {
+            MethodLoggingInstrumenter m = new MethodLoggingInstrumenter(transformations);
+            m.setUseCompactLog(compactLog);
+            applyProcessor(m, classFilter);
+        }
+
         if (transplantationPointCallCount) {
             tpcInstrumenter =
                     new TransplantationPointCallCountInstrumenter(transformations);
             tpcInstrumenter.setUseCompactLog(compactLog);
-            applyProcessor(sourceFactory, tpcInstrumenter);
+            applyProcessor(tpcInstrumenter, classFilter);
         }
 
-        writeJavaClass();
+        File fileFrom = new File(src);
+        File out = new File(outputDirectory + "/" + srcDirectory);
+        writeJavaClass(out, fileFrom);
     }
 
     protected void instruTestSrc() {
-
         String test = projectDirectory + "/" + testDirectory;
-        String main = projectDirectory + "/" + srcDirectory;
-
-        if ( testFactorty == null ) {
-            testFactorty = initSpoon(test+":"+main);
-        }
+        List<String> classFilter = allClassesName(new File(test));
 
         if(assertCount) {
-            applyProcessor(testFactorty, new AssertCountInstrumenter());
+            applyProcessor(new AssertCountInstrumenter(), classFilter);
         }
 
         if(testCount) {
-            applyProcessor(testFactorty, new TestCountInstrumenter());
+            applyProcessor(new TestCountInstrumenter(), classFilter);
         }
 
         if(newTest) {
-            applyProcessor(testFactorty, new TestLoggingInstrumenter());
+            applyProcessor(new TestLoggingInstrumenter() ,classFilter);
         }
 
-        writeJavaClass();
+        File fileFrom = new File(test);
+        File out = new File(outputDirectory + "/" + testDirectory);
+        writeJavaClass(out, fileFrom);
     }
 
-    protected void writeJavaClass() {
-        String test = projectDirectory + "/" + testDirectory;
-        String out = outputDirectory + "/" + testDirectory;
-
-        Environment env = testFactorty.getEnvironment();
+    protected void writeJavaClass(File out, File fileFrom) {
+        Environment env = factory.getEnvironment();
         AbstractProcessor processor;
         if(useSourceCodeFragments) {
             env.useSourceCodeFragments(true);
-            processor = new JavaOutputProcessorWithFilter(new File(out), new FragmentDrivenJavaPrettyPrinter(env), allClassesName(new File(test)));
+            processor = new JavaOutputProcessorWithFilter(out, new FragmentDrivenJavaPrettyPrinter(env), allClassesName(fileFrom));
 
         } else {
-            processor = new JavaOutputProcessorWithFilter(new File(out), new DiversifyPrettyPrinter(env), allClassesName(new File(test)));
+            processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
         }
-        applyProcessor(testFactorty, processor);
+        ProcessingManager pm = new QueueProcessingManager(factory);
+        processor.setFactory(factory);
+        pm.addProcessor(processor);
+        pm.process();
     }
 
 
@@ -207,7 +205,11 @@ public class Instru {
         FileUtils.copyFileToDirectory(new File(packagePath + InstruBinaryLog.class.getSimpleName() + ".java"),dir);
     }
 
-    protected Factory initSpoon(String srcDirectory) {
+    protected Factory initSpoon() {
+        String test = projectDirectory + "/" + testDirectory;
+        String main = projectDirectory + "/" + srcDirectory;
+        String srcDirectory = test + ":" + main;
+
         try {
             return new SpoonMetaFactory().buildNewFactory(srcDirectory, javaVersion);
         } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
@@ -215,9 +217,10 @@ public class Instru {
         }
     }
 
-    protected void applyProcessor(Factory factory, AbstractProcessor processor) {
+    protected void applyProcessor(AbstractLoggingInstrumenter processor, List<String> classFilter) {
         ProcessingManager pm = new QueueProcessingManager(factory);
         processor.setFactory(factory);
+        processor.setClassFilter(classFilter);
         pm.addProcessor(processor);
         pm.process();
     }
@@ -286,21 +289,10 @@ public class Instru {
         this.transplantationPointCallCount = transplantationPointCallCount;
     }
 
-    public void setSourceFactory(Factory sourceFactory) {
-        this.sourceFactory = sourceFactory;
+    public void setFactory(Factory factory) {
+        this.factory = factory;
     }
 
-    public Factory getSourceFactory() {
-        return sourceFactory;
-    }
-
-    public Factory getTestFactorty() {
-        return testFactorty;
-    }
-
-    public void setTestFactorty(Factory testFactorty) {
-        this.testFactorty = testFactorty;
-    }
 
     public void setOnlyCopyLoggerCode(boolean onlyCopyLoggerCode) {
         this.onlyCopyLoggerCode = onlyCopyLoggerCode;

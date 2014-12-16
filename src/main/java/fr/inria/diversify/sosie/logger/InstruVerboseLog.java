@@ -160,7 +160,7 @@ public class InstruVerboseLog extends InstruLogWriter {
                 StringBuilder string = new StringBuilder();
                 string.append("$$$\n");
                 string.append("V");
-                string.append(callDeep.get(thread));
+                string.append(getCallDeep(thread));
                 string.append(simpleSeparator);
                 string.append(id + "");
                 string.append(simpleSeparator);
@@ -265,7 +265,7 @@ public class InstruVerboseLog extends InstruLogWriter {
     }
 
 
-    public void writeException(int id, Thread thread, String className, String methodSignature, Object exception) {
+    public void writeException(int id, Thread thread, Object exception) {
         String semaphore = "";
         if (getLogMethod(thread) && log(thread)) {
             try {
@@ -275,10 +275,6 @@ public class InstruVerboseLog extends InstruLogWriter {
                 string.append(callDeep.get(thread));
                 string.append(simpleSeparator);
                 string.append(id + "");
-                string.append(simpleSeparator);
-                string.append(className);
-                string.append(simpleSeparator);
-                string.append(methodSignature);
                 string.append(simpleSeparator);
                 if (exception != null) string.append(exception.toString());
                 else string.append("NullException");
@@ -304,7 +300,7 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     }
 
-    public void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
+    public void writeCatch(int id, Thread thread, Object exception) {
         String semaphore = "";
         if (getLogMethod(thread) && log(thread)) {
             try {
@@ -314,10 +310,6 @@ public class InstruVerboseLog extends InstruLogWriter {
                 string.append(callDeep.get(thread));
                 string.append(simpleSeparator);
                 string.append(id + "");
-                string.append(simpleSeparator);
-                string.append(className);
-                string.append(simpleSeparator);
-                string.append(methodSignature);
                 string.append(simpleSeparator);
                 if (exception != null) string.append(exception.toString());
                 else string.append("NullException");
@@ -345,7 +337,8 @@ public class InstruVerboseLog extends InstruLogWriter {
 //Writes the subtotal of assertions called
                 writeSubTotal("ASC", flw, getAssertCallCount());
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("\nTE");
+                stringBuilder.append("$$$\n");
+                stringBuilder.append("TE");
                 stringBuilder.append(simpleSeparator);
                 stringBuilder.append(System.currentTimeMillis());
                 semaphore = flw.toString() + flw.hashCode();

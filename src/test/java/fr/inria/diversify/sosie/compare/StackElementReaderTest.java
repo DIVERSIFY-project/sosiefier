@@ -96,7 +96,7 @@ public class StackElementReaderTest {
         //Build some data for the reader
         log.writeTestStart(t, "sampleTest");
         log.methodCall(t, "foo");
-        log.writeException(10, t, "A", "foo", new Exception("e"));
+        log.writeException(10, t, new Exception("e"));
         log.close();
 
         //Make the reader read from the byte[] buffer

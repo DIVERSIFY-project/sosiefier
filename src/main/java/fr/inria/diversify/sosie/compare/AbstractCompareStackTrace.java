@@ -53,23 +53,21 @@ public abstract class  AbstractCompareStackTrace {
         return diff;
     }
 
-    protected void findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
+    protected int findNewSyncro(int maxOperation, int syncroRange, StackTrace st1, StackTrace st2) {
         int count1 = 0;
         int count2 = 0;
-        int maxDiff = 1;
 
         List<StackTraceCall> callDiff1 = new ArrayList<>();
         List<StackTraceCall> callDiff2 = new ArrayList<>();
 
         for(int i = 0; i < maxOperation; i++) {
             for(int j = 0; j < maxOperation - i; j++) {
-                maxDiff = Math.max(maxDiff,Math.abs(count1 - count2));
                 if(st1.getTop().equals(st2.getTop()) &&  isSameForXOperation(syncroRange, st1, st2)) {
                     testReport.addAllDiffMethodCall(callDiff1);
                     testReport.addAllDiffMethodCall(callDiff2);
-                    return;
+                    return Math.abs(count1 - count2);
                 }
-                if(st1.hasNext()) {
+                else if(st1.hasNext()) {
                     count1++;
                     callDiff1.add(st1.getTop());
                     st1.next();
@@ -86,7 +84,14 @@ public abstract class  AbstractCompareStackTrace {
             }
         }
         st2.previous(count2);
+
+        return Math.abs(count1 - count2);
     }
+
+    protected void debug(StackTrace st1) {
+
+    }
+
 
     protected boolean isSameForXOperation(int x, StackTrace st1, StackTrace st2) {
         if(st1.getDeep() != st2.getDeep())

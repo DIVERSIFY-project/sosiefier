@@ -4,9 +4,7 @@ package fr.inria.diversify.sosie.logger.processor;
 import fr.inria.diversify.transformation.Transformation;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtStatement;
+import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
@@ -15,6 +13,7 @@ import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.QueueProcessingManager;
+import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,49 +28,54 @@ import java.util.stream.Collectors;
 public class MethodLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMethod> {
     protected List<CtMethod> methods;
 
+
     public MethodLoggingInstrumenter(List<Transformation> transformations) {
         super(transformations);
     }
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
-        containsGoto(candidate);
+
         return !candidate.isImplicit()
                 && candidate.getBody() != null
                 && candidate.getBody().getStatements().size() != 0
-                && hasCall(candidate);
+               // && hasCall(candidate)
+                && !containsGoto(candidate)
+                && classFilterContains(candidate);
 
     }
 
     @Override
     public void process(CtMethod candidate) {
-        CtBlock body = candidate.getBody();
-        CtStatement stmt = body.getStatement(0);
-        String id = idFor(getClass(stmt).getQualifiedName() + "." + candidate.getSignature());
+        String id = idFor(getClass(candidate).getQualifiedName() + "." + candidate.getSignature());
+        Factory factory = candidate.getFactory();
+
+        CtTry ctTry = factory.Core().createTry();
+        ctTry.setBody(candidate.getBody());
 
         String snippet;
         if (containsTransformation(candidate)) {
-            snippet = "try{\n\t"+getLogName()+".startLogging(Thread.currentThread(),\""+id+"\");\n\t" + getLogName() + ".methodCall(Thread.currentThread(),\"" +
-                    id + "\");\n";
+            snippet = getLogName()+".startLogging(Thread.currentThread(),\""+id+"\");\n\t" + getLogName() + ".methodCall(Thread.currentThread(),\"" +
+                    id + "\")";
         } else {
-            snippet = "\ttry{\n\t" + getLogName() + ".methodCall(Thread.currentThread(),\"" +
-                id + "\");\n";
+            snippet = getLogName() + ".methodCall(Thread.currentThread(),\"" +
+                    id + "\")";
         }
-        SourcePosition sp = stmt.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
+        CtCodeSnippetStatement beginStmt = new CtCodeSnippetStatementImpl();
+        beginStmt.setValue(snippet);
 
-        int index;
-        if(stmt.getPosition().getLine() == candidate.getPosition().getLine()) {
-            index = sp.getSourceStart();
-        } else {
-            index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-        }
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+        ctTry.getBody().insertBegin(beginStmt);
 
-        sp = body.getLastStatement().getPosition();
-        compileUnit = sp.getCompilationUnit();
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd()+2 ,
-                "\n" + "\t}\n\tfinally{"+getLogName()+".methodOut(Thread.currentThread()); }", 0));
+        CtCodeSnippetStatement stmt = new CtCodeSnippetStatementImpl();
+        stmt.setValue(getLogName()+".methodOut(Thread.currentThread())");
+
+        CtBlock finalizerBlock = factory.Core().createBlock();
+        finalizerBlock.addStatement(stmt);
+        ctTry.setFinalizer(finalizerBlock);
+
+        CtBlock methodBlock = factory.Core().createBlock();
+        methodBlock.addStatement(ctTry);
+        candidate.setBody(methodBlock);
     }
 
     protected boolean hasCall(CtMethod method) {

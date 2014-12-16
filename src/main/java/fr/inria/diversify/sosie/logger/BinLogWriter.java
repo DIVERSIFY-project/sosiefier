@@ -44,15 +44,14 @@ public class BinLogWriter {
         log.writeVar(id, thread, methodSignatureId, var);
     }
 
-    public static void writeException(int id, Thread thread,
-                                        String className, String methodSignature, Object exception) {
+    public static void writeException(int id, Thread thread, Object exception) {
         if ( log == null ) { log = new InstruBinaryLog("LogDirName"); }
-        log.writeException(id, thread, className, methodSignature, exception);
+        log.writeException(id, thread, exception);
     }
 
-    public static void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
+    public static void writeCatch(int id, Thread thread, Object exception) {
         if ( log == null ) { log = new InstruBinaryLog("LogDirName"); }
-        log.writeCatch(id, thread, className, methodSignature, exception);
+        log.writeCatch(id, thread, exception);
     }
 
     public  static void close() {

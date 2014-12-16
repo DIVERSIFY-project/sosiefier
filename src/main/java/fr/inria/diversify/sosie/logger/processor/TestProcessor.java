@@ -1,5 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
+import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtMethod;
 
@@ -18,6 +19,7 @@ public abstract class TestProcessor extends AbstractLoggingInstrumenter<CtMethod
     public boolean isToBeProcessed(CtMethod candidate) {
         if(candidate.isImplicit()
                 || candidate.getBody() == null
+                || !classFilterContains(candidate)
                 || candidate.getBody().getStatements().size() == 0) {
             return false;
         }

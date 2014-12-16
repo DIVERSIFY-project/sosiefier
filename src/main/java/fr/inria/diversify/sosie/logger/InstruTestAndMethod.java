@@ -42,7 +42,7 @@ public class InstruTestAndMethod {
         boolean compact = Boolean.parseBoolean(inputConfiguration.getProperty("compact.log", "false"));
         boolean onlyUpdateLoggerCode = Boolean.parseBoolean(inputConfiguration.getProperty("only.copy.logger", "false"));
         int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion", "5"));
-        boolean useSourceCodeFragments = Boolean.parseBoolean(inputConfiguration.getProperty("useSourceCodeFragments, false"));
+        boolean useSourceCodeFragments = Boolean.parseBoolean(inputConfiguration.getProperty("useSourceCodeFragments", "false"));
 
 
         MavenDependencyResolver t = new MavenDependencyResolver();
@@ -66,7 +66,7 @@ public class InstruTestAndMethod {
             TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
             List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
             instru = new Instru(project, src, test, javaVersion, out, transf);
-            instru.setSourceFactory(factory);
+            instru.setFactory(factory);
         } else {
             instru = new Instru(project, src, test, javaVersion, out, null);
         }

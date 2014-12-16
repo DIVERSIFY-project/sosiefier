@@ -10,6 +10,7 @@ import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.visitor.CtAbstractVisitor;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
+import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 
 import java.util.*;
@@ -25,6 +26,12 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
         super(transformations);
         alreadyInstrument = new HashSet<>();
     }
+
+    @Override
+    public boolean isToBeProcessed(CtStatement candidate) {
+        return  classFilterContains(candidate);
+    }
+
     @Override
     public void process(CtStatement statement) {
         if(!alreadyInstrumented(statement)) {
@@ -33,29 +40,26 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
             Set<CtFieldReference> after = scanner.getAfter();
 
             for (CtFieldReference<?> var : fieldUsed.keySet()) {
-                if (getMethod(statement) != null && ok(statement)
-                        && !statement.toString().startsWith("this(")
-                        && !statement.toString().startsWith("super(")
-                        && !var.getSimpleName().equals("class") && !oneLineMethod(statement)) {
+                if (getMethod(statement) != null
+                        && ok(statement)
+                        && !var.getSimpleName().equals("class") ) {
                     try {
                         alreadyInstrument.add(statement);
                         String id = idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
 
-                        String snippet = "\t" + getLogName() + ".writeVar(" + getCount(statement) + ",Thread.currentThread(),\"" + id + "\",\"" + idFor(var.getSimpleName()) + "\"," + fieldUsed.get(var) + ");\n\t";
+                        String snippet = getLogName() + ".writeVar(" + getCount(statement) + ",Thread.currentThread(),\"" + id + "\",\"" + idFor(var.getSimpleName()) + "\"," + fieldUsed.get(var) + ")";
 
                         if(fieldUsed.get(var).contains(".")) {
-                            snippet = "\ttry {\n\t" + snippet + "} catch (Exception eeee) {}\n";
+                            snippet = "try {\n\t" + snippet + ";\n} catch (Exception eeee) {}";
                         }
-                        SourcePosition sp = statement.getPosition();
-                        CompilationUnit compileUnit = sp.getCompilationUnit();
-                        int index;
-                        if (!after.contains(var)) {
-                            index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-                        } else {
-                            index = compileUnit.nextLineIndex(sp.getSourceEnd());
-                        }
+                        CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
+                        snippetStatement.setValue(snippet);
 
-                        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+                        if (!after.contains(var)) {
+                            statement.insertBefore(snippetStatement);
+                        } else {
+                            statement.insertAfter(snippetStatement);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -76,7 +80,9 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
             return false;
         CtStatement parent = statement.getParent(CtStatement.class);
         if(parent instanceof CtBlock)
-            return true;
+            return true  && !statement.toString().startsWith("this(")
+                    && !statement.toString().startsWith("super(")
+                    && !oneLineMethod(statement);
         else
             return false;
     }

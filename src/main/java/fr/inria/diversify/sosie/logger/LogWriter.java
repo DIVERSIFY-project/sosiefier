@@ -74,13 +74,12 @@ public class LogWriter {
         getLog(thread).writeVar(id, thread, methodSignatureId, var);
     }
 
-    public static void writeException(int id, Thread thread,
-                                        String className, String methodSignature, Object exception) {
-        getLog(thread).writeException(id, thread, className, methodSignature, exception);
+    public static void writeException(int id, Thread thread, Object exception) {
+        getLog(thread).writeException(id, thread, exception);
     }
 
-    public static void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
-        getLog(thread).writeCatch(id, thread, className, methodSignature, exception);
+    public static void writeCatch(int id, Thread thread, Object exception) {
+        getLog(thread).writeCatch(id, thread, exception);
     }
 
     public static void countAssert(String s){

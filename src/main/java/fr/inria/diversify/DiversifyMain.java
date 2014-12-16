@@ -457,9 +457,9 @@ public class DiversifyMain {
 
     protected void computeAllPossibleTransformation() throws InterruptedException {
         ComputeAllPossibleTransformation capt = new ComputeAllPossibleTransformation(inputProgram.getCodeFragments(), initCoverageReport());
-        Log.info("add: {}",capt.getAllAdd().size());
-        Log.info("replace: {}",capt.getAllReplace().size());
-        Log.info("delete: {}",capt.getAllReplace().size());
+        Log.info("delete: {}",inputProgram.getCodeFragments().size());
+        Log.info("add: {}",capt.getAllAdd2());
+
     }
 
     protected void computeDiversifyStat(String transDir, String fileName) throws Exception {

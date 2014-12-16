@@ -248,19 +248,19 @@ public class InstruBinaryLog extends InstruLogWriter {
     }
 
     @Override
-    public void writeException(int id, Thread thread, String className, String methodSignature, Object exception) {
+    public void writeException(int id, Thread thread, Object exception) {
 
         try {
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_EXCEPTION);
-            int classId = getSignatureId(className);
-            int methdId = getSignatureId(methodSignature);
+//            int classId = getSignatureId(className);
+//            int methdId = getSignatureId(methodSignature);
             int excepId = getSignatureId(exception.toString());
             writeSignatures(os);
             os.writeInt(id);
             os.writeInt(getCallDeep(thread));
-            os.writeInt(classId);
-            os.writeInt(methdId);
+//            os.writeInt(classId);
+//            os.writeInt(methdId);
             os.writeInt(excepId);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -272,19 +272,19 @@ public class InstruBinaryLog extends InstruLogWriter {
 
 
     @Override
-    public void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
+    public void writeCatch(int id, Thread thread, Object exception) {
 
         try {
             DataOutputStream os = getStream(thread);
             os.writeByte(LOG_CATCH);
             os.writeInt(getCallDeep(thread));
             os.writeInt(id);
-            int classId = getSignatureId(className);
-            int methdId = getSignatureId(methodSignature);
+//            int classId = getSignatureId(className);
+//            int methdId = getSignatureId(methodSignature);
             int excepId = getSignatureId(exception.toString());
             writeSignatures(os);
-            os.writeInt(classId);
-            os.writeInt(methdId);
+//            os.writeInt(classId);
+//            os.writeInt(methdId);
             os.writeInt(excepId);
         } catch (InterruptedException e) {
             e.printStackTrace();

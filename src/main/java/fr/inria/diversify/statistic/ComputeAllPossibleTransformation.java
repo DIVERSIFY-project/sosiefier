@@ -27,15 +27,16 @@ import java.util.stream.Collectors;
  * Time: 2:14 PM
  */
 public class ComputeAllPossibleTransformation {
-    protected CodeFragmentList codeFragments;
-    protected ICoverageReport coverageReport;
+    protected List<CodeFragment> codeFragments;
 
     protected boolean subType;
 
     public ComputeAllPossibleTransformation(CodeFragmentList list, ICoverageReport coverageReport) {
-        codeFragments = new CodeFragmentList(list.stream()
+        Log.debug("nb of statement: {}:", list.size());
+        codeFragments = list.stream()
             .filter(fragment -> coverageReport.codeFragmentCoverage(fragment) != 0)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList());
+        Log.debug("nb of statement: {}:", codeFragments.size());
     }
 
     public long numberOfNotDiversification() throws InterruptedException {
@@ -102,7 +103,7 @@ public class ComputeAllPossibleTransformation {
 
     public List<CodeFragment> findCandidate(CodeFragment cf, boolean varNameMatch, boolean subType) {
         List<CodeFragment> list = new ArrayList<CodeFragment>();
-        for (CodeFragment statement : codeFragments.getUniqueCodeFragmentList())
+        for (CodeFragment statement : codeFragments)
             if (cf.isReplaceableBy(statement, varNameMatch, subType) && !statement.equalString().equals(cf.equalString()))
                 list.add(statement);
 
@@ -189,18 +190,60 @@ public class ComputeAllPossibleTransformation {
         return allReplace;
     }
 
+
+    public BigInteger getAllAdd2() throws InterruptedException {
+        BigInteger result = new BigInteger("0");
+        BigInteger tmp;
+        for(CodeFragment cf1 : codeFragments) {
+            for(CodeFragment cf2 : findCandidate(cf1, false, subType)) {
+
+                tmp = getNumberOfVarMapping(cf1, cf2);
+                result = result.add(tmp);
+
+                if (max.compareTo(tmp) < 0) {
+                    max = tmp;
+                    Log.debug("{}  {}  {}", tmp, cf1.getInputContext().size(), cf2.getInputContext().size());
+                    d_nbAllVarMapping(cf1,cf2);
+                    Log.debug("{}\ntransplantationPoint: {}\n {}", tmp, cf1.getInputContext().equalString(), cf1);
+                    Log.debug("replace/add:{}\n{}\n", cf2.getInputContext().equalString(), cf2);
+                    Log.debug("____________________________");
+                }
+            }
+        }
+
+        return result;
+    }
+
     protected List<Map<String, String>> getAllVarMapping(CodeFragment before, CodeFragment after) {
         List<List<String>> vars = new ArrayList<List<String>>();
 
         for (CtVariableReference<?> variable : after.getInputContext().getVar()) {
+
+
             List<String> mapping = new ArrayList<String>();
             vars.add(mapping);
             for (Object candidate : before.getInputContext().allCandidate(variable.getType(), subType))
                     mapping.add(variable.toString()+"==="+candidate.toString() );
 
         }
-
         return computeVarMapping(vars);
+    }
+
+    protected long nbAllVarMapping(CodeFragment before, CodeFragment after) {
+        long nb = 1;
+        for (CtVariableReference<?> variable : after.getInputContext().getVar()) {
+            nb = nb * before.getInputContext().allCandidate(variable.getType(), subType).size();
+        }
+        return nb;
+    }
+
+    protected long d_nbAllVarMapping(CodeFragment before, CodeFragment after) {
+        long nb = 1;
+        for (CtVariableReference<?> variable : after.getInputContext().getVar()) {
+            Log.debug("{}: {} = {} * {}",variable,  (nb * before.getInputContext().allCandidate(variable.getType(), subType).size()), nb , before.getInputContext().allCandidate(variable.getType(), subType).size());
+            nb = nb * before.getInputContext().allCandidate(variable.getType(), subType).size();
+        }
+        return nb;
     }
 
     protected List<Map<String, String>> computeVarMapping(List<List<String>> vars) {
@@ -240,24 +283,12 @@ public class ComputeAllPossibleTransformation {
         return map;
     }
 
+
+
     protected CtElement copyElem(CtElement elem) {
         Factory factory = elem.getFactory();
         CtElement tmp = factory.Core().clone(elem);
         tmp.setParent(elem.getParent());
         return tmp;
     }
-
-//    protected Map<?, Long> numberOfDiversificationFor(Map<?, List<CodeFragment>> map) {
-//        Map<Object, Long> result =  new HashMap<Object, Long>();
-//        for (Object key : map.keySet()) {
-//            Long nb = Long.valueOf(0);
-//            for (CodeFragment cf1 : map.get(key)) {
-//                for (CodeFragment cf2 : findCandidate(cf1)) {
-//                    nb = nb + getNumberOfVarMapping(cf1,cf2);
-//                }
-//            }
-//            result.put(key,nb);
-//        }
-//        return result;
-//    }
 }

@@ -162,10 +162,9 @@ public abstract class InstruLogWriter {
 
     public abstract void writeVar(int id, Thread thread, String methodSignatureId, Object... var);
 
-    public abstract void writeException(int id, Thread thread,
-                                        String className, String methodSignature, Object exception);
+    public abstract void writeException(int id, Thread thread, Object exception);
 
-    public abstract void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception);
+    public abstract void writeCatch(int id, Thread thread, Object exception);
 
     public abstract void close();
 
