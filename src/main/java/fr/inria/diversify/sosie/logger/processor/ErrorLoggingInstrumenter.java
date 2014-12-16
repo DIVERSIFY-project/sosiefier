@@ -27,7 +27,8 @@ public class ErrorLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStat
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {
         try {
-            if (candidate.getParent(CtCase.class) != null || !classFilterContains(candidate)) return false;
+            if (candidate.getParent(CtCase.class) != null)
+                return false;
 
             return CtIf.class.isAssignableFrom(candidate.getClass())
                     || CtTry.class.isAssignableFrom(candidate.getClass())

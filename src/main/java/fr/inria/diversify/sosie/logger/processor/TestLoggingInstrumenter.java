@@ -29,8 +29,7 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
     public boolean isToBeProcessed(CtMethod candidate) {
         if(candidate.isImplicit()
                 || candidate.getBody() == null
-                || candidate.getBody().getStatements().size() == 0
-                || !classFilterContains(candidate))
+                || candidate.getBody().getStatements().size() == 0)
             return false;
 
         for(CtAnnotation<?> annotation: candidate.getAnnotations())
@@ -55,17 +54,6 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
         CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
         snippetStatement.setValue(snippet);
         element.getBody().insertBegin(snippetStatement);
-//        SourcePosition sp = firstStmt.getPosition();
-//        CompilationUnit compileUnit = sp.getCompilationUnit();
-
-//        int index;
-//        if(firstStmt.getPosition().getLine() == element.getPosition().getLine())
-//            index = sp.getSourceStart();
-//        else
-//            index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-//
-//        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-
 
         snippet = getLogName() + ".writeTestFinish()";
         snippetStatement = new CtCodeSnippetStatementImpl();
@@ -73,20 +61,21 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
         //Search the return statement
         boolean returnSt = false;
         List<CtStatement> sts = element.getBody().getStatements();
+        List<CtStatement> insert = new ArrayList<>();
+
         for ( CtStatement st :  sts ) {
             if  ( st instanceof CtReturn ) {
-//                CompilationUnit cu = st.getPosition().getCompilationUnit();
-//                int pos = st.getPosition().getSourceStart();
-//                cu.addSourceCodeFragment(new SourceCodeFragment(pos, getLogName() + ".writeTestFinish();\n", 0));
-                st.insertBefore(snippetStatement);
+
+                insert.add(st);
+
                 returnSt = true;
             }
         }
+        for (CtStatement stmt : insert) {
+            stmt.insertBefore(snippetStatement);
+        }
 
         if ( returnSt == false ) {
-//            CompilationUnit cu = element.getPosition().getCompilationUnit();
-//            int pos = element.getBody().getPosition().getSourceEnd();
-//            cu.addSourceCodeFragment(new SourceCodeFragment(pos, getLogName() + ".writeTestFinish();\n", 0));
             element.getBody().insertEnd(snippetStatement);
         }
 

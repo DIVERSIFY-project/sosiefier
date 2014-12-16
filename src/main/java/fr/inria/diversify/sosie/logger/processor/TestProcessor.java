@@ -19,7 +19,6 @@ public abstract class TestProcessor extends AbstractLoggingInstrumenter<CtMethod
     public boolean isToBeProcessed(CtMethod candidate) {
         if(candidate.isImplicit()
                 || candidate.getBody() == null
-                || !classFilterContains(candidate)
                 || candidate.getBody().getStatements().size() == 0) {
             return false;
         }

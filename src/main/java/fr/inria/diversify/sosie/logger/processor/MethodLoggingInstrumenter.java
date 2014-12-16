@@ -40,8 +40,7 @@ public class MethodLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMet
                 && candidate.getBody() != null
                 && candidate.getBody().getStatements().size() != 0
                // && hasCall(candidate)
-                && !containsGoto(candidate)
-                && classFilterContains(candidate);
+                && !containsGoto(candidate);
 
     }
 

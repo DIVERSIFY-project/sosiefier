@@ -27,45 +27,41 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
         alreadyInstrument = new HashSet<>();
     }
 
-    @Override
-    public boolean isToBeProcessed(CtStatement candidate) {
-        return  classFilterContains(candidate);
-    }
 
     @Override
     public void process(CtStatement statement) {
-        if(!alreadyInstrumented(statement)) {
-            FieldReferenceVisitor scanner = getFieldUsed(statement);
-            Map<CtFieldReference, String> fieldUsed = scanner.getFields();
-            Set<CtFieldReference> after = scanner.getAfter();
+        try {
+            if (!alreadyInstrumented(statement)) {
+                FieldReferenceVisitor scanner = getFieldUsed(statement);
+                Map<CtFieldReference, String> fieldUsed = scanner.getFields();
+                Set<CtFieldReference> after = scanner.getAfter();
 
-            for (CtFieldReference<?> var : fieldUsed.keySet()) {
-                if (getMethod(statement) != null
-                        && ok(statement)
-                        && !var.getSimpleName().equals("class") ) {
-                    try {
-                        alreadyInstrument.add(statement);
-                        String id = idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
+                for (CtFieldReference<?> var : fieldUsed.keySet()) {
+                    if (getMethod(statement) != null && ok(statement) && !var.getSimpleName().equals("class")) {
+                        try {
+                            alreadyInstrument.add(statement);
+                            String id = idFor(getClass(statement).getQualifiedName() + "." + getMethod(statement).getSignature());
 
-                        String snippet = getLogName() + ".writeVar(" + getCount(statement) + ",Thread.currentThread(),\"" + id + "\",\"" + idFor(var.getSimpleName()) + "\"," + fieldUsed.get(var) + ")";
+                            String snippet = getLogName() + ".writeVar(" + getCount(statement) + ",Thread.currentThread(),\"" + id + "\",\"" + idFor(var.getSimpleName()) + "\"," + fieldUsed.get(var) + ")";
 
-                        if(fieldUsed.get(var).contains(".")) {
-                            snippet = "try {\n\t" + snippet + ";\n} catch (Exception eeee) {}";
+                            if (fieldUsed.get(var).contains(".")) {
+                                snippet = "try {\n\t" + snippet + ";\n} catch (Exception eeee) {}";
+                            }
+                            CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
+                            snippetStatement.setValue(snippet);
+
+                            if (!after.contains(var)) {
+                                statement.insertBefore(snippetStatement);
+                            } else {
+                                statement.insertAfter(snippetStatement);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                        CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
-                        snippetStatement.setValue(snippet);
-
-                        if (!after.contains(var)) {
-                            statement.insertBefore(snippetStatement);
-                        } else {
-                            statement.insertAfter(snippetStatement);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
             }
-        }
+        } catch (Exception e) {}
     }
 
     protected boolean alreadyInstrumented(CtStatement statement) {

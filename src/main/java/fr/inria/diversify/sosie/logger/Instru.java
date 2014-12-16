@@ -59,7 +59,8 @@ public class Instru {
 
     private TransplantationPointCallCountInstrumenter tpcInstrumenter = null;
 
-    private Factory factory = null;
+    private Factory sourceFactory = null;
+    private Factory testFactory = null;
     private boolean onlyCopyLoggerCode;
 
 
@@ -81,8 +82,6 @@ public class Instru {
         if ( onlyCopyLoggerCode ) {
             copyLogger(outputDirectory, srcDirectory);
         }
-
-        factory = initSpoon();
 
         initOutputDirectory();
 
@@ -124,59 +123,66 @@ public class Instru {
 
     protected void instruMainSrc() {
         String src = projectDirectory + "/" + srcDirectory;
-        List<String> classFilter = allClassesName(new File(src));
 
+        if ( sourceFactory == null ) {
+            sourceFactory = initSpoon(src);
+        }
+
+        if(methodCall) {
+            MethodLoggingInstrumenter m = new MethodLoggingInstrumenter(transformations);
+            m.setUseCompactLog(compactLog);
+            applyProcessor(sourceFactory, m);
+        }
         if(variable) {
 //            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter(transformations);
             FieldUsedInstrumenter v = new FieldUsedInstrumenter(transformations);
             v.setUseCompactLog(compactLog);
-            applyProcessor(v, classFilter);
+            applyProcessor(sourceFactory, v);
         }
         if(error) {
             ErrorLoggingInstrumenter e = new ErrorLoggingInstrumenter(transformations);
             e.setUseCompactLog(compactLog);
-            applyProcessor(e, classFilter);
+            applyProcessor(sourceFactory, e);
         }
-        if(methodCall) {
-            MethodLoggingInstrumenter m = new MethodLoggingInstrumenter(transformations);
-            m.setUseCompactLog(compactLog);
-            applyProcessor(m, classFilter);
-        }
-
         if (transplantationPointCallCount) {
             tpcInstrumenter =
                     new TransplantationPointCallCountInstrumenter(transformations);
             tpcInstrumenter.setUseCompactLog(compactLog);
-            applyProcessor(tpcInstrumenter, classFilter);
+            applyProcessor(sourceFactory, tpcInstrumenter);
         }
 
         File fileFrom = new File(src);
         File out = new File(outputDirectory + "/" + srcDirectory);
-        writeJavaClass(out, fileFrom);
+        writeJavaClass(sourceFactory, out, fileFrom);
     }
 
     protected void instruTestSrc() {
+
         String test = projectDirectory + "/" + testDirectory;
-        List<String> classFilter = allClassesName(new File(test));
+        String main = projectDirectory + "/" + srcDirectory;
+
+        if ( testFactory == null ) {
+            testFactory = initSpoon(test+":"+main);
+        }
 
         if(assertCount) {
-            applyProcessor(new AssertCountInstrumenter(), classFilter);
+            applyProcessor(testFactory, new AssertCountInstrumenter());
         }
 
         if(testCount) {
-            applyProcessor(new TestCountInstrumenter(), classFilter);
+            applyProcessor(testFactory, new TestCountInstrumenter());
         }
 
         if(newTest) {
-            applyProcessor(new TestLoggingInstrumenter() ,classFilter);
+            applyProcessor(testFactory, new TestLoggingInstrumenter());
         }
 
         File fileFrom = new File(test);
         File out = new File(outputDirectory + "/" + testDirectory);
-        writeJavaClass(out, fileFrom);
+        writeJavaClass(testFactory, out, fileFrom);
     }
 
-    protected void writeJavaClass(File out, File fileFrom) {
+    protected void writeJavaClass(Factory factory, File out, File fileFrom) {
         Environment env = factory.getEnvironment();
         AbstractProcessor processor;
         if(useSourceCodeFragments) {
@@ -186,10 +192,7 @@ public class Instru {
         } else {
             processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
         }
-        ProcessingManager pm = new QueueProcessingManager(factory);
-        processor.setFactory(factory);
-        pm.addProcessor(processor);
-        pm.process();
+        applyProcessor(factory, processor);
     }
 
 
@@ -205,11 +208,7 @@ public class Instru {
         FileUtils.copyFileToDirectory(new File(packagePath + InstruBinaryLog.class.getSimpleName() + ".java"),dir);
     }
 
-    protected Factory initSpoon() {
-        String test = projectDirectory + "/" + testDirectory;
-        String main = projectDirectory + "/" + srcDirectory;
-        String srcDirectory = test + ":" + main;
-
+    protected Factory initSpoon(String srcDirectory) {
         try {
             return new SpoonMetaFactory().buildNewFactory(srcDirectory, javaVersion);
         } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
@@ -217,10 +216,9 @@ public class Instru {
         }
     }
 
-    protected void applyProcessor(AbstractLoggingInstrumenter processor, List<String> classFilter) {
+    protected void applyProcessor(Factory factory, AbstractProcessor processor) {
         ProcessingManager pm = new QueueProcessingManager(factory);
         processor.setFactory(factory);
-        processor.setClassFilter(classFilter);
         pm.addProcessor(processor);
         pm.process();
     }
@@ -289,10 +287,21 @@ public class Instru {
         this.transplantationPointCallCount = transplantationPointCallCount;
     }
 
-    public void setFactory(Factory factory) {
-        this.factory = factory;
+    public void setSourceFactory(Factory sourceFactory) {
+        this.sourceFactory = sourceFactory;
     }
 
+    public Factory getSourceFactory() {
+        return sourceFactory;
+    }
+
+    public Factory getTestFactory() {
+        return testFactory;
+    }
+
+    public void setTestFactory(Factory testFactorty) {
+        this.testFactory = testFactorty;
+    }
 
     public void setOnlyCopyLoggerCode(boolean onlyCopyLoggerCode) {
         this.onlyCopyLoggerCode = onlyCopyLoggerCode;

@@ -20,7 +20,6 @@ import java.util.Map;
 public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends AbstractProcessor<E> {
     protected static Map<String, String> idMap = new HashMap();
     protected static Map<CtExecutable, Integer> count = new HashMap();
-    List<String> classFilter;
 
     protected List<Transformation> transformations;
 
@@ -61,13 +60,6 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
 
         return idMap.get(key);
     }
-
-    public boolean classFilterContains(E element) {
-        return getClass(element) != null
-            && classFilter.contains(getClass(element).getSimpleName());
-    }
-
-
 
     protected String idFor(String string) {
         return idFor(string, "");
@@ -118,9 +110,5 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
             }
         }
         return false;
-    }
-
-    public void setClassFilter(List<String> classFilter) {
-        this.classFilter = classFilter;
     }
 }

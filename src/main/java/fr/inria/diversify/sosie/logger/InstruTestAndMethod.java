@@ -66,7 +66,7 @@ public class InstruTestAndMethod {
             TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
             List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
             instru = new Instru(project, src, test, javaVersion, out, transf);
-            instru.setFactory(factory);
+            instru.setSourceFactory(factory);
         } else {
             instru = new Instru(project, src, test, javaVersion, out, null);
         }
