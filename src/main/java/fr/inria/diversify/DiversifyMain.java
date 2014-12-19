@@ -451,7 +451,7 @@ public class DiversifyMain {
             computeDiversifyStat(transDir, out);
         }
 
-        computeAllPossibleTransformation();
+      //  computeAllPossibleTransformation();
 
     }
 

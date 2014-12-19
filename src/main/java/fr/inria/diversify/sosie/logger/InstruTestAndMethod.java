@@ -39,7 +39,7 @@ public class InstruTestAndMethod {
         boolean intruCountAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruCountAssert", "false"));
         boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest", "false"));
         boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruTransplantPointCount", "false"));
-        boolean compact = Boolean.parseBoolean(inputConfiguration.getProperty("compact.log", "false"));
+        String logger = inputConfiguration.getProperty("logger", "verbose");
         boolean onlyUpdateLoggerCode = Boolean.parseBoolean(inputConfiguration.getProperty("only.copy.logger", "false"));
         int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion", "5"));
         boolean useSourceCodeFragments = Boolean.parseBoolean(inputConfiguration.getProperty("useSourceCodeFragments", "false"));
@@ -70,7 +70,7 @@ public class InstruTestAndMethod {
         } else {
             instru = new Instru(project, src, test, javaVersion, out, null);
         }
-        instru.setCompactLog(compact);
+        instru.setLogger(logger);
         instru.setMethodCall(intruMethodCall);
         instru.setVariable(intruVariable);
         instru.setError(intruError);

@@ -33,7 +33,7 @@ public class Instru {
 
     private  int javaVersion;
 
-    private boolean compactLog;
+    private String logger;
 
     //What to instrument?
 
@@ -130,24 +130,24 @@ public class Instru {
 
         if(methodCall) {
             MethodLoggingInstrumenter m = new MethodLoggingInstrumenter(transformations);
-            m.setUseCompactLog(compactLog);
+            m.setLogger(logger);
             applyProcessor(sourceFactory, m);
         }
         if(variable) {
 //            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter(transformations);
             FieldUsedInstrumenter v = new FieldUsedInstrumenter(transformations);
-            v.setUseCompactLog(compactLog);
+            v.setLogger(logger);
             applyProcessor(sourceFactory, v);
         }
         if(error) {
             ErrorLoggingInstrumenter e = new ErrorLoggingInstrumenter(transformations);
-            e.setUseCompactLog(compactLog);
+            e.setLogger(logger);
             applyProcessor(sourceFactory, e);
         }
         if (transplantationPointCallCount) {
             tpcInstrumenter =
                     new TransplantationPointCallCountInstrumenter(transformations);
-            tpcInstrumenter.setUseCompactLog(compactLog);
+            tpcInstrumenter.setLogger(logger);
             applyProcessor(sourceFactory, tpcInstrumenter);
         }
 
@@ -206,6 +206,16 @@ public class Instru {
         FileUtils.copyFileToDirectory(new File(packagePath + InstruLogWriter.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + InstruVerboseLog.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + InstruBinaryLog.class.getSimpleName() + ".java"),dir);
+
+
+        dir = new File(tmpDir+"/"+src+"/fr/inria/diversify/testamplification/logger");
+        FileUtils.forceMkdir(dir);
+        packagePath = System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/testamplification/logger/";
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.ShutdownHookLog.class.getSimpleName() + ".java"), dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.LogWriter.class.getSimpleName() + ".java"),dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.VerboseLogWriter.class.getSimpleName() + ".java"),dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.DeepLogWriter.class.getSimpleName() + ".java"),dir);
     }
 
     protected Factory initSpoon(String srcDirectory) {
@@ -239,12 +249,8 @@ public class Instru {
         return list;
     }
 
-    public void setCompactLog(boolean compactLog) {
-        this.compactLog = compactLog;
-    }
-
-    public boolean getCompactLog() {
-        return compactLog;
+    public void setLogger(String logger) {
+        this.logger = logger;
     }
 
     public boolean getMethodCall() {

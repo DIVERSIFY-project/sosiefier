@@ -55,7 +55,7 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
         snippetStatement.setValue(snippet);
         element.getBody().insertBegin(snippetStatement);
 
-        snippet = getLogName() + ".writeTestFinish()";
+        snippet = getLogName() + ".writeTestFinish(Thread.currentThread())";
         snippetStatement = new CtCodeSnippetStatementImpl();
         snippetStatement.setValue(snippet);
         //Search the return statement

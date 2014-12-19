@@ -31,12 +31,23 @@ public class AssertCountInstrumenter extends TestProcessor {
     }
 
     protected boolean isAssert(CtInvocation invocation) {
-            try {
-                Class cl = invocation.getExecutable().getDeclaringType().getActualClass();
-                return org.junit.Assert.class.isAssignableFrom(cl);
-            }catch (Exception e) {
-                return false;
-            }
+        try {
+            Class cl = invocation.getExecutable().getDeclaringType().getActualClass();
 
+            return isAssertInstance(cl);
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    protected boolean isAssertInstance(Class cl) {
+        if (cl.equals(org.junit.Assert.class) || cl.equals(junit.framework.Assert.class))
+            return true;
+        Class superCl = cl.getSuperclass();
+        if(superCl != null) {
+            return isAssertInstance(superCl);
+        }
+        return false;
     }
 }
