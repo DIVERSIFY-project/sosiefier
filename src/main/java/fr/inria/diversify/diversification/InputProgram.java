@@ -294,7 +294,8 @@ public class InputProgram {
                 if (serialized.has("sourceCode")) {
                     return getCodeFragment(position, serialized.getString("sourceCode"));
                 } else if (serialized.has("sourcecode")) {
-                    return getCodeFragment(position, serialized.getString("sourcecode"));
+                    // Super Hack!!!
+                    return getCodeFragment(position, serialized.getString("sourcecode").replace("\n", "\r\n"));
                 } else if (serialized.has("type")) {
                     return findCodeFragment(position, serialized.getString("type"),
                             cf -> cf.getCodeFragmentType().getSimpleName());
