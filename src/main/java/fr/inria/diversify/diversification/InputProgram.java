@@ -41,6 +41,8 @@ import java.util.function.Predicate;
  */
 public class InputProgram {
 
+    private HashMap<String, String> nearestMatchPositions;
+
     /**
      * List of all the code fragments extracted by Spoon of the input program
      */
@@ -291,6 +293,8 @@ public class InputProgram {
                 String position = serialized.getString("position");
                 if (serialized.has("sourceCode")) {
                     return getCodeFragment(position, serialized.getString("sourceCode"));
+                } else if (serialized.has("sourcecode")) {
+                    return getCodeFragment(position, serialized.getString("sourcecode"));
                 } else if (serialized.has("type")) {
                     return findCodeFragment(position, serialized.getString("type"),
                             cf -> cf.getCodeFragmentType().getSimpleName());
@@ -331,16 +335,18 @@ public class InputProgram {
                 //String cfSourceCode = codeFragment.equalString();
                 //source.equals(cfSourceCode)
                 String ctValue = accesor.apply(codeFragment);
-                if (ctValue.equals(searchValue) && cfLine == lineNumber) {
-                    //If it is of the same code and the same line: we found it!!
-                    return codeFragment;
-                } else {
-                    int penalty = ctValue.equals(searchValue) ? 0 : 10000; //Establish a high penalty for lines of different type
-                    int d = Math.abs(cfLine - lineNumber) + penalty;
-                    if (d < minDiff) {
-                        //else return the nearest one with same code
-                        result = codeFragment;
-                        minDiff = d;
+                if (ctValue.equals(searchValue) ) {
+                    if (cfLine == lineNumber) {
+                        //If it is of the same code and the same line: we found it!!
+                        return codeFragment;
+                    } else {
+                        //int penalty = ctValue.equals(searchValue) ? 0 : 10000; //Establish a high penalty for lines of different type
+                        int d = Math.abs(cfLine - lineNumber);
+                        if (d < minDiff) {
+                            //else return the nearest one with same code
+                            result = codeFragment;
+                            minDiff = d;
+                        }
                     }
                 }
             }
@@ -348,6 +354,9 @@ public class InputProgram {
 
         if ( result == null ) {
             Log.warn("Unable to find " + position + " Search value " + searchValue);
+        } else if ( !result.positionString().equals(position) ) {
+            Log.warn("Unable to find fragment at " + position + ":" + lineNumber +
+                    "(" +searchValue + "). Nearest match " + result.positionString() + "(" + accesor.apply(result) + ")");
         }
 
         return result;
@@ -489,4 +498,5 @@ public class InputProgram {
         setClassesDir(configuration.getClassesDir());
         setCoverageDir(configuration.getCoverageDir());
     }
+
 }

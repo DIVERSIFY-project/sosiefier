@@ -170,8 +170,8 @@ public class ObjectExistence extends CVLTransformation {
 
     protected void   removeSourceCode(CtSimpleType cl) {
           CompilationUnit compileUnit = cl.getPosition().getCompilationUnit();
-              if(compileUnit.getSourceCodeFraments() != null)
-                    compileUnit.getSourceCodeFraments().clear();
+              if(compileUnit.getSourceCodeFragments() != null)
+                    compileUnit.getSourceCodeFragments().clear();
     }
 
     public boolean equals(Object other) {

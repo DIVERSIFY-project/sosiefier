@@ -93,7 +93,7 @@ public class ReplaceLiteral extends AbstractTransformation {
 
     public void removeSourceCode() {
         CompilationUnit compileUnit = transplantationPoint.getPosition().getCompilationUnit();
-        compileUnit.getSourceCodeFraments().clear();
+        compileUnit.getSourceCodeFragments().clear();
     }
 
     public void setTransplantationPoint(CtLiteral transplantationPoint) {

@@ -8,7 +8,6 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.reflect.visitor.PrettyPrinter;
 
 import java.io.File;

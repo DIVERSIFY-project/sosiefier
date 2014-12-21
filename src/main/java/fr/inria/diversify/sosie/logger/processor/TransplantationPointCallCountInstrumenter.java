@@ -110,9 +110,10 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
                         int b = cu.beginOfLineIndex(e.getPosition().getSourceStart());
                         cu.addSourceCodeFragment(new SourceCodeFragment(b, probeStr + ";", 0));
                     } else if (e.getParent() instanceof CtIf) {
-                        cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(),
+                        CtExpression c = ((CtIf)e).getCondition();
+                        cu.addSourceCodeFragment(new SourceCodeFragment(c.getPosition().getSourceStart(),
                                 "(" + probeStr + "||", 0));
-                        cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceEnd() + 1, ")", 0));
+                        cu.addSourceCodeFragment(new SourceCodeFragment(c.getPosition().getSourceEnd() + 1, ")", 0));
                         //System.out.println("Parent if");
                     } else {
                         e = e.getParent();

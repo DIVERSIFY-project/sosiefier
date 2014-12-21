@@ -655,7 +655,7 @@ public class TransformationJsonParser {
 
         if (cf == null) {
             throw new TransformationParserException(
-                    "Cannot find a code fragment that matches the current JSON object " + jsonObject.toString());
+                "Cannot find a code fragment that matches the current JSON object " + jsonObject.toString());
         }
 
         return cf;

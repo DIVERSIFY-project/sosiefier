@@ -40,8 +40,8 @@ public abstract class InstruLogWriter {
     //Number of times a TP is called
     private HashMap<String, Integer> transplantPointCallCount;
 
-    //Mean depth of the call
-    private HashMap<String, Integer[]> depthArray;
+    //Instrumented depths of the call
+    private HashMap<String, Integer[]> depthInstruArray;
 
     //Number of times an assertion is called
     private HashMap<String, Integer> assertCallCount;
@@ -135,8 +135,8 @@ public abstract class InstruLogWriter {
         setCurrentTestSignature(testSignature);
         getTransplantPointCallCount().clear();
         getAssertCallCount().clear();
-        if (depthArray == null) depthArray = new HashMap<String, Integer[]>();
-        else depthArray.clear();
+        if (depthInstruArray == null) depthInstruArray = new HashMap<String, Integer[]>();
+        else depthInstruArray.clear();
     }
 
     private void incCallCount(HashMap<String, Integer> map, String id) {
@@ -392,28 +392,32 @@ public abstract class InstruLogWriter {
     }
 
     public synchronized Integer[] getDepthArray(String key) {
-        if (depthArray == null) depthArray = new HashMap<String, Integer[]>();
-        return depthArray.get(key);
+        if (depthInstruArray == null) depthInstruArray = new HashMap<String, Integer[]>();
+        return depthInstruArray.get(key);
     }
 
     public synchronized void setDepthArray(String id, int index, int value) {
-        Integer[] arr = depthArray.get(id);
+        Integer[] arr = depthInstruArray.get(id);
         if (arr == null) {
-            arr = new Integer[4];
-            depthArray.put(id, arr);
+            arr = new Integer[] {-1,-1,-1,-1,-1,-1};
+            depthInstruArray.put(id, arr);
         }
         arr[index] = value;
     }
 
-    public synchronized void setDepthArray(String id, int min, int mean, int max) {
-        Integer[] arr = depthArray.get(id);
+    public synchronized void setDepthArray(String id, int min, int mean, int max,
+                                           int sMin, int sMean, int sMax) {
+        Integer[] arr = depthInstruArray.get(id);
         if (arr == null) {
-            arr = new Integer[3];
-            depthArray.put(id, arr);
+            arr = new Integer[6];
+            depthInstruArray.put(id, arr);
         }
         arr[0] = min;
         arr[1] = mean;
         arr[2] = max;
+        arr[3] = sMin;
+        arr[4] = sMean;
+        arr[5] = sMax;
     }
 
 
