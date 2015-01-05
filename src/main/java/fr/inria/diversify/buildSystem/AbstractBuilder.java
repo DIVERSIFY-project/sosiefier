@@ -137,7 +137,7 @@ public abstract class AbstractBuilder {
         runGoals(new String[]{"android:emulator-stop-all"}, false);
     }
 
-    protected int runGoals(String[] goals, boolean verbose) throws InterruptedException {
+    public int runGoals(String[] goals, boolean verbose) throws InterruptedException {
         initThreadGroup();
         reset();
 

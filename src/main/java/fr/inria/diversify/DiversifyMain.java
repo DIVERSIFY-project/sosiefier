@@ -97,7 +97,7 @@ public class DiversifyMain {
 
             String dependencyPom = inputConfiguration.getProperty("dependencyPom");
             if(dependencyPom != null) {
-                FileUtils.copyFile(new File(inputConfiguration.getProperty("project") + "/" +dependencyPom), pom);
+                FileUtils.copyFile(new File(dependencyPom), pom);
             }
 
             t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
@@ -218,7 +218,7 @@ public class DiversifyMain {
             String src = inputConfiguration.getProperty("src");
             rb = new MavenBuilder(directory, src);
 
-            String androidSdk = inputConfiguration.getProperty("AndroidSdk");
+            String androidSdk = inputConfiguration.getProperty("AndroidSdk", "null");
             if(!androidSdk.equals("null") ) {
                 rb.stopAndroidEmulation();
                 rb.startAndroidEmulation();
@@ -266,7 +266,7 @@ public class DiversifyMain {
     /**
      * Initializes the InputProgram dataset
      */
-    protected void initInputProgram() {
+    protected void  initInputProgram() throws IOException, InterruptedException {
         inputProgram = new InputProgram();
 
         inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
@@ -380,7 +380,10 @@ public class DiversifyMain {
         }
     }
 
-    protected ICoverageReport initCoverageReport() {
+    protected ICoverageReport initCoverageReport() throws IOException, InterruptedException {
+
+        MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir(), inputProgram.getSourceCodeDir());
+        builder.runGoals(new String[]{"clean", "test"}, false);
         String jacocoFile = inputConfiguration.getProperty("jacoco");
         String classes = inputConfiguration.getProperty("project") + "/" + inputConfiguration.getProperty("classes");
 
@@ -455,7 +458,7 @@ public class DiversifyMain {
 
     }
 
-    protected void computeAllPossibleTransformation() throws InterruptedException {
+    protected void computeAllPossibleTransformation() throws InterruptedException, IOException {
         ComputeAllPossibleTransformation capt = new ComputeAllPossibleTransformation(inputProgram.getCodeFragments(), initCoverageReport());
         Log.info("delete: {}",inputProgram.getCodeFragments().size());
         Log.info("add: {}",capt.getAllAdd2());
