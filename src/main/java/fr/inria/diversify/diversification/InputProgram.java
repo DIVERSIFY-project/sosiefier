@@ -8,6 +8,7 @@ import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
 import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.util.Log;
+import fr.inria.diversify.util.StringSimilarity;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -17,10 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
-import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
@@ -31,12 +30,11 @@ import spoon.support.QueueProcessingManager;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Predicate;
 //import java.util.stream.Collectors;
 
 /**
  * The InputProgram class encapsulates all the known information of the program being sosiefiecated
- * <p/>
+ * <p>
  * Created by marcel on 6/06/14.
  */
 public class InputProgram {
@@ -253,7 +251,7 @@ public class InputProgram {
 
     /**
      * Process only the code fragments needed to handle a known set of transformations.
-     * <p/>
+     * <p>
      * This is faster than processing all. Useful for multi-sosies when we start from a known set of single-sosies
      * instead of searching out of the fragments.
      *
@@ -280,7 +278,7 @@ public class InputProgram {
 
     /**
      * Search for a specific code fragment given its serialized JSON object.
-     * <p/>
+     * <p>
      * Note: The JSON object is the serialized version OF THE CODE FRAGMENT by no means
      * THE TRANSFORMATION containing a particular code fragment.
      *
@@ -294,7 +292,8 @@ public class InputProgram {
                 if (serialized.has("sourceCode")) {
                     return getCodeFragment(position, serialized.getString("sourceCode"));
                 } else if (serialized.has("sourcecode")) {
-                    return getCodeFragment(position, serialized.getString("sourcecode"));
+                    // Super Hack!!!
+                    return getCodeFragment(position, serialized.getString("sourcecode").replace("\n", "\r\n"));
                 } else if (serialized.has("type")) {
                     return findCodeFragment(position, serialized.getString("type"),
                             cf -> cf.getCodeFragmentType().getSimpleName());
@@ -318,7 +317,7 @@ public class InputProgram {
      * @return
      */
     public CodeFragment findCodeFragment(String position, String searchValue,
-                                            Function<CodeFragment, String> accesor) {
+                                         Function<CodeFragment, String> accesor) {
 
         CodeFragment result = null;
 
@@ -327,6 +326,10 @@ public class InputProgram {
         int lineNumber = Integer.parseInt(s[1]);
         int minDiff = Integer.MAX_VALUE;
 
+        double sDiff = 0;
+
+        int similiarFragmentCount = 0;
+        int similarMinDist = Integer.MAX_VALUE;
         for (CodeFragment codeFragment : getCodeFragments()) {
             String[] cfPos = codeFragment.positionString().split(":");
             //Analyze only code fragments in the file of the one we are looking for
@@ -335,28 +338,51 @@ public class InputProgram {
                 //String cfSourceCode = codeFragment.equalString();
                 //source.equals(cfSourceCode)
                 String ctValue = accesor.apply(codeFragment);
-                if (ctValue.equals(searchValue) ) {
-                    if (cfLine == lineNumber) {
-                        //If it is of the same code and the same line: we found it!!
-                        return codeFragment;
-                    } else {
-                        //int penalty = ctValue.equals(searchValue) ? 0 : 10000; //Establish a high penalty for lines of different type
+                if (ctValue.equals(searchValue) && cfLine == lineNumber) {
+                    //If it is of the same code and the same line: we found it!!
+                    //Log.info("Nailed! Search completed of snippet at pos " + position);
+                    return codeFragment;
+                } else {
+                    //Similarity factor (provide flexibility...)
+                    double x = StringSimilarity.CompareStrings(ctValue, searchValue);
+                    if ( x > sDiff ) {
+                        similiarFragmentCount = 0;//A better value is found, erase similar count
+                        //find the most likely by search value
+                        int k = Math.abs(cfLine - lineNumber);
+                        //Log.info("x > sDif -> MD: " + minDiff + " k:" + k + " x:" + x + " sD:" + sDiff);
+                        minDiff = k;//Store line distance
+                        sDiff = x;
+                        result = codeFragment;
+
+                    } else if ( Math.abs(x - sDiff) < 0.0000001 ) {
+                        similiarFragmentCount++; //equally good fragment found, augment the amount of fragments
                         int d = Math.abs(cfLine - lineNumber);
+                        //Log.info("x==sDiff ->  sDif -> MD: " + minDiff + " d:" + d + " x:" + x + " sD:" + sDiff);
                         if (d < minDiff) {
+                            similarMinDist = minDiff;
                             //else return the nearest one with same code
                             result = codeFragment;
                             minDiff = d;
                         }
                     }
                 }
+
             }
         }
 
-        if ( result == null ) {
-            Log.warn("Unable to find " + position + " Search value " + searchValue);
-        } else if ( !result.positionString().equals(position) ) {
-            Log.warn("Unable to find fragment at " + position + ":" + lineNumber +
-                    "(" +searchValue + "). Nearest match " + result.positionString() + "(" + accesor.apply(result) + ")");
+
+
+        //Log.info("Search completed of snippet at pos " + position);
+        if (result == null) {
+            Log.warn("Unable to find " + searchValue + "at " + position + ":" + lineNumber);
+        } else if (!result.positionString().equals(position)) {
+            Log.warn("Unable to find fragment at " + position + ":" + lineNumber);
+            Log.info("Best match at " + result.positionString());
+            if ( sDiff < 1.0 || similiarFragmentCount != 0 ) {
+                Log.info("Dice: " + sDiff +  " Similars: " + similiarFragmentCount + " Similar MinDist: " + similarMinDist);
+                Log.info("Search value: " + searchValue );
+                if ( sDiff < 0 ) Log.info("Value found: " + accesor.apply(result));
+            }
         }
 
         return result;

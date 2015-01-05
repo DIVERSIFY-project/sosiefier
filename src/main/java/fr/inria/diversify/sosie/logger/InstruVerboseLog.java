@@ -29,7 +29,7 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     int nullCallDepths = 0;
 
-    private static boolean findDepthDiffs = true;
+    private static boolean findDepthDiffs = false;
 
     /**
      * Constructor of the verbose log
@@ -168,11 +168,10 @@ public class InstruVerboseLog extends InstruLogWriter {
 
         if (findDepthDiffs) {
             sDepth = getDepth();
-        }
-
-        if (sDepth < depth) {
-            System.out.println("SDepth: " + getDepth());
-            throw new RuntimeException("Uppps");
+            if (sDepth < depth) {
+                System.out.println("SDepth: " + getDepth());
+                throw new RuntimeException("Uppps");
+            }
         }
 
         Integer[] arr = getDepthArray(id);
@@ -532,7 +531,7 @@ public class InstruVerboseLog extends InstruLogWriter {
         if (!fileWriters.containsKey(thread)) {
             String fileName = getThreadLogFilePath(thread) + "_" + System.currentTimeMillis();
             previousVarLog.put(thread, new HashMap<String, String>());
-            PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(fileName), 1024*8));
+            PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(fileName), 1024 * 8));
             fileWriters.put(thread, f);
             semaphores.put(f.toString() + f.hashCode(), new Semaphore(1));
         }

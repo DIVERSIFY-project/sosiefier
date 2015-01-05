@@ -19,7 +19,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * A program to create a pool of sosies out of a directory of transformations
+ * A program to create a pool of sosies out of a directory of transformations without the source code
  * <p/>
  * Created by marodrig on 19/06/2014.
  */

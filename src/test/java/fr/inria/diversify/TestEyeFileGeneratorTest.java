@@ -47,6 +47,7 @@ public class TestEyeFileGeneratorTest {
         //Put a pair <code to be replaced, replacement>
         generator.addPairs(fl.get(0).getCtCodeFragment(), fl.get(1).getCtCodeFragment());
         generator.addPairs(fl.get(2).getCtCodeFragment(), fl.get(3).getCtCodeFragment());
+        generator.addPairs(fl.get(2).getCtCodeFragment(), null);
         //Save it to file
         generator.saveToFile("testGeneration.json");
 

@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.CtCodeElement;
+import spoon.reflect.declaration.CtElement;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,13 +17,12 @@ import java.util.Iterator;
 /**
  * The JSON file generator takes two Spoon.CtCodeFragment as input and turn them into a JSON format that can be
  * understood by the TestEye plugin
- * <p/>
+ * <p>
  * Created by marodrig on 27/11/2014.
  */
 public class TestEyeFileGenerator {
 
     private ArrayList<CtCodeElement> replaced;
-
     private ArrayList<CtCodeElement> replacement;
 
     public TestEyeFileGenerator() {
@@ -33,7 +33,7 @@ public class TestEyeFileGenerator {
     /**
      * Sets a list of replaced and replacement fragments. Element the i-th element of the replaced list will be replaced
      * with the i-th of the replacement list.
-     * <p/>
+     * <p>
      * Both list must be the same size, otherwise a IllegalArgumentException will be thrown
      */
     public void addAllPairs(Collection<CtCodeElement> replaced, Collection<CtCodeElement> replacement) {
@@ -44,7 +44,8 @@ public class TestEyeFileGenerator {
 
     /**
      * Add a pair of elements
-     * @param replaced Element to be replaced
+     *
+     * @param replaced    Element to be replaced
      * @param replacement Replacement
      */
     public void addPairs(CtCodeElement replaced, CtCodeElement replacement) {
@@ -54,6 +55,7 @@ public class TestEyeFileGenerator {
 
     /**
      * Persist a element in our format
+     *
      * @param element element to persist
      * @return A JSON object
      */
@@ -75,13 +77,12 @@ public class TestEyeFileGenerator {
      * @return
      */
     public JSONArray toJSON() throws JSONException {
-        int i = 0;
         JSONArray result = new JSONArray();
-        Iterator<CtCodeElement> replacedIt = replaced.iterator();
-        Iterator<CtCodeElement> replacementIt = replacement .iterator();
-        while (replacedIt.hasNext()) {
-            JSONObject tp = elementToJSON(replacedIt.next());
-            JSONObject t = elementToJSON(replacementIt.next());
+        for ( int i = 0; i < replaced.size(); i++ ) {
+            JSONObject tp = elementToJSON(replaced.get(i));
+            CtCodeElement e = replacement.get(i);
+            JSONObject t = null;
+            if (e != null) t = elementToJSON(e);
             i++;
             JSONObject object = new JSONObject();
             object.put("variableMapping", new JSONObject()); //This field is "sosie specific"
@@ -91,7 +92,7 @@ public class TestEyeFileGenerator {
             object.put("name", "replace");//This field is "sosie specific"
             object.put("tindex", i);//ID of the transformation.
             object.put("transplantationPoint", tp);//replaced code
-            object.put("transplant", t);//replacement.
+            if (t != null) object.put("transplant", t);//replacement. Could be a deletion, so no replacement...
             result.put(object);
         }
         return result;
@@ -99,6 +100,7 @@ public class TestEyeFileGenerator {
 
     /**
      * Save the JSON Array into a file
+     *
      * @param fileName path where the file is going to be saved.
      */
     public void saveToFile(String fileName) throws IOException, JSONException {
