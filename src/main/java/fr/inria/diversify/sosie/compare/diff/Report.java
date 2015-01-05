@@ -32,7 +32,12 @@ public class Report {
     }
 
     public void putTestReport(String key, TestReport testReport) {
-        testReports.put(key, testReport);
+        TestReport tr = testReports.get(key);
+        if(tr == null) {
+            testReports.put(key, testReport);
+        } else {
+            tr.merge(testReport,true);
+        }
     }
 
 
@@ -122,7 +127,7 @@ public class Report {
             Map<String, String> pointType = testReports.get(test).pointReport();
             for(String point : sameVarPerTest.get(test)) {
                 String type = pointType.get(point);
-                if(type.equals("FD") || type.equals("VD")) {
+                if(type != null && (type.equals("FD") || type.equals("VD"))) {
                     if(!map.containsKey(test)) {
                         map.put(test, new HashSet());
                     }

@@ -10,7 +10,6 @@ import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * User: Simon
@@ -33,8 +32,8 @@ public abstract class AbstractBuilder {
     //Did all the test run
     protected boolean allTestRun;
 
-    //Phases of the compiler
-    protected String[] phases;
+    //Goals of the compiler
+    protected String[] goals;
 
     //setting file for the compiler
     protected File setting;
@@ -45,7 +44,7 @@ public abstract class AbstractBuilder {
     //Errors that we are OK with...
     protected List<String> acceptedErrors;
 
-    //-3 nothing ¿?
+    //-3 nothing
     //-2 not compile
     //-1 compile, error in test
     //0 compile, all test green
@@ -84,10 +83,10 @@ public abstract class AbstractBuilder {
     }
 
 
-    /**
-     * Resettable latch to wait for the builder
-     */
-    protected CountDownLatch latch;
+//    /**
+//     * Resettable latch to wait for the builder
+//     */
+//    protected CountDownLatch latch;
 
     public AbstractBuilder(String directory, String srcDir) {
         this.directory = directory;
@@ -97,7 +96,7 @@ public abstract class AbstractBuilder {
         runCount = 0;
         saveOutputToFile = false;
         saveOutputDir = "buildoutput";
-        latch = new CountDownLatch(1);
+//        latch = new CountDownLatch(1);
     }
 
     protected void reset() {
@@ -108,69 +107,66 @@ public abstract class AbstractBuilder {
     }
 
     public void runBuilder() throws InterruptedException {
-
-        /*
-        if (System.getProperty("os.name").contains("Windows")) {
-            //Increases the number
-            reset();
-            runCount++;
-            runPrivate();
-        } else {
-        */
-
-            initThreadGroup();
-            reset();
-            runCount++;
-            Thread thread = new Thread() {
-                public void run() {
-                    runPrivate();
-                }
-            };
-            thread.start();
-            //Wait until the maven thread is over...
-//            latch.await();
-//            latch = new CountDownLatch(1);
-
-            thread.join(1000 * timeOut);
-
-            thread.interrupt();
-            //So we can kill it afterwards
-            killUselessThread();
-        //}
+        initThreadGroup();
+        reset();
+        Thread thread = new Thread() {
+            public void run() {
+                runPrivate(null, true);
+            }
+        };
+        thread.start();
+        thread.join(1000 * timeOut);
+        thread.interrupt();
+        killUselessThread();
     }
 
+
     public void initTimeOut() throws InterruptedException {
-        /*
-        if ( System.getProperty("os.name").contains("Windows")) {
-            reset();
-            runPrivate();
-        } else {
-        */
-            initThreadGroup();
-            reset();
-            Thread thread = new Thread() {
-                public void run() {
-                    runPrivate();
-                }
-            };
-            thread.start();
-//            latch.await();
-//            latch = new CountDownLatch(1);
+        timeOut = runGoals(goals, true) * 6;
+        Log.debug("timeOut init: " + timeOut);
+    }
 
-            //No need for timeouts with latch
+    public void startAndroidEmulation() throws InterruptedException {
+        Log.debug("start android emulator");
+        runGoals(new String[]{"android:emulator-start", "-Dandroid.emulator.avd=myandroid",
+                "-Dandroid.emulator.options=\"-no-window -no-audio -no-boot-anim -wipe-data\"", "-Dandroid.emulator.wait=100000"}, false);
+    }
 
-        int tmpTimeOut = 0;
-        int factor = 12;
+    public void stopAndroidEmulation() throws InterruptedException {
+        Log.debug("stop android emulator");
+        runGoals(new String[]{"android:emulator-stop-all"}, false);
+    }
+
+    public int runGoals(String[] goals, boolean verbose) throws InterruptedException {
+        initThreadGroup();
+        reset();
+
+        Thread thread = new Thread() {
+            public void run() {
+                runPrivate(goals, verbose);
+            }
+        };
+        thread.start();
+
+        int time = 0;
         while (status == -3) {
-            tmpTimeOut = tmpTimeOut + factor;
+            time++;
             Thread.sleep(1000);
         }
-        Log.debug("timeOut init: " + tmpTimeOut);
-        timeOut = tmpTimeOut;
-            thread.interrupt();
-            //See if we are in windows and not call this
-            killUselessThread();
-        //}
+        Log.debug("timeOut init: " + time);
+        thread.interrupt();
+        //See if we are in windows and not call this
+        killUselessThread();
+
+        return time;
+    }
+
+    public void copyClasses(String classes) throws IOException {
+        String[] tmp = classes.split("target");
+        File destDir = new File(directory+"/"+tmp[0]+"/classes2");
+        File classesDir = new File(directory+"/"+classes);
+        FileUtils.deleteDirectory(destDir);
+        FileUtils.copyDirectory(classesDir, destDir);
     }
 
     public void initPom(String newPomFile) throws Exception {
@@ -181,10 +177,8 @@ public abstract class AbstractBuilder {
 
     /**
      * Method to run in the compiler's thread
-     *
-     * @remark: IMPORTANT: latch.countDown() MUST BE CALLED FROM THE runPrivate Implementation. Otherwise ill never stop...
      */
-    protected abstract void runPrivate();
+    protected abstract void runPrivate(String[] goals, boolean verbose);
 
     protected void initThreadGroup() {
         threadSet = Thread.getAllStackTraces().keySet();
@@ -206,7 +200,6 @@ public abstract class AbstractBuilder {
 
     protected void killAllChildrenProcess() {
         String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        Log.debug("PID :" + pid);
         Runtime r = Runtime.getRuntime();
         try {
             r.exec("pkill -P " + pid);
@@ -215,7 +208,7 @@ public abstract class AbstractBuilder {
         } catch (Exception e) {
             Log.error("killallchildren ", e);
         }
-        Log.debug("all children process kill");
+        Log.debug("all children process kill (pid: {})", pid);
     }
 
     protected void saveOutputToFile(String output) {
@@ -263,8 +256,8 @@ public abstract class AbstractBuilder {
         this.clojureTest = clojureTest;
     }
 
-    public void setPhase(String[] phases) {
-        this.phases = phases;
+    public void setGoals(String[] goals) {
+        this.goals = goals;
     }
 
     public void setDirectory(String directory) {
@@ -306,5 +299,9 @@ public abstract class AbstractBuilder {
 
     public void setSetting(File setting) {
         this.setting = setting;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

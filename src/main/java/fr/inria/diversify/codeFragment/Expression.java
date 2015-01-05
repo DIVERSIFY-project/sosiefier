@@ -1,6 +1,6 @@
 package fr.inria.diversify.codeFragment;
 
-import spoon.reflect.code.CtCodeElement;
+import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtExpression;
 
 /**
@@ -22,7 +22,11 @@ public class Expression extends CodeFragment {
     }
 
     @Override
-    public boolean isReplace(CodeFragment other, boolean varNameMatch) {
-        return context.isReplace(other.context, varNameMatch);
+    public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch, boolean subType) {
+        return context.isReplaceableBy(other.context, varNameMatch, subType);
+    }
+
+    public Expression clone() {
+        return new Expression((CtExpression<?>) copyElem(codeFragment));
     }
 }

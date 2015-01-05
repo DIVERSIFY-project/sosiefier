@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (C) 2012 Square, Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
+  <groupId>com.squareup.dagger</groupId>
+  <artifactId>dagger-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.2.1</version>
+  <name>Dagger (Parent)</name>
+  <description>A fast dependency injector for Android and Java.</description>
+  <url>https://github.com/square/dagger</url>
+
+  <modules>
+    <module>core</module>
+  </modules>
+
+  <properties>
+      <jacoco.it.execution.data.file>${project.build.directory}/coverage-reports/jacoco-it.exec
+      </jacoco.it.execution.data.file>
+      <jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec
+      </jacoco.ut.execution.data.file>
+      <jacoco.address>localhost</jacoco.address>
+      <jacoco.port>6300</jacoco.port>
+      
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Compilation -->
+    <java.version>1.6</java.version>
+    <javax.inject.version>1</javax.inject.version>
+    <javawriter.version>2.3.0</javawriter.version>
+    <guava.version>15.0</guava.version>
+
+    <!-- Test Dependencies -->
+    <junit.version>4.10</junit.version>
+    <fest.version>1.4</fest.version>
+    <truth.version>0.13</truth.version>
+    <compile-testing.version>0.4</compile-testing.version>
+  </properties>
+
+  <scm>
+    <url>http://github.com/square/dagger/</url>
+    <connection>scm:git:git://github.com/square/dagger.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/square/dagger.git</developerConnection>
+    <tag>dagger-parent-1.2.1</tag>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>http://github.com/square/dagger/issues</url>
+  </issueManagement>
+
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>Square, Inc.</name>
+    <url>http://squareup.com</url>
+  </organization>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>javax.inject</groupId>
+        <artifactId>javax.inject</artifactId>
+        <version>${javax.inject.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.squareup</groupId>
+        <artifactId>javawriter</artifactId>
+        <version>${javawriter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.easytesting</groupId>
+        <artifactId>fest-assert</artifactId>
+        <version>${fest.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.testing.compile</groupId>
+        <artifactId>compile-testing</artifactId>
+        <version>${compile-testing.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.truth0</groupId>
+        <artifactId>truth</artifactId>
+        <version>${truth.version}</version>
+      </dependency>
+      
+      <dependency>
+          <groupId>fr.inria.juncoprovider</groupId>
+          <artifactId>junco-provider</artifactId>
+          <version>0.1</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>1.7</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+            <useIncrementalCompilation>false</useIncrementalCompilation>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <compilerArgument>-Xlint:all</compilerArgument>
+          <showWarnings>true</showWarnings>
+          <showDeprecation>true</showDeprecation>
+        </configuration>
+      </plugin>
+
+<plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.7.1.201405082137</version>
+    <executions>
+        <!--
+         Prepares the property pointing to the JaCoCo runtime agent which
+         is passed as VM argument when the Surefire Maven plugin is executed.
+         -->
+        <execution>
+            <id>pre-unit-test</id>
+            <goals> <goal>prepare-agent</goal> </goals>
+            <configuration>
+                <!--
+                 Sets the name of the property containing the settings
+                 for JaCoCo runtime agent.
+                 -->
+                <propertyName>surefireArgLine</propertyName>
+                <!-- This is needed in order to Junco connecto to Jacoco-->
+                <output>tcpserver</output>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+
+
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    
+    <!-- Force use Junco provider -->
+    <dependencies>
+        <dependency>
+            <groupId>fr.inria.juncoprovider</groupId>
+            <artifactId>junco-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+    </dependencies>
+    
+    <configuration>
+        <!-- Properties of the Junco provier -->
+        <properties>
+            <property>
+                <name>html:report</name>
+                <value>false</value>
+            </property>
+            <property>
+                <name>transplant:file</name>
+                <value>${basedir}/transplant.json</value>
+            </property>
+            <property>
+                <name>classes:dir</name>
+                <value>${basedir}/classes2/</value>
+            </property>
+            
+            <property>
+                <name>stopAtFirstFailure</name>
+                <value>true</value>
+            </property>
+            <property>
+                <name>alwaysResetCoverageInformation</name>
+                <value>false</value>
+            </property>
+        </properties>
+        <!-- Sets the VM argument line used when unit tests are run. -->
+        <argLine>${surefireArgLine}</argLine>
+
+    </configuration>
+</plugin>
+
+          </plugins>
+  </build>
+</project>

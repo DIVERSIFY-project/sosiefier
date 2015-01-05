@@ -9,6 +9,7 @@ import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +21,7 @@ import java.util.Random;
  */
 public class MutationToSosieQuery extends TransformationQuery {
 
+    protected boolean subType;
     protected List<Transformation> mutations;
     protected String classesDir;
     protected File jacocoDir;
@@ -34,7 +36,7 @@ public class MutationToSosieQuery extends TransformationQuery {
 
     protected void init(String mutationDirectory) throws TransformationParserException {
         TransformationParser tf = new TransformationParser(true, inputProgram);
-        mutations = new ArrayList<Transformation>(tf.parseDir(mutationDirectory));
+        mutations = new ArrayList(tf.parseDir(mutationDirectory));
     }
 
 
@@ -43,46 +45,42 @@ public class MutationToSosieQuery extends TransformationQuery {
 
     }
 
-    @Override
-    public List<Transformation> query(int nb) {
+    public Transformation query() throws QueryException {
+        Random r = new Random();
+        Transformation mutation = null;
+        ASTTransformation transformation = null;
+
         try {
-            List<Transformation> result = new ArrayList<>();
-            for ( int j = 0; j < nb; j++ ) {
-                Random r = new Random();
-                Transformation mutation = null;
-                ASTTransformation transformation = null;
-                while (transformation == null) {
+            while (transformation == null) {
+                mutation = mutations.get(r.nextInt(mutations.size()));
+                while (mutation.getStatus() != -1)
                     mutation = mutations.get(r.nextInt(mutations.size()));
-                    while (mutation.getStatus() != -1)
-                        mutation = mutations.get(r.nextInt(mutations.size()));
 
-                    MultiCoverageReport coverageReport = new MultiCoverageReport(classesDir);
-                    for (String failure : mutation.getFailures()) {
-                        String test = formatTest(failure);
-                        for (File jacocoFile : jacocoDir.listFiles()) {
-                            if (test.equals(jacocoFile.getName()))
-                                coverageReport.addJacocoFile(jacocoFile);
-                        }
+                MultiCoverageReport coverageReport = new MultiCoverageReport(classesDir);
+                for (String failure : mutation.getFailures()) {
+                    String test = formatTest(failure);
+                    for (File jacocoFile : jacocoDir.listFiles()) {
+                        if (test.equals(jacocoFile.getName()))
+                            coverageReport.addJacocoFile(jacocoFile);
                     }
-
-                    T thread = new T(new ASTTransformationQuery(inputProgram, Statement.class, false));
-
-                    thread.start();
-                    int count = 0;
-                    while (thread.trans == null && count < 50) {
-                        Thread.sleep(100);
-                        count++;
-                    }
-                    thread.interrupt();
-                    transformation = thread.trans;
                 }
-                transformation.setParent(mutation);
-                result.add(transformation);
+
+                T thread = new T(new ASTTransformationQuery(inputProgram, Statement.class, subType, false));
+
+                thread.start();
+                int count = 0;
+                while (thread.trans == null && count < 50) {
+                    Thread.sleep(100);
+                    count++;
+                }
+                thread.interrupt();
+                transformation = thread.trans;
             }
-            return result;
+            transformation.setParent(mutation);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new QueryException(e);
         }
+        return transformation;
     }
 
     protected String formatTest(String failure) {
@@ -103,7 +101,7 @@ public class MutationToSosieQuery extends TransformationQuery {
         }
         public void run() {
             try {
-                trans = (ASTTransformation) query.buildTransformation();
+                trans = (ASTTransformation) query.query();
             } catch (Exception e) {
 
             }

@@ -1,7 +1,7 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.util.Log;
+import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.CompilationUnit;
@@ -9,6 +9,7 @@ import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtTypeReference;
+import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,6 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
 
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
-        /*
-        if(!(isTestClass(candidate.getDeclaringType().getReference())))
-            return false;*/
-
         if(candidate.isImplicit()
                 || candidate.getBody() == null
                 || candidate.getBody().getStatements().size() == 0)
@@ -47,56 +44,39 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
         return false;
     }
 
-    protected boolean isTestClass(CtTypeReference<?> type) {
-        if(type.getSimpleName().endsWith("Test") || type.getSimpleName().endsWith("Behaviour")) // Behaviour for jbehave
-            return true;
-        else {
-            try {
-                if (type.getSuperclass() != null) return isTestClass(type.getSuperclass());
-            } catch (Exception e) {}
-        }
-        return false;
-    }
-
     @Override
     public void process(CtMethod element) {
-        CtStatement firstStmt = element.getBody().getStatement(0);
-
         String testName =  element.getPosition().getCompilationUnit().getMainType().getQualifiedName()
                 + "." + element.getSimpleName();
         idFor(testName, "TEST"); //Save the id of the test to be able to count all processed tests
 
-        String snippet = "\t\t" + getLogName() + ".writeTestStart(Thread.currentThread(),\"" + testName + "\");\n";
+        String snippet = getLogName() + ".writeTestStart(Thread.currentThread(),\"" + testName + "\")";
+        CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
+        snippetStatement.setValue(snippet);
+        element.getBody().insertBegin(snippetStatement);
 
-        SourcePosition sp = firstStmt.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-
-        Log.info("Instrumenting test " + testName) ;
-
-        int index;
-        if(firstStmt.getPosition().getLine() == element.getPosition().getLine())
-            index = sp.getSourceStart();
-        else
-            index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-
+        snippet = getLogName() + ".writeTestFinish(Thread.currentThread())";
+        snippetStatement = new CtCodeSnippetStatementImpl();
+        snippetStatement.setValue(snippet);
         //Search the return statement
         boolean returnSt = false;
         List<CtStatement> sts = element.getBody().getStatements();
+        List<CtStatement> insert = new ArrayList<>();
+
         for ( CtStatement st :  sts ) {
             if  ( st instanceof CtReturn ) {
-                CompilationUnit cu = st.getPosition().getCompilationUnit();
-                int pos = st.getPosition().getSourceStart();
-                cu.addSourceCodeFragment(new SourceCodeFragment(pos, getLogName() + ".writeTestFinish();\n", 0));
+
+                insert.add(st);
+
                 returnSt = true;
             }
         }
+        for (CtStatement stmt : insert) {
+            stmt.insertBefore(snippetStatement);
+        }
 
         if ( returnSt == false ) {
-            CompilationUnit cu = element.getPosition().getCompilationUnit();
-            int pos = element.getBody().getPosition().getSourceEnd();
-            cu.addSourceCodeFragment(new SourceCodeFragment(pos, getLogName() + ".writeTestFinish();\n", 0));
+            element.getBody().insertEnd(snippetStatement);
         }
 
     }

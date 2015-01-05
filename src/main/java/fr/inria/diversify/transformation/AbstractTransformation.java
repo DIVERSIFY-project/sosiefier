@@ -1,6 +1,7 @@
 package fr.inria.diversify.transformation;
 
 import fr.inria.diversify.diversification.InputConfiguration;
+import fr.inria.diversify.diversification.InputProgram;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 
 import java.util.*;
+import java.util.stream.Collectors;
 //import java.util.stream.Collectors;
 
 /**
@@ -50,7 +52,7 @@ public abstract class AbstractTransformation implements Transformation {
     protected String type;
     protected Transformation parent;
 
-    private InputConfiguration inputConfiguration;
+    private InputProgram inputProgram;
 
     public void setStatus(Integer result) {
         status = result;
@@ -125,56 +127,7 @@ public abstract class AbstractTransformation implements Transformation {
         return parent;
     }
 
-    /**
-     * Applies the transformations and saves into the destination directory.
-     * 
-     * @param destinationDir The parent directory to store the transformation. The transformation
-     *                       will try maintain the project structure. For example if we try to
-     *                       apply an transformation over org.pack.myclass, destination dir
-     *                       could be 'modified/src/main/java' and the file will be save in
-     *                       'modified/src/main/java/org/pack/myclass.java'
-     * @throws Exception
-     */
-    public void apply(String destinationDir) throws Exception {
-        
-        addSourceCode();
 
-        printJavaFile(destinationDir);
-        removeSourceCode();
-    }
-
-    /**
-     * Restores the original code and stores it in the destination directory
-     *
-     * @param destinationDir The parent directory to store the transformation. The transformation
-     *                       will try maintain the project structure. For example if we try to
-     *                       apply an transformation over org.pack.myclass, destination dir
-     *                       could be 'modified/src/main/java' and the file will be save in
-     *                       'modified/src/main/java/org/pack/myclass.java'
-     * @throws Exception
-     */
-    public void restore(String destinationDir) throws Exception {
-        if(parent != null) {
-            parent.removeSourceCode();
-            parent.printJavaFile(destinationDir);
-        }
-        removeSourceCode();
-        printJavaFile(destinationDir);
-    }
-
-    public void applyWithParent(String srcDir) throws Exception {
-        String processor = getInputConfiguration() == null ? "" : getInputConfiguration().getProperty("processor");
-        addSourceCode();
-
-        printJavaFile(srcDir);
-
-        if (parent != null) {
-            parent.addSourceCode();
-            parent.printJavaFile(srcDir);
-            parent.removeSourceCode();
-        }
-        removeSourceCode();
-    }
 
     protected boolean equalParent(Transformation otherParent) {
         if(parent != null)
@@ -185,26 +138,6 @@ public abstract class AbstractTransformation implements Transformation {
         return true;
     }
 
-
-    protected String getTransformationString(CtElement transplantPoint) throws Exception {
-        CtElement parentMethod = getParentMethod(transplantPoint);
-        SourcePosition sp = parentMethod.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-        Environment env = compileUnit.getFactory().getEnvironment();
-
-        addSourceCode();
-
-
-        FragmentDrivenJavaPrettyPrinter printer = new FragmentDrivenJavaPrettyPrinter(env);
-        printer.calculate(compileUnit,null);
-        String[] code = printer.getResult().split("\n");
-        removeSourceCode();
-
-        int begin = sp.getLine() - 1;
-        int end = getLineEnd(parentMethod) + code.length - printer.getResult().split("\n").length;
-
-        return code + "\n" + begin + "\n" + end + "\n";
-    }
 
     protected CtElement getParentMethod(CtElement son) {
         CtElement parent = son.getParent();
@@ -255,14 +188,14 @@ public abstract class AbstractTransformation implements Transformation {
         this.series = series;
     }
 
-    public void setInputConfiguration(InputConfiguration inputConfiguration) {
-        this.inputConfiguration = inputConfiguration;
+    public void setInputProgram(InputProgram inputProgram) {
+        this.inputProgram = inputProgram;
     }
 
     /**
      * Global input configuration
      */
-    public InputConfiguration getInputConfiguration() {
-        return inputConfiguration;
+    public InputProgram getInputProgram() {
+        return inputProgram;
     }
 }

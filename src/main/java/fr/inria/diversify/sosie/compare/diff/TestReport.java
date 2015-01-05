@@ -38,7 +38,7 @@ public class TestReport {
 
     public void updateVar(Map<String, Object> vars, StackTraceCall call) {
         for(String var: vars.keySet()) {
-            String key = call.getMethod() + ":" + var;
+            String key = call.getClassName() + ":" + var;
             Object newValue = vars.get(var);
             Set<Object> values = variable.get(key);
             if (values != null) {
@@ -53,11 +53,10 @@ public class TestReport {
         }
     }
 
-    public void updateVarDiff(Set<VariableDiff> diffs) {
-        for (VariableDiff diff: diffs) {
-            String key = diff.getDiffStart().getMethod() + ":" + diff.getVarDiff();
-            if(variable.containsKey(key))
-                variableDiff.add(key);
+    public void updateVarDiff(Set<String> vars) {
+        for (String var: vars) {
+            if(variable.containsKey(var))
+                variableDiff.add(var);
         }
     }
 

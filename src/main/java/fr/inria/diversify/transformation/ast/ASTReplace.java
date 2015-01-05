@@ -1,13 +1,13 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.codeFragment.InputContext;
+import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.code.CtCodeElement;
+import spoon.reflect.reference.CtVariableReference;
 
 import java.util.Map;
 
@@ -55,40 +55,33 @@ public class ASTReplace extends ASTTransformation {
         type = "adrStmt";
     }
 
-
-    @Override
-    public void addSourceCode() throws Exception {
-        CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
-
+    protected void applyInfo() {
         Log.debug("transformation: {}, {}", type, name);
         Log.debug("transplantation point:\n{}", transplantationPoint);
         Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
         Log.debug("{}", transplantationPoint.getCodeFragmentType());
         Log.debug("replace by: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
+    }
 
-        if (withVarMapping()) {
-            if (variableMapping == null)
-                variableMapping = transplantationPoint.randomVariableMapping(getTransplant());
-
-            Log.debug("random variable mapping: {}", variableMapping);
-            getTransplant().replaceVar(transplantationPoint, variableMapping);
-            if (getTransplant().equals(transplantationPoint.codeFragmentString()))
-                throw new Exception("same statment");
-        }
-        CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
-        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
-
-        String processor = getInputConfiguration() == null ?  "" : getInputConfiguration().getProperty("processor");
-        if (processor.equals("fr.inria.diversify.codeFragmentProcessor.StatementProcessor")) {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.beginOfLineIndex(sp.getSourceStart()), "/** replace \n", 0));
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(compileUnit.nextLineIndex(sp.getSourceEnd()), "**/\n" +
-                    getTransplant().codeFragmentString() + "\n", 0));
-        } else {
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceStart(), "/** replace\n", 0));
-            compileUnit.addSourceCodeFragment(new SourceCodeFragment(sp.getSourceEnd() + 1, " **/\n" +
-                    getTransplant().codeFragmentString(), 0));
+    protected CtCodeElement buildCopyTransplant() throws BuildTransplantException {
+        try {
+            CodeFragment stmt = transplant.clone();
+            if (withVarMapping()) {
+                if (variableMapping == null) {
+                    variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
+                }
+                Log.debug("random variable mapping: {}", variableMapping);
+                stmt.replaceVar(transplantationPoint, variableMapping);
+                if (stmt.codeFragmentString().equals(transplantationPoint.codeFragmentString())) {
+                    throw new BuildTransplantException("same statment");
+                }
+            }
+            return stmt.getCtCodeFragment();
+        } catch (Exception e) {
+            throw new BuildTransplantException("", e);
         }
     }
+
 
     protected boolean withVarMapping() {
         //todo a remplacer par un attribut
@@ -145,5 +138,22 @@ public class ASTReplace extends ASTTransformation {
         this.type = type;
     }
 
+    public boolean usedOfSubType() {
+        InputContext tpInputContext = transplant.getContext().getInputContext();
+        InputContext tInputContext = transplantationPoint.getContext().getInputContext();
+        for(Map.Entry<String, String> var : variableMapping.entrySet()) {
+            CtVariableReference variable = tpInputContext.getVariableOrFieldNamed(var.getKey());
+            CtVariableReference candidate = tInputContext.getVariableOrFieldNamed(var.getValue());
+
+            if(!variable.getType().equals(candidate.getType())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public  void updateStatementList() {
+        getInputProgram().getCodeFragments().remove(transplantationPoint);
+    }
 
 }

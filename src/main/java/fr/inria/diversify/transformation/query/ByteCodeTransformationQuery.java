@@ -47,34 +47,24 @@ public class ByteCodeTransformationQuery extends TransformationQuery {
     }
 
     @Override
-    public List<Transformation> query(int nb) {
+    public Transformation query() {
         try {
-            List<Transformation> result = new ArrayList<>();
-            for (int j = 0; j < nb; j++) {
-                String type = this.type;
-                if (type == null) {
-                    Random r = new Random();
-                    int i = r.nextInt(3);
-                    if (i == 0)
-                        type = "replace";
-                    if (i == 1)
-                        type = "add";
-                    if (i == 2)
-                        type = "delete";
-                }
-
-                if (type.equals("replace"))
-                    result.add( replace());
-
-                if (type.equals("add"))
-                    result.add( add());
-
-                if (type.equals("delete"))
-                    result.add( delete());
-
-                result.add(null);
+            String type = this.type;
+            if (type == null) {
+                Random r = new Random();
+                int i = r.nextInt(3);
+                if (i == 0) { type = "replace"; }
+                if (i == 1) { type = "add"; }
+                if (i == 2) { type = "delete"; }
             }
-            return result;
+
+            if (type.equals("replace")) { return replace(); }
+
+            if (type.equals("add")) { return add(); }
+
+            if (type.equals("delete")) { return delete(); }
+
+            return null;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

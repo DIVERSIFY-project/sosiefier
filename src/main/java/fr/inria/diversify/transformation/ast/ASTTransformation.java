@@ -22,6 +22,8 @@ import java.io.IOException;
  */
 public abstract class ASTTransformation extends AbstractTransformation {
 
+    protected boolean subType;
+
     /**
      * Transplantation point that is going to be modified, either by an Add, Replace or Delete transformation
      */
@@ -52,8 +54,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     public String methodLocationName() {
         CtExecutable elem = transplantationPoint.getCtCodeFragment().getParent(CtExecutable.class);
-        if (elem != null)
-            return elem.getSimpleName();
+        if (elem != null) return elem.getSimpleName();
         return "field";
     }
 
@@ -90,7 +91,14 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     @Override
     public String getTransformationString() throws Exception {
-        return getTransformationString(transplantationPoint.getCtCodeFragment());
+        copyTransplant = buildCopyTransplant();
+        transplantationPoint.getCtCodeFragment().replace(copyTransplant);
+
+        String ret = transplantationPoint.getCtCodeFragment().getParent().toString();
+
+        copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+
+        return ret;
     }
 
     /**
@@ -104,13 +112,16 @@ public abstract class ASTTransformation extends AbstractTransformation {
         Factory factory = type.getFactory();
         Environment env = factory.getEnvironment();
 
-        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new FragmentDrivenJavaPrettyPrinter(env));
+        JavaOutputProcessor processor = new JavaOutputProcessor(new File(directory), new DefaultJavaPrettyPrinter(env));
         processor.setFactory(factory);
 
         processor.createJavaFile(type);
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
+    public void setSubType(boolean subType) {
+        this.subType = subType;
+    }
     /**
      * Removes the original source code in the transplantation point
      */
@@ -121,7 +132,43 @@ public abstract class ASTTransformation extends AbstractTransformation {
             compileUnit.getSourceCodeFragments().clear();
     }
 
+    public abstract boolean usedOfSubType();
 
+    protected abstract void applyInfo();
+
+    public void apply(String srcDir) throws Exception {
+        applyInfo();
+        copyTransplant = buildCopyTransplant();
+        try {
+            transplantationPoint.getCtCodeFragment().replace(copyTransplant);
+            printJavaFile(srcDir);
+        } catch (Exception e) {
+            throw new ApplyTransformationException("", e);
+        }
+
+    }
+
+    @Override
+    public void applyWithParent(String srcDir) throws Exception {
+        if(parent != null) {
+            parent.apply(srcDir);
+        }
+        apply(srcDir);
+    }
+
+    protected abstract CtCodeElement buildCopyTransplant() throws Exception;
+
+    CtCodeElement copyTransplant;
+
+    public void restore(String srcDir) throws Exception {
+        if(parent != null) {
+            parent.restore(srcDir);
+        }
+        copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+        printJavaFile(srcDir);
+    }
+
+    public abstract void updateStatementList();
 }
 
 

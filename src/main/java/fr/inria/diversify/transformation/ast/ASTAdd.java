@@ -1,14 +1,14 @@
 package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
-import fr.inria.diversify.diversification.InputConfiguration;
+import fr.inria.diversify.codeFragment.InputContext;
+import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtSimpleType;
+import spoon.reflect.code.*;
+import spoon.reflect.factory.Factory;
+import spoon.reflect.reference.CtVariableReference;
 
 import java.util.Map;
 
@@ -20,7 +20,6 @@ import java.util.Map;
  * Time: 4:33 PM
  */
 public class ASTAdd extends ASTTransformation {
-    //private final InputConfiguration inputConfiguration;
     protected CodeFragment transplant;
     protected Map<String, String> variableMapping;
 
@@ -28,8 +27,8 @@ public class ASTAdd extends ASTTransformation {
     public ASTAdd() {
         name = "add";
         type = "adrStmt";
-        //inputConfiguration = configuration;
     }
+
 
     @Override
     public JSONObject toJSONObject() throws JSONException {
@@ -42,30 +41,45 @@ public class ASTAdd extends ASTTransformation {
         return object;
     }
 
-    public void addSourceCode() throws Exception {
-        CtSimpleType<?> originalClass = getOriginalClass(transplantationPoint);
-
-        Log.debug("transformation: {}, {}",type,name);
-        Log.debug("transplant:\n {}", transplant);
-        Log.debug("---------------------\ntransplantation point:\n{}", transplantationPoint);
+    protected void applyInfo() {
+        Log.debug("transformation: {}, {}", type, name);
+        Log.debug("transplantation point:\n{}", transplantationPoint);
         Log.debug("{}", transplantationPoint.getCtCodeFragment().getPosition());
-
-        if(withVarMapping()) {
-            if(variableMapping == null)
-                variableMapping = transplantationPoint.randomVariableMapping(transplant);
-
-            Log.debug("random variable mapping: {}",variableMapping);
-            transplant.replaceVar(transplantationPoint, variableMapping);
-        }
-        CompilationUnit compileUnit = originalClass.getPosition().getCompilationUnit();
-        SourcePosition sp = transplantationPoint.getCtCodeFragment().getPosition();
-
-        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, transplant.codeFragmentString(), 0));
-        Log.debug("----------\n---------");
-        Log.debug("{}",originalClass.getQualifiedName());
+        Log.debug("{}", transplantationPoint.getCodeFragmentType());
+        Log.debug("transplant: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
+    protected CtCodeElement buildCopyTransplant() throws BuildTransplantException {
+        try {
+            CodeFragment stmtToAdd = transplant.clone();
+            if (withVarMapping()) {
+                if (variableMapping == null) variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
+
+                Log.debug("random variable mapping: {}", variableMapping);
+                stmtToAdd.replaceVar(transplantationPoint, variableMapping);
+            }
+
+            Factory factory = transplantationPoint.getCtCodeFragment().getFactory();
+
+            CtIf stmtIf = factory.Core().createIf();
+            stmtIf.setParent(transplantationPoint.getCtCodeFragment().getParent());
+
+            stmtIf.setCondition(factory.Code().createLiteral(true));
+
+            CtBlock body = factory.Core().createBlock();
+            stmtIf.setThenStatement(body);
+            CtStatement tmp = (CtStatement) factory.Core().clone(transplantationPoint.getCtCodeFragment());
+
+            tmp.setParent(stmtIf);
+            body.addStatement(tmp);
+
+            stmtToAdd.getCtCodeFragment().setParent(stmtIf);
+            body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
+            return stmtIf;
+        } catch (Exception e) {
+            throw new BuildTransplantException("", e);
+        }
+    }
     protected boolean withVarMapping() {
         return name.equals("add");
     }
@@ -74,9 +88,8 @@ public class ASTAdd extends ASTTransformation {
         variableMapping = mapping;
     }
 
-    public boolean setCodeFragmentToAdd(CodeFragment add) {
+    public void setTransplant(CodeFragment add) {
         this.transplant = add;
-        return true;
     }
 
     public  int hashCode() {
@@ -102,10 +115,6 @@ public class ASTAdd extends ASTTransformation {
                 transplant.getCtCodeFragment().getPosition().equals(otherASTAdd.transplant.getCtCodeFragment().getPosition());
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public String toString() {
         String ret = new String();
@@ -119,4 +128,20 @@ public class ASTAdd extends ASTTransformation {
     public CodeFragment getTransplant() {
         return transplant;
     }
+
+    public boolean usedOfSubType() {
+        InputContext tpInputContext = transplant.getContext().getInputContext();
+        InputContext tInputContext = transplantationPoint.getContext().getInputContext();
+        for(Map.Entry<String, String> var : variableMapping.entrySet()) {
+            CtVariableReference variable = tpInputContext.getVariableOrFieldNamed(var.getKey());
+            CtVariableReference candidate = tInputContext.getVariableOrFieldNamed(var.getValue());
+
+            if(!variable.getType().equals(candidate.getType())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void updateStatementList() {}
 }

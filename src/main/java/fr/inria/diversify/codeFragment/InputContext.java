@@ -1,6 +1,5 @@
 package fr.inria.diversify.codeFragment;
 
-import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 
@@ -10,11 +9,11 @@ import java.util.List;
 import java.util.Set;
 
 public class InputContext {
-	protected Set<CtVariableReference<?>> localVariableReferences;
+	protected Set<CtVariableReference<?>> variableReferences;
 	protected Integer hashCode = null;
 
 	public InputContext(Set<CtVariableReference<?>> inputContext) {
-		this.localVariableReferences = inputContext;
+		this.variableReferences = inputContext;
 	}
 
 	@Override
@@ -27,51 +26,59 @@ public class InputContext {
 	protected Set<String> inputContextToString() {
 		//todo set ou list ?????
         Set<String> set = new HashSet<>();
-		for (CtVariableReference<?> var : localVariableReferences)
+		for (CtVariableReference<?> var : variableReferences)
 			set.add(var.getType().toString());
 		return set;
 	}
-	
-	public Object candidate(CtTypeReference<?> type){
-        Object candidate =  candidateForLocalVar(type);;
-        return candidate;
-	}
 
-    public List<Object> allCandidate(CtTypeReference<?> type){
-        List<Object> candidate = new ArrayList<>();
-        candidate.addAll(allCandidateForLocalVar(type));
 
-        return candidate;
-    }
-
-    public List<CtVariableReference> allCandidateForLocalVar(CtTypeReference<?> type){
+    public List<CtVariableReference> allCandidate(CtTypeReference<?> type, boolean subType){
         List<CtVariableReference> candidate = new ArrayList<>();
 
-        for (CtVariableReference<?> var : localVariableReferences)
-            if(var.getType().equals(type)  && var.getType().getActualTypeArguments().equals(type.getActualTypeArguments())) {
-                candidate.add(var);
-            }
+        for (CtVariableReference<?> var : variableReferences) {
+            try {
+
+
+                CtTypeReference<?> varType = var.getType();
+                if (subType) {
+                    if (type.isSubtypeOf(varType) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                        candidate.add(var);
+                    }
+                } else {
+                    if (varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                        candidate.add(var);
+                    }
+                }
+            } catch (Throwable e) {}
+        }
         return candidate;
     }
 
-
-    public CtVariableReference<?> candidateForLocalVar(CtTypeReference<?> type){
-        CtVariableReference<?> candidate = null;
-        for (CtVariableReference<?> var : localVariableReferences) {
+    public CtVariableReference<?> candidate(CtTypeReference<?> type, boolean subType){
+        for (CtVariableReference<?> var : variableReferences) {
             CtTypeReference<?> varType = var.getType();
-            if(varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
-                candidate = var;
-                break;
-            }
+            try {
+                if (subType) {
+                    if (type.isSubtypeOf(varType) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                        return var;
+                    }
+                } else {
+                    if (varType.equals(type) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
+                        return var;
+                    }
+                }
+            } catch (Throwable e) {}
         }
-        return candidate;
+        return null;
         }
 	
-	public boolean isInclude(InputContext other){
-		boolean isReplace = true;
-		for (CtVariableReference<?> variable : other.localVariableReferences)
-			isReplace = isReplace && hasCandidate(variable.getType());
-        return isReplace;
+	public boolean containsAll(InputContext other, boolean subType){
+		for (CtVariableReference<?> variable : other.variableReferences) {
+            if(!hasCandidate(variable.getType(), subType)) {
+                return false;
+            }
+        }
+        return true;
 	}
 
     public CtVariableReference getVariableOrFieldNamed(String name) {
@@ -88,24 +95,24 @@ public class InputContext {
 
     public Set<String> getAllVarName() {
         Set<String> set = new HashSet<>();
-        for (CtVariableReference<?> var : localVariableReferences)
+        for (CtVariableReference<?> var : variableReferences)
             set.add(var.getSimpleName());
 
         return set;
     }
 
-	protected boolean hasCandidate(CtTypeReference<?> type) {
-		return candidate(type) != null;
+	protected boolean hasCandidate(CtTypeReference<?> type, boolean subType) {
+		return candidate(type, subType) != null;
 	}
 
 	public Set<CtVariableReference<?>> getVar() {
-		return localVariableReferences;
+		return variableReferences;
 	}
 
 	public String equalString() {
         //todo set ou list ?????
         Set<String> set = new HashSet<>();
-        for (CtVariableReference<?> var : localVariableReferences)
+        for (CtVariableReference<?> var : variableReferences)
             set.add(var.getType().toString()+": "+var);
         return set.toString();
 	}
@@ -123,13 +130,13 @@ public class InputContext {
 	}
 
 	public int size() {
-		return localVariableReferences.size();
+		return variableReferences.size();
 	}
 
     public List<CtTypeReference<?>> getTypes() {
         List<CtTypeReference<?>> types = new ArrayList<>();
 
-        for (CtVariableReference var: localVariableReferences) {
+        for (CtVariableReference var: variableReferences) {
                types.add(var.getType());
         }
         return types;

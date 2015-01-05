@@ -9,10 +9,7 @@ import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.factory.Factory;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,50 +17,13 @@ import java.util.List;
  * Date: 7/22/13
  * Time: 2:03 PM
  *
- * TODO: Move this to Test folder
  */
 public class InstruTestAndMethod {
 
 
-    private void logInputVariables(InputConfiguration inputConfiguration) {
-        String project = inputConfiguration.getProperty("project");
-        Log.info("project: " + project);
-        String src = inputConfiguration.getProperty("src");
-        Log.info("src: " + src);
-        String test = inputConfiguration.getProperty("testSrc");
-        Log.info("test: " + test);
-        String out = inputConfiguration.getProperty("outputDirectory");
-        Log.info("out: " + out);
-        String prevTransfPath = inputConfiguration.getPreviousTransformationPath();
-        Log.info("Prev Transf Path: " + prevTransfPath);
-
-        boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
-        Log.info("Intru Method Call:  " + intruMethodCall);
-        boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
-        Log.info("Intru Variable:  " + intruVariable);
-        boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError"));
-        Log.info("Intru Error:  " + intruError);
-        boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert"));
-        Log.info("Intru Assert:  " + intruAssert);
-        boolean intruCountAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruCountAssert"));
-        Log.info("Intru Count Assert:  " + intruCountAssert);
-        boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
-        Log.info("Intru new test:  " + intruNewTest);
-        boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruTransplantPointCount"));
-        Log.info("Intru TransplantPoint:  " + intruTransplantPoint);
-        boolean compact = Boolean.parseBoolean(inputConfiguration.getProperty("compact.log", "false"));
-        Log.info("Compact:  " + compact);
-        boolean onlyUpdateLoggerCode = Boolean.parseBoolean(inputConfiguration.getProperty("only.copy.logger", "false"));
-        Log.info("Only Update Logger Code:  " + onlyUpdateLoggerCode);
-    }
-
     public InstruTestAndMethod(String propertiesFile) throws Exception {
-
-        Log.info("Property file: " + propertiesFile);
-
-
+        Log.DEBUG();
         InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
-        logInputVariables(inputConfiguration);
 
         //Configuration
         String project = inputConfiguration.getProperty("project");
@@ -72,16 +32,17 @@ public class InstruTestAndMethod {
         String out = inputConfiguration.getProperty("outputDirectory");
         String prevTransfPath = inputConfiguration.getPreviousTransformationPath();
 
-        boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall"));
-        boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable"));
-        boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError"));
-        boolean intruAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruAssert"));
-        boolean intruCountAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruCountAssert"));
-        boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest"));
-        boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruTransplantPointCount"));
-        boolean compact = Boolean.parseBoolean(inputConfiguration.getProperty("compact.log", "false"));
+        boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall", "false"));
+        boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable", "false"));
+        boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError", "false"));
+        boolean intruCountTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruCountTest", "false"));
+        boolean intruCountAssert = Boolean.parseBoolean(inputConfiguration.getProperty("intruCountAssert", "false"));
+        boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest", "false"));
+        boolean intruTransplantPoint = Boolean.parseBoolean(inputConfiguration.getProperty("intruTransplantPointCount", "false"));
+        String logger = inputConfiguration.getProperty("logger", "verbose");
         boolean onlyUpdateLoggerCode = Boolean.parseBoolean(inputConfiguration.getProperty("only.copy.logger", "false"));
-        boolean fastProcess = Boolean.parseBoolean(inputConfiguration.getProperty("fastProcess", "false"));
+        int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion", "5"));
+        boolean useSourceCodeFragments = Boolean.parseBoolean(inputConfiguration.getProperty("useSourceCodeFragments", "false"));
 
 
         MavenDependencyResolver t = new MavenDependencyResolver();
@@ -89,43 +50,37 @@ public class InstruTestAndMethod {
 
         Instru instru;
         if ( onlyUpdateLoggerCode ) {
-            instru = new Instru(project, src, test, out, null);
+            instru = new Instru(project, src, test, javaVersion, out, null);
             instru.copyLogger();
             return;
         } else if ( intruTransplantPoint ) {
-            Factory factory = new SpoonMetaFactory().buildNewFactory(project + "/" + src, 7);
-            Factory testFactory = null;
-            if ( intruNewTest ) {
-                ArrayList<String> s = new ArrayList<>();
-                s.add(project + "/" + src);
-                s.add(project + "/" + test);
-                testFactory = new SpoonMetaFactory().buildNewFactory(s, 7);
-            }
+
+            Factory factory = new SpoonMetaFactory().buildNewFactory(project, javaVersion);
 
             InputProgram inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
             inputProgram.setSourceCodeDir(src);
             inputProgram.setPreviousTransformationsPath(prevTransfPath);
             inputProgram.processCodeFragments();
-            /*if ( fastProcess ) { inputProgram.processCodeFragments(); }
-              else { inputProgram.processCodeFragments(); }*/
-
-            Log.info("Locating code snippets...");
 
             TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-            parser.setListener(e -> Log.info(e.getSource().toString()));
             List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
-            instru = new Instru(project, src, test, out, transf);
+            instru = new Instru(project, src, test, javaVersion, out, transf);
             instru.setSourceFactory(factory);
-            if ( intruNewTest ) { instru.setTestFactory(testFactory); }
         } else {
-            instru = new Instru(project, src, test, out, null);
+            instru = new Instru(project, src, test, javaVersion, out, null);
         }
-        instru.setCompactLog(compact);
-        instru.setInstruTransplantationPointCallCount(intruTransplantPoint);
-        instru.setInstruCountAssertions(intruCountAssert);
+        instru.setLogger(logger);
+        instru.setMethodCall(intruMethodCall);
+        instru.setVariable(intruVariable);
+        instru.setError(intruError);
+        instru.setNewTest(intruNewTest);
+        instru.setAssertCount(intruCountAssert);
+        instru.setTestCount(intruCountTest);
         instru.setOnlyCopyLoggerCode(onlyUpdateLoggerCode);
-        instru.instru(intruMethodCall, intruVariable, intruError, intruNewTest, intruAssert);
+        instru.setUseSourceCodeFragments(useSourceCodeFragments);
+
+        instru.instru();
     }
 
     public static void main(String[] args) throws Exception {

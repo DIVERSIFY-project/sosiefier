@@ -1,47 +1,32 @@
 package fr.inria.diversify.sosie.logger;
-
-//import fr.inria.diversify.util.Log;
-
 import java.io.*;
-import java.lang.StackTraceElement;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-
 /**
  * Verbose log for humans to understand
  * <p/>
  * Created by marodrig on 25/06/2014.
  */
 public class InstruVerboseLog extends InstruLogWriter {
-
     ///File writer for each thread. Each one saved in a different file
     private Map<Thread, PrintWriter> fileWriters;
-
     private String separator = ":;:";
-
     private String simpleSeparator = ";";
-
     //TPs called in this test
     protected HashSet<Integer> transplantPointCalledInThisTest;
-
-    int nullCallDepths = 0;
-
-    private static boolean findDepthDiffs = false;
-
     /**
      * Constructor of the verbose log
      *
-     * @param logDir    Directory of the logger
+     * @param logDir Directory of the logger
      * @param parentLog Parent log (the logger of the thread launching the test)
      */
     public InstruVerboseLog(String logDir, InstruLogWriter parentLog) {
         super(logDir, parentLog);
         previousVarLog = new HashMap();
         fileWriters = new HashMap<Thread, PrintWriter>();
-        setCurrentTestSignature(parentLog.getCurrentTestSignature());
     }
 
     public InstruVerboseLog(String logDir) {
@@ -83,13 +68,12 @@ public class InstruVerboseLog extends InstruLogWriter {
 
         super.writeTestStart(thread, testSignature);
 
-        nullCallDepths = 0;
-
         String semaphore = "";
         try {
             partialLoggingThread = null;
-
-//            previousVarLog.get(thread).clear();
+            if(previousVarLog.get(thread) != null) {
+                previousVarLog.get(thread).clear();
+            }
             resetCallDepth(thread);
 
             StringBuilder stringBuilder = new StringBuilder();
@@ -97,8 +81,6 @@ public class InstruVerboseLog extends InstruLogWriter {
             stringBuilder.append("NewTest");
             stringBuilder.append(simpleSeparator);
             stringBuilder.append(testSignature);
-            stringBuilder.append(simpleSeparator);
-            stringBuilder.append(System.currentTimeMillis());
 
             String string = stringBuilder.toString();
             PrintWriter fileWriter = getFileWriter(thread);
@@ -147,138 +129,7 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
-    /**
-     * Updates the depth of the test
-     * @param id ID of the call position
-     * @param depth Depth of the call position
-     */
-    /**
-     * Updates the depth of the test
-     *
-     * @param id ID of the call position
-     */
-    private void updateDepth(Thread t, String id, int count, boolean exists) {
-        Integer depth = callDeep.get(t); //Attempt the fast way first
-        Integer sDepth = -1;
-
-        if (depth == null) {
-            depth = getDepth();
-            nullCallDepths++;
-        }
-
-        if (findDepthDiffs) {
-            sDepth = getDepth();
-            if (sDepth < depth) {
-                System.out.println("SDepth: " + getDepth());
-                throw new RuntimeException("Uppps");
-            }
-        }
-
-        Integer[] arr = getDepthArray(id);
-        if (arr == null) setDepthArray(id, depth, depth, depth, sDepth, sDepth, sDepth);
-        else {
-            //Instrumented
-            if (depth < arr[0] && depth != -1) arr[0] = depth;
-            if (depth != -1) {
-                if (arr[1] != -1) arr[1] = (arr[1] * count + depth) / (count + 1);
-                else arr[1] = depth;
-            }
-            if (depth > arr[2]) arr[2] = depth;
-
-            if (findDepthDiffs) {
-                //Stack traced
-                if (sDepth < arr[3]) arr[3] = sDepth;
-                if (arr[4] != -1) arr[4] = (arr[4] * count + sDepth) / (count + 1);
-                else arr[4] = sDepth;
-                if (sDepth > arr[5]) arr[5] = sDepth;
-            }
-        }
-    }
-
-    public void writeSourcePositionCall(String id) {
-        Thread t = Thread.currentThread();
-        if (getTransplantPointCallCount().containsKey(id)) {
-            int k = getTransplantPointCallCount().get(id);
-            updateDepth(t, id, k, true);
-            getTransplantPointCallCount().put(id, k + 1);
-        } else {
-            updateDepth(t, id, 1, true);
-            getTransplantPointCallCount().put(id, 1);
-            writeStartLogging(t, id);
-        }
-    }
-
-    @Override
-    public void countAssert(String id) {
-
-        Thread thread = getParent() == null ? Thread.currentThread() : getParent().getThread();
-
-        if (getAssertCallCount().containsKey(id)) {
-            int k = getAssertCallCount().get(id);
-            getAssertCallCount().put(id, k + 1);
-        } else {
-            String semaphore = "";
-            if (getLogMethod(thread)) {
-                try {
-                    getAssertCallCount().put(id, 1);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("$$$\n");
-                    stringBuilder.append("SA"); //start logging
-                    stringBuilder.append(simpleSeparator);
-                    stringBuilder.append(id);
-                    stringBuilder.append(simpleSeparator);
-                    stringBuilder.append(System.currentTimeMillis());
-
-                    String string = stringBuilder.toString();
-                    PrintWriter fileWriter = getFileWriter(thread);
-                    semaphore = fileWriter.toString() + fileWriter.hashCode();
-                    fileWriter.append(string);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    startLogMethod(thread);
-                    releaseFileWriter(semaphore);
-                }
-            }
-        }
-    }
-
-
-    /**
-     * Get how deep in the stack is the call position
-     *
-     * @return
-     */
-    private int getDepth() {
-        //Search first in the current thread
-        Thread thread = Thread.currentThread();
-        StackTraceElement[] a = thread.getStackTrace();
-        String ct = getCurrentTestSignature();
-
-        int result = -1;
-        int i = 3;
-        while (i < a.length) {
-            String sig = a[i].getClassName();
-            if (ct.contains(sig)) {
-                result = i;
-            }
-            sig += "." + a[i].getMethodName();
-            if (sig.equals(getCurrentTestSignature())) {
-                return i - 4; //The log depth of this method +4 of the call
-            }
-            i++;
-        }
-        if (result == -1) {
-            result = a.length - 9;
-            if (result < 0) {
-                throw new RuntimeException("What now!!!");
-            }
-            return result;
-        }
-        return result;
-    }
-
-    protected void writeStartLogging(Thread thread, String id) {
+    protected  void writeStartLogging(Thread thread, String id) {
         String semaphore = "";
         if (getLogMethod(thread)) {
             try {
@@ -287,15 +138,6 @@ public class InstruVerboseLog extends InstruLogWriter {
                 stringBuilder.append("S"); //start logging
                 stringBuilder.append(simpleSeparator);
                 stringBuilder.append(id);
-                stringBuilder.append(simpleSeparator);
-                stringBuilder.append(System.currentTimeMillis());
-                stringBuilder.append(simpleSeparator);
-                //stringBuilder.append(getDepth());
-                Integer[] d = getDepthArray(id);
-                stringBuilder.append(d[1]);
-                stringBuilder.append(simpleSeparator);
-                stringBuilder.append(d[4]);
-
 
                 String string = stringBuilder.toString();
                 PrintWriter fileWriter = getFileWriter(thread);
@@ -311,7 +153,6 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
-
     public void writeVar(int id, Thread thread, String methodSignatureId, Object... var) {
         String semaphore = "";
         if (getLogMethod(thread) && log(thread)) {
@@ -319,14 +160,14 @@ public class InstruVerboseLog extends InstruLogWriter {
                 StringBuilder string = new StringBuilder();
                 string.append("$$$\n");
                 string.append("V");
-                string.append(callDeep.get(thread));
+                string.append(getCallDeep(thread));
                 string.append(simpleSeparator);
                 string.append(id + "");
                 string.append(simpleSeparator);
                 string.append(methodSignatureId);
 
-                String varsString = buildVars(thread, id + methodSignatureId, var);
-                if (varsString.isEmpty())
+                String varsString = buildVars(thread, id+methodSignatureId, var);
+                if(varsString.isEmpty())
                     return;
 
                 string.append(varsString);
@@ -344,6 +185,49 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
+    public void writeSourcePositionCall(String id) {
+        if (getTransplantPointCallCount().containsKey(id)) {
+            int k = getTransplantPointCallCount().get(id);
+            getTransplantPointCallCount().put(id, k + 1);
+        } else {
+            getTransplantPointCallCount().put(id, 1);
+            writeStartLogging(Thread.currentThread(), id);
+        }
+    }
+
+    @Override
+    public void countAssert(String id) {
+        Thread thread = getParent() == null ? Thread.currentThread() : getParent().getThread();
+        if (getAssertCallCount().containsKey(id)) {
+            int k = getAssertCallCount().get(id);
+            getAssertCallCount().put(id, k + 1);
+        } else {
+            String semaphore = "";
+            if (getLogMethod(thread)) {
+                try {
+                    getAssertCallCount().put(id, 1);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("$$$\n");
+                    stringBuilder.append("SA"); //start logging
+                    stringBuilder.append(simpleSeparator);
+                    stringBuilder.append(id);
+                    stringBuilder.append(simpleSeparator);
+                    stringBuilder.append(System.currentTimeMillis());
+                    String string = stringBuilder.toString();
+                    PrintWriter fileWriter = getFileWriter(thread);
+                    semaphore = fileWriter.toString() + fileWriter.hashCode();
+                    fileWriter.append(string);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    startLogMethod(thread);
+                    releaseFileWriter(semaphore);
+                }
+            }
+        }
+    }
+    static long nbVar = 0;
+    static long tooBigVar = 0;
     protected String buildVars(Thread thread, String methodSignatureId, Object[] vars) {
         StringBuilder varsString = new StringBuilder();
         stopLogMethod(thread);
@@ -357,14 +241,21 @@ public class InstruVerboseLog extends InstruLogWriter {
                 } else {
                     value = vars[i + 1].toString();
                 }
+                if(value.length() > 1000) {
+                    value = vars[i + 1].getClass().getCanonicalName() + value.length();
 
-                String previousValue = previousVars.get(methodSignatureId + ":" + varName);
+                    tooBigVar++;
+                }
+                String varId = methodSignatureId + ":" + varName;
+                String previousValue = previousVars.get(varId);
                 if (!value.equals(previousValue)) {
-                    previousVars.put(methodSignatureId + ":" + varName, value);
+                    nbVar++;
+                    previousVars.put(varId, value);
                     varsString.append(separator);
                     varsString.append(varName);
                     varsString.append(simpleSeparator);
                     varsString.append(value);
+
                 }
             } catch (Exception e) {
             }
@@ -374,7 +265,7 @@ public class InstruVerboseLog extends InstruLogWriter {
     }
 
 
-    public void writeException(int id, Thread thread, String className, String methodSignature, Object exception) {
+    public void writeException(int id, Thread thread, Object exception) {
         String semaphore = "";
         if (getLogMethod(thread) && log(thread)) {
             try {
@@ -385,17 +276,11 @@ public class InstruVerboseLog extends InstruLogWriter {
                 string.append(simpleSeparator);
                 string.append(id + "");
                 string.append(simpleSeparator);
-                string.append(className);
-                string.append(simpleSeparator);
-                string.append(methodSignature);
-                string.append(simpleSeparator);
                 if (exception != null) string.append(exception.toString());
                 else string.append("NullException");
-
                 PrintWriter fileWriter = getFileWriter(thread);
                 semaphore = fileWriter.toString() + fileWriter.hashCode();
                 fileWriter.append(string.toString());
-
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -404,7 +289,18 @@ public class InstruVerboseLog extends InstruLogWriter {
         }
     }
 
-    public void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
+    static long testCount = 0;
+    static long assertCount = 0;
+    public void testCount(String signature) {
+    System.out.println("test: "+ ++testCount);
+    }
+
+    public void assertCount(String signature) {
+        System.out.println("assert: "+ ++assertCount);
+
+    }
+
+    public void writeCatch(int id, Thread thread, Object exception) {
         String semaphore = "";
         if (getLogMethod(thread) && log(thread)) {
             try {
@@ -415,17 +311,11 @@ public class InstruVerboseLog extends InstruLogWriter {
                 string.append(simpleSeparator);
                 string.append(id + "");
                 string.append(simpleSeparator);
-                string.append(className);
-                string.append(simpleSeparator);
-                string.append(methodSignature);
-                string.append(simpleSeparator);
                 if (exception != null) string.append(exception.toString());
                 else string.append("NullException");
-
                 PrintWriter fileWriter = getFileWriter(thread);
                 semaphore = fileWriter.toString() + fileWriter.hashCode();
                 fileWriter.append(string.toString());
-
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -436,23 +326,19 @@ public class InstruVerboseLog extends InstruLogWriter {
 
     @Override
     public void writeTestFinish() {
-
-        if (nullCallDepths > 0)
-            System.out.println(nullCallDepths + " depth with slow method at " + getCurrentTestSignature());
-
-
+//        System.err.println("var: "+nbVar);
+//        System.err.println("too big var: "+tooBigVar);
         for (Thread thread : fileWriters.keySet()) {
             String semaphore = "";
             try {
                 PrintWriter flw = getFileWriter(thread);
-                //Writes the subtotal of transplantation points called
+//Writes the subtotal of transplantation points called
                 writeSubTotal("TPC", flw, getTransplantPointCallCount());
-
-                //Writes the subtotal of assertions called
+//Writes the subtotal of assertions called
                 writeSubTotal("ASC", flw, getAssertCallCount());
-
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("\nTE");
+                stringBuilder.append("$$$\n");
+                stringBuilder.append("TE");
                 stringBuilder.append(simpleSeparator);
                 stringBuilder.append(System.currentTimeMillis());
                 semaphore = flw.toString() + flw.hashCode();
@@ -478,7 +364,6 @@ public class InstruVerboseLog extends InstruLogWriter {
             releaseFileWriter(semaphore);
         }
     }
-
     /**
      * Writes a sub-total count to the PrintWriter
      *
@@ -487,27 +372,17 @@ public class InstruVerboseLog extends InstruLogWriter {
      */
     private void writeSubTotal(String subTotalId, PrintWriter flw, HashMap<String, Integer> map) {
         StringBuilder sb = new StringBuilder();
-
         for (Map.Entry<String, Integer> e : map.entrySet()) {
             if (e.getValue() > 1) {
-                //Don't spend more space in login an occurrence of something we already log
-
+//Don't spend more space in login an occurrence of something we already log
                 sb.append("\n").
                         append(subTotalId).
-                        append(simpleSeparator).
-                        append(e.getKey()).
-                        append(simpleSeparator).
-                        append(e.getValue()).
-                        append(simpleSeparator).
-                        append(System.currentTimeMillis());
-                if (subTotalId.equals("TPC")) {
-                    Integer[] depth = getDepthArray(e.getKey());
-                    if (depth == null) depth = new Integer[]{-1, -1, -1, -1, -1, -1};
-                    for (int i = 0; i < depth.length; i++) {
-                        sb.append(simpleSeparator).
-                                append(depth[i]);
-                    }
-                }
+                          append(simpleSeparator).
+                          append(e.getKey()).
+                          append(simpleSeparator).
+                          append(e.getValue()).
+                          append(simpleSeparator).
+                          append(System.currentTimeMillis());
             }
         }
         flw.write(sb.toString());
@@ -518,7 +393,6 @@ public class InstruVerboseLog extends InstruLogWriter {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         reader.readLine();
         String line = reader.readLine();
-
         while (line != null) {
             String[] tmp = line.split(" ");
             map.put(tmp[1], tmp[0]);
@@ -530,8 +404,8 @@ public class InstruVerboseLog extends InstruLogWriter {
     protected synchronized PrintWriter getFileWriter(Thread thread) throws IOException, InterruptedException {
         if (!fileWriters.containsKey(thread)) {
             String fileName = getThreadLogFilePath(thread) + "_" + System.currentTimeMillis();
-            previousVarLog.put(thread, new HashMap<String, String>());
-            PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(fileName), 1024 * 8));
+            previousVarLog.put(thread,new HashMap<String, String>());
+            PrintWriter f = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
             fileWriters.put(thread, f);
             semaphores.put(f.toString() + f.hashCode(), new Semaphore(1));
         }
@@ -540,10 +414,8 @@ public class InstruVerboseLog extends InstruLogWriter {
         return f;
     }
 
-
     protected void releaseFileWriter(String id) {
         if (semaphores.containsKey(id))
             semaphores.get(id).release();
     }
-
 }

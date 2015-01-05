@@ -28,8 +28,8 @@ public class SpoonMetaFactory{
 
         StandardEnvironment env = new StandardEnvironment();
         env.setComplianceLevel(javaVersion);
-        env.setVerbose(true);
-        env.setDebug(true);
+        env.setVerbose(false);
+        env.setDebug(false);
 
         DefaultCoreFactory f = new DefaultCoreFactory();
         Factory factory = new FactoryImpl(f, env);

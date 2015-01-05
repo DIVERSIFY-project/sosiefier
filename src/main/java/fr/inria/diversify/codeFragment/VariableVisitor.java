@@ -18,107 +18,66 @@ import java.util.Set;
 
 public class VariableVisitor extends CtScanner {
     protected boolean withField;
-    protected Set<CtVariableReference<?>> localVariableReferences = new HashSet<CtVariableReference<?>>();
-    protected Set<CtVariableReference<?>> localVariableCreate = new HashSet<CtVariableReference<?>>();
-    protected CtTypeReference<?> refThis;
+    protected Set<CtVariableReference<?>> variableReferences = new HashSet();
+ 	protected Set<CtVariableReference<?>> localVariableCreate = new HashSet();
+	protected CtTypeReference<?> refThis;
 
-    int count = 0;
 
     public VariableVisitor() {
         this.withField = true;
     }
 
     public VariableVisitor(boolean withField) {
-        try {
-            count++;
-            this.withField = withField;
-        } catch (RuntimeException e) {
-            Log.error(e.getMessage() + " " + count);
-        }
+        this.withField = withField;
     }
 
-    public InputContext input() {
-        count++;
-        try {
-            localVariableReferences.removeAll(localVariableCreate);
+	public InputContext input() {
+        variableReferences.removeAll(localVariableCreate);
 
-            if (refThis != null)
-                localVariableReferences.add(getThis());
-        } catch (RuntimeException e) {
-            Log.error(e.getMessage() + " " + count);
-        }
-        return new InputContext(localVariableReferences);
+		if(refThis != null)
+            variableReferences.add(getThis());
+		return new InputContext(variableReferences);
+	}
 
+	public <T> void visitCtLocalVariable(CtLocalVariable<T> localVariable) {
+		localVariableCreate.add(localVariable.getReference());
+		super.visitCtLocalVariable(localVariable);
     }
 
-    public <T> void visitCtLocalVariable(CtLocalVariable<T> localVariable) {
-        count++;
-        try {
-            localVariableCreate.add(localVariable.getReference());
-        } catch (RuntimeException e) {
-            Log.error(e.getMessage() + " " + count);
-        }
-        super.visitCtLocalVariable(localVariable);
-    }
+	public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
+		variableReferences.add(variableAccess.getVariable());
+		super.visitCtVariableAccess(variableAccess);
+	}
 
-    public <T> void visitCtVariableAccess(CtVariableAccess<T> variableAccess) {
-        count++;
-        try {
-            localVariableReferences.add(variableAccess.getVariable());
-        } catch (RuntimeException e) {
-            Log.error(e.getMessage() + " " + count);
-        }
-        super.visitCtVariableAccess(variableAccess);
-    }
+	public <T> void visitCtLocalVariableReference(CtLocalVariableReference<T> reference) {
+		variableReferences.add(reference);
 
-    public <T> void visitCtLocalVariableReference(CtLocalVariableReference<T> reference) {
-        count++;
-        try {
-            localVariableReferences.add(reference);
-        } catch (RuntimeException e) {
-            Log.error(e.getMessage() + " " + count);
-        }
-        super.visitCtLocalVariableReference(reference);
-    }
+		super.visitCtLocalVariableReference(reference);
+	}
 
     public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
-        count++;
-        try {
-            if (withField && !(reference.getSimpleName() == "super"))
-                localVariableReferences.add(reference);
-        } catch (RuntimeException e) {
-            Log.error(e.getMessage() + " " + count);
-        }
+        if(withField && !(reference.getSimpleName() == "super"))
+                variableReferences.add(reference);
+
         super.visitCtFieldReference(reference);
     }
 
-    public <T> void visitCtInvocation(CtInvocation<T> invocation) {
-        count++;
-        try {
-            if (invocation.getTarget() == null)
-                refThis = invocation.getExecutable().getDeclaringType();
-        } catch (RuntimeException e) {
-            Log.error(e.getMessage() + " " + count);
-        }
-        super.visitCtInvocation(invocation);
-    }
+	public <T> void visitCtInvocation(CtInvocation<T> invocation) {
+		if(invocation.getTarget() == null)
+			refThis = invocation.getExecutable().getDeclaringType();
 
-    protected CtVariableReference<?> getThis() {
-        count++;
-        try {
-            CtVariableReference thisVariable = new CtLocalVariableReferenceImpl();
-            thisVariable.setType(refThis);
-            thisVariable.setFactory(FactoryImpl.getLauchingFactory());
-            thisVariable.setSimpleName("this");
-            return thisVariable;
-        } catch (RuntimeException e) {
-            Log.error(e.getMessage() + " " + count);
-        }
-        throw new RuntimeException("eeeee");
-    }
+		super.visitCtInvocation(invocation);
+	}
 
-    public Set<CtVariableReference<?>> getLocalVariableReferences() {
-        count++;
-        return localVariableReferences;
+	protected CtVariableReference<?> getThis(){
+		CtVariableReference thisVariable = new CtLocalVariableReferenceImpl();
+		thisVariable.setType(refThis);
+        thisVariable.setFactory(FactoryImpl.getLauchingFactory());
+		thisVariable.setSimpleName("this");
+		return thisVariable;
+	}
+
+    public Set<CtVariableReference<?>> getVariableReferences() {
+        return variableReferences;
     }
 }

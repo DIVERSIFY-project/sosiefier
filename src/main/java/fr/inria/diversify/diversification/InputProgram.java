@@ -18,8 +18,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
+import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
+import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
@@ -34,12 +36,10 @@ import java.util.function.Function;
 
 /**
  * The InputProgram class encapsulates all the known information of the program being sosiefiecated
- * <p>
+ * <p/>
  * Created by marcel on 6/06/14.
  */
 public class InputProgram {
-
-    private HashMap<String, String> nearestMatchPositions;
 
     /**
      * List of all the code fragments extracted by Spoon of the input program
@@ -60,6 +60,9 @@ public class InputProgram {
      * Path to the source code of the input program
      */
     private String sourceCodeDir;
+
+
+    private String externalSourceCodeDir = "";
 
     /**
      * Path to the test source code of the input program
@@ -167,6 +170,13 @@ public class InputProgram {
         this.sourceCodeDir = sourceCodeDir;
     }
 
+    public void setExternalSourceCodeDir(String externalSourceCodeDir) {
+        this.externalSourceCodeDir = externalSourceCodeDir;
+    }
+
+    public String getExternalSourceCodeDir() {
+        return externalSourceCodeDir;
+    }
 
     /**
      * Path to the know sosie information stored in file
@@ -389,6 +399,46 @@ public class InputProgram {
     }
 
     /**
+     * Returns an specific code fragment given its position, source and type. The source is optional.
+     * However, you should supply both, since is possible that a code fragment
+     * is not found given only position since a difference of line numbers is usual.
+     *
+     * @param position Position of the code fragment
+     * @param source   Source of the code Fragment
+     * @return
+     */
+    public synchronized CodeFragment getCodeFragment(String position, String source, String type) {
+
+        CodeFragment result = null;
+
+        String[] s = position.split(":");
+        String qualifiedName = s[0];
+        int lineNumber = Integer.parseInt(s[1]);
+        int minDiff = Integer.MAX_VALUE;
+
+        List<CodeFragment> set = getCodeFragments()
+                .stream()
+                .filter(codeFragment -> source == null || codeFragment.getSourceClass().getQualifiedName().equals(qualifiedName))
+                .filter(codeFragment -> codeFragment.getCodeFragmentType().getSimpleName().equals(type))
+                .collect(Collectors.toList());
+
+        for (CodeFragment codeFragment : set) {
+            int cfLine = codeFragment.getStartLine();
+            int d = Math.abs(cfLine - lineNumber);
+            if (d < minDiff) {
+                //else return the nearest one with same code
+                result = codeFragment;
+                minDiff = d;
+              if(minDiff == 0) {
+                  break;
+              }
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Returns an specific code fragment given its position and source. The source is optional.
      * However, you should supply both, since is possible that a code fragment
      * is not found given only position since a difference of line numbers is usual.
@@ -484,8 +534,8 @@ public class InputProgram {
             /*
             getRoots().stream()
                     .flatMap(root -> {
-                        root.accept(query);
-                        return query.getResult().stream();
+                        root.accept(executeQuery);
+                        return executeQuery.getResult().stream();
                     })
                     .collect(Collectors.toList());
             */

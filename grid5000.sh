@@ -1,13 +1,17 @@
 #!/bin/sh
-sleep 20
+cd /root
+git clone https://github.com/marcelinorc/junco-provider.git
+cd junco-provider
+git pull
+mvn clean install
+
 cd /root/diversify-statements
 git pull
-mvn clean package
+mvn clean -Dmaven.test.skip=true package
 
-rm -rf repo/sosie-exp
-mkdir repo
-sh script/git/init.sh repo
+rm -rf repo
 
-java -jar target/Sosies-generator-1.0-SNAPSHOT-jar-with-dependencies.jar git repo
+java -Djava.library.path=lib -Dhttp.proxyHost=proxy.rennes.grid5000.fr -Dhttps.proxyPort=3128 -Dhttps.proxyHost=proxy.rennes.grid5000.fr -Dhttp.proxyPort=3128 -jar target/Sosies-generator-1.0-SNAPSHOT-jar-with-dependencies.jar git repo
 
-sh runFromGit.sh 100 repo &
+sh script/runFromGit.sh 1000 repo &
+

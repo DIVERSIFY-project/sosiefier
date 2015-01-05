@@ -44,6 +44,7 @@ public abstract class BytecodeTransformation extends AbstractTransformation {
     }
 
     protected abstract void apply() throws BadBytecode;
+    public void applyWithParent(String srcDir) throws BadBytecode {}
 
     public void restore(String targetDir) throws Exception {
         String destination = targetDir+ "/"+backupClass.getName().replace(".","/") + ".class";
@@ -128,19 +129,8 @@ public abstract class BytecodeTransformation extends AbstractTransformation {
 
     public int line() {return 0;}
 
-
-    @Override
-    public void addSourceCode() throws Exception {
-
-    }
-
     @Override
     public void printJavaFile(String srcDir) throws IOException {
-
-    }
-
-    @Override
-    public void removeSourceCode() {
 
     }
 }

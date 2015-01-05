@@ -6,6 +6,9 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
+import spoon.reflect.factory.Factory;
+import spoon.support.reflect.code.CtBlockImpl;
+import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 
 import java.util.*;
@@ -16,8 +19,6 @@ import java.util.*;
  * Time: 11:32
  */
 public class ErrorLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
-    protected static Map<CtExecutable,Integer> count = new HashMap();
-    protected static Map<Integer,String> idMap = new HashMap();
 
     public ErrorLoggingInstrumenter(List<Transformation> transformations) {
         super(transformations);
@@ -25,14 +26,16 @@ public class ErrorLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStat
 
     @Override
     public boolean isToBeProcessed(CtStatement candidate) {
-        if(candidate.getParent(CtCase.class) != null)
-            return false;
+        try {
+            if (candidate.getParent(CtCase.class) != null)
+                return false;
 
-        return
-                CtIf.class.isAssignableFrom(candidate.getClass())
-                        || CtTry.class.isAssignableFrom(candidate.getClass())
-                        || CtThrow.class.isAssignableFrom(candidate.getClass())
-                ;
+            return CtIf.class.isAssignableFrom(candidate.getClass())
+                    || CtTry.class.isAssignableFrom(candidate.getClass())
+                    || CtThrow.class.isAssignableFrom(candidate.getClass());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void process(CtStatement statement) {
@@ -45,59 +48,64 @@ public class ErrorLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStat
 
 
     protected void instruThrow(CtThrow throwStmt) {
-        String className = getClass(throwStmt).getQualifiedName();
+        Factory factory = throwStmt.getFactory();
         SourcePosition sp = throwStmt.getPosition();
-        CompilationUnit compileUnit = sp.getCompilationUnit();
-        String methodName;
-        if(getMethod(throwStmt) == null)
-            methodName = "field";
 
-        else
-            methodName = getMethod(throwStmt).getSignature();
-        String snippet = "\t"+getLogName()+".writeException("+sp.getSourceStart()+",Thread.currentThread(),\"" +
-                 className + "\",\"" + methodName + "\"," +
-                throwStmt.getThrownExpression() + ");\n";
+        if(getMethod(throwStmt) == null) {
+            return;
+        }
+        String id = idFor(getClass(throwStmt).getQualifiedName() + "." +getMethod(throwStmt).getSignature()+ ":"+sp.getSourceStart());
 
-        int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+        String localVar = "throwable_" + id;
+        String snippet = throwStmt.getThrownExpression().getType() + " " + localVar + " = " + throwStmt.getThrownExpression();
+        CtCodeSnippetStatement var = new CtCodeSnippetStatementImpl();
+        var.setValue(snippet);
 
-        snippet = "\n";
+        snippet =  getLogName()+".writeException("+id+",Thread.currentThread()," + localVar + ")";
+        CtCodeSnippetStatement log = new CtCodeSnippetStatementImpl();
+        log.setValue(snippet);
 
-        index = compileUnit.nextLineIndex(sp.getSourceEnd());
-        compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+        snippet = "throw " + localVar;
+        CtCodeSnippetStatement thro = new CtCodeSnippetStatementImpl();
+        thro.setValue(snippet);
+
+        CtBlock block = factory.Core().createBlock();
+
+        block.addStatement(var);
+        block.addStatement(log);
+        block.addStatement(thro);
+
+        throwStmt.replace(block);
+        throwStmt.getParent(CtBlock.class).removeStatement(throwStmt);
     }
-
 
     protected void instruCatch(CtTry tryStmt) {
-        String className = getClass(tryStmt).getQualifiedName();
-        String methodName;
-        if(getMethod(tryStmt) == null)
-            methodName = "field";
-        else
-            methodName = getMethod(tryStmt).getSignature();
-
-        List<CtCatch> catchList = tryStmt.getCatchers();
-        for (CtCatch catchStmt : catchList) {
-            CtBlock<?> catchBlock = catchStmt.getBody();
-            if(getMethod(tryStmt) != null && !catchBlock.getStatements().isEmpty()) {
-                CtStatement statement = catchBlock.getStatements().get(0);
-                SourcePosition sp = statement.getPosition();
-
-                String snippet = getLogName() + ".writeCatch("+sp.getSourceStart()+",Thread.currentThread(),\"" +
-                        className + "\",\"" + methodName + "\"," +
-                        catchStmt.getParameter().getSimpleName() + ");\n";
-
-
-//                if(!catchBlock.getStatements().isEmpty()) {
-
-                    CompilationUnit compileUnit = sp.getCompilationUnit();
-                    int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
-                    compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
-//                }
-            }
+        if(getMethod(tryStmt) == null) {
+            return;
         }
-    }
 
+//        List<CtCatch> catchList = tryStmt.getCatchers();
+//        for (CtCatch catchStmt : catchList) {
+//            CtBlock<?> catchBlock = catchStmt.getBody();
+//            if(getMethod(tryStmt) != null && !catchBlock.getStatements().isEmpty()) {
+//                CtStatement statement = catchBlock.getStatements().get(0);
+//                SourcePosition sp = statement.getPosition();
+//
+//                String id = idFor(getClass(tryStmt).getQualifiedName() + "." +getMethod(tryStmt).getSignature()+ ":"+sp.getSourceStart());
+//                String snippet = getLogName() + ".writeCatch("+id+",Thread.currentThread(),\"" +
+//                        catchStmt.getParameter().getSimpleName() + ");\n";
+//
+//                CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
+//                snippetStatement.setValue(snippet);
+//
+//                tryStmt.insertBefore(snippetStatement);
+////                CompilationUnit compileUnit = sp.getCompilationUnit();
+////                int index = compileUnit.beginOfLineIndex(sp.getSourceStart());
+////                compileUnit.addSourceCodeFragment(new SourceCodeFragment(index, snippet, 0));
+//
+//            }
+//        }
+    }
 
     protected int getCount(CtStatement stmt) {
         CtExecutable parent = stmt.getParent(CtExecutable.class);

@@ -94,7 +94,7 @@ public class ShuffleStmtTransformation extends SpoonTransformation<CtBlock, CtEl
         VariableVisitor query = new VariableVisitor(false);
         stmt.accept(query);
 
-        Set<String> localVarUsed = query.getLocalVariableReferences().stream()
+        Set<String> localVarUsed = query.getVariableReferences().stream()
                 .map(var -> var.getDeclaration().getSimpleName())
                 .filter(a -> localVar.contains(a))
                 .collect(Collectors.toSet());

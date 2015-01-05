@@ -1,8 +1,5 @@
 /output_diversify/
 /output_sosie/
-/result/
-/repo/
-/sortResult/
 /mavenProjects/
 /test/
 **/target/
@@ -37,3 +34,6 @@ Thumbs.db
 /testCompare/
 /output_sosieInstru/
 /evosuite/
+/rhinoSosie/
+/repo/
+/result/

@@ -2,8 +2,8 @@ package fr.inria.diversify.codeFragment;
 
 
 import fr.inria.diversify.codeFragmentProcessor.SubStatementVisitor;
-import spoon.reflect.code.CtCodeElement;
-import spoon.reflect.code.CtStatement;
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.*;
 
@@ -16,7 +16,7 @@ public class Statement extends CodeFragment {
     public Statement() {}
 
     //check if this can be replaced by other
-    public boolean isReplace(CodeFragment other, boolean varNameMatch) {
+    public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch, boolean subType) {
         Class<?> cl = codeFragment.getClass();
         Class<?> clOther = other.codeFragment.getClass();
 
@@ -34,15 +34,20 @@ public class Statement extends CodeFragment {
             return false;
 
 
-
         SubStatementVisitor sub = new SubStatementVisitor();
         other.codeFragment.accept(sub);
         if (sub.getStatements().contains(codeFragment))  {
             return false;
         }
-        if (!context.isReplace(other.context, varNameMatch))
-            return false;
 
+        if (!context.isReplaceableBy(other.context, varNameMatch, subType)) {
+            return false;
+        }
+
+        if((other.codeFragment instanceof CtReturn || other.codeFragment instanceof CtThrow)
+            && !deadCode()) {
+            return false;
+        }
 
         //check for return
         CtTypeReference t1 = this.hasReturn();
@@ -68,8 +73,24 @@ public class Statement extends CodeFragment {
             return string;
     }
 
+    protected boolean deadCode() {
+        int position = 0;
+        CtBlock block = codeFragment.getParent(CtBlock.class);
+        for(Object stmt: block.getStatements()) {
+            position++;
+            if(codeFragment == stmt) {
+                break;
+            }
+        }
+        return  position == block.getStatements().size();
+    }
+
     protected boolean containsSuper(CtCodeElement cf) {
         String string = cf.toString();
         return string.contains("super(") || string.contains("super.");
+    }
+
+    public Statement clone() {
+        return new Statement((CtStatement) copyElem(codeFragment));
     }
 }

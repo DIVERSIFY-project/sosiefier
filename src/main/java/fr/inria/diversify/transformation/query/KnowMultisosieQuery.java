@@ -31,6 +31,11 @@ public class KnowMultisosieQuery extends TransformationQuery {
     }
 
     @Override
+    public Transformation query() throws QueryException {
+        return null;
+    }
+
+    @Override
     public List<Transformation> query(int nb) {
         try {
             File folder = new File(getInputProgram().getPreviousTransformationsPath());

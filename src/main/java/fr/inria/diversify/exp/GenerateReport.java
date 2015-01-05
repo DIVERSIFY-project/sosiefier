@@ -11,6 +11,8 @@ import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.factory.Factory;
 
 import java.io.*;
@@ -93,10 +95,23 @@ public class GenerateReport {
             result += "\n\nTransformation: " + i + ":\n" + transformationDetail(t);
 
         }
-
+        File dir = new File(inputConfiguration.getProperty("resultDir"));
+        if(!dir.exists()) {
+            dir.mkdirs();
+        }
         Writer writer = new FileWriter(inputConfiguration.getProperty("resultDir") + "/" + sosie + "_" + point);
         writer.write(result);
         writer.close();
+    }
+
+    protected CtMethod getTest(String name) {
+
+        for(CtElement elem: inputProgram.getAllElement(CtMethod.class)) {
+            CtMethod method = (CtMethod) elem;
+            if(name.equals(method.getDeclaringType().getQualifiedName() +"."+ method.getSimpleName()))
+                return method;
+        }
+        return null;
     }
 
     protected String transformationDetail(Transformation transformation) throws Exception {

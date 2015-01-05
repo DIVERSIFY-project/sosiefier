@@ -16,6 +16,9 @@ import java.util.*;
  * Created by marodrig on 01/07/2014.
  */
 public class StackElementTextReader extends StackElementReader {
+    Set<String> testToExclude;
+    Map<String, List<String>> traceByTest;
+    String logEntry = "";
 
     @Override
     public List<StackTrace> loadLog(String dir, boolean recursive) throws IOException {
@@ -45,57 +48,69 @@ public class StackElementTextReader extends StackElementReader {
         return list;
     }
 
-
     protected Map<String, List<String>> splitByTest(File file) throws Exception {
-        Map<String, List<String>> traceByTest = new HashMap();
-        Set<String> testToExclude = new HashSet();
+        traceByTest = new HashMap();
+        testToExclude = new HashSet();
         BufferedReader reader = new BufferedReader(new FileReader(file));
         reader.readLine();
-        String line = reader.readLine();
-        String tmp = "";
+        String line = "";
 
-        if(line == null)
-            throw new Exception("empty file");
-
-        List<String> trace = new LinkedList();
-        traceByTest.put("null",trace);
-        testToExclude.add("null");
-        while (line != null) {
-            if(!line.isEmpty()) {
-                if(line.endsWith("$$$")) {
-                    try {
-                        if(line.startsWith("NewTest")) {
-                            String test = line.substring(8, line.length() - 3);
-                            if(traceByTest.containsKey(test)) {
-                                testToExclude.add(test);
-                                trace = traceByTest.get(test);
-                            } else {
-                                trace = new LinkedList();
-                                traceByTest.put(test, trace);
-                            }
-                        } else {
-                            trace.add(tmp + line.substring(0, line.length() - 3));
-                        }
-                        tmp = "";
-                    } catch (Exception e) {
-                        Log.error("malformed line: {}",line);
-                        tmp = "";
-                    }
-                }
-                else {
-                    tmp = tmp + line;
+        while (true) {
+            line = reader.readLine();
+            if(line == null)
+                break;
+            if(line.startsWith("NewTest")) {
+                try {
+                    parseNewTest(reader, parseTestName(line));
+                } catch (Throwable e) {
+                    e.printStackTrace();
                 }
             }
-            line = reader.readLine();
         }
-        if(!tmp.equals(""))
-            trace.add(tmp);
-
-        Log.debug("all test: {}, to exclude: {}", traceByTest.size(), testToExclude.size());
         for(String test: testToExclude)
             traceByTest.remove(test);
 
         return traceByTest;
+    }
+
+
+    protected void addTest(List<String> trace, String testName) {
+        if(traceByTest.containsKey(testName)) {
+            testToExclude.add(testName);
+        }
+        if(!trace.isEmpty()) {
+            traceByTest.put(testName, trace);
+        }
+    }
+
+    protected void parseNewTest(BufferedReader reader, String testName) throws IOException {
+        List<String> trace = new LinkedList();
+        String line = reader.readLine();
+        logEntry = "";
+
+        while (line != null) {
+            logEntry = logEntry + line;
+            if(line.endsWith("$$$")) {
+                if(logEntry.startsWith("NewTest")) {
+                    testToExclude.add(parseTestName(logEntry));
+                    testToExclude.add(testName);
+                    return;
+                }
+                if(logEntry.startsWith("TE")) {
+                    addTest(trace, testName);
+                    return;
+                }
+                trace.add(logEntry.substring(0, line.length() - 3));
+                logEntry = "";
+            }
+
+            line = reader.readLine();
+        }
+        testToExclude.add(testName);
+    }
+
+    protected String parseTestName(String logEntry) {
+        return logEntry.substring(8, logEntry.length() - 3);
     }
 
     /**
@@ -114,7 +129,6 @@ public class StackElementTextReader extends StackElementReader {
             map.put(Integer.parseInt(tmp[0]),line.substring(tmp[0].length(), line.length()));
             line = reader.readLine();
         }
-
         return map;
     }
 }

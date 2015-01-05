@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import fr.inria.diversify.diversification.InputProgram;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +25,8 @@ public interface Transformation {
     public String getType();
     public String getName();
     public String getLevel();
+    public InputProgram getInputProgram();
+    public void setInputProgram(InputProgram inputProgram);
     public JSONObject toJSONObject() throws JSONException;
 
     public String classLocationName();
@@ -36,11 +39,7 @@ public interface Transformation {
 
     public int line();
 
-    void addSourceCode() throws Exception;
-
     void printJavaFile(String srcDir) throws IOException;
-
-    void removeSourceCode();
 
     public boolean isSosie();
 

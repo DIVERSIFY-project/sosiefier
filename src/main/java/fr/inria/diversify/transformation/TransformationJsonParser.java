@@ -85,15 +85,14 @@ public class TransformationJsonParser {
         Log.debug("transformation directory: {}", file.getAbsolutePath());
 
         for (File f : file.listFiles())
-            if (f.getName().endsWith(".json") && f.getName().contains("transplant")) { //patch to handle latest sosie
+            if (f.getName().endsWith(".json")) {
                 countFile++;
                 Log.debug("Current number of transformation {}", transformations.size());
                 Log.debug("parse tranformation file: " + f.getName());
                 transformations.addAll(parseFile(f));
-            } else if (f.isDirectory()) {
-                transformations.addAll(parseDir(f.getAbsolutePath()));
             }
         Log.debug("number of transformation file: {}", countFile);
+        Log.debug("number of transformation : {}", transformations.size());
         Log.debug("number of parse error : {}", countError);
 
         return transformations;
@@ -246,35 +245,6 @@ public class TransformationJsonParser {
         }
     }
 
-
-    /**
-     * Tries to get the type of a transformation
-     *
-     * @param jsonObject JSONOBject Containing the transformation
-     * @return A string with the type of the transformation
-     * @throws JSONException
-     */
-    /*
-    private String tryToGetType(JSONObject jsonObject) throws JSONException {
-        String type = "";
-        try {
-            type = jsonObject.getString("type");
-        } catch (JSONException e) {
-
-            if  ( e.getMessage().contains("[\"type\"] not found") ) {
-
-                if ( jsonObject.has("name") ) {
-                    String name = jsonObject.getString("name");
-                    if ( name.contains("replace") ||  name.contains("delete") ||  name.contains("add") ) {
-                        return "adrStmt";
-                    }
-                    //OTHER TYPES BY NAMES GOES HERE!!!!
-                } else { throw e; }
-
-            } else { throw e; }
-        }
-        return type;
-    } */
     public Transformation parseTransformation(JSONObject jsonObject) throws TransformationParserException {
         try {
             String type = jsonObject.getString("type");
@@ -300,6 +270,7 @@ public class TransformationJsonParser {
             }
             trans.setFailures(getFailures(jsonObject));
             trans.setStatus(jsonObject.getInt("status"));
+            trans.setInputProgram(inputProgram);
 
             if (jsonObject.has("parent"))
                 trans.setParent(parseTransformation(jsonObject.getJSONObject("parent")));
@@ -483,12 +454,12 @@ public class TransformationJsonParser {
             if (name.equals("delete"))
                 trans = parseASTDelete(jsonObject);
 
-            if (jsonObject.has("tindex")) {
+            if ( jsonObject.has("tindex") ) {
                 trans.setIndex(jsonObject.getInt("tindex"));
             }
 
             trans.setName(jsonObject.getString("name"));
-            String p = jsonObject.getJSONObject("transplantationPoint").getString("position");
+
             trans.setTransplantationPoint(findCodeFragment(jsonObject.getJSONObject("transplantationPoint")));
         } catch (JSONException e) {
             throw new TransformationParserException(e);
@@ -649,13 +620,18 @@ public class TransformationJsonParser {
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws TransformationParserException {
 
         CodeFragment cf = null;
-        //String position = jsonObject.getString("position");
-        //String sourceCode = jsonObject.getString("sourceCode");
-        cf = inputProgram.getCodeFragment(jsonObject);
+        try {
+            String position = jsonObject.getString("position");
+            String sourceCode = jsonObject.getString("sourceCode");
+            cf = inputProgram.getCodeFragment(position, sourceCode);
+        } catch (JSONException e) {
+            throw new TransformationParserException(
+                    "Unnable to obtain at least one field from JSON object " + jsonObject.toString(), e);
+        }
 
         if (cf == null) {
             throw new TransformationParserException(
-                "Cannot find a code fragment that matches the current JSON object " + jsonObject.toString());
+                    "Cannot find a code fragment that matches the current JSON object " + jsonObject.toString());
         }
 
         return cf;
@@ -687,7 +663,6 @@ public class TransformationJsonParser {
      * @return
      * @throws TransformationParserException
      */
-
     protected CtMethod getMethod(String name) throws TransformationParserException {
         for (CtMethod mth : inputProgram.getJavassistMethods()) {
             if (mth.getLongName().equals(name))
@@ -740,7 +715,7 @@ public class TransformationJsonParser {
     public static void saveToFile(List<Transformation> transf, String fileName) throws JSONException, IOException {
 
         JSONArray a = new JSONArray();
-        for (Transformation t : transf) {
+        for ( Transformation t : transf ) {
             a.put(t.toJSONObject());
         }
 

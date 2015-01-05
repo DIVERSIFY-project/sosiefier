@@ -1,11 +1,14 @@
 package fr.inria.diversify.diversification;
 
+import fr.inria.diversify.sosie.logger.Instru;
+import fr.inria.diversify.statistic.AbstractSessionResults;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.transformation.query.TransformationQuery;
-import fr.inria.diversify.util.GitUtil;
+import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.json.JSONException;
 
 import java.io.*;
@@ -17,6 +20,21 @@ import java.util.List;
  * Time: 3:05 PM
  */
 public abstract class AbstractDiversify {
+
+    /**
+     * Number of trials performed
+     */
+    protected int trial = 0;
+
+    /**
+     * Session report
+     */
+    protected AbstractSessionResults sessionResults;
+
+    /**
+     * Input configuration
+     */
+    protected InputConfiguration inputConfiguration;
 
     /**
      * The original temporal directory. This is a patch. Sometimes we cannot delete the tmpDir
@@ -44,8 +62,9 @@ public abstract class AbstractDiversify {
     /**
      * Directory to copy sosies programs source code to.
      */
-    private String socieSourcesDir = null;
+    private String sosieSourcesDir = null;
 
+    private boolean android = false;
 
 
     /**
@@ -82,10 +101,10 @@ public abstract class AbstractDiversify {
      * Directory to copy sosies programs source code to.
      */
 
-    public String getSocieSourcesDir() { return socieSourcesDir; }
+    public String getSosieSourcesDir() { return sosieSourcesDir; }
 
-    public void setSocieSourcesDir(String socieSourcesDir) {
-        this.socieSourcesDir = socieSourcesDir;
+    public void setSosieSourcesDir(String sosieSourcesDir) {
+        this.sosieSourcesDir = sosieSourcesDir;
     }
 
     protected List<Transformation> transformations;
@@ -115,9 +134,10 @@ public abstract class AbstractDiversify {
      */
     public String printResult(String output) {
         mkDirResult(output);
-        String fileName = output + System.currentTimeMillis();
+        String prefix = output + System.currentTimeMillis();
+        String fileName = "";
         try {
-            writeTransformations(fileName);
+            fileName = writeTransformations(prefix);
             Log.info("write result in {}", fileName);
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
@@ -125,16 +145,22 @@ public abstract class AbstractDiversify {
         return fileName;
     }
 
-    public void printResult(String output, String git) {
+    public void printResultInGitRepo(String output, String git) {
         String absoluteFileName = printResult(git + "/" + output);
+        String fileName = absoluteFileName.substring(git.length() + 1, absoluteFileName.length());
 
-        String[] split = absoluteFileName.split("/");
-        String tmp = split[0];
-        for (int i = 1; i < split.length - 1; i++) {
-            tmp = tmp + "/" + split[i];
+        try {
+            GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", git);
+            gitUtils.pull();
+            gitUtils.add(fileName);
+            gitUtils.commit("update");
+            gitUtils.push();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        } catch (GitAPIException e) {
+            e.printStackTrace();
         }
-        Log.debug(tmp + "/   " + split[split.length - 1]);
-        GitUtil.addToGit(tmp + "/", "*");
     }
 
     /**
@@ -146,12 +172,12 @@ public abstract class AbstractDiversify {
      * @throws IOException
      * @throws JSONException
      */
-    public void writeTransformations(String fileName) throws IOException, JSONException {
+    public String writeTransformations(String fileName) throws IOException, JSONException {
         if (transformations.isEmpty())
-            return;
+            return "";
 
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
-        write.writeAllTransformation(null);
+        return write.writeAllTransformation(null);
     }
 
     protected void mkDirResult(String output) {
@@ -201,13 +227,90 @@ public abstract class AbstractDiversify {
     }
 
     protected Integer runTest(String directory) throws InterruptedException {
+        int status;
+//        if(android) {
+//            builder.startAndroidEmulation();
+//        }
+
         Log.debug("run test in directory: {}", directory);
         builder.setDirectory(directory);
         builder.runBuilder();
         Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
-        return builder.getStatus();
+        status = builder.getStatus();
+
+//        if(android) {
+//            builder.stopAndroidEmulation();
+//        }
+//        builder.setStatus(status);
+        return status;
     }
 
 
+    protected void copySosieProgram() throws IOException, JSONException {
+        //Store the whole sosie program.
+        try {
 
+            if (getSosieSourcesDir() != null && getSosieSourcesDir().length() > 0) {
+                File f = new File(getSosieSourcesDir());
+                if (!(f.exists())) {
+                    f.mkdirs();
+                }
+
+                String destPath = getSosieDestinationPath();
+
+                boolean intruMethodCall = Boolean.parseBoolean(inputConfiguration.getProperty("intruMethodCall","false"));
+                boolean intruVariable = Boolean.parseBoolean(inputConfiguration.getProperty("intruVariable","false"));
+                boolean intruError = Boolean.parseBoolean(inputConfiguration.getProperty("intruError","false"));
+                boolean intruNewTest = Boolean.parseBoolean(inputConfiguration.getProperty("intruNewTest","false"));
+                int javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion"));
+
+                if (intruMethodCall || intruVariable || intruError || intruNewTest) {
+                    Instru instru = new Instru(tmpDir, sourceDir, inputConfiguration.getProperty("testSrc"), javaVersion, destPath, transformations);
+                    instru.setMethodCall(intruMethodCall);
+                    instru.setVariable(intruVariable);
+                    instru.setError(intruError);
+                    instru.setNewTest(intruNewTest);
+                    instru.instru();
+                } else {
+                    File dest = new File(destPath);
+                    if (!(dest.exists())) {
+                        dest.mkdirs();
+                    }
+                    FileUtils.copyDirectory(new File(tmpDir), dest);
+                }
+
+                FileWriter writer = new FileWriter(destPath + "/trans.json");
+                for (Transformation t : transformations) {
+                    writer.write(t.toJSONObject().toString() + "\n");
+                }
+                writer.close();
+            }
+        } catch (IOException e) {
+            //We may also don't want to recover from here. If no instrumentation possible... now what?
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected String getSosieDestinationPath() {
+        return getSosieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
+    }
+
+    protected void tryRestore(Transformation trans, Exception e) throws Exception {
+        try {
+            trans.restore(tmpDir + "/" + sourceDir);
+        } catch (Exception restore) {}
+
+        try {
+            trans.printJavaFile(tmpDir + "/" + sourceDir);
+        } catch (Exception print) {}
+
+        int status = runTest(tmpDir);
+        if (status != 0) {
+            throw new Exception(e);
+        }
+    }
+
+    public void setAndroid(boolean android) {
+        this.android = android;
+    }
 }

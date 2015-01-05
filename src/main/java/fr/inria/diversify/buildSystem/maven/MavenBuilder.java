@@ -3,11 +3,11 @@ package fr.inria.diversify.buildSystem.maven;
 
 import fr.inria.diversify.buildSystem.AbstractBuilder;
 import fr.inria.diversify.util.Log;
-import org.apache.commons.io.FileUtils;
 import org.apache.maven.shared.invoker.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,23 +18,22 @@ import java.util.List;
 public class MavenBuilder extends AbstractBuilder {
 
 
-
-
     public MavenBuilder(String directory, String srcDir) throws IOException {
         super(directory, srcDir);
     }
 
-    protected void runPrivate() {
-
-        Log.debug("run maven (timeout {})",timeOut);
+    protected void runPrivate(String[] goals, boolean verbose) {
+        if(goals == null) {
+            goals = this.goals;
+        }
+        Log.debug("run maven, phase: {}, timeout {}", Arrays.toString(goals), timeOut);
 
         InvocationRequest request = new DefaultInvocationRequest();
-
         request.setPomFile(new File(directory + "/pom.xml"));
 
         List<String> l = new ArrayList<String>();
 
-        for (String phase : phases)
+        for (String phase : goals)
             l.add(phase);
         request.setLocalRepositoryDirectory(setting);
         request.setGoals(l);
@@ -46,8 +45,11 @@ public class MavenBuilder extends AbstractBuilder {
             //ubuntu
             mvnHome = new File("/usr/share/maven");
         if (!mvnHome.exists())
+            //debian
+            mvnHome = new File("/opt/maven");
+        if (!mvnHome.exists())
             //osx
-            mvnHome = new File("/usr/local/Cellar/maven/3.1.1/libexec/");
+            mvnHome = new File("/usr/local/Cellar/maven/3.2.3/libexec/");
         if (!mvnHome.exists())
             //win
             mvnHome = new File(System.getenv("M2_HOME"));
@@ -63,6 +65,9 @@ public class MavenBuilder extends AbstractBuilder {
         try {
             invoker.execute(request);
             String output = os.toString();
+            if(verbose) {
+                Log.debug(output);
+            }
             if (getSaveOutputToFile()) { saveOutputToFile(output); }
             if (clojureTest)
                 parseClojureResult(output);
@@ -79,8 +84,8 @@ public class MavenBuilder extends AbstractBuilder {
             e.printStackTrace();
         }
 
-        //Tell the main thread that we are done
-        latch.countDown();
+//        //Tell the main thread that we are done
+//        latch.countDown();
     }
 
     /**
@@ -91,17 +96,17 @@ public class MavenBuilder extends AbstractBuilder {
         //Save r to further analysis
         MavenOutputParser parser = new MavenOutputParser();
         parser.setAcceptedErrors(acceptedErrors);
+
         parser.parse(r, "\n");
         errors = parser.getCompileErrors();
         failedTests = parser.getFailedTests();
         status = parser.getStatus();
     }
 
-
     protected void parseClojureResult(String r) {
         Integer tmpFailure = null;
         for (String s : r.split("\n")) {
-            Log.debug(s);
+
             if (s.startsWith("[ERROR] COMPILATION ERROR")) {
                 tmpFailure = -2;
                 compileError = true;
@@ -119,12 +124,5 @@ public class MavenBuilder extends AbstractBuilder {
             }
         }
         status = tmpFailure;
-    }
-
-    public void initPom(String newPomFile) throws Exception {
-        super.initPom(newPomFile);
-        File failFastDir = new File(directory + "/" + srcDir + "/fr/inria/diversify/buildSystem/builder");
-        FileUtils.forceMkdir(failFastDir);
-        FileUtils.copyFileToDirectory(new File("src/main/java/fr/inria/diversify/transformation/builder/FailFastListener.java"), failFastDir);
     }
 }

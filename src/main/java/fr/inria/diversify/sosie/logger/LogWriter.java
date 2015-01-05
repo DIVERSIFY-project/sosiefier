@@ -33,7 +33,7 @@ public class LogWriter {
             return logs.get(thread);
         } else {
             InstruVerboseLog l;
-            if ( currentTestThread == null || !logs.containsKey(currentTestThread) ) {
+            if ( currentTestThread == null ) {
                 l = new InstruVerboseLog("LogDirName");
             } else {
                 l = new InstruVerboseLog("LogDirName", logs.get(currentTestThread));
@@ -43,25 +43,26 @@ public class LogWriter {
         }
     }
 
-    /**
-     * Only to register method call depth
-     * @param thread Thread being registered
-     */
-    public static void depthOnlyMethodCall(Thread thread) {
-        getLog(thread).depthOnlyMethodCall(thread);
+    public static void testCount(String methodSignatureId) {
+        getLog().testCount(methodSignatureId);
+    }
+
+    public static void assertCount(String methodSignatureId) {
+        getLog().assertCount(methodSignatureId);
     }
 
     public static void methodCall(Thread thread, String methodSignatureId) {
         getLog(thread).methodCall(thread, methodSignatureId);
     }
 
+
     public static void methodOut(Thread thread) {
         getLog(thread).methodOut(thread);
     }
 
     public static void writeTestStart(Thread thread, String testSignature) {
-        currentTestThread = thread;
         getLog(thread).writeTestStart(thread, testSignature);
+        currentTestThread = thread;
     }
 
     public static void writeAssert(int id, Thread thread, String className,
@@ -73,13 +74,12 @@ public class LogWriter {
         getLog(thread).writeVar(id, thread, methodSignatureId, var);
     }
 
-    public static void writeException(int id, Thread thread,
-                                        String className, String methodSignature, Object exception) {
-        getLog(thread).writeException(id, thread, className, methodSignature, exception);
+    public static void writeException(int id, Thread thread, Object exception) {
+        getLog(thread).writeException(id, thread, exception);
     }
 
-    public static void writeCatch(int id, Thread thread, String className, String methodSignature, Object exception) {
-        getLog(thread).writeCatch(id, thread, className, methodSignature, exception);
+    public static void writeCatch(int id, Thread thread, Object exception) {
+        getLog(thread).writeCatch(id, thread, exception);
     }
 
     public static void countAssert(String s){

@@ -7,10 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtSimpleType;
-import spoon.reflect.declaration.CtTypedElement;
+import spoon.reflect.declaration.*;
+import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.FactoryImpl;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtVariableReference;
@@ -48,8 +46,8 @@ public abstract class CodeFragment {
     public void init(CtCodeElement cf) {
         codeFragment = cf;
         context = new Context(initInputContext(), initOutputContext());
-        this.initOutputContext();
-        this.initInputContext();
+//        this.initOutputContext();
+//        this.initInputContext();
     }
 
     public CtTypeReference<?> getOutputContext() {
@@ -127,16 +125,16 @@ public abstract class CodeFragment {
     }
 
     //check if this can be replaced by other
-    public abstract  boolean isReplace(CodeFragment other, boolean varNameMatch);
+    public abstract  boolean isReplaceableBy(CodeFragment other, boolean varNameMatch , boolean subType);
 
-    public Map<String,String> randomVariableMapping(CodeFragment other) {
+    public Map<String,String> randomVariableMapping(CodeFragment other, boolean subType) {
         Map<String,String> varMap = new HashMap<>();
         Random r = new Random();
 
         for (CtVariableReference<?> variable : other.getInputContext().getVar()) {
-            List<Object> list = getInputContext().allCandidate(variable.getType());
+            List<CtVariableReference> list = getInputContext().allCandidate(variable.getType(), subType);
             if ( list.size() > 0 ) {
-                Object candidate = list.get(r.nextInt(list.size()));
+                CtVariableReference candidate = list.get(r.nextInt(list.size()));
                 varMap.put(variable.toString(), candidate.toString());
             }
         }
@@ -149,7 +147,7 @@ public abstract class CodeFragment {
         object.put("type", getCodeFragmentType().getSimpleName());
 //        object.put("inputContext", new JSONArray(getInputContext().inputContextToString()));
 //        object.put("outputContext", getOutputContext().toString());
-        object.put("sourceCode", equalString());
+        object.put("sourcecode", equalString());
         return object;
     }
 
@@ -223,6 +221,15 @@ public abstract class CodeFragment {
 //        if(codeFragment instanceof CtExpression)
 //            return CtExpression.class;
        return CtStatement.class;
+    }
+
+    public abstract CodeFragment clone();
+
+    protected CtElement copyElem(CtElement elem) {
+        Factory factory = elem.getFactory();
+        CtElement tmp = factory.Core().clone(elem);
+        tmp.setParent(elem.getParent());
+        return tmp;
     }
 }
 

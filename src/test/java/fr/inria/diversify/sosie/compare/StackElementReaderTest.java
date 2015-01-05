@@ -80,7 +80,7 @@ public class StackElementReaderTest {
 
         Assert.assertEquals(2, st.get(0).getStackTraceOperations().size());
         Assert.assertTrue(st.get(0).getStackTraceOperations().get(1) instanceof StackTraceVariableObservation);
-        Map<String, Object> vars =
+        Map<String, Long> vars =
                 ((StackTraceVariableObservation)st.get(0).getStackTraceOperations().get(1)).getVars().getVariables();
         Assert.assertTrue(vars.containsValue("1000"));
 
@@ -96,7 +96,7 @@ public class StackElementReaderTest {
         //Build some data for the reader
         log.writeTestStart(t, "sampleTest");
         log.methodCall(t, "foo");
-        log.writeException(10, t, "A", "foo", new Exception("e"));
+        log.writeException(10, t, new Exception("e"));
         log.close();
 
         //Make the reader read from the byte[] buffer

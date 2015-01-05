@@ -3,6 +3,7 @@ package fr.inria.diversify.sosie.logger;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.sosie.logger.processor.*;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.DiversifyPrettyPrinter;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import org.apache.commons.io.FileUtils;
 import spoon.compiler.Environment;
@@ -30,60 +31,51 @@ public class Instru {
     protected String testDirectory;
     protected List<Transformation> transformations;
 
-    private boolean compactLog;
+    private  int javaVersion;
+
+    private String logger;
 
     //What to instrument?
 
     //Instrument method calls
-    private boolean intruMethodCall;
+    private boolean methodCall;
     //Instrument variables
-    private boolean intruVariable;
+    private boolean variable;
     //Instrument errors
-    private boolean intruError;
-    //Instrument asserts
-    private boolean intruAssert;
-    //Instrument count assertions a simpler, faster processor to count assertions
-    private boolean instruCountAssertions;
+    private boolean error;
+    //Instrument asserts count
+    private boolean assertCount;
+    //Instrument test count
+    private boolean testCount;
+
     //Instrument new test
-    private boolean intruNewTest;
+    private boolean newTest;
+
+
+    private boolean useSourceCodeFragments;
 
     //Instrument call counts over transplantation points
-    private boolean instruTransplantationPointCallCount;
+    private boolean transplantationPointCallCount;
 
     private TransplantationPointCallCountInstrumenter tpcInstrumenter = null;
-    private Factory sourceFactory = null;
 
-    private Factory testFactorty = null;
+    private Factory sourceFactory = null;
+    private Factory testFactory = null;
     private boolean onlyCopyLoggerCode;
 
 
-    public Instru(String projectDirectory, String srcDirectory, String testDirectory ,String outputDirectory,
+    public Instru(String projectDirectory, String srcDirectory, String testDirectory, int javaVersion, String outputDirectory,
                   List<Transformation> transformations) {
         this.projectDirectory = projectDirectory;
         this.srcDirectory = srcDirectory;
         this.testDirectory = testDirectory;
         this.outputDirectory = outputDirectory;
         this.transformations = transformations;
+        this.javaVersion = javaVersion;
     }
 
     public void copyLogger() throws IOException {
         copyLogger(outputDirectory, srcDirectory);
-    }
-
-    public void instru(boolean intruMethodCall, boolean intruVariable, boolean intruError, boolean intruNewTest, boolean intruAssert) throws IOException {
-        if ( onlyCopyLoggerCode ) {
-            copyLogger(outputDirectory, srcDirectory);
-        }
-
-        initOutputDirectory();
-
-        if(intruMethodCall || intruVariable || intruError || getInstruTransplantationPointCallCount())
-            instruMainSrc(intruMethodCall, intruVariable, intruError);
-
-        if(intruAssert || intruNewTest || instruCountAssertions)
-            instruTestSrc(intruNewTest, intruAssert);
-
-        writeId();
     }
 
     public void instru() throws IOException {
@@ -93,11 +85,11 @@ public class Instru {
 
         initOutputDirectory();
 
-        if(getIntruMethodCall() || getIntruVariable() || getIntruError() || getInstruTransplantationPointCallCount())
-            instruMainSrc(getIntruMethodCall(), getIntruVariable(), getIntruError());
+        if(methodCall || variable || error || getTransplantationPointCallCount())
+            instruMainSrc();
 
-        if(getIntruAssert() || getIntruNewTest())
-            instruTestSrc(getIntruNewTest(), getIntruAssert());
+        if(assertCount || newTest || testCount)
+            instruTestSrc();
 
         writeId();
     }
@@ -111,12 +103,11 @@ public class Instru {
     protected void writeId() throws IOException {
 
         TestLoggingInstrumenter.writeIdFile(outputDirectory);
-        SimpleAssertInvocationCounter.writeIdFile(outputDirectory);
         TransplantationPointCallCountInstrumenter.writeIdFile(outputDirectory);
 
-        if ( tpcInstrumenter != null ) {
+        if(tpcInstrumenter != null)
             tpcInstrumenter.writeIdMapToFile(outputDirectory + "/tpcid.json");
-        }
+
         VariableLoggingInstrumenter.writeIdFile(outputDirectory);
         copyLogger(outputDirectory, srcDirectory);
 
@@ -130,78 +121,78 @@ public class Instru {
         partialLogging.close();
     }
 
-    protected void instruMainSrc(boolean intruMethodCall, boolean intruVariable, boolean intruError) {
+    protected void instruMainSrc() {
         String src = projectDirectory + "/" + srcDirectory;
-        String out = outputDirectory + "/" + srcDirectory;
 
         if ( sourceFactory == null ) {
             sourceFactory = initSpoon(src);
         }
 
-        if ( instruTransplantationPointCallCount ) {
-            tpcInstrumenter =
-                    new TransplantationPointCallCountInstrumenter(transformations);
-            tpcInstrumenter.setUseCompactLog(compactLog);
-            applyProcessor(sourceFactory, tpcInstrumenter);
-
-            //TODO: Ask if we want to calculate the depth
-            DepthOnlyMethodInstrumenter m = new DepthOnlyMethodInstrumenter(transformations);
-            m.setUseCompactLog(compactLog);
-            applyProcessor(sourceFactory, m);
-
-        }
-
-        if(intruMethodCall) {
+        if(methodCall) {
             MethodLoggingInstrumenter m = new MethodLoggingInstrumenter(transformations);
-            m.setUseCompactLog(compactLog);
+            m.setLogger(logger);
             applyProcessor(sourceFactory, m);
         }
-        if(intruVariable) {
-            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter(transformations);
-            v.setUseCompactLog(compactLog);
+        if(variable) {
+//            VariableLoggingInstrumenter v = new VariableLoggingInstrumenter(transformations);
+            FieldUsedInstrumenter v = new FieldUsedInstrumenter(transformations);
+            v.setLogger(logger);
             applyProcessor(sourceFactory, v);
         }
-        if(intruError) {
+        if(error) {
             ErrorLoggingInstrumenter e = new ErrorLoggingInstrumenter(transformations);
-            e.setUseCompactLog(compactLog);
+            e.setLogger(logger);
             applyProcessor(sourceFactory, e);
         }
+        if (transplantationPointCallCount) {
+            tpcInstrumenter =
+                    new TransplantationPointCallCountInstrumenter(transformations);
+            tpcInstrumenter.setLogger(logger);
+            applyProcessor(sourceFactory, tpcInstrumenter);
+        }
 
-
-        Environment env = sourceFactory.getEnvironment();
-        env.useSourceCodeFragments(true);
-        applyProcessor(sourceFactory,
-                       new JavaOutputProcessorWithFilter(new File(out),
-                                                         new FragmentDrivenJavaPrettyPrinter(env),
-                                                         allClassesName(new File(src))));
+        File fileFrom = new File(src);
+        File out = new File(outputDirectory + "/" + srcDirectory);
+        writeJavaClass(sourceFactory, out, fileFrom);
     }
 
-    protected void instruTestSrc(boolean intruNewTest, boolean intruAssert) {
+    protected void instruTestSrc() {
 
         String test = projectDirectory + "/" + testDirectory;
-        String out = outputDirectory + "/" + testDirectory;
+        String main = projectDirectory + "/" + srcDirectory;
 
-        if ( testFactorty == null ) {
-            //testFactorty = initSpoon(src + System.getProperty("path.separator") + test);
-            testFactorty = initSpoon(test);
+        if ( testFactory == null ) {
+            testFactory = initSpoon(test+":"+main);
         }
 
-        if(intruAssert) {
-            applyProcessor(testFactorty, new AssertInstrumenter());
-        } else if ( instruCountAssertions ) {
-            applyProcessor(testFactorty, new SimpleAssertInvocationCounter());
-            applyProcessor(testFactorty, new SimpleAssertCounter());
-        }
-        if(intruNewTest) {
-            applyProcessor(testFactorty, new TestLoggingInstrumenter());
+        if(assertCount) {
+            applyProcessor(testFactory, new AssertCountInstrumenter());
         }
 
-        Environment env = testFactorty.getEnvironment();
-        env.useSourceCodeFragments(true);
-        applyProcessor(testFactorty,
-                       new JavaOutputProcessorWithFilter(new File(out),
-                                                         new FragmentDrivenJavaPrettyPrinter(env),
-                                                         allClassesName(new File(test))));
+        if(testCount) {
+            applyProcessor(testFactory, new TestCountInstrumenter());
+        }
+
+        if(newTest) {
+            applyProcessor(testFactory, new TestLoggingInstrumenter());
+        }
+
+        File fileFrom = new File(test);
+        File out = new File(outputDirectory + "/" + testDirectory);
+        writeJavaClass(testFactory, out, fileFrom);
+    }
+
+    protected void writeJavaClass(Factory factory, File out, File fileFrom) {
+        Environment env = factory.getEnvironment();
+        AbstractProcessor processor;
+        if(useSourceCodeFragments) {
+            env.useSourceCodeFragments(true);
+            processor = new JavaOutputProcessorWithFilter(out, new FragmentDrivenJavaPrettyPrinter(env), allClassesName(fileFrom));
+
+        } else {
+            processor = new JavaOutputProcessorWithFilter(out, new DiversifyPrettyPrinter(env), allClassesName(fileFrom));
+        }
+        applyProcessor(factory, processor);
     }
 
 
@@ -215,42 +206,29 @@ public class Instru {
         FileUtils.copyFileToDirectory(new File(packagePath + InstruLogWriter.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + InstruVerboseLog.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + InstruBinaryLog.class.getSimpleName() + ".java"),dir);
+
+
+        dir = new File(tmpDir+"/"+src+"/fr/inria/diversify/testamplification/logger");
+        FileUtils.forceMkdir(dir);
+        packagePath = System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/testamplification/logger/";
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.ShutdownHookLog.class.getSimpleName() + ".java"), dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.LogWriter.class.getSimpleName() + ".java"),dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.VerboseLogWriter.class.getSimpleName() + ".java"),dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.DeepLogWriter.class.getSimpleName() + ".java"),dir);
     }
 
     protected Factory initSpoon(String srcDirectory) {
-
         try {
-            return new SpoonMetaFactory().buildNewFactory(srcDirectory, 7);
+            return new SpoonMetaFactory().buildNewFactory(srcDirectory, javaVersion);
         } catch (ClassNotFoundException  | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);
         }
-
-        /*
-        StandardEnvironment env = new StandardEnvironment();
-//        int javaVersion = Integer.parseInt(DiversifyProperties.getProperty("javaVersion"));
-//        env.setComplianceLevel(javaVersion);
-        env.setVerbose(true);
-        env.setDebug(true);
-
-        DefaultCoreFactory f = new DefaultCoreFactory();
-        Factory factory = new FactoryImpl(f, env);
-        SpoonCompiler c = new JDTBasedSpoonCompiler(factory);
-        for (String dir : srcDirectory.split(System.getProperty("path.separator")))
-            try {
-                c.addInputSource(new File(dir));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        try {
-            c.build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return factory;*/
     }
 
     protected void applyProcessor(Factory factory, AbstractProcessor processor) {
         ProcessingManager pm = new QueueProcessingManager(factory);
+        processor.setFactory(factory);
         pm.addProcessor(processor);
         pm.process();
     }
@@ -271,60 +249,48 @@ public class Instru {
         return list;
     }
 
-    public void setCompactLog(boolean compactLog) {
-        this.compactLog = compactLog;
+    public void setLogger(String logger) {
+        this.logger = logger;
     }
 
-    public boolean getCompactLog() {
-        return compactLog;
+    public boolean getMethodCall() {
+        return methodCall;
     }
 
-    public boolean getIntruMethodCall() {
-        return intruMethodCall;
+    public void setMethodCall(boolean methodCall) {
+        this.methodCall = methodCall;
     }
 
-    public void setIntruMethodCall(boolean intruMethodCall) {
-        this.intruMethodCall = intruMethodCall;
+    public boolean getVariable() {
+        return variable;
     }
 
-    public boolean getIntruVariable() {
-        return intruVariable;
+    public void setVariable(boolean variable) {
+        this.variable = variable;
     }
 
-    public void setIntruVariable(boolean intruVariable) {
-        this.intruVariable = intruVariable;
+    public boolean getError() {
+        return error;
     }
 
-    public boolean getIntruError() {
-        return intruError;
+    public void setError(boolean error) {
+        this.error = error;
     }
 
-    public void setIntruError(boolean intruError) {
-        this.intruError = intruError;
+    public boolean getNewTest() {
+        return newTest;
     }
 
-    public boolean getIntruAssert() {
-        return intruAssert;
+    public void setNewTest(boolean newTest) {
+        this.newTest = newTest;
     }
 
-    public void setIntruAssert(boolean intruAssert) {
-        this.intruAssert = intruAssert;
+    public boolean getTransplantationPointCallCount() {
+        return transplantationPointCallCount;
     }
 
-    public boolean getIntruNewTest() {
-        return intruNewTest;
-    }
-
-    public void setIntruNewTest(boolean intruNewTest) {
-        this.intruNewTest = intruNewTest;
-    }
-
-    public boolean getInstruTransplantationPointCallCount() {
-        return instruTransplantationPointCallCount;
-    }
-
-    public void setInstruTransplantationPointCallCount(boolean instruTransplantationPointCallCount) {
-        this.instruTransplantationPointCallCount = instruTransplantationPointCallCount;
+    public void setTransplantationPointCallCount(boolean transplantationPointCallCount) {
+        this.transplantationPointCallCount = transplantationPointCallCount;
     }
 
     public void setSourceFactory(Factory sourceFactory) {
@@ -335,20 +301,12 @@ public class Instru {
         return sourceFactory;
     }
 
-    public Factory getTestFactorty() {
-        return testFactorty;
+    public Factory getTestFactory() {
+        return testFactory;
     }
 
     public void setTestFactory(Factory testFactorty) {
-        this.testFactorty = testFactorty;
-    }
-
-    public boolean isInstruCountAssertions() {
-        return instruCountAssertions;
-    }
-
-    public void setInstruCountAssertions(boolean instruCountAssertions) {
-        this.instruCountAssertions = instruCountAssertions;
+        this.testFactory = testFactorty;
     }
 
     public void setOnlyCopyLoggerCode(boolean onlyCopyLoggerCode) {
@@ -357,5 +315,17 @@ public class Instru {
 
     public boolean isOnlyCopyLoggerCode() {
         return onlyCopyLoggerCode;
+    }
+
+    public void setAssertCount(boolean assertCount) {
+        this.assertCount = assertCount;
+    }
+
+    public void setTestCount(boolean testCount) {
+        this.testCount = testCount;
+    }
+
+    public void setUseSourceCodeFragments(boolean useSourceCodeFragments) {
+        this.useSourceCodeFragments = useSourceCodeFragments;
     }
 }

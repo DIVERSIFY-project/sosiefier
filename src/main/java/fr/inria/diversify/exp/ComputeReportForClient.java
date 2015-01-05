@@ -1,7 +1,6 @@
 package fr.inria.diversify.exp;
 
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
-import fr.inria.diversify.sosie.compare.CompareAllStackTrace;
 import fr.inria.diversify.sosie.compare.diff.Report;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.util.Log;
@@ -64,9 +63,11 @@ public class ComputeReportForClient extends ComputeReport {
 
                     Log.info("compare sosie/original");
                     Report originalSosieReport = compareTrace(stackTrace1, originalLog, false);
-
-                    writeGoodDiff(resultDir.getAbsolutePath(), sosie.getName(), sosieSosieReport, originalSosieReport);
-
+                    try {
+                        writeGoodDiff(resultDir.getAbsolutePath(), sosie.getName(), sosieSosieReport, originalSosieReport);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     writeCSVReport(
                             originalSosieReport.buildAllTest(),
                             sosieSosieReport.buildAllTest(),
@@ -115,7 +116,7 @@ public class ComputeReportForClient extends ComputeReport {
 
         builder.setTimeOut(600);
         builder.setSetting(localRepository);
-        builder.setPhase(new String[]{"clean", "install"});
+        builder.setGoals(new String[]{"clean", "install" });
         builder.runBuilder();
         int status = builder.getStatus();
 

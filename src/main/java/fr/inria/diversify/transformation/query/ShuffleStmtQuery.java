@@ -36,28 +36,23 @@ public class ShuffleStmtQuery extends TransformationQuery {
     }
 
     @Override
-    public List<Transformation> query(int nb) {
+    public Transformation query() {
+        ShuffleStmtTransformation sst = new ShuffleStmtTransformation();
+        List<CtElement> objects = getInputProgram().getAllElement(CtBlock.class);
+        Random r = new Random();
 
-        List<Transformation> result = new ArrayList<>();
-        for ( int j = 0; j < nb; j ++) {
-            ShuffleStmtTransformation sst = new ShuffleStmtTransformation();
-            List<CtElement> objects = getInputProgram().getAllElement(CtBlock.class);
-            Random r = new Random();
-
-            CtBlock block = (CtBlock) objects.get(r.nextInt(objects.size()));
-            while (coverageReport.elementCoverage(block) == 0
-                    || !isCandidate(block)) {
-                block = (CtBlock) objects.get(r.nextInt(objects.size()));
-            }
-            sst.setTransformationPoint(block);
-
-            result.add(sst);
+        CtBlock block = (CtBlock) objects.get(r.nextInt(objects.size()));
+        while (coverageReport.elementCoverage(block) == 0
+                || !isCandidate(block)) {
+            block = (CtBlock) objects.get(r.nextInt(objects.size()));
         }
-        return result;
+        sst.setTransformationPoint(block);
+
+        return sst;
     }
 
     @Override
-    public void query() {
+    public void executeQuery() {
 
     }
 

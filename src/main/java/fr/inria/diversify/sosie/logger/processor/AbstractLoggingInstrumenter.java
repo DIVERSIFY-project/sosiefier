@@ -23,23 +23,31 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
 
     protected List<Transformation> transformations;
 
-    protected boolean useCompactLog = false;
+    protected String logger = "verbose";
 
     public AbstractLoggingInstrumenter(List<Transformation> transformations) {
         this.transformations = transformations;
     }
     
-    public boolean getUseCompactLog() {
-        return useCompactLog;
+    public String getLogger() {
+        return logger;
     }
 
-    public void setUseCompactLog(boolean logClassFullName) {
-        this.useCompactLog = logClassFullName;
+    public void setLogger(String logger) {
+        this.logger = logger;
     }
 
     protected String getLogName() {
-        String packName = "fr.inria.diversify.sosie.logger.";
-        return packName + (useCompactLog ? "BinLogWriter" : "LogWriter" );
+        if(logger == "verbose") {
+            return "fr.inria.diversify.testamplification.logger.Logger";
+        }
+        if(logger == "bin") {
+            return "fr.inria.diversify.sosie.logger.BinLogWriter";
+        }
+        if(logger == "bin") {
+            return "fr.inria.diversify.sosie.logger.Logger";
+        }
+        return "fr.inria.diversify.testamplification.logger.Logger";
     }
 
     protected CtClass<?> getClass(CtElement stmt) {
