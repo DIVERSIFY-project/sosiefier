@@ -32,6 +32,7 @@ import spoon.support.QueueProcessingManager;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 //import java.util.stream.Collectors;
 
 /**
@@ -251,7 +252,7 @@ public class InputProgram {
     public void processCodeFragments() {
         if (codeFragments == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
-            StatementProcessor processor = new StatementProcessor();
+            StatementProcessor processor = new StatementProcessor(externalSourceCodeDir);
             pm.addProcessor(processor);
             pm.process();
             codeFragments = processor.getCodeFragments();

@@ -601,7 +601,7 @@ public class TransformationJsonParser {
     protected ASTTransformation parseASTAdd(JSONObject jsonObject) throws JSONException, TransformationParserException {
         ASTAdd trans = new ASTAdd();
 
-        trans.setCodeFragmentToAdd(findCodeFragment(jsonObject.getJSONObject("transplant")));
+        trans.setTransplant(findCodeFragment(jsonObject.getJSONObject("transplant")));
         trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("variableMapping")));
 
         return trans;
@@ -620,14 +620,9 @@ public class TransformationJsonParser {
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws TransformationParserException {
 
         CodeFragment cf = null;
-        try {
-            String position = jsonObject.getString("position");
-            String sourceCode = jsonObject.getString("sourceCode");
-            cf = inputProgram.getCodeFragment(position, sourceCode);
-        } catch (JSONException e) {
-            throw new TransformationParserException(
-                    "Unnable to obtain at least one field from JSON object " + jsonObject.toString(), e);
-        }
+        //String position = jsonObject.getString("position");
+        //String sourceCode = jsonObject.getString("sourceCode");
+        cf = inputProgram.getCodeFragment(jsonObject);
 
         if (cf == null) {
             throw new TransformationParserException(
