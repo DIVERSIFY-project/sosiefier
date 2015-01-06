@@ -80,6 +80,7 @@ public class DiversifyMain {
         String repo = inputConfiguration.getProperty("gitRepository");
 
         if(!repo.equals("null")) {
+            repo += System.currentTimeMillis();
             Log.debug("clone https://github.com/simonAllier/sosie-exp.git in {}", repo);
             GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", repo);
             gitUtils.cloneRepo();
