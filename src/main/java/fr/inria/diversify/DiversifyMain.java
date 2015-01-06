@@ -90,7 +90,7 @@ public class DiversifyMain {
         MavenDependencyResolver t = new MavenDependencyResolver();
         String builder = inputConfiguration.getProperty("builder");
 
-        if (builder.equals("maven")) {
+        if (builder.equals("maven") && inputConfiguration.getProperty("dependencyPom") != null) {
             File pom = new File(inputConfiguration.getProperty("project") + "/pom.xml");
             File originalPom = new File(inputConfiguration.getProperty("project") + "/_originalPom.xml");
             FileUtils.copyFile(pom, originalPom);
@@ -105,7 +105,9 @@ public class DiversifyMain {
             FileUtils.copyFile(originalPom, pom);
             FileUtils.forceDelete(originalPom);
         }
-
+        if(builder.equals("maven")) {
+            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
+        }
         String androidSdk = inputConfiguration.getProperty("AndroidSdk");
         if(androidSdk != null) {
             t.resolveAndroidDependencies(androidSdk);
