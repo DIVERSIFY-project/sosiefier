@@ -34,6 +34,7 @@ public class MavenDependencyResolver {
 
 
     public void DependencyResolver(String pomFile) throws Exception {
+        Log.debug("Resolve dependency of {}", pomFile);
         String[] split = pomFile.split("/");
         baseDir = "";
         for(int i = 0;  i <  split.length - 1; i++) {
