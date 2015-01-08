@@ -30,6 +30,7 @@ import java.util.*;
  */
 public class MavenDependencyResolver {
     Set<URL> jarURL = new HashSet<>();
+    Properties properties;
     String baseDir;
 
 
@@ -70,21 +71,19 @@ public class MavenDependencyResolver {
         urls.add("http://repo1.maven.org/maven2/");
 
 
-        Properties properties = project.getProperties();
+        updateProperties(project.getProperties());
         for (Dependency dependency : project.getDependencies()) {
             try {
                 String artifactId = "mvn:" + resolveName(dependency.getGroupId(), properties) +
                         ":" + resolveName(dependency.getArtifactId(), properties) +
-                        ":" + resolveName(dependency.getVersion(), properties);// +
-                      //  ":" + resolveName(dependency.getType(), properties);
+                        ":" + resolveName(dependency.getVersion(), properties);
 
                 File cachedFile = resolver.resolve(artifactId + ":" + resolveName(dependency.getType(), properties), urls);
                 jarURL.add(cachedFile.toURI().toURL());
                 Log.debug("resolve artifact: {}", artifactId);
 
-
                 File pomD = resolver.resolve(artifactId + ":pom", urls);
-                resolveAllDependencies(loadProject(pomD));
+//                resolveAllDependencies(loadProject(pomD));
 
             } catch (Exception e) {}
 
@@ -102,6 +101,16 @@ public class MavenDependencyResolver {
 
         URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
         Thread.currentThread().setContextClassLoader(child);
+    }
+
+    protected void updateProperties(Properties properties) {
+        if(this.properties == null) {
+            this.properties = new Properties(properties);
+        } else {
+            for (Object key : properties.keySet()) {
+                this.properties.put(key, properties.get(key));
+            }
+        }
     }
 
     protected void resolveModuleDependencies(String moduleName) throws IOException, XmlPullParserException {

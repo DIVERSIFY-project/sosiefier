@@ -24,6 +24,7 @@ import fr.inria.diversify.transformation.query.ASTTransformationQuery;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.TransformationFilter;
+import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
 import org.apache.commons.io.FileUtils;
@@ -458,7 +459,6 @@ public class DiversifyMain {
         }
 
       //  computeAllPossibleTransformation();
-
     }
 
     protected void computeAllPossibleTransformation() throws InterruptedException, IOException {
@@ -478,12 +478,10 @@ public class DiversifyMain {
 //        filter.setTransplantPosition("com.github.mobile.accounts");
         TransformationsWriter write = new TransformationsWriter(filter.filter(transformations), fileName);
 
-
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         write.writeAllTransformation(null);
         StatisticDiversification sd = new StatisticDiversification(transformations);
         sd.writeStat(fileName);
-
 
         for (String type : getAllTransformationType(transformations))
             write.writeAllTransformation(type);
@@ -493,9 +491,8 @@ public class DiversifyMain {
         for (String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
-
-        CVLMetric cvlMetric = new CVLMetric(inputProgram);
-        cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
+//        CVLMetric cvlMetric = new CVLMetric(inputProgram);
+//        cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
 //       Visu v = new Visu(fileName + "_visu/visu", inputProgram);
 //        v.writeJSON(transformations);
@@ -511,10 +508,8 @@ public class DiversifyMain {
         return types;
     }
 
-
     protected void initLogLevel() {
         int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
         Log.set(level);
-
     }
 }
