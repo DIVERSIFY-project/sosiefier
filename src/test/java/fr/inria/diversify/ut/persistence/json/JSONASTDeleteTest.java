@@ -23,8 +23,13 @@ import static org.junit.Assert.assertTrue;
  */
 public class JSONASTDeleteTest {
 
-    private static final String TRANSFORMATIONS = "transformations";
-
+    /**
+     * Test that creates a "transformation" inside the global object
+     */
+    @Test
+    public void testWriteEmpty() {
+        SectionTestUtils.doTestWriteEmpty(new JsonASTDeleteSectionOutput());
+    }
 
     /**
      * Write Delete

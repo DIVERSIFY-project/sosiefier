@@ -1,5 +1,6 @@
 package fr.inria.diversify.ut.persistence.json;
 
+import fr.inria.diversify.persistence.json.JsonASTAddSectionOutput;
 import fr.inria.diversify.persistence.json.JsonASTReplaceSectionOutput;
 import fr.inria.diversify.persistence.json.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -19,9 +20,17 @@ import static org.junit.Assert.*;
 /**
  * Created by marodrig on 08/01/2015.
  */
-public class JSONASTAddTest extends JSONASTReplaceTest {
+public class JSONASTAddTest {
 
     private static final String TRANSFORMATIONS = "transformations";
+
+    /**
+     * Test that creates a "transformation" inside the global object
+     */
+    @Test
+    public void testWriteEmpty() {
+        SectionTestUtils.doTestWriteEmpty(new JsonASTAddSectionOutput());
+    }
 
     /**
      * Write Replace
@@ -30,13 +39,13 @@ public class JSONASTAddTest extends JSONASTReplaceTest {
      */
     @Test
     public void testWrite() throws JSONException {
-        JsonASTReplaceSectionOutput d = new JsonASTReplaceSectionOutput();
+        JsonASTAddSectionOutput d = new JsonASTAddSectionOutput();
         d.setOutputObject(new JSONObject());
-        ASTReplace r = new ASTReplace();
+        ASTAdd r = new ASTAdd();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         d.write(Arrays.asList(new ASTTransformation[]{r}));
-        writeAssertions(d);
+        SectionTestUtils.writeAssertions(d);
     }
 
     /**
@@ -45,13 +54,13 @@ public class JSONASTAddTest extends JSONASTReplaceTest {
      * @throws org.json.JSONException
      */
     @Test
-    public void testWriteDeleteOnly() throws JSONException {
-        JsonASTReplaceSectionOutput d = new JsonASTReplaceSectionOutput();
+    public void testWriteAddOnly() throws JSONException {
+        JsonASTAddSectionOutput d = new JsonASTAddSectionOutput();
         d.setOutputObject(new JSONObject());
-        ASTReplace r = new ASTReplace();
+        ASTAdd r = new ASTAdd();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        d.write(Arrays.asList(new ASTTransformation[]{new ASTDelete(), r, new ASTAdd()}));
-        writeOnlyAssertions(d);
+        d.write(Arrays.asList(new ASTTransformation[]{new ASTDelete(), r, new ASTReplace()}));
+        SectionTestUtils.writeOnlyAssertions(d);
     }
 }

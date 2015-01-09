@@ -25,30 +25,12 @@ public class JSONASTReplaceTest {
 
     private static final String TRANSFORMATIONS = "transformations";
 
-    protected void writeAssertions(JsonSectionOutput d) throws JSONException {
-        JSONObject tr = d.getOutputObject().getJSONArray(
-                JsonASTSectionOutput.TRANSFORMATIONS).getJSONObject(0).getJSONObject("transplantationPoint");
-
-        assertEquals(tr.get("position"), "org.class:1");
-        assertEquals(tr.get("type"), "CtReturn");
-        assertEquals(tr.get("sourcecode"), "return 0");
-
-        tr = d.getOutputObject().getJSONArray(
-                JsonASTSectionOutput.TRANSFORMATIONS).getJSONObject(0).getJSONObject("transplant");
-        assertEquals(tr.get("position"), "org.class:1");
-        assertEquals(tr.get("type"), "CtReturn");
-        assertEquals(tr.get("sourcecode"), "return 0");
-    }
-
-    protected void writeOnlyAssertions(JsonSectionOutput d) throws JSONException {
-        JSONArray array = d.getOutputObject().getJSONArray(JsonASTSectionOutput.TRANSFORMATIONS);
-        assertEquals(3, array.length());
-        assertTrue(array.getJSONObject(1).has("transplantationPoint"));
-        assertFalse(array.getJSONObject(2).has("transplantationPoint"));
-        assertFalse(array.getJSONObject(0).has("transplantationPoint"));
-        assertTrue(array.getJSONObject(1).has("transplant"));
-        assertFalse(array.getJSONObject(2).has("transplant"));
-        assertFalse(array.getJSONObject(0).has("transplant"));
+    /**
+     * Test that creates a "transformation" inside the global object
+     */
+    @Test
+    public void testWriteEmpty() {
+        SectionTestUtils.doTestWriteEmpty(new JsonASTReplaceSectionOutput());
     }
 
 
@@ -65,7 +47,7 @@ public class JSONASTReplaceTest {
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         d.write(Arrays.asList(new ASTTransformation[]{r}));
-        writeAssertions(d);
+        SectionTestUtils.writeAssertions(d);
     }
 
     /**
@@ -81,6 +63,6 @@ public class JSONASTReplaceTest {
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         d.write(Arrays.asList(new ASTTransformation[]{new ASTDelete(), r, new ASTAdd()}));
-        writeOnlyAssertions(d);
+        SectionTestUtils.writeOnlyAssertions(d);
     }
 }

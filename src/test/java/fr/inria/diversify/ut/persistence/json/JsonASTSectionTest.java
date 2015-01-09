@@ -20,16 +20,14 @@ import static org.junit.Assert.assertTrue;
  */
 public class JsonASTSectionTest {
 
+
+
     /**
      * Test that creates a "transformation" inside the global object
      */
     @Test
     public void testWriteEmpty() {
-        JSONObject o = new JSONObject();
-        JsonASTSectionOutput d = new JsonASTSectionOutput();
-        d.setOutputObject(o);
-        d.write(new ArrayList<>());
-        assertTrue(o.has(JsonASTSectionOutput.TRANSFORMATIONS));
+        SectionTestUtils.doTestWriteEmpty(new JsonASTSectionOutput());
     }
 
     /**
@@ -63,4 +61,6 @@ public class JsonASTSectionTest {
         d.write(Arrays.asList(new ASTTransformation[]{new ASTReplace(), new ASTDelete(), new ASTAdd()}));
         assertEquals(3, d.getOutputObject().getJSONArray(JsonASTSectionOutput.TRANSFORMATIONS).length());
     }
+
+
 }
