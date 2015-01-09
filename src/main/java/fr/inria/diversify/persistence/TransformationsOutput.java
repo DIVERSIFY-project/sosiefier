@@ -12,7 +12,7 @@ import java.util.List;
  * <p>
  * Created by marodrig on 08/01/2015.
  */
-public abstract class TransformationOutput {
+public abstract class TransformationsOutput {
 
     /**
      * Uri of the output
@@ -35,7 +35,7 @@ public abstract class TransformationOutput {
      * @param uri URI of the storage
      * @param transformations Transformations to write
      */
-    public TransformationOutput(List<SectionOuput> sections, String uri, Collection<Transformation> transformations) {
+    public TransformationsOutput(List<SectionOuput> sections, String uri, Collection<Transformation> transformations) {
         this.sections = sections;
         this.uri = uri;
         this.transformations = transformations;
@@ -46,7 +46,7 @@ public abstract class TransformationOutput {
      * @param sections Sections writing to storage
      * @param uri URI of the storage
      */
-    public TransformationOutput(List<SectionOuput> sections, String uri) {
+    public TransformationsOutput(List<SectionOuput> sections, String uri) {
         this.sections = sections;
         this.uri = uri;
         this.transformations = new ArrayList<>();
@@ -57,7 +57,7 @@ public abstract class TransformationOutput {
      * @param transformations Transformations to write
      * @param uri URI of the storage
      */
-    public TransformationOutput(Collection<Transformation> transformations, String uri) {
+    public TransformationsOutput(Collection<Transformation> transformations, String uri) {
         this.sections = new ArrayList<>();
         this.uri = uri;
         this.transformations = transformations;

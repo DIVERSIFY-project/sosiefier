@@ -2,7 +2,7 @@ package fr.inria.diversify.persistence.json;
 
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.SectionOuput;
-import fr.inria.diversify.persistence.TransformationOutput;
+import fr.inria.diversify.persistence.TransformationsOutput;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +17,7 @@ import java.util.List;
  * <p>
  * Created by marodrig on 08/01/2015.
  */
-public class JsonTransformationOutput extends TransformationOutput {
+public class JsonTransformationOutput extends TransformationsOutput {
 
     private static final String UNABLE_WRITE_JSON_MSG = "Unable to write json file. Cause: ";
 
