@@ -261,7 +261,7 @@ public class Assert {
      * thrown.
      * Message contains: Expected: <null> but was: object
      *
-     * @param object Object to check or <code>null</code>
+     * @param object Object to validate or <code>null</code>
      */
     static public void assertNull(Object object) {
         if (object != null) {

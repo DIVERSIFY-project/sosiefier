@@ -44,13 +44,14 @@ public class SpoonMetaFactory{
                     }
                 } catch (IOException e) {
                     Log.error("error in initSpoon", e);
+                    throw new RuntimeException(e);
                 }
             }
         }
         try {
             compiler.build();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return factory;

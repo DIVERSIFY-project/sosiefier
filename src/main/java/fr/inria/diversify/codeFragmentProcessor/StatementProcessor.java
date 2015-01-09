@@ -31,15 +31,17 @@ public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatemen
 			}
 		} catch (Exception e) {
             try{
-//                Log.debug("error in StatementProcessor.process with the statement: "+element, e);
+                Log.debug("error in StatementProcessor.process with the statement: "+element, e);
             } catch (Exception ee) {
-//                Log.debug("error in StatementProcessor.process with the statement ");
+                Log.debug("error in StatementProcessor.process with the statement ");
             }
 		}
 	}
 
 
 	protected boolean isValidStatement(CtStatement element) throws IOException {
+        return true;
+        /*
         String file = element.getPosition().getCompilationUnit().getFile().toString();
         for (File filter : sourceFilter) {
             if(file.contains(filter.getCanonicalPath().toString()))
@@ -48,7 +50,7 @@ public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatemen
 
 		 valid = new ValidStatementVisitor(element, false);
 		element.getParent().accept(valid);
-		return !valid.inExpression(element) && valid.isValid();
+		return !valid.inExpression(element) && valid.isValid();*/
 	}
 
 }

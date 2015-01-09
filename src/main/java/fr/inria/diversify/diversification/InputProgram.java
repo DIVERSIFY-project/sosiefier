@@ -43,6 +43,11 @@ import java.util.stream.Collectors;
 public class InputProgram {
 
     /**
+     * Default tolerance value for the code fragment searching algorithm
+     */
+    private double searchToleranceThreshold = 0.9999999;
+
+    /**
      * List of all the code fragments extracted by Spoon of the input program
      */
     private CodeFragmentList codeFragments;
@@ -346,12 +351,9 @@ public class InputProgram {
             //Analyze only code fragments in the file of the one we are looking for
             if (cfPos[0].equals(position)) {
                 int cfLine = Integer.parseInt(cfPos[1]);
-                //String cfSourceCode = codeFragment.equalString();
-                //source.equals(cfSourceCode)
                 String ctValue = accesor.apply(codeFragment);
                 if (ctValue.equals(searchValue) && cfLine == lineNumber) {
                     //If it is of the same code and the same line: we found it!!
-                    //Log.info("Nailed! Search completed of snippet at pos " + position);
                     return codeFragment;
                 } else {
                     //Similarity factor (provide flexibility...)
@@ -360,7 +362,6 @@ public class InputProgram {
                         similiarFragmentCount = 0;//A better value is found, erase similar count
                         //find the most likely by search value
                         int k = Math.abs(cfLine - lineNumber);
-                        //Log.info("x > sDif -> MD: " + minDiff + " k:" + k + " x:" + x + " sD:" + sDiff);
                         minDiff = k;//Store line distance
                         sDiff = x;
                         result = codeFragment;

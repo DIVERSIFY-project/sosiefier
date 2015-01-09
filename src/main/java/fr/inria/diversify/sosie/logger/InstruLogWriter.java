@@ -30,7 +30,7 @@ public abstract class InstruLogWriter {
     ///Semaphores for locking output streams
     protected Map<String, Semaphore> semaphores;
 
-    ///Previous logs of variables status. Useful to check whether they have change
+    ///Previous logs of variables status. Useful to validate whether they have change
     protected Map<Thread, Map<String, String>> previousVarLog;
 
     protected Boolean partialLogging = null;
@@ -201,7 +201,7 @@ public abstract class InstruLogWriter {
      *
      * @param thread Thread to reset depth
      */
-    protected void resetCallDepth(Thread thread) {
+    public void resetCallDepth(Thread thread) {
         if (callDeep != null && callDeep.containsKey(thread))
             callDeep.remove(thread);
     }

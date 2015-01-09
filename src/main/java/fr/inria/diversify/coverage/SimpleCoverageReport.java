@@ -13,7 +13,7 @@ import java.util.Set;
 
 /**
  *
- * A coverage report to simply check if a element is at least partially covered
+ * A coverage report to simply validate if a element is at least partially covered
  *
  * Created by marodrig on 11/07/2014.
  */

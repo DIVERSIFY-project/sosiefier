@@ -46,7 +46,7 @@ public class AssertInstrumenter extends AbstractLoggingInstrumenter<CtInvocation
             result += typedElement.getDeclaringType().getPackage().getSimpleName() + ".";
             result += typedElement.getDeclaringType().getSimpleName() + ".";
         } else if (typedElement.getPackage() != null && !typedElement.getPackage().toString().equals("null")) {
-            //If not declaring type, check for packages
+            //If not declaring type, validate for packages
             result += typedElement.getPackage().getSimpleName() + ".";
         }
 

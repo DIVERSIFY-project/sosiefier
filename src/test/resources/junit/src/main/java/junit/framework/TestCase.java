@@ -431,7 +431,7 @@ public abstract class TestCase extends Assert implements Test {
      * thrown.
      * Message contains: Expected: <null> but was: object
      *
-     * @param object Object to check or <code>null</code>
+     * @param object Object to validate or <code>null</code>
      */
     @SuppressWarnings("deprecation")
     public static void assertNull(Object object) {

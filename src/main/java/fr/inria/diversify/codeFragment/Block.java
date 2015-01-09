@@ -21,7 +21,7 @@ public class Block extends CodeFragment {
     }
 
     @Override
-    //check if this can be replaced by other
+    //validate if this can be replaced by other
     public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch, boolean subType) {
         Class<?> cl = codeFragment.getClass();
         Class<?> clOther = other.codeFragment.getClass();

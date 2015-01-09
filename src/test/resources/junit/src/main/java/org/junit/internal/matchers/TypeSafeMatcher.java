@@ -7,7 +7,7 @@ import org.junit.internal.MethodSorter;
 
 /**
  * Convenient base class for Matchers that require a non-null value of a specific type.
- * This simply implements the null check, checks the type and then casts.
+ * This simply implements the null validate, checks the type and then casts.
  *
  * @author Joe Walnes
  * @deprecated Please use {@link org.hamcrest.TypeSafeMatcher}.

@@ -48,7 +48,7 @@ public class TempFolderRuleTest {
             String subfolder = "subfolder";
             String filename = "a.txt";
             // force usage of folder.newFolder(String),
-            // check is available and works, to avoid a potential NoSuchMethodError with non-recompiled code.
+            // validate is available and works, to avoid a potential NoSuchMethodError with non-recompiled code.
             Method method = folder.getClass().getMethod("newFolder", new Class<?>[]{String.class});
             createdFiles[0] = (File) method.invoke(folder, subfolder);
             new File(createdFiles[0], filename).createNewFile();

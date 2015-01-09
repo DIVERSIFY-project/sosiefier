@@ -5,7 +5,7 @@ import org.junit.runners.model.Statement;
 
 /**
  * Verifier is a base class for Rules like ErrorCollector, which can turn
- * otherwise passing test methods into failing tests if a verification check is
+ * otherwise passing test methods into failing tests if a verification validate is
  * failed
  *
  * <pre>

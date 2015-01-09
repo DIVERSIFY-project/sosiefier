@@ -30,7 +30,7 @@ public abstract class LogWriter {
     ///Semaphores for locking output streams
     protected Map<String, Semaphore> semaphores;
 
-    ///Previous logs of variables status. Useful to check whether they have change
+    ///Previous logs of variables status. Useful to validate whether they have change
     protected Map<Thread, Map<String, String>> previousVarLog;
 
 

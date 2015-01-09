@@ -52,7 +52,7 @@ public abstract class Filter {
                     return desiredDescription.equals(description);
                 }
 
-                // explicitly check if any children want to run
+                // explicitly validate if any children want to run
                 for (Description each : description.getChildren()) {
                     if (shouldRun(each)) {
                         return true;
