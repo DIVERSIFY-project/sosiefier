@@ -1,6 +1,6 @@
 package fr.inria.diversify.ut.persistence.json;
 
-import fr.inria.diversify.persistence.json.JsonASTDeleteSectionOutput;
+import fr.inria.diversify.persistence.json.JsonASTReplaceSectionOutput;
 import fr.inria.diversify.persistence.json.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -13,30 +13,32 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 /**
  * Created by marodrig on 08/01/2015.
  */
-public class JSONASTDeleteTest {
+public class JSONASTReplaceTest {
 
     private static final String TRANSFORMATIONS = "transformations";
 
+    private void writeAssertions() {
+
+    }
 
     /**
-     * Write Delete
+     * Write Replace
      *
-     * @throws JSONException
+     * @throws org.json.JSONException
      */
     @Test
     public void testWrite() throws JSONException {
-        JsonASTDeleteSectionOutput d = new JsonASTDeleteSectionOutput();
+        JsonASTReplaceSectionOutput d = new JsonASTReplaceSectionOutput();
         d.setOutputObject(new JSONObject());
-        ASTDelete r = new ASTDelete();
+        ASTReplace r = new ASTReplace();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
+        r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         d.write(Arrays.asList(new ASTTransformation[]{r}));
 
         JSONObject tr = d.getOutputObject().getJSONArray(
@@ -45,24 +47,35 @@ public class JSONASTDeleteTest {
         assertEquals(tr.get("position"), "org.class:1");
         assertEquals(tr.get("type"), "CtReturn");
         assertEquals(tr.get("sourcecode"), "return 0");
+
+        tr = d.getOutputObject().getJSONArray(
+                JsonASTSectionOutput.TRANSFORMATIONS).getJSONObject(0).getJSONObject("transplant");
+        assertEquals(tr.get("position"), "org.class:1");
+        assertEquals(tr.get("type"), "CtReturn");
+        assertEquals(tr.get("sourcecode"), "return 0");
     }
 
     /**
-     * Write Delete transformations only
+     * Write Replace transformations only
      *
-     * @throws JSONException
+     * @throws org.json.JSONException
      */
     @Test
     public void testWriteDeleteOnly() throws JSONException {
-        JsonASTDeleteSectionOutput d = new JsonASTDeleteSectionOutput();
+        JsonASTReplaceSectionOutput d = new JsonASTReplaceSectionOutput();
         d.setOutputObject(new JSONObject());
-        ASTDelete r = new ASTDelete();
+        ASTReplace r = new ASTReplace();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        d.write(Arrays.asList(new ASTTransformation[]{new ASTReplace(), r, new ASTAdd()}));
+        r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
+        d.write(Arrays.asList(new ASTTransformation[]{new ASTDelete(), r, new ASTAdd()}));
         JSONArray array = d.getOutputObject().getJSONArray(JsonASTSectionOutput.TRANSFORMATIONS);
+
         assertEquals(3, array.length());
         assertTrue(array.getJSONObject(1).has("transplantationPoint"));
         assertFalse(array.getJSONObject(2).has("transplantationPoint"));
         assertFalse(array.getJSONObject(0).has("transplantationPoint"));
+        assertTrue(array.getJSONObject(1).has("transplant"));
+        assertFalse(array.getJSONObject(2).has("transplant"));
+        assertFalse(array.getJSONObject(0).has("transplant"));
     }
 }

@@ -50,6 +50,14 @@ public abstract class CodeFragment {
 //        this.initInputContext();
     }
 
+    /**
+     * Returns the simple name of the Code fragment's type
+     * @return A string with the name
+     */
+    public String getCodeFragmentTypeSimpleName() {
+        return getCodeFragmentType().getSimpleName();
+    }
+
     public CtTypeReference<?> getOutputContext() {
         return context.getOutputContext();
     }

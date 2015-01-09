@@ -36,13 +36,4 @@ public abstract class JsonSectionOutput extends SectionOuput {
     }
 
 
-    @Override
-    public void write(Collection<Transformation> transformations) {
-        if ( getOutputObject() == null ) throw new PersistenceException("JSON Object not set");
-        if ( !getOutputObject().has(TRANSFORMATIONS) ) try {
-            getOutputObject().put(TRANSFORMATIONS, new JSONObject());
-        } catch (JSONException e) {
-            throw new PersistenceException("Cant set transformation object", e);
-        }
-    }
 }
