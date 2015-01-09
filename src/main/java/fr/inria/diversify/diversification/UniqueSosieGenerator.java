@@ -19,8 +19,9 @@ import java.util.Random;
  * Created by Simon on 23/10/2014.
  */
 public class UniqueSosieGenerator extends AbstractDiversify {
-    List<Transformation> allTransformation;
-    private Collection<Transformation> transformation;
+    protected List<Transformation> allTransformation;
+    protected boolean randomGeneration = false;
+    protected int currentSize;
 
     public UniqueSosieGenerator(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
         this.sourceDir = srcDir;
@@ -36,11 +37,16 @@ public class UniqueSosieGenerator extends AbstractDiversify {
 
     @Override
     public void run(int n) throws Exception {
-//        Random random = new Random();
-        while (transformations.size() < n && !allTransformation.isEmpty()) {
-//            Transformation t = allTransformation.get(random.nextInt(allTransformation.size()));
-//            allTransformation.remove(t);
-            run(allTransformation.remove(0));
+        if(randomGeneration) {
+            Random random = new Random();
+            while (transformations.size() < n && !allTransformation.isEmpty()) {
+                Transformation t = allTransformation.remove(random.nextInt(allTransformation.size()));
+                run(t);
+            }
+        } else {
+            while (transformations.size() < n && !allTransformation.isEmpty()) {
+                run(allTransformation.remove(0));
+            }
         }
     }
 
@@ -77,6 +83,8 @@ public class UniqueSosieGenerator extends AbstractDiversify {
         } catch (BuildTransplantException e) {}
     }
 
+
+
     protected void writeTransformation(String fileName, ASTTransformation transformation) throws IOException, JSONException {
         FileWriter out = new FileWriter(fileName);
 
@@ -87,5 +95,9 @@ public class UniqueSosieGenerator extends AbstractDiversify {
 
     public void setTransformation(Collection<Transformation> transformation) {
         allTransformation = new ArrayList<>(transformation);
+    }
+
+    public void setRandomGeneration(boolean randomGeneration) {
+        this.randomGeneration = randomGeneration;
     }
 }
