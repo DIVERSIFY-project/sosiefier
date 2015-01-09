@@ -468,7 +468,7 @@ public class DiversifyMain {
 
     }
 
-    protected void computeDiversifyStat(String transDir, String fileName) throws Exception {
+    protected void computeDiversifyStat(String transDir, String directoryName) throws Exception {
         TransformationParser tf = new TransformationParser(true, inputProgram);
 //        TransformationOldParser tf = new TransformationOldParser(true);
         Collection<Transformation> transformations = tf.parseDir(transDir);
@@ -476,12 +476,12 @@ public class DiversifyMain {
         TransformationFilter filter = new TransformationFilter();
 //        filter.setName("delete");
 //        filter.setTransplantPosition("com.github.mobile.accounts");
-        TransformationsWriter write = new TransformationsWriter(filter.filter(transformations), fileName);
+        TransformationsWriter write = new TransformationsWriter(filter.filter(transformations), directoryName);
 
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         write.writeAllTransformation(null);
         StatisticDiversification sd = new StatisticDiversification(transformations);
-        sd.writeStat(fileName);
+        sd.writeStat(directoryName);
 
         for (String type : getAllTransformationType(transformations))
             write.writeAllTransformation(type);

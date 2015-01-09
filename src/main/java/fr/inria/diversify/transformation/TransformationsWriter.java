@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -19,14 +20,19 @@ import java.util.stream.Collectors;
  */
 public class TransformationsWriter {
 
-    protected String fileNamePrefix;
+    protected String directoryName;
     protected Collection<Transformation> transformations;
 
     public TransformationsWriter() {}
 
-    public TransformationsWriter(Collection<Transformation> transformations, String prefix) {
+    public TransformationsWriter(Collection<Transformation> transformations, String directoryName) {
         this.transformations = transformations;
-        fileNamePrefix = prefix;
+        this.directoryName = directoryName;
+        File directory = new File(directoryName);
+
+        if(!directory.exists()) {
+            directory.mkdirs();
+        }
     }
 
     public String writeGoodTransformation(String type) throws IOException, JSONException {
@@ -36,9 +42,9 @@ public class TransformationsWriter {
 
         String fileName;
         if(type == null)
-            fileName = fileNamePrefix+"_good.json";
+            fileName = directoryName + "/good.json";
         else
-            fileName = fileNamePrefix+ "_" + type + "_good.json";
+            fileName = directoryName+ "/" + type + "_good.json";
 
 
 
@@ -52,15 +58,16 @@ public class TransformationsWriter {
 
         String fileName;
         if(type == null)
-            fileName = fileNamePrefix+".json";
+            fileName = directoryName + "all.json";
         else
-            fileName = fileNamePrefix+ "_" + type + ".json";
+            fileName = directoryName+ "/" + type + "_all.json";
 
         return  writeTransformation(fileName,transformation);
     }
 
     public String writeTransformation(String fileName, Collection<Transformation> trans) throws IOException, JSONException {
         Log.debug("write {} transformation in file {}",trans.size(), fileName);
+
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         JSONArray obj = new JSONArray();
 
