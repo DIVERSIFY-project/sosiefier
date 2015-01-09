@@ -28,10 +28,10 @@ import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.reference.CtTypeReference;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * The TransformationJSONParser is a great tool to load Transformations from a JSON file and link them to the existing
@@ -63,7 +63,10 @@ public class TransformationJsonParser {
     InputProgram inputProgram;
 
     private HashMap<Integer, String> failureDictionary;
+
     private int parsingTransfIndex;
+
+    private ActionListener listener;
 
     public TransformationJsonParser(boolean toSet, InputProgram inputProgram) {
 
@@ -75,32 +78,25 @@ public class TransformationJsonParser {
             transformations = new ArrayList<>();
     }
 
-    public Collection<Transformation> parseDir(String dir) {
+    public Collection<Transformation> parseDir(String dir) throws TransformationParserException {
 
         File file = new File(dir);
         int countFile = 0;
         Log.debug("transformation directory: {}", file.getAbsolutePath());
 
-        List<File> files = Arrays.asList(file.listFiles());
-        transformations = files.parallelStream()
-                .filter(f -> f.getName().endsWith(".json"))
-                .flatMap(f -> {
-                    try {
-                        return parseFile(f).stream();
-                    } catch (TransformationParserException e) {
-                        e.printStackTrace();
-                    }
-                    return new ArrayList<Transformation>().stream();
-                })
-                .collect(Collectors.toList());
-
+        for (File f : file.listFiles())
+            if (f.getName().endsWith(".json")) {
+                countFile++;
+                Log.debug("Current number of transformation {}", transformations.size());
+                Log.debug("parse tranformation file: " + f.getName());
+                transformations.addAll(parseFile(f));
+            }
         Log.debug("number of transformation file: {}", countFile);
         Log.debug("number of transformation : {}", transformations.size());
         Log.debug("number of parse error : {}", countError);
 
         return transformations;
     }
-
 
 
     public Transformation parseUniqueTransformation(File file) throws TransformationParserException {
@@ -121,15 +117,33 @@ public class TransformationJsonParser {
         }
     }
 
+    /**
+     * Sets the load progress listener
+     */
+    public void setListener(ActionListener listener) {
+        this.listener = listener;
+    }
+
     public List<Transformation> parseArray(JSONArray array) throws JSONException {
         ArrayList<Transformation> list = new ArrayList<Transformation>();
-        for (int i = 0; i < array.length(); i++) {
+
+        int stepSize = array.length() / 10;
+        int step = stepSize;
+        int length = array.length();
+
+        for (int i = 0; i < length; i++) {
             try {
                 parsingTransfIndex = i;
                 JSONObject jsonObject = array.getJSONObject(i);
                 if (filter(jsonObject)) {
                     Transformation t = parseTransformation(jsonObject);
                     list.add(t);
+                }
+
+                step--;
+                if (step <= 0 && stepSize > 0 && listener != null) {
+                    step = stepSize;
+                    listener.actionPerformed(new ActionEvent(i / length, 0, ""));
                 }
             } catch (TransformationParserException e) {
                 Log.warn("Unable to parse transformation " + i);
@@ -139,6 +153,21 @@ public class TransformationJsonParser {
 
         parseFailureDictionay(array);
         return list;
+    }
+
+    /**
+     * Parses a list of files
+     *
+     * @param files Files to parse
+     * @return A list of transformations
+     * @throws TransformationParserException
+     */
+    public List<Transformation> parseFileList(List<String> files) throws TransformationParserException {
+        ArrayList<Transformation> result = new ArrayList<>();
+        for (String s : files) {
+            result.addAll(parseFile(new File(s)));
+        }
+        return result;
     }
 
     public List<Transformation> parseFile(File file) throws TransformationParserException {
@@ -161,11 +190,19 @@ public class TransformationJsonParser {
             }
 
             JSONArray array = null;
+            String fileStr = sb.toString();
             try {
-                array = new JSONArray(sb.toString());
+                array = new JSONArray(fileStr);
             } catch (JSONException e) {
                 if (e.toString().contains("A JSONArray text must start with '['")) {
-                    array = new JSONObject(sb.toString()).getJSONArray("transformations");
+                    try {
+                        array = new JSONObject(fileStr).getJSONArray("transformations");
+                    } catch (JSONException ex) {
+                        //Try contingency plan with malformed JSON files
+                        fileStr.replace("\n", ",");
+                        fileStr = "[" + fileStr + "]";
+                        array = new JSONArray(fileStr);
+                    }
                 }
             }
 
@@ -228,7 +265,7 @@ public class TransformationJsonParser {
             if (trans == null)
                 throw new TransformationParserException("Unknown transformation type for " + jsonObject.toString());
 
-            if ( jsonObject.has("tindex") ) {
+            if (jsonObject.has("tindex")) {
                 trans.setIndex(jsonObject.getInt("tindex"));
             }
             trans.setFailures(getFailures(jsonObject));
@@ -489,9 +526,9 @@ public class TransformationJsonParser {
         ReturnValueMutation trans = new ReturnValueMutation();
 
         Object jsonPosition = jsonObject.get("position");
-        CtElement p = null;
+        CtReturn p = null;
 
-        for (CtElement ret : inputProgram.getAllElement(CtReturn.class)) {
+        for (CtReturn<?> ret : inputProgram.getReturns()) {
             String position = ret.getParent(CtPackage.class).getQualifiedName()
                     + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
             if (position.equals(jsonPosition)) {
@@ -502,7 +539,7 @@ public class TransformationJsonParser {
         if (p == null) {
             throw new TransformationParserException("Cannot find return statement that matches position " + jsonPosition);
         }
-        trans.setTransformationPoint((CtReturn) p);
+        trans.setTransformationPoint(p);
 
         return trans;
     }
@@ -518,11 +555,11 @@ public class TransformationJsonParser {
         }
 
         CtLocalVariable p = null;
-        for (CtElement ret : inputProgram.getAllElement(CtLocalVariable.class)) {
+        for (CtLocalVariable<?> ret : inputProgram.getInlineConstant()) {
             String position = ret.getParent(CtPackage.class).getQualifiedName()
                     + "." + ret.getParent(CtSimpleType.class).getSimpleName() + ":" + ret.getPosition().getLine();
             if (position.equals(jsonPos)) {
-                p = (CtLocalVariable) ret;
+                p = ret;
                 break;
             }
         }
@@ -574,26 +611,18 @@ public class TransformationJsonParser {
             TransformationParserException {
         ASTReplace trans = new ASTReplace();
 
-        trans.setTransplant(findCodeFragment(jsonObject.getJSONObject("transplant")));
+        trans.setCodeFragmentToReplace(findCodeFragment(jsonObject.getJSONObject("transplant")));
         trans.setVarMapping(parseVariableMapping(jsonObject.getJSONObject("variableMapping")));
 
         return trans;
     }
 
     protected CodeFragment findCodeFragment(JSONObject jsonObject) throws TransformationParserException {
+
         CodeFragment cf = null;
-        try {
-            String position = jsonObject.getString("position");
-            String sourCode = null;
-            if(jsonObject.has("sourcecode")) {
-                sourCode = jsonObject.getString("sourcecode");
-            }
-            String type = jsonObject.getString("type");
-            cf = inputProgram.getCodeFragment(position, sourCode, type);
-        } catch (JSONException e) {
-            throw new TransformationParserException(
-                    "Unnable to obtain at least one field from JSON object " + jsonObject.toString(), e);
-        }
+        //String position = jsonObject.getString("position");
+        //String sourceCode = jsonObject.getString("sourceCode");
+        cf = inputProgram.getCodeFragment(jsonObject);
 
         if (cf == null) {
             throw new TransformationParserException(

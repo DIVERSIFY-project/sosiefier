@@ -32,6 +32,8 @@ public class SosiePoolCreatorMain {
             inputProgram.setPreviousTransformationsPath(
                     configuration.getProperty("transformation.directory"));
             inputProgram.processCodeFragments();
+
+
             SosiePoolCreator creator = new SosiePoolCreator(inputProgram);
 
             //Filter properties

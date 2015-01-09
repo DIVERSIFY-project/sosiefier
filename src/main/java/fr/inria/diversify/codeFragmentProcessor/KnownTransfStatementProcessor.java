@@ -36,7 +36,7 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
                     positions.add(s);
                 }
                 String klass = s.split(":")[0];
-                if ( !classNames.contains(klass) ) {
+                if (!classNames.contains(klass)) {
                     classNames.add(klass);
                 }
                 s = obj.getJSONObject("transplant").getString("sourceCode");
@@ -50,7 +50,7 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
                     positions.add(s);
                 }
                 String klass = s.split(":")[0];
-                if ( !classNames.contains(klass) ) {
+                if (!classNames.contains(klass)) {
                     classNames.add(klass);
                 }
                 s = obj.getJSONObject("transplantationPoint").getString("sourceCode");
@@ -73,6 +73,7 @@ public class KnownTransfStatementProcessor extends StatementProcessor {
             }
         }
     }
+
 
     int count = 0;
 

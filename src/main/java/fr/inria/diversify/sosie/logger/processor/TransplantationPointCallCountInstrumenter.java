@@ -76,15 +76,7 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
 
         alreadyVisited.add(statement.getPosition().toString());
 
-        //int index = elementsMap.get(statement.getPosition().toString()).index;
-
-        //System.out.println("Index: " + index);
-        //System.out.println("Pos: " + statement.getPosition());
-
         CtElement e = statement;
-
-        //CompilationUnit cuc = e.getPosition().getCompilationUnit();
-        //cuc.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(), "/*" + index + "*/", 0));
 
         //Search for the parent block first
         //TODO: Hacer esto con un visitor
@@ -109,10 +101,11 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
                     } else if (e.getParent() instanceof CtBlock) {
                         int b = cu.beginOfLineIndex(e.getPosition().getSourceStart());
                         cu.addSourceCodeFragment(new SourceCodeFragment(b, probeStr + ";", 0));
-                    } else if (e.getParent() instanceof CtIf) {
-                        cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceStart(),
+                    } else if (e instanceof CtIf) {
+                        CtExpression c = ((CtIf)e).getCondition();
+                        cu.addSourceCodeFragment(new SourceCodeFragment(c.getPosition().getSourceStart(),
                                 "(" + probeStr + "||", 0));
-                        cu.addSourceCodeFragment(new SourceCodeFragment(e.getPosition().getSourceEnd() + 1, ")", 0));
+                        cu.addSourceCodeFragment(new SourceCodeFragment(c.getPosition().getSourceEnd() + 1, ")", 0));
                         //System.out.println("Parent if");
                     } else {
                         e = e.getParent();

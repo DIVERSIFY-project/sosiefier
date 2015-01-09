@@ -7,6 +7,7 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
+//import spoon.reflect.reference.CtCatchVariableReference;
 import spoon.reflect.visitor.CtAbstractVisitor;
 import spoon.reflect.visitor.QueryVisitor;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -236,6 +237,12 @@ public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtS
             @Override
             public <T> void visitCtThisAccess(CtThisAccess<T> tCtThisAccess) {
             }
+
+            /*
+            @Override
+            public <T> void visitCtCatchVariableReference(CtCatchVariableReference<T> tCtCatchVariableReference) {
+
+            }*/
         };
 
         visitor.scan(el);

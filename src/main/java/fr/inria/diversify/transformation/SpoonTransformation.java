@@ -78,8 +78,8 @@ public abstract class SpoonTransformation<P extends CtElement, T extends CtEleme
 
     public void removeSourceCode() {
         CompilationUnit compileUnit = transformationPoint.getPosition().getCompilationUnit();
-        if(compileUnit.getSourceCodeFraments() != null)
-            compileUnit.getSourceCodeFraments().clear();
+        if(compileUnit.getSourceCodeFragments() != null)
+            compileUnit.getSourceCodeFragments().clear();
     }
 
 

@@ -6,10 +6,12 @@ import fr.inria.diversify.transformation.ast.exception.ApplyTransformationExcept
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
 import spoon.reflect.code.*;
+import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
+import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
@@ -29,6 +31,8 @@ public abstract class ASTTransformation extends AbstractTransformation {
      */
     protected CodeFragment transplantationPoint;
 
+    public ASTTransformation() {
+    }
     public CtSimpleType<?> getOriginalClass(CodeFragment cf) {
         return cf.getCompilationUnit().getMainType();
     }
@@ -40,6 +44,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
     public void setTransplantationPoint(CodeFragment transplantationPoint) {
         this.transplantationPoint = transplantationPoint;
     }
+
 
     public String classLocationName() {
         return transplantationPoint.getSourceClass().getQualifiedName();
@@ -55,10 +60,19 @@ public abstract class ASTTransformation extends AbstractTransformation {
         return "field";
     }
 
+
     @Override
     public String getLevel() {
         CtCodeElement stmt = transplantationPoint.getCtCodeFragment();
-        if (stmt instanceof CtLocalVariable || stmt instanceof CtNewClass || stmt instanceof CtBreak || stmt instanceof CtUnaryOperator || stmt instanceof CtAssignment || stmt instanceof CtReturn || stmt instanceof CtOperatorAssignment || stmt instanceof CtContinue || stmt instanceof CtInvocation)
+        if (stmt instanceof CtLocalVariable
+                || stmt instanceof CtNewClass
+                || stmt instanceof CtBreak
+                || stmt instanceof CtUnaryOperator
+                || stmt instanceof CtAssignment
+                || stmt instanceof CtReturn
+                || stmt instanceof CtOperatorAssignment
+                || stmt instanceof CtContinue
+                || stmt instanceof CtInvocation)
             return "statement";
         return "block";
     }
@@ -92,7 +106,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
     /**
      * Prints the modified java file. When the transformation is done a new java file is created. This method performs a
      * pretty print of it
-     *
      * @param directory Directory where the java file is going to be placed
      * @throws IOException
      */
@@ -110,6 +123,15 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     public void setSubType(boolean subType) {
         this.subType = subType;
+    }
+    /**
+     * Removes the original source code in the transplantation point
+     */
+    public void removeSourceCode() {
+        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
+        CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
+        if (compileUnit.getSourceCodeFragments() != null)
+            compileUnit.getSourceCodeFragments().clear();
     }
 
     public abstract boolean usedOfSubType();

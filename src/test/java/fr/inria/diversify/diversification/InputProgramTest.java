@@ -24,7 +24,6 @@ public class InputProgramTest {
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2/src/main"), 5));
         inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
-
         Assert.assertTrue(inputProgram.getCodeFragments().size() > 0);
     }
 

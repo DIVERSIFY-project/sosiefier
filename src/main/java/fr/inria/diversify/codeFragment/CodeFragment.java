@@ -133,8 +133,10 @@ public abstract class CodeFragment {
 
         for (CtVariableReference<?> variable : other.getInputContext().getVar()) {
             List<CtVariableReference> list = getInputContext().allCandidate(variable.getType(), subType);
-            CtVariableReference candidate = list.get(r.nextInt(list.size()));
-            varMap.put(variable.toString(), candidate.toString());
+            if ( list.size() > 0 ) {
+                CtVariableReference candidate = list.get(r.nextInt(list.size()));
+                varMap.put(variable.toString(), candidate.toString());
+            }
         }
         return varMap;
     }

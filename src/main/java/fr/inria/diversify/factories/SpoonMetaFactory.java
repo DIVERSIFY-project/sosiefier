@@ -17,6 +17,12 @@ import java.io.IOException;
 public class SpoonMetaFactory{
 
     public Factory buildNewFactory(String srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        ArrayList<String> a = new ArrayList<String>();
+        a.add(srcDirectory);
+        return buildNewFactory(a, javaVersion);
+    }
+    public Factory buildNewFactory(Collection<String> srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        //String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
 
         StandardEnvironment env = new StandardEnvironment();
         env.setComplianceLevel(javaVersion);
@@ -43,6 +49,7 @@ public class SpoonMetaFactory{
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return factory;
     }
 }

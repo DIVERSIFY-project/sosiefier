@@ -118,8 +118,8 @@ public class CleanTransformations {
         c.clean(path, outputPath)
 */
         CleanTransformations c = new CleanTransformations();
-        c.clean("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\commons-lang.json",
-                "C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\commons-lang-index-non-rep.json");
+        c.clean("C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\ISSTA\\common-lang-diverse-02.json",
+                "C:\\MarcelStuff\\projects\\DIVERSE\\programs\\single-sosies-pools\\ISSTA\\common-lang-diverse-02-nonrep.json");
     }
 
 }

@@ -24,7 +24,7 @@ public class ReplaceNew extends SpoonTransformation<CtNewClass, CtNewClass> {
 
     public void removeSourceCode() {
         CompilationUnit compileUnit = transformationPoint.getPosition().getCompilationUnit();
-        compileUnit.getSourceCodeFraments().clear();
+        compileUnit.getSourceCodeFragments().clear();
     }
 }
 

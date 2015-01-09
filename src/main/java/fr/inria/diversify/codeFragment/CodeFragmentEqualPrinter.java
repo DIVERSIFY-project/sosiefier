@@ -36,8 +36,6 @@ public class CodeFragmentEqualPrinter extends DefaultJavaPrettyPrinter {
 		write(reference.getType().toString());
 	}
 
-
-
 	public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
 		if (reference.getSimpleName().equals("this")) {
 			if (context.currentThis.isEmpty()
