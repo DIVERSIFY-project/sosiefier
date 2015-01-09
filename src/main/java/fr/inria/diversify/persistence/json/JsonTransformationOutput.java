@@ -34,6 +34,10 @@ public class JsonTransformationOutput extends TransformationOutput {
         super(sections, uri);
     }
 
+    public JsonTransformationOutput(Collection<Transformation> transformations, String uri) {
+        super(transformations, uri);
+    }
+
 
     @Override
     protected void prepareSection(SectionOuput s) {

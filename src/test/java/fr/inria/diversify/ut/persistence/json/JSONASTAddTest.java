@@ -23,7 +23,6 @@ public class JSONASTAddTest extends JSONASTReplaceTest {
 
     private static final String TRANSFORMATIONS = "transformations";
 
-
     /**
      * Write Replace
      *
@@ -37,19 +36,7 @@ public class JSONASTAddTest extends JSONASTReplaceTest {
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         d.write(Arrays.asList(new ASTTransformation[]{r}));
-
-        JSONObject tr = d.getOutputObject().getJSONArray(
-                JsonASTSectionOutput.TRANSFORMATIONS).getJSONObject(0).getJSONObject("transplantationPoint");
-
-        assertEquals(tr.get("position"), "org.class:1");
-        assertEquals(tr.get("type"), "CtReturn");
-        assertEquals(tr.get("sourcecode"), "return 0");
-
-        tr = d.getOutputObject().getJSONArray(
-                JsonASTSectionOutput.TRANSFORMATIONS).getJSONObject(0).getJSONObject("transplant");
-        assertEquals(tr.get("position"), "org.class:1");
-        assertEquals(tr.get("type"), "CtReturn");
-        assertEquals(tr.get("sourcecode"), "return 0");
+        writeAssertions(d);
     }
 
     /**
@@ -65,14 +52,6 @@ public class JSONASTAddTest extends JSONASTReplaceTest {
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         d.write(Arrays.asList(new ASTTransformation[]{new ASTDelete(), r, new ASTAdd()}));
-        JSONArray array = d.getOutputObject().getJSONArray(JsonASTSectionOutput.TRANSFORMATIONS);
-
-        assertEquals(3, array.length());
-        assertTrue(array.getJSONObject(1).has("transplantationPoint"));
-        assertFalse(array.getJSONObject(2).has("transplantationPoint"));
-        assertFalse(array.getJSONObject(0).has("transplantationPoint"));
-        assertTrue(array.getJSONObject(1).has("transplant"));
-        assertFalse(array.getJSONObject(2).has("transplant"));
-        assertFalse(array.getJSONObject(0).has("transplant"));
+        writeOnlyAssertions(d);
     }
 }

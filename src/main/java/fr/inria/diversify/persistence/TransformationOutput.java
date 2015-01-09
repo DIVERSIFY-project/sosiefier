@@ -52,6 +52,24 @@ public abstract class TransformationOutput {
         this.transformations = new ArrayList<>();
     }
 
+    /**
+     * Build the transformation output object
+     * @param transformations Transformations to write
+     * @param uri URI of the storage
+     */
+    public TransformationOutput(Collection<Transformation> transformations, String uri) {
+        this.sections = new ArrayList<>();
+        this.uri = uri;
+        this.transformations = transformations;
+    }
+
+    /**
+     * Adds a section
+     * @param section
+     */
+    public void addTransformation(SectionOuput section) {
+        sections.add(section);
+    }
 
     /**
      * Adds a transformation to persist
