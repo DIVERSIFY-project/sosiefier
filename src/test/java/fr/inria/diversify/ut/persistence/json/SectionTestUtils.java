@@ -7,6 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -16,6 +18,8 @@ import static org.junit.Assert.assertTrue;
  * Created by marodrig on 09/01/2015.
  */
 public class SectionTestUtils {
+
+
     protected static void writeAssertions(JsonSectionOutput d) throws JSONException {
         JSONObject tr = d.getOutputObject().getJSONArray(
                 JsonASTSectionOutput.TRANSFORMATIONS).getJSONObject(0).getJSONObject("transplantationPoint");
@@ -47,5 +51,10 @@ public class SectionTestUtils {
         d.setOutputObject(o);
         d.write(new ArrayList<>());
         assertTrue(o.has(JsonASTSectionOutput.TRANSFORMATIONS));
+    }
+
+
+    public static <T> List<T> list(T... data) {
+        return Arrays.asList(data);
     }
 }

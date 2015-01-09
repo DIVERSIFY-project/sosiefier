@@ -17,32 +17,35 @@ import java.util.Map;
  */
 public class JsonASTFailuresSectionOutput extends JsonASTSectionOutput {
 
+    public static final String FAILURES = "failures";
+    public static final String FAILURES_DICTIONARY = "failureDictionary";
+
     private Map<String, Integer> failuresIDs = new HashMap<>();
 
     private int id = 0;
+
+    protected void put(JSONObject object, Transformation transformation, boolean isEmptyObject) throws JSONException {
+        if (isEmptyObject) super.put(object, transformation, isEmptyObject);
+
+        List<String> failures = transformation.getFailures();
+        JSONArray array = new JSONArray();
+        if (failures != null) {
+            for (String failure : failures) {
+                if (!failuresIDs.containsKey(failure)) {
+                    failuresIDs.put(failure, id);
+                    array.put(id);
+                    id++;
+                } else array.put(failuresIDs.get(failure));
+            }
+        }
+        object.put(FAILURES, array);
+    }
 
     @Override
     public void write(Collection<Transformation> transformations) {
         super.write(transformations);
         try {
-            JSONObject to = getOutputObject().getJSONObject(TRANSFORMATIONS);
-            for (Transformation t : transformations) {
-                if (t instanceof ASTTransformation) {
-                    List<String> failures = t.getFailures();
-                    JSONArray array = new JSONArray();
-                    if (failures != null) {
-                        for (String failure : failures) {
-                            if (!failuresIDs.containsKey(failure)) {
-                                failuresIDs.put(failure, id);
-                                id++;
-                            }
-                            array.put(failuresIDs.get(failure));
-                        }
-                    }
-                    to.put("failures", array);
-                }
-            }
-            getOutputObject().put("failures", failuresIDs);
+            getOutputObject().put(FAILURES_DICTIONARY, failuresIDs);
         } catch (JSONException e) {
             throw new PersistenceException(e);
         }
