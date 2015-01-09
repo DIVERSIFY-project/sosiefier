@@ -24,7 +24,7 @@ public abstract class AbstractSessionResults {
     protected int testFailedCount;
 
     /**
-     * Amount of build compile failed  runs during the session
+     * Amount of locate compile failed  runs during the session
      */
     protected int compileFailedCount;
 

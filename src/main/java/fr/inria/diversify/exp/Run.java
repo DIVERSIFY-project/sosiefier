@@ -31,7 +31,7 @@ public class Run {
         Run run = new Run();
         run.localRepository = run.makeTmpSetting(resultDir);
 
-        Log.info("build report for original/original");
+        Log.info("locate report for original/original");
         List<StackTrace> originalLog = run.makeReportAndOLog(originalDir, resultDir+ "/original"+reportCount++);
 
         File result = new File(resultDir + "/sosie");
@@ -39,7 +39,7 @@ public class Run {
             result.mkdirs();
         }
 
-        Log.info("build report for sosie");
+        Log.info("locate report for sosie");
         ComputeReport computeReport = new ComputeReport();
         computeReport.setMinReportSize(run.minReportSize);
         computeReport.setOriginalLog(originalLog);
@@ -51,7 +51,7 @@ public class Run {
 
 
         for(String client : clients) {
-            Log.info("build report for client: {}",client);
+            Log.info("locate report for client: {}",client);
             try {
                 FileUtils.copyFile(new File(originalDir + "/log/id"), new File(client + "/log/id"));
                 run.setPartialLogging(originalDir, false);
@@ -114,7 +114,7 @@ public class Run {
         }
         Log.info("run program: {}, install: {}, status: {}",programDirectory,install,builder.getStatus() );
         if(status != 0) {
-            throw new Exception("error during the build of " + programDirectory);
+            throw new Exception("error during the locate of " + programDirectory);
         }
     }
 

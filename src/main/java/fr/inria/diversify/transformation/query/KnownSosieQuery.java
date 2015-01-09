@@ -57,7 +57,7 @@ public class KnownSosieQuery extends TransformationQuery {
 
     private ArrayList<SosieWithCoverage> sosies;
 
-    //Indicates if the multi-sosies are build incrementing a the previously found smaller multi-sosie
+    //Indicates if the multi-sosies are locate incrementing a the previously found smaller multi-sosie
     private boolean incrementalSosiefication = true;
 
     //Last multisosie found

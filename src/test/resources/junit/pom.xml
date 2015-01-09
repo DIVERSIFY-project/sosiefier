@@ -121,7 +121,7 @@
             one or more related mojos.
             For more information see http://maven.apache.org/plugin-developers/index.html
 
-            The following plugins are ordered according the Maven build lifecycle.
+            The following plugins are ordered according the Maven locate lifecycle.
             http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
             -->
             <plugin>
@@ -441,7 +441,7 @@
                     <plugin>
                         <!--
                         The goal is to sign all artifacts so that the user may verify them before downloading.
-                        The automatic build system may reuire your key ID, and passphrase specified using system properties:
+                        The automatic locate system may reuire your key ID, and passphrase specified using system properties:
                         -Dgpg.passphrase="<passphrase>" -Dgpg.keyname="<your key ID>"
                         In order to create the key pair, use the command "gpg &ndash;&ndash;gen-key".
                         (&ndash;&ndash; stands for double dash)

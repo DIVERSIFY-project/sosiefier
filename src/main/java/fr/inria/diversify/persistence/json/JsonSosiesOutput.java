@@ -11,13 +11,13 @@ import java.util.List;
 /**
  * Created by marodrig on 09/01/2015.
  */
-public class JsonSosieOutput extends JsonTransformationOutput {
+public class JsonSosiesOutput extends JsonTransformationOutput {
 
-    public JsonSosieOutput(List<SectionOuput> sections, String uri, Collection<Transformation> transformations) {
+    public JsonSosiesOutput(List<SectionOuput> sections, String uri, Collection<Transformation> transformations) {
         super(sections, uri, transformations);
     }
 
-    public JsonSosieOutput(Collection<Transformation> transformations, String uri) {
+    public JsonSosiesOutput(Collection<Transformation> transformations, String uri) {
         super(transformations, uri);
         this.sections = new ArrayList<>();
         sections.add(new JsonASTAddSectionOutput());

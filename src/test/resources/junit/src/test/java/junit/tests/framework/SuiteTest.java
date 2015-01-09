@@ -24,7 +24,7 @@ public class SuiteTest extends TestCase {
 
     public static Test suite() {
         TestSuite suite = new TestSuite("Suite Tests");
-        // build the suite manually, because some of the suites are testing
+        // locate the suite manually, because some of the suites are testing
         // the functionality that automatically builds suites
         suite.addTest(new SuiteTest("testNoTestCases"));
         suite.addTest(new SuiteTest("testOneTestCase"));

@@ -269,14 +269,14 @@ public abstract class AbstractBuilder {
     }
 
     /**
-     * Resets the build count
+     * Resets the locate count
      */
     public void resetRunCount() {
 
     }
 
     /**
-     * Number of times the build has been run
+     * Number of times the locate has been run
      *
      * @return
      */

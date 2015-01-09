@@ -29,7 +29,7 @@ public class MultiCoverageReport implements ICoverageReport {
     /**
      * Creates a multicoverage report using jacoco files
      *
-     * @param classesDir Directory where the build classes are
+     * @param classesDir Directory where the locate classes are
      * @param jacocoDir Directory with the client jacoco coverage files
      */
     public MultiCoverageReport(String classesDir, File jacocoDir) {

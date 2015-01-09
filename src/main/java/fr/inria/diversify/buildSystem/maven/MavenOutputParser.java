@@ -41,7 +41,7 @@ public class MavenOutputParser {
      *
      * @param output Output
      * @param regex  Regex to split the string
-     * @return 0 if build success, -1 if test fails, -2 compilation error, -3 nothing parsed, -4 parsing error
+     * @return 0 if locate success, -1 if test fails, -2 compilation error, -3 nothing parsed, -4 parsing error
      */
     public int parse(String output, String regex) {
         return parse(output.split(regex));
@@ -51,7 +51,7 @@ public class MavenOutputParser {
      * Parse an output
      *
      * @param output lines of compilation
-     * @return 0 if build success, -1 if test fails, -2 compilation error, -3 nothing parsed, -4 parsing error
+     * @return 0 if locate success, -1 if test fails, -2 compilation error, -3 nothing parsed, -4 parsing error
      */
     public int parse(String[] output) {
 

@@ -246,12 +246,12 @@ public class AndroidSdk
                 return androidTarget.getBuildToolInfo().getPath( pathId );
             }
         }
-        // if no valid target is defined, or it has no build tools installed, try to use the latest
+        // if no valid target is defined, or it has no locate tools installed, try to use the latest
         BuildToolInfo latestBuildToolInfo = sdkManager.getLatestBuildTool();
         if ( latestBuildToolInfo == null )
         {
             throw new InvalidSdkException( "Invalid SDK: Build-tools not found. Check the content of '" 
-                + sdkPath.getAbsolutePath() + File.separator + "build-tools', or run '"
+                + sdkPath.getAbsolutePath() + File.separator + "locate-tools', or run '"
                 + sdkPath.getAbsolutePath() + File.separator + "tools" + File.separator
                 + "android sdk' to install them" );
         }
