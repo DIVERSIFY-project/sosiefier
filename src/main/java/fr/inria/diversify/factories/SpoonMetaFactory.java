@@ -10,18 +10,20 @@ import spoon.support.compiler.jdt.JDTBasedSpoonCompiler;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by marodrig on 16/06/2014.
  */
 public class SpoonMetaFactory{
 
+//    public Factory buildNewFactory(String srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+//        ArrayList<String> a = new ArrayList<String>();
+//        a.add(srcDirectory);
+//        return buildNewFactory(a, javaVersion);
+//    }
     public Factory buildNewFactory(String srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        ArrayList<String> a = new ArrayList<String>();
-        a.add(srcDirectory);
-        return buildNewFactory(a, javaVersion);
-    }
-    public Factory buildNewFactory(Collection<String> srcDirectory, int javaVersion) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         //String srcDirectory = DiversifyProperties.getProperty("project") + "/" + DiversifyProperties.getProperty("src");
 
         StandardEnvironment env = new StandardEnvironment();
