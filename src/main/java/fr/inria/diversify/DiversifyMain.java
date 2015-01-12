@@ -66,7 +66,7 @@ public class DiversifyMain {
         initLogLevel();
         initDependency();
         initInputProgram();
-        initRepo();
+//        initRepo();
         initSpoon();
 
         if (inputConfiguration.getProperty("stat").equals("true")) {
@@ -77,16 +77,17 @@ public class DiversifyMain {
         }
     }
 
-    protected void initRepo() throws GitAPIException, IOException {
-        String repo = inputConfiguration.getProperty("gitRepository");
+//    protected void initRepo() throws GitAPIException, IOException {
+//        String repo = inputConfiguration.getProperty("gitRepository");
+//
+//        if(!repo.equals("null")) {
+//            repo += System.currentTimeMillis();
+//            Log.debug("clone https://github.com/simonAllier/sosie-exp.git in {}", repo);
+//            GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", repo);
 
-        if(!repo.equals("null")) {
-            repo += System.currentTimeMillis();
-            Log.debug("clone https://github.com/simonAllier/sosie-exp.git in {}", repo);
-            GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", repo);
-            gitUtils.cloneRepo();
-        }
-    }
+//            gitUtils.cloneRepo();
+//        }
+//    }
 
     protected void initDependency() throws Exception, InvalidSdkException {
         MavenDependencyResolver t = new MavenDependencyResolver();

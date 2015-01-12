@@ -150,7 +150,7 @@ public abstract class AbstractDiversify {
         String fileName = absoluteFileName.substring(git.length() + 1, absoluteFileName.length());
 
         try {
-            GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", git);
+            GitUtils gitUtils = new GitUtils(git);
             gitUtils.pull();
             gitUtils.add(fileName);
             gitUtils.commit("update");
