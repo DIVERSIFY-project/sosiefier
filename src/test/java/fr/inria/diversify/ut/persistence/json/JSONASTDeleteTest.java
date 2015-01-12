@@ -1,7 +1,7 @@
 package fr.inria.diversify.ut.persistence.json;
 
 import fr.inria.diversify.persistence.json.output.JsonASTDeleteSectionOutput;
-import fr.inria.diversify.persistence.json.JsonASTSectionOutput;
+import fr.inria.diversify.persistence.json.output.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;

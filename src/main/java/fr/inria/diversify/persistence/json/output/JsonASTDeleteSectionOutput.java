@@ -1,14 +1,9 @@
 package fr.inria.diversify.persistence.json.output;
 
-import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.json.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTDelete;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Collection;
 
 /**
  * Created by marodrig on 08/01/2015.

@@ -1,6 +1,6 @@
 package fr.inria.diversify.ut.persistence.json;
 
-import fr.inria.diversify.persistence.json.JsonASTSectionOutput;
+import fr.inria.diversify.persistence.json.output.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -9,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;

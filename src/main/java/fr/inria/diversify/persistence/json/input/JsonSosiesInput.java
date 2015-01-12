@@ -1,4 +1,4 @@
-package fr.inria.diversify.persistence.json;
+package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.persistence.SectionInput;
 import fr.inria.diversify.transformation.Transformation;
