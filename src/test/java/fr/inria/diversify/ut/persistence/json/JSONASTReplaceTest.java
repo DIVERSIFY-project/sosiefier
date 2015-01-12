@@ -1,20 +1,16 @@
 package fr.inria.diversify.ut.persistence.json;
 
-import fr.inria.diversify.persistence.json.JsonASTReplaceSectionOutput;
-import fr.inria.diversify.persistence.json.JsonASTSectionOutput;
-import fr.inria.diversify.persistence.json.JsonSectionOutput;
+import fr.inria.diversify.persistence.json.output.JsonASTReplaceSectionOutput;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 

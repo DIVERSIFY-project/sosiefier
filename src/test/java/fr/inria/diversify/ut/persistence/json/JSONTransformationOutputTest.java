@@ -1,8 +1,8 @@
 package fr.inria.diversify.ut.persistence.json;
 
 import fr.inria.diversify.persistence.SectionOuput;
-import fr.inria.diversify.persistence.json.JsonSectionOutput;
-import fr.inria.diversify.persistence.json.JsonTransformationOutput;
+import fr.inria.diversify.persistence.json.output.JsonSectionOutput;
+import fr.inria.diversify.persistence.json.output.JsonTransformationOutput;
 import fr.inria.diversify.transformation.Transformation;
 import mockit.Mocked;
 import mockit.Verifications;

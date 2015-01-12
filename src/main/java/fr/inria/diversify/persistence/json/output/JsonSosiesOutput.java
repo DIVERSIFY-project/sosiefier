@@ -1,10 +1,9 @@
-package fr.inria.diversify.persistence.json;
+package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.persistence.SectionOuput;
 import fr.inria.diversify.transformation.Transformation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 

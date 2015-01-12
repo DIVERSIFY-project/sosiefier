@@ -1,6 +1,7 @@
-package fr.inria.diversify.persistence.json;
+package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
+import fr.inria.diversify.persistence.json.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONArray;

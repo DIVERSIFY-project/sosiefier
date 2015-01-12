@@ -1,16 +1,12 @@
 package fr.inria.diversify.ut.persistence.json;
 
-import fr.inria.diversify.persistence.json.JsonASTDeleteSectionOutput;
-import fr.inria.diversify.persistence.json.JsonASTFailuresSectionOutput;
+import fr.inria.diversify.persistence.json.output.JsonASTFailuresSectionOutput;
 import fr.inria.diversify.persistence.json.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.doTestWriteEmpty;
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.list;

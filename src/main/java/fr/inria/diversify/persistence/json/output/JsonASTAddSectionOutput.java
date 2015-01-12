@@ -1,10 +1,10 @@
-package fr.inria.diversify.persistence.json;
+package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
+import fr.inria.diversify.persistence.json.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.ASTDelete;
+import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,7 +13,8 @@ import java.util.Collection;
 /**
  * Created by marodrig on 08/01/2015.
  */
-public class JsonASTReplaceSectionOutput extends JsonASTSectionOutput {
+public class JsonASTAddSectionOutput extends JsonASTSectionOutput {
+
     /**
      * Puts the transformation data into the JSON Object.
      *
@@ -23,8 +24,8 @@ public class JsonASTReplaceSectionOutput extends JsonASTSectionOutput {
      */
     protected void put(JSONObject object, Transformation transformation, boolean isEmptyObject) throws JSONException {
         if (isEmptyObject) super.put(object, transformation, isEmptyObject);
-        if (transformation instanceof ASTReplace) {
-            ASTReplace d = (ASTReplace) transformation;
+        if (transformation instanceof ASTAdd) {
+            ASTAdd d = (ASTAdd) transformation;
             object.put("transplantationPoint", codeFragmentToJSON(d.getTransplantationPoint()));
             object.put("transplant", codeFragmentToJSON(d.getTransplant()));
         }

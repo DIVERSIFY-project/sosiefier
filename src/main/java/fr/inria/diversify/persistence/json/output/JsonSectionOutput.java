@@ -1,4 +1,4 @@
-package fr.inria.diversify.persistence.json;
+package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.SectionOuput;
