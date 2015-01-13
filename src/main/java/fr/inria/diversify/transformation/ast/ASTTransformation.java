@@ -124,15 +124,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
     public void setSubType(boolean subType) {
         this.subType = subType;
     }
-    /**
-     * Removes the original source code in the transplantation point
-     */
-    public void removeSourceCode() {
-        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
-        CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
-        if (compileUnit.getSourceCodeFragments() != null)
-            compileUnit.getSourceCodeFragments().clear();
-    }
 
     public abstract boolean usedOfSubType();
 

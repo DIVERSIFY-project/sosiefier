@@ -78,19 +78,17 @@ public class TestDataMutator extends TestProcessor {
 			newLiteral.setValue(r.nextBoolean());
 		} else {
 			if(value instanceof Integer) {
-				newLiteral.setValue(r.nextInt());
+				newLiteral.setValue((int)value + modif());
 			} else  if(value instanceof Long) {
-				newLiteral.setValue(r.nextLong());
+				newLiteral.setValue((long)value + (long)modif());
 			} else if(value instanceof Double) {
-				newLiteral.setValue(r.nextDouble());
+				newLiteral.setValue((double)value + (double)modif());
 			} else if(value instanceof Short) {
-			//	newLiteral.setValue(r.next);
-				newLiteral.setValue(value);
+				newLiteral.setValue((short)value + (short)modif());
 			} else if(value instanceof Float) {
-				newLiteral.setValue(r.nextFloat());
+				newLiteral.setValue((float)value + (float)modif());
 			} else if(value instanceof Byte) {
-				newLiteral.setValue(value);
-				//newLiteral.setValue(r.nextBytes(););
+				newLiteral.setValue((byte)value + (byte)modif());
 			}
 			if(literal.getParent() instanceof CtUnaryOperator) {
 				CtUnaryOperator parent = (CtUnaryOperator)literal.getParent();
@@ -106,5 +104,14 @@ public class TestDataMutator extends TestProcessor {
 		toReplace.replace(newLiteral);
 
 		return true;
+	}
+
+	protected int modif() {
+		Random r = new Random();
+		if(r.nextBoolean()) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 }

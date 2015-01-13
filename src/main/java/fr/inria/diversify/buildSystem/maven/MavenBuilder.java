@@ -69,10 +69,11 @@ public class MavenBuilder extends AbstractBuilder {
                 Log.debug(output);
             }
             if (getSaveOutputToFile()) { saveOutputToFile(output); }
-            if (clojureTest)
+            if (clojureTest) {
                 parseClojureResult(output);
-            else
+            } else {
                 parseResult(output);
+            }
 
         } catch (MavenInvocationException e) {
             Log.debug("Error in run Maven", e);
@@ -106,7 +107,6 @@ public class MavenBuilder extends AbstractBuilder {
     protected void parseClojureResult(String r) {
         Integer tmpFailure = null;
         for (String s : r.split("\n")) {
-
             if (s.startsWith("[ERROR] COMPILATION ERROR")) {
                 tmpFailure = -2;
                 compileError = true;

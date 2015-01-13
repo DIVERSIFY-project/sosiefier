@@ -29,15 +29,21 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
                 || mutatedMethod.contains(candidate)) {
             return false;
         }
-        for(CtAnnotation<?> annotation: candidate.getAnnotations()) {
-            if (annotation.toString().startsWith("@org.junit.Test")) {
-                return true;
-            }
-        }
-        if(candidate.getSimpleName().contains("test")) {
-            return true;
-        }
-        return false;
+
+        return candidate.getSimpleName().contains("test")
+            || candidate.getAnnotations().stream()
+                .map(annotation -> annotation.toString())
+                .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
+
+//        for(CtAnnotation<?> annotation: candidate.getAnnotations()) {
+//            if (annotation.toString().startsWith("@org.junit.Test")) {
+//                return true;
+//            }
+//        }
+//        if(candidate.getSimpleName().contains("test")) {
+//            return true;
+//        }
+//        return false;
     }
 
     protected CtMethod cloneMethod(CtMethod method, String suffix) {
@@ -47,12 +53,14 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
         cloned_method.setSimpleName(method.getSimpleName()+suffix+cloneNumber);
         cloneNumber++;
 
-        CtAnnotation toRemove = null;
-        for(CtAnnotation annotation : cloned_method.getAnnotations()) {
-            if(annotation.toString().contains("Override")) {
-                toRemove = annotation;
-            }
-        }
+        CtAnnotation toRemove = cloned_method.getAnnotations().stream()
+                .filter(annotation -> annotation.toString().contains("Override"))
+                .findFirst().orElse(null);
+//        for(CtAnnotation annotation : cloned_method.getAnnotations()) {
+//            if(annotation.toString().contains("Override")) {
+//                toRemove = annotation;
+//            }
+//        }
         if(toRemove != null) {
             cloned_method.removeAnnotation(toRemove);
         }
@@ -62,12 +70,14 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
     protected CtMethod cloneMethodTest(CtMethod method, String suffix, int timeOut) {
         CtMethod cloned_method = cloneMethod(method,suffix);
-        CtAnnotation testAnnotation = null;
-        for(CtAnnotation annotation : cloned_method.getAnnotations()) {
-            if(annotation.toString().contains("Test")) {
-                testAnnotation = annotation;
-            }
-        }
+        CtAnnotation testAnnotation = cloned_method.getAnnotations().stream()
+                .filter(annotation -> annotation.toString().contains("Test"))
+                .findFirst().orElse(null);
+//        for(CtAnnotation annotation : cloned_method.getAnnotations()) {
+//            if(annotation.toString().contains("Test")) {
+//                testAnnotation = annotation;
+//            }
+//        }
         if(testAnnotation == null) {
             testAnnotation = getFactory().Core().createAnnotation();
             CtTypeReference<Object> ref = getFactory().Core().createTypeReference();

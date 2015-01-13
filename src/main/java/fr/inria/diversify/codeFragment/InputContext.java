@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InputContext {
 	protected Set<CtVariableReference<?>> variableReferences;
@@ -24,11 +25,9 @@ public class InputContext {
 	}
 	
 	protected Set<String> inputContextToString() {
-		//todo set ou list ?????
-        Set<String> set = new HashSet<>();
-		for (CtVariableReference<?> var : variableReferences)
-			set.add(var.getType().toString());
-		return set;
+		return variableReferences.stream()
+                .map(var -> var.getType().toString())
+                .collect(Collectors.toSet());
 	}
 
 
@@ -37,8 +36,6 @@ public class InputContext {
 
         for (CtVariableReference<?> var : variableReferences) {
             try {
-
-
                 CtTypeReference<?> varType = var.getType();
                 if (subType) {
                     if (type.isSubtypeOf(varType) && varType.getActualTypeArguments().equals(type.getActualTypeArguments())) {
@@ -73,32 +70,31 @@ public class InputContext {
         }
 	
 	public boolean containsAll(InputContext other, boolean subType){
-		for (CtVariableReference<?> variable : other.variableReferences) {
-            if(!hasCandidate(variable.getType(), subType)) {
-                return false;
-            }
-        }
-        return true;
+//		for (CtVariableReference<?> variable : other.variableReferences) {
+//            if(!hasCandidate(variable.getType(), subType)) {
+//                return false;
+//            }
+//        }
+        return !other.variableReferences.stream()
+                .anyMatch(var -> !hasCandidate(var.getType(), subType));
+      //  return true;
 	}
 
     public CtVariableReference getVariableOrFieldNamed(String name) {
-        CtVariableReference o = null;
-        for(CtVariableReference vf : getVar())
-            if(vf.toString().equals(name)) {
-                o = vf;
-                break;
-            }
+        CtVariableReference o = getVar().stream()
+                .filter(vf -> vf.toString().equals(name))
+                .findFirst().orElse(null);
+
         if(o == null && name.endsWith(")"))
             return getVariableOrFieldNamed(name.substring(1,name.length()-1));
+
         return o;
     }
 
     public Set<String> getAllVarName() {
-        Set<String> set = new HashSet<>();
-        for (CtVariableReference<?> var : variableReferences)
-            set.add(var.getSimpleName());
-
-        return set;
+       return variableReferences.stream()
+                .map(var -> var.getSimpleName())
+                .collect(Collectors.toSet());
     }
 
 	protected boolean hasCandidate(CtTypeReference<?> type, boolean subType) {
@@ -110,11 +106,10 @@ public class InputContext {
 	}
 
 	public String equalString() {
-        //todo set ou list ?????
-        Set<String> set = new HashSet<>();
-        for (CtVariableReference<?> var : variableReferences)
-            set.add(var.getType().toString()+": "+var);
-        return set.toString();
+        return variableReferences.stream()
+                .map(var -> var.getSimpleName() + ": "+ var)
+                .collect(Collectors.toSet())
+                .toString();
 	}
 	
 	@Override
@@ -134,11 +129,8 @@ public class InputContext {
 	}
 
     public List<CtTypeReference<?>> getTypes() {
-        List<CtTypeReference<?>> types = new ArrayList<>();
-
-        for (CtVariableReference var: variableReferences) {
-               types.add(var.getType());
-        }
-        return types;
+        return variableReferences.stream()
+                .map(var -> var.getType())
+                .collect(Collectors.toList());
     }
 }
