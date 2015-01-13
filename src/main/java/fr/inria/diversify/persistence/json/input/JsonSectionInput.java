@@ -4,7 +4,10 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.SectionInput;
+import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONObject;
+
+import java.util.Collection;
 
 /**
  * Created by marodrig on 12/01/2015.
