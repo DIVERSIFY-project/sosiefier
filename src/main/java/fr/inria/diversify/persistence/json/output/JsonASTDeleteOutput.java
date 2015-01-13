@@ -8,18 +8,19 @@ import org.json.JSONObject;
 /**
  * Created by marodrig on 08/01/2015.
  */
-public class JsonASTDeleteSectionOutput extends JsonASTSectionOutput {
+public class JsonASTDeleteOutput extends JsonASTSectionOutput {
     /**
      * Puts the transformation data into the JSON Object.
-     * @param object Objecto to put data
+     * @param object Objecto to putDataToJSON data
      * @param transformation Transformation to obtain data from
-     * @param isEmptyObject Indicate if the JSON object is empty
      */
-    protected void put(JSONObject object, Transformation transformation, boolean isEmptyObject) throws JSONException {
-        if ( isEmptyObject ) super.put(object, transformation, isEmptyObject);
+    protected void putDataToJSON(JSONObject object, Transformation transformation) throws JSONException {
         if (transformation instanceof ASTDelete) {
+            super.putDataToJSON(object, transformation);
             ASTDelete d = (ASTDelete) transformation;
-            object.put("transplantationPoint", codeFragmentToJSON(d.getTransplantationPoint()));
+            object.put(TRANSPLANT_POINT, codeFragmentToJSON(d.getTransplantationPoint()));
         }
     }
+
+    public boolean canStore(Transformation t) {return t instanceof ASTDelete;}
 }

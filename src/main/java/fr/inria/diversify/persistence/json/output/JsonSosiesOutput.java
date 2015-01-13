@@ -1,6 +1,6 @@
 package fr.inria.diversify.persistence.json.output;
 
-import fr.inria.diversify.persistence.SectionOuput;
+import fr.inria.diversify.persistence.SectionOutput;
 import fr.inria.diversify.transformation.Transformation;
 
 import java.util.ArrayList;
@@ -12,16 +12,19 @@ import java.util.List;
  */
 public class JsonSosiesOutput extends JsonTransformationOutput {
 
-    public JsonSosiesOutput(List<SectionOuput> sections, String uri, Collection<Transformation> transformations) {
-        super(sections, uri, transformations);
+    public JsonSosiesOutput(Collection<Transformation> transformations, String uri, List<SectionOutput> sections) {
+        super(transformations, uri, sections);
+        sections.add(new JsonASTAddOutput());
+        sections.add(new JsonASTReplaceOutput());
+        sections.add(new JsonASTDeleteOutput());
     }
+
 
     public JsonSosiesOutput(Collection<Transformation> transformations, String uri) {
         super(transformations, uri);
         this.sections = new ArrayList<>();
-        sections.add(new JsonASTAddSectionOutput());
-        sections.add(new JsonASTReplaceSectionOutput());
-        sections.add(new JsonASTDeleteSectionOutput());
-        sections.add(new JsonASTFailuresSectionOutput());
+        sections.add(0, new JsonASTReplaceOutput());
+        sections.add(0, new JsonASTDeleteOutput());
+        sections.add(0, new JsonASTAddOutput());
     }
 }

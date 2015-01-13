@@ -194,7 +194,7 @@ public class RunNotifier {
 
     /**
      * Ask that the tests run stop before starting the next test. Phrased politely because
-     * the test currently running will not be interrupted. It seems a little odd to put this
+     * the test currently running will not be interrupted. It seems a little odd to putDataToJSON this
      * functionality here, but the <code>RunNotifier</code> is the only object guaranteed
      * to be shared amongst the many runners involved.
      */

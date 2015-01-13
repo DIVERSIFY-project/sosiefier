@@ -1,9 +1,8 @@
 package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.SectionOuput;
+import fr.inria.diversify.persistence.SectionOutput;
 import fr.inria.diversify.persistence.TransformationsOutput;
-import fr.inria.diversify.persistence.json.output.JsonSectionOutput;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,14 +24,10 @@ public class JsonTransformationOutput extends TransformationsOutput {
     /**
      * Resulting global object
      */
-    JSONObject outputObject;
+    protected JSONObject outputObject;
 
-    public JsonTransformationOutput(List<SectionOuput> sections, String uri, Collection<Transformation> transformations) {
-        super(sections, uri, transformations);
-    }
-
-    public JsonTransformationOutput(List<SectionOuput> sections, String uri) {
-        super(sections, uri);
+    public JsonTransformationOutput(Collection<Transformation> transformations, String uri, List<SectionOutput> sections) {
+        super(transformations, uri, sections);
     }
 
     public JsonTransformationOutput(Collection<Transformation> transformations, String uri) {
@@ -41,7 +36,7 @@ public class JsonTransformationOutput extends TransformationsOutput {
 
 
     @Override
-    protected void prepareSection(SectionOuput s) {
+    protected void prepareSection(SectionOutput s) {
         if (s instanceof JsonSectionOutput) ((JsonSectionOutput) s).setOutputObject(outputObject);
     }
 

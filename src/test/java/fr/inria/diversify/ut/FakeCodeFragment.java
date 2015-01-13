@@ -1,4 +1,4 @@
-package fr.inria.diversify.ut.persistence.json;
+package fr.inria.diversify.ut;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 
@@ -12,11 +12,11 @@ public class FakeCodeFragment extends CodeFragment {
 
 /*
 *     JSONObject object = new JSONObject();
-        object.put("position", fragment.positionString());
-        object.put("type", fragment.getCodeFragmentType().getSimpleName());
-        object.put("sourcecode", fragment.equalString());
-        //object.put("inputContext", new JSONArray(getInputContext().inputContextToString()));
-        //object.put("outputContext", getOutputContext().toString());
+        object.putDataToJSON("position", fragment.positionString());
+        object.putDataToJSON("type", fragment.getCodeFragmentType().getSimpleName());
+        object.putDataToJSON("sourcecode", fragment.equalString());
+        //object.putDataToJSON("inputContext", new JSONArray(getInputContext().inputContextToString()));
+        //object.putDataToJSON("outputContext", getOutputContext().toString());
         return object;
 * */
 
@@ -24,6 +24,11 @@ public class FakeCodeFragment extends CodeFragment {
         this.position = position;
         this.type = type;
         this.source = source;
+    }
+
+    @Override
+    public int id() {
+        return source.hashCode();
     }
 
     @Override

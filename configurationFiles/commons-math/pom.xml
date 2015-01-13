@@ -520,7 +520,7 @@
         <configuration>
           <excludes>
 
-            <!-- MANIFEST files cannot have any comments, so we can't put license header -->
+            <!-- MANIFEST files cannot have any comments, so we can't putDataToJSON license header -->
             <exclude>src/test/maxima/special/RealFunctionValidation/MANIFEST.txt</exclude>
 
             <!-- the following are test data files with specific syntax that cannot include

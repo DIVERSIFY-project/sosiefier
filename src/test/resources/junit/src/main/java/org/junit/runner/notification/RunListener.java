@@ -126,7 +126,7 @@ public class RunListener {
     /**
      * Indicates a {@code RunListener} that can have its methods called
      * concurrently. This implies that the class is thread-safe (i.e. no set of
-     * listener calls can put the listener into an invalid state, even if those
+     * listener calls can putDataToJSON the listener into an invalid state, even if those
      * listener calls are being made by multiple threads without
      * synchronization).
      *

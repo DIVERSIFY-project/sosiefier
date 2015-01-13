@@ -47,7 +47,7 @@ public class StringSimilarity {
     private static List<String> WordLetterPairs(String str) {
         List<String> AllPairs = new ArrayList<String>();
 
-        // Tokenize the String and put the tokens/words into an array
+        // Tokenize the String and putDataToJSON the tokens/words into an array
         String[] Words = str.split("\\s");
 
         // For each word

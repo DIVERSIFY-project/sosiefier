@@ -1,30 +1,37 @@
-package fr.inria.diversify.ut.persistence.json;
+package fr.inria.diversify.ut.persistence.json.output;
 
-import fr.inria.diversify.persistence.json.output.JsonASTAddSectionOutput;
+import fr.inria.diversify.persistence.PersistenceException;
+import fr.inria.diversify.persistence.json.output.JsonASTAddOutput;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.ut.FakeCodeFragment;
+import fr.inria.diversify.ut.persistence.json.SectionTestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.list;
 
 
 /**
  * Created by marodrig on 08/01/2015.
  */
-public class JSONASTAddTest {
+public class JsonAstAddOutputTest {
 
     private static final String TRANSFORMATIONS = "transformations";
 
     /**
      * Test that creates a "transformation" inside the global object
      */
-    @Test
+    @Test(expected = PersistenceException.class)
     public void testWriteEmpty() {
-        SectionTestUtils.doTestWriteEmpty(new JsonASTAddSectionOutput());
+        SectionTestUtils.doTestWriteEmpty(new JsonASTAddOutput(), new ASTAdd());
     }
 
     /**
@@ -34,12 +41,13 @@ public class JSONASTAddTest {
      */
     @Test
     public void testWrite() throws JSONException {
-        JsonASTAddSectionOutput d = new JsonASTAddSectionOutput();
+        JsonASTAddOutput d = new JsonASTAddOutput();
         d.setOutputObject(new JSONObject());
         ASTAdd r = new ASTAdd();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        d.write(Arrays.asList(new ASTTransformation[]{r}));
+        d.before(new ArrayList<>());
+        d.write(r);
         SectionTestUtils.writeAssertions(d);
     }
 
@@ -50,12 +58,13 @@ public class JSONASTAddTest {
      */
     @Test
     public void testWriteAddOnly() throws JSONException {
-        JsonASTAddSectionOutput d = new JsonASTAddSectionOutput();
+        JsonASTAddOutput d = new JsonASTAddOutput();
         d.setOutputObject(new JSONObject());
         ASTAdd r = new ASTAdd();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        d.write(Arrays.asList(new ASTTransformation[]{new ASTDelete(), r, new ASTReplace()}));
+        d.before(new ArrayList<>());
+        for (Transformation t : list(new ASTDelete(), r, new ASTReplace())) d.write(t);
         SectionTestUtils.writeOnlyAssertions(d);
     }
 }

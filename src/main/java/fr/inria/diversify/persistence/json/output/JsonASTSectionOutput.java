@@ -2,7 +2,6 @@ package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.json.output.JsonSectionOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONArray;
@@ -10,11 +9,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
+ * Parent class for all sections writing Transformations to JSON
+ * <p>
  * Created by marodrig on 08/01/2015.
  */
-public class JsonASTSectionOutput extends JsonSectionOutput {
+public abstract class JsonASTSectionOutput extends JsonSectionOutput {
+
+    public static final String FAILURES = "failures";
+
+    public static final String FAILURES_DICTIONARY = "failureDictionary";
+
+    private Map<String, Integer> failuresIDs = new HashMap<>();
+
+    private int failureId = 0;
 
     /**
      * Writes a CodeFragment to JSON
@@ -24,56 +36,83 @@ public class JsonASTSectionOutput extends JsonSectionOutput {
      * @throws JSONException
      */
     protected JSONObject codeFragmentToJSON(CodeFragment fragment) throws JSONException {
+        if (fragment == null) throw new PersistenceException("Invalid null fragment");
         JSONObject object = new JSONObject();
-        object.put("position", fragment.positionString());
-        object.put("type", fragment.getCodeFragmentTypeSimpleName());
-        object.put("sourcecode", fragment.equalString());
-        //object.put("inputContext", new JSONArray(getInputContext().inputContextToString()));
-        //object.put("outputContext", getOutputContext().toString());
+        object.put(POSITION, fragment.positionString());
+        object.put(TRANSF_TYPE, fragment.getCodeFragmentTypeSimpleName());
+        object.put(SOURCE_CODE, fragment.equalString());
         return object;
     }
 
     /**
      * Ensures that the Transformation sections exists
+     *
      * @throws JSONException
      */
-    protected void initializeSection() throws JSONException {
-        if (getOutputObject() == null) throw new PersistenceException("JSON Object not set");
-        if (!getOutputObject().has(TRANSFORMATIONS)) getOutputObject().put(TRANSFORMATIONS, new JSONArray());
+    @Override
+    public void before(Collection<Transformation> t) {
+        try {
+            if (getOutputObject() == null) throw new PersistenceException("JSON Object not set");
+            if (!getOutputObject().has(TRANSFORMATIONS)) getOutputObject().put(TRANSFORMATIONS, new JSONArray());
+        } catch (JSONException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     /**
      * Puts the transformation data into the JSON Object.
-     * @param object Objecto to put data
+     *
+     * @param object         Objecto to put data
      * @param transformation Transformation to obtain data from
-     * @param isEmptyObject Indicate if the JSON object is empty
      */
-    protected void put(JSONObject object, Transformation transformation, boolean isEmptyObject) throws JSONException {
+    protected void putDataToJSON(JSONObject object, Transformation transformation) throws JSONException {
         if (transformation instanceof ASTTransformation) {
             ASTTransformation astt = (ASTTransformation) transformation;
-            object.put("tindex", astt.getIndex());
-            object.put("type", astt.getType());
-            object.put("status", astt.getStatus());
-            object.put("name", astt.getName());
+            object.put(TINDEX, astt.getIndex());
+            object.put(TRANSF_TYPE, astt.getType());
+            object.put(STATUS, astt.getStatus());
+            object.put(NAME, astt.getName());
+
+            //Write failures
+            List<String> failures = transformation.getFailures();
+            JSONArray array = new JSONArray();
+            if (failures != null) {
+                for (String failure : failures) {
+                    if (!failuresIDs.containsKey(failure)) {
+                        failuresIDs.put(failure, failureId);
+                        array.put(failureId);
+                        failureId++;
+                    } else array.put(failuresIDs.get(failure));
+                }
+            }
+            object.put(FAILURES, array);
         }
     }
 
 
     @Override
-    public void write(Collection<Transformation> transformations) {
+    public void write(Transformation transformation) {
         try {
-            initializeSection();
-            JSONArray array = getOutputObject().getJSONArray(TRANSFORMATIONS);
-
-            boolean isEmptyArray = array.length() == 0;
-            if ( !isEmptyArray && array.length() != transformations.size() )
-                throw new PersistenceException("Unable to find JSON Object to append data");
-            int i = 0;
-            for (Transformation t : transformations) {
-                if ( isEmptyArray ) { array.put(new JSONObject()); }
-                put(array.getJSONObject(i), t, isEmptyArray);
-                i++;
+            if (canStore(transformation)) {
+                //Ensure the before phase in case our caller hasn't called
+                if (getOutputObject() == null || !getOutputObject().has(TRANSFORMATIONS)) before(null);
+                //Obtain the array containing the transformations
+                JSONArray array = getOutputObject().getJSONArray(TRANSFORMATIONS);
+                JSONObject o = new JSONObject();
+                putDataToJSON(o, transformation);
+                array.put(o);
             }
+        } catch (JSONException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    public abstract boolean canStore(Transformation t);
+
+    @Override
+    public void after() {
+        try {
+            getOutputObject().put(FAILURES_DICTIONARY, failuresIDs);
         } catch (JSONException e) {
             throw new PersistenceException(e);
         }
