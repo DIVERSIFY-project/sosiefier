@@ -151,6 +151,8 @@
                     <excludes>
                         <exclude>**/junit/**</exclude>
                         <exclude>**/easymock/**</exclude>
+                        <exclude>**/it/**</exclude>
+                        <exclude>**/oldTests/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

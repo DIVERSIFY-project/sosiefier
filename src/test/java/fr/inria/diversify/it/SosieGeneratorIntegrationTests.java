@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Properties;
@@ -30,7 +31,9 @@ public class SosieGeneratorIntegrationTests {
         String resourceRoot = null;
         try {
             resourceRoot = getClass().getResource("/").toURI().getPath();
-            return getClass().getResource("/" + name).toURI().getPath();
+            URL res = getClass().getResource("/" + name);
+            if ( res == null ) throw new RuntimeException("Unable to find file " + resourceRoot + name);
+            return res.toURI().getPath();
         } catch (URISyntaxException e) {
             Log.error("Unable to find file " + resourceRoot + name);
             throw new RuntimeException("Unable to find file " + resourceRoot + name);
