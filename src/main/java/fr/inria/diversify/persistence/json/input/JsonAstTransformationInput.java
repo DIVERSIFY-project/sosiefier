@@ -2,7 +2,6 @@ package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static fr.inria.diversify.persistence.json.output.JsonASTSectionOutput.FAILURES;
+import static fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput.FAILURES;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.STATUS;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TINDEX;
 

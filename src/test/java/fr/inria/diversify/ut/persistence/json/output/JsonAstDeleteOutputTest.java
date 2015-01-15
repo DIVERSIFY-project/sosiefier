@@ -1,8 +1,8 @@
 package fr.inria.diversify.ut.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.json.output.JsonASTDeleteOutput;
-import fr.inria.diversify.persistence.json.output.JsonASTSectionOutput;
+import fr.inria.diversify.persistence.json.output.JsonAstDeleteOutput;
+import fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -13,6 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSPLANT;
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.list;
@@ -31,7 +33,7 @@ public class JsonAstDeleteOutputTest {
      */
     @Test(expected = PersistenceException.class)
     public void testWriteEmpty() {
-        SectionTestUtils.doTestWriteEmpty(new JsonASTDeleteOutput(), new ASTDelete());
+        SectionTestUtils.doTestWriteEmpty(new JsonAstDeleteOutput(), new ASTDelete());
     }
 
     /**
@@ -41,14 +43,14 @@ public class JsonAstDeleteOutputTest {
      */
     @Test
     public void testWrite() throws JSONException {
-        JsonASTDeleteOutput d = new JsonASTDeleteOutput();
-        d.setOutputObject(new JSONObject());
         ASTDelete r = new ASTDelete();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        d.store(r);
 
+        JsonAstDeleteOutput d = new JsonAstDeleteOutput();
+        d.setTransformations(list(r));
+        d.write(new JSONObject());
         JSONObject tr = d.getOutputObject().getJSONArray(
-                JsonASTSectionOutput.TRANSFORMATIONS).getJSONObject(0).getJSONObject(TRANSPLANT_POINT);
+                JsonAstTransformationOutput.TRANSFORMATIONS).getJSONObject(0).getJSONObject(TRANSPLANT_POINT);
 
         assertEquals(tr.get("position"), "org.class:1");
         assertEquals(tr.get("type"), "CtReturn");
@@ -62,14 +64,14 @@ public class JsonAstDeleteOutputTest {
      */
     @Test
     public void testWriteDeleteOnly() throws JSONException {
-        JsonASTDeleteOutput d = new JsonASTDeleteOutput();
-        d.setOutputObject(new JSONObject());
         ASTDelete r = new ASTDelete();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
 
-        for (Transformation t : list(new ASTReplace(), r, new ASTAdd())) d.store(t);
+        JsonAstDeleteOutput d = new JsonAstDeleteOutput();
+        d.setTransformations(list(new ASTReplace(), r, new ASTAdd()));
+        d.write(new JSONObject());
 
-        JSONArray array = d.getOutputObject().getJSONArray(JsonASTSectionOutput.TRANSFORMATIONS);
+        JSONArray array = d.getOutputObject().getJSONArray(JsonAstTransformationOutput.TRANSFORMATIONS);
         assertEquals(1, array.length());
         assertTrue(array.getJSONObject(0).has(TRANSPLANT_POINT));
         assertFalse(array.getJSONObject(0).has(TRANSPLANT));

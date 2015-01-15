@@ -1,7 +1,7 @@
 package fr.inria.diversify.ut.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.json.output.JsonASTReplaceOutput;
+import fr.inria.diversify.persistence.json.output.JsonAstReplaceOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -28,7 +28,7 @@ public class JsonAstReplaceOutputTest {
      */
     @Test(expected = PersistenceException.class)
     public void testWriteEmpty() {
-        SectionTestUtils.doTestWriteEmpty(new JsonASTReplaceOutput(), new ASTReplace());
+        SectionTestUtils.doTestWriteEmpty(new JsonAstReplaceOutput(), new ASTReplace());
     }
 
 
@@ -39,12 +39,14 @@ public class JsonAstReplaceOutputTest {
      */
     @Test
     public void testWrite() throws JSONException {
-        JsonASTReplaceOutput d = new JsonASTReplaceOutput();
-        d.setOutputObject(new JSONObject());
         ASTReplace r = new ASTReplace();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        d.store(r);
+
+        JsonAstReplaceOutput d = new JsonAstReplaceOutput();
+        d.setTransformations(list(r));
+        d.write(new JSONObject());
+
         SectionTestUtils.writeAssertions(d);
     }
 
@@ -55,12 +57,14 @@ public class JsonAstReplaceOutputTest {
      */
     @Test
     public void testWriteReplaceOnly() throws JSONException {
-        JsonASTReplaceOutput d = new JsonASTReplaceOutput();
-        d.setOutputObject(new JSONObject());
         ASTReplace r = new ASTReplace();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        for (Transformation t : list(new ASTDelete(), r, new ASTAdd())) d.store(t);
+
+        JsonAstReplaceOutput d = new JsonAstReplaceOutput();
+        d.setTransformations(list(new ASTDelete(), r, new ASTAdd()));
+        d.write(new JSONObject());
+
         SectionTestUtils.writeOnlyAssertions(d);
     }
 }

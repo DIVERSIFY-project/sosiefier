@@ -29,7 +29,7 @@ public class SectionTestUtils {
     public static void writeAssertions(JsonSectionOutput d) throws JSONException {
 
         JSONObject tr = d.getOutputObject().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
-        if ( !(d instanceof JsonASTDeleteOutput) ) assertTrue(tr.has(VARIABLE_MAP));
+        if ( !(d instanceof JsonAstDeleteOutput) ) assertTrue(tr.has(VARIABLE_MAP));
 
         tr = tr.getJSONObject("transplantationPoint");
         assertEquals(tr.get("position"), "org.class:1");
@@ -49,7 +49,7 @@ public class SectionTestUtils {
         assertTrue(array.getJSONObject(0).has(TRANSPLANT));
     }
 
-    public static void doTestWriteEmpty(JsonASTSectionOutput d, ASTTransformation t) {
+    public static void doTestWriteEmpty(JsonAstTransformationOutput d, ASTTransformation t) {
         JSONObject o = new JSONObject();
         d.setOutputObject(o);
         d.before(new ArrayList<>());
@@ -68,7 +68,7 @@ public class SectionTestUtils {
      * @throws JSONException
      */
     public static JSONObject createDeleteASTTransformationJSON() throws JSONException {
-        JsonASTDeleteOutput d = new JsonASTDeleteOutput();
+        JsonAstDeleteOutput d = new JsonAstDeleteOutput();
         d.setOutputObject(new JSONObject());
         ASTDelete r = new ASTDelete();
         r.setIndex(1);
@@ -85,7 +85,7 @@ public class SectionTestUtils {
      * @throws JSONException
      */
     public static JSONObject createAddASTTransformationJSON() throws JSONException {
-        JsonASTAddOutput d = new JsonASTAddOutput();
+        JsonAstAddOutput d = new JsonAstAddOutput();
         d.setOutputObject(new JSONObject());
         ASTAdd r = new ASTAdd();
         r.setIndex(1);
@@ -99,7 +99,7 @@ public class SectionTestUtils {
 
 
     public static JSONObject createReplaceASTTransformationJSON() {
-        JsonASTReplaceOutput d = new JsonASTReplaceOutput();
+        JsonAstReplaceOutput d = new JsonAstReplaceOutput();
         d.setOutputObject(new JSONObject());
         ASTReplace r = new ASTReplace();
         r.setIndex(1);

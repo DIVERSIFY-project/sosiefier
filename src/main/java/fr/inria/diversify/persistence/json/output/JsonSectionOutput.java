@@ -1,12 +1,14 @@
 package fr.inria.diversify.persistence.json.output;
 
-import fr.inria.diversify.persistence.SectionOutput;
+import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONObject;
+
+import java.util.Collection;
 
 /**
  * Created by marodrig on 08/01/2015.
  */
-public abstract class JsonSectionOutput extends SectionOutput {
+public abstract class JsonSectionOutput {
 
     public static final String VARIABLE_MAP = "variableMap";
 
@@ -32,9 +34,9 @@ public abstract class JsonSectionOutput extends SectionOutput {
      * Resulting global object
      */
     JSONObject outputObject;
+    private Collection<Transformation> transformations;
 
-
-    public void setOutputObject(JSONObject outputObject) {
+    public void write(JSONObject outputObject) {
         this.outputObject = outputObject;
     }
 
@@ -46,5 +48,11 @@ public abstract class JsonSectionOutput extends SectionOutput {
         return outputObject;
     }
 
+    public void setTransformations(Collection<Transformation> transformations) {
+        this.transformations = transformations;
+    }
 
+    public Collection<Transformation> getTransformations() {
+        return transformations;
+    }
 }

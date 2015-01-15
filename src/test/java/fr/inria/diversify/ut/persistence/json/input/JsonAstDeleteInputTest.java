@@ -1,14 +1,11 @@
 package fr.inria.diversify.ut.persistence.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.persistence.json.input.JsonAstAddInput;
 import fr.inria.diversify.persistence.json.input.JsonAstDeleteInput;
-import fr.inria.diversify.persistence.json.output.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.ut.MockInputProgram;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 

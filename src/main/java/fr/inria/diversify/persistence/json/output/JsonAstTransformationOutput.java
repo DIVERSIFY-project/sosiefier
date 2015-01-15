@@ -4,6 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,18 +16,36 @@ import java.util.Map;
 
 /**
  * Parent class for all sections writing Transformations to JSON
- * <p>
+ * <p/>
  * Created by marodrig on 08/01/2015.
  */
-public abstract class JsonASTSectionOutput extends JsonSectionOutput {
+public abstract class JsonAstTransformationOutput extends JsonSectionOutput {
 
     public static final String FAILURES = "failures";
 
     public static final String FAILURES_DICTIONARY = "failureDictionary";
 
-    private Map<String, Integer> failuresIDs = new HashMap<>();
+    private HashMap<String, Integer> failuresDict;
 
-    private int failureId = 0;
+    @Override
+    public void write(JSONObject outputObject) {
+        try {
+            if (getOutputObject() == null) throw new PersistenceException("JSON Object not set");
+            if (!getOutputObject().has(TRANSFORMATIONS)) getOutputObject().put(TRANSFORMATIONS, new JSONArray());
+
+            this.outputObject = outputObject;
+            for (Transformation t : getTransformations()) {
+                if (canStore(t)) {
+                    JSONArray array = getOutputObject().getJSONArray(TRANSFORMATIONS);
+                    JSONObject o = new JSONObject();
+                    putDataToJSON(o, t);
+                    array.put(o);
+                }
+            }
+        } catch (JSONException e) {
+            throw new PersistenceException(e);
+        }
+    }
 
     /**
      * Writes a CodeFragment to JSON
@@ -45,21 +64,6 @@ public abstract class JsonASTSectionOutput extends JsonSectionOutput {
     }
 
     /**
-     * Ensures that the Transformation sections exists
-     *
-     * @throws JSONException
-     */
-    @Override
-    public void before(Collection<Transformation> t) {
-        try {
-            if (getOutputObject() == null) throw new PersistenceException("JSON Object not set");
-            if (!getOutputObject().has(TRANSFORMATIONS)) getOutputObject().put(TRANSFORMATIONS, new JSONArray());
-        } catch (JSONException e) {
-            throw new PersistenceException(e);
-        }
-    }
-
-    /**
      * Puts the transformation data into the JSON Object.
      *
      * @param object         Objecto to put data
@@ -75,45 +79,28 @@ public abstract class JsonASTSectionOutput extends JsonSectionOutput {
             //Write failures
             List<String> failures = transformation.getFailures();
             JSONArray array = new JSONArray();
-            if (failures != null) {
+
+            if (failures == null) Log.warn("Unset persistence failures dictionary");
+            else {
                 for (String failure : failures) {
-                    if (!failuresIDs.containsKey(failure)) {
-                        failuresIDs.put(failure, failureId);
-                        array.put(failureId);
-                        failureId++;
-                    } else array.put(failuresIDs.get(failure));
+                    if (!failuresDict.containsKey(failure)) {
+                        throw new PersistenceException("Unable to find failure index");
+                    }
+                    array.put(failuresDict.get(failure));
+
                 }
+                object.put(FAILURES, array);
             }
-            object.put(FAILURES, array);
-        }
-    }
-
-
-    @Override
-    public void store(Transformation transformation) {
-        try {
-            if (canStore(transformation)) {
-                //Ensure the before phase in case our caller hasn't called
-                if (getOutputObject() == null || !getOutputObject().has(TRANSFORMATIONS)) before(null);
-                //Obtain the array containing the transformations
-                JSONArray array = getOutputObject().getJSONArray(TRANSFORMATIONS);
-                JSONObject o = new JSONObject();
-                putDataToJSON(o, transformation);
-                array.put(o);
-            }
-        } catch (JSONException e) {
-            throw new PersistenceException(e);
         }
     }
 
     public abstract boolean canStore(Transformation t);
 
-    @Override
-    public void storeMetaData() {
-        try {
-            getOutputObject().put(FAILURES_DICTIONARY, failuresIDs);
-        } catch (JSONException e) {
-            throw new PersistenceException(e);
-        }
+    /**
+     * Sets the failure dictionary
+     * @param failuresDict
+     */
+    public void setFailuresDict(HashMap<String, Integer> failuresDict) {
+        this.failuresDict = failuresDict;
     }
 }

@@ -1,20 +1,17 @@
 package fr.inria.diversify.persistence.json.input;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.SectionInput;
-import fr.inria.diversify.persistence.json.output.JsonASTSectionOutput;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import static fr.inria.diversify.persistence.json.output.JsonASTSectionOutput.FAILURES;
-import static fr.inria.diversify.persistence.json.output.JsonASTSectionOutput.FAILURES_DICTIONARY;
+import static fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput.FAILURES;
+import static fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput.FAILURES_DICTIONARY;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.NAME;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
 

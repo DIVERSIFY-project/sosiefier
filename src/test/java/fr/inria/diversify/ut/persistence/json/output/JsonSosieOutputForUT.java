@@ -1,7 +1,5 @@
 package fr.inria.diversify.ut.persistence.json.output;
 
-import fr.inria.diversify.persistence.SectionOutput;
-import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.persistence.json.output.JsonSosiesOutput;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONObject;

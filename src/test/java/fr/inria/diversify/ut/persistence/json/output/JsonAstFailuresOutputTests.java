@@ -1,7 +1,7 @@
 package fr.inria.diversify.ut.persistence.json.output;
 
-import fr.inria.diversify.persistence.json.output.JsonASTReplaceOutput;
-import fr.inria.diversify.persistence.json.output.JsonASTSectionOutput;
+import fr.inria.diversify.persistence.json.output.JsonAstReplaceOutput;
+import fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.ut.FakeCodeFragment;
@@ -29,7 +29,7 @@ public class JsonAstFailuresOutputTests {
 
     @Test
     public void testFailureWrite() throws JSONException {
-        JsonASTReplaceOutput sectionOutput = new JsonASTReplaceOutput();
+        JsonAstReplaceOutput sectionOutput = new JsonAstReplaceOutput();
         sectionOutput.setOutputObject(new JSONObject());
 
         ASTReplace r = getExample("Failure 1", "Failure 2");
@@ -38,18 +38,18 @@ public class JsonAstFailuresOutputTests {
         sectionOutput.storeMetaData();
 
         JSONObject d = sectionOutput.getOutputObject();
-        assertTrue(d.has(JsonASTSectionOutput.FAILURES_DICTIONARY));
+        assertTrue(d.has(JsonAstTransformationOutput.FAILURES_DICTIONARY));
 
-        JSONObject fails = d.getJSONObject(JsonASTSectionOutput.FAILURES_DICTIONARY);
+        JSONObject fails = d.getJSONObject(JsonAstTransformationOutput.FAILURES_DICTIONARY);
         assertEquals(fails.get("Failure 1"), 0);
         assertEquals(fails.get("Failure 2"), 1);
         assertEquals(fails.get("Failure 3"), 2);
         assertEquals(fails.length(), 3);
 
-        JSONArray array = d.getJSONArray(JsonASTSectionOutput.TRANSFORMATIONS);
-        assertEquals(array.getJSONObject(0).getJSONArray(JsonASTSectionOutput.FAILURES).get(0), 0);
-        assertEquals(array.getJSONObject(0).getJSONArray(JsonASTSectionOutput.FAILURES).get(1), 1);
-        assertEquals(array.getJSONObject(1).getJSONArray(JsonASTSectionOutput.FAILURES).get(0), 2);
-        assertEquals(array.getJSONObject(1).getJSONArray(JsonASTSectionOutput.FAILURES).get(1), 1);
+        JSONArray array = d.getJSONArray(JsonAstTransformationOutput.TRANSFORMATIONS);
+        assertEquals(array.getJSONObject(0).getJSONArray(JsonAstTransformationOutput.FAILURES).get(0), 0);
+        assertEquals(array.getJSONObject(0).getJSONArray(JsonAstTransformationOutput.FAILURES).get(1), 1);
+        assertEquals(array.getJSONObject(1).getJSONArray(JsonAstTransformationOutput.FAILURES).get(0), 2);
+        assertEquals(array.getJSONObject(1).getJSONArray(JsonAstTransformationOutput.FAILURES).get(1), 1);
     }
 }
