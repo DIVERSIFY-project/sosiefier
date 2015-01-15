@@ -1,6 +1,6 @@
 package fr.inria.diversify.ut.persistence.json.output;
 
-import fr.inria.diversify.persistence.json.output.JsonAAstReplaceOutput;
+import fr.inria.diversify.persistence.json.output.JsonAstReplaceOutput;
 import fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -29,7 +29,7 @@ public class JsonAstFailuresOutputTests {
 
     @Test
     public void testFailureWrite() throws JSONException {
-        JsonAAstReplaceOutput sectionOutput = new JsonAAstReplaceOutput();
+        JsonAstReplaceOutput sectionOutput = new JsonAstReplaceOutput();
         sectionOutput.setOutputObject(new JSONObject());
 
         ASTReplace r = getExample("Failure 1", "Failure 2");

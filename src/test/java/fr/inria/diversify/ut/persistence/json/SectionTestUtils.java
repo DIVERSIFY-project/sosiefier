@@ -99,7 +99,7 @@ public class SectionTestUtils {
 
 
     public static JSONObject createReplaceASTTransformationJSON() {
-        JsonAAstReplaceOutput d = new JsonAAstReplaceOutput();
+        JsonAstReplaceOutput d = new JsonAstReplaceOutput();
         d.setOutputObject(new JSONObject());
         ASTReplace r = new ASTReplace();
         r.setIndex(1);

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Created by marodrig on 08/01/2015.
  */
-public class JsonAAstReplaceOutput extends JsonAstTransformationOutput {
+public class JsonAstReplaceOutput extends JsonAstTransformationOutput {
 
 
     /**
