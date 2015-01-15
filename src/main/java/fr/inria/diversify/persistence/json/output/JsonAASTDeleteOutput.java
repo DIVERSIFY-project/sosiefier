@@ -8,7 +8,8 @@ import org.json.JSONObject;
 /**
  * Created by marodrig on 08/01/2015.
  */
-public class JsonASTDeleteOutput extends JsonASTSectionOutput {
+public class JsonAASTDeleteOutput extends JsonAstTransformationOutput {
+
     /**
      * Puts the transformation data into the JSON Object.
      * @param object Objecto to putDataToJSON data
@@ -22,5 +23,6 @@ public class JsonASTDeleteOutput extends JsonASTSectionOutput {
         }
     }
 
+    @Override
     public boolean canStore(Transformation t) {return t instanceof ASTDelete;}
 }

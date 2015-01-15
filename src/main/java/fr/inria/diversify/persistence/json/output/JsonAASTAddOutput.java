@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Created by marodrig on 08/01/2015.
  */
-public class JsonASTAddOutput extends JsonASTSectionOutput {
+public class JsonAASTAddOutput extends JsonAstTransformationOutput {
 
     /**
      * Puts the transformation data into the JSON Object.
@@ -27,5 +27,6 @@ public class JsonASTAddOutput extends JsonASTSectionOutput {
         }
     }
 
+    @Override
     public boolean canStore(Transformation t) {return t instanceof ASTAdd;}
 }

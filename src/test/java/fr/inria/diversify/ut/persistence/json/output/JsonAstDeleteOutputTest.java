@@ -1,9 +1,8 @@
 package fr.inria.diversify.ut.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.json.output.JsonAstDeleteOutput;
+import fr.inria.diversify.persistence.json.output.JsonAASTDeleteOutput;
 import fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput;
-import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -13,8 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
-
-import java.util.HashMap;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSPLANT;
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.list;
@@ -33,7 +30,7 @@ public class JsonAstDeleteOutputTest {
      */
     @Test(expected = PersistenceException.class)
     public void testWriteEmpty() {
-        SectionTestUtils.doTestWriteEmpty(new JsonAstDeleteOutput(), new ASTDelete());
+        SectionTestUtils.doTestWriteEmpty(new JsonAASTDeleteOutput(), new ASTDelete());
     }
 
     /**
@@ -46,7 +43,7 @@ public class JsonAstDeleteOutputTest {
         ASTDelete r = new ASTDelete();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
 
-        JsonAstDeleteOutput d = new JsonAstDeleteOutput();
+        JsonAASTDeleteOutput d = new JsonAASTDeleteOutput();
         d.setTransformations(list(r));
         d.write(new JSONObject());
         JSONObject tr = d.getOutputObject().getJSONArray(
@@ -67,7 +64,7 @@ public class JsonAstDeleteOutputTest {
         ASTDelete r = new ASTDelete();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
 
-        JsonAstDeleteOutput d = new JsonAstDeleteOutput();
+        JsonAASTDeleteOutput d = new JsonAASTDeleteOutput();
         d.setTransformations(list(new ASTReplace(), r, new ASTAdd()));
         d.write(new JSONObject());
 

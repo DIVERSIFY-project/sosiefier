@@ -29,7 +29,7 @@ public class SectionTestUtils {
     public static void writeAssertions(JsonSectionOutput d) throws JSONException {
 
         JSONObject tr = d.getOutputObject().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
-        if ( !(d instanceof JsonAstDeleteOutput) ) assertTrue(tr.has(VARIABLE_MAP));
+        if ( !(d instanceof JsonAASTDeleteOutput) ) assertTrue(tr.has(VARIABLE_MAP));
 
         tr = tr.getJSONObject("transplantationPoint");
         assertEquals(tr.get("position"), "org.class:1");
@@ -68,7 +68,7 @@ public class SectionTestUtils {
      * @throws JSONException
      */
     public static JSONObject createDeleteASTTransformationJSON() throws JSONException {
-        JsonAstDeleteOutput d = new JsonAstDeleteOutput();
+        JsonAASTDeleteOutput d = new JsonAASTDeleteOutput();
         d.setOutputObject(new JSONObject());
         ASTDelete r = new ASTDelete();
         r.setIndex(1);
@@ -85,7 +85,7 @@ public class SectionTestUtils {
      * @throws JSONException
      */
     public static JSONObject createAddASTTransformationJSON() throws JSONException {
-        JsonAstAddOutput d = new JsonAstAddOutput();
+        JsonAASTAddOutput d = new JsonAASTAddOutput();
         d.setOutputObject(new JSONObject());
         ASTAdd r = new ASTAdd();
         r.setIndex(1);
@@ -99,7 +99,7 @@ public class SectionTestUtils {
 
 
     public static JSONObject createReplaceASTTransformationJSON() {
-        JsonAstReplaceOutput d = new JsonAstReplaceOutput();
+        JsonASTReplaceOutput d = new JsonASTReplaceOutput();
         d.setOutputObject(new JSONObject());
         ASTReplace r = new ASTReplace();
         r.setIndex(1);
