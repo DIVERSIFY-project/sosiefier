@@ -21,6 +21,7 @@ import java.util.List;
 
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.createTransformations;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -31,14 +32,20 @@ public class JsonSosiesInputTest {
 
     private static final String EMPTY_STR = "";
 
-    @Test(expected = PersistenceException.class)
-    public void testReadEmpty() {
-        JsonSosiesInput input = new JsonSosiesInput(
-                new InputStreamReader(new ByteArrayInputStream(EMPTY_STR.getBytes())));
-        input.read();
+    /**
+     * Test that all sections are properly initialized in every constructor
+     */
+    @Test
+    public void testConstructors() {
+        InputProgram p = new InputProgram();
+        InputStreamReader r = new InputStreamReader(
+                new ByteArrayInputStream(EMPTY_STR.getBytes(StandardCharsets.UTF_8)));
+        JsonSosiesInput input = new JsonSosiesInput(r, p);
+        assertTrue(input.getSections().size() > 0);
+
+        input = new JsonSosiesInput("/uzr/h0m3/my.jzon", p);
+        assertTrue(input.getSections().size() > 0);
     }
-
-
 
     @Test
     public void testReadFromSoiesOutput(@Mocked FileWriter anyWriter) {

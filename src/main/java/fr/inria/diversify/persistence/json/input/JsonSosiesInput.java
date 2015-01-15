@@ -31,12 +31,13 @@ public class JsonSosiesInput extends TransformationsInput {
      */
     private InputProgram inputProgram;
 
-    public JsonSosiesInput(InputStreamReader reader) {
-        this("");
-        this.streamReader = reader;
+    public JsonSosiesInput(InputStreamReader r, InputProgram inputProgram) {
+        this("", inputProgram);
+        this.streamReader = r;
+
     }
 
-    public JsonSosiesInput(String uri) {
+    public JsonSosiesInput(String uri, InputProgram inputProgram) {
         super(uri);
         sections = new ArrayList<>();
         sections.add(new JsonAstTransformationCollectionInput());
@@ -44,15 +45,6 @@ public class JsonSosiesInput extends TransformationsInput {
         sections.add(new JsonAstAddInput());
         sections.add(new JsonAstReplaceInput());
         sections.add(new JsonHeaderInput());
-    }
-
-    public JsonSosiesInput(InputStreamReader r, InputProgram inputProgram) {
-        this(r);
-        this.inputProgram = inputProgram;
-    }
-
-    public JsonSosiesInput(String uri, InputProgram inputProgram) {
-        super(uri);
         this.inputProgram = inputProgram;
     }
 
@@ -122,7 +114,18 @@ public class JsonSosiesInput extends TransformationsInput {
         this.inputProgram = inputProgram;
     }
 
+    /**
+     * Input program to obtain the code fragments for the transformations
+     */
     public InputProgram getInputProgram() {
         return inputProgram;
+    }
+
+    /**
+     * All sections in the reader.
+     * @return
+     */
+    public Collection<SectionInput> getSections() {
+        return sections;
     }
 }
