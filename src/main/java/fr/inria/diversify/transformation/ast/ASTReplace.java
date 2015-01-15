@@ -50,6 +50,10 @@ public class ASTReplace extends ASTTransformation {
         variableMapping = mapping;
     }
 
+    public Map<String, String> getVarMapping() {
+        return variableMapping;
+    }
+
     public ASTReplace() {
         name = "replace";
         type = "adrStmt";

@@ -8,6 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.STATUS;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TINDEX;
@@ -29,9 +31,9 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
         else {
             astt = build();
             t.put(index, astt);
+            astt.setIndex(index);
+            astt.setStatus(getJsonObject().getInt(STATUS));
         }
-        astt.setIndex(index);
-        astt.setStatus(getJsonObject().getInt(STATUS));
         return astt;
     }
 
@@ -42,5 +44,15 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
         } catch (JSONException e) {
             throw new PersistenceException("Unable to map JSON into transformation", e);
         }
+    }
+
+    protected Map<String, String> getVarMap(JSONObject jsonObject) throws JSONException {
+        Map<String, String> varMap = new HashMap<>();
+        Iterator<String> nameItr = jsonObject.keys();
+        while(nameItr.hasNext()) {
+            String name = nameItr.next();
+            varMap.put(name, jsonObject.getString(name));
+        }
+        return varMap;
     }
 }

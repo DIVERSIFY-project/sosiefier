@@ -8,6 +8,8 @@ import org.json.JSONObject;
  */
 public abstract class JsonSectionOutput extends SectionOutput {
 
+    public static final String VARIABLE_MAP = "variableMap";
+
     public static final String TRANSFORMATIONS = "transformations";
 
     public static final String TRANSPLANT_POINT = "transplantationPoint";

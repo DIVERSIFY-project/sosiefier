@@ -31,6 +31,7 @@ import spoon.reflect.reference.CtTypeReference;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.*;
 
 /**
@@ -67,6 +68,8 @@ public class TransformationJsonParser {
     private int parsingTransfIndex;
 
     private ActionListener listener;
+
+    private Collection<String> errors;
 
     public TransformationJsonParser(boolean toSet, InputProgram inputProgram) {
 
@@ -146,7 +149,9 @@ public class TransformationJsonParser {
                     listener.actionPerformed(new ActionEvent(i / length, 0, ""));
                 }
             } catch (TransformationParserException e) {
-                Log.warn("Unable to parse transformation " + i);
+                String err = "Unable to parse transformation " + i;
+                Log.warn(err);
+                getErrors().add(err);
                 e.printStackTrace();
             }
         }
@@ -726,4 +731,8 @@ public class TransformationJsonParser {
     }
 
 
+    public Collection<String> getErrors() {
+        if ( errors == null ) errors = new ArrayList<>();
+        return errors;
+    }
 }

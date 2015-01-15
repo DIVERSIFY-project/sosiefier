@@ -9,18 +9,29 @@ import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.ut.MockInputProgram;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.createReplaceASTTransformationJSON;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Created by marodrig on 12/01/2015.
  */
 public class JsonAstReplaceInputTest {
+
+    /**
+     * Test that something goes wrong and it reports it right
+     */
+    @Test
+    @Ignore
+    public void testWithErrors_UnableToFindCodeFragment() {
+        fail("Not implemented yet");
+    }
 
     /**
      * Test the reading of a transformation
@@ -46,5 +57,14 @@ public class JsonAstReplaceInputTest {
         assertEquals(p.getCodeFragments().get(1), add.getTransplant());
     }
 
+    @Test
+    public void testCanHandleSection() {
+        JsonAstReplaceInput reader = new JsonAstReplaceInput();
+        assertTrue(reader.canHandleSection(TRANSFORMATIONS + ".replace"));
+        assertTrue(reader.canHandleSection(TRANSFORMATIONS + ".replaceWitgestein"));
+        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".delete"));
+        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".add"));
+        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".addWitgestein"));
+    }
 
 }

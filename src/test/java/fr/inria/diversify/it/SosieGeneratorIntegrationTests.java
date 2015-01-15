@@ -1,7 +1,11 @@
 package fr.inria.diversify.it;
 
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
+import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.util.Log;
+import spoon.reflect.factory.Factory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,6 +26,41 @@ public class SosieGeneratorIntegrationTests {
     private Properties properties;
 
     /**
+     * Gets an input program from data located in the data dir,
+     * given the name of the configuration file (without the .properties)
+     * @param s Name of the configuration file.
+     * @return An input program
+     * @throws IOException
+     */
+    protected InputProgram getInputProgram(String s) throws IOException {
+        //Path to the configuration
+        String path = getProperties().getProperty("data.dir");
+        if ( path == null ) throw new RuntimeException("Unable to obtain the data.dir properties");
+
+        path += getProperties().getProperty("input.configurations", "/input_configurations") + "/" + s + ".properties";
+        InputConfiguration c = new InputConfiguration(path);
+
+        Factory factory = null;
+        try {
+            MavenDependencyResolver resolver = new MavenDependencyResolver();
+            resolver.DependencyResolver(c.getProjectPath() + "/pom.xml");
+            factory = new SpoonMetaFactory().buildNewFactory(c.getSourceCodeDir(), 7);
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        InputProgram inputProgram = new InputProgram();
+        inputProgram.setFactory(factory);
+        inputProgram.setSourceCodeDir(c.getSourceCodeDir());
+        inputProgram.setPreviousTransformationsPath(c.getPreviousTransformationPath());
+        inputProgram.processCodeFragments();
+
+        return inputProgram;
+    }
+
+    /**
      * Get the path of a file located in the resource directory
      *
      * @param name
@@ -35,8 +74,8 @@ public class SosieGeneratorIntegrationTests {
             if ( res == null ) throw new RuntimeException("Unable to find file " + resourceRoot + name);
             return res.toURI().getPath();
         } catch (URISyntaxException e) {
-            Log.error("Unable to find file " + resourceRoot + name);
-            throw new RuntimeException("Unable to find file " + resourceRoot + name);
+            Log.error("URISyntaxException " + e.getMessage());
+            throw new RuntimeException("Error loading resource file", e);
         }
     }
 
@@ -46,7 +85,7 @@ public class SosieGeneratorIntegrationTests {
      * @return as string  with the full path of the directory
      */
     protected String getDataDir() {
-        String path = getProperties().getProperty("data.path");
+        String path = getProperties().getProperty("data.dir");
         if (path == null) {
             Log.error("Unable to find the 'data.path' property");
             throw new RuntimeException("Unable to find the 'data.path' property");
@@ -92,7 +131,7 @@ public class SosieGeneratorIntegrationTests {
             try {
                 properties.load(new FileInputStream(getResourcePath("integration_test.properties")));
             } catch (IOException e) {
-                Log.error("Unable to read 'integration_test.properties'");
+                Log.error("Unable to read 'integration_test.properties' file");
                 throw new RuntimeException(e);
             }
         }

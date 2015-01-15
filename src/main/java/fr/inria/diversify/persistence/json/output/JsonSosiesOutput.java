@@ -26,5 +26,6 @@ public class JsonSosiesOutput extends JsonTransformationOutput {
         sections.add(0, new JsonASTReplaceOutput());
         sections.add(0, new JsonASTDeleteOutput());
         sections.add(0, new JsonASTAddOutput());
+        sections.add(0, new JsonHeaderOutput());
     }
 }

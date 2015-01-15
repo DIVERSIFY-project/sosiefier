@@ -88,6 +88,10 @@ public class ASTAdd extends ASTTransformation {
         variableMapping = mapping;
     }
 
+    public Map<String, String> getVarMapping() {
+        return variableMapping;
+    }
+
     public void setTransplant(CodeFragment add) {
         this.transplant = add;
     }
@@ -109,8 +113,8 @@ public class ASTAdd extends ASTTransformation {
 
         return status == otherASTAdd.status &&
                 name.equals(otherASTAdd.name) &&
-                failures.equals(otherASTAdd.failures) &&
-                (variableMapping == null || variableMapping.equals(otherASTAdd.variableMapping)) &&
+                ((failures == otherASTAdd.failures) || failures.equals(otherASTAdd.failures)) &&
+                ((variableMapping == otherASTAdd.variableMapping) || variableMapping.equals(otherASTAdd.variableMapping)) &&
                 transplantationPoint.getCtCodeFragment().equals(otherASTAdd.transplantationPoint.getCtCodeFragment()) &&
                 transplant.getCtCodeFragment().getPosition().equals(otherASTAdd.transplant.getCtCodeFragment().getPosition());
     }
@@ -144,4 +148,6 @@ public class ASTAdd extends ASTTransformation {
     }
 
     public void updateStatementList() {}
+
+
 }

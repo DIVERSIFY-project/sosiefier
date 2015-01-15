@@ -1,5 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -9,6 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 
@@ -32,16 +35,23 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
         try {
             ASTAdd transf = (ASTAdd) get(transformations); //add the transformation to the transformations map if not present
 
+            transf.setVarMapping(getVarMap(getJsonObject().getJSONObject(VARIABLE_MAP)));
+
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);
-            transf.setTransplantationPoint(getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE)));
+            CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
+            if ( cf == null ) throw new PersistenceException("Unable to find code fragment");
+            transf.setTransplantationPoint(cf);
 
             cfJson = getJsonObject().getJSONObject(TRANSPLANT);
-            transf.setTransplant(getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE)));
-
+            cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
+            if ( cf == null ) throw new PersistenceException("Unable to find code fragment");
+            transf.setTransplant(cf);
         } catch (JSONException e) {
             throw new PersistenceException("Unable to parse delete transformation", e);
         }
     }
+
+
 
     @Override
     public boolean canHandleSection(String s) {

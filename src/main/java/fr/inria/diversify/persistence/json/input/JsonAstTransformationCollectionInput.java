@@ -33,12 +33,13 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
                 JSONArray tr = getJsonObject().getJSONArray(TRANSFORMATIONS);
                 for ( int i = 0; i < tr.length(); i++ ) {
                     JSONObject obj = tr.getJSONObject(i);
-                    Collection<SectionInput> sections = getLocator().locate(TRANSFORMATIONS + "." + obj.getString(NAME));
-                    for ( SectionInput si : sections ) {
-                        si.setLocator(getLocator());
-                        ((JsonSectionInput)si).setInputProgram(getInputProgram());
-                        ((JsonSectionInput)si).setJsonObject(obj);
-                        si.read(transformations);
+                    for ( SectionInput si : getSections() ) {
+                        if ( si.canHandleSection(TRANSFORMATIONS + "." + obj.getString(NAME)) ) {
+                            si.setSections(getSections());
+                            ((JsonSectionInput) si).setInputProgram(getInputProgram());
+                            ((JsonSectionInput) si).setJsonObject(obj);
+                            si.read(transformations);
+                        }
                     }
                 }
             }

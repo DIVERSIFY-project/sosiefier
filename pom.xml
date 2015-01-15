@@ -56,13 +56,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.report</artifactId>
-            <version>0.7.1.201405082137</version>
-        </dependency>
-
-
-        <dependency>
             <groupId>org.jmockit</groupId>
             <artifactId>jmockit</artifactId>
             <version>1.14</version>

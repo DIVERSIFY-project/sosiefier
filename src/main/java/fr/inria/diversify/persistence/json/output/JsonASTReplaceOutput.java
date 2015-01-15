@@ -21,6 +21,7 @@ public class JsonASTReplaceOutput extends JsonASTSectionOutput {
             ASTReplace d = (ASTReplace) transformation;
             object.put(TRANSPLANT_POINT, codeFragmentToJSON(d.getTransplantationPoint()));
             object.put(TRANSPLANT, codeFragmentToJSON(d.getTransplant()));
+            object.put(VARIABLE_MAP, d.getVarMapping());
         }
     }
 

@@ -72,7 +72,6 @@ public abstract class JsonASTSectionOutput extends JsonSectionOutput {
             object.put(TRANSF_TYPE, astt.getType());
             object.put(STATUS, astt.getStatus());
             object.put(NAME, astt.getName());
-
             //Write failures
             List<String> failures = transformation.getFailures();
             JSONArray array = new JSONArray();

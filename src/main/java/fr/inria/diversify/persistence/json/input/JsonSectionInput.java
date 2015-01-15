@@ -13,9 +13,6 @@ import java.util.Collection;
  * Created by marodrig on 12/01/2015.
  */
 public abstract class JsonSectionInput extends SectionInput {
-
-
-
     /**
      * JSon to read transformations from
      */

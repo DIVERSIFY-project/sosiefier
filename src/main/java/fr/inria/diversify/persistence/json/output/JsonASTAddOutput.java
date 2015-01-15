@@ -23,6 +23,7 @@ public class JsonASTAddOutput extends JsonASTSectionOutput {
             ASTAdd d = (ASTAdd) transformation;
             object.put(TRANSPLANT_POINT, codeFragmentToJSON(d.getTransplantationPoint()));
             object.put(TRANSPLANT, codeFragmentToJSON(d.getTransplant()));
+            object.put(VARIABLE_MAP, d.getVarMapping());
         }
     }
 

@@ -1,5 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -33,11 +34,16 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
             ASTReplace transf = (ASTReplace) get(transformations); //add the transformation to the transformations map if not present
 
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);
-            transf.setTransplantationPoint(getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE)));
+            CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
+            if ( cf == null ) throw new PersistenceException("Unable to find code fragment");
+            transf.setTransplantationPoint(cf);
 
             cfJson = getJsonObject().getJSONObject(TRANSPLANT);
-            transf.setTransplant(getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE)));
-            
+            cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
+            if ( cf == null ) throw new PersistenceException("Unable to find code fragment");
+            transf.setTransplant(cf);
+
+            transf.setVarMapping(getVarMap(getJsonObject().getJSONObject(VARIABLE_MAP)));
         } catch (JSONException e) {
             throw new PersistenceException("Unable to parse replace transformation", e);
         }

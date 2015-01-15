@@ -1,7 +1,10 @@
 package fr.inria.diversify.persistence;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 
+import java.awt.*;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,28 +16,36 @@ public abstract class TransformationsInput {
 
     protected final String uri;
 
-    protected final InputSectionLocator sectionLocator;
+    private Collection<String> errors;
 
-    public TransformationsInput(String uri, InputSectionLocator sectionFactory) {
+    protected Collection<SectionInput> sections;
+
+    public TransformationsInput(String uri) {
         this.uri = uri;
-        this.sectionLocator = sectionFactory;
+        sections = new ArrayList<>();
     }
+
+    /**
+     * Retrieves a collection of all section name in the storage
+     * @return A collection of strings
+     */
+    protected abstract Collection<String> sectionNames();
 
     /**
      * Read all transformations from the storage
      * @return A collection of transformations indexed by id.
      */
-    public HashMap<Integer, Transformation> read() {
+    public Collection<Transformation> read() {
         open();
         HashMap<Integer, Transformation> result = new HashMap<>();
-        for ( String s : sectionNames() ) {
-            for ( SectionInput section : sectionLocator.locate(s) ) {
-                initializeSection(section);
-                section.read(result);
+        for ( SectionInput section : sections ) {
+            initializeSection(section);
+            for ( String s : sectionNames() ) {
+                if ( section.canHandleSection(s) ) section.read(result);
             }
         }
         close();
-        return result;
+        return result.values();
     }
 
     /**
@@ -52,13 +63,13 @@ public abstract class TransformationsInput {
      * @param section Section to be initialized
      */
     protected void initializeSection(SectionInput section) {
-        section.setLocator(sectionLocator);
+        section.setSections(sections);
+        section.setErrors(getErrors());
     }
 
-    /**
-     * Obtains the collection of section names in the storage
-     * @return
-     */
-    protected abstract Collection<String> sectionNames();
 
+    public Collection<String> getErrors() {
+        if ( errors == null ) errors = new ArrayList<>();
+        return errors;
+    }
 }

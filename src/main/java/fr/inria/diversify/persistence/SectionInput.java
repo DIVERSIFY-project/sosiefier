@@ -13,9 +13,14 @@ import java.util.HashMap;
 public abstract class SectionInput {
 
     /**
-     * Section locator to obtain sections inputs for a sub-object
+     * Reading errors
      */
-    private InputSectionLocator locator;
+    private Collection<String> errors;
+
+    /**
+     * Section inputs to obtain data from the storage sections for input sub-objects
+     */
+    private Collection<SectionInput> sections;
 
     /**
      * Read data into the given transformations. It may add new transformations as well.
@@ -23,13 +28,21 @@ public abstract class SectionInput {
      */
     public abstract void read(HashMap<Integer, Transformation> transformations);
 
-    public void setLocator(InputSectionLocator locator) {
-        this.locator = locator;
-    }
-
-    public InputSectionLocator getLocator() {
-        return locator;
-    }
-
     public abstract boolean canHandleSection(String s);
+
+    public Collection<String> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(Collection<String> errors) {
+        this.errors = errors;
+    }
+
+    public Collection<SectionInput> getSections() {
+        return sections;
+    }
+
+    public void setSections(Collection<SectionInput> sections) {
+        this.sections = sections;
+    }
 }

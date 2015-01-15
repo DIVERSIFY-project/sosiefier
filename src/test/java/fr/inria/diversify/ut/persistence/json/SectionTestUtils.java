@@ -1,6 +1,8 @@
 package fr.inria.diversify.ut.persistence.json;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.output.*;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -12,13 +14,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
-import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
-import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSPLANT;
-import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSPLANT_POINT;
+import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -28,15 +28,16 @@ public class SectionTestUtils {
 
 
     public static void writeAssertions(JsonSectionOutput d) throws JSONException {
-        JSONObject tr = d.getOutputObject().getJSONArray(
-                TRANSFORMATIONS).getJSONObject(0).getJSONObject("transplantationPoint");
 
+        JSONObject tr = d.getOutputObject().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
+        if ( !(d instanceof JsonASTDeleteOutput) ) assertTrue(tr.has(VARIABLE_MAP));
+
+        tr = tr.getJSONObject("transplantationPoint");
         assertEquals(tr.get("position"), "org.class:1");
         assertEquals(tr.get("type"), "CtReturn");
         assertEquals(tr.get("sourcecode"), "return 0");
 
-        tr = d.getOutputObject().getJSONArray(
-                TRANSFORMATIONS).getJSONObject(0).getJSONObject("transplant");
+        tr = d.getOutputObject().getJSONArray(TRANSFORMATIONS).getJSONObject(0).getJSONObject("transplant");
         assertEquals(tr.get("position"), "org.class:1");
         assertEquals(tr.get("type"), "CtReturn");
         assertEquals(tr.get("sourcecode"), "return 0");
@@ -111,5 +112,31 @@ public class SectionTestUtils {
         return d.getOutputObject();
     }
 
+
+    /**
+     * Creates a collection of transformations that matches the fake fragments of the mock program
+     * @return
+     * @param p
+     */
+    public static List<Transformation> createTransformations(InputProgram p) {
+        ASTAdd add = new ASTAdd();
+        add.setIndex(0);
+        add.setStatus(-1);
+        add.setTransplantationPoint(p.getCodeFragments().get(0));
+        add.setTransplant(p.getCodeFragments().get(1));
+
+        ASTDelete del = new ASTDelete();
+        del.setIndex(1);
+        del.setStatus(-2);
+        del.setTransplantationPoint(p.getCodeFragments().get(2));
+
+        ASTReplace r = new ASTReplace();
+        r.setIndex(2);
+        r.setStatus(0);
+        r.setTransplantationPoint(p.getCodeFragments().get(1));
+        r.setTransplant(p.getCodeFragments().get(2));
+
+        return list(add, del, r);
+    }
 
 }

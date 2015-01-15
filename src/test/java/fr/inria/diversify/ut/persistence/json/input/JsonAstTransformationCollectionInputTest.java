@@ -1,7 +1,6 @@
 package fr.inria.diversify.ut.persistence.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.persistence.InputSectionLocator;
 import fr.inria.diversify.persistence.json.input.*;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -11,28 +10,34 @@ import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.ut.MockInputProgram;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
 
-import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.createAddASTTransformationJSON;
-import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.createDeleteASTTransformationJSON;
-import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.createReplaceASTTransformationJSON;
+import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.*;
 import static org.junit.Assert.assertEquals;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
+import static org.junit.Assert.fail;
 
 /**
  * Created by marodrig on 12/01/2015.
  */
 public class JsonAstTransformationCollectionInputTest {
 
-    private void testReadTransformation(JsonAstTransformationInput input, JSONObject object) throws JSONException {
-        InputSectionLocator locator = new InputSectionLocator();
-        locator.addSection(input);
+    /**
+     * Test that something goes wrong and it reports it right
+     */
+    @Test
+    @Ignore
+    public void testWithErrors_UnableToFindCodeFragment() {
+        fail("Not implemented yet");
+    }
 
+    private void testReadTransformation(JsonAstTransformationInput input, JSONObject object) throws JSONException {
         JsonAstTransformationCollectionInput reader = new JsonAstTransformationCollectionInput();
         InputProgram p = new MockInputProgram();
-        reader.setLocator(locator);
+        reader.setSections(list(input));
         reader.setInputProgram(p);
         //The json data is created with JsonAstDeleteOutput class.
         reader.setJsonObject(object);
