@@ -19,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.assertEqualsTransformation;
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.createTransformations;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -64,8 +65,8 @@ public class JsonSosiesInputTest {
 
         //Sort them so we can test pair wise. Sorting by type make sense because
         // there is only Transformation for each type
-        t.sort((o1, o2) -> o1.getType().compareTo(o2.getType()));
-        result.sort((o1, o2) -> o1.getType().compareTo(o2.getType()));
+        t.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
+        result.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
 
         assertEquals(t.size(), result.size());
         assertEqualsTransformation(t.get(0), result.get(0));
@@ -73,29 +74,5 @@ public class JsonSosiesInputTest {
         assertEqualsTransformation(t.get(2), result.get(2));
     }
 
-    private void assertEqualsTransformation(Transformation tt, Transformation tt2) {
-        ASTTransformation t1 = (ASTTransformation) tt;
-        ASTTransformation t2 = (ASTTransformation) tt2;
 
-        assertEquals(t1.getStatus(), t2.getStatus());
-        assertEquals(t1.getIndex(), t2.getIndex());
-        assertEquals(t1.getTransplantationPoint().equalString(), t2.getTransplantationPoint().equalString());
-        assertEquals(t1.getClass(), t2.getClass());
-        if ( t1 instanceof ASTAdd ) {
-            assertEquals(
-                    ((ASTAdd)t1).getTransplant().equalString(),
-                    ((ASTAdd)t2).getTransplant().equalString());
-            assertEquals(
-                    ((ASTAdd)t1).getTransplant(),
-                    ((ASTAdd)t2).getTransplant());
-
-        } else if ( t1 instanceof ASTReplace) {
-            assertEquals(
-                    ((ASTReplace)t1).getTransplant().equalString(),
-                    ((ASTReplace)t2).getTransplant().equalString());
-            assertEquals(
-                    ((ASTReplace)t1).getTransplant(),
-                    ((ASTReplace)t2).getTransplant());
-        }
-    }
 }

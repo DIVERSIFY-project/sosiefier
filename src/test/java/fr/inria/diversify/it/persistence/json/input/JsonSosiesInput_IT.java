@@ -28,6 +28,10 @@ public class JsonSosiesInput_IT extends SosieGeneratorIntegrationTests{
                 "C:\\MarcelStuff\\data\\DIVERSE\\sosies-pools\\collections_4_0_small_test_new.json", inputProgram);
         Collection<Transformation> newLoad = newIn.read();
         assertEquals(0, newIn.getErrors().size()); //TODO:Add later a more robust questions
-        assertTrue(newLoad.size() > 0);
+        int i = 0;
+        for ( Transformation t : newLoad ) {
+            System.out.println(i + ":" + t.getIndex());
+        }
+        assertEquals(13, newLoad.size());
     }
 }

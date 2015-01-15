@@ -14,7 +14,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
@@ -54,7 +53,7 @@ public class SectionTestUtils {
         JSONObject o = new JSONObject();
         d.setOutputObject(o);
         d.before(new ArrayList<>());
-        d.write(t);
+        d.store(t);
         assertTrue(o.has(TRANSFORMATIONS));
     }
 
@@ -75,7 +74,7 @@ public class SectionTestUtils {
         r.setIndex(1);
         r.setStatus(-1);
         r.setTransplantationPoint(new FakeCodeFragment("org.MyClass:1", "ctReturn", "return 0"));
-        d.write(r);
+        d.store(r);
 
         return d.getOutputObject();
     }
@@ -94,7 +93,7 @@ public class SectionTestUtils {
 
         r.setTransplantationPoint(new FakeCodeFragment("org.MyClass:1", "ctReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.MyOtherClass:10", "ctIf", "if ( int == 0 ) int = 10"));
-        d.write(r);
+        d.store(r);
         return d.getOutputObject();
     }
 
@@ -108,7 +107,7 @@ public class SectionTestUtils {
 
         r.setTransplantationPoint(new FakeCodeFragment("org.MyClass:1", "ctReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.MyOtherClass:10", "ctIf", "if ( int == 0 ) int = 10"));
-        d.write(r);
+        d.store(r);
         return d.getOutputObject();
     }
 
@@ -126,17 +125,43 @@ public class SectionTestUtils {
         add.setTransplant(p.getCodeFragments().get(1));
 
         ASTDelete del = new ASTDelete();
-        del.setIndex(1);
+        del.setIndex(0);
         del.setStatus(-2);
         del.setTransplantationPoint(p.getCodeFragments().get(2));
 
         ASTReplace r = new ASTReplace();
-        r.setIndex(2);
+        r.setIndex(0);
         r.setStatus(0);
         r.setTransplantationPoint(p.getCodeFragments().get(1));
         r.setTransplant(p.getCodeFragments().get(2));
 
         return list(add, del, r);
+    }
+
+    public static void assertEqualsTransformation(Transformation tt, Transformation tt2) {
+        ASTTransformation t1 = (ASTTransformation) tt;
+        ASTTransformation t2 = (ASTTransformation) tt2;
+
+        assertEquals(t1.getStatus(), t2.getStatus());
+        assertEquals(t1.getIndex(), t2.getIndex());
+        assertEquals(t1.getTransplantationPoint().equalString(), t2.getTransplantationPoint().equalString());
+        assertEquals(t1.getClass(), t2.getClass());
+        if ( t1 instanceof ASTAdd ) {
+            assertEquals(
+                    ((ASTAdd)t1).getTransplant().equalString(),
+                    ((ASTAdd)t2).getTransplant().equalString());
+            assertEquals(
+                    ((ASTAdd)t1).getTransplant(),
+                    ((ASTAdd)t2).getTransplant());
+
+        } else if ( t1 instanceof ASTReplace) {
+            assertEquals(
+                    ((ASTReplace)t1).getTransplant().equalString(),
+                    ((ASTReplace)t2).getTransplant().equalString());
+            assertEquals(
+                    ((ASTReplace)t1).getTransplant(),
+                    ((ASTReplace)t2).getTransplant());
+        }
     }
 
 }

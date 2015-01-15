@@ -28,10 +28,10 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<Integer, Transformation> transformations, HashMap<String, Object> metadata) {
 
         try {
-            ASTReplace transf = (ASTReplace) get(transformations); //add the transformation to the transformations map if not present
+            ASTReplace transf = (ASTReplace) get(transformations, metadata); //add the transformation to the transformations map if not present
 
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);
             CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
@@ -47,6 +47,17 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
         } catch (JSONException e) {
             throw new PersistenceException("Unable to parse replace transformation", e);
         }
+    }
+
+    /**
+     * Method that indicate if the meta data section can be handled or not
+     *
+     * @param s Unique name of the section
+     * @return true if possible
+     */
+    @Override
+    public boolean canHandleMetaDataSection(String s) {
+        return false;
     }
 
     @Override

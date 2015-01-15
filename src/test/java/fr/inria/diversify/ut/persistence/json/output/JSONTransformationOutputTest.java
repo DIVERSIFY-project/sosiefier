@@ -35,12 +35,12 @@ public class JSONTransformationOutputTest {
         }
 
         @Override
-        public void after() {
+        public void storeMetaData() {
             assertTrue(flagBeforeAfter);
             flagBeforeAfter = false;
         }
         @Override
-        public void write(Transformation transformations) {
+        public void store(Transformation transformations) {
             assertNotNull(transformations);
 
             assertFalse(getOutputObject().has("test"));
@@ -64,7 +64,7 @@ public class JSONTransformationOutputTest {
         }
 
         @Override
-        public void write(Transformation transformations) {
+        public void store(Transformation transformations) {
             assertNotNull(transformations);
             assertNotNull(getOutputObject());
             try {

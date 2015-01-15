@@ -15,8 +15,11 @@ import spoon.reflect.factory.Factory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.assertEqualsTransformation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -49,7 +52,7 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
         String transfPath = inputProgram.getPreviousTransformationsPath();
         File f = new File(transfPath);
         assertTrue(f.exists() && !f.isDirectory());
-        Collection<Transformation> oldLoad = parser.parseFile(f);
+        List<Transformation> oldLoad = new ArrayList<>(parser.parseFile(f));
         assertEquals(0, parser.getErrors().size());
 
         //Write with the new system
@@ -60,11 +63,19 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
         //Loads wiht the new System
         JsonSosiesInput newIn = new JsonSosiesInput(transfPath, inputProgram);
 
-        Collection<Transformation> newLoad = newIn.read();
-        assertEquals(0, newIn.getErrors().size());
+        List<Transformation> newLoad = new ArrayList<>(newIn.read());
+
+
+        //Let's trust there are no repeated indexes
+        oldLoad.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
+        newLoad.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
 
         //Test that old and new gives same result
-        assertEquals(newLoad.size(), oldLoad.size());
+        assertEquals(oldLoad.size(), newLoad.size());
+        assertEquals(0, newIn.getErrors().size());
+        for ( int i = 0; i < newLoad.size(); i++ ) {
+            assertEqualsTransformation(oldLoad.get(i), newLoad.get(i));
+        }
     }
 
 

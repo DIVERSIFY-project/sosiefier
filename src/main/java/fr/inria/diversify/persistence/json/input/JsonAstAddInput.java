@@ -30,10 +30,10 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<Integer, Transformation> transformations, HashMap<String, Object> metadata) {
 
         try {
-            ASTAdd transf = (ASTAdd) get(transformations); //add the transformation to the transformations map if not present
+            ASTAdd transf = (ASTAdd) get(transformations, metadata); //add the transformation to the transformations map if not present
 
             transf.setVarMapping(getVarMap(getJsonObject().getJSONObject(VARIABLE_MAP)));
 
@@ -52,6 +52,16 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
     }
 
 
+    /**
+     * Method that indicate if the meta data section can be handled or not
+     *
+     * @param s Unique name of the section
+     * @return true if possible
+     */
+    @Override
+    public boolean canHandleMetaDataSection(String s) {
+        return false;
+    }
 
     @Override
     public boolean canHandleSection(String s) {

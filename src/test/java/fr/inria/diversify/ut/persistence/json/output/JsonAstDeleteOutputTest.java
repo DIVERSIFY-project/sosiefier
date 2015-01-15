@@ -7,16 +7,12 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.ut.FakeCodeFragment;
 import fr.inria.diversify.ut.persistence.json.SectionTestUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSPLANT;
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.list;
@@ -49,7 +45,7 @@ public class JsonAstDeleteOutputTest {
         d.setOutputObject(new JSONObject());
         ASTDelete r = new ASTDelete();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        d.write(r);
+        d.store(r);
 
         JSONObject tr = d.getOutputObject().getJSONArray(
                 JsonASTSectionOutput.TRANSFORMATIONS).getJSONObject(0).getJSONObject(TRANSPLANT_POINT);
@@ -71,7 +67,7 @@ public class JsonAstDeleteOutputTest {
         ASTDelete r = new ASTDelete();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
 
-        for (Transformation t : list(new ASTReplace(), r, new ASTAdd())) d.write(t);
+        for (Transformation t : list(new ASTReplace(), r, new ASTAdd())) d.store(t);
 
         JSONArray array = d.getOutputObject().getJSONArray(JsonASTSectionOutput.TRANSFORMATIONS);
         assertEquals(1, array.length());

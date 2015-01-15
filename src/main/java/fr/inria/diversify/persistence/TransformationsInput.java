@@ -38,10 +38,14 @@ public abstract class TransformationsInput {
     public Collection<Transformation> read() {
         open();
         HashMap<Integer, Transformation> result = new HashMap<>();
+        HashMap<String, Object> metaData = new HashMap<>();
         for ( SectionInput section : sections ) {
             initializeSection(section);
+            section.readMetaData(metaData);
+        }
+        for ( SectionInput section : sections ) {
             for ( String s : sectionNames() ) {
-                if ( section.canHandleSection(s) ) section.read(result);
+                if ( section.canHandleSection(s) ) section.read(result, metaData);
             }
         }
         close();

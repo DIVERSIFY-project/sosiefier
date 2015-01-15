@@ -15,12 +15,12 @@ public class JsonHeaderOutput extends JsonSectionOutput {
     }
 
     @Override
-    public void write(Transformation transformation) {
+    public void store(Transformation transformation) {
 
     }
 
     @Override
-    public void after() {
+    public void storeMetaData() {
 
     }
 }

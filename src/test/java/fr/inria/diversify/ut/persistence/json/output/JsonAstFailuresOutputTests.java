@@ -34,8 +34,8 @@ public class JsonAstFailuresOutputTests {
 
         ASTReplace r = getExample("Failure 1", "Failure 2");
         ASTReplace r2 = getExample("Failure 3", "Failure 2");
-        for (Transformation t : list(r, r2)) sectionOutput.write(t);
-        sectionOutput.after();
+        for (Transformation t : list(r, r2)) sectionOutput.store(t);
+        sectionOutput.storeMetaData();
 
         JSONObject d = sectionOutput.getOutputObject();
         assertTrue(d.has(JsonASTSectionOutput.FAILURES_DICTIONARY));

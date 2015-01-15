@@ -6,14 +6,11 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.ut.FakeCodeFragment;
 import fr.inria.diversify.ut.persistence.json.SectionTestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
-
-import java.util.Arrays;
 
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.list;
 import static org.junit.Assert.assertEquals;
@@ -47,7 +44,7 @@ public class JsonAstReplaceOutputTest {
         ASTReplace r = new ASTReplace();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        d.write(r);
+        d.store(r);
         SectionTestUtils.writeAssertions(d);
     }
 
@@ -63,7 +60,7 @@ public class JsonAstReplaceOutputTest {
         ASTReplace r = new ASTReplace();
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
-        for (Transformation t : list(new ASTDelete(), r, new ASTAdd())) d.write(t);
+        for (Transformation t : list(new ASTDelete(), r, new ASTAdd())) d.store(t);
         SectionTestUtils.writeOnlyAssertions(d);
     }
 }

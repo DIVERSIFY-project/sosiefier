@@ -26,8 +26,26 @@ public abstract class SectionInput {
      * Read data into the given transformations. It may add new transformations as well.
      * @param transformations Transformation to be modified by the reader. May increase size after method call.
      */
-    public abstract void read(HashMap<Integer, Transformation> transformations);
+    public abstract void read(HashMap<Integer, Transformation> transformations, HashMap<String, Object> metaData);
 
+    /**
+     * Read data into the given transformations. It may add new transformations as well.
+     * @param metaData Metadata to be read
+     */
+    public abstract void readMetaData(HashMap<String, Object> metaData);
+
+    /**
+     * Method that indicate if the meta data section can be handled or not
+     * @param s Unique name of the section
+     * @return true if possible
+     */
+    public abstract boolean canHandleMetaDataSection(String s);
+
+    /**
+     * Method that indicate if the section can be handled or not
+     * @param s Unique name of the section
+     * @return true if possible
+     */
     public abstract boolean canHandleSection(String s);
 
     public Collection<String> getErrors() {

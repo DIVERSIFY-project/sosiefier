@@ -90,7 +90,7 @@ public abstract class JsonASTSectionOutput extends JsonSectionOutput {
 
 
     @Override
-    public void write(Transformation transformation) {
+    public void store(Transformation transformation) {
         try {
             if (canStore(transformation)) {
                 //Ensure the before phase in case our caller hasn't called
@@ -109,7 +109,7 @@ public abstract class JsonASTSectionOutput extends JsonSectionOutput {
     public abstract boolean canStore(Transformation t);
 
     @Override
-    public void after() {
+    public void storeMetaData() {
         try {
             getOutputObject().put(FAILURES_DICTIONARY, failuresIDs);
         } catch (JSONException e) {

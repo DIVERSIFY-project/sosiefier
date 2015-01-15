@@ -23,11 +23,11 @@ public abstract class SectionOutput {
      * every section so it can add data to the section's storage
      * @param transformation
      */
-    public abstract void write(Transformation transformation);
+    public abstract void store(Transformation transformation);
 
     /**
-     * Method called after the writing process is over
+     * Store meta data. This method called after the writing process of the transformations is over.
      */
-    public abstract void after();
+    public abstract void storeMetaData();
 
 }

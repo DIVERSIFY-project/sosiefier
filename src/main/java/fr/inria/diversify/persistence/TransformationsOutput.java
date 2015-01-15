@@ -106,19 +106,17 @@ public abstract class TransformationsOutput {
      */
     public void write() {
         initialize();
+
+        //Prepare sections for storing
         for (SectionOutput s : sections) {
             prepareSection(s);
             s.before(transformations);
         }
-        for (Transformation t : transformations) sections.forEach(s -> s.write(t));
+        //Store transformations
+        for (Transformation t : transformations) sections.forEach(s -> s.store(t));
 
-        sections.forEach(s -> s.after());
+        //Store meta data after collect it from transformations
+        sections.forEach(s -> s.storeMetaData());
         close();
-        /*
-            for ( SectionOutput s : sections ) {
-                System.out.println(t.getClass().getSimpleName() + " " + s.getClass().getSimpleName());
-                s.write(t);
-            }
-            */
     }
 }

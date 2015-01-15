@@ -23,9 +23,19 @@ public class JsonSosiesOutput extends JsonTransformationOutput {
     public JsonSosiesOutput(Collection<Transformation> transformations, String uri) {
         super(transformations, uri);
         this.sections = new ArrayList<>();
-        sections.add(0, new JsonASTReplaceOutput());
-        sections.add(0, new JsonASTDeleteOutput());
-        sections.add(0, new JsonASTAddOutput());
-        sections.add(0, new JsonHeaderOutput());
+        sections.add(new JsonHeaderOutput());
+        sections.add(new JsonASTReplaceOutput());
+        sections.add(new JsonASTDeleteOutput());
+        sections.add(new JsonASTAddOutput());
+    }
+
+    @Override
+    protected void initialize() {
+        super.initialize();
+        //This is a (non optimal) solution to ensure all transformations
+        //have an unique ID before they persist to the JSON file.
+        //UUI [http://en.wikipedia.org/wiki/Universally_unique_identifier] seems like an over kill
+        int id = 0;
+        for ( Transformation t : transformations ) t.setIndex(id++);
     }
 }
