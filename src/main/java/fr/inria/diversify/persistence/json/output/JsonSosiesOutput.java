@@ -41,9 +41,9 @@ public class JsonSosiesOutput {
         failures.write(outputObject);
 
         Collection<JsonAstTransformationOutput> sections =Arrays.asList(new JsonAstTransformationOutput[] {
-                new JsonASTReplaceOutput(),
-                new JsonAASTAddOutput(),
-                new JsonAASTDeleteOutput()
+                new JsonAAstReplaceOutput(),
+                new JsonAstAddOutput(),
+                new JsonAstDeleteOutput()
         });
 
         //Write transformations to file

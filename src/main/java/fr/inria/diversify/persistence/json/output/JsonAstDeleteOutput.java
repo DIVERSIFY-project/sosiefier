@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Created by marodrig on 08/01/2015.
  */
-public class JsonAASTDeleteOutput extends JsonAstTransformationOutput {
+public class JsonAstDeleteOutput extends JsonAstTransformationOutput {
 
     /**
      * Puts the transformation data into the JSON Object.

@@ -1,7 +1,7 @@
 package fr.inria.diversify.ut.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.json.output.JsonASTReplaceOutput;
+import fr.inria.diversify.persistence.json.output.JsonAAstReplaceOutput;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -27,7 +27,7 @@ public class JsonAstReplaceOutputTest {
      */
     @Test(expected = PersistenceException.class)
     public void testWriteEmpty() {
-        SectionTestUtils.doTestWriteEmpty(new JsonASTReplaceOutput(), new ASTReplace());
+        SectionTestUtils.doTestWriteEmpty(new JsonAAstReplaceOutput(), new ASTReplace());
     }
 
 
@@ -42,7 +42,7 @@ public class JsonAstReplaceOutputTest {
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
 
-        JsonASTReplaceOutput d = new JsonASTReplaceOutput();
+        JsonAAstReplaceOutput d = new JsonAAstReplaceOutput();
         d.setTransformations(list(r));
         d.write(new JSONObject());
 
@@ -60,7 +60,7 @@ public class JsonAstReplaceOutputTest {
         r.setTransplantationPoint(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
         r.setTransplant(new FakeCodeFragment("org.class:1", "CtReturn", "return 0"));
 
-        JsonASTReplaceOutput d = new JsonASTReplaceOutput();
+        JsonAAstReplaceOutput d = new JsonAAstReplaceOutput();
         d.setTransformations(list(new ASTDelete(), r, new ASTAdd()));
         d.write(new JSONObject());
 
