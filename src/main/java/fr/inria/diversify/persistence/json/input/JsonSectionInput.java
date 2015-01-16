@@ -3,16 +3,17 @@ package fr.inria.diversify.persistence.json.input;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.SectionInput;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by marodrig on 12/01/2015.
  */
-public abstract class JsonSectionInput extends SectionInput {
+public abstract class JsonSectionInput {
     /**
      * JSon to read transformations from
      */
@@ -22,6 +23,16 @@ public abstract class JsonSectionInput extends SectionInput {
      * Input program where the code fragments of the transformations are
      */
     private InputProgram inputProgram;
+
+    /**
+     * Errors during the load process
+     */
+    private Collection<String> errors;
+
+    public JsonSectionInput(InputProgram inputProgram, JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
+        this.inputProgram = inputProgram;
+    }
 
     /**
      * Finds a code fragment
@@ -46,6 +57,8 @@ public abstract class JsonSectionInput extends SectionInput {
         this.jsonObject = jsonObject;
     }
 
+    public abstract void read(HashMap<Integer, Transformation> transformations);
+
     /**
      * Input program where the code fragments of the transformations are
      */
@@ -55,5 +68,14 @@ public abstract class JsonSectionInput extends SectionInput {
 
     public void setInputProgram(InputProgram inputProgram) {
         this.inputProgram = inputProgram;
+    }
+
+    public void setErrors(Collection<String> errors) {
+        this.errors = errors;
+    }
+
+    public Collection<String> getErrors() {
+        if ( errors == null ) errors = new ArrayList<>();
+        return errors;
     }
 }

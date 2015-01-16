@@ -8,6 +8,7 @@ import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.ut.MockInputProgram;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -37,14 +38,11 @@ public class JsonAstAddInputTest {
      */
     @Test
     public void testReadAddTransformation() throws JSONException {
-        JsonAstAddInput reader = new JsonAstAddInput();
-
         InputProgram p = new MockInputProgram();
+        //Create a ASTAdd persisted as json
+        JSONObject o = createAddASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
+        JsonAstAddInput reader = new JsonAstAddInput(p, o);
         reader.setInputProgram(p);
-
-        //The json data is created with JsonAstAddOutput class.
-        reader.setJsonObject(createAddASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0));
-
         HashMap<Integer, Transformation> result = new HashMap<>();
         reader.read(result);
 
@@ -58,12 +56,12 @@ public class JsonAstAddInputTest {
 
     @Test
     public void testCanHandleSection() {
-        JsonAstAddInput reader = new JsonAstAddInput();
-        assertTrue(reader.canHandleSection(TRANSFORMATIONS + ".add"));
-        assertTrue(reader.canHandleSection(TRANSFORMATIONS + ".addWitgestein"));
-        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".delete"));
-        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".replace"));
-        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".replaceWitgestein"));
+        JsonAstAddInput reader = new JsonAstAddInput(new InputProgram(), new JSONObject());
+        assertTrue(reader.canRead(TRANSFORMATIONS + ".add"));
+        assertTrue(reader.canRead(TRANSFORMATIONS + ".addWitgestein"));
+        assertFalse(reader.canRead(TRANSFORMATIONS + ".delete"));
+        assertFalse(reader.canRead(TRANSFORMATIONS + ".replace"));
+        assertFalse(reader.canRead(TRANSFORMATIONS + ".replaceWitgestein"));
     }
 
 }

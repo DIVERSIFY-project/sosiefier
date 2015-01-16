@@ -1,14 +1,13 @@
 package fr.inria.diversify.ut.persistence.json.output;
 
-import fr.inria.diversify.persistence.json.output.JsonAstReplaceOutput;
-import fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.persistence.json.output.JsonFailuresOutput;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.ut.FakeCodeFragment;
-import org.json.JSONArray;
+import fr.inria.diversify.ut.persistence.json.SectionTestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.list;
 import static org.junit.Assert.assertEquals;
@@ -19,37 +18,36 @@ import static org.junit.Assert.assertTrue;
  */
 public class JsonAstFailuresOutputTests {
 
-    private ASTReplace getExample(String param1, String param2) {
-        ASTReplace r = new ASTReplace();
-        r.setTransplant(new FakeCodeFragment("myOrg.pos:1", "CtTest", "test"));
-        r.setTransplantationPoint(new FakeCodeFragment("myOrg.pos:1", "CtTest", "test"));
-        r.setFailures(list(param1, param2));
-        return r;
-    }
-
     @Test
-    public void testFailureWrite() throws JSONException {
-        JsonAstReplaceOutput sectionOutput = new JsonAstReplaceOutput();
-        sectionOutput.setOutputObject(new JSONObject());
-
-        ASTReplace r = getExample("Failure 1", "Failure 2");
-        ASTReplace r2 = getExample("Failure 3", "Failure 2");
-        for (Transformation t : list(r, r2)) sectionOutput.store(t);
-        sectionOutput.storeMetaData();
+    public void testEmptyFailureWrite() throws JSONException {
+        JsonFailuresOutput sectionOutput = new JsonFailuresOutput();
+        sectionOutput.setTransformations(new ArrayList<>());
+        sectionOutput.write(new JSONObject());
 
         JSONObject d = sectionOutput.getOutputObject();
-        assertTrue(d.has(JsonAstTransformationOutput.FAILURES_DICTIONARY));
+        assertTrue(d.has(JsonFailuresOutput.FAILURES_DICTIONARY));
+    }
 
-        JSONObject fails = d.getJSONObject(JsonAstTransformationOutput.FAILURES_DICTIONARY);
+    /**
+     * Test the proper creation of the failure dictionary
+     * @throws JSONException
+     */
+    @Test
+    public void testFailureWrite() throws JSONException {
+        ASTReplace r = SectionTestUtils.getExample("Failure 1", "Failure 2");
+        ASTReplace r2 = SectionTestUtils.getExample("Failure 3", "Failure 2");
+
+        JsonFailuresOutput sectionOutput = new JsonFailuresOutput();
+        sectionOutput.setTransformations(list(r, r2));
+        sectionOutput.write(new JSONObject());
+
+        JSONObject d = sectionOutput.getOutputObject();
+        assertTrue(d.has(JsonFailuresOutput.FAILURES_DICTIONARY));
+
+        JSONObject fails = d.getJSONObject(JsonFailuresOutput.FAILURES_DICTIONARY);
         assertEquals(fails.get("Failure 1"), 0);
         assertEquals(fails.get("Failure 2"), 1);
         assertEquals(fails.get("Failure 3"), 2);
         assertEquals(fails.length(), 3);
-
-        JSONArray array = d.getJSONArray(JsonAstTransformationOutput.TRANSFORMATIONS);
-        assertEquals(array.getJSONObject(0).getJSONArray(JsonAstTransformationOutput.FAILURES).get(0), 0);
-        assertEquals(array.getJSONObject(0).getJSONArray(JsonAstTransformationOutput.FAILURES).get(1), 1);
-        assertEquals(array.getJSONObject(1).getJSONArray(JsonAstTransformationOutput.FAILURES).get(0), 2);
-        assertEquals(array.getJSONObject(1).getJSONArray(JsonAstTransformationOutput.FAILURES).get(1), 1);
     }
 }

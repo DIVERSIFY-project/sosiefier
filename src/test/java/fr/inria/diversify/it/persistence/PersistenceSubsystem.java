@@ -46,12 +46,12 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
         //Gets the input program described in common-collections.properties
         //file in the <getDataDir()>/input_configurations
         InputProgram inputProgram = getInputProgram("common-collections-small-test");
-
-        TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-
         String transfPath = inputProgram.getPreviousTransformationsPath();
         File f = new File(transfPath);
         assertTrue(f.exists() && !f.isDirectory());
+
+        //Load using the old system
+        TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
         List<Transformation> oldLoad = new ArrayList<>(parser.parseFile(f));
         assertEquals(0, parser.getErrors().size());
 
@@ -62,9 +62,7 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
 
         //Loads wiht the new System
         JsonSosiesInput newIn = new JsonSosiesInput(transfPath, inputProgram);
-
         List<Transformation> newLoad = new ArrayList<>(newIn.read());
-
 
         //Let's trust there are no repeated indexes
         oldLoad.sort((o1, o2) -> o1.getIndex() - o2.getIndex());

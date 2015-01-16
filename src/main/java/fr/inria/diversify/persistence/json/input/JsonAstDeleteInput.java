@@ -1,5 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -16,9 +17,12 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
  */
 public class JsonAstDeleteInput extends JsonAstTransformationInput {
 
+    public JsonAstDeleteInput(InputProgram inputProgram, JSONObject jsonObject) {
+        super(inputProgram, jsonObject);
+    }
 
-    public JsonAstDeleteInput() {
-        super();
+    public JsonAstDeleteInput(InputProgram inputProgram) {
+        super(inputProgram);
     }
 
     @Override
@@ -30,12 +34,11 @@ public class JsonAstDeleteInput extends JsonAstTransformationInput {
      * Read data into the given transformations. It may add new transformations as well.
      *
      * @param transformations Transformation to be modified by the reader. May increase size after method call.
-     * @param metaData
      */
     @Override
-    public void read(HashMap<Integer, Transformation> transformations, HashMap<String, Object> metaData) {
+    public void read(HashMap<Integer, Transformation> transformations) {
         try {
-            ASTDelete transf = (ASTDelete)get(transformations, metaData); //add the transformation to the transformations map if not present
+            ASTDelete transf = (ASTDelete)get(transformations); //add the transformation to the transformations map if not present
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);
             transf.setTransplantationPoint(getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE)));
         } catch (JSONException e) {
@@ -44,26 +47,13 @@ public class JsonAstDeleteInput extends JsonAstTransformationInput {
     }
 
     /**
-     * Read data into the given transformations. It may add new transformations as well.
+     * Indicate if can handle a section within the file
      *
-     * @param metaData Metadata to be read
+     * @param s Section name
+     * @return True if can handle
      */
     @Override
-    public void readMetaData(HashMap<String, Object> metaData) {}
-
-    /**
-     * Method that indicate if the meta data section can be handled or not
-     *
-     * @param s Unique name of the section
-     * @return true if possible
-     */
-    @Override
-    public boolean canHandleMetaDataSection(String s) {
-        return false;
-    }
-
-    @Override
-    public boolean canHandleSection(String s) {
+    public boolean canRead(String s) {
         String[] r = s.split("\\.");
         if ( r.length != 2 ) return false;
         return  r[0].equals(TRANSFORMATIONS) && r[1].equals("delete");

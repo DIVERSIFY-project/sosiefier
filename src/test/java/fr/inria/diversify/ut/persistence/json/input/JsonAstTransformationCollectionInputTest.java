@@ -34,13 +34,35 @@ public class JsonAstTransformationCollectionInputTest {
         fail("Not implemented yet");
     }
 
-    private void testReadTransformation(JsonAstTransformationInput input, JSONObject object) throws JSONException {
-        JsonAstTransformationCollectionInput reader = new JsonAstTransformationCollectionInput();
+
+
+    /**
+     * Test the reading of a ASTDelete transformation
+     */
+    @Test
+    public void testReadDeleteTransformation() throws JSONException {
+        testReadTransformation(createDeleteASTTransformationJSON());
+    }
+
+    /**
+     * Test the reading of a ASTAdd transformation
+     */
+    @Test
+    public void testReadAddTransformation() throws JSONException {
+        testReadTransformation(createAddASTTransformationJSON());
+    }
+
+    /**
+     * Test the reading of a ASTAdd transformation
+     */
+    @Test
+    public void testReadReplaceTransformation() throws JSONException {
+        testReadTransformation(createReplaceASTTransformationJSON());
+    }
+
+    private void testReadTransformation(JSONObject data) throws JSONException {
         InputProgram p = new MockInputProgram();
-        reader.setSections(list(input));
-        reader.setInputProgram(p);
-        //The json data is created with JsonAstDeleteOutput class.
-        reader.setJsonObject(object);
+        JsonAstTransformationCollectionInput reader = new JsonAstTransformationCollectionInput(p, data);
 
         HashMap<Integer, Transformation> result = new HashMap<>();
         reader.read(result);
@@ -52,29 +74,5 @@ public class JsonAstTransformationCollectionInputTest {
         assertEquals(p.getCodeFragments().get(0), ast.getTransplantationPoint());
         if (ast instanceof ASTAdd) assertEquals(p.getCodeFragments().get(1), ((ASTAdd) ast).getTransplant());
         if (ast instanceof ASTReplace) assertEquals(p.getCodeFragments().get(1), ((ASTReplace) ast).getTransplant());
-    }
-
-    /**
-     * Test the reading of a ASTDelete transformation
-     */
-    @Test
-    public void testReadDeleteTransformation() throws JSONException {
-        testReadTransformation(new JsonAstDeleteInput(), createDeleteASTTransformationJSON());
-    }
-
-    /**
-     * Test the reading of a ASTAdd transformation
-     */
-    @Test
-    public void testReadAddTransformation() throws JSONException {
-        testReadTransformation(new JsonAstAddInput(), createAddASTTransformationJSON());
-    }
-
-    /**
-     * Test the reading of a ASTAdd transformation
-     */
-    @Test
-    public void testReadReplaceTransformation() throws JSONException {
-        testReadTransformation(new JsonAstReplaceInput(), createReplaceASTTransformationJSON());
     }
 }

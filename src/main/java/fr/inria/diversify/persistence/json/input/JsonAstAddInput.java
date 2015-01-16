@@ -1,6 +1,7 @@
 package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -20,9 +21,14 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
  */
 public class JsonAstAddInput extends JsonAstTransformationInput {
 
-    public JsonAstAddInput() {
-        super();
+    public JsonAstAddInput(InputProgram inputProgram, JSONObject jsonObject) {
+        super(inputProgram, jsonObject);
     }
+
+    public JsonAstAddInput(InputProgram inputProgram) {
+        super(inputProgram);
+    }
+
 
     @Override
     protected ASTTransformation build() {
@@ -30,10 +36,12 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations, HashMap<String, Object> metadata) {
+    public void read(HashMap<Integer, Transformation> transformations) {
 
         try {
-            ASTAdd transf = (ASTAdd) get(transformations, metadata); //add the transformation to the transformations map if not present
+            if ( getJsonObject() == null ) throw new PersistenceException("JSON object unset");
+
+            ASTAdd transf = (ASTAdd) get(transformations); //add the transformation to the transformations map if not present
 
             transf.setVarMapping(getVarMap(getJsonObject().getJSONObject(VARIABLE_MAP)));
 
@@ -51,20 +59,14 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
         }
     }
 
-
     /**
-     * Method that indicate if the meta data section can be handled or not
+     * Indicate if can handle a section within the file
      *
-     * @param s Unique name of the section
-     * @return true if possible
+     * @param s Section name
+     * @return True if can handle
      */
     @Override
-    public boolean canHandleMetaDataSection(String s) {
-        return false;
-    }
-
-    @Override
-    public boolean canHandleSection(String s) {
+    public boolean canRead(String s) {
         String[] r = s.split("\\.");
         if ( r.length != 2 ) return false;
         return  r[0].equals(TRANSFORMATIONS) && r[1].contains("add");

@@ -1,5 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -10,7 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput.FAILURES;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.STATUS;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TINDEX;
 
@@ -19,14 +19,24 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TINDE
  */
 public abstract class JsonAstTransformationInput extends JsonSectionInput {
 
+    private HashMap<Integer, String> failures;
+
+    public JsonAstTransformationInput(InputProgram inputProgram) {
+        super(inputProgram, null);
+    }
+
+    public JsonAstTransformationInput(InputProgram inputProgram, JSONObject jsonObject) {
+        super(inputProgram, jsonObject);
+    }
+
     protected abstract ASTTransformation build();
 
     /**
      * gets data from the JSON  object into the transformation object
      */
-    protected ASTTransformation get(HashMap<Integer, Transformation> t, HashMap<String, Object> metadata) throws JSONException {
+    protected ASTTransformation get(HashMap<Integer, Transformation> t) throws JSONException {
 
-        HashMap<Integer, String> failures = (HashMap<Integer, String>)metadata.get(FAILURES);
+        HashMap<Integer, String> failures = getFailures();
 
         int index = getJsonObject().getInt(TINDEX);
         ASTTransformation astt;
@@ -41,20 +51,13 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations, HashMap<String, Object> metadata) {
+    public void read(HashMap<Integer, Transformation> transformations) {
         try {
-            get(transformations, metadata);
+            get(transformations);
         } catch (JSONException e) {
             throw new PersistenceException("Unable to map JSON into transformation", e);
         }
     }
-
-    /**
-     * Read data into the given transformations. It may add new transformations as well.
-     * @param metaData Metadata to be read
-     */
-    @Override
-    public void readMetaData(HashMap<String, Object> metaData) {  }
 
     protected Map<String, String> getVarMap(JSONObject jsonObject) throws JSONException {
         Map<String, String> varMap = new HashMap<>();
@@ -64,5 +67,24 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
             varMap.put(name, jsonObject.getString(name));
         }
         return varMap;
+    }
+
+    /**
+     * Indicate if can handle a section within the file
+     * @param s Section name
+     * @return True if can handle
+     */
+    public abstract boolean canRead(String s);
+
+    /**
+     * Failures dictionary
+     * @return The failures dictionary
+     */
+    public HashMap<Integer,String> getFailures() {
+        return failures;
+    }
+
+    public void setFailures(HashMap<Integer, String> failures) {
+        this.failures = failures;
     }
 }

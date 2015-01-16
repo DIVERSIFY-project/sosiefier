@@ -9,6 +9,7 @@ import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.ut.MockInputProgram;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -38,14 +39,11 @@ public class JsonAstReplaceInputTest {
      */
     @Test
     public void testReadReplaceTransformation() throws JSONException {
-        JsonAstReplaceInput reader = new JsonAstReplaceInput();
-
         InputProgram p = new MockInputProgram();
-        reader.setInputProgram(p);
+        //Create json replace
+        JSONObject o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
 
-        //The json data is created with JsonAstAddOutput class.
-        reader.setJsonObject(createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0));
-
+        JsonAstReplaceInput reader = new JsonAstReplaceInput(p, o);
         HashMap<Integer, Transformation> result = new HashMap<>();
         reader.read(result);
 
@@ -59,12 +57,12 @@ public class JsonAstReplaceInputTest {
 
     @Test
     public void testCanHandleSection() {
-        JsonAstReplaceInput reader = new JsonAstReplaceInput();
-        assertTrue(reader.canHandleSection(TRANSFORMATIONS + ".replace"));
-        assertTrue(reader.canHandleSection(TRANSFORMATIONS + ".replaceWitgestein"));
-        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".delete"));
-        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".add"));
-        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".addWitgestein"));
+        JsonAstReplaceInput reader = new JsonAstReplaceInput(new InputProgram(), new JSONObject());
+        assertTrue(reader.canRead(TRANSFORMATIONS + ".replace"));
+        assertTrue(reader.canRead(TRANSFORMATIONS + ".replaceWitgestein"));
+        assertFalse(reader.canRead(TRANSFORMATIONS + ".delete"));
+        assertFalse(reader.canRead(TRANSFORMATIONS + ".add"));
+        assertFalse(reader.canRead(TRANSFORMATIONS + ".addWitgestein"));
     }
 
 }

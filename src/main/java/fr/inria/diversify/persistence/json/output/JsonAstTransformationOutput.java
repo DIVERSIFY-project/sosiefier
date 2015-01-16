@@ -9,10 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Parent class for all sections writing Transformations to JSON
@@ -21,19 +19,16 @@ import java.util.Map;
  */
 public abstract class JsonAstTransformationOutput extends JsonSectionOutput {
 
-    public static final String FAILURES = "failures";
-
-    public static final String FAILURES_DICTIONARY = "failureDictionary";
-
     private HashMap<String, Integer> failuresDict;
 
     @Override
     public void write(JSONObject outputObject) {
+        super.write(outputObject);
         try {
             if (getOutputObject() == null) throw new PersistenceException("JSON Object not set");
-            if (!getOutputObject().has(TRANSFORMATIONS)) getOutputObject().put(TRANSFORMATIONS, new JSONArray());
+            if (getTransformations() == null) throw new PersistenceException("Transformations unset");
 
-            this.outputObject = outputObject;
+            if (!getOutputObject().has(TRANSFORMATIONS)) getOutputObject().put(TRANSFORMATIONS, new JSONArray());
             for (Transformation t : getTransformations()) {
                 if (canStore(t)) {
                     JSONArray array = getOutputObject().getJSONArray(TRANSFORMATIONS);
@@ -78,19 +73,19 @@ public abstract class JsonAstTransformationOutput extends JsonSectionOutput {
             object.put(NAME, astt.getName());
             //Write failures
             List<String> failures = transformation.getFailures();
+
             JSONArray array = new JSONArray();
 
             if (failures == null) Log.warn("Unset persistence failures dictionary");
             else {
                 for (String failure : failures) {
-                    if (!failuresDict.containsKey(failure)) {
+                    if (!getFailuresDictionary().containsKey(failure)) {
                         throw new PersistenceException("Unable to find failure index");
                     }
                     array.put(failuresDict.get(failure));
-
                 }
-                object.put(FAILURES, array);
             }
+            object.put(JsonFailuresOutput.FAILURES, array);
         }
     }
 
@@ -102,5 +97,10 @@ public abstract class JsonAstTransformationOutput extends JsonSectionOutput {
      */
     public void setFailuresDict(HashMap<String, Integer> failuresDict) {
         this.failuresDict = failuresDict;
+    }
+
+    protected HashMap<String, Integer> getFailuresDictionary() {
+        if ( failuresDict == null ) failuresDict = new HashMap<>();
+        return failuresDict;
     }
 }

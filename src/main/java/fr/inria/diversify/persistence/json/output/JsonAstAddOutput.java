@@ -8,6 +8,8 @@ import org.json.JSONObject;
 /**
  * Created by marodrig on 08/01/2015.
  */
+
+//C:\MarcelStuff\projects\DIVERSE\sosie_generator\sosies-generator\src\main\java\fr\inria\diversify\persistence\json\output\JsonAstAddOutput.java
 public class JsonAstAddOutput extends JsonAstTransformationOutput {
 
     /**

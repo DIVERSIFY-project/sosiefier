@@ -2,8 +2,6 @@ package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.SectionInput;
-import fr.inria.diversify.persistence.TransformationsInput;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,24 +10,37 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
  * Created by marodrig on 09/01/2015.
  */
-public class JsonSosiesInput extends TransformationsInput {
+public class JsonSosiesInput {
 
+    /**
+     * Path of the json file
+     */
+    private final String jsonPath;
 
+    /**
+     * Stream reader to obtain the JSON text from
+     */
     private InputStreamReader streamReader;
 
+    /**
+     * JSON Object loaded
+     */
     private JSONObject jsonObject;
 
     /**
      * Input program to obtain the code fragments for the transformations
      */
     private InputProgram inputProgram;
+    private Collection<String> errors;
 
     public JsonSosiesInput(InputStreamReader r, InputProgram inputProgram) {
         this("", inputProgram);
@@ -37,27 +48,15 @@ public class JsonSosiesInput extends TransformationsInput {
 
     }
 
-    public JsonSosiesInput(String uri, InputProgram inputProgram) {
-        super(uri);
-        sections = new ArrayList<>();
-        sections.add(new JsonAstTransformationCollectionInput());
-        sections.add(new JsonAstDeleteInput());
-        sections.add(new JsonAstAddInput());
-        sections.add(new JsonAstReplaceInput());
-        sections.add(new JsonHeaderInput());
+    public JsonSosiesInput(String jsonPath, InputProgram inputProgram) {
+        this.jsonPath = jsonPath;
         this.inputProgram = inputProgram;
     }
 
-    @Override
-    protected void close() {
-
-    }
-
-    @Override
     protected void open() {
         BufferedReader br = null;
         try {
-            if ( streamReader == null ) streamReader = new FileReader(uri);
+            if ( streamReader == null ) streamReader = new FileReader(jsonPath);
             br = new BufferedReader(streamReader);
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
@@ -84,30 +83,24 @@ public class JsonSosiesInput extends TransformationsInput {
         }
     }
 
-    @Override
+    /**
+     * Read the transformations from the JSON file
+     * @return A collection the transformations
+     */
     public Collection<Transformation> read() {
-        if ( inputProgram == null ) throw new PersistenceException("Input program not set");
-        return super.read();
-    }
+        open(); //Open the json file
 
-    @Override
-    protected void initializeSection(SectionInput section) {
-        super.initializeSection(section);
-        if ( section instanceof JsonSectionInput) {
-            JsonSectionInput s = (JsonSectionInput) section;
-            s.setJsonObject(jsonObject);
-            s.setInputProgram(inputProgram);
-        }
-    }
+        HashMap<Integer, Transformation> result = new HashMap<>();
+        JsonFailuresInput failures = new JsonFailuresInput(inputProgram, jsonObject);
+        failures.setErrors(getErrors());
+        failures.read(result);
 
-    @Override
-    protected Collection<String> sectionNames() {
-        ArrayList<String> result = new ArrayList<>();
-        Iterator<?> keys = jsonObject.keys();
-        while( keys.hasNext() ){
-            result.add((String)keys.next());
-        }
-        return result;
+        JsonAstTransformationCollectionInput asts = new
+                JsonAstTransformationCollectionInput(inputProgram, jsonObject);
+        asts.setFailures(failures.getFailures());
+        asts.read(result);
+
+        return result.values();
     }
 
     public void setInputProgram(InputProgram inputProgram) {
@@ -122,10 +115,12 @@ public class JsonSosiesInput extends TransformationsInput {
     }
 
     /**
-     * All sections in the reader.
+     * Errors during the loading process
      * @return
      */
-    public Collection<SectionInput> getSections() {
-        return sections;
+    public Collection<String> getErrors() {
+        if ( errors == null ) errors = new ArrayList<>();
+        return errors;
     }
+
 }

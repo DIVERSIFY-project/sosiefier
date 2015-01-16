@@ -42,10 +42,10 @@ public class JsonSosiesInputTest {
         InputStreamReader r = new InputStreamReader(
                 new ByteArrayInputStream(EMPTY_STR.getBytes(StandardCharsets.UTF_8)));
         JsonSosiesInput input = new JsonSosiesInput(r, p);
-        assertTrue(input.getSections().size() > 0);
+        assertTrue(input.getInputProgram() != null);
 
         input = new JsonSosiesInput("/uzr/h0m3/my.jzon", p);
-        assertTrue(input.getSections().size() > 0);
+        assertTrue(input.getInputProgram() != null);
     }
 
     @Test

@@ -1,17 +1,15 @@
 package fr.inria.diversify.persistence.json.input;
 
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.SectionInput;
 import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-
-import static fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput.FAILURES;
-import static fr.inria.diversify.persistence.json.output.JsonAstTransformationOutput.FAILURES_DICTIONARY;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.NAME;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
 
@@ -22,24 +20,27 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANS
  */
 public class JsonAstTransformationCollectionInput extends JsonSectionInput {
 
-    @Override
-    public boolean canHandleSection(String s) {
-        return s.equals(TRANSFORMATIONS);
+    private HashMap<Integer, String> failures;
+
+    public JsonAstTransformationCollectionInput(InputProgram inputProgram, JSONObject jsonObject) {
+        super(inputProgram, jsonObject);
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations, HashMap<String, Object> metaData) {
+    public void read(HashMap<Integer, Transformation> transformations) {
         try {
             if (getJsonObject().has(TRANSFORMATIONS)) {
                 JSONArray tr = getJsonObject().getJSONArray(TRANSFORMATIONS);
+
+                Collection<JsonAstTransformationInput> sections = buildSections();
+
                 for ( int i = 0; i < tr.length(); i++ ) {
                     JSONObject obj = tr.getJSONObject(i);
-                    for ( SectionInput si : getSections() ) {
-                        if ( si.canHandleSection(TRANSFORMATIONS + "." + obj.getString(NAME)) ) {
-                            si.setSections(getSections());
-                            ((JsonSectionInput) si).setInputProgram(getInputProgram());
-                            ((JsonSectionInput) si).setJsonObject(obj);
-                            si.read(transformations, metaData);
+                    for ( JsonAstTransformationInput si : sections ) {
+                        if ( si.canRead(TRANSFORMATIONS + "." + obj.getString(NAME)) ) {
+                            si.setJsonObject(obj);
+                            si.setFailures(getFailures());
+                            si.read(transformations);
                         }
                     }
                 }
@@ -49,35 +50,19 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
         }
     }
 
-    /**
-     * Read data into the given transformations. It may add new transformations as well.
-     *
-     * @param metaData Metadata to be read
-     */
-    @Override
-    public void readMetaData(HashMap<String, Object> metaData) {
-        try {
-            HashMap<Integer, String> failures = new HashMap<>();
-            JSONObject failuresJson = getJsonObject().getJSONObject(FAILURES_DICTIONARY);
-            Iterator<?> keys = failuresJson.keys();
-            while( keys.hasNext() ){
-                String n = (String)keys.next();
-                failures.put(failuresJson.getInt(n), n);
-            }
-            metaData.put(FAILURES, failures);
-        } catch (JSONException e) {
-            throw new PersistenceException(e);
-        }
+    private Collection<JsonAstTransformationInput> buildSections() {
+        ArrayList<JsonAstTransformationInput> sections = new ArrayList<>();
+        sections.add(new JsonAstAddInput(getInputProgram()));
+        sections.add(new JsonAstReplaceInput(getInputProgram()));
+        sections.add(new JsonAstDeleteInput(getInputProgram()));
+        return sections;
     }
 
-    /**
-     * Method that indicate if the meta data section can be handled or not
-     *
-     * @param s Unique name of the section
-     * @return true if possible
-     */
-    @Override
-    public boolean canHandleMetaDataSection(String s) {
-        return s.equals(FAILURES_DICTIONARY);
+    public HashMap<Integer, String> getFailures() {
+        return failures;
+    }
+
+    public void setFailures(HashMap<Integer, String> failures) {
+        this.failures = failures;
     }
 }

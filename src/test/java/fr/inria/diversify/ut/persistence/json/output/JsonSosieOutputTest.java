@@ -35,7 +35,11 @@ public class JsonSosieOutputTest {
     @Test
     public void testSosieOutput(@Mocked FileWriter anyWriter) throws IOException, JSONException {
 
+        //Get the transformations
         List<Transformation> transfs = createTransformations(new MockInputProgram());
+
+        //JsonSosieOutputForUT only for Unit TEST!!!!!!
+        //Use JsonSosiesOutput intead
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon");
         out.write();
 

@@ -6,6 +6,7 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.ut.MockInputProgram;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -34,15 +35,11 @@ public class JsonAstDeleteInputTest {
      */
     @Test
     public void testReadDeleteTransformation() throws JSONException {
-        JsonAstDeleteInput reader = new JsonAstDeleteInput();
-
         InputProgram p = new MockInputProgram();
-        reader.setInputProgram(p);
-
-        //The json data is created with JsonAstDeleteOutput class.
-        reader.setJsonObject(createDeleteASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0));
-
+        JSONObject o = createDeleteASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         HashMap<Integer, Transformation> result = new HashMap<>();
+
+        JsonAstDeleteInput reader = new JsonAstDeleteInput(p, o);
         reader.read(result);
 
         ASTDelete delete = (ASTDelete)result.get(1);
@@ -53,10 +50,10 @@ public class JsonAstDeleteInputTest {
     }
     @Test
     public void testCanHandleSection() {
-        JsonAstDeleteInput reader = new JsonAstDeleteInput();
-        assertTrue(reader.canHandleSection(TRANSFORMATIONS + ".delete"));
-        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".addWitgestein"));
-        assertFalse(reader.canHandleSection(TRANSFORMATIONS + ".replaceWitgestein"));
+        JsonAstDeleteInput reader = new JsonAstDeleteInput(new InputProgram(), new JSONObject());
+        assertTrue(reader.canRead(TRANSFORMATIONS + ".delete"));
+        assertFalse(reader.canRead(TRANSFORMATIONS + ".addWitgestein"));
+        assertFalse(reader.canRead(TRANSFORMATIONS + ".replaceWitgestein"));
     }
 
 }

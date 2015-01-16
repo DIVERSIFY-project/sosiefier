@@ -2,6 +2,7 @@ package fr.inria.diversify.ut.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.persistence.json.output.JsonAstAddOutput;
+import fr.inria.diversify.persistence.json.output.JsonAstReplaceOutput;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -61,5 +62,14 @@ public class JsonAstAddOutputTest {
         d.setTransformations(list(new ASTDelete(), r, new ASTReplace()));
         d.write(new JSONObject());
         SectionTestUtils.writeOnlyAssertions(d);
+    }
+
+    /**
+     * Test failure writing
+     * @throws JSONException
+     */
+    @Test
+    public void testFailureWrite() throws JSONException {
+        SectionTestUtils.testFailureWrite(new JsonAstReplaceOutput());
     }
 }

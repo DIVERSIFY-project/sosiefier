@@ -34,6 +34,7 @@ public abstract class JsonSectionOutput {
      * Resulting global object
      */
     JSONObject outputObject;
+
     private Collection<Transformation> transformations;
 
     public void write(JSONObject outputObject) {

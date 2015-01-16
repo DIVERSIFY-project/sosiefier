@@ -1,6 +1,7 @@
 package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
+import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -18,8 +19,12 @@ import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
  */
 public class JsonAstReplaceInput extends JsonAstTransformationInput {
 
-    public JsonAstReplaceInput() {
-        super();
+    public JsonAstReplaceInput(InputProgram inputProgram, JSONObject jsonObject) {
+        super(inputProgram, jsonObject);
+    }
+
+    public JsonAstReplaceInput(InputProgram inputProgram) {
+        super(inputProgram);
     }
 
     @Override
@@ -28,10 +33,10 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations, HashMap<String, Object> metadata) {
+    public void read(HashMap<Integer, Transformation> transformations) {
 
         try {
-            ASTReplace transf = (ASTReplace) get(transformations, metadata); //add the transformation to the transformations map if not present
+            ASTReplace transf = (ASTReplace) get(transformations); //add the transformation to the transformations map if not present
 
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);
             CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
@@ -50,18 +55,13 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
     }
 
     /**
-     * Method that indicate if the meta data section can be handled or not
+     * Indicate if can handle a section within the file
      *
-     * @param s Unique name of the section
-     * @return true if possible
+     * @param s Section name
+     * @return True if can handle
      */
     @Override
-    public boolean canHandleMetaDataSection(String s) {
-        return false;
-    }
-
-    @Override
-    public boolean canHandleSection(String s) {
+    public boolean canRead(String s) {
         String[] r = s.split("\\.");
         if ( r.length != 2 ) return false;
         return  r[0].equals(TRANSFORMATIONS) && r[1].contains("replace");
