@@ -132,9 +132,9 @@ import org.junit.runners.parameterized.TestWithParameters;
  * <h3>Create different runners</h3>
  * <p>
  * By default the {@code Parameterized} runner creates a slightly modified
- * {@link BlockJUnit4ClassRunner} for each set of parameters. You can build an
+ * {@link BlockJUnit4ClassRunner} for each set of parameters. You can locate an
  * own {@code Parameterized} runner that creates another runner for each set of
- * parameters. Therefore you have to build a {@link ParametersRunnerFactory}
+ * parameters. Therefore you have to locate a {@link ParametersRunnerFactory}
  * that creates a runner for each {@link TestWithParameters}. (
  * {@code TestWithParameters} are bundling the parameters and the test name.)
  * The factory must have a public zero-arg constructor.

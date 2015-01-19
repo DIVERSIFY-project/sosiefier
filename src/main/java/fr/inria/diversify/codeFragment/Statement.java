@@ -15,7 +15,7 @@ public class Statement extends CodeFragment {
 
     public Statement() {}
 
-    //check if this can be replaced by other
+    //validate if this can be replaced by other
     public boolean isReplaceableBy(CodeFragment other, boolean varNameMatch, boolean subType) {
         Class<?> cl = codeFragment.getClass();
         Class<?> clOther = other.codeFragment.getClass();
@@ -49,7 +49,7 @@ public class Statement extends CodeFragment {
             return false;
         }
 
-        //check for return
+        //validate for return
         CtTypeReference t1 = this.hasReturn();
         CtTypeReference t2 = other.hasReturn();
         if (t1 == null && t2 == null)

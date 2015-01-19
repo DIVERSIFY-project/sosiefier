@@ -30,7 +30,7 @@ public class DeepLogWriter extends LogWriter {
                 incCallDepth(thread);
                 int deep = getCallDeep(thread);
 //                if(!deepCallByMethod.containsKey(methodSignatureId)) {
-//                    deepCallByMethod.put(methodSignatureId, new LinkedList<Integer>());
+//                    deepCallByMethod.putDataToJSON(methodSignatureId, new LinkedList<Integer>());
 //                }
 //                deepCallByMethod.get(methodSignatureId).add(deep);
 
@@ -50,7 +50,7 @@ public class DeepLogWriter extends LogWriter {
                 incCallDepth(thread);
                 int deep = getCallDeep(thread);
 //                if(!deepExceptionByMethod.containsKey(id)) {
-//                    deepExceptionByMethod.put(id, new LinkedList<Integer>());
+//                    deepExceptionByMethod.putDataToJSON(id, new LinkedList<Integer>());
 //                }
 //                deepExceptionByMethod.get(id).add(deep);
 

@@ -50,6 +50,14 @@ public abstract class CodeFragment {
 //        this.initInputContext();
     }
 
+    /**
+     * Returns the simple name of the Code fragment's type
+     * @return A string with the name
+     */
+    public String getCodeFragmentTypeSimpleName() {
+        return getCodeFragmentType().getSimpleName();
+    }
+
     public CtTypeReference<?> getOutputContext() {
         return context.getOutputContext();
     }
@@ -124,7 +132,7 @@ public abstract class CodeFragment {
         Log.debug("apres: {}",codeFragment);
     }
 
-    //check if this can be replaced by other
+    //validate if this can be replaced by other
     public abstract  boolean isReplaceableBy(CodeFragment other, boolean varNameMatch , boolean subType);
 
     public Map<String,String> randomVariableMapping(CodeFragment other, boolean subType) {

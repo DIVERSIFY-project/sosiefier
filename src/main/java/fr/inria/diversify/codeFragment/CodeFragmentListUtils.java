@@ -140,7 +140,7 @@ public class CodeFragmentListUtils {
 //        for(CodeFragment cf : codeFragments) {
 //            CtSimpleType cl = cf.getSourceClass();
 //            if(!map.containsKey(cl))
-//                map.put(cl, new ArrayList<CodeFragment>());
+//                map.putDataToJSON(cl, new ArrayList<CodeFragment>());
 //            map.get(cl).add(cf);
 //        }
 //        return map;
@@ -151,7 +151,7 @@ public class CodeFragmentListUtils {
 //        for(CodeFragment cf : codeFragments) {
 //            CtPackage cl = cf.getSourceClass().getPackage();
 //            if(!map.containsKey(cl))
-//                map.put(cl, new ArrayList<CodeFragment>());
+//                map.putDataToJSON(cl, new ArrayList<CodeFragment>());
 //            map.get(cl).add(cf);
 //        }
 //        return map;
@@ -162,7 +162,7 @@ public class CodeFragmentListUtils {
 //        for(CodeFragment cf : codeFragments) {
 //            Class cl = cf.getCodeFragmentType();
 //            if(!map.containsKey(cl))
-//                map.put(cl, new ArrayList<CodeFragment>());
+//                map.putDataToJSON(cl, new ArrayList<CodeFragment>());
 //            map.get(cl).add(cf);
 //        }
 //        return map;

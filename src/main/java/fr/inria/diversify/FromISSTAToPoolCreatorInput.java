@@ -295,12 +295,12 @@ public class FromISSTAToPoolCreatorInput {
                     //Log.warn("Attempting to write non-com sosie with position: " + s + " closest:" + findNearest(arr, s));
                     totalShifted++;
                 }
-                arr.put(t.toJSONObject());
+                arr.putDataToJSON(t.toJSONObject());
             }
             Log.info("Sifted: " + totalShifted + "/" + arr.length());
-            toFile.put("transformations", arr);
+            toFile.putDataToJSON("transformations", arr);
         } else {
-            toFile.put("transformations", diverse);
+            toFile.putDataToJSON("transformations", diverse);
         }
 
 
@@ -308,7 +308,7 @@ public class FromISSTAToPoolCreatorInput {
 //        JSONObject diffObj = new JSONObject();
         /*
         for ( Map.Entry<String, String> k : differences.entrySet() ) {
-            diffObj.put(k.)
+            diffObj.putDataToJSON(k.)
         }*/
 
 

@@ -65,7 +65,8 @@
         <dependency>
             <groupId>org.jmockit</groupId>
             <artifactId>jmockit</artifactId>
-            <version>1.9</version>
+            <version>1.14</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -150,6 +151,8 @@
                     <excludes>
                         <exclude>**/junit/**</exclude>
                         <exclude>**/easymock/**</exclude>
+                        <exclude>**/it/**</exclude>
+                        <exclude>**/oldTests/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

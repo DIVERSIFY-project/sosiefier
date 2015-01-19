@@ -40,7 +40,7 @@ public class MultipleFailureException extends Exception {
      * multiple throwables in the list) or the first element in the list
      * (if there is only one element).
      *
-     * @param errors list to check
+     * @param errors list to validate
      * @throws Exception or Error if the list is not empty
      */
     @SuppressWarnings("deprecation")

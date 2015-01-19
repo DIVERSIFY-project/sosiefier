@@ -123,6 +123,7 @@ public abstract class AbstractTransformation implements Transformation {
     public void setParent(Transformation parent) {
         this.parent = parent;
     }
+
     public Transformation getParent() {
         return parent;
     }

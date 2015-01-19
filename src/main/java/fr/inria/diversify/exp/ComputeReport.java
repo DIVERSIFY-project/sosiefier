@@ -78,7 +78,7 @@ public class ComputeReport {
         for(File sosie : sosiesDir.listFiles()) {
             if(sosie.isDirectory()) {
                 try {
-                    Log.info("build report for {}",sosie.getName());
+                    Log.info("locate report for {}",sosie.getName());
                     setPartialLogging(sosie, false);
 
                     File sosieLogDir2 = new File(sosie+"/oLog");
@@ -215,7 +215,7 @@ public class ComputeReport {
             status = builder.getStatus();
         }
         if(status != 0) {
-            throw new Exception("error during the build of " + directory.getAbsolutePath());
+            throw new Exception("error during the locate of " + directory.getAbsolutePath());
         }
     }
 

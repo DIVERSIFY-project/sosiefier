@@ -114,7 +114,7 @@ public abstract class AbstractDiversify {
      */
     protected TransformationQuery transQuery;
     /**
-     * Build system to perform the build lifecycle
+     * Build system to perform the locate lifecycle
      */
     protected AbstractBuilder builder;
 

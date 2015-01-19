@@ -261,7 +261,7 @@ public class Diversify extends AbstractDiversify {
     /**
      * Early reports the advance of the system.
      *
-     * @param status Status of the current transformations, Sosie, build failed, etc.
+     * @param status Status of the current transformations, Sosie, locate failed, etc.
      */
     protected void earlyReport(int status) {
         if (getEarlyReportSosiesOnly() == false || status == 0) {

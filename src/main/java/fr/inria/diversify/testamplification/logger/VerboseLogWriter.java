@@ -150,7 +150,7 @@ public class VerboseLogWriter extends LogWriter {
 //        Thread thread = getParent() == null ? Thread.currentThread() : getParent().getThread();
 //        if (getAssertCallCount().containsKey(id)) {
 //            int k = getAssertCallCount().get(id);
-//            getAssertCallCount().put(id, k + 1);
+//            getAssertCallCount().putDataToJSON(id, k + 1);
 //        } else {
 //            String semaphore = "";
 //            if (getLogMethod(thread)) {

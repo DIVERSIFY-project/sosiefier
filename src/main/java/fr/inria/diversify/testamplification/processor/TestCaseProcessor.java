@@ -15,9 +15,9 @@ public class TestCaseProcessor extends TestProcessor {
 	/*
 	 * This processor removes all the assertions from a test case
 	 * For future version: 
-	 * - we should check first whether the assertion contains a call to a method under test. If yes, we should extract it.
+	 * - we should validate first whether the assertion contains a call to a method under test. If yes, we should extract it.
 	 * - some method calls might actually be assertions embedded in some more complex 'checker' methods (for example 
-	 * we could check if the invocation is to a method inside the test packages and that's not a test, then it's probably a checker)
+	 * we could validate if the invocation is to a method inside the test packages and that's not a test, then it's probably a checker)
 	 * */
 
 	public boolean isToBeProcessed(CtMethod candidate) {return  true;}

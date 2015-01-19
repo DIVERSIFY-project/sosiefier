@@ -12,7 +12,7 @@ import org.junit.runner.Runner;
  * A RunnerBuilder is a strategy for constructing runners for classes.
  *
  * Only writers of custom runners should use <code>RunnerBuilder</code>s.  A custom runner class with a constructor taking
- * a <code>RunnerBuilder</code> parameter will be passed the instance of <code>RunnerBuilder</code> used to build that runner itself.
+ * a <code>RunnerBuilder</code> parameter will be passed the instance of <code>RunnerBuilder</code> used to locate that runner itself.
  * For example,
  * imagine a custom runner that builds suites based on a list of classes in a text file:
  *

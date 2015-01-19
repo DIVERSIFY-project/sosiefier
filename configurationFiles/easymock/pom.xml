@@ -200,7 +200,7 @@
             <jdk>1.5</jdk>
           </configuration>
         </plugin>
-        <!--This plugin configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+        <!--This plugin configuration is used to store Eclipse m2e settings only. It has no influence on the Maven locate itself. -->
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
           <artifactId>lifecycle-mapping</artifactId>

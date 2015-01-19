@@ -2,10 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
-import fr.inria.diversify.codeFragmentProcessor.InlineConstantProcessor;
-import fr.inria.diversify.codeFragmentProcessor.KnownTransfStatementProcessor;
-import fr.inria.diversify.codeFragmentProcessor.ReturnProcessor;
-import fr.inria.diversify.codeFragmentProcessor.StatementProcessor;
+import fr.inria.diversify.codeFragmentProcessor.*;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.util.StringSimilarity;
@@ -18,10 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
-import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtSimpleType;
@@ -32,7 +27,6 @@ import spoon.support.QueueProcessingManager;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 //import java.util.stream.Collectors;
 
 /**
@@ -41,6 +35,16 @@ import java.util.stream.Collectors;
  * Created by marcel on 6/06/14.
  */
 public class InputProgram {
+
+    /**
+     * Code fragment processor to identify interesting fragments for the input program
+     */
+    private AbstractCodeFragmentProcessor<?> codeFragmentProcessor;
+
+    /**
+     * Default tolerance value for the code fragment searching algorithm
+     */
+    private double searchToleranceThreshold = 0.9999999;
 
     /**
      * List of all the code fragments extracted by Spoon of the input program
@@ -123,136 +127,13 @@ public class InputProgram {
      */
     private Factory factory;
 
-
-    /**
-     * Spoon factory to process all AST elements
-     */
-    public Factory getFactory() {
-        return factory;
-    }
-
-    public void setFactory(Factory factory) {
-        this.factory = factory;
-    }
-
-    /**
-     * Coverage report for the input program
-     */
-    public ICoverageReport getCoverageReport() {
-        return coverageReport;
-    }
-
-    /**
-     * Coverage report for the input program
-     */
-    public void setCoverageReport(ICoverageReport coverageReport) {
-        this.coverageReport = coverageReport;
-    }
-
-    /**
-     * Path to the test source code of the input program
-     */
-    public String getTestSourceCodeDir() {
-        return testSourceCodeDir;
-    }
-
-    public void setTestSourceCodeDir(String testSourceCodeDir) {
-        this.testSourceCodeDir = testSourceCodeDir;
-    }
-
-    /**
-     * Path to the source of the input program
-     */
-    public String getSourceCodeDir() {
-        return sourceCodeDir;
-    }
-
-    public void setSourceCodeDir(String sourceCodeDir) {
-        this.sourceCodeDir = sourceCodeDir;
-    }
-
-    public void setExternalSourceCodeDir(String externalSourceCodeDir) {
-        this.externalSourceCodeDir = externalSourceCodeDir;
-    }
-
-    public String getExternalSourceCodeDir() {
-        return externalSourceCodeDir;
-    }
-
-    /**
-     * Path to the know sosie information stored in file
-     */
-    public String getPreviousTransformationsPath() {
-        return previousTransformationsPath;
-    }
-
-    public void setPreviousTransformationsPath(String path) {
-        this.previousTransformationsPath = path;
-    }
-
-    /**
-     * Number of transformations that we are going to attempt in every run of the diversificator
-     */
-    public int getTransformationPerRun() {
-        return transformationPerRun;
-    }
-
-    public void setTransformationPerRun(int transformationPerRun) {
-        this.transformationPerRun = transformationPerRun;
-    }
-
-    /**
-     * Path to the root directory of the input program
-     */
-    public String getProgramDir() {
-        return programDir;
-    }
-
-    public void setProgramDir(String programDir) {
-        this.programDir = programDir;
-    }
-
-    /**
-     * Path to the built classes
-     */
-    public String getClassesDir() {
-        return classesDir;
-    }
-
-    public void setClassesDir(String classesDir) {
-        this.classesDir = classesDir;
-    }
-
-
-    /**
-     * Path to the coverage information
-     */
-    public String getCoverageDir() {
-        return coverageDir;
-    }
-
-    public void setCoverageDir(String coverageDir) {
-        this.coverageDir = coverageDir;
-    }
-
-    /**
-     * Minimum number of transformations that we are going to attempt in every run of the diversificator
-     */
-    public int getMinTransformationsPerRun() {
-        return minTransformationsPerRun;
-    }
-
-    public void setMinTransformationsPerRun(int minTransformationsPerRun) {
-        this.minTransformationsPerRun = minTransformationsPerRun;
-    }
-
     /**
      * Process all code fragments. Used to early process them.
      */
     public void processCodeFragments() {
         if (codeFragments == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
-            StatementProcessor processor = new StatementProcessor(externalSourceCodeDir);
+            AbstractCodeFragmentProcessor<?> processor = getCodeFragmentProcessor();
             pm.addProcessor(processor);
             pm.process();
             codeFragments = processor.getCodeFragments();
@@ -265,9 +146,11 @@ public class InputProgram {
      * <p>
      * This is faster than processing all. Useful for multi-sosies when we start from a known set of single-sosies
      * instead of searching out of the fragments.
+     * @deprecated: Set a KnownTransfStatementProcessor as the code fragment processor instead and use processCodeFragments() without parameters
      *
      * @param transformations An array of stored transformations.
      */
+    @Deprecated
     public void processCodeFragments(JSONArray transformations) throws JSONException {
         if (codeFragments == null) {
             ProcessingManager pm = new QueueProcessingManager(factory);
@@ -296,6 +179,7 @@ public class InputProgram {
      * @param serialized Serialized object
      * @return The code fragment
      */
+    @Deprecated
     public synchronized CodeFragment getCodeFragment(JSONObject serialized) {
         if (serialized.has("position")) {
             try {
@@ -329,7 +213,6 @@ public class InputProgram {
      */
     public CodeFragment findCodeFragment(String position, String searchValue,
                                          Function<CodeFragment, String> accesor) {
-
         CodeFragment result = null;
 
         String[] s = position.split(":");
@@ -346,12 +229,9 @@ public class InputProgram {
             //Analyze only code fragments in the file of the one we are looking for
             if (cfPos[0].equals(position)) {
                 int cfLine = Integer.parseInt(cfPos[1]);
-                //String cfSourceCode = codeFragment.equalString();
-                //source.equals(cfSourceCode)
                 String ctValue = accesor.apply(codeFragment);
                 if (ctValue.equals(searchValue) && cfLine == lineNumber) {
                     //If it is of the same code and the same line: we found it!!
-                    //Log.info("Nailed! Search completed of snippet at pos " + position);
                     return codeFragment;
                 } else {
                     //Similarity factor (provide flexibility...)
@@ -360,7 +240,6 @@ public class InputProgram {
                         similiarFragmentCount = 0;//A better value is found, erase similar count
                         //find the most likely by search value
                         int k = Math.abs(cfLine - lineNumber);
-                        //Log.info("x > sDif -> MD: " + minDiff + " k:" + k + " x:" + x + " sD:" + sDiff);
                         minDiff = k;//Store line distance
                         sDiff = x;
                         result = codeFragment;
@@ -408,6 +287,7 @@ public class InputProgram {
      * @param source   Source of the code Fragment
      * @return
      */
+    /*
     public synchronized CodeFragment getCodeFragment(String position, String source, String type) {
 
         CodeFragment result = null;
@@ -437,7 +317,7 @@ public class InputProgram {
         }
 
         return result;
-    }
+    }*/
 
     /**
      * Returns an specific code fragment given its position and source. The source is optional.
@@ -575,5 +455,138 @@ public class InputProgram {
         setClassesDir(configuration.getClassesDir());
         setCoverageDir(configuration.getCoverageDir());
     }
+
+    public AbstractCodeFragmentProcessor<?> getCodeFragmentProcessor() {
+        //Convention over configuration
+        if ( codeFragmentProcessor == null ) codeFragmentProcessor = new StatementProcessor(externalSourceCodeDir);
+        return codeFragmentProcessor;
+    }
+
+    public void setCodeFragmentProcessor(AbstractCodeFragmentProcessor<?> codeFragmentProcessor) {
+        this.codeFragmentProcessor = codeFragmentProcessor;
+    }
+
+    /**
+     * Spoon factory to process all AST elements
+     */
+    public Factory getFactory() {
+        return factory;
+    }
+
+    public void setFactory(Factory factory) {
+        this.factory = factory;
+    }
+
+    /**
+     * Coverage report for the input program
+     */
+    public ICoverageReport getCoverageReport() {
+        return coverageReport;
+    }
+
+    /**
+     * Coverage report for the input program
+     */
+    public void setCoverageReport(ICoverageReport coverageReport) {
+        this.coverageReport = coverageReport;
+    }
+
+    /**
+     * Path to the test source code of the input program
+     */
+    public String getTestSourceCodeDir() {
+        return testSourceCodeDir;
+    }
+
+    public void setTestSourceCodeDir(String testSourceCodeDir) {
+        this.testSourceCodeDir = testSourceCodeDir;
+    }
+
+    /**
+     * Path to the source of the input program
+     */
+    public String getSourceCodeDir() {
+        return sourceCodeDir;
+    }
+
+    public void setSourceCodeDir(String sourceCodeDir) {
+        this.sourceCodeDir = sourceCodeDir;
+    }
+
+    public void setExternalSourceCodeDir(String externalSourceCodeDir) {
+        this.externalSourceCodeDir = externalSourceCodeDir;
+    }
+
+    public String getExternalSourceCodeDir() {
+        return externalSourceCodeDir;
+    }
+
+    /**
+     * Path to the know sosie information stored in file
+     */
+    public String getPreviousTransformationsPath() {
+        return previousTransformationsPath;
+    }
+
+    public void setPreviousTransformationsPath(String path) {
+        this.previousTransformationsPath = path;
+    }
+
+    /**
+     * Number of transformations that we are going to attempt in every run of the diversificator
+     */
+    public int getTransformationPerRun() {
+        return transformationPerRun;
+    }
+
+    public void setTransformationPerRun(int transformationPerRun) {
+        this.transformationPerRun = transformationPerRun;
+    }
+
+    /**
+     * Path to the root directory of the input program
+     */
+    public String getProgramDir() {
+        return programDir;
+    }
+
+    public void setProgramDir(String programDir) {
+        this.programDir = programDir;
+    }
+
+    /**
+     * Path to the built classes
+     */
+    public String getClassesDir() {
+        return classesDir;
+    }
+
+    public void setClassesDir(String classesDir) {
+        this.classesDir = classesDir;
+    }
+
+
+    /**
+     * Path to the coverage information
+     */
+    public String getCoverageDir() {
+        return coverageDir;
+    }
+
+    public void setCoverageDir(String coverageDir) {
+        this.coverageDir = coverageDir;
+    }
+
+    /**
+     * Minimum number of transformations that we are going to attempt in every run of the diversificator
+     */
+    public int getMinTransformationsPerRun() {
+        return minTransformationsPerRun;
+    }
+
+    public void setMinTransformationsPerRun(int minTransformationsPerRun) {
+        this.minTransformationsPerRun = minTransformationsPerRun;
+    }
+
 
 }

@@ -138,7 +138,7 @@ public class Assert {
      * they are considered equal.
      *
      * @param expected expected value
-     * @param actual the value to check against <code>expected</code>
+     * @param actual the value to validate against <code>expected</code>
      */
     static public void assertEquals(Object expected, Object actual) {
         assertEquals(null, expected, actual);
@@ -152,8 +152,8 @@ public class Assert {
      *
      * @param message the identifying message for the {@link AssertionError} (<code>null</code>
      * okay)
-     * @param unexpected unexpected value to check
-     * @param actual the value to check against <code>unexpected</code>
+     * @param unexpected unexpected value to validate
+     * @param actual the value to validate against <code>unexpected</code>
      */
     static public void assertNotEquals(String message, Object unexpected,
             Object actual) {
@@ -168,8 +168,8 @@ public class Assert {
      * <code>unexpected</code> and <code>actual</code> are <code>null</code>,
      * they are considered equal.
      *
-     * @param unexpected unexpected value to check
-     * @param actual the value to check against <code>unexpected</code>
+     * @param unexpected unexpected value to validate
+     * @param actual the value to validate against <code>unexpected</code>
      */
     static public void assertNotEquals(Object unexpected, Object actual) {
         assertNotEquals(null, unexpected, actual);
@@ -191,8 +191,8 @@ public class Assert {
      *
      * @param message the identifying message for the {@link AssertionError} (<code>null</code>
      * okay)
-     * @param unexpected unexpected value to check
-     * @param actual the value to check against <code>unexpected</code>
+     * @param unexpected unexpected value to validate
+     * @param actual the value to validate against <code>unexpected</code>
      */
     static public void assertNotEquals(String message, long unexpected, long actual) {
         if (unexpected == actual) {
@@ -204,8 +204,8 @@ public class Assert {
      * Asserts that two longs are <b>not</b> equals. If they are, an
      * {@link AssertionError} without a message is thrown.
      *
-     * @param unexpected unexpected value to check
-     * @param actual the value to check against <code>unexpected</code>
+     * @param unexpected unexpected value to validate
+     * @param actual the value to validate against <code>unexpected</code>
      */
     static public void assertNotEquals(long unexpected, long actual) {
         assertNotEquals(null, unexpected, actual);
@@ -221,7 +221,7 @@ public class Assert {
      * @param message the identifying message for the {@link AssertionError} (<code>null</code>
      * okay)
      * @param unexpected unexpected value
-     * @param actual the value to check against <code>unexpected</code>
+     * @param actual the value to validate against <code>unexpected</code>
      * @param delta the maximum delta between <code>unexpected</code> and
      * <code>actual</code> for which both numbers are still
      * considered equal.
@@ -240,7 +240,7 @@ public class Assert {
      * equal: <code>assertNotEquals(Double.NaN, Double.NaN, *)</code> fails
      *
      * @param unexpected unexpected value
-     * @param actual the value to check against <code>unexpected</code>
+     * @param actual the value to validate against <code>unexpected</code>
      * @param delta the maximum delta between <code>unexpected</code> and
      * <code>actual</code> for which both numbers are still
      * considered equal.
@@ -256,7 +256,7 @@ public class Assert {
      * equal: <code>assertNotEquals(Float.NaN, Float.NaN, *)</code> fails
      *
      * @param unexpected unexpected value
-     * @param actual the value to check against <code>unexpected</code>
+     * @param actual the value to validate against <code>unexpected</code>
      * @param delta the maximum delta between <code>unexpected</code> and
      * <code>actual</code> for which both numbers are still
      * considered equal.
@@ -542,7 +542,7 @@ public class Assert {
      * @param message the identifying message for the {@link AssertionError} (<code>null</code>
      * okay)
      * @param expected expected value
-     * @param actual the value to check against <code>expected</code>
+     * @param actual the value to validate against <code>expected</code>
      * @param delta the maximum delta between <code>expected</code> and
      * <code>actual</code> for which both numbers are still
      * considered equal.
@@ -564,7 +564,7 @@ public class Assert {
      * @param message the identifying message for the {@link AssertionError} (<code>null</code>
      * okay)
      * @param expected expected value
-     * @param actual the value to check against <code>expected</code>
+     * @param actual the value to validate against <code>expected</code>
      * @param delta the maximum delta between <code>expected</code> and
      * <code>actual</code> for which both numbers are still
      * considered equal.
@@ -586,7 +586,7 @@ public class Assert {
      * @param message the identifying message for the {@link AssertionError} (<code>null</code>
      * okay)
      * @param unexpected unexpected value
-     * @param actual the value to check against <code>unexpected</code>
+     * @param actual the value to validate against <code>unexpected</code>
      * @param delta the maximum delta between <code>unexpected</code> and
      * <code>actual</code> for which both numbers are still
      * considered equal.
@@ -674,7 +674,7 @@ public class Assert {
      * equal: <code>assertEquals(Double.NaN, Double.NaN, *)</code> passes
      *
      * @param expected expected value
-     * @param actual the value to check against <code>expected</code>
+     * @param actual the value to validate against <code>expected</code>
      * @param delta the maximum delta between <code>expected</code> and
      * <code>actual</code> for which both numbers are still
      * considered equal.
@@ -690,7 +690,7 @@ public class Assert {
      * equal: <code>assertEquals(Float.NaN, Float.NaN, *)</code> passes
      *
      * @param expected expected value
-     * @param actual the value to check against <code>expected</code>
+     * @param actual the value to validate against <code>expected</code>
      * @param delta the maximum delta between <code>expected</code> and
      * <code>actual</code> for which both numbers are still
      * considered equal.
@@ -706,7 +706,7 @@ public class Assert {
      *
      * @param message the identifying message for the {@link AssertionError} (<code>null</code>
      * okay)
-     * @param object Object to check or <code>null</code>
+     * @param object Object to validate or <code>null</code>
      */
     static public void assertNotNull(String message, Object object) {
         assertTrue(message, object != null);
@@ -716,7 +716,7 @@ public class Assert {
      * Asserts that an object isn't null. If it is an {@link AssertionError} is
      * thrown.
      *
-     * @param object Object to check or <code>null</code>
+     * @param object Object to validate or <code>null</code>
      */
     static public void assertNotNull(Object object) {
         assertNotNull(null, object);
@@ -728,7 +728,7 @@ public class Assert {
      *
      * @param message the identifying message for the {@link AssertionError} (<code>null</code>
      * okay)
-     * @param object Object to check or <code>null</code>
+     * @param object Object to validate or <code>null</code>
      */
     static public void assertNull(String message, Object object) {
         if (object == null) {
@@ -741,7 +741,7 @@ public class Assert {
      * Asserts that an object is null. If it isn't an {@link AssertionError} is
      * thrown.
      *
-     * @param object Object to check or <code>null</code>
+     * @param object Object to validate or <code>null</code>
      */
     static public void assertNull(Object object) {
         assertNull(null, object);

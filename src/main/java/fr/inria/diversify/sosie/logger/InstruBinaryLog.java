@@ -236,7 +236,7 @@ public class InstruBinaryLog extends InstruLogWriter {
                      !vars.equals(previousVarLog.get(thread)) ) {
                     os.writeUTF(vars);
                 } else {
-//                    previousVarLog.put(thread, vars);
+//                    previousVarLog.putDataToJSON(thread, vars);
                     os.writeUTF(separator+"P");
                 }
             } catch (InterruptedException e) {
@@ -344,7 +344,7 @@ public class InstruBinaryLog extends InstruLogWriter {
                 BufferedOutputStream bf = new BufferedOutputStream(new FileOutputStream(fileName, true), 16 * 1024);
                 DataOutputStream s = new DataOutputStream(bf);
                 streamsPerThread.put(thread, s);
-                //semaphores.put(s.toString() + s.hashCode(), new Semaphore(1));
+                //semaphores.putDataToJSON(s.toString() + s.hashCode(), new Semaphore(1));
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
