@@ -275,7 +275,6 @@ public class VerboseLogWriter extends LogWriter {
 
     @Override
     public void writeTestFinish(Thread t) {
-
         for (Thread thread : fileWriters.keySet()) {
             String semaphore = "";
             try {

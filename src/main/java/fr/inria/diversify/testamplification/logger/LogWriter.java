@@ -1,6 +1,8 @@
 package fr.inria.diversify.testamplification.logger;
 
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.Semaphore;
@@ -69,7 +71,9 @@ public abstract class LogWriter {
      * @param thread            Thread where the call is invoked
      * @param methodSignatureId Signature of the method
      */
-    public abstract void methodCall(Thread thread, String methodSignatureId);
+    public void methodCall(Thread thread, String methodSignatureId){
+        throw new NotImplementedException();
+    }
 
     /**
      * Method that logs and return from a method
@@ -80,18 +84,28 @@ public abstract class LogWriter {
         decCallDepth(thread);
     }
 
-    public abstract void writeAssert(int id, Thread thread, String className,
-                                     String methodSignature, String assertName, Object... var);
+    public void writeAssert(int id, Thread thread, String className,
+                                     String methodSignature, String assertName, Object... var){
+        throw new NotImplementedException();
+    }
 
 
 
-    public abstract void writeVar(int id, Thread thread, String methodSignatureId, Object... var);
+    public void writeVar(int id, Thread thread, String methodSignatureId, Object... var){
+        throw new NotImplementedException();
+    }
 
-    public abstract void writeException(int id, Thread thread, Object exception);
+    public void writeException(int id, Thread thread, Object exception){
+        throw new NotImplementedException();
+    }
 
-    public abstract void writeCatch(int id, Thread thread, Object exception);
+    public void writeCatch(int id, Thread thread, Object exception){
+        throw new NotImplementedException();
+    }
 
-    public abstract void close();
+    public void close(){
+        throw new NotImplementedException();
+    }
 
 
     /**
@@ -161,7 +175,6 @@ public abstract class LogWriter {
     protected void initDir() {
         String logDirName = "log";
         dir = new File(logDirName);
-
         while (!isLogDir(dir)) {
             logDirName = "../" + logDirName;
             dir = new File(logDirName);
@@ -254,16 +267,32 @@ public abstract class LogWriter {
     /**
      * Logs the completion of a tests
      */
-    public abstract void writeTestFinish(Thread thread);
+    public  void writeTestFinish(Thread thread) {
+        throw new NotImplementedException();
+    }
 
-    public abstract void testCount(String signature);
+    public void testCount(String signature){
+        throw new NotImplementedException();
+    }
 
-    public abstract void assertCount(String signature);
+    public void assertCount(String signature){
+        throw new NotImplementedException();
+    }
 
     //Thread containing the test
     public Thread getThread() {
         return thread;
     }
 
-    public abstract void writeTestStart(Thread thread, String testSignature);
+    public void writeTestStart(Thread thread, String testSignature){
+        throw new NotImplementedException();
+    }
+
+    public void logAssertArgument(Thread thread, int idAssertTarget, Object target, int idAssertInvocation, Object invocation){
+        throw new NotImplementedException();
+    }
+
+    public void logAssertArgument(Thread thread, int idAssert, Object invocation){
+        throw new NotImplementedException();
+    }
 }

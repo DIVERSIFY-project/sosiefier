@@ -1,12 +1,11 @@
 package fr.inria.diversify.testamplification.processor;
 
-import fr.inria.diversify.util.Log;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtStatement;
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
+import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,31 +24,62 @@ public class TestCaseProcessor extends TestProcessor {
 
 	@Override
 	public void process(CtMethod method) {
+//		String testName =  method.getPosition().getCompilationUnit().getMainType().getQualifiedName()
+//				+ "." + method.getSimpleName();
+//		String idTest = idFor(testName, "TEST");
+
 		List stmts = Query.getElements(method, new TypeFilter(CtStatement.class));
 		for(Object s: new ArrayList(stmts)){
 			if(s instanceof CtInvocation){
 				try {
 					CtInvocation invocation = (CtInvocation) s;
-
 					if (isAssert(invocation)) {
-						CtBlock block = (CtBlock) invocation.getParent();
-						getInvocation(invocation).stream().forEach(arg -> invocation.insertBefore(arg));
-						block.removeStatement(invocation);
+						if(invocation.getParent() instanceof CtCase) {
+							CtCase ctCase = (CtCase) invocation.getParent();
+							int index = ctCase.getStatements().indexOf(invocation);
+							getArgs(invocation).stream()
+													 .forEach(arg -> ctCase.getStatements().add(index, buildLogStatement(arg)));
+							ctCase.getStatements().remove(invocation);
+						} else {
+							CtBlock block = (CtBlock) invocation.getParent();
+							getArgs(invocation).stream().forEach(arg -> invocation.insertBefore(buildLogStatement(arg)));
+							block.removeStatement(invocation);
+						}
 					}
 				} catch (Exception e) {}
 			}
 		}
 	}
 
-	protected List<CtInvocation> getInvocation(CtInvocation invocation) {
-		List<CtInvocation> list = new ArrayList<>();
+	protected List<CtElement> getArgs(CtInvocation invocation) {
+		List<CtElement> list = new ArrayList<>();
 		for(Object arg : invocation.getArguments()) {
-			if(arg instanceof CtInvocation) {
-				CtInvocation i = (CtInvocation)arg;
-		    	i.setTypeCasts(new ArrayList<>());
+			if(!(arg instanceof CtLiteral)) {
+				CtElement i = (CtElement)arg;
 				list.add(i);
 			}
 		}
 		return list;
+	}
+
+
+	protected CtCodeSnippetStatement buildLogStatement(CtElement arg) {
+		CtCodeSnippetStatement stmt = new CtCodeSnippetStatementImpl();
+
+		String snippet;
+		String idAssertInvocation = idFor(arg.getPosition().getLine()+"_"+arg.toString(), "ASSERT");
+		if(arg instanceof CtInvocation) {
+			CtInvocation invocation = (CtInvocation) arg;
+			CtExpression target = invocation.getTarget();
+			String idAssertTarget = idFor(arg.getPosition().getLine()+"_"+invocation.toString(), "ASSERT");
+
+			snippet = getLogName() + ".logAssertArgument(Thread.currentThread()," + idAssertTarget + "," + target
+					+ "," + idAssertInvocation + ","  + arg + ")";
+		} else {
+			snippet = getLogName() + ".logAssertArgument(Thread.currentThread()," + idAssertInvocation + ","+ arg + ")";
+		}
+		stmt.setValue(snippet);
+
+		return stmt;
 	}
 }

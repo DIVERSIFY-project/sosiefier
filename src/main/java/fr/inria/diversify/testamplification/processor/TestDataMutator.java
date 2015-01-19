@@ -32,7 +32,7 @@ public class TestDataMutator extends TestProcessor {
 			//this index serves to replace ith literal is replaced by zero in the ith clone of the method
 			int lit_index = 0;
 			for(CtLiteral lit : l) {
-				if (!literalInAssert(lit)) {
+				if (!literalInAssert(lit) && !isCase(lit)) {
 					//clone the method
 					CtMethod cloned_method = cloneMethod(method, "_literalMutation");
 					//add the cloned method in the same class as the original method
@@ -42,6 +42,7 @@ public class TestDataMutator extends TestProcessor {
 					//set the value of the selected literal
 					if (!replaceByRandom(literal)) {
 						((CtClass) method.getDeclaringType()).removeMethod(cloned_method);
+						mutatedMethod.remove(cloned_method);
 					} else {
 						count++;
 					}
@@ -113,5 +114,9 @@ public class TestDataMutator extends TestProcessor {
 		} else {
 			return -1;
 		}
+	}
+
+	protected boolean isCase(CtLiteral literal) {
+		return literal.getParent(CtCase.class) != null;
 	}
 }

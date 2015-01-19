@@ -29,7 +29,7 @@ public class Logger {
         if ( logs.containsKey(thread) ) {
             return logs.get(thread);
         } else {
-            LogWriter l = new VerboseLogWriter();
+            LogWriter l = new AssertLogWriter();
             logs.put(thread, l);
             return l;
         }
@@ -49,6 +49,14 @@ public class Logger {
 
     public static void methodOut(Thread thread) {
         getLog(thread).methodOut(thread);
+    }
+
+    public static void logAssertArgument(Thread thread, int idAssertTarget, Object target, int idAssertInvocation, Object invocation) {
+        getLog(thread).logAssertArgument(thread,idAssertTarget, target, idAssertInvocation, invocation);
+    }
+
+    public static void logAssertArgument(Thread thread, int idAssert, Object invocation) {
+        getLog(thread).logAssertArgument(thread,idAssert,invocation);
     }
 
     public static void writeTestStart(Thread thread, String testSignature) {

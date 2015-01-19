@@ -44,16 +44,6 @@ public class DeepLogWriter extends LogWriter {
     }
 
     @Override
-    public void writeAssert(int id, Thread thread, String className, String methodSignature, String assertName, Object... var) {
-
-    }
-
-    @Override
-    public void writeVar(int id, Thread thread, String methodSignatureId, Object... var) {
-
-    }
-
-    @Override
     public void writeException(int id, Thread thread, Object exception) {
         if (getLogMethod(thread) && currentTest != null) {
             try {
@@ -69,10 +59,7 @@ public class DeepLogWriter extends LogWriter {
         }
     }
 
-    @Override
-    public void writeCatch(int id, Thread thread, Object exception) {
 
-    }
 
     @Override
     public void writeTestFinish(Thread thread) {
@@ -117,18 +104,6 @@ public class DeepLogWriter extends LogWriter {
         return sb.toString();
     }
 
-
-
-    @Override
-    public void testCount(String signature) {
-
-    }
-
-    @Override
-    public void assertCount(String signature) {
-
-    }
-
     @Override
     public void writeTestStart(Thread thread, String testSignature) {
         currentTest = testSignature;
@@ -145,26 +120,6 @@ public class DeepLogWriter extends LogWriter {
     }
 
     public void close() {
-//        try {
-//            PrintWriter fileWriter = getFileWriter("methodCall");
-//            for(String id : deepCallByMethod.keySet()) {
-//                fileWriter.append(id);
-//                fileWriter.append(separator);
-//                fileWriter.append(join(deepCallByMethod.get(id), ","));
-//                fileWriter.append("\n");
-//            }
-//            fileWriter = getFileWriter("methodException");
-//            for(Integer id : deepExceptionByMethod.keySet()) {
-//                fileWriter.append(id+"");
-//                fileWriter.append(separator);
-//                fileWriter.append(join(deepExceptionByMethod.get(id), ","));
-//                fileWriter.append("\n");
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } writeTestFinish(null);
         for (PrintWriter writer : fileWriters.values()) {
             writer.close();
         }
