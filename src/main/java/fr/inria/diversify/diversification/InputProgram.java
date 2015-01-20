@@ -49,7 +49,7 @@ public class InputProgram {
     /**
      * List of all the code fragments extracted by Spoon of the input program
      */
-    private CodeFragmentList codeFragments;
+    protected CodeFragmentList codeFragments;
 
     /**
      * Coverage report for the input program
@@ -131,7 +131,7 @@ public class InputProgram {
      * Process all code fragments. Used to early process them.
      */
     public void processCodeFragments() {
-        if (codeFragments == null) {
+        if (codeFragments == null || codeFragments.size() == 0) {
             ProcessingManager pm = new QueueProcessingManager(factory);
             AbstractCodeFragmentProcessor<?> processor = getCodeFragmentProcessor();
             pm.addProcessor(processor);
@@ -143,12 +143,12 @@ public class InputProgram {
 
     /**
      * Process only the code fragments needed to handle a known set of transformations.
-     * <p>
+     * <p/>
      * This is faster than processing all. Useful for multi-sosies when we start from a known set of single-sosies
      * instead of searching out of the fragments.
-     * @deprecated: Set a KnownTransfStatementProcessor as the code fragment processor instead and use processCodeFragments() without parameters
      *
      * @param transformations An array of stored transformations.
+     * @deprecated: Set a KnownTransfStatementProcessor as the code fragment processor instead and use processCodeFragments() without parameters
      */
     @Deprecated
     public void processCodeFragments(JSONArray transformations) throws JSONException {
@@ -172,7 +172,7 @@ public class InputProgram {
 
     /**
      * Search for a specific code fragment given its serialized JSON object.
-     * <p>
+     * <p/>
      * Note: The JSON object is the serialized version OF THE CODE FRAGMENT by no means
      * THE TRANSFORMATION containing a particular code fragment.
      *
@@ -211,16 +211,26 @@ public class InputProgram {
      * @param accesor     Accesor function to the property we are looking for
      * @return
      */
+
     public CodeFragment findCodeFragment(String position, String searchValue,
                                          Function<CodeFragment, String> accesor) {
+        return findCodeFragment(position, searchValue, accesor, 5, 0.85);
+    }
+
+    public CodeFragment findCodeFragment(String position, String searchValue,
+                                         Function<CodeFragment, String> accesor,
+                                         int lineThreshold, double valueThreshold) {
         CodeFragment result = null;
 
         String[] s = position.split(":");
         position = s[0];
         int lineNumber = Integer.parseInt(s[1]);
-        int minDiff = Integer.MAX_VALUE;
 
+
+        int minDiff = Integer.MAX_VALUE;
+        //int minDiff = lineThreshold;
         double sDiff = 0;
+        //double sDiff = valueThreshold;
 
         int similiarFragmentCount = 0;
         int similarMinDist = Integer.MAX_VALUE;
@@ -236,18 +246,20 @@ public class InputProgram {
                 } else {
                     //Similarity factor (provide flexibility...)
                     double x = StringSimilarity.CompareStrings(ctValue, searchValue);
-                    if ( x > sDiff ) {
+                    //Line distance
+                    int k = Math.abs(cfLine - lineNumber);
+
+                    //Do not analyze this fragment if it is to different or to far
+                    if (x < valueThreshold || k > lineThreshold) continue;
+
+                    if (x > sDiff) {
                         similiarFragmentCount = 0;//A better value is found, erase similar count
-                        //find the most likely by search value
-                        int k = Math.abs(cfLine - lineNumber);
                         minDiff = k;//Store line distance
                         sDiff = x;
                         result = codeFragment;
-
-                    } else if ( Math.abs(x - sDiff) < 0.0000001 ) {
+                    } else if (Math.abs(x - sDiff) < 0.0000001) {
                         similiarFragmentCount++; //equally good fragment found, augment the amount of fragments
                         int d = Math.abs(cfLine - lineNumber);
-                        //Log.info("x==sDiff ->  sDif -> MD: " + minDiff + " d:" + d + " x:" + x + " sD:" + sDiff);
                         if (d < minDiff) {
                             similarMinDist = minDiff;
                             //else return the nearest one with same code
@@ -255,69 +267,26 @@ public class InputProgram {
                             minDiff = d;
                         }
                     }
-                }
 
+                }
             }
         }
 
-
-
         //Log.info("Search completed of snippet at pos " + position);
         if (result == null) {
-            Log.warn("Unable to find " + searchValue + "at " + position + ":" + lineNumber);
+            Log.warn("Unable to find " + searchValue + " at " + position + ":" + lineNumber);
         } else if (!result.positionString().equals(position)) {
             Log.warn("Unable to find fragment at " + position + ":" + lineNumber);
             Log.info("Best match at " + result.positionString());
-            if ( sDiff < 1.0 || similiarFragmentCount != 0 ) {
-                Log.info("Dice: " + sDiff +  " Similars: " + similiarFragmentCount + " Similar MinDist: " + similarMinDist);
-                Log.info("Search value: " + searchValue );
-                if ( sDiff < 0 ) Log.info("Value found: " + accesor.apply(result));
+            if (sDiff < 1.0 || similiarFragmentCount != 0) {
+                Log.info("Dice: " + sDiff + " Similars: " + similiarFragmentCount + " Similar MinDist: " + similarMinDist);
+                Log.info("Search value: " + searchValue);
+                if (sDiff < 0) Log.info("Value found: " + accesor.apply(result));
             }
         }
 
         return result;
     }
-
-    /**
-     * Returns an specific code fragment given its position, source and type. The source is optional.
-     * However, you should supply both, since is possible that a code fragment
-     * is not found given only position since a difference of line numbers is usual.
-     *
-     * @param position Position of the code fragment
-     * @param source   Source of the code Fragment
-     * @return
-     */
-    /*
-    public synchronized CodeFragment getCodeFragment(String position, String source, String type) {
-
-        CodeFragment result = null;
-
-        String[] s = position.split(":");
-        String qualifiedName = s[0];
-        int lineNumber = Integer.parseInt(s[1]);
-        int minDiff = Integer.MAX_VALUE;
-
-        List<CodeFragment> set = getCodeFragments()
-                .stream()
-                .filter(codeFragment -> source == null || codeFragment.getSourceClass().getQualifiedName().equals(qualifiedName))
-                .filter(codeFragment -> codeFragment.getCodeFragmentType().getSimpleName().equals(type))
-                .collect(Collectors.toList());
-
-        for (CodeFragment codeFragment : set) {
-            int cfLine = codeFragment.getStartLine();
-            int d = Math.abs(cfLine - lineNumber);
-            if (d < minDiff) {
-                //else return the nearest one with same code
-                result = codeFragment;
-                minDiff = d;
-              if(minDiff == 0) {
-                  break;
-              }
-            }
-        }
-
-        return result;
-    }*/
 
     /**
      * Returns an specific code fragment given its position and source. The source is optional.
@@ -396,7 +365,6 @@ public class InputProgram {
             InlineConstantProcessor processor = new InlineConstantProcessor();
             pm.addProcessor(processor);
             pm.process();
-
             inlineConstant = processor.getInlineConstant();
         }
         return inlineConstant;
@@ -458,7 +426,7 @@ public class InputProgram {
 
     public AbstractCodeFragmentProcessor<?> getCodeFragmentProcessor() {
         //Convention over configuration
-        if ( codeFragmentProcessor == null ) codeFragmentProcessor = new StatementProcessor(externalSourceCodeDir);
+        if (codeFragmentProcessor == null) codeFragmentProcessor = new StatementProcessor(externalSourceCodeDir);
         return codeFragmentProcessor;
     }
 

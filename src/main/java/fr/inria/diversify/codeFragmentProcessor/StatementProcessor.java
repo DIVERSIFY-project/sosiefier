@@ -11,47 +11,46 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StatementProcessor extends AbstractCodeFragmentProcessor<CtStatement> {
-	protected ValidStatementVisitor valid;
-    protected List<File> sourceFilter;
+    protected ValidStatementVisitor valid;
+    protected List<File> sourceFilter = null;
 
 
     public StatementProcessor(String externalSourceCodeDir) {
-         sourceFilter = Arrays.asList(externalSourceCodeDir.split(System.getProperty("path.separator")))
-                              .stream()
-                              .map(s -> new File(s))
-                              .collect(Collectors.toList());
+        if (!externalSourceCodeDir.equals("")) {
+            sourceFilter = Arrays.asList(externalSourceCodeDir.split(System.getProperty("path.separator")))
+                    .stream()
+                    .map(s -> new File(s))
+                    .collect(Collectors.toList());
+        }
     }
 
     public void process(CtStatement element) {
-		try {
-			if(isValidStatement(element)) {
-
+        try {
+            if (isValidStatement(element)) {
                 Statement stmt = new Statement(element);
-				addCf(stmt);
-			}
-		} catch (Exception e) {
-            try{
-                Log.debug("error in StatementProcessor.process with the statement: "+element, e);
-            } catch (Exception ee) {
-                Log.debug("error in StatementProcessor.process with the statement ");
+                addCf(stmt);
             }
-		}
-	}
-
-
-	protected boolean isValidStatement(CtStatement element) throws IOException {
-        return true;
-        /*
-        String file = element.getPosition().getCompilationUnit().getFile().toString();
-        for (File filter : sourceFilter) {
-            if(file.contains(filter.getCanonicalPath().toString()))
-                return false;
+        } catch (Exception e) {
+            try {
+                Log.warn("error in StatementProcessor.process with the statement: " + element, e);
+            } catch (Exception ee) {
+                Log.warn("error in StatementProcessor.process with the statement ");
+            }
         }
+    }
 
-		 valid = new ValidStatementVisitor(element, false);
-		element.getParent().accept(valid);
-		return !valid.inExpression(element) && valid.isValid();*/
-	}
+
+    protected boolean isValidStatement(CtStatement element) throws IOException {
+        if (sourceFilter != null) {
+            String file = element.getPosition().getCompilationUnit().getFile().toString();
+            for (File filter : sourceFilter) {
+                if (file.contains(filter.getCanonicalPath().toString())) return false;
+            }
+        }
+        valid = new ValidStatementVisitor(element, false);
+        element.getParent().accept(valid);
+        return !valid.inExpression(element) && valid.isValid();
+    }
 
 }
 

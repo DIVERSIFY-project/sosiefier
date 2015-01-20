@@ -53,7 +53,7 @@ public class InputConfigurationTest {
      * Return some crazy path to test with
      * @return
      */
-    private StringBuilder crazyPaths() {
+    public StringBuilder crazyPaths() {
         //Some crazy paths so the posibility that they exists gets reduced
         StringBuilder sb = new StringBuilder();
         sb.append("project=../pr0j3cts/kily009\n")

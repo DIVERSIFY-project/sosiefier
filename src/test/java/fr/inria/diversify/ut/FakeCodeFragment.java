@@ -60,4 +60,9 @@ public class FakeCodeFragment extends CodeFragment {
     public CodeFragment clone() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return  positionString() + ", " + equalString();
+    }
 }
