@@ -40,7 +40,6 @@ public class Diversify extends AbstractDiversify {
      */
     protected int sosie = 0;
 
-
     private boolean earlyReport = false;
 
     private boolean earlyReportSosiesOnly = false;

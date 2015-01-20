@@ -80,21 +80,7 @@ public class ASTAdd extends ASTTransformation {
             throw new BuildTransplantException("", e);
         }
     }
-    protected boolean withVarMapping() {
-        return name.equals("add");
-    }
 
-    public void setVarMapping(Map<String, String> mapping) {
-        variableMapping = mapping;
-    }
-
-    public Map<String, String> getVarMapping() {
-        return variableMapping;
-    }
-
-    public void setTransplant(CodeFragment add) {
-        this.transplant = add;
-    }
 
     public  int hashCode() {
         return super.hashCode() * transplant.getCompilationUnit().hashCode() *
@@ -149,5 +135,19 @@ public class ASTAdd extends ASTTransformation {
 
     public void updateStatementList() {}
 
+    protected boolean withVarMapping() {
+        return name.equals("add");
+    }
 
+    public void setVarMapping(Map<String, String> mapping) {
+        variableMapping = mapping;
+    }
+
+    public Map<String, String> getVarMapping() {
+        return variableMapping;
+    }
+
+    public void setTransplant(CodeFragment add) {
+        this.transplant = add;
+    }
 }

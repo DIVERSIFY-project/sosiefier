@@ -24,6 +24,7 @@ import java.io.IOException;
  */
 public abstract class ASTTransformation extends AbstractTransformation {
 
+
     protected boolean subType;
 
     /**
@@ -31,36 +32,15 @@ public abstract class ASTTransformation extends AbstractTransformation {
      */
     protected CodeFragment transplantationPoint;
 
+    CtCodeElement copyTransplant;
+
     public ASTTransformation() {
     }
-    public CtSimpleType<?> getOriginalClass(CodeFragment cf) {
-        return cf.getCompilationUnit().getMainType();
-    }
 
-    public CodeFragment getTransplantationPoint() {
-        return transplantationPoint;
-    }
-
-    public void setTransplantationPoint(CodeFragment transplantationPoint) {
-        this.transplantationPoint = transplantationPoint;
-    }
-
-
-    public String classLocationName() {
-        return transplantationPoint.getSourceClass().getQualifiedName();
-    }
-
-    public String packageLocationName() {
-        return transplantationPoint.getSourcePackage().getQualifiedName();
-    }
-
-    public String methodLocationName() {
-        CtExecutable elem = transplantationPoint.getCtCodeFragment().getParent(CtExecutable.class);
-        if (elem != null) return elem.getSimpleName();
-        return "field";
-    }
-
-
+    /**
+     * String describing the level of the transformation, it may be at the statement, or block level.
+     * @return a string describing the level.
+     */
     @Override
     public String getLevel() {
         CtCodeElement stmt = transplantationPoint.getCtCodeFragment();
@@ -77,20 +57,11 @@ public abstract class ASTTransformation extends AbstractTransformation {
         return "block";
     }
 
-    @Override
-    public String stmtType() {
-        return transplantationPoint.getCtCodeFragment().getClass().getSimpleName();
-    }
-
-    public int line() {
-        return transplantationPoint.getStartLine();
-    }
-
-    //for stupid transformation
-    public void setName(String type) {
-        name = type;
-    }
-
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     @Override
     public String getTransformationString() throws Exception {
         copyTransplant = buildCopyTransplant();
@@ -121,9 +92,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
         Log.debug("copy file: " + directory + " " + type.getQualifiedName());
     }
 
-    public void setSubType(boolean subType) {
-        this.subType = subType;
-    }
+
     /**
      * Removes the original source code in the transplantation point
      */
@@ -138,6 +107,11 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     protected abstract void applyInfo();
 
+    /**
+     * Apply the transformation. After the transformation is performed, the result will be copied to the output directory
+     * @param srcDir  Path of the output directory
+     * @throws Exception
+     */
     public void apply(String srcDir) throws Exception {
         applyInfo();
         copyTransplant = buildCopyTransplant();
@@ -150,6 +124,11 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     }
 
+    /**
+     * Applies the transformation having into consideration the parent transformation
+     * @param srcDir Path of the output directory
+     * @throws Exception
+     */
     @Override
     public void applyWithParent(String srcDir) throws Exception {
         if(parent != null) {
@@ -160,8 +139,11 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     protected abstract CtCodeElement buildCopyTransplant() throws Exception;
 
-    CtCodeElement copyTransplant;
-
+    /**
+     * Undo the transformation. After the transformation is restored, the result will be copy to the output directory
+     * @param srcDir  Path of the output directory
+     * @throws Exception
+     */
     public void restore(String srcDir) throws Exception {
         if(parent != null) {
             parent.restore(srcDir);
@@ -171,6 +153,73 @@ public abstract class ASTTransformation extends AbstractTransformation {
     }
 
     public abstract void updateStatementList();
+
+    public CtSimpleType<?> getOriginalClass(CodeFragment cf) {
+        return cf.getCompilationUnit().getMainType();
+    }
+
+    /**
+     * Returns the transplantation point of the transformation
+     * @return A code fragment representing the transplantation point
+     */
+    public CodeFragment getTransplantationPoint() {
+        return transplantationPoint;
+    }
+
+    public void setTransplantationPoint(CodeFragment transplantationPoint) {
+        this.transplantationPoint = transplantationPoint;
+    }
+
+
+    /**
+     * Returns the qualified name of the source class of the transplantation point
+     * @return
+     */
+    public String classLocationName() {
+        return transplantationPoint.getSourceClass().getQualifiedName();
+    }
+
+    /**
+     * Returns the qualified name of the package of the transplantation points
+     * @return
+     */
+    public String packageLocationName() {
+        return transplantationPoint.getSourcePackage().getQualifiedName();
+    }
+
+    @Override
+    public String stmtType() {
+        return transplantationPoint.getCtCodeFragment().getClass().getSimpleName();
+    }
+
+    /**
+     *  Starting line number at wish  the transplantation point is located
+     * @return  An integer describing the starting line number
+     */
+    public int line() {
+        return transplantationPoint.getStartLine();
+    }
+
+    /**
+     * Subtype of the transformation, add, delete, replace, replaceWitgestein, addSteroid, etc.
+     * @param type
+     */
+    //for stupid transformation
+    public void setName(String type) {
+        name = type;
+    }
+
+    public String methodLocationName() {
+        CtExecutable elem = transplantationPoint.getCtCodeFragment().getParent(CtExecutable.class);
+        if (elem != null) return elem.getSimpleName();
+        return "field";
+    }
+
+    public void setSubType(boolean subType) {
+        this.subType = subType;
+    }
+
+
 }
 
 

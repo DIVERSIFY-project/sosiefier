@@ -27,14 +27,26 @@ public abstract class AbstractTransformation implements Transformation {
     //A global ID for the transformations. For our purposes is enough a simple global increment.
     private static int globalID = 0;
 
+
+    private static int id = 0;
+
+    //status of the transformation when transformation raises an exception
     public static int EXCEPTION = -4;
+
+    //status of the transformation when the transformation has not been tested
     public static int NOT_TESTED = -3;
+
+    //status of the transformation when the transformation fails to compile
     public static int COMPILED_FAIL = -2;
+
+    //status of the transformation when the transformation's  test fails
     public static int TEST_FAIL = -1;
+
+    //sosie status for a transformation
     public static int SOSIE = 0;
 
     /**
-     * An index to identify the
+     * An index to identify the transformation in the storage
      */
     private int index = -1;
 
@@ -45,41 +57,29 @@ public abstract class AbstractTransformation implements Transformation {
      */
     private int series;
 
-    protected Integer status = -3;
+    //Current status of the transformation
+    protected Integer status = NOT_TESTED;
+
+    //List of test failures  as result of transforming the source code using the current transformation
     protected List<String> failures;
+
+    @Deprecated
     protected static Map<String,Integer> failuresDico = new HashMap<>();
+
+    //Name of the current transformation. More like a subtype
     protected String name;
+
+    // type of the current transformation.
     protected String type;
+
+    //Parent of the current transformation.
     protected Transformation parent;
 
+    //input programs over which transformations are going to be perform
     private InputProgram inputProgram;
 
-    public void setStatus(Integer result) {
-        status = result;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public boolean isSosie() { return status == SOSIE; }
-
-    public void setFailures(List<String> f) {
-        failures = f;
-    }
-    public List<String> getFailures() {
-        return failures;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     @Override
+    @Deprecated
     public JSONObject toJSONObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("type", type);
@@ -99,7 +99,7 @@ public abstract class AbstractTransformation implements Transformation {
         return object;
     }
 
-    private static int id = 0;
+    @Deprecated
     protected JSONArray failuresToJSON() {
 
         JSONArray array = new JSONArray();
@@ -128,8 +128,11 @@ public abstract class AbstractTransformation implements Transformation {
         return parent;
     }
 
-
-
+    /**
+     *  indicate if the other transformation shares the same parent
+     * @param otherParent transformation  to which we want to check
+     * @return
+     */
     protected boolean equalParent(Transformation otherParent) {
         if(parent != null)
             return parent.equals(otherParent);
@@ -140,6 +143,11 @@ public abstract class AbstractTransformation implements Transformation {
     }
 
 
+    /**
+     * gets the parent method of an element
+     * @param son
+     * @return
+     */
     protected CtElement getParentMethod(CtElement son) {
         CtElement parent = son.getParent();
 
@@ -152,6 +160,11 @@ public abstract class AbstractTransformation implements Transformation {
             return parent;
     }
 
+    /**
+     * Gets the line's end  of the source position of an element
+     * @param exe element for which  we want to know the line's and
+     * @return
+     */
     protected int getLineEnd(CtElement exe) {
         if(exe instanceof CtExecutable && ((CtExecutable)exe).getBody() != null) {
             CtBlock body = ((CtExecutable) exe).getBody();
@@ -198,5 +211,40 @@ public abstract class AbstractTransformation implements Transformation {
      */
     public InputProgram getInputProgram() {
         return inputProgram;
+    }
+
+    public void setStatus(Integer result) {
+        status = result;
+    }
+
+    /**
+     * Current status of the transformation
+     */
+
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     *  indicate if this transformation is a Sosie
+     * @return
+     */
+    public boolean isSosie() { return status == SOSIE; }
+
+
+    public void setFailures(List<String> f) {
+        failures = f;
+    }
+
+    public List<String> getFailures() {
+        return failures;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
     }
 }
