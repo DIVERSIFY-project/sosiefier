@@ -24,6 +24,7 @@ import fr.inria.diversify.transformation.query.ASTTransformationQuery;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.TransformationFilter;
+import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
 import org.apache.commons.io.FileUtils;
@@ -65,7 +66,7 @@ public class DiversifyMain {
         initLogLevel();
         initDependency();
         initInputProgram();
-        initRepo();
+//        initRepo();
         initSpoon();
 
         if (inputConfiguration.getProperty("stat").equals("true")) {
@@ -76,21 +77,23 @@ public class DiversifyMain {
         }
     }
 
-    protected void initRepo() throws GitAPIException, IOException {
-        String repo = inputConfiguration.getProperty("gitRepository");
+//    protected void initRepo() throws GitAPIException, IOException {
+//        String repo = inputConfiguration.getProperty("gitRepository");
+//
+//        if(!repo.equals("null")) {
+//            repo += System.currentTimeMillis();
+//            Log.debug("clone https://github.com/simonAllier/sosie-exp.git in {}", repo);
+//            GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", repo);
 
-        if(!repo.equals("null")) {
-            Log.debug("clone https://github.com/simonAllier/sosie-exp.git in {}", repo);
-            GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", repo);
-            gitUtils.cloneRepo();
-        }
-    }
+//            gitUtils.cloneRepo();
+//        }
+//    }
 
     protected void initDependency() throws Exception, InvalidSdkException {
         MavenDependencyResolver t = new MavenDependencyResolver();
         String builder = inputConfiguration.getProperty("builder");
 
-        if (builder.equals("maven")) {
+        if (builder.equals("maven") && inputConfiguration.getProperty("dependencyPom") != null) {
             File pom = new File(inputConfiguration.getProperty("project") + "/pom.xml");
             File originalPom = new File(inputConfiguration.getProperty("project") + "/_originalPom.xml");
             FileUtils.copyFile(pom, originalPom);
@@ -105,7 +108,9 @@ public class DiversifyMain {
             FileUtils.copyFile(originalPom, pom);
             FileUtils.forceDelete(originalPom);
         }
-
+        if(builder.equals("maven")) {
+            t.DependencyResolver(inputConfiguration.getProperty("project") + "/pom.xml");
+        }
         String androidSdk = inputConfiguration.getProperty("AndroidSdk");
         if(androidSdk != null) {
             t.resolveAndroidDependencies(androidSdk);
@@ -455,7 +460,6 @@ public class DiversifyMain {
         }
 
       //  computeAllPossibleTransformation();
-
     }
 
     protected void computeAllPossibleTransformation() throws InterruptedException, IOException {
@@ -465,7 +469,7 @@ public class DiversifyMain {
 
     }
 
-    protected void computeDiversifyStat(String transDir, String fileName) throws Exception {
+    protected void computeDiversifyStat(String transDir, String directoryName) throws Exception {
         TransformationParser tf = new TransformationParser(true, inputProgram);
 //        TransformationOldParser tf = new TransformationOldParser(true);
         Collection<Transformation> transformations = tf.parseDir(transDir);
@@ -473,14 +477,12 @@ public class DiversifyMain {
         TransformationFilter filter = new TransformationFilter();
 //        filter.setName("delete");
 //        filter.setTransplantPosition("com.github.mobile.accounts");
-        TransformationsWriter write = new TransformationsWriter(filter.filter(transformations), fileName);
-
+        TransformationsWriter write = new TransformationsWriter(filter.filter(transformations), directoryName);
 
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         write.writeAllTransformation(null);
         StatisticDiversification sd = new StatisticDiversification(transformations);
-        sd.writeStat(fileName);
-
+        sd.writeStat(directoryName);
 
         for (String type : getAllTransformationType(transformations))
             write.writeAllTransformation(type);
@@ -490,9 +492,8 @@ public class DiversifyMain {
         for (String type : getAllTransformationType(transformations))
             write.writeGoodTransformation(type);
 
-
-        CVLMetric cvlMetric = new CVLMetric(inputProgram);
-        cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
+//        CVLMetric cvlMetric = new CVLMetric(inputProgram);
+//        cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
 //       Visu v = new Visu(fileName + "_visu/visu", inputProgram);
 //        v.writeJSON(transformations);
@@ -508,10 +509,8 @@ public class DiversifyMain {
         return types;
     }
 
-
     protected void initLogLevel() {
         int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
         Log.set(level);
-
     }
 }

@@ -19,8 +19,8 @@ public class DeepLogWriter extends LogWriter {
     protected static Map<String, PrintWriter> fileWriters = new HashMap<String, PrintWriter>();
     protected char separator = ';';
 
-    public DeepLogWriter(String logDir) {
-        super(logDir);
+    public DeepLogWriter() {
+        super();
     }
 
     @Override

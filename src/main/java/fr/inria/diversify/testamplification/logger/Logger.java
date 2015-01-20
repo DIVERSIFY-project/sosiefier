@@ -29,7 +29,7 @@ public class Logger {
         if ( logs.containsKey(thread) ) {
             return logs.get(thread);
         } else {
-            LogWriter l = new DeepLogWriter("LogDirName");
+            LogWriter l = new VerboseLogWriter();
             logs.put(thread, l);
             return l;
         }

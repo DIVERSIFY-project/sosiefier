@@ -51,7 +51,7 @@ public class SpoonMetaFactory{
         try {
             compiler.build();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return factory;

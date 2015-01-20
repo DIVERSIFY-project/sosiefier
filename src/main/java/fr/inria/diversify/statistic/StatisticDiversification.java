@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class StatisticDiversification {
     protected static char separator = ';';
-    protected static String sourceCityFileSuffix  = "_source.csv";;
+    protected static String sourceCityFileSuffix  = "source.csv";;
 
     protected Collection<Transformation> transformations;
     protected int numberOfFailureMax;
@@ -30,9 +30,9 @@ public class StatisticDiversification {
     }
 
 
-    public void writeStat(String output) {
+    public void writeStat(String directory) {
         try {
-            writeSourceCity(output+sourceCityFileSuffix);
+            writeSourceCity(directory + "/" + sourceCityFileSuffix);
         } catch (IOException e) {
             e.printStackTrace();
         }

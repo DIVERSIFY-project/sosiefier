@@ -88,7 +88,7 @@ public class DiversifyMainRefactor {
 
         if(repo != null) {
             Log.debug("clone https://github.com/simonAllier/sosie-exp.git in {}", repo);
-            GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", repo);
+            GitUtils gitUtils = new GitUtils(repo);
             gitUtils.cloneRepo();
         }
     }

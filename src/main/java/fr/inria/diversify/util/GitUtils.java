@@ -13,18 +13,18 @@ import java.io.*;
  * Created by Simon on 29/08/14.
  */
 public class GitUtils {
-    protected String remotePath;
+    protected String remotePath = "https://github.com/simonAllier/sosie-exp.git";
     protected String localPath;
     protected Repository localRepository;
     protected Git git;
+
 
     protected String user = "diversify-exp-user";
     protected String password = "diversify-exp-password";
 
 
 
-    public GitUtils(String remotePath, String localPath) throws IOException, GitAPIException {
-        this.remotePath = remotePath;
+    public GitUtils(String localPath) throws IOException, GitAPIException {
         this.localPath = localPath;
 
         localRepository = new FileRepository(localPath + "/.git");

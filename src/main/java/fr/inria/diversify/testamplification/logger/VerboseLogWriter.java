@@ -19,8 +19,8 @@ public class VerboseLogWriter extends LogWriter {
     private String simpleSeparator = ";";
 
 
-    public VerboseLogWriter(String logDir) {
-        super(logDir);
+    public VerboseLogWriter() {
+        super();
         previousVarLog = new HashMap();
         fileWriters = new HashMap<Thread, PrintWriter>();
     }

@@ -15,9 +15,6 @@ public abstract class LogWriter {
     //Thread containing the test
     private final Thread thread;
 
-    //Dir where the logs are going to be stored
-    private String logDir = "LogDirName";
-
     ///The call deep is how deep in the stack are we.
     protected Map<Thread, Integer> callDeep;
 
@@ -41,11 +38,11 @@ public abstract class LogWriter {
 
     /**
      * Constructor for the logger
-     *
-     * @param logDir Directory where the logging is going to be stored
      */
-    public LogWriter(String logDir) {
-        if (dir == null) initDir(logDir);
+    public LogWriter() {
+        if (dir == null) {
+            initDir();
+        }
         semaphores = new HashMap<String, Semaphore>();
         callDeep = new HashMap<Thread, Integer>();
         logMethod = new HashMap<Thread, Boolean>();
@@ -161,15 +158,25 @@ public abstract class LogWriter {
     /**
      * Initializes the directory where the files for each thread are going to be stored
      */
-    protected void initDir(String logDir) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(logDir));
-            dir = new File("log" + reader.readLine());
-        } catch (IOException e) {
-            dir = new File("log");
+    protected void initDir() {
+        String logDirName = "log";
+        dir = new File(logDirName);
+
+        while (!isLogDir(dir)) {
+            logDirName = "../" + logDirName;
+            dir = new File(logDirName);
         }
-        //Log.debug("LOG DIR:" + dir.getAbsolutePath());
-        dir.mkdir();
+    }
+
+    protected boolean isLogDir(File dir) {
+        if(dir.exists()) {
+            for(File fileInDir : dir.listFiles()) {
+                if(fileInDir.getName().equals("id")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -242,14 +249,6 @@ public abstract class LogWriter {
         }
         startLogMethod(thread);
         return varsString.toString();
-    }
-
-    public String getLogDir() {
-        return logDir;
-    }
-
-    public void setLogDir(String logDir) {
-        this.logDir = logDir;
     }
 
     /**

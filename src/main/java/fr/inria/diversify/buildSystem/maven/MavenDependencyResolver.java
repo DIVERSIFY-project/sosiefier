@@ -21,9 +21,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * User: Simon
@@ -31,10 +29,18 @@ import java.util.Properties;
  * Time: 3:47 PM
  */
 public class MavenDependencyResolver {
-    List<URL> jarURL = new ArrayList();
+    Set<URL> jarURL = new HashSet<>();
+    Properties properties;
+    String baseDir;
 
 
     public void DependencyResolver(String pomFile) throws Exception {
+        Log.debug("Resolve dependency of {}", pomFile);
+        String[] split = pomFile.split("/");
+        baseDir = "";
+        for(int i = 0;  i <  split.length - 1; i++) {
+            baseDir += split[i] + "/";
+        }
         MavenProject project = loadProject(new File(pomFile));
         resolveAllDependencies(project);
     }
@@ -65,22 +71,51 @@ public class MavenDependencyResolver {
         urls.add("http://repo1.maven.org/maven2/");
 
 
-        Properties properties = project.getProperties();
+        updateProperties(project.getProperties());
         for (Dependency dependency : project.getDependencies()) {
             try {
                 String artifactId = "mvn:" + resolveName(dependency.getGroupId(), properties) +
                         ":" + resolveName(dependency.getArtifactId(), properties) +
-                        ":" + resolveName(dependency.getVersion(), properties) +
-                        ":" + resolveName(dependency.getType(), properties);
+                        ":" + resolveName(dependency.getVersion(), properties);
 
-                File cachedFile = resolver.resolve(artifactId, urls);
+                File cachedFile = resolver.resolve(artifactId + ":" + resolveName(dependency.getType(), properties), urls);
                 jarURL.add(cachedFile.toURI().toURL());
                 Log.debug("resolve artifact: {}", artifactId);
+
+                File pomD = resolver.resolve(artifactId + ":pom", urls);
+//                resolveAllDependencies(loadProject(pomD));
+
             } catch (Exception e) {}
+
+
+        }
+        for(String module: project.getModules()) {
+            try {
+                resolveModuleDependencies(module);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            }
         }
 
         URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
         Thread.currentThread().setContextClassLoader(child);
+    }
+
+    protected void updateProperties(Properties properties) {
+        if(this.properties == null) {
+            this.properties = new Properties(properties);
+        } else {
+            for (Object key : properties.keySet()) {
+                this.properties.put(key, properties.get(key));
+            }
+        }
+    }
+
+    protected void resolveModuleDependencies(String moduleName) throws IOException, XmlPullParserException {
+        MavenProject project = loadProject(new File(baseDir + "/" + moduleName + "/pom.xml"));
+        resolveAllDependencies(project);
     }
 
     public void resolveAndroidDependencies(String chosenSdkPlatform) throws InvalidSdkException, MojoExecutionException, MalformedURLException {

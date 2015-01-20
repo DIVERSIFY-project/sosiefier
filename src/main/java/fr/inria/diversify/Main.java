@@ -32,12 +32,15 @@ public class Main {
         }
         else
             new DiversifyMain(args[0]);
+        System.exit(0);
         suicide();
     }
 
 
+
     protected static void initPropertiesFile(String git) throws IOException, InterruptedException, GitAPIException {
-        GitUtils gitUtils = new GitUtils("https://github.com/simonAllier/sosie-exp.git", git);
+        Log.info("clone the repository https://github.com/simonAllier/sosie-exp.git in {}", git);
+        GitUtils gitUtils = new GitUtils(git);
         gitUtils.cloneRepo();
 
         String propertiesFile = gitUtils.getFirstPropertyFile();
