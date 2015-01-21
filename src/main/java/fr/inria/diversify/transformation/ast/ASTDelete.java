@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtCodeSnippetStatement;
+import spoon.reflect.factory.Factory;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 
@@ -36,8 +37,22 @@ public class ASTDelete extends ASTTransformation {
         Log.debug("{}", transplantationPoint.getCodeFragmentType());
     }
 
-    protected  CtCodeElement buildReplacementElement() {
-        CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
+    /**
+     * All AST transformations takes the transplantation point (TP) and replaces it by :
+     * 1. The TP + transplant (add operation)
+     * 2. The transplant (replace operation)
+     * 3. And empty statement (delete operation)
+     * <p/>
+     * This method builds the such replacement element
+     *
+     * @return The resulting CtElement after the transformation
+     * @throws Exception
+     * @Note: Renamed after buildCopyElement.
+     */
+    @Override
+    protected CtCodeElement buildReplacementElement() throws Exception {
+        Factory factory = transplantationPoint.getCtCodeFragment().getFactory();
+        CtCodeSnippetStatement snippetStatement = factory.Core().createCodeSnippetStatement();
         snippetStatement.setValue("");
         return snippetStatement;
     }
@@ -46,7 +61,6 @@ public class ASTDelete extends ASTTransformation {
     public  int hashCode() {
         return super.hashCode() * transplantationPoint.getCompilationUnit().hashCode() * transplantationPoint.getStartLine();
     }
-
     public boolean equals(Object other) {
         if(other == null)
             return false;

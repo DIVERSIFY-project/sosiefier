@@ -79,10 +79,11 @@ public class SinglePointDiversify extends AbstractDiversify {
             trans.restore(tmpDir + "/" + sourceDir);
 
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
-            Log.debug("run after restore: " + tmpDir + "/" + sourceDir);
         } catch (ApplyTransformationException e) {
             tryRestore(trans,e);
         } catch (BuildTransplantException e) {}
+        Integer result = runTest(tmpDir);
+        Log.debug("run after restore: " +result);
     }
 
 

@@ -228,9 +228,6 @@ public abstract class AbstractDiversify {
 
     protected Integer runTest(String directory) throws InterruptedException {
         int status;
-//        if(android) {
-//            builder.startAndroidEmulation();
-//        }
 
         Log.debug("run test in directory: {}", directory);
         builder.setDirectory(directory);
@@ -238,15 +235,12 @@ public abstract class AbstractDiversify {
         Log.info("status: " + builder.getStatus() + ", compile error: " + builder.getCompileError() + ", run all test: " + builder.allTestRun() + ", nb error: " + builder.getTestFail().size());
         status = builder.getStatus();
 
-//        if(android) {
-//            builder.stopAndroidEmulation();
-//        }
-//        builder.setStatus(status);
+
         return status;
     }
 
 
-    protected void copySosieProgram() throws IOException, JSONException {
+    protected String copySosieProgram() throws IOException, JSONException {
         //Store the whole sosie program.
         try {
 
@@ -284,7 +278,10 @@ public abstract class AbstractDiversify {
                     writer.write(t.toJSONObject().toString() + "\n");
                 }
                 writer.close();
+
+                return destPath;
             }
+            return null;
         } catch (IOException e) {
             //We may also don't want to recover from here. If no instrumentation possible... now what?
             throw new RuntimeException(e);

@@ -76,12 +76,16 @@ public class Statement extends CodeFragment {
     protected boolean deadCode() {
         int position = 0;
         CtBlock block = codeFragment.getParent(CtBlock.class);
+        if(block.getStatements() == null) {
+            return true;
+        }
         for(Object stmt: block.getStatements()) {
             position++;
             if(codeFragment == stmt) {
                 break;
             }
         }
+
         return  position == block.getStatements().size();
     }
 

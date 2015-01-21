@@ -236,8 +236,7 @@ public class DiversifyMainRefactor {
             if(phases[0] == null) {
                 phases = new String[]{"clean", "test" };
             }
-            String src = inputConfiguration.getProperty("src");
-            rb = new MavenBuilder(directory, src);
+            rb = new MavenBuilder(directory);
             rb.setGoals(phases);
 
             initTimeOut(rb);

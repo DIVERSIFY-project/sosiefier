@@ -32,16 +32,23 @@ public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMetho
                 || candidate.getBody().getStatements().size() == 0)
             return false;
 
-        for(CtAnnotation<?> annotation: candidate.getAnnotations())
-            if(annotation.toString().startsWith("@org.junit.Test") ||
-               annotation.toString().startsWith("@org.junit.Before") ||
-               annotation.toString().startsWith("@org.junit.After"))
-                return true;
-
-        if(candidate.getSimpleName().contains("test"))
+        if(candidate.getSimpleName().contains("test")) {
             return true;
+        }
 
-        return false;
+        return candidate.getAnnotations().stream()
+                 .map(annotation -> annotation.toString())
+                 .anyMatch(annotation -> annotation.startsWith("@org.junit.Test")
+                         || annotation.startsWith("@org.junit.Before")
+                         || annotation.startsWith("@org.junit.After"));
+
+//        for(CtAnnotation<?> annotation: candidate.getAnnotations())
+//            if(annotation.toString().startsWith("@org.junit.Test") ||
+//               annotation.toString().startsWith("@org.junit.Before") ||
+//               annotation.toString().startsWith("@org.junit.After"))
+//                return true;
+//
+//        return false;
     }
 
     @Override

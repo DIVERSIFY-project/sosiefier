@@ -83,7 +83,7 @@ public class MavenDependencyResolver {
                 Log.debug("resolve artifact: {}", artifactId);
 
                 File pomD = resolver.resolve(artifactId + ":pom", urls);
-//                resolveAllDependencies(loadProject(pomD));
+                resolveAllDependencies(loadProject(pomD));
 
             } catch (Exception e) {}
 
