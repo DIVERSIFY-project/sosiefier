@@ -11,7 +11,6 @@ import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtSimpleType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 import spoon.support.JavaOutputProcessor;
 
 import java.io.File;
@@ -39,6 +38,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     /**
      * String describing the level of the transformation, it may be at the statement, or block level.
+     *
      * @return a string describing the level.
      */
     @Override
@@ -58,13 +58,12 @@ public abstract class ASTTransformation extends AbstractTransformation {
     }
 
     /**
-     *
      * @return
      * @throws Exception
      */
     @Override
     public String getTransformationString() throws Exception {
-        copyTransplant = buildCopyTransplant();
+        copyTransplant = buildReplacementElement();
         transplantationPoint.getCtCodeFragment().replace(copyTransplant);
 
         String ret = transplantationPoint.getCtCodeFragment().getParent().toString();
@@ -77,6 +76,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
     /**
      * Prints the modified java file. When the transformation is done a new java file is created. This method performs a
      * pretty print of it
+     *
      * @param directory Directory where the java file is going to be placed
      * @throws IOException
      */
@@ -105,17 +105,21 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     public abstract boolean usedOfSubType();
 
+    /**
+     * Logs description of the transformation that is going to be perform
+     */
     protected abstract void applyInfo();
 
     /**
      * Apply the transformation. After the transformation is performed, the result will be copied to the output directory
-     * @param srcDir  Path of the output directory
+     *
+     * @param srcDir Path of the output directory
      * @throws Exception
      */
     public void apply(String srcDir) throws Exception {
         applyInfo();
-        copyTransplant = buildCopyTransplant();
         try {
+            copyTransplant = buildReplacementElement();
             transplantationPoint.getCtCodeFragment().replace(copyTransplant);
             printJavaFile(srcDir);
         } catch (Exception e) {
@@ -126,26 +130,38 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     /**
      * Applies the transformation having into consideration the parent transformation
+     *
      * @param srcDir Path of the output directory
      * @throws Exception
      */
     @Override
     public void applyWithParent(String srcDir) throws Exception {
-        if(parent != null) {
-            parent.apply(srcDir);
-        }
+        if (parent != null) parent.apply(srcDir);
         apply(srcDir);
     }
 
-    protected abstract CtCodeElement buildCopyTransplant() throws Exception;
+    /**
+     * All AST transformations takes the transplantation point (TP) and replaces it by :
+     * 1. The TP + transplant (add operation)
+     * 2. The transplant (replace operation)
+     * 3. And empty statement (delete operation)
+     * <p/>
+     * This method builds the such replacement element
+     *
+     * @return The resulting CtElement after the transformation
+     * @throws Exception
+     * @Note: Renamed after buildCopyElement.
+     */
+    protected abstract CtCodeElement buildReplacementElement() throws Exception;
 
     /**
      * Undo the transformation. After the transformation is restored, the result will be copy to the output directory
-     * @param srcDir  Path of the output directory
+     *
+     * @param srcDir Path of the output directory
      * @throws Exception
      */
     public void restore(String srcDir) throws Exception {
-        if(parent != null) {
+        if (parent != null) {
             parent.restore(srcDir);
         }
         copyTransplant.replace(transplantationPoint.getCtCodeFragment());
@@ -160,6 +176,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     /**
      * Returns the transplantation point of the transformation
+     *
      * @return A code fragment representing the transplantation point
      */
     public CodeFragment getTransplantationPoint() {
@@ -173,6 +190,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     /**
      * Returns the qualified name of the source class of the transplantation point
+     *
      * @return
      */
     public String classLocationName() {
@@ -181,6 +199,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     /**
      * Returns the qualified name of the package of the transplantation points
+     *
      * @return
      */
     public String packageLocationName() {
@@ -193,8 +212,9 @@ public abstract class ASTTransformation extends AbstractTransformation {
     }
 
     /**
-     *  Starting line number at wish  the transplantation point is located
-     * @return  An integer describing the starting line number
+     * Starting line number at wish  the transplantation point is located
+     *
+     * @return An integer describing the starting line number
      */
     public int line() {
         return transplantationPoint.getStartLine();
@@ -202,6 +222,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
 
     /**
      * Subtype of the transformation, add, delete, replace, replaceWitgestein, addSteroid, etc.
+     *
      * @param type
      */
     //for stupid transformation

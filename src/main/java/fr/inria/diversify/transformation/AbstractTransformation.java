@@ -247,4 +247,5 @@ public abstract class AbstractTransformation implements Transformation {
     public String getName() {
         return name;
     }
+
 }

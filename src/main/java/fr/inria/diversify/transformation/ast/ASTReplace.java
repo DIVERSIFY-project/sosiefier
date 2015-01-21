@@ -67,7 +67,7 @@ public class ASTReplace extends ASTTransformation {
         Log.debug("replace by: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    protected CtCodeElement buildCopyTransplant() throws BuildTransplantException {
+    protected CtCodeElement buildReplacementElement() throws BuildTransplantException {
         try {
             CodeFragment stmt = transplant.clone();
             if (withVarMapping()) {
@@ -86,7 +86,6 @@ public class ASTReplace extends ASTTransformation {
         }
     }
 
-
     protected boolean withVarMapping() {
         //todo a remplacer par un attribut
         return name.equals("replace");
@@ -98,6 +97,8 @@ public class ASTReplace extends ASTTransformation {
         return super.hashCode() * getTransplant().getCompilationUnit().hashCode() *
                 getTransplant().getStartLine() * transplantationPoint.getCompilationUnit().hashCode() * transplantationPoint.getStartLine();
     }
+
+
 
     public boolean equals(Object other) {
         if (other == null)

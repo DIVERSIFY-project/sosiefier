@@ -20,6 +20,7 @@ import java.util.Map;
  * Time: 4:33 PM
  */
 public class ASTAdd extends ASTTransformation {
+
     protected CodeFragment transplant;
     protected Map<String, String> variableMapping;
 
@@ -49,12 +50,12 @@ public class ASTAdd extends ASTTransformation {
         Log.debug("transplant: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    protected CtCodeElement buildCopyTransplant() throws BuildTransplantException {
+    protected CtCodeElement buildReplacementElement() throws BuildTransplantException {
         try {
             CodeFragment stmtToAdd = transplant.clone();
             if (withVarMapping()) {
-                if (variableMapping == null) variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
-
+                if (variableMapping == null)
+                    variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
                 Log.debug("random variable mapping: {}", variableMapping);
                 stmtToAdd.replaceVar(transplantationPoint, variableMapping);
             }
@@ -125,10 +126,7 @@ public class ASTAdd extends ASTTransformation {
         for(Map.Entry<String, String> var : variableMapping.entrySet()) {
             CtVariableReference variable = tpInputContext.getVariableOrFieldNamed(var.getKey());
             CtVariableReference candidate = tInputContext.getVariableOrFieldNamed(var.getValue());
-
-            if(!variable.getType().equals(candidate.getType())) {
-                return true;
-            }
+            if(!variable.getType().equals(candidate.getType())) return true;
         }
         return false;
     }

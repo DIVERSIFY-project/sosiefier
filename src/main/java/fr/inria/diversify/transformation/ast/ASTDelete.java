@@ -36,7 +36,7 @@ public class ASTDelete extends ASTTransformation {
         Log.debug("{}", transplantationPoint.getCodeFragmentType());
     }
 
-    protected  CtCodeElement buildCopyTransplant() {
+    protected  CtCodeElement buildReplacementElement() {
         CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
         snippetStatement.setValue("");
         return snippetStatement;
@@ -46,6 +46,7 @@ public class ASTDelete extends ASTTransformation {
     public  int hashCode() {
         return super.hashCode() * transplantationPoint.getCompilationUnit().hashCode() * transplantationPoint.getStartLine();
     }
+
     public boolean equals(Object other) {
         if(other == null)
             return false;
