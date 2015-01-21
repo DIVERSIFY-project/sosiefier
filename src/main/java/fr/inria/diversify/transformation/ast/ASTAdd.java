@@ -49,7 +49,7 @@ public class ASTAdd extends ASTTransformation {
         Log.debug("transplant: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    protected CtCodeElement buildReplacementElement() throws BuildTransplantException {
+    protected CtCodeElement buildReplacementElement() {
         try {
             CodeFragment stmtToAdd = transplant.clone();
             if (withVarMapping()) {
@@ -77,7 +77,7 @@ public class ASTAdd extends ASTTransformation {
             body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
             return stmtIf;
         } catch (Exception e) {
-            throw new BuildTransplantException("", e);
+            throw new RuntimeException(new BuildTransplantException("", e));
         }
     }
     protected boolean withVarMapping() {

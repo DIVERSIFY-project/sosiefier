@@ -152,7 +152,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
      * @throws Exception
      * @Note: Renamed after buildCopyElement.
      */
-    protected abstract CtCodeElement buildReplacementElement() throws Exception;
+    protected abstract CtCodeElement buildReplacementElement();
 
     /**
      * Undo the transformation. After the transformation is restored, the result will be copy to the output directory
