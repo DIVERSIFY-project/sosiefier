@@ -59,6 +59,10 @@ public class Logger {
         getLog(thread).logAssertArgument(thread,idAssert,invocation);
     }
 
+    public static void writeTestStart(Thread thread, Object thisObject, String testSignature) {
+        getLog(thread).writeTestStart(thread, thisObject, testSignature);
+    }
+
     public static void writeTestStart(Thread thread, String testSignature) {
         getLog(thread).writeTestStart(thread, testSignature);
     }

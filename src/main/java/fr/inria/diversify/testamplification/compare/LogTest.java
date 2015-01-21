@@ -1,5 +1,7 @@
 package fr.inria.diversify.testamplification.compare;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -35,4 +37,13 @@ public class LogTest {
     public void reset() {
         index = 0;
     }
+
+    public int numberOfNext() {
+        return asserts.size() - index;
+    }
+
+    public int size() {
+        return asserts.size();
+    }
+
 }

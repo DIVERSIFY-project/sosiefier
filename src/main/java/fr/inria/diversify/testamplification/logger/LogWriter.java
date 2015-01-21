@@ -284,6 +284,10 @@ public abstract class LogWriter {
         return thread;
     }
 
+    public void writeTestStart(Thread thread, Object thisObject, String testSignature){
+        throw new NotImplementedException();
+    }
+
     public void writeTestStart(Thread thread, String testSignature){
         throw new NotImplementedException();
     }

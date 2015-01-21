@@ -58,6 +58,10 @@ public class AssertLogWriter extends LogWriter {
         }
     }
 
+    public void writeTestStart(Thread thread, Object thisObject, String testSignature) {
+        writeTestStart(thread, thisObject.getClass().getName() + "." + testSignature);
+    }
+
     @Override
     public void writeTestFinish(Thread t) {
         for (Thread thread : fileWriters.keySet()) {

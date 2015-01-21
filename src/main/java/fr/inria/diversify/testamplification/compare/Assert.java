@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class Assert {
     String[] methods;
-    String[] values;
+    Object[] values;
 
     static Map<Integer, String> dico = new HashMap<>();
 
@@ -26,7 +26,7 @@ public class Assert {
         return assertId;
     }
 
-    public void setValues(String[] values) {
+    public void setValues(Object[] values) {
         this.values = values;
     }
 
@@ -34,7 +34,7 @@ public class Assert {
         String ret = assertId + ", "  + dico.get(classId) + ": ";
 
         for(int i = 0; i < values.length; i++)  {
-            ret += "\n\t" + methods[i] + ": " + values[i];
+            ret += "\n\t" + methods[i] + "(): " + values[i];
         }
 
         return ret;
@@ -48,7 +48,7 @@ public class Assert {
         return methods;
     }
 
-    public String[] getValues() {
+    public Object[] getValues() {
         return values;
     }
 }

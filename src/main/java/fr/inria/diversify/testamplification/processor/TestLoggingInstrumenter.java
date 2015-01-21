@@ -5,6 +5,7 @@ import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.ModifierKind;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import java.util.List;
@@ -33,11 +34,17 @@ public class TestLoggingInstrumenter extends TestProcessor {
 
     @Override
     public void process(CtMethod element) {
-        String testName =  element.getPosition().getCompilationUnit().getMainType().getQualifiedName()
-                + "." + element.getSimpleName();
-        idFor(testName, "TEST"); //Save the id of the test to be able to count all processed tests
+        String snippet;
+        if(element.getModifiers().contains(ModifierKind.STATIC)) {
+            String testName = element.getPosition().getCompilationUnit().getMainType().getQualifiedName() + "." + element.getSimpleName();
+            snippet = getLogName() + ".writeTestStart(Thread.currentThread(), \"" + testName + "\")";
+        } else {
+            String testName = element.getSimpleName();
+//            idFor(testName, "TEST"); //Save the id of the test to be able to count all processed tests
+           snippet = getLogName() + ".writeTestStart(Thread.currentThread(),this, \"" + testName + "\")";
+        }
 
-        String snippet = getLogName() + ".writeTestStart(Thread.currentThread(),\"" + testName + "\")";
+
 
         CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
         snippetStatement.setValue(snippet);

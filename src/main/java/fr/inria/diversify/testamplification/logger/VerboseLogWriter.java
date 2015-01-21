@@ -76,6 +76,10 @@ public class VerboseLogWriter extends LogWriter {
         }
     }
 
+    public void writeTestStart(Thread thread, Object thisObject, String testSignature) {
+        writeTestStart(thread, thisObject.getClass().getName() + "." + testSignature);
+    }
+
     public void writeAssert(int id, Thread thread, String className, String methodSignature, String assertName, Object... var) {
         String semaphore = "";
         try {
@@ -145,36 +149,6 @@ public class VerboseLogWriter extends LogWriter {
 
 
 
-//    @Override
-//    public void countAssert(String id) {
-//        Thread thread = getParent() == null ? Thread.currentThread() : getParent().getThread();
-//        if (getAssertCallCount().containsKey(id)) {
-//            int k = getAssertCallCount().get(id);
-//            getAssertCallCount().putDataToJSON(id, k + 1);
-//        } else {
-//            String semaphore = "";
-//            if (getLogMethod(thread)) {
-//                try {
-//                    StringBuilder stringBuilder = new StringBuilder();
-//                    stringBuilder.append("$$$\n");
-//                    stringBuilder.append("SA"); //start logging
-//                    stringBuilder.append(simpleSeparator);
-//                    stringBuilder.append(id);
-//                    stringBuilder.append(simpleSeparator);
-//                    stringBuilder.append(System.currentTimeMillis());
-//                    String string = stringBuilder.toString();
-//                    PrintWriter fileWriter = getFileWriter(thread);
-//                    semaphore = fileWriter.toString() + fileWriter.hashCode();
-//                    fileWriter.append(string);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                } finally {
-//                    startLogMethod(thread);
-//                    releaseFileWriter(semaphore);
-//                }
-//            }
-//        }
-//    }
     static long nbVar = 0;
     static long tooBigVar = 0;
     protected String buildVars(Thread thread, String methodSignatureId, Object[] vars) {

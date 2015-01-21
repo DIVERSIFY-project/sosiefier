@@ -16,14 +16,13 @@ public class LogTestReader {
     Map<String, Test> traceByTest;
     Map<Integer, String> idToClass;
     Map<Integer,  String[]> getters;
-    private Map<Integer, String[]> previousValues;
-
-
+    private Map<Integer, Object[]> previousValues;
+    static Map<Integer, String> idMap;
 
 
     public Collection<Test> loadLog(String dir) throws IOException {
         File file = new File(dir);
-        Map<Integer, String> idMap = loadIdMap(dir + "/id");
+        loadIdMap(dir + "/id");
 
         Log.debug("load trace in directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles()) {
@@ -49,11 +48,11 @@ public class LogTestReader {
         Assert assertO = new Assert(assertId, classId, getters.get(classId));
 
         count++;
-        String[] pValues = previousValues.get(classId);
+        Object[] pValues = previousValues.get(classId);
         if(split.length != 3) {
             String[] tmp = assertLog.split(":;:");
 
-            String[] values = Arrays.copyOfRange(tmp, 1, tmp.length);
+            Object[] values = parseValues(Arrays.copyOfRange(tmp, 1, tmp.length));
             if (pValues == null) {
                 pValues = values;
                 previousValues.put(classId, pValues);
@@ -75,6 +74,43 @@ public class LogTestReader {
         assertO.setValues(Arrays.copyOf(pValues, pValues.length));
 
         return assertO;
+    }
+
+    protected Object[] parseValues(String[] values) {
+        Object[] parseValues = new Object[values.length];
+        for(int i = 0; i < values.length; i++) {
+            parseValues[i] = parseValue(values[i]);
+        }
+        return parseValues;
+    }
+
+    protected Object parseValue(String value) {
+        //value is a set
+        if(value.startsWith("{") && value.endsWith("}")) {
+
+            Set<Object> set = new HashSet<>();
+            for(String s : value.substring(1,value.length()-1).split(", ")) {
+                set.add(parseValue(s));
+            }
+            return set;
+        }
+        //value is a array or a list
+        if(value.startsWith("[") && value.endsWith("]")) {
+            List<Object> list = new ArrayList<>();
+            for(String s : value.substring(1,value.length()-1).split(", ")) {
+                list.add(parseValue(s));
+            }
+            return list;
+        }
+        //toString() is not define
+        if(value.split("@").length > 1) {
+            return parseValue(value.split("@")[0]);
+        }
+        //toString() is not define
+        if( value.split("\\$").length > 1) {
+            return parseValue(value.split("\\$")[0]);
+        }
+        return value.intern();
     }
 
     protected void splitByTest(File file) throws Exception {
@@ -99,7 +135,7 @@ public class LogTestReader {
                             if (currentTest != null) {
                                 testToExclude.add(currentTest);
                             }
-                            assertLogs.clear();
+                            assertLogs = new LinkedList<>();
                             currentTest = parseTestName(logEntry);
                             break;
                         case "TE" :
@@ -167,16 +203,19 @@ public class LogTestReader {
      * @throws java.io.IOException
      */
     protected Map<Integer,String> loadIdMap(String file) throws IOException {
-        Map<Integer,String> map = new HashMap<>();
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String line = reader.readLine();
+        if(idMap == null) {
+            idMap = new HashMap<>();
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
 
-        while (line != null) {
-            String[] tmp = line.split(" ");
-            map.put(Integer.parseInt(tmp[0]),line.substring(tmp[0].length(), line.length()));
-            line = reader.readLine();
+            while (line != null) {
+                String[] tmp = line.split(" ");
+                Integer id = Integer.parseInt(tmp[0]);
+                idMap.put(id, line.substring(tmp[0].length(), line.length()));
+                line = reader.readLine();
+            }
         }
-        return map;
+        return idMap;
     }
 
     protected void reset() {

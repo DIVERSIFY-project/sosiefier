@@ -67,11 +67,11 @@ public class TestCaseProcessor extends TestProcessor {
 		CtCodeSnippetStatement stmt = new CtCodeSnippetStatementImpl();
 
 		String snippet;
-		String idAssertInvocation = idFor(arg.getPosition().getLine()+"_"+arg.toString(), "ASSERT");
+		String idAssertInvocation = idFor(arg.getPosition().getLine()+"_"+arg.toString(), "ASSERT_I");
 		if(arg instanceof CtInvocation) {
 			CtInvocation invocation = (CtInvocation) arg;
 			CtExpression target = invocation.getTarget();
-			String idAssertTarget = idFor(arg.getPosition().getLine()+"_"+invocation.toString(), "ASSERT");
+			String idAssertTarget = idFor(arg.getPosition().getLine()+"_"+invocation.toString(), "ASSERT_T");
 
 			snippet = getLogName() + ".logAssertArgument(Thread.currentThread()," + idAssertTarget + "," + target
 					+ "," + idAssertInvocation + ","  + arg + ")";

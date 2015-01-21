@@ -105,8 +105,8 @@ public class DeepLogWriter extends LogWriter {
     }
 
     @Override
-    public void writeTestStart(Thread thread, String testSignature) {
-        currentTest = testSignature;
+    public void writeTestStart(Thread thread, Object thisObject, String testSignature) {
+        currentTest = thisObject.getClass().getName() + "." +testSignature;
         resetCallDepth(thread);
         deepCallForCurrentTest = new LinkedList<Integer>();
         deepExceptionForCurrentTest = new LinkedList<Integer>();
