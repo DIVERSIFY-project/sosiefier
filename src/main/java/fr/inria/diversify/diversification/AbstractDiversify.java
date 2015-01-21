@@ -240,7 +240,7 @@ public abstract class AbstractDiversify {
     }
 
 
-    protected void copySosieProgram() throws IOException, JSONException {
+    protected String copySosieProgram() throws IOException, JSONException {
         //Store the whole sosie program.
         try {
 
@@ -278,7 +278,10 @@ public abstract class AbstractDiversify {
                     writer.write(t.toJSONObject().toString() + "\n");
                 }
                 writer.close();
+
+                return destPath;
             }
+            return null;
         } catch (IOException e) {
             //We may also don't want to recover from here. If no instrumentation possible... now what?
             throw new RuntimeException(e);

@@ -18,8 +18,8 @@ import java.util.List;
 public class MavenBuilder extends AbstractBuilder {
 
 
-    public MavenBuilder(String directory, String srcDir) throws IOException {
-        super(directory, srcDir);
+    public MavenBuilder(String directory) throws IOException {
+        super(directory);
     }
 
     protected void runPrivate(String[] goals, boolean verbose) {

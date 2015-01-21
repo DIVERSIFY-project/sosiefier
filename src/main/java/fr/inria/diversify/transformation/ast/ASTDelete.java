@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtCodeSnippetStatement;
+import spoon.reflect.factory.Factory;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 
@@ -37,7 +38,8 @@ public class ASTDelete extends ASTTransformation {
     }
 
     protected  CtCodeElement buildCopyTransplant() {
-        CtCodeSnippetStatement snippetStatement = new CtCodeSnippetStatementImpl();
+        Factory factory = transplantationPoint.getCtCodeFragment().getFactory();
+        CtCodeSnippetStatement snippetStatement = factory.Core().createCodeSnippetStatement();
         snippetStatement.setValue("");
         return snippetStatement;
     }

@@ -157,7 +157,13 @@ public abstract class ASTTransformation extends AbstractTransformation {
         if(parent != null) {
             parent.restore(srcDir);
         }
-        copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+        try {
+            copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+        } catch (Throwable e) {
+            e.printStackTrace();
+            Log.debug("");
+
+        }
         printJavaFile(srcDir);
     }
 

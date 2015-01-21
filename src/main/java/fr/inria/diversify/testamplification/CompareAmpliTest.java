@@ -48,7 +48,7 @@ public class CompareAmpliTest {
     public JSONObject toJson(List<TestDiff> diffs, Transformation sosie) throws JSONException {
         JSONObject object = new JSONObject();
 
-        object.put("transformation","");
+        object.put("transformation",sosie.toJSONObject());
 
         JSONArray array = new JSONArray();
         object.put("testDiff", array);

@@ -94,7 +94,7 @@ public class Run {
 
 
     protected void runProgram(String programDirectory, boolean install) throws Exception {
-        MavenBuilder builder = new MavenBuilder(programDirectory, "src/main/java");
+        MavenBuilder builder = new MavenBuilder(programDirectory);
 
         builder.setTimeOut(1000);
         builder.setSetting(localRepository);

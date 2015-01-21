@@ -112,7 +112,7 @@ public class ComputeReportForClient extends ComputeReport {
 
     protected void installProgram(File programDirectory) throws Exception {
         Log.info("install program: {}",programDirectory.getAbsoluteFile());
-        MavenBuilder builder = new MavenBuilder(programDirectory.getAbsolutePath(), "src/main/java");
+        MavenBuilder builder = new MavenBuilder(programDirectory.getAbsolutePath());
 
         builder.setTimeOut(600);
         builder.setSetting(localRepository);

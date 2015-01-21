@@ -70,12 +70,14 @@ public class LogDiff implements Comparable {
         }
 
         JSONArray notS = new JSONArray();
-        object.put("notSyncro",notS);
-
         notSyncro.stream()
                 .map(a -> a.getAssertId())
                 .distinct()
                 .forEach(i ->  notS.put(i));
+
+        if(notS.length() != 0) {
+            object.put("notSyncro", notS);
+        }
 
         return object;
     }

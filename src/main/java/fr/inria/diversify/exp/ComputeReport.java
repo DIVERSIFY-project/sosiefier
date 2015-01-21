@@ -200,7 +200,7 @@ public class ComputeReport {
 
     protected void runProgram(File directory) throws Exception {
         Log.info("run program: {}",directory.getAbsoluteFile());
-        MavenBuilder builder = new MavenBuilder(directory.getAbsolutePath(), "src/main/java");
+        MavenBuilder builder = new MavenBuilder(directory.getAbsolutePath());
 
         builder.setTimeOut(600);
         builder.setSetting(localRepository);

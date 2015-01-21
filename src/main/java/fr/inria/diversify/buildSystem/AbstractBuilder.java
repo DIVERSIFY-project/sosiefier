@@ -18,9 +18,6 @@ import java.util.Set;
  */
 public abstract class AbstractBuilder {
 
-    //Directory containing the source
-    protected String srcDir;
-
     //Directory where the builder is going to be saved in case the user requested
     private String saveOutputDir;
 
@@ -88,9 +85,8 @@ public abstract class AbstractBuilder {
 //     */
 //    protected CountDownLatch latch;
 
-    public AbstractBuilder(String directory, String srcDir) {
+    public AbstractBuilder(String directory) {
         this.directory = directory;
-        this.srcDir = srcDir;
         errors = new ArrayList<>();
         acceptedErrors = new ArrayList<>();
         runCount = 0;
