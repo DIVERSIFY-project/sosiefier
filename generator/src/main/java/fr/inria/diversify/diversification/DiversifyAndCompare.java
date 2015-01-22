@@ -70,8 +70,8 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         } catch (ApplyTransformationException e) {
             tryRestore(trans,e);
         } catch (BuildTransplantException e) {}
-        Integer result = runTest(tmpDir);
-        Log.debug("run after restore: " +result);
+    //    Integer result = runTest(tmpDir);
+      //  Log.debug("run after restore: " +result);
     }
 
 
@@ -84,7 +84,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         FileUtils.copyDirectory(new File(amplifiedTestDir), new File(sosieDir + "/" +testSrcDir));
         File dir = new File(sosieDir+"/"+sourceDir+ "/fr/inria/diversify/testamplification/logger");
         FileUtils.forceMkdir(dir);
-        String packagePath = System.getProperty("user.dir") + "/src/main/java/fr/inria/diversify/testamplification/logger/";
+        String packagePath = System.getProperty("user.dir") + "/generator/src/main/java/fr/inria/diversify/testamplification/logger/";
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.ShutdownHookLog.class.getSimpleName() + ".java"), dir);
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.LogWriter.class.getSimpleName() + ".java"),dir);

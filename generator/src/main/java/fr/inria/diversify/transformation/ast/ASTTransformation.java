@@ -89,7 +89,7 @@ public abstract class ASTTransformation extends AbstractTransformation {
         processor.setFactory(factory);
 
         processor.createJavaFile(type);
-        Log.debug("copy file: " + directory + " " + type.getQualifiedName());
+        Log.debug("write type {} in directory {}", type.getQualifiedName(), directory);
     }
 
 
@@ -164,7 +164,12 @@ public abstract class ASTTransformation extends AbstractTransformation {
         if (parent != null) {
             parent.restore(srcDir);
         }
-        copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+        try {
+            copyTransplant.replace(transplantationPoint.getCtCodeFragment());
+        } catch (Throwable e) {
+            e.printStackTrace();
+            Log.debug("");
+        }
         printJavaFile(srcDir);
     }
 

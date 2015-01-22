@@ -145,7 +145,8 @@ public class LogTestComparator {
 
     protected AssertDiff compareAssert(Assert originalAssert, Assert sosieAssert) {
         if(originalAssert.getAssertId() == sosieAssert.getAssertId()) {
-            for(int i = 0; i < originalAssert.getValues().length; i++) {
+            int borne = Math.min(originalAssert.getValues().length, sosieAssert.getValues().length);
+            for(int i = 0; i < borne; i++) {
                 Object oValue = originalAssert.getValues()[i];
                 Object sValue = sosieAssert.getValues()[i];
                 if(!oValue.equals(sValue)) {
