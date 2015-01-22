@@ -133,7 +133,7 @@ public abstract class AbstractBuilder {
         runGoals(new String[]{"android:emulator-stop-all"}, false);
     }
 
-    public int runGoals(String[] goals, boolean verbose) throws InterruptedException {
+    public int runGoals(final String[] goals, final boolean verbose) throws InterruptedException {
         initThreadGroup();
         reset();
 
