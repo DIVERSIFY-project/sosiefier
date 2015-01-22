@@ -9,14 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>generator</artifactId>
+    <artifactId>core</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>fr.irisa.diversify</groupId>
-            <artifactId>core</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 
 </project>

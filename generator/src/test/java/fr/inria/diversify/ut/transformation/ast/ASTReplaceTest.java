@@ -6,6 +6,7 @@ import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.ut.SpoonMetaFactoryTest;
 import org.junit.Test;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtCodeElement;
@@ -27,11 +28,10 @@ public class ASTReplaceTest {
 
     /**
      * Test the transformation of the AST. Test that after the transformation, the TP is AFTER the transplant
-     * @throws Exception
      */
     @Test
-    public void testTransformation() throws Exception {
-        Factory f = new SpoonMetaFactory().buildNewFactory("src\\test\\java\\fr\\inria\\diversify\\ut\\samples", 7);
+    public void testTransformation() throws BuildTransplantException {
+        Factory f = new SpoonMetaFactoryTest().build();
         InputProgram p = new InputProgram();
         p.setFactory(f);
         p.setCodeFragmentProcessor(new AllStatementsProcessor());

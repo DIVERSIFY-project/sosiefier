@@ -5,6 +5,7 @@ import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.ut.MockInputProgram;
+import fr.inria.diversify.ut.SpoonMetaFactoryTest;
 import org.junit.Test;
 import spoon.reflect.factory.Factory;
 
@@ -122,7 +123,7 @@ public class InputProgramTest {
      */
     @Test
     public void testDefaultStatementProcessor() throws IllegalAccessException, InstantiationException, ClassNotFoundException, URISyntaxException {
-        Factory f = new SpoonMetaFactory().buildNewFactory("src\\test\\java\\fr\\inria\\diversify\\ut\\samples", 7);
+        Factory f = new SpoonMetaFactoryTest().build();
         InputProgram p = new InputProgram();
         p.setFactory(f);
         p.processCodeFragments();
@@ -139,7 +140,7 @@ public class InputProgramTest {
      */
     @Test
     public void testGetRoots() throws IllegalAccessException, InstantiationException, ClassNotFoundException, URISyntaxException {
-        Factory f = new SpoonMetaFactory().buildNewFactory("src\\test\\java\\fr\\inria\\diversify\\ut\\samples", 7);
+        Factory f = new SpoonMetaFactoryTest().build();
         InputProgram p = new InputProgram();
         p.setFactory(f);
         p.processCodeFragments();
@@ -154,7 +155,7 @@ public class InputProgramTest {
     /*
     @Test
     public void testInlineConstant() throws IllegalAccessException, InstantiationException, ClassNotFoundException, URISyntaxException {
-        Factory f = new SpoonMetaFactory().buildNewFactory("src\\test\\java\\fr\\inria\\diversify\\ut\\samples", 7);
+        Factory f = new SpoonMetaFactoryTest().build();
         InputProgram p = new InputProgram();
         p.setFactory(f);
         p.processCodeFragments();

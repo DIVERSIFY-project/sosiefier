@@ -6,6 +6,7 @@ import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
+import fr.inria.diversify.ut.SpoonMetaFactoryTest;
 import org.junit.Test;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtCodeElement;
@@ -33,7 +34,7 @@ public class ASTDeleteTest {
      */
     @Test
     public void testTransformation() throws Exception {
-        Factory f = new SpoonMetaFactory().buildNewFactory("src\\test\\java\\fr\\inria\\diversify\\ut\\samples", 7);
+        Factory f = new SpoonMetaFactoryTest().build();
         InputProgram p = new InputProgram();
         p.setFactory(f);
         p.setCodeFragmentProcessor(new AllStatementsProcessor());

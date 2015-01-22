@@ -10,7 +10,7 @@ public class SpoonMetaFactoryTest extends SpoonMetaFactory {
 
     public Factory build() {
         try {
-            return buildNewFactory("src\\test\\java\\fr\\inria\\diversify\\ut\\samples", 7);
+            return buildNewFactory("generator\\src\\test\\java\\fr\\inria\\diversify\\ut\\samples", 7);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
