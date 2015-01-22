@@ -162,7 +162,7 @@ public class MakeAmpliTest {
     }
 
     protected void copyLogger() throws IOException {
-        File dir = new File(outputDirectory+"/"+srcDirectory+"/fr/inria/diversify/testamplification/logger");
+        File dir = new File(outputDirectory+"/"+srcDirectory+ "/fr/inria/diversify/testamplification/logger");
         FileUtils.forceMkdir(dir);
         String packagePath = System.getProperty("user.dir") + "/src/main/java/fr/inria/diversify/testamplification/logger/";
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);

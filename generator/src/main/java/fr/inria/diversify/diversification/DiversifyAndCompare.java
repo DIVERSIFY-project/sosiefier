@@ -82,7 +82,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         id.createNewFile();
 
         FileUtils.copyDirectory(new File(amplifiedTestDir), new File(sosieDir + "/" +testSrcDir));
-        File dir = new File(sosieDir+"/"+sourceDir+"/fr/inria/diversify/testamplification/logger");
+        File dir = new File(sosieDir+"/"+sourceDir+ "/fr/inria/diversify/testamplification/logger");
         FileUtils.forceMkdir(dir);
         String packagePath = System.getProperty("user.dir") + "/src/main/java/fr/inria/diversify/testamplification/logger/";
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);

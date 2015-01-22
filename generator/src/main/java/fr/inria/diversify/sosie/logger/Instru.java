@@ -197,7 +197,7 @@ public class Instru {
 
 
     protected void copyLogger(String tmpDir, String src) throws IOException {
-        File dir = new File(tmpDir+"/"+src+"/fr/inria/diversify/sosie/logger");
+        File dir = new File(tmpDir+"/"+src+ "/fr/inria/diversify/sosie/logger");
         FileUtils.forceMkdir(dir);
         String packagePath = System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/sosie/logger/";
         FileUtils.copyFileToDirectory(new File(packagePath + LogWriter.class.getSimpleName() + ".java"), dir);
@@ -208,7 +208,7 @@ public class Instru {
         FileUtils.copyFileToDirectory(new File(packagePath + InstruBinaryLog.class.getSimpleName() + ".java"),dir);
 
 
-        dir = new File(tmpDir+"/"+src+"/fr/inria/diversify/testamplification/logger");
+        dir = new File(tmpDir+"/"+src+ "/fr/inria/diversify/testamplification/logger");
         FileUtils.forceMkdir(dir);
         packagePath = System.getProperty("user.dir")+"/src/main/java/fr/inria/diversify/testamplification/logger/";
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);

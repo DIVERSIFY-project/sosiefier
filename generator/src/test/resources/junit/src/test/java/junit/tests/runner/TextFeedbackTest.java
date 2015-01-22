@@ -58,7 +58,7 @@ public class TextFeedbackTest extends TestCase {
     }
 
     public void testTwoTests() {
-        String expected = expected(new String[]{"..", "Time: 0", "", "OK (2 tests)", ""});
+        String expected = expected(new String[]{"src/main", "Time: 0", "", "OK (2 tests)", ""});
         TestSuite suite = new TestSuite();
         suite.addTest(new TestCase() {
             @Override
