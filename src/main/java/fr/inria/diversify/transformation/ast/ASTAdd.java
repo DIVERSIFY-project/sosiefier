@@ -20,7 +20,6 @@ import java.util.Map;
  * Time: 4:33 PM
  */
 public class ASTAdd extends ASTTransformation {
-
     protected CodeFragment transplant;
     protected Map<String, String> variableMapping;
 
@@ -50,12 +49,12 @@ public class ASTAdd extends ASTTransformation {
         Log.debug("transplant: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    protected CtCodeElement buildReplacementElement() throws BuildTransplantException {
+    protected CtCodeElement buildReplacementElement() {
         try {
             CodeFragment stmtToAdd = transplant.clone();
             if (withVarMapping()) {
-                if (variableMapping == null)
-                    variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
+                if (variableMapping == null) variableMapping = transplantationPoint.randomVariableMapping(getTransplant(), subType);
+
                 Log.debug("random variable mapping: {}", variableMapping);
                 stmtToAdd.replaceVar(transplantationPoint, variableMapping);
             }
@@ -78,10 +77,20 @@ public class ASTAdd extends ASTTransformation {
             body.addStatement((CtStatement) factory.Core().clone(stmtToAdd.getCtCodeFragment()));
             return stmtIf;
         } catch (Exception e) {
-            throw new BuildTransplantException("", e);
+            throw new RuntimeException(new BuildTransplantException("", e));
         }
     }
+    protected boolean withVarMapping() {
+        return name.equals("add");
+    }
 
+    public void setVarMapping(Map<String, String> mapping) {
+        variableMapping = mapping;
+    }
+
+    public void setTransplant(CodeFragment add) {
+        this.transplant = add;
+    }
 
     public  int hashCode() {
         return super.hashCode() * transplant.getCompilationUnit().hashCode() *
@@ -100,8 +109,8 @@ public class ASTAdd extends ASTTransformation {
 
         return status == otherASTAdd.status &&
                 name.equals(otherASTAdd.name) &&
-                ((failures == otherASTAdd.failures) || failures.equals(otherASTAdd.failures)) &&
-                ((variableMapping == otherASTAdd.variableMapping) || variableMapping.equals(otherASTAdd.variableMapping)) &&
+                failures.equals(otherASTAdd.failures) &&
+                (variableMapping == null || variableMapping.equals(otherASTAdd.variableMapping)) &&
                 transplantationPoint.getCtCodeFragment().equals(otherASTAdd.transplantationPoint.getCtCodeFragment()) &&
                 transplant.getCtCodeFragment().getPosition().equals(otherASTAdd.transplant.getCtCodeFragment().getPosition());
     }
@@ -133,19 +142,8 @@ public class ASTAdd extends ASTTransformation {
 
     public void updateStatementList() {}
 
-    protected boolean withVarMapping() {
-        return name.equals("add");
-    }
-
-    public void setVarMapping(Map<String, String> mapping) {
-        variableMapping = mapping;
-    }
-
     public Map<String, String> getVarMapping() {
         return variableMapping;
     }
 
-    public void setTransplant(CodeFragment add) {
-        this.transplant = add;
-    }
 }

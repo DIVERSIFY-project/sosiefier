@@ -67,7 +67,7 @@ public class ASTReplace extends ASTTransformation {
         Log.debug("replace by: ({})\n{}", getTransplant().getCodeFragmentType(), getTransplant());
     }
 
-    protected CtCodeElement buildReplacementElement() throws BuildTransplantException {
+    protected CtCodeElement buildReplacementElement() {
         try {
             CodeFragment stmt = transplant.clone();
             if (withVarMapping()) {
@@ -82,7 +82,7 @@ public class ASTReplace extends ASTTransformation {
             }
             return stmt.getCtCodeFragment();
         } catch (Exception e) {
-            throw new BuildTransplantException("", e);
+            throw new RuntimeException(new BuildTransplantException("", e));
         }
     }
 
@@ -146,15 +146,23 @@ public class ASTReplace extends ASTTransformation {
     public boolean usedOfSubType() {
         InputContext tpInputContext = transplant.getContext().getInputContext();
         InputContext tInputContext = transplantationPoint.getContext().getInputContext();
-        for(Map.Entry<String, String> var : variableMapping.entrySet()) {
-            CtVariableReference variable = tpInputContext.getVariableOrFieldNamed(var.getKey());
-            CtVariableReference candidate = tInputContext.getVariableOrFieldNamed(var.getValue());
 
-            if(!variable.getType().equals(candidate.getType())) {
-                return true;
-            }
-        }
-        return false;
+        return variableMapping.entrySet().stream()
+                .anyMatch(var -> {
+                    CtVariableReference variable = tpInputContext.getVariableOrFieldNamed(var.getKey());
+                    CtVariableReference candidate = tInputContext.getVariableOrFieldNamed(var.getValue());
+                    return !variable.getType().equals(candidate.getType());
+                });
+
+//        for(Map.Entry<String, String> var : variableMapping.entrySet()) {
+//            CtVariableReference variable = tpInputContext.getVariableOrFieldNamed(var.getKey());
+//            CtVariableReference candidate = tInputContext.getVariableOrFieldNamed(var.getValue());
+//
+//            if(!variable.getType().equals(candidate.getType())) {
+//                return true;
+//            }
+//        }
+//        return false;
     }
 
     public  void updateStatementList() {

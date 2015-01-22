@@ -4,6 +4,8 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.testamplification.processor.*;
+import fr.inria.diversify.testamplification.processor.TestLoggingInstrumenter;
+import fr.inria.diversify.testamplification.processor.TestProcessor;
 import fr.inria.diversify.util.DiversifyPrettyPrinter;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import fr.inria.diversify.util.Log;
@@ -27,7 +29,7 @@ import java.util.List;
 /**
  * Created by Simon on 03/12/14.
  */
-public class Main {
+public class MakeAmpliTest {
 
     private String outputDirectory;
     private String projectDirectory;
@@ -36,8 +38,15 @@ public class Main {
     private String testDirectory;
     private int javaVersion;
 
+    boolean dataMutator;
+    boolean removeAssert;
+    boolean methodCallAdder;
+    boolean methodCallRemover;
+    boolean removeNotClone;
+    boolean logNewTest;
 
-    public Main(String propertiesFile) throws Exception {
+
+    public MakeAmpliTest(String propertiesFile) throws Exception {
         Log.DEBUG();
         InputConfiguration inputConfiguration = new InputConfiguration(propertiesFile);
 
@@ -46,23 +55,27 @@ public class Main {
         srcDirectory = inputConfiguration.getProperty("src");
         testDirectory = inputConfiguration.getProperty("testSrc");
         outputDirectory = inputConfiguration.getProperty("outputDirectory");
-
-        boolean dataMutator = Boolean.parseBoolean(inputConfiguration.getProperty("dataMutator", "false"));
-        boolean removeAssert = Boolean.parseBoolean(inputConfiguration.getProperty("removeAssert", "false"));
-        boolean methodCallAdder = Boolean.parseBoolean(inputConfiguration.getProperty("methodCallAdder", "false"));
-        boolean methodCallRemover = Boolean.parseBoolean(inputConfiguration.getProperty("methodCallRemover", "false"));
-        boolean removeNotClone = Boolean.parseBoolean(inputConfiguration.getProperty("removeNotClone", "false"));
         javaVersion = Integer.parseInt(inputConfiguration.getProperty("javaVersion", "5"));
+
+        dataMutator = Boolean.parseBoolean(inputConfiguration.getProperty("dataMutator", "false"));
+        removeAssert = Boolean.parseBoolean(inputConfiguration.getProperty("removeAssert", "false"));
+        methodCallAdder = Boolean.parseBoolean(inputConfiguration.getProperty("methodCallAdder", "false"));
+        methodCallRemover = Boolean.parseBoolean(inputConfiguration.getProperty("methodCallRemover", "false"));
+        removeNotClone = Boolean.parseBoolean(inputConfiguration.getProperty("removeNotClone", "false"));
+        logNewTest  = Boolean.parseBoolean(inputConfiguration.getProperty("logNewTest", "false"));
 
         MavenDependencyResolver t = new MavenDependencyResolver();
         t.DependencyResolver(projectDirectory + "/pom.xml");
 
         initOutputDirectory();
-        transform(removeAssert, dataMutator, methodCallAdder, methodCallRemover, removeNotClone);
+        transform();
+
+        copyLogger();
+        writeId();
     }
 
     public static void main(String[] args) throws Exception {
-        new Main(args[0]);
+        new MakeAmpliTest(args[0]);
     }
 
     protected void initOutputDirectory() throws IOException {
@@ -72,7 +85,7 @@ public class Main {
     }
 
 
-    protected void transform(boolean removeAssert, boolean dataMutator, boolean methodCallAdder, boolean methodCallRemover, boolean removeNotClone) {
+    protected void transform() {
         String src = projectDirectory + "/" + srcDirectory;
         String test = projectDirectory + "/" + testDirectory;
 
@@ -83,7 +96,6 @@ public class Main {
         if(dataMutator) {
             TestDataMutator m = new TestDataMutator();
             applyProcessor(sourceFactory, m);
-
         }
         if(methodCallAdder) {
             TestMethodCallAdder v = new TestMethodCallAdder();
@@ -93,18 +105,18 @@ public class Main {
             TestMethodCallRemover e = new TestMethodCallRemover();
             applyProcessor(sourceFactory, e);
         }
-
         if(removeNotClone) {
             RemoveNotCloneProcessor p = new RemoveNotCloneProcessor();
             applyProcessor(sourceFactory, p);
         }
-
+        if(logNewTest) {
+            TestLoggingInstrumenter m = new TestLoggingInstrumenter();
+            applyProcessor(sourceFactory, m);
+        }
         if(removeAssert) {
             TestCaseProcessor tc = new TestCaseProcessor();
             applyProcessor(sourceFactory, tc);
         }
-
-
 
         File fileFrom = new File(test);
         File out = new File(outputDirectory + "/" + testDirectory);
@@ -147,6 +159,20 @@ public class Main {
                 }
             }
         return list;
+    }
+
+    protected void copyLogger() throws IOException {
+        File dir = new File(outputDirectory+"/"+srcDirectory+"/fr/inria/diversify/testamplification/logger");
+        FileUtils.forceMkdir(dir);
+        String packagePath = System.getProperty("user.dir") + "/src/main/java/fr/inria/diversify/testamplification/logger/";
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.Logger.class.getSimpleName() + ".java"), dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.ShutdownHookLog.class.getSimpleName() + ".java"), dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.LogWriter.class.getSimpleName() + ".java"),dir);
+        FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.AssertLogWriter.class.getSimpleName() + ".java"),dir);
+    }
+
+    protected void writeId() throws IOException {
+        fr.inria.diversify.testamplification.processor.TestProcessor.writeIdFile(outputDirectory);
     }
 
 }

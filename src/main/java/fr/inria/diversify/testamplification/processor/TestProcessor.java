@@ -7,6 +7,9 @@ import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.reference.CtPackageReference;
 import spoon.reflect.reference.CtTypeReference;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,8 +21,10 @@ import java.util.Map;
 public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
     protected static List<CtMethod> mutatedMethod = new LinkedList<>();
     protected static int count;
+    protected static Map<String, String> idMap = new HashMap();
 
     protected int cloneNumber = 1;
+
     @Override
     public boolean isToBeProcessed(CtMethod candidate) {
 
@@ -29,15 +34,11 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
                 || mutatedMethod.contains(candidate)) {
             return false;
         }
-        for(CtAnnotation<?> annotation: candidate.getAnnotations()) {
-            if (annotation.toString().startsWith("@org.junit.Test")) {
-                return true;
-            }
-        }
-        if(candidate.getSimpleName().contains("test")) {
-            return true;
-        }
-        return false;
+
+        return candidate.getSimpleName().contains("test")
+            || candidate.getAnnotations().stream()
+                .map(annotation -> annotation.toString())
+                .anyMatch(annotation -> annotation.startsWith("@org.junit.Test"));
     }
 
     protected CtMethod cloneMethod(CtMethod method, String suffix) {
@@ -47,12 +48,10 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
         cloned_method.setSimpleName(method.getSimpleName()+suffix+cloneNumber);
         cloneNumber++;
 
-        CtAnnotation toRemove = null;
-        for(CtAnnotation annotation : cloned_method.getAnnotations()) {
-            if(annotation.toString().contains("Override")) {
-                toRemove = annotation;
-            }
-        }
+        CtAnnotation toRemove = cloned_method.getAnnotations().stream()
+                .filter(annotation -> annotation.toString().contains("Override"))
+                .findFirst().orElse(null);
+
         if(toRemove != null) {
             cloned_method.removeAnnotation(toRemove);
         }
@@ -62,12 +61,11 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
     protected CtMethod cloneMethodTest(CtMethod method, String suffix, int timeOut) {
         CtMethod cloned_method = cloneMethod(method,suffix);
-        CtAnnotation testAnnotation = null;
-        for(CtAnnotation annotation : cloned_method.getAnnotations()) {
-            if(annotation.toString().contains("Test")) {
-                testAnnotation = annotation;
-            }
-        }
+
+        CtAnnotation testAnnotation = cloned_method.getAnnotations().stream()
+                .filter(annotation -> annotation.toString().contains("Test"))
+                .findFirst().orElse(null);
+
         if(testAnnotation == null) {
             testAnnotation = getFactory().Core().createAnnotation();
             CtTypeReference<Object> ref = getFactory().Core().createTypeReference();
@@ -80,9 +78,9 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
             Map<String, Object> elementValue = new HashMap<String, Object>();
             testAnnotation.setElementValues(elementValue);
         }
-//        if(testAnnotation.getElementValue("timeout") == null) {
-            testAnnotation.getElementValues().put("timeout", timeOut);
-//        }
+
+        testAnnotation.getElementValues().put("timeout", timeOut);
+
         cloned_method.addAnnotation(testAnnotation);
 
         return cloned_method;
@@ -112,5 +110,33 @@ public abstract class TestProcessor extends AbstractProcessor<CtMethod> {
 
     public static int getCount() {
         return count;
+    }
+
+    protected String idFor(String string, String anotation) {
+        String key = string + " " + anotation;
+        if (!idMap.containsKey(key))
+            idMap.put(key, Integer.toString(idMap.size()));
+
+        return idMap.get(key);
+    }
+
+    protected String idFor(String string) {
+        return idFor(string, "");
+    }
+
+    public static void writeIdFile(String dir) throws IOException {
+        File file = new File(dir + "/log");
+        file.mkdirs();
+        FileWriter fw = new FileWriter(file.getAbsoluteFile() + "/id");
+
+        for (String s : idMap.keySet())
+            fw.write(idMap.get(s) + " " + s + "\n");
+
+        fw.close();
+    }
+
+
+    protected String getLogName() {
+        return "fr.inria.diversify.testamplification.logger.Logger";
     }
 }

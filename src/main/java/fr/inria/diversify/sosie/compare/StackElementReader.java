@@ -1,6 +1,5 @@
 package fr.inria.diversify.sosie.compare;
 
-import fr.inria.diversify.sosie.compare.stackElement.StackTraceElement;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 
 import java.io.IOException;

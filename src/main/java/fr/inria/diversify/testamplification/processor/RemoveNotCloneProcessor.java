@@ -35,7 +35,7 @@ public class RemoveNotCloneProcessor extends TestProcessor {
             return mutatedMethod.stream()
                                 .filter(mth -> mth.getDeclaringType().equals(type))
                                 .filter(mth -> mth.getSimpleName().startsWith(methodName))
-                                .findAny().orElseGet(() ->  null);
+                                .findAny().orElse(null);
 
     }
 }

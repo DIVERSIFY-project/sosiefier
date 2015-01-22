@@ -192,6 +192,11 @@ public class DiversifyMain {
             TransformationParser tf = new TransformationParser(true, inputProgram);
             Collection<Transformation> transformations = tf.parseDir(transDir);
             ((UniqueSosieGenerator) ad).setTransformation(transformations);
+        } else if (transformationType.startsWith("fse")) {
+            String testSrcDir = inputConfiguration.getProperty("testSrc");
+            ad = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir);
+            ((DiversifyAndCompare) ad).setAmplifiedTestDir(inputConfiguration.getProperty("amplifiedTestDir"));
+            ((DiversifyAndCompare) ad).setOriginalLogDir(inputConfiguration.getProperty("originalLog"));
         } else {
             ad = new SinglePointDiversify(inputConfiguration, projet, src);
             boolean withParent = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.withparent", "false"));
@@ -220,8 +225,7 @@ public class DiversifyMain {
             if(phases[0] == null) {
                 phases = new String[]{"clean", "test" };
             }
-            String src = inputConfiguration.getProperty("src");
-            rb = new MavenBuilder(directory, src);
+            rb = new MavenBuilder(directory);
 
             String androidSdk = inputConfiguration.getProperty("AndroidSdk", "null");
             if(!androidSdk.equals("null") ) {
@@ -273,7 +277,7 @@ public class DiversifyMain {
      */
     protected void  initInputProgram() throws IOException, InterruptedException {
         inputProgram = new InputProgram();
-
+        inputConfiguration.setInputProgram(inputProgram);
         inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
         inputProgram.setSourceCodeDir(inputConfiguration.getSourceCodeDir());
 
@@ -336,6 +340,11 @@ public class DiversifyMain {
                 query.setShuffle(true);
                 return query;
             }
+            case "fse":{
+                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
+                boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
+                return new ASTTransformationQuery(inputProgram, cl, subType, false);
+            }
             case "adr": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
                 boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
@@ -387,7 +396,7 @@ public class DiversifyMain {
 
     protected ICoverageReport initCoverageReport() throws IOException, InterruptedException {
 
-        MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir(), inputProgram.getSourceCodeDir());
+        MavenBuilder builder = new MavenBuilder(inputProgram.getProgramDir());
         builder.runGoals(new String[]{"clean", "test"}, false);
         String jacocoFile = inputConfiguration.getProperty("jacoco");
         String classes = inputConfiguration.getProperty("project") + "/" + inputConfiguration.getProperty("classes");
