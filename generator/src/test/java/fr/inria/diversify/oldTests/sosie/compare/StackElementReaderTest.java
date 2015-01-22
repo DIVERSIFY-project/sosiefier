@@ -1,7 +1,7 @@
 package fr.inria.diversify.oldTests.sosie.compare;
 
 import fr.inria.diversify.sosie.compare.StackElementBinaryReader;
-import fr.inria.diversify.ut.FileOutputStreamMock;
+import fr.inria.diversify.oldTests.FileOutputStreamMock;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTrace;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTracePush;
 import fr.inria.diversify.sosie.compare.stackTraceOperation.StackTraceVariableObservation;

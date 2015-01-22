@@ -1,4 +1,4 @@
-package fr.inria.diversify.ut;
+package fr.inria.diversify.oldTests;
 
 import mockit.Mock;
 import mockit.MockUp;

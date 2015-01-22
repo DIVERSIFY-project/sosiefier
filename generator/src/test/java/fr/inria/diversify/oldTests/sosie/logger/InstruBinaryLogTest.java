@@ -1,7 +1,7 @@
 package fr.inria.diversify.oldTests.sosie.logger;
 
 import fr.inria.diversify.sosie.logger.InstruBinaryLog;
-import fr.inria.diversify.ut.FileOutputStreamMock;
+import fr.inria.diversify.oldTests.FileOutputStreamMock;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package fr.inria.diversify.it.persistence.json.output;
+package fr.inria.diversify.persistence.json.output;
 
 /**
  * Created by marodrig on 14/01/2015.

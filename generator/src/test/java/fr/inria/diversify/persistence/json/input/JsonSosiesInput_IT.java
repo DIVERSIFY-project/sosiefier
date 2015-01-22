@@ -1,8 +1,7 @@
-package fr.inria.diversify.it.persistence.json.input;
+package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.it.SosieGeneratorIntegrationTests;
-import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.transformation.Transformation;
 import org.junit.Test;
 
