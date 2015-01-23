@@ -307,8 +307,9 @@ public class ASTTransformationQuery extends TransformationQuery {
         int size = getInputProgram().getCodeFragments().size();
         CodeFragment stmt = getInputProgram().getCodeFragments().get(r.nextInt(size));
 
-        while (withCoverage && getInputProgram().getCoverageReport().codeFragmentCoverage(stmt) == 0)
+        while (withCoverage && getInputProgram().getCoverageReport().codeFragmentCoverage(stmt) == 0) {
             stmt = getInputProgram().getCodeFragments().get(r.nextInt(size));
+        }
         return stmt;
     }
 

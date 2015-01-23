@@ -64,7 +64,7 @@ public class InputConfiguration {
 
     public InputConfiguration(String file) throws IOException {
         this(new FileInputStream(file));
-        if (rootPath == null || rootPath.equals("")) rootPath = new File(file).getParent();
+        if (rootPath == null || rootPath.equals("")) rootPath = System.getProperty("user.dir");
     }
 
     /**
