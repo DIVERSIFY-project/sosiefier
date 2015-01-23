@@ -5,7 +5,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Simon on 19/01/15.
@@ -47,5 +50,19 @@ public class TestDiff {
         return object;
     }
 
+    public void filter(Set<String> filter) {
+        diff.stream()
+                .forEach(d -> d.filter(filter));
+        diff = diff.stream()
+                .filter(d -> !d.isEmpty())
+                .collect(Collectors.toList());
+    }
 
+    public Set<String> buildFilter() {
+        Set<String> filter = new HashSet<>();
+        for(LogDiff d : diff) {
+            filter.addAll(d.buildFilter());
+        }
+        return filter.stream().map(f -> signature + " " + f).collect(Collectors.toSet());
+    }
 }

@@ -51,4 +51,27 @@ public class Assert {
     public Object[] getValues() {
         return values;
     }
+
+//    public void removeMethod(String toRemove) {
+//        int index = 0;
+//        for(String mth : methods) {
+//            if(toRemove.equals(mth)) {
+//               break;
+//            }
+//            index++;
+//        }
+//
+//        String[] newMethods = new String[methods.length - 1];
+//        Object[] newValues = new Object[methods.length - 1];
+//        int j = 0;
+//        for(int i = 0; i < methods.length ; i++) {
+//            if(i != index) {
+//                newMethods[j] = methods[i];
+//                newValues[j] = values[i];
+//                j++;
+//            }
+//        }
+//        methods = newMethods;
+//        values = newValues;
+//    }
 }

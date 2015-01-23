@@ -196,7 +196,8 @@ public class DiversifyMain {
             String testSrcDir = inputConfiguration.getProperty("testSrc");
             ad = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir);
             ((DiversifyAndCompare) ad).setAmplifiedTestDir(inputConfiguration.getProperty("amplifiedTestDir"));
-            ((DiversifyAndCompare) ad).setOriginalLogDir(inputConfiguration.getProperty("originalLog"));
+            ((DiversifyAndCompare) ad).setOriginalLogDir(inputConfiguration.getProperty("compare.originalLog"));
+            ((DiversifyAndCompare) ad).setFilterFile(inputConfiguration.getProperty("compare.filter"));
         } else {
             ad = new SinglePointDiversify(inputConfiguration, projet, src);
             boolean withParent = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.withparent", "false"));

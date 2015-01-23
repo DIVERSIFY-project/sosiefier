@@ -10,6 +10,7 @@ import fr.inria.diversify.transformation.ast.exception.ApplyTransformationExcept
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -17,6 +18,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Simon on 21/01/15.
@@ -27,6 +30,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
     protected InputProgram inputProgram;
     protected String testSrcDir;
     protected List<JSONObject> diff;
+    protected String filterFile;
 
     public DiversifyAndCompare(InputConfiguration inputConfiguration, String projectDir, String srcDir, String testDir) {
         super(inputConfiguration, projectDir, srcDir);
@@ -49,13 +53,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
                 trans.setStatus(status);
                 trans.setFailures(builder.getTestFail());
                 if (status == 0) {
-                    String sosieDir = copySosieProgram();
-                    copyTestAndLogger(sosieDir);
-                    runSosie(sosieDir);
-                    CompareAmpliTest cat = new CompareAmpliTest();
-
-                    List<TestDiff> result = cat.compare(originalLogDir, sosieDir + "/log");
-                    diff.add(cat.toJson(result, trans));
+                    compare(trans);
                 }
                 // error during runTest
             } catch (Exception e) {
@@ -74,6 +72,23 @@ public class DiversifyAndCompare extends SinglePointDiversify {
       //  Log.debug("run after restore: " +result);
     }
 
+    protected void compare(Transformation trans) throws IOException, JSONException, InterruptedException {
+        String sosieDir = copySosieProgram();
+        copyTestAndLogger(sosieDir);
+        runSosie(sosieDir);
+        CompareAmpliTest cat = new CompareAmpliTest();
+
+        List<TestDiff> result = cat.compare(originalLogDir, sosieDir + "/log");
+        try {
+            Map<String, Set<String>> filter = cat.loadFilter(filterFile);
+            cat.filter(result,filter);
+
+            diff.add(cat.toJson(result, trans));
+        } catch (Exception e) {
+            Log.debug("");
+        }
+
+    }
 
     protected void copyTestAndLogger(String sosieDir) throws IOException {
         File log = new File(sosieDir + "/log");
@@ -101,6 +116,10 @@ public class DiversifyAndCompare extends SinglePointDiversify {
 
     public void setOriginalLogDir(String originalLogDir) {
         this.originalLogDir = originalLogDir;
+    }
+
+    public void setFilterFile(String filterFile) {
+        this.filterFile = filterFile;
     }
 
     public String printResult(String output) {
