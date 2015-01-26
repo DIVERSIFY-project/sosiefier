@@ -1,9 +1,6 @@
 package fr.inria.diversify.it.persistence;
 
-import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
-import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.it.SosieGeneratorIntegrationTests;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.persistence.json.output.JsonSosiesOutput;
@@ -11,15 +8,13 @@ import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import org.junit.Test;
-import spoon.reflect.factory.Factory;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import static fr.inria.diversify.ut.persistence.json.SectionTestUtils.assertEqualsTransformation;
+import static fr.inria.diversify.ut.json.SectionTestUtils.assertEqualsTransformation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
