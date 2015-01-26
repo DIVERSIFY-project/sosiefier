@@ -1,4 +1,4 @@
-package fr.inria.diversify.it.persistence;
+package fr.inria.diversify.persistence;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.it.SosieGeneratorIntegrationTests;
@@ -7,6 +7,9 @@ import fr.inria.diversify.persistence.json.output.JsonSosiesOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
+import fr.inria.diversify.transformation.ast.ASTAdd;
+import fr.inria.diversify.transformation.ast.ASTReplace;
+import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.junit.Test;
 
 import java.io.File;
@@ -14,10 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.inria.diversify.ut.json.SectionTestUtils.assertEqualsTransformation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 /**
  * Created by marodrig on 13/01/2015.
@@ -71,6 +72,30 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
         }
     }
 
+    public static void assertEqualsTransformation(Transformation tt, Transformation tt2) {
+        ASTTransformation t1 = (ASTTransformation) tt;
+        ASTTransformation t2 = (ASTTransformation) tt2;
 
+        assertEquals(t1.getStatus(), t2.getStatus());
+        assertEquals(t1.getIndex(), t2.getIndex());
+        assertEquals(t1.getTransplantationPoint().equalString(), t2.getTransplantationPoint().equalString());
+        assertEquals(t1.getClass(), t2.getClass());
+        if ( t1 instanceof ASTAdd) {
+            assertEquals(
+                    ((ASTAdd)t1).getTransplant().equalString(),
+                    ((ASTAdd)t2).getTransplant().equalString());
+            assertEquals(
+                    ((ASTAdd)t1).getTransplant(),
+                    ((ASTAdd)t2).getTransplant());
+
+        } else if ( t1 instanceof ASTReplace) {
+            assertEquals(
+                    ((ASTReplace)t1).getTransplant().equalString(),
+                    ((ASTReplace)t2).getTransplant().equalString());
+            assertEquals(
+                    ((ASTReplace)t1).getTransplant(),
+                    ((ASTReplace)t2).getTransplant());
+        }
+    }
 
 }

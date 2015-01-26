@@ -140,7 +140,7 @@ public class InputProgramTest {
      * This is a regression test to check that the default processing of statements does not change
      */
     @Test
-    public void testGetRoots() throws IllegalAccessException, InstantiationException, ClassNotFoundException, URISyntaxException {
+    public void testGetRoots() throws Exception {
         Factory f = new SpoonMetaFactoryTest().build();
         InputProgram p = new InputProgram();
         p.setFactory(f);

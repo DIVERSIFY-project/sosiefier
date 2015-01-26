@@ -43,6 +43,6 @@ public class ASTDeleteTest {
         //Test that the replacement was properly built
         ASTDeleteForTest a = new ASTDeleteForTest();
         a.setTransplantationPoint(p.getCodeFragments().get(0));
-        assertEquals(snippetStatement, a.buildReplacement());
+        assertEquals(snippetStatement.getValue(), ((CtCodeSnippetStatement)a.buildReplacement()).getValue());
     }
 }

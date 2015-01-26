@@ -1,6 +1,6 @@
 package fr.inria.diversify.oldTests.sosie.compare;
 
-import fr.inria.diversify.ut.FileOutputStreamMock;
+import fr.inria.diversify.oldTests.FileOutputStreamMock;
 import fr.inria.diversify.sosie.logger.BinaryLogReader;
 import fr.inria.diversify.sosie.logger.InstruBinaryLog;
 import org.junit.Ignore;
