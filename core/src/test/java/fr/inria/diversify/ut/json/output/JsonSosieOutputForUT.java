@@ -18,4 +18,9 @@ public class JsonSosieOutputForUT extends JsonSosiesOutput {
     public JSONObject getJSONObject() {
         return outputObject;
     }
+
+    public JSONObject writeToJsonNow() {
+        writeToJson();
+        return getJSONObject();
+    }
 }

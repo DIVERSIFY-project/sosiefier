@@ -29,29 +29,39 @@ public class JsonSosiesOutput {
         outputObject = new JSONObject();
     }
 
-    public void write() {
-
+    /**
+     * Writes the transformation into a JSON object
+     */
+    protected void writeToJson() {
         //Make sure all transformations have unique id. //TODO: Investigate the advantages of adding a UUId
         int id = 0;
-        for ( Transformation t : transformations ) t.setIndex(id++);
+        for (Transformation t : transformations) t.setIndex(id++);
 
         //Write failures to file
         JsonFailuresOutput failures = new JsonFailuresOutput();
         failures.setTransformations(transformations);
         failures.write(outputObject);
 
-        Collection<JsonAstTransformationOutput> sections =Arrays.asList(new JsonAstTransformationOutput[] {
+        Collection<JsonAstTransformationOutput> sections = Arrays.asList(new JsonAstTransformationOutput[]{
                 new JsonAstReplaceOutput(),
                 new JsonAstAddOutput(),
                 new JsonAstDeleteOutput()
         });
 
         //Write transformations to file
-        for ( JsonAstTransformationOutput s : sections ) {
+        for (JsonAstTransformationOutput s : sections) {
             s.setTransformations(transformations);
             s.setFailuresDict(failures.getFailuresDict());
             s.write(outputObject);
         }
+    }
+
+    /**
+     * Writes the transformation into a JSON file
+     */
+    public void write() {
+
+        writeToJson();
 
         try {
             FileWriter fw = new FileWriter(path);
