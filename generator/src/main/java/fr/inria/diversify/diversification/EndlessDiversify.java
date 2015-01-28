@@ -1,7 +1,6 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
-import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
@@ -68,7 +67,7 @@ public class EndlessDiversify extends AbstractDiversify {
         sessionResults.saveReport(getResultDir() + "/" + Thread.currentThread().getId() + "_session");
     }
 
-    protected void writeTransformation(SingleTransformation trans) throws IOException, JSONException {
+    protected void writeTransformation(Transformation trans) throws IOException, JSONException {
         File dir = new File(getSosieSourcesDir());
         if(!dir.exists())
             dir.mkdirs();

@@ -1,7 +1,6 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
-import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
@@ -20,7 +19,7 @@ import java.util.Random;
  * Created by Simon on 23/10/2014.
  */
 public class MultiSosieGenerator extends AbstractDiversify {
-    protected List<SingleTransformation> allTransformation;
+    protected List<Transformation> allTransformation;
     protected boolean randomGeneration = false;
    // protected List<Transformation> currentSosie;
     protected List<List<Transformation>> multiSosies;
@@ -33,7 +32,7 @@ public class MultiSosieGenerator extends AbstractDiversify {
         sessionResults = new SinglePointSessionResults();
     }
 
-    public MultiSosieGenerator(List<SingleTransformation> allTransformation) {
+    public MultiSosieGenerator(List<Transformation> allTransformation) {
         this.allTransformation = allTransformation;
     }
 
@@ -53,7 +52,7 @@ public class MultiSosieGenerator extends AbstractDiversify {
     }
 
 
-    protected void applyAndCheck(SingleTransformation trans) throws Exception {
+    protected void applyAndCheck(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
@@ -90,10 +89,10 @@ public class MultiSosieGenerator extends AbstractDiversify {
         transformations.clear();
     }
 
-    protected SingleTransformation getNextTransformation() throws Exception {
+    protected Transformation getNextTransformation() throws Exception {
         if(randomGeneration) {
             Random random = new Random();
-            SingleTransformation t = allTransformation.remove(random.nextInt(allTransformation.size()));
+            Transformation t = allTransformation.remove(random.nextInt(allTransformation.size()));
             return t;
         } else {
             return allTransformation.remove(0);
@@ -109,7 +108,7 @@ public class MultiSosieGenerator extends AbstractDiversify {
         out.close();
     }
 
-    public void setTransformation(Collection<SingleTransformation> transformation) {
+    public void setTransformation(Collection<Transformation> transformation) {
         allTransformation = new ArrayList<>(transformation);
     }
 

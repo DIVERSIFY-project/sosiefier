@@ -2,8 +2,9 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.sosie.logger.Instru;
 import fr.inria.diversify.statistic.AbstractSessionResults;
-import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.buildSystem.AbstractBuilder;
+import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.TransformationsWriter;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
