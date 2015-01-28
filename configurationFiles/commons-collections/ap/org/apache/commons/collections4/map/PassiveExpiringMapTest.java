@@ -80,7 +80,7 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
         }
         try {
             final TimeUnit unit = null;
-            new PassiveExpiringMap<java.lang.String, java.lang.String>(11L , unit);
+            new PassiveExpiringMap<java.lang.String, java.lang.String>(9L , unit);
         } catch (final IllegalArgumentException ex) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -110,13 +110,85 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testDecoratedMap_add530() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoratedMap_add530");
+        final Map<java.lang.Integer, java.lang.String> m = makeDecoratedTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,m,1711,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,m,1713,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,m,1715,m.get(java.lang.Integer.valueOf(2)));
+        m.remove(Integer.valueOf(2));
+        m.remove(Integer.valueOf(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1718,m,1717,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1720,m,1719,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1722,m,1721,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1724,m,1723,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(2), "two");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1726,m,1725,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1728,m,1727,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,m,1729,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(1), "one-one");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1732,m,1731,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,m,1733,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,m,1735,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testDecoratedMap_add531() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoratedMap_add531");
+        final Map<java.lang.Integer, java.lang.String> m = makeDecoratedTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,m,1711,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,m,1713,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,m,1715,m.get(java.lang.Integer.valueOf(2)));
+        m.remove(Integer.valueOf(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1718,m,1717,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1720,m,1719,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1722,m,1721,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1724,m,1723,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(2), "two");
+        m.put(Integer.valueOf(2), "two");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1726,m,1725,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1728,m,1727,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,m,1729,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(1), "one-one");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1732,m,1731,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,m,1733,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,m,1735,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testDecoratedMap_add532() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoratedMap_add532");
+        final Map<java.lang.Integer, java.lang.String> m = makeDecoratedTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,m,1711,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,m,1713,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,m,1715,m.get(java.lang.Integer.valueOf(2)));
+        m.remove(Integer.valueOf(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1718,m,1717,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1720,m,1719,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1722,m,1721,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1724,m,1723,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(2), "two");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1726,m,1725,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1728,m,1727,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,m,1729,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(1), "one-one");
+        m.put(Integer.valueOf(1), "one-one");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1732,m,1731,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,m,1733,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,m,1735,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testDecoratedMap() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoratedMap");
         final Map<java.lang.Integer, java.lang.String> m = makeDecoratedTestMap();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,m,1711,m.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,m,1713,m.get(java.lang.Integer.valueOf(1)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,m,1715,m.get(java.lang.Integer.valueOf(2)));
-        m.remove(Integer.valueOf(3));
+        m.remove(Integer.valueOf(1));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1718,m,1717,m.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1720,m,1719,m.get(java.lang.Integer.valueOf(1)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1722,m,1721,m.get(java.lang.Integer.valueOf(2)));
@@ -191,7 +263,7 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1726,m,1725,m.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1728,m,1727,m.get(java.lang.Integer.valueOf(1)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,m,1729,m.get(java.lang.Integer.valueOf(2)));
-        m.put(Integer.valueOf(2), "one-one");
+        m.put(Integer.valueOf(0), "one-one");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1732,m,1731,m.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,m,1733,m.get(java.lang.Integer.valueOf(1)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,m,1735,m.get(java.lang.Integer.valueOf(2)));
@@ -220,6 +292,72 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testDecoratedMap_remove423() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoratedMap_remove423");
+        final Map<java.lang.Integer, java.lang.String> m = makeDecoratedTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,m,1711,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,m,1713,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,m,1715,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1718,m,1717,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1720,m,1719,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1722,m,1721,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1724,m,1723,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(2), "two");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1726,m,1725,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1728,m,1727,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,m,1729,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(1), "one-one");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1732,m,1731,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,m,1733,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,m,1735,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testDecoratedMap_remove424() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoratedMap_remove424");
+        final Map<java.lang.Integer, java.lang.String> m = makeDecoratedTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,m,1711,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,m,1713,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,m,1715,m.get(java.lang.Integer.valueOf(2)));
+        m.remove(Integer.valueOf(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1718,m,1717,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1720,m,1719,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1722,m,1721,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1724,m,1723,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1726,m,1725,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1728,m,1727,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,m,1729,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(1), "one-one");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1732,m,1731,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,m,1733,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,m,1735,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testDecoratedMap_remove425() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoratedMap_remove425");
+        final Map<java.lang.Integer, java.lang.String> m = makeDecoratedTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1712,m,1711,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1714,m,1713,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1716,m,1715,m.get(java.lang.Integer.valueOf(2)));
+        m.remove(Integer.valueOf(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1718,m,1717,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1720,m,1719,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1722,m,1721,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1724,m,1723,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1726,m,1725,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1728,m,1727,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1730,m,1729,m.get(java.lang.Integer.valueOf(2)));
+        m.put(Integer.valueOf(1), "one-one");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1732,m,1731,m.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1734,m,1733,m.get(java.lang.Integer.valueOf(1)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1736,m,1735,m.get(java.lang.Integer.valueOf(2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testEntrySet() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEntrySet");
         final Map<java.lang.Integer, java.lang.String> m = makeTestMap();
@@ -239,12 +377,54 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testIsEmpty_add537() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsEmpty_add537");
+        Map<java.lang.Integer, java.lang.String> m = makeTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1752,m,1751,m.isEmpty());
+        m = makeTestMap();
+        m.remove(Integer.valueOf(2));
+        m.remove(Integer.valueOf(2));
+        m.remove(Integer.valueOf(4));
+        m.remove(Integer.valueOf(6));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1754,m,1753,m.isEmpty());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testIsEmpty_add538() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsEmpty_add538");
+        Map<java.lang.Integer, java.lang.String> m = makeTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1752,m,1751,m.isEmpty());
+        m = makeTestMap();
+        m.remove(Integer.valueOf(2));
+        m.remove(Integer.valueOf(4));
+        m.remove(Integer.valueOf(4));
+        m.remove(Integer.valueOf(6));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1754,m,1753,m.isEmpty());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testIsEmpty_add539() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsEmpty_add539");
+        Map<java.lang.Integer, java.lang.String> m = makeTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1752,m,1751,m.isEmpty());
+        m = makeTestMap();
+        m.remove(Integer.valueOf(2));
+        m.remove(Integer.valueOf(4));
+        m.remove(Integer.valueOf(6));
+        m.remove(Integer.valueOf(6));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1754,m,1753,m.isEmpty());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testIsEmpty() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsEmpty");
         Map<java.lang.Integer, java.lang.String> m = makeTestMap();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1752,m,1751,m.isEmpty());
         m = makeTestMap();
-        m.remove(Integer.valueOf(1));
+        m.remove(Integer.valueOf(3));
         m.remove(Integer.valueOf(4));
         m.remove(Integer.valueOf(6));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1754,m,1753,m.isEmpty());
@@ -270,7 +450,43 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
         m = makeTestMap();
         m.remove(Integer.valueOf(2));
         m.remove(Integer.valueOf(4));
-        m.remove(Integer.valueOf(5));
+        m.remove(Integer.valueOf(7));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1754,m,1753,m.isEmpty());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testIsEmpty_remove430() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsEmpty_remove430");
+        Map<java.lang.Integer, java.lang.String> m = makeTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1752,m,1751,m.isEmpty());
+        m = makeTestMap();
+        m.remove(Integer.valueOf(4));
+        m.remove(Integer.valueOf(6));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1754,m,1753,m.isEmpty());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testIsEmpty_remove431() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsEmpty_remove431");
+        Map<java.lang.Integer, java.lang.String> m = makeTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1752,m,1751,m.isEmpty());
+        m = makeTestMap();
+        m.remove(Integer.valueOf(4));
+        m.remove(Integer.valueOf(6));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1754,m,1753,m.isEmpty());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testIsEmpty_remove432() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIsEmpty_remove432");
+        Map<java.lang.Integer, java.lang.String> m = makeTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1752,m,1751,m.isEmpty());
+        m = makeTestMap();
+        m.remove(Integer.valueOf(4));
+        m.remove(Integer.valueOf(6));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1754,m,1753,m.isEmpty());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -293,6 +509,16 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testValues");
         final Map<java.lang.Integer, java.lang.String> m = makeTestMap();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1760,m.values(),1759,m.values().size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testZeroTimeToLive_add540() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testZeroTimeToLive_add540");
+        final PassiveExpiringMap<java.lang.String, java.lang.String> m = new PassiveExpiringMap<java.lang.String, java.lang.String>(0L);
+        m.put("a", "b");
+        m.put("a", "b");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1762,m,1761,m.get("a"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -320,6 +546,58 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testZeroTimeToLive_remove433() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testZeroTimeToLive_remove433");
+        final PassiveExpiringMap<java.lang.String, java.lang.String> m = new PassiveExpiringMap<java.lang.String, java.lang.String>(0L);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1762,m,1761,m.get("a"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testExpiration_add533() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_add533");
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(500), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(500), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testExpiration_add534() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_add534");
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(500), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testExpiration_add535() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_add535");
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(500), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testExpiration_add536() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_add536");
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(500), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testExpiration() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration");
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(499), 500);
@@ -331,7 +609,7 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
 
     public void testExpiration_literalMutation506() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_literalMutation506");
-        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(500), 499);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(500), 501);
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
@@ -341,7 +619,7 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
     public void testExpiration_literalMutation507() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_literalMutation507");
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(500), 500);
-        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(999), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1001), 1000);
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -389,6 +667,42 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<K, V> {
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
         validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 999);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testExpiration_remove426() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_remove426");
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testExpiration_remove427() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_remove427");
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testExpiration_remove428() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_remove428");
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testExpiration_remove429() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testExpiration_remove429");
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(1000), 1000);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(500)), 500);
+        validateExpiration(new PassiveExpiringMap<java.lang.String, java.lang.String>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<java.lang.String, java.lang.String>(1 , TimeUnit.SECONDS)), 1000);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

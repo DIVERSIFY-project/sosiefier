@@ -5,6 +5,7 @@ import org.apache.commons.collections4.IterableMap;
 import java.util.Iterator;
 import java.util.Map;
 import org.apache.commons.collections4.Predicate;
+import org.junit.Test;
 
 /** 
  * Extension of {@link AbstractMapTest} for exercising the
@@ -37,6 +38,20 @@ public class PredicatedMapTest<K, V> extends AbstractIterableMapTest<K, V> {
 
     public IterableMap<K, V> makeTestMap() {
         return decorateMap(new HashMap<K, V>(), testPredicate, testPredicate);
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testEntrySet_add541() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEntrySet_add541");
+        Map<K, V> map = makeTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1767,((map.entrySet()) != null));
+        map = decorateMap(new HashMap<K, V>(), null, null);
+        map.put(((K)("oneKey")), ((V)("oneValue")));
+        map.put(((K)("oneKey")), ((V)("oneValue")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1768,((map.entrySet().size()) == 1));
+        map = decorateMap(map, null, null);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @SuppressWarnings(value = "unchecked")
@@ -76,6 +91,18 @@ public class PredicatedMapTest<K, V> extends AbstractIterableMapTest<K, V> {
     }
 
     @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testEntrySet_remove434() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEntrySet_remove434");
+        Map<K, V> map = makeTestMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1767,((map.entrySet()) != null));
+        map = decorateMap(new HashMap<K, V>(), null, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1768,((map.entrySet().size()) == 1));
+        map = decorateMap(map, null, null);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void testPut() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut");
         final Map<K, V> map = makeTestMap();
@@ -108,6 +135,435 @@ public class PredicatedMapTest<K, V> extends AbstractIterableMapTest<K, V> {
         map.put(((K)("F")), ((V)("f")));
         iterator = map.entrySet().iterator();
         final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add542() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add542");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add543() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add543");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add544() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add544");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add545() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add545");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add546() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add546");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add547() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add547");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add548() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add548");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add549() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add549");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add550() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add550");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add551() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add551");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_add552() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_add552");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
         entry.setValue(((V)("x")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -191,7 +647,7 @@ public class PredicatedMapTest<K, V> extends AbstractIterableMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_literalMutation528");
         final Map<K, V> map = makeTestMap();
         try {
-            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(4))));
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(2))));
         } catch (final IllegalArgumentException e) {
         }
         try {
@@ -812,6 +1268,265 @@ public class PredicatedMapTest<K, V> extends AbstractIterableMapTest<K, V> {
         iterator = map.entrySet().iterator();
         final Map.Entry<K, V> entry = iterator.next();
         entry.setValue(((V)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_remove435() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_remove435");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_remove436() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_remove436");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_remove437() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_remove437");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_remove438() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_remove438");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_remove439() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_remove439");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_remove440() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_remove440");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
+        entry.setValue(((V)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testPut_remove441() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_remove441");
+        final Map<K, V> map = makeTestMap();
+        try {
+            map.put(((K)("Hi")), ((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        try {
+            map.put(((K)(java.lang.Integer.valueOf(3))), ((V)("Hi")));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1769,!(map.containsKey(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1770,!(map.containsValue(java.lang.Integer.valueOf(3))));
+        final Map<K, V> map2 = new HashMap<K, V>();
+        map2.put(((K)("A")), ((V)("a")));
+        map2.put(((K)("B")), ((V)("b")));
+        map2.put(((K)("C")), ((V)("c")));
+        map2.put(((K)("c")), ((V)(java.lang.Integer.valueOf(3))));
+        try {
+            map.putAll(map2);
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("E")), ((V)("e")));
+        Iterator<java.util.Map.Entry<K, V>> iterator = map.entrySet().iterator();
+        try {
+            final Map.Entry<K, V> entry = iterator.next();
+            entry.setValue(((V)(java.lang.Integer.valueOf(3))));
+        } catch (final IllegalArgumentException e) {
+        }
+        map.put(((K)("F")), ((V)("f")));
+        iterator = map.entrySet().iterator();
+        final Map.Entry<K, V> entry = iterator.next();
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

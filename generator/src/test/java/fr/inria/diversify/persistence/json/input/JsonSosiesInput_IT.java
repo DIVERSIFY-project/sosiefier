@@ -2,7 +2,7 @@ package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.it.SosieGeneratorIntegrationTests;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -25,10 +25,10 @@ public class JsonSosiesInput_IT extends SosieGeneratorIntegrationTests{
         String transfPath = inputProgram.getPreviousTransformationsPath();
         JsonSosiesInput newIn = new JsonSosiesInput(
                 "C:\\MarcelStuff\\data\\DIVERSE\\sosies-pools\\collections_4_0_small_test_new.json", inputProgram);
-        Collection<Transformation> newLoad = newIn.read();
+        Collection<SingleTransformation> newLoad = newIn.read();
         assertEquals(0, newIn.getErrors().size()); //TODO:Add later a more robust questions
         int i = 0;
-        for ( Transformation t : newLoad ) {
+        for ( SingleTransformation t : newLoad ) {
             System.out.println(i + ":" + t.getIndex());
         }
         assertEquals(13, newLoad.size());

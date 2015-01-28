@@ -62,9 +62,63 @@ public class LazySortedMapTest<K, V> extends AbstractSortedMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),828,i1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),820,map,819,map.size());
         map = org.apache.commons.collections4.map.LazySortedMap.lazySortedMap(new java.util.TreeMap<java.lang.Integer, java.lang.Number>(), org.apache.commons.collections4.FactoryUtils.<Number>nullFactory());
-        final Number o = map.get(6);
+        final Number o = map.get(4);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),829,o);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),831,map,830,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testSortOrder_add308() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortOrder_add308");
+        final SortedMap<java.lang.String, java.lang.Number> map = org.apache.commons.collections4.map.LazySortedMap.lazySortedMap(new java.util.TreeMap<java.lang.String, java.lang.Number>(), oneFactory);
+        map.put("A", 5);
+        map.put("A", 5);
+        map.get("B");
+        map.put("C", 8);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),833,map,832,map.firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),835,map,834,map.lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),837,map.tailMap("B"),836,map.tailMap("B").firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,map.headMap("C"),838,map.headMap("C").lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,map.subMap("A", "C"),840,map.subMap("A", "C").lastKey());
+        final Comparator<?> c = map.comparator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),842,(c == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testSortOrder_add309() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortOrder_add309");
+        final SortedMap<java.lang.String, java.lang.Number> map = org.apache.commons.collections4.map.LazySortedMap.lazySortedMap(new java.util.TreeMap<java.lang.String, java.lang.Number>(), oneFactory);
+        map.put("A", 5);
+        map.get("B");
+        map.get("B");
+        map.put("C", 8);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),833,map,832,map.firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),835,map,834,map.lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),837,map.tailMap("B"),836,map.tailMap("B").firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,map.headMap("C"),838,map.headMap("C").lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,map.subMap("A", "C"),840,map.subMap("A", "C").lastKey());
+        final Comparator<?> c = map.comparator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),842,(c == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testSortOrder_add310() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortOrder_add310");
+        final SortedMap<java.lang.String, java.lang.Number> map = org.apache.commons.collections4.map.LazySortedMap.lazySortedMap(new java.util.TreeMap<java.lang.String, java.lang.Number>(), oneFactory);
+        map.put("A", 5);
+        map.get("B");
+        map.put("C", 8);
+        map.put("C", 8);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),833,map,832,map.firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),835,map,834,map.lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),837,map.tailMap("B"),836,map.tailMap("B").firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,map.headMap("C"),838,map.headMap("C").lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,map.subMap("A", "C"),840,map.subMap("A", "C").lastKey());
+        final Comparator<?> c = map.comparator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),842,(c == null));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -138,6 +192,54 @@ public class LazySortedMapTest<K, V> extends AbstractSortedMapTest<K, V> {
         map.put("A", 5);
         map.get("B");
         map.put("C", 9);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),833,map,832,map.firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),835,map,834,map.lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),837,map.tailMap("B"),836,map.tailMap("B").firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,map.headMap("C"),838,map.headMap("C").lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,map.subMap("A", "C"),840,map.subMap("A", "C").lastKey());
+        final Comparator<?> c = map.comparator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),842,(c == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testSortOrder_remove258() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortOrder_remove258");
+        final SortedMap<java.lang.String, java.lang.Number> map = org.apache.commons.collections4.map.LazySortedMap.lazySortedMap(new java.util.TreeMap<java.lang.String, java.lang.Number>(), oneFactory);
+        map.get("B");
+        map.put("C", 8);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),833,map,832,map.firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),835,map,834,map.lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),837,map.tailMap("B"),836,map.tailMap("B").firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,map.headMap("C"),838,map.headMap("C").lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,map.subMap("A", "C"),840,map.subMap("A", "C").lastKey());
+        final Comparator<?> c = map.comparator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),842,(c == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testSortOrder_remove259() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortOrder_remove259");
+        final SortedMap<java.lang.String, java.lang.Number> map = org.apache.commons.collections4.map.LazySortedMap.lazySortedMap(new java.util.TreeMap<java.lang.String, java.lang.Number>(), oneFactory);
+        map.put("A", 5);
+        map.put("C", 8);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),833,map,832,map.firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),835,map,834,map.lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),837,map.tailMap("B"),836,map.tailMap("B").firstKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),839,map.headMap("C"),838,map.headMap("C").lastKey());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),841,map.subMap("A", "C"),840,map.subMap("A", "C").lastKey());
+        final Comparator<?> c = map.comparator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),842,(c == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testSortOrder_remove260() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSortOrder_remove260");
+        final SortedMap<java.lang.String, java.lang.Number> map = org.apache.commons.collections4.map.LazySortedMap.lazySortedMap(new java.util.TreeMap<java.lang.String, java.lang.Number>(), oneFactory);
+        map.get("B");
+        map.put("C", 8);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),833,map,832,map.firstKey());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),835,map,834,map.lastKey());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),837,map.tailMap("B"),836,map.tailMap("B").firstKey());

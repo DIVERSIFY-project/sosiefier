@@ -167,7 +167,6 @@ public class LogTestReader {
                             break;
                         case "TE" :
                             if(currentTest != null) {
-//                                Log.debug("StringPool size: {}", StringPool.size());
                                 addTest(currentTest, assertLogs);
                                 currentTest = null;
                             }
@@ -197,7 +196,6 @@ public class LogTestReader {
     protected void addTest(String testName, List<Assert> assertLogs) {
         if(!traceByTest.containsKey(testName)) {
             traceByTest.put(testName,new Test(testName));
-            Log.debug("test: {}, {}", testName, traceByTest.size());
         }
         traceByTest.get(testName).addLog(new LogTest(assertLogs));
     }

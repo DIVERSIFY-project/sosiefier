@@ -69,12 +69,204 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testGetByIndex_add380() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetByIndex_add380");
+        resetEmpty();
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.get(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),960,it,959,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),962,lom,961,lom.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetByIndex_add381() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetByIndex_add381");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.get(0);
+            lom.get(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),960,it,959,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),962,lom,961,lom.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetByIndex_add382() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetByIndex_add382");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.get(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(-1);
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),960,it,959,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),962,lom,961,lom.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetByIndex_add383() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetByIndex_add383");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.get(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        resetFull();
+        lom = getMap();
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),960,it,959,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),962,lom,961,lom.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetByIndex_add384() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetByIndex_add384");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.get(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.get(-1);
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),960,it,959,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),962,lom,961,lom.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetByIndex_add385() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetByIndex_add385");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.get(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(lom.size());
+            lom.get(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),960,it,959,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),962,lom,961,lom.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testGetByIndex_literalMutation283() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetByIndex_literalMutation283");
         resetEmpty();
         ListOrderedMap<K, V> lom = getMap();
         try {
-            lom.get(1);
+            lom.get(-1);
         } catch (final IndexOutOfBoundsException ex) {
         }
         try {
@@ -144,7 +336,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         resetFull();
         lom = getMap();
         try {
-            lom.get(0);
+            lom.get(2);
         } catch (final IndexOutOfBoundsException ex) {
         }
         try {
@@ -189,6 +381,66 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testGetByIndex_remove300() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetByIndex_remove300");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.get(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),960,it,959,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),962,lom,961,lom.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetByIndex_remove301() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetByIndex_remove301");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.get(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom = getMap();
+        try {
+            lom.get(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.get(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),960,it,959,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),962,lom,961,lom.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testGetValueByIndex() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex");
         resetEmpty();
@@ -213,6 +465,237 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         }
         int i = 0;
         for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetValueByIndex_add386() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex_add386");
+        resetEmpty();
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.getValue(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetValueByIndex_add387() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex_add387");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.getValue(0);
+            lom.getValue(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetValueByIndex_add388() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex_add388");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.getValue(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(-1);
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetValueByIndex_add389() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex_add389");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.getValue(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        resetFull();
+        lom = getMap();
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetValueByIndex_add390() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex_add390");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.getValue(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.getValue(-1);
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetValueByIndex_add391() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex_add391");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.getValue(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(lom.size());
+            lom.getValue(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetValueByIndex_add392() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex_add392");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.getValue(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
             it.next();
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
@@ -297,7 +780,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         resetFull();
         lom = getMap();
         try {
-            lom.getValue(2);
+            lom.getValue(0);
         } catch (final IndexOutOfBoundsException ex) {
         }
         try {
@@ -335,7 +818,69 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
             lom.getValue(lom.size());
         } catch (final IndexOutOfBoundsException ex) {
         }
-        int i = -1;
+        int i = 1;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetValueByIndex_remove302() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex_remove302");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.getValue(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
+            it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),966,lom,965,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testGetValueByIndex_remove303() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetValueByIndex_remove303");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.getValue(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom = getMap();
+        try {
+            lom.getValue(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.getValue(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        int i = 0;
         for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; i++) {
             it.next();
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),964,it,963,it.getValue());
@@ -363,6 +908,69 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testIndexOf_add393() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIndexOf_add393");
+        resetEmpty();
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),967,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),969,lom,968,lom.indexOf(getOtherKeys()));
+        resetFull();
+        lom = getMap();
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),970,i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),972,lom,971,lom.indexOf(list.get(i)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testIndexOf_add394() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIndexOf_add394");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),967,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),969,lom,968,lom.indexOf(getOtherKeys()));
+        resetFull();
+        resetFull();
+        lom = getMap();
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),970,i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),972,lom,971,lom.indexOf(list.get(i)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testIndexOf_add395() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIndexOf_add395");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),967,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),969,lom,968,lom.indexOf(getOtherKeys()));
+        resetFull();
+        lom = getMap();
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),970,i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),972,lom,971,lom.indexOf(list.get(i)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testIndexOf_literalMutation291() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIndexOf_literalMutation291");
         resetEmpty();
@@ -375,9 +983,263 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
             list.add(it.next());
         }
-        for (int i = 1 ; i < (list.size()) ; i++) {
+        for (int i = -1 ; i < (list.size()) ; i++) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),970,i);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),972,lom,971,lom.indexOf(list.get(i)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testIndexOf_remove304() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIndexOf_remove304");
+        ListOrderedMap<K, V> lom = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),967,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),969,lom,968,lom.indexOf(getOtherKeys()));
+        resetFull();
+        lom = getMap();
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),970,i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),972,lom,971,lom.indexOf(list.get(i)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testIndexOf_remove305() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIndexOf_remove305");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),967,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),969,lom,968,lom.indexOf(getOtherKeys()));
+        lom = getMap();
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),970,i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),972,lom,971,lom.indexOf(list.get(i)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testSetValueByIndex_add450() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetValueByIndex_add450");
+        resetEmpty();
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.setValue(0, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(lom.size(), ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final V value = lom.getValue(i);
+            final Object input = Integer.valueOf(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),946,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1087,lom,1086,lom.setValue(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,lom,1089,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testSetValueByIndex_add451() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetValueByIndex_add451");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.setValue(0, ((V)("")));
+            lom.setValue(0, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(lom.size(), ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final V value = lom.getValue(i);
+            final Object input = Integer.valueOf(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),946,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1087,lom,1086,lom.setValue(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,lom,1089,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testSetValueByIndex_add452() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetValueByIndex_add452");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.setValue(0, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(-1, ((V)("")));
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(lom.size(), ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final V value = lom.getValue(i);
+            final Object input = Integer.valueOf(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),946,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1087,lom,1086,lom.setValue(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,lom,1089,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testSetValueByIndex_add453() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetValueByIndex_add453");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.setValue(0, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        resetFull();
+        lom = getMap();
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(lom.size(), ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final V value = lom.getValue(i);
+            final Object input = Integer.valueOf(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),946,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1087,lom,1086,lom.setValue(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,lom,1089,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testSetValueByIndex_add454() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetValueByIndex_add454");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.setValue(0, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.setValue(-1, ((V)("")));
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(lom.size(), ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final V value = lom.getValue(i);
+            final Object input = Integer.valueOf(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),946,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1087,lom,1086,lom.setValue(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,lom,1089,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testSetValueByIndex_add455() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetValueByIndex_add455");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.setValue(0, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(lom.size(), ((V)("")));
+            lom.setValue(lom.size(), ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final V value = lom.getValue(i);
+            final Object input = Integer.valueOf(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),946,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1087,lom,1086,lom.setValue(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,lom,1089,lom.getValue(i));
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -494,7 +1356,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         } catch (final IndexOutOfBoundsException ex) {
         }
         try {
-            lom.setValue(0, ((V)("")));
+            lom.setValue(2, ((V)("")));
         } catch (final IndexOutOfBoundsException ex) {
         }
         resetFull();
@@ -677,7 +1539,75 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
             lom.setValue(lom.size(), ((V)("")));
         } catch (final IndexOutOfBoundsException ex) {
         }
-        for (int i = 1 ; i < (lom.size()) ; i++) {
+        for (int i = -1 ; i < (lom.size()) ; i++) {
+            final V value = lom.getValue(i);
+            final Object input = Integer.valueOf(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),946,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1087,lom,1086,lom.setValue(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,lom,1089,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testSetValueByIndex_remove353() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetValueByIndex_remove353");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.setValue(0, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(lom.size(), ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final V value = lom.getValue(i);
+            final Object input = Integer.valueOf(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),946,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1087,lom,1086,lom.setValue(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1088,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1090,lom,1089,lom.getValue(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testSetValueByIndex_remove354() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetValueByIndex_remove354");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.setValue(0, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom = getMap();
+        try {
+            lom.setValue(-1, ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.setValue(lom.size(), ((V)("")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        for (int i = 0 ; i < (lom.size()) ; i++) {
             final V value = lom.getValue(i);
             final Object input = Integer.valueOf(i);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),946,value);
@@ -725,12 +1655,324 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_add442() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_add442");
+        resetEmpty();
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_add443() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_add443");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_add444() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_add444");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_add445() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_add445");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_add446() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_add446");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_add447() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_add447");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_add448() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_add448");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_add449() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_add449");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testRemoveByIndex_literalMutation361() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_literalMutation361");
         resetEmpty();
         ListOrderedMap<K, V> lom = getMap();
         try {
-            lom.remove(-1);
+            lom.remove(1);
         } catch (final IndexOutOfBoundsException ex) {
         }
         try {
@@ -771,7 +2013,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         } catch (final IndexOutOfBoundsException ex) {
         }
         try {
-            lom.remove(2);
+            lom.remove(0);
         } catch (final IndexOutOfBoundsException ex) {
         }
         resetFull();
@@ -814,7 +2056,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         resetFull();
         lom = getMap();
         try {
-            lom.remove(0);
+            lom.remove(2);
         } catch (final IndexOutOfBoundsException ex) {
         }
         try {
@@ -862,7 +2104,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
             list.add(it.next());
         }
-        for (int i = 1 ; i < (list.size()) ; i++) {
+        for (int i = -1 ; i < (list.size()) ; i++) {
             final Object key = list.get(i);
             final Object value = lom.get(key);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
@@ -870,6 +2112,3897 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
             list.remove(i);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
         }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_remove350() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_remove350");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_remove351() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_remove351");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            list.remove(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testRemoveByIndex_remove352() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveByIndex_remove352");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.remove(0);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        resetFull();
+        lom = getMap();
+        try {
+            lom.remove(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.remove(lom.size());
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        final List<K> list = new ArrayList<K>();
+        for (final MapIterator<K, V> it = lom.mapIterator() ; it.hasNext() ; ) {
+            list.add(it.next());
+        }
+        for (int i = 0 ; i < (list.size()) ; i++) {
+            final Object key = list.get(i);
+            final Object value = lom.get(key);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1081,value);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1083,lom,1082,lom.remove(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1085,lom,1084,lom.containsKey(key));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add407() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add407");
+        resetEmpty();
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add408() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add408");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add409() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add409");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add410() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add410");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add411() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add411");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add412() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add412");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add413() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add413");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add414() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add414");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add415() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add415");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add416() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add416");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add417() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add417");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add418() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add418");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add419() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add419");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add420() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add420");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add421() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add421");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add422() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add422");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add423() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add423");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add424() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add424");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add425() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add425");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add426() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add426");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add427() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add427");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add428() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add428");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add429() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add429");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add430() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add430");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add431() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add431");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add432() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add432");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add433() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add433");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add434() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add434");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add435() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add435");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add436() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add436");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add437() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add437");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add438() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add438");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add439() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add439");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add440() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add440");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_add441() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_add441");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1628,7 +6761,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
             lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
         } catch (final IndexOutOfBoundsException ex) {
         }
-        lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        lom.put(-1, ((K)("testInsert1")), ((V)("testInsert1v")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
         lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
@@ -2163,7 +7296,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
-        lom.put(1, ((K)("testInsert0")), ((V)("testInsert0v")));
+        lom.put(-1, ((K)("testInsert0")), ((V)("testInsert0v")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
@@ -2485,7 +7618,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
-        lom.put(2, ((K)("testInsert3")), ((V)("testInsert3v")));
+        lom.put(4, ((K)("testInsert3")), ((V)("testInsert3v")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
@@ -3242,7 +8375,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
         }
-        final Integer i1 = Integer.valueOf(0);
+        final Integer i1 = Integer.valueOf(2);
         final Integer i1b = Integer.valueOf(1);
         final Integer i2 = Integer.valueOf(2);
         final Integer i3 = Integer.valueOf(3);
@@ -3456,7 +8589,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         }
         final Integer i1 = Integer.valueOf(1);
         final Integer i1b = Integer.valueOf(1);
-        final Integer i2 = Integer.valueOf(3);
+        final Integer i2 = Integer.valueOf(1);
         final Integer i3 = Integer.valueOf(3);
         resetEmpty();
         lom = getMap();
@@ -4535,7 +9668,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         lom.put(((K)(i1)), ((V)("1")));
         lom.put(((K)(i2)), ((V)("2")));
         lom.put(((K)(i3)), ((V)("3")));
-        lom.put(1, ((K)(i1b)), ((V)("One")));
+        lom.put(-1, ((K)(i1b)), ((V)("One")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
@@ -6163,7 +11296,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         lom.put(((K)(i1)), ((V)("1")));
         lom.put(((K)(i2)), ((V)("2")));
         lom.put(((K)(i3)), ((V)("3")));
-        lom.put(4, ((K)(i1b)), ((V)("One")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
@@ -6276,6 +11409,3679 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove317() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove317");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove318() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove318");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove319() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove319");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove320() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove320");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove321() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove321");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove322() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove322");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove323() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove323");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove324() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove324");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove325() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove325");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove326() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove326");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove327() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove327");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove328() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove328");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove329() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove329");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove330() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove330");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove331() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove331");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove332() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove332");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove333() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove333");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove334() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove334");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove335() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove335");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove336() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove336");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove337() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove337");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove338() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove338");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove339() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove339");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove340() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove340");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove341() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove341");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove342() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove342");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove343() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove343");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove344() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove344");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove345() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove345");
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        lom.put(0, ((K)("testInsert1")), ((V)("testInsert1v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove346() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove346");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove347() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove347");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove348() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove348");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPut_intObjectObject_remove349() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPut_intObjectObject_remove349");
+        resetEmpty();
+        ListOrderedMap<K, V> lom = getMap();
+        try {
+            lom.put(1, ((K)("testInsert1")), ((V)("testInsert1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            lom.put(-1, ((K)("testInsert-1")), ((V)("testInsert-1v")));
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),994,lom,993,lom.getValue(0));
+        lom.put(((K)("testInsertPut")), ((V)("testInsertPutv")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),996,lom,995,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),998,lom,997,lom.getValue(1));
+        lom.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1000,lom,999,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1002,lom,1001,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1004,lom,1003,lom.getValue(2));
+        lom.put(3, ((K)("testInsert3")), ((V)("testInsert3v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1006,lom,1005,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1008,lom,1007,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1010,lom,1009,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1012,lom,1011,lom.getValue(3));
+        resetFull();
+        lom = getMap();
+        final ListOrderedMap<K, V> lom2 = new ListOrderedMap<K, V>();
+        lom2.putAll(lom);
+        lom2.put(0, ((K)("testInsert0")), ((V)("testInsert0v")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1014,lom2,1013,lom2.getValue(0));
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1016,lom2,1015,lom2.getValue((i + 1)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1018,lom,1017,lom.getValue(i));
+        }
+        final Integer i1 = Integer.valueOf(1);
+        final Integer i1b = Integer.valueOf(1);
+        final Integer i2 = Integer.valueOf(2);
+        final Integer i3 = Integer.valueOf(3);
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1020,lom,1019,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1022,lom.map,1021,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1024,lom.keyList(),1023,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1026,lom,1025,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1027,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1029,lom,1028,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(0, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1031,lom,1030,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1033,lom.map,1032,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1035,lom.keyList(),1034,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1037,lom,1036,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1039,lom,1038,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1041,lom,1040,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1042,i1b);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1044,lom,1043,lom.get(0));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(1, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1046,lom,1045,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1048,lom.map,1047,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1050,lom.keyList(),1049,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1052,lom,1051,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1054,lom,1053,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1056,lom,1055,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(2, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1058,lom,1057,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1060,lom.map,1059,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1062,lom.keyList(),1061,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1064,lom,1063,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1066,lom,1065,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1068,lom,1067,lom.getValue(2));
+        resetEmpty();
+        lom = getMap();
+        lom.put(((K)(i1)), ((V)("1")));
+        lom.put(((K)(i2)), ((V)("2")));
+        lom.put(((K)(i3)), ((V)("3")));
+        lom.put(3, ((K)(i1b)), ((V)("One")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1070,lom,1069,lom.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1072,lom.map,1071,lom.map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1074,lom.keyList(),1073,lom.keyList().size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1076,lom,1075,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1078,lom,1077,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1080,lom,1079,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_add396() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_add396");
+        resetEmpty();
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_add397() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_add397");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_add398() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_add398");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_add399() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_add399");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_add400() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_add400");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_add401() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_add401");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_add402() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_add402");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -6546,12 +15352,269 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
         values.put("NewInsert0", "NewInsert0v");
         values.put("NewInsert1", "NewInsert1v");
-        lom.putAll(2, values);
+        lom.putAll(0, values);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_remove306() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_remove306");
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_remove307() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_remove307");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_remove308() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_remove308");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_remove309() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_remove309");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_remove310() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_remove310");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_remove311() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_remove311");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert1", "NewInsert1v");
+        lom.putAll(1, values);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndex_remove312() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndex_remove312");
+        resetEmpty();
+        @SuppressWarnings(value = "unchecked")
+        final ListOrderedMap<java.lang.String, java.lang.String> lom = ((ListOrderedMap<java.lang.String, java.lang.String>)(map));
+        lom.put("testInsert0", "testInsert0v");
+        lom.put("testInsert1", "testInsert1v");
+        lom.put("testInsert2", "testInsert2v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),978,lom,977,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),980,lom,979,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),982,lom,981,lom.getValue(2));
+        final Map<java.lang.String, java.lang.String> values = new ListOrderedMap<java.lang.String, java.lang.String>();
+        values.put("NewInsert0", "NewInsert0v");
+        values.put("NewInsert1", "NewInsert1v");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),984,lom,983,lom.getValue(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),986,lom,985,lom.getValue(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),988,lom,987,lom.getValue(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),990,lom,989,lom.getValue(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),992,lom,991,lom.getValue(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndexBug441_add403() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndexBug441_add403");
+        resetEmpty();
+        resetEmpty();
+        final ListOrderedMap<K, V> lom = getMap();
+        final int size = 5;
+        for (int i = 0 ; i < size ; i++) {
+            lom.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.TRUE)));
+        }
+        final Map<K, V> map = new TreeMap<K, V>();
+        for (int i = 0 ; i < size ; i++) {
+            map.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.FALSE)));
+        }
+        lom.putAll(3, map);
+        final List<K> orderedList = lom.asList();
+        for (int i = 0 ; i < size ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),974,null,973,java.lang.Integer.valueOf(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,orderedList,975,orderedList.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndexBug441_add404() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndexBug441_add404");
+        resetEmpty();
+        final ListOrderedMap<K, V> lom = getMap();
+        final int size = 5;
+        for (int i = 0 ; i < size ; i++) {
+            lom.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.TRUE)));
+            lom.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.TRUE)));
+        }
+        final Map<K, V> map = new TreeMap<K, V>();
+        for (int i = 0 ; i < size ; i++) {
+            map.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.FALSE)));
+        }
+        lom.putAll(3, map);
+        final List<K> orderedList = lom.asList();
+        for (int i = 0 ; i < size ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),974,null,973,java.lang.Integer.valueOf(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,orderedList,975,orderedList.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndexBug441_add405() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndexBug441_add405");
+        resetEmpty();
+        final ListOrderedMap<K, V> lom = getMap();
+        final int size = 5;
+        for (int i = 0 ; i < size ; i++) {
+            lom.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.TRUE)));
+        }
+        final Map<K, V> map = new TreeMap<K, V>();
+        for (int i = 0 ; i < size ; i++) {
+            map.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.FALSE)));
+            map.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.FALSE)));
+        }
+        lom.putAll(3, map);
+        final List<K> orderedList = lom.asList();
+        for (int i = 0 ; i < size ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),974,null,973,java.lang.Integer.valueOf(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,orderedList,975,orderedList.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndexBug441_add406() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndexBug441_add406");
+        resetEmpty();
+        final ListOrderedMap<K, V> lom = getMap();
+        final int size = 5;
+        for (int i = 0 ; i < size ; i++) {
+            lom.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.TRUE)));
+        }
+        final Map<K, V> map = new TreeMap<K, V>();
+        for (int i = 0 ; i < size ; i++) {
+            map.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.FALSE)));
+        }
+        lom.putAll(3, map);
+        lom.putAll(3, map);
+        final List<K> orderedList = lom.asList();
+        for (int i = 0 ; i < size ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),974,null,973,java.lang.Integer.valueOf(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,orderedList,975,orderedList.get(i));
+        }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -6582,7 +15645,7 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndexBug441_literalMutation305");
         resetEmpty();
         final ListOrderedMap<K, V> lom = getMap();
-        final int size = 6;
+        final int size = 4;
         for (int i = 0 ; i < size ; i++) {
             lom.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.TRUE)));
         }
@@ -6680,9 +15743,111 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         }
         lom.putAll(3, map);
         final List<K> orderedList = lom.asList();
-        for (int i = -1 ; i < size ; i++) {
+        for (int i = 1 ; i < size ; i++) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),974,null,973,java.lang.Integer.valueOf(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,orderedList,975,orderedList.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndexBug441_remove313() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndexBug441_remove313");
+        final ListOrderedMap<K, V> lom = getMap();
+        final int size = 5;
+        for (int i = 0 ; i < size ; i++) {
+            lom.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.TRUE)));
+        }
+        final Map<K, V> map = new TreeMap<K, V>();
+        for (int i = 0 ; i < size ; i++) {
+            map.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.FALSE)));
+        }
+        lom.putAll(3, map);
+        final List<K> orderedList = lom.asList();
+        for (int i = 0 ; i < size ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),974,null,973,java.lang.Integer.valueOf(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,orderedList,975,orderedList.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndexBug441_remove314() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndexBug441_remove314");
+        resetEmpty();
+        final ListOrderedMap<K, V> lom = getMap();
+        final int size = 5;
+        for (int i = 0 ; i < size ; i++) {
+        }
+        final Map<K, V> map = new TreeMap<K, V>();
+        for (int i = 0 ; i < size ; i++) {
+            map.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.FALSE)));
+        }
+        lom.putAll(3, map);
+        final List<K> orderedList = lom.asList();
+        for (int i = 0 ; i < size ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),974,null,973,java.lang.Integer.valueOf(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,orderedList,975,orderedList.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndexBug441_remove315() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndexBug441_remove315");
+        resetEmpty();
+        final ListOrderedMap<K, V> lom = getMap();
+        final int size = 5;
+        for (int i = 0 ; i < size ; i++) {
+            lom.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.TRUE)));
+        }
+        final Map<K, V> map = new TreeMap<K, V>();
+        for (int i = 0 ; i < size ; i++) {
+        }
+        lom.putAll(3, map);
+        final List<K> orderedList = lom.asList();
+        for (int i = 0 ; i < size ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),974,null,973,java.lang.Integer.valueOf(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,orderedList,975,orderedList.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testPutAllWithIndexBug441_remove316() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAllWithIndexBug441_remove316");
+        resetEmpty();
+        final ListOrderedMap<K, V> lom = getMap();
+        final int size = 5;
+        for (int i = 0 ; i < size ; i++) {
+            lom.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.TRUE)));
+        }
+        final Map<K, V> map = new TreeMap<K, V>();
+        for (int i = 0 ; i < size ; i++) {
+            map.put(((K)(Integer.valueOf(i))), ((V)(java.lang.Boolean.FALSE)));
+        }
+        final List<K> orderedList = lom.asList();
+        for (int i = 0 ; i < size ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),974,null,973,java.lang.Integer.valueOf(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),976,orderedList,975,orderedList.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testValueList_getByIndex_add456() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testValueList_getByIndex_add456");
+        resetFull();
+        resetFull();
+        final ListOrderedMap<K, V> lom = getMap();
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final V expected = lom.getValue(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1091,expected);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1093,lom.valueList(),1092,lom.valueList().get(i));
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -6695,6 +15860,38 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
             final V expected = lom.getValue(i);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1091,expected);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1093,lom.valueList(),1092,lom.valueList().get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testValueList_getByIndex_remove355() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testValueList_getByIndex_remove355");
+        final ListOrderedMap<K, V> lom = getMap();
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final V expected = lom.getValue(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1091,expected);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1093,lom.valueList(),1092,lom.valueList().get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testValueList_setByIndex_add458() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testValueList_setByIndex_add458");
+        resetFull();
+        resetFull();
+        final ListOrderedMap<K, V> lom = getMap();
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final Object input = Integer.valueOf(i);
+            final V expected = lom.getValue(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1097,expected);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1099,lom.valueList(),1098,lom.valueList().set(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1100,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1102,lom,1101,lom.getValue(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1103,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1105,lom.valueList(),1104,lom.valueList().get(i));
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -6735,6 +15932,38 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testValueList_setByIndex_remove357() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testValueList_setByIndex_remove357");
+        final ListOrderedMap<K, V> lom = getMap();
+        for (int i = 0 ; i < (lom.size()) ; i++) {
+            final Object input = Integer.valueOf(i);
+            final V expected = lom.getValue(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1097,expected);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1099,lom.valueList(),1098,lom.valueList().set(i, ((V)(input))));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1100,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1102,lom,1101,lom.getValue(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1103,input);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1105,lom.valueList(),1104,lom.valueList().get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testValueList_removeByIndex_add457() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testValueList_removeByIndex_add457");
+        resetFull();
+        resetFull();
+        final ListOrderedMap<K, V> lom = getMap();
+        while ((lom.size()) > 1) {
+            final V expected = lom.getValue(1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1094,expected);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1096,lom.valueList(),1095,lom.valueList().remove(1));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testValueList_removeByIndex() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testValueList_removeByIndex");
         resetFull();
@@ -6752,10 +15981,112 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         resetFull();
         final ListOrderedMap<K, V> lom = getMap();
         while ((lom.size()) > 1) {
-            final V expected = lom.getValue(0);
+            final V expected = lom.getValue(2);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1094,expected);
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1096,lom.valueList(),1095,lom.valueList().remove(1));
         }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testValueList_removeByIndex_remove356() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testValueList_removeByIndex_remove356");
+        final ListOrderedMap<K, V> lom = getMap();
+        while ((lom.size()) > 1) {
+            final V expected = lom.getValue(1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1094,expected);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1096,lom.valueList(),1095,lom.valueList().remove(1));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_add375() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_add375");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, null);
+        hmap.put(key1, null);
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, null);
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_add376() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_add376");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, null);
+        hmap.put(key2, null);
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, null);
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_add377() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_add377");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, null);
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, null);
+        listMap.put(key1, null);
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_add378() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_add378");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, null);
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, null);
+        listMap.put(key2, null);
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_add379() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_add379");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, null);
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, null);
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        listMap.putAll(2, hmap);
+        listMap.putAll(2, hmap);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -6772,6 +16103,176 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         listMap.put(key2, null);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
         listMap.putAll(1, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_remove295() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_remove295");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, null);
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_remove296() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_remove296");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, null);
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_remove297() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_remove297");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, null);
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_remove298() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_remove298");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, null);
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nullValues_remove299() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nullValues_remove299");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, null);
+        hmap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),956,hmap,955,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, null);
+        listMap.put(key2, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),958,listMap,957,listMap.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_add370() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_add370");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, "1");
+        hmap.put(key1, "1");
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, "3");
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_add371() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_add371");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, "1");
+        hmap.put(key2, "2");
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, "3");
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_add372() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_add372");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, "1");
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, "3");
+        listMap.put(key1, "3");
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_add373() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_add373");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, "1");
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, "3");
+        listMap.put(key2, "4");
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_add374() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_add374");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, "1");
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, "3");
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
+        listMap.putAll(2, hmap);
+        listMap.putAll(2, hmap);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -6851,7 +16352,87 @@ public class ListOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         listMap.put(key1, "3");
         listMap.put(key2, "4");
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
-        listMap.putAll(3, hmap);
+        listMap.putAll(1, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_remove290() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_remove290");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, "3");
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_remove291() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_remove291");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, "3");
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_remove292() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_remove292");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, "1");
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_remove293() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_remove293");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, "1");
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
+        listMap.putAll(2, hmap);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testCOLLECTIONS_474_nonNullValues_remove294() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCOLLECTIONS_474_nonNullValues_remove294");
+        Object key1 = new Object();
+        Object key2 = new Object();
+        HashMap<java.lang.Object, java.lang.Object> hmap = new HashMap<java.lang.Object, java.lang.Object>();
+        hmap.put(key1, "1");
+        hmap.put(key2, "2");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),952,hmap,951,hmap.size());
+        ListOrderedMap<java.lang.Object, java.lang.Object> listMap = new ListOrderedMap<java.lang.Object, java.lang.Object>();
+        listMap.put(key1, "3");
+        listMap.put(key2, "4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),954,listMap,953,listMap.size());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

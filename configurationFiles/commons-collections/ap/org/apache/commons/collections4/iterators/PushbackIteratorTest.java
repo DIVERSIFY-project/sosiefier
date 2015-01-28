@@ -55,6 +55,32 @@ public class PushbackIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testImmediatePushback_add1184() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testImmediatePushback_add1184");
+        PushbackIterator<E> iter = makeObject();
+        iter.pushback(((E)("x")));
+        iter.pushback(((E)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4173,iter,4172,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4175,iter,4174,iter.next());
+        validate(iter, "b", "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testImmediatePushback_add1185() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testImmediatePushback_add1185");
+        PushbackIterator<E> iter = makeObject();
+        iter.pushback(((E)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4173,iter,4172,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4175,iter,4174,iter.next());
+        validate(iter, "b", "c");
+        validate(iter, "b", "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test
     @SuppressWarnings(value = "unchecked")
     public void testImmediatePushback() {
@@ -103,6 +129,56 @@ public class PushbackIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testImmediatePushback_remove875() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testImmediatePushback_remove875");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4173,iter,4172,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4175,iter,4174,iter.next());
+        validate(iter, "b", "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testImmediatePushback_remove876() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testImmediatePushback_remove876");
+        PushbackIterator<E> iter = makeObject();
+        iter.pushback(((E)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4173,iter,4172,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4175,iter,4174,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testDelayedPushback_add1182() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDelayedPushback_add1182");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4167,iter,4166,iter.next());
+        iter.pushback(((E)("x")));
+        iter.pushback(((E)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4169,iter,4168,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4171,iter,4170,iter.next());
+        validate(iter, "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testDelayedPushback_add1183() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDelayedPushback_add1183");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4167,iter,4166,iter.next());
+        iter.pushback(((E)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4169,iter,4168,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4171,iter,4170,iter.next());
+        validate(iter, "c");
+        validate(iter, "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test
     @SuppressWarnings(value = "unchecked")
     public void testDelayedPushback() {
@@ -139,6 +215,78 @@ public class PushbackIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4169,iter,4168,iter.next());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4171,iter,4170,iter.next());
         validate(iter, "foo");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testDelayedPushback_remove873() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDelayedPushback_remove873");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4167,iter,4166,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4169,iter,4168,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4171,iter,4170,iter.next());
+        validate(iter, "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testDelayedPushback_remove874() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDelayedPushback_remove874");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4167,iter,4166,iter.next());
+        iter.pushback(((E)("x")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4169,iter,4168,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4171,iter,4170,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testMultiplePushback_add1186() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiplePushback_add1186");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4177,iter,4176,iter.next());
+        iter.pushback(((E)("x")));
+        iter.pushback(((E)("x")));
+        iter.pushback(((E)("y")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4179,iter,4178,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4181,iter,4180,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4183,iter,4182,iter.next());
+        validate(iter, "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testMultiplePushback_add1187() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiplePushback_add1187");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4177,iter,4176,iter.next());
+        iter.pushback(((E)("x")));
+        iter.pushback(((E)("y")));
+        iter.pushback(((E)("y")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4179,iter,4178,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4181,iter,4180,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4183,iter,4182,iter.next());
+        validate(iter, "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testMultiplePushback_add1188() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiplePushback_add1188");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4177,iter,4176,iter.next());
+        iter.pushback(((E)("x")));
+        iter.pushback(((E)("y")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4179,iter,4178,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4181,iter,4180,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4183,iter,4182,iter.next());
+        validate(iter, "c");
+        validate(iter, "c");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -199,6 +347,48 @@ public class PushbackIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4181,iter,4180,iter.next());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4183,iter,4182,iter.next());
         validate(iter, "foo");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testMultiplePushback_remove877() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiplePushback_remove877");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4177,iter,4176,iter.next());
+        iter.pushback(((E)("y")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4179,iter,4178,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4181,iter,4180,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4183,iter,4182,iter.next());
+        validate(iter, "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testMultiplePushback_remove878() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiplePushback_remove878");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4177,iter,4176,iter.next());
+        iter.pushback(((E)("y")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4179,iter,4178,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4181,iter,4180,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4183,iter,4182,iter.next());
+        validate(iter, "c");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testMultiplePushback_remove879() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiplePushback_remove879");
+        PushbackIterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4177,iter,4176,iter.next());
+        iter.pushback(((E)("x")));
+        iter.pushback(((E)("y")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4179,iter,4178,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4181,iter,4180,iter.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4183,iter,4182,iter.next());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

@@ -3,6 +3,7 @@ package org.apache.commons.collections4.iterators;
 import java.util.Iterator;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.junit.Test;
 
 /** 
  * Tests the NodeListIterator.
@@ -88,6 +89,18 @@ public NodeListIteratorTest(final String testName) {
     /** 
      * tests the convenience Constructor with parameter type org.w3c.Node
      */
+@Test(timeout = 1000)
+    public void testEmptyIteratorWithNodeConstructor_add1113() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyIteratorWithNodeConstructor_add1113");
+        createIteratorWithStandardConstr = false;
+        testEmptyIterator();
+        testEmptyIterator();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * tests the convenience Constructor with parameter type org.w3c.Node
+     */
 public void testEmptyIteratorWithNodeConstructor() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyIteratorWithNodeConstructor");
         createIteratorWithStandardConstr = true;
@@ -98,10 +111,42 @@ public void testEmptyIteratorWithNodeConstructor() {
     /** 
      * tests the convenience Constructor with parameter type org.w3c.Node
      */
+@Test(timeout = 1000)
+    public void testEmptyIteratorWithNodeConstructor_remove833() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyIteratorWithNodeConstructor_remove833");
+        createIteratorWithStandardConstr = false;
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * tests the convenience Constructor with parameter type org.w3c.Node
+     */
+@Test(timeout = 1000)
+    public void testFullIteratorWithNodeConstructor_add1114() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFullIteratorWithNodeConstructor_add1114");
+        createIteratorWithStandardConstr = false;
+        testFullIterator();
+        testFullIterator();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * tests the convenience Constructor with parameter type org.w3c.Node
+     */
 public void testFullIteratorWithNodeConstructor() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFullIteratorWithNodeConstructor");
-        createIteratorWithStandardConstr = true;
+        createIteratorWithStandardConstr = false;
         testFullIterator();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * tests the convenience Constructor with parameter type org.w3c.Node
+     */
+@Test(timeout = 1000)
+    public void testFullIteratorWithNodeConstructor_remove834() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFullIteratorWithNodeConstructor_remove834");
+        createIteratorWithStandardConstr = false;
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 }

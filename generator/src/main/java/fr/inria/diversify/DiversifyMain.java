@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import fr.inria.diversify.buildSystem.android.InvalidSdkException;
 import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.ComputeAllPossibleTransformation;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.TransformationParser;
@@ -22,19 +21,16 @@ import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.transformation.query.ASTTransformationQuery;
 
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
-import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.TransformationFilter;
-import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import spoon.reflect.factory.Factory;
 import fr.inria.diversify.coverage.CoverageReport;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.query.ByteCodeTransformationQuery;
 import fr.inria.diversify.util.Log;
 
@@ -190,7 +186,7 @@ public class DiversifyMain {
             ad = new UniqueSosieGenerator(inputConfiguration, projet, src);
             String transDir = inputConfiguration.getProperty("transformation.directory");
             TransformationParser tf = new TransformationParser(true, inputProgram);
-            Collection<Transformation> transformations = tf.parseDir(transDir);
+            Collection<SingleTransformation> transformations = tf.parseDir(transDir);
             ((UniqueSosieGenerator) ad).setTransformation(transformations);
         } else if (transformationType.startsWith("fse")) {
             String testSrcDir = inputConfiguration.getProperty("testSrc");
@@ -482,7 +478,7 @@ public class DiversifyMain {
     protected void computeDiversifyStat(String transDir, String directoryName) throws Exception {
         TransformationParser tf = new TransformationParser(true, inputProgram);
 //        TransformationOldParser tf = new TransformationOldParser(true);
-        Collection<Transformation> transformations = tf.parseDir(transDir);
+        Collection<SingleTransformation> transformations = tf.parseDir(transDir);
 
         TransformationFilter filter = new TransformationFilter();
 //        filter.setName("delete");
@@ -512,9 +508,9 @@ public class DiversifyMain {
 //        matrix.printAllMatrix(fileName);
     }
 
-    protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {
+    protected Set<String> getAllTransformationType(Collection<SingleTransformation> transformations) {
         Set<String> types = new HashSet<String>();
-        for (Transformation t : transformations)
+        for (SingleTransformation t : transformations)
             types.add(t.getType());
         return types;
     }

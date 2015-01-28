@@ -4,8 +4,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.Header;
 import fr.inria.diversify.persistence.MavenHeader;
 import fr.inria.diversify.persistence.json.input.JsonHeaderInput;
-import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.ut.json.output.JsonHeaderOutputTest;
+import fr.inria.diversify.transformation.SingleTransformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -54,7 +53,7 @@ public class JsonHeaderInputTest {
     @Test
     public void testRead_AllOK() throws JSONException {
         JsonHeaderInputForTest t = new JsonHeaderInputForTest(new InputProgram(), getGoodJson());
-        t.read(new HashMap<Integer, Transformation>());
+        t.read(new HashMap<Integer, SingleTransformation>());
         assertEquals(0, t.getErrors().size());
     }
 
@@ -64,7 +63,7 @@ public class JsonHeaderInputTest {
         o.getJSONObject(Header.HEADER).put(MavenHeader.GROUP_ID, "diversify");
 
         JsonHeaderInputForTest t = new JsonHeaderInputForTest(new InputProgram(), o);
-        t.read(new HashMap<Integer, Transformation>());
+        t.read(new HashMap<Integer, SingleTransformation>());
         assertEquals(1, t.getErrors().size());
         assertEquals(JsonHeaderInput.GROUP_ID_DONT_MATCH, ((List<String>) t.getErrors()).get(0));
     }
@@ -77,7 +76,7 @@ public class JsonHeaderInputTest {
         o.getJSONObject(Header.HEADER).put(MavenHeader.VERSION, "1.0-SNAPSHOT___");
 
         JsonHeaderInputForTest t = new JsonHeaderInputForTest(new InputProgram(), o);
-        t.read(new HashMap<Integer, Transformation>());
+        t.read(new HashMap<Integer, SingleTransformation>());
         assertEquals(3, t.getErrors().size());
         assertEquals(JsonHeaderInput.GROUP_ID_DONT_MATCH, ((List<String>) t.getErrors()).get(0));
         assertEquals(JsonHeaderInput.ARTIFACT_DONT_MATCH, ((List<String>) t.getErrors()).get(1));

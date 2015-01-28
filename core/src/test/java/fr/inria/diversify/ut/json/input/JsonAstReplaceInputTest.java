@@ -2,7 +2,7 @@ package fr.inria.diversify.ut.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonAstReplaceInput;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.ut.MockInputProgram;
 import org.json.JSONException;
@@ -41,7 +41,7 @@ public class JsonAstReplaceInputTest {
         JSONObject o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
 
         JsonAstReplaceInput reader = new JsonAstReplaceInput(p, o);
-        HashMap<Integer, Transformation> result = new HashMap<>();
+        HashMap<Integer, SingleTransformation> result = new HashMap<>();
         reader.read(result);
 
         ASTReplace add = (ASTReplace)result.get(1);

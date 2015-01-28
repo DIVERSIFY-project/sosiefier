@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.apache.commons.collections4.IterableMap;
 import java.util.Map;
 import org.apache.commons.collections4.MapIterator;
+import org.junit.Test;
 
 /** 
  * Tests the UnmodifiableMapIterator.
@@ -70,6 +71,22 @@ public class UnmodifiableMapIteratorTest<K, V> extends AbstractMapIteratorTest<K
         it = getMap().mapIterator();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4395,(it != (org.apache.commons.collections4.iterators.UnmodifiableMapIterator.unmodifiableMapIterator(it))));
         try {
+            org.apache.commons.collections4.iterators.UnmodifiableMapIterator.unmodifiableMapIterator(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testDecorateFactory_add1216() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add1216");
+        MapIterator<K, V> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4392,it);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4394,null,4393,org.apache.commons.collections4.iterators.UnmodifiableMapIterator.unmodifiableMapIterator(it));
+        it = getMap().mapIterator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4395,(it != (org.apache.commons.collections4.iterators.UnmodifiableMapIterator.unmodifiableMapIterator(it))));
+        try {
+            org.apache.commons.collections4.iterators.UnmodifiableMapIterator.unmodifiableMapIterator(null);
             org.apache.commons.collections4.iterators.UnmodifiableMapIterator.unmodifiableMapIterator(null);
         } catch (final IllegalArgumentException ex) {
         }

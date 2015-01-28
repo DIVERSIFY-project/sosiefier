@@ -1,7 +1,7 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourceCodeFragment;
@@ -24,7 +24,7 @@ import java.util.*;
 public class VariableLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
     protected int tmpVarCount = 0;
 
-    public VariableLoggingInstrumenter(List<Transformation> transformations) {
+    public VariableLoggingInstrumenter(List<SingleTransformation> transformations) {
         super(transformations);
     }
 

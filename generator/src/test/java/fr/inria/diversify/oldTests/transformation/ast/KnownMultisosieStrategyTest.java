@@ -1,15 +1,8 @@
 package fr.inria.diversify.oldTests.transformation.ast;
 
-import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.KnownSosieQuery;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import spoon.reflect.factory.Factory;
-
-import java.util.Collection;
 
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.fail;

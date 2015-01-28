@@ -1,6 +1,7 @@
 package org.apache.commons.collections4.map;
 
 import org.apache.commons.collections4.OrderedMap;
+import org.junit.Test;
 
 /** 
  * Extension of {@link AbstractOrderedMapTest} for exercising the
@@ -54,6 +55,20 @@ public class UnmodifiableOrderedMapTest<K, V> extends AbstractOrderedMapTest<K, 
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,map);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1990,null,1989,org.apache.commons.collections4.map.UnmodifiableOrderedMap.unmodifiableOrderedMap(map));
         try {
+            org.apache.commons.collections4.map.UnmodifiableOrderedMap.unmodifiableOrderedMap(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testDecorateFactory_add600() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add600");
+        final OrderedMap<K, V> map = makeFullMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1990,null,1989,org.apache.commons.collections4.map.UnmodifiableOrderedMap.unmodifiableOrderedMap(map));
+        try {
+            org.apache.commons.collections4.map.UnmodifiableOrderedMap.unmodifiableOrderedMap(null);
             org.apache.commons.collections4.map.UnmodifiableOrderedMap.unmodifiableOrderedMap(null);
         } catch (final IllegalArgumentException ex) {
         }

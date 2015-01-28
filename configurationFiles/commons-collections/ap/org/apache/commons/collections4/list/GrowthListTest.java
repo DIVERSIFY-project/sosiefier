@@ -3,6 +3,7 @@ package org.apache.commons.collections4.list;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.junit.Test;
 
 /** 
  * Extension of {@link AbstractListTest} for exercising the {@link GrowthList}.
@@ -27,6 +28,21 @@ public class GrowthListTest<E> extends AbstractListTest<E> {
         return GrowthList.growthList(list);
     }
 
+    @Test(timeout = 1000)
+    public void testGrowthAdd_add794() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAdd_add794");
+        final Integer one = Integer.valueOf(1);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2287,grower,2286,grower.size());
+        grower.add(1, one);
+        grower.add(1, one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2289,grower,2288,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2291,grower,2290,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2292,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2294,grower,2293,grower.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testGrowthAdd() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAdd");
         final Integer one = Integer.valueOf(2);
@@ -45,7 +61,7 @@ public class GrowthListTest<E> extends AbstractListTest<E> {
         final Integer one = Integer.valueOf(1);
         final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2287,grower,2286,grower.size());
-        grower.add(2, one);
+        grower.add(0, one);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2289,grower,2288,grower.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2291,grower,2290,grower.get(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2292,one);
@@ -53,9 +69,85 @@ public class GrowthListTest<E> extends AbstractListTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testGrowthAdd_remove622() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAdd_remove622");
+        final Integer one = Integer.valueOf(1);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2287,grower,2286,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2289,grower,2288,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2291,grower,2290,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2292,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2294,grower,2293,grower.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGrowthAddAll_add795() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAddAll_add795");
+        final Integer one = Integer.valueOf(1);
+        final Integer two = Integer.valueOf(2);
+        final Collection<java.lang.Integer> coll = new ArrayList<java.lang.Integer>();
+        coll.add(one);
+        coll.add(one);
+        coll.add(two);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2275,grower,2274,grower.size());
+        grower.addAll(1, coll);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2277,grower,2276,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2279,grower,2278,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2280,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2282,grower,2281,grower.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2283,two);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2285,grower,2284,grower.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGrowthAddAll_add796() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAddAll_add796");
+        final Integer one = Integer.valueOf(1);
+        final Integer two = Integer.valueOf(2);
+        final Collection<java.lang.Integer> coll = new ArrayList<java.lang.Integer>();
+        coll.add(one);
+        coll.add(two);
+        coll.add(two);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2275,grower,2274,grower.size());
+        grower.addAll(1, coll);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2277,grower,2276,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2279,grower,2278,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2280,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2282,grower,2281,grower.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2283,two);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2285,grower,2284,grower.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGrowthAddAll_add797() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAddAll_add797");
+        final Integer one = Integer.valueOf(1);
+        final Integer two = Integer.valueOf(2);
+        final Collection<java.lang.Integer> coll = new ArrayList<java.lang.Integer>();
+        coll.add(one);
+        coll.add(two);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2275,grower,2274,grower.size());
+        grower.addAll(1, coll);
+        grower.addAll(1, coll);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2277,grower,2276,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2279,grower,2278,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2280,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2282,grower,2281,grower.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2283,two);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2285,grower,2284,grower.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testGrowthAddAll() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAddAll");
-        final Integer one = Integer.valueOf(0);
+        final Integer one = Integer.valueOf(2);
         final Integer two = Integer.valueOf(2);
         final Collection<java.lang.Integer> coll = new ArrayList<java.lang.Integer>();
         coll.add(one);
@@ -100,13 +192,85 @@ public class GrowthListTest<E> extends AbstractListTest<E> {
         coll.add(two);
         final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2275,grower,2274,grower.size());
-        grower.addAll(0, coll);
+        grower.addAll(2, coll);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2277,grower,2276,grower.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2279,grower,2278,grower.get(0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2280,one);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2282,grower,2281,grower.get(1));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2283,two);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2285,grower,2284,grower.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGrowthAddAll_remove623() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAddAll_remove623");
+        final Integer one = Integer.valueOf(1);
+        final Integer two = Integer.valueOf(2);
+        final Collection<java.lang.Integer> coll = new ArrayList<java.lang.Integer>();
+        coll.add(two);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2275,grower,2274,grower.size());
+        grower.addAll(1, coll);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2277,grower,2276,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2279,grower,2278,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2280,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2282,grower,2281,grower.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2283,two);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2285,grower,2284,grower.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGrowthAddAll_remove624() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAddAll_remove624");
+        final Integer one = Integer.valueOf(1);
+        final Integer two = Integer.valueOf(2);
+        final Collection<java.lang.Integer> coll = new ArrayList<java.lang.Integer>();
+        coll.add(two);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2275,grower,2274,grower.size());
+        grower.addAll(1, coll);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2277,grower,2276,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2279,grower,2278,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2280,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2282,grower,2281,grower.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2283,two);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2285,grower,2284,grower.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGrowthAddAll_remove625() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthAddAll_remove625");
+        final Integer one = Integer.valueOf(1);
+        final Integer two = Integer.valueOf(2);
+        final Collection<java.lang.Integer> coll = new ArrayList<java.lang.Integer>();
+        coll.add(one);
+        coll.add(two);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2275,grower,2274,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2277,grower,2276,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2279,grower,2278,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2280,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2282,grower,2281,grower.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2283,two);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2285,grower,2284,grower.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGrowthSet1_add798() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthSet1_add798");
+        final Integer one = Integer.valueOf(1);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2296,grower,2295,grower.size());
+        grower.set(1, one);
+        grower.set(1, one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2298,grower,2297,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2300,grower,2299,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2301,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2303,grower,2302,grower.get(1));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -136,9 +300,36 @@ public class GrowthListTest<E> extends AbstractListTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testGrowthSet1_remove626() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthSet1_remove626");
+        final Integer one = Integer.valueOf(1);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2296,grower,2295,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2298,grower,2297,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2300,grower,2299,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2301,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2303,grower,2302,grower.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGrowthSet2_add799() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthSet2_add799");
+        final Integer one = Integer.valueOf(1);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2305,grower,2304,grower.size());
+        grower.set(0, one);
+        grower.set(0, one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2307,grower,2306,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2308,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2310,grower,2309,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testGrowthSet2() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthSet2");
-        final Integer one = Integer.valueOf(0);
+        final Integer one = Integer.valueOf(2);
         final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2305,grower,2304,grower.size());
         grower.set(0, one);
@@ -153,7 +344,19 @@ public class GrowthListTest<E> extends AbstractListTest<E> {
         final Integer one = Integer.valueOf(1);
         final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2305,grower,2304,grower.size());
-        grower.set(-1, one);
+        grower.set(1, one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2307,grower,2306,grower.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2308,one);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2310,grower,2309,grower.get(0));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGrowthSet2_remove627() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGrowthSet2_remove627");
+        final Integer one = Integer.valueOf(1);
+        final GrowthList<java.lang.Integer> grower = new GrowthList<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2305,grower,2304,grower.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2307,grower,2306,grower.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2308,one);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2310,grower,2309,grower.get(0));
@@ -170,6 +373,23 @@ public class GrowthListTest<E> extends AbstractListTest<E> {
         final E element = getOtherElements()[0];
         try {
             list = makeObject();
+            list.add(-1, element);
+        } catch (final IndexOutOfBoundsException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Override.
+     */
+@Test(timeout = 1000)
+    public void testListAddByIndexBoundsChecking_add800() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListAddByIndexBoundsChecking_add800");
+        List<E> list;
+        final E element = getOtherElements()[0];
+        try {
+            list = makeObject();
+            list.add(-1, element);
             list.add(-1, element);
         } catch (final IndexOutOfBoundsException e) {
         }
@@ -200,7 +420,7 @@ public void testListAddByIndexBoundsChecking_literalMutation801() {
         final E element = getOtherElements()[0];
         try {
             list = makeObject();
-            list.add(2, element);
+            list.add(0, element);
         } catch (final IndexOutOfBoundsException e) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -216,6 +436,23 @@ public void testListAddByIndexBoundsChecking_literalMutation801() {
         final E element = getOtherElements()[0];
         try {
             list = makeFullCollection();
+            list.add(-1, element);
+        } catch (final IndexOutOfBoundsException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Override.
+     */
+@Test(timeout = 1000)
+    public void testListAddByIndexBoundsChecking2_add801() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListAddByIndexBoundsChecking2_add801");
+        List<E> list;
+        final E element = getOtherElements()[0];
+        try {
+            list = makeFullCollection();
+            list.add(-1, element);
             list.add(-1, element);
         } catch (final IndexOutOfBoundsException e) {
         }
@@ -270,6 +507,22 @@ public void testListAddByIndexBoundsChecking2_literalMutation803() {
     /** 
      * Override.
      */
+@Test(timeout = 1000)
+    public void testListSetByIndexBoundsChecking_add802() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListSetByIndexBoundsChecking_add802");
+        final List<E> list = makeObject();
+        final E element = getOtherElements()[0];
+        try {
+            list.set(-1, element);
+            list.set(-1, element);
+        } catch (final IndexOutOfBoundsException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Override.
+     */
 public void testListSetByIndexBoundsChecking_literalMutation804() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListSetByIndexBoundsChecking_literalMutation804");
         final List<E> list = makeObject();
@@ -313,10 +566,26 @@ public void testListSetByIndexBoundsChecking_literalMutation805() {
     /** 
      * Override.
      */
+@Test(timeout = 1000)
+    public void testListSetByIndexBoundsChecking2_add803() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListSetByIndexBoundsChecking2_add803");
+        final List<E> list = makeFullCollection();
+        final E element = getOtherElements()[0];
+        try {
+            list.set(-1, element);
+            list.set(-1, element);
+        } catch (final IndexOutOfBoundsException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Override.
+     */
 public void testListSetByIndexBoundsChecking2_literalMutation806() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListSetByIndexBoundsChecking2_literalMutation806");
         final List<E> list = makeFullCollection();
-        final E element = getOtherElements()[1];
+        final E element = getOtherElements()[-1];
         try {
             list.set(-1, element);
         } catch (final IndexOutOfBoundsException e) {

@@ -2,14 +2,11 @@ package fr.inria.diversify.transformation.query;
 
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.util.DiversifyEnvironment;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.transformation.bytecode.BytecodeAdd;
 import fr.inria.diversify.transformation.bytecode.BytecodeDelete;
 import fr.inria.diversify.transformation.bytecode.BytecodeReplace;
-import fr.inria.diversify.transformation.bytecode.BytecodeTransformation;
-import fr.inria.diversify.transformation.query.TransformationQuery;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
@@ -47,7 +44,7 @@ public class ByteCodeTransformationQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation query() {
+    public SingleTransformation query() {
         try {
             String type = this.type;
             if (type == null) {

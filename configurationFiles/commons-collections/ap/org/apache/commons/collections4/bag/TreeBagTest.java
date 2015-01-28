@@ -34,10 +34,12 @@ public class TreeBagTest<T> extends AbstractSortedBagTest<T> {
         return bag;
     }
 
+    @org.junit.Test(timeout = 1000)
     public void testCollections265() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCollections265");
         final Bag<java.lang.Object> bag = new TreeBag<java.lang.Object>();
         try {
+            bag.add(new Object());
             bag.add(new Object());
         } catch (final IllegalArgumentException iae) {
         }
@@ -47,11 +49,11 @@ public class TreeBagTest<T> extends AbstractSortedBagTest<T> {
     public void testOrdering() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOrdering");
         final Bag<T> bag = setupBag();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5898,bag.toArray()[0]);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5899,bag.toArray()[1]);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5900,bag.toArray()[2]);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5902,((org.apache.commons.collections4.SortedBag<T>)(bag)),5901,((org.apache.commons.collections4.SortedBag<T>)(bag)).first());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5904,((org.apache.commons.collections4.SortedBag<T>)(bag)),5903,((org.apache.commons.collections4.SortedBag<T>)(bag)).last());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5859,bag.toArray()[0]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5860,bag.toArray()[1]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5861,bag.toArray()[2]);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5863,((org.apache.commons.collections4.SortedBag<T>)(bag)),5862,((org.apache.commons.collections4.SortedBag<T>)(bag)).first());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5865,((org.apache.commons.collections4.SortedBag<T>)(bag)),5864,((org.apache.commons.collections4.SortedBag<T>)(bag)).last());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

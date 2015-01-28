@@ -21,12 +21,49 @@ public class EqualPredicateTest extends AbstractPredicateTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void objectFactoryUsesEqualsForTest() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "objectFactoryUsesEqualsForTest");
         final Predicate<EqualsTestObject> predicate = org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(FALSE_OBJECT);
         assertFalse(predicate, FALSE_OBJECT);
+        assertFalse(predicate, FALSE_OBJECT);
         assertTrue(org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(TRUE_OBJECT), TRUE_OBJECT);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void objectFactoryUsesEqualsForTest_add1244() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "objectFactoryUsesEqualsForTest_add1244");
+        final Predicate<EqualsTestObject> predicate = org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(FALSE_OBJECT);
+        assertFalse(predicate, FALSE_OBJECT);
+        assertTrue(org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(TRUE_OBJECT), TRUE_OBJECT);
+        assertTrue(org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(TRUE_OBJECT), TRUE_OBJECT);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void objectFactoryUsesEqualsForTest_remove916() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "objectFactoryUsesEqualsForTest_remove916");
+        final Predicate<EqualsTestObject> predicate = org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(FALSE_OBJECT);
+        assertTrue(org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(TRUE_OBJECT), TRUE_OBJECT);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void objectFactoryUsesEqualsForTest_remove917() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "objectFactoryUsesEqualsForTest_remove917");
+        final Predicate<EqualsTestObject> predicate = org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(FALSE_OBJECT);
+        assertFalse(predicate, FALSE_OBJECT);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "boxing")
+    @Test(timeout = 1000)
+    public void testPredicateTypeCanBeSuperClassOfObject_add1245() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPredicateTypeCanBeSuperClassOfObject_add1245");
+        final Predicate<java.lang.Number> predicate = org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(((Number)(4)));
+        assertTrue(predicate, 4);
+        assertTrue(predicate, 4);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -53,7 +90,15 @@ public class EqualPredicateTest extends AbstractPredicateTest {
     public void testPredicateTypeCanBeSuperClassOfObject_literalMutation1195() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPredicateTypeCanBeSuperClassOfObject_literalMutation1195");
         final Predicate<java.lang.Number> predicate = org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(((Number)(4)));
-        assertTrue(predicate, 5);
+        assertTrue(predicate, 3);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "boxing")
+    @Test(timeout = 1000)
+    public void testPredicateTypeCanBeSuperClassOfObject_remove918() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPredicateTypeCanBeSuperClassOfObject_remove918");
+        final Predicate<java.lang.Number> predicate = org.apache.commons.collections4.functors.EqualPredicate.equalPredicate(((Number)(4)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

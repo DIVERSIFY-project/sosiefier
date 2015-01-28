@@ -1,6 +1,6 @@
 package fr.inria.diversify.persistence.json.output;
 
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +15,7 @@ public class JsonAstDeleteOutput extends JsonAstTransformationOutput {
      * @param object Objecto to putDataToJSON data
      * @param transformation Transformation to obtain data from
      */
-    protected void putDataToJSON(JSONObject object, Transformation transformation) throws JSONException {
+    protected void putDataToJSON(JSONObject object, SingleTransformation transformation) throws JSONException {
         if (transformation instanceof ASTDelete) {
             super.putDataToJSON(object, transformation);
             ASTDelete d = (ASTDelete) transformation;
@@ -24,5 +24,5 @@ public class JsonAstDeleteOutput extends JsonAstTransformationOutput {
     }
 
     @Override
-    public boolean canStore(Transformation t) {return t instanceof ASTDelete;}
+    public boolean canStore(SingleTransformation t) {return t instanceof ASTDelete;}
 }

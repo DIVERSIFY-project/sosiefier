@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 import org.apache.commons.collections4.Predicate;
 import java.util.Random;
+import org.junit.Test;
 import junit.framework.TestCase;
 
 /** 
@@ -116,9 +117,17 @@ public class FilterListIteratorTest extends TestCase {
         fourPred = null;
     }
 
+    @Test(timeout = 1000)
     public void testWalkLists() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWalkLists");
         walkLists(list, list.listIterator());
+        walkLists(list, list.listIterator());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testWalkLists_remove764() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWalkLists_remove764");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -216,59 +225,131 @@ public class FilterListIteratorTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
     public void testTruePredicate() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTruePredicate");
         final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
         walkLists(list, filtered);
+        walkLists(list, filtered);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testTruePredicate_remove763() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTruePredicate_remove763");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testFalsePredicate() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFalsePredicate");
         final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , falsePred);
         walkLists(new ArrayList<java.lang.Integer>(), filtered);
+        walkLists(new ArrayList<java.lang.Integer>(), filtered);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testFalsePredicate_remove750() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFalsePredicate_remove750");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , falsePred);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testEvens() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEvens");
         final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , evenPred);
         walkLists(evens, filtered);
+        walkLists(evens, filtered);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testEvens_remove749() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEvens_remove749");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , evenPred);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testOdds() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOdds");
         final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , oddPred);
         walkLists(odds, filtered);
+        walkLists(odds, filtered);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testOdds_remove757() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOdds_remove757");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , oddPred);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testThrees() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrees");
         final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
         walkLists(threes, filtered);
+        walkLists(threes, filtered);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testThrees_remove762() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrees_remove762");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testFours() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFours");
         final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , fourPred);
         walkLists(fours, filtered);
+        walkLists(fours, filtered);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testFours_remove751() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFours_remove751");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , fourPred);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testNestedSixes() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNestedSixes");
         final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred) , evenPred);
         walkLists(sixes, filtered);
+        walkLists(sixes, filtered);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testNestedSixes_remove752() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNestedSixes_remove752");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred) , evenPred);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testNestedSixes2() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNestedSixes2");
         final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(new FilterListIterator<java.lang.Integer>(list.listIterator() , evenPred) , threePred);
         walkLists(sixes, filtered);
+        walkLists(sixes, filtered);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testNestedSixes2_remove753() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNestedSixes2_remove753");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(new FilterListIterator<java.lang.Integer>(list.listIterator() , evenPred) , threePred);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -279,10 +360,28 @@ public class FilterListIteratorTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testNestedSixes3_add1003() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNestedSixes3_add1003");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred) , evenPred);
+        walkLists(sixes, new FilterListIterator<java.lang.Integer>(filtered , truePred));
+        walkLists(sixes, new FilterListIterator<java.lang.Integer>(filtered , truePred));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testNestedSixes3_remove754() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNestedSixes3_remove754");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred) , evenPred);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testNextChangesPrevious() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNextChangesPrevious");
         {
             final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            nextNextPrevious(threes.listIterator(), filtered);
             nextNextPrevious(threes.listIterator(), filtered);
         }
         {
@@ -292,11 +391,54 @@ public class FilterListIteratorTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testNextChangesPrevious_add1005() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNextChangesPrevious_add1005");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            nextNextPrevious(threes.listIterator(), filtered);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+            nextNextPrevious(list.listIterator(), filtered);
+            nextNextPrevious(list.listIterator(), filtered);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testNextChangesPrevious_remove755() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNextChangesPrevious_remove755");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+            nextNextPrevious(list.listIterator(), filtered);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testNextChangesPrevious_remove756() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNextChangesPrevious_remove756");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            nextNextPrevious(threes.listIterator(), filtered);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testPreviousChangesNext() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPreviousChangesNext");
         {
             final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
             final ListIterator<java.lang.Integer> expected = threes.listIterator();
+            walkForward(expected, filtered);
             walkForward(expected, filtered);
             previousPreviousNext(expected, filtered);
         }
@@ -309,12 +451,156 @@ public class FilterListIteratorTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testPreviousChangesNext_add1008() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPreviousChangesNext_add1008");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            final ListIterator<java.lang.Integer> expected = threes.listIterator();
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+            final ListIterator<java.lang.Integer> expected = list.listIterator();
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testPreviousChangesNext_add1009() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPreviousChangesNext_add1009");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            final ListIterator<java.lang.Integer> expected = threes.listIterator();
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+            final ListIterator<java.lang.Integer> expected = list.listIterator();
+            walkForward(expected, filtered);
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testPreviousChangesNext_add1010() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPreviousChangesNext_add1010");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            final ListIterator<java.lang.Integer> expected = threes.listIterator();
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+            final ListIterator<java.lang.Integer> expected = list.listIterator();
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testPreviousChangesNext_remove758() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPreviousChangesNext_remove758");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            final ListIterator<java.lang.Integer> expected = threes.listIterator();
+            previousPreviousNext(expected, filtered);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+            final ListIterator<java.lang.Integer> expected = list.listIterator();
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testPreviousChangesNext_remove759() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPreviousChangesNext_remove759");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            final ListIterator<java.lang.Integer> expected = threes.listIterator();
+            walkForward(expected, filtered);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+            final ListIterator<java.lang.Integer> expected = list.listIterator();
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testPreviousChangesNext_remove760() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPreviousChangesNext_remove760");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            final ListIterator<java.lang.Integer> expected = threes.listIterator();
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+            final ListIterator<java.lang.Integer> expected = list.listIterator();
+            previousPreviousNext(expected, filtered);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testPreviousChangesNext_remove761() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPreviousChangesNext_remove761");
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , threePred);
+            final ListIterator<java.lang.Integer> expected = threes.listIterator();
+            walkForward(expected, filtered);
+            previousPreviousNext(expected, filtered);
+        }
+        {
+            final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , truePred);
+            final ListIterator<java.lang.Integer> expected = list.listIterator();
+            walkForward(expected, filtered);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testFailingHasNextBug() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFailingHasNextBug");
         final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , fourPred);
         final ListIterator<java.lang.Integer> expected = fours.listIterator();
         while (expected.hasNext()) {
             expected.next();
+            expected.next();
+            filtered.next();
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3165,filtered,3164,filtered.hasPrevious());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3166,!(filtered.hasNext()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3168,expected,3167,expected.previous());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3170,filtered,3169,filtered.previous());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testFailingHasNextBug_add998() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testFailingHasNextBug_add998");
+        final FilterListIterator<java.lang.Integer> filtered = new FilterListIterator<java.lang.Integer>(list.listIterator() , fourPred);
+        final ListIterator<java.lang.Integer> expected = fours.listIterator();
+        while (expected.hasNext()) {
+            expected.next();
+            filtered.next();
             filtered.next();
         }
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3165,filtered,3164,filtered.hasPrevious());

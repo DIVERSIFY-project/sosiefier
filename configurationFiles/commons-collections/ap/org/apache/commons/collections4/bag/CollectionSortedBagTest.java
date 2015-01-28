@@ -103,9 +103,9 @@ public void testEmptyBagCompatibility() throws IOException, ClassNotFoundExcepti
         final Bag<T> bag = makeObject();
         if (((bag instanceof java.io.Serializable) && (!(skipSerializedCanonicalTests()))) && (isTestSerialization())) {
             final Bag<?> bag2 = ((Bag<?>)(readExternalFormFromDisk(getCanonicalEmptyCollectionName(bag))));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5836,((bag2.size()) == 0));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5837,bag);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5838,bag2);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5797,((bag2.size()) == 0));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5798,bag);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5799,bag2);
         } 
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -119,10 +119,10 @@ public void testFullBagCompatibility() throws IOException, ClassNotFoundExceptio
         final SortedBag<T> bag = ((SortedBag<T>)(makeFullCollection()));
         if (((bag instanceof java.io.Serializable) && (!(skipSerializedCanonicalTests()))) && (isTestSerialization())) {
             final SortedBag<?> bag2 = ((SortedBag<?>)(readExternalFormFromDisk(getCanonicalFullCollectionName(bag))));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5840,bag,5839,bag.size());
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5842,bag2,5841,bag2.size());
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5843,bag);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5844,bag2);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5801,bag,5800,bag.size());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5803,bag2,5802,bag2.size());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5804,bag);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5805,bag2);
         } 
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

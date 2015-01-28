@@ -3,6 +3,7 @@ package org.apache.commons.collections4.iterators;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.junit.Test;
 
 /** 
  * Tests the UniqueFilterIterator class.
@@ -56,6 +57,25 @@ public class UniqueFilterIteratorTest<E> extends AbstractIteratorTest<E> {
         }
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4381,!(iter.hasNext()));
         try {
+            iter.next();
+        } catch (final Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2767,e.getClass(),2766,e.getClass().equals(new java.util.NoSuchElementException().getClass()));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testIterator_add1213() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterator_add1213");
+        final Iterator<E> iter = makeObject();
+        for (final String testValue : testArray) {
+            final E iterValue = iter.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2763,testValue);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2764,iterValue);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4381,!(iter.hasNext()));
+        try {
+            iter.next();
             iter.next();
         } catch (final Exception e) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2767,e.getClass(),2766,e.getClass().equals(new java.util.NoSuchElementException().getClass()));

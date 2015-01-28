@@ -4,7 +4,7 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.testamplification.CompareAmpliTest;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
@@ -38,7 +38,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         diff = new ArrayList<>();
     }
 
-    protected void run(Transformation trans) throws Exception {
+    protected void run(SingleTransformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
@@ -72,7 +72,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
       //  Log.debug("run after restore: " +result);
     }
 
-    protected void compare(Transformation trans) throws IOException, JSONException, InterruptedException {
+    protected void compare(SingleTransformation trans) throws IOException, JSONException, InterruptedException {
         String sosieDir = copySosieProgram();
         copyTestAndLogger(sosieDir);
         runSosie(sosieDir);
@@ -86,6 +86,8 @@ public class DiversifyAndCompare extends SinglePointDiversify {
             diff.add(cat.toJson(result, trans));
         } catch (Exception e) {
             Log.debug("");
+        } finally {
+            FileUtils.forceDelete(new File(sosieDir));
         }
 
     }

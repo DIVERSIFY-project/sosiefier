@@ -1,21 +1,11 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import spoon.compiler.Environment;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.visitor.FragmentDrivenJavaPrettyPrinter;
 
 import java.util.*;
-import java.util.stream.Collectors;
-//import java.util.stream.Collectors;
 
 /**
  * User: Simon
@@ -143,41 +133,6 @@ public abstract class AbstractTransformation implements Transformation {
     }
 
 
-    /**
-     * gets the parent method of an element
-     * @param son
-     * @return
-     */
-    protected CtElement getParentMethod(CtElement son) {
-        CtElement parent = son.getParent();
-
-        while(parent != null && !(parent instanceof CtExecutable) ) {
-            parent = parent.getParent();
-        }
-        if(parent == null)
-            return son.getParent();
-        else
-            return parent;
-    }
-
-    /**
-     * Gets the line's end  of the source position of an element
-     * @param exe element for which  we want to know the line's and
-     * @return
-     */
-    protected int getLineEnd(CtElement exe) {
-        if(exe instanceof CtExecutable && ((CtExecutable)exe).getBody() != null) {
-            CtBlock body = ((CtExecutable) exe).getBody();
-            int bodyEnd = body.getPosition().getEndLine();
-            int stmtEnd = body.getLastStatement().getPosition().getEndLine();
-            if(bodyEnd < stmtEnd)
-                return stmtEnd+1;
-            else
-                return bodyEnd;
-        }
-        else
-            return exe.getPosition().getEndLine()+1;
-    }
 
 
     @Override

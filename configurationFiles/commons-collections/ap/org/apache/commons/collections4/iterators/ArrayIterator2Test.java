@@ -1,6 +1,7 @@
 package org.apache.commons.collections4.iterators;
 
 import java.util.Iterator;
+import org.junit.Test;
 
 /** 
  * Tests the ArrayIterator with primitive type arrays.
@@ -55,6 +56,122 @@ public class ArrayIterator2Test<E> extends AbstractIteratorTest<E> {
             iter.next();
         } catch (final Exception e) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2751,e.getClass(),2750,e.getClass().equals(new java.util.NoSuchElementException().getClass()));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testIterator_add958() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterator_add958");
+        final Iterator<E> iter = makeObject();
+        for (final int element : testArray) {
+            final Integer testValue = Integer.valueOf(element);
+            final Number iterValue = ((Number)(iter.next()));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2747,testValue);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2748,iterValue);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2749,!(iter.hasNext()));
+        try {
+            iter.next();
+            iter.next();
+        } catch (final Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2751,e.getClass(),2750,e.getClass().equals(new java.util.NoSuchElementException().getClass()));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testIndexedArray_add956() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIndexedArray_add956");
+        Iterator<E> iter = makeArrayIterator(testArray, 2);
+        int count = 0;
+        while (iter.hasNext()) {
+            ++count;
+            iter.next();
+            iter.next();
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2742,count);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2743,((testArray.length) - 2));
+        iter = makeArrayIterator(testArray, 1, ((testArray.length) - 1));
+        count = 0;
+        while (iter.hasNext()) {
+            ++count;
+            iter.next();
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2744,(("the count should be right using ArrayIterator(Object,1," + ((testArray.length) - 1)) + ") "));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2745,count);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2746,((testArray.length) - 2));
+        try {
+            iter = makeArrayIterator(testArray, -1);
+        } catch (final ArrayIndexOutOfBoundsException aioobe) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, ((testArray.length) + 1));
+        } catch (final ArrayIndexOutOfBoundsException aioobe) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, 0, -1);
+        } catch (final ArrayIndexOutOfBoundsException aioobe) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, 0, ((testArray.length) + 1));
+        } catch (final ArrayIndexOutOfBoundsException aioobe) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, 1, 1);
+        } catch (final IllegalArgumentException iae) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, ((testArray.length) - 1), ((testArray.length) - 2));
+        } catch (final IllegalArgumentException iae) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testIndexedArray_add957() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIndexedArray_add957");
+        Iterator<E> iter = makeArrayIterator(testArray, 2);
+        int count = 0;
+        while (iter.hasNext()) {
+            ++count;
+            iter.next();
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2742,count);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2743,((testArray.length) - 2));
+        iter = makeArrayIterator(testArray, 1, ((testArray.length) - 1));
+        count = 0;
+        while (iter.hasNext()) {
+            ++count;
+            iter.next();
+            iter.next();
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2744,(("the count should be right using ArrayIterator(Object,1," + ((testArray.length) - 1)) + ") "));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2745,count);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2746,((testArray.length) - 2));
+        try {
+            iter = makeArrayIterator(testArray, -1);
+        } catch (final ArrayIndexOutOfBoundsException aioobe) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, ((testArray.length) + 1));
+        } catch (final ArrayIndexOutOfBoundsException aioobe) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, 0, -1);
+        } catch (final ArrayIndexOutOfBoundsException aioobe) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, 0, ((testArray.length) + 1));
+        } catch (final ArrayIndexOutOfBoundsException aioobe) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, 1, 1);
+        } catch (final IllegalArgumentException iae) {
+        }
+        try {
+            iter = makeArrayIterator(testArray, ((testArray.length) - 1), ((testArray.length) - 2));
+        } catch (final IllegalArgumentException iae) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -161,7 +278,7 @@ public class ArrayIterator2Test<E> extends AbstractIteratorTest<E> {
         }
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2742,count);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2743,((testArray.length) - 2));
-        iter = makeArrayIterator(testArray, 2, ((testArray.length) - 1));
+        iter = makeArrayIterator(testArray, 0, ((testArray.length) - 1));
         count = 0;
         while (iter.hasNext()) {
             ++count;
@@ -207,7 +324,7 @@ public class ArrayIterator2Test<E> extends AbstractIteratorTest<E> {
         }
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2742,count);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2743,((testArray.length) - 2));
-        iter = makeArrayIterator(testArray, 1, ((testArray.length) - 0));
+        iter = makeArrayIterator(testArray, 1, ((testArray.length) - 2));
         count = 0;
         while (iter.hasNext()) {
             ++count;
@@ -254,7 +371,7 @@ public class ArrayIterator2Test<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2742,count);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2743,((testArray.length) - 2));
         iter = makeArrayIterator(testArray, 1, ((testArray.length) - 1));
-        count = 1;
+        count = -1;
         while (iter.hasNext()) {
             ++count;
             iter.next();
@@ -309,7 +426,7 @@ public class ArrayIterator2Test<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2745,count);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2746,((testArray.length) - 2));
         try {
-            iter = makeArrayIterator(testArray, 0);
+            iter = makeArrayIterator(testArray, 2);
         } catch (final ArrayIndexOutOfBoundsException aioobe) {
         }
         try {
@@ -551,7 +668,7 @@ public class ArrayIterator2Test<E> extends AbstractIteratorTest<E> {
         } catch (final ArrayIndexOutOfBoundsException aioobe) {
         }
         try {
-            iter = makeArrayIterator(testArray, 0, ((testArray.length) + 2));
+            iter = makeArrayIterator(testArray, 0, ((testArray.length) + 0));
         } catch (final ArrayIndexOutOfBoundsException aioobe) {
         }
         try {
@@ -601,7 +718,7 @@ public class ArrayIterator2Test<E> extends AbstractIteratorTest<E> {
         } catch (final ArrayIndexOutOfBoundsException aioobe) {
         }
         try {
-            iter = makeArrayIterator(testArray, 2, 1);
+            iter = makeArrayIterator(testArray, 0, 1);
         } catch (final IllegalArgumentException iae) {
         }
         try {
@@ -647,7 +764,7 @@ public class ArrayIterator2Test<E> extends AbstractIteratorTest<E> {
         } catch (final ArrayIndexOutOfBoundsException aioobe) {
         }
         try {
-            iter = makeArrayIterator(testArray, 1, 0);
+            iter = makeArrayIterator(testArray, 1, 2);
         } catch (final IllegalArgumentException iae) {
         }
         try {
@@ -697,7 +814,7 @@ public class ArrayIterator2Test<E> extends AbstractIteratorTest<E> {
         } catch (final IllegalArgumentException iae) {
         }
         try {
-            iter = makeArrayIterator(testArray, ((testArray.length) - 2), ((testArray.length) - 2));
+            iter = makeArrayIterator(testArray, ((testArray.length) - 0), ((testArray.length) - 2));
         } catch (final IllegalArgumentException iae) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

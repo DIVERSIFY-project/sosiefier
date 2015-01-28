@@ -4,7 +4,7 @@ import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.factory.Factory;
@@ -64,7 +64,7 @@ public class InstruTestAndMethod {
             inputProgram.processCodeFragments();
 
             TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-            List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
+            List<SingleTransformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
             instru = new Instru(project, src, test, javaVersion, out, transf);
             instru.setSourceFactory(factory);
         } else {

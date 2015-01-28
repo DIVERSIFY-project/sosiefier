@@ -2,14 +2,11 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.util.Log;
 import spoon.reflect.code.*;
 import spoon.reflect.reference.CtVariableReference;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;

@@ -3,9 +3,8 @@ package fr.inria.diversify.testamplification;
 import fr.inria.diversify.testamplification.compare.LogTestComparator;
 import fr.inria.diversify.testamplification.compare.LogTestReader;
 import fr.inria.diversify.testamplification.compare.Test;
-import fr.inria.diversify.testamplification.compare.diff.LogDiff;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +12,6 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * Created by Simon on 15/01/15.
@@ -45,6 +43,7 @@ public class CompareAmpliTest {
 
     public void filter(List<TestDiff> diff, Map<String, Set<String>> filter) {
         diff.stream()
+                .filter(d -> filter.containsKey(d.getSignature()))
                 .forEach(d -> d.filter(filter.get(d.getSignature())));
     }
 
@@ -54,7 +53,7 @@ public class CompareAmpliTest {
         fw.close();
     }
 
-    public JSONObject toJson(List<TestDiff> diffs, Transformation sosie) throws JSONException {
+    public JSONObject toJson(List<TestDiff> diffs, SingleTransformation sosie) throws JSONException {
         JSONObject object = new JSONObject();
 
         if(sosie != null) {

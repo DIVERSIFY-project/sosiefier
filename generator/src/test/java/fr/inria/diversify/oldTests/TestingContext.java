@@ -2,7 +2,7 @@ package fr.inria.diversify.oldTests;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import spoon.reflect.factory.Factory;
@@ -42,6 +42,6 @@ public class TestingContext {
 
     public static void loadTransformations(String resourcePath) throws TransformationParserException {
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-        List<Transformation> transf = parser.parseFile(new File(resourcePath));
+        List<SingleTransformation> transf = parser.parseFile(new File(resourcePath));
     }
 }

@@ -73,17 +73,31 @@ public class UnmodifiableSortedBidiMapTest<K extends java.lang.Comparable<K>, V 
 
     public void testUnmodifiable() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5601,((makeObject()) instanceof org.apache.commons.collections4.Unmodifiable));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5602,((makeFullMap()) instanceof org.apache.commons.collections4.Unmodifiable));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5562,((makeObject()) instanceof org.apache.commons.collections4.Unmodifiable));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5563,((makeFullMap()) instanceof org.apache.commons.collections4.Unmodifiable));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     public void testDecorateFactory() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory");
         final SortedBidiMap<K, V> map = makeFullMap();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5598,map);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5600,null,5599,org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMap.unmodifiableSortedBidiMap(map));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5559,map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5561,null,5560,org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMap.unmodifiableSortedBidiMap(map));
         try {
+            org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMap.unmodifiableSortedBidiMap(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testDecorateFactory_add1653() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add1653");
+        final SortedBidiMap<K, V> map = makeFullMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5559,map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5561,null,5560,org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMap.unmodifiableSortedBidiMap(map));
+        try {
+            org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMap.unmodifiableSortedBidiMap(null);
             org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMap.unmodifiableSortedBidiMap(null);
         } catch (final IllegalArgumentException ex) {
         }

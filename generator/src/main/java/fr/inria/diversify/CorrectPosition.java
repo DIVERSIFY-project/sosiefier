@@ -1,25 +1,17 @@
 package fr.inria.diversify;
 
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
-import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
-import fr.inria.diversify.transformation.ast.ASTAdd;
-import fr.inria.diversify.transformation.ast.ASTDelete;
-import fr.inria.diversify.transformation.ast.ASTReplace;
-import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
-import org.json.JSONObject;
-import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.factory.Factory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Properties;
 
@@ -54,10 +46,10 @@ public class CorrectPosition {
         inputProgram.setPreviousTransformationsPath(prevTransfPath);
         inputProgram.processCodeFragments();
 
-        Collection<Transformation> ts = new TransformationJsonParser(false, inputProgram).parseFile(new File(prevTransfPath));
+        Collection<SingleTransformation> ts = new TransformationJsonParser(false, inputProgram).parseFile(new File(prevTransfPath));
 
         JSONArray array = new JSONArray();
-        for (Transformation t : ts) {
+        for (SingleTransformation t : ts) {
             array.put(t.toJSONObject());
         }
         FileWriter fw = new FileWriter(out);

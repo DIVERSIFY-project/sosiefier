@@ -1,6 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourcePosition;
@@ -20,7 +20,7 @@ public class FieldUsedInstrumenter extends AbstractLoggingInstrumenter<CtStateme
 
     protected Set<CtStatement> alreadyInstrument;
 
-    public FieldUsedInstrumenter(List<Transformation> transformations) {
+    public FieldUsedInstrumenter(List<SingleTransformation> transformations) {
         super(transformations);
         alreadyInstrument = new HashSet<>();
     }

@@ -47,10 +47,40 @@ public class BooleanComparatorTest extends AbstractComparatorTest<java.lang.Bool
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testConstructors_add1256() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_add1256");
+        allTests(false, new BooleanComparator());
+        allTests(false, new BooleanComparator());
+        allTests(false, new BooleanComparator(false));
+        allTests(true, new BooleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testConstructors_add1257() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_add1257");
+        allTests(false, new BooleanComparator());
+        allTests(false, new BooleanComparator(false));
+        allTests(false, new BooleanComparator(false));
+        allTests(true, new BooleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testConstructors_add1258() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_add1258");
+        allTests(false, new BooleanComparator());
+        allTests(false, new BooleanComparator(false));
+        allTests(true, new BooleanComparator(true));
+        allTests(true, new BooleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test
     public void testConstructors_literalMutation1200() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1200");
-        allTests(true, new BooleanComparator());
+        allTests(false, new BooleanComparator());
         allTests(false, new BooleanComparator(false));
         allTests(true, new BooleanComparator(true));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -60,7 +90,7 @@ public class BooleanComparatorTest extends AbstractComparatorTest<java.lang.Bool
     public void testConstructors_literalMutation1201() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1201");
         allTests(false, new BooleanComparator());
-        allTests(true, new BooleanComparator(false));
+        allTests(false, new BooleanComparator(false));
         allTests(true, new BooleanComparator(true));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -69,7 +99,7 @@ public class BooleanComparatorTest extends AbstractComparatorTest<java.lang.Bool
     public void testConstructors_literalMutation1202() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1202");
         allTests(false, new BooleanComparator());
-        allTests(false, new BooleanComparator(false));
+        allTests(false, new BooleanComparator(true));
         allTests(true, new BooleanComparator(true));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -88,14 +118,82 @@ public class BooleanComparatorTest extends AbstractComparatorTest<java.lang.Bool
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation1204");
         allTests(false, new BooleanComparator());
         allTests(false, new BooleanComparator(false));
-        allTests(true, new BooleanComparator(false));
+        allTests(true, new BooleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testConstructors_remove928() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_remove928");
+        allTests(false, new BooleanComparator(false));
+        allTests(true, new BooleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testConstructors_remove929() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_remove929");
+        allTests(false, new BooleanComparator(false));
+        allTests(true, new BooleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testConstructors_remove930() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_remove930");
+        allTests(false, new BooleanComparator(false));
+        allTests(true, new BooleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testStaticFactoryMethods_add1259() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods_add1259");
+        allTests(false, BooleanComparator.getFalseFirstComparator());
+        allTests(false, BooleanComparator.getFalseFirstComparator());
+        allTests(false, BooleanComparator.booleanComparator(false));
+        allTests(true, BooleanComparator.getTrueFirstComparator());
+        allTests(true, BooleanComparator.booleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testStaticFactoryMethods_add1260() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods_add1260");
+        allTests(false, BooleanComparator.getFalseFirstComparator());
+        allTests(false, BooleanComparator.booleanComparator(false));
+        allTests(false, BooleanComparator.booleanComparator(false));
+        allTests(true, BooleanComparator.getTrueFirstComparator());
+        allTests(true, BooleanComparator.booleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testStaticFactoryMethods_add1261() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods_add1261");
+        allTests(false, BooleanComparator.getFalseFirstComparator());
+        allTests(false, BooleanComparator.booleanComparator(false));
+        allTests(true, BooleanComparator.getTrueFirstComparator());
+        allTests(true, BooleanComparator.getTrueFirstComparator());
+        allTests(true, BooleanComparator.booleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testStaticFactoryMethods_add1262() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods_add1262");
+        allTests(false, BooleanComparator.getFalseFirstComparator());
+        allTests(false, BooleanComparator.booleanComparator(false));
+        allTests(true, BooleanComparator.getTrueFirstComparator());
+        allTests(true, BooleanComparator.booleanComparator(true));
+        allTests(true, BooleanComparator.booleanComparator(true));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @Test
     public void testStaticFactoryMethods() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods");
-        allTests(false, BooleanComparator.getFalseFirstComparator());
+        allTests(true, BooleanComparator.getFalseFirstComparator());
         allTests(false, BooleanComparator.booleanComparator(false));
         allTests(true, BooleanComparator.getTrueFirstComparator());
         allTests(true, BooleanComparator.booleanComparator(true));
@@ -138,7 +236,7 @@ public class BooleanComparatorTest extends AbstractComparatorTest<java.lang.Bool
         allTests(false, BooleanComparator.getFalseFirstComparator());
         allTests(false, BooleanComparator.booleanComparator(false));
         allTests(true, BooleanComparator.getTrueFirstComparator());
-        allTests(false, BooleanComparator.booleanComparator(true));
+        allTests(true, BooleanComparator.booleanComparator(true));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -146,6 +244,42 @@ public class BooleanComparatorTest extends AbstractComparatorTest<java.lang.Bool
     public void testStaticFactoryMethods_literalMutation1210() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods_literalMutation1210");
         allTests(false, BooleanComparator.getFalseFirstComparator());
+        allTests(false, BooleanComparator.booleanComparator(false));
+        allTests(true, BooleanComparator.getTrueFirstComparator());
+        allTests(true, BooleanComparator.booleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testStaticFactoryMethods_remove931() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods_remove931");
+        allTests(false, BooleanComparator.booleanComparator(false));
+        allTests(true, BooleanComparator.getTrueFirstComparator());
+        allTests(true, BooleanComparator.booleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testStaticFactoryMethods_remove932() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods_remove932");
+        allTests(false, BooleanComparator.booleanComparator(false));
+        allTests(true, BooleanComparator.getTrueFirstComparator());
+        allTests(true, BooleanComparator.booleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testStaticFactoryMethods_remove933() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods_remove933");
+        allTests(false, BooleanComparator.booleanComparator(false));
+        allTests(true, BooleanComparator.getTrueFirstComparator());
+        allTests(true, BooleanComparator.booleanComparator(true));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testStaticFactoryMethods_remove934() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testStaticFactoryMethods_remove934");
         allTests(false, BooleanComparator.booleanComparator(false));
         allTests(true, BooleanComparator.getTrueFirstComparator());
         allTests(true, BooleanComparator.booleanComparator(true));

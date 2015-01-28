@@ -4,7 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.codeFragmentProcessor.AbstractCodeFragmentProcessor;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
@@ -49,8 +49,8 @@ public class SamplingMain {
 
         initSpoon();
         TransformationParser tf = new TransformationParser(true, inputProgram);
-        Collection<Transformation> transformations = tf.parseDir(inputConfiguration.getProperty("transformation.directory"));
-        Set<Transformation> set = new HashSet<Transformation>(transformations);
+        Collection<SingleTransformation> transformations = tf.parseDir(inputConfiguration.getProperty("transformation.directory"));
+        Set<SingleTransformation> set = new HashSet<SingleTransformation>(transformations);
 
         Sampling s = new Sampling(set, 500);
 

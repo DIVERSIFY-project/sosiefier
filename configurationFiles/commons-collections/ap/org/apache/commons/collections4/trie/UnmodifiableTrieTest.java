@@ -50,17 +50,31 @@ public class UnmodifiableTrieTest<V> extends AbstractSortedMapTest<java.lang.Str
 
     public void testUnmodifiable() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6397,((makeObject()) instanceof org.apache.commons.collections4.Unmodifiable));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6398,((makeFullMap()) instanceof org.apache.commons.collections4.Unmodifiable));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6358,((makeObject()) instanceof org.apache.commons.collections4.Unmodifiable));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6359,((makeFullMap()) instanceof org.apache.commons.collections4.Unmodifiable));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     public void testDecorateFactory() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory");
         final Trie<java.lang.String, V> trie = makeFullMap();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6394,trie);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6396,null,6395,org.apache.commons.collections4.trie.UnmodifiableTrie.unmodifiableTrie(trie));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6355,trie);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6357,null,6356,org.apache.commons.collections4.trie.UnmodifiableTrie.unmodifiableTrie(trie));
         try {
+            org.apache.commons.collections4.trie.UnmodifiableTrie.unmodifiableTrie(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testDecorateFactory_add1999() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add1999");
+        final Trie<java.lang.String, V> trie = makeFullMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6355,trie);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6357,null,6356,org.apache.commons.collections4.trie.UnmodifiableTrie.unmodifiableTrie(trie));
+        try {
+            org.apache.commons.collections4.trie.UnmodifiableTrie.unmodifiableTrie(null);
             org.apache.commons.collections4.trie.UnmodifiableTrie.unmodifiableTrie(null);
         } catch (final IllegalArgumentException ex) {
         }

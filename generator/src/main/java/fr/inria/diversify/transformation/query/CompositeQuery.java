@@ -1,11 +1,9 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -36,9 +34,9 @@ public class CompositeQuery extends TransformationQuery  {
     public void setType(String type) {}
 
     @Override
-    public Transformation query() {
+    public SingleTransformation query() {
         try {
-            Transformation transformation = null;
+            SingleTransformation transformation = null;
             Random r = new Random();
 
             while (transformation == null) {
@@ -59,7 +57,7 @@ public class CompositeQuery extends TransformationQuery  {
     }
 
     class T extends Thread {
-        public Transformation trans;
+        public SingleTransformation trans;
         ASTTransformationQuery query;
         MutationQuery mutation;
         double r;

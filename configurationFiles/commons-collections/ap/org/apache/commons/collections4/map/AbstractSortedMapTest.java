@@ -5,6 +5,7 @@ import org.apache.commons.collections4.BulkTest;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
+import org.junit.Test;
 import java.util.TreeMap;
 
 /** 
@@ -217,6 +218,54 @@ public AbstractSortedMapTest(final String testName) {
             return ((SortedMap<K, V>)(main.makeFullMap())).headMap(toKey);
         }
 
+        @Test(timeout = 1000)
+        public void testHeadMapOutOfRange_add184() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHeadMapOutOfRange_add184");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            resetEmpty();
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testHeadMapOutOfRange_add185() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHeadMapOutOfRange_add185");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testHeadMapOutOfRange_add186() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHeadMapOutOfRange_add186");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
         public void testHeadMapOutOfRange() {
             fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHeadMapOutOfRange");
             if (!(isPutAddSupported())) {
@@ -228,6 +277,34 @@ public AbstractSortedMapTest(final String testName) {
             } catch (final IllegalArgumentException ex) {
             }
             verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testHeadMapOutOfRange_remove150() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHeadMapOutOfRange_remove150");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testHeadMapOutOfRange_remove151() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testHeadMapOutOfRange_remove151");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
             fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
         }
 
@@ -268,6 +345,54 @@ public AbstractSortedMapTest(final String testName) {
             return ((SortedMap<K, V>)(main.makeFullMap())).tailMap(fromKey);
         }
 
+        @Test(timeout = 1000)
+        public void testTailMapOutOfRange_add190() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTailMapOutOfRange_add190");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            resetEmpty();
+            try {
+                getMap().put(invalidKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testTailMapOutOfRange_add191() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTailMapOutOfRange_add191");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            try {
+                getMap().put(invalidKey, subSortedValues.get(0));
+                getMap().put(invalidKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testTailMapOutOfRange_add192() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTailMapOutOfRange_add192");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            try {
+                getMap().put(invalidKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
         public void testTailMapOutOfRange() {
             fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTailMapOutOfRange");
             if (!(isPutAddSupported())) {
@@ -279,6 +404,34 @@ public AbstractSortedMapTest(final String testName) {
             } catch (final IllegalArgumentException ex) {
             }
             verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testTailMapOutOfRange_remove154() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTailMapOutOfRange_remove154");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            try {
+                getMap().put(invalidKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testTailMapOutOfRange_remove155() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testTailMapOutOfRange_remove155");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            try {
+                getMap().put(invalidKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
             fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
         }
 
@@ -321,6 +474,54 @@ public AbstractSortedMapTest(final String testName) {
             return ((SortedMap<K, V>)(main.makeFullMap())).subMap(fromKey, toKey);
         }
 
+        @Test(timeout = 1000)
+        public void testSubMapOutOfRange_add187() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubMapOutOfRange_add187");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            resetEmpty();
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testSubMapOutOfRange_add188() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubMapOutOfRange_add188");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testSubMapOutOfRange_add189() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubMapOutOfRange_add189");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
         public void testSubMapOutOfRange() {
             fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubMapOutOfRange");
             if (!(isPutAddSupported())) {
@@ -328,10 +529,38 @@ public AbstractSortedMapTest(final String testName) {
             } 
             resetEmpty();
             try {
-                getMap().put(toKey, subSortedValues.get(-1));
+                getMap().put(toKey, subSortedValues.get(1));
             } catch (final IllegalArgumentException ex) {
             }
             verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testSubMapOutOfRange_remove152() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubMapOutOfRange_remove152");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
+            verify();
+            fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+        }
+
+        @Test(timeout = 1000)
+        public void testSubMapOutOfRange_remove153() {
+            fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSubMapOutOfRange_remove153");
+            if (!(isPutAddSupported())) {
+                return ;
+            } 
+            resetEmpty();
+            try {
+                getMap().put(toKey, subSortedValues.get(0));
+            } catch (final IllegalArgumentException ex) {
+            }
             fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
         }
 

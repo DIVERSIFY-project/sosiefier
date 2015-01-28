@@ -2,6 +2,7 @@ package org.apache.commons.collections4.iterators;
 
 import java.util.Iterator;
 import org.apache.commons.collections4.ResettableIterator;
+import org.junit.Test;
 
 /** 
  * Tests the SingletonIterator to ensure that the next() method will actually
@@ -61,6 +62,52 @@ public class SingletonIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testIterator_add1201() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterator_add1201");
+        final Iterator<E> iter = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4300,iter,4299,iter.hasNext());
+        final E iterValue = iter.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4301,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2764,iterValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4302,!(iter.hasNext()));
+        try {
+            iter.next();
+            iter.next();
+        } catch (final Exception e) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4304,e.getClass(),4303,e.getClass().equals(new java.util.NoSuchElementException().getClass()));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSingletonIteratorRemove_add1205() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletonIteratorRemove_add1205");
+        final ResettableIterator<E> iter = new SingletonIterator<E>(((E)("xyzzy")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4318,iter,4317,iter.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4320,iter,4319,iter.next());
+        iter.remove();
+        iter.remove();
+        iter.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4321,!(iter.hasNext()));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSingletonIteratorRemove_add1206() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletonIteratorRemove_add1206");
+        final ResettableIterator<E> iter = new SingletonIterator<E>(((E)("xyzzy")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4318,iter,4317,iter.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4320,iter,4319,iter.next());
+        iter.remove();
+        iter.reset();
+        iter.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4321,!(iter.hasNext()));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @SuppressWarnings(value = "unchecked")
     public void testSingletonIteratorRemove() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletonIteratorRemove");
@@ -85,6 +132,30 @@ public class SingletonIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSingletonIteratorRemove_remove888() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletonIteratorRemove_remove888");
+        final ResettableIterator<E> iter = new SingletonIterator<E>(((E)("xyzzy")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4318,iter,4317,iter.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4320,iter,4319,iter.next());
+        iter.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4321,!(iter.hasNext()));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSingletonIteratorRemove_remove889() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSingletonIteratorRemove_remove889");
+        final ResettableIterator<E> iter = new SingletonIterator<E>(((E)("xyzzy")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4318,iter,4317,iter.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4320,iter,4319,iter.next());
+        iter.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4321,!(iter.hasNext()));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testReset() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset");
         final ResettableIterator<E> it = makeObject();
@@ -93,6 +164,120 @@ public class SingletonIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4309,it,4308,it.next());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4298,it,4297,it.hasNext());
         it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4311,it,4310,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4312,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4314,it,4313,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4316,it,4315,it.hasNext());
+        it.reset();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4282,it,4281,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_add1202() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1202");
+        final ResettableIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4306,it,4305,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4307,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4309,it,4308,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4298,it,4297,it.hasNext());
+        it.reset();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4311,it,4310,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4312,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4314,it,4313,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4316,it,4315,it.hasNext());
+        it.reset();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4282,it,4281,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_add1203() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1203");
+        final ResettableIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4306,it,4305,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4307,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4309,it,4308,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4298,it,4297,it.hasNext());
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4311,it,4310,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4312,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4314,it,4313,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4316,it,4315,it.hasNext());
+        it.reset();
+        it.reset();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4282,it,4281,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_add1204() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1204");
+        final ResettableIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4306,it,4305,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4307,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4309,it,4308,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4298,it,4297,it.hasNext());
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4311,it,4310,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4312,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4314,it,4313,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4316,it,4315,it.hasNext());
+        it.reset();
+        it.reset();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4282,it,4281,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_remove885() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_remove885");
+        final ResettableIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4306,it,4305,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4307,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4309,it,4308,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4298,it,4297,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4311,it,4310,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4312,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4314,it,4313,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4316,it,4315,it.hasNext());
+        it.reset();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4282,it,4281,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_remove886() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_remove886");
+        final ResettableIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4306,it,4305,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4307,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4309,it,4308,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4298,it,4297,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4311,it,4310,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4312,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4314,it,4313,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4316,it,4315,it.hasNext());
+        it.reset();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4282,it,4281,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_remove887() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_remove887");
+        final ResettableIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4306,it,4305,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4307,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4309,it,4308,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4298,it,4297,it.hasNext());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4311,it,4310,it.hasNext());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4312,org.apache.commons.collections4.iterators.SingletonIteratorTest.testValue);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4314,it,4313,it.next());

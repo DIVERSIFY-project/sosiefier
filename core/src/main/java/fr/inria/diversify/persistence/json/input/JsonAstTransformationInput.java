@@ -2,7 +2,7 @@ package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +34,7 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
     /**
      * gets data from the JSON  object into the transformation object
      */
-    protected ASTTransformation get(HashMap<Integer, Transformation> t) throws JSONException {
+    protected ASTTransformation get(HashMap<Integer, SingleTransformation> t) throws JSONException {
 
         HashMap<Integer, String> failures = getFailures();
 
@@ -51,7 +51,7 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<Integer, SingleTransformation> transformations) {
         try {
             get(transformations);
         } catch (JSONException e) {

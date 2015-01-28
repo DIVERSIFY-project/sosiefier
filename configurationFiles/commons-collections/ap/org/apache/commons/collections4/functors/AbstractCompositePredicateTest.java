@@ -78,10 +78,32 @@ public void singletonCollectionToGetInstance() {
     /** 
      * Tests <code>getInstance</code> with a null predicate array.
      */
-@Test(expected = IllegalArgumentException.class)
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
     public final void nullArrayToGetInstance() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullArrayToGetInstance");
         getPredicateInstance(((Predicate<T>[])(null)));
+        getPredicateInstance(((Predicate<T>[])(null)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests <code>getInstance</code> with a null predicate array.
+     */
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullArrayToGetInstance_remove894() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullArrayToGetInstance_remove894");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests <code>getInstance</code> with a single null element in the predicate array.
+     */
+@SuppressWarnings(value = { "unchecked" })
+    @Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullElementInArrayToGetInstance_add1220() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementInArrayToGetInstance_add1220");
+        getPredicateInstance(new Predicate[]{ null });
+        getPredicateInstance(new Predicate[]{ null });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -97,6 +119,28 @@ public void singletonCollectionToGetInstance() {
     }
 
     /** 
+     * Tests <code>getInstance</code> with a single null element in the predicate array.
+     */
+@SuppressWarnings(value = { "unchecked" })
+    @Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullElementInArrayToGetInstance_remove896() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementInArrayToGetInstance_remove896");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests <code>getInstance</code> with two null elements in the predicate array.
+     */
+@SuppressWarnings(value = { "unchecked" })
+    @Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullElementsInArrayToGetInstance_add1221() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementsInArrayToGetInstance_add1221");
+        getPredicateInstance(new Predicate[]{ null , null });
+        getPredicateInstance(new Predicate[]{ null , null });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
      * Tests <code>getInstance</code> with two null elements in the predicate array.
      */
 @SuppressWarnings(value = { "foo" })
@@ -108,25 +152,110 @@ public void singletonCollectionToGetInstance() {
     }
 
     /** 
+     * Tests <code>getInstance</code> with two null elements in the predicate array.
+     */
+@SuppressWarnings(value = { "unchecked" })
+    @Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullElementsInArrayToGetInstance_remove897() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementsInArrayToGetInstance_remove897");
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
      * Tests <code>getInstance</code> with a null predicate collection
      */
-@Test(expected = IllegalArgumentException.class)
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
     public final void nullCollectionToGetInstance() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullCollectionToGetInstance");
         getPredicateInstance(((Collection<org.apache.commons.collections4.Predicate<T>>)(null)));
+        getPredicateInstance(((Collection<org.apache.commons.collections4.Predicate<T>>)(null)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests <code>getInstance</code> with a null predicate collection
+     */
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullCollectionToGetInstance_remove895() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullCollectionToGetInstance_remove895");
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     /** 
      * Tests <code>getInstance</code> with a predicate collection that contains null elements
      */
-@Test(expected = IllegalArgumentException.class)
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
     public final void nullElementsInCollectionToGetInstance() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementsInCollectionToGetInstance");
         final Collection<org.apache.commons.collections4.Predicate<T>> coll = new ArrayList<org.apache.commons.collections4.Predicate<T>>();
         coll.add(null);
         coll.add(null);
+        coll.add(null);
         getPredicateInstance(coll);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests <code>getInstance</code> with a predicate collection that contains null elements
+     */
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullElementsInCollectionToGetInstance_add1223() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementsInCollectionToGetInstance_add1223");
+        final Collection<org.apache.commons.collections4.Predicate<T>> coll = new ArrayList<org.apache.commons.collections4.Predicate<T>>();
+        coll.add(null);
+        coll.add(null);
+        coll.add(null);
+        getPredicateInstance(coll);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests <code>getInstance</code> with a predicate collection that contains null elements
+     */
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullElementsInCollectionToGetInstance_add1224() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementsInCollectionToGetInstance_add1224");
+        final Collection<org.apache.commons.collections4.Predicate<T>> coll = new ArrayList<org.apache.commons.collections4.Predicate<T>>();
+        coll.add(null);
+        coll.add(null);
+        getPredicateInstance(coll);
+        getPredicateInstance(coll);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests <code>getInstance</code> with a predicate collection that contains null elements
+     */
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullElementsInCollectionToGetInstance_remove898() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementsInCollectionToGetInstance_remove898");
+        final Collection<org.apache.commons.collections4.Predicate<T>> coll = new ArrayList<org.apache.commons.collections4.Predicate<T>>();
+        coll.add(null);
+        getPredicateInstance(coll);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests <code>getInstance</code> with a predicate collection that contains null elements
+     */
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullElementsInCollectionToGetInstance_remove899() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementsInCollectionToGetInstance_remove899");
+        final Collection<org.apache.commons.collections4.Predicate<T>> coll = new ArrayList<org.apache.commons.collections4.Predicate<T>>();
+        coll.add(null);
+        getPredicateInstance(coll);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests <code>getInstance</code> with a predicate collection that contains null elements
+     */
+@Test(expected = IllegalArgumentException.class, timeout = 1000)
+    public final void nullElementsInCollectionToGetInstance_remove900() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "nullElementsInCollectionToGetInstance_remove900");
+        final Collection<org.apache.commons.collections4.Predicate<T>> coll = new ArrayList<org.apache.commons.collections4.Predicate<T>>();
+        coll.add(null);
+        coll.add(null);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 }

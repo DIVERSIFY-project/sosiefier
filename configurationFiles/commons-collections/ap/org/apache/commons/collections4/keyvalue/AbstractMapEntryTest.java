@@ -2,6 +2,7 @@ package org.apache.commons.collections4.keyvalue;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Test;
 import junit.framework.TestCase;
 
 /** 
@@ -53,6 +54,38 @@ public Map.Entry<K, V> makeKnownMapEntry(final K key, final V value) {
     }
 
     @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_add850() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_add850");
+        Map.Entry<K, V> entry = makeMapEntry(((K)(key)), ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2390,((entry.getKey()) == (key)));
+        entry.setValue(((V)(value)));
+        entry.setValue(((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2391,((entry.getValue()) == (value)));
+        entry = makeMapEntry(null, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2392,((entry.getKey()) == null));
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2393,((entry.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_add851() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_add851");
+        Map.Entry<K, V> entry = makeMapEntry(((K)(key)), ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2390,((entry.getKey()) == (key)));
+        entry.setValue(((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2391,((entry.getValue()) == (value)));
+        entry = makeMapEntry(null, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2392,((entry.getKey()) == null));
+        entry.setValue(null);
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2393,((entry.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void testAccessorsAndMutators() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators");
         Map.Entry<K, V> entry = makeMapEntry(((K)(key)), ((V)(value)));
@@ -63,6 +96,53 @@ public Map.Entry<K, V> makeKnownMapEntry(final K key, final V value) {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2392,((entry.getKey()) == null));
         entry.setValue(null);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2393,((entry.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_remove667() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_remove667");
+        Map.Entry<K, V> entry = makeMapEntry(((K)(key)), ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2390,((entry.getKey()) == (key)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2391,((entry.getValue()) == (value)));
+        entry = makeMapEntry(null, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2392,((entry.getKey()) == null));
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2393,((entry.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_remove668() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_remove668");
+        Map.Entry<K, V> entry = makeMapEntry(((K)(key)), ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2390,((entry.getKey()) == (key)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2391,((entry.getValue()) == (value)));
+        entry = makeMapEntry(null, null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2392,((entry.getKey()) == null));
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2393,((entry.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Subclasses should override this method to test the
+     * desired behaviour of the class with respect to
+     * handling of self-references.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSelfReferenceHandling_add852() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSelfReferenceHandling_add852");
+        final Map.Entry<K, V> entry = makeMapEntry();
+        try {
+            entry.setValue(((V)(entry)));
+            entry.setValue(((V)(entry)));
+        } catch (final IllegalArgumentException iae) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2408,(((entry.getKey()) == null) && ((entry.getValue()) == null)));
+        }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

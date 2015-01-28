@@ -1,7 +1,7 @@
 package fr.inria.diversify.ut.json.output;
 
 import fr.inria.diversify.persistence.json.output.JsonSosiesOutput;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import org.json.JSONObject;
 
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.Collection;
  */
 public class JsonSosieOutputForUT extends JsonSosiesOutput {
 
-    public JsonSosieOutputForUT(Collection<Transformation> transformations, String uri) {
+    public JsonSosieOutputForUT(Collection<SingleTransformation> transformations, String uri) {
         super(transformations, uri);
     }
 

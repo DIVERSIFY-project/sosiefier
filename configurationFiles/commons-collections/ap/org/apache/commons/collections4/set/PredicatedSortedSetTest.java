@@ -50,7 +50,7 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
     public void testGetSet() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetSet");
         final PredicatedSortedSet<E> set = makeTestSet();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6281,((set.decorated()) != null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6242,((set.decorated()) != null));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -63,7 +63,22 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
             set.add(((E)(testString)));
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6282,!(set.contains(testString)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6243,!(set.contains(testString)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAdd_add1972() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAdd_add1972");
+        final SortedSet<E> set = makeTestSet();
+        final String testString = "B";
+        try {
+            set.add(((E)(testString)));
+            set.add(((E)(testString)));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6243,!(set.contains(testString)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -76,7 +91,7 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
             set.add(((E)(testString)));
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6282,!(set.contains(testString)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6243,!(set.contains(testString)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -89,7 +104,7 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
             set.add(((E)(testString)));
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6282,!(set.contains(testString)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6243,!(set.contains(testString)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -106,10 +121,120 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6283,!(set.contains("Aone")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6284,!(set.contains("Atwo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6285,!(set.contains("Bthree")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6286,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAddAll_add1973() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1973");
+        final SortedSet<E> set = makeTestSet();
+        final Set<E> elements = new TreeSet<E>();
+        elements.add(((E)("Aone")));
+        elements.add(((E)("Aone")));
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Afour")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAddAll_add1974() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1974");
+        final SortedSet<E> set = makeTestSet();
+        final Set<E> elements = new TreeSet<E>();
+        elements.add(((E)("Aone")));
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Afour")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAddAll_add1975() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1975");
+        final SortedSet<E> set = makeTestSet();
+        final Set<E> elements = new TreeSet<E>();
+        elements.add(((E)("Aone")));
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Afour")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAddAll_add1976() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1976");
+        final SortedSet<E> set = makeTestSet();
+        final Set<E> elements = new TreeSet<E>();
+        elements.add(((E)("Aone")));
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Afour")));
+        elements.add(((E)("Afour")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAddAll_add1977() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1977");
+        final SortedSet<E> set = makeTestSet();
+        final Set<E> elements = new TreeSet<E>();
+        elements.add(((E)("Aone")));
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Afour")));
+        try {
+            set.addAll(elements);
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -126,10 +251,10 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6283,!(set.contains("Aone")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6284,!(set.contains("Atwo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6285,!(set.contains("Bthree")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6286,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -146,10 +271,10 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6283,!(set.contains("Aone")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6284,!(set.contains("Atwo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6285,!(set.contains("Bthree")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6286,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -166,10 +291,10 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6283,!(set.contains("Aone")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6284,!(set.contains("Atwo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6285,!(set.contains("Bthree")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6286,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -186,10 +311,10 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6283,!(set.contains("Aone")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6284,!(set.contains("Atwo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6285,!(set.contains("Bthree")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6286,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -206,10 +331,90 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6283,!(set.contains("Aone")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6284,!(set.contains("Atwo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6285,!(set.contains("Bthree")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6286,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAddAll_remove1536() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1536");
+        final SortedSet<E> set = makeTestSet();
+        final Set<E> elements = new TreeSet<E>();
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Afour")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAddAll_remove1537() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1537");
+        final SortedSet<E> set = makeTestSet();
+        final Set<E> elements = new TreeSet<E>();
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Afour")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAddAll_remove1538() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1538");
+        final SortedSet<E> set = makeTestSet();
+        final Set<E> elements = new TreeSet<E>();
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Afour")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testIllegalAddAll_remove1539() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1539");
+        final SortedSet<E> set = makeTestSet();
+        final Set<E> elements = new TreeSet<E>();
+        elements.add(((E)("Atwo")));
+        elements.add(((E)("Bthree")));
+        elements.add(((E)("Afour")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6244,!(set.contains("Aone")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6245,!(set.contains("Atwo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6246,!(set.contains("Bthree")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6247,!(set.contains("Afour")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -217,7 +422,7 @@ public class PredicatedSortedSetTest<E> extends AbstractSortedSetTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testComparator");
         final SortedSet<E> set = makeTestSet();
         final Comparator<? super E> c = set.comparator();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6280,(c == null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6241,(c == null));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

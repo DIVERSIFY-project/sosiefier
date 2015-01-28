@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.io.Serializable;
+import org.junit.Test;
 import org.apache.commons.collections4.Transformer;
 
 /** 
@@ -82,6 +83,86 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         return true;
     }
 
+    @Test(timeout = 1000)
+    public void testAddedObjectsCanBeRetrievedByKey_add1534() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAddedObjectsCanBeRetrievedByKey_add1534");
+        final Collection<java.lang.String> coll = makeTestCollection();
+        coll.add("12");
+        coll.add("12");
+        coll.add("16");
+        coll.add("1");
+        coll.addAll(java.util.Arrays.asList("2", "3", "4"));
+        @SuppressWarnings(value = "unchecked")
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testAddedObjectsCanBeRetrievedByKey_add1535() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAddedObjectsCanBeRetrievedByKey_add1535");
+        final Collection<java.lang.String> coll = makeTestCollection();
+        coll.add("12");
+        coll.add("16");
+        coll.add("16");
+        coll.add("1");
+        coll.addAll(java.util.Arrays.asList("2", "3", "4"));
+        @SuppressWarnings(value = "unchecked")
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testAddedObjectsCanBeRetrievedByKey_add1536() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAddedObjectsCanBeRetrievedByKey_add1536");
+        final Collection<java.lang.String> coll = makeTestCollection();
+        coll.add("12");
+        coll.add("16");
+        coll.add("1");
+        coll.add("1");
+        coll.addAll(java.util.Arrays.asList("2", "3", "4"));
+        @SuppressWarnings(value = "unchecked")
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testAddedObjectsCanBeRetrievedByKey_add1537() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAddedObjectsCanBeRetrievedByKey_add1537");
+        final Collection<java.lang.String> coll = makeTestCollection();
+        coll.add("12");
+        coll.add("16");
+        coll.add("1");
+        coll.addAll(java.util.Arrays.asList("2", "3", "4"));
+        coll.addAll(java.util.Arrays.asList("2", "3", "4"));
+        @SuppressWarnings(value = "unchecked")
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testAddedObjectsCanBeRetrievedByKey() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAddedObjectsCanBeRetrievedByKey");
         final Collection<java.lang.String> coll = makeTestCollection();
@@ -91,12 +172,12 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         coll.addAll(java.util.Arrays.asList("2", "3", "4"));
         @SuppressWarnings(value = "unchecked")
         final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4743,indexed,4742,indexed.get(12));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4745,indexed,4744,indexed.get(16));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4747,indexed,4746,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4749,indexed,4748,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(3));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -109,12 +190,12 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         coll.addAll(java.util.Arrays.asList("2", "3", "4"));
         @SuppressWarnings(value = "unchecked")
         final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4743,indexed,4742,indexed.get(12));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4745,indexed,4744,indexed.get(16));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4747,indexed,4746,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4749,indexed,4748,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(3));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -127,12 +208,12 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         coll.addAll(java.util.Arrays.asList("2", "3", "4"));
         @SuppressWarnings(value = "unchecked")
         final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4743,indexed,4742,indexed.get(12));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4745,indexed,4744,indexed.get(16));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4747,indexed,4746,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4749,indexed,4748,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(3));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -145,12 +226,12 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         coll.addAll(java.util.Arrays.asList("foo", "3", "4"));
         @SuppressWarnings(value = "unchecked")
         final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4743,indexed,4742,indexed.get(12));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4745,indexed,4744,indexed.get(16));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4747,indexed,4746,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4749,indexed,4748,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(3));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -163,12 +244,12 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         coll.addAll(java.util.Arrays.asList("2", "foo", "4"));
         @SuppressWarnings(value = "unchecked")
         final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4743,indexed,4742,indexed.get(12));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4745,indexed,4744,indexed.get(16));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4747,indexed,4746,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4749,indexed,4748,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(3));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -181,12 +262,12 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         coll.addAll(java.util.Arrays.asList("2", "3", "foo"));
         @SuppressWarnings(value = "unchecked")
         final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4743,indexed,4742,indexed.get(12));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4745,indexed,4744,indexed.get(16));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4747,indexed,4746,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4749,indexed,4748,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(3));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -199,12 +280,110 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         coll.addAll(java.util.Arrays.asList("2", "3", "4"));
         @SuppressWarnings(value = "unchecked")
         final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4743,indexed,4742,indexed.get(12));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4745,indexed,4744,indexed.get(16));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4747,indexed,4746,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4749,indexed,4748,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(3));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testAddedObjectsCanBeRetrievedByKey_remove1164() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAddedObjectsCanBeRetrievedByKey_remove1164");
+        final Collection<java.lang.String> coll = makeTestCollection();
+        coll.add("16");
+        coll.add("1");
+        coll.addAll(java.util.Arrays.asList("2", "3", "4"));
+        @SuppressWarnings(value = "unchecked")
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testAddedObjectsCanBeRetrievedByKey_remove1165() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAddedObjectsCanBeRetrievedByKey_remove1165");
+        final Collection<java.lang.String> coll = makeTestCollection();
+        coll.add("16");
+        coll.add("1");
+        coll.addAll(java.util.Arrays.asList("2", "3", "4"));
+        @SuppressWarnings(value = "unchecked")
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testAddedObjectsCanBeRetrievedByKey_remove1166() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAddedObjectsCanBeRetrievedByKey_remove1166");
+        final Collection<java.lang.String> coll = makeTestCollection();
+        coll.add("16");
+        coll.add("1");
+        coll.addAll(java.util.Arrays.asList("2", "3", "4"));
+        @SuppressWarnings(value = "unchecked")
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testAddedObjectsCanBeRetrievedByKey_remove1167() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAddedObjectsCanBeRetrievedByKey_remove1167");
+        final Collection<java.lang.String> coll = makeTestCollection();
+        coll.add("12");
+        coll.add("16");
+        coll.add("1");
+        @SuppressWarnings(value = "unchecked")
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = ((IndexedCollection<java.lang.Integer, java.lang.String>)(coll));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4751,indexed,4750,indexed.get(12));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4753,indexed,4752,indexed.get(16));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(4));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEnsureDuplicateObjectsCauseException_add1538() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEnsureDuplicateObjectsCauseException_add1538");
+        final Collection<java.lang.String> coll = makeUniqueTestCollection();
+        coll.add("1");
+        coll.add("1");
+        try {
+            coll.add("1");
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEnsureDuplicateObjectsCauseException_add1539() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEnsureDuplicateObjectsCauseException_add1539");
+        final Collection<java.lang.String> coll = makeUniqueTestCollection();
+        coll.add("1");
+        try {
+            coll.add("1");
+            coll.add("1");
+        } catch (final IllegalArgumentException e) {
+        }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -230,13 +409,100 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testEnsureDuplicateObjectsCauseException_remove1168() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEnsureDuplicateObjectsCauseException_remove1168");
+        final Collection<java.lang.String> coll = makeUniqueTestCollection();
+        try {
+            coll.add("1");
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testDecoratedCollectionIsIndexedOnCreation() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecoratedCollectionIsIndexedOnCreation");
         final Collection<java.lang.String> original = makeFullCollection();
         final IndexedCollection<java.lang.Integer, java.lang.String> indexed = decorateUniqueCollection(original);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4755,indexed,4754,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4757,indexed,4756,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4759,indexed,4758,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4763,indexed,4762,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4765,indexed,4764,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4767,indexed,4766,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_add1540() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_add1540");
+        final Collection<java.lang.String> original = new ArrayList<java.lang.String>();
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = decorateUniqueCollection(original);
+        original.add("1");
+        original.add("1");
+        original.add("2");
+        original.add("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
+        indexed.reindex();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_add1541() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_add1541");
+        final Collection<java.lang.String> original = new ArrayList<java.lang.String>();
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = decorateUniqueCollection(original);
+        original.add("1");
+        original.add("2");
+        original.add("2");
+        original.add("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
+        indexed.reindex();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_add1542() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_add1542");
+        final Collection<java.lang.String> original = new ArrayList<java.lang.String>();
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = decorateUniqueCollection(original);
+        original.add("1");
+        original.add("2");
+        original.add("3");
+        original.add("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
+        indexed.reindex();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_add1543() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_add1543");
+        final Collection<java.lang.String> original = new ArrayList<java.lang.String>();
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = decorateUniqueCollection(original);
+        original.add("1");
+        original.add("2");
+        original.add("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
+        indexed.reindex();
+        indexed.reindex();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -247,13 +513,13 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         original.add("foo");
         original.add("2");
         original.add("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4763,indexed,4762,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4765,indexed,4764,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
         indexed.reindex();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4767,indexed,4766,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -264,13 +530,13 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         original.add("1");
         original.add("foo");
         original.add("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4763,indexed,4762,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4765,indexed,4764,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
         indexed.reindex();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4767,indexed,4766,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -281,13 +547,81 @@ public class IndexedCollectionTest extends AbstractCollectionTest<java.lang.Stri
         original.add("1");
         original.add("2");
         original.add("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4761,indexed,4760,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4763,indexed,4762,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4765,indexed,4764,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
         indexed.reindex();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4767,indexed,4766,indexed.get(1));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(2));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_remove1169() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_remove1169");
+        final Collection<java.lang.String> original = new ArrayList<java.lang.String>();
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = decorateUniqueCollection(original);
+        original.add("2");
+        original.add("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
+        indexed.reindex();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_remove1170() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_remove1170");
+        final Collection<java.lang.String> original = new ArrayList<java.lang.String>();
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = decorateUniqueCollection(original);
+        original.add("2");
+        original.add("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
+        indexed.reindex();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_remove1171() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_remove1171");
+        final Collection<java.lang.String> original = new ArrayList<java.lang.String>();
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = decorateUniqueCollection(original);
+        original.add("2");
+        original.add("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
+        indexed.reindex();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_remove1172() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately_remove1172");
+        final Collection<java.lang.String> original = new ArrayList<java.lang.String>();
+        final IndexedCollection<java.lang.Integer, java.lang.String> indexed = decorateUniqueCollection(original);
+        original.add("1");
+        original.add("2");
+        original.add("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4769,indexed,4768,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4771,indexed,4770,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,indexed,4772,indexed.get(3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,indexed,4774,indexed.get(1));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4777,indexed,4776,indexed.get(2));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4779,indexed,4778,indexed.get(3));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 }

@@ -71,6 +71,22 @@ public class LazyMapTest<K, V> extends AbstractIterableMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void mapGetWithTransformer_add307() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "mapGetWithTransformer_add307");
+        final Transformer<java.lang.Number, java.lang.Integer> intConverter = new Transformer<java.lang.Number, java.lang.Integer>() {
+            public Integer transform(final Number input) {
+                return input.intValue();
+            }
+        };
+        final Map<java.lang.Long, java.lang.Number> map = LazyMap.lazyMap(new java.util.HashMap<java.lang.Long, java.lang.Number>(), intConverter);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),822,map,821,map.size());
+        final Number i1 = map.get(123L);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),823,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),825,map,824,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test
     public void mapGetWithTransformer() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "mapGetWithTransformer");
@@ -81,7 +97,23 @@ public class LazyMapTest<K, V> extends AbstractIterableMapTest<K, V> {
         };
         final Map<java.lang.Long, java.lang.Number> map = LazyMap.lazyMap(new java.util.HashMap<java.lang.Long, java.lang.Number>(), intConverter);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),822,map,821,map.size());
-        final Number i1 = map.get(124L);
+        final Number i1 = map.get(122L);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),823,i1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),825,map,824,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void mapGetWithTransformer_remove257() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "mapGetWithTransformer_remove257");
+        final Transformer<java.lang.Number, java.lang.Integer> intConverter = new Transformer<java.lang.Number, java.lang.Integer>() {
+            public Integer transform(final Number input) {
+                return input.intValue();
+            }
+        };
+        final Map<java.lang.Long, java.lang.Number> map = LazyMap.lazyMap(new java.util.HashMap<java.lang.Long, java.lang.Number>(), intConverter);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),822,map,821,map.size());
+        final Number i1 = map.get(123L);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),823,i1);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),825,map,824,map.size());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

@@ -2,7 +2,7 @@ package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
@@ -36,7 +36,7 @@ public class JsonAstDeleteInput extends JsonAstTransformationInput {
      * @param transformations Transformation to be modified by the reader. May increase size after method call.
      */
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<Integer, SingleTransformation> transformations) {
         try {
             ASTDelete transf = (ASTDelete)get(transformations); //add the transformation to the transformations map if not present
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);

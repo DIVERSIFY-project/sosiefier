@@ -2,6 +2,7 @@ package org.apache.commons.collections4.keyvalue;
 
 import org.apache.commons.collections4.KeyValue;
 import java.util.Map;
+import org.junit.Test;
 
 /** 
  * Test the UnmodifiableMapEntry class.
@@ -122,6 +123,18 @@ public class UnmodifiableMapEntryTest<K, V> extends AbstractMapEntryTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable");
         final Map.Entry<K, V> entry = makeMapEntry();
         try {
+            entry.setValue(null);
+        } catch (final UnsupportedOperationException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testUnmodifiable_add874() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_add874");
+        final Map.Entry<K, V> entry = makeMapEntry();
+        try {
+            entry.setValue(null);
             entry.setValue(null);
         } catch (final UnsupportedOperationException ex) {
         }

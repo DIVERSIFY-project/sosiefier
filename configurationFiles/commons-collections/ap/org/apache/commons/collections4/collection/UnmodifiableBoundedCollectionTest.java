@@ -3,6 +3,7 @@ package org.apache.commons.collections4.collection;
 import java.util.ArrayList;
 import org.apache.commons.collections4.BoundedCollection;
 import java.util.Collection;
+import org.junit.Test;
 
 /** 
  * Extension of {@link AbstractCollectionTest} for exercising the
@@ -62,17 +63,31 @@ public class UnmodifiableBoundedCollectionTest<E> extends AbstractCollectionTest
 
     public void testUnmodifiable() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4802,((makeObject()) instanceof org.apache.commons.collections4.Unmodifiable));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4803,((makeFullCollection()) instanceof org.apache.commons.collections4.Unmodifiable));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4810,((makeObject()) instanceof org.apache.commons.collections4.Unmodifiable));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4811,((makeFullCollection()) instanceof org.apache.commons.collections4.Unmodifiable));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     public void testDecorateFactory() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory");
         final BoundedCollection<E> coll = makeFullCollection();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4799,coll);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4801,null,4800,org.apache.commons.collections4.collection.UnmodifiableBoundedCollection.unmodifiableBoundedCollection(coll));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4807,coll);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4809,null,4808,org.apache.commons.collections4.collection.UnmodifiableBoundedCollection.unmodifiableBoundedCollection(coll));
         try {
+            org.apache.commons.collections4.collection.UnmodifiableBoundedCollection.unmodifiableBoundedCollection(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testDecorateFactory_add1552() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add1552");
+        final BoundedCollection<E> coll = makeFullCollection();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4807,coll);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4809,null,4808,org.apache.commons.collections4.collection.UnmodifiableBoundedCollection.unmodifiableBoundedCollection(coll));
+        try {
+            org.apache.commons.collections4.collection.UnmodifiableBoundedCollection.unmodifiableBoundedCollection(null);
             org.apache.commons.collections4.collection.UnmodifiableBoundedCollection.unmodifiableBoundedCollection(null);
         } catch (final IllegalArgumentException ex) {
         }

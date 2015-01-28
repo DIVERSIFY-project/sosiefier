@@ -97,6 +97,81 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
     }
 
     @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_add475() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_add475");
+        resetFull();
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,map,1411,map.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1414,map,1413,map.containsKey(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1416,map,1415,map.containsValue(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1418,map,1417,map.remove(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1420,map.entrySet(),1419,map.entrySet().contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1422,map.keySet(),1421,map.keySet().contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1424,map.values(),1423,map.values().contains(null));
+        try {
+            map.put(null, null);
+        } catch (final NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,map,1425,map.put(new org.apache.commons.collections4.keyvalue.MultiKey<K>(null , null), null));
+        try {
+            map.put(null, ((V)(new Object())));
+        } catch (final NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_add476() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_add476");
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,map,1411,map.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1414,map,1413,map.containsKey(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1416,map,1415,map.containsValue(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1418,map,1417,map.remove(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1420,map.entrySet(),1419,map.entrySet().contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1422,map.keySet(),1421,map.keySet().contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1424,map.values(),1423,map.values().contains(null));
+        try {
+            map.put(null, null);
+            map.put(null, null);
+        } catch (final NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,map,1425,map.put(new org.apache.commons.collections4.keyvalue.MultiKey<K>(null , null), null));
+        try {
+            map.put(null, ((V)(new Object())));
+        } catch (final NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_add477() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_add477");
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,map,1411,map.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1414,map,1413,map.containsKey(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1416,map,1415,map.containsValue(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1418,map,1417,map.remove(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1420,map.entrySet(),1419,map.entrySet().contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1422,map.keySet(),1421,map.keySet().contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1424,map.values(),1423,map.values().contains(null));
+        try {
+            map.put(null, null);
+        } catch (final NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,map,1425,map.put(new org.apache.commons.collections4.keyvalue.MultiKey<K>(null , null), null));
+        try {
+            map.put(null, ((V)(new Object())));
+            map.put(null, ((V)(new Object())));
+        } catch (final NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void testNullHandling_literalMutation390() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_literalMutation390");
         resetFull();
@@ -115,6 +190,87 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
         try {
             map.put(null, ((V)(new Object())));
         } catch (final NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_remove374() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_remove374");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1412,map,1411,map.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1414,map,1413,map.containsKey(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1416,map,1415,map.containsValue(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1418,map,1417,map.remove(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1420,map.entrySet(),1419,map.entrySet().contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1422,map.keySet(),1421,map.keySet().contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1424,map.values(),1423,map.values().contains(null));
+        try {
+            map.put(null, null);
+        } catch (final NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1426,map,1425,map.put(new org.apache.commons.collections4.keyvalue.MultiKey<K>(null , null), null));
+        try {
+            map.put(null, ((V)(new Object())));
+        } catch (final NullPointerException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyGet_add465() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyGet_add465");
+        resetFull();
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        final MultiKey<K>[] keys = getMultiKeyKeys();
+        final V[] values = getSampleValues();
+        for (int i = 0 ; i < (keys.length) ; i++) {
+            final MultiKey<K> key = keys[i];
+            final V value = values[i];
+            switch (key.size()) {
+                case 2 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1196,multimap,1195,multimap.get(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1194,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1198,multimap,1197,multimap.get(null, key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1200,multimap,1199,multimap.get(key.getKey(0), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1202,multimap,1201,multimap.get(null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1204,multimap,1203,multimap.get(key.getKey(0), key.getKey(1), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1206,multimap,1205,multimap.get(key.getKey(0), key.getKey(1), null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1208,multimap,1207,multimap.get(key.getKey(0), key.getKey(1), null, null, null));
+                    break;
+                case 3 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1211,multimap,1210,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1209,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1213,multimap,1212,multimap.get(null, key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1215,multimap,1214,multimap.get(key.getKey(0), null, key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1217,multimap,1216,multimap.get(key.getKey(0), key.getKey(1), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1219,multimap,1218,multimap.get(null, null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1221,multimap,1220,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1223,multimap,1222,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), null, null));
+                    break;
+                case 4 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1226,multimap,1225,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1224,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1228,multimap,1227,multimap.get(null, key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1230,multimap,1229,multimap.get(key.getKey(0), null, key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1232,multimap,1231,multimap.get(key.getKey(0), key.getKey(1), null, key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1234,multimap,1233,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1236,multimap,1235,multimap.get(null, null, null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1238,multimap,1237,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), null));
+                    break;
+                case 5 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1241,multimap,1240,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1239,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1243,multimap,1242,multimap.get(null, key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1245,multimap,1244,multimap.get(key.getKey(0), null, key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1247,multimap,1246,multimap.get(key.getKey(0), key.getKey(1), null, key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1249,multimap,1248,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), null, key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1251,multimap,1250,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1253,multimap,1252,multimap.get(null, null, null, null, null));
+                    break;
+                default :
+            }
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -175,9 +331,116 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyGet_remove364() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyGet_remove364");
+        final MultiKeyMap<K, V> multimap = getMap();
+        final MultiKey<K>[] keys = getMultiKeyKeys();
+        final V[] values = getSampleValues();
+        for (int i = 0 ; i < (keys.length) ; i++) {
+            final MultiKey<K> key = keys[i];
+            final V value = values[i];
+            switch (key.size()) {
+                case 2 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1196,multimap,1195,multimap.get(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1194,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1198,multimap,1197,multimap.get(null, key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1200,multimap,1199,multimap.get(key.getKey(0), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1202,multimap,1201,multimap.get(null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1204,multimap,1203,multimap.get(key.getKey(0), key.getKey(1), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1206,multimap,1205,multimap.get(key.getKey(0), key.getKey(1), null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1208,multimap,1207,multimap.get(key.getKey(0), key.getKey(1), null, null, null));
+                    break;
+                case 3 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1211,multimap,1210,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1209,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1213,multimap,1212,multimap.get(null, key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1215,multimap,1214,multimap.get(key.getKey(0), null, key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1217,multimap,1216,multimap.get(key.getKey(0), key.getKey(1), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1219,multimap,1218,multimap.get(null, null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1221,multimap,1220,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1223,multimap,1222,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), null, null));
+                    break;
+                case 4 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1226,multimap,1225,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1224,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1228,multimap,1227,multimap.get(null, key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1230,multimap,1229,multimap.get(key.getKey(0), null, key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1232,multimap,1231,multimap.get(key.getKey(0), key.getKey(1), null, key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1234,multimap,1233,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1236,multimap,1235,multimap.get(null, null, null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1238,multimap,1237,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), null));
+                    break;
+                case 5 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1241,multimap,1240,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1239,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1243,multimap,1242,multimap.get(null, key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1245,multimap,1244,multimap.get(key.getKey(0), null, key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1247,multimap,1246,multimap.get(key.getKey(0), key.getKey(1), null, key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1249,multimap,1248,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), null, key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1251,multimap,1250,multimap.get(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1253,multimap,1252,multimap.get(null, null, null, null, null));
+                    break;
+                default :
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
     public void testMultiKeyContainsKey() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyContainsKey");
         resetFull();
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        final MultiKey<K>[] keys = getMultiKeyKeys();
+        for (final MultiKey<K> key : keys) {
+            switch (key.size()) {
+                case 2 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1139,multimap,1138,multimap.containsKey(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1141,multimap,1140,multimap.containsKey(null, key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1143,multimap,1142,multimap.containsKey(key.getKey(0), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1145,multimap,1144,multimap.containsKey(null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1147,multimap,1146,multimap.containsKey(key.getKey(0), key.getKey(1), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1149,multimap,1148,multimap.containsKey(key.getKey(0), key.getKey(1), null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1151,multimap,1150,multimap.containsKey(key.getKey(0), key.getKey(1), null, null, null));
+                    break;
+                case 3 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1153,multimap,1152,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1155,multimap,1154,multimap.containsKey(null, key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1157,multimap,1156,multimap.containsKey(key.getKey(0), null, key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1159,multimap,1158,multimap.containsKey(key.getKey(0), key.getKey(1), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1161,multimap,1160,multimap.containsKey(null, null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1163,multimap,1162,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1165,multimap,1164,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), null, null));
+                    break;
+                case 4 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1167,multimap,1166,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1169,multimap,1168,multimap.containsKey(null, key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1171,multimap,1170,multimap.containsKey(key.getKey(0), null, key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1173,multimap,1172,multimap.containsKey(key.getKey(0), key.getKey(1), null, key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1175,multimap,1174,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1177,multimap,1176,multimap.containsKey(null, null, null, null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1179,multimap,1178,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), null));
+                    break;
+                case 5 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1181,multimap,1180,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1183,multimap,1182,multimap.containsKey(null, key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1185,multimap,1184,multimap.containsKey(key.getKey(0), null, key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1187,multimap,1186,multimap.containsKey(key.getKey(0), key.getKey(1), null, key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1189,multimap,1188,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), null, key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1191,multimap,1190,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), null));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1193,multimap,1192,multimap.containsKey(null, null, null, null, null));
+                    break;
+                default :
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyContainsKey_remove363() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyContainsKey_remove363");
         final MultiKeyMap<K, V> multimap = getMap();
         final MultiKey<K>[] keys = getMultiKeyKeys();
         for (final MultiKey<K> key : keys) {
@@ -291,11 +554,13 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    public void testMultiKeyRemove() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemove");
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemove_add466() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemove_add466");
         final MultiKey<K>[] keys = getMultiKeyKeys();
         final V[] values = getSampleValues();
-        for (int i = -1 ; i < (keys.length) ; i++) {
+        for (int i = 0 ; i < (keys.length) ; i++) {
+            resetFull();
             resetFull();
             final MultiKeyMap<K, V> multimap = getMap();
             final int size = multimap.size();
@@ -348,8 +613,124 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    public void testMultiKeyRemove() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemove");
+        final MultiKey<K>[] keys = getMultiKeyKeys();
+        final V[] values = getSampleValues();
+        for (int i = 1 ; i < (keys.length) ; i++) {
+            resetFull();
+            final MultiKeyMap<K, V> multimap = getMap();
+            final int size = multimap.size();
+            final MultiKey<K> key = keys[i];
+            final V value = values[i];
+            switch (key.size()) {
+                case 2 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1356,multimap,1355,multimap.containsKey(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1359,multimap,1358,multimap.removeMultiKey(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1357,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1361,multimap,1360,multimap.containsKey(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1364,multimap,1363,multimap.size());
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1362,(size - 1));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1366,multimap,1365,multimap.removeMultiKey(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1368,multimap,1367,multimap.containsKey(key.getKey(0), key.getKey(1)));
+                    break;
+                case 3 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1370,multimap,1369,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1373,multimap,1372,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1371,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1375,multimap,1374,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1378,multimap,1377,multimap.size());
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1376,(size - 1));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1380,multimap,1379,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1382,multimap,1381,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    break;
+                case 4 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1384,multimap,1383,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1387,multimap,1386,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1389,multimap,1388,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1392,multimap,1391,multimap.size());
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1390,(size - 1));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1394,multimap,1393,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1396,multimap,1395,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    break;
+                case 5 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1398,multimap,1397,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1401,multimap,1400,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1399,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1403,multimap,1402,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1406,multimap,1405,multimap.size());
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1404,(size - 1));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1408,multimap,1407,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1410,multimap,1409,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    break;
+                default :
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemove_remove365() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemove_remove365");
+        final MultiKey<K>[] keys = getMultiKeyKeys();
+        final V[] values = getSampleValues();
+        for (int i = 0 ; i < (keys.length) ; i++) {
+            final MultiKeyMap<K, V> multimap = getMap();
+            final int size = multimap.size();
+            final MultiKey<K> key = keys[i];
+            final V value = values[i];
+            switch (key.size()) {
+                case 2 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1356,multimap,1355,multimap.containsKey(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1359,multimap,1358,multimap.removeMultiKey(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1357,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1361,multimap,1360,multimap.containsKey(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1364,multimap,1363,multimap.size());
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1362,(size - 1));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1366,multimap,1365,multimap.removeMultiKey(key.getKey(0), key.getKey(1)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1368,multimap,1367,multimap.containsKey(key.getKey(0), key.getKey(1)));
+                    break;
+                case 3 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1370,multimap,1369,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1373,multimap,1372,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1371,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1375,multimap,1374,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1378,multimap,1377,multimap.size());
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1376,(size - 1));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1380,multimap,1379,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1382,multimap,1381,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2)));
+                    break;
+                case 4 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1384,multimap,1383,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1387,multimap,1386,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1385,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1389,multimap,1388,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1392,multimap,1391,multimap.size());
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1390,(size - 1));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1394,multimap,1393,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1396,multimap,1395,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3)));
+                    break;
+                case 5 :
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1398,multimap,1397,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1401,multimap,1400,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1399,value);
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1403,multimap,1402,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1406,multimap,1405,multimap.size());
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1404,(size - 1));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1408,multimap,1407,multimap.removeMultiKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1410,multimap,1409,multimap.containsKey(key.getKey(0), key.getKey(1), key.getKey(2), key.getKey(3), key.getKey(4)));
+                    break;
+                default :
+            }
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
     public void testMultiKeyRemoveAll1() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll1");
+        resetFull();
         resetFull();
         final MultiKeyMap<K, V> multimap = getMap();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1335,multimap,1334,multimap.size());
@@ -362,8 +743,54 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll1_add468() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll1_add468");
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1335,multimap,1334,multimap.size());
+        multimap.removeAll(I1);
+        multimap.removeAll(I1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1337,multimap,1336,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1339,org.apache.commons.collections4.map.MultiKeyMapTest.I1,1338,org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(0)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll1_remove366() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll1_remove366");
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1335,multimap,1334,multimap.size());
+        multimap.removeAll(I1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1337,multimap,1336,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1339,org.apache.commons.collections4.map.MultiKeyMapTest.I1,1338,org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(0)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll1_remove367() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll1_remove367");
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1335,multimap,1334,multimap.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1337,multimap,1336,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1339,org.apache.commons.collections4.map.MultiKeyMapTest.I1,1338,org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(0)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
     public void testMultiKeyRemoveAll2() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll2");
+        resetFull();
         resetFull();
         final MultiKeyMap<K, V> multimap = getMap();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1341,multimap,1340,multimap.size());
@@ -376,8 +803,54 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll2_add470() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll2_add470");
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1341,multimap,1340,multimap.size());
+        multimap.removeAll(I2, I3);
+        multimap.removeAll(I2, I3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1343,multimap,1342,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1344,((org.apache.commons.collections4.map.MultiKeyMapTest.I2.equals(key.getKey(0))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I3.equals(key.getKey(1)))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll2_remove368() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll2_remove368");
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1341,multimap,1340,multimap.size());
+        multimap.removeAll(I2, I3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1343,multimap,1342,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1344,((org.apache.commons.collections4.map.MultiKeyMapTest.I2.equals(key.getKey(0))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I3.equals(key.getKey(1)))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll2_remove369() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll2_remove369");
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1341,multimap,1340,multimap.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1343,multimap,1342,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1344,((org.apache.commons.collections4.map.MultiKeyMapTest.I2.equals(key.getKey(0))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I3.equals(key.getKey(1)))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
     public void testMultiKeyRemoveAll3() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll3");
+        resetFull();
         resetFull();
         final MultiKeyMap<K, V> multimap = getMap();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1346,multimap,1345,multimap.size());
@@ -390,8 +863,54 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll3_add472() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll3_add472");
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1346,multimap,1345,multimap.size());
+        multimap.removeAll(I1, I1, I2);
+        multimap.removeAll(I1, I1, I2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1348,multimap,1347,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1349,(((org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(0))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(1)))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I2.equals(key.getKey(2)))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll3_remove370() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll3_remove370");
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1346,multimap,1345,multimap.size());
+        multimap.removeAll(I1, I1, I2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1348,multimap,1347,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1349,(((org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(0))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(1)))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I2.equals(key.getKey(2)))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll3_remove371() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll3_remove371");
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1346,multimap,1345,multimap.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1348,multimap,1347,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1349,(((org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(0))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(1)))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I2.equals(key.getKey(2)))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
     public void testMultiKeyRemoveAll4() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll4");
+        resetFull();
         resetFull();
         final MultiKeyMap<K, V> multimap = getMap();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1351,multimap,1350,multimap.size());
@@ -404,10 +923,69 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll4_add474() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll4_add474");
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1351,multimap,1350,multimap.size());
+        multimap.removeAll(I1, I1, I2, I3);
+        multimap.removeAll(I1, I1, I2, I3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1353,multimap,1352,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1354,(((((org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(0))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(1)))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I2.equals(key.getKey(2)))) && ((key.size()) >= 4)) && (org.apache.commons.collections4.map.MultiKeyMapTest.I3.equals(key.getKey(3)))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll4_remove372() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll4_remove372");
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1351,multimap,1350,multimap.size());
+        multimap.removeAll(I1, I1, I2, I3);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1353,multimap,1352,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1354,(((((org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(0))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(1)))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I2.equals(key.getKey(2)))) && ((key.size()) >= 4)) && (org.apache.commons.collections4.map.MultiKeyMapTest.I3.equals(key.getKey(3)))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultiKeyRemoveAll4_remove373() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultiKeyRemoveAll4_remove373");
+        resetFull();
+        final MultiKeyMap<K, V> multimap = getMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1351,multimap,1350,multimap.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1353,multimap,1352,multimap.size());
+        for (final MapIterator<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> it = multimap.mapIterator() ; it.hasNext() ; ) {
+            final MultiKey<? extends K> key = it.next();
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1354,(((((org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(0))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I1.equals(key.getKey(1)))) && (org.apache.commons.collections4.map.MultiKeyMapTest.I2.equals(key.getKey(2)))) && ((key.size()) >= 4)) && (org.apache.commons.collections4.map.MultiKeyMapTest.I3.equals(key.getKey(3)))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @SuppressWarnings(value = "unchecked")
     public void testClone() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testClone");
         final MultiKeyMap<K, V> map = new MultiKeyMap<K, V>();
+        map.put(new MultiKey<K>(((K)(I1)) , ((K)(I2))), ((V)("1-2")));
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1107,map,1106,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1109,cloned,1108,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1111,map,1110,map.get(new org.apache.commons.collections4.keyvalue.MultiKey<K>(((K)(org.apache.commons.collections4.map.MultiKeyMapTest.I1)) , ((K)(org.apache.commons.collections4.map.MultiKeyMapTest.I2)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1113,cloned,1112,cloned.get(new org.apache.commons.collections4.keyvalue.MultiKey<K>(((K)(org.apache.commons.collections4.map.MultiKeyMapTest.I1)) , ((K)(org.apache.commons.collections4.map.MultiKeyMapTest.I2)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testClone_add459() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testClone_add459");
+        final MultiKeyMap<K, V> map = new MultiKeyMap<K, V>();
+        map.put(new MultiKey<K>(((K)(I1)) , ((K)(I2))), ((V)("1-2")));
         map.put(new MultiKey<K>(((K)(I1)) , ((K)(I2))), ((V)("1-2")));
         final Map<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> cloned = map.clone();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1107,map,1106,map.size());
@@ -444,6 +1022,123 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
     }
 
     @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testClone_remove358() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testClone_remove358");
+        final MultiKeyMap<K, V> map = new MultiKeyMap<K, V>();
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1107,map,1106,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1109,cloned,1108,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1111,map,1110,map.get(new org.apache.commons.collections4.keyvalue.MultiKey<K>(((K)(org.apache.commons.collections4.map.MultiKeyMapTest.I1)) , ((K)(org.apache.commons.collections4.map.MultiKeyMapTest.I2)))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1113,cloned,1112,cloned.get(new org.apache.commons.collections4.keyvalue.MultiKey<K>(((K)(org.apache.commons.collections4.map.MultiKeyMapTest.I1)) , ((K)(org.apache.commons.collections4.map.MultiKeyMapTest.I2)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testLRUMultiKeyMap_add460() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap_add460");
+        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(2));
+        map.put(((K)(I1)), ((K)(I2)), ((V)("1-2")));
+        map.put(((K)(I1)), ((K)(I2)), ((V)("1-2")));
+        map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1115,map,1114,map.size());
+        map.put(((K)(I1)), ((K)(I4)), ((V)("1-4")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1117,map,1116,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1119,map,1118,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1121,map,1120,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1123,map,1122,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        final MultiKeyMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1125,map,1124,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1127,cloned,1126,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1129,cloned,1128,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1131,cloned,1130,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        cloned.put(((K)(I1)), ((K)(I5)), ((V)("1-5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1133,cloned,1132,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1135,cloned,1134,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1137,cloned,1136,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I5));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testLRUMultiKeyMap_add461() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap_add461");
+        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(2));
+        map.put(((K)(I1)), ((K)(I2)), ((V)("1-2")));
+        map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
+        map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1115,map,1114,map.size());
+        map.put(((K)(I1)), ((K)(I4)), ((V)("1-4")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1117,map,1116,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1119,map,1118,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1121,map,1120,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1123,map,1122,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        final MultiKeyMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1125,map,1124,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1127,cloned,1126,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1129,cloned,1128,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1131,cloned,1130,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        cloned.put(((K)(I1)), ((K)(I5)), ((V)("1-5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1133,cloned,1132,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1135,cloned,1134,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1137,cloned,1136,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I5));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testLRUMultiKeyMap_add462() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap_add462");
+        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(2));
+        map.put(((K)(I1)), ((K)(I2)), ((V)("1-2")));
+        map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1115,map,1114,map.size());
+        map.put(((K)(I1)), ((K)(I4)), ((V)("1-4")));
+        map.put(((K)(I1)), ((K)(I4)), ((V)("1-4")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1117,map,1116,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1119,map,1118,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1121,map,1120,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1123,map,1122,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        final MultiKeyMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1125,map,1124,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1127,cloned,1126,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1129,cloned,1128,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1131,cloned,1130,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        cloned.put(((K)(I1)), ((K)(I5)), ((V)("1-5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1133,cloned,1132,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1135,cloned,1134,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1137,cloned,1136,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I5));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testLRUMultiKeyMap_add463() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap_add463");
+        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(2));
+        map.put(((K)(I1)), ((K)(I2)), ((V)("1-2")));
+        map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1115,map,1114,map.size());
+        map.put(((K)(I1)), ((K)(I4)), ((V)("1-4")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1117,map,1116,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1119,map,1118,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1121,map,1120,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1123,map,1122,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        final MultiKeyMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1125,map,1124,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1127,cloned,1126,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1129,cloned,1128,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1131,cloned,1130,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        cloned.put(((K)(I1)), ((K)(I5)), ((V)("1-5")));
+        cloned.put(((K)(I1)), ((K)(I5)), ((V)("1-5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1133,cloned,1132,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1135,cloned,1134,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1137,cloned,1136,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I5));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void testLRUMultiKeyMap() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap");
         final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(2));
@@ -470,7 +1165,7 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
     @SuppressWarnings(value = "unchecked")
     public void testLRUMultiKeyMap_literalMutation382() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap_literalMutation382");
-        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(1));
+        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(3));
         map.put(((K)(I1)), ((K)(I2)), ((V)("1-2")));
         map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1115,map,1114,map.size());
@@ -581,6 +1276,102 @@ public class MultiKeyMapTest<K, V> extends AbstractIterableMapTest<org.apache.co
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1129,cloned,1128,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1131,cloned,1130,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
         cloned.put(((K)(I1)), ((K)(I5)), ((V)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1133,cloned,1132,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1135,cloned,1134,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1137,cloned,1136,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I5));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testLRUMultiKeyMap_remove359() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap_remove359");
+        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(2));
+        map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1115,map,1114,map.size());
+        map.put(((K)(I1)), ((K)(I4)), ((V)("1-4")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1117,map,1116,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1119,map,1118,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1121,map,1120,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1123,map,1122,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        final MultiKeyMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1125,map,1124,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1127,cloned,1126,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1129,cloned,1128,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1131,cloned,1130,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        cloned.put(((K)(I1)), ((K)(I5)), ((V)("1-5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1133,cloned,1132,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1135,cloned,1134,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1137,cloned,1136,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I5));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testLRUMultiKeyMap_remove360() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap_remove360");
+        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(2));
+        map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1115,map,1114,map.size());
+        map.put(((K)(I1)), ((K)(I4)), ((V)("1-4")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1117,map,1116,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1119,map,1118,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1121,map,1120,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1123,map,1122,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        final MultiKeyMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1125,map,1124,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1127,cloned,1126,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1129,cloned,1128,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1131,cloned,1130,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        cloned.put(((K)(I1)), ((K)(I5)), ((V)("1-5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1133,cloned,1132,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1135,cloned,1134,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1137,cloned,1136,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I5));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testLRUMultiKeyMap_remove361() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap_remove361");
+        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(2));
+        map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1115,map,1114,map.size());
+        map.put(((K)(I1)), ((K)(I4)), ((V)("1-4")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1117,map,1116,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1119,map,1118,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1121,map,1120,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1123,map,1122,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        final MultiKeyMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1125,map,1124,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1127,cloned,1126,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1129,cloned,1128,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1131,cloned,1130,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        cloned.put(((K)(I1)), ((K)(I5)), ((V)("1-5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1133,cloned,1132,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1135,cloned,1134,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1137,cloned,1136,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I5));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testLRUMultiKeyMap_remove362() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLRUMultiKeyMap_remove362");
+        final MultiKeyMap<K, V> map = MultiKeyMap.multiKeyMap(new org.apache.commons.collections4.map.LRUMap<org.apache.commons.collections4.keyvalue.MultiKey<? extends K>, V>(2));
+        map.put(((K)(I1)), ((K)(I3)), ((V)("1-1")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1115,map,1114,map.size());
+        map.put(((K)(I1)), ((K)(I4)), ((V)("1-4")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1117,map,1116,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1119,map,1118,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1121,map,1120,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1123,map,1122,map.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        final MultiKeyMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1125,map,1124,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1127,cloned,1126,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I3));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1129,cloned,1128,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1131,cloned,1130,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I2));
+        cloned.put(((K)(I1)), ((K)(I5)), ((V)("1-5")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1133,cloned,1132,cloned.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1135,cloned,1134,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I4));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1137,cloned,1136,cloned.containsKey(org.apache.commons.collections4.map.MultiKeyMapTest.I1, org.apache.commons.collections4.map.MultiKeyMapTest.I5));

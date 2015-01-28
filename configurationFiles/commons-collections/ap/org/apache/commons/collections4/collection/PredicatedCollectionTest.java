@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.apache.commons.collections4.Predicate;
+import org.junit.Test;
 
 /** 
  * Extension of {@link AbstractCollectionTest} for exercising the
@@ -72,7 +73,22 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
             c.add(((E)(i)));
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4772,!(c.contains(i)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4780,!(c.contains(i)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAdd_add1544() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAdd_add1544");
+        final Collection<E> c = makeTestCollection();
+        final Integer i = Integer.valueOf(3);
+        try {
+            c.add(((E)(i)));
+            c.add(((E)(i)));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4780,!(c.contains(i)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -85,7 +101,7 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
             c.add(((E)(i)));
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4772,!(c.contains(i)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4780,!(c.contains(i)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -98,7 +114,117 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
             c.add(((E)(i)));
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4772,!(c.contains(i)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4780,!(c.contains(i)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1545() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1545");
+        final Collection<E> c = makeTestCollection();
+        final List<E> elements = new ArrayList<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            c.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1546() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1546");
+        final Collection<E> c = makeTestCollection();
+        final List<E> elements = new ArrayList<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            c.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1547() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1547");
+        final Collection<E> c = makeTestCollection();
+        final List<E> elements = new ArrayList<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            c.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1548() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1548");
+        final Collection<E> c = makeTestCollection();
+        final List<E> elements = new ArrayList<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        elements.add(((E)("four")));
+        try {
+            c.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1549() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1549");
+        final Collection<E> c = makeTestCollection();
+        final List<E> elements = new ArrayList<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            c.addAll(elements);
+            c.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -115,10 +241,10 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
             c.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,!(c.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4774,!(c.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,!(c.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4776,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -135,10 +261,10 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
             c.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,!(c.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4774,!(c.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,!(c.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4776,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -155,10 +281,10 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
             c.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,!(c.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4774,!(c.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,!(c.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4776,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -169,16 +295,16 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
         final List<E> elements = new ArrayList<E>();
         elements.add(((E)("one")));
         elements.add(((E)("two")));
-        elements.add(((E)(Integer.valueOf(2))));
+        elements.add(((E)(Integer.valueOf(4))));
         elements.add(((E)("four")));
         try {
             c.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,!(c.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4774,!(c.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,!(c.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4776,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -195,10 +321,90 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
             c.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4773,!(c.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4774,!(c.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4775,!(c.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4776,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_remove1173() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1173");
+        final Collection<E> c = makeTestCollection();
+        final List<E> elements = new ArrayList<E>();
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            c.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_remove1174() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1174");
+        final Collection<E> c = makeTestCollection();
+        final List<E> elements = new ArrayList<E>();
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            c.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_remove1175() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1175");
+        final Collection<E> c = makeTestCollection();
+        final List<E> elements = new ArrayList<E>();
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            c.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_remove1176() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1176");
+        final Collection<E> c = makeTestCollection();
+        final List<E> elements = new ArrayList<E>();
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            c.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4781,!(c.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4782,!(c.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4783,!(c.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4784,!(c.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

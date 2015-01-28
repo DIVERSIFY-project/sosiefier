@@ -2,10 +2,9 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.AbstractTransformation;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.Log;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -139,7 +138,7 @@ public abstract class TransformationQuery {
 
     private InputProgram inputProgram;
 
-    List<Transformation> transformations;
+    List<SingleTransformation> transformations;
 
     /**
      * Status of the last transformation found. Querys may use this information to optimize further exploration of
@@ -176,7 +175,7 @@ public abstract class TransformationQuery {
 
     public abstract void setType(String type);
 
-    public abstract  Transformation query() throws QueryException;
+    public abstract SingleTransformation query() throws QueryException;
 
 
     //public void prepareForNextTransformationSize()
@@ -186,9 +185,9 @@ public abstract class TransformationQuery {
      *
      * @param nb
      */
-    public List<Transformation> query(int nb) throws QueryException {
+    public List<SingleTransformation> query(int nb) throws QueryException {
         try {
-            List<Transformation> result = new ArrayList<>();
+            List<SingleTransformation> result = new ArrayList<>();
             for ( int j = 0; j < nb; j++ ) {
                 result.add(query());
             }
@@ -260,7 +259,7 @@ public abstract class TransformationQuery {
      * @return
      * @throws Exception
      */
-    public Collection<Transformation> getMultiTransformations() {
+    public Collection<SingleTransformation> getMultiTransformations() {
         return transformations;
     }
 

@@ -76,7 +76,7 @@ public AllPredicateTest() {
     @Test
     public void oneTruePredicate_literalMutation1174() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "oneTruePredicate_literalMutation1174");
-        final Predicate<java.lang.Integer> predicate = createMockPredicate(true);
+        final Predicate<java.lang.Integer> predicate = createMockPredicate(false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4431,org.apache.commons.collections4.functors.AllPredicate.allPredicate(predicate),4430,org.apache.commons.collections4.functors.AllPredicate.allPredicate(predicate).evaluate(getTestValue()));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -100,7 +100,7 @@ public AllPredicateTest() {
     @Test
     public void oneFalsePredicate_literalMutation1172() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "oneFalsePredicate_literalMutation1172");
-        final Predicate<java.lang.Integer> predicate = createMockPredicate(true);
+        final Predicate<java.lang.Integer> predicate = createMockPredicate(false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4429,org.apache.commons.collections4.functors.AllPredicate.allPredicate(predicate),4428,org.apache.commons.collections4.functors.AllPredicate.allPredicate(predicate).evaluate(getTestValue()));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

@@ -1,6 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import spoon.reflect.code.*;
 
 import spoon.reflect.cu.CompilationUnit;
@@ -25,7 +25,7 @@ public class AssertInstrumenter extends AbstractLoggingInstrumenter<CtInvocation
     protected static Map<Integer,String> idMap = new HashMap();
 
     public AssertInstrumenter() {
-        super(new ArrayList<Transformation>());
+        super(new ArrayList<SingleTransformation>());
     }
 
     @Override

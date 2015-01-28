@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.apache.commons.collections4.Predicate;
+import org.junit.Test;
 
 /** 
  * Test the filter iterator.
@@ -75,12 +76,166 @@ public FilterIteratorTest(final String name) {
     }
 
     @SuppressWarnings(value = "unused")
+    @Test(timeout = 1000)
+    public void testRepeatedNext_add982() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedNext_add982");
+        for (final String element : array) {
+            iterator.next();
+            iterator.next();
+        }
+        verifyNoMoreElements();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unused")
+    @Test(timeout = 1000)
+    public void testRepeatedNext_add983() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedNext_add983");
+        for (final String element : array) {
+            iterator.next();
+        }
+        verifyNoMoreElements();
+        verifyNoMoreElements();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unused")
     public void testRepeatedNext() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedNext");
         for (final String element : array) {
             iterator.next();
         }
         verifyNoMoreElements();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unused")
+    @Test(timeout = 1000)
+    public void testRepeatedNext_remove736() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedNext_remove736");
+        for (final String element : array) {
+            iterator.next();
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_add984() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_add984");
+        verifyElementsInPredicate(new String[0]);
+        verifyElementsInPredicate(new String[0]);
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_add985() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_add985");
+        verifyElementsInPredicate(new String[0]);
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_add986() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_add986");
+        verifyElementsInPredicate(new String[0]);
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_add987() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_add987");
+        verifyElementsInPredicate(new String[0]);
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_add988() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_add988");
+        verifyElementsInPredicate(new String[0]);
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_add989() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_add989");
+        verifyElementsInPredicate(new String[0]);
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_add990() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_add990");
+        verifyElementsInPredicate(new String[0]);
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_add991() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_add991");
+        verifyElementsInPredicate(new String[0]);
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -138,7 +293,7 @@ public FilterIteratorTest(final String name) {
 
     public void testReturnValues() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues");
-        verifyElementsInPredicate(new String[1]);
+        verifyElementsInPredicate(new String[-1]);
         verifyElementsInPredicate(new String[]{ "a" });
         verifyElementsInPredicate(new String[]{ "b" });
         verifyElementsInPredicate(new String[]{ "c" });
@@ -253,6 +408,148 @@ public FilterIteratorTest(final String name) {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testReturnValues_remove737() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_remove737");
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_remove738() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_remove738");
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_remove739() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_remove739");
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_remove740() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_remove740");
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_remove741() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_remove741");
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_remove742() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_remove742");
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_remove743() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_remove743");
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReturnValues_remove744() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReturnValues_remove744");
+        verifyElementsInPredicate(new String[]{ "a" });
+        verifyElementsInPredicate(new String[]{ "b" });
+        verifyElementsInPredicate(new String[]{ "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" });
+        verifyElementsInPredicate(new String[]{ "a" , "c" });
+        verifyElementsInPredicate(new String[]{ "b" , "c" });
+        verifyElementsInPredicate(new String[]{ "a" , "b" , "c" });
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test that when the iterator is changed, the hasNext method returns the
+     * correct response for the new iterator.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetIterator_add992() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetIterator_add992");
+        final Iterator<E> iter1 = java.util.Collections.singleton(((E)(new Object()))).iterator();
+        final Iterator<E> iter2 = java.util.Collections.<E>emptyList().iterator();
+        final FilterIterator<E> filterIterator = new FilterIterator<E>(iter1);
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.TruePredicate.truePredicate());
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.TruePredicate.truePredicate());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3004,filterIterator,3003,filterIterator.hasNext());
+        filterIterator.setIterator(iter2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3006,filterIterator,3005,filterIterator.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test that when the iterator is changed, the hasNext method returns the
+     * correct response for the new iterator.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetIterator_add993() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetIterator_add993");
+        final Iterator<E> iter1 = java.util.Collections.singleton(((E)(new Object()))).iterator();
+        final Iterator<E> iter2 = java.util.Collections.<E>emptyList().iterator();
+        final FilterIterator<E> filterIterator = new FilterIterator<E>(iter1);
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.TruePredicate.truePredicate());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3004,filterIterator,3003,filterIterator.hasNext());
+        filterIterator.setIterator(iter2);
+        filterIterator.setIterator(iter2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3006,filterIterator,3005,filterIterator.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     /** 
      * Test that when the iterator is changed, the hasNext method returns the
      * correct response for the new iterator.
@@ -271,14 +568,97 @@ public FilterIteratorTest(final String name) {
     }
 
     /** 
+     * Test that when the iterator is changed, the hasNext method returns the
+     * correct response for the new iterator.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetIterator_remove745() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetIterator_remove745");
+        final Iterator<E> iter1 = java.util.Collections.singleton(((E)(new Object()))).iterator();
+        final Iterator<E> iter2 = java.util.Collections.<E>emptyList().iterator();
+        final FilterIterator<E> filterIterator = new FilterIterator<E>(iter1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3004,filterIterator,3003,filterIterator.hasNext());
+        filterIterator.setIterator(iter2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3006,filterIterator,3005,filterIterator.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test that when the iterator is changed, the hasNext method returns the
+     * correct response for the new iterator.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetIterator_remove746() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetIterator_remove746");
+        final Iterator<E> iter1 = java.util.Collections.singleton(((E)(new Object()))).iterator();
+        final Iterator<E> iter2 = java.util.Collections.<E>emptyList().iterator();
+        final FilterIterator<E> filterIterator = new FilterIterator<E>(iter1);
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.TruePredicate.truePredicate());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3004,filterIterator,3003,filterIterator.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3006,filterIterator,3005,filterIterator.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
      * Test that when the predicate is changed, the hasNext method returns the
      * correct response for the new predicate.
      */
-public void testSetPredicate() {
+@Test(timeout = 1000)
+    public void testSetPredicate() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetPredicate");
         final Iterator<E> iter = java.util.Collections.singleton(((E)(null))).iterator();
         final FilterIterator<E> filterIterator = new FilterIterator<E>(iter);
         filterIterator.setPredicate(org.apache.commons.collections4.functors.TruePredicate.truePredicate());
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.TruePredicate.truePredicate());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3008,filterIterator,3007,filterIterator.hasNext());
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.NotNullPredicate.notNullPredicate());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3010,filterIterator,3009,filterIterator.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test that when the predicate is changed, the hasNext method returns the
+     * correct response for the new predicate.
+     */
+@Test(timeout = 1000)
+    public void testSetPredicate_add995() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetPredicate_add995");
+        final Iterator<E> iter = java.util.Collections.singleton(((E)(null))).iterator();
+        final FilterIterator<E> filterIterator = new FilterIterator<E>(iter);
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.TruePredicate.truePredicate());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3008,filterIterator,3007,filterIterator.hasNext());
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.NotNullPredicate.notNullPredicate());
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.NotNullPredicate.notNullPredicate());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3010,filterIterator,3009,filterIterator.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test that when the predicate is changed, the hasNext method returns the
+     * correct response for the new predicate.
+     */
+@Test(timeout = 1000)
+    public void testSetPredicate_remove747() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetPredicate_remove747");
+        final Iterator<E> iter = java.util.Collections.singleton(((E)(null))).iterator();
+        final FilterIterator<E> filterIterator = new FilterIterator<E>(iter);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3008,filterIterator,3007,filterIterator.hasNext());
+        filterIterator.setPredicate(org.apache.commons.collections4.functors.NotNullPredicate.notNullPredicate());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3010,filterIterator,3009,filterIterator.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Test that when the predicate is changed, the hasNext method returns the
+     * correct response for the new predicate.
+     */
+@Test(timeout = 1000)
+    public void testSetPredicate_remove748() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetPredicate_remove748");
+        final Iterator<E> iter = java.util.Collections.singleton(((E)(null))).iterator();
+        final FilterIterator<E> filterIterator = new FilterIterator<E>(iter);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3008,filterIterator,3007,filterIterator.hasNext());
         filterIterator.setPredicate(org.apache.commons.collections4.functors.NotNullPredicate.notNullPredicate());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3010,filterIterator,3009,filterIterator.hasNext());

@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Queue;
+import org.junit.Test;
 
 /** 
  * Test cases for CircularFifoQueue.
@@ -32,11 +33,11 @@ public class CircularFifoQueueTest<E> extends AbstractQueueTest<E> {
         super.verify();
         final Iterator<E> iterator1 = getCollection().iterator();
         for (E e : getConfirmed()) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6059,iterator1,6058,iterator1.hasNext());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6020,iterator1,6019,iterator1.hasNext());
             final Object o1 = iterator1.next();
             final Object o2 = e;
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,o1);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6061,o2);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,o1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6022,o2);
         }
     }
 
@@ -96,6 +97,118 @@ public class CircularFifoQueueTest<E> extends AbstractQueueTest<E> {
      * Tests that the removal operation actually removes the first element.
      */
 @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testCircularFifoQueueCircular_add1821() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueCircular_add1821");
+        final List<E> list = new ArrayList<E>();
+        list.add(((E)("A")));
+        list.add(((E)("A")));
+        list.add(((E)("B")));
+        list.add(((E)("C")));
+        final Queue<E> queue = new CircularFifoQueue<E>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
+        queue.add(((E)("D")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testCircularFifoQueueCircular_add1822() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueCircular_add1822");
+        final List<E> list = new ArrayList<E>();
+        list.add(((E)("A")));
+        list.add(((E)("B")));
+        list.add(((E)("B")));
+        list.add(((E)("C")));
+        final Queue<E> queue = new CircularFifoQueue<E>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
+        queue.add(((E)("D")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testCircularFifoQueueCircular_add1823() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueCircular_add1823");
+        final List<E> list = new ArrayList<E>();
+        list.add(((E)("A")));
+        list.add(((E)("B")));
+        list.add(((E)("C")));
+        list.add(((E)("C")));
+        final Queue<E> queue = new CircularFifoQueue<E>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
+        queue.add(((E)("D")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testCircularFifoQueueCircular_add1824() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueCircular_add1824");
+        final List<E> list = new ArrayList<E>();
+        list.add(((E)("A")));
+        list.add(((E)("B")));
+        list.add(((E)("C")));
+        final Queue<E> queue = new CircularFifoQueue<E>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
+        queue.add(((E)("D")));
+        queue.add(((E)("D")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@SuppressWarnings(value = "unchecked")
     public void testCircularFifoQueueCircular() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueCircular");
         final List<E> list = new ArrayList<E>();
@@ -103,18 +216,18 @@ public class CircularFifoQueueTest<E> extends AbstractQueueTest<E> {
         list.add(((E)("B")));
         list.add(((E)("C")));
         final Queue<E> queue = new CircularFifoQueue<E>(list);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5955,queue,5954,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5957,queue,5956,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5959,queue,5958,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
         queue.add(((E)("D")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5961,queue,5960,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5963,queue,5962,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5965,queue,5964,queue.contains("C"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5967,queue,5966,queue.contains("D"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5969,queue,5968,queue.peek());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5971,queue,5970,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5973,queue,5972,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5975,queue,5974,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -129,18 +242,18 @@ public class CircularFifoQueueTest<E> extends AbstractQueueTest<E> {
         list.add(((E)("B")));
         list.add(((E)("C")));
         final Queue<E> queue = new CircularFifoQueue<E>(list);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5955,queue,5954,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5957,queue,5956,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5959,queue,5958,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
         queue.add(((E)("D")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5961,queue,5960,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5963,queue,5962,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5965,queue,5964,queue.contains("C"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5967,queue,5966,queue.contains("D"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5969,queue,5968,queue.peek());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5971,queue,5970,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5973,queue,5972,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5975,queue,5974,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -155,18 +268,18 @@ public class CircularFifoQueueTest<E> extends AbstractQueueTest<E> {
         list.add(((E)("foo")));
         list.add(((E)("C")));
         final Queue<E> queue = new CircularFifoQueue<E>(list);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5955,queue,5954,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5957,queue,5956,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5959,queue,5958,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
         queue.add(((E)("D")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5961,queue,5960,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5963,queue,5962,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5965,queue,5964,queue.contains("C"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5967,queue,5966,queue.contains("D"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5969,queue,5968,queue.peek());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5971,queue,5970,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5973,queue,5972,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5975,queue,5974,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -181,18 +294,18 @@ public class CircularFifoQueueTest<E> extends AbstractQueueTest<E> {
         list.add(((E)("B")));
         list.add(((E)("foo")));
         final Queue<E> queue = new CircularFifoQueue<E>(list);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5955,queue,5954,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5957,queue,5956,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5959,queue,5958,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
         queue.add(((E)("D")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5961,queue,5960,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5963,queue,5962,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5965,queue,5964,queue.contains("C"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5967,queue,5966,queue.contains("D"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5969,queue,5968,queue.peek());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5971,queue,5970,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5973,queue,5972,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5975,queue,5974,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -207,18 +320,191 @@ public class CircularFifoQueueTest<E> extends AbstractQueueTest<E> {
         list.add(((E)("B")));
         list.add(((E)("C")));
         final Queue<E> queue = new CircularFifoQueue<E>(list);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5955,queue,5954,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5957,queue,5956,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5959,queue,5958,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
         queue.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5961,queue,5960,queue.contains("A"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5963,queue,5962,queue.contains("B"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5965,queue,5964,queue.contains("C"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5967,queue,5966,queue.contains("D"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5969,queue,5968,queue.peek());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5971,queue,5970,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5973,queue,5972,queue.remove());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5975,queue,5974,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testCircularFifoQueueCircular_remove1394() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueCircular_remove1394");
+        final List<E> list = new ArrayList<E>();
+        list.add(((E)("B")));
+        list.add(((E)("C")));
+        final Queue<E> queue = new CircularFifoQueue<E>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
+        queue.add(((E)("D")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testCircularFifoQueueCircular_remove1395() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueCircular_remove1395");
+        final List<E> list = new ArrayList<E>();
+        list.add(((E)("B")));
+        list.add(((E)("C")));
+        final Queue<E> queue = new CircularFifoQueue<E>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
+        queue.add(((E)("D")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testCircularFifoQueueCircular_remove1396() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueCircular_remove1396");
+        final List<E> list = new ArrayList<E>();
+        list.add(((E)("B")));
+        list.add(((E)("C")));
+        final Queue<E> queue = new CircularFifoQueue<E>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
+        queue.add(((E)("D")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testCircularFifoQueueCircular_remove1397() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueCircular_remove1397");
+        final List<E> list = new ArrayList<E>();
+        list.add(((E)("A")));
+        list.add(((E)("B")));
+        list.add(((E)("C")));
+        final Queue<E> queue = new CircularFifoQueue<E>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5916,queue,5915,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5918,queue,5917,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5920,queue,5919,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5922,queue,5921,queue.contains("A"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5924,queue,5923,queue.contains("B"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5926,queue,5925,queue.contains("C"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5928,queue,5927,queue.contains("D"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5930,queue,5929,queue.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5932,queue,5931,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5934,queue,5933,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5936,queue,5935,queue.remove());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@Test(timeout = 1000)
+    public void testCircularFifoQueueRemove_add1825() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueRemove_add1825");
+        resetFull();
+        resetFull();
+        final int size = getConfirmed().size();
+        for (int i = 0 ; i < size ; i++) {
+            final Object o1 = getCollection().remove();
+            final Object o2 = ((List<?>)(getConfirmed())).remove(0);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5937,o1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5938,o2);
+            verify();
+        }
+        try {
+            getCollection().remove();
+        } catch (final NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@Test(timeout = 1000)
+    public void testCircularFifoQueueRemove_add1826() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueRemove_add1826");
+        resetFull();
+        final int size = getConfirmed().size();
+        for (int i = 0 ; i < size ; i++) {
+            final Object o1 = getCollection().remove();
+            final Object o2 = ((List<?>)(getConfirmed())).remove(0);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5937,o1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5938,o2);
+            verify();
+            verify();
+        }
+        try {
+            getCollection().remove();
+        } catch (final NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@Test(timeout = 1000)
+    public void testCircularFifoQueueRemove_add1827() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueRemove_add1827");
+        resetFull();
+        final int size = getConfirmed().size();
+        for (int i = 0 ; i < size ; i++) {
+            final Object o1 = getCollection().remove();
+            final Object o2 = ((List<?>)(getConfirmed())).remove(0);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5937,o1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5938,o2);
+            verify();
+        }
+        try {
+            getCollection().remove();
+            getCollection().remove();
+        } catch (final NoSuchElementException e) {
+        }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -232,8 +518,8 @@ public void testCircularFifoQueueRemove() {
         for (int i = -1 ; i < size ; i++) {
             final Object o1 = getCollection().remove();
             final Object o2 = ((List<?>)(getConfirmed())).remove(0);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,o1);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5977,o2);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5937,o1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5938,o2);
             verify();
         }
         try {
@@ -253,9 +539,51 @@ public void testCircularFifoQueueRemove_literalMutation1668() {
         for (int i = 0 ; i < size ; i++) {
             final Object o1 = getCollection().remove();
             final Object o2 = ((List<?>)(getConfirmed())).remove(-1);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,o1);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5977,o2);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5937,o1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5938,o2);
             verify();
+        }
+        try {
+            getCollection().remove();
+        } catch (final NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@Test(timeout = 1000)
+    public void testCircularFifoQueueRemove_remove1398() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueRemove_remove1398");
+        final int size = getConfirmed().size();
+        for (int i = 0 ; i < size ; i++) {
+            final Object o1 = getCollection().remove();
+            final Object o2 = ((List<?>)(getConfirmed())).remove(0);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5937,o1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5938,o2);
+            verify();
+        }
+        try {
+            getCollection().remove();
+        } catch (final NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests that the removal operation actually removes the first element.
+     */
+@Test(timeout = 1000)
+    public void testCircularFifoQueueRemove_remove1399() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCircularFifoQueueRemove_remove1399");
+        resetFull();
+        final int size = getConfirmed().size();
+        for (int i = 0 ; i < size ; i++) {
+            final Object o1 = getCollection().remove();
+            final Object o2 = ((List<?>)(getConfirmed())).remove(0);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5937,o1);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5938,o2);
         }
         try {
             getCollection().remove();
@@ -270,7 +598,7 @@ public void testCircularFifoQueueRemove_literalMutation1668() {
 public void testConstructorException1() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructorException1");
         try {
-            new CircularFifoQueue<E>(1);
+            new CircularFifoQueue<E>(-1);
         } catch (final IllegalArgumentException ex) {
             return ;
         }
@@ -304,6 +632,139 @@ public void testConstructorException3() {
     }
 
     @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_add1831() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_add1831");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_add1832() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_add1832");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_add1833() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_add1833");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_add1834() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_add1834");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_add1835() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_add1835");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_add1836() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_add1836");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_add1837() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_add1837");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void testRemoveError1() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1");
         final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
@@ -312,11 +773,11 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5987,fifo,5986,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5989,fifo,5988,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5991,fifo,5990,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -329,11 +790,11 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5987,fifo,5986,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5989,fifo,5988,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5991,fifo,5990,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -346,11 +807,11 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5987,fifo,5986,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5989,fifo,5988,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5991,fifo,5990,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -363,11 +824,11 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5987,fifo,5986,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5989,fifo,5988,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5991,fifo,5990,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -380,11 +841,11 @@ public void testConstructorException3() {
         fifo.add(((E)("foo")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5987,fifo,5986,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5989,fifo,5988,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5991,fifo,5990,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -397,11 +858,11 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("foo")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5987,fifo,5986,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5989,fifo,5988,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5991,fifo,5990,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -414,11 +875,11 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5987,fifo,5986,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5989,fifo,5988,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5991,fifo,5990,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -431,11 +892,11 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5987,fifo,5986,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5989,fifo,5988,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5991,fifo,5990,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -448,11 +909,298 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5987,fifo,5986,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5989,fifo,5988,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5991,fifo,5990,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_remove1403() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_remove1403");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_remove1404() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_remove1404");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_remove1405() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_remove1405");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_remove1406() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_remove1406");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_remove1407() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_remove1407");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_remove1408() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_remove1408");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError1_remove1409() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError1_remove1409");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5948,fifo,5947,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5950,fifo,5949,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5952,fifo,5951,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_add1838() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_add1838");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_add1839() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_add1839");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_add1840() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_add1840");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_add1841() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_add1841");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_add1842() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_add1842");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_add1843() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_add1843");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_add1844() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_add1844");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_add1845() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_add1845");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -466,31 +1214,31 @@ public void testConstructorException3() {
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @SuppressWarnings(value = "unchecked")
     public void testRemoveError2_literalMutation1684() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_literalMutation1684");
-        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(6);
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(4);
         fifo.add(((E)("1")));
         fifo.add(((E)("2")));
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -504,12 +1252,12 @@ public void testConstructorException3() {
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -523,12 +1271,12 @@ public void testConstructorException3() {
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -542,12 +1290,12 @@ public void testConstructorException3() {
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -561,12 +1309,12 @@ public void testConstructorException3() {
         fifo.add(((E)("foo")));
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -580,12 +1328,12 @@ public void testConstructorException3() {
         fifo.add(((E)("4")));
         fifo.add(((E)("foo")));
         fifo.add(((E)("6")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -599,12 +1347,12 @@ public void testConstructorException3() {
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -618,12 +1366,12 @@ public void testConstructorException3() {
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -637,12 +1385,362 @@ public void testConstructorException3() {
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5993,fifo,5992,fifo.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5995,fifo,5994,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5997,fifo,5996,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5999,fifo,5998,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_remove1410() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_remove1410");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_remove1411() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_remove1411");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_remove1412() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_remove1412");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_remove1413() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_remove1413");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_remove1414() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_remove1414");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_remove1415() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_remove1415");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_remove1416() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_remove1416");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError2_remove1417() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError2_remove1417");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5954,fifo,5953,fifo.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5956,fifo,5955,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5958,fifo,5957,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5960,fifo,5959,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_add1846() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_add1846");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_add1847() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_add1847");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_add1848() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_add1848");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_add1849() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_add1849");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_add1850() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_add1850");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_add1851() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_add1851");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_add1852() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_add1852");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_add1853() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_add1853");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_add1854() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_add1854");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -655,14 +1753,14 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -675,14 +1773,14 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -695,14 +1793,14 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -715,14 +1813,14 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -735,14 +1833,14 @@ public void testConstructorException3() {
         fifo.add(((E)("foo")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -755,14 +1853,14 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("foo")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -775,14 +1873,14 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -795,14 +1893,14 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -815,14 +1913,14 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("foo")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -835,14 +1933,14 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -855,14 +1953,346 @@ public void testConstructorException3() {
         fifo.add(((E)("3")));
         fifo.add(((E)("4")));
         fifo.add(((E)("5")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6001,fifo,6000,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
         fifo.remove("3");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6003,fifo,6002,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6005,fifo,6004,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6007,fifo,6006,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_remove1418() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_remove1418");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_remove1419() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_remove1419");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_remove1420() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_remove1420");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_remove1421() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_remove1421");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_remove1422() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_remove1422");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_remove1423() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_remove1423");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_remove1424() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_remove1424");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_remove1425() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_remove1425");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fifo.remove("3");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError3_remove1426() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError3_remove1426");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5962,fifo,5961,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5964,fifo,5963,fifo.toString());
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5966,fifo,5965,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5968,fifo,5967,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_add1855() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_add1855");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_add1856() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_add1856");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_add1857() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_add1857");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_add1858() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_add1858");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_add1859() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_add1859");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_add1860() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_add1860");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_add1861() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_add1861");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_add1862() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_add1862");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -877,9 +2307,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -894,9 +2324,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -911,9 +2341,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -928,9 +2358,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -945,9 +2375,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -962,9 +2392,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -979,9 +2409,9 @@ public void testConstructorException3() {
         fifo.add(((E)("foo")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -996,9 +2426,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("foo")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1013,9 +2443,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("4");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1030,9 +2460,297 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6009,fifo,6008,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6011,fifo,6010,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_remove1427() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_remove1427");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_remove1428() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_remove1428");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_remove1429() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_remove1429");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_remove1430() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_remove1430");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_remove1431() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_remove1431");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_remove1432() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_remove1432");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_remove1433() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_remove1433");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fifo.remove("4");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError4_remove1434() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError4_remove1434");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5970,fifo,5969,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5972,fifo,5971,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_add1863() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_add1863");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_add1864() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_add1864");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_add1865() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_add1865");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_add1866() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_add1866");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_add1867() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_add1867");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_add1868() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_add1868");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_add1869() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_add1869");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_add1870() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_add1870");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1047,9 +2765,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("5");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1064,9 +2782,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("5");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1081,9 +2799,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("5");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1098,9 +2816,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("5");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1115,9 +2833,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("5");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1132,9 +2850,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("5");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1149,9 +2867,9 @@ public void testConstructorException3() {
         fifo.add(((E)("foo")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("5");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1166,9 +2884,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("foo")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("5");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1183,9 +2901,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("5");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1200,9 +2918,297 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6013,fifo,6012,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6015,fifo,6014,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_remove1435() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_remove1435");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_remove1436() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_remove1436");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_remove1437() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_remove1437");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_remove1438() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_remove1438");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_remove1439() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_remove1439");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_remove1440() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_remove1440");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_remove1441() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_remove1441");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fifo.remove("5");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError5_remove1442() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError5_remove1442");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5974,fifo,5973,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5976,fifo,5975,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_add1871() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_add1871");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_add1872() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_add1872");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_add1873() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_add1873");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_add1874() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_add1874");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_add1875() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_add1875");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_add1876() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_add1876");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_add1877() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_add1877");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_add1878() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_add1878");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1217,9 +3223,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("6");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1234,9 +3240,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("6");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1251,9 +3257,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("6");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1268,9 +3274,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("6");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1285,9 +3291,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("6");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1302,9 +3308,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("6");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1319,9 +3325,9 @@ public void testConstructorException3() {
         fifo.add(((E)("foo")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("6");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1336,9 +3342,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("foo")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("6");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1353,9 +3359,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("6");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1370,9 +3376,297 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6017,fifo,6016,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6019,fifo,6018,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_remove1443() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_remove1443");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_remove1444() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_remove1444");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_remove1445() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_remove1445");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_remove1446() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_remove1446");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_remove1447() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_remove1447");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_remove1448() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_remove1448");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_remove1449() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_remove1449");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fifo.remove("6");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError6_remove1450() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError6_remove1450");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5978,fifo,5977,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5980,fifo,5979,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_add1879() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_add1879");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_add1880() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_add1880");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_add1881() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_add1881");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_add1882() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_add1882");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_add1883() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_add1883");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_add1884() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_add1884");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_add1885() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_add1885");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_add1886() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_add1886");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1387,16 +3681,16 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @SuppressWarnings(value = "unchecked")
     public void testRemoveError7_literalMutation1735() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_literalMutation1735");
-        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(6);
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(4);
         fifo.add(((E)("1")));
         fifo.add(((E)("2")));
         fifo.add(((E)("3")));
@@ -1404,9 +3698,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1421,9 +3715,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1438,9 +3732,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1455,9 +3749,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1472,9 +3766,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1489,9 +3783,9 @@ public void testConstructorException3() {
         fifo.add(((E)("foo")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1506,9 +3800,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("foo")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1523,9 +3817,9 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1540,9 +3834,325 @@ public void testConstructorException3() {
         fifo.add(((E)("5")));
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6021,fifo,6020,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6023,fifo,6022,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_remove1451() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_remove1451");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_remove1452() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_remove1452");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_remove1453() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_remove1453");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_remove1454() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_remove1454");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_remove1455() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_remove1455");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_remove1456() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_remove1456");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_remove1457() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_remove1457");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError7_remove1458() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError7_remove1458");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5982,fifo,5981,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5984,fifo,5983,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_add1887() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_add1887");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_add1888() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_add1888");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_add1889() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_add1889");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_add1890() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_add1890");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_add1891() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_add1891");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_add1892() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_add1892");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_add1893() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_add1893");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_add1894() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_add1894");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_add1895() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_add1895");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1558,16 +4168,16 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @SuppressWarnings(value = "unchecked")
     public void testRemoveError8_literalMutation1745() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_literalMutation1745");
-        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(6);
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(4);
         fifo.add(((E)("1")));
         fifo.add(((E)("2")));
         fifo.add(((E)("3")));
@@ -1576,9 +4186,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1594,9 +4204,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1612,9 +4222,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1630,9 +4240,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1648,9 +4258,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1666,9 +4276,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1684,9 +4294,9 @@ public void testConstructorException3() {
         fifo.add(((E)("foo")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1702,9 +4312,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("foo")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1720,9 +4330,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("7");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1738,9 +4348,351 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6025,fifo,6024,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6027,fifo,6026,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_remove1459() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_remove1459");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_remove1460() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_remove1460");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_remove1461() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_remove1461");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_remove1462() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_remove1462");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_remove1463() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_remove1463");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_remove1464() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_remove1464");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_remove1465() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_remove1465");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_remove1466() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_remove1466");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fifo.remove("7");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError8_remove1467() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError8_remove1467");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5986,fifo,5985,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5988,fifo,5987,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_add1896() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_add1896");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_add1897() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_add1897");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_add1898() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_add1898");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_add1899() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_add1899");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_add1900() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_add1900");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_add1901() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_add1901");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_add1902() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_add1902");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_add1903() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_add1903");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_add1904() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_add1904");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1756,9 +4708,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1774,9 +4726,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1792,9 +4744,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1810,9 +4762,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1828,9 +4780,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1846,9 +4798,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1864,9 +4816,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1882,9 +4834,9 @@ public void testConstructorException3() {
         fifo.add(((E)("foo")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1900,9 +4852,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("foo")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1918,9 +4870,9 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("8");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1936,9 +4888,326 @@ public void testConstructorException3() {
         fifo.add(((E)("6")));
         fifo.add(((E)("7")));
         fifo.add(((E)("8")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6029,fifo,6028,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
         fifo.remove("foo");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6031,fifo,6030,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_remove1468() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_remove1468");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_remove1469() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_remove1469");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_remove1470() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_remove1470");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_remove1471() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_remove1471");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_remove1472() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_remove1472");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_remove1473() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_remove1473");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_remove1474() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_remove1474");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_remove1475() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_remove1475");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fifo.remove("8");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRemoveError9_remove1476() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoveError9_remove1476");
+        final CircularFifoQueue<E> fifo = new CircularFifoQueue<E>(5);
+        fifo.add(((E)("1")));
+        fifo.add(((E)("2")));
+        fifo.add(((E)("3")));
+        fifo.add(((E)("4")));
+        fifo.add(((E)("5")));
+        fifo.add(((E)("6")));
+        fifo.add(((E)("7")));
+        fifo.add(((E)("8")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5990,fifo,5989,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5992,fifo,5991,fifo.toString());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_add1905() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_add1905");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        b.add(((E)("a")));
+        b.add(((E)("a")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b);
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_add1906() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_add1906");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        b.add(((E)("a")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b);
+        new ObjectOutputStream(bos).writeObject(b);
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_add1907() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_add1907");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        b.add(((E)("a")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b);
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_add1908() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_add1908");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        b.add(((E)("a")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b);
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_add1909() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_add1909");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        b.add(((E)("a")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b);
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -1947,56 +5216,56 @@ public void testConstructorException3() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization");
         final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
         b.add(((E)("a")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6033,b,6032,b.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6035,b,6034,b.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b);
         final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6037,b2,6036,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6039,b2,6038,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
         b2.add(((E)("b")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6041,b2,6040,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6043,b2,6042,b2.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6045,b2,6044,b2.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
         bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b2);
         final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6047,b3,6046,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6049,b3,6048,b3.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6051,b3,6050,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
         b3.add(((E)("c")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6053,b3,6052,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6055,b3,6054,b3.contains("b"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6057,b3,6056,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     @SuppressWarnings(value = "unchecked")
     public void testRepeatedSerialization_literalMutation1767() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_literalMutation1767");
-        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(1);
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(3);
         b.add(((E)("a")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6033,b,6032,b.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6035,b,6034,b.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b);
         final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6037,b2,6036,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6039,b2,6038,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
         b2.add(((E)("b")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6041,b2,6040,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6043,b2,6042,b2.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6045,b2,6044,b2.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
         bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b2);
         final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6047,b3,6046,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6049,b3,6048,b3.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6051,b3,6050,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
         b3.add(((E)("c")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6053,b3,6052,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6055,b3,6054,b3.contains("b"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6057,b3,6056,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2005,27 +5274,27 @@ public void testConstructorException3() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_literalMutation1768");
         final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
         b.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6033,b,6032,b.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6035,b,6034,b.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b);
         final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6037,b2,6036,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6039,b2,6038,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
         b2.add(((E)("b")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6041,b2,6040,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6043,b2,6042,b2.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6045,b2,6044,b2.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
         bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b2);
         final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6047,b3,6046,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6049,b3,6048,b3.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6051,b3,6050,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
         b3.add(((E)("c")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6053,b3,6052,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6055,b3,6054,b3.contains("b"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6057,b3,6056,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2034,27 +5303,27 @@ public void testConstructorException3() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_literalMutation1769");
         final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
         b.add(((E)("a")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6033,b,6032,b.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6035,b,6034,b.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b);
         final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6037,b2,6036,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6039,b2,6038,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
         b2.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6041,b2,6040,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6043,b2,6042,b2.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6045,b2,6044,b2.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
         bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b2);
         final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6047,b3,6046,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6049,b3,6048,b3.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6051,b3,6050,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
         b3.add(((E)("c")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6053,b3,6052,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6055,b3,6054,b3.contains("b"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6057,b3,6056,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2063,27 +5332,232 @@ public void testConstructorException3() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_literalMutation1770");
         final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
         b.add(((E)("a")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6033,b,6032,b.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6035,b,6034,b.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b);
         final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6037,b2,6036,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6039,b2,6038,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
         b2.add(((E)("b")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6041,b2,6040,b2.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6043,b2,6042,b2.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6045,b2,6044,b2.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
         bos = new ByteArrayOutputStream();
         new ObjectOutputStream(bos).writeObject(b2);
         final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6047,b3,6046,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6049,b3,6048,b3.contains("a"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6051,b3,6050,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
         b3.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6053,b3,6052,b3.size());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6055,b3,6054,b3.contains("b"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6057,b3,6056,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_remove1477() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_remove1477");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b);
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_remove1478() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_remove1478");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        b.add(((E)("a")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_remove1479() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_remove1479");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b);
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_remove1480() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_remove1480");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        b.add(((E)("a")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testRepeatedSerialization_remove1481() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRepeatedSerialization_remove1481");
+        final CircularFifoQueue<E> b = new CircularFifoQueue<E>(2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5994,b,5993,b.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5996,b,5995,b.contains("a"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b);
+        final CircularFifoQueue<E> b2 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5998,b2,5997,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6000,b2,5999,b2.contains("a"));
+        b2.add(((E)("b")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6002,b2,6001,b2.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6004,b2,6003,b2.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6006,b2,6005,b2.contains("b"));
+        bos = new ByteArrayOutputStream();
+        new ObjectOutputStream(bos).writeObject(b2);
+        final CircularFifoQueue<E> b3 = ((CircularFifoQueue<E>)(new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6008,b3,6007,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6010,b3,6009,b3.contains("a"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6012,b3,6011,b3.contains("b"));
+        b3.add(((E)("c")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6014,b3,6013,b3.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6016,b3,6015,b3.contains("b"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6018,b3,6017,b3.contains("c"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGetIndex_add1828() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetIndex_add1828");
+        resetFull();
+        resetFull();
+        final CircularFifoQueue<E> queue = getCollection();
+        final List<E> confirmed = ((List<E>)(getConfirmed()));
+        for (int i = 0 ; i < (confirmed.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5940,confirmed,5939,confirmed.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5942,queue,5941,queue.get(i));
+        }
+        queue.remove();
+        queue.remove();
+        for (int i = 0 ; i < (queue.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5944,confirmed,5943,confirmed.get((i + 2)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5946,queue,5945,queue.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGetIndex_add1829() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetIndex_add1829");
+        resetFull();
+        final CircularFifoQueue<E> queue = getCollection();
+        final List<E> confirmed = ((List<E>)(getConfirmed()));
+        for (int i = 0 ; i < (confirmed.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5940,confirmed,5939,confirmed.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5942,queue,5941,queue.get(i));
+        }
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        for (int i = 0 ; i < (queue.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5944,confirmed,5943,confirmed.get((i + 2)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5946,queue,5945,queue.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGetIndex_add1830() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetIndex_add1830");
+        resetFull();
+        final CircularFifoQueue<E> queue = getCollection();
+        final List<E> confirmed = ((List<E>)(getConfirmed()));
+        for (int i = 0 ; i < (confirmed.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5940,confirmed,5939,confirmed.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5942,queue,5941,queue.get(i));
+        }
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        for (int i = 0 ; i < (queue.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5944,confirmed,5943,confirmed.get((i + 2)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5946,queue,5945,queue.get(i));
+        }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -2093,14 +5567,14 @@ public void testConstructorException3() {
         final CircularFifoQueue<E> queue = getCollection();
         final List<E> confirmed = ((List<E>)(getConfirmed()));
         for (int i = -1 ; i < (confirmed.size()) ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5979,confirmed,5978,confirmed.get(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5981,queue,5980,queue.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5940,confirmed,5939,confirmed.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5942,queue,5941,queue.get(i));
         }
         queue.remove();
         queue.remove();
         for (int i = 0 ; i < (queue.size()) ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5983,confirmed,5982,confirmed.get((i + 2)));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5985,queue,5984,queue.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5944,confirmed,5943,confirmed.get((i + 2)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5946,queue,5945,queue.get(i));
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -2111,14 +5585,68 @@ public void testConstructorException3() {
         final CircularFifoQueue<E> queue = getCollection();
         final List<E> confirmed = ((List<E>)(getConfirmed()));
         for (int i = 0 ; i < (confirmed.size()) ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5979,confirmed,5978,confirmed.get(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5981,queue,5980,queue.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5940,confirmed,5939,confirmed.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5942,queue,5941,queue.get(i));
         }
         queue.remove();
         queue.remove();
         for (int i = -1 ; i < (queue.size()) ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5983,confirmed,5982,confirmed.get((i + 2)));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5985,queue,5984,queue.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5944,confirmed,5943,confirmed.get((i + 2)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5946,queue,5945,queue.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGetIndex_remove1400() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetIndex_remove1400");
+        final CircularFifoQueue<E> queue = getCollection();
+        final List<E> confirmed = ((List<E>)(getConfirmed()));
+        for (int i = 0 ; i < (confirmed.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5940,confirmed,5939,confirmed.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5942,queue,5941,queue.get(i));
+        }
+        queue.remove();
+        queue.remove();
+        for (int i = 0 ; i < (queue.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5944,confirmed,5943,confirmed.get((i + 2)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5946,queue,5945,queue.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGetIndex_remove1401() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetIndex_remove1401");
+        resetFull();
+        final CircularFifoQueue<E> queue = getCollection();
+        final List<E> confirmed = ((List<E>)(getConfirmed()));
+        for (int i = 0 ; i < (confirmed.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5940,confirmed,5939,confirmed.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5942,queue,5941,queue.get(i));
+        }
+        queue.remove();
+        for (int i = 0 ; i < (queue.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5944,confirmed,5943,confirmed.get((i + 2)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5946,queue,5945,queue.get(i));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGetIndex_remove1402() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetIndex_remove1402");
+        resetFull();
+        final CircularFifoQueue<E> queue = getCollection();
+        final List<E> confirmed = ((List<E>)(getConfirmed()));
+        for (int i = 0 ; i < (confirmed.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5940,confirmed,5939,confirmed.get(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5942,queue,5941,queue.get(i));
+        }
+        queue.remove();
+        for (int i = 0 ; i < (queue.size()) ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5944,confirmed,5943,confirmed.get((i + 2)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),5946,queue,5945,queue.get(i));
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

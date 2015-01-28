@@ -3,8 +3,7 @@ package fr.inria.diversify.persistence.json.input;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.ASTAdd;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
@@ -33,7 +32,7 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
     }
 
     @Override
-    public void read(HashMap<Integer, Transformation> transformations) {
+    public void read(HashMap<Integer, SingleTransformation> transformations) {
 
         try {
             ASTReplace transf = (ASTReplace) get(transformations); //add the transformation to the transformations map if not present

@@ -1,9 +1,8 @@
 package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
-import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -145,12 +144,12 @@ public class RunResults {
      * @param inputProgram Input program over which the transformations where made
      * @return
      */
-    public List<Transformation> parseTransformations(InputProgram inputProgram) {
+    public List<SingleTransformation> parseTransformations(InputProgram inputProgram) {
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-        ArrayList<Transformation> result = new ArrayList<>();
+        ArrayList<SingleTransformation> result = new ArrayList<>();
         for (int i = 0; i < transformationsJSON.length(); i++) {
             try {
-                Transformation t = parser.parseTransformation(transformationsJSON.getJSONObject(i));
+                SingleTransformation t = parser.parseTransformation(transformationsJSON.getJSONObject(i));
                 result.add(t);
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -166,9 +165,9 @@ public class RunResults {
         return transformationsJSON;
     }
 
-    public void setTransformations(Collection<Transformation> transformations) {
+    public void setTransformations(Collection<SingleTransformation> transformations) {
         JSONArray array = new JSONArray();
-        for (Transformation t : transformations) {
+        for (SingleTransformation t : transformations) {
             try {
                 array.put(t.toJSONObject());
             } catch (JSONException e) {

@@ -5,7 +5,7 @@ import fr.inria.diversify.statistic.SessionResults;
 import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.query.TransformationQuery;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
@@ -126,7 +126,7 @@ public class Diversify extends AbstractDiversify {
                 try {
                     transQuery.executeQuery();
                     //Obtain transformations
-                    transformations = (List<Transformation>) transQuery.getMultiTransformations();
+                    transformations = (List<SingleTransformation>) transQuery.getMultiTransformations();
                     success = true;
                 } catch (SeveralTriesUnsuccessful e ) {
                     if ( e.getCauses()[0] instanceof QueryException) {
@@ -177,12 +177,12 @@ public class Diversify extends AbstractDiversify {
         }
     }
 
-    protected void applyTransformations(Collection<Transformation> trans, String outputDir) throws Exception {
+    protected void applyTransformations(Collection<SingleTransformation> trans, String outputDir) throws Exception {
 
         int successful = 0;
         try {
             //Try to apply transformations
-            for (Transformation t : trans) {
+            for (SingleTransformation t : trans) {
                 //Input the configuration
                 if ( t instanceof AbstractTransformation ) {
                     ((AbstractTransformation)t).setInputProgram(inputConfiguration.getInputProgram());
@@ -193,8 +193,8 @@ public class Diversify extends AbstractDiversify {
         } catch (Exception e) {
             //Revert to the original state
             try {
-                for (Iterator<Transformation> i = trans.iterator(); i.hasNext() && successful > 0; successful--) {
-                    Transformation t = i.next();
+                for (Iterator<SingleTransformation> i = trans.iterator(); i.hasNext() && successful > 0; successful--) {
+                    SingleTransformation t = i.next();
                     if ( t instanceof AbstractTransformation ) {
                         ((AbstractTransformation)t).setInputProgram(inputConfiguration.getInputProgram());
                     }
@@ -232,7 +232,7 @@ public class Diversify extends AbstractDiversify {
         }
 
         //Store transformation status
-        for (Transformation tran : transformations) {
+        for (SingleTransformation tran : transformations) {
             if (tran.getStatus() == AbstractTransformation.NOT_TESTED) {
                 tran.setStatus(status);
                 tran.setFailures(builder.getTestFail());
@@ -288,7 +288,7 @@ public class Diversify extends AbstractDiversify {
      * @param status Resulting status
      * @return A run result
      */
-    protected RunResults buildRunResult(Collection<Transformation> trans, int status, int series) {
+    protected RunResults buildRunResult(Collection<SingleTransformation> trans, int status, int series) {
         RunResults result = new RunResults();
         result.setId(trial);
         result.setIncrementalSeries(series);

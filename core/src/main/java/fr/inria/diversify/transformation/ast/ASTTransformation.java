@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.transformation.AbstractTransformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.util.Log;
 import spoon.compiler.Environment;
@@ -21,7 +22,7 @@ import java.io.IOException;
  * Date: 7/11/13
  * Time: 4:15 PM
  */
-public abstract class ASTTransformation extends AbstractTransformation {
+public abstract class ASTTransformation extends SingleTransformation {
 
 
     protected boolean subType;
@@ -41,7 +42,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
      *
      * @return a string describing the level.
      */
-    @Override
     public String getLevel() {
         CtCodeElement stmt = transplantationPoint.getCtCodeFragment();
         if (stmt instanceof CtLocalVariable
@@ -61,7 +61,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
      * @return
      * @throws Exception
      */
-    @Override
     public String getTransformationString() throws Exception {
         copyTransplant = buildReplacementElement();
         transplantationPoint.getCtCodeFragment().replace(copyTransplant);
@@ -92,16 +91,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
         Log.debug("write type {} in directory {}", type.getQualifiedName(), directory);
     }
 
-
-    /**
-     * Removes the original source code in the transplantation point
-     */
-    public void removeSourceCode() {
-        CtSimpleType<?> type = getOriginalClass(transplantationPoint);
-        CompilationUnit compileUnit = type.getPosition().getCompilationUnit();
-        if (compileUnit.getSourceCodeFragments() != null)
-            compileUnit.getSourceCodeFragments().clear();
-    }
 
     public abstract boolean usedOfSubType();
 
@@ -209,11 +198,6 @@ public abstract class ASTTransformation extends AbstractTransformation {
      */
     public String packageLocationName() {
         return transplantationPoint.getSourcePackage().getQualifiedName();
-    }
-
-    @Override
-    public String stmtType() {
-        return transplantationPoint.getCtCodeFragment().getClass().getSimpleName();
     }
 
     /**

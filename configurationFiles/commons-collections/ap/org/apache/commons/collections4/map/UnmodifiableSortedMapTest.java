@@ -1,6 +1,7 @@
 package org.apache.commons.collections4.map;
 
 import java.util.SortedMap;
+import org.junit.Test;
 import java.util.TreeMap;
 
 /** 
@@ -55,6 +56,20 @@ public class UnmodifiableSortedMapTest<K, V> extends AbstractSortedMapTest<K, V>
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,map);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1994,null,1993,org.apache.commons.collections4.map.UnmodifiableSortedMap.unmodifiableSortedMap(map));
         try {
+            org.apache.commons.collections4.map.UnmodifiableSortedMap.unmodifiableSortedMap(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testDecorateFactory_add601() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add601");
+        final SortedMap<K, V> map = makeFullMap();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1988,map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1994,null,1993,org.apache.commons.collections4.map.UnmodifiableSortedMap.unmodifiableSortedMap(map));
+        try {
+            org.apache.commons.collections4.map.UnmodifiableSortedMap.unmodifiableSortedMap(null);
             org.apache.commons.collections4.map.UnmodifiableSortedMap.unmodifiableSortedMap(null);
         } catch (final IllegalArgumentException ex) {
         }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import org.apache.commons.collections4.ResettableListIterator;
+import org.junit.Test;
 
 /** 
  * Tests the ReverseListIterator.
@@ -50,6 +51,48 @@ public class ReverseListIteratorTest<E> extends AbstractListIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testEmptyListIteratorIsIndeedEmpty_add1189() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyListIteratorIsIndeedEmpty_add1189");
+        final ListIterator<E> it = makeEmptyIterator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4200,it,4199,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4201,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4203,it,4202,it.nextIndex());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4205,it,4204,it.hasPrevious());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4207,it,4206,it.previousIndex());
+        try {
+            it.next();
+            it.next();
+        } catch (final NoSuchElementException e) {
+        }
+        try {
+            it.previous();
+        } catch (final NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEmptyListIteratorIsIndeedEmpty_add1190() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEmptyListIteratorIsIndeedEmpty_add1190");
+        final ListIterator<E> it = makeEmptyIterator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4200,it,4199,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4201,-1);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4203,it,4202,it.nextIndex());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4205,it,4204,it.hasPrevious());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4207,it,4206,it.previousIndex());
+        try {
+            it.next();
+        } catch (final NoSuchElementException e) {
+        }
+        try {
+            it.previous();
+            it.previous();
+        } catch (final NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Override
     public void testWalkForwardAndBack() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWalkForwardAndBack");
@@ -73,6 +116,66 @@ public class ReverseListIteratorTest<E> extends AbstractListIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4282,it,4281,it.hasNext());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4284,it,4283,it.hasPrevious());
         try {
+            it.previous();
+        } catch (final NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testWalkForwardAndBack_add1195() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWalkForwardAndBack_add1195");
+        final ArrayList<E> list = new ArrayList<E>();
+        final ListIterator<E> it = makeObject();
+        while (it.hasNext()) {
+            list.add(it.next());
+            list.add(it.next());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4268,it,4267,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4270,it,4269,it.hasPrevious());
+        for (int i = (list.size()) - 1 ; i >= 0 ; i--) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4271,("" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4272,(((list.size()) - i) - 2));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4274,it,4273,it.nextIndex());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4275,(((list.size()) - i) - 1));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4277,it,4276,it.previousIndex());
+            final Object obj = list.get(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4278,obj);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4280,it,4279,it.previous());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4282,it,4281,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4284,it,4283,it.hasPrevious());
+        try {
+            it.previous();
+        } catch (final NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testWalkForwardAndBack_add1196() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testWalkForwardAndBack_add1196");
+        final ArrayList<E> list = new ArrayList<E>();
+        final ListIterator<E> it = makeObject();
+        while (it.hasNext()) {
+            list.add(it.next());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4268,it,4267,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4270,it,4269,it.hasPrevious());
+        for (int i = (list.size()) - 1 ; i >= 0 ; i--) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4271,("" + i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4272,(((list.size()) - i) - 2));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4274,it,4273,it.nextIndex());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4275,(((list.size()) - i) - 1));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4277,it,4276,it.previousIndex());
+            final Object obj = list.get(i);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4278,obj);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4280,it,4279,it.previous());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4282,it,4281,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4284,it,4283,it.hasPrevious());
+        try {
+            it.previous();
             it.previous();
         } catch (final NoSuchElementException e) {
         }
@@ -116,7 +219,7 @@ public class ReverseListIteratorTest<E> extends AbstractListIteratorTest<E> {
         }
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4268,it,4267,it.hasNext());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4270,it,4269,it.hasPrevious());
-        for (int i = (list.size()) - 1 ; i >= 1 ; i--) {
+        for (int i = (list.size()) - 1 ; i >= -1 ; i--) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4271,("" + i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4272,(((list.size()) - i) - 2));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4274,it,4273,it.nextIndex());
@@ -175,6 +278,92 @@ public class ReverseListIteratorTest<E> extends AbstractListIteratorTest<E> {
         final ResettableListIterator<E> it = makeObject();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4209,it,4208,it.next());
         it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4211,it,4210,it.next());
+        it.next();
+        it.next();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4213,it,4212,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_add1191() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1191");
+        final ResettableListIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4209,it,4208,it.next());
+        it.reset();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4211,it,4210,it.next());
+        it.next();
+        it.next();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4213,it,4212,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_add1192() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1192");
+        final ResettableListIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4209,it,4208,it.next());
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4211,it,4210,it.next());
+        it.next();
+        it.next();
+        it.next();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4213,it,4212,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_add1193() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1193");
+        final ResettableListIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4209,it,4208,it.next());
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4211,it,4210,it.next());
+        it.next();
+        it.next();
+        it.next();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4213,it,4212,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_add1194() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1194");
+        final ResettableListIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4209,it,4208,it.next());
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4211,it,4210,it.next());
+        it.next();
+        it.next();
+        it.reset();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4213,it,4212,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_remove880() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_remove880");
+        final ResettableListIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4209,it,4208,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4211,it,4210,it.next());
+        it.next();
+        it.next();
+        it.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4213,it,4212,it.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testReset_remove881() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_remove881");
+        final ResettableListIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4209,it,4208,it.next());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4211,it,4210,it.next());
         it.next();
         it.next();

@@ -3,6 +3,7 @@ package org.apache.commons.collections4.iterators;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import org.junit.Test;
 import junit.framework.TestCase;
 
 /** 
@@ -28,12 +29,14 @@ public void testConstructorEx() throws Exception {
      * 
      * @throws Exception If something unexpected occurs.
      */
-public void testLooping0() throws Exception {
+@Test(timeout = 1000)
+    public void testLooping0() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLooping0");
         final List<java.lang.Object> list = new ArrayList<java.lang.Object>();
         final LoopingIterator<java.lang.Object> loop = new LoopingIterator<java.lang.Object>(list);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3670,!(loop.hasNext()));
         try {
+            loop.next();
             loop.next();
         } catch (final NoSuchElementException ex) {
         }
@@ -159,6 +162,134 @@ public void testLooping3_literalMutation1044() throws Exception {
      * 
      * @throws Exception If something unexpected occurs.
      */
+@Test(timeout = 1000)
+    public void testRemoving1_add1069() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoving1_add1069");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3712,list,3711,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3714,loop,3713,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3716,loop,3715,loop.next());
+        loop.remove();
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3718,list,3717,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3720,loop,3719,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3722,loop,3721,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3724,list,3723,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3726,loop,3725,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3728,loop,3727,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3730,list,3729,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3732,loop,3731,loop.hasNext());
+        try {
+            loop.next();
+        } catch (final NoSuchElementException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the remove() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testRemoving1_add1070() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoving1_add1070");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3712,list,3711,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3714,loop,3713,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3716,loop,3715,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3718,list,3717,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3720,loop,3719,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3722,loop,3721,loop.next());
+        loop.remove();
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3724,list,3723,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3726,loop,3725,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3728,loop,3727,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3730,list,3729,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3732,loop,3731,loop.hasNext());
+        try {
+            loop.next();
+        } catch (final NoSuchElementException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the remove() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testRemoving1_add1071() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoving1_add1071");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3712,list,3711,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3714,loop,3713,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3716,loop,3715,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3718,list,3717,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3720,loop,3719,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3722,loop,3721,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3724,list,3723,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3726,loop,3725,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3728,loop,3727,loop.next());
+        loop.remove();
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3730,list,3729,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3732,loop,3731,loop.hasNext());
+        try {
+            loop.next();
+        } catch (final NoSuchElementException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the remove() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testRemoving1_add1072() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoving1_add1072");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3712,list,3711,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3714,loop,3713,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3716,loop,3715,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3718,list,3717,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3720,loop,3719,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3722,loop,3721,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3724,list,3723,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3726,loop,3725,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3728,loop,3727,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3730,list,3729,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3732,loop,3731,loop.hasNext());
+        try {
+            loop.next();
+            loop.next();
+        } catch (final NoSuchElementException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the remove() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
 public void testRemoving1() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoving1");
         final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("foo", "b", "c"));
@@ -245,6 +376,96 @@ public void testRemoving1_literalMutation1047() throws Exception {
     }
 
     /** 
+     * Tests the remove() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testRemoving1_remove797() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoving1_remove797");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3712,list,3711,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3714,loop,3713,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3716,loop,3715,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3718,list,3717,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3720,loop,3719,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3722,loop,3721,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3724,list,3723,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3726,loop,3725,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3728,loop,3727,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3730,list,3729,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3732,loop,3731,loop.hasNext());
+        try {
+            loop.next();
+        } catch (final NoSuchElementException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the remove() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testRemoving1_remove798() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoving1_remove798");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3712,list,3711,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3714,loop,3713,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3716,loop,3715,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3718,list,3717,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3720,loop,3719,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3722,loop,3721,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3724,list,3723,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3726,loop,3725,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3728,loop,3727,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3730,list,3729,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3732,loop,3731,loop.hasNext());
+        try {
+            loop.next();
+        } catch (final NoSuchElementException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the remove() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testRemoving1_remove799() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testRemoving1_remove799");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3712,list,3711,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3714,loop,3713,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3716,loop,3715,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3718,list,3717,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3720,loop,3719,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3722,loop,3721,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3724,list,3723,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3726,loop,3725,loop.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3728,loop,3727,loop.next());
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3730,list,3729,list.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3732,loop,3731,loop.hasNext());
+        try {
+            loop.next();
+        } catch (final NoSuchElementException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
      * Tests the reset() method on a LoopingIterator wrapped ArrayList.
      * 
      * @throws Exception If something unexpected occurs.
@@ -261,6 +482,84 @@ public void testReset() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3740,loop,3739,loop.next());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3742,loop,3741,loop.next());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3744,loop,3743,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3746,loop,3745,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3748,loop,3747,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3750,loop,3749,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the reset() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testReset_add1073() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1073");
+        final List<java.lang.String> list = java.util.Arrays.asList("a", "b", "c");
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3734,loop,3733,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3736,loop,3735,loop.next());
+        loop.reset();
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3738,loop,3737,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3740,loop,3739,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3742,loop,3741,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3744,loop,3743,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3746,loop,3745,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3748,loop,3747,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3750,loop,3749,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the reset() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testReset_add1074() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1074");
+        final List<java.lang.String> list = java.util.Arrays.asList("a", "b", "c");
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3734,loop,3733,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3736,loop,3735,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3738,loop,3737,loop.next());
+        loop.reset();
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3740,loop,3739,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3742,loop,3741,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3744,loop,3743,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3746,loop,3745,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3748,loop,3747,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3750,loop,3749,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the reset() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testReset_add1075() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_add1075");
+        final List<java.lang.String> list = java.util.Arrays.asList("a", "b", "c");
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3734,loop,3733,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3736,loop,3735,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3738,loop,3737,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3740,loop,3739,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3742,loop,3741,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3744,loop,3743,loop.next());
+        loop.reset();
         loop.reset();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3746,loop,3745,loop.next());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3748,loop,3747,loop.next());
@@ -341,6 +640,78 @@ public void testReset_literalMutation1050() throws Exception {
     }
 
     /** 
+     * Tests the reset() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testReset_remove800() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_remove800");
+        final List<java.lang.String> list = java.util.Arrays.asList("a", "b", "c");
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3734,loop,3733,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3736,loop,3735,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3738,loop,3737,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3740,loop,3739,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3742,loop,3741,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3744,loop,3743,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3746,loop,3745,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3748,loop,3747,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3750,loop,3749,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the reset() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testReset_remove801() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_remove801");
+        final List<java.lang.String> list = java.util.Arrays.asList("a", "b", "c");
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3734,loop,3733,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3736,loop,3735,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3738,loop,3737,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3740,loop,3739,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3742,loop,3741,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3744,loop,3743,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3746,loop,3745,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3748,loop,3747,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3750,loop,3749,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the reset() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testReset_remove802() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testReset_remove802");
+        final List<java.lang.String> list = java.util.Arrays.asList("a", "b", "c");
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3734,loop,3733,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3736,loop,3735,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3738,loop,3737,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3740,loop,3739,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3742,loop,3741,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3744,loop,3743,loop.next());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3746,loop,3745,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3748,loop,3747,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3750,loop,3749,loop.next());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
      * Tests the size() method on a LoopingIterator wrapped ArrayList.
      * 
      * @throws Exception If something unexpected occurs.
@@ -356,6 +727,121 @@ public void testSize() throws Exception {
         loop.reset();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3756,loop,3755,loop.size());
         loop.next();
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3758,loop,3757,loop.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the size() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testSize_add1076() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSize_add1076");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3752,loop,3751,loop.size());
+        loop.next();
+        loop.next();
+        loop.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3754,loop,3753,loop.size());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3756,loop,3755,loop.size());
+        loop.next();
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3758,loop,3757,loop.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the size() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testSize_add1077() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSize_add1077");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3752,loop,3751,loop.size());
+        loop.next();
+        loop.next();
+        loop.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3754,loop,3753,loop.size());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3756,loop,3755,loop.size());
+        loop.next();
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3758,loop,3757,loop.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the size() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testSize_add1078() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSize_add1078");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3752,loop,3751,loop.size());
+        loop.next();
+        loop.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3754,loop,3753,loop.size());
+        loop.reset();
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3756,loop,3755,loop.size());
+        loop.next();
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3758,loop,3757,loop.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the size() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testSize_add1079() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSize_add1079");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3752,loop,3751,loop.size());
+        loop.next();
+        loop.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3754,loop,3753,loop.size());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3756,loop,3755,loop.size());
+        loop.next();
+        loop.next();
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3758,loop,3757,loop.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the size() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testSize_add1080() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSize_add1080");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3752,loop,3751,loop.size());
+        loop.next();
+        loop.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3754,loop,3753,loop.size());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3756,loop,3755,loop.size());
+        loop.next();
+        loop.remove();
         loop.remove();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3758,loop,3757,loop.size());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -420,6 +906,48 @@ public void testSize_literalMutation1053() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3756,loop,3755,loop.size());
         loop.next();
         loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3758,loop,3757,loop.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the size() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testSize_remove803() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSize_remove803");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3752,loop,3751,loop.size());
+        loop.next();
+        loop.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3754,loop,3753,loop.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3756,loop,3755,loop.size());
+        loop.next();
+        loop.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3758,loop,3757,loop.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests the size() method on a LoopingIterator wrapped ArrayList.
+     * 
+     * @throws Exception If something unexpected occurs.
+     */
+@Test(timeout = 1000)
+    public void testSize_remove804() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSize_remove804");
+        final List<java.lang.String> list = new ArrayList<java.lang.String>(java.util.Arrays.asList("a", "b", "c"));
+        final LoopingIterator<java.lang.String> loop = new LoopingIterator<java.lang.String>(list);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3752,loop,3751,loop.size());
+        loop.next();
+        loop.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3754,loop,3753,loop.size());
+        loop.reset();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3756,loop,3755,loop.size());
+        loop.next();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),3758,loop,3757,loop.size());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

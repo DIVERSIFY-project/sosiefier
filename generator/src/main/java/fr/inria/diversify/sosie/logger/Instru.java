@@ -2,7 +2,7 @@ package fr.inria.diversify.sosie.logger;
 
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.sosie.logger.processor.*;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.DiversifyPrettyPrinter;
 import fr.inria.diversify.util.JavaOutputProcessorWithFilter;
 import org.apache.commons.io.FileUtils;
@@ -29,7 +29,7 @@ public class Instru {
     protected String projectDirectory;
     protected String srcDirectory;
     protected String testDirectory;
-    protected List<Transformation> transformations;
+    protected List<SingleTransformation> transformations;
 
     private  int javaVersion;
 
@@ -65,7 +65,7 @@ public class Instru {
 
 
     public Instru(String projectDirectory, String srcDirectory, String testDirectory, int javaVersion, String outputDirectory,
-                  List<Transformation> transformations) {
+                  List<SingleTransformation> transformations) {
         this.projectDirectory = projectDirectory;
         this.srcDirectory = srcDirectory;
         this.testDirectory = testDirectory;

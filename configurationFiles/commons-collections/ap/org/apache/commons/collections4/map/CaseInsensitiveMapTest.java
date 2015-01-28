@@ -31,6 +31,51 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
     }
 
     @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testCaseInsensitive_add193() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCaseInsensitive_add193");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("One")), ((V)("One")));
+        map.put(((K)("One")), ((V)("One")));
+        map.put(((K)("Two")), ((V)("Two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),380,map,379,map.get("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),382,map,381,map.get("oNe"));
+        map.put(((K)("two")), ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),384,map,383,map.get("Two"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testCaseInsensitive_add194() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCaseInsensitive_add194");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("One")), ((V)("One")));
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(((K)("Two")), ((V)("Two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),380,map,379,map.get("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),382,map,381,map.get("oNe"));
+        map.put(((K)("two")), ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),384,map,383,map.get("Two"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testCaseInsensitive_add195() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCaseInsensitive_add195");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("One")), ((V)("One")));
+        map.put(((K)("Two")), ((V)("Two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),380,map,379,map.get("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),382,map,381,map.get("oNe"));
+        map.put(((K)("two")), ((V)("Three")));
+        map.put(((K)("two")), ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),384,map,383,map.get("Two"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void testCaseInsensitive() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCaseInsensitive");
         final Map<K, V> map = makeObject();
@@ -118,6 +163,125 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),382,map,381,map.get("oNe"));
         map.put(((K)("two")), ((V)("foo")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),384,map,383,map.get("Two"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testCaseInsensitive_remove156() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCaseInsensitive_remove156");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("Two")), ((V)("Two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),380,map,379,map.get("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),382,map,381,map.get("oNe"));
+        map.put(((K)("two")), ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),384,map,383,map.get("Two"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testCaseInsensitive_remove157() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCaseInsensitive_remove157");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("Two")), ((V)("Two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),380,map,379,map.get("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),382,map,381,map.get("oNe"));
+        map.put(((K)("two")), ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),384,map,383,map.get("Two"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testCaseInsensitive_remove158() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testCaseInsensitive_remove158");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("Two")), ((V)("Two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),380,map,379,map.get("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),382,map,381,map.get("oNe"));
+        map.put(((K)("two")), ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),384,map,383,map.get("Two"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_add200() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_add200");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("One")), ((V)("One")));
+        map.put(((K)("One")), ((V)("One")));
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(null, ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),401,map,400,map.get(null));
+        map.put(null, ((V)("Four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),403,map,402,map.get(null));
+        final Set<K> keys = map.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),405,keys,404,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),407,keys,406,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),409,keys,408,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),411,keys,410,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_add201() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_add201");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("One")), ((V)("One")));
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(null, ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),401,map,400,map.get(null));
+        map.put(null, ((V)("Four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),403,map,402,map.get(null));
+        final Set<K> keys = map.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),405,keys,404,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),407,keys,406,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),409,keys,408,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),411,keys,410,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_add202() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_add202");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("One")), ((V)("One")));
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(null, ((V)("Three")));
+        map.put(null, ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),401,map,400,map.get(null));
+        map.put(null, ((V)("Four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),403,map,402,map.get(null));
+        final Set<K> keys = map.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),405,keys,404,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),407,keys,406,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),409,keys,408,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),411,keys,410,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_add203() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_add203");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("One")), ((V)("One")));
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(null, ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),401,map,400,map.get(null));
+        map.put(null, ((V)("Four")));
+        map.put(null, ((V)("Four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),403,map,402,map.get(null));
+        final Set<K> keys = map.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),405,keys,404,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),407,keys,406,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),409,keys,408,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),411,keys,410,keys.size());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -244,6 +408,193 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),407,keys,406,keys.contains("two"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),409,keys,408,keys.contains(null));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),411,keys,410,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_remove160() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_remove160");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(null, ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),401,map,400,map.get(null));
+        map.put(null, ((V)("Four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),403,map,402,map.get(null));
+        final Set<K> keys = map.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),405,keys,404,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),407,keys,406,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),409,keys,408,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),411,keys,410,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_remove161() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_remove161");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(null, ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),401,map,400,map.get(null));
+        map.put(null, ((V)("Four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),403,map,402,map.get(null));
+        final Set<K> keys = map.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),405,keys,404,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),407,keys,406,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),409,keys,408,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),411,keys,410,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_remove162() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_remove162");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(null, ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),401,map,400,map.get(null));
+        map.put(null, ((V)("Four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),403,map,402,map.get(null));
+        final Set<K> keys = map.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),405,keys,404,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),407,keys,406,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),409,keys,408,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),411,keys,410,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testNullHandling_remove163() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNullHandling_remove163");
+        final Map<K, V> map = makeObject();
+        map.put(((K)("Two")), ((V)("Two")));
+        map.put(null, ((V)("Three")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),401,map,400,map.get(null));
+        map.put(null, ((V)("Four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),403,map,402,map.get(null));
+        final Set<K> keys = map.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),405,keys,404,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),407,keys,406,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),409,keys,408,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),411,keys,410,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_add204() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_add204");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("One", "One");
+        map.put("One", "One");
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_add205() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_add205");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("One", "One");
+        map.put("Two", "Two");
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_add206() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_add206");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("One", "One");
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_add207() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_add207");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("One", "One");
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_add208() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_add208");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("One", "One");
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -401,7 +752,7 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
         map.put("Two", "Two");
         map.put("one", "Three");
         map.put(null, "Four");
-        map.put(java.lang.Integer.valueOf(19), "Five");
+        map.put(java.lang.Integer.valueOf(21), "Five");
         final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
         final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
@@ -433,6 +784,126 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_remove164() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_remove164");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_remove165() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_remove165");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_remove166() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_remove166");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_remove167() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_remove167");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testPutAll_remove168() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testPutAll_remove168");
+        final Map<java.lang.Object, java.lang.String> map = new HashMap<java.lang.Object, java.lang.String>();
+        map.put("Two", "Two");
+        map.put("one", "Three");
+        map.put(null, "Four");
+        map.put(java.lang.Integer.valueOf(20), "Five");
+        final Map<java.lang.Object, java.lang.String> caseInsensitiveMap = new CaseInsensitiveMap<java.lang.Object, java.lang.String>(map);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),413,caseInsensitiveMap,412,caseInsensitiveMap.size());
+        final Set<java.lang.Object> keys = caseInsensitiveMap.keySet();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),415,keys,414,keys.contains("one"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),417,keys,416,keys.contains("two"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),419,keys,418,keys.contains(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),421,keys,420,keys.contains(java.lang.Integer.toString(20)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),423,keys,422,keys.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),424,((!(caseInsensitiveMap.containsValue("One"))) || (!(caseInsensitiveMap.containsValue("Three")))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),426,caseInsensitiveMap,425,caseInsensitiveMap.get(null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testClone_add196() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testClone_add196");
+        final CaseInsensitiveMap<K, V> map = new CaseInsensitiveMap<K, V>(10);
+        map.put(((K)("1")), ((V)("1")));
+        map.put(((K)("1")), ((V)("1")));
+        final CaseInsensitiveMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),386,map,385,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),388,cloned,387,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),390,map,389,map.get("1"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),392,cloned,391,cloned.get("1"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -485,6 +956,94 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),388,cloned,387,cloned.size());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),390,map,389,map.get("1"));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),392,cloned,391,cloned.get("1"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testClone_remove159() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testClone_remove159");
+        final CaseInsensitiveMap<K, V> map = new CaseInsensitiveMap<K, V>(10);
+        final CaseInsensitiveMap<K, V> cloned = map.clone();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),386,map,385,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),388,cloned,387,cloned.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),390,map,389,map.get("1"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),392,cloned,391,cloned.get("1"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testLocaleIndependence_add197() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_add197");
+        final Locale orig = Locale.getDefault();
+        final Locale[] locales = new Locale[]{ Locale.ENGLISH , new Locale("tr" , "" , "") , Locale.getDefault() };
+        final String[][] data = new String[][]{ new String[]{ "i" , "I" } , new String[]{ "ς" , "σ" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } };
+        try {
+            for (final Locale locale : locales) {
+                Locale.setDefault(locale);
+                Locale.setDefault(locale);
+                for (int j = 0 ; j < (data.length) ; j++) {
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),394,("Test data corrupt: " + j));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),396,data[j][0],395,data[j][0].equalsIgnoreCase(data[j][1]));
+                    final CaseInsensitiveMap<java.lang.String, java.lang.String> map = new CaseInsensitiveMap<java.lang.String, java.lang.String>();
+                    map.put(data[j][0], "value");
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),397,(((java.util.Locale.getDefault()) + ": ") + j));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),399,map,398,map.get(data[j][1]));
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testLocaleIndependence_add198() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_add198");
+        final Locale orig = Locale.getDefault();
+        final Locale[] locales = new Locale[]{ Locale.ENGLISH , new Locale("tr" , "" , "") , Locale.getDefault() };
+        final String[][] data = new String[][]{ new String[]{ "i" , "I" } , new String[]{ "ς" , "σ" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } };
+        try {
+            for (final Locale locale : locales) {
+                Locale.setDefault(locale);
+                for (int j = 0 ; j < (data.length) ; j++) {
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),394,("Test data corrupt: " + j));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),396,data[j][0],395,data[j][0].equalsIgnoreCase(data[j][1]));
+                    final CaseInsensitiveMap<java.lang.String, java.lang.String> map = new CaseInsensitiveMap<java.lang.String, java.lang.String>();
+                    map.put(data[j][0], "value");
+                    map.put(data[j][0], "value");
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),397,(((java.util.Locale.getDefault()) + ": ") + j));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),399,map,398,map.get(data[j][1]));
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testLocaleIndependence_add199() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testLocaleIndependence_add199");
+        final Locale orig = Locale.getDefault();
+        final Locale[] locales = new Locale[]{ Locale.ENGLISH , new Locale("tr" , "" , "") , Locale.getDefault() };
+        final String[][] data = new String[][]{ new String[]{ "i" , "I" } , new String[]{ "ς" , "σ" } , new String[]{ "Σ" , "ς" } , new String[]{ "Σ" , "σ" } };
+        try {
+            for (final Locale locale : locales) {
+                Locale.setDefault(locale);
+                for (int j = 0 ; j < (data.length) ; j++) {
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),394,("Test data corrupt: " + j));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),396,data[j][0],395,data[j][0].equalsIgnoreCase(data[j][1]));
+                    final CaseInsensitiveMap<java.lang.String, java.lang.String> map = new CaseInsensitiveMap<java.lang.String, java.lang.String>();
+                    map.put(data[j][0], "value");
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),397,(((java.util.Locale.getDefault()) + ": ") + j));
+                    fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),399,map,398,map.get(data[j][1]));
+                }
+            }
+        } finally {
+            Locale.setDefault(orig);
+            Locale.setDefault(orig);
+        }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -749,7 +1308,7 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
         try {
             for (final Locale locale : locales) {
                 Locale.setDefault(locale);
-                for (int j = -1 ; j < (data.length) ; j++) {
+                for (int j = 1 ; j < (data.length) ; j++) {
                     fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),394,("Test data corrupt: " + j));
                     fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),396,data[j][0],395,data[j][0].equalsIgnoreCase(data[j][1]));
                     final CaseInsensitiveMap<java.lang.String, java.lang.String> map = new CaseInsensitiveMap<java.lang.String, java.lang.String>();

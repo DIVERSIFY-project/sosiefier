@@ -2,7 +2,7 @@ package fr.inria.diversify.ut.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonAstDeleteInput;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.ut.MockInputProgram;
 import org.json.JSONException;
@@ -37,7 +37,7 @@ public class JsonAstDeleteInputTest {
     public void testReadDeleteTransformation() throws JSONException {
         InputProgram p = new MockInputProgram();
         JSONObject o = createDeleteASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
-        HashMap<Integer, Transformation> result = new HashMap<>();
+        HashMap<Integer, SingleTransformation> result = new HashMap<>();
 
         JsonAstDeleteInput reader = new JsonAstDeleteInput(p, o);
         reader.read(result);

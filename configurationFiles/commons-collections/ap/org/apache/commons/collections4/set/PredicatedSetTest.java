@@ -3,6 +3,7 @@ package org.apache.commons.collections4.set;
 import java.util.HashSet;
 import org.apache.commons.collections4.Predicate;
 import java.util.Set;
+import org.junit.Test;
 
 /** 
  * Extension of {@link AbstractSetTest} for exercising the
@@ -46,7 +47,7 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
     public void testGetSet() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetSet");
         final PredicatedSet<E> set = makeTestSet();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6274,((set.decorated()) != null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6235,((set.decorated()) != null));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -59,7 +60,22 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
             set.add(((E)(i)));
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6275,!(set.contains(i)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6236,!(set.contains(i)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAdd_add1966() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAdd_add1966");
+        final Set<E> set = makeTestSet();
+        final Integer i = Integer.valueOf(3);
+        try {
+            set.add(((E)(i)));
+            set.add(((E)(i)));
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6236,!(set.contains(i)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -72,7 +88,7 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
             set.add(((E)(i)));
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6275,!(set.contains(i)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6236,!(set.contains(i)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -80,12 +96,12 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
     public void testIllegalAdd_literalMutation1860() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAdd_literalMutation1860");
         final Set<E> set = makeTestSet();
-        final Integer i = Integer.valueOf(4);
+        final Integer i = Integer.valueOf(2);
         try {
             set.add(((E)(i)));
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6275,!(set.contains(i)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6236,!(set.contains(i)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -102,10 +118,120 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6276,!(set.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6277,!(set.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6278,!(set.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6279,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1967() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1967");
+        final Set<E> set = makeTestSet();
+        final Set<E> elements = new HashSet<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1968() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1968");
+        final Set<E> set = makeTestSet();
+        final Set<E> elements = new HashSet<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1969() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1969");
+        final Set<E> set = makeTestSet();
+        final Set<E> elements = new HashSet<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1970() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1970");
+        final Set<E> set = makeTestSet();
+        final Set<E> elements = new HashSet<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        elements.add(((E)("four")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_add1971() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_add1971");
+        final Set<E> set = makeTestSet();
+        final Set<E> elements = new HashSet<E>();
+        elements.add(((E)("one")));
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            set.addAll(elements);
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -122,10 +248,10 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6276,!(set.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6277,!(set.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6278,!(set.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6279,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -142,10 +268,10 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6276,!(set.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6277,!(set.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6278,!(set.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6279,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -162,10 +288,10 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6276,!(set.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6277,!(set.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6278,!(set.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6279,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -176,16 +302,16 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
         final Set<E> elements = new HashSet<E>();
         elements.add(((E)("one")));
         elements.add(((E)("two")));
-        elements.add(((E)(Integer.valueOf(4))));
+        elements.add(((E)(Integer.valueOf(2))));
         elements.add(((E)("four")));
         try {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6276,!(set.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6277,!(set.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6278,!(set.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6279,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -202,10 +328,90 @@ public class PredicatedSetTest<E> extends AbstractSetTest<E> {
             set.addAll(elements);
         } catch (final IllegalArgumentException e) {
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6276,!(set.contains("one")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6277,!(set.contains("two")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6278,!(set.contains(java.lang.Integer.valueOf(3))));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6279,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_remove1532() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1532");
+        final Set<E> set = makeTestSet();
+        final Set<E> elements = new HashSet<E>();
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_remove1533() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1533");
+        final Set<E> set = makeTestSet();
+        final Set<E> elements = new HashSet<E>();
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_remove1534() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1534");
+        final Set<E> set = makeTestSet();
+        final Set<E> elements = new HashSet<E>();
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testIllegalAddAll_remove1535() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalAddAll_remove1535");
+        final Set<E> set = makeTestSet();
+        final Set<E> elements = new HashSet<E>();
+        elements.add(((E)("two")));
+        elements.add(((E)(Integer.valueOf(3))));
+        elements.add(((E)("four")));
+        try {
+            set.addAll(elements);
+        } catch (final IllegalArgumentException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6237,!(set.contains("one")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6238,!(set.contains("two")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6239,!(set.contains(java.lang.Integer.valueOf(3))));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6240,!(set.contains("four")));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

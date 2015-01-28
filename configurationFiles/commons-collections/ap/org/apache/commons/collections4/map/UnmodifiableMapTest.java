@@ -3,6 +3,7 @@ package org.apache.commons.collections4.map;
 import java.util.HashMap;
 import org.apache.commons.collections4.IterableMap;
 import java.util.Map;
+import org.junit.Test;
 
 /** 
  * Extension of {@link AbstractMapTest} for exercising the
@@ -50,12 +51,14 @@ public class UnmodifiableMapTest<K, V> extends AbstractIterableMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
     public void testDecorateFactory() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory");
         final Map<K, V> map = makeFullMap();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1983,map);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1985,null,1984,org.apache.commons.collections4.map.UnmodifiableMap.unmodifiableMap(map));
         try {
+            org.apache.commons.collections4.map.UnmodifiableMap.unmodifiableMap(null);
             org.apache.commons.collections4.map.UnmodifiableMap.unmodifiableMap(null);
         } catch (final IllegalArgumentException ex) {
         }

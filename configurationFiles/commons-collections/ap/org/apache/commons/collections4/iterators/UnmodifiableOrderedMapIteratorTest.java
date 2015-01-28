@@ -3,6 +3,7 @@ package org.apache.commons.collections4.iterators;
 import java.util.Map;
 import org.apache.commons.collections4.OrderedMap;
 import org.apache.commons.collections4.OrderedMapIterator;
+import org.junit.Test;
 import java.util.TreeMap;
 
 /** 
@@ -69,6 +70,22 @@ public class UnmodifiableOrderedMapIteratorTest<K, V> extends AbstractOrderedMap
         it = getMap().mapIterator();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4400,(it != (org.apache.commons.collections4.iterators.UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(it))));
         try {
+            org.apache.commons.collections4.iterators.UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testDecorateFactory_add1217() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add1217");
+        OrderedMapIterator<K, V> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4397,it);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4399,null,4398,org.apache.commons.collections4.iterators.UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(it));
+        it = getMap().mapIterator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4400,(it != (org.apache.commons.collections4.iterators.UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(it))));
+        try {
+            org.apache.commons.collections4.iterators.UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(null);
             org.apache.commons.collections4.iterators.UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(null);
         } catch (final IllegalArgumentException ex) {
         }

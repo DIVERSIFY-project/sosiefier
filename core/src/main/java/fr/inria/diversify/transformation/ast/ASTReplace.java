@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.ast;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.InputContext;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
 import fr.inria.diversify.util.Log;
 import org.json.JSONException;
@@ -104,7 +105,6 @@ public class ASTReplace extends ASTTransformation {
         if (!this.getClass().isAssignableFrom(other.getClass()))
             return false;
         ASTReplace otherReplace = (ASTReplace) other;
-
         if (!equalParent(otherReplace.parent))
             return false;
 
@@ -161,5 +161,4 @@ public class ASTReplace extends ASTTransformation {
     public void updateStatementList() {
         getInputProgram().getCodeFragments().remove(transplantationPoint);
     }
-
 }

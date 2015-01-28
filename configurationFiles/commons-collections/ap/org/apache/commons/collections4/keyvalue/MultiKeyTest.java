@@ -8,6 +8,7 @@ import java.util.Map;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import org.junit.Test;
 import junit.framework.TestCase;
 
 /** 
@@ -63,7 +64,7 @@ public class MultiKeyTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2447,null,2446,java.util.Arrays.equals(new java.lang.Object[]{ ONE , TWO , THREE , FOUR }, mk.getKeys()));
         mk = new MultiKey<java.lang.Integer>(ONE , TWO , THREE , FOUR , FIVE);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2449,null,2448,java.util.Arrays.equals(new java.lang.Object[]{ ONE , TWO , THREE , FOUR , FIVE }, mk.getKeys()));
-        mk = new MultiKey<java.lang.Integer>(new Integer[]{ THREE , FOUR , ONE , TWO } , false);
+        mk = new MultiKey<java.lang.Integer>(new Integer[]{ THREE , FOUR , ONE , TWO } , true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2451,null,2450,java.util.Arrays.equals(new java.lang.Object[]{ THREE , FOUR , ONE , TWO }, mk.getKeys()));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -104,7 +105,7 @@ public class MultiKeyTest extends TestCase {
         mk = new MultiKey<java.lang.Integer>(keys);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2457,null,2456,java.util.Arrays.equals(new java.lang.Object[]{  }, mk.getKeys()));
         keys = new Integer[]{ THREE , FOUR , ONE , TWO };
-        mk = new MultiKey<java.lang.Integer>(keys , true);
+        mk = new MultiKey<java.lang.Integer>(keys , false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2459,null,2458,java.util.Arrays.equals(new java.lang.Object[]{ THREE , FOUR , ONE , TWO }, mk.getKeys()));
         keys[3] = FIVE;
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2461,null,2460,java.util.Arrays.equals(new java.lang.Object[]{ THREE , FOUR , ONE , TWO }, mk.getKeys()));
@@ -130,7 +131,7 @@ public class MultiKeyTest extends TestCase {
         keys = new Integer[]{ THREE , FOUR , ONE , TWO };
         mk = new MultiKey<java.lang.Integer>(keys , true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2459,null,2458,java.util.Arrays.equals(new java.lang.Object[]{ THREE , FOUR , ONE , TWO }, mk.getKeys()));
-        keys[2] = FIVE;
+        keys[4] = FIVE;
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2461,null,2460,java.util.Arrays.equals(new java.lang.Object[]{ THREE , FOUR , ONE , TWO }, mk.getKeys()));
         keys = new Integer[]{ THREE , FOUR , ONE , TWO };
         mk = new MultiKey<java.lang.Integer>(keys , false);
@@ -183,7 +184,7 @@ public class MultiKeyTest extends TestCase {
         keys = new Integer[]{ THREE , FOUR , ONE , TWO };
         mk = new MultiKey<java.lang.Integer>(keys , false);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2463,null,2462,java.util.Arrays.equals(new java.lang.Object[]{ THREE , FOUR , ONE , TWO }, mk.getKeys()));
-        keys[4] = FIVE;
+        keys[2] = FIVE;
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2465,null,2464,java.util.Arrays.equals(new java.lang.Object[]{ THREE , FOUR , ONE , FIVE }, mk.getKeys()));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -241,6 +242,46 @@ public class MultiKeyTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testGetIndexed_add869() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetIndexed_add869");
+        final MultiKey<java.lang.Integer> mk = new MultiKey<java.lang.Integer>(ONE , TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2480,ONE);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2482,mk,2481,mk.getKey(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2483,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2485,mk,2484,mk.getKey(1));
+        try {
+            mk.getKey(-1);
+            mk.getKey(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            mk.getKey(2);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testGetIndexed_add870() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetIndexed_add870");
+        final MultiKey<java.lang.Integer> mk = new MultiKey<java.lang.Integer>(ONE , TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2480,ONE);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2482,mk,2481,mk.getKey(0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2483,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2485,mk,2484,mk.getKey(1));
+        try {
+            mk.getKey(-1);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        try {
+            mk.getKey(2);
+            mk.getKey(2);
+        } catch (final IndexOutOfBoundsException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testGetIndexed() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetIndexed");
         final MultiKey<java.lang.Integer> mk = new MultiKey<java.lang.Integer>(ONE , TWO);
@@ -271,7 +312,7 @@ public class MultiKeyTest extends TestCase {
         } catch (final IndexOutOfBoundsException ex) {
         }
         try {
-            mk.getKey(3);
+            mk.getKey(1);
         } catch (final IndexOutOfBoundsException ex) {
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -307,7 +348,7 @@ public class MultiKeyTest extends TestCase {
     public void testGetKeysArrayConstructorNonCloned() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testGetKeysArrayConstructorNonCloned");
         final Integer[] keys = new Integer[]{ ONE , TWO };
-        final MultiKey<java.lang.Integer> mk = new MultiKey<java.lang.Integer>(keys , false);
+        final MultiKey<java.lang.Integer> mk = new MultiKey<java.lang.Integer>(keys , true);
         final Object[] array = mk.getKeys();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2494,(array != keys));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2496,null,2495,java.util.Arrays.equals(array, keys));
@@ -341,7 +382,7 @@ public class MultiKeyTest extends TestCase {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2507,((mk1.hashCode()) == (mk1.hashCode())));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2508,((mk1.hashCode()) == (mk2.hashCode())));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2509,((mk1.hashCode()) != (mk3.hashCode())));
-        final int total = (-1 ^ (ONE.hashCode())) ^ (TWO.hashCode());
+        final int total = (1 ^ (ONE.hashCode())) ^ (TWO.hashCode());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2510,total);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2512,mk1,2511,mk1.hashCode());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -389,6 +430,131 @@ public class MultiKeyTest extends TestCase {
         }
     }
 
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_add864() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_add864");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        map.put(mk, TWO);
+        map.put(mk, TWO);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(sysKey);
+        out.writeObject(map);
+        out.close();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_add865() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_add865");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        map.put(mk, TWO);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(sysKey);
+        out.writeObject(sysKey);
+        out.writeObject(map);
+        out.close();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_add866() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_add866");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        map.put(mk, TWO);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(sysKey);
+        out.writeObject(map);
+        out.writeObject(map);
+        out.close();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_add867() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_add867");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        map.put(mk, TWO);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(sysKey);
+        out.writeObject(map);
+        out.close();
+        out.close();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_add868() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_add868");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        map.put(mk, TWO);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(sysKey);
+        out.writeObject(map);
+        out.close();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
+        in.close();
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testEqualsAfterSerialization() throws IOException, ClassNotFoundException {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization");
         SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("foo");
@@ -405,6 +571,121 @@ public class MultiKeyTest extends TestCase {
         sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
         final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
         in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_remove678() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_remove678");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(sysKey);
+        out.writeObject(map);
+        out.close();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_remove679() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_remove679");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        map.put(mk, TWO);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(map);
+        out.close();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_remove680() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_remove680");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        map.put(mk, TWO);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(map);
+        out.close();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_remove681() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_remove681");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        map.put(mk, TWO);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(sysKey);
+        out.writeObject(map);
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
+        in.close();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
+        final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2470,map2,2469,map2.get(mk2));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testEqualsAfterSerialization_remove682() throws IOException, ClassNotFoundException {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsAfterSerialization_remove682");
+        SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
+        final MultiKey<?> mk = new MultiKey<java.lang.Object>(ONE , sysKey);
+        final Map<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer> map = new HashMap<org.apache.commons.collections4.keyvalue.MultiKey<?>, Integer>();
+        map.put(mk, TWO);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream out = new ObjectOutputStream(baos);
+        out.writeObject(sysKey);
+        out.writeObject(map);
+        out.close();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream in = new ObjectInputStream(bais);
+        sysKey = ((SystemHashCodeSimulatingKey)(in.readObject()));
+        final Map<?, ?> map2 = ((Map<?, ?>)(in.readObject()));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2467,sysKey,2466,sysKey.hashCode());
         final MultiKey<?> mk2 = new MultiKey<java.lang.Object>(ONE , sysKey);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2468,TWO);

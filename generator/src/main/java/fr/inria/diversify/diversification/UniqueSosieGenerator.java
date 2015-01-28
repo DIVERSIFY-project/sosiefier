@@ -1,7 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
@@ -19,7 +19,7 @@ import java.util.Random;
  * Created by Simon on 23/10/2014.
  */
 public class UniqueSosieGenerator extends AbstractDiversify {
-    protected List<Transformation> allTransformation;
+    protected List<SingleTransformation> allTransformation;
     protected boolean randomGeneration = false;
     protected int currentSize;
 
@@ -31,7 +31,7 @@ public class UniqueSosieGenerator extends AbstractDiversify {
         sessionResults = new SinglePointSessionResults();
     }
 
-    public UniqueSosieGenerator(List<Transformation> allTransformation) {
+    public UniqueSosieGenerator(List<SingleTransformation> allTransformation) {
         this.allTransformation = allTransformation;
     }
 
@@ -40,7 +40,7 @@ public class UniqueSosieGenerator extends AbstractDiversify {
         if(randomGeneration) {
             Random random = new Random();
             while (transformations.size() < n && !allTransformation.isEmpty()) {
-                Transformation t = allTransformation.remove(random.nextInt(allTransformation.size()));
+                SingleTransformation t = allTransformation.remove(random.nextInt(allTransformation.size()));
                 run(t);
             }
         } else {
@@ -50,7 +50,7 @@ public class UniqueSosieGenerator extends AbstractDiversify {
         }
     }
 
-    protected void run(Transformation trans) throws Exception {
+    protected void run(SingleTransformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         writeTransformation(tmpDir + "/transplant.json", (ASTTransformation) trans);
@@ -93,7 +93,7 @@ public class UniqueSosieGenerator extends AbstractDiversify {
         out.close();
     }
 
-    public void setTransformation(Collection<Transformation> transformation) {
+    public void setTransformation(Collection<SingleTransformation> transformation) {
         allTransformation = new ArrayList<>(transformation);
     }
 

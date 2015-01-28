@@ -38,6 +38,22 @@ public class StaticBucketMapTest<K, V> extends AbstractIterableMapTest<K, V> {
     }
 
     @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void test_get_nullMatchesIncorrectly_add572() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_get_nullMatchesIncorrectly_add572");
+        final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(17);
+        map.put(null, ((V)("A")));
+        map.put(null, ((V)("A")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1821,map,1820,map.get(null));
+        for (int i = 'A' ; i <= 'Z' ; i++) {
+            final String str = String.valueOf(((char)(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1822,("String: " + str));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1824,map,1823,map.get(str));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void test_get_nullMatchesIncorrectly() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_get_nullMatchesIncorrectly");
         final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(17);
@@ -80,6 +96,36 @@ public class StaticBucketMapTest<K, V> extends AbstractIterableMapTest<K, V> {
     }
 
     @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void test_get_nullMatchesIncorrectly_remove455() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_get_nullMatchesIncorrectly_remove455");
+        final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(17);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1821,map,1820,map.get(null));
+        for (int i = 'A' ; i <= 'Z' ; i++) {
+            final String str = String.valueOf(((char)(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1822,("String: " + str));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1824,map,1823,map.get(str));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void test_containsKey_nullMatchesIncorrectly_add570() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_containsKey_nullMatchesIncorrectly_add570");
+        final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(17);
+        map.put(null, ((V)("A")));
+        map.put(null, ((V)("A")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1811,map,1810,map.containsKey(null));
+        for (int i = 'A' ; i <= 'Z' ; i++) {
+            final String str = String.valueOf(((char)(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1812,("String: " + str));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1814,map,1813,map.containsKey(str));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void test_containsKey_nullMatchesIncorrectly() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_containsKey_nullMatchesIncorrectly");
         final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(17);
@@ -96,7 +142,7 @@ public class StaticBucketMapTest<K, V> extends AbstractIterableMapTest<K, V> {
     @SuppressWarnings(value = "unchecked")
     public void test_containsKey_nullMatchesIncorrectly_literalMutation583() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_containsKey_nullMatchesIncorrectly_literalMutation583");
-        final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(16);
+        final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(18);
         map.put(null, ((V)("A")));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1811,map,1810,map.containsKey(null));
         for (int i = 'A' ; i <= 'Z' ; i++) {
@@ -117,6 +163,36 @@ public class StaticBucketMapTest<K, V> extends AbstractIterableMapTest<K, V> {
             final String str = String.valueOf(((char)(i)));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1812,("String: " + str));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1814,map,1813,map.containsKey(str));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void test_containsKey_nullMatchesIncorrectly_remove453() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_containsKey_nullMatchesIncorrectly_remove453");
+        final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(17);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1811,map,1810,map.containsKey(null));
+        for (int i = 'A' ; i <= 'Z' ; i++) {
+            final String str = String.valueOf(((char)(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1812,("String: " + str));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1814,map,1813,map.containsKey(str));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void test_containsValue_nullMatchesIncorrectly_add571() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_containsValue_nullMatchesIncorrectly_add571");
+        final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(17);
+        map.put(((K)("A")), null);
+        map.put(((K)("A")), null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1816,map,1815,map.containsValue(null));
+        for (int i = 'A' ; i <= 'Z' ; i++) {
+            final String str = String.valueOf(((char)(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1817,("String: " + str));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1819,map,1818,map.containsValue(str));
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -154,6 +230,20 @@ public class StaticBucketMapTest<K, V> extends AbstractIterableMapTest<K, V> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_containsValue_nullMatchesIncorrectly_literalMutation590");
         final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(17);
         map.put(((K)("foo")), null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1816,map,1815,map.containsValue(null));
+        for (int i = 'A' ; i <= 'Z' ; i++) {
+            final String str = String.valueOf(((char)(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1817,("String: " + str));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1819,map,1818,map.containsValue(str));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void test_containsValue_nullMatchesIncorrectly_remove454() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "test_containsValue_nullMatchesIncorrectly_remove454");
+        final StaticBucketMap<K, V> map = new StaticBucketMap<K, V>(17);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),1816,map,1815,map.containsValue(null));
         for (int i = 'A' ; i <= 'Z' ; i++) {
             final String str = String.valueOf(((char)(i)));

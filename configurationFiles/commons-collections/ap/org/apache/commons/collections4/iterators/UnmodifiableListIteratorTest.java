@@ -3,6 +3,7 @@ package org.apache.commons.collections4.iterators;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import org.junit.Test;
 
 /** 
  * Tests the UnmodifiableListIterator.
@@ -67,6 +68,22 @@ public class UnmodifiableListIteratorTest<E> extends AbstractListIteratorTest<E>
         it = testList.listIterator();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4390,(it != (org.apache.commons.collections4.iterators.UnmodifiableListIterator.umodifiableListIterator(it))));
         try {
+            org.apache.commons.collections4.iterators.UnmodifiableListIterator.umodifiableListIterator(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testDecorateFactory_add1215() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add1215");
+        ListIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4387,it);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4389,null,4388,org.apache.commons.collections4.iterators.UnmodifiableListIterator.umodifiableListIterator(it));
+        it = testList.listIterator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4390,(it != (org.apache.commons.collections4.iterators.UnmodifiableListIterator.umodifiableListIterator(it))));
+        try {
+            org.apache.commons.collections4.iterators.UnmodifiableListIterator.umodifiableListIterator(null);
             org.apache.commons.collections4.iterators.UnmodifiableListIterator.umodifiableListIterator(null);
         } catch (final IllegalArgumentException ex) {
         }

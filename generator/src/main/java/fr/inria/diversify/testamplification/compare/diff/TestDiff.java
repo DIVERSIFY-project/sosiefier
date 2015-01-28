@@ -1,5 +1,6 @@
 package fr.inria.diversify.testamplification.compare.diff;
 
+import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 public class TestDiff {
     List<LogDiff> diff;
     String signature;
+     boolean excludeThisTest = false;
 
     public TestDiff(String signature) {
         this.signature = signature;
@@ -44,39 +46,58 @@ public class TestDiff {
         JSONObject object = new JSONObject();
 
         object.put("test", signature);
-        JSONArray array = new JSONArray();
-        object.put("logDiff", array);
 
-        for(LogDiff d : diff) {
-            array.put(d.toJson());
+        if(excludeThisTest) {
+            object.put("excludeThisTest", true);
+        } else {
+            JSONArray array = new JSONArray();
+            object.put("logDiff", array);
+
+            for (LogDiff d : diff) {
+                array.put(d.toJson());
+            }
         }
-
         return object;
     }
 
     protected void buildFrom(JSONObject object) throws JSONException {
         this.signature = object.getString("test");
         diff = new ArrayList<>();
-        JSONArray logDiff = object.getJSONArray("logDiff");
-        for(int i = 0; i< logDiff.length(); i++) {
-            diff.add(new LogDiff(logDiff.getJSONObject(i)));
+
+        if(object.has("excludeThisTest")) {
+            excludeThisTest = true;
+        } else {
+            JSONArray logDiff = object.getJSONArray("logDiff");
+            for (int i = 0; i < logDiff.length(); i++) {
+                diff.add(new LogDiff(logDiff.getJSONObject(i)));
+            }
         }
     }
 
     public void filter(Set<String> filter) {
-        diff.stream()
-                .forEach(d -> d.filter(filter));
-        diff = diff.stream()
-                .filter(d -> !d.isEmpty())
-                .collect(Collectors.toList());
+        if(filter.contains("excludeThisTest")) {
+            excludeThisTest = true;
+        } else {
+            diff.stream().forEach(d -> d.filter(filter));
+            diff = diff.stream().filter(d -> !d.isEmpty()).collect(Collectors.toList());
+        }
     }
 
     public Set<String> buildFilter() {
         Set<String> filter = new HashSet<>();
-        for(LogDiff d : diff) {
-            filter.addAll(d.buildFilter());
+        if(excludeThisTest) {
+            filter.add("excludeThisTest");
+        } else {
+            for (LogDiff d : diff) {
+                filter.addAll(d.buildFilter());
+            }
         }
         return filter.stream().map(f -> signature + " " + f).collect(Collectors.toSet());
+    }
+
+    public void excludeThisTest() {
+        excludeThisTest = true;
+        diff.clear();
     }
 }
 

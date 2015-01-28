@@ -1,6 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtBreak;
 import spoon.reflect.declaration.*;
@@ -21,11 +21,11 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
     protected static Map<String, String> idMap = new HashMap();
     protected static Map<CtExecutable, Integer> count = new HashMap();
 
-    protected List<Transformation> transformations;
+    protected List<SingleTransformation> transformations;
 
     protected String logger = "verbose";
 
-    public AbstractLoggingInstrumenter(List<Transformation> transformations) {
+    public AbstractLoggingInstrumenter(List<SingleTransformation> transformations) {
         this.transformations = transformations;
     }
     
@@ -111,7 +111,7 @@ public abstract class AbstractLoggingInstrumenter<E extends CtElement> extends A
             return false;
         }
         String methodSignature = method.getDeclaringType().getQualifiedName() +"."+ method.getSimpleName();
-        for (Transformation trans : transformations) {
+        for (SingleTransformation trans : transformations) {
             String transSignature = trans.classLocationName() +"."+ trans.methodLocationName();
             if(transSignature.equals(methodSignature)) {
                 return true;

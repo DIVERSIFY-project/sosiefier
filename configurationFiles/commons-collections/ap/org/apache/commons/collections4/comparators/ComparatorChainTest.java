@@ -29,11 +29,24 @@ public class ComparatorChainTest extends AbstractComparatorTest<org.apache.commo
         return "4";
     }
 
+    @Test(timeout = 1000)
+    public void testNoopComparatorChain_add1268() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoopComparatorChain_add1268");
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
+        final Integer i1 = Integer.valueOf(4);
+        final Integer i2 = Integer.valueOf(6);
+        chain.addComparator(new org.apache.commons.collections4.comparators.ComparableComparator<java.lang.Integer>());
+        chain.addComparator(new org.apache.commons.collections4.comparators.ComparableComparator<java.lang.Integer>());
+        final int correctValue = i1.compareTo(i2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4500,((chain.compare(i1, i2)) == correctValue));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test
     public void testNoopComparatorChain() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoopComparatorChain");
         final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
-        final Integer i1 = Integer.valueOf(5);
+        final Integer i1 = Integer.valueOf(3);
         final Integer i2 = Integer.valueOf(6);
         chain.addComparator(new org.apache.commons.collections4.comparators.ComparableComparator<java.lang.Integer>());
         final int correctValue = i1.compareTo(i2);
@@ -53,11 +66,36 @@ public class ComparatorChainTest extends AbstractComparatorTest<org.apache.commo
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    public void testNoopComparatorChain_remove938() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNoopComparatorChain_remove938");
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
+        final Integer i1 = Integer.valueOf(4);
+        final Integer i2 = Integer.valueOf(6);
+        final int correctValue = i1.compareTo(i2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4500,((chain.compare(i1, i2)) == correctValue));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testBadNoopComparatorChain_add1264() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBadNoopComparatorChain_add1264");
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
+        final Integer i1 = Integer.valueOf(4);
+        final Integer i2 = Integer.valueOf(6);
+        try {
+            chain.compare(i1, i2);
+            chain.compare(i1, i2);
+        } catch (final UnsupportedOperationException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test
     public void testBadNoopComparatorChain() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBadNoopComparatorChain");
         final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
-        final Integer i1 = Integer.valueOf(3);
+        final Integer i1 = Integer.valueOf(5);
         final Integer i2 = Integer.valueOf(6);
         try {
             chain.compare(i1, i2);
@@ -71,11 +109,25 @@ public class ComparatorChainTest extends AbstractComparatorTest<org.apache.commo
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBadNoopComparatorChain_literalMutation1214");
         final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
         final Integer i1 = Integer.valueOf(4);
-        final Integer i2 = Integer.valueOf(7);
+        final Integer i2 = Integer.valueOf(5);
         try {
             chain.compare(i1, i2);
         } catch (final UnsupportedOperationException e) {
         }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testListComparatorChain_add1267() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListComparatorChain_add1267");
+        final List<java.util.Comparator<java.lang.Integer>> list = new LinkedList<java.util.Comparator<java.lang.Integer>>();
+        list.add(new org.apache.commons.collections4.comparators.ComparableComparator<java.lang.Integer>());
+        list.add(new org.apache.commons.collections4.comparators.ComparableComparator<java.lang.Integer>());
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>(list);
+        final Integer i1 = Integer.valueOf(4);
+        final Integer i2 = Integer.valueOf(6);
+        final int correctValue = i1.compareTo(i2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4499,((chain.compare(i1, i2)) == correctValue));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -99,9 +151,36 @@ public class ComparatorChainTest extends AbstractComparatorTest<org.apache.commo
         list.add(new org.apache.commons.collections4.comparators.ComparableComparator<java.lang.Integer>());
         final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>(list);
         final Integer i1 = Integer.valueOf(4);
-        final Integer i2 = Integer.valueOf(7);
+        final Integer i2 = Integer.valueOf(5);
         final int correctValue = i1.compareTo(i2);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4499,((chain.compare(i1, i2)) == correctValue));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testListComparatorChain_remove937() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testListComparatorChain_remove937");
+        final List<java.util.Comparator<java.lang.Integer>> list = new LinkedList<java.util.Comparator<java.lang.Integer>>();
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>(list);
+        final Integer i1 = Integer.valueOf(4);
+        final Integer i2 = Integer.valueOf(6);
+        final int correctValue = i1.compareTo(i2);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4499,((chain.compare(i1, i2)) == correctValue));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testBadListComparatorChain_add1263() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBadListComparatorChain_add1263");
+        final List<java.util.Comparator<java.lang.Integer>> list = new LinkedList<java.util.Comparator<java.lang.Integer>>();
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>(list);
+        final Integer i1 = Integer.valueOf(4);
+        final Integer i2 = Integer.valueOf(6);
+        try {
+            chain.compare(i1, i2);
+            chain.compare(i1, i2);
+        } catch (final UnsupportedOperationException e) {
+        }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -110,7 +189,7 @@ public class ComparatorChainTest extends AbstractComparatorTest<org.apache.commo
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testBadListComparatorChain");
         final List<java.util.Comparator<java.lang.Integer>> list = new LinkedList<java.util.Comparator<java.lang.Integer>>();
         final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>(list);
-        final Integer i1 = Integer.valueOf(3);
+        final Integer i1 = Integer.valueOf(5);
         final Integer i2 = Integer.valueOf(6);
         try {
             chain.compare(i1, i2);
@@ -125,11 +204,67 @@ public class ComparatorChainTest extends AbstractComparatorTest<org.apache.commo
         final List<java.util.Comparator<java.lang.Integer>> list = new LinkedList<java.util.Comparator<java.lang.Integer>>();
         final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>(list);
         final Integer i1 = Integer.valueOf(4);
-        final Integer i2 = Integer.valueOf(5);
+        final Integer i2 = Integer.valueOf(7);
         try {
             chain.compare(i1, i2);
         } catch (final UnsupportedOperationException e) {
         }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testComparatorChainOnMinvaluedCompatator_add1265() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testComparatorChainOnMinvaluedCompatator_add1265");
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
+        chain.addComparator(new Comparator<java.lang.Integer>() {
+            public int compare(final Integer a, final Integer b) {
+                final int result = a.compareTo(b);
+                if (result < 0) {
+                    return Integer.MIN_VALUE;
+                } 
+                if (result > 0) {
+                    return Integer.MAX_VALUE;
+                } 
+                return 0;
+            }
+        }, true);
+        chain.addComparator(new Comparator<java.lang.Integer>() {
+            public int compare(final Integer a, final Integer b) {
+                final int result = a.compareTo(b);
+                if (result < 0) {
+                    return Integer.MIN_VALUE;
+                } 
+                if (result > 0) {
+                    return Integer.MAX_VALUE;
+                } 
+                return 0;
+            }
+        }, true);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4496,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(5))) > 0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4497,((chain.compare(java.lang.Integer.valueOf(5), java.lang.Integer.valueOf(4))) < 0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4498,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(4))) == 0));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testComparatorChainOnMinvaluedCompatator_add1266() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testComparatorChainOnMinvaluedCompatator_add1266");
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
+        chain.addComparator(new Comparator<java.lang.Integer>() {
+            public int compare(final Integer a, final Integer b) {
+                final int result = a.compareTo(b);
+                if (result < 0) {
+                    return Integer.MIN_VALUE;
+                } 
+                if (result > 0) {
+                    return Integer.MAX_VALUE;
+                } 
+                return 0;
+            }
+        }, true);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4496,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(5))) > 0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4497,((chain.compare(java.lang.Integer.valueOf(5), java.lang.Integer.valueOf(4))) < 0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4498,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(4))) == 0));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -140,7 +275,7 @@ public class ComparatorChainTest extends AbstractComparatorTest<org.apache.commo
         chain.addComparator(new Comparator<java.lang.Integer>() {
             public int compare(final Integer a, final Integer b) {
                 final int result = a.compareTo(b);
-                if (result < 1) {
+                if (result < -1) {
                     return Integer.MIN_VALUE;
                 } 
                 if (result > 0) {
@@ -214,7 +349,39 @@ public class ComparatorChainTest extends AbstractComparatorTest<org.apache.commo
                 } 
                 return 0;
             }
-        }, false);
+        }, true);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4496,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(5))) > 0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4497,((chain.compare(java.lang.Integer.valueOf(5), java.lang.Integer.valueOf(4))) < 0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4498,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(4))) == 0));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testComparatorChainOnMinvaluedCompatator_remove935() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testComparatorChainOnMinvaluedCompatator_remove935");
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4496,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(5))) > 0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4497,((chain.compare(java.lang.Integer.valueOf(5), java.lang.Integer.valueOf(4))) < 0));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4498,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(4))) == 0));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testComparatorChainOnMinvaluedCompatator_remove936() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testComparatorChainOnMinvaluedCompatator_remove936");
+        final ComparatorChain<java.lang.Integer> chain = new ComparatorChain<java.lang.Integer>();
+        chain.addComparator(new Comparator<java.lang.Integer>() {
+            public int compare(final Integer a, final Integer b) {
+                final int result = a.compareTo(b);
+                if (result < 0) {
+                    return Integer.MIN_VALUE;
+                } 
+                if (result > 0) {
+                    return Integer.MAX_VALUE;
+                } 
+                return 0;
+            }
+        }, true);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4496,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(5))) > 0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4497,((chain.compare(java.lang.Integer.valueOf(5), java.lang.Integer.valueOf(4))) < 0));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4498,((chain.compare(java.lang.Integer.valueOf(4), java.lang.Integer.valueOf(4))) == 0));

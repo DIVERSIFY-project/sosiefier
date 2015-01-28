@@ -44,14 +44,14 @@ public AbstractSortedSetTest(final String name) {
             } else {
                 last = colliter.next();
             }
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6126,last);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6128,confiter,6127,confiter.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6087,last);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6089,confiter,6088,confiter.next());
         }
         if ((getCollection().size()) > 0) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6129,first);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6131,getCollection(),6130,getCollection().first());
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6132,last);
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6134,getCollection(),6133,getCollection().last());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6090,first);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6092,getCollection(),6091,getCollection().first());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6093,last);
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6095,getCollection(),6094,getCollection().last());
         } 
     }
 

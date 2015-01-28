@@ -42,8 +42,7 @@ public class ObjectSubstitution extends CVLTransformation {
         ObjectSubstitution o = (ObjectSubstitution)other;
 
         try {
-        return stmtType().equals(o.stmtType())
-                && transformationPoint.getSignature().equals(o.transformationPoint.getSignature())
+        return transformationPoint.getSignature().equals(o.transformationPoint.getSignature())
                 && transplant.getSignature().equals(o.transplant.getSignature());
         } catch (Exception e) {}
         return false;

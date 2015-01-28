@@ -3,18 +3,16 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
-import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 /**
@@ -72,7 +70,7 @@ public class ASTTransformationQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation query() throws QueryException {
+    public SingleTransformation query() throws QueryException {
         try {
             Random r = new Random();
             ASTTransformation t = null;
@@ -348,8 +346,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         return list;
     }
 
-    public Collection<Transformation> isstaTransformation(int nb) throws Exception {
-        List<Transformation> transformations = new ArrayList<>();
+    public Collection<SingleTransformation> isstaTransformation(int nb) throws Exception {
+        List<SingleTransformation> transformations = new ArrayList<>();
         for(int i = 0; i< nb; i++) {
             ASTReplace replace = replace(subType);
             transformations.add(replace);

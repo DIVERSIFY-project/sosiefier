@@ -1,7 +1,7 @@
 package fr.inria.diversify.sosie;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import org.json.JSONArray;
@@ -120,7 +120,7 @@ public class SosiePoolCreator {
             // Overwrite in case the user has changed this.
             getProperties().setProperty("status", "0");
             parser.setFilterProperties(properties);
-            Collection<Transformation> ts;
+            Collection<SingleTransformation> ts;
             File f = new File(inputProgram.getPreviousTransformationsPath());
             if (f.isDirectory()) {
                 ts = parser.parseDir(inputProgram.getPreviousTransformationsPath());
@@ -130,7 +130,7 @@ public class SosiePoolCreator {
 
             int index = 0;
             JSONArray array = new JSONArray();
-            for (Transformation t : ts) {
+            for (SingleTransformation t : ts) {
                 //Allow only sosies
                 if (t.isSosie()) {
                     //Avoid repeated transformations

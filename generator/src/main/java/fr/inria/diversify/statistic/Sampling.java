@@ -1,6 +1,6 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationsWriter;
 import org.json.JSONException;
 
@@ -13,12 +13,12 @@ import java.util.*;
  * Time: 13:23
  */
 public class Sampling {
-    protected List<Transformation> transformations;
+    protected List<SingleTransformation> transformations;
 
-    public Sampling(Collection<Transformation> allTransformations, int sampleSize) {
+    public Sampling(Collection<SingleTransformation> allTransformations, int sampleSize) {
         Random r = new Random();
 
-        transformations = new LinkedList<Transformation>(allTransformations);
+        transformations = new LinkedList<SingleTransformation>(allTransformations);
         while(transformations.size() > sampleSize) {
             transformations.remove(transformations.get(r.nextInt(transformations.size())));
         }
@@ -33,7 +33,7 @@ public class Sampling {
     }
 
     protected void writeSubList(int begin, int end, String fileName) throws IOException, JSONException {
-        ArrayList<Transformation> list = new ArrayList<Transformation>(end - begin);
+        ArrayList<SingleTransformation> list = new ArrayList<SingleTransformation>(end - begin);
         for (int i = begin; i < end; i++) {
             list.add(transformations.get(i));
         }

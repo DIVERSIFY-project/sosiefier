@@ -44,17 +44,31 @@ public class UnmodifiableSetTest<E> extends AbstractSetTest<E> {
 
     public void testUnmodifiable() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable");
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6327,((makeObject()) instanceof org.apache.commons.collections4.Unmodifiable));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6328,((makeFullCollection()) instanceof org.apache.commons.collections4.Unmodifiable));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6288,((makeObject()) instanceof org.apache.commons.collections4.Unmodifiable));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6289,((makeFullCollection()) instanceof org.apache.commons.collections4.Unmodifiable));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     public void testDecorateFactory() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory");
         final Set<E> set = makeFullCollection();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6324,set);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6326,null,6325,org.apache.commons.collections4.set.UnmodifiableSet.unmodifiableSet(set));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6285,set);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6287,null,6286,org.apache.commons.collections4.set.UnmodifiableSet.unmodifiableSet(set));
         try {
+            org.apache.commons.collections4.set.UnmodifiableSet.unmodifiableSet(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testDecorateFactory_add1982() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add1982");
+        final Set<E> set = makeFullCollection();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6285,set);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6287,null,6286,org.apache.commons.collections4.set.UnmodifiableSet.unmodifiableSet(set));
+        try {
+            org.apache.commons.collections4.set.UnmodifiableSet.unmodifiableSet(null);
             org.apache.commons.collections4.set.UnmodifiableSet.unmodifiableSet(null);
         } catch (final IllegalArgumentException ex) {
         }

@@ -13,7 +13,7 @@ import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.StatisticDiversification;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.TransformationsWriter;
@@ -465,7 +465,7 @@ public class DiversifyMainRefactor {
     protected void computeDiversifyStat(String transDir, String fileName) throws Exception {
         TransformationParser tf = new TransformationParser(true, inputProgram);
 //        TransformationOldParser tf = new TransformationOldParser(true);
-        Collection<Transformation> transformations = tf.parseDir(transDir);
+        Collection<SingleTransformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
 
@@ -494,9 +494,9 @@ public class DiversifyMainRefactor {
 //        matrix.printAllMatrix(fileName);
     }
 
-    protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {
+    protected Set<String> getAllTransformationType(Collection<SingleTransformation> transformations) {
         Set<String> types = new HashSet<String>();
-        for (Transformation t : transformations)
+        for (SingleTransformation t : transformations)
             types.add(t.getType());
         return types;
     }

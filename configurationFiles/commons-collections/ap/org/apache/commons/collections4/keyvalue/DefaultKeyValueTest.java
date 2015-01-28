@@ -2,6 +2,7 @@ package org.apache.commons.collections4.keyvalue;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Test;
 import junit.framework.TestCase;
 
 /** 
@@ -49,12 +50,140 @@ protected DefaultKeyValue<K, V> makeDefaultKeyValue(final K key, final V value) 
     }
 
     @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_add853() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_add853");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        kv.setKey(((K)(key)));
+        kv.setKey(((K)(key)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2413,((kv.getKey()) == (key)));
+        kv.setValue(((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2414,((kv.getValue()) == (value)));
+        kv.setKey(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2415,((kv.getKey()) == null));
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,((kv.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_add854() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_add854");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        kv.setKey(((K)(key)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2413,((kv.getKey()) == (key)));
+        kv.setValue(((V)(value)));
+        kv.setValue(((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2414,((kv.getValue()) == (value)));
+        kv.setKey(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2415,((kv.getKey()) == null));
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,((kv.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_add855() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_add855");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        kv.setKey(((K)(key)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2413,((kv.getKey()) == (key)));
+        kv.setValue(((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2414,((kv.getValue()) == (value)));
+        kv.setKey(null);
+        kv.setKey(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2415,((kv.getKey()) == null));
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,((kv.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_add856() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_add856");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        kv.setKey(((K)(key)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2413,((kv.getKey()) == (key)));
+        kv.setValue(((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2414,((kv.getValue()) == (value)));
+        kv.setKey(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2415,((kv.getKey()) == null));
+        kv.setValue(null);
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,((kv.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void testAccessorsAndMutators_literalMutation881() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_literalMutation881");
         final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
         kv.setKey(((K)(key)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2413,((kv.getKey()) == (key)));
         kv.setValue(((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2414,((kv.getValue()) == (value)));
+        kv.setKey(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2415,((kv.getKey()) == null));
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,((kv.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_remove669() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_remove669");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2413,((kv.getKey()) == (key)));
+        kv.setValue(((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2414,((kv.getValue()) == (value)));
+        kv.setKey(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2415,((kv.getKey()) == null));
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,((kv.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_remove670() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_remove670");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        kv.setKey(((K)(key)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2413,((kv.getKey()) == (key)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2414,((kv.getValue()) == (value)));
+        kv.setKey(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2415,((kv.getKey()) == null));
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,((kv.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_remove671() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_remove671");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2413,((kv.getKey()) == (key)));
+        kv.setValue(((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2414,((kv.getValue()) == (value)));
+        kv.setKey(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2415,((kv.getKey()) == null));
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2416,((kv.getValue()) == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testAccessorsAndMutators_remove672() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testAccessorsAndMutators_remove672");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        kv.setKey(((K)(key)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2413,((kv.getKey()) == (key)));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2414,((kv.getValue()) == (value)));
         kv.setKey(null);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2415,((kv.getKey()) == null));
@@ -73,6 +202,44 @@ protected DefaultKeyValue<K, V> makeDefaultKeyValue(final K key, final V value) 
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2433,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
         }
         try {
+            kv.setValue(((V)(kv)));
+        } catch (final IllegalArgumentException iae) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2434,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSelfReferenceHandling_add861() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSelfReferenceHandling_add861");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        try {
+            kv.setKey(((K)(kv)));
+            kv.setKey(((K)(kv)));
+        } catch (final IllegalArgumentException iae) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2433,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        }
+        try {
+            kv.setValue(((V)(kv)));
+        } catch (final IllegalArgumentException iae) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2434,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSelfReferenceHandling_add862() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSelfReferenceHandling_add862");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue();
+        try {
+            kv.setKey(((K)(kv)));
+        } catch (final IllegalArgumentException iae) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2433,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        }
+        try {
+            kv.setValue(((V)(kv)));
             kv.setValue(((V)(kv)));
         } catch (final IllegalArgumentException iae) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2434,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
@@ -126,6 +293,114 @@ protected DefaultKeyValue<K, V> makeDefaultKeyValue(final K key, final V value) 
      * Subclasses should override this method to test their own constructors.
      */
 @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testConstructors_add857() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_add857");
+        DefaultKeyValue<K, V> kv = new DefaultKeyValue<K, V>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2417,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        kv = new DefaultKeyValue<K, V>(((K)(key)) , ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        final DefaultKeyValue<K, V> kv2 = new DefaultKeyValue<K, V>(kv);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2419,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        kv.setKey(null);
+        kv.setKey(null);
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        final Map<K, V> map = new HashMap<K, V>();
+        map.put(((K)(key)), ((V)(value)));
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        kv = new DefaultKeyValue<K, V>(entry);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2421,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,((kv.getValue()) == (value)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Subclasses should override this method to test their own constructors.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testConstructors_add858() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_add858");
+        DefaultKeyValue<K, V> kv = new DefaultKeyValue<K, V>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2417,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        kv = new DefaultKeyValue<K, V>(((K)(key)) , ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        final DefaultKeyValue<K, V> kv2 = new DefaultKeyValue<K, V>(kv);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2419,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        kv.setKey(null);
+        kv.setValue(null);
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        final Map<K, V> map = new HashMap<K, V>();
+        map.put(((K)(key)), ((V)(value)));
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        kv = new DefaultKeyValue<K, V>(entry);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2421,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,((kv.getValue()) == (value)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Subclasses should override this method to test their own constructors.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testConstructors_add859() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_add859");
+        DefaultKeyValue<K, V> kv = new DefaultKeyValue<K, V>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2417,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        kv = new DefaultKeyValue<K, V>(((K)(key)) , ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        final DefaultKeyValue<K, V> kv2 = new DefaultKeyValue<K, V>(kv);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2419,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        kv.setKey(null);
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        final Map<K, V> map = new HashMap<K, V>();
+        map.put(((K)(key)), ((V)(value)));
+        map.put(((K)(key)), ((V)(value)));
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        kv = new DefaultKeyValue<K, V>(entry);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2421,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,((kv.getValue()) == (value)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Subclasses should override this method to test their own constructors.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testConstructors_add860() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_add860");
+        DefaultKeyValue<K, V> kv = new DefaultKeyValue<K, V>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2417,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        kv = new DefaultKeyValue<K, V>(((K)(key)) , ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        final DefaultKeyValue<K, V> kv2 = new DefaultKeyValue<K, V>(kv);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2419,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        kv.setKey(null);
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        final Map<K, V> map = new HashMap<K, V>();
+        map.put(((K)(key)), ((V)(value)));
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        kv = new DefaultKeyValue<K, V>(entry);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2421,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        entry.setValue(null);
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,((kv.getValue()) == (value)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Subclasses should override this method to test their own constructors.
+     */
+@SuppressWarnings(value = "unchecked")
     public void testConstructors_literalMutation884() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_literalMutation884");
         DefaultKeyValue<K, V> kv = new DefaultKeyValue<K, V>();
@@ -143,6 +418,106 @@ protected DefaultKeyValue<K, V> makeDefaultKeyValue(final K key, final V value) 
         kv = new DefaultKeyValue<K, V>(entry);
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2421,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
         entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,((kv.getValue()) == (value)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Subclasses should override this method to test their own constructors.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testConstructors_remove673() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_remove673");
+        DefaultKeyValue<K, V> kv = new DefaultKeyValue<K, V>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2417,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        kv = new DefaultKeyValue<K, V>(((K)(key)) , ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        final DefaultKeyValue<K, V> kv2 = new DefaultKeyValue<K, V>(kv);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2419,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        final Map<K, V> map = new HashMap<K, V>();
+        map.put(((K)(key)), ((V)(value)));
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        kv = new DefaultKeyValue<K, V>(entry);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2421,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,((kv.getValue()) == (value)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Subclasses should override this method to test their own constructors.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testConstructors_remove674() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_remove674");
+        DefaultKeyValue<K, V> kv = new DefaultKeyValue<K, V>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2417,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        kv = new DefaultKeyValue<K, V>(((K)(key)) , ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        final DefaultKeyValue<K, V> kv2 = new DefaultKeyValue<K, V>(kv);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2419,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        kv.setKey(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        final Map<K, V> map = new HashMap<K, V>();
+        map.put(((K)(key)), ((V)(value)));
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        kv = new DefaultKeyValue<K, V>(entry);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2421,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,((kv.getValue()) == (value)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Subclasses should override this method to test their own constructors.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testConstructors_remove675() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_remove675");
+        DefaultKeyValue<K, V> kv = new DefaultKeyValue<K, V>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2417,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        kv = new DefaultKeyValue<K, V>(((K)(key)) , ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        final DefaultKeyValue<K, V> kv2 = new DefaultKeyValue<K, V>(kv);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2419,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        kv.setKey(null);
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        final Map<K, V> map = new HashMap<K, V>();
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        kv = new DefaultKeyValue<K, V>(entry);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2421,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        entry.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,((kv.getValue()) == (value)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Subclasses should override this method to test their own constructors.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testConstructors_remove676() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testConstructors_remove676");
+        DefaultKeyValue<K, V> kv = new DefaultKeyValue<K, V>();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2417,(((kv.getKey()) == null) && ((kv.getValue()) == null)));
+        kv = new DefaultKeyValue<K, V>(((K)(key)) , ((V)(value)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2418,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
+        final DefaultKeyValue<K, V> kv2 = new DefaultKeyValue<K, V>(kv);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2419,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        kv.setKey(null);
+        kv.setValue(null);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2420,(((kv2.getKey()) == (key)) && ((kv2.getValue()) == (value))));
+        final Map<K, V> map = new HashMap<K, V>();
+        map.put(((K)(key)), ((V)(value)));
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        kv = new DefaultKeyValue<K, V>(entry);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2421,(((kv.getKey()) == (key)) && ((kv.getValue()) == (value))));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2422,((kv.getValue()) == (value)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -200,11 +575,37 @@ protected DefaultKeyValue<K, V> makeDefaultKeyValue(final K key, final V value) 
     }
 
     @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testToMapEntry_add863() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testToMapEntry_add863");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue(((K)(key)), ((V)(value)));
+        final Map<K, V> map = new HashMap<K, V>();
+        map.put(kv.getKey(), kv.getValue());
+        map.put(kv.getKey(), kv.getValue());
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2436,entry,2435,entry.equals(kv.toMapEntry()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2437,((entry.hashCode()) == (kv.hashCode())));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void testToMapEntry() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testToMapEntry");
         final DefaultKeyValue<K, V> kv = makeDefaultKeyValue(((K)(key)), ((V)(value)));
         final Map<K, V> map = new HashMap<K, V>();
         map.put(kv.getKey(), kv.getValue());
+        final Map.Entry<K, V> entry = map.entrySet().iterator().next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2436,entry,2435,entry.equals(kv.toMapEntry()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2437,((entry.hashCode()) == (kv.hashCode())));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testToMapEntry_remove677() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testToMapEntry_remove677");
+        final DefaultKeyValue<K, V> kv = makeDefaultKeyValue(((K)(key)), ((V)(value)));
+        final Map<K, V> map = new HashMap<K, V>();
         final Map.Entry<K, V> entry = map.entrySet().iterator().next();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2436,entry,2435,entry.equals(kv.toMapEntry()));
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),2437,((entry.hashCode()) == (kv.hashCode())));

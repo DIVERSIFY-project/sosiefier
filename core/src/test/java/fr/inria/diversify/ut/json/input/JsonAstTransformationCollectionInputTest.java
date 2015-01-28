@@ -2,7 +2,7 @@ package fr.inria.diversify.ut.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.input.*;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -62,7 +62,7 @@ public class JsonAstTransformationCollectionInputTest {
         InputProgram p = new MockInputProgram();
         JsonAstTransformationCollectionInput reader = new JsonAstTransformationCollectionInput(p, data);
 
-        HashMap<Integer, Transformation> result = new HashMap<>();
+        HashMap<Integer, SingleTransformation> result = new HashMap<>();
         reader.read(result);
 
         ASTTransformation ast = (ASTTransformation) result.get(1);

@@ -1,14 +1,10 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import spoon.reflect.code.CtCodeSnippetStatement;
 import spoon.reflect.code.CtReturn;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.cu.SourceCodeFragment;
-import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
-import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.CtCodeSnippetStatementImpl;
 
 import java.util.ArrayList;
@@ -22,7 +18,7 @@ import java.util.List;
 public class TestLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMethod> {
 
     public TestLoggingInstrumenter() {
-        super(new ArrayList<Transformation>());
+        super(new ArrayList<SingleTransformation>());
     }
 
     @Override

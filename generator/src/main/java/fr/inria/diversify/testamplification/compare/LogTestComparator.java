@@ -35,29 +35,46 @@ public class LogTestComparator {
         return result;
     }
 
-
+    int countExcludeTest;
     protected TestDiff compareTest(Test original, Test sosie) {
         TestDiff result = new TestDiff(original.getSignature());
-
+        countExcludeTest = 50;
         Log.debug("compare test {}", original.getSignature());
-        for (int i = 0; i < original.size(); i++) {
-            if(sosie.size() < i  || !compareLog(original.getLog(i), sosie.getLog(i)).isEmpty()) {
-                List<LogDiff> currentResult = new ArrayList<>(sosie.size());
-                for (int j = 0; j < sosie.size(); j++) {
-                    LogDiff logResult = compareLog(original.getLog(i), sosie.getLog(j));
-                    if (logResult.isEmpty()) {
-                        break;
-                    } else {
-                        currentResult.add(logResult);
-                    }
-                }
-                LogDiff smallerDiff = currentResult.stream()
-                                                     .sorted()
-                                                     .findFirst().orElse(null);
-                result.add(smallerDiff);
+
+        LogDiff logResult = compareLog(original.getLog(0), sosie.getLog(0));
+        if(logResult == null) {
+            result = new TestDiff(original.getSignature());
+            result.excludeThisTest();
+            return result;
+        } else {
+            if (!logResult.isEmpty()) {
+                result.add(logResult);
             }
         }
         return result;
+//        for (int i = 0; i < original.size(); i++) {
+//            if(sosie.size() < i  || !compareLog(original.getLog(i), sosie.getLog(i)).isEmpty()) {
+//                List<LogDiff> currentResult = new ArrayList<>(sosie.size());
+//                for (int j = 0; j < sosie.size(); j++) {
+//                    LogDiff logResult = compareLog(original.getLog(i), sosie.getLog(j));
+//                    if(logResult == null) {
+//                        result = new TestDiff(original.getSignature());
+//                        result.excludeThisTest();
+//                        return result;
+//                    }
+//                    if (logResult.isEmpty()) {
+//                        break;
+//                    } else {
+//                        currentResult.add(logResult);
+//                    }
+//                }
+//                LogDiff smallerDiff = currentResult.stream()
+//                                                     .sorted()
+//                                                     .findFirst().orElse(null);
+//                result.add(smallerDiff);
+//            }
+//        }
+//        return result;
     }
 
     protected LogDiff compareLog(LogTest original, LogTest sosie) {
@@ -83,7 +100,9 @@ public class LogTestComparator {
         Assert sosieAssert = sosie.next();
 
         while(original.hasNext() && sosie.hasNext()) {
-
+            if (countExcludeTest < 0) {
+                return null;
+            }
             if (originalAssert.getAssertId() == sosieAssert.getAssertId()) {
                 result.add(compareAssert(originalAssert, sosieAssert));
 
@@ -104,6 +123,7 @@ public class LogTestComparator {
     }
 
     private Set<Integer> findSyncro(LogTest original, LogTest sosie) {
+        countExcludeTest--;
         int oNON = original.numberOfNext();
         int sNON = sosie.numberOfNext();
         int borne = Math.min(original.numberOfNext(),sosie.numberOfNext());

@@ -41,6 +41,19 @@ public class IteratorIterableTest extends BulkTest {
     }
 
     @SuppressWarnings(value = "unused")
+    @org.junit.Test(timeout = 1000)
+    public void testIterator_add1032() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterator_add1032");
+        final Iterator<java.lang.Integer> iter = createIterator();
+        final Iterable<java.lang.Number> iterable = new IteratorIterable<java.lang.Number>(iter);
+        verifyIteration(iterable);
+        verifyIteration(iterable);
+        for (final Number actual : iterable) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unused")
     public void testIterator_literalMutation1019() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterator_literalMutation1019");
         final Iterator<java.lang.Integer> iter = createIterator();
@@ -51,11 +64,62 @@ public class IteratorIterableTest extends BulkTest {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @SuppressWarnings(value = "unused")
+    @org.junit.Test(timeout = 1000)
+    public void testIterator_remove776() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIterator_remove776");
+        final Iterator<java.lang.Integer> iter = createIterator();
+        final Iterable<java.lang.Number> iterable = new IteratorIterable<java.lang.Number>(iter);
+        for (final Number actual : iterable) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultipleUserIterator_add1033() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultipleUserIterator_add1033");
+        final Iterator<java.lang.Integer> iter = createIterator();
+        final Iterable<java.lang.Number> iterable = new IteratorIterable<java.lang.Number>(iter , true);
+        verifyIteration(iterable);
+        verifyIteration(iterable);
+        verifyIteration(iterable);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultipleUserIterator_add1034() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultipleUserIterator_add1034");
+        final Iterator<java.lang.Integer> iter = createIterator();
+        final Iterable<java.lang.Number> iterable = new IteratorIterable<java.lang.Number>(iter , true);
+        verifyIteration(iterable);
+        verifyIteration(iterable);
+        verifyIteration(iterable);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testMultipleUserIterator() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultipleUserIterator");
         final Iterator<java.lang.Integer> iter = createIterator();
-        final Iterable<java.lang.Number> iterable = new IteratorIterable<java.lang.Number>(iter , false);
+        final Iterable<java.lang.Number> iterable = new IteratorIterable<java.lang.Number>(iter , true);
         verifyIteration(iterable);
+        verifyIteration(iterable);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultipleUserIterator_remove777() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultipleUserIterator_remove777");
+        final Iterator<java.lang.Integer> iter = createIterator();
+        final Iterable<java.lang.Number> iterable = new IteratorIterable<java.lang.Number>(iter , true);
+        verifyIteration(iterable);
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testMultipleUserIterator_remove778() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testMultipleUserIterator_remove778");
+        final Iterator<java.lang.Integer> iter = createIterator();
+        final Iterable<java.lang.Number> iterable = new IteratorIterable<java.lang.Number>(iter , true);
         verifyIteration(iterable);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

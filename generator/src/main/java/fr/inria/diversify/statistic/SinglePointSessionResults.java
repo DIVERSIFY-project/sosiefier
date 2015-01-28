@@ -1,7 +1,6 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.transformation.Transformation;
-import org.apache.commons.io.FileUtils;
+import fr.inria.diversify.transformation.SingleTransformation;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -33,7 +32,7 @@ public class SinglePointSessionResults extends AbstractSessionResults {
      *
      * @param results
      */
-    public void addRunResults(Transformation results) {
+    public void addRunResults(SingleTransformation results) {
 
         if (results.getStatus() == 0) {
             sosieCount++;

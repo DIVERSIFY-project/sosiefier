@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 
@@ -16,14 +16,14 @@ import java.util.Random;
  */
 public class FromListQuery extends TransformationQuery {
 
-    private final List<Transformation> list;
+    private final List<SingleTransformation> list;
     boolean shuffle = false;
 
     public FromListQuery(InputProgram inputProgram) throws TransformationParserException {
         super(inputProgram);
         TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
         File f = new File(getInputProgram().getPreviousTransformationsPath());
-        Collection<Transformation> ts;
+        Collection<SingleTransformation> ts;
         if (f.isDirectory()) {
             ts = parser.parseDir(f.getAbsolutePath());
         } else {
@@ -38,7 +38,7 @@ public class FromListQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation query() throws QueryException {
+    public SingleTransformation query() throws QueryException {
         int index = 0;
         if(shuffle) {
             Random r = new Random();

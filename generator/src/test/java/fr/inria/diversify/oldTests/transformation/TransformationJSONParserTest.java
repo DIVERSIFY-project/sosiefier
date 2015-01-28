@@ -2,7 +2,7 @@ package fr.inria.diversify.oldTests.transformation;
 
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class TransformationJSONParserTest {
         inputProgram.processCodeFragments();
 
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-        List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
+        List<SingleTransformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
 
         Assert.assertTrue(0 < transf.size());
      }

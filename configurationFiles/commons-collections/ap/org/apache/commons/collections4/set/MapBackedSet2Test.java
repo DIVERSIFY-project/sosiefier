@@ -2,6 +2,7 @@ package org.apache.commons.collections4.set;
 
 import java.util.Iterator;
 import java.util.Set;
+import org.junit.Test;
 
 /** 
  * JUnit test.
@@ -34,28 +35,63 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testOrdering_add1965() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOrdering_add1965");
+        final Set<E> set = setupSet();
+        Iterator<E> it = set.iterator();
+        for (int i = 0 ; i < 10 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
+        }
+        for (int i = 0 ; i < 10 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
+        }
+        it = set.iterator();
+        for (int i = 1 ; i < 10 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
+        }
+        for (int i = 0 ; i < 10 ; i++) {
+            set.add(((E)(java.lang.Integer.toString(i))));
+            set.add(((E)(java.lang.Integer.toString(i))));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
+        it = set.iterator();
+        for (int i = 1 ; i < 10 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
+        }
+        for (int i = 0 ; i < 10 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -67,28 +103,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -99,29 +135,29 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOrdering_literalMutation1843");
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
-        for (int i = 1 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+        for (int i = -1 ; i < 10 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -132,29 +168,29 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOrdering_literalMutation1844");
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
-        for (int i = 0 ; i < 11 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+        for (int i = 0 ; i < 9 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -166,28 +202,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = -1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -199,28 +235,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 11 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -232,28 +268,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
-        for (int i = 0 ; i < 10 ; i += 1) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+        for (int i = 0 ; i < 10 ; i += 3) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -265,28 +301,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
-        for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+        for (int i = 2 ; i < 10 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -298,28 +334,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 9 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -331,28 +367,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 1) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -364,28 +400,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
-        for (int i = 1 ; i < 10 ; i++) {
+        for (int i = -1 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -397,28 +433,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 9 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -430,28 +466,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -463,28 +499,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 11 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -496,28 +532,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 1) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -529,28 +565,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -562,28 +598,28 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
-        for (int i = 0 ; i < 11 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+        for (int i = 0 ; i < 9 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -595,28 +631,61 @@ public class MapBackedSet2Test<E> extends AbstractSetTest<E> {
         final Set<E> set = setupSet();
         Iterator<E> it = set.iterator();
         for (int i = 0 ; i < 10 ; i++) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6259,null,6258,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6261,it,6260,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6263,set,6262,set.remove(java.lang.Integer.toString(i)));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
         }
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6265,null,6264,java.lang.Integer.toString(i));
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6267,it,6266,it.next());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
         }
         for (int i = 0 ; i < 10 ; i++) {
             set.add(((E)(java.lang.Integer.toString(i))));
         }
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6269,set,6268,set.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
         it = set.iterator();
         for (int i = 1 ; i < 10 ; i += 2) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6271,null,6270,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
         }
         for (int i = 0 ; i < 10 ; i += 3) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6273,null,6272,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testOrdering_remove1531() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testOrdering_remove1531");
+        final Set<E> set = setupSet();
+        Iterator<E> it = set.iterator();
+        for (int i = 0 ; i < 10 ; i++) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6220,null,6219,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6222,it,6221,it.next());
+        }
+        for (int i = 0 ; i < 10 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6224,set,6223,set.remove(java.lang.Integer.toString(i)));
+        }
+        it = set.iterator();
+        for (int i = 1 ; i < 10 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6226,null,6225,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6228,it,6227,it.next());
+        }
+        for (int i = 0 ; i < 10 ; i++) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6230,set,6229,set.size());
+        it = set.iterator();
+        for (int i = 1 ; i < 10 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6232,null,6231,java.lang.Integer.toString(i));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),927,it,926,it.next());
+        }
+        for (int i = 0 ; i < 10 ; i += 2) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6234,null,6233,java.lang.Integer.toString(i));
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),933,it,932,it.next());
         }
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

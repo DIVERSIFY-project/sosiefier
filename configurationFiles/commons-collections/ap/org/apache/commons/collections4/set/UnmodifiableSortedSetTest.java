@@ -74,6 +74,86 @@ public class UnmodifiableSortedSetTest<E> extends AbstractSortedSetTest<E> {
      * Verify that base set and subsets are not modifiable
      */
 @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_add1985() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_add1985");
+        setupSet();
+        setupSet();
+        verifyUnmodifiable(set);
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_add1986() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_add1986");
+        setupSet();
+        verifyUnmodifiable(set);
+        verifyUnmodifiable(set);
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_add1987() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_add1987");
+        setupSet();
+        verifyUnmodifiable(set);
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_add1988() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_add1988");
+        setupSet();
+        verifyUnmodifiable(set);
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_add1989() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_add1989");
+        setupSet();
+        verifyUnmodifiable(set);
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
     public void testUnmodifiable_literalMutation1907() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_literalMutation1907");
         setupSet();
@@ -92,7 +172,7 @@ public class UnmodifiableSortedSetTest<E> extends AbstractSortedSetTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_literalMutation1908");
         setupSet();
         verifyUnmodifiable(set);
-        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(0)))));
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(2)))));
         verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
         verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -122,7 +202,7 @@ public class UnmodifiableSortedSetTest<E> extends AbstractSortedSetTest<E> {
         verifyUnmodifiable(set);
         verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
         verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
-        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(0))), ((E)(java.lang.Integer.valueOf(3)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(2))), ((E)(java.lang.Integer.valueOf(3)))));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -140,12 +220,96 @@ public class UnmodifiableSortedSetTest<E> extends AbstractSortedSetTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_remove1545() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_remove1545");
+        verifyUnmodifiable(set);
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_remove1546() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_remove1546");
+        setupSet();
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_remove1547() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_remove1547");
+        setupSet();
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_remove1548() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_remove1548");
+        setupSet();
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Verify that base set and subsets are not modifiable
+     */
+@SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testUnmodifiable_remove1549() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testUnmodifiable_remove1549");
+        setupSet();
+        verifyUnmodifiable(set.headSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.tailSet(((E)(java.lang.Integer.valueOf(1)))));
+        verifyUnmodifiable(set.subSet(((E)(java.lang.Integer.valueOf(1))), ((E)(java.lang.Integer.valueOf(3)))));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     public void testDecorateFactory() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory");
         final SortedSet<E> set = makeFullCollection();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6330,set);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6332,null,6331,org.apache.commons.collections4.set.UnmodifiableSortedSet.unmodifiableSortedSet(set));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6291,set);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6293,null,6292,org.apache.commons.collections4.set.UnmodifiableSortedSet.unmodifiableSortedSet(set));
         try {
+            UnmodifiableSortedSet.unmodifiableSortedSet(null);
+        } catch (final IllegalArgumentException ex) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testDecorateFactory_add1984() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testDecorateFactory_add1984");
+        final SortedSet<E> set = makeFullCollection();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6291,set);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6293,null,6292,org.apache.commons.collections4.set.UnmodifiableSortedSet.unmodifiableSortedSet(set));
+        try {
+            UnmodifiableSortedSet.unmodifiableSortedSet(null);
             UnmodifiableSortedSet.unmodifiableSortedSet(null);
         } catch (final IllegalArgumentException ex) {
         }
@@ -187,7 +351,25 @@ public class UnmodifiableSortedSetTest<E> extends AbstractSortedSetTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testComparator");
         setupSet();
         final Comparator<? super E> c = set.comparator();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6329,(c == null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6290,(c == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testComparator_add1983() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testComparator_add1983");
+        setupSet();
+        setupSet();
+        final Comparator<? super E> c = set.comparator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6290,(c == null));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @org.junit.Test(timeout = 1000)
+    public void testComparator_remove1544() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testComparator_remove1544");
+        final Comparator<? super E> c = set.comparator();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6290,(c == null));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 

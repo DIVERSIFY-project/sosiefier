@@ -2,7 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.statistic.RunResults;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationParserException;
 
 import java.io.File;
@@ -31,12 +31,12 @@ public class KnowMultisosieQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation query() throws QueryException {
+    public SingleTransformation query() throws QueryException {
         return null;
     }
 
     @Override
-    public List<Transformation> query(int nb) {
+    public List<SingleTransformation> query(int nb) {
         try {
             File folder = new File(getInputProgram().getPreviousTransformationsPath());
 
@@ -49,7 +49,7 @@ public class KnowMultisosieQuery extends TransformationQuery {
                 }
             }
 
-            List<Transformation> result = null;
+            List<SingleTransformation> result = null;
 
             while (result == null && currentRunResult < files.length) {
 

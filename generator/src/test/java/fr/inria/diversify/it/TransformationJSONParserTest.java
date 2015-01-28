@@ -4,12 +4,11 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.util.Log;
 import org.junit.Test;
-import org.kevoree.resolver.MavenResolver;
 import spoon.reflect.factory.Factory;
 
 import java.io.File;
@@ -65,7 +64,7 @@ public class TransformationJSONParserTest extends SosieGeneratorIntegrationTests
         inputProgram.processCodeFragments();
 
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-        List<Transformation> transf = null;
+        List<SingleTransformation> transf = null;
         try {
             transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
         } catch (TransformationParserException e) {

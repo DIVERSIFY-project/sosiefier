@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.cvl.LinkExistence;
 import fr.inria.diversify.transformation.cvl.LinkSubstitution;
 import fr.inria.diversify.transformation.cvl.ObjectExistence;
@@ -31,9 +31,9 @@ public class CvlQuery extends TransformationQuery {
     public void setType(String type) {}
 
     @Override
-    public Transformation query() {
+    public SingleTransformation query() {
         try {
-            Transformation t = null;
+            SingleTransformation t = null;
             Random r = new Random();
             int i = r.nextInt(8);
             switch (i) {

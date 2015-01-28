@@ -53,6 +53,18 @@ public class PeekingIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testSinglePeek_add1181() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSinglePeek_add1181");
+        PeekingIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4156,it,4155,it.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4158,it,4157,it.element());
+        validate(it, ((E[])(testArray)));
+        validate(it, ((E[])(testArray)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test
     @SuppressWarnings(value = "unchecked")
     public void testSinglePeek() {
@@ -61,6 +73,16 @@ public class PeekingIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4156,it,4155,it.peek());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4158,it,4157,it.element());
         validate(it, ((E[])(testArray)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    @SuppressWarnings(value = "unchecked")
+    public void testSinglePeek_remove872() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSinglePeek_remove872");
+        PeekingIterator<E> it = makeObject();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4156,it,4155,it.peek());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4158,it,4157,it.element());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -83,10 +105,11 @@ public class PeekingIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void testIteratorExhausted() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIteratorExhausted");
         PeekingIterator<E> it = makeObject();
+        it.next();
         it.next();
         it.next();
         it.next();
@@ -99,12 +122,110 @@ public class PeekingIteratorTest<E> extends AbstractIteratorTest<E> {
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
-    @Test
+    @Test(timeout = 1000)
+    public void testIteratorExhausted_add1178() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIteratorExhausted_add1178");
+        PeekingIterator<E> it = makeObject();
+        it.next();
+        it.next();
+        it.next();
+        it.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4128,it,4127,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4130,it,4129,it.peek());
+        try {
+            it.element();
+        } catch (NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testIteratorExhausted_add1179() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIteratorExhausted_add1179");
+        PeekingIterator<E> it = makeObject();
+        it.next();
+        it.next();
+        it.next();
+        it.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4128,it,4127,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4130,it,4129,it.peek());
+        try {
+            it.element();
+        } catch (NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testIteratorExhausted_add1180() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIteratorExhausted_add1180");
+        PeekingIterator<E> it = makeObject();
+        it.next();
+        it.next();
+        it.next();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4128,it,4127,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4130,it,4129,it.peek());
+        try {
+            it.element();
+            it.element();
+        } catch (NoSuchElementException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
     public void testIllegalRemove() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalRemove");
         PeekingIterator<E> it = makeObject();
         it.next();
+        it.next();
         it.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4124,it,4123,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4126,it,4125,it.peek());
+        try {
+            it.remove();
+        } catch (IllegalStateException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testIllegalRemove_add1175() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalRemove_add1175");
+        PeekingIterator<E> it = makeObject();
+        it.next();
+        it.remove();
+        it.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4124,it,4123,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4126,it,4125,it.peek());
+        try {
+            it.remove();
+        } catch (IllegalStateException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testIllegalRemove_add1176() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalRemove_add1176");
+        PeekingIterator<E> it = makeObject();
+        it.next();
+        it.remove();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4124,it,4123,it.hasNext());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4126,it,4125,it.peek());
+        try {
+            it.remove();
+            it.remove();
+        } catch (IllegalStateException e) {
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testIllegalRemove_remove871() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testIllegalRemove_remove871");
+        PeekingIterator<E> it = makeObject();
+        it.next();
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4124,it,4123,it.hasNext());
         fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4126,it,4125,it.peek());
         try {

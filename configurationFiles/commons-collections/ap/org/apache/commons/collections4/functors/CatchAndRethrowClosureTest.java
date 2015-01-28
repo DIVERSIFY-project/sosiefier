@@ -37,6 +37,87 @@ public class CatchAndRethrowClosureTest extends AbstractClosureTest {
         return CatchAndRethrowClosureTest.generateNoExceptionClosure();
     }
 
+    @Test(timeout = 1000)
+    public void testThrowingClosure_add1225() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowingClosure_add1225");
+        Closure<java.lang.Integer> closure = CatchAndRethrowClosureTest.generateNoExceptionClosure();
+        try {
+            closure.execute(Integer.valueOf(0));
+            closure.execute(Integer.valueOf(0));
+        } catch (final FunctorException ex) {
+        } catch (final RuntimeException ex) {
+        }
+        closure = CatchAndRethrowClosureTest.generateIOExceptionClosure();
+        try {
+            closure.execute(Integer.valueOf(0));
+        } catch (final FunctorException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4442,((ex.getCause()) instanceof java.io.IOException));
+        } catch (final RuntimeException ex) {
+        }
+        closure = CatchAndRethrowClosureTest.generateNullPointerExceptionClosure();
+        try {
+            closure.execute(Integer.valueOf(0));
+        } catch (final FunctorException ex) {
+        } catch (final RuntimeException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4443,(ex instanceof java.lang.NullPointerException));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testThrowingClosure_add1226() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowingClosure_add1226");
+        Closure<java.lang.Integer> closure = CatchAndRethrowClosureTest.generateNoExceptionClosure();
+        try {
+            closure.execute(Integer.valueOf(0));
+        } catch (final FunctorException ex) {
+        } catch (final RuntimeException ex) {
+        }
+        closure = CatchAndRethrowClosureTest.generateIOExceptionClosure();
+        try {
+            closure.execute(Integer.valueOf(0));
+            closure.execute(Integer.valueOf(0));
+        } catch (final FunctorException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4442,((ex.getCause()) instanceof java.io.IOException));
+        } catch (final RuntimeException ex) {
+        }
+        closure = CatchAndRethrowClosureTest.generateNullPointerExceptionClosure();
+        try {
+            closure.execute(Integer.valueOf(0));
+        } catch (final FunctorException ex) {
+        } catch (final RuntimeException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4443,(ex instanceof java.lang.NullPointerException));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @Test(timeout = 1000)
+    public void testThrowingClosure_add1227() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowingClosure_add1227");
+        Closure<java.lang.Integer> closure = CatchAndRethrowClosureTest.generateNoExceptionClosure();
+        try {
+            closure.execute(Integer.valueOf(0));
+        } catch (final FunctorException ex) {
+        } catch (final RuntimeException ex) {
+        }
+        closure = CatchAndRethrowClosureTest.generateIOExceptionClosure();
+        try {
+            closure.execute(Integer.valueOf(0));
+        } catch (final FunctorException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4442,((ex.getCause()) instanceof java.io.IOException));
+        } catch (final RuntimeException ex) {
+        }
+        closure = CatchAndRethrowClosureTest.generateNullPointerExceptionClosure();
+        try {
+            closure.execute(Integer.valueOf(0));
+            closure.execute(Integer.valueOf(0));
+        } catch (final FunctorException ex) {
+        } catch (final RuntimeException ex) {
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4443,(ex instanceof java.lang.NullPointerException));
+        }
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
     @Test
     public void testThrowingClosure() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testThrowingClosure");
@@ -74,7 +155,7 @@ public class CatchAndRethrowClosureTest extends AbstractClosureTest {
         }
         closure = CatchAndRethrowClosureTest.generateIOExceptionClosure();
         try {
-            closure.execute(Integer.valueOf(1));
+            closure.execute(Integer.valueOf(-1));
         } catch (final FunctorException ex) {
             fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),4442,((ex.getCause()) instanceof java.io.IOException));
         } catch (final RuntimeException ex) {

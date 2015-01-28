@@ -1,7 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
@@ -19,10 +19,10 @@ import java.util.Random;
  * Created by Simon on 23/10/2014.
  */
 public class MultiSosieGenerator extends AbstractDiversify {
-    protected List<Transformation> allTransformation;
+    protected List<SingleTransformation> allTransformation;
     protected boolean randomGeneration = false;
    // protected List<Transformation> currentSosie;
-    protected List<List<Transformation>> multiSosies;
+    protected List<List<SingleTransformation>> multiSosies;
 
     public MultiSosieGenerator(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
         this.sourceDir = srcDir;
@@ -32,7 +32,7 @@ public class MultiSosieGenerator extends AbstractDiversify {
         sessionResults = new SinglePointSessionResults();
     }
 
-    public MultiSosieGenerator(List<Transformation> allTransformation) {
+    public MultiSosieGenerator(List<SingleTransformation> allTransformation) {
         this.allTransformation = allTransformation;
     }
 
@@ -52,7 +52,7 @@ public class MultiSosieGenerator extends AbstractDiversify {
     }
 
 
-    protected void applyAndCheck(Transformation trans) throws Exception {
+    protected void applyAndCheck(SingleTransformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
@@ -83,16 +83,16 @@ public class MultiSosieGenerator extends AbstractDiversify {
 
 
     protected void restoreAll() throws Exception {
-        for(Transformation transformation: transformations) {
+        for(SingleTransformation transformation: transformations) {
             transformation.restore(tmpDir + "/" + sourceDir);
         }
         transformations.clear();
     }
 
-    protected Transformation getNextTransformation() throws Exception {
+    protected SingleTransformation getNextTransformation() throws Exception {
         if(randomGeneration) {
             Random random = new Random();
-            Transformation t = allTransformation.remove(random.nextInt(allTransformation.size()));
+            SingleTransformation t = allTransformation.remove(random.nextInt(allTransformation.size()));
             return t;
         } else {
             return allTransformation.remove(0);
@@ -108,7 +108,7 @@ public class MultiSosieGenerator extends AbstractDiversify {
         out.close();
     }
 
-    public void setTransformation(Collection<Transformation> transformation) {
+    public void setTransformation(Collection<SingleTransformation> transformation) {
         allTransformation = new ArrayList<>(transformation);
     }
 

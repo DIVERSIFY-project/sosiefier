@@ -3,16 +3,14 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.diversification.InputProgram;
 
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.mutation.*;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtReturn;
-import spoon.reflect.declaration.CtElement;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -74,12 +72,12 @@ public class MutationQuery extends TransformationQuery {
     }
 
     @Override
-    public Transformation query() {
+    public SingleTransformation query() {
         try {
             Random r = new Random();
             int i = r.nextInt(8);
 
-            Transformation t = null;
+            SingleTransformation t = null;
             switch (i) {
                 case 0:
                     t = getNegateConditionalMutation();

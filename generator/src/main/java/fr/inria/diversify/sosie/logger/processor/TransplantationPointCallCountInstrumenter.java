@@ -1,7 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.transformation.AbstractTransformation;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
@@ -35,7 +34,7 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
         int index;
 
         //Transformations over the log point
-        List<Transformation> transformations;
+        List<SingleTransformation> transformations;
 
         LogPoint(CtCodeElement element, int index) {
             this.element = element;
@@ -44,14 +43,14 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
         }
     }
 
-    public TransplantationPointCallCountInstrumenter(List<Transformation> transformations) {
+    public TransplantationPointCallCountInstrumenter(List<SingleTransformation> transformations) {
         super(transformations);
 
         elementsMap = new HashMap<>();
 
         alreadyVisited = new HashSet<>();
         int k = 0;
-        for (Transformation t : transformations) {
+        for (SingleTransformation t : transformations) {
             if (t instanceof ASTTransformation) {
                 ASTTransformation ast = (ASTTransformation) t;
                 CtCodeElement element = ast.getTransplantationPoint().getCtCodeFragment();
@@ -134,7 +133,7 @@ public class TransplantationPointCallCountInstrumenter extends AbstractLoggingIn
                 o.put("code", s.getValue().element.toString());
                 o.put("source_position", s.getKey());
                 JSONArray transf = new JSONArray();
-                for ( Transformation f : s.getValue().transformations ) {
+                for ( SingleTransformation f : s.getValue().transformations ) {
                     JSONObject t = f.toJSONObject();
                     if ( t.has("transplantationPoint") ) {
                         t.remove("transplantationPoint");

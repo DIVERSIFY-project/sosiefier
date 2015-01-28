@@ -1,7 +1,7 @@
 package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.util.Log;
 import spoon.reflect.declaration.CtClass;
 
@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
  * Created by Simon on 20/03/14.
  */
 public class FailureMatrix {
-    protected Collection<Transformation> transformations;
+    protected Collection<SingleTransformation> transformations;
     protected List<String> allTest;
     InputProgram inputProgram;
 
-    public FailureMatrix(InputProgram inputProgram, Collection<Transformation> transformations, String allTestFile) throws IOException {
+    public FailureMatrix(InputProgram inputProgram, Collection<SingleTransformation> transformations, String allTestFile) throws IOException {
         this.inputProgram = inputProgram;
         BufferedReader br = new BufferedReader(new FileReader(allTestFile));
         allTest = new ArrayList<>();
@@ -41,10 +41,10 @@ public class FailureMatrix {
                 .collect(Collectors.toList()));
     }
 
-    protected List<String> buildMatrix(Collection<Transformation> transformations) {
+    protected List<String> buildMatrix(Collection<SingleTransformation> transformations) {
         Map<String,Integer> map = new HashMap<>();
 
-        for(Transformation transformation: transformations) {
+        for(SingleTransformation transformation: transformations) {
             if(transformation.getStatus() == -1) {
                 StringBuilder sb = new StringBuilder();
                 List<String> failures = transformation.getFailures();

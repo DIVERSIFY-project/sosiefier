@@ -1,6 +1,7 @@
 package org.apache.commons.collections4;
 
 import org.apache.commons.collections4.map.AbstractMapTest;
+import org.junit.Test;
 import java.util.TreeMap;
 
 /** 
@@ -27,8 +28,8 @@ public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<K, V> {
     public void testNewMap() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testNewMap");
         final TreeMap<K, V> map = makeObject();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6441,map,6440,map.isEmpty());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6443,map,6442,map.size());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6402,map,6401,map.isEmpty());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6404,map,6403,map.size());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -38,8 +39,34 @@ public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<K, V> {
         final TreeMap<K, V> map = makeObject();
         map.put(((K)("first")), ((V)("First Item")));
         map.put(((K)("second")), ((V)("Second Item")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6445,map,6444,map.get("first"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6447,map,6446,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSearch_add2040() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSearch_add2040");
+        final TreeMap<K, V> map = makeObject();
+        map.put(((K)("first")), ((V)("First Item")));
+        map.put(((K)("first")), ((V)("First Item")));
+        map.put(((K)("second")), ((V)("Second Item")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSearch_add2041() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSearch_add2041");
+        final TreeMap<K, V> map = makeObject();
+        map.put(((K)("first")), ((V)("First Item")));
+        map.put(((K)("second")), ((V)("Second Item")));
+        map.put(((K)("second")), ((V)("Second Item")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -49,8 +76,8 @@ public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<K, V> {
         final TreeMap<K, V> map = makeObject();
         map.put(((K)("first")), ((V)("First Item")));
         map.put(((K)("second")), ((V)("Second Item")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6445,map,6444,map.get("first"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6447,map,6446,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -60,8 +87,8 @@ public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<K, V> {
         final TreeMap<K, V> map = makeObject();
         map.put(((K)("foo")), ((V)("First Item")));
         map.put(((K)("second")), ((V)("Second Item")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6445,map,6444,map.get("first"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6447,map,6446,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -71,8 +98,8 @@ public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<K, V> {
         final TreeMap<K, V> map = makeObject();
         map.put(((K)("first")), ((V)("foo")));
         map.put(((K)("second")), ((V)("Second Item")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6445,map,6444,map.get("first"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6447,map,6446,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -82,8 +109,8 @@ public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<K, V> {
         final TreeMap<K, V> map = makeObject();
         map.put(((K)("first")), ((V)("First Item")));
         map.put(((K)("foo")), ((V)("Second Item")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6445,map,6444,map.get("first"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6447,map,6446,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -93,8 +120,30 @@ public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<K, V> {
         final TreeMap<K, V> map = makeObject();
         map.put(((K)("first")), ((V)("First Item")));
         map.put(((K)("second")), ((V)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6445,map,6444,map.get("first"));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6447,map,6446,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSearch_remove1594() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSearch_remove1594");
+        final TreeMap<K, V> map = makeObject();
+        map.put(((K)("second")), ((V)("Second Item")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSearch_remove1595() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSearch_remove1595");
+        final TreeMap<K, V> map = makeObject();
+        map.put(((K)("second")), ((V)("Second Item")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6406,map,6405,map.get("first"));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6408,map,6407,map.get("second"));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 }

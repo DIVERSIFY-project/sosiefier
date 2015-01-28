@@ -2,7 +2,7 @@ package fr.inria.diversify.ut.json;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.output.*;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -13,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
@@ -57,7 +56,7 @@ public class SectionTestUtils {
     }
 
 
-    public static List<Transformation> list(Transformation... data) {
+    public static List<SingleTransformation> list(SingleTransformation... data) {
         return Arrays.asList(data);
     }
 
@@ -119,7 +118,7 @@ public class SectionTestUtils {
      * @return
      * @param p
      */
-    public static List<Transformation> createTransformations(InputProgram p) {
+    public static List<SingleTransformation> createTransformations(InputProgram p) {
         ASTAdd add = new ASTAdd();
         add.setIndex(0);
         add.setStatus(-1);
@@ -140,7 +139,7 @@ public class SectionTestUtils {
         return list(add, del, r);
     }
 
-    public static void assertEqualsTransformation(Transformation tt, Transformation tt2) {
+    public static void assertEqualsTransformation(SingleTransformation tt, SingleTransformation tt2) {
         ASTTransformation t1 = (ASTTransformation) tt;
         ASTTransformation t2 = (ASTTransformation) tt2;
 

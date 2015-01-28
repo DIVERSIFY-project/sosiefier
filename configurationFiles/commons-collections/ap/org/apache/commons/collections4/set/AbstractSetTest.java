@@ -4,6 +4,7 @@ import org.apache.commons.collections4.collection.AbstractCollectionTest;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import org.junit.Test;
 
 /** 
  * Abstract test class for {@link Set} methods and contracts.
@@ -38,13 +39,13 @@ public AbstractSetTest(final String name) {
 @Override
     public void verify() {
         super.verify();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6117,null,6116,getConfirmed());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6119,null,6118,getCollection());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6121,getConfirmed(),6120,getConfirmed().hashCode());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6123,getCollection(),6122,getCollection().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6078,null,6077,getConfirmed());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6080,null,6079,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6082,getConfirmed(),6081,getConfirmed().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6084,getCollection(),6083,getCollection().hashCode());
         final Collection<E> set = makeConfirmedCollection();
         for (E element : getCollection()) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6125,set,6124,set.add(element));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6086,set,6085,set.add(element));
         }
     }
 
@@ -121,22 +122,197 @@ public AbstractSetTest(final String name) {
      * Tests {@link Set#equals(Object)}.
      */
 @SuppressWarnings(value = "unchecked")
-    public void testSetEquals() {
-        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals");
+    @Test(timeout = 1000)
+    public void testSetEquals_add1919() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_add1919");
         resetEmpty();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6099,null,6098,getCollection());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6101,null,6100,getConfirmed());
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
         verify();
         final Collection<E> set2 = makeConfirmedCollection();
         set2.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6102,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
         resetFull();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6104,null,6103,getCollection());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6106,null,6105,getConfirmed());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
         verify();
         set2.clear();
         set2.addAll(java.util.Arrays.asList(getOtherElements()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6107,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_add1920() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_add1920");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_add1921() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_add1921");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_add1922() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_add1922");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_add1923() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_add1923");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_add1924() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_add1924");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_add1925() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_add1925");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    public void testSetEquals() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -147,33 +323,240 @@ public AbstractSetTest(final String name) {
     public void testSetEquals_literalMutation1796() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_literalMutation1796");
         resetEmpty();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6099,null,6098,getCollection());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6101,null,6100,getConfirmed());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
         verify();
         final Collection<E> set2 = makeConfirmedCollection();
         set2.add(((E)("foo")));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6102,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
         resetFull();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6104,null,6103,getCollection());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6106,null,6105,getConfirmed());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
         verify();
         set2.clear();
         set2.addAll(java.util.Arrays.asList(getOtherElements()));
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6107,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_remove1489() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_remove1489");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_remove1490() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_remove1490");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_remove1491() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_remove1491");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_remove1492() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_remove1492");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_remove1493() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_remove1493");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_remove1494() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_remove1494");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.addAll(java.util.Arrays.asList(getOtherElements()));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#equals(Object)}.
+     */
+@SuppressWarnings(value = "unchecked")
+    @Test(timeout = 1000)
+    public void testSetEquals_remove1495() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetEquals_remove1495");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6060,null,6059,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6062,null,6061,getConfirmed());
+        verify();
+        final Collection<E> set2 = makeConfirmedCollection();
+        set2.add(((E)("foo")));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6063,!(getCollection().equals(set2)));
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6065,null,6064,getCollection());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6067,null,6066,getConfirmed());
+        verify();
+        set2.clear();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6068,!(getCollection().equals(set2)));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     /** 
      * Tests {@link Set#hashCode()}.
      */
-public void testSetHashCode() {
+@Test(timeout = 1000)
+    public void testSetHashCode() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetHashCode");
         resetEmpty();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6109,getCollection(),6108,getCollection().hashCode());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6111,getConfirmed(),6110,getConfirmed().hashCode());
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6070,getCollection(),6069,getCollection().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6072,getConfirmed(),6071,getConfirmed().hashCode());
         resetFull();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6113,getCollection(),6112,getCollection().hashCode());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6115,getConfirmed(),6114,getConfirmed().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6074,getCollection(),6073,getCollection().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6076,getConfirmed(),6075,getConfirmed().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#hashCode()}.
+     */
+@Test(timeout = 1000)
+    public void testSetHashCode_add1927() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetHashCode_add1927");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6070,getCollection(),6069,getCollection().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6072,getConfirmed(),6071,getConfirmed().hashCode());
+        resetFull();
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6074,getCollection(),6073,getCollection().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6076,getConfirmed(),6075,getConfirmed().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#hashCode()}.
+     */
+@Test(timeout = 1000)
+    public void testSetHashCode_remove1496() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetHashCode_remove1496");
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6070,getCollection(),6069,getCollection().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6072,getConfirmed(),6071,getConfirmed().hashCode());
+        resetFull();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6074,getCollection(),6073,getCollection().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6076,getConfirmed(),6075,getConfirmed().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Tests {@link Set#hashCode()}.
+     */
+@Test(timeout = 1000)
+    public void testSetHashCode_remove1497() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSetHashCode_remove1497");
+        resetEmpty();
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6070,getCollection(),6069,getCollection().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6072,getConfirmed(),6071,getConfirmed().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6074,getCollection(),6073,getCollection().hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6076,getConfirmed(),6075,getConfirmed().hashCode());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 }

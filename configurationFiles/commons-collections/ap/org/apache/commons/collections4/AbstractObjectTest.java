@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import org.junit.Test;
 
 /** 
  * Abstract test class for {@link java.lang.Object} methods and contracts.
@@ -86,23 +87,23 @@ public boolean isEqualsCheckable() {
     public void testObjectEqualsSelf() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectEqualsSelf");
         final Object obj = makeObject();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6427,obj);
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6427,obj);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6388,obj);
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6388,obj);
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     public void testEqualsNull() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testEqualsNull");
         final Object obj = makeObject();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6426,obj,6425,obj.equals(null));
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6387,obj,6386,obj.equals(null));
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
     public void testObjectHashCodeEqualsSelfHashCode() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectHashCodeEqualsSelfHashCode");
         final Object obj = makeObject();
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6437,obj,6436,obj.hashCode());
-        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6437,obj,6436,obj.hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6398,obj,6397,obj.hashCode());
+        fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6398,obj,6397,obj.hashCode());
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
 
@@ -110,14 +111,14 @@ public boolean isEqualsCheckable() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testObjectHashCodeEqualsContract");
         final Object obj1 = makeObject();
         if (obj1.equals(obj1)) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6429,obj1,6428,obj1.hashCode());
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6429,obj1,6428,obj1.hashCode());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6390,obj1,6389,obj1.hashCode());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6390,obj1,6389,obj1.hashCode());
         } 
         final Object obj2 = makeObject();
         if (obj1.equals(obj2)) {
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6431,obj1,6430,obj1.hashCode());
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6433,obj2,6432,obj2.hashCode());
-            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6435,obj2,6434,obj2.equals(obj1));
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6392,obj1,6391,obj1.hashCode());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6394,obj2,6393,obj2.hashCode());
+            fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6396,obj2,6395,obj2.equals(obj1));
         } 
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -139,8 +140,8 @@ public boolean isEqualsCheckable() {
         if ((obj instanceof Serializable) && (isTestSerialization())) {
             final Object dest = serializeDeserialize(obj);
             if (isEqualsCheckable()) {
-                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6438,obj);
-                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6439,dest);
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6399,obj);
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6400,dest);
             } 
         } 
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -154,12 +155,32 @@ public boolean isEqualsCheckable() {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-public void testSimpleSerialization() throws Exception {
+@Test(timeout = 1000)
+    public void testSimpleSerialization() throws Exception {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSimpleSerialization");
         final Object o = makeObject();
         if ((o instanceof Serializable) && (isTestSerialization())) {
             final byte[] objekt = writeExternalFormToBytes(((Serializable)(o)));
             readExternalFormFromBytes(objekt);
+            readExternalFormFromBytes(objekt);
+        } 
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    /** 
+     * Sanity check method, makes sure that any Serializable
+     * class can be serialized and de-serialized in memory,
+     * using the handy makeObject() method
+     * 
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+@Test(timeout = 1000)
+    public void testSimpleSerialization_remove1593() throws Exception {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testSimpleSerialization_remove1593");
+        final Object o = makeObject();
+        if ((o instanceof Serializable) && (isTestSerialization())) {
+            final byte[] objekt = writeExternalFormToBytes(((Serializable)(o)));
         } 
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }
@@ -174,8 +195,8 @@ public void testCanonicalEmptyCollectionExists() {
             final Object object = makeObject();
             if (object instanceof Serializable) {
                 final String name = getCanonicalEmptyCollectionName(object);
-                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6419,(("Canonical empty collection (" + name) + ") is not in SVN"));
-                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6421,new java.io.File(name),6420,new java.io.File(name).exists());
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6380,(("Canonical empty collection (" + name) + ") is not in SVN"));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6382,new java.io.File(name),6381,new java.io.File(name).exists());
             } 
         } 
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
@@ -191,8 +212,8 @@ public void testCanonicalFullCollectionExists() {
             final Object object = makeObject();
             if (object instanceof Serializable) {
                 final String name = getCanonicalFullCollectionName(object);
-                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6422,(("Canonical full collection (" + name) + ") is not in SVN"));
-                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6424,new java.io.File(name),6423,new java.io.File(name).exists());
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6383,(("Canonical full collection (" + name) + ") is not in SVN"));
+                fr.inria.diversify.testamplification.logger.Logger.logAssertArgument(Thread.currentThread(),6385,new java.io.File(name),6384,new java.io.File(name).exists());
             } 
         } 
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());

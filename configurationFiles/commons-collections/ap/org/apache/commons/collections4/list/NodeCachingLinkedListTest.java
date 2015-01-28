@@ -28,6 +28,294 @@ public class NodeCachingLinkedListTest<E> extends AbstractLinkedListTest<E> {
     }
 
     @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add804() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add804");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add805() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add805");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add806() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add806");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add807() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add807");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add808() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add808");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add809() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add809");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add810() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add810");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add811() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add811");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add812() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add812");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add813() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add813");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add814() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add814");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_add815() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_add815");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
     public void testShrinkCache() {
         fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache");
         if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
@@ -147,7 +435,7 @@ public class NodeCachingLinkedListTest<E> extends AbstractLinkedListTest<E> {
         final NodeCachingLinkedList<E> list = getCollection();
         list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
         list.removeAllNodes();
-        list.setMaximumCacheSize(1);
+        list.setMaximumCacheSize(3);
         list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
         checkNodes();
         list.removeNode(list.getNode(0, false));
@@ -282,7 +570,7 @@ public class NodeCachingLinkedListTest<E> extends AbstractLinkedListTest<E> {
         list.setMaximumCacheSize(2);
         list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
         checkNodes();
-        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, true));
         list.removeNode(list.getNode(0, false));
         list.removeNode(list.getNode(0, false));
         checkNodes();
@@ -327,7 +615,7 @@ public class NodeCachingLinkedListTest<E> extends AbstractLinkedListTest<E> {
         list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
         checkNodes();
         list.removeNode(list.getNode(0, false));
-        list.removeNode(list.getNode(0, true));
+        list.removeNode(list.getNode(0, false));
         list.removeNode(list.getNode(0, false));
         checkNodes();
         list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
@@ -372,7 +660,7 @@ public class NodeCachingLinkedListTest<E> extends AbstractLinkedListTest<E> {
         checkNodes();
         list.removeNode(list.getNode(0, false));
         list.removeNode(list.getNode(0, false));
-        list.removeNode(list.getNode(0, true));
+        list.removeNode(list.getNode(0, false));
         checkNodes();
         list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
         checkNodes();
@@ -463,6 +751,270 @@ public class NodeCachingLinkedListTest<E> extends AbstractLinkedListTest<E> {
         list.removeNode(list.getNode(0, false));
         checkNodes();
         list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "foo" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove628() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove628");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove629() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove629");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove630() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove630");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove631() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove631");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove632() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove632");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove633() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove633");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove634() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove634");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove635() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove635");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove636() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove636");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove637() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove637");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove638() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove638");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        checkNodes();
+        fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
+    }
+
+    @SuppressWarnings(value = "unchecked")
+    @org.junit.Test(timeout = 1000)
+    public void testShrinkCache_remove639() {
+        fr.inria.diversify.testamplification.logger.Logger.writeTestStart(Thread.currentThread(),this, "testShrinkCache_remove639");
+        if ((!(isRemoveSupported())) || (!(isAddSupported()))) {
+            return ;
+        } 
+        resetEmpty();
+        final NodeCachingLinkedList<E> list = getCollection();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeAllNodes();
+        list.setMaximumCacheSize(2);
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        list.removeNode(list.getNode(0, false));
+        checkNodes();
+        list.addAll(java.util.Arrays.asList(((E[])(new String[]{ "1" , "2" , "3" , "4" }))));
         checkNodes();
         fr.inria.diversify.testamplification.logger.Logger.writeTestFinish(Thread.currentThread());
     }

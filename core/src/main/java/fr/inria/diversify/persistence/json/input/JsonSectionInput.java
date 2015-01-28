@@ -3,7 +3,7 @@ package fr.inria.diversify.persistence.json.input;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.SingleTransformation;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public abstract class JsonSectionInput {
         this.jsonObject = jsonObject;
     }
 
-    public abstract void read(HashMap<Integer, Transformation> transformations);
+    public abstract void read(HashMap<Integer, SingleTransformation> transformations);
 
     /**
      * Input program where the code fragments of the transformations are
