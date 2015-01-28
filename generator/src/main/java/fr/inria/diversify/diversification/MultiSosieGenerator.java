@@ -2,6 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
@@ -22,7 +23,7 @@ public class MultiSosieGenerator extends AbstractDiversify {
     protected List<SingleTransformation> allTransformation;
     protected boolean randomGeneration = false;
    // protected List<Transformation> currentSosie;
-    protected List<List<SingleTransformation>> multiSosies;
+    protected List<List<Transformation>> multiSosies;
 
     public MultiSosieGenerator(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
         this.sourceDir = srcDir;
@@ -83,7 +84,7 @@ public class MultiSosieGenerator extends AbstractDiversify {
 
 
     protected void restoreAll() throws Exception {
-        for(SingleTransformation transformation: transformations) {
+        for(Transformation transformation: transformations) {
             transformation.restore(tmpDir + "/" + sourceDir);
         }
         transformations.clear();

@@ -3,6 +3,7 @@ package fr.inria.diversify.persistence.json.input;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -85,10 +86,10 @@ public class JsonSosiesInput {
      * Read the transformations from the JSON file
      * @return A collection the transformations
      */
-    public Collection<SingleTransformation> read() {
+    public Collection<Transformation> read() {
         open(); //Open the json file
 
-        HashMap<Integer, SingleTransformation> result = new HashMap<>();
+        HashMap<Integer, Transformation> result = new HashMap<>();
         JsonFailuresInput failures = new JsonFailuresInput(inputProgram, jsonObject);
         failures.setErrors(getErrors());
         failures.read(result);

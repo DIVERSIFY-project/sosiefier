@@ -2,6 +2,7 @@ package fr.inria.diversify.sosie.logger.processor;
 
 
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;
 import spoon.reflect.code.*;
@@ -26,7 +27,7 @@ public class MethodLoggingInstrumenter extends AbstractLoggingInstrumenter<CtMet
     protected List<CtMethod> methods;
 
 
-    public MethodLoggingInstrumenter(List<SingleTransformation> transformations) {
+    public MethodLoggingInstrumenter(List<Transformation> transformations) {
         super(transformations);
     }
 

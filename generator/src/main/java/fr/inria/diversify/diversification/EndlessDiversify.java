@@ -2,6 +2,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
@@ -26,7 +27,7 @@ public class EndlessDiversify extends AbstractDiversify {
         sessionResults = new SinglePointSessionResults();
     }
 
-    protected void run(SingleTransformation trans) throws Exception {
+    protected void run(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         try {
@@ -78,7 +79,7 @@ public class EndlessDiversify extends AbstractDiversify {
         results.flush();
     }
 
-    protected void applyTransformation(SingleTransformation trans) throws Exception {
+    protected void applyTransformation(Transformation trans) throws Exception {
         trans.apply(tmpDir + "/" + sourceDir);
     }
 

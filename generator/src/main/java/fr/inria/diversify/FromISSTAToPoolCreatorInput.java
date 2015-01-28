@@ -4,7 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.util.Log;
@@ -108,7 +108,7 @@ public class FromISSTAToPoolCreatorInput {
 
 
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-        List<SingleTransformation> transf = parser.parseArray(array);
+        List<Transformation> transf = parser.parseArray(array);
 
         System.out.println("transf size" + transf.size());
     }

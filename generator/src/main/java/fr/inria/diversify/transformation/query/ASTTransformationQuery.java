@@ -4,6 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
@@ -346,8 +347,8 @@ public class ASTTransformationQuery extends TransformationQuery {
         return list;
     }
 
-    public Collection<SingleTransformation> isstaTransformation(int nb) throws Exception {
-        List<SingleTransformation> transformations = new ArrayList<>();
+    public Collection<Transformation> isstaTransformation(int nb) throws Exception {
+        List<Transformation> transformations = new ArrayList<>();
         for(int i = 0; i< nb; i++) {
             ASTReplace replace = replace(subType);
             transformations.add(replace);

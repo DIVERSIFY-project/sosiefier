@@ -1,7 +1,7 @@
 package fr.inria.diversify.ut.json.output;
 
 import fr.inria.diversify.persistence.json.output.JsonFailuresOutput;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.ut.json.SectionTestUtils;
 import org.json.JSONException;
@@ -22,7 +22,7 @@ public class JsonAstFailuresOutputTests {
     @Test
     public void testEmptyFailureWrite() throws JSONException {
         JsonFailuresOutput sectionOutput = new JsonFailuresOutput();
-        sectionOutput.setTransformations(new ArrayList<SingleTransformation>());
+        sectionOutput.setTransformations(new ArrayList<Transformation>());
         sectionOutput.write(new JSONObject());
 
         JSONObject d = sectionOutput.getOutputObject();

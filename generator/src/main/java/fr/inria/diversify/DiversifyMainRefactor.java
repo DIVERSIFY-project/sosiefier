@@ -13,10 +13,7 @@ import fr.inria.diversify.diversification.*;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.StatisticDiversification;
-import fr.inria.diversify.transformation.SingleTransformation;
-import fr.inria.diversify.transformation.TransformationParser;
-import fr.inria.diversify.transformation.TransformationParserException;
-import fr.inria.diversify.transformation.TransformationsWriter;
+import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
 import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
@@ -465,14 +462,14 @@ public class DiversifyMainRefactor {
     protected void computeDiversifyStat(String transDir, String fileName) throws Exception {
         TransformationParser tf = new TransformationParser(true, inputProgram);
 //        TransformationOldParser tf = new TransformationOldParser(true);
-        Collection<SingleTransformation> transformations = tf.parseDir(transDir);
+        Collection<Transformation> transformations = tf.parseDir(transDir);
         TransformationsWriter write = new TransformationsWriter(transformations, fileName);
 
 
         Log.debug("all transformation type : {}", getAllTransformationType(transformations));
         write.writeAllTransformation(null);
-        StatisticDiversification sd = new StatisticDiversification(transformations);
-        sd.writeStat(fileName);
+//        StatisticDiversification sd = new StatisticDiversification(transformations);
+//        sd.writeStat(fileName);
 
 
         for (String type : getAllTransformationType(transformations))
@@ -487,16 +484,16 @@ public class DiversifyMainRefactor {
         CVLMetric cvlMetric = new CVLMetric(inputProgram);
         cvlMetric.printMetrics(fileName + "_cvlMetric.csv");
 
-       Visu v = new Visu(fileName + "_visu/visu", inputProgram);
-        v.writeJSON(transformations);
+//       Visu v = new Visu(fileName + "_visu/visu", inputProgram);
+//        v.writeJSON(transformations);
 
 //        FailureMatrix matrix = new FailureMatrix(transformations,inputConfiguration.getProperty("allTestFile"));
 //        matrix.printAllMatrix(fileName);
     }
 
-    protected Set<String> getAllTransformationType(Collection<SingleTransformation> transformations) {
+    protected Set<String> getAllTransformationType(Collection<Transformation> transformations) {
         Set<String> types = new HashSet<String>();
-        for (SingleTransformation t : transformations)
+        for (Transformation t : transformations)
             types.add(t.getType());
         return types;
     }

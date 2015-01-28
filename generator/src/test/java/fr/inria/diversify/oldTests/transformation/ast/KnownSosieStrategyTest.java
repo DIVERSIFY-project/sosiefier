@@ -4,7 +4,7 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.AbstractTransformation;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.KnownSosieQuery;
 import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
@@ -25,7 +25,7 @@ public class KnownSosieStrategyTest {
 
     private static InputProgram inputProgram = null;
 
-    private static ArrayList<SingleTransformation> sosies;
+    private static ArrayList<Transformation> sosies;
 
     private String getResourcePath(String name) throws Exception {
         return getClass().getResource("/" + name).toURI().getPath();
@@ -57,7 +57,7 @@ public class KnownSosieStrategyTest {
         //Set the amount of points we must find
         KnownSosieQuery st = new KnownSosieQuery(inputProgram, sosies);
         st.executeQuery();
-        Collection<SingleTransformation> cf1 = st.getMultiTransformations();
+        Collection<Transformation> cf1 = st.getMultiTransformations();
         assertEquals(5, cf1.size());
     }
 
@@ -72,18 +72,18 @@ public class KnownSosieStrategyTest {
 
         //Query three times
         st.executeQuery();
-        Collection<SingleTransformation> cf1 = st.getMultiTransformations();
+        Collection<Transformation> cf1 = st.getMultiTransformations();
         st.executeQuery();
-        Collection<SingleTransformation> cf2 = st.getMultiTransformations();
+        Collection<Transformation> cf2 = st.getMultiTransformations();
         st.executeQuery();
-        Collection<SingleTransformation> cf3 = st.getMultiTransformations();
+        Collection<Transformation> cf3 = st.getMultiTransformations();
 
         String s1 = "";
         String s2 = "";
         String s3 = "";
-        for ( SingleTransformation t : cf1 ) { s1 += t.toString(); }
-        for ( SingleTransformation t : cf2 ) { s2 += t.toString(); }
-        for ( SingleTransformation t : cf3 ) { s3 += t.toString(); }
+        for ( Transformation t : cf1 ) { s1 += t.toString(); }
+        for ( Transformation t : cf2 ) { s2 += t.toString(); }
+        for ( Transformation t : cf3 ) { s3 += t.toString(); }
 
         assertFalse(s1.equals(s2));
         assertFalse(s1.equals(s3));
@@ -103,16 +103,16 @@ public class KnownSosieStrategyTest {
         //Query three times
         inputProgram.setTransformationPerRun(5);
         st.executeQuery();
-        Collection<SingleTransformation> cf1 = st.getMultiTransformations();
+        Collection<Transformation> cf1 = st.getMultiTransformations();
         inputProgram.setTransformationPerRun(6);
         st.executeQuery();
-        Collection<SingleTransformation> cf2 = st.getMultiTransformations();
+        Collection<Transformation> cf2 = st.getMultiTransformations();
         inputProgram.setTransformationPerRun(5);
 
         String s1 = "";
         String s2 = "";
-        for ( SingleTransformation t : cf1 ) { s1 += t.toString(); }
-        for ( SingleTransformation t : cf2 ) { s2 += t.toString(); }
+        for ( Transformation t : cf1 ) { s1 += t.toString(); }
+        for ( Transformation t : cf2 ) { s2 += t.toString(); }
         assertTrue(s2.contains(s1));
     }
 
@@ -128,25 +128,25 @@ public class KnownSosieStrategyTest {
         //Query three times
         inputProgram.setTransformationPerRun(5);
         st.executeQuery();
-        Collection<SingleTransformation> cf51 = st.getMultiTransformations();
+        Collection<Transformation> cf51 = st.getMultiTransformations();
         st.executeQuery();
-        Collection<SingleTransformation> cf52 = st.getMultiTransformations();
+        Collection<Transformation> cf52 = st.getMultiTransformations();
 
         inputProgram.setTransformationPerRun(6);
         st.executeQuery();
-        Collection<SingleTransformation> cf62 = st.getMultiTransformations();
+        Collection<Transformation> cf62 = st.getMultiTransformations();
         st.executeQuery();
-        Collection<SingleTransformation> cf61 = st.getMultiTransformations();
+        Collection<Transformation> cf61 = st.getMultiTransformations();
         inputProgram.setTransformationPerRun(5);
 
         String s51 = "";
         String s52 = "";
         String s61 = "";
         String s62 = "";
-        for ( SingleTransformation t : cf51 ) { s51 += t.toString(); }
-        for ( SingleTransformation t : cf52 ) { s52 += t.toString(); }
-        for ( SingleTransformation t : cf61 ) { s61 += t.toString(); }
-        for ( SingleTransformation t : cf62 ) { s62 += t.toString(); }
+        for ( Transformation t : cf51 ) { s51 += t.toString(); }
+        for ( Transformation t : cf52 ) { s52 += t.toString(); }
+        for ( Transformation t : cf61 ) { s61 += t.toString(); }
+        for ( Transformation t : cf62 ) { s62 += t.toString(); }
 
         assertTrue(s62.contains(s52));
         assertTrue(s61.contains(s51));
@@ -176,7 +176,7 @@ public class KnownSosieStrategyTest {
 
         //51
         st.executeQuery();
-        Collection<SingleTransformation> cf51 = st.getMultiTransformations();
+        Collection<Transformation> cf51 = st.getMultiTransformations();
         assertEquals(0, st.getLastIncrementalSeries());
 
         //52
@@ -186,14 +186,14 @@ public class KnownSosieStrategyTest {
 
         //53
         st.executeQuery();
-        Collection<SingleTransformation> cf53 = st.getMultiTransformations();
+        Collection<Transformation> cf53 = st.getMultiTransformations();
         assertEquals(2, st.getLastIncrementalSeries());
 
 
         //63
         inputProgram.setTransformationPerRun(6);
         st.executeQuery();
-        Collection<SingleTransformation> cf63 = st.getMultiTransformations();
+        Collection<Transformation> cf63 = st.getMultiTransformations();
         st.setLastTransformationStatus(AbstractTransformation.COMPILED_FAIL);
         assertEquals(2, st.getLastIncrementalSeries());
 
@@ -201,7 +201,7 @@ public class KnownSosieStrategyTest {
 
         //61
         st.executeQuery();
-        Collection<SingleTransformation> cf61 = st.getMultiTransformations();
+        Collection<Transformation> cf61 = st.getMultiTransformations();
         assertEquals(0, st.getLastIncrementalSeries());
 
         try {
@@ -216,7 +216,7 @@ public class KnownSosieStrategyTest {
         //71
         inputProgram.setTransformationPerRun(7);
         st.executeQuery();
-        Collection<SingleTransformation> cf71 = st.getMultiTransformations();
+        Collection<Transformation> cf71 = st.getMultiTransformations();
         assertEquals(0, st.getLastIncrementalSeries());
 
         // 71 and 72 are bad blood
@@ -235,14 +235,14 @@ public class KnownSosieStrategyTest {
         String s53 = "";
         String s63 = "";
 
-        for ( SingleTransformation t : cf51 ) { s51 += t.toString(); }
-        for ( SingleTransformation t : cf61 ) { s61 += t.toString(); }
-        for ( SingleTransformation t : cf71 ) { s71 += t.toString(); }
+        for ( Transformation t : cf51 ) { s51 += t.toString(); }
+        for ( Transformation t : cf61 ) { s61 += t.toString(); }
+        for ( Transformation t : cf71 ) { s71 += t.toString(); }
         assertTrue(s61.contains(s51));
         assertTrue(s71.contains(s61));
 
-        for ( SingleTransformation t : cf53 ) { s53 += t.toString(); }
-        for ( SingleTransformation t : cf63 ) { s63 += t.toString(); }
+        for ( Transformation t : cf53 ) { s53 += t.toString(); }
+        for ( Transformation t : cf63 ) { s63 += t.toString(); }
         assertTrue(s63.contains(s53));
     }
 
@@ -271,7 +271,7 @@ public class KnownSosieStrategyTest {
 
         //51
         st.executeQuery();
-        Collection<SingleTransformation> cf51 = st.getMultiTransformations();
+        Collection<Transformation> cf51 = st.getMultiTransformations();
         assertEquals(0, st.getLastIncrementalSeries());
 
         //52
@@ -281,21 +281,21 @@ public class KnownSosieStrategyTest {
 
         //53
         st.executeQuery();
-        Collection<SingleTransformation> cf53 = st.getMultiTransformations();
+        Collection<Transformation> cf53 = st.getMultiTransformations();
         assertEquals(2, st.getLastIncrementalSeries());
 
 
         //63
         inputProgram.setTransformationPerRun(6);
         st.executeQuery();
-        Collection<SingleTransformation> cf63 = st.getMultiTransformations();
+        Collection<Transformation> cf63 = st.getMultiTransformations();
         assertEquals(2, st.getLastIncrementalSeries());
 
         //62 is bad blood
 
         //61
         st.executeQuery();
-        Collection<SingleTransformation> cf61 = st.getMultiTransformations();
+        Collection<Transformation> cf61 = st.getMultiTransformations();
         st.setLastTransformationStatus(-1);
         assertEquals(0, st.getLastIncrementalSeries());
 
@@ -304,7 +304,7 @@ public class KnownSosieStrategyTest {
 
         inputProgram.setTransformationPerRun(7);
         st.executeQuery();
-        Collection<SingleTransformation> cf73 = st.getMultiTransformations();
+        Collection<Transformation> cf73 = st.getMultiTransformations();
         assertEquals(2, st.getLastIncrementalSeries());
 
         String s51 = "";
@@ -312,11 +312,11 @@ public class KnownSosieStrategyTest {
         String s61 = "";
         String s63 = "";
         String s73 = "";
-        for ( SingleTransformation t : cf51 ) { s51 += t.toString(); }
-        for ( SingleTransformation t : cf53 ) { s53 += t.toString(); }
-        for ( SingleTransformation t : cf61 ) { s61 += t.toString(); }
-        for ( SingleTransformation t : cf63 ) { s63 += t.toString(); }
-        for ( SingleTransformation t : cf73 ) { s73 += t.toString(); }
+        for ( Transformation t : cf51 ) { s51 += t.toString(); }
+        for ( Transformation t : cf53 ) { s53 += t.toString(); }
+        for ( Transformation t : cf61 ) { s61 += t.toString(); }
+        for ( Transformation t : cf63 ) { s63 += t.toString(); }
+        for ( Transformation t : cf73 ) { s73 += t.toString(); }
 
         assertTrue(s63.contains(s53));
         assertTrue(s73.contains(s63));

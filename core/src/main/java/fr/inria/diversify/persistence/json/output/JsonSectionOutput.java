@@ -1,6 +1,6 @@
 package fr.inria.diversify.persistence.json.output;
 
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONObject;
 
 import java.util.Collection;
@@ -35,7 +35,7 @@ public abstract class JsonSectionOutput {
      */
     JSONObject outputObject;
 
-    private Collection<SingleTransformation> transformations;
+    private Collection<Transformation> transformations;
 
     public void write(JSONObject outputObject) {
         this.outputObject = outputObject;
@@ -49,11 +49,11 @@ public abstract class JsonSectionOutput {
         return outputObject;
     }
 
-    public void setTransformations(Collection<SingleTransformation> transformations) {
+    public void setTransformations(Collection<Transformation> transformations) {
         this.transformations = transformations;
     }
 
-    public Collection<SingleTransformation> getTransformations() {
+    public Collection<Transformation> getTransformations() {
         return transformations;
     }
 }

@@ -3,10 +3,7 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.AbstractTransformation;
-import fr.inria.diversify.transformation.SingleTransformation;
-import fr.inria.diversify.transformation.TransformationJsonParser;
-import fr.inria.diversify.transformation.TransformationParserException;
+import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 
 import java.io.*;
@@ -33,9 +30,9 @@ public class KnownSosieQuery extends TransformationQuery {
     private class SosieWithCoverage {
         private List<Integer> coverage;
 
-        private SingleTransformation transformation;
+        private Transformation transformation;
 
-        public SosieWithCoverage(SingleTransformation t) {
+        public SosieWithCoverage(Transformation t) {
             this.transformation = t;
             coverage = new ArrayList<>();
         }
@@ -51,7 +48,7 @@ public class KnownSosieQuery extends TransformationQuery {
     /**
      * Sosies found from the transformation pool passed as paramethers.
      */
-    protected SingleTransformation getSosies(int index) {
+    protected Transformation getSosies(int index) {
         return sosies.get(index).transformation;
     }
 
@@ -77,7 +74,7 @@ public class KnownSosieQuery extends TransformationQuery {
         }
     }
 
-    public KnownSosieQuery(InputProgram inputProgram, ArrayList<SingleTransformation> transf) {
+    public KnownSosieQuery(InputProgram inputProgram, ArrayList<Transformation> transf) {
         super(inputProgram);
         extractSosies(transf);
     }
@@ -86,7 +83,7 @@ public class KnownSosieQuery extends TransformationQuery {
         super(inputProgram);
         TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
         File f = new File(getInputProgram().getPreviousTransformationsPath());
-        Collection<SingleTransformation> ts;
+        Collection<Transformation> ts;
         if (f.isDirectory()) {
             ts = parser.parseDir(f.getAbsolutePath());
         } else {
@@ -101,7 +98,7 @@ public class KnownSosieQuery extends TransformationQuery {
      *
      * @param transf
      */
-    private void extractSosies(Collection<SingleTransformation> transf) {
+    private void extractSosies(Collection<Transformation> transf) {
 
         ICoverageReport coverageReport = getInputProgram().getCoverageReport();
 
@@ -109,7 +106,7 @@ public class KnownSosieQuery extends TransformationQuery {
 
         sosies = new ArrayList<>();
 
-        for (SingleTransformation t : transf) {
+        for (Transformation t : transf) {
             if (t.isSosie()) {
                 SosieWithCoverage c = new SosieWithCoverage(t);
 
@@ -275,7 +272,7 @@ public class KnownSosieQuery extends TransformationQuery {
      * @param f
      */
     private void completeIncrementalTransformation(int nb, Integer[] indexes,
-                                                   ArrayList<SingleTransformation> tf, TransformationFoundRecord f) {
+                                                   ArrayList<Transformation> tf, TransformationFoundRecord f) {
         //Linking list mechanism to know the parent of a multisosie
         if (prevRecord == null) {
             prevRecord = f;
@@ -297,7 +294,7 @@ public class KnownSosieQuery extends TransformationQuery {
     }
 
     @Override
-    public List<SingleTransformation> query(int nb) throws QueryException {
+    public List<Transformation> query(int nb) throws QueryException {
 
         //Update the incremental series number
         if (prevRecord == null) lastIncrementalSeries = 0;
@@ -322,14 +319,14 @@ public class KnownSosieQuery extends TransformationQuery {
         while (found && transAttempts < maxTransfNumbers) {
 
             int attempts = 0;
-            ArrayList<SingleTransformation> tf = new ArrayList<>(transformations);
+            ArrayList<Transformation> tf = new ArrayList<>(transformations);
             int i = tf.size();
             Arrays.fill(indexes, tf.size(), indexes.length, -1);
 
             //Build the transformation
             while (tf.size() < nb && attempts < sosies.size()) {
                 int index = r.nextInt(sosies.size());
-                SingleTransformation t = getSosies(index);
+                Transformation t = getSosies(index);
                 if (canBeMerged(t)) {
                     indexes[i] = index;
                     i++;
@@ -381,7 +378,7 @@ public class KnownSosieQuery extends TransformationQuery {
      * @param t
      * @return
      */
-    protected boolean canBeMerged(SingleTransformation t) {
+    protected boolean canBeMerged(Transformation t) {
 
         //Avoid sosies already in the transformation
         boolean result = !transformations.contains(t);
@@ -416,8 +413,8 @@ public class KnownSosieQuery extends TransformationQuery {
      *
      * @return
      */
-    public ArrayList<SingleTransformation> getSosies() {
-        ArrayList<SingleTransformation> result = new ArrayList<>();
+    public ArrayList<Transformation> getSosies() {
+        ArrayList<Transformation> result = new ArrayList<>();
         for (SosieWithCoverage s : sosies) {
             result.add(s.transformation);
         }

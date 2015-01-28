@@ -78,7 +78,7 @@ public abstract class AbstractDiversify {
         this.transQuery = transQuery;
     }
 
-    public List<SingleTransformation> getTransformations() {
+    public List<Transformation> getTransformations() {
         return transformations;
     }
 
@@ -107,7 +107,7 @@ public abstract class AbstractDiversify {
         this.sosieSourcesDir = sosieSourcesDir;
     }
 
-    protected List<SingleTransformation> transformations;
+    protected List<Transformation> transformations;
 
     /**
      * Query to find transformations
@@ -274,7 +274,7 @@ public abstract class AbstractDiversify {
                 }
 
                 FileWriter writer = new FileWriter(destPath + "/trans.json");
-                for (SingleTransformation t : transformations) {
+                for (Transformation t : transformations) {
                     writer.write(t.toJSONObject().toString() + "\n");
                 }
                 writer.close();
@@ -292,7 +292,7 @@ public abstract class AbstractDiversify {
         return getSosieSourcesDir() + "/" + sessionResults.getBeginTime() + "_trial_" + trial;
     }
 
-    protected void tryRestore(SingleTransformation trans, Exception e) throws Exception {
+    protected void tryRestore(Transformation trans, Exception e) throws Exception {
         try {
             trans.restore(tmpDir + "/" + sourceDir);
         } catch (Exception restore) {
@@ -300,9 +300,9 @@ public abstract class AbstractDiversify {
             Log.debug("");
         }
 
-        try {
-            trans.printJavaFile(tmpDir + "/" + sourceDir);
-        } catch (Exception print) {}
+//        try {
+//            trans.printJavaFile(tmpDir + "/" + sourceDir);
+//        } catch (Exception print) {}
 
         int status = runTest(tmpDir);
         if (status != 0) {

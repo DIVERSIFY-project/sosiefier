@@ -1,6 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.*;
@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class ErrorLoggingInstrumenter extends AbstractLoggingInstrumenter<CtStatement> {
 
-    public ErrorLoggingInstrumenter(List<SingleTransformation> transformations) {
+    public ErrorLoggingInstrumenter(List<Transformation> transformations) {
         super(transformations);
     }
 

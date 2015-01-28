@@ -3,7 +3,7 @@ package fr.inria.diversify;
 import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
@@ -46,10 +46,10 @@ public class CorrectPosition {
         inputProgram.setPreviousTransformationsPath(prevTransfPath);
         inputProgram.processCodeFragments();
 
-        Collection<SingleTransformation> ts = new TransformationJsonParser(false, inputProgram).parseFile(new File(prevTransfPath));
+        Collection<Transformation> ts = new TransformationJsonParser(false, inputProgram).parseFile(new File(prevTransfPath));
 
         JSONArray array = new JSONArray();
-        for (SingleTransformation t : ts) {
+        for (Transformation t : ts) {
             array.put(t.toJSONObject());
         }
         FileWriter fw = new FileWriter(out);

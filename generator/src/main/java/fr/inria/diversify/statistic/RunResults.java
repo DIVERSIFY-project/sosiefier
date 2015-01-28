@@ -2,6 +2,7 @@ package fr.inria.diversify.statistic;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -144,12 +145,12 @@ public class RunResults {
      * @param inputProgram Input program over which the transformations where made
      * @return
      */
-    public List<SingleTransformation> parseTransformations(InputProgram inputProgram) {
+    public List<Transformation> parseTransformations(InputProgram inputProgram) {
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-        ArrayList<SingleTransformation> result = new ArrayList<>();
+        ArrayList<Transformation> result = new ArrayList<>();
         for (int i = 0; i < transformationsJSON.length(); i++) {
             try {
-                SingleTransformation t = parser.parseTransformation(transformationsJSON.getJSONObject(i));
+                Transformation t = parser.parseTransformation(transformationsJSON.getJSONObject(i));
                 result.add(t);
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -165,9 +166,9 @@ public class RunResults {
         return transformationsJSON;
     }
 
-    public void setTransformations(Collection<SingleTransformation> transformations) {
+    public void setTransformations(Collection<Transformation> transformations) {
         JSONArray array = new JSONArray();
-        for (SingleTransformation t : transformations) {
+        for (Transformation t : transformations) {
             try {
                 array.put(t.toJSONObject());
             } catch (JSONException e) {

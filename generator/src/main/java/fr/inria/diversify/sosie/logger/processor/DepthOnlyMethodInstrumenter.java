@@ -1,6 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.cu.CompilationUnit;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class DepthOnlyMethodInstrumenter extends AbstractLoggingInstrumenter<CtExecutable> {
 
-    public DepthOnlyMethodInstrumenter(List<SingleTransformation> transformations) {
+    public DepthOnlyMethodInstrumenter(List<Transformation> transformations) {
         super(transformations);
     }
 

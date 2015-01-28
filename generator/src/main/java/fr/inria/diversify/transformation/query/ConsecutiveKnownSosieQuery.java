@@ -1,7 +1,7 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import java.io.File;
@@ -14,11 +14,11 @@ import java.util.*;
  */
 public class ConsecutiveKnownSosieQuery extends TransformationQuery {
 
-    private ArrayList<SingleTransformation> sosies;
+    private ArrayList<Transformation> sosies;
 
     private int currentTrial = 0;
 
-    public ConsecutiveKnownSosieQuery(InputProgram inputProgram, ArrayList<SingleTransformation> transf) {
+    public ConsecutiveKnownSosieQuery(InputProgram inputProgram, ArrayList<Transformation> transf) {
         super(inputProgram);
         extractSosies(transf);
     }
@@ -27,7 +27,7 @@ public class ConsecutiveKnownSosieQuery extends TransformationQuery {
         super(inputProgram);
         TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
         File f = new File(getInputProgram().getPreviousTransformationsPath());
-        Collection<SingleTransformation> ts;
+        Collection<Transformation> ts;
         if (f.isDirectory()) {
             ts = parser.parseDir(f.getAbsolutePath());
         } else {
@@ -41,9 +41,9 @@ public class ConsecutiveKnownSosieQuery extends TransformationQuery {
      *
      * @param transf
      */
-    private void extractSosies(Collection<SingleTransformation> transf) {
+    private void extractSosies(Collection<Transformation> transf) {
         sosies = new ArrayList<>();
-        for (SingleTransformation t : transf) {
+        for (Transformation t : transf) {
             if (t.isSosie()) {
                 sosies.add(t);
             }
@@ -58,8 +58,8 @@ public class ConsecutiveKnownSosieQuery extends TransformationQuery {
     }
 
     @Override
-    public SingleTransformation query() {
-        SingleTransformation t = sosies.get(currentTrial);
+    public Transformation query() {
+        Transformation t = sosies.get(currentTrial);
         currentTrial++;
         return t;
     }

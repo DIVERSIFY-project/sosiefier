@@ -55,7 +55,7 @@ public class TransformationJsonParser {
     /**
      * Transformations that we where able to parse
      */
-    Collection<SingleTransformation> transformations;
+    Collection<Transformation> transformations;
 
     /**
      * Input program to link the pase to
@@ -80,7 +80,7 @@ public class TransformationJsonParser {
             transformations = new ArrayList<>();
     }
 
-    public Collection<SingleTransformation> parseDir(String dir) throws TransformationParserException {
+    public Collection<Transformation> parseDir(String dir) throws TransformationParserException {
 
         File file = new File(dir);
         int countFile = 0;
@@ -126,8 +126,8 @@ public class TransformationJsonParser {
         this.listener = listener;
     }
 
-    public List<SingleTransformation> parseArray(JSONArray array) throws JSONException {
-        ArrayList<SingleTransformation> list = new ArrayList<SingleTransformation>();
+    public List<Transformation> parseArray(JSONArray array) throws JSONException {
+        ArrayList<Transformation> list = new ArrayList<Transformation>();
 
         int stepSize = array.length() / 10;
         int step = stepSize;
@@ -166,15 +166,15 @@ public class TransformationJsonParser {
      * @return A list of transformations
      * @throws TransformationParserException
      */
-    public List<SingleTransformation> parseFileList(List<String> files) throws TransformationParserException {
-        ArrayList<SingleTransformation> result = new ArrayList<>();
+    public List<Transformation> parseFileList(List<String> files) throws TransformationParserException {
+        ArrayList<Transformation> result = new ArrayList<>();
         for (String s : files) {
             result.addAll(parseFile(new File(s)));
         }
         return result;
     }
 
-    public List<SingleTransformation> parseFile(File file) throws TransformationParserException {
+    public List<Transformation> parseFile(File file) throws TransformationParserException {
 
         try {
             BufferedReader br = null;
@@ -210,7 +210,7 @@ public class TransformationJsonParser {
                 }
             }
 
-            List<SingleTransformation> list = parseArray(array);
+            List<Transformation> list = parseArray(array);
             return list;
         } catch (IOException | JSONException e) {
             throw new TransformationParserException(e);

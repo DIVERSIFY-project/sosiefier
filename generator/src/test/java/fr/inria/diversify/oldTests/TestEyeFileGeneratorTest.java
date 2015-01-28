@@ -5,7 +5,7 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.codeFragment.CodeFragmentList;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import org.junit.Test;
 
@@ -54,7 +54,7 @@ public class TestEyeFileGeneratorTest {
 
         //Test that the Sosie reader can read them
         TransformationParser parser = new TransformationParser(false, inputProgram);
-        Collection<SingleTransformation> t = parser.parseFile(new File("testGeneration.json"));
+        Collection<Transformation> t = parser.parseFile(new File("testGeneration.json"));
         assertEquals(2, t.size());
     }
 }

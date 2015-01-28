@@ -1,7 +1,7 @@
 package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,11 +19,11 @@ public class JsonSosiesOutput {
 
     protected final JSONObject outputObject;
 
-    private final Collection<SingleTransformation> transformations;
+    private final Collection<Transformation> transformations;
 
     private final String path;
 
-    public JsonSosiesOutput(Collection<SingleTransformation> transformations, String path) {
+    public JsonSosiesOutput(Collection<Transformation> transformations, String path) {
         this.transformations = transformations;
         this.path = path;
         outputObject = new JSONObject();
@@ -33,7 +33,7 @@ public class JsonSosiesOutput {
 
         //Make sure all transformations have unique id. //TODO: Investigate the advantages of adding a UUId
         int id = 0;
-        for ( SingleTransformation t : transformations ) t.setIndex(id++);
+        for ( Transformation t : transformations ) t.setIndex(id++);
 
         //Write failures to file
         JsonFailuresOutput failures = new JsonFailuresOutput();

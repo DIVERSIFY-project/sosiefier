@@ -3,6 +3,7 @@ package fr.inria.diversify.persistence.json.input;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +24,7 @@ public class JsonFailuresInput extends JsonSectionInput {
     }
 
     @Override
-    public void read(HashMap<Integer, SingleTransformation> transformations) {
+    public void read(HashMap<Integer, Transformation> transformations) {
 
         failures = new HashMap<>();
         try {

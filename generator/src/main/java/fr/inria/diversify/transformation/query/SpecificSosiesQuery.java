@@ -2,6 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 
@@ -20,9 +21,9 @@ public class SpecificSosiesQuery extends TransformationQuery {
 
     private List<Integer> specificIndex;
 
-    private ArrayList<SingleTransformation> transformations;
+    private ArrayList<Transformation> transformations;
 
-    public SpecificSosiesQuery(InputProgram inputProgram, ArrayList<SingleTransformation> transf) {
+    public SpecificSosiesQuery(InputProgram inputProgram, ArrayList<Transformation> transf) {
         super(inputProgram);
         transformations = transf;
     }
@@ -31,7 +32,7 @@ public class SpecificSosiesQuery extends TransformationQuery {
         super(inputProgram);
         TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
         File f = new File(getInputProgram().getPreviousTransformationsPath());
-        Collection<SingleTransformation> ts;
+        Collection<Transformation> ts;
         if (f.isDirectory()) {
             ts = parser.parseDir(f.getAbsolutePath());
         } else {
@@ -52,8 +53,8 @@ public class SpecificSosiesQuery extends TransformationQuery {
     }
 
     @Override
-    public List<SingleTransformation> query(int nb) throws QueryException {
-        ArrayList<SingleTransformation> ts = new ArrayList<>();
+    public List<Transformation> query(int nb) throws QueryException {
+        ArrayList<Transformation> ts = new ArrayList<>();
         for ( int i : specificIndex ) {
             ts.add(transformations.get(i));
         }

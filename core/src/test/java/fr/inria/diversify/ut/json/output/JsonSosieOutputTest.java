@@ -1,6 +1,6 @@
 package fr.inria.diversify.ut.json.output;
 
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.ut.MockInputProgram;
 import mockit.Mocked;
 import mockit.Verifications;
@@ -23,7 +23,7 @@ public class JsonSosieOutputTest {
 
     @Test
     public void testSosiesUniqueId(@Mocked FileWriter anyWriter) throws IOException, JSONException {
-        List<SingleTransformation> transfs = createTransformations(new MockInputProgram());
+        List<Transformation> transfs = createTransformations(new MockInputProgram());
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon");
         out.write();
 
@@ -36,7 +36,7 @@ public class JsonSosieOutputTest {
     public void testSosieOutput(@Mocked final FileWriter anyWriter) throws IOException, JSONException {
 
         //Get the transformations
-        List<SingleTransformation> transfs = createTransformations(new MockInputProgram());
+        List<Transformation> transfs = createTransformations(new MockInputProgram());
 
         //JsonSosieOutputForUT only for Unit TEST!!!!!!
         //Use JsonSosiesOutput intead

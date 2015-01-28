@@ -4,7 +4,7 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.it.SosieGeneratorIntegrationTests;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
 import fr.inria.diversify.persistence.json.output.JsonSosiesOutput;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTAdd;
@@ -48,7 +48,7 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
 
         //Load using the old system
         TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
-        List<SingleTransformation> oldLoad = new ArrayList<>(parser.parseFile(f));
+        List<Transformation> oldLoad = new ArrayList<>(parser.parseFile(f));
         assertEquals(0, parser.getErrors().size());
 
         //Write with the new system
@@ -58,7 +58,7 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
 
         //Loads wiht the new System
         JsonSosiesInput newIn = new JsonSosiesInput(transfPath, inputProgram);
-        List<SingleTransformation> newLoad = new ArrayList<>(newIn.read());
+        List<Transformation> newLoad = new ArrayList<>(newIn.read());
 
         //Let's trust there are no repeated indexes
         oldLoad.sort((o1, o2) -> o1.getIndex() - o2.getIndex());
@@ -72,7 +72,7 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
         }
     }
 
-    public static void assertEqualsTransformation(SingleTransformation tt, SingleTransformation tt2) {
+    public static void assertEqualsTransformation(Transformation tt, Transformation tt2) {
         ASTTransformation t1 = (ASTTransformation) tt;
         ASTTransformation t2 = (ASTTransformation) tt2;
 

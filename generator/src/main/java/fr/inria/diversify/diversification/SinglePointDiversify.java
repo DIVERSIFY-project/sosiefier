@@ -3,6 +3,7 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
@@ -45,14 +46,14 @@ public class SinglePointDiversify extends AbstractDiversify {
     }
 
 
-    public void run(Collection<SingleTransformation> trans) throws Exception {
-        for(SingleTransformation transformation: trans) {
+    public void run(Collection<Transformation> trans) throws Exception {
+        for(Transformation transformation: trans) {
             run(transformation);
         }
         Log.info("session result: {}", sessionResults);
     }
 
-    protected void run(SingleTransformation trans) throws Exception {
+    protected void run(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
@@ -87,7 +88,7 @@ public class SinglePointDiversify extends AbstractDiversify {
     }
 
 
-    protected void applyTransformation(SingleTransformation trans) throws Exception {
+    protected void applyTransformation(Transformation trans) throws Exception {
         if(withParent) {
             if(acceptedErrors) {
                 builder.setAcceptedErrors(trans.getParent().getFailures());

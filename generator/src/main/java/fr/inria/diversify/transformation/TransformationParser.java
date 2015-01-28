@@ -30,7 +30,7 @@ public class  TransformationParser {
      * @throws IOException
      * @throws JSONException
      */
-    public Collection<SingleTransformation> parseDir(String dir) throws TransformationParserException {
+    public Collection<Transformation> parseDir(String dir) throws TransformationParserException {
         return parser.parseDir(dir);
     }
 
@@ -42,7 +42,7 @@ public class  TransformationParser {
      * @throws IOException
      * @throws JSONException
      */
-    public List<SingleTransformation> parseFile(File file) throws TransformationParserException {
+    public List<Transformation> parseFile(File file) throws TransformationParserException {
         return parser.parseFile(file);
     }
 

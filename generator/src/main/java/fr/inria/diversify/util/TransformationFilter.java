@@ -1,6 +1,7 @@
 package fr.inria.diversify.util;
 
 import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,13 +15,13 @@ public class TransformationFilter {
     String name;
     String transplantPosition;
 
-    public Set<SingleTransformation> filter(Collection<SingleTransformation> transformations) {
-        Set<SingleTransformation> set = new HashSet<>();
+    public Set<Transformation> filter(Collection<Transformation> transformations) {
+        Set<Transformation> set = new HashSet<>();
 
-        for(SingleTransformation trans: transformations) {
+        for(Transformation trans: transformations) {
             if((type == null || trans.getType().equals(type))
                     && (name == null || trans.getName().equals(name))
-                    && (transplantPosition == null || !trans.classLocationName().contains(transplantPosition))) {
+                    && (transplantPosition == null )) {
                 set.add(trans);
             }
         }

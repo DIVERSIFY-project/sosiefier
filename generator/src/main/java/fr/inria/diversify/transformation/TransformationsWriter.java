@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 public class TransformationsWriter {
 
     protected String directoryName;
-    protected Collection<SingleTransformation> transformations;
+    protected Collection<Transformation> transformations;
 
     public TransformationsWriter() {}
 
-    public TransformationsWriter(Collection<SingleTransformation> transformations, String directoryName) {
+    public TransformationsWriter(Collection<Transformation> transformations, String directoryName) {
         this.transformations = transformations;
         this.directoryName = directoryName;
         File directory = new File(directoryName);
@@ -36,7 +36,7 @@ public class TransformationsWriter {
     }
 
     public String writeGoodTransformation(String type) throws IOException, JSONException {
-        Collection<SingleTransformation> goodTransformation = transformations.stream().
+        Collection<Transformation> goodTransformation = transformations.stream().
                 filter(t -> t.getStatus() == 0 && (type == null || t.getType().equals(type)))
                 .collect(Collectors.toList());
 
@@ -52,7 +52,7 @@ public class TransformationsWriter {
     }
 
     public String writeAllTransformation(String type) throws IOException, JSONException {
-        Collection<SingleTransformation> transformation = transformations.stream().
+        Collection<Transformation> transformation = transformations.stream().
                 filter(t -> type == null || t.getType().equals(type))
                 .collect(Collectors.toList());
 
@@ -65,13 +65,13 @@ public class TransformationsWriter {
         return  writeTransformation(fileName,transformation);
     }
 
-    public String writeTransformation(String fileName, Collection<SingleTransformation> trans) throws IOException, JSONException {
+    public String writeTransformation(String fileName, Collection<Transformation> trans) throws IOException, JSONException {
         Log.debug("write {} transformation in file {}",trans.size(), fileName);
 
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         JSONArray obj = new JSONArray();
 
-        for (SingleTransformation transformation : trans) {
+        for (Transformation transformation : trans) {
             try {
                 obj.put(transformation.toJSONObject());
             } catch (Exception e) {
