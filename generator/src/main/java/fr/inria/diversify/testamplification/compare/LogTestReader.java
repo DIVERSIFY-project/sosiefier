@@ -1,5 +1,6 @@
 package fr.inria.diversify.testamplification.compare;
 
+import fr.inria.diversify.testamplification.compare.diff.Pool;
 import fr.inria.diversify.util.Log;
 
 import java.io.BufferedReader;
@@ -42,39 +43,64 @@ public class LogTestReader {
 
     int count = 0;
     protected Assert parseAssert(String assertLog) {
-        String[] split = assertLog.split(";");
-        int assertId = Integer.parseInt(split[1]);
-        int classId = Integer.parseInt(split[2]);
-        Assert assertO = new Assert(assertId, classId, getters.get(classId));
+        Assert assertO = null;
 
-        count++;
-        Object[] pValues = previousValues.get(classId);
-        if(split.length != 3) {
-            String[] tmp = assertLog.split(":;:");
+            String[] split = assertLog.split(";");
+            int assertId = Pool.getCanonicalVersion(Integer.parseInt(split[1]));
+            int classId = Pool.getCanonicalVersion(Integer.parseInt(split[2]));
+            assertO = new Assert(assertId, classId, getters.get(classId));
 
-            Object[] values = parseValues(Arrays.copyOfRange(tmp, 1, tmp.length));
-            if (pValues == null) {
-                pValues = values;
-                previousValues.put(classId, pValues);
-            } else {
-                char[] masque = split[3].toCharArray();
-                if(assertLog.endsWith(":;:")) {
-                    values = Arrays.copyOf(values, values.length + 1);
-                    values[values.length - 1] = "";
-                }
-                int index = 0;
-                for (int i = 0; i < masque.length - 1; i++) {
-                    if (masque[i] == '1') {
-                        pValues[i] = values[index];
-                        index++;
+            count++;
+            Object[] pValues = previousValues.get(classId);
+            if (split.length != 3) {
+                String[] tmp = assertLog.split(":;:");
+
+                Object[] values = parseValues(Arrays.copyOfRange(tmp, 1, tmp.length));
+                if (pValues == null) {
+                    pValues = values;
+                    previousValues.put(classId, pValues);
+                } else {
+                    char[] masque = split[3].toCharArray();
+                    if (assertLog.endsWith(":;:")) {
+                        values = Arrays.copyOf(values, values.length + 1);
+                        values[values.length - 1] = "";
+                    }
+                    int index = 0;
+                    for (int i = 0; i < masque.length - 1; i++) {
+                        if (masque[i] == '1') {
+                            try {
+                                pValues[i] = values[index];
+                            }catch (Exception e) {
+                                pValues[i] = "";
+                            }
+                            index++;
+                        }
                     }
                 }
             }
-        }
-        assertO.setValues(Arrays.copyOf(pValues, pValues.length));
+            assertO.setValues(Arrays.copyOf(pValues, pValues.length));
 
         return assertO;
     }
+
+//    protected String[] getValue(String assertLog) {
+//        List<String> array = new ArrayList<>();
+//
+//
+//        for(char c : assertLog.toCharArray()) {
+//            if( count == 0 && c == ':') {
+//                count = 1;
+//            } else if( count == 1 && c == ':') {
+//                count = 1;
+//            } else if( count == 2 && c == ':') {
+//                count = 1;
+//            } else if( count == 3 ) {
+//                count = 1;
+//            }
+//
+//        }
+//
+//    }
 
     protected Object[] parseValues(String[] values) {
         Object[] parseValues = new Object[values.length];
@@ -92,7 +118,7 @@ public class LogTestReader {
             for(String s : value.substring(1,value.length()-1).split(", ")) {
                 set.add(parseValue(s));
             }
-            return set;
+            return Pool.getCanonicalVersion(set);
         }
         //value is a array or a list
         if(value.startsWith("[") && value.endsWith("]")) {
@@ -100,7 +126,7 @@ public class LogTestReader {
             for(String s : value.substring(1,value.length()-1).split(", ")) {
                 list.add(parseValue(s));
             }
-            return list;
+            return Pool.getCanonicalVersion(list);
         }
         //toString() is not define
         if(value.split("@").length > 1) {
@@ -110,7 +136,7 @@ public class LogTestReader {
         if( value.split("\\$").length > 1) {
             return parseValue(value.split("\\$")[0]);
         }
-        return value.intern();
+        return Pool.getCanonicalVersion(value);
     }
 
     protected void splitByTest(File file) throws Exception {
@@ -118,6 +144,7 @@ public class LogTestReader {
         List<Assert> assertLogs = new LinkedList();
         String currentTest = null;
         BufferedReader reader = new BufferedReader(new FileReader(file));
+
         reader.readLine();
         String line = "";
         String logEntry = "";
@@ -140,6 +167,7 @@ public class LogTestReader {
                             break;
                         case "TE" :
                             if(currentTest != null) {
+//                                Log.debug("StringPool size: {}", StringPool.size());
                                 addTest(currentTest, assertLogs);
                                 currentTest = null;
                             }
@@ -169,6 +197,7 @@ public class LogTestReader {
     protected void addTest(String testName, List<Assert> assertLogs) {
         if(!traceByTest.containsKey(testName)) {
             traceByTest.put(testName,new Test(testName));
+            Log.debug("test: {}, {}", testName, traceByTest.size());
         }
         traceByTest.get(testName).addLog(new LogTest(assertLogs));
     }
@@ -178,7 +207,7 @@ public class LogTestReader {
         String[] methods = new String[split.length - 2];
 
         for(int i = 2; i < split.length; i++) {
-            methods[i - 2] = split[i];
+            methods[i - 2] = Pool.getCanonicalVersion(split[i]);
         }
         getters.put(Integer.parseInt(split[1]), methods);
     }

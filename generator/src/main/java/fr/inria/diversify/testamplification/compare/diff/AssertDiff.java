@@ -22,6 +22,11 @@ public class AssertDiff {
         methodFilter = new HashSet<>();
     }
 
+    public AssertDiff(JSONObject jsonObject) throws JSONException {
+        buildFrom(jsonObject);
+    }
+
+
     @Override
     public String toString() {
         return "original: " + original.toString() + "\nsosie: " + sosie;
@@ -50,6 +55,27 @@ public class AssertDiff {
         }
 
         return object;
+    }
+
+    protected void buildFrom(JSONObject jsonObject) throws JSONException {
+        int assertId = jsonObject.getInt("assertId");
+        int classId = jsonObject.getInt("classId");
+
+        JSONArray diff = jsonObject.getJSONArray("methodDiffs");
+        int length = diff.length();
+        String[] mth = new String[length];
+        String[] valueO = new String[length];
+        String[] valueS = new String[length];
+
+        for(int i = 0; i < length; i++) {
+            JSONObject d = diff.getJSONObject(i);
+            mth[i] = d.getString("method");
+            valueO[i] = d.getString("original");
+            valueS[i] = d.getString("sosie");
+        }
+
+        original = new Assert(assertId, classId, mth, valueO);
+        sosie = new Assert(assertId, classId, mth, valueS);
     }
 
     public void filter(String filter) {

@@ -22,6 +22,10 @@ public class TestDiff {
         diff = new ArrayList<>();
     }
 
+    public TestDiff(JSONObject object) throws JSONException {
+        buildFrom(object);
+    }
+
     public void add(LogDiff logResult) {
         if(logResult != null) {
             diff.add(logResult);
@@ -50,6 +54,15 @@ public class TestDiff {
         return object;
     }
 
+    protected void buildFrom(JSONObject object) throws JSONException {
+        this.signature = object.getString("test");
+        diff = new ArrayList<>();
+        JSONArray logDiff = object.getJSONArray("logDiff");
+        for(int i = 0; i< logDiff.length(); i++) {
+            diff.add(new LogDiff(logDiff.getJSONObject(i)));
+        }
+    }
+
     public void filter(Set<String> filter) {
         diff.stream()
                 .forEach(d -> d.filter(filter));
@@ -66,3 +79,5 @@ public class TestDiff {
         return filter.stream().map(f -> signature + " " + f).collect(Collectors.toSet());
     }
 }
+
+

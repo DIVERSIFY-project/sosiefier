@@ -14,12 +14,16 @@ import java.util.stream.Collectors;
  */
 public class LogDiff implements Comparable {
     List<AssertDiff> assertDiffs;
-    Set<Assert> notSyncro;
+    Set<Integer> notSyncro;
     int allDiff = -1;
 
     public LogDiff() {
         assertDiffs = new ArrayList<>();
         notSyncro = new HashSet<>();
+    }
+
+    public LogDiff(JSONObject jsonObject) throws JSONException {
+        buildFrom(jsonObject);
     }
 
     public void add(AssertDiff assertDiff) {
@@ -54,7 +58,7 @@ public class LogDiff implements Comparable {
         this.allDiff = allDiff;
     }
 
-    public void addAll(Set<Assert> notSyncro) {
+    public void addAll(Set<Integer> notSyncro) {
         this.notSyncro.addAll(notSyncro);
     }
 
@@ -68,13 +72,30 @@ public class LogDiff implements Comparable {
         }
 
         JSONArray notS = new JSONArray();
-        notSyncro.stream().map(a -> a.getAssertId()).distinct().forEach(i -> notS.put(i));
+
+        notSyncro.stream().forEach(i -> notS.put(i));
 
         if (notS.length() != 0) {
             object.put("notSyncro", notS);
         }
 
         return object;
+    }
+
+    private void buildFrom(JSONObject jsonObject) throws JSONException {
+        assertDiffs = new ArrayList<>();
+        notSyncro = new HashSet<>();
+
+        if(jsonObject.has("notSyncro")) {
+            JSONArray array = jsonObject.getJSONArray("notSyncro");
+            for(int i = 0; i < array.length(); i++) {
+                notSyncro.add(array.getInt(i));
+            }
+        }
+        JSONArray diff = jsonObject.getJSONArray("assertDiff");
+        for(int i = 0; i < diff.length(); i++) {
+            assertDiffs.add(new AssertDiff(diff.getJSONObject(i)));
+        }
     }
 
     public void filter(Set<String> filter) {
@@ -85,7 +106,7 @@ public class LogDiff implements Comparable {
                 Set<Integer> toRemove = Arrays.stream(f.substring(1, f.length() - 1).split(", "))
                                               .map(a -> Integer.parseInt(a)).collect(Collectors.toSet());
                 notSyncro = notSyncro.stream()
-                                     .filter(nS -> !toRemove.contains(nS.getAssertId())).collect(Collectors.toSet());
+                                     .filter(nS -> !toRemove.contains(nS)).collect(Collectors.toSet());
             } else {
                 String[] tmp = f.split(";");
                 map.put(Integer.parseInt(tmp[0]), f.substring(tmp[0].length() + 1,f.length()));
@@ -106,13 +127,8 @@ public class LogDiff implements Comparable {
     public Set<String> buildFilter() {
         Set<String> filter = new HashSet<>();
 
-        if(notSyncro != null) {
-            Set<Integer> ids = notSyncro.stream()
-                    .map(nS -> nS.getAssertId())
-                    .collect(Collectors.toSet());
-            if(!ids.isEmpty()) {
-                filter.add(ids.toString());
-            }
+        if(notSyncro != null && !notSyncro.isEmpty()) {
+            filter.add(notSyncro.toString());
         }
         for(AssertDiff a : assertDiffs) {
             filter.add(a.buildFilter());
