@@ -27,13 +27,15 @@ public class LogTestReader {
 
         Log.debug("load trace in directory: {}", file.getAbsolutePath());
         for (File f : file.listFiles()) {
-                try {
-                    Log.debug("parse file: {}", f.getAbsoluteFile());
-                    splitByTest(f);
-                } catch (Exception e) {
-                    Log.debug("error for: {}", f.getAbsoluteFile());
-                    e.printStackTrace();
-                }
+            if (f.isFile() && f.getName().startsWith("logmain")) {
+            try {
+                Log.debug("parse file: {}", f.getAbsoluteFile());
+                splitByTest(f);
+            } catch (Exception e) {
+                Log.debug("error for: {}", f.getAbsoluteFile());
+                e.printStackTrace();
+            }
+        }
 
         }
         Log.debug("number of test: {}",traceByTest.size());
@@ -195,7 +197,7 @@ public class LogTestReader {
 
     protected void addTest(String testName, List<Assert> assertLogs) {
         if(!traceByTest.containsKey(testName)) {
-            traceByTest.put(testName,new Test(testName));
+            traceByTest.put(testName, new Test(testName));
         }
         traceByTest.get(testName).addLog(new LogTest(assertLogs));
     }
