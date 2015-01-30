@@ -1,7 +1,7 @@
 package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,7 +26,7 @@ public class JsonFailuresOutput extends JsonSectionOutput {
         super.write(object);
         failuresDict = new HashMap<>();
         int id = 0;
-        for (SingleTransformation t : getTransformations()) {
+        for (Transformation t : getTransformations()) {
             if (t.getFailures() != null && t.getFailures().size() > 0) {
                 for (String s : t.getFailures())
                     if (!failuresDict.containsKey(s)) failuresDict.put(s, id++);

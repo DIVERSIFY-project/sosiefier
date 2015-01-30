@@ -1,6 +1,6 @@
 package fr.inria.diversify.persistence.json.output;
 
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +19,7 @@ public class JsonAstAddOutput extends JsonAstTransformationOutput {
      * @param transformation Transformation to obtain data from
      */
     @Override
-    protected void putDataToJSON(JSONObject object, SingleTransformation transformation) throws JSONException {
+    protected void putDataToJSON(JSONObject object, Transformation transformation) throws JSONException {
         if (transformation instanceof ASTAdd) {
             super.putDataToJSON(object, transformation);
             ASTAdd d = (ASTAdd) transformation;
@@ -30,5 +30,5 @@ public class JsonAstAddOutput extends JsonAstTransformationOutput {
     }
 
     @Override
-    public boolean canStore(SingleTransformation t) {return t instanceof ASTAdd;}
+    public boolean canStore(Transformation t) {return t instanceof ASTAdd;}
 }

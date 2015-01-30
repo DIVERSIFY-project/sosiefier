@@ -2,7 +2,7 @@ package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +27,7 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
     }
 
     @Override
-    public void read(HashMap<Integer, SingleTransformation> transformations) {
+    public void read(HashMap<Integer, Transformation> transformations) {
         try {
             if (getJsonObject().has(TRANSFORMATIONS)) {
                 JSONArray tr = getJsonObject().getJSONArray(TRANSFORMATIONS);

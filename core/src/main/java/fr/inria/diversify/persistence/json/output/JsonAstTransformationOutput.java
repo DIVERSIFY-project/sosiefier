@@ -2,7 +2,7 @@ package fr.inria.diversify.persistence.json.output;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
@@ -29,7 +29,7 @@ public abstract class JsonAstTransformationOutput extends JsonSectionOutput {
             if (getTransformations() == null) throw new PersistenceException("Transformations unset");
 
             if (!getOutputObject().has(TRANSFORMATIONS)) getOutputObject().put(TRANSFORMATIONS, new JSONArray());
-            for (SingleTransformation t : getTransformations()) {
+            for (Transformation t : getTransformations()) {
                 if (canStore(t)) {
                     JSONArray array = getOutputObject().getJSONArray(TRANSFORMATIONS);
                     JSONObject o = new JSONObject();
@@ -64,7 +64,7 @@ public abstract class JsonAstTransformationOutput extends JsonSectionOutput {
      * @param object         Objecto to put data
      * @param transformation Transformation to obtain data from
      */
-    protected void putDataToJSON(JSONObject object, SingleTransformation transformation) throws JSONException {
+    protected void putDataToJSON(JSONObject object, Transformation transformation) throws JSONException {
         if (transformation instanceof ASTTransformation) {
             ASTTransformation astt = (ASTTransformation) transformation;
             object.put(TINDEX, astt.getIndex());
@@ -89,7 +89,7 @@ public abstract class JsonAstTransformationOutput extends JsonSectionOutput {
         }
     }
 
-    public abstract boolean canStore(SingleTransformation t);
+    public abstract boolean canStore(Transformation t);
 
     /**
      * Sets the failure dictionary
