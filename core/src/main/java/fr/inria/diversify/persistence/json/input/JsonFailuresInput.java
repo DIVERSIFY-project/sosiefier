@@ -27,6 +27,8 @@ public class JsonFailuresInput extends JsonSectionInput {
 
         failures = new HashMap<>();
         try {
+            if ( getJsonObject().has(FAILURES_DICTIONARY) ) return;
+
             JSONObject failuresJson = getJsonObject().getJSONObject(FAILURES_DICTIONARY);
             Iterator<?> keys = failuresJson.keys();
             while( keys.hasNext() ){

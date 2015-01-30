@@ -11,6 +11,8 @@ import java.io.File;
  */
 public class SpoonMetaFactoryTest extends SpoonMetaFactory {
 
+    public static final String PROBABLE_FAIL_CAUSE = "This test fails if the basepath is incorrect. Check basepath";
+
     public Factory build() {
         try {
 

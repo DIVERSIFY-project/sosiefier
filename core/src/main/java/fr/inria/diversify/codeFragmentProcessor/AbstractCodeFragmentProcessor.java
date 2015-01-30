@@ -26,4 +26,18 @@ public abstract class AbstractCodeFragmentProcessor<E extends CtElement> extends
     public CodeFragmentList getCodeFragments() {
         return codeFragments;
     }
+
+
+    /**
+     * Listener to know the advance in the process.
+     */
+    private ProcessListener processListener;
+
+    public ProcessListener getProcessListener() {
+        return processListener;
+    }
+
+    public void setProcessListener(ProcessListener processListener) {
+        this.processListener = processListener;
+    }
 }

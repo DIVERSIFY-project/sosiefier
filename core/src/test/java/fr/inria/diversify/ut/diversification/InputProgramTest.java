@@ -1,10 +1,8 @@
 package fr.inria.diversify.ut.diversification;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.diversification.accessors.SourceAccesor;
-import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.ut.MockInputProgram;
 import fr.inria.diversify.ut.SpoonMetaFactoryTest;
 import org.junit.Test;
@@ -12,13 +10,10 @@ import spoon.reflect.factory.Factory;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
-import java.util.Properties;
-import java.util.function.Function;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+
+import static fr.inria.diversify.ut.SpoonMetaFactoryTest.PROBABLE_FAIL_CAUSE;
+import static org.junit.Assert.*;
 
 /**
  * Created by marodrig on 19/01/2015.
@@ -131,7 +126,7 @@ public class InputProgramTest {
 
         //I don't know how many valid statements are really there.
         // This is just a regression test to know when something change!!!!
-        assertEquals(18, p.getCodeFragments().size());
+        assertEquals(PROBABLE_FAIL_CAUSE, 18, p.getCodeFragments().size());
     }
 
     /**
@@ -145,7 +140,7 @@ public class InputProgramTest {
         InputProgram p = new InputProgram();
         p.setFactory(f);
         p.processCodeFragments();
-        assertEquals(1, p.getRoots().size());
+        assertEquals(PROBABLE_FAIL_CAUSE, 1, p.getRoots().size());
     }
 
     /**
