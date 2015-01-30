@@ -97,8 +97,8 @@ public class AssertDiff {
         }
     }
 
-\    public void filter(Set<String> filter) {
-\        for(String f : filter) {
+    public void filter(Set<String> filter) {
+        for(String f : filter) {
             String[] mths = f.split(";");
             if (mths.length == 1 && mths[0].startsWith("[") && mths[0].endsWith("]")) {
                 String[] classIds = mths[0].substring(1, mths[0].length() - 1).split(",");
