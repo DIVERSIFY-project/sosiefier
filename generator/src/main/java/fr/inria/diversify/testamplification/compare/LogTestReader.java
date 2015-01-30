@@ -58,15 +58,16 @@ public class LogTestReader {
                 String[] tmp = assertLog.split(":;:");
 
                 Object[] values = parseValues(Arrays.copyOfRange(tmp, 1, tmp.length));
+                if (assertLog.endsWith(":;:")) {
+                    values = Arrays.copyOf(values, values.length + 1);
+                    values[values.length - 1] = "";
+                }
                 if (pValues == null) {
                     pValues = values;
                     previousValues.put(classId, pValues);
                 } else {
                     char[] masque = split[3].toCharArray();
-                    if (assertLog.endsWith(":;:")) {
-                        values = Arrays.copyOf(values, values.length + 1);
-                        values[values.length - 1] = "";
-                    }
+
                     int index = 0;
                     for (int i = 0; i < masque.length - 1; i++) {
                         if (masque[i] == '1') {

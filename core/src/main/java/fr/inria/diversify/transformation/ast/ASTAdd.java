@@ -118,7 +118,7 @@ public class ASTAdd extends ASTTransformation {
     @Override
     public String toString() {
         String ret = new String();
-
+        ret = "add\n";
         ret = ret + "transplantationPoint: "+ transplantationPoint.toString()+"\n" +
                 "varMapping: "+variableMapping+"\n";
 

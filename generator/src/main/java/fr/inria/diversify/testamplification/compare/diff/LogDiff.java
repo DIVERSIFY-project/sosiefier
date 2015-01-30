@@ -99,7 +99,7 @@ public class LogDiff implements Comparable {
     }
 
     public void filter(Set<String> filter) {
-        Map<Integer, String> map = new HashMap<>();
+        Map<Integer, Set<String>> map = new HashMap<>();
 
         for(String f : filter) {
             if(f.startsWith("[")) {
@@ -109,12 +109,17 @@ public class LogDiff implements Comparable {
                                      .filter(nS -> !toRemove.contains(nS)).collect(Collectors.toSet());
             } else {
                 String[] tmp = f.split(";");
-                map.put(Integer.parseInt(tmp[0]), f.substring(tmp[0].length() + 1,f.length()));
+                int assertId = Integer.parseInt(tmp[0]);
+                if(!map.containsKey(assertId)) {
+                    map.put(assertId, new HashSet<>());
+                }
+                map.get(assertId).add(f.substring(tmp[0].length() + 1,f.length()));
             }
         }
 
         for (AssertDiff a : assertDiffs) {
             if(map.containsKey(a.getAssertId())) {
+
                 a.filter(map.get(a.getAssertId()));
             }
         }
@@ -134,6 +139,13 @@ public class LogDiff implements Comparable {
             filter.add(a.buildFilter());
         }
         return  filter;
+    }
+
+    public int size() {
+        return  notSyncro.size()
+                + assertDiffs.stream()
+                             .mapToInt(assertDiff -> assertDiff.nbOfDiff())
+                             .sum();
     }
 }
 

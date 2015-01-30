@@ -68,8 +68,6 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         } catch (ApplyTransformationException e) {
             tryRestore(trans,e);
         } catch (BuildTransplantException e) {}
-    //    Integer result = runTest(tmpDir);
-      //  Log.debug("run after restore: " +result);
     }
 
     protected void compare(SingleTransformation trans) throws IOException, JSONException, InterruptedException {
@@ -107,6 +105,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.LogWriter.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.AssertLogWriter.class.getSimpleName() + ".java"),dir);
     }
+
     protected void runSosie(String sosieDir) throws IOException, InterruptedException {
         MavenBuilder builder = new MavenBuilder(sosieDir);
         builder.runGoals(new String[]{"clean", "test"}, false);

@@ -128,8 +128,7 @@ public class ASTReplace extends ASTTransformation {
 
     @Override
     public String toString() {
-        String ret = new String();
-
+        String ret = "replace\n";
         ret = ret + "transplantationPoint: " + transplantationPoint.toString() + "\n" +
                 type + ": " + getTransplant().toString() + "\n" +
                 "varMapping: " + variableMapping + "\n";
