@@ -41,11 +41,11 @@ public class AssertDiff {
 
 
         object.put("assertId", original.getAssertId());
-        if(original.getClassId() !=  sosie.getClassId()) {
-            object.put("classId", original.getClassId());
-            object.put("sosieClassId", sosie.getClassId());
+        if(original.getClassName() !=  sosie.getClassName()) {
+            object.put("className", original.getClassName());
+            object.put("sosieClassName", sosie.getClassName());
         } else {
-            object.put("classId", original.getClassId());
+            object.put("className", original.getClassName());
 
             JSONArray diffs = new JSONArray();
             object.put("methodDiffs", diffs);
@@ -72,11 +72,11 @@ public class AssertDiff {
 
     protected void buildFrom(JSONObject jsonObject) throws JSONException {
         int assertId = jsonObject.getInt("assertId");
-        int classId = jsonObject.getInt("classId");
+        String className = jsonObject.getString("className");
 
         if(jsonObject.has("sosieClassId")) {
-            original = new Assert(assertId, classId, new String[0], new String[0]);
-            sosie = new Assert(assertId, jsonObject.getInt("sosieClassId"), new String[0], new String[0]);
+            original = new Assert(assertId, className, new String[0], new String[0]);
+            sosie = new Assert(assertId, jsonObject.getString("sosieClassNa,e"), new String[0], new String[0]);
         } else {
 
             JSONArray diff = jsonObject.getJSONArray("methodDiffs");
@@ -92,8 +92,8 @@ public class AssertDiff {
                 valueS[i] = d.getString("sosie");
             }
 
-            original = new Assert(assertId, classId, mth, valueO);
-            sosie = new Assert(assertId, classId, mth, valueS);
+            original = new Assert(assertId, className, mth, valueO);
+            sosie = new Assert(assertId, className, mth, valueS);
         }
     }
 
@@ -101,10 +101,10 @@ public class AssertDiff {
         for(String f : filter) {
             String[] mths = f.split(";");
             if (mths.length == 1 && mths[0].startsWith("[") && mths[0].endsWith("]")) {
-                String[] classIds = mths[0].substring(1, mths[0].length() - 1).split(",");
-                int classSosieId = Integer.parseInt(classIds[1]);
+                String[] classNames = mths[0].substring(1, mths[0].length() - 1).split(",");
+                String classSosieName = classNames[1];
 
-                excludeThisDiff = excludeThisDiff || sosie.getClassId() == classSosieId;
+                excludeThisDiff = excludeThisDiff || sosie.getClassName() == classSosieName;
             }
             for (String mth : mths) {
                 methodFilter.add(mth);
@@ -115,8 +115,8 @@ public class AssertDiff {
     public String buildFilter() {
         String filter = getAssertId() + "";
 
-        if(original.getClassId() !=  sosie.getClassId()) {
-            filter += ";[" + original.getClassId() + "," + sosie.getClassId() + "]";
+        if(original.getClassName() !=  sosie.getClassName()) {
+            filter += ";[" + original.getClassName() + "," + sosie.getClassName() + "]";
         } else {
             for (int i = 0; i < original.getValues().length; i++) {
                 Object oValue = original.getValues()[i];

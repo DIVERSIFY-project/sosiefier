@@ -50,7 +50,8 @@ public class LogTestReader {
             String[] split = assertLog.split(";");
             int assertId = Pool.getCanonicalVersion(Integer.parseInt(split[1]));
             int classId = Pool.getCanonicalVersion(Integer.parseInt(split[2]));
-            assertO = new Assert(assertId, classId, getters.get(classId));
+            String className = Pool.getCanonicalVersion(idToClass.get(classId));
+            assertO = new Assert(assertId, className, getters.get(classId));
 
             count++;
             Object[] pValues = previousValues.get(classId);
