@@ -30,4 +30,16 @@ public class MultiTransformation extends Transformation {
             transformation.restore(srcDir);
         }
     }
+
+    public void add(Transformation transformation) {
+        transformations.add(transformation);
+    }
+
+    public boolean remove(Transformation transformation) {
+        return transformations.remove(transformation);
+    }
+
+    public int size() {
+        return transformations.size();
+    }
 }

@@ -57,12 +57,16 @@ public class DiversifyMainRefactor {
         initLogLevel();
         initDependency();
         initInputProgram();
-        initRepo();
+//        initRepo();
         initSpoon();
         TransformationQuery query = initTransformationQuery();
-        AbstractBuilder builder = initBuilder(null);
-        AbstractDiversify runner = initRunner(query, builder);
-        runner.run(10);
+
+        AbstractDiversify runner = initRunner();
+        runner.setTransformationQuery(query);
+        AbstractBuilder builder = initBuilder(runner.getTmpDir());
+        runner.setBuilder(builder);
+        int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
+        runner.run(n);
 
         String repo = inputConfiguration.getProperty("gitRepository");
 
@@ -116,113 +120,45 @@ public class DiversifyMainRefactor {
         }
     }
 
-    protected AbstractDiversify initRunner(TransformationQuery query, AbstractBuilder builder) throws Exception {
+    protected AbstractDiversify initRunner() throws Exception {
         AbstractDiversify abstractDiversify = null;
         String runner = inputConfiguration.getProperty("runner", "simple");
+        String projet = inputConfiguration.getProperty("project");
+        String src = inputConfiguration.getProperty("src");
+        String testSrcDir = inputConfiguration.getProperty("testSrc", null);
+        String sosieDir = inputConfiguration.getProperty("copy.sosie.sources.to", "");
+        String resultDir = inputConfiguration.getProperty("result");
 
         switch (runner) {
             case "simple":
-                return null;
-                //return new SinglePointDiversify();
-            case "endless":
+                abstractDiversify = new SinglePointDiversify(inputConfiguration, projet, src);
+                break;
+            case "multi": {
+                int multiTransformationSize = Integer.parseInt(inputConfiguration.getProperty("multiTransformation.size"));
+                abstractDiversify = new MultiSosieGenerator(inputConfiguration, projet, src);
+                ((MultiSosieGenerator) abstractDiversify).setTransformationSize(multiTransformationSize);
+                break;
+            }
+            case "fse": {
+                abstractDiversify = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir);
+                break;
+            }
+            case "android": {
+                abstractDiversify = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir);
+                abstractDiversify.setAndroid(true);
+                break;
+            }
 
         }
+
+
+        String tmpDir = abstractDiversify.init(projet, inputConfiguration.getProperty("tmpDir"));
+        abstractDiversify.setSosieSourcesDir(sosieDir);
+        abstractDiversify.setBuilder(initBuilder(tmpDir));
+        abstractDiversify.setResultDir(resultDir);
+
         return abstractDiversify;
     }
-
-//    protected AbstractDiversify initAndRunBuilder() throws Exception {
-//        AbstractDiversify abstractDiversify;
-//        int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
-//        if(inputConfiguration.getProperty("transformation.type").equals("issta")) {
-//            abstractDiversify = initAbstractDiversify();
-//            ASTTransformationQuery query = new ASTTransformationQuery(inputProgram);
-//            ((SinglePointDiversify) abstractDiversify).run(query.isstaTransformation(n));
-//            String repo = inputConfiguration.getProperty("gitRepository");
-//            abstractDiversify.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
-//        } else {
-//            abstractDiversify = initAbstractDiversify();
-//            TransformationQuery query = initTransformationQuery();
-//            //Get sizes of incremental sosies that we want
-//            int max;
-//            int min;
-//            String sosieSizes = inputConfiguration.getProperty("transformation.size.set");
-//            ArrayList<Integer> intSosieSizes = null;
-//            if (sosieSizes != null) {
-//                intSosieSizes = new ArrayList<>();
-//                for (String s : sosieSizes.split(";")) {
-//                    intSosieSizes.add(Integer.parseInt(s));
-//                }
-//                max = intSosieSizes.size() - 1;
-//                min = 0;
-//            } else {
-//                max = Integer.parseInt(inputConfiguration.getProperty("transformation.size", "1"));
-//                min = Integer.parseInt(inputConfiguration.getProperty("transformation.size.min", Integer.toString(max)));
-//            }
-//            for (int i = min; i <= max; i++) {
-//                if (intSosieSizes != null) {
-//                    inputProgram.setTransformationPerRun(intSosieSizes.get(i));
-//                } else {
-//                    inputProgram.setTransformationPerRun(i);
-//                }
-//                abstractDiversify.setTransformationQuery(query);
-//
-//                abstractDiversify.run(n);
-//                //Clear the found transformations for the next step to speed up. No needed since the new ones are going
-//                //to be of different size and therefore different
-//                //executeQuery.clearTransformationFounds();
-//                String repo = inputConfiguration.getProperty("gitRepository");
-//                if (repo.equals("null")) abstractDiversify.printResult(inputConfiguration.getProperty("result"));
-//                else abstractDiversify.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
-//            }
-//        }
-//        abstractDiversify.deleteTmpFiles();
-//        return abstractDiversify;
-//    }
-
-
-//    protected AbstractDiversify initAbstractDiversify() throws Exception {
-//        AbstractDiversify ad = null;
-//        String transformationType = inputConfiguration.getProperty("transformation.type");
-//        String projet = inputConfiguration.getProperty("project");
-//        String src = inputConfiguration.getProperty("src");
-//        String resultDir = inputConfiguration.getProperty("result");
-//        String sosieDir = inputConfiguration.getProperty("copy.sosie.sources.to", "");
-//
-//        if (transformationType.equals("knownsosies")
-//                || transformationType.equals("knownmultisosies")
-//                || transformationType.equals("singleconsecutive")
-//                || transformationType.equals("specificindexes")) {
-//            ad = new Diversify(inputConfiguration, projet, src);
-//            boolean early = inputConfiguration.getProperty("early.report", "false").equals("true");
-//            boolean earlySosies = inputConfiguration.getProperty("early.report.sosies.only", "false").equals("true");
-//            ((Diversify) ad).setEarlyReportSosiesOnly(earlySosies);
-//            ((Diversify) ad).setEarlyReport(early);
-//        } else if(transformationType.startsWith("endless")){
-//            ad = new EndlessDiversify(inputConfiguration, projet, src);
-//        } else if(transformationType.equals("uniquesosies")) {
-//            ad = new UniqueSosieGenerator(inputConfiguration, projet, src);
-//            String transDir = inputConfiguration.getProperty("transformation.directory");
-//            TransformationParser tf = new TransformationParser(true, inputProgram);
-//            Collection<Transformation> transformations = tf.parseDir(transDir);
-//            ((UniqueSosieGenerator) ad).setTransformation(transformations);
-//        } else {
-//            ad = new SinglePointDiversify(inputConfiguration, projet, src);
-//            boolean withParent = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.withparent", "false"));
-//            boolean acceptedError = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.acceptederror", "false"));
-//            ((SinglePointDiversify) ad).setWithParent(withParent);
-//            ((SinglePointDiversify) ad).setAcceptedErrors(acceptedError);
-//        }
-//
-//        String tmpDir = ad.init(projet, inputConfiguration.getProperty("tmpDir"));
-//        ad.setSosieSourcesDir(sosieDir);
-//        ad.setBuilder(initBuilder(tmpDir));
-//        ad.setResultDir(resultDir);
-//
-//        String androidSDK = inputConfiguration.getProperty("AndroidSdk");
-//        ad.setAndroid(androidSDK != null);
-//        return ad;
-//    }
-
 
     protected AbstractBuilder initBuilder(String directory) throws Exception {
         AbstractBuilder rb;
@@ -234,6 +170,13 @@ public class DiversifyMainRefactor {
                 phases = new String[]{"clean", "test" };
             }
             rb = new MavenBuilder(directory);
+
+            String androidSdk = inputConfiguration.getProperty("AndroidSdk", "null");
+            if(!androidSdk.equals("null") ) {
+                rb.stopAndroidEmulation();
+                rb.startAndroidEmulation();
+            }
+
             rb.setGoals(phases);
 
             initTimeOut(rb);
@@ -252,7 +195,6 @@ public class DiversifyMainRefactor {
 
             initTimeOut(rb);
         }
-
         //Obtain some other builder properties
         boolean saveOutput = Boolean.parseBoolean(inputConfiguration.getProperty("save.builder.output", "false"));
         boolean useClojure = Boolean.parseBoolean(inputConfiguration.getProperty("clojure", "false"));
@@ -276,17 +218,17 @@ public class DiversifyMainRefactor {
     /**
      * Initializes the InputProgram dataset
      */
-    protected void initInputProgram() {
+    protected void  initInputProgram() throws IOException, InterruptedException {
         inputProgram = new InputProgram();
-
+        inputConfiguration.setInputProgram(inputProgram);
         inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
         inputProgram.setSourceCodeDir(inputConfiguration.getSourceCodeDir());
 
         if(inputConfiguration.getProperty("externalSrc") != null) {
             List<String> list = Arrays.asList(inputConfiguration.getProperty("externalSrc").split(System.getProperty("path.separator")));
             String sourcesDir = list.stream()
-                              .map(src -> inputProgram.getProgramDir() + "/" + src)
-                             .collect(Collectors.joining(System.getProperty("path.separator")));
+                                    .map(src -> inputProgram.getProgramDir() + "/" + src)
+                                    .collect(Collectors.joining(System.getProperty("path.separator")));
             inputProgram.setExternalSourceCodeDir(sourcesDir);
         }
         inputProgram.setCoverageReport(initCoverageReport());
@@ -299,13 +241,12 @@ public class DiversifyMainRefactor {
                 inputConfiguration.getProperty("transformation.directory"));
 
         inputProgram.setClassesDir(inputConfiguration.getProperty("project") + "/" +
-                inputConfiguration.getProperty("classes"));
+                                           inputConfiguration.getProperty("classes"));
 
         inputProgram.setCoverageDir(inputConfiguration.getProperty("jacoco"));
     }
 
     protected TransformationQuery initTransformationQuery() throws ClassNotFoundException, NotFoundException, TransformationParserException {
-
         String type = inputConfiguration.getProperty("transformation.type").toLowerCase();
         boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
         switch (type) {
@@ -323,55 +264,26 @@ public class DiversifyMainRefactor {
                 return new CvlQuery(inputProgram);
             case "bytecode":
                 return new ByteCodeTransformationQuery(inputProgram);
-            case "mutationtososie": {
-                /*
-                String jacocoFile = inputConfiguration.getProperty("jacoco");
-                String classes = inputConfiguration.getProperty("project") + "/" + inputConfiguration.getProperty("classes");
-                String mutationDirectory = inputConfiguration.getProperty("transformation.directory");
-                */
-                return new MutationToSosieQuery(inputProgram);
-            }
-            case "randomlist": {
-                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
-                return new ASTTransformationQuery(inputProgram, cl, subType, false);
-            }
-            case "orderedlist": {
-                return new ConsecutiveKnownSosieQuery(inputProgram);
-            }
             case "adr": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
                 return new ASTTransformationQuery(inputProgram, cl, subType, false);
             }
-            case "uniquesosies":
-                //todo fix
-
             case "adrstupid": {
                 Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
                 return new ASTTransformationQuery(inputProgram, cl, subType, true);
             }
-            case "knownsosies":
-                //This executeQuery benefits from a early processCodeFragments
-                inputProgram.processCodeFragments();
-                return new KnownSosieQuery(inputProgram);
-            case "knownmultisosies":
-                //This executeQuery benefits from a early processCodeFragments
-                inputProgram.processCodeFragments();
-                return new KnowMultisosieQuery(inputProgram);
-            case "singleconsecutive":
-                int startSosieIndex = Integer.parseInt(inputConfiguration.getProperty("start.sosie.index", "0"));
-                inputProgram.processCodeFragments();
-                ConsecutiveKnownSosieQuery q = new ConsecutiveKnownSosieQuery(inputProgram);
-                q.setCurrentTrial(startSosieIndex);
-                return q;
-            case "specificindexes":
-                ArrayList<Integer> spIndex = new ArrayList<>();
-                for ( String s : inputConfiguration.getProperty("specific.indexes").split(",") ) {
-                    spIndex.add(Integer.parseInt(s));
-                }
-                inputProgram.processCodeFragments();
-                SpecificSosiesQuery query = new SpecificSosiesQuery(inputProgram);
-                query.setSpecificIndex(spIndex);
+            case "fromlist": {
+                FromListQuery query = new FromListQuery(inputProgram);
+                query.setShuffle(true);
                 return query;
+            }
+            case "fse":{
+                Class cl = Class.forName(inputConfiguration.getProperty("CodeFragmentClass"));
+                return new ASTTransformationQuery(inputProgram, cl, subType, false);
+            }
+            case "issta": {
+
+            }
             default:
                 //Try to construct the executeQuery from the explicit class
                 try {
