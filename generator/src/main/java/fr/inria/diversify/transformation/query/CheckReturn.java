@@ -27,8 +27,8 @@ public class CheckReturn extends ASTTransformationQuery {
     protected void initReturn() {
         returns = new ArrayList<>();
 
-        for(CodeFragment cf: getInputProgram().getCodeFragments()) {
-            if(isReturnVariable(cf.getCtCodeFragment())) {
+        for (CodeFragment cf : getInputProgram().getCodeFragments()) {
+            if (isReturnVariable(cf.getCtCodeFragment())) {
                 returns.add(cf);
             }
         }
@@ -37,7 +37,7 @@ public class CheckReturn extends ASTTransformationQuery {
     protected void initCheck() {
         checks = new ArrayList<>();
 
-        for(CodeFragment cf :getAllUniqueCodeFragments()) {
+        for (CodeFragment cf : getAllUniqueCodeFragments()) {
             try {
                 CtCodeElement stmt = cf.getCtCodeFragment();
                 if (stmt instanceof CtIf) {
@@ -61,12 +61,13 @@ public class CheckReturn extends ASTTransformationQuery {
                         }
                     }
                 }
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
     }
 
     protected boolean isReturnVariable(CtCodeElement stmt) {
-        if(stmt instanceof CtReturn) {
+        if (stmt instanceof CtReturn) {
             CtReturn ret = (CtReturn) stmt;
             if (ret.getReturnedExpression() instanceof CtVariableReference ||
                     ret.getReturnedExpression() instanceof CtVariableAccess) {
@@ -84,7 +85,6 @@ public class CheckReturn extends ASTTransformationQuery {
     public void setType(String type) {
 
     }
-
 
 
     protected ASTReplace transformation() throws Exception {
@@ -119,7 +119,7 @@ public class CheckReturn extends ASTTransformationQuery {
     }
 
     protected CodeFragment findRandomCheck(CodeFragment cf,
-                                                      boolean varNameMatch) throws IllegalAccessException, InstantiationException {
+                                           boolean varNameMatch) throws IllegalAccessException, InstantiationException {
         List<CodeFragment> list = checks.stream()
                 .filter(codeFragment -> cf.isReplaceableBy(codeFragment, varNameMatch, subType))
                 .collect(Collectors.toList());
@@ -137,10 +137,10 @@ public class CheckReturn extends ASTTransformationQuery {
 
     public long nbOfTransformation(boolean varNameMatch) {
         long nb = 0;
-        for(CodeFragment transplant: returns) {
+        for (CodeFragment transplant : returns) {
             List<CodeFragment> list = new ArrayList();
-            for (CodeFragment  check : checks)
-                if (transplant.isReplaceableBy( check, varNameMatch, subType) && transplant.getCtCodeFragment().getParent(CtIf.class) != check) {
+            for (CodeFragment check : checks)
+                if (transplant.isReplaceableBy(check, varNameMatch, subType) && transplant.getCtCodeFragment().getParent(CtIf.class) != check) {
                     list.add(check);
                 }
             nb = nb + list.size();
