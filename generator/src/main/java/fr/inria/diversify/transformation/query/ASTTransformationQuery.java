@@ -3,7 +3,6 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTDelete;
@@ -71,7 +70,7 @@ public class ASTTransformationQuery extends TransformationQuery {
     }
 
     @Override
-    public SingleTransformation query() throws QueryException {
+    public Transformation query() throws QueryException {
         try {
             Random r = new Random();
             ASTTransformation t = null;

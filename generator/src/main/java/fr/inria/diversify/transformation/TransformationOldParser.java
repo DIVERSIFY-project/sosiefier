@@ -28,18 +28,18 @@ public class TransformationOldParser {
 
     InputProgram inputProgram;
 
-    Collection<SingleTransformation> transformations;
+    Collection<Transformation> transformations;
 
     public TransformationOldParser(boolean toSet, InputProgram inputProgram) {
         this.inputProgram = inputProgram;
 
         if (toSet)
-            transformations = new HashSet<SingleTransformation>();
+            transformations = new HashSet<>();
         else
-            transformations = new ArrayList<SingleTransformation>();
+            transformations = new ArrayList<>();
     }
 
-    public Collection<SingleTransformation> parseDir(String dir) throws IOException, JSONException {
+    public Collection<Transformation> parseDir(String dir) throws IOException, JSONException {
 
         File file = new File(dir);
         int countFile = 0;
@@ -58,7 +58,7 @@ public class TransformationOldParser {
         return transformations;
     }
 
-    public SingleTransformation parseUniqueTransformation(File file) throws Exception {
+    public Transformation parseUniqueTransformation(File file) throws Exception {
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
@@ -73,8 +73,8 @@ public class TransformationOldParser {
         return parseTransformation(jsonObject);
     }
 
-    public List<SingleTransformation> parseFile(File file) throws IOException, JSONException {
-        List<SingleTransformation> list = new ArrayList<SingleTransformation>();
+    public List<Transformation> parseFile(File file) throws IOException, JSONException {
+        List<Transformation> list = new ArrayList<>();
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
@@ -84,7 +84,7 @@ public class TransformationOldParser {
             line = br.readLine();
         }
         if (sb.length() == 0)
-            return new ArrayList<SingleTransformation>();
+            return new ArrayList<>();
         JSONArray array = new JSONArray(sb.toString());
         for (int i = 0; i < array.length(); i++) {
             count++;
@@ -100,7 +100,7 @@ public class TransformationOldParser {
         return list;
     }
 
-    protected SingleTransformation parseTransformation(JSONObject jsonObject) throws Exception {
+    protected Transformation parseTransformation(JSONObject jsonObject) throws Exception {
         String type = jsonObject.getString("type");
         ASTTransformation trans = null;
 

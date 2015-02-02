@@ -87,6 +87,6 @@ public class ASTDelete extends ASTTransformation {
 
     @Override
     public String toString() {
-        return "transplantationPoint: "+ transplantationPoint.toString()+"\n";
+        return "delete\ntransplantationPoint: "+ transplantationPoint.toString()+"\n";
     }
 }

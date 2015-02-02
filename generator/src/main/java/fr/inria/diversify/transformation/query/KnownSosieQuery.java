@@ -210,7 +210,7 @@ public class KnownSosieQuery extends TransformationQuery {
                     seriesIncrement = false;
                     //This means that we have changed the transformation size and therefore we must use
                     //the previously found multisosie as the parent of the current transformation
-                    if (isCleanSeriesOnly() && prevRecord.status != AbstractTransformation.SOSIE) {
+                    if (isCleanSeriesOnly() && prevRecord.status != Transformation.SOSIE) {
                         //The last transformation was not a sosie. Create an empty slot and continue search
                         prevRecord = new TransformationFoundRecord(
                                 prevRecord, null, prevRecord.status);
@@ -230,7 +230,7 @@ public class KnownSosieQuery extends TransformationQuery {
                     //On the other hand we may continue creating multisosies incrementing an existing one
 
                     int s = prevRecord.getParent().getPrevious().status;
-                    if (isCleanSeriesOnly() && s != AbstractTransformation.SOSIE) {
+                    if (isCleanSeriesOnly() && s != Transformation.SOSIE) {
                         //The last transformation was not a sosie. Create an empty slot and continue search
                         prevRecord = new TransformationFoundRecord(
                                 prevRecord.getParent().getPrevious(),

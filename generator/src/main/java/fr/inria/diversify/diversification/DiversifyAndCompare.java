@@ -4,7 +4,7 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.testamplification.CompareAmpliTest;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
 import fr.inria.diversify.transformation.ast.exception.BuildTransplantException;
@@ -38,7 +38,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         diff = new ArrayList<>();
     }
 
-    protected void run(SingleTransformation trans) throws Exception {
+    protected void run(Transformation trans) throws Exception {
         Log.info("trial {}", trial);
         Log.debug("output dir: " + tmpDir + "/" + sourceDir);
         writePosition(tmpDir + "/transplant.json", (ASTTransformation) trans);
@@ -67,12 +67,11 @@ public class DiversifyAndCompare extends SinglePointDiversify {
             ((SinglePointSessionResults) sessionResults).addRunResults(trans);
         } catch (ApplyTransformationException e) {
             tryRestore(trans,e);
+            e.printStackTrace();
         } catch (BuildTransplantException e) {}
-    //    Integer result = runTest(tmpDir);
-      //  Log.debug("run after restore: " +result);
     }
 
-    protected void compare(SingleTransformation trans) throws IOException, JSONException, InterruptedException {
+    protected void compare(Transformation trans) throws IOException, JSONException, InterruptedException {
         String sosieDir = copySosieProgram();
         copyTestAndLogger(sosieDir);
         runSosie(sosieDir);
@@ -107,6 +106,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.LogWriter.class.getSimpleName() + ".java"),dir);
         FileUtils.copyFileToDirectory(new File(packagePath + fr.inria.diversify.testamplification.logger.AssertLogWriter.class.getSimpleName() + ".java"),dir);
     }
+
     protected void runSosie(String sosieDir) throws IOException, InterruptedException {
         MavenBuilder builder = new MavenBuilder(sosieDir);
         builder.runGoals(new String[]{"clean", "test"}, false);

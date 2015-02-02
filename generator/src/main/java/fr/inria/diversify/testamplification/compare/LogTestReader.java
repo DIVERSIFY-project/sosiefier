@@ -50,7 +50,8 @@ public class LogTestReader {
             String[] split = assertLog.split(";");
             int assertId = Pool.getCanonicalVersion(Integer.parseInt(split[1]));
             int classId = Pool.getCanonicalVersion(Integer.parseInt(split[2]));
-            assertO = new Assert(assertId, classId, getters.get(classId));
+            String className = Pool.getCanonicalVersion(idToClass.get(classId));
+            assertO = new Assert(assertId, className, getters.get(classId));
 
             count++;
             Object[] pValues = previousValues.get(classId);
@@ -58,15 +59,16 @@ public class LogTestReader {
                 String[] tmp = assertLog.split(":;:");
 
                 Object[] values = parseValues(Arrays.copyOfRange(tmp, 1, tmp.length));
+                if (assertLog.endsWith(":;:")) {
+                    values = Arrays.copyOf(values, values.length + 1);
+                    values[values.length - 1] = "";
+                }
                 if (pValues == null) {
                     pValues = values;
                     previousValues.put(classId, pValues);
                 } else {
                     char[] masque = split[3].toCharArray();
-                    if (assertLog.endsWith(":;:")) {
-                        values = Arrays.copyOf(values, values.length + 1);
-                        values[values.length - 1] = "";
-                    }
+
                     int index = 0;
                     for (int i = 0; i < masque.length - 1; i++) {
                         if (masque[i] == '1') {
@@ -113,19 +115,19 @@ public class LogTestReader {
     }
 
     protected Object parseValue(String value) {
-        //value is a set
+        //value is a Map
         if(value.startsWith("{") && value.endsWith("}")) {
 
             Set<Object> set = new HashSet<>();
-            for(String s : value.substring(1,value.length()-1).split(", ")) {
+            for(String s : value.substring(1,value.length()-1).split(",\\s?")) {
                 set.add(parseValue(s));
             }
             return Pool.getCanonicalVersion(set);
         }
-        //value is a array or a list
+        //value is a array or a list or set
         if(value.startsWith("[") && value.endsWith("]")) {
-            List<Object> list = new ArrayList<>();
-            for(String s : value.substring(1,value.length()-1).split(", ")) {
+            Set<Object> list = new HashSet<>();
+            for(String s : value.substring(1,value.length()-1).split(",\\s?")) {
                 list.add(parseValue(s));
             }
             return Pool.getCanonicalVersion(list);

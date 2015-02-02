@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
@@ -48,7 +47,7 @@ public class SpecificSosiesQuery extends TransformationQuery {
     }
 
     @Override
-    public SingleTransformation query() throws QueryException {
+    public Transformation query() throws QueryException {
         return null;
     }
 

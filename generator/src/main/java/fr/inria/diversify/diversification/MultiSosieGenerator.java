@@ -1,6 +1,7 @@
 package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.SinglePointSessionResults;
+import fr.inria.diversify.transformation.MultiTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.transformation.ast.exception.ApplyTransformationException;
@@ -21,8 +22,9 @@ import java.util.Random;
 public class MultiSosieGenerator extends AbstractDiversify {
     protected List<Transformation> allTransformation;
     protected boolean randomGeneration = false;
-   // protected List<Transformation> currentSosie;
-    protected List<List<Transformation>> multiSosies;
+   protected MultiTransformation currentMultiTransformation;
+    protected List<MultiTransformation> multiSosies;
+    private int transformationSize;
 
     public MultiSosieGenerator(InputConfiguration inputConfiguration, String projectDir, String srcDir) {
         this.sourceDir = srcDir;
@@ -42,10 +44,9 @@ public class MultiSosieGenerator extends AbstractDiversify {
         while(multiSosies.size() < n ) {
             applyAndCheck(getNextTransformation());
 
-            if(transformations.size() == transformations.size()) {
-                multiSosies.add(transformations);
+            if(currentMultiTransformation.size() == transformations.size()) {
+                multiSosies.add(currentMultiTransformation);
                 copySosieProgram();
-                restoreAll();
                 trial++;
             }
         }
@@ -53,40 +54,28 @@ public class MultiSosieGenerator extends AbstractDiversify {
 
 
     protected void applyAndCheck(Transformation trans) throws Exception {
-        Log.info("trial {}", trial);
-        Log.debug("output dir: " + tmpDir + "/" + sourceDir);
+       currentMultiTransformation.add(trans);
+       String dir = tmpDir + "/" + sourceDir;
         try {
-            trans.apply(tmpDir + "/" + sourceDir);
+            currentMultiTransformation.apply(dir);
             try {
                 int status = runTest(tmpDir);
 
-                trans.setStatus(status);
-                trans.setFailures(builder.getTestFail());
+                currentMultiTransformation.setStatus(status);
+                currentMultiTransformation.setFailures(builder.getTestFail());
 
             } catch (Exception e) {
-                trans.setStatus(-2);
+                currentMultiTransformation.setStatus(-2);
                 Log.debug("compile error during diversification", e);
             }
+            currentMultiTransformation.restore(dir);
 
-            ((SinglePointSessionResults) sessionResults).addRunResults(trans);
-            if (trans.getStatus() != 0) {
-                trans.restore(tmpDir + "/" + sourceDir);
-            } else {
-                Log.info(sessionResults.toString());
-                transformations.add(trans);
-                writeTransformations(getSosieSourcesDir());
+            if (currentMultiTransformation.getStatus() != 0) {
+                currentMultiTransformation.remove(trans);
             }
         } catch (ApplyTransformationException e) {
             tryRestore(trans,e);
         } catch (BuildTransplantException e) {}
-    }
-
-
-    protected void restoreAll() throws Exception {
-        for(Transformation transformation: transformations) {
-            transformation.restore(tmpDir + "/" + sourceDir);
-        }
-        transformations.clear();
     }
 
     protected Transformation getNextTransformation() throws Exception {
@@ -114,5 +103,9 @@ public class MultiSosieGenerator extends AbstractDiversify {
 
     public void setRandomGeneration(boolean randomGeneration) {
         this.randomGeneration = randomGeneration;
+    }
+
+    public void setTransformationSize(int transformationSize) {
+        this.transformationSize = transformationSize;
     }
 }

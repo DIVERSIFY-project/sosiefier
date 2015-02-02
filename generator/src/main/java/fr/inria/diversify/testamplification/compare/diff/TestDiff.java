@@ -99,6 +99,26 @@ public class TestDiff {
         excludeThisTest = true;
         diff.clear();
     }
+
+    public int size() {
+        if(excludeThisTest) {
+            return 0;
+        } else {
+            return diff.stream()
+                       .mapToInt(d -> d.size())
+                       .sum();
+
+        }
+    }
+
+    public String toString() {
+        try {
+            return toJSON().toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }
 
 

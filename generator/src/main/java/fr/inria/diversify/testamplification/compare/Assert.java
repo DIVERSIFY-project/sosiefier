@@ -1,5 +1,6 @@
 package fr.inria.diversify.testamplification.compare;
 
+import java.text.StringCharacterIterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,18 +15,19 @@ public class Assert {
     static Map<Integer, String> dico = new HashMap<>();
 
     protected int assertId;
-    protected int classId;
+ //   protected int classId;
+    protected String className;
 
-    public Assert(int assertId, int classId, String[] methods) {
+    public Assert(int assertId, String className, String[] methods) {
         this.assertId = assertId;
-        this.classId = classId;
+        this.className = className;
         this.methods = methods;
     }
 
-    public Assert(int assertId, int classId, String[] mth, String[] valueS) {
+    public Assert(int assertId, String className, String[] mth, Object[] valueS) {
         this.assertId = assertId;
-        this.classId = classId;
-        this.methods = methods;
+        this.className = className;
+        this.methods = mth;
         values = valueS;
     }
 
@@ -38,7 +40,7 @@ public class Assert {
     }
 
     public String toString() {
-        String ret = assertId + ", "  + dico.get(classId) + ": ";
+        String ret = assertId + ", "  + className + ": ";
 
         for(int i = 0; i < values.length; i++)  {
             ret += "\n\t" + methods[i] + "(): " + values[i];
@@ -47,8 +49,8 @@ public class Assert {
         return ret;
     }
 
-    public int getClassId() {
-        return classId;
+    public String getClassName() {
+        return className;
     }
 
     public String[] getMethods() {
@@ -58,27 +60,4 @@ public class Assert {
     public Object[] getValues() {
         return values;
     }
-
-//    public void removeMethod(String toRemove) {
-//        int index = 0;
-//        for(String mth : methods) {
-//            if(toRemove.equals(mth)) {
-//               break;
-//            }
-//            index++;
-//        }
-//
-//        String[] newMethods = new String[methods.length - 1];
-//        Object[] newValues = new Object[methods.length - 1];
-//        int j = 0;
-//        for(int i = 0; i < methods.length ; i++) {
-//            if(i != index) {
-//                newMethods[j] = methods[i];
-//                newValues[j] = values[i];
-//                j++;
-//            }
-//        }
-//        methods = newMethods;
-//        values = newValues;
-//    }
 }

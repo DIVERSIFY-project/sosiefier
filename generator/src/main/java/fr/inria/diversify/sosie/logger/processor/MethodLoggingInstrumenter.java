@@ -1,7 +1,6 @@
 package fr.inria.diversify.sosie.logger.processor;
 
 
-import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import spoon.processing.AbstractProcessor;
 import spoon.processing.ProcessingManager;

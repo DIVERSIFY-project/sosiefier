@@ -1,15 +1,11 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.diversification.InputProgram;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.List;
 
 /**
  * Created by Simon on 28/01/15.
  */
-public class MultiTransformation extends AbstractTransformation {
+public class MultiTransformation extends Transformation {
     List<Transformation> transformations;
 
 
@@ -33,5 +29,17 @@ public class MultiTransformation extends AbstractTransformation {
         for(Transformation transformation: transformations) {
             transformation.restore(srcDir);
         }
+    }
+
+    public void add(Transformation transformation) {
+        transformations.add(transformation);
+    }
+
+    public boolean remove(Transformation transformation) {
+        return transformations.remove(transformation);
+    }
+
+    public int size() {
+        return transformations.size();
     }
 }

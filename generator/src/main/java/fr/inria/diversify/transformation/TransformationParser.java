@@ -52,7 +52,7 @@ public class  TransformationParser {
      * @return A list of all transformations found
      * @throws Exception
      */
-    public SingleTransformation parseUniqueTransformation(File file) throws Exception {
+    public Transformation parseUniqueTransformation(File file) throws Exception {
         return parser.parseUniqueTransformation(file);
     }
 

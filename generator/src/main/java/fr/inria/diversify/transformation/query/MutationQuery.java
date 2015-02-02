@@ -3,7 +3,7 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.diversification.InputProgram;
 
 import fr.inria.diversify.coverage.ICoverageReport;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.mutation.*;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -72,12 +72,12 @@ public class MutationQuery extends TransformationQuery {
     }
 
     @Override
-    public SingleTransformation query() {
+    public Transformation query() {
         try {
             Random r = new Random();
             int i = r.nextInt(8);
 
-            SingleTransformation t = null;
+            Transformation t = null;
             switch (i) {
                 case 0:
                     t = getNegateConditionalMutation();

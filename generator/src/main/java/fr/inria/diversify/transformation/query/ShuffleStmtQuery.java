@@ -2,7 +2,7 @@ package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.other.ShuffleStmtTransformation;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtReturn;
@@ -35,7 +35,7 @@ public class ShuffleStmtQuery extends TransformationQuery {
     }
 
     @Override
-    public SingleTransformation query() {
+    public Transformation query() {
         ShuffleStmtTransformation sst = new ShuffleStmtTransformation();
         List<CtElement> objects = getInputProgram().getAllElement(CtBlock.class);
         Random r = new Random();

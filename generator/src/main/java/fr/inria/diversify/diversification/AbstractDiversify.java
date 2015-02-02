@@ -75,6 +75,10 @@ public abstract class AbstractDiversify {
 
     public void setOriginalTmpDir(String originalTmpDir) { this.originalTmpDir = originalTmpDir; }
 
+    public String getTmpDir() {
+        return tmpDir;
+    }
+
     public void setTransformationQuery(TransformationQuery transQuery) {
         this.transQuery = transQuery;
     }
@@ -216,8 +220,8 @@ public abstract class AbstractDiversify {
      */
     public void deleteTmpFiles() {
         try {
-            org.codehaus.plexus.util.FileUtils.cleanDirectory(tmpDir);
-            org.codehaus.plexus.util.FileUtils.forceDelete(tmpDir);
+            FileUtils.cleanDirectory(new File(tmpDir));
+           FileUtils.forceDelete(new File(tmpDir));
         } catch (IOException e) {
             try {
                 init(projectDir, originalTmpDir);
