@@ -24,7 +24,6 @@ import java.io.IOException;
  */
 public abstract class ASTTransformation extends SingleTransformation {
 
-
     protected boolean subType;
 
     /**

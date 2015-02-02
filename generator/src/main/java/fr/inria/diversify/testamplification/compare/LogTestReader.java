@@ -115,19 +115,19 @@ public class LogTestReader {
     }
 
     protected Object parseValue(String value) {
-        //value is a set
+        //value is a Map
         if(value.startsWith("{") && value.endsWith("}")) {
 
             Set<Object> set = new HashSet<>();
-            for(String s : value.substring(1,value.length()-1).split(", ")) {
+            for(String s : value.substring(1,value.length()-1).split(",\\s?")) {
                 set.add(parseValue(s));
             }
             return Pool.getCanonicalVersion(set);
         }
-        //value is a array or a list
+        //value is a array or a list or set
         if(value.startsWith("[") && value.endsWith("]")) {
-            List<Object> list = new ArrayList<>();
-            for(String s : value.substring(1,value.length()-1).split(", ")) {
+            Set<Object> list = new HashSet<>();
+            for(String s : value.substring(1,value.length()-1).split(",\\s?")) {
                 list.add(parseValue(s));
             }
             return Pool.getCanonicalVersion(list);

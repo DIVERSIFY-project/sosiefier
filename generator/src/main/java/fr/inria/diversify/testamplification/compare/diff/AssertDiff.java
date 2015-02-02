@@ -74,22 +74,22 @@ public class AssertDiff {
         int assertId = jsonObject.getInt("assertId");
         String className = jsonObject.getString("className");
 
-        if(jsonObject.has("sosieClassId")) {
+        if(jsonObject.has("sosieClassName")) {
             original = new Assert(assertId, className, new String[0], new String[0]);
-            sosie = new Assert(assertId, jsonObject.getString("sosieClassNa,e"), new String[0], new String[0]);
+            sosie = new Assert(assertId, jsonObject.getString("sosieClassName"), new String[0], new String[0]);
         } else {
 
             JSONArray diff = jsonObject.getJSONArray("methodDiffs");
             int length = diff.length();
             String[] mth = new String[length];
-            String[] valueO = new String[length];
-            String[] valueS = new String[length];
+            Object[] valueO = new Object[length];
+            Object[] valueS = new Object[length];
 
             for (int i = 0; i < length; i++) {
                 JSONObject d = diff.getJSONObject(i);
                 mth[i] = d.getString("method");
-                valueO[i] = d.getString("original");
-                valueS[i] = d.getString("sosie");
+                valueO[i] = parseValue(d.getString("original"));
+                valueS[i] = parseValue(d.getString("sosie"));
             }
 
             original = new Assert(assertId, className, mth, valueO);
@@ -155,5 +155,33 @@ public class AssertDiff {
         return count;
     }
 
+    protected Object parseValue(String value) {
+        //value is a Map
+        if(value.startsWith("{") && value.endsWith("}")) {
+
+            Set<Object> set = new HashSet<>();
+            for(String s : value.substring(1,value.length()-1).split(",\\s?")) {
+                set.add(parseValue(s));
+            }
+            return Pool.getCanonicalVersion(set);
+        }
+        //value is a array or a list or set
+        if(value.startsWith("[") && value.endsWith("]")) {
+            Set<Object> list = new HashSet<>();
+            for(String s : value.substring(1,value.length()-1).split(",\\s?")) {
+                list.add(parseValue(s));
+            }
+            return Pool.getCanonicalVersion(list);
+        }
+        //toString() is not define
+        if(value.split("@").length > 1) {
+            return parseValue(value.split("@")[0]);
+        }
+        //toString() is not define
+        if( value.split("\\$").length > 1) {
+            return parseValue(value.split("\\$")[0]);
+        }
+        return Pool.getCanonicalVersion(value);
+    }
 
 }

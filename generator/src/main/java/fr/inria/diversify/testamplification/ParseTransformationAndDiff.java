@@ -44,10 +44,11 @@ public class ParseTransformationAndDiff {
     public void stat(Map<Transformation, Set<TestDiff>> diffs) {
         for (Transformation transformation : diffs.keySet()) {
            int sum = diffs.get(transformation).stream().mapToInt(diff -> diff.size()).sum();
-            Log.info("{} \n{}\n\n",transformation, sum);
+            Log.info("{} \nnb: {}\n",transformation, sum);
             diffs.get(transformation).stream()
                  .filter(diff -> diff.size() != 0)
                  .forEach(diff -> Log.info(diff.toString()));
+            Log.debug("");
         }
     }
 
@@ -88,9 +89,8 @@ public class ParseTransformationAndDiff {
         }
 
         JSONObject object = new JSONObject(sb.toString());
-//        for (int i = 0; i < array.length(); i++) {
-            parseTD(object);
-//        }
+        parseTD(object);
+
 
     }
 

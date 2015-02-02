@@ -24,7 +24,7 @@ public class Assert {
         this.methods = methods;
     }
 
-    public Assert(int assertId, String className, String[] mth, String[] valueS) {
+    public Assert(int assertId, String className, String[] mth, Object[] valueS) {
         this.assertId = assertId;
         this.className = className;
         this.methods = mth;
