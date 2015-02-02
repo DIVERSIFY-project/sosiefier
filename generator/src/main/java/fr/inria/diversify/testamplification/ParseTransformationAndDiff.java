@@ -4,7 +4,6 @@ import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
-import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
@@ -96,7 +95,7 @@ public class ParseTransformationAndDiff {
 
     protected void parseTD(JSONObject td) throws JSONException, TransformationParserException {
         TransformationJsonParser parser = new TransformationJsonParser(true, inputProgram);
-        SingleTransformation trans = parser.parseTransformation(td.getJSONObject("transformation"));
+        Transformation trans = parser.parseTransformation(td.getJSONObject("transformation"));
 
         Set<TestDiff> diff = parseDiff(td.getJSONArray("testDiff"));
 

@@ -101,7 +101,7 @@ public class TransformationJsonParser {
     }
 
 
-    public SingleTransformation parseUniqueTransformation(File file) throws TransformationParserException {
+    public Transformation parseUniqueTransformation(File file) throws TransformationParserException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             StringBuilder sb = new StringBuilder();
@@ -138,7 +138,7 @@ public class TransformationJsonParser {
                 parsingTransfIndex = i;
                 JSONObject jsonObject = array.getJSONObject(i);
                 if (filter(jsonObject)) {
-                    SingleTransformation t = parseTransformation(jsonObject);
+                    Transformation t = parseTransformation(jsonObject);
                     list.add(t);
                 }
 
@@ -249,11 +249,11 @@ public class TransformationJsonParser {
         }
     }
 
-    public SingleTransformation parseTransformation(JSONObject jsonObject) throws TransformationParserException {
+    public Transformation parseTransformation(JSONObject jsonObject) throws TransformationParserException {
         try {
             String type = jsonObject.getString("type");
 
-            SingleTransformation trans = null;
+            Transformation trans = null;
 
             if (type.equals("mutation"))
                 trans = parseMutation(jsonObject);
@@ -285,7 +285,7 @@ public class TransformationJsonParser {
         }
     }
 
-    protected SingleTransformation parseOther(JSONObject jsonObject) throws JSONException, TransformationParserException {
+    protected Transformation parseOther(JSONObject jsonObject) throws JSONException, TransformationParserException {
         ShuffleStmtTransformation shuffle = new ShuffleStmtTransformation();
         shuffle.setTransformationPoint(getBlock(jsonObject.getString("transformationPoint")));
 
@@ -332,7 +332,7 @@ public class TransformationJsonParser {
         return o;
     }
 
-    protected SingleTransformation parseCvl(JSONObject jsonObject) throws JSONException {
+    protected Transformation parseCvl(JSONObject jsonObject) throws JSONException {
         String name = jsonObject.getString("name");
         CVLTransformation trans = null;
 
@@ -427,9 +427,9 @@ public class TransformationJsonParser {
         return le;
     }
 
-    protected SingleTransformation parseMutation(JSONObject jsonObject) throws TransformationParserException {
+    protected Transformation parseMutation(JSONObject jsonObject) throws TransformationParserException {
 
-        SingleTransformation trans;
+        Transformation trans;
 
         try {
             String name = jsonObject.getString("name");
@@ -446,7 +446,7 @@ public class TransformationJsonParser {
         return trans;
     }
 
-    protected SingleTransformation parseStmt(JSONObject jsonObject) throws TransformationParserException {
+    protected Transformation parseStmt(JSONObject jsonObject) throws TransformationParserException {
         ASTTransformation trans = null;
         try {
             String name = jsonObject.getString("name");
@@ -494,7 +494,7 @@ public class TransformationJsonParser {
         return trans;
     }
 
-    protected SingleTransformation parseBinaryOperatorMutation(JSONObject jsonObject) throws JSONException,
+    protected Transformation parseBinaryOperatorMutation(JSONObject jsonObject) throws JSONException,
             TransformationParserException {
 
         String name = jsonObject.getString("name");
@@ -525,7 +525,7 @@ public class TransformationJsonParser {
         return trans;
     }
 
-    protected SingleTransformation parseReturnValueMutation(JSONObject jsonObject) throws JSONException,
+    protected Transformation parseReturnValueMutation(JSONObject jsonObject) throws JSONException,
             TransformationParserException {
         ReturnValueMutation trans = new ReturnValueMutation();
 
@@ -548,7 +548,7 @@ public class TransformationJsonParser {
         return trans;
     }
 
-    protected SingleTransformation parseInlineConstantMutation(JSONObject jsonObject) throws TransformationParserException {
+    protected Transformation parseInlineConstantMutation(JSONObject jsonObject) throws TransformationParserException {
         InlineConstantMutation trans = new InlineConstantMutation();
 
         Object jsonPos;
@@ -711,10 +711,10 @@ public class TransformationJsonParser {
         this.filterProperties = filterProperties;
     }
 
-    public static void saveToFile(List<SingleTransformation> transf, String fileName) throws JSONException, IOException {
+    public static void saveToFile(List<Transformation> transf, String fileName) throws JSONException, IOException {
 
         JSONArray a = new JSONArray();
-        for ( SingleTransformation t : transf ) {
+        for ( Transformation t : transf ) {
             a.put(t.toJSONObject());
         }
 

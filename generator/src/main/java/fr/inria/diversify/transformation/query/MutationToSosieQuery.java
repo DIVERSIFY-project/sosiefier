@@ -3,7 +3,7 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.codeFragment.Statement;
 import fr.inria.diversify.coverage.MultiCoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -21,7 +21,7 @@ import java.util.Random;
 public class MutationToSosieQuery extends TransformationQuery {
 
     protected boolean subType;
-    protected List<SingleTransformation> mutations;
+    protected List<Transformation> mutations;
     protected String classesDir;
     protected File jacocoDir;
     protected InputProgram inputProgram;
@@ -44,9 +44,9 @@ public class MutationToSosieQuery extends TransformationQuery {
 
     }
 
-    public SingleTransformation query() throws QueryException {
+    public Transformation query() throws QueryException {
         Random r = new Random();
-        SingleTransformation mutation = null;
+        Transformation mutation = null;
         ASTTransformation transformation = null;
 
         try {

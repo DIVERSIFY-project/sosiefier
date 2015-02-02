@@ -2,8 +2,8 @@ package fr.inria.diversify.transformation.query;
 
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.coverage.ICoverageReport;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.bytecode.BytecodeAdd;
 import fr.inria.diversify.transformation.bytecode.BytecodeDelete;
 import fr.inria.diversify.transformation.bytecode.BytecodeReplace;
@@ -44,7 +44,7 @@ public class ByteCodeTransformationQuery extends TransformationQuery {
     }
 
     @Override
-    public SingleTransformation query() {
+    public Transformation query() {
         try {
             String type = this.type;
             if (type == null) {

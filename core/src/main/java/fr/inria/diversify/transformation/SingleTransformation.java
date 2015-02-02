@@ -1,21 +1,17 @@
 package fr.inria.diversify.transformation;
 
-import fr.inria.diversify.diversification.InputProgram;
-import org.json.JSONException;
-import org.json.JSONObject;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * User: Simon
  * Date: 07/11/13
  * Time: 11:16
  */
-public abstract class SingleTransformation extends AbstractTransformation {
+public abstract class SingleTransformation extends Transformation {
 
 
     public abstract String classLocationName();

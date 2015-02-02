@@ -1,6 +1,6 @@
 package fr.inria.diversify.statistic;
 
-import fr.inria.diversify.transformation.AbstractTransformation;
+import fr.inria.diversify.transformation.Transformation;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -189,7 +189,7 @@ public class SessionResults extends AbstractSessionResults {
                         if (runResults.containsKey(k)) {
                             RunResults r = runResults.get(k);
                             int sIndex = r.getStatus();
-                            if (sIndex <= 0 && sIndex >= AbstractTransformation.EXCEPTION) {
+                            if (sIndex <= 0 && sIndex >= Transformation.EXCEPTION) {
                                 color = colors[Math.abs(sIndex)];
                                 tbl2.append("<td bgcolor=").
                                         append(color).

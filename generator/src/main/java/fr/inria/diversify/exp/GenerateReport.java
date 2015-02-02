@@ -4,7 +4,7 @@ import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.util.Log;
@@ -89,7 +89,7 @@ public class GenerateReport {
         }
 
         int i = 0;
-        for (SingleTransformation t : loadFromFile(new File(trans))) {
+        for (Transformation t : loadFromFile(new File(trans))) {
             i++;
             result += "\n\nTransformation: " + i + ":\n" + transformationDetail(t);
 
@@ -113,19 +113,19 @@ public class GenerateReport {
         return null;
     }
 
-    protected String transformationDetail(SingleTransformation transformation) throws Exception {
+    protected String transformationDetail(Transformation transformation) throws Exception {
         String detail = "";
-        detail += "package: " + transformation.packageLocationName();
-        detail += "\nclass: " + transformation.classLocationName();
-
-        detail += "\nname: " + transformation.getName();
-        detail += "\ntype: " + transformation.getType();
-
-        try {
-            detail += "\n" + transformation.getTransformationString();
-        } catch (Exception e) {
-            Log.debug("");
-        }
+//        detail += "package: " + transformation.packageLocationName();
+//        detail += "\nclass: " + transformation.classLocationName();
+//
+//        detail += "\nname: " + transformation.getName();
+//        detail += "\ntype: " + transformation.getType();
+//
+//        try {
+//            detail += "\n" + transformation.getTransformationString();
+//        } catch (Exception e) {
+//            Log.debug("");
+//        }
 
         return detail;
     }
@@ -195,16 +195,16 @@ public class GenerateReport {
     }
 
 
-    public List<SingleTransformation> loadFromFile(File file) throws IOException, JSONException, TransformationParserException {
+    public List<Transformation> loadFromFile(File file) throws IOException, JSONException, TransformationParserException {
         BufferedReader br = null;
-        List<SingleTransformation> transformations = new ArrayList<>();
+        List<Transformation> transformations = new ArrayList<>();
         try {
             TransformationJsonParser parser = new TransformationJsonParser(false, inputProgram);
             br = new BufferedReader(new FileReader(file));
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {
-                SingleTransformation t = parser.parseTransformation(new JSONObject(line));
+                Transformation t = parser.parseTransformation(new JSONObject(line));
                 transformations.add(t);
                 line = br.readLine();
             }

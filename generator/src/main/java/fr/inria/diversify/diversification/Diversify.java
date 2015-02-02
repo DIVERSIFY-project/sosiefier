@@ -2,7 +2,6 @@ package fr.inria.diversify.diversification;
 
 import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.statistic.SessionResults;
-import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
@@ -147,7 +146,7 @@ public class Diversify extends AbstractDiversify {
                         applyTransformations(transformations, outputDir);
                         success = true;
                     } catch (Exception ex) {
-                        transQuery.setLastTransformationStatus(AbstractTransformation.EXCEPTION);
+                        transQuery.setLastTransformationStatus(Transformation.EXCEPTION);
                         success = false;
                         Log.error("Query application failed! " + ex.getMessage());
                         //Application failed!... we'll executeQuery and apply again
@@ -161,7 +160,7 @@ public class Diversify extends AbstractDiversify {
                     try {
                         run();
                     } catch (Exception ex) {
-                        transQuery.setLastTransformationStatus(AbstractTransformation.EXCEPTION);
+                        transQuery.setLastTransformationStatus(Transformation.EXCEPTION);
                         Log.error("Diversified program run failed! " + ex.getMessage());
                         success = false;
                         //Application failed!... we'll executeQuery, apply and run again
@@ -184,8 +183,8 @@ public class Diversify extends AbstractDiversify {
             //Try to apply transformations
             for (Transformation t : trans) {
                 //Input the configuration
-                if ( t instanceof AbstractTransformation ) {
-                    ((AbstractTransformation)t).setInputProgram(inputConfiguration.getInputProgram());
+                if ( t instanceof Transformation) {
+                    ((Transformation)t).setInputProgram(inputConfiguration.getInputProgram());
                 }
                 t.apply(outputDir);
                 successful++;
@@ -195,8 +194,8 @@ public class Diversify extends AbstractDiversify {
             try {
                 for (Iterator<Transformation> i = trans.iterator(); i.hasNext() && successful > 0; successful--) {
                     Transformation t = i.next();
-                    if ( t instanceof AbstractTransformation ) {
-                        ((AbstractTransformation)t).setInputProgram(inputConfiguration.getInputProgram());
+                    if ( t instanceof Transformation) {
+                        ((Transformation)t).setInputProgram(inputConfiguration.getInputProgram());
                     }
                     t.restore(outputDir);
                 }
@@ -226,14 +225,14 @@ public class Diversify extends AbstractDiversify {
         //Give back to the executeQuery the value of the las transformation
         transQuery.setLastTransformationStatus(status);
 
-        if (status == AbstractTransformation.SOSIE) {
+        if (status == Transformation.SOSIE) {
             sosie++;
             copySosieProgram();
         }
 
         //Store transformation status
         for (Transformation tran : transformations) {
-            if (tran.getStatus() == AbstractTransformation.NOT_TESTED) {
+            if (tran.getStatus() == Transformation.NOT_TESTED) {
                 tran.setStatus(status);
                 tran.setFailures(builder.getTestFail());
             }

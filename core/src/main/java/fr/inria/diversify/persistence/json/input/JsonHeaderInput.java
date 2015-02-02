@@ -3,7 +3,6 @@ package fr.inria.diversify.persistence.json.input;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.Header;
 import fr.inria.diversify.persistence.MavenHeader;
-import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;

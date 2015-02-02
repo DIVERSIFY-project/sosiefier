@@ -3,7 +3,7 @@ package fr.inria.diversify;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.transformation.SingleTransformation;
+import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationOldParser;
 import spoon.reflect.factory.Factory;
@@ -26,7 +26,7 @@ public class OldParserToNewJsonFormat {
         inputProgram.processCodeFragments();
 
         TransformationOldParser parser = new TransformationOldParser(false, inputProgram);
-        List<SingleTransformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
+        List<Transformation> transf = parser.parseFile(new File(inputProgram.getPreviousTransformationsPath()));
 
         TransformationJsonParser.saveToFile(transf, configuration.getResultPath());
     }

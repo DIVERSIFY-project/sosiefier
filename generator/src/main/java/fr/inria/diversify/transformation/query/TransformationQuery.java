@@ -1,7 +1,6 @@
 package fr.inria.diversify.transformation.query;
 
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.AbstractTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 
@@ -40,7 +39,7 @@ public abstract class TransformationQuery {
         private int incrementalSeries;
 
         //Known status of this transformation
-        int status = AbstractTransformation.SOSIE;
+        int status = Transformation.SOSIE;
 
         int myHashCode = 0;
 
@@ -123,7 +122,7 @@ public abstract class TransformationQuery {
      * Status of the last transformation found. Querys may use this information to optimize further exploration of
      * the search space
      */
-    private int lastTransformationStatus = AbstractTransformation.SOSIE;
+    private int lastTransformationStatus = Transformation.SOSIE;
 
     /**
      * Multipoint transformations may be (parent/child) related.

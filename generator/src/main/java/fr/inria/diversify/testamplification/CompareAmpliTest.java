@@ -4,7 +4,6 @@ import fr.inria.diversify.testamplification.compare.LogTestComparator;
 import fr.inria.diversify.testamplification.compare.LogTestReader;
 import fr.inria.diversify.testamplification.compare.Test;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
-import fr.inria.diversify.transformation.SingleTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
