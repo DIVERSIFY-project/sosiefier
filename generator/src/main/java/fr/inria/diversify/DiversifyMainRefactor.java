@@ -250,6 +250,8 @@ public class DiversifyMainRefactor {
         String type = inputConfiguration.getProperty("transformation.type").toLowerCase();
         boolean subType = Boolean.parseBoolean(inputConfiguration.getProperty("transformation.subtype", "false"));
         switch (type) {
+            case "checkreturnif":
+                return new CheckReturnQuery(inputProgram);
             case "checkreturn":
                 return new CheckReturn(inputProgram);
             case "mutation":
