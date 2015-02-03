@@ -43,11 +43,18 @@ public class ParseTransformationAndDiff {
     public void stat(Map<Transformation, Set<TestDiff>> diffs) {
         for (Transformation transformation : diffs.keySet()) {
            int sum = diffs.get(transformation).stream().mapToInt(diff -> diff.size()).sum();
-            Log.info("{} \nnb: {}\n",transformation, sum);
-            diffs.get(transformation).stream()
-                 .filter(diff -> diff.size() != 0)
-                 .forEach(diff -> Log.info(diff.toString()));
-            Log.debug("");
+
+            int diffSize = diffs.get(transformation).stream()
+                 .mapToInt(diff -> diff.size())
+                .sum();
+            if(diffSize != 0) {
+                Log.info("{} \nnb: {}\n",transformation, sum);
+
+                diffs.get(transformation).stream()
+                     .filter(diff -> diff.size() != 0)
+                     .forEach(diff -> Log.info(diff.toString()));
+                Log.debug("");
+            }
         }
     }
 
@@ -67,7 +74,10 @@ public class ParseTransformationAndDiff {
 
         for (File file : dir.listFiles()) {
             if (file.isFile() && file.getName().endsWith(".json")) {
-                parseFile(file);
+                try {
+                    parseFile(file);
+                } catch (Exception e) {}
+
             }
         }
     }

@@ -52,29 +52,6 @@ public class LogTestComparator {
             }
         }
         return result;
-//        for (int i = 0; i < original.size(); i++) {
-//            if(sosie.size() < i  || !compareLog(original.getLog(i), sosie.getLog(i)).isEmpty()) {
-//                List<LogDiff> currentResult = new ArrayList<>(sosie.size());
-//                for (int j = 0; j < sosie.size(); j++) {
-//                    LogDiff logResult = compareLog(original.getLog(i), sosie.getLog(j));
-//                    if(logResult == null) {
-//                        result = new TestDiff(original.getSignature());
-//                        result.excludeThisTest();
-//                        return result;
-//                    }
-//                    if (logResult.isEmpty()) {
-//                        break;
-//                    } else {
-//                        currentResult.add(logResult);
-//                    }
-//                }
-//                LogDiff smallerDiff = currentResult.stream()
-//                                                     .sorted()
-//                                                     .findFirst().orElse(null);
-//                result.add(smallerDiff);
-//            }
-//        }
-//        return result;
     }
 
     protected LogDiff compareLog(LogTest original, LogTest sosie) {

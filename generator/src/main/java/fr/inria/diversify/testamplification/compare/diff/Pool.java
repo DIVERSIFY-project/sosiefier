@@ -1,5 +1,7 @@
 package fr.inria.diversify.testamplification.compare.diff;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -7,14 +9,14 @@ import java.util.concurrent.ConcurrentMap;
  * Created by Simon on 27/01/15.
  */
 public class Pool {
-    private static ConcurrentMap<String,String> StringPool =
-            new ConcurrentHashMap<String,String>(20000);
+    private static Map<String,String> StringPool =
+            new HashMap<String,String>(20000);
 
-    private static ConcurrentMap<Integer,Integer> IntegerPool =
-            new ConcurrentHashMap<Integer,Integer>(20000);
+    private static Map<Integer,Integer> IntegerPool =
+            new HashMap<Integer,Integer>(20000);
 
-    private static ConcurrentMap<Object,Object> ObjectPool =
-            new ConcurrentHashMap<Object,Object>(20000);
+    private static Map<Object,Object> ObjectPool =
+            new HashMap<Object,Object>(20000);
 
     public static String getCanonicalVersion(String str) {
         String canon = StringPool.putIfAbsent(str, str);
@@ -28,5 +30,11 @@ public class Pool {
     public static Object getCanonicalVersion(Object str) {
         Object canon = ObjectPool.putIfAbsent(str, str);
         return (canon == null) ? str : canon;
+    }
+
+    public static void reset() {
+        StringPool.clear();
+        IntegerPool.clear();
+        ObjectPool.clear();
     }
 }

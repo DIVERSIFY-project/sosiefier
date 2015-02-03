@@ -3,6 +3,7 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.testamplification.CompareAmpliTest;
+import fr.inria.diversify.testamplification.compare.diff.Pool;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
@@ -81,10 +82,10 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         try {
             Map<String, Set<String>> filter = cat.loadFilter(filterFile);
             cat.filter(result,filter);
-
             diff.add(cat.toJson(result, trans));
+            Pool.reset();
         } catch (Exception e) {
-            Log.debug("");
+            Pool.reset();
         } finally {
             FileUtils.forceDelete(new File(sosieDir));
         }

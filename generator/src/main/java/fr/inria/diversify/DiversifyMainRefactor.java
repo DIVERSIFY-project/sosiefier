@@ -140,7 +140,11 @@ public class DiversifyMainRefactor {
                 break;
             }
             case "fse": {
-                abstractDiversify = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir);
+                DiversifyAndCompare dac = new DiversifyAndCompare(inputConfiguration, projet, src, testSrcDir);
+                dac.setAmplifiedTestDir(inputConfiguration.getProperty("amplifiedTestDir"));
+                dac.setOriginalLogDir(inputConfiguration.getProperty("compare.originalLog"));
+                dac.setFilterFile(inputConfiguration.getProperty("compare.filter"));
+                abstractDiversify = dac;
                 break;
             }
             case "android": {
