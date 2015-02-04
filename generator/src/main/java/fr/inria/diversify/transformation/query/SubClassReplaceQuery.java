@@ -4,7 +4,9 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.CheckReturnTransformation;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.util.Log;
 import spoon.SpoonException;
+import spoon.reflect.code.CtAssignment;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.code.CtNewClass;
 import spoon.reflect.declaration.CtClass;
@@ -13,45 +15,26 @@ import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.CtAssignmentImpl;
 
 import javax.sql.rowset.serial.SerialRef;
+import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by aelie on 03/02/15.
  */
-public class SubClassReplaceQuery extends TransformationQuery {
-    protected List<CodeFragment> instantiationStatementList;
-    protected Map<CtTypeReference, List<CtTypeReference>> subclassesBySuperclass;
+public class SubClassReplaceQuery extends TransformationQuery  {
+    protected List<CtNewClass> instantiations;
+
 
     public SubClassReplaceQuery(InputProgram inputProgram) {
         super(inputProgram);
         initFindInstantiationStatements();
-        initFindSubclasses();
     }
 
     protected void initFindInstantiationStatements() {
-        instantiationStatementList = new ArrayList<>();
-        for (CodeFragment codeFragment : getInputProgram().getCodeFragments()) {
-            if (isInstantiation(codeFragment.getCtCodeFragment())) {
-                instantiationStatementList.add(codeFragment);
-            }
-        }
-    }
-
-    protected void initFindSubclasses() {
-        subclassesBySuperclass = new HashMap<>();
-        for (CodeFragment codeFragment : getInputProgram().getCodeFragments()) {
-            if (isDeclaration(codeFragment.getCtCodeFragment())) {
-                try {
-                    CtTypeReference superclass = ((CtVariable) codeFragment.getCtCodeFragment()).getType().getSuperclass();
-                    if (!subclassesBySuperclass.containsKey(superclass)) {
-                        subclassesBySuperclass.put(superclass, new ArrayList<>());
-                    }
-                    subclassesBySuperclass.get(superclass).add(((CtVariable) codeFragment.getCtCodeFragment()).getType());
-                } catch (SpoonException se) {
-                    System.err.println("Failed somewhere with " + codeFragment.getCtCodeFragment().toString());
-                }
-            }
-        }
+        instantiations = getInputProgram().getAllElement(CtNewClass.class).stream()
+                                           .map(operator -> (CtNewClass)operator)
+                                           .collect(Collectors.toList());
     }
 
     protected boolean isDeclaration(CtCodeElement codeElement) {
@@ -72,44 +55,62 @@ public class SubClassReplaceQuery extends TransformationQuery {
 
     @Override
     public Transformation query() throws QueryException {
-        Transformation result;
+        Transformation result = null;
         Random random = new Random();
-        CodeFragment transplant = null;
-        CodeFragment transplantationPoint = instantiationStatementList.get(random.nextInt(instantiationStatementList.size() - 1));
-        CtClass instantiatedClass = ((CtNewClass) ((CtAssignmentImpl) transplantationPoint.getCtCodeFragment()).getAssignment()).getAnonymousClass();
-        CtTypeReference superClass = instantiatedClass.getSuperclass();
-
-        result = new CheckReturnTransformation(transplantationPoint, transplant);
-        result.setInputProgram(getInputProgram());
-        return result;
-        /*Transformation result;
-        Random random = new Random();
-        CodeFragment transplant = null;
-        CodeFragment transplantationPoint = null;
-        Collections.shuffle(ifStatementList, random);
-        int counter = ifStatementList.size();
-        while(transplant == null && counter-- > 0) {
-            transplantationPoint = returnStatementList.get(random.nextInt(returnStatementList.size() - 1));
-            for (CodeFragment ifCodeFragment : ifStatementList) {
-                if (transplantationPoint.getContext().getInputContext().containsAll(ifCodeFragment.getInputContext(), true)) {
-                    transplant = ifCodeFragment;
-                }
-            }
+        CtAssignment transplant = null;
+        CtNewClass transplantationPoint = instantiations.get(random.nextInt(instantiations.size()));
+        try {
+            Set<Class> subClasses = getAllSubClass(getTypeOf(transplantationPoint));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        result = new CheckReturnTransformation(transplantationPoint, transplant);
-        result.setInputProgram(getInputProgram());
 
-        return result;*/
+
+        return result;
     }
 
-    protected CodeFragment findRandomReturnToReplace(boolean withCoverage) {
-        /*Random r = new Random();
-        int size = returnStatementList.size();
-        CodeFragment stmt = returnStatementList.get(r.nextInt(size));
 
-        while (withCoverage && getInputProgram().getCoverageReport().codeFragmentCoverage(stmt) == 0)
-            stmt = returnStatementList.get(r.nextInt(size));
-        return stmt;*/
-        return null;
+    protected Class getTypeOf(CtNewClass newClass) {
+        return  newClass.getType().getActualClass();
+    }
+
+    protected List<Class> getAllClasses() throws NoSuchFieldException, IllegalAccessException {
+        return getAllClasses(Thread.currentThread().getContextClassLoader());
+    }
+
+    protected List<Class> getAllClasses(ClassLoader classLoader) throws NoSuchFieldException, IllegalAccessException {
+        Field f = ClassLoader.class.getDeclaredField("classes");
+        f.setAccessible(true);
+        List<Class> classes = new LinkedList<>();
+
+        if(classLoader.getParent() != null) {
+            classes.addAll(getAllClasses(classLoader.getParent()));
+        }
+        classes.addAll((Vector<Class>) f.get(Thread.currentThread().getContextClassLoader()));
+
+        return classes;
+    }
+
+    protected Set<Class> getAllSubClass(Class superClass) throws NoSuchFieldException, IllegalAccessException {
+
+        return getAllClasses().stream()
+                .filter(cl -> isSubClass(cl, superClass))
+                .collect(Collectors.toSet());
+    }
+
+    protected boolean isSubClass(Class subClass, Class superClass) {
+        if(!subClass.equals(Object.class)) {
+            return false;
+        }
+        if(subClass.getSuperclass().equals(superClass)) {
+            return true;
+        }
+
+        for(Class inter : subClass.getInterfaces()) {
+            if(inter.equals(superClass)) {
+                return true;
+            }
+        }
+        return isSubClass(subClass.getSuperclass(), superClass);
     }
 }

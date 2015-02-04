@@ -1,7 +1,9 @@
 package fr.inria.diversify.transformation.query;
 
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.codeFragment.Statement;
+import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.other.ShuffleCollectionBeforeReturn;
@@ -14,6 +16,7 @@ import spoon.reflect.reference.CtArrayTypeReference;
 import spoon.reflect.reference.CtVariableReference;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Simon on 04/02/15.
@@ -29,16 +32,13 @@ public class ShuffleCollectionBeforeReturnQuery extends TransformationQuery {
 
     protected void initReturn() {
         returnsCollection = new LinkedList<>();
-        returnsArray = new LinkedList<>();
+        returnsArray = allCoveredCodeFragment().stream()
+                .filter(cf -> isReturnArray(cf.getCtCodeFragment()))
+                .collect(Collectors.toList());
 
-        for (CodeFragment cf : getInputProgram().getCodeFragments()) {
-            if (isReturnCollection(cf.getCtCodeFragment()) ) {
-                returnsCollection.add(cf);
-            }
-            if (isReturnArray(cf.getCtCodeFragment()) ) {
-                returnsArray.add(cf);
-            }
-        }
+        returnsCollection = allCoveredCodeFragment().stream()
+                .filter(cf -> isReturnCollection(cf.getCtCodeFragment()))
+                .collect(Collectors.toList());
     }
 
     protected boolean isReturnCollection(CtCodeElement stmt) {
@@ -152,5 +152,13 @@ public class ShuffleCollectionBeforeReturnQuery extends TransformationQuery {
             return var.getVariable().getSimpleName();
         }
 
+    }
+
+    protected List<CodeFragment> allCoveredCodeFragment() {
+        ICoverageReport coverageReport =  getInputProgram().getCoverageReport();
+        return getInputProgram().getCodeFragments().stream()
+                .distinct()
+                .filter(cf -> coverageReport.codeFragmentCoverage(cf) != 0)
+                .collect(Collectors.toList());
     }
 }
