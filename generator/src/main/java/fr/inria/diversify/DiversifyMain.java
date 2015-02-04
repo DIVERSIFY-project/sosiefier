@@ -302,6 +302,8 @@ public class DiversifyMain {
         String type = inputConfiguration.getProperty("transformation.type").toLowerCase();
 
         switch (type) {
+            case "subclassreplace":
+                return new SubClassReplaceQuery(inputProgram);
             case "checkreturn":
                 return new CheckReturn(inputProgram);
             case "mutation":
