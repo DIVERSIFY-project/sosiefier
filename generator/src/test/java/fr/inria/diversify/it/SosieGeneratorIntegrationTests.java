@@ -44,7 +44,7 @@ public class SosieGeneratorIntegrationTests {
         try {
             MavenDependencyResolver resolver = new MavenDependencyResolver();
             resolver.DependencyResolver(c.getProjectPath() + "/pom.xml");
-            factory = new SpoonMetaFactory().buildNewFactory(c.getSourceCodeDir(), 7);
+            factory = new SpoonMetaFactory().buildNewFactory(c.getProjectPath() + "/" +c.getRelativeSourceCodeDir(), 7);
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class SosieGeneratorIntegrationTests {
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
-        inputProgram.setSourceCodeDir(c.getSourceCodeDir());
+        inputProgram.setRelativeSourceCodeDir(c.getRelativeSourceCodeDir());
         inputProgram.setPreviousTransformationsPath(c.getPreviousTransformationPath());
         inputProgram.processCodeFragments();
 

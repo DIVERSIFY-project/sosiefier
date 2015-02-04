@@ -38,7 +38,7 @@ public class KnownSosieStrategyTest {
             Factory factory = new SpoonMetaFactory().buildNewFactory(getResourcePath("easymock-light-3.2"), 5);
             inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
-            inputProgram.setSourceCodeDir(getResourcePath("easymock-light-3.2"));
+            inputProgram.setRelativeSourceCodeDir(getResourcePath("easymock-light-3.2"));
             inputProgram.setPreviousTransformationsPath(getResourcePath("easymock3.2-non-rep-index.json"));
             inputProgram.setTransformationPerRun(5);
             inputProgram.processCodeFragments();

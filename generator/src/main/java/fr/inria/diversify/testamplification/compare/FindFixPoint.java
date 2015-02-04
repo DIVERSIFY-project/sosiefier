@@ -44,4 +44,28 @@ public class FindFixPoint {
             }
         }
     }
+
+    public int nbOfFixPoint() {
+        int count = 0;
+        for(Map<Integer, Boolean[]> map : fixValue.values()) {
+            for(Boolean[] fix : map.values()) {
+                for(Boolean b : fix) {
+                    if(b) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    public int nbOfPoint() {
+        int count = 0;
+        for(Map<Integer, Boolean[]> map : fixValue.values()) {
+            for(Boolean[] fix : map.values()) {
+                count += fix.length;
+            }
+        }
+        return count;
+    }
 }

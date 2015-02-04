@@ -42,7 +42,7 @@ public class CorrectPosition {
         Factory factory = new SpoonMetaFactory().buildNewFactory(project + "/" + src, 7);
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
-        inputProgram.setSourceCodeDir(src);
+        inputProgram.setRelativeSourceCodeDir(src);
         inputProgram.setPreviousTransformationsPath(prevTransfPath);
         inputProgram.processCodeFragments();
 

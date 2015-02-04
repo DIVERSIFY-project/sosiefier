@@ -92,7 +92,7 @@ public class FromISSTAToPoolCreatorInput {
     private void test(InputConfiguration inputConfiguration) throws IllegalAccessException, InstantiationException, ClassNotFoundException, IOException, JSONException {
 
         String project = inputConfiguration.getProjectPath();
-        String src = inputConfiguration.getSourceCodeDir();
+        String src = inputConfiguration.getRelativeSourceCodeDir();
         String prevTransfPath = inputConfiguration.getPreviousTransformationPath();
         String out = inputConfiguration.getResultPath();
 
@@ -102,7 +102,7 @@ public class FromISSTAToPoolCreatorInput {
 
         InputProgram inputProgram = new InputProgram();
         inputProgram.setFactory(factory);
-        inputProgram.setSourceCodeDir(src);
+        inputProgram.setRelativeSourceCodeDir(src);
         inputProgram.setPreviousTransformationsPath(prevTransfPath);
         inputProgram.processCodeFragments();
 
@@ -196,7 +196,7 @@ public class FromISSTAToPoolCreatorInput {
 
         String project = inputConfiguration.getProjectPath();
         Log.info("Project: " + project);
-        String src = inputConfiguration.getSourceCodeDir();
+        String src = inputConfiguration.getRelativeSourceCodeDir();
         String prevTransfPath = inputConfiguration.getPreviousTransformationPath();
         Log.info("Transf path: " + prevTransfPath);
         String out = inputConfiguration.getResultPath();
@@ -252,7 +252,7 @@ public class FromISSTAToPoolCreatorInput {
 
             InputProgram inputProgram = new InputProgram();
             inputProgram.setFactory(factory);
-            inputProgram.setSourceCodeDir(src);
+            inputProgram.setRelativeSourceCodeDir(src);
             inputProgram.setPreviousTransformationsPath(prevTransfPath);
             inputProgram.processCodeFragments();
 

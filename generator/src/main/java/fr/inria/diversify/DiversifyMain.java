@@ -273,7 +273,7 @@ public class DiversifyMain {
         inputProgram = new InputProgram();
         inputConfiguration.setInputProgram(inputProgram);
         inputProgram.setProgramDir(inputConfiguration.getProperty("project"));
-        inputProgram.setSourceCodeDir(inputConfiguration.getSourceCodeDir());
+        inputProgram.setRelativeSourceCodeDir(inputConfiguration.getRelativeSourceCodeDir());
 
         if(inputConfiguration.getProperty("externalSrc") != null) {
             List<String> list = Arrays.asList(inputConfiguration.getProperty("externalSrc").split(System.getProperty("path.separator")));
@@ -443,7 +443,7 @@ public class DiversifyMain {
 
 
     protected void initSpoon() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        String sourcesDir = inputProgram.getSourceCodeDir();
+        String sourcesDir = inputProgram.getAbsoluteSourceCodeDir();
         if(inputProgram.getExternalSourceCodeDir() != null) {
             sourcesDir += System.getProperty("path.separator") + inputProgram.getExternalSourceCodeDir();
         }

@@ -125,8 +125,8 @@ public class InputConfiguration {
      *
      * @return String with the path
      */
-    public String getSourceCodeDir() {
-        return getAbsolutePath(prop.getProperty("project") + "/" + prop.getProperty("src"));
+    public String getRelativeSourceCodeDir() {
+        return prop.getProperty("src");
     }
 
 
@@ -277,7 +277,7 @@ public class InputConfiguration {
      */
     public boolean validate() {
         checkPath("Project path", getProjectPath(), true);
-        checkPath("Source path", getSourceCodeDir(), true);
+        checkPath("Source path", getProjectPath() + "/"+ getResultPath() , true);
         checkPath("Previous transformation path", getPreviousTransformationPath(), false);
         checkPath("Coverage dir", getCoverageDir(), false);
         checkPath("Root dir", getRootPath(), false);
