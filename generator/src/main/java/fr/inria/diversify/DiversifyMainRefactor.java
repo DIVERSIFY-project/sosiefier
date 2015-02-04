@@ -258,6 +258,8 @@ public class DiversifyMainRefactor {
                 return new CheckReturnQuery(inputProgram);
             case "checkreturn":
                 return new CheckReturn(inputProgram);
+            case "shufflecollectionbeforereturn":
+                return new ShuffleCollectionBeforeReturnQuery(inputProgram);
             case "mutation":
                 return new MutationQuery(inputProgram);
             case "shuffle":

@@ -135,7 +135,7 @@ public abstract class TransformationQuery {
 
     protected String type;
 
-    private InputProgram inputProgram;
+    protected InputProgram inputProgram;
 
     List<Transformation> transformations;
 
