@@ -28,12 +28,6 @@ public class ShuffleStmtQuery extends TransformationQuery {
         coverageReport = inputProgram.getCoverageReport();
     }
 
-
-    @Override
-    public void setType(String type) {
-
-    }
-
     @Override
     public Transformation query() {
         ShuffleStmtTransformation sst = new ShuffleStmtTransformation();

@@ -33,11 +33,6 @@ public class FromListQuery extends TransformationQuery {
     }
 
     @Override
-    public void setType(String type) {
-
-    }
-
-    @Override
     public Transformation query() throws QueryException {
         int index = 0;
         if(shuffle) {

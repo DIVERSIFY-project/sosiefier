@@ -67,11 +67,6 @@ public class MutationQuery extends TransformationQuery {
     }
 
     @Override
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
     public Transformation query() {
         try {
             Random r = new Random();

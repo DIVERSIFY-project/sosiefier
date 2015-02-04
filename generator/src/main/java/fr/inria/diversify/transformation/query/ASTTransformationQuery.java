@@ -65,11 +65,6 @@ public class ASTTransformationQuery extends TransformationQuery {
 
 
     @Override
-    public void setType(String type) {
-
-    }
-
-    @Override
     public Transformation query() throws QueryException {
         try {
             Random r = new Random();

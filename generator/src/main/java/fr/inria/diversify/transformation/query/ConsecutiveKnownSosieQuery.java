@@ -50,13 +50,6 @@ public class ConsecutiveKnownSosieQuery extends TransformationQuery {
         }
     }
 
-
-
-    @Override
-    public void setType(String type) {
-
-    }
-
     @Override
     public Transformation query() {
         Transformation t = sosies.get(currentTrial);

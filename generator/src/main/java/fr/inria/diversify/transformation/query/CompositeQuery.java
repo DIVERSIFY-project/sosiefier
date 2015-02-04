@@ -31,9 +31,6 @@ public class CompositeQuery extends TransformationQuery  {
     }
 
     @Override
-    public void setType(String type) {}
-
-    @Override
     public Transformation query() {
         try {
             Transformation transformation = null;

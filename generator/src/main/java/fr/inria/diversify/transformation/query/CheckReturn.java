@@ -81,12 +81,6 @@ public class CheckReturn extends ASTTransformationQuery {
         return stmt instanceof CtThrow;
     }
 
-    @Override
-    public void setType(String type) {
-
-    }
-
-
     protected ASTReplace transformation() throws Exception {
         ASTReplace tf = new ASTReplace();
         CodeFragment transplantationPoint = null;

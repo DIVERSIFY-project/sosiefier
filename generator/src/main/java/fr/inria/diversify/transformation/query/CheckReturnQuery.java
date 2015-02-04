@@ -66,11 +66,6 @@ public class CheckReturnQuery extends TransformationQuery {
     }
 
     @Override
-    public void setType(String type) {
-        //done
-    }
-
-    @Override
     public Transformation query() throws QueryException {
         Transformation result;
         Random random = new Random();

@@ -26,9 +26,7 @@ import java.util.List;
  */
 public class ByteCodeTransformationQuery extends TransformationQuery {
     protected List<CtMethod> methods;
-    protected String type = "replace";
     protected ICoverageReport coverageReport;
-    private InputProgram inputProgram;
 
     public ByteCodeTransformationQuery(InputProgram inputProgram) throws NotFoundException {
         super(inputProgram);
@@ -39,28 +37,15 @@ public class ByteCodeTransformationQuery extends TransformationQuery {
     }
 
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Override
     public Transformation query() {
         try {
-            String type = this.type;
-            if (type == null) {
-                Random r = new Random();
-                int i = r.nextInt(3);
-                if (i == 0) { type = "replace"; }
-                if (i == 1) { type = "add"; }
-                if (i == 2) { type = "delete"; }
-            }
 
-            if (type.equals("replace")) { return replace(); }
-
-            if (type.equals("add")) { return add(); }
-
-            if (type.equals("delete")) { return delete(); }
-
+            Random r = new Random();
+            int i = r.nextInt(3);
+            if (i == 0) {  return replace(); }
+            if (i == 1) { return add(); }
+            if (i == 2) { return delete(); }
             return null;
         } catch (Exception e) {
             throw new RuntimeException(e);

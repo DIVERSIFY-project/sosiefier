@@ -16,9 +16,6 @@ import java.util.*;
  */
 public abstract class TransformationQuery {
 
-
-
-
     /**
      * A class containing data and logic to help increase the speed of the search process of a previously found
      * transformation
@@ -133,7 +130,6 @@ public abstract class TransformationQuery {
 
     protected HashMap<Integer, HashSet<TransformationFoundRecord>> transformationFounds;
 
-    protected String type;
 
     protected InputProgram inputProgram;
 
@@ -172,7 +168,6 @@ public abstract class TransformationQuery {
         transformationFounds = new HashMap<>();
     }
 
-    public abstract void setType(String type);
 
     public abstract Transformation query() throws QueryException;
 

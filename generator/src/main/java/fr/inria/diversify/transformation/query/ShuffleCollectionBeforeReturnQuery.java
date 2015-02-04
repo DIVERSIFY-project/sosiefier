@@ -96,11 +96,6 @@ public class ShuffleCollectionBeforeReturnQuery extends TransformationQuery {
     }
 
     @Override
-    public void setType(String type) {
-
-    }
-
-    @Override
     public Transformation query() throws QueryException {
         ShuffleCollectionBeforeReturn transformation = new ShuffleCollectionBeforeReturn();
         CodeFragment transplantationPoint;

@@ -38,12 +38,6 @@ public class MutationToSosieQuery extends TransformationQuery {
         mutations = new ArrayList(tf.parseDir(mutationDirectory));
     }
 
-
-    @Override
-    public void setType(String type) {
-
-    }
-
     public Transformation query() throws QueryException {
         Random r = new Random();
         Transformation mutation = null;

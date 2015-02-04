@@ -25,11 +25,6 @@ public class OtherQuery extends TransformationQuery {
     }
 
     @Override
-    public void setType(String type) {
-
-    }
-
-    @Override
     public Transformation query() {
         return getEmptyMethodBody();
     }

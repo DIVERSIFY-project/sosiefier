@@ -141,26 +141,6 @@ public class KnownSosieQuery extends TransformationQuery {
                 }
             });
         }
-
-        /*
-        HashSet<String> setPos = new HashSet<>();
-        ArrayList<SosieWithCoverage> overlap = new ArrayList<>();
-
-        for ( int i = sosies.size() - 1; i >= 0; i-- ) {
-            String pos = ((ASTTransformation)sosies.get(i).transformation).
-                    getTransplantationPoint().getCtCodeFragment().getPosition().toString();
-            if ( !setPos.contains(pos) ) {
-                System.out.println(sosies.get(i).coverage.size() + ", " + pos);
-                setPos.add(pos);
-            }
-        }
-        System.out.println("OverlapEnd");
-        */
-    }
-
-    @Override
-    public void setType(String type) {
-
     }
 
     @Override

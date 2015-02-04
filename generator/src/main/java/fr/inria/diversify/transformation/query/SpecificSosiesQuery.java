@@ -42,11 +42,6 @@ public class SpecificSosiesQuery extends TransformationQuery {
     }
 
     @Override
-    public void setType(String type) {
-
-    }
-
-    @Override
     public Transformation query() throws QueryException {
         return null;
     }
