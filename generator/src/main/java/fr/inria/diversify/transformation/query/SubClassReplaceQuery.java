@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
  */
 public class SubClassReplaceQuery extends TransformationQuery  {
     protected List<CtNewClass> instantiations;
+    protected List<Class> allClasses;
 
 
     public SubClassReplaceQuery(InputProgram inputProgram) {
@@ -32,10 +33,23 @@ public class SubClassReplaceQuery extends TransformationQuery  {
     }
 
     protected void initFindInstantiationStatements() {
+        try {
+            getAllSubClass(Map.class);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         instantiations = getInputProgram().getAllElement(CtNewClass.class).stream()
-                                           .map(operator -> (CtNewClass)operator)
-                                           .collect(Collectors.toList());
-    }
+                                           .map(operator -> (CtNewClass) operator)
+                                            .filter(newClass -> {
+                                                try {
+                                                    return getAllSubClass(getTypeOf(newClass)).size() > 1;
+                                                } catch (Exception e) {
+                                                    return false;
+                                                }
+                                            }).collect(Collectors.toList());
+                                            }
 
     protected boolean isDeclaration(CtCodeElement codeElement) {
         if (codeElement instanceof CtVariable) {
@@ -55,9 +69,11 @@ public class SubClassReplaceQuery extends TransformationQuery  {
 
     @Override
     public Transformation query() throws QueryException {
+
+
         Transformation result = null;
         Random random = new Random();
-        CtAssignment transplant = null;
+//        CtAssignment transplant = null;
         CtNewClass transplantationPoint = instantiations.get(random.nextInt(instantiations.size()));
         try {
             Set<Class> subClasses = getAllSubClass(getTypeOf(transplantationPoint));
@@ -75,7 +91,10 @@ public class SubClassReplaceQuery extends TransformationQuery  {
     }
 
     protected List<Class> getAllClasses() throws NoSuchFieldException, IllegalAccessException {
-        return getAllClasses(Thread.currentThread().getContextClassLoader());
+        if(allClasses == null) {
+            allClasses = getAllClasses(Thread.currentThread().getContextClassLoader());
+        }
+        return allClasses;
     }
 
     protected List<Class> getAllClasses(ClassLoader classLoader) throws NoSuchFieldException, IllegalAccessException {
@@ -86,12 +105,20 @@ public class SubClassReplaceQuery extends TransformationQuery  {
         if(classLoader.getParent() != null) {
             classes.addAll(getAllClasses(classLoader.getParent()));
         }
-        classes.addAll((Vector<Class>) f.get(Thread.currentThread().getContextClassLoader()));
-
+        classes.addAll((Vector<Class>) f.get(classLoader));
         return classes;
     }
 
     protected Set<Class> getAllSubClass(Class superClass) throws NoSuchFieldException, IllegalAccessException {
+
+        for(Class cl : getAllClasses()) {
+            try {
+                isSubClass(cl, superClass);
+            } catch ( Exception e) {
+                e.printStackTrace();
+                Log.debug("");
+            }
+        }
 
         return getAllClasses().stream()
                 .filter(cl -> isSubClass(cl, superClass))
@@ -99,18 +126,21 @@ public class SubClassReplaceQuery extends TransformationQuery  {
     }
 
     protected boolean isSubClass(Class subClass, Class superClass) {
-        if(!subClass.equals(Object.class)) {
+        if(subClass.equals(Object.class)) {
             return false;
         }
-        if(subClass.getSuperclass().equals(superClass)) {
-            return true;
-        }
-
         for(Class inter : subClass.getInterfaces()) {
             if(inter.equals(superClass)) {
                 return true;
             }
         }
-        return isSubClass(subClass.getSuperclass(), superClass);
+        if(subClass.isInterface()) {
+            return false;
+        } else {
+            if(subClass.getSuperclass().equals(superClass)) {
+                return true;
+            }
+            return isSubClass(subClass.getSuperclass(), superClass);
+        }
     }
 }

@@ -19,6 +19,8 @@ import fr.inria.diversify.util.Log;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Level;
+import spoon.Launcher;
 import spoon.reflect.factory.Factory;
 
 import java.io.File;
@@ -412,6 +414,7 @@ public class DiversifyMainRefactor {
     }
 
     protected void initLogLevel() {
+        Launcher.logger.setLevel(Level.OFF);
         int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
         Log.set(level);
 
