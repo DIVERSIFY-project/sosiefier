@@ -74,19 +74,19 @@ public class DiversifyAndCompare extends SinglePointDiversify {
 
     protected void compare(Transformation trans) throws IOException, JSONException, InterruptedException {
         String sosieDir = copySosieProgram();
-        copyTestAndLogger(sosieDir);
-        runSosie(sosieDir);
-        CompareAmpliTest cat = new CompareAmpliTest();
-
-        List<TestDiff> result = cat.compare(originalLogDir, sosieDir + "/log");
         try {
+            copyTestAndLogger(sosieDir);
+            runSosie(sosieDir);
+            CompareAmpliTest cat = new CompareAmpliTest();
+
+            List<TestDiff> result = cat.compare(originalLogDir, sosieDir + "/log");
+
             Map<String, Set<String>> filter = cat.loadFilter(filterFile);
             cat.filter(result,filter);
             diff.add(cat.toJson(result, trans));
             Pool.reset();
-        } catch (Exception e) {
-            Pool.reset();
         } finally {
+            Pool.reset();
             FileUtils.forceDelete(new File(sosieDir));
         }
 
