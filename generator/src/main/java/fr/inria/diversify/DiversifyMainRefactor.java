@@ -15,12 +15,10 @@ import fr.inria.diversify.statistic.CVLMetric;
 import fr.inria.diversify.statistic.StatisticDiversification;
 import fr.inria.diversify.transformation.*;
 import fr.inria.diversify.transformation.query.*;
-import fr.inria.diversify.util.GitUtils;
 import fr.inria.diversify.util.Log;
 import fr.inria.diversify.visu.Visu;
 import javassist.NotFoundException;
 import org.apache.commons.io.FileUtils;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import spoon.reflect.factory.Factory;
 
 import java.io.File;
@@ -57,7 +55,6 @@ public class DiversifyMainRefactor {
         initLogLevel();
         initDependency();
         initInputProgram();
-//        initRepo();
         initSpoon();
         TransformationQuery query = initTransformationQuery();
 
@@ -65,32 +62,17 @@ public class DiversifyMainRefactor {
         runner.setTransformationQuery(query);
         AbstractBuilder builder = initBuilder(runner.getTmpDir());
         runner.setBuilder(builder);
-        int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
-        runner.run(n);
 
-        String repo = inputConfiguration.getProperty("gitRepository");
-
-        if (repo.equals("null")) {
-            runner.printResult(inputConfiguration.getProperty("result"));
-        } else {
-            runner.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
+        try {
+            int n = Integer.parseInt(inputConfiguration.getProperty("nbRun"));
+            runner.run(n);
+        } finally {
+            writeResult(runner);
+            runner.deleteTmpFiles();
         }
-
-
-        runner.deleteTmpFiles();
 
         if (inputConfiguration.getProperty("stat").equals("true")) {
             computeStatistic();
-        }
-    }
-
-    protected void initRepo() throws GitAPIException, IOException {
-        String repo = inputConfiguration.getProperty("gitRepository");
-
-        if(repo != null) {
-            Log.debug("clone https://github.com/simonAllier/sosie-exp.git in {}", repo);
-            GitUtils gitUtils = new GitUtils(repo);
-            gitUtils.cloneRepo();
         }
     }
 
@@ -156,9 +138,9 @@ public class DiversifyMainRefactor {
         }
 
 
-        String tmpDir = abstractDiversify.init(projet, inputConfiguration.getProperty("tmpDir"));
+      abstractDiversify.init(projet, inputConfiguration.getProperty("tmpDir"));
         abstractDiversify.setSosieSourcesDir(sosieDir);
-        abstractDiversify.setBuilder(initBuilder(tmpDir));
+//        abstractDiversify.setBuilder(initBuilder(tmpDir));
         abstractDiversify.setResultDir(resultDir);
 
         return abstractDiversify;
@@ -185,14 +167,13 @@ public class DiversifyMainRefactor {
 
             initTimeOut(rb);
 
-            String pomFile = inputConfiguration.getProperty("newPomFile");
-            if (!pomFile.equals("")) {
-                rb.initPom(pomFile);
-            }
-
-            rb.copyClasses(inputConfiguration.getProperty("classes"));
-            rb.initTimeOut();
-//            rb.setGoals(new String[]{"test"});
+//            String pomFile = inputConfiguration.getProperty("newPomFile");
+//            if (!pomFile.equals("")) {
+//                rb.initPom(pomFile);
+//            }
+//
+//            rb.copyClasses(inputConfiguration.getProperty("classes"));
+//            rb.initTimeOut();
         } else { //builder == ant
             rb = new AntBuilder(directory, inputConfiguration.getProperty("builder.testTarget"));
             rb.setGoals(new String[]{"clean", inputConfiguration.getProperty("builder.testTarget")});
@@ -420,6 +401,15 @@ public class DiversifyMainRefactor {
         return types;
     }
 
+    protected void writeResult(AbstractDiversify runner) {
+        String repo = inputConfiguration.getProperty("gitRepository");
+
+        if (repo.equals("null")) {
+            runner.printResult(inputConfiguration.getProperty("result"));
+        } else {
+            runner.printResultInGitRepo(inputConfiguration.getProperty("result"), repo);
+        }
+    }
 
     protected void initLogLevel() {
         int level = Integer.parseInt(inputConfiguration.getProperty("logLevel"));
