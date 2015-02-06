@@ -36,7 +36,7 @@ public class JsonFailuresInput extends JsonSectionInput {
                 failures.put(failuresJson.getInt(n), n);
             }
         } catch (JSONException e) {
-            throw new PersistenceException(e);
+            throwError("Unexpected JSON error ", e, true);
         }
     }
 

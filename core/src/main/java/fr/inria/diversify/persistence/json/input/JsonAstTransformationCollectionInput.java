@@ -10,12 +10,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.NAME;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
 
 /**
  * Class to read the transformations object in the JSONArray
- * <p>
+ * <p/>
  * Created by marodrig on 12/01/2015.
  */
 public class JsonAstTransformationCollectionInput extends JsonSectionInput {
@@ -28,27 +29,35 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
 
     @Override
     public void read(HashMap<Integer, Transformation> transformations) {
+
+        JSONArray tr = null;
         try {
-            if (getJsonObject().has(TRANSFORMATIONS)) {
-                JSONArray tr = getJsonObject().getJSONArray(TRANSFORMATIONS);
+            tr = getJsonObject().getJSONArray(TRANSFORMATIONS);
+        } catch (JSONException e) {
+            throwError("Unable to obtain the transformations object", e, true);
+        }
+        Collection<JsonAstTransformationInput> sections = buildSections();
 
-                Collection<JsonAstTransformationInput> sections = buildSections();
-
-                for ( int i = 0; i < tr.length(); i++ ) {
-                    JSONObject obj = tr.getJSONObject(i);
-                    for ( JsonAstTransformationInput si : sections ) {
-                        if ( si.canRead(TRANSFORMATIONS + "." + obj.getString(NAME)) ) {
-                            si.setJsonObject(obj);
-                            si.setFailures(getFailures());
-                            si.read(transformations);
-                        }
+        for (int i = 0; i < tr.length(); i++) {
+            try {
+                JSONObject obj = tr.getJSONObject(i);
+                for (JsonAstTransformationInput si : sections) {
+                    if (si.canRead(TRANSFORMATIONS + "." + obj.getString(NAME))) {
+                        si.setJsonObject(obj);
+                        si.setFailures(getFailures());
+                        si.read(transformations);
                     }
                 }
+            } catch (PersistenceException pe) {
+                throwError("Unable to parse Transformation  " + i, pe, false);
+            } catch (JSONException e) {
+                throwError("Unable to parse Transformation " + i, e, false);
             }
-        } catch (JSONException e) {
-            throw new PersistenceException("Unable to obtain the transformations object", e);
         }
+
+
     }
+
 
     private Collection<JsonAstTransformationInput> buildSections() {
         ArrayList<JsonAstTransformationInput> sections = new ArrayList<>();

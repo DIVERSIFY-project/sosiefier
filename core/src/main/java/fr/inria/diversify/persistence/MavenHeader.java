@@ -13,42 +13,45 @@ public class MavenHeader extends Header {
 
     public static final String VERSION = "version";
 
+    public static final String GENERATOR_VERSION = "generatorVersion";
+
+    /*
     private String groupId;
 
     private String artifactId;
 
-    private String version;
+    private String version;*/
 
     /**
      * Id of the artifact's group
-     */
+
     public String getGroupId() {
         return groupId;
     }
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
-    }
+    } */
 
     /**
      * Artifact's id
-     */
+
     public String getArtifactId() {
         return artifactId;
     }
 
     public void setArtifactId(String artifactId) {
         this.artifactId = artifactId;
-    }
+    }*/
 
     /**
      * Artifact's version
-     */
+
     public String getVersion() {
         return version;
     }
 
     public void setVersion(String version) {
         this.version = version;
-    }
+    }*/
 }

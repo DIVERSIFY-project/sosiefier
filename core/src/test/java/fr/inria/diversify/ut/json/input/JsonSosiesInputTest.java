@@ -1,9 +1,12 @@
 package fr.inria.diversify.ut.json.input;
 
 import fr.inria.diversify.diversification.InputProgram;
+import fr.inria.diversify.persistence.json.input.JsonHeaderInput;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
+import fr.inria.diversify.persistence.json.output.JsonHeaderOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.ut.MockInputProgram;
+import fr.inria.diversify.ut.json.output.JsonHeaderOutputTest;
 import fr.inria.diversify.ut.json.output.JsonSosieOutputForUT;
 import mockit.Mocked;
 import org.junit.Test;
@@ -18,9 +21,7 @@ import java.util.List;
 
 import static fr.inria.diversify.ut.json.SectionTestUtils.assertEqualsTransformation;
 import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformations;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by marodrig on 14/01/2015.
@@ -50,14 +51,21 @@ public class JsonSosiesInputTest {
         //Write the transformations
         InputProgram p = new MockInputProgram();
         List<Transformation> t = createTransformations(p);
-        JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon");
+        JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
+                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_POM);
         out.write(); //We need to mock the File writer so no writing to file is done
 
         //Read the transformations
         InputStreamReader r = new InputStreamReader(
                 new ByteArrayInputStream(out.getJSONObject().toString().getBytes(StandardCharsets.UTF_8)));
         JsonSosiesInput input = new JsonSosiesInput(r, p);
+
+        //Mock the header section
+        input.setSection(JsonHeaderInput.class, new JsonHeaderInputTest.JsonHeaderInputForUT());
         ArrayList<Transformation> result = new ArrayList<>(input.read());
+
+        //Assert that the header was properly read
+        assertNotNull(input.getHeader());
 
 
         //Sort them so we can test pair wise. Sorting by type make sense because

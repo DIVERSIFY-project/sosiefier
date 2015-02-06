@@ -1,7 +1,5 @@
 package fr.inria.diversify.persistence;
 
-import org.json.JSONException;
-
 /**
  * Created by marodrig on 08/01/2015.
  */

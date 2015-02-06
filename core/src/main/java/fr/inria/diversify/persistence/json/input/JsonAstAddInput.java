@@ -5,14 +5,11 @@ import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.transformation.ast.ASTAdd;
-import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 
@@ -47,12 +44,12 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
 
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);
             CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
-            if ( cf == null ) throw new PersistenceException("Unable to find code fragment");
+            logCfStatus(transf, cf, cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
             transf.setTransplantationPoint(cf);
 
             cfJson = getJsonObject().getJSONObject(TRANSPLANT);
             cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
-            if ( cf == null ) throw new PersistenceException("Unable to find code fragment");
+            logCfStatus(transf, cf, cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
             transf.setTransplant(cf);
         } catch (JSONException e) {
             throw new PersistenceException("Unable to parse delete transformation", e);
@@ -69,6 +66,6 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
     public boolean canRead(String s) {
         String[] r = s.split("\\.");
         if ( r.length != 2 ) return false;
-        return  r[0].equals(TRANSFORMATIONS) && r[1].contains("add");
+        return  r[0].equals(TRANSFORMATIONS) && r[1].toLowerCase().contains("add");
     }
 }

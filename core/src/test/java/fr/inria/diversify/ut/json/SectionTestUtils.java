@@ -13,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;

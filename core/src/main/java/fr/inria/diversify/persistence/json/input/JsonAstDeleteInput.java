@@ -1,5 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
@@ -40,7 +41,9 @@ public class JsonAstDeleteInput extends JsonAstTransformationInput {
         try {
             ASTDelete transf = (ASTDelete)get(transformations); //add the transformation to the transformations map if not present
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);
-            transf.setTransplantationPoint(getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE)));
+            CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
+            logCfStatus(transf, cf, cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
+            transf.setTransplantationPoint(cf);
         } catch (JSONException e) {
             throw new PersistenceException("Unable to parse delete transformation", e);
         }
@@ -56,6 +59,6 @@ public class JsonAstDeleteInput extends JsonAstTransformationInput {
     public boolean canRead(String s) {
         String[] r = s.split("\\.");
         if ( r.length != 2 ) return false;
-        return  r[0].equals(TRANSFORMATIONS) && r[1].equals("delete");
+        return  r[0].equals(TRANSFORMATIONS) && r[1].toLowerCase().equals("delete");
     }
 }

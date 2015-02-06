@@ -2,9 +2,7 @@ package fr.inria.diversify.persistence.json.input;
 
 import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import org.json.JSONException;
@@ -35,22 +33,24 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
     @Override
     public void read(HashMap<Integer, Transformation> transformations) {
 
+        ASTReplace transf = null;
         try {
-            ASTReplace transf = (ASTReplace) get(transformations); //add the transformation to the transformations map if not present
+            transf = (ASTReplace) get(transformations); //add the transformation to the transformations map if not present
 
             JSONObject cfJson = getJsonObject().getJSONObject(TRANSPLANT_POINT);
             CodeFragment cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
-            if ( cf == null ) throw new PersistenceException("Unable to find code fragment");
+            logCfStatus(transf, cf, cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
             transf.setTransplantationPoint(cf);
 
             cfJson = getJsonObject().getJSONObject(TRANSPLANT);
             cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
-            if ( cf == null ) throw new PersistenceException("Unable to find code fragment");
+            logCfStatus(transf, cf, cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
             transf.setTransplant(cf);
 
             transf.setVarMapping(getVarMap(getJsonObject().getJSONObject(VARIABLE_MAP)));
         } catch (JSONException e) {
-            throw new PersistenceException("Unable to parse replace transformation", e);
+            String s = "JsonAstReplaceInput::read Unable to parse replace transformation from json object";
+            throwError(getTransformationErrorString(transf, s), e);
         }
     }
 
@@ -64,6 +64,6 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
     public boolean canRead(String s) {
         String[] r = s.split("\\.");
         if ( r.length != 2 ) return false;
-        return  r[0].equals(TRANSFORMATIONS) && r[1].contains("replace");
+        return  r[0].equals(TRANSFORMATIONS) && r[1].toLowerCase().contains("replace");
     }
 }

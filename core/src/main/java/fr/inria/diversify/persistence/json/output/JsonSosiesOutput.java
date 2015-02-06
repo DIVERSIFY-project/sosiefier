@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by marodrig on 09/01/2015.
@@ -21,12 +23,64 @@ public class JsonSosiesOutput {
 
     private final Collection<Transformation> transformations;
 
-    private final String path;
+    private final String outputPath;
 
-    public JsonSosiesOutput(Collection<Transformation> transformations, String path) {
+    private List<JsonAstTransformationOutput> astSections;
+
+    /**
+     * Customizable sections by the user of the output
+     */
+    private HashMap<Class<? extends JsonSectionOutput>, JsonSectionOutput> visibleSections;
+
+    /**
+     * Saves the sosies with version information
+     *
+     * @param transformations Transformations to be stored
+     * @param outPutPath      Path where the sosies are going to be stored
+     * @param srcPOM          POM's path for the project where the sosies are extracted
+     * @param generatorPOM    POM of the sosies generator
+     */
+    public JsonSosiesOutput(Collection<Transformation> transformations, String outPutPath,
+                            String srcPOM, String generatorPOM) {
+        initSections(srcPOM, generatorPOM);
         this.transformations = transformations;
-        this.path = path;
+        this.outputPath = outPutPath;
         outputObject = new JSONObject();
+    }
+
+    /**
+     * Init sections
+     * @param srcPOM
+     * @param generatorPOM
+     */
+    private void initSections(String srcPOM, String generatorPOM) {
+        astSections = Arrays.asList(new JsonAstTransformationOutput[]{
+                        new JsonAstReplaceOutput(),
+                        new JsonAstAddOutput(),
+                        new JsonAstDeleteOutput(),
+                });
+        visibleSections = new HashMap<>();
+        for (JsonSectionOutput s : astSections) visibleSections.put(s.getClass(), s);
+        JsonHeaderOutput s = new JsonHeaderOutput(srcPOM, generatorPOM);
+        visibleSections.put(JsonHeaderOutput.class, new JsonHeaderOutput(srcPOM, generatorPOM));
+    }
+
+    /**
+     * Sets a section in the list of sections.
+     * There is only one section per class in the output object
+     * @param section Output Section to be set
+     */
+    public void setSection(Class<? extends JsonSectionOutput> aClass, JsonSectionOutput section) {
+        visibleSections.put(aClass, section);
+    }
+
+    /**
+     * Get the section from the list
+     * @param aClass
+     * @return
+     */
+    public JsonSectionOutput getSection(Class<? extends JsonSectionOutput> aClass){
+        return visibleSections.get(aClass.getClass());
     }
 
     /**
@@ -37,23 +91,22 @@ public class JsonSosiesOutput {
         int id = 0;
         for (Transformation t : transformations) t.setIndex(id++);
 
+
         //Write failures to file
         JsonFailuresOutput failures = new JsonFailuresOutput();
         failures.setTransformations(transformations);
         failures.write(outputObject);
 
-        Collection<JsonAstTransformationOutput> sections = Arrays.asList(new JsonAstTransformationOutput[]{
-                new JsonAstReplaceOutput(),
-                new JsonAstAddOutput(),
-                new JsonAstDeleteOutput()
-        });
 
         //Write transformations to file
-        for (JsonAstTransformationOutput s : sections) {
+        for (JsonAstTransformationOutput s : astSections) {
             s.setTransformations(transformations);
             s.setFailuresDict(failures.getFailuresDict());
             s.write(outputObject);
         }
+
+        //Write the header
+        visibleSections.get(JsonHeaderOutput.class).write(outputObject);
     }
 
     /**
@@ -64,7 +117,7 @@ public class JsonSosiesOutput {
         writeToJson();
 
         try {
-            FileWriter fw = new FileWriter(path);
+            FileWriter fw = new FileWriter(outputPath);
             outputObject.write(fw);
             fw.close();
         } catch (IOException | JSONException e) {

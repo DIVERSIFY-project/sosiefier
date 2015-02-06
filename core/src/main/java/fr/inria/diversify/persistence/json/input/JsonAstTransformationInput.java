@@ -1,5 +1,6 @@
 package fr.inria.diversify.persistence.json.input;
 
+import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
@@ -11,8 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.STATUS;
-import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TINDEX;
+import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
 
 /**
  * Created by marodrig on 12/01/2015.
@@ -30,6 +30,47 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
     }
 
     protected abstract ASTTransformation build();
+
+    /**
+     * Prepend the error message with the transformation index
+     * @param transf Transformation
+     * @param s Error message
+     * @return
+     */
+    protected String getTransformationErrorString(ASTTransformation transf, String s) {
+        if (transf != null) return  "Transformation " + transf.getIndex() + " " + s;
+        return s;
+    }
+
+    /**
+     * Log the status of the JSON loading of a Code fragment for a transformation
+     * @param ast
+     * @param cf
+     * @param src
+     * @param pos
+     */
+    protected void logCfStatus(ASTTransformation ast, CodeFragment cf, String src, String pos) {
+        StringBuilder sb = new StringBuilder("");
+
+        if ( cf == null ) {
+            if ( ast != null ) sb.append("Transf " + ast.getIndex());
+            sb.append(". Unable to find code fragment " + src + " at " + pos);
+            String s = sb.toString();
+            if ( !s.equals("") ) throwError(s, null);
+        }
+        else {
+            if ( ast != null ) sb.append("Transf " + ast.getIndex());
+            if ( !cf.positionString().equals(pos) )  {
+                sb.append(". Storage position:" + pos + " found: " + cf.positionString());
+            }
+            if ( !cf.equalString().equals(src) ) {
+                sb.append(". Storage source:" + src + " found: " + cf.equalString());
+            }
+            String s = sb.toString();
+            if ( !s.equals("") ) throwWarning(s, null, false);
+        }
+
+    }
 
     /**
      * gets data from the JSON  object into the transformation object

@@ -22,10 +22,7 @@ public class JsonHeaderInput extends JsonSectionInput {
     public static final String GROUP_ID_DONT_MATCH = "This project group ID don't match with the one of the sosies!";
     public static final String ARTIFACT_DONT_MATCH = "This project artifact ID don't match with the one of the sosies!";
     public static final String VERSION_DONT_MATCH = "This project version don't match with the one of the sosies!";
-    /**
-     * Path where the project lives
-     */
-    private String projectPath;
+    public static final String GENERATOR_VERSION_DONT_MATCH = "The generator used to create this file is unknown!";
 
     /**
      * Resulting header of the input operation
@@ -34,12 +31,14 @@ public class JsonHeaderInput extends JsonSectionInput {
 
     public JsonHeaderInput(InputProgram inputProgram, JSONObject jsonObject) {
         super(inputProgram, jsonObject);
-        projectPath = inputProgram.getProgramDir();
     }
 
     @Override
     public void read(HashMap<Integer, Transformation> transformations) {
         try {
+
+            String projectPath = getInputProgram().getProgramDir();
+
             header = null;
 
             JSONObject h = getJsonObject().getJSONObject(Header.HEADER);
@@ -51,6 +50,7 @@ public class JsonHeaderInput extends JsonSectionInput {
                 header.setGroupId(h.getString(MavenHeader.GROUP_ID));
                 header.setArtifactId(h.getString(MavenHeader.ARTIFACT_ID));
                 header.setVersion(h.getString(MavenHeader.VERSION));
+                header.setGeneratorVersion(h.getString(MavenHeader.GENERATOR_VERSION));
 
                 //Verify
                 Reader reader = getReader(projectPath + "/pom.xml");
@@ -60,18 +60,18 @@ public class JsonHeaderInput extends JsonSectionInput {
                 ret = new MavenProject(model);
 
                 if ( !header.getGroupId().equals(ret.getGroupId()) )
-                    getErrors().add(GROUP_ID_DONT_MATCH);
+                    throwError(GROUP_ID_DONT_MATCH, null, false);
                 if ( !header.getArtifactId().equals(ret.getArtifactId()) )
-                    getErrors().add(ARTIFACT_DONT_MATCH);
+                    throwError(ARTIFACT_DONT_MATCH, null, false);
                 if ( !header.getVersion().equals(ret.getVersion()) )
-                    getErrors().add(VERSION_DONT_MATCH);
+                    throwError(VERSION_DONT_MATCH, null, false);
                 reader.close();
             }
             if ( header != null )
                 header.setTransformationCount(h.getInt(Header.TRANSF_COUNT));
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throwError("Unexpected exception", e, true);
         }
     }
 
@@ -81,14 +81,6 @@ public class JsonHeaderInput extends JsonSectionInput {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public String getProjectPath() {
-        return projectPath;
-    }
-
-    public void setProjectPath(String projectPath) {
-        this.projectPath = projectPath;
     }
 
     public Header getHeader() {

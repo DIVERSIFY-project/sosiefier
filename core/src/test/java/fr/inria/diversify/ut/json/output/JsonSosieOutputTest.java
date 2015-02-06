@@ -1,5 +1,6 @@
 package fr.inria.diversify.ut.json.output;
 
+import fr.inria.diversify.persistence.json.output.JsonHeaderOutput;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.ut.MockInputProgram;
 import mockit.Mocked;
@@ -24,7 +25,8 @@ public class JsonSosieOutputTest {
     @Test
     public void testSosiesUniqueId(@Mocked FileWriter anyWriter) throws IOException, JSONException {
         List<Transformation> transfs = createTransformations(new MockInputProgram());
-        JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon");
+        JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon",
+                "mySrc/pom.xml", "sosie-generator/pom.xml");
         out.write();
 
         assertEquals(transfs.get(0).getIndex(), 0);
@@ -40,10 +42,11 @@ public class JsonSosieOutputTest {
 
         //JsonSosieOutputForUT only for Unit TEST!!!!!!
         //Use JsonSosiesOutput intead
-        JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon");
+        JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon",
+                "mySrc/pom.xml", "sosie-generator/pom.xml");
         out.write();
 
-        assertEquals(2, out.getJSONObject().length());
+        assertEquals(3, out.getJSONObject().length());
         assertEquals(3, out.getJSONObject().getJSONArray(TRANSFORMATIONS).length());
 
         new Verifications() {{
@@ -51,5 +54,4 @@ public class JsonSosieOutputTest {
             times = 1;
         }};
     }
-
 }

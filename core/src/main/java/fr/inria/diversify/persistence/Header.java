@@ -23,6 +23,7 @@ public class Header {
     private String groupId;
     private String artifactId;
     private String version;
+    private String generatorVersion;
 
     public int getTransformationCount() {
         return transformationCount;
@@ -62,5 +63,13 @@ public class Header {
 
     public String getVersion() {
         return version;
+    }
+
+    public void setGeneratorVersion(String generatorVersion) {
+        this.generatorVersion = generatorVersion;
+    }
+
+    public String getGeneratorVersion() {
+        return generatorVersion;
     }
 }

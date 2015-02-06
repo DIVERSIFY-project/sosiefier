@@ -4,6 +4,7 @@ import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.PersistenceException;
 import fr.inria.diversify.transformation.Transformation;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public abstract class JsonSectionInput {
      */
     protected CodeFragment getCodeFragment(String position, String source) {
         CodeFragment c = getInputProgram().getCodeFragment(position, source);
-        if ( c == null ) throw new PersistenceException("Unable to find fragment");
+        //if ( c == null ) throw new PersistenceException("Unable to find fragment");
         return c;
     }
 
@@ -77,5 +78,17 @@ public abstract class JsonSectionInput {
     public Collection<String> getErrors() {
         if ( errors == null ) errors = new ArrayList<>();
         return errors;
+    }
+
+    protected void throwWarning(String s, JSONException e, boolean raise) {
+        String msg = e == null ? "" : e.getMessage();
+        getErrors().add(JsonSosiesInput.WARNING + " " + s + " " + msg);
+        if ( raise ) throw new PersistenceException(s, e);
+    }
+
+    protected void throwError(String s, Exception e, boolean raise) {
+        String msg = e == null ? "" : e.getMessage();
+        getErrors().add(JsonSosiesInput.ERROR + " " + s + ". " + msg);
+        if ( raise ) throw new PersistenceException(s, e);
     }
 }
