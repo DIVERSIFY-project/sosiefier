@@ -49,27 +49,29 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
      * @param src
      * @param pos
      */
-    protected void logCfStatus(ASTTransformation ast, CodeFragment cf, String src, String pos) {
+    protected void logCfStatus(ASTTransformation ast, CodeFragment cf, String pos, String src) {
         StringBuilder sb = new StringBuilder("");
+        if ( ast != null ) sb.append("Transf ").append(ast.getIndex()).append(". ");
 
         if ( cf == null ) {
-            if ( ast != null ) sb.append("Transf " + ast.getIndex());
-            sb.append(". Unable to find code fragment " + src + " at " + pos);
+            sb.append("Unable to find code fragment \"").append(src).append("\" at \"").append(pos).append("\"");
             String s = sb.toString();
-            if ( !s.equals("") ) throwError(s, null);
+            throwError(s, null, true);
         }
         else {
-            if ( ast != null ) sb.append("Transf " + ast.getIndex());
             if ( !cf.positionString().equals(pos) )  {
-                sb.append(". Storage position:" + pos + " found: " + cf.positionString());
+                sb.append("Position mismatch -> Storage: \"").append(pos).append("\"; Found: \"").
+                        append(cf.positionString()).append("\".");
+                throwWarning(sb.toString(), null, false);
             }
             if ( !cf.equalString().equals(src) ) {
-                sb.append(". Storage source:" + src + " found: " + cf.equalString());
+                sb = new StringBuilder("");
+                if ( ast != null ) sb.append("Transf ").append(ast.getIndex()).append(". ");
+                sb.append("Source mismatch -> Storage: \"").append(src).
+                        append("\"; Found: \"").append(cf.equalString()).append("\".");
+                throwWarning(sb.toString(), null, false);
             }
-            String s = sb.toString();
-            if ( !s.equals("") ) throwWarning(s, null, false);
         }
-
     }
 
     /**

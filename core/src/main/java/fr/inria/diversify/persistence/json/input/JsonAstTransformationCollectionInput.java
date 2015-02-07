@@ -39,24 +39,31 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
         Collection<JsonAstTransformationInput> sections = buildSections();
 
         for (int i = 0; i < tr.length(); i++) {
+            checkToManyErrors();
             try {
                 JSONObject obj = tr.getJSONObject(i);
                 for (JsonAstTransformationInput si : sections) {
                     if (si.canRead(TRANSFORMATIONS + "." + obj.getString(NAME))) {
                         si.setJsonObject(obj);
                         si.setFailures(getFailures());
+                        si.setLoadMessages(getLoadMessages());
                         si.read(transformations);
                     }
                 }
             } catch (PersistenceException pe) {
-                throwError("Unable to parse Transformation  " + i, pe, false);
+                throwError("Transf " + i + ". Wrong data ", pe, false);
             } catch (JSONException e) {
-                throwError("Unable to parse Transformation " + i, e, false);
+                throwError("Transf " + i + ". Unable to parse from JSON " + i, e, false);
+            } catch (Exception e) {
+                throwError("Transf " + i + ". Unexpected error. ", e, false);
             }
+
         }
 
 
     }
+
+
 
 
     private Collection<JsonAstTransformationInput> buildSections() {

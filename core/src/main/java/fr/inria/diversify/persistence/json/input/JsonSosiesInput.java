@@ -3,14 +3,10 @@ package fr.inria.diversify.persistence.json.input;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.Header;
 import fr.inria.diversify.persistence.PersistenceException;
-import fr.inria.diversify.persistence.json.output.JsonHeaderOutput;
-import fr.inria.diversify.persistence.json.output.JsonSectionOutput;
 import fr.inria.diversify.transformation.Transformation;
-import javafx.fxml.LoadException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.script.Bindings;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,6 +14,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by marodrig on 09/01/2015.
@@ -52,7 +49,7 @@ public class JsonSosiesInput {
     /**
      * Errors from the reader
      */
-    private Collection<String> errors;
+    private List<String> loadMessages;
 
     /**
      * Header from the reader
@@ -138,31 +135,32 @@ public class JsonSosiesInput {
     /**
      * Read the transformations from the JSON file
      * @return A collection the transformations
+     * @throws fr.inria.diversify.persistence.PersistenceException in case the read has to many errors
      */
     public Collection<Transformation> read() {
         open(); //Open the json file
 
         HashMap<Integer, Transformation> result = new HashMap<>();
+        JsonHeaderInput headerInput = (JsonHeaderInput)getSection(JsonHeaderInput.class);
+        headerInput.setJsonObject(jsonObject);
+        headerInput.setInputProgram(inputProgram);
+        headerInput.setLoadMessages(getLoadMessages());
+        headerInput.read(result);
+        header = headerInput.getHeader();
+
         JsonFailuresInput failures = (JsonFailuresInput) getSection(JsonFailuresInput.class);
         failures.setJsonObject(jsonObject);
         failures.setInputProgram(inputProgram);
-        failures.setErrors(getErrors());
+        failures.setLoadMessages(getLoadMessages());
         failures.read(result);
 
         JsonAstTransformationCollectionInput asts = (JsonAstTransformationCollectionInput)
                 getSection(JsonAstTransformationCollectionInput.class);
         asts.setJsonObject(jsonObject);
         asts.setInputProgram(inputProgram);
-        asts.setErrors(getErrors());
+        asts.setLoadMessages(getLoadMessages());
         asts.setFailures(failures.getFailures());
         asts.read(result);
-
-        JsonHeaderInput headerInput = (JsonHeaderInput)getSection(JsonHeaderInput.class);
-        headerInput.setJsonObject(jsonObject);
-        headerInput.setInputProgram(inputProgram);
-        headerInput.read(result);
-
-        header = headerInput.getHeader();
 
         return result.values();
     }
@@ -182,9 +180,9 @@ public class JsonSosiesInput {
      * Errors during the loading process
      * @return
      */
-    public Collection<String> getErrors() {
-        if ( errors == null ) errors = new ArrayList<>();
-        return errors;
+    public List<String> getLoadMessages() {
+        if ( loadMessages == null ) loadMessages = new ArrayList<>();
+        return loadMessages;
     }
 
     public Header getHeader() {

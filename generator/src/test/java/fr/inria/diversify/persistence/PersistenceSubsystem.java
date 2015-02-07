@@ -66,7 +66,7 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
 
         //Test that old and new gives same result
         assertEquals(oldLoad.size(), newLoad.size());
-        assertEquals(0, newIn.getErrors().size());
+        assertEquals(0, newIn.getLoadMessages().size());
         for ( int i = 0; i < newLoad.size(); i++ ) {
             assertEqualsTransformation(oldLoad.get(i), newLoad.get(i));
         }

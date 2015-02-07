@@ -50,7 +50,7 @@ public class JsonAstReplaceInput extends JsonAstTransformationInput {
             transf.setVarMapping(getVarMap(getJsonObject().getJSONObject(VARIABLE_MAP)));
         } catch (JSONException e) {
             String s = "JsonAstReplaceInput::read Unable to parse replace transformation from json object";
-            throwError(getTransformationErrorString(transf, s), e);
+            throwError(getTransformationErrorString(transf, s), e, true);
         }
     }
 

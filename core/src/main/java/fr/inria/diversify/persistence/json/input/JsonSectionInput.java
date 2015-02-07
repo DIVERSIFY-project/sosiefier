@@ -8,13 +8,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by marodrig on 12/01/2015.
  */
 public abstract class JsonSectionInput {
+
+    /**
+     * Max number of errors allowed
+     */
+    public static final int MAX_ERRORS = 40;
+
     /**
      * JSon to read transformations from
      */
@@ -28,7 +34,9 @@ public abstract class JsonSectionInput {
     /**
      * Errors during the load process
      */
-    private Collection<String> errors;
+    private List<String> loadMessages;
+
+    protected int errorCount;
 
     public JsonSectionInput(InputProgram inputProgram, JSONObject jsonObject) {
         this.jsonObject = jsonObject;
@@ -71,24 +79,32 @@ public abstract class JsonSectionInput {
         this.inputProgram = inputProgram;
     }
 
-    public void setErrors(Collection<String> errors) {
-        this.errors = errors;
+    public void setLoadMessages(List<String> msgs) {
+        this.loadMessages = msgs;
     }
 
-    public Collection<String> getErrors() {
-        if ( errors == null ) errors = new ArrayList<>();
-        return errors;
+    public List<String> getLoadMessages() {
+        if ( loadMessages == null ) loadMessages = new ArrayList<>();
+        return loadMessages;
     }
 
     protected void throwWarning(String s, JSONException e, boolean raise) {
         String msg = e == null ? "" : e.getMessage();
-        getErrors().add(JsonSosiesInput.WARNING + " " + s + " " + msg);
+        getLoadMessages().add(JsonSosiesInput.WARNING + " " + s + " " + msg);
         if ( raise ) throw new PersistenceException(s, e);
     }
 
     protected void throwError(String s, Exception e, boolean raise) {
+        errorCount++;
         String msg = e == null ? "" : e.getMessage();
-        getErrors().add(JsonSosiesInput.ERROR + " " + s + ". " + msg);
+        getLoadMessages().add(JsonSosiesInput.ERROR + " " + s + ". " + msg);
         if ( raise ) throw new PersistenceException(s, e);
+    }
+
+    /**
+     * Halts the loading process if to many errors are registered
+     */
+    public void checkToManyErrors() {
+        if ( errorCount > MAX_ERRORS ) throwError("To many errors", null, true);
     }
 }

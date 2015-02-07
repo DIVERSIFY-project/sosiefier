@@ -35,8 +35,11 @@ public class JsonHeaderInput extends JsonSectionInput {
 
     @Override
     public void read(HashMap<Integer, Transformation> transformations) {
-        try {
 
+        //Indicate that an exception must be raised because of mismatch in the src
+        boolean raise = false;
+
+        try {
             String projectPath = getInputProgram().getProgramDir();
 
             header = null;
@@ -59,20 +62,28 @@ public class JsonHeaderInput extends JsonSectionInput {
                 Model model = mavenReader.read(reader);
                 ret = new MavenProject(model);
 
-                if ( !header.getGroupId().equals(ret.getGroupId()) )
+                if (!header.getGroupId().equals(ret.getGroupId())) {
                     throwError(GROUP_ID_DONT_MATCH, null, false);
-                if ( !header.getArtifactId().equals(ret.getArtifactId()) )
+                    raise = true;
+                }
+                if (!header.getArtifactId().equals(ret.getArtifactId())) {
                     throwError(ARTIFACT_DONT_MATCH, null, false);
-                if ( !header.getVersion().equals(ret.getVersion()) )
+                    raise = true;
+                }
+                if (!header.getVersion().equals(ret.getVersion())) {
                     throwError(VERSION_DONT_MATCH, null, false);
+                    raise = true;
+                }
                 reader.close();
             }
-            if ( header != null )
+            if (header != null)
                 header.setTransformationCount(h.getInt(Header.TRANSF_COUNT));
 
         } catch (Exception e) {
-            throwError("Unexpected exception", e, true);
+            throwError("Unexpected exception while reading header", e, true);
         }
+
+        if (raise) throwError("This does not seems to be the project for which sosies were generated", null, true);
     }
 
     protected Reader getReader(String s) {
