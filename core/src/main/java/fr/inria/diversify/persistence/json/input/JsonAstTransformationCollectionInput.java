@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.NAME;
+import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TINDEX;
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.TRANSFORMATIONS;
 
 /**
@@ -40,8 +41,10 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
 
         for (int i = 0; i < tr.length(); i++) {
             checkToManyErrors();
+            int index = -1;
             try {
                 JSONObject obj = tr.getJSONObject(i);
+                index = obj.getInt(TINDEX);
                 for (JsonAstTransformationInput si : sections) {
                     if (si.canRead(TRANSFORMATIONS + "." + obj.getString(NAME))) {
                         si.setJsonObject(obj);
@@ -50,22 +53,25 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
                         si.read(transformations);
                     }
                 }
+                index = -1;
             } catch (PersistenceException pe) {
-                throwError("Transf " + i + ". Wrong data ", pe, false);
+                //Don't report twice the cause in case it has been already reported
+                String s = "Transf " + index + " cannot load.";
+                if ( getLoadMessages().get(getLoadMessages().size() - 1).contains(pe.getMessage()) )
+                    throwError(s, null, false);
+                else throwError(s, pe, false);
             } catch (JSONException e) {
-                throwError("Transf " + i + ". Unable to parse from JSON " + i, e, false);
+                throwError("Transf " + index + ". Unable to parse from JSON ", e, false);
             } catch (Exception e) {
-                throwError("Transf " + i + ". Unexpected error. ", e, false);
+                throwError("Transf " + index + ". Unexpected error. ", e, false);
             }
-
         }
-
-
     }
 
-
-
-
+    /**
+     * Builds the sub sections that will read the transformation section
+     * @return
+     */
     private Collection<JsonAstTransformationInput> buildSections() {
         ArrayList<JsonAstTransformationInput> sections = new ArrayList<>();
         sections.add(new JsonAstAddInput(getInputProgram()));

@@ -93,6 +93,14 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
         return astt;
     }
 
+    /**
+     * Put the transformation after the reading is properly done
+     * @param transformation
+     */
+    protected void putTransformation(ASTTransformation transformation) {
+
+    }
+
     @Override
     public void read(HashMap<Integer, Transformation> transformations) {
         try {

@@ -96,6 +96,11 @@ public abstract class JsonSectionInput {
 
     protected void throwError(String s, Exception e, boolean raise) {
         errorCount++;
+
+        //Ensure errors are represented as a single line
+        s = s.replaceAll("\n", "\\\\n");
+        s = s.replaceAll("\r", "\\r");
+
         String msg = e == null ? "" : e.getMessage();
         getLoadMessages().add(JsonSosiesInput.ERROR + " " + s + ". " + msg);
         if ( raise ) throw new PersistenceException(s, e);

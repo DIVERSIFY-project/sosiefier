@@ -8,6 +8,8 @@ import fr.inria.diversify.transformation.ast.ASTDelete;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
 import fr.inria.diversify.ut.FakeCodeFragment;
+import fr.inria.diversify.ut.json.output.JsonHeaderOutputTest;
+import fr.inria.diversify.ut.json.output.JsonSosieOutputForUT;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -113,6 +115,18 @@ public class SectionTestUtils {
     }
 
 
+    /**
+     * Creates a JsonObjec from the JsonSosiesOutput
+     *
+     * @return
+     */
+    public static JSONObject createTransformationsJSONObject(InputProgram p) {
+        List<Transformation> t = createTransformations(p);
+        JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
+                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_POM);
+        out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
+        return out.getJSONObject();
+    }
 
     /**
      * Creates a collection of transformations that matches the fake fragments of the mock program

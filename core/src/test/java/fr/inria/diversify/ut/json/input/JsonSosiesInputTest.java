@@ -47,13 +47,13 @@ public class JsonSosiesInputTest {
     }
 
     @Test
-    public void testReadFromSoiesOutput(@Mocked FileWriter anyWriter) {
+    public void testReadFromSoiesOutput() {
         //Write the transformations
         InputProgram p = new MockInputProgram();
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
                 JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_POM);
-        out.write(); //We need to mock the File writer so no writing to file is done
+        out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
 
         //Read the transformations
         InputStreamReader r = new InputStreamReader(
