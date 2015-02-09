@@ -47,12 +47,7 @@ public class JsonAstTransformationCollectionInputTest {
     public void testPropagatesLogEvent() throws JSONException {
         //Create a valid json transformations object
         InputProgram p = new MockInputProgram();
-        JSONObject jsonObject = createTransformationsJSONObject(p);
-
-        //Introduce some errors
-        JSONArray o = jsonObject.getJSONArray(TRANSFORMATIONS);
-        o.getJSONObject(0).getJSONObject(TRANSPLANT).put(POSITION, "my.NonExistingClass:90"); //<-error
-        o.getJSONObject(1).getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "return   0"); //<- warning
+        JSONObject jsonObject = createTransformationsJSONObjectWithErrors(p);
 
         //Read with errors
         JsonAstTransformationCollectionInput input = new JsonAstTransformationCollectionInput(p, jsonObject);

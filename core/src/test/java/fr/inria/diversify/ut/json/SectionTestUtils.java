@@ -114,6 +114,26 @@ public class SectionTestUtils {
         return d.getOutputObject();
     }
 
+    /**
+     * Creates a JsonObjec from the JsonSosiesOutput with errors
+     *
+     * @return
+     */
+    public static JSONObject createTransformationsJSONObjectWithErrors(InputProgram p) throws JSONException {
+        List<Transformation> t = createTransformations(p);
+        JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
+                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_POM);
+        out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
+
+
+        //Introduce some errors
+        JSONArray o = out.getJSONObject().getJSONArray(TRANSFORMATIONS);
+        o.getJSONObject(0).getJSONObject(TRANSPLANT).put(POSITION, "my.NonExistingClass:90"); //<-error
+        o.getJSONObject(1).getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "return   0"); //<- warning
+
+
+        return out.getJSONObject();
+    }
 
     /**
      * Creates a JsonObjec from the JsonSosiesOutput

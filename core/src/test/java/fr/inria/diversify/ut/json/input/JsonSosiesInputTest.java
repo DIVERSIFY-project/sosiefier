@@ -9,6 +9,8 @@ import fr.inria.diversify.ut.MockInputProgram;
 import fr.inria.diversify.ut.json.output.JsonHeaderOutputTest;
 import fr.inria.diversify.ut.json.output.JsonSosieOutputForUT;
 import mockit.Mocked;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -21,6 +23,7 @@ import java.util.List;
 
 import static fr.inria.diversify.ut.json.SectionTestUtils.assertEqualsTransformation;
 import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformations;
+import static fr.inria.diversify.ut.json.SectionTestUtils.createTransformationsJSONObjectWithErrors;
 import static org.junit.Assert.*;
 
 /**
@@ -46,6 +49,30 @@ public class JsonSosiesInputTest {
         assertTrue(input.getInputProgram() != null);
     }
 
+    /**
+     * Test that the json reader propagates errors
+     * @throws JSONException
+     */
+    @Test
+    public void testReadPropagateErrors() throws JSONException {
+
+        MockInputProgram p = new MockInputProgram();
+        JSONObject out = createTransformationsJSONObjectWithErrors(p);
+
+        //Read the transformations
+        InputStreamReader r = new InputStreamReader(
+                new ByteArrayInputStream(out.toString().getBytes(StandardCharsets.UTF_8)));
+        JsonSosiesInput input = new JsonSosiesInput(r, p);
+        //Mock the header section
+        input.setSection(JsonHeaderInput.class, new JsonHeaderInputTest.JsonHeaderInputForUT());
+        ArrayList<Transformation> result = new ArrayList<>(input.read());
+
+        assertEquals(3, input.getLoadMessages().size());
+    }
+
+    /**
+     * Test the proper reading of sosies
+     */
     @Test
     public void testReadFromSoiesOutput() {
         //Write the transformations
@@ -53,7 +80,7 @@ public class JsonSosiesInputTest {
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
                 JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_POM);
-        out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
+        out.writeToJsonNow();
 
         //Read the transformations
         InputStreamReader r = new InputStreamReader(

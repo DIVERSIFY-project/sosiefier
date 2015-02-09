@@ -18,6 +18,8 @@ public class JsonSosieOutputForUT extends JsonSosiesOutput {
     public JsonSosieOutputForUT(Collection<Transformation> transformations, String uri,
                                 String srcPom, String generatorPom) {
         super(transformations, uri, srcPom, generatorPom);
+
+        //Mocks the header section
         setSection(JsonHeaderOutput.class, new JsonHeaderOutputForUT(SRC_POM, GEN_POM));
     }
 
