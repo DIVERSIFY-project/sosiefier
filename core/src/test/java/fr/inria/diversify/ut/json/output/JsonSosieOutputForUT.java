@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.util.Collection;
 
 import static fr.inria.diversify.ut.json.output.JsonHeaderOutputTest.*;
-import static fr.inria.diversify.ut.json.output.JsonHeaderOutputTest.GEN_POM;
+import static fr.inria.diversify.ut.json.output.JsonHeaderOutputTest.GEN_VER;
 
 /**
  * Created by marodrig on 14/01/2015.
@@ -20,7 +20,7 @@ public class JsonSosieOutputForUT extends JsonSosiesOutput {
         super(transformations, uri, srcPom, generatorPom);
 
         //Mocks the header section
-        setSection(JsonHeaderOutput.class, new JsonHeaderOutputForUT(SRC_POM, GEN_POM));
+        setSection(JsonHeaderOutput.class, new JsonHeaderOutputForUT(SRC_POM, GEN_VER));
     }
 
     public JSONObject getJSONObject() {

@@ -33,12 +33,12 @@ public class JsonAstAddInputTest {
         String error1 = "ERROR  : Transf 1. Unable to find code fragment \"return 0\" at \"org.MyClass:200\". ";
         JSONObject o = createAddASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:200");
-        assertEquals(error1, testErrors(new JsonAstAddInput(null, o), o, 1).get(0));
+        assertEquals(error1, testErrors(new JsonAstAddInput(null, o), o, 1, 0).get(0));
 
         error1 = "ERROR  : Transf 1. Unable to find code fragment \"fullyDifferent()\" at \"org.MyOtherClass:10\". ";
         o = createAddASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT).put(SOURCE_CODE, "fullyDifferent()");
-        assertEquals(error1, testErrors(new JsonAstAddInput(null, o), o, 1).get(0));
+        assertEquals(error1, testErrors(new JsonAstAddInput(null, o), o, 1, 0).get(0));
     }
 
     @Test
@@ -48,18 +48,20 @@ public class JsonAstAddInputTest {
                 "\"org.MyClass:2\"; Found: \"org.MyClass:1\". ";
         String error2 = "WARNING: Transf 1. Source mismatch -> Storage: \"return   0\"; Found: \"return 0\". ";
 
+        //Insert ann error
         JSONObject o = createAddASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:2");
-        assertEquals(error1,testErrors(new JsonAstAddInput(null, o), o, 1).get(0));
+        //Test that the error was raised
+        assertEquals(error1,testErrors(new JsonAstAddInput(null, o), o, 1, 1).get(0));
 
         o = createAddASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "return   0");
-        assertEquals(error2, testErrors(new JsonAstAddInput(null, o), o, 1).get(0));
+        assertEquals(error2, testErrors(new JsonAstAddInput(null, o), o, 1, 1).get(0));
 
         o = createAddASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT).put(SOURCE_CODE, "return   0");
         o.getJSONObject(TRANSPLANT).put(POSITION, "org.MyClass:2");
-        List<String> errors = testErrors(new JsonAstAddInput(null, o), o, 2);
+        List<String> errors = testErrors(new JsonAstAddInput(null, o), o, 2, 1);
         assertEquals(error1, errors.get(0));
         assertEquals(error2, errors.get(1));
     }

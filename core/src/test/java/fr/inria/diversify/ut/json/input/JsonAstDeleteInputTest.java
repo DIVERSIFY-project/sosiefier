@@ -33,12 +33,12 @@ public class JsonAstDeleteInputTest {
         String error1 = "ERROR  : Transf 1. Unable to find code fragment \"return 0\" at \"org.MyClass:200\". ";
         JSONObject o = createDeleteASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:200");
-        assertEquals(error1, testErrors(new JsonAstDeleteInput(null, o), o, 1).get(0));
+        assertEquals(error1, testErrors(new JsonAstDeleteInput(null, o), o, 1, 0).get(0));
 
         error1 = "ERROR  : Transf 1. Unable to find code fragment \"fullyDifferent()\" at \"org.MyClass:1\". ";
         o = createDeleteASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "fullyDifferent()");
-        assertEquals(error1, testErrors(new JsonAstDeleteInput(null, o), o, 1).get(0));
+        assertEquals(error1, testErrors(new JsonAstDeleteInput(null, o), o, 1, 0).get(0));
     }
 
     @Test
@@ -50,16 +50,16 @@ public class JsonAstDeleteInputTest {
 
         JSONObject o = createDeleteASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:2");
-        assertEquals(error1,testErrors(new JsonAstDeleteInput(null, o), o, 1).get(0));
+        assertEquals(error1,testErrors(new JsonAstDeleteInput(null, o), o, 1, 1).get(0));
 
         o = createDeleteASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "return   0");
-        assertEquals(error2, testErrors(new JsonAstDeleteInput(null, o), o, 1).get(0));
+        assertEquals(error2, testErrors(new JsonAstDeleteInput(null, o), o, 1, 1).get(0));
 
         o = createDeleteASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "return   0");
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:2");
-        List<String> errors = testErrors(new JsonAstDeleteInput(null, o), o, 2);
+        List<String> errors = testErrors(new JsonAstDeleteInput(null, o), o, 2, 1);
         assertEquals(error1, errors.get(0));
         assertEquals(error2, errors.get(1));
     }

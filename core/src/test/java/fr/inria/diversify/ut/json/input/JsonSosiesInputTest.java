@@ -79,7 +79,7 @@ public class JsonSosiesInputTest {
         InputProgram p = new MockInputProgram();
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
-                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_POM);
+                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_VER);
         out.writeToJsonNow();
 
         //Read the transformations

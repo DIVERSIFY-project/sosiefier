@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 public class JsonHeaderOutputTest {
 
     public static final String SRC_POM = "/uzr/pr0j3ct/pom.xml";
-    public static final String GEN_POM = "/uzr/g3n3r4t0r/pom.xml";
+    public static final String GEN_VER = "1.0-SNAPSHOT";
 
     public static class JsonHeaderOutputForUT extends JsonHeaderOutput {
         public JsonHeaderOutputForUT(String srcPOM, String generatorPOM) {
@@ -46,7 +46,7 @@ public class JsonHeaderOutputTest {
         sb.append("<parent> \n");
         sb.append("<artifactId>Sosies-generator</artifactId> \n");
         sb.append("<groupId>fr.irisa.diversify</groupId> \n");
-        if ( path.equals(GEN_POM) ) sb.append("<version>1.0-SNAPSHOT</version> \n");
+        if ( path.equals(GEN_VER) ) sb.append("<version>1.0-SNAPSHOT</version> \n");
         else sb.append("<version>1.2.1</version> \n");
         sb.append("</parent> \n");
         sb.append("<modelVersion>4.0.0</modelVersion> \n");
@@ -58,7 +58,7 @@ public class JsonHeaderOutputTest {
     @Test
     public void testWrite() throws JSONException {
         JSONObject o = new JSONObject();
-        JsonHeaderOutputForUT h = new JsonHeaderOutputForUT(SRC_POM, GEN_POM);
+        JsonHeaderOutputForUT h = new JsonHeaderOutputForUT(SRC_POM, GEN_VER);
         h.setTransformations(list(new ASTDelete(), new ASTReplace()));
         h.write(o);
         o = o.getJSONObject(Header.HEADER);

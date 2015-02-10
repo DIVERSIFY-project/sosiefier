@@ -26,14 +26,8 @@ public class JsonSosiesInput {
     public static final String INFO    = "INFO   :";
     public static final String DEBUG   = "DEBUG  :";
 
-    /**
-     * Path of the json file
-     */
-    private final String jsonPath;
+    private String jsonPath;
 
-    /**
-     * Stream reader to obtain the JSON text from
-     */
     private InputStreamReader streamReader;
 
     /**
@@ -61,13 +55,17 @@ public class JsonSosiesInput {
      */
     private HashMap<String, JsonSectionInput> visibleSections;
 
+    public JsonSosiesInput() {
+        initSections();
+    }
+
     public JsonSosiesInput(InputStreamReader r, InputProgram inputProgram) {
         this("", inputProgram);
-        this.streamReader = r;
+        this.setStreamReader(r);
     }
 
     public JsonSosiesInput(String jsonPath, InputProgram inputProgram) {
-        this.jsonPath = jsonPath;
+        this.setJsonPath(jsonPath);
         this.inputProgram = inputProgram;
         initSections();
     }
@@ -94,8 +92,8 @@ public class JsonSosiesInput {
     protected void open() {
         BufferedReader br = null;
         try {
-            if ( streamReader == null ) streamReader = new FileReader(jsonPath);
-            br = new BufferedReader(streamReader);
+            if ( getStreamReader() == null ) setStreamReader(new FileReader(getJsonPath()));
+            br = new BufferedReader(getStreamReader());
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {
@@ -191,4 +189,25 @@ public class JsonSosiesInput {
     }
 
 
+    /**
+     * Path of the json file
+     */
+    public String getJsonPath() {
+        return jsonPath;
+    }
+
+    public void setJsonPath(String jsonPath) {
+        this.jsonPath = jsonPath;
+    }
+
+    /**
+     * Stream reader to obtain the JSON text from
+     */
+    public InputStreamReader getStreamReader() {
+        return streamReader;
+    }
+
+    public void setStreamReader(InputStreamReader streamReader) {
+        this.streamReader = streamReader;
+    }
 }

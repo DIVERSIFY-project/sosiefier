@@ -38,22 +38,26 @@ public class JsonSosiesOutput {
      * @param transformations Transformations to be stored
      * @param outPutPath      Path where the sosies are going to be stored
      * @param srcPOM          POM's path for the project where the sosies are extracted
-     * @param generatorPOM    POM of the sosies generator
+     * @param generatorVersion    POM of the sosies generator
      */
     public JsonSosiesOutput(Collection<Transformation> transformations, String outPutPath,
-                            String srcPOM, String generatorPOM) {
-        initSections(srcPOM, generatorPOM);
+                            String srcPOM, String generatorVersion) {
+        assert outPutPath != null;
+        assert srcPOM != null;
+        assert generatorVersion != null;
+
         this.transformations = transformations;
         this.outputPath = outPutPath;
         outputObject = new JSONObject();
+        initSections(srcPOM, generatorVersion);
     }
 
     /**
      * Init sections
      * @param srcPOM
-     * @param generatorPOM
+     * @param generatorVersion
      */
-    private void initSections(String srcPOM, String generatorPOM) {
+    private void initSections(String srcPOM, String generatorVersion) {
         astSections = Arrays.asList(new JsonAstTransformationOutput[]{
                         new JsonAstReplaceOutput(),
                         new JsonAstAddOutput(),
@@ -61,8 +65,9 @@ public class JsonSosiesOutput {
                 });
         visibleSections = new HashMap<>();
         for (JsonSectionOutput s : astSections) visibleSections.put(s.getClass(), s);
-        JsonHeaderOutput s = new JsonHeaderOutput(srcPOM, generatorPOM);
-        visibleSections.put(JsonHeaderOutput.class, new JsonHeaderOutput(srcPOM, generatorPOM));
+        JsonHeaderOutput s = new JsonHeaderOutput(srcPOM, generatorVersion);
+        s.setTransformations(transformations);
+        visibleSections.put(JsonHeaderOutput.class, s);
     }
 
     /**
@@ -91,12 +96,14 @@ public class JsonSosiesOutput {
         int id = 0;
         for (Transformation t : transformations) t.setIndex(id++);
 
+        //Write the header
+        visibleSections.get(JsonHeaderOutput.class).setTransformations(transformations);
+        visibleSections.get(JsonHeaderOutput.class).write(outputObject);
 
         //Write failures to file
         JsonFailuresOutput failures = new JsonFailuresOutput();
         failures.setTransformations(transformations);
         failures.write(outputObject);
-
 
         //Write transformations to file
         for (JsonAstTransformationOutput s : astSections) {
@@ -104,9 +111,6 @@ public class JsonSosiesOutput {
             s.setFailuresDict(failures.getFailuresDict());
             s.write(outputObject);
         }
-
-        //Write the header
-        visibleSections.get(JsonHeaderOutput.class).write(outputObject);
     }
 
     /**

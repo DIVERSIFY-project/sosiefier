@@ -51,6 +51,9 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
             cf = getCodeFragment(cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
             logCfStatus(transf, cf, cfJson.getString(POSITION), cfJson.getString(SOURCE_CODE));
             transf.setTransplant(cf);
+
+            //Add transformation if all went OK
+            addTransformation(transformations, transf);
         } catch (JSONException e) {
             throw new PersistenceException("Unable to parse delete transformation", e);
         }

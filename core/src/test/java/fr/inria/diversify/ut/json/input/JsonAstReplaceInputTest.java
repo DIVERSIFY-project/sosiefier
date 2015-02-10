@@ -46,14 +46,16 @@ public class JsonAstReplaceInputTest {
         assertEquals(p.getCodeFragments().get(1), replace.getTransplant());
     }
 
-    public static List<String> testErrors(JsonSectionInput reader, JSONObject o, int errors) throws JSONException {
+    public static List<String> testErrors(JsonSectionInput reader, JSONObject o,
+                                          int errors, int resultSize) throws JSONException {
         InputProgram p = new MockInputProgram();
         reader.setInputProgram(p);
         //Create json replace
-        //JsonAstReplaceInput reader = new JsonAstReplaceInput(p, o);
-        try { reader.read(new HashMap<Integer, Transformation>());
+        HashMap<Integer, Transformation> r = new HashMap<>();
+        try { reader.read(r);
         } catch (PersistenceException e) { // DO NOTHING, WE EXPECT THIS WHILE TESTING ERROR HANDLING
         }
+        assertEquals(resultSize, r.size()); // Test that no
         assertEquals(errors, reader.getLoadMessages().size());
         return reader.getLoadMessages();
     }
@@ -66,12 +68,12 @@ public class JsonAstReplaceInputTest {
         String error1 = "ERROR  : Transf 1. Unable to find code fragment \"return 0\" at \"org.MyClass:200\". ";
         JSONObject o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:200");
-        assertEquals(error1, testErrors(new JsonAstReplaceInput(null, o), o, 1).get(0));
+        assertEquals(error1, testErrors(new JsonAstReplaceInput(null, o), o, 1, 0).get(0));
 
         error1 = "ERROR  : Transf 1. Unable to find code fragment \"fullyDifferent()\" at \"org.MyClass:1\". ";
         o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "fullyDifferent()");
-        assertEquals(error1, testErrors(new JsonAstReplaceInput(null, o), o, 1).get(0));
+        assertEquals(error1, testErrors(new JsonAstReplaceInput(null, o), o, 1, 0).get(0));
     }
 
     @Test
@@ -83,16 +85,16 @@ public class JsonAstReplaceInputTest {
 
         JSONObject o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:2");
-        assertEquals(error1,testErrors(new JsonAstReplaceInput(null, o), o, 1).get(0));
+        assertEquals(error1,testErrors(new JsonAstReplaceInput(null, o), o, 1, 1).get(0));
 
         o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "return   0");
-        assertEquals(error2, testErrors(new JsonAstReplaceInput(null, o), o, 1).get(0));
+        assertEquals(error2, testErrors(new JsonAstReplaceInput(null, o), o, 1, 1).get(0));
 
         o = createReplaceASTTransformationJSON().getJSONArray(TRANSFORMATIONS).getJSONObject(0);
         o.getJSONObject(TRANSPLANT_POINT).put(SOURCE_CODE, "return   0");
         o.getJSONObject(TRANSPLANT_POINT).put(POSITION, "org.MyClass:2");
-        List<String> errors = testErrors(new JsonAstReplaceInput(null, o), o, 2);
+        List<String> errors = testErrors(new JsonAstReplaceInput(null, o), o, 2, 1);
         assertEquals(error1, errors.get(0));
         assertEquals(error2, errors.get(1));
     }

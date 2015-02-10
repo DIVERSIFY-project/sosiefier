@@ -86,11 +86,20 @@ public abstract class JsonAstTransformationInput extends JsonSectionInput {
         if (t.containsKey(index)) astt = (ASTTransformation) t.get(index);
         else {
             astt = build();
-            t.put(index, astt);
+            //t.put(index, astt);
             astt.setIndex(index);
             astt.setStatus(getJsonObject().getInt(STATUS));
         }
         return astt;
+    }
+
+    /**
+     * Adds the transformation to the transformation's dictionary
+     * @param t Transformation's dictionary
+     * @param astt AST Transformation
+     */
+    protected void addTransformation(HashMap<Integer, Transformation> t, ASTTransformation astt) {
+        t.put(astt.getIndex(), astt);
     }
 
     /**

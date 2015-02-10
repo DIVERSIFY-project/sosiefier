@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import static fr.inria.diversify.persistence.json.output.JsonSectionOutput.*;
@@ -51,8 +52,10 @@ public class JsonAstTransformationCollectionInputTest {
 
         //Read with errors
         JsonAstTransformationCollectionInput input = new JsonAstTransformationCollectionInput(p, jsonObject);
-        input.read(new HashMap<Integer, Transformation>());
+        HashMap<Integer, Transformation> r = new HashMap<Integer, Transformation>();
+        input.read(r);
 
+        assertEquals(2, r.size()); //Test that only two transformations where read out of three
         assertEquals(3, input.getLoadMessages().size());
     }
 

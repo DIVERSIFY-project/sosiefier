@@ -122,7 +122,7 @@ public class SectionTestUtils {
     public static JSONObject createTransformationsJSONObjectWithErrors(InputProgram p) throws JSONException {
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
-                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_POM);
+                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_VER);
         out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
 
 
@@ -143,7 +143,7 @@ public class SectionTestUtils {
     public static JSONObject createTransformationsJSONObject(InputProgram p) {
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
-                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_POM);
+                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_VER);
         out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
         return out.getJSONObject();
     }

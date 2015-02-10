@@ -28,11 +28,11 @@ public class JsonHeaderOutput extends JsonSectionOutput {
     /**
      * Path where the POM of the generator lives
      */
-    private String generatorPOMPath;
+    private String generatorVersion;
 
-    public JsonHeaderOutput(String srcPOM, String generatorPOM) {
+    public JsonHeaderOutput(String srcPOM, String genVer) {
         srcProjectPath = srcPOM;
-        generatorPOMPath = generatorPOM;
+        generatorVersion = genVer;
     }
 
     private MavenProject getPOMModel(Reader reader) throws IOException, XmlPullParserException {
@@ -48,9 +48,9 @@ public class JsonHeaderOutput extends JsonSectionOutput {
 
             JSONObject h = new JSONObject();
             jsonObject.put(Header.HEADER, h);
-            if ( getTransformations() == null ) h.put(Header.TRANSF_COUNT, 0);
+            if (getTransformations() == null) h.put(Header.TRANSF_COUNT, 0);
             else h.put(Header.TRANSF_COUNT, getTransformations().size());
-            if ( srcProjectPath.toLowerCase().endsWith(POM_XML) ) {
+            if (srcProjectPath.toLowerCase().endsWith(POM_XML)) {
                 //Removed null and file exists protections that mask errors
                 Reader r = getReader(srcProjectPath);
                 try {
@@ -63,16 +63,9 @@ public class JsonHeaderOutput extends JsonSectionOutput {
                     r.close();
                 }
             }
-            if ( generatorPOMPath.toLowerCase().endsWith(POM_XML) ) {
-                //Removed null and file exists protections that mask errors
-                Reader r = getReader(generatorPOMPath);
-                try {
-                    MavenProject ret = getPOMModel(r);
-                    h.put(MavenHeader.GENERATOR_VERSION, ret.getVersion());
-                } finally {
-                    r.close();
-                }
-            }
+
+            //For now just the version
+            h.put(MavenHeader.GENERATOR_VERSION, generatorVersion);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -100,7 +93,7 @@ public class JsonHeaderOutput extends JsonSectionOutput {
         this.srcProjectPath = srcProjectPath;
     }
 
-    public void setGeneratorPOMPath(String generatorPOMPath) {
-        this.generatorPOMPath = generatorPOMPath;
+    public void setGeneratorVersion(String generatorVersion) {
+        this.generatorVersion = generatorVersion;
     }
 }

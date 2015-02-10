@@ -419,6 +419,7 @@ public class InputProgram {
      * @param configuration
      */
     public void configure(InputConfiguration configuration) {
+        setProgramDir(configuration.getProjectPath());
         setSourceCodeDir(configuration.getSourceCodeDir());
         setPreviousTransformationsPath(configuration.getPreviousTransformationPath());
         setClassesDir(configuration.getClassesDir());

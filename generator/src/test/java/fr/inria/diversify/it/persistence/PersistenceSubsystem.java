@@ -10,6 +10,7 @@ import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTAdd;
 import fr.inria.diversify.transformation.ast.ASTReplace;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.util.Log;
 import org.junit.Test;
 
 import java.io.File;
@@ -53,7 +54,8 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
 
         //Write with the new system
         transfPath = transfPath.substring(0, transfPath.lastIndexOf('.')) + "_new.json";
-        JsonSosiesOutput newOut = new JsonSosiesOutput(oldLoad, transfPath);
+        JsonSosiesOutput newOut = new JsonSosiesOutput(oldLoad, transfPath,
+                inputProgram.getProgramDir() + "/pom.xml", "1.0-SNAPSHOT");
         newOut.write();
 
         //Loads wiht the new System
@@ -70,6 +72,9 @@ public class PersistenceSubsystem extends SosieGeneratorIntegrationTests {
         for ( int i = 0; i < newLoad.size(); i++ ) {
             assertEqualsTransformation(oldLoad.get(i), newLoad.get(i));
         }
+
+        //Just for curiosity, print the errors during load
+        for ( String s : newIn.getLoadMessages() ) Log.debug(s);
     }
 
     public static void assertEqualsTransformation(Transformation tt, Transformation tt2) {

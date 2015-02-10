@@ -42,8 +42,12 @@ public class JsonSosieOutputTest {
 
         //JsonSosieOutputForUT only for Unit TEST!!!!!!
         //Use JsonSosiesOutput intead
-        JsonSosieOutputForUT out = new JsonSosieOutputForUT(transfs, "/uzr/h0m3/my.jzon",
-                "mySrc/pom.xml", "sosie-generator/pom.xml");
+        JsonSosieOutputForUT out = new JsonSosieOutputForUT(
+                transfs, //Transformations
+                "/uzr/h0m3/my.jzon", //Output path for the JSON
+                "mySrc/pom.xml",  //POM file of the source project
+                "1.0-SNAPSHOT" //Version of the generator
+                );
         out.write();
 
         assertEquals(3, out.getJSONObject().length());
