@@ -27,7 +27,7 @@ public class MakeFilter {
 
 
         MakeFilter mk = new MakeFilter();
-        if(args.length == 3) {
+        if(args.length == 5) {
             diffs = mk.loadFilter(args[3]);
             out = args[4];
         } else {
