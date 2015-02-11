@@ -28,7 +28,6 @@ import java.util.Set;
 public class DiversifyAndCompare extends SinglePointDiversify {
     protected String amplifiedTestDir;
     protected String originalLogDir;
-  //  protected InputProgram inputProgram;
     protected String testSrcDir;
     protected List<JSONObject> diff;
     protected String filterFile;

@@ -28,7 +28,6 @@ public class ParseTransformationAndDiff {
     public static void main(String[] args) throws IOException, InterruptedException, JSONException, TransformationParserException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         InputConfiguration inputConfiguration = new InputConfiguration(args[0]);
         InputProgram inputProgram = initInputProgram(inputConfiguration);
-
         ParseTransformationAndDiff p = new ParseTransformationAndDiff(inputProgram);
         p.initSpoon(inputConfiguration);
         p.parseDir(args[1]);
@@ -36,11 +35,15 @@ public class ParseTransformationAndDiff {
 
 
         p.applyFilter(p.diffs, filter);
-        p.stat(p.diffs);
+//        p.stat(p.diffs);
+        for(Transformation trans : p.diffs.keySet()) {
+            p.toJson(p.diffs.get(trans), trans);
+        }
 
     }
 
     public void stat(Map<Transformation, Set<TestDiff>> diffs) {
+        int count = 0;
         for (Transformation transformation : diffs.keySet()) {
            int sum = diffs.get(transformation).stream().mapToInt(diff -> diff.size()).sum();
 
@@ -49,13 +52,16 @@ public class ParseTransformationAndDiff {
                 .sum();
             if(diffSize != 0) {
                 Log.info("{} \nnb: {}\n",transformation, sum);
-
+                count++;
                 diffs.get(transformation).stream()
                      .filter(diff -> diff.size() != 0)
                      .forEach(diff -> Log.info(diff.toString()));
                 Log.debug("");
             }
         }
+        Log.info("{} {}",diffs.size(), count);
+
+
     }
 
     public void applyFilter(Map<Transformation, Set<TestDiff>> diffs, Map<String, Set<String>> filter) {
@@ -75,11 +81,17 @@ public class ParseTransformationAndDiff {
         for (File file : dir.listFiles()) {
             if (file.isFile() && file.getName().endsWith(".json")) {
                 try {
+
                     parseFile(file);
-                } catch (Exception e) {}
+                } catch (Exception e) {
+
+                    Log.debug("{}", file);
+                }
 
             }
+
         }
+        Log.debug("");
     }
 
     protected void parseFile(File file) throws IOException, JSONException, TransformationParserException {
@@ -99,8 +111,6 @@ public class ParseTransformationAndDiff {
 
         JSONObject object = new JSONObject(sb.toString());
         parseTD(object);
-
-
     }
 
     protected void parseTD(JSONObject td) throws JSONException, TransformationParserException {
@@ -184,4 +194,28 @@ public class ParseTransformationAndDiff {
     }
 
 
- }
+    protected List<Integer> foo() {
+        List ret = new ArrayList<>();
+        return ret;
+    }
+
+    public JSONObject toJson(Set<TestDiff> diffs, Transformation sosie) throws JSONException {
+        JSONObject object = new JSONObject();
+
+        if(sosie != null) {
+            object.put("transformation", sosie.toJSONObject());
+        }
+
+        JSONArray array = new JSONArray();
+        object.put("testDiff", array);
+        for(TestDiff diff : diffs) {
+            if(!diff.getDiff().isEmpty()) {
+                array.put(diff.toJSON());
+            }
+        }
+
+        return object;
+    }
+
+
+}

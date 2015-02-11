@@ -1,6 +1,5 @@
 package fr.inria.diversify.testamplification.compare.diff;
 
-import fr.inria.diversify.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -119,6 +118,8 @@ public class TestDiff {
         }
         return "";
     }
+
+
 }
 
 

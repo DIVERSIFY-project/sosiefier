@@ -16,7 +16,8 @@ import java.util.Random;
  * This first version replaces all integer literals by 0
  * */
 public class TestDataMutator extends TestProcessor {
-	
+    protected static String[] stringList = {"foo", "bar", "baz"};
+
 	/* This processor looks for all literals in a method (for the moment only int)
 	 * It creates as many clones of the method as there are literals in the method
 	 * The ith literal is replaced by zero in the ith clone of the method

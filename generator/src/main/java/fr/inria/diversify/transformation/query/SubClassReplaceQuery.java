@@ -1,21 +1,17 @@
 package fr.inria.diversify.transformation.query;
 
-import fr.inria.diversify.codeFragment.CodeFragment;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.CheckReturnTransformation;
 import fr.inria.diversify.transformation.Transformation;
 import fr.inria.diversify.util.Log;
-import spoon.SpoonException;
-import spoon.reflect.code.CtAssignment;
-import spoon.reflect.code.CtCodeElement;
-import spoon.reflect.code.CtNewClass;
-import spoon.reflect.declaration.CtClass;
+import org.reflections.Reflections;
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtVariable;
-import spoon.reflect.reference.CtTypeReference;
 import spoon.support.reflect.code.CtAssignmentImpl;
 
-import javax.sql.rowset.serial.SerialRef;
-import java.lang.reflect.Field;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,33 +19,72 @@ import java.util.stream.Collectors;
  * Created by aelie on 03/02/15.
  */
 public class SubClassReplaceQuery extends TransformationQuery  {
-    protected List<CtNewClass> instantiations;
-    protected List<Class> allClasses;
+    protected Map<CtNewClass,Class> instantiations;
+    //protected List<Class> allClasses;
+    Reflections reflections;
 
 
     public SubClassReplaceQuery(InputProgram inputProgram) {
         super(inputProgram);
+        reflections = new Reflections(".*");
         initFindInstantiationStatements();
     }
 
     protected void initFindInstantiationStatements() {
-        try {
-            getAllSubClass(Map.class);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        List<CtNewClass> newClasses = getInputProgram()
+                .getAllElement(CtNewClass.class).stream()
+                .map(operator -> (CtNewClass) operator)
+                .collect(Collectors.toList());
+
+        instantiations = new HashMap<>();
+
+        for(CtNewClass newCl : newClasses) {
+            try {
+                Class staticType = null;
+                CtElement parent = newCl.getParent();
+                if (parent instanceof CtVariable) {
+                    CtVariable var = (CtVariable) parent;
+                    staticType = var.getType().getActualClass();
+                }
+                if (parent instanceof CtThrow) {
+
+                }
+                if (parent instanceof CtInvocation) {
+                    CtInvocation invocation = (CtInvocation) parent;
+                    if(!invocation.getTarget().equals(newCl)) {
+                        int position = invocation.getArguments().indexOf(newCl);
+                        Method mth = invocation.getExecutable().getActualMethod();
+                        staticType = mth.getParameterTypes()[position];
+                    }
+                }
+                if (parent instanceof CtNewClass) {
+                    CtNewClass newClass = (CtNewClass) parent;
+                    int position = newClass.getArguments().indexOf(newCl);
+                    Constructor constructor = newClass.getExecutable().getActualConstructor();
+                    staticType = constructor.getParameterTypes()[position];
+                }
+                if (parent instanceof CtReturn) {
+                    CtMethod mth = parent.getParent(CtMethod.class);
+                    staticType = mth.getType().getActualClass();
+                }
+                if (parent instanceof CtAssignment) {
+                    CtAssignment assignment = (CtAssignment) parent;
+                    staticType = assignment.getAssigned().getType().getActualClass();
+                }
+                if (parent instanceof CtConditional) {
+
+                }
+                if(staticType != null) {
+                    instantiations.put(newCl, staticType);
+                }
+
+            } catch (Exception e) {
+                Log.debug("");
+            }
         }
-        instantiations = getInputProgram().getAllElement(CtNewClass.class).stream()
-                                           .map(operator -> (CtNewClass) operator)
-                                            .filter(newClass -> {
-                                                try {
-                                                    return getAllSubClass(getTypeOf(newClass)).size() > 1;
-                                                } catch (Exception e) {
-                                                    return false;
-                                                }
-                                            }).collect(Collectors.toList());
-                                            }
+
+
+    }
 
     protected boolean isDeclaration(CtCodeElement codeElement) {
         if (codeElement instanceof CtVariable) {
@@ -72,14 +107,14 @@ public class SubClassReplaceQuery extends TransformationQuery  {
 
 
         Transformation result = null;
-        Random random = new Random();
-//        CtAssignment transplant = null;
-        CtNewClass transplantationPoint = instantiations.get(random.nextInt(instantiations.size()));
-        try {
-            Set<Class> subClasses = getAllSubClass(getTypeOf(transplantationPoint));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        Random random = new Random();
+////        CtAssignment transplant = null;
+//        CtNewClass transplantationPoint = instantiations.get(random.nextInt(instantiations.size()));
+//        try {
+//            Set<Class> subClasses = getAllSubClass(getTypeOf(transplantationPoint));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
         return result;
@@ -90,57 +125,58 @@ public class SubClassReplaceQuery extends TransformationQuery  {
         return  newClass.getType().getActualClass();
     }
 
-    protected List<Class> getAllClasses() throws NoSuchFieldException, IllegalAccessException {
-        if(allClasses == null) {
-            allClasses = getAllClasses(Thread.currentThread().getContextClassLoader());
-        }
-        return allClasses;
-    }
-
-    protected List<Class> getAllClasses(ClassLoader classLoader) throws NoSuchFieldException, IllegalAccessException {
-        Field f = ClassLoader.class.getDeclaredField("classes");
-        f.setAccessible(true);
-        List<Class> classes = new LinkedList<>();
-
-        if(classLoader.getParent() != null) {
-            classes.addAll(getAllClasses(classLoader.getParent()));
-        }
-        classes.addAll((Vector<Class>) f.get(classLoader));
-        return classes;
-    }
-
-    protected Set<Class> getAllSubClass(Class superClass) throws NoSuchFieldException, IllegalAccessException {
-
-        for(Class cl : getAllClasses()) {
-            try {
-                isSubClass(cl, superClass);
-            } catch ( Exception e) {
-                e.printStackTrace();
-                Log.debug("");
-            }
-        }
-
-        return getAllClasses().stream()
-                .filter(cl -> isSubClass(cl, superClass))
-                .collect(Collectors.toSet());
-    }
-
-    protected boolean isSubClass(Class subClass, Class superClass) {
-        if(subClass.equals(Object.class)) {
-            return false;
-        }
-        for(Class inter : subClass.getInterfaces()) {
-            if(inter.equals(superClass)) {
-                return true;
-            }
-        }
-        if(subClass.isInterface()) {
-            return false;
-        } else {
-            if(subClass.getSuperclass().equals(superClass)) {
-                return true;
-            }
-            return isSubClass(subClass.getSuperclass(), superClass);
-        }
-    }
+//    protected List<Class> getAllClasses() throws NoSuchFieldException, IllegalAccessException {
+//
+//        if(allClasses == null) {
+//            allClasses = getAllClasses(Thread.currentThread().getContextClassLoader());
+//        }
+//        return allClasses;
+//    }
+//
+//    protected List<Class> getAllClasses(ClassLoader classLoader) throws NoSuchFieldException, IllegalAccessException {
+//        Field f = ClassLoader.class.getDeclaredField("classes");
+//        f.setAccessible(true);
+//        List<Class> classes = new LinkedList<>();
+//
+//        if(classLoader.getParent() != null) {
+//            classes.addAll(getAllClasses(classLoader.getParent()));
+//        }
+//        classes.addAll((Vector<Class>) f.get(classLoader));
+//        return classes;
+//    }
+//
+//    protected Set<Class> getAllSubClass(Class superClass) throws NoSuchFieldException, IllegalAccessException {
+//
+//        for(Class cl : getAllClasses()) {
+//            try {
+//                isSubClass(cl, superClass);
+//            } catch ( Exception e) {
+//                e.printStackTrace();
+//                Log.debug("");
+//            }
+//        }
+//
+//        return getAllClasses().stream()
+//                .filter(cl -> isSubClass(cl, superClass))
+//                .collect(Collectors.toSet());
+//    }
+//
+//    protected boolean isSubClass(Class subClass, Class superClass) {
+//        if(subClass.equals(Object.class)) {
+//            return false;
+//        }
+//        for(Class inter : subClass.getInterfaces()) {
+//            if(inter.equals(superClass)) {
+//                return true;
+//            }
+//        }
+//        if(subClass.isInterface()) {
+//            return false;
+//        } else {
+//            if(subClass.getSuperclass().equals(superClass)) {
+//                return true;
+//            }
+//            return isSubClass(subClass.getSuperclass(), superClass);
+//        }
+//    }
 }

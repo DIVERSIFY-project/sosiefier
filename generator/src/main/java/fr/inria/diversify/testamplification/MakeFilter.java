@@ -22,10 +22,18 @@ public class MakeFilter {
         int n = Integer.parseInt(args[2]);
         String p1dir = args[0];
         String p2dir = args[1];
+        Set<String> diffs;
+        String out;
 
 
         MakeFilter mk = new MakeFilter();
-        Set<String> diffs = mk.loadFilter(args[3]);
+        if(args.length == 3) {
+            diffs = mk.loadFilter(args[3]);
+            out = args[4];
+        } else {
+            diffs = new HashSet<>();
+            out = args[3];
+        }
 
         for(int i = 0; i < n; i++) {
             Pool.reset();
@@ -35,7 +43,7 @@ public class MakeFilter {
             List<TestDiff> testdiff = mk.compare(p1dir + "/log", p2dir + "/log");
             diffs.addAll(mk.buildFilter(testdiff));
         }
-        mk.printFilter(diffs, args[4]);
+        mk.printFilter(diffs, out);
     }
 
     protected void runProgram(String dir) throws IOException, InterruptedException {
