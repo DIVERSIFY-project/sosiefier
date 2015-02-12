@@ -138,6 +138,7 @@ public abstract class AbstractDiversify {
      * @return
      */
     public String printResult(String output) {
+        Log.info("session result: {}", sessionResults);
         mkDirResult(output);
         String prefix = output + System.currentTimeMillis();
         String fileName = "";

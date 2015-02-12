@@ -125,6 +125,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
     }
 
     public String printResult(String output) {
+        Log.info("session result: {}", sessionResults);
         mkDirResult(output);
         String fileName = "";
         try {

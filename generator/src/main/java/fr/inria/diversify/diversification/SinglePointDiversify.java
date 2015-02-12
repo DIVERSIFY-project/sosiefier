@@ -41,7 +41,6 @@ public class SinglePointDiversify extends AbstractDiversify {
         for(int i = 0;i < n; i++  ) {
             run(transQuery.query());
         }
-        Log.info("session result: {}", sessionResults);
     }
 
 
