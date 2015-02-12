@@ -72,7 +72,9 @@ public class DiversifyAndCompare extends SinglePointDiversify {
     }
 
     protected void compare(Transformation trans) throws IOException, JSONException, InterruptedException {
+        Log.info("compare");
         String sosieDir = copySosieProgram();
+
         try {
             copyTestAndLogger(sosieDir);
             runSosie(sosieDir);
