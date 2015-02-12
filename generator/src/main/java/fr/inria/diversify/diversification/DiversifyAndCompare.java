@@ -72,9 +72,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
     }
 
     protected void compare(Transformation trans) throws IOException, JSONException, InterruptedException {
-        Log.info("compare");
         String sosieDir = copySosieProgram();
-
         try {
             copyTestAndLogger(sosieDir);
             runSosie(sosieDir);
@@ -131,11 +129,13 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         mkDirResult(output);
         String fileName = "";
         try {
+            int i = 0;
             for(JSONObject d : diff) {
-                fileName = output + System.currentTimeMillis() + ".json";
+                fileName = output + System.currentTimeMillis() +i+ ".json";
                 FileWriter fw = new FileWriter(fileName);
                 d.write(fw);
                 fw.close();
+                i++;
                 Log.info("write diff in {}", fileName);
             }
 
