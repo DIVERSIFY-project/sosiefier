@@ -143,6 +143,6 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
         }
-        return fileName;
+        return output;
     }
 }
