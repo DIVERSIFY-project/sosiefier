@@ -146,7 +146,7 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         String[] tmp = output.split("/");
         String ret = "";
         for (int i = 0; i< tmp.length -1; i++) {
-            ret += "/" + tmp[i];
+            ret +=  tmp[i] + "/";
         }
         return ret;
     }
