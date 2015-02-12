@@ -134,9 +134,10 @@ public class DiversifyAndCompare extends SinglePointDiversify {
                 FileWriter fw = new FileWriter(fileName);
                 d.write(fw);
                 fw.close();
+                Log.info("write diff in {}", fileName);
             }
 
-            Log.info("write result in {}", fileName);
+
         } catch (Exception e) {
             Log.error("error in Builder.printResult", e);
         }

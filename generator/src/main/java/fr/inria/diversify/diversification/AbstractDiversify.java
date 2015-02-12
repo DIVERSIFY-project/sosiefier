@@ -154,7 +154,7 @@ public abstract class AbstractDiversify {
     public void printResultInGitRepo(String output, String git) {
         String absoluteFileName = printResult(git + "/" + output);
         String fileName = absoluteFileName.substring(git.length() + 1, absoluteFileName.length());
-
+        Log.info("add dir {} in git", fileName);
         try {
             GitUtils gitUtils = new GitUtils(git);
             gitUtils.pull();
@@ -162,7 +162,6 @@ public abstract class AbstractDiversify {
             gitUtils.commit("update");
             gitUtils.push();
         } catch (IOException e) {
-
             e.printStackTrace();
         } catch (GitAPIException e) {
             e.printStackTrace();
