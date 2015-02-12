@@ -128,8 +128,8 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         mkDirResult(output);
         String fileName = "";
         try {
-            fileName = output + System.currentTimeMillis() + ".json";
             for(JSONObject d : diff) {
+                fileName = output + System.currentTimeMillis() + ".json";
                 FileWriter fw = new FileWriter(fileName);
                 d.write(fw);
                 fw.close();
