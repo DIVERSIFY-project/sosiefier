@@ -82,12 +82,12 @@ public class DiversifyMainRefactor {
         MavenDependencyResolver t = new MavenDependencyResolver();
         String builder = inputConfiguration.getProperty("builder");
 
-        if (builder.equals("maven")) {
+        String dependencyPom = inputConfiguration.getProperty("dependencyPom");
+        if (builder.equals("maven") && dependencyPom != null) {
             File pom = new File(inputConfiguration.getProperty("project") + "/pom.xml");
             File originalPom = new File(inputConfiguration.getProperty("project") + "/_originalPom.xml");
             FileUtils.copyFile(pom, originalPom);
 
-            String dependencyPom = inputConfiguration.getProperty("dependencyPom");
             if(dependencyPom != null) {
                 FileUtils.copyFile(new File(inputConfiguration.getProperty("project") + "/" +dependencyPom), pom);
             }
@@ -169,10 +169,10 @@ public class DiversifyMainRefactor {
 
             initTimeOut(rb);
 
-//            String pomFile = inputConfiguration.getProperty("newPomFile");
-//            if (!pomFile.equals("")) {
-//                rb.initPom(pomFile);
-//            }
+            String pomFile = inputConfiguration.getProperty("newPomFile");
+            if (!pomFile.equals("")) {
+                rb.initPom(pomFile);
+            }
 //
 //            rb.copyClasses(inputConfiguration.getProperty("classes"));
 //            rb.initTimeOut();
