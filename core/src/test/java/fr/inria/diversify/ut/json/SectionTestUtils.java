@@ -1,5 +1,6 @@
 package fr.inria.diversify.ut.json;
 
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.output.*;
 import fr.inria.diversify.transformation.Transformation;
@@ -122,7 +123,7 @@ public class SectionTestUtils {
     public static JSONObject createTransformationsJSONObjectWithErrors(InputProgram p) throws JSONException {
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
-                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_VER);
+                JsonHeaderOutputTest.SRC_POM, InputConfiguration.LATEST_GENERATOR_VERSION);
         out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
 
 
@@ -143,7 +144,7 @@ public class SectionTestUtils {
     public static JSONObject createTransformationsJSONObject(InputProgram p) {
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
-                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_VER);
+                JsonHeaderOutputTest.SRC_POM, InputConfiguration.LATEST_GENERATOR_VERSION);
         out.writeToJsonNow(); //We need to mock the File writer so no writing to file is done
         return out.getJSONObject();
     }

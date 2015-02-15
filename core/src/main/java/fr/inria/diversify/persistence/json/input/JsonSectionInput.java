@@ -19,7 +19,7 @@ public abstract class JsonSectionInput {
     /**
      * Max number of errors allowed
      */
-    public static final int MAX_ERRORS = 40;
+    public static final int MAX_ERRORS = 4000;
 
     /**
      * JSon to read transformations from
@@ -110,6 +110,6 @@ public abstract class JsonSectionInput {
      * Halts the loading process if to many errors are registered
      */
     public void checkToManyErrors() {
-        if ( errorCount > MAX_ERRORS ) throwError("To many errors", null, true);
+        //if ( errorCount > MAX_ERRORS ) throwError("To many errors", null, true);
     }
 }

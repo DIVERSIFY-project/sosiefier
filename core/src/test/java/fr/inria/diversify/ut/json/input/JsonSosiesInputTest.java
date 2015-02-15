@@ -1,5 +1,6 @@
 package fr.inria.diversify.ut.json.input;
 
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.persistence.json.input.JsonHeaderInput;
 import fr.inria.diversify.persistence.json.input.JsonSosiesInput;
@@ -79,7 +80,7 @@ public class JsonSosiesInputTest {
         InputProgram p = new MockInputProgram();
         List<Transformation> t = createTransformations(p);
         JsonSosieOutputForUT out = new JsonSosieOutputForUT(t, "/uzr/h0m3/my.jzon",
-                JsonHeaderOutputTest.SRC_POM, JsonHeaderOutputTest.GEN_VER);
+                JsonHeaderOutputTest.SRC_POM, InputConfiguration.LATEST_GENERATOR_VERSION);
         out.writeToJsonNow();
 
         //Read the transformations

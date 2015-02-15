@@ -40,7 +40,15 @@ public abstract class CodeFragment {
     protected CtCodeElement codeFragment;
 
 
+    /**
+     * Source code string
+     */
     protected String equalString;
+
+    /**
+     * Position string <Fully_qualified_name>:<Line_number>
+     */
+    private String positionString;
 
     public void init(CtCodeElement cf) {
         codeFragment = cf;
@@ -158,7 +166,13 @@ public abstract class CodeFragment {
     }
 
     public String positionString() {
-        return getSourcePackage().getQualifiedName()+"."+getSourceClass().getSimpleName()+ ":" +codeFragment.getPosition().getLine();
+        if ( positionString == null ) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(getSourcePackage().getQualifiedName()).append(".").
+                    append(getSourceClass().getSimpleName()).append(":").append(codeFragment.getPosition().getLine());
+            positionString = sb.toString();
+        }
+        return positionString;
     }
 
     public CtTypeReference<?> getMethodReturnType() {

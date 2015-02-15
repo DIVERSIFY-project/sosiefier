@@ -55,7 +55,7 @@ public class JsonAstAddInput extends JsonAstTransformationInput {
             //Add transformation if all went OK
             addTransformation(transformations, transf);
         } catch (JSONException e) {
-            throw new PersistenceException("Unable to parse delete transformation", e);
+            throw new PersistenceException("Unable to parse add transformation", e);
         }
     }
 

@@ -23,6 +23,7 @@ import java.util.*;
  * <p/>
  * Created by marodrig on 19/06/2014.
  */
+@Deprecated
 public class FromISSTAToPoolCreatorInput {
 
     HashMap<String, Integer[]> diffCount;

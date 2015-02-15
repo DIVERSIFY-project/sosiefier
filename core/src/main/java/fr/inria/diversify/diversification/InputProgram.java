@@ -39,6 +39,12 @@ import java.util.*;
 public class InputProgram {
 
     /**
+     * The preferred generator version indicates the preferred version of the generator to modify this
+     * program
+     */
+    private String preferredGeneratorVersion = InputConfiguration.LATEST_GENERATOR_VERSION;
+
+    /**
      * Code fragment processor to identify interesting fragments for the input program
      */
     private AbstractCodeFragmentProcessor<?> codeFragmentProcessor;
@@ -130,6 +136,11 @@ public class InputProgram {
     private Factory factory;
 
     /**
+     * Code fragments separated by class
+     */
+    private HashMap<String, CodeFragmentList> codeFragmentsByClass = null;
+
+    /**
      * Process all code fragments. Used to early process them.
      */
     public void processCodeFragments() {
@@ -139,6 +150,7 @@ public class InputProgram {
             pm.addProcessor(processor);
             pm.process();
             codeFragments = processor.getCodeFragments();
+            codeFragmentsByClass = processor.getCodeFragmentsByClass();
         }
     }
 
@@ -235,54 +247,60 @@ public class InputProgram {
 
         int similiarFragmentCount = 0;
         int similarMinDist = Integer.MAX_VALUE;
-        for (CodeFragment codeFragment : getCodeFragments()) {
-            String[] cfPos = codeFragment.positionString().split(":");
-            //Analyze only code fragments in the file of the one we are looking for
-            if (cfPos[0].equals(position)) {
-                int cfLine = Integer.parseInt(cfPos[1]);
-                String ctValue = accesor.getValue(codeFragment);
-                if (ctValue.equals(searchValue) && cfLine == lineNumber) {
-                    //If it is of the same code and the same line: we found it!!
-                    return codeFragment;
-                } else {
-                    //Similarity factor (provide flexibility...)
-                    double x = StringSimilarity.CompareStrings(ctValue, searchValue);
-                    //Line distance
-                    int k = Math.abs(cfLine - lineNumber);
 
-                    //Do not analyze this fragment if it is to different or to far
-                    if (x < valueThreshold || k > lineThreshold) continue;
+        CodeFragmentList fragments = getCodeFragmentsByClass().get(position);
+        if (fragments != null) {
+            for (CodeFragment codeFragment : getCodeFragments()) {
+                String[] cfPos = codeFragment.positionString().split(":");
+                //Analyze only code fragments in the file of the one we are looking for
+                if (cfPos[0].equals(position)) {
+                    int cfLine = Integer.parseInt(cfPos[1]);
+                    String ctValue = accesor.getValue(codeFragment);
+                    if (ctValue.equals(searchValue) && cfLine == lineNumber) {
+                        //If it is of the same code and the same line: we found it!!
+                        return codeFragment;
+                    } else {
+                        //Similarity factor (provide flexibility...)
+                        double x = StringSimilarity.CompareStrings(ctValue, searchValue);
+                        //Line distance
+                        int k = Math.abs(cfLine - lineNumber);
 
-                    if (x > sDiff) {
-                        similiarFragmentCount = 0;//A better value is found, erase similar count
-                        minDiff = k;//Store line distance
-                        sDiff = x;
-                        result = codeFragment;
-                    } else if (Math.abs(x - sDiff) < 0.0000001) {
-                        similiarFragmentCount++; //equally good fragment found, augment the amount of fragments
-                        int d = Math.abs(cfLine - lineNumber);
-                        if (d < minDiff) {
-                            similarMinDist = minDiff;
-                            //else return the nearest one with same code
+                        //Do not analyze this fragment if it is to different or to far
+                        if (x < valueThreshold || k > lineThreshold) continue;
+
+                        if (x > sDiff) {
+                            similiarFragmentCount = 0;//A better value is found, erase similar count
+                            minDiff = k;//Store line distance
+                            sDiff = x;
                             result = codeFragment;
-                            minDiff = d;
+                        } else if (Math.abs(x - sDiff) < 0.0000001) {
+                            similiarFragmentCount++; //equally good fragment found, augment the amount of fragments
+                            int d = Math.abs(cfLine - lineNumber);
+                            if (d < minDiff) {
+                                similarMinDist = minDiff;
+                                //else return the nearest one with same code
+                                result = codeFragment;
+                                minDiff = d;
+                            }
                         }
                     }
-
                 }
             }
         }
 
         //Log.info("Search completed of snippet at pos " + position);
         if (result == null) {
-            Log.warn("Unable to find " + searchValue + " at " + position + ":" + lineNumber);
-        } else if (!result.positionString().equals(position)) {
-            Log.warn("Unable to find fragment at " + position + ":" + lineNumber);
-            Log.info("Best match at " + result.positionString());
-            if (sDiff < 1.0 || similiarFragmentCount != 0) {
-                Log.info("Dice: " + sDiff + " Similars: " + similiarFragmentCount + " Similar MinDist: " + similarMinDist);
-                Log.info("Search value: " + searchValue);
-                if (sDiff < 0) Log.info("Value found: " + accesor.getValue(result));
+            Log.error("Unable to find " + searchValue + " at " + position + ":" + lineNumber);
+        } else {
+            position = position + ":" + lineNumber;
+            if (!result.positionString().equals(position)) {
+                Log.warn("Unable to find fragment at " + position);
+                Log.info("Best match at " + result.positionString());
+                if (sDiff < 1.0 || similiarFragmentCount != 0) {
+                    Log.info("Dice: " + sDiff + " Similars: " + similiarFragmentCount + " Similar MinDist: " + similarMinDist);
+                    Log.info("Search value: " + searchValue);
+                    if (sDiff < 0) Log.info("Value found: " + accesor.getValue(result));
+                }
             }
         }
 
@@ -559,4 +577,16 @@ public class InputProgram {
     }
 
 
+    public String getPreferredGeneratorVersion() {
+        return preferredGeneratorVersion;
+    }
+
+    public void setPreferredGeneratorVersion(String preferredGeneratorVersion) {
+        this.preferredGeneratorVersion = preferredGeneratorVersion;
+    }
+
+    public HashMap<String, CodeFragmentList> getCodeFragmentsByClass() {
+        if (codeFragmentsByClass == null) processCodeFragments();
+        return codeFragmentsByClass;
+    }
 }

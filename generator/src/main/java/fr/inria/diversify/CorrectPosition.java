@@ -24,12 +24,15 @@ import java.util.Collection;
 import java.util.Properties;
 
 /**
+ *
+ *
  * Given a JSON file with transformations and a project, finds the transformations in the project and corrects
  * the positions so they match in the given project. This will solve situations in wich sosies where created using
  * one source and then tried to be replicated using another.
  * <p>
  * Created by marodrig on 22/12/2014.
  */
+@Deprecated
 public class CorrectPosition {
 
     public CorrectPosition(String fileName) throws Exception {

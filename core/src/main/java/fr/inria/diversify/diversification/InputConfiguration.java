@@ -22,6 +22,10 @@ import java.util.*;
  */
 public class InputConfiguration {
 
+    //GENERATOR VERSIONS
+    public static final String GEN_VERSION_1_0_0 = "1.0.0";
+    public static final String LATEST_GENERATOR_VERSION = GEN_VERSION_1_0_0;
+
     /**
      * Internal properties
      */
@@ -254,6 +258,7 @@ public class InputConfiguration {
     }
 
     protected String getAbsolutePath(String path) {
+        if ( new File(path).exists() ) return path;
         Path p = null;
         if (rootPath != null && !rootPath.equals("")) p = Paths.get(rootPath + "/" + path);
         else p = Paths.get(path);

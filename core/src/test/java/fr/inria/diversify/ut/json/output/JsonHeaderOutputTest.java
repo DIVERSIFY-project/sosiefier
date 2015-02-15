@@ -1,5 +1,6 @@
 package fr.inria.diversify.ut.json.output;
 
+import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.persistence.Header;
 import fr.inria.diversify.persistence.MavenHeader;
 import fr.inria.diversify.persistence.json.output.JsonHeaderOutput;
@@ -23,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 public class JsonHeaderOutputTest {
 
     public static final String SRC_POM = "/uzr/pr0j3ct/pom.xml";
-    public static final String GEN_VER = "1.0-SNAPSHOT";
+    //public static final String GEN_VER = "1.0-SNAPSHOT";
 
     public static class JsonHeaderOutputForUT extends JsonHeaderOutput {
         public JsonHeaderOutputForUT(String srcPOM, String generatorPOM) {
@@ -46,8 +47,7 @@ public class JsonHeaderOutputTest {
         sb.append("<parent> \n");
         sb.append("<artifactId>Sosies-generator</artifactId> \n");
         sb.append("<groupId>fr.irisa.diversify</groupId> \n");
-        if ( path.equals(GEN_VER) ) sb.append("<version>1.0-SNAPSHOT</version> \n");
-        else sb.append("<version>1.2.1</version> \n");
+        sb.append("<version>1.2.1</version> \n");
         sb.append("</parent> \n");
         sb.append("<modelVersion>4.0.0</modelVersion> \n");
         sb.append("<artifactId>generator</artifactId> \n");
@@ -58,7 +58,7 @@ public class JsonHeaderOutputTest {
     @Test
     public void testWrite() throws JSONException {
         JSONObject o = new JSONObject();
-        JsonHeaderOutputForUT h = new JsonHeaderOutputForUT(SRC_POM, GEN_VER);
+        JsonHeaderOutputForUT h = new JsonHeaderOutputForUT(SRC_POM, InputConfiguration.LATEST_GENERATOR_VERSION);
         h.setTransformations(list(new ASTDelete(), new ASTReplace()));
         h.write(o);
         o = o.getJSONObject(Header.HEADER);
@@ -67,7 +67,7 @@ public class JsonHeaderOutputTest {
         assertEquals(o.getString(MavenHeader.GROUP_ID), "fr.irisa.diversify");
         assertEquals(o.getString(MavenHeader.ARTIFACT_ID),"generator");
         assertEquals(o.getString(MavenHeader.VERSION), "1.2.1");
-        assertEquals(o.getString(MavenHeader.GENERATOR_VERSION), "1.0-SNAPSHOT");
+        assertEquals(o.getString(MavenHeader.GENERATOR_VERSION), InputConfiguration.LATEST_GENERATOR_VERSION);
     }
 
 }

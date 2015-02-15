@@ -57,7 +57,8 @@ public class JsonAstTransformationCollectionInput extends JsonSectionInput {
             } catch (PersistenceException pe) {
                 //Don't report twice the cause in case it has been already reported
                 String s = "Transf " + index + " cannot load.";
-                if ( getLoadMessages().get(getLoadMessages().size() - 1).contains(pe.getMessage()) )
+                if ( getLoadMessages().size() > 0 &&
+                        getLoadMessages().get(getLoadMessages().size() - 1).contains(pe.getMessage()) )
                     throwError(s, null, false);
                 else throwError(s, pe, false);
             } catch (JSONException e) {
