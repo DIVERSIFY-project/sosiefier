@@ -138,7 +138,7 @@ public class InputProgram {
     /**
      * Code fragments separated by class
      */
-    private HashMap<String, CodeFragmentList> codeFragmentsByClass = null;
+    protected HashMap<String, CodeFragmentList> codeFragmentsByClass = null;
 
     /**
      * Process all code fragments. Used to early process them.
@@ -250,7 +250,7 @@ public class InputProgram {
 
         CodeFragmentList fragments = getCodeFragmentsByClass().get(position);
         if (fragments != null) {
-            for (CodeFragment codeFragment : getCodeFragments()) {
+            for (CodeFragment codeFragment : fragments) {
                 String[] cfPos = codeFragment.positionString().split(":");
                 //Analyze only code fragments in the file of the one we are looking for
                 if (cfPos[0].equals(position)) {

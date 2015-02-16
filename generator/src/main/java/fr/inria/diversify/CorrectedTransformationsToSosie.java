@@ -68,16 +68,24 @@ public class CorrectedTransformationsToSosie {
         initPath(inputConfiguration);
         Log.info("Creating tmp dir completed");
 
+        //Path for resulting files of sosies and non-sosies
+
+        String transfPath = inputConfiguration.getResultPath() + "/coll-minus_sosies.json";
+
+        String sosiePath = inputConfiguration.getResultPath() + System.currentTimeMillis() + ".sosies.json" ;
+
         sosies = new ArrayList<>();
 
         //Load transformations and previously created sosies (if any)
         Log.info("Loading transformations");
-        transformations = loadWithSosiesInput(inputConfiguration, inputConfiguration.getResultPath());
+        if ( new File(transfPath).exists() )
+            transformations = loadWithSosiesInput(inputConfiguration, transfPath);
+        else
+            transformations = loadWithSosiesInput(inputConfiguration,
+                    inputConfiguration.getPreviousTransformationPath());
         Log.info("Loading transformations completed");
 
-        //Path for resulting files of sosies and non-sosies
-        String transfPath = inputConfiguration.getResultPath() + ".old.json";
-        String sosiePath = inputConfiguration.getResultPath() + ".sosies.json";
+
 
         Log.info("Transformation size: " + transformations.size());
         while (transformations.size() > 0) {
@@ -88,7 +96,7 @@ public class CorrectedTransformationsToSosie {
             try {
                 Log.info("Applying transformation");
                 status = applyTransformation(inputConfiguration, t);
-                Log.info("Transformation applied successfully");
+                Log.info("Transformation applied successfully. Build status: " + status);
             } catch (Exception e) {
                 status = EXCEPTION;
             }
@@ -102,16 +110,20 @@ public class CorrectedTransformationsToSosie {
                 Log.info("Recovering from exception successful");
             }
 
-            transformations.remove(t);
+            transformations.remove(transformations.size() - 1);
             //Save the transformations
-            new JsonSosiesOutput(transformations, transfPath,
-                    inputConfiguration.getProjectPath() + "\\pom.xml", InputConfiguration.LATEST_GENERATOR_VERSION);
+            JsonSosiesOutput transfOut =  new JsonSosiesOutput(
+                    transformations, transfPath, inputConfiguration.getProjectPath() + "\\pom.xml",
+                    InputConfiguration.LATEST_GENERATOR_VERSION);
+            transfOut.write();
+
 
             if (status == SOSIE) {
                 sosies.add(t);
                 //Save the sosies
-                new JsonSosiesOutput(transformations, sosiePath,
+                JsonSosiesOutput sosieOut = new JsonSosiesOutput(transformations, sosiePath,
                         inputConfiguration.getProjectPath() + "\\pom.xml", InputConfiguration.LATEST_GENERATOR_VERSION);
+                sosieOut.write();
             }
 
             Log.info("Sosies so far: " + sosies.size());
@@ -153,7 +165,7 @@ public class CorrectedTransformationsToSosie {
     private int runTests(InputConfiguration inputConfiguration) throws InterruptedException, IOException {
         MavenBuilder rb = new MavenBuilder(inputConfiguration.getTempDir());
         rb.setTimeOut(0);
-        rb.runGoals(new String[]{"clean", "test"}, false);
+        rb.runGoals(new String[]{"clean", "test"}, true);
         return rb.getStatus();
     }
 

@@ -22,6 +22,12 @@ import static org.junit.Assert.fail;
  */
 public class JsonSosieOutputTest {
 
+    /**
+     * Test that sosies are given an unique ID
+     * @param anyWriter
+     * @throws IOException
+     * @throws JSONException
+     */
     @Test
     public void testSosiesUniqueId(@Mocked FileWriter anyWriter) throws IOException, JSONException {
         List<Transformation> transfs = createTransformations(new MockInputProgram());
@@ -34,6 +40,17 @@ public class JsonSosieOutputTest {
         assertEquals(transfs.get(2).getIndex(), 2);
     }
 
+    @Test
+    public void testCustomSections() {
+
+    }
+
+    /**
+     * Test the writing of sosies normally
+     * @param anyWriter A mock for the FileWrite class
+     * @throws IOException
+     * @throws JSONException
+     */
     @Test
     public void testSosieOutput(@Mocked final FileWriter anyWriter) throws IOException, JSONException {
 
