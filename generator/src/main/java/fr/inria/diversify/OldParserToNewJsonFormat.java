@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * Created by marodrig on 29/07/2014.
  */
+@Deprecated
 public class OldParserToNewJsonFormat {
 
     public static void main(String[] args) throws Exception {

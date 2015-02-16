@@ -36,10 +36,10 @@ public class InputConfiguration {
      */
     private InputProgram inputProgram;
 
-    /**
+    /*
      * Output path to all operations resulting in output
      */
-    private String outputPath;
+    //private String outputPath;
 
     /**
      * Errors raised during validation
@@ -47,6 +47,7 @@ public class InputConfiguration {
     private List<String> errors;
 
     private String rootPath;
+
 
     public InputConfiguration() {
         prop = new Properties();
@@ -258,8 +259,8 @@ public class InputConfiguration {
     }
 
     protected String getAbsolutePath(String path) {
-        if ( new File(path).exists() ) return path;
-        Path p = null;
+        Path p = Paths.get(path);
+        if ( new File(path).exists() || p.isAbsolute() ) return path;
         if (rootPath != null && !rootPath.equals("")) p = Paths.get(rootPath + "/" + path);
         else p = Paths.get(path);
         return p.normalize().toString().replace(File.separator, "/");
@@ -286,6 +287,15 @@ public class InputConfiguration {
         checkPath("Previous transformation path", getPreviousTransformationPath(), false);
         checkPath("Coverage dir", getCoverageDir(), false);
         checkPath("Root dir", getRootPath(), false);
+        checkPath("Temp directory", getTempDir(), false);
         return errors.size() == 0;
+    }
+
+    /**
+     * Gets the temporary directory for all operations
+     * @return
+     */
+    public String getTempDir() {
+        return getAbsolutePath(getProperty("tmpDir"));
     }
 }

@@ -29,11 +29,60 @@ public class FromISSTAToTestEyeFormat {
     private static final String CONF_PATH = "C:\\MarcelStuff\\data\\DIVERSE\\input_configurations\\IsstaToTestEye-CommonColl.properties";
 
     public static void main(String[] args) throws Exception {
+
         Log.NONE();
 
-
         InputConfiguration inputConfiguration = new InputConfiguration(CONF_PATH);
-/*
+
+        //Gather several JSON files into a single TestEye format
+        getherIntoTestEyeFormat(inputConfiguration);
+
+        //Test that the result can be properly loaded using the new JsonSosiesInput
+        Collection<Transformation> r = loadWithSosiesInput(inputConfiguration);
+
+        //Save the corrected(*) sosies
+        JsonSosiesOutput sosiesOutput = new JsonSosiesOutput(r, inputConfiguration.getResultPath() + ".corrected.json",
+                inputConfiguration.getProjectPath() + "/pom.xml", InputConfiguration.LATEST_GENERATOR_VERSION);
+        sosiesOutput.write();
+
+        //(*) Position mismatches and sources mismatches
+    }
+
+    /**
+     * Loads the sosies with the JsonSosiesInput
+     * @param inputConfiguration Input configuration to load
+     * @return The collection of transformations loaded
+     * @throws Exception
+     */
+    private static Collection<Transformation> loadWithSosiesInput(InputConfiguration inputConfiguration) throws Exception {
+        MavenDependencyResolver dr = new MavenDependencyResolver();
+        dr.DependencyResolver(inputConfiguration.getProjectPath() + "\\pom.xml");
+
+        InputProgram p = new InputProgram();
+        p.configure(inputConfiguration);
+
+        long t = System.currentTimeMillis();
+        p.setFactory(new SpoonMetaFactory().buildNewFactory(inputConfiguration.getSourceCodeDir(), 7));
+        Log.info("Build: " + Math.abs(System.currentTimeMillis() - t));
+
+        t = System.currentTimeMillis();
+        p.processCodeFragments();
+        Log.info("Process code fragment Time: " + Math.abs(System.currentTimeMillis() - t));
+
+        t = System.currentTimeMillis();
+        JsonSosiesInput input = new JsonSosiesInput(inputConfiguration.getResultPath(), p);
+        Collection<Transformation> r = input.read();
+        Log.info("Read Time: " + Math.abs(System.currentTimeMillis() - t));
+        return r;
+    }
+
+    /**
+     * Gather scattered files into one single TestEye JSONFile.
+     * @param inputConfiguration Input configuration
+     * @throws JSONException
+     * @throws IOException
+     */
+    private static void getherIntoTestEyeFormat(InputConfiguration inputConfiguration) throws JSONException, IOException {
         JSONObject result = new JSONObject();
         JsonHeaderOutput output = new JsonHeaderOutput(inputConfiguration.getProjectPath() + "/pom.xml", "1.0.0");
         output.write(result);
@@ -73,33 +122,7 @@ public class FromISSTAToTestEyeFormat {
         FileWriter fw = new FileWriter(inputConfiguration.getResultPath());
         result.write(fw);
         fw.close();
-*/
-        MavenDependencyResolver dr = new MavenDependencyResolver();
-        dr.DependencyResolver(inputConfiguration.getProjectPath() + "\\pom.xml");
 
-        InputProgram p = new InputProgram();
-        p.configure(inputConfiguration);
-
-        long t = System.currentTimeMillis();
-        p.setFactory(new SpoonMetaFactory().buildNewFactory(inputConfiguration.getSourceCodeDir(), 7));
-        System.out.println("Build: " + Math.abs(System.currentTimeMillis() - t));
-
-        t = System.currentTimeMillis();
-        p.processCodeFragments();
-        System.out.println("Process code fragment Time: " + Math.abs(System.currentTimeMillis() - t));
-
-        t = System.currentTimeMillis();
-        JsonSosiesInput input = new JsonSosiesInput(inputConfiguration.getResultPath(), p);
-        Collection<Transformation> r = input.read();
-        System.out.println("Read Time: " + Math.abs(System.currentTimeMillis() - t));
-        /*
-        for ( String s : input.getLoadMessages() ) {
-            System.out.println(s);
-        }*/
-
-        JsonSosiesOutput sosiesOutput = new JsonSosiesOutput(r, inputConfiguration.getResultPath() + ".corrected.json",
-                inputConfiguration.getProjectPath() + "/pom.xml", InputConfiguration.LATEST_GENERATOR_VERSION);
-        sosiesOutput.write();
     }
 
     private static void correctSource(JSONObject o) throws JSONException {
