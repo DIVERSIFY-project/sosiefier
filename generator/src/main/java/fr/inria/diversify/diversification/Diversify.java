@@ -3,6 +3,7 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.statistic.RunResults;
 import fr.inria.diversify.statistic.SessionResults;
 import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.query.KnownSosieQuery;
 import fr.inria.diversify.transformation.query.QueryException;
 import fr.inria.diversify.transformation.query.SeveralTriesUnsuccessful;
 import fr.inria.diversify.transformation.query.TransformationQuery;
@@ -123,9 +124,9 @@ public class Diversify extends AbstractDiversify {
             while (success == false && attempts < 10) {
                 //1. We executeQuery for transformations.
                 try {
-                    transQuery.executeQuery();
+                    ((KnownSosieQuery) transQuery).executeQuery();
                     //Obtain transformations
-                    transformations = (List<Transformation>) transQuery.getMultiTransformations();
+                    transformations = (List<Transformation>)  ((KnownSosieQuery) transQuery).getMultiTransformations();
                     success = true;
                 } catch (SeveralTriesUnsuccessful e ) {
                     if ( e.getCauses()[0] instanceof QueryException) {
@@ -146,7 +147,7 @@ public class Diversify extends AbstractDiversify {
                         applyTransformations(transformations, outputDir);
                         success = true;
                     } catch (Exception ex) {
-                        transQuery.setLastTransformationStatus(Transformation.EXCEPTION);
+                        ((KnownSosieQuery) transQuery).setLastTransformationStatus(Transformation.EXCEPTION);
                         success = false;
                         Log.error("Query application failed! " + ex.getMessage());
                         //Application failed!... we'll executeQuery and apply again
@@ -160,7 +161,7 @@ public class Diversify extends AbstractDiversify {
                     try {
                         run();
                     } catch (Exception ex) {
-                        transQuery.setLastTransformationStatus(Transformation.EXCEPTION);
+                        ((KnownSosieQuery) transQuery).setLastTransformationStatus(Transformation.EXCEPTION);
                         Log.error("Diversified program run failed! " + ex.getMessage());
                         success = false;
                         //Application failed!... we'll executeQuery, apply and run again
@@ -223,7 +224,7 @@ public class Diversify extends AbstractDiversify {
         //Build and run the transformation
         status = runTest(tmpDir);
         //Give back to the executeQuery the value of the las transformation
-        transQuery.setLastTransformationStatus(status);
+        ((KnownSosieQuery) transQuery).setLastTransformationStatus(status);
 
         if (status == Transformation.SOSIE) {
             sosie++;
@@ -264,7 +265,7 @@ public class Diversify extends AbstractDiversify {
     protected void earlyReport(int status) {
         if (getEarlyReportSosiesOnly() == false || status == 0) {
             try {
-                RunResults result = buildRunResult(transformations, status, transQuery.getLastIncrementalSeries());
+                RunResults result = buildRunResult(transformations, status,  ((KnownSosieQuery) transQuery).getLastIncrementalSeries());
                 String jsonFile = getResultDir() + "/" + Thread.currentThread().getId() +
                         "_trial_" + trial + "_size_" + transformations.size() + "_stat_" + status + ".json";
                 result.saveToFile(jsonFile);

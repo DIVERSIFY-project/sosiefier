@@ -119,7 +119,25 @@ public class TestDiff {
         return "";
     }
 
+    public void merge(TestDiff other) {
+        if(excludeThisTest || other.excludeThisTest) {
+            excludeThisTest = true;
+        } else {
+            //all diff.size() == 1
+            diff.get(0).merge(other.diff.get(0));
 
+        }
+    }
+
+    public int mergeSize(TestDiff other) {
+        if(excludeThisTest || other.excludeThisTest) {
+            return 0;
+        } else {
+            //all diff.size() == 1
+            return diff.get(0).mergeSize(other.diff.get(0));
+
+        }
+    }
 }
 
 

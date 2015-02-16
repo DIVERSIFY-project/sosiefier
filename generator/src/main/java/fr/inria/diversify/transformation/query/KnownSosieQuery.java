@@ -3,8 +3,11 @@ package fr.inria.diversify.transformation.query;
 import fr.inria.diversify.coverage.ICoverageReport;
 import fr.inria.diversify.coverage.NullCoverageReport;
 import fr.inria.diversify.diversification.InputProgram;
-import fr.inria.diversify.transformation.*;
+import fr.inria.diversify.transformation.Transformation;
+import fr.inria.diversify.transformation.TransformationJsonParser;
+import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.transformation.ast.ASTTransformation;
+import fr.inria.diversify.util.Log;
 
 import java.io.*;
 import java.util.*;
@@ -15,6 +18,123 @@ import java.util.*;
  * Created by marcel on 6/06/14.
  */
 public class KnownSosieQuery extends TransformationQuery {
+
+    List<Transformation> transformations;
+
+    /**
+     * A class containing data and logic to help increase the speed of the search process of a previously found
+     * transformation
+     */
+    protected class TransformationFoundRecord {
+        //Transformation that incremented by this transformation.
+        //A parent transformation of {1, 2, 3} is for example {1, 2}, {1, 3} or {2, 3}
+        //Formally: Y is parent of X if Y subset of X
+        private TransformationFoundRecord parent = null;
+
+        //Transformation found just before this one
+        //Used to have a linked list of previously built transformations.
+        private TransformationFoundRecord previous = null;
+
+        //Index of the transformations taken from the pool of transformations that conforms this multisosie
+        ArrayList<Integer> transformation;
+
+        private int incrementalSeries;
+
+        //Known status of this transformation
+        int status = Transformation.SOSIE;
+
+        int myHashCode = 0;
+
+        public TransformationFoundRecord(TransformationFoundRecord parent, TransformationFoundRecord previous, int status) {
+            setParentAndPrevious(parent, previous);
+            this.status = status;
+        }
+
+        public TransformationFoundRecord(Integer[] indexes, TransformationFoundRecord parent, TransformationFoundRecord previous) {
+            transformation = new ArrayList<>(Arrays.asList(indexes));
+            setParentAndPrevious(parent, previous);
+        }
+
+        public void setParentAndPrevious(TransformationFoundRecord parent, TransformationFoundRecord previous) {
+            this.setPrevious(previous);
+            this.setParent(parent);
+
+        }
+
+        @Override
+        public boolean equals(Object p) {
+            ArrayList<Integer> t = ((TransformationFoundRecord) p).transformation;
+            if (t.size() != transformation.size()) return false;
+            for (Integer ti : t) {
+                if (!transformation.contains(ti)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            if (myHashCode == 0) {
+                if (transformation == null) return 0;
+                for (Integer i : transformation) {
+                    myHashCode += i * 17;
+                }
+                myHashCode %= 5009;
+            }
+
+            return myHashCode;
+        }
+
+        public void setIncrementalSeries(int incrementalSeries) {
+            if ( getParent() != null && getParent().getIncrementalSeries() != incrementalSeries ) {
+                throw new RuntimeException("the series number mismatch!!");
+            }
+            this.incrementalSeries = incrementalSeries;
+        }
+
+        /**
+         * Series number of the transformation found. A redundant data to help improve robustness.
+         */
+        public int getIncrementalSeries() {
+            return incrementalSeries;
+        }
+
+        public TransformationFoundRecord getParent() {
+            return parent;
+        }
+
+        public void setParent(TransformationFoundRecord parent) {
+            this.parent = parent;
+            if ( this.parent != null ) {
+                this.incrementalSeries = this.parent.incrementalSeries;
+            }
+        }
+
+        public TransformationFoundRecord getPrevious() {
+            return previous;
+        }
+
+        public void setPrevious(TransformationFoundRecord previous) {
+            this.previous = previous;
+        }
+    }
+
+    /**
+     * Status of the last transformation found. Querys may use this information to optimize further exploration of
+     * the search space
+     */
+    private int lastTransformationStatus = Transformation.SOSIE;
+
+    /**
+     * Multipoint transformations may be (parent/child) related.
+     *
+     * The incremental series number helps to identify parents and childs obtained in different runs
+     */
+    protected int lastIncrementalSeries = 0;
+
+    protected HashMap<Integer, HashSet<TransformationFoundRecord>> transformationFounds;
+
 
     public boolean isCleanSeriesOnly() {
         return cleanSeriesOnly;
@@ -43,6 +163,32 @@ public class KnownSosieQuery extends TransformationQuery {
         }
     }
 
+    /**
+     * Status of the last transformation found. Querys may use this information to optimize further exploration of
+     * the search space
+     */
+    public int getLastTransformationStatus() {
+        return lastTransformationStatus;
+    }
+
+
+
+    /**
+     * Multipoint transformations may be (parent/child) related.
+     *
+     * The incremental series number helps to identify parents and childs obtained in different runs
+     */
+    public int getLastIncrementalSeries() {
+        return lastIncrementalSeries;
+    }
+
+    /*
+    public void setLastIncrementalSeries(int lastIncrementalSeries) {
+        this.lastIncrementalSeries = lastIncrementalSeries;
+    }
+    */
+
+
     private boolean cleanSeriesOnly = true;
 
     /**
@@ -66,9 +212,9 @@ public class KnownSosieQuery extends TransformationQuery {
     //Increment of the last series number
     private boolean seriesIncrement = true;
 
-    @Override
+
     public void setLastTransformationStatus(int lastTransformationStatus) {
-        super.setLastTransformationStatus(lastTransformationStatus);
+        this.lastTransformationStatus = lastTransformationStatus;
         if (prevRecord != null) {
             prevRecord.status = lastTransformationStatus;
         }
@@ -76,11 +222,13 @@ public class KnownSosieQuery extends TransformationQuery {
 
     public KnownSosieQuery(InputProgram inputProgram, ArrayList<Transformation> transf) {
         super(inputProgram);
+        transformationFounds = new HashMap<>();
         extractSosies(transf);
     }
 
     public KnownSosieQuery(InputProgram inputProgram) throws TransformationParserException {
         super(inputProgram);
+        transformationFounds = new HashMap<>();
         TransformationJsonParser parser = new TransformationJsonParser(false, getInputProgram());
         File f = new File(getInputProgram().getPreviousTransformationsPath());
         Collection<Transformation> ts;
@@ -143,8 +291,75 @@ public class KnownSosieQuery extends TransformationQuery {
         }
     }
 
+
+    /**
+     * Performs the search for transformations
+     *
+     * @throws SeveralTriesUnsuccessful when several unsuccessful attempts have been made to get the transformations
+     */
+    public void executeQuery() {
+        int max = 100;
+        Exception[] causes = new Exception[max];
+        int trials = 0;
+        boolean failed = true;
+        while (trials < max && failed)
+            try {
+                //The amount of transformations are given in the executeQuery by the InputProgram
+                transformations = query(getInputProgram().getTransformationPerRun());
+                failed = false;
+            } catch (QueryException qe) {
+                if ( qe.getReason().equals(QueryException.Reasons.UNABLE_TO_FIND_SOSIE_PARENT) ) {
+                    //We cannot recover from this one. No use to try
+                    causes[0] = qe;
+                    trials = max + 1;
+                }
+            } catch (Exception e) {
+                Log.warn("Unable to executeQuery: " + e.getMessage());
+                causes[trials] = e;
+                failed = true;
+                trials++;
+            }
+
+        if (trials >= max) {
+            throw new SeveralTriesUnsuccessful(causes);
+        }
+    }
+
+    /**
+     * Tells if a similar transformation has been already found
+     *
+     * @param tf   transformation found
+     * @param size Size of transformation asked by the users.
+     *             This size may vary from the actual size of the transformation
+     * @return true if already found
+     */
+    protected boolean alreadyFound(int size, TransformationFoundRecord tf) {
+
+        if (!transformationFounds.containsKey(size)) {
+            HashSet<TransformationFoundRecord> h = new HashSet<>();
+            h.add(tf);
+            transformationFounds.put(size, h);
+            return false;
+        } else if (transformationFounds.get(size).contains(tf)) {
+            return true;
+        } else {
+            transformationFounds.get(size).add(tf);
+            return false;
+        }
+    }
+
+    /**
+     * Returns the list of found transformations a collection of transformations
+     *
+     * @return
+     * @throws Exception
+     */
+    public Collection<Transformation> getMultiTransformations() {
+        return transformations;
+    }
+
     @Override
-    public SingleTransformation query() throws QueryException {
+    public Transformation query() throws QueryException {
         return null;
     }
 

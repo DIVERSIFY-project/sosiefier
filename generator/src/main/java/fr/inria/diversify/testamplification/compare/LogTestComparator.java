@@ -1,6 +1,7 @@
 package fr.inria.diversify.testamplification.compare;
 
 import fr.inria.diversify.testamplification.compare.diff.AssertDiff;
+import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.testamplification.compare.diff.LogDiff;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
 import fr.inria.diversify.util.Log;
@@ -22,8 +23,8 @@ public class LogTestComparator {
         sosieTests = new ArrayList<>(test);
     }
 
-    public List<TestDiff> compare() throws JSONException {
-        List<TestDiff> result = new ArrayList<>(originalTests.size());
+    public Diff compare() throws JSONException {
+        Diff result = new Diff();
         for(Test original : originalTests) {
             for (Test sosie : sosieTests) {
                 if(original.getSignature().equals(sosie.getSignature()) && sosie.size() == 1) {

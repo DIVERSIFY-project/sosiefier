@@ -43,6 +43,7 @@ public class MavenDependencyResolver {
         }
         MavenProject project = loadProject(new File(pomFile));
         resolveAllDependencies(project);
+        addApplicationClasses(new File(pomFile));
     }
 
     public MavenProject loadProject(File pomFile) throws IOException, XmlPullParserException {
@@ -60,6 +61,12 @@ public class MavenDependencyResolver {
         return ret;
     }
 
+    protected void addApplicationClasses(File pomFile) throws MalformedURLException {
+        jarURL.add(new URL("file://" + pomFile.getParent() + "/target/classes/"));
+        URLClassLoader child = new URLClassLoader(jarURL.toArray(new URL[jarURL.size()]), Thread.currentThread().getContextClassLoader());
+        Thread.currentThread().setContextClassLoader(child);
+    }
+
     public void resolveAllDependencies(MavenProject project) throws MalformedURLException {
         MavenResolver resolver = new MavenResolver();
         resolver.setBasePath(System.getProperty("user.home") + File.separator + ".m2/repository");
@@ -69,7 +76,6 @@ public class MavenDependencyResolver {
             urls.add(repo.getUrl());
         }
         urls.add("http://repo1.maven.org/maven2/");
-
 
         updateProperties(project.getProperties());
         for (Dependency dependency : project.getDependencies()) {
@@ -87,14 +93,11 @@ public class MavenDependencyResolver {
 
             } catch (Exception e) {}
 
-
         }
         for(String module: project.getModules()) {
             try {
                 resolveModuleDependencies(module);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (XmlPullParserException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

@@ -44,10 +44,6 @@ public class ShuffleStmtQuery extends TransformationQuery {
         return sst;
     }
 
-    @Override
-    public void executeQuery() {
-
-    }
 
     protected boolean isCandidate(CtBlock<?> block) {
         if(block.getStatements().size() >= 3)

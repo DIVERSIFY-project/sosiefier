@@ -31,7 +31,7 @@ public class Main {
             }
         }
         else
-            new DiversifyMainRefactor(args[0]);
+            new DiversifyMain(args[0]);
         System.exit(0);
         suicide();
     }

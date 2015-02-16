@@ -4,8 +4,8 @@ import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.testamplification.compare.LogTestComparator;
 import fr.inria.diversify.testamplification.compare.LogTestReader;
 import fr.inria.diversify.testamplification.compare.Test;
+import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.testamplification.compare.diff.Pool;
-import fr.inria.diversify.testamplification.compare.diff.TestDiff;
 import fr.inria.diversify.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
@@ -40,8 +40,8 @@ public class MakeFilter {
             Log.info("run {}",i);
             mk.runProgram(p1dir);
             mk.runProgram(p2dir);
-            List<TestDiff> testdiff = mk.compare(p1dir + "/log", p2dir + "/log");
-            diffs.addAll(mk.buildFilter(testdiff));
+            Diff testdiff = mk.compare(p1dir + "/log", p2dir + "/log");
+            diffs.addAll(testdiff.buildFilter());
         }
         mk.printFilter(diffs, out);
     }
@@ -57,7 +57,7 @@ public class MakeFilter {
         builder.runGoals(new String[]{"clean", "test"}, false);
     }
 
-    public List<TestDiff> compare(String dirOriginalLog, String dirSosieLog) throws JSONException, IOException {
+    public Diff compare(String dirOriginalLog, String dirSosieLog) throws JSONException, IOException {
         LogTestReader reader = new LogTestReader();
 
         Collection<Test> testOriginal = reader.loadLog(dirOriginalLog);
@@ -68,13 +68,6 @@ public class MakeFilter {
         return  comparator.compare();
     }
 
-    public void filter(List<TestDiff> diff, Map<String, Set<String>> filter) {
-        diff.stream()
-            .filter(d -> filter.containsKey(d.getSignature()))
-            .forEach(d -> d.filter(filter.get(d.getSignature())));
-    }
-
-
     public Set<String> loadFilter(String file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         Set<String> filter = new HashSet<>();
@@ -83,14 +76,6 @@ public class MakeFilter {
         while(line != null) {
             filter.add(line);
             line = reader.readLine();
-        }
-        return filter;
-    }
-
-    public Set<String> buildFilter(List<TestDiff> diffs) {
-        Set<String> filter = new HashSet<>();
-        for(TestDiff d : diffs) {
-            filter.addAll(d.buildFilter());
         }
         return filter;
     }

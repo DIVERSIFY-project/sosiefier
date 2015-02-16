@@ -1,7 +1,6 @@
 package fr.inria.diversify.testamplification.compare.diff;
 
-import fr.inria.diversify.testamplification.compare.Assert;
-import fr.inria.diversify.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -144,6 +143,40 @@ public class LogDiff implements Comparable {
     public int size() {
         return  notSyncro.size()
                 + assertDiffs.stream()
+                             .mapToInt(assertDiff -> assertDiff.nbOfDiff())
+                             .sum();
+    }
+
+    public void merge(LogDiff other) {
+        notSyncro.addAll(other.notSyncro);
+
+        assertDiffs = assertDiffs.stream()
+                .filter(assertDiff -> !notSyncro.contains(assertDiff.getAssertId()))
+                .collect(Collectors.toList());
+
+        //for()
+
+        other.assertDiffs.stream()
+                .filter(assertDiff -> assertDiffs.stream()
+                                                 .noneMatch(ad -> ad.getAssertId() == assertDiff.getAssertId()))
+                .forEach(assertDiff -> assertDiffs.add(assertDiff));
+    }
+
+    public int mergeSize(LogDiff other) {
+        Set<Integer> allNotSyncro = new HashSet<>();
+        allNotSyncro.addAll(other.notSyncro);
+        allNotSyncro.addAll(notSyncro);
+
+        Set<AssertDiff> commonsAssertDiffs = assertDiffs.stream()
+                                 .filter(assertDiff -> !allNotSyncro.contains(assertDiff.getAssertId()))
+                                 .collect(Collectors.toSet());
+
+        other.assertDiffs.stream()
+                         .filter(assertDiff -> !allNotSyncro.contains(assertDiff.getAssertId()))
+                         .forEach(assertDiff -> commonsAssertDiffs.add(assertDiff));
+
+        return  allNotSyncro.size()
+                + commonsAssertDiffs.stream()
                              .mapToInt(assertDiff -> assertDiff.nbOfDiff())
                              .sum();
     }

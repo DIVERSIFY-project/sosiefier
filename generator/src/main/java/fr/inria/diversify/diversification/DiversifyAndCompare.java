@@ -3,6 +3,7 @@ package fr.inria.diversify.diversification;
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
 import fr.inria.diversify.statistic.SinglePointSessionResults;
 import fr.inria.diversify.testamplification.CompareAmpliTest;
+import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.testamplification.compare.diff.Pool;
 import fr.inria.diversify.testamplification.compare.diff.TestDiff;
 import fr.inria.diversify.transformation.Transformation;
@@ -71,18 +72,19 @@ public class DiversifyAndCompare extends SinglePointDiversify {
         } catch (BuildTransplantException e) {}
     }
 
-    protected void compare(Transformation trans) throws IOException, JSONException, InterruptedException {
+    protected void compare(Transformation sosie) throws IOException, JSONException, InterruptedException {
         String sosieDir = copySosieProgram();
         try {
             copyTestAndLogger(sosieDir);
             runSosie(sosieDir);
             CompareAmpliTest cat = new CompareAmpliTest();
 
-            List<TestDiff> result = cat.compare(originalLogDir, sosieDir + "/log");
+            Diff result = cat.compare(originalLogDir, sosieDir + "/log");
 
             Map<String, Set<String>> filter = cat.loadFilter(filterFile);
-            cat.filter(result,filter);
-            diff.add(cat.toJson(result, trans));
+            result.filter(filter);
+            result.setSosie(sosie);
+            diff.add(result.toJson());
             Pool.reset();
         } finally {
             Pool.reset();

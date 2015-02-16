@@ -3,12 +3,10 @@ package fr.inria.diversify.testamplification;
 import fr.inria.diversify.diversification.InputConfiguration;
 import fr.inria.diversify.diversification.InputProgram;
 import fr.inria.diversify.factories.SpoonMetaFactory;
-import fr.inria.diversify.testamplification.compare.diff.TestDiff;
+import fr.inria.diversify.testamplification.compare.diff.Diff;
 import fr.inria.diversify.transformation.Transformation;
-import fr.inria.diversify.transformation.TransformationJsonParser;
 import fr.inria.diversify.transformation.TransformationParserException;
 import fr.inria.diversify.util.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import spoon.reflect.factory.Factory;
@@ -21,7 +19,7 @@ import java.util.stream.Collectors;
  * Created by Simon on 27/01/15.
  */
 public class ParseTransformationAndDiff {
-    protected Map<Transformation, Set<TestDiff>> diffs;
+    protected Map<Transformation, Diff> diffs;
     protected InputProgram inputProgram;
 
 
@@ -35,28 +33,22 @@ public class ParseTransformationAndDiff {
 
 
         p.applyFilter(p.diffs, filter);
-//        p.stat(p.diffs);
+        p.stat(p.diffs);
         for(Transformation trans : p.diffs.keySet()) {
-            p.toJson(p.diffs.get(trans), trans);
+            p.diffs.get(trans).toJson();
         }
 
     }
 
-    public void stat(Map<Transformation, Set<TestDiff>> diffs) {
+    public void stat(Map<Transformation, Diff> diffs) {
         int count = 0;
         for (Transformation transformation : diffs.keySet()) {
-           int sum = diffs.get(transformation).stream().mapToInt(diff -> diff.size()).sum();
+           int sum = diffs.get(transformation).size();
 
-            int diffSize = diffs.get(transformation).stream()
-                 .mapToInt(diff -> diff.size())
-                .sum();
-            if(diffSize != 0) {
+            if(sum != 0) {
                 Log.info("{} \nnb: {}\n",transformation, sum);
                 count++;
-                diffs.get(transformation).stream()
-                     .filter(diff -> diff.size() != 0)
-                     .forEach(diff -> Log.info(diff.toString()));
-                Log.debug("");
+                Log.info(diffs.get(transformation).toString());
             }
         }
         Log.info("{} {}",diffs.size(), count);
@@ -64,9 +56,9 @@ public class ParseTransformationAndDiff {
 
     }
 
-    public void applyFilter(Map<Transformation, Set<TestDiff>> diffs, Map<String, Set<String>> filter) {
+    public void applyFilter(Map<Transformation, Diff> diffs, Map<String, Set<String>> filter) {
         for (Transformation trans : diffs.keySet()) {
-            diffs.get(trans).stream().filter(d -> filter.containsKey(d.getSignature())).forEach(d -> d.filter(filter.get(d.getSignature())));
+            diffs.get(trans).filter(filter);
         }
     }
 
@@ -81,15 +73,12 @@ public class ParseTransformationAndDiff {
         for (File file : dir.listFiles()) {
             if (file.isFile() && file.getName().endsWith(".json")) {
                 try {
-
                     parseFile(file);
                 } catch (Exception e) {
 
                     Log.debug("{}", file);
                 }
-
             }
-
         }
         Log.debug("");
     }
@@ -110,29 +99,14 @@ public class ParseTransformationAndDiff {
         }
 
         JSONObject object = new JSONObject(sb.toString());
-        parseTD(object);
+       Diff diff = new Diff(object, inputProgram);
+
+        diffs.put(diff.getSosie(), diff);
     }
 
-    protected void parseTD(JSONObject td) throws JSONException, TransformationParserException {
-        TransformationJsonParser parser = new TransformationJsonParser(true, inputProgram);
-        Transformation trans = parser.parseTransformation(td.getJSONObject("transformation"));
 
-        Set<TestDiff> diff = parseDiff(td.getJSONArray("testDiff"));
 
-        diffs.put(trans, diff);
-    }
-
-    protected Set<TestDiff> parseDiff(JSONArray array) throws JSONException {
-        Set<TestDiff> diffs = new HashSet<>();
-
-        for (int i = 0; i < array.length(); i++) {
-            diffs.add(new TestDiff(array.getJSONObject(i)));
-        }
-
-        return diffs;
-    }
-
-    public Map<Transformation, Set<TestDiff>> getDiffs() {
+    public Map<Transformation,Diff> getDiffs() {
         return diffs;
     }
 
@@ -198,24 +172,5 @@ public class ParseTransformationAndDiff {
         List ret = new ArrayList<>();
         return ret;
     }
-
-    public JSONObject toJson(Set<TestDiff> diffs, Transformation sosie) throws JSONException {
-        JSONObject object = new JSONObject();
-
-        if(sosie != null) {
-            object.put("transformation", sosie.toJSONObject());
-        }
-
-        JSONArray array = new JSONArray();
-        object.put("testDiff", array);
-        for(TestDiff diff : diffs) {
-            if(!diff.getDiff().isEmpty()) {
-                array.put(diff.toJSON());
-            }
-        }
-
-        return object;
-    }
-
 
 }

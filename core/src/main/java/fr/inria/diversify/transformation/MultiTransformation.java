@@ -1,5 +1,6 @@
 package fr.inria.diversify.transformation;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -8,6 +9,11 @@ import java.util.List;
 public class MultiTransformation extends Transformation {
     List<Transformation> transformations;
 
+
+    public  MultiTransformation() {
+        transformations = new LinkedList<>();
+        type = "multi";
+    }
 
     @Override
     public void apply(String srcDir) throws Exception {
